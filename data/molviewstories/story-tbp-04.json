@@ -1,0 +1,440 @@
+{
+  "id": "story-tbp-04",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "tbp",
+  "title": "TBP: Arginine [2/5]",
+  "caption": "TBP: Arginine 2/5. Arginine Residues A string of arginine amino acids interact with the phosphate groups of the DNA and glues the protein to the DNA: Arg192, Arg199, Arg204, and Arg290.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1cdw.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.4665815186,
+                        0.6063873444,
+                        -0.6438913535,
+                        -0.581544075,
+                        -0.7588303199,
+                        -0.2932286385,
+                        -0.6664144171,
+                        0.2376361381,
+                        0.7066971703
+                      ],
+                      "translation": [
+                        135.0863694935,
+                        105.5007997009,
+                        153.6890178993
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#BC536D"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#c5a3af"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "B"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#c5a3af"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 38,
+                            "label_atom_id": "NH2"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 7,
+                            "label_atom_id": "OP1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 38,
+                            "label_atom_id": "NH2"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 6,
+                            "label_atom_id": "O3'"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 38,
+                            "label_atom_id": "NH1"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 7,
+                            "label_atom_id": "OP1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 45,
+                            "label_atom_id": "NE"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 8,
+                            "label_atom_id": "OP1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 45,
+                            "label_atom_id": "NH2"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 8,
+                            "label_atom_id": "OP1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 136,
+                            "label_atom_id": "NH1"
+                          },
+                          "end": {
+                            "label_asym_id": "A",
+                            "label_seq_id": 8,
+                            "label_atom_id": "OP1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 50,
+                            "label_atom_id": "NH1"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 9,
+                            "label_atom_id": "OP1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 50,
+                            "label_atom_id": "NH2"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 9,
+                            "label_atom_id": "OP1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C",
+                        "label_seq_id": 38
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "Arg192"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C",
+                        "label_seq_id": 45
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "Arg199"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C",
+                        "label_seq_id": 136
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "Arg290"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C",
+                        "label_seq_id": 50
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "Arg204"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "label_asym_id": "C",
+                          "label_seq_id": 38
+                        },
+                        {
+                          "label_asym_id": "C",
+                          "label_seq_id": 45
+                        },
+                        {
+                          "label_asym_id": "C",
+                          "label_seq_id": 136
+                        },
+                        {
+                          "label_asym_id": "C",
+                          "label_seq_id": 50
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "element-symbol",
+                                  "params": {}
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            41.64831266838914,
+            51.593692023811926,
+            11.363921371597097
+          ],
+          "target": [
+            77.29,
+            61.61,
+            18.73
+          ],
+          "up": [
+            -0.28,
+            0.96,
+            0.04
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "annotation",
+    "volume"
+  ]
+}

@@ -1,0 +1,3543 @@
+{
+  "id": "story-alphafind-06",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "alphafind",
+  "title": "Similarity in the vector space",
+  "caption": "Similarity in the vector space. Similarity in the vector space The distance in this space corresponds to similarity in structure.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "primitives",
+        "params": {
+          "label_attachment": "top-center",
+          "label_background_color": "black",
+          "opacity": 1
+        },
+        "children": [
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                -30,
+                0,
+                0
+              ],
+              "end": [
+                30,
+                0,
+                0
+              ],
+              "tube_radius": 0.1,
+              "color": "red"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                0,
+                -30,
+                0
+              ],
+              "end": [
+                0,
+                30,
+                0
+              ],
+              "tube_radius": 0.1,
+              "color": "red"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                0,
+                0,
+                -30
+              ],
+              "end": [
+                0,
+                0,
+                30
+              ],
+              "tube_radius": 0.1,
+              "color": "red"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                32,
+                0,
+                0
+              ],
+              "text": "X",
+              "label_color": "white",
+              "label_size": 4
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                0,
+                33,
+                0
+              ],
+              "text": "Y",
+              "label_color": "white",
+              "label_size": 4
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                0,
+                0,
+                32
+              ],
+              "text": "Z",
+              "label_color": "white",
+              "label_size": 4
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -20,
+                8.862159600739687,
+                -4.1982335451757535
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "red",
+              "tooltip": "-20,8.862159600739687,-4.1982335451757535"
+            },
+            "ref": "pt_0"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -20,
+                10.262159600739688,
+                -4.1982335451757535
+              ],
+              "text": "A0A1D6JW22",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                8.393923158582766,
+                12.179275896578474,
+                18.376050223432685
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "8.393923158582766,12.179275896578474,18.376050223432685"
+            },
+            "ref": "pt_1"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                8.393923158582766,
+                13.579275896578475,
+                18.376050223432685
+              ],
+              "text": "A0A4D4LYU1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                18.970730272703804,
+                4.9625921377514715,
+                -5.20803462346521
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "18.970730272703804,4.9625921377514715,-5.20803462346521"
+            },
+            "ref": "pt_2"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                18.970730272703804,
+                6.362592137751472,
+                -5.20803462346521
+              ],
+              "text": "A0A7S2ARG5",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -11.996776053110807,
+                2.5197179214501375,
+                -15.210177902772557
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-11.996776053110807,2.5197179214501375,-15.210177902772557"
+            },
+            "ref": "pt_3"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -11.996776053110807,
+                3.9197179214501374,
+                -15.210177902772557
+              ],
+              "text": "A0A3D0EQI2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                19.001876828733657,
+                -13.327541144899442,
+                11.9657885889319
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "19.001876828733657,-13.327541144899442,11.9657885889319"
+            },
+            "ref": "pt_4"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                19.001876828733657,
+                -11.927541144899442,
+                11.9657885889319
+              ],
+              "text": "A0A1F4X4G9",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                10.290134744645911,
+                7.652929304413192,
+                13.16799175037886
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "10.290134744645911,7.652929304413192,13.16799175037886"
+            },
+            "ref": "pt_5"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                10.290134744645911,
+                9.052929304413192,
+                13.16799175037886
+              ],
+              "text": "A0A2S9KIM8",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                13.80072042966276,
+                -12.679296144815453,
+                8.076212547239265
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "13.80072042966276,-12.679296144815453,8.076212547239265"
+            },
+            "ref": "pt_6"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                13.80072042966276,
+                -11.279296144815453,
+                8.076212547239265
+              ],
+              "text": "H9DQK2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                14.639487515632936,
+                3.559860082805244,
+                -2.8481291358184535
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "14.639487515632936,3.559860082805244,-2.8481291358184535"
+            },
+            "ref": "pt_7"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                14.639487515632936,
+                4.959860082805244,
+                -2.8481291358184535
+              ],
+              "text": "A0A8B9PW02",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                3.298649352727807,
+                10.012726076947729,
+                -7.965815724419372
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "3.298649352727807,10.012726076947729,-7.965815724419372"
+            },
+            "ref": "pt_8"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                3.298649352727807,
+                11.41272607694773,
+                -7.965815724419372
+              ],
+              "text": "A0AAW8IHC1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -12.605903297371697,
+                6.552222173386326,
+                10.396006070586736
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-12.605903297371697,6.552222173386326,10.396006070586736"
+            },
+            "ref": "pt_9"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -12.605903297371697,
+                7.9522221733863265,
+                10.396006070586736
+              ],
+              "text": "C3MH26",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                11.55564425207558,
+                -2.15107824835286,
+                -5.566785285191145
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "11.55564425207558,-2.15107824835286,-5.566785285191145"
+            },
+            "ref": "pt_10"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                11.55564425207558,
+                -0.7510782483528602,
+                -5.566785285191145
+              ],
+              "text": "A0A382RIZ7",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -16.082620281376876,
+                10.785137747698172,
+                8.809747148352471
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-16.082620281376876,10.785137747698172,8.809747148352471"
+            },
+            "ref": "pt_11"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -16.082620281376876,
+                12.185137747698173,
+                8.809747148352471
+              ],
+              "text": "A0A1Y3C540",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -9.167200173978927,
+                -12.542494457170505,
+                14.544034927748726
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-9.167200173978927,-12.542494457170505,14.544034927748726"
+            },
+            "ref": "pt_12"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -9.167200173978927,
+                -11.142494457170505,
+                14.544034927748726
+              ],
+              "text": "A0A832Z988",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                6.8147306563696475,
+                -2.301671654713573,
+                6.786001843684062
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "6.8147306563696475,-2.301671654713573,6.786001843684062"
+            },
+            "ref": "pt_13"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                6.8147306563696475,
+                -0.901671654713573,
+                6.786001843684062
+              ],
+              "text": "A0A2K2DFI2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -17.05772205183166,
+                3.61734833238188,
+                5.152959060342255
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-17.05772205183166,3.61734833238188,5.152959060342255"
+            },
+            "ref": "pt_14"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -17.05772205183166,
+                5.01734833238188,
+                5.152959060342255
+              ],
+              "text": "A0A090FKV3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                15.13606284672278,
+                -3.6352385347254312,
+                -17.698606414123788
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "15.13606284672278,-3.6352385347254312,-17.698606414123788"
+            },
+            "ref": "pt_15"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                15.13606284672278,
+                -2.2352385347254313,
+                -17.698606414123788
+              ],
+              "text": "A0A5D3FDD4",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                18.673333973874833,
+                -8.949708913769427,
+                -7.33022119889938
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "18.673333973874833,-8.949708913769427,-7.33022119889938"
+            },
+            "ref": "pt_16"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                18.673333973874833,
+                -7.549708913769427,
+                -7.33022119889938
+              ],
+              "text": "A0A7K4KDB1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -18.996751822705846,
+                -14.03039123410963,
+                4.765727093977148
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-18.996751822705846,-14.03039123410963,4.765727093977148"
+            },
+            "ref": "pt_17"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -18.996751822705846,
+                -12.630391234109629,
+                4.765727093977148
+              ],
+              "text": "A0A724LZ95",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -14.898708670480119,
+                3.8586518747843,
+                11.223668885650113
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-14.898708670480119,3.8586518747843,11.223668885650113"
+            },
+            "ref": "pt_18"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -14.898708670480119,
+                5.2586518747843005,
+                11.223668885650113
+              ],
+              "text": "A0A225AN51",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                10.88386518094012,
+                -6.771859397649678,
+                4.216491614643019
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "10.88386518094012,-6.771859397649678,4.216491614643019"
+            },
+            "ref": "pt_19"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                10.88386518094012,
+                -5.371859397649677,
+                4.216491614643019
+              ],
+              "text": "A0A538TFK9",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -1.8997089489130303,
+                1.8043739392123825,
+                4.795337569205458
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-1.8997089489130303,1.8043739392123825,4.795337569205458"
+            },
+            "ref": "pt_20"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -1.8997089489130303,
+                3.2043739392123824,
+                4.795337569205458
+              ],
+              "text": "W8DXC3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                2.2554144223977346,
+                -11.548157058377058,
+                1.2186310706965742
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "2.2554144223977346,-11.548157058377058,1.2186310706965742"
+            },
+            "ref": "pt_21"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                2.2554144223977346,
+                -10.148157058377057,
+                1.2186310706965742
+              ],
+              "text": "A0A7C1UEG1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -0.5237161615502828,
+                7.518053430085274,
+                -0.22931792613235302
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-0.5237161615502828,7.518053430085274,-0.22931792613235302"
+            },
+            "ref": "pt_22"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -0.5237161615502828,
+                8.918053430085275,
+                -0.22931792613235302
+              ],
+              "text": "R4WGK9",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                11.838329931779299,
+                -10.611681580994627,
+                18.403996281977015
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "11.838329931779299,-10.611681580994627,18.403996281977015"
+            },
+            "ref": "pt_23"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                11.838329931779299,
+                -9.211681580994627,
+                18.403996281977015
+              ],
+              "text": "A0A1H8XXM0",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -11.344802649546182,
+                4.98598680121404,
+                6.660138341212587
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-11.344802649546182,4.98598680121404,6.660138341212587"
+            },
+            "ref": "pt_24"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -11.344802649546182,
+                6.38598680121404,
+                6.660138341212587
+              ],
+              "text": "A0A7K4XHP3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -0.7000391092151403,
+                7.041204676334019,
+                16.674534007979673
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-0.7000391092151403,7.041204676334019,16.674534007979673"
+            },
+            "ref": "pt_25"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -0.7000391092151403,
+                8.441204676334019,
+                16.674534007979673
+              ],
+              "text": "A0A7G7CI59",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                3.3801918410608778,
+                6.380702030819521,
+                0.4566237953622476
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "3.3801918410608778,6.380702030819521,0.4566237953622476"
+            },
+            "ref": "pt_26"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                3.3801918410608778,
+                7.780702030819521,
+                0.4566237953622476
+              ],
+              "text": "A0A4V3GTC5",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                10.371361801226158,
+                9.662179616052526,
+                7.959872821884346
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "10.371361801226158,9.662179616052526,7.959872821884346"
+            },
+            "ref": "pt_27"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                10.371361801226158,
+                11.062179616052527,
+                7.959872821884346
+              ],
+              "text": "U6SL63",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -17.684676852386474,
+                12.795161883568653,
+                16.639330099787912
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-17.684676852386474,12.795161883568653,16.639330099787912"
+            },
+            "ref": "pt_28"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -17.684676852386474,
+                14.195161883568653,
+                16.639330099787912
+              ],
+              "text": "A0A1B8AXS8",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                6.446314813001663,
+                -5.183171893677354,
+                -5.778530314892123
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "6.446314813001663,-5.183171893677354,-5.778530314892123"
+            },
+            "ref": "pt_29"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                6.446314813001663,
+                -3.783171893677354,
+                -5.778530314892123
+              ],
+              "text": "A0A844KKW9",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                7.350362855286221,
+                14.716771828216224,
+                -11.361161822278518
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "7.350362855286221,14.716771828216224,-11.361161822278518"
+            },
+            "ref": "pt_30"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                7.350362855286221,
+                16.116771828216223,
+                -11.361161822278518
+              ],
+              "text": "A0A2I8EG49",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                4.941870774000563,
+                2.8268289346578968,
+                -14.391963539965218
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "4.941870774000563,2.8268289346578968,-14.391963539965218"
+            },
+            "ref": "pt_31"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                4.941870774000563,
+                4.226828934657897,
+                -14.391963539965218
+              ],
+              "text": "A0A389MPR7",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -9.327503323765995,
+                -11.082997369139775,
+                -6.527549360071134
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-9.327503323765995,-11.082997369139775,-6.527549360071134"
+            },
+            "ref": "pt_32"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -9.327503323765995,
+                -9.682997369139775,
+                -6.527549360071134
+              ],
+              "text": "A0A0G0Q999",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -15.25595709310437,
+                0.37128470419702353,
+                -10.024265273004858
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-15.25595709310437,0.37128470419702353,-10.024265273004858"
+            },
+            "ref": "pt_33"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -15.25595709310437,
+                1.7712847041970234,
+                -10.024265273004858
+              ],
+              "text": "A0A3B6GX69",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                13.074448009538173,
+                8.890013572035969,
+                11.854759335983545
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "13.074448009538173,8.890013572035969,11.854759335983545"
+            },
+            "ref": "pt_34"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                13.074448009538173,
+                10.290013572035969,
+                11.854759335983545
+              ],
+              "text": "A0AB73HTI6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -13.06779846039717,
+                1.3291549949644832,
+                8.14403912598209
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-13.06779846039717,1.3291549949644832,8.14403912598209"
+            },
+            "ref": "pt_35"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -13.06779846039717,
+                2.729154994964483,
+                8.14403912598209
+              ],
+              "text": "A0AAD5F1W3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -11.541377246321645,
+                -4.869710364000639,
+                -9.070476154010976
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-11.541377246321645,-4.869710364000639,-9.070476154010976"
+            },
+            "ref": "pt_36"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -11.541377246321645,
+                -3.469710364000639,
+                -9.070476154010976
+              ],
+              "text": "A0A552E620",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                4.746657200194022,
+                12.851578245367818,
+                -4.184857220752747
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "4.746657200194022,12.851578245367818,-4.184857220752747"
+            },
+            "ref": "pt_37"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                4.746657200194022,
+                14.251578245367819,
+                -4.184857220752747
+              ],
+              "text": "A0A517LAD1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                7.431483754135115,
+                -14.296949932468124,
+                1.101716182056407
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "7.431483754135115,-14.296949932468124,1.101716182056407"
+            },
+            "ref": "pt_38"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                7.431483754135115,
+                -12.896949932468123,
+                1.101716182056407
+              ],
+              "text": "A0A2K0JK43",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                18.154513635090552,
+                14.983340273183785,
+                -6.942960524347654
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "18.154513635090552,14.983340273183785,-6.942960524347654"
+            },
+            "ref": "pt_39"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                18.154513635090552,
+                16.383340273183784,
+                -6.942960524347654
+              ],
+              "text": "A0A1M5GHG0",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -14.735808260447811,
+                2.5838820287549424,
+                -11.076125666222651
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-14.735808260447811,2.5838820287549424,-11.076125666222651"
+            },
+            "ref": "pt_40"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -14.735808260447811,
+                3.9838820287549424,
+                -11.076125666222651
+              ],
+              "text": "A0A8I6TGK3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                10.932478116401398,
+                9.984567222163605,
+                -10.847201079013757
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "10.932478116401398,9.984567222163605,-10.847201079013757"
+            },
+            "ref": "pt_41"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                10.932478116401398,
+                11.384567222163605,
+                -10.847201079013757
+              ],
+              "text": "A0A7Y8BM17",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                11.380833746516146,
+                -6.664498330701463,
+                12.980245110429678
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "11.380833746516146,-6.664498330701463,12.980245110429678"
+            },
+            "ref": "pt_42"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                11.380833746516146,
+                -5.264498330701462,
+                12.980245110429678
+              ],
+              "text": "A0A370KKB5",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -9.897051439329516,
+                -3.263921049108802,
+                -11.65131167479558
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-9.897051439329516,-3.263921049108802,-11.65131167479558"
+            },
+            "ref": "pt_43"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -9.897051439329516,
+                -1.8639210491088023,
+                -11.65131167479558
+              ],
+              "text": "A0A924NE03",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -19.229957834569404,
+                -13.449615615045332,
+                15.61354041499726
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-19.229957834569404,-13.449615615045332,15.61354041499726"
+            },
+            "ref": "pt_44"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -19.229957834569404,
+                -12.049615615045331,
+                15.61354041499726
+              ],
+              "text": "A0A9Q1GA85",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -18.590186352594174,
+                -12.497134511049808,
+                19.03067413018107
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-18.590186352594174,-12.497134511049808,19.03067413018107"
+            },
+            "ref": "pt_45"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -18.590186352594174,
+                -11.097134511049807,
+                19.03067413018107
+              ],
+              "text": "A0A816A2Y0",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                15.339059523685137,
+                11.339239819817521,
+                14.679483344407345
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "15.339059523685137,11.339239819817521,14.679483344407345"
+            },
+            "ref": "pt_46"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                15.339059523685137,
+                12.739239819817522,
+                14.679483344407345
+              ],
+              "text": "A0A3C1HYN7",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                9.249098089603649,
+                0.9125516062704264,
+                12.275236549467081
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "9.249098089603649,0.9125516062704264,12.275236549467081"
+            },
+            "ref": "pt_47"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                9.249098089603649,
+                2.3125516062704263,
+                12.275236549467081
+              ],
+              "text": "A0A6A4VQT2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -1.8645294667294365,
+                -6.781225705417455,
+                -2.805116049366916
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-1.8645294667294365,-6.781225705417455,-2.805116049366916"
+            },
+            "ref": "pt_48"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -1.8645294667294365,
+                -5.381225705417455,
+                -2.805116049366916
+              ],
+              "text": "A0A2Z4FHG7",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -1.061103788742912,
+                9.986576821552262,
+                -8.615939505798451
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-1.061103788742912,9.986576821552262,-8.615939505798451"
+            },
+            "ref": "pt_49"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -1.061103788742912,
+                11.386576821552262,
+                -8.615939505798451
+              ],
+              "text": "A0A0F4RGB6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -9.941481571513577,
+                1.961520187842325,
+                7.468941862098291
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-9.941481571513577,1.961520187842325,7.468941862098291"
+            },
+            "ref": "pt_50"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -9.941481571513577,
+                3.361520187842325,
+                7.468941862098291
+              ],
+              "text": "A0A5D2FD42",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -8.329662650103273,
+                13.495823746234237,
+                0.24426216728897998
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-8.329662650103273,13.495823746234237,0.24426216728897998"
+            },
+            "ref": "pt_51"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -8.329662650103273,
+                14.895823746234237,
+                0.24426216728897998
+              ],
+              "text": "A0A2W4M5H1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -8.963183805899462,
+                10.49157580301653,
+                6.561961090847035
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-8.963183805899462,10.49157580301653,6.561961090847035"
+            },
+            "ref": "pt_52"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -8.963183805899462,
+                11.891575803016531,
+                6.561961090847035
+              ],
+              "text": "A0AAV5Z5S9",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -9.939927266332234,
+                0.23156939812906785,
+                9.702173566329293
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-9.939927266332234,0.23156939812906785,9.702173566329293"
+            },
+            "ref": "pt_53"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -9.939927266332234,
+                1.6315693981290678,
+                9.702173566329293
+              ],
+              "text": "A0A1G3LFS8",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -15.619540646512178,
+                -12.180807325785281,
+                -3.4136119904724183
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-15.619540646512178,-12.180807325785281,-3.4136119904724183"
+            },
+            "ref": "pt_54"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -15.619540646512178,
+                -10.78080732578528,
+                -3.4136119904724183
+              ],
+              "text": "A0A1H5NMX1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -2.069343447947176,
+                1.431342323176068,
+                -0.6629432848603756
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-2.069343447947176,1.431342323176068,-0.6629432848603756"
+            },
+            "ref": "pt_55"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -2.069343447947176,
+                2.831342323176068,
+                -0.6629432848603756
+              ],
+              "text": "A0A3A5ZJP2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -0.40083476473228075,
+                -14.736043743587288,
+                10.9208816554019
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-0.40083476473228075,-14.736043743587288,10.9208816554019"
+            },
+            "ref": "pt_56"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -0.40083476473228075,
+                -13.336043743587288,
+                10.9208816554019
+              ],
+              "text": "A0A6I3WGQ4",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                5.902099129962153,
+                6.420177333129686,
+                -4.48260083583591
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "5.902099129962153,6.420177333129686,-4.48260083583591"
+            },
+            "ref": "pt_57"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                5.902099129962153,
+                7.820177333129687,
+                -4.48260083583591
+              ],
+              "text": "A0A7W9X1Y3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                9.059233814841718,
+                -9.474496635684773,
+                -19.320588249756838
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "9.059233814841718,-9.474496635684773,-19.320588249756838"
+            },
+            "ref": "pt_58"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                9.059233814841718,
+                -8.074496635684772,
+                -19.320588249756838
+              ],
+              "text": "A0A316H223",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -4.797144344847766,
+                14.301541953127526,
+                15.788223900381126
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-4.797144344847766,14.301541953127526,15.788223900381126"
+            },
+            "ref": "pt_59"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -4.797144344847766,
+                15.701541953127526,
+                15.788223900381126
+              ],
+              "text": "A0A8X6IBS8",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                15.75155911332331,
+                0.02304556212038733,
+                -10.449165377249301
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "15.75155911332331,0.02304556212038733,-10.449165377249301"
+            },
+            "ref": "pt_60"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                15.75155911332331,
+                1.4230455621203872,
+                -10.449165377249301
+              ],
+              "text": "D9XD74",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                12.891996642792947,
+                1.9856338360204973,
+                5.793027425706896
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "12.891996642792947,1.9856338360204973,5.793027425706896"
+            },
+            "ref": "pt_61"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                12.891996642792947,
+                3.385633836020497,
+                5.793027425706896
+              ],
+              "text": "A0A4Q5J769",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -12.27865968910919,
+                -12.139339910524996,
+                -17.090814836483332
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-12.27865968910919,-12.139339910524996,-17.090814836483332"
+            },
+            "ref": "pt_62"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -12.27865968910919,
+                -10.739339910524995,
+                -17.090814836483332
+              ],
+              "text": "T1F7X9",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                2.2801211227670137,
+                -4.483038201906311,
+                -9.472812850071932
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "2.2801211227670137,-4.483038201906311,-9.472812850071932"
+            },
+            "ref": "pt_63"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                2.2801211227670137,
+                -3.083038201906311,
+                -9.472812850071932
+              ],
+              "text": "A0A1B4NWX3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -9.584721283681574,
+                -8.363947129346343,
+                8.14049350470441
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-9.584721283681574,-8.363947129346343,8.14049350470441"
+            },
+            "ref": "pt_64"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -9.584721283681574,
+                -6.963947129346343,
+                8.14049350470441
+              ],
+              "text": "A0A7V6WH59",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -8.528203958630911,
+                -12.129917990669647,
+                7.842075373482658
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-8.528203958630911,-12.129917990669647,7.842075373482658"
+            },
+            "ref": "pt_65"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -8.528203958630911,
+                -10.729917990669646,
+                7.842075373482658
+              ],
+              "text": "A0A2K0WVQ6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -0.4616095867186232,
+                9.047232632583473,
+                -2.0597808170714416
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-0.4616095867186232,9.047232632583473,-2.0597808170714416"
+            },
+            "ref": "pt_66"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -0.4616095867186232,
+                10.447232632583473,
+                -2.0597808170714416
+              ],
+              "text": "A0A7J0H3K3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                12.008409871123149,
+                -2.936902702876978,
+                -10.952910739670187
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "12.008409871123149,-2.936902702876978,-10.952910739670187"
+            },
+            "ref": "pt_67"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                12.008409871123149,
+                -1.536902702876978,
+                -10.952910739670187
+              ],
+              "text": "A0A285NZK1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                8.927724283494172,
+                5.856170398822087,
+                -19.000325727756717
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "8.927724283494172,5.856170398822087,-19.000325727756717"
+            },
+            "ref": "pt_68"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                8.927724283494172,
+                7.256170398822087,
+                -19.000325727756717
+              ],
+              "text": "A0A0Q8CRC1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -13.925513274889454,
+                3.480961822297104,
+                8.428946021012962
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-13.925513274889454,3.480961822297104,8.428946021012962"
+            },
+            "ref": "pt_69"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -13.925513274889454,
+                4.880961822297104,
+                8.428946021012962
+              ],
+              "text": "A0A9P4Y205",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                16.27262315563712,
+                14.58549078053693,
+                -4.657249196752673
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "16.27262315563712,14.58549078053693,-4.657249196752673"
+            },
+            "ref": "pt_70"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                16.27262315563712,
+                15.98549078053693,
+                -4.657249196752673
+              ],
+              "text": "A0AAC9JCX6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                1.8613017498864792,
+                -6.400224220924429,
+                -10.983604797984299
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "1.8613017498864792,-6.400224220924429,-10.983604797984299"
+            },
+            "ref": "pt_71"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                1.8613017498864792,
+                -5.000224220924428,
+                -10.983604797984299
+              ],
+              "text": "A0A8U0TLI6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -10.654895185489295,
+                -1.4321160309282277,
+                -0.4304785012936918
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-10.654895185489295,-1.4321160309282277,-0.4304785012936918"
+            },
+            "ref": "pt_72"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -10.654895185489295,
+                -0.03211603092822779,
+                -0.4304785012936918
+              ],
+              "text": "A0A4R6SFR6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -8.782754923049652,
+                1.4746306366214412,
+                19.202922798212967
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-8.782754923049652,1.4746306366214412,19.202922798212967"
+            },
+            "ref": "pt_73"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -8.782754923049652,
+                2.874630636621441,
+                19.202922798212967
+              ],
+              "text": "A0A8H5Y122",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                1.4958127010322642,
+                4.173822311067852,
+                -17.87513360599405
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "1.4958127010322642,4.173822311067852,-17.87513360599405"
+            },
+            "ref": "pt_74"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                1.4958127010322642,
+                5.573822311067852,
+                -17.87513360599405
+              ],
+              "text": "Q7Y149",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -12.654163772185711,
+                14.09654122111533,
+                3.663594753234065
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-12.654163772185711,14.09654122111533,3.663594753234065"
+            },
+            "ref": "pt_75"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -12.654163772185711,
+                15.496541221115331,
+                3.663594753234065
+              ],
+              "text": "A0A927V378",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -16.94524072787317,
+                11.940669678842823,
+                -4.381735669958289
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-16.94524072787317,11.940669678842823,-4.381735669958289"
+            },
+            "ref": "pt_76"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -16.94524072787317,
+                13.340669678842824,
+                -4.381735669958289
+              ],
+              "text": "A0A3B6B8F7",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -11.936567707452923,
+                13.981053208844969,
+                -16.4919799366362
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-11.936567707452923,13.981053208844969,-16.4919799366362"
+            },
+            "ref": "pt_77"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -11.936567707452923,
+                15.38105320884497,
+                -16.4919799366362
+              ],
+              "text": "A0A3A0B2H0",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                11.38239501407952,
+                0.2705106736993912,
+                -2.822165167599451
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "11.38239501407952,0.2705106736993912,-2.822165167599451"
+            },
+            "ref": "pt_78"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                11.38239501407952,
+                1.670510673699391,
+                -2.822165167599451
+              ],
+              "text": "A0A327IYC2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                14.93251699666871,
+                9.08483722125311,
+                -17.97373259858432
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "14.93251699666871,9.08483722125311,-17.97373259858432"
+            },
+            "ref": "pt_79"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                14.93251699666871,
+                10.48483722125311,
+                -17.97373259858432
+              ],
+              "text": "A0A841QJV1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -15.461569350081845,
+                9.259021360885527,
+                -0.24837072616719524
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-15.461569350081845,9.259021360885527,-0.24837072616719524"
+            },
+            "ref": "pt_80"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -15.461569350081845,
+                10.659021360885527,
+                -0.24837072616719524
+              ],
+              "text": "A0A453DDF2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -15.197709781532467,
+                11.975869506763956,
+                -17.198333409469342
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-15.197709781532467,11.975869506763956,-17.198333409469342"
+            },
+            "ref": "pt_81"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -15.197709781532467,
+                13.375869506763957,
+                -17.198333409469342
+              ],
+              "text": "A0A3M0NT30",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -8.487026765942574,
+                -8.288456703849079,
+                -4.452665810204053
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-8.487026765942574,-8.288456703849079,-4.452665810204053"
+            },
+            "ref": "pt_82"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -8.487026765942574,
+                -6.888456703849078,
+                -4.452665810204053
+              ],
+              "text": "A0A6J2VLH7",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                5.7844400741305435,
+                -6.741227891334347,
+                -1.0402357103612303
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "5.7844400741305435,-6.741227891334347,-1.0402357103612303"
+            },
+            "ref": "pt_83"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                5.7844400741305435,
+                -5.341227891334347,
+                -1.0402357103612303
+              ],
+              "text": "A0A353P9F6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                16.128029316896573,
+                -4.986190236613766,
+                -6.599698641584837
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "16.128029316896573,-4.986190236613766,-6.599698641584837"
+            },
+            "ref": "pt_84"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                16.128029316896573,
+                -3.5861902366137657,
+                -6.599698641584837
+              ],
+              "text": "A0A6M2AT58",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -10.247979434834633,
+                -9.64533122983994,
+                16.60093317681458
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-10.247979434834633,-9.64533122983994,16.60093317681458"
+            },
+            "ref": "pt_85"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -10.247979434834633,
+                -8.24533122983994,
+                16.60093317681458
+              ],
+              "text": "A0A183MUZ6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -3.3788016239122953,
+                13.169315436989564,
+                11.56518526616992
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-3.3788016239122953,13.169315436989564,11.56518526616992"
+            },
+            "ref": "pt_86"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -3.3788016239122953,
+                14.569315436989564,
+                11.56518526616992
+              ],
+              "text": "A0A2E9ZI09",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                12.865347670958727,
+                -2.4783685229533603,
+                10.05208496877458
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "12.865347670958727,-2.4783685229533603,10.05208496877458"
+            },
+            "ref": "pt_87"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                12.865347670958727,
+                -1.0783685229533604,
+                10.05208496877458
+              ],
+              "text": "A0A7Y8GY12",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                19.321093464272963,
+                5.575930619397695,
+                -0.32434676177217625
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "19.321093464272963,5.575930619397695,-0.32434676177217625"
+            },
+            "ref": "pt_88"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                19.321093464272963,
+                6.975930619397696,
+                -0.32434676177217625
+              ],
+              "text": "A0A563EYG7",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                7.762324981304118,
+                -3.0004505870056164,
+                -2.3640052900009323
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "7.762324981304118,-3.0004505870056164,-2.3640052900009323"
+            },
+            "ref": "pt_89"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                7.762324981304118,
+                -1.6004505870056165,
+                -2.3640052900009323
+              ],
+              "text": "A0A0C3LGT3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                18.66544022312155,
+                3.63361597529547,
+                6.490083588614652
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "18.66544022312155,3.63361597529547,6.490083588614652"
+            },
+            "ref": "pt_90"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                18.66544022312155,
+                5.03361597529547,
+                6.490083588614652
+              ],
+              "text": "A0A7V4HFY1",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                15.004700462741312,
+                9.914923404112415,
+                1.1424609614914516
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "15.004700462741312,9.914923404112415,1.1424609614914516"
+            },
+            "ref": "pt_91"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                15.004700462741312,
+                11.314923404112415,
+                1.1424609614914516
+              ],
+              "text": "A0A416ZDL8",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -6.427846321857942,
+                0.14835377814961248,
+                -18.333359340595052
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-6.427846321857942,0.14835377814961248,-18.333359340595052"
+            },
+            "ref": "pt_92"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -6.427846321857942,
+                1.5483537781496124,
+                -18.333359340595052
+              ],
+              "text": "A0A1I8AZW8",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -12.85650797886774,
+                9.379258175458745,
+                10.624120106767805
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-12.85650797886774,9.379258175458745,10.624120106767805"
+            },
+            "ref": "pt_93"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -12.85650797886774,
+                10.779258175458745,
+                10.624120106767805
+              ],
+              "text": "A0AAF0FJ91",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -0.794187061728735,
+                -14.540810770431563,
+                2.277170146116987
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-0.794187061728735,-14.540810770431563,2.277170146116987"
+            },
+            "ref": "pt_94"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -0.794187061728735,
+                -13.140810770431562,
+                2.277170146116987
+              ],
+              "text": "A0A4Z2BHK4",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                4.68589444837562,
+                -9.698813365739625,
+                -12.313923763103958
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "4.68589444837562,-9.698813365739625,-12.313923763103958"
+            },
+            "ref": "pt_95"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                4.68589444837562,
+                -8.298813365739624,
+                -12.313923763103958
+              ],
+              "text": "A0A316EFS9",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                15.098173737933394,
+                1.4762161283124442,
+                5.537968532698869
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "15.098173737933394,1.4762161283124442,5.537968532698869"
+            },
+            "ref": "pt_96"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                15.098173737933394,
+                2.876216128312444,
+                5.537968532698869
+              ],
+              "text": "A0A067H3U6",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -16.9043889913155,
+                14.363892582960034,
+                14.301973528854433
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-16.9043889913155,14.363892582960034,14.301973528854433"
+            },
+            "ref": "pt_97"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -16.9043889913155,
+                15.763892582960034,
+                14.301973528854433
+              ],
+              "text": "A0A7W7YWP2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                -12.748796169144043,
+                11.80339149581414,
+                -10.315792257533758
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "-12.748796169144043,11.80339149581414,-10.315792257533758"
+            },
+            "ref": "pt_98"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                -12.748796169144043,
+                13.20339149581414,
+                -10.315792257533758
+              ],
+              "text": "A0A3B6CFE3",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                17.266325458549545,
+                13.216454993798834,
+                -18.76615406566998
+              ],
+              "radius": [
+                0.8,
+                0.8,
+                0.8
+              ],
+              "color": "cyan",
+              "tooltip": "17.266325458549545,13.216454993798834,-18.76615406566998"
+            },
+            "ref": "pt_99"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "label",
+              "position": [
+                17.266325458549545,
+                14.616454993798834,
+                -18.76615406566998
+              ],
+              "text": "A0A454A6K2",
+              "label_color": "white",
+              "label_size": 1
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                -20,
+                8.862159600739687,
+                -4.1982335451757535
+              ],
+              "end": [
+                -16.94524072787317,
+                11.940669678842823,
+                -4.381735669958289
+              ],
+              "tube_radius": 0.1,
+              "color": "yellow",
+              "tooltip": "A0A1D6JW22 \u2194 A0A3B6B8F7"
+            },
+            "ref": "connection_0"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                -20,
+                8.862159600739687,
+                -4.1982335451757535
+              ],
+              "end": [
+                -15.461569350081845,
+                9.259021360885527,
+                -0.24837072616719524
+              ],
+              "tube_radius": 0.1,
+              "color": "yellow",
+              "tooltip": "A0A1D6JW22 \u2194 A0A453DDF2"
+            },
+            "ref": "connection_1"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                -20,
+                8.862159600739687,
+                -4.1982335451757535
+              ],
+              "end": [
+                -12.748796169144043,
+                11.80339149581414,
+                -10.315792257533758
+              ],
+              "tube_radius": 0.1,
+              "color": "yellow",
+              "tooltip": "A0A1D6JW22 \u2194 A0A3B6CFE3"
+            },
+            "ref": "connection_2"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                -20,
+                8.862159600739687,
+                -4.1982335451757535
+              ],
+              "end": [
+                -15.25595709310437,
+                0.37128470419702353,
+                -10.024265273004858
+              ],
+              "tube_radius": 0.1,
+              "color": "yellow",
+              "tooltip": "A0A1D6JW22 \u2194 A0A3B6GX69"
+            },
+            "ref": "connection_3"
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                -20,
+                8.862159600739687,
+                -4.1982335451757535
+              ],
+              "end": [
+                -14.735808260447811,
+                2.5838820287549424,
+                -11.076125666222651
+              ],
+              "tube_radius": 0.1,
+              "color": "yellow",
+              "tooltip": "A0A1D6JW22 \u2194 A0A8I6TGK3"
+            },
+            "ref": "connection_4"
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "target": [
+            -20,
+            8.862159600739687,
+            -4.1982335451757535
+          ],
+          "position": [
+            -20,
+            8.862159600739687,
+            10.801766454824246
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "camera",
+    "volume"
+  ]
+}

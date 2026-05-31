@@ -22,6 +22,8 @@ import pathlib
 
 from molviewspec import ComponentExpression, create_builder
 
+from molbench.mvs import categorize
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "tasks" / "mvs"
 CIF = "https://files.rcsb.org/download/{}.cif"
@@ -110,12 +112,14 @@ TASKS = [
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for t in TASKS:
+        root = reference_root(t["build"])
         doc = {
             "id": t["id"],
             "category": "mvs",
             "title": t["title"],
             "prompt": t["prompt"],
-            "reference_mvs": reference_root(t["build"]),
+            "reference_mvs": root,
+            "categories": categorize(root),   # same auto-tagger as the ingested tasks
             "skills": t["skills"],
             "notes": t["notes"],
         }

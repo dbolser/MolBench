@@ -1,15 +1,17 @@
 {
-  "id": "mvs-005",
-  "category": "mvs",
-  "title": "Surface representation",
-  "prompt": "Load insulin (4INS) and render the protein as a steel-blue molecular surface.",
-  "reference_mvs": {
+  "id": "story-mvs-examples-00",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "mvs-examples",
+  "title": "Basic Visualization",
+  "caption": "Basic Visualization. Basic Molecular Visualization Load a molecule from URL (PDB ID 1cbs) and display default representation (cartoon) in blue color.",
+  "scene_mvs": {
     "kind": "root",
     "children": [
       {
         "kind": "download",
         "params": {
-          "url": "https://files.rcsb.org/download/4ins.cif"
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1cbs_updated.cif"
         },
         "children": [
           {
@@ -27,20 +29,19 @@
                   {
                     "kind": "component",
                     "params": {
-                      "selector": "polymer"
+                      "selector": "all"
                     },
                     "children": [
                       {
                         "kind": "representation",
                         "params": {
-                          "type": "surface",
-                          "surface_type": "molecular"
+                          "type": "cartoon"
                         },
                         "children": [
                           {
                             "kind": "color",
                             "params": {
-                              "color": "steelblue"
+                              "color": "blue"
                             }
                           }
                         ]
@@ -58,12 +59,6 @@
   "categories": [
     "load",
     "representation",
-    "color",
-    "surface"
-  ],
-  "skills": [
-    "representation-surface",
     "color"
-  ],
-  "notes": "Uses the 'surface' representation type."
+  ]
 }

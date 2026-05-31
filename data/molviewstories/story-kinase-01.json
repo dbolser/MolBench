@@ -1,0 +1,254 @@
+{
+  "id": "story-kinase-01",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "kinase",
+  "title": "The ABL Kinase: A Well-Regulated Enzyme",
+  "caption": "The ABL Kinase: A Well-Regulated Enzyme. The ABL Kinase: A Well-Regulated Enzyme Normally, the ABL kinase (PDB ID 1OPL(https://doi.org/10.2210/pdb1opl/pdb)) is a well-regulated enzyme, kept in check by its SH3 and SH2 domains which fold back onto the kinase domain like a safety lock.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1opl.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.6321036327,
+                        0.3450463255,
+                        0.6938213248,
+                        -0.6288677634,
+                        -0.7515716885,
+                        -0.1991615756,
+                        0.4527364948,
+                        -0.5622126202,
+                        0.6920597055
+                      ],
+                      "translation": [
+                        36.3924122492,
+                        118.2516908402,
+                        -26.4992054179
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#4577B2"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 146,
+                                "end_auth_seq_id": 247
+                              },
+                              "color": "#8ED1A4"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 83,
+                                "end_auth_seq_id": 145
+                              },
+                              "color": "#64B9AA"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#4577B2"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "D"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": 4552626
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.33
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": 4552626
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 146,
+                            "end_auth_seq_id": 247
+                          },
+                          "text": "SH2",
+                          "label_color": "#8ED1A4",
+                          "label_size": 9
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 83,
+                            "end_auth_seq_id": 145
+                          },
+                          "text": "SH3",
+                          "label_color": "#64B9AA",
+                          "label_size": 9
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            -16.46232024325223,
+            -11.567617521650881,
+            39.865831035215976
+          ],
+          "target": [
+            -10.37,
+            49.7,
+            12.68
+          ],
+          "up": [
+            -0.27,
+            -0.37,
+            -0.89
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "surface",
+    "volume"
+  ]
+}

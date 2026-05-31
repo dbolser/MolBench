@@ -54,6 +54,11 @@
       }
     ]
   },
+  "categories": [
+    "load",
+    "representation",
+    "color"
+  ],
   "skills": [
     "download",
     "component",

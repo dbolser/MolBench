@@ -1,0 +1,116 @@
+{
+  "id": "story-tbp-00",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "tbp",
+  "title": "TATA-Binding Protein",
+  "caption": "TATA-Binding Protein. TATA-Binding Protein Tells RNA Polymerase Where To Get Started on a Gene Specialized DNA sequences next to genes, called promoters, define the proper start site and direction for transcription.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1vok.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "sequence-id",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "sequence-id",
+                                  "params": {}
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_asym_id": "A",
+                            "label_seq_id": 88,
+                            "label_atom_id": "OD2"
+                          },
+                          "text": "TATA-Binding Protein",
+                          "label_size": 5,
+                          "label_color": "#4577B2"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            -3.4984311329022972,
+            16.43589890183253,
+            12.694030019459568
+          ],
+          "target": [
+            74.81,
+            66.8,
+            30.7
+          ],
+          "up": [
+            -0.55,
+            0.83,
+            0.1
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "volume"
+  ]
+}

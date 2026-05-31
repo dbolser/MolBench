@@ -1,0 +1,135 @@
+{
+  "id": "story-alphafind-01",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "alphafind",
+  "title": "Structural alignment",
+  "caption": "Structural alignment. Structural alignment Protein superposition aligns two protein structures in 3D space by minimizing the distance between corresponding atoms, usually C\u03b1 atoms.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://alphafold.ebi.ac.uk/files/AF-A0A1D6JW22-F1-model_v6.pdb"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "pdb"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "all"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "ref": "protein1",
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "red"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://alphafold.ebi.ac.uk/files/AF-A0A3B6B8F7-F1-model_v6.pdb"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "pdb"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        1,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      "translation": [
+                        0,
+                        0,
+                        0
+                      ]
+                    },
+                    "ref": "animated_transform"
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "all"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "ref": "protein2",
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "blue"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}

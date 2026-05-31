@@ -1,0 +1,245 @@
+{
+  "id": "story-tbp-07",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "tbp",
+  "title": "TBP: Non-Polar Interactions [5/5]",
+  "caption": "TBP: Non-Polar Interactions 5/5. Hydrophobic and van der Waals Interactions Several residues projecting from the concave surface of TBP make hydrophobic or van der Waals side-chain/base contacts (<4 \u00c5 between non-hydrogen atoms) with the TATA element.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1cdw.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.4665815186,
+                        0.6063873444,
+                        -0.6438913535,
+                        -0.581544075,
+                        -0.7588303199,
+                        -0.2932286385,
+                        -0.6664144171,
+                        0.2376361381,
+                        0.7066971703
+                      ],
+                      "translation": [
+                        135.0863694935,
+                        105.5007997009,
+                        153.6890178993
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#BC536D"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#c5a3af"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "B"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#c5a3af"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": [
+                                      0.7725490196078432,
+                                      0.6392156862745098,
+                                      0.6862745098039216
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.33
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "B"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": [
+                                      0.7725490196078432,
+                                      0.6392156862745098,
+                                      0.6862745098039216
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.33
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            33.955829056778086,
+            15.998137644535184,
+            -10.435993673443065
+          ],
+          "target": [
+            77.48,
+            59.61,
+            30.36
+          ],
+          "up": [
+            -0.73,
+            0.68,
+            0.06
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "surface"
+  ]
+}

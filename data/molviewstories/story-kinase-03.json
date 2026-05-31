@@ -1,0 +1,384 @@
+{
+  "id": "story-kinase-03",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "kinase",
+  "title": "ATP Binding and Unstoppable Signaling [1/2]",
+  "caption": "ATP Binding and Unstoppable Signaling 1/2. ATP Binding and Unstoppable Signaling To function, every kinase needs ATP(https://en.wikipedia.org/wiki/Kinase), and BCR-ABL is no exception.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/2g2i.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.5680242227,
+                        0.6527660987,
+                        0.5012433569,
+                        -0.10067389,
+                        0.5493518768,
+                        -0.8295042395,
+                        -0.8168312251,
+                        -0.5216406194,
+                        -0.2463286704
+                      ],
+                      "translation": [
+                        -8.1905690894,
+                        75.7603329146,
+                        -6.1327389269
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#BC536D"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 146,
+                                "end_auth_seq_id": 247
+                              },
+                              "color": "#D03B4B"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 246,
+                                "end_auth_seq_id": 255
+                              },
+                              "color": "#FF8DA1"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 384,
+                                "end_auth_seq_id": 402
+                              },
+                              "color": "#FF0000"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "E"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "element-symbol",
+                                  "params": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.33
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "element-symbol",
+                                  "params": {}
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_asym_id": "E"
+                          },
+                          "text": "ADP",
+                          "label_color": "#BC536D",
+                          "label_size": 2
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 146,
+                            "end_auth_seq_id": 247
+                          },
+                          "text": "SH2",
+                          "label_color": "#D03B4B",
+                          "label_size": 3
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 246,
+                            "end_auth_seq_id": 255
+                          },
+                          "text": "P Loop",
+                          "label_color": "#FF8DA1",
+                          "label_size": 3
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 384,
+                            "end_auth_seq_id": 402
+                          },
+                          "text": "Activation Loop (active)",
+                          "label_color": "#FF0000",
+                          "label_size": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 271,
+                            "auth_atom_id": "NZ"
+                          },
+                          "end": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 286,
+                            "auth_atom_id": "OE1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "Salt Bridge",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 271
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 286
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 381
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": 15956300
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 271
+                          },
+                          "text": "Lys271",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 286
+                          },
+                          "text": "Glu286",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 381
+                          },
+                          "text": "Asp381",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            41.1685606192826,
+            72.91858001951604,
+            32.69049025858627
+          ],
+          "target": [
+            15.59,
+            54.81,
+            12.37
+          ],
+          "up": [
+            0.61,
+            0.03,
+            -0.79
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "surface",
+    "volume"
+  ]
+}

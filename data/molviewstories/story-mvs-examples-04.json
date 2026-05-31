@@ -1,0 +1,162 @@
+{
+  "id": "story-mvs-examples-04",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "mvs-examples",
+  "title": "Annotation-Based Coloring",
+  "caption": "Annotation-Based Coloring. Annotation-Based Visualization Load a structure (PDB ID 1h9t) and apply coloring and labels based on data from an MVS annotation file.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.wwpdb.org/download/1h9t.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component_from_uri",
+                    "params": {
+                      "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                      "format": "cif",
+                      "block_header": "1h9t_annotations",
+                      "category_name": "components",
+                      "field_name": "component",
+                      "field_values": [
+                        "Protein"
+                      ],
+                      "schema": "chain"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color_from_uri",
+                            "params": {
+                              "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                              "format": "cif",
+                              "block_header": "1h9t_annotations",
+                              "category_name": "annotations",
+                              "field_name": "color",
+                              "schema": "residue_range"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component_from_uri",
+                    "params": {
+                      "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                      "format": "cif",
+                      "category_name": "components",
+                      "field_values": [
+                        "DNA"
+                      ],
+                      "schema": "chain"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color_from_uri",
+                            "params": {
+                              "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                              "format": "cif",
+                              "category_name": "annotations",
+                              "schema": "residue_range"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component_from_uri",
+                    "params": {
+                      "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                      "format": "cif",
+                      "category_name": "components",
+                      "field_values": [
+                        "Gold",
+                        "Chloride"
+                      ],
+                      "schema": "chain"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface"
+                        },
+                        "children": [
+                          {
+                            "kind": "color_from_uri",
+                            "params": {
+                              "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                              "format": "cif",
+                              "category_name": "annotations",
+                              "schema": "residue_range"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "label_from_uri",
+                    "params": {
+                      "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                      "format": "cif",
+                      "block_header": "1h9t_annotations",
+                      "category_name": "annotations",
+                      "field_name": "label",
+                      "schema": "residue_range"
+                    }
+                  },
+                  {
+                    "kind": "tooltip_from_uri",
+                    "params": {
+                      "uri": "https://molstar.org/mol-view-spec/examples/annotations/annotations-1h9t.cif",
+                      "format": "cif",
+                      "block_header": "1h9t_annotations",
+                      "category_name": "annotations",
+                      "field_name": "label",
+                      "schema": "residue_range"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "representation",
+    "surface"
+  ]
+}

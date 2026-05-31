@@ -86,6 +86,24 @@ def test_mvs_non_tree_scores_zero():
     assert mvs.grade_mvs(_scene(), [{"action": "load"}])["f1"] == 0.0
 
 
+def _scene_pdb(pdb="1hho"):
+    s = _scene()
+    s["root"]["children"][0]["params"]["url"] = f"https://x/{pdb}.cif"
+    return s
+
+
+def test_mvs_download_variant_is_normalised():
+    # 1cbs vs 1cbs_updated are the same structure -> identical score.
+    assert mvs.grade_mvs(_scene_pdb("1cbs"), _scene_pdb("1cbs_updated"))["f1"] == 1.0
+
+
+def test_mvs_downstream_credit_survives_upstream_mismatch():
+    # Right representation+colour but a genuinely different structure should still
+    # earn substantial (not ~zero) credit — position-wise, not prefix-only.
+    f1 = mvs.grade_mvs(_scene_pdb("1abc"), _scene_pdb("9zzz"))["f1"]
+    assert 0.5 < f1 < 1.0, f"expected downstream credit, got {f1}"
+
+
 if __name__ == "__main__":
     test_all_reference_answers_are_schema_valid()
     test_self_grading_is_perfect()
@@ -96,4 +114,6 @@ if __name__ == "__main__":
     test_mvs_partial_credit_for_wrong_colour()
     test_mvs_grey_gray_fold()
     test_mvs_non_tree_scores_zero()
+    test_mvs_download_variant_is_normalised()
+    test_mvs_downstream_credit_survives_upstream_mismatch()
     print("all sanity checks passed")

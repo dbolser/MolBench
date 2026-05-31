@@ -49,6 +49,8 @@ PRICING: dict[str, tuple[float, float]] = {
     "claude-sonnet-4": (3.0, 15.0),
     "claude-opus-4": (15.0, 75.0),
     "gpt-4o": (2.5, 10.0),
+    "gpt-5.4-nano": (0.05, 0.40),  # approximate
+    "gpt-5-nano": (0.05, 0.40),    # approximate
     # Gemini prices are approximate (they change / vary by tier) — token counts are
     # exact, so cost just rescales if you correct the rate.
     "gemini-3.5-flash": (0.3, 2.5),
@@ -237,7 +239,9 @@ def run(models: list[str], categories: list[str] | None,
             elif cat in GRADED_CATEGORIES:
                 run_task = run_mvs_task if cat == "mvs" else run_api_task
                 got = [run_task(model, system, task) for _ in range(samples)]
-                per_task.append({"id": task["id"], "category": cat, **_aggregate(got)})
+                per_task.append({"id": task["id"], "category": cat,
+                                 "categories": task.get("categories", []),
+                                 **_aggregate(got)})
 
         wall_seconds = time.perf_counter() - started
         graded = [t for t in per_task if t["category"] in GRADED_CATEGORIES]
@@ -253,9 +257,24 @@ def run(models: list[str], categories: list[str] | None,
             "cost_usd": cost_usd(model.name, model.usage),
             "wall_seconds": round(wall_seconds, 2),
             "sec_per_call": round(wall_seconds / calls, 2) if calls else None,
+            "by_skill": _means_by_skill(per_task),
             "tasks": per_task,
         }
     return report
+
+
+def _means_by_skill(per_task: list[dict]) -> dict[str, dict]:
+    """Mean F1 per skill category (selection, color, camera, ...).
+
+    A task carries several categories, so it contributes to each. This is what
+    powers the leaderboard drill-down: 'on selection, model X beats Y'.
+    """
+    buckets: dict[str, list[float]] = {}
+    for t in per_task:
+        for skill in t.get("categories", []):
+            buckets.setdefault(skill, []).append(t["f1"])
+    return {skill: {"mean_f1": round(statistics.fmean(vs), 4), "n": len(vs)}
+            for skill, vs in sorted(buckets.items())}
 
 
 def _means_by_category(per_task: list[dict]) -> dict[str, dict]:

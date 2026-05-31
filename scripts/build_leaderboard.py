@@ -59,6 +59,40 @@ def row(rank: int, name: str, m: dict) -> str:
     )
 
 
+def drilldown(ranked: list) -> str:
+    """A skill x model matrix: 'on selection, model X beats Y'."""
+    skills: list[str] = []
+    for _, m in ranked:
+        for s in m.get("by_skill", {}):
+            if s not in skills:
+                skills.append(s)
+    if not skills:
+        return ""
+    skills.sort()
+    head = "".join(f"<th>{html.escape(n)}</th>" for n, _ in ranked)
+    body = []
+    for skill in skills:
+        cells = []
+        best = max((m["by_skill"].get(skill, {}).get("mean_f1", -1) for _, m in ranked),
+                   default=-1)
+        n = next((m["by_skill"][skill]["n"] for _, m in ranked if skill in m.get("by_skill", {})), 0)
+        for _, m in ranked:
+            d = m.get("by_skill", {}).get(skill)
+            if not d:
+                cells.append("<td>&mdash;</td>")
+            else:
+                lead = " class='f1'" if d["mean_f1"] == best else ""
+                cells.append(f"<td{lead}>{d['mean_f1']:.3f}</td>")
+        body.append(f"<tr><td class='model'>{skill} <span class='pm'>({n})</span></td>{''.join(cells)}</tr>")
+    return (
+        "<h2>Drill-down by skill</h2>"
+        "<p class='sub'>Mean F1 on tasks tagged with each skill (task count in parens). "
+        "Skills are derived automatically from the reference scene tree.</p>"
+        f"<table><thead><tr><th>Skill</th>{head}</tr></thead><tbody>"
+        f"{''.join(body)}</tbody></table>"
+    )
+
+
 def build(scorecard_path: pathlib.Path) -> None:
     data = json.loads(scorecard_path.read_text())
     models = data.get("models", {})
@@ -70,6 +104,7 @@ def build(scorecard_path: pathlib.Path) -> None:
     rows = "\n".join(row(i + 1, name, m) for i, (name, m) in enumerate(ranked))
     n_tasks = data.get("n_tasks", "?")
     n_samples = data.get("samples", 1)
+    drill = drilldown(ranked)
 
     page = f"""<!doctype html>
 <html lang="en">
@@ -82,6 +117,7 @@ def build(scorecard_path: pathlib.Path) -> None:
   body {{ font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
           max-width: 860px; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }}
   h1 {{ margin-bottom: .2rem; }}
+  h2 {{ margin-top: 2.5rem; font-size: 1.15rem; }}
   .sub {{ color: #888; margin-top: 0; }}
   table {{ border-collapse: collapse; width: 100%; margin-top: 1.5rem; }}
   th, td {{ text-align: left; padding: .5rem .6rem; border-bottom: 1px solid #8884; }}
@@ -112,6 +148,7 @@ def build(scorecard_path: pathlib.Path) -> None:
 {rows}
     </tbody>
   </table>
+  {drill}
   <footer>
     <p>Higher F1 is better. <b>MVS&nbsp;F1</b> is the primary, engine-agnostic
        scene-tree score; <b>API&nbsp;F1</b> is the secondary imperative-PDBeMolstar

@@ -1,0 +1,308 @@
+{
+  "id": "story-tbp-01",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "tbp",
+  "title": "TBP: Highly Conserved in Eukaryotes [1/2]",
+  "caption": "TBP: Highly Conserved in Eukaryotes 1/2. TATA-Binding Protein Is Highly Conserved in Eukaryotes TBP has a phylogenetically conserved, 180 amino-acid carboxy-terminal domain (ranging from 38 to 93% identity among eukaryotes and archaebacteria), containing two structural repeats flanking a highly basi",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1cdw.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.4665815186,
+                        0.6063873444,
+                        -0.6438913535,
+                        -0.581544075,
+                        -0.7588303199,
+                        -0.2932286385,
+                        -0.6664144171,
+                        0.2376361381,
+                        0.7066971703
+                      ],
+                      "translation": [
+                        135.0863694935,
+                        105.5007997009,
+                        153.6890178993
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "protein"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#BC536D"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "nucleic"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#BC536D"
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.5
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "DNA"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C",
+                        "beg_label_seq_id": 160,
+                        "end_label_seq_id": 177
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "TBP (H. sapiens)"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1vtl.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.4769460004,
+                        0.7214347188,
+                        -0.5020502557,
+                        -0.297882932,
+                        0.4047204695,
+                        0.8645617968,
+                        0.8269149119,
+                        0.5619014932,
+                        0.0218732801
+                      ],
+                      "translation": [
+                        65.6043682658,
+                        -3.7328402905,
+                        -16.8650755387
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "E"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#B9E3A0"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#B9E3A0"
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.5
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "B"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#B9E3A0"
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.5
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "E",
+                        "beg_label_seq_id": 75,
+                        "end_label_seq_id": 92
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "TBP (A. thaliana)"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            33.955829056778086,
+            15.998137644535184,
+            -10.435993673443065
+          ],
+          "target": [
+            77.48,
+            59.61,
+            30.36
+          ],
+          "up": [
+            -0.73,
+            0.68,
+            0.06
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "annotation"
+  ]
+}

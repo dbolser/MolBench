@@ -1,0 +1,465 @@
+{
+  "id": "story-kinase-09",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "kinase",
+  "title": "Fighting Back: Ponatinib and the Future of Kinase Inhibitors",
+  "caption": "Fighting Back: Ponatinib and the Future of Kinase Inhibitors. Fighting Back: Ponatinib and the Future of Kinase Inhibitors The battle didn't end there.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/3oxz.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        0.7989033646,
+                        0.5984398921,
+                        -0.0601922711,
+                        -0.1303123126,
+                        0.269921501,
+                        0.9540236289,
+                        0.5871729857,
+                        -0.754328893,
+                        0.2936252816
+                      ],
+                      "translation": [
+                        -8.0697093741,
+                        58.1709160658,
+                        19.0363028443
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#7D7EA5"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "B"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "element-symbol",
+                                  "params": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.33
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "element-symbol",
+                                  "params": {}
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_asym_id": "B"
+                          },
+                          "text": "Ponatinib",
+                          "label_color": "#7D7EA5",
+                          "label_size": 2
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "auth_seq_id": 315
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": 237
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 315
+                          },
+                          "text": "T315I",
+                          "label_color": "red",
+                          "label_size": 2
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 360,
+                            "auth_atom_id": "O"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_atom_id": "N4"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 361,
+                            "auth_atom_id": "O"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_atom_id": "N4"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 286,
+                            "auth_atom_id": "OE2"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_atom_id": "N2"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 381,
+                            "auth_atom_id": "N"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_atom_id": "O1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 318,
+                            "auth_atom_id": "N"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_atom_id": "N1"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 286
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 318
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 360
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 361
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 381
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": 15956300
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 286
+                          },
+                          "text": "Glu286",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 318
+                          },
+                          "text": "Met318",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 360
+                          },
+                          "text": "Ile360",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 361
+                          },
+                          "text": "His361",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "auth_seq_id": 381
+                          },
+                          "text": "Asp381",
+                          "label_color": "#F3794C",
+                          "label_size": 1.5
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            49.05700820819345,
+            62.80475285350859,
+            18.39666911707821
+          ],
+          "target": [
+            9.61,
+            50.49,
+            14.08
+          ],
+          "up": [
+            0.15,
+            -0.15,
+            -0.98
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "surface",
+    "volume"
+  ]
+}

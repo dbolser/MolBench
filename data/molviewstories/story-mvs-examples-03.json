@@ -1,15 +1,17 @@
 {
-  "id": "mvs-002",
-  "category": "mvs",
-  "title": "Heme ball-and-stick",
-  "prompt": "Load haemoglobin (1HHO); show the protein as a grey cartoon and the heme groups as orange ball-and-stick.",
-  "reference_mvs": {
+  "id": "story-mvs-examples-03",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "mvs-examples",
+  "title": "Structural Superposition",
+  "caption": "Structural Superposition. Structural Superposition Two molecules superposed by applying a matrix transform.",
+  "scene_mvs": {
     "kind": "root",
     "children": [
       {
         "kind": "download",
         "params": {
-          "url": "https://files.rcsb.org/download/1hho.cif"
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/4hhb_updated.cif"
         },
         "children": [
           {
@@ -27,7 +29,7 @@
                   {
                     "kind": "component",
                     "params": {
-                      "selector": "polymer"
+                      "selector": "all"
                     },
                     "children": [
                       {
@@ -39,29 +41,74 @@
                           {
                             "kind": "color",
                             "params": {
-                              "color": "gray"
+                              "color": "red"
                             }
                           }
                         ]
                       }
                     ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1oj6_updated.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.7202161,
+                        -0.33009904,
+                        -0.61018308,
+                        0.36257631,
+                        0.57075962,
+                        -0.73673053,
+                        0.59146191,
+                        -0.75184312,
+                        -0.29138417
+                      ],
+                      "translation": [
+                        -12.54,
+                        46.79,
+                        94.5
+                      ]
+                    }
                   },
                   {
                     "kind": "component",
                     "params": {
-                      "selector": "ligand"
+                      "selector": "all"
                     },
                     "children": [
                       {
                         "kind": "representation",
                         "params": {
-                          "type": "ball_and_stick"
+                          "type": "cartoon"
                         },
                         "children": [
                           {
                             "kind": "color",
                             "params": {
-                              "color": "orange"
+                              "color": "blue"
                             }
                           }
                         ]
@@ -81,11 +128,5 @@
     "representation",
     "color",
     "multi-component"
-  ],
-  "skills": [
-    "multi-component",
-    "ligand-selector",
-    "color"
-  ],
-  "notes": "Heme is selected via the 'ligand' component selector."
+  ]
 }

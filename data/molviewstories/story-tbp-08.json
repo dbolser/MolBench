@@ -1,0 +1,262 @@
+{
+  "id": "story-tbp-08",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "tbp",
+  "title": "TBP and Transcription Pre-Initiation Complex",
+  "caption": "TBP and Transcription Pre-Initiation Complex. TATA-Binding Protein and the Transcription Pre-Initiation Complex The structure shown here, from PDB ID 7ENC(https://doi.org/10.2210/pdb7enc/pdb), is that of a pol II \"pre-initiation complex\" (PIC) poised to start transcription.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/7enc.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        0.8975055044,
+                        -0.4316347566,
+                        -0.0904174009,
+                        0.247274877,
+                        0.3227849997,
+                        0.9136000105,
+                        -0.3651561375,
+                        -0.8423189899,
+                        0.3964337454
+                      ],
+                      "translation": [
+                        -189.7572972798,
+                        304.0841220076,
+                        -411.5005782853
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "CB"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#0072B2"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "TBP"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "GB"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#D55E00"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "HB"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#D55E00"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#009E73"
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.5
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_entity_id": "57"
+                          },
+                          "text": "pol II",
+                          "label_size": 20,
+                          "label_color": "#0072B2"
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_entity_id": "53"
+                          },
+                          "text": "DNA",
+                          "label_size": 20,
+                          "label_color": "#D55E00"
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_entity_id": "21"
+                          },
+                          "text": "mediator",
+                          "label_size": 20,
+                          "label_color": "#009E73"
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_entity_id": "42"
+                          },
+                          "text": "TBP-associated factors (TAFs)",
+                          "label_size": 20,
+                          "label_color": "#56B4E9"
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": [
+                            100,
+                            150,
+                            0
+                          ],
+                          "text": "PIC",
+                          "label_size": 30,
+                          "label_color": "#4577B2"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            33.955829056778086,
+            15.998137644535184,
+            -10.435993673443065
+          ],
+          "target": [
+            77.48,
+            59.61,
+            30.36
+          ],
+          "up": [
+            -0.73,
+            0.68,
+            0.06
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "annotation",
+    "volume"
+  ]
+}

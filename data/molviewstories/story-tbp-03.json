@@ -1,21 +1,23 @@
 {
-  "id": "mvs-003",
-  "category": "mvs",
-  "title": "Catalytic residues",
-  "prompt": "Load hen egg-white lysozyme (1LYZ) as a grey cartoon, and show the two catalytic residues Glu35 and Asp52 on chain A as red ball-and-stick.",
-  "reference_mvs": {
+  "id": "story-tbp-03",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "tbp",
+  "title": "TBP: Binding to TATA Box [1/5]",
+  "caption": "TBP: Binding to TATA Box 1/5. TATA-Binding Protein Binds to the Minor Groove of the TATA Box When the first structures of TBP-DNA complexes were determined, researchers discovered that TBP is not gentle when it binds to DNA.",
+  "scene_mvs": {
     "kind": "root",
     "children": [
       {
         "kind": "download",
         "params": {
-          "url": "https://files.rcsb.org/download/1lyz.cif"
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1cdw.bcif"
         },
         "children": [
           {
             "kind": "parse",
             "params": {
-              "format": "mmcif"
+              "format": "bcif"
             },
             "children": [
               {
@@ -25,9 +27,32 @@
                 },
                 "children": [
                   {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.4665815186,
+                        0.6063873444,
+                        -0.6438913535,
+                        -0.581544075,
+                        -0.7588303199,
+                        -0.2932286385,
+                        -0.6664144171,
+                        0.2376361381,
+                        0.7066971703
+                      ],
+                      "translation": [
+                        135.0863694935,
+                        105.5007997009,
+                        153.6890178993
+                      ]
+                    }
+                  },
+                  {
                     "kind": "component",
                     "params": {
-                      "selector": "polymer"
+                      "selector": {
+                        "label_asym_id": "C"
+                      }
                     },
                     "children": [
                       {
@@ -39,7 +64,7 @@
                           {
                             "kind": "color",
                             "params": {
-                              "color": "gray"
+                              "color": "#BC536D"
                             }
                           }
                         ]
@@ -50,21 +75,20 @@
                     "kind": "component",
                     "params": {
                       "selector": {
-                        "auth_asym_id": "A",
-                        "auth_seq_id": 35
+                        "label_asym_id": "A"
                       }
                     },
                     "children": [
                       {
                         "kind": "representation",
                         "params": {
-                          "type": "ball_and_stick"
+                          "type": "cartoon"
                         },
                         "children": [
                           {
                             "kind": "color",
                             "params": {
-                              "color": "red"
+                              "color": "#c5a3af"
                             }
                           }
                         ]
@@ -75,21 +99,20 @@
                     "kind": "component",
                     "params": {
                       "selector": {
-                        "auth_asym_id": "A",
-                        "auth_seq_id": 52
+                        "label_asym_id": "B"
                       }
                     },
                     "children": [
                       {
                         "kind": "representation",
                         "params": {
-                          "type": "ball_and_stick"
+                          "type": "cartoon"
                         },
                         "children": [
                           {
                             "kind": "color",
                             "params": {
-                              "color": "red"
+                              "color": "#c5a3af"
                             }
                           }
                         ]
@@ -101,6 +124,26 @@
             ]
           }
         ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            33.955829056778086,
+            15.998137644535184,
+            -10.435993673443065
+          ],
+          "target": [
+            77.48,
+            59.61,
+            30.36
+          ],
+          "up": [
+            -0.73,
+            0.68,
+            0.06
+          ]
+        }
       }
     ]
   },
@@ -109,12 +152,7 @@
     "selection",
     "representation",
     "color",
+    "camera",
     "multi-component"
-  ],
-  "skills": [
-    "residue-selection",
-    "ComponentExpression",
-    "color"
-  ],
-  "notes": "Tests the ComponentExpression selection sub-language (auth_asym_id/auth_seq_id)."
+  ]
 }

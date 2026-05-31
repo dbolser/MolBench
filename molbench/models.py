@@ -145,14 +145,23 @@ class OpenAIModel(Model):
     def generate(self, system: str, user: str) -> str:
         from openai import OpenAI  # lazy import
         client = OpenAI(api_key=os.environ[self.api_key_env], base_url=self.base_url)
-        resp = client.chat.completions.create(
+        base = dict(
             model=self.model_id,
-            max_tokens=self.max_tokens,
             messages=[
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
             ],
         )
+        # gpt-5 / o-series reject `max_tokens` and require `max_completion_tokens`;
+        # older models and most OpenAI-compatible hosts want `max_tokens`. Try the
+        # common one, fall back on the newer spelling — one adapter, both worlds.
+        try:
+            resp = client.chat.completions.create(max_tokens=self.max_tokens, **base)
+        except Exception as e:  # noqa: BLE001 - inspect the API error to retry
+            if "max_completion_tokens" not in str(e):
+                raise
+            resp = client.chat.completions.create(
+                max_completion_tokens=self.max_tokens, **base)
         if resp.usage:  # OpenAI-compatible hosts may omit usage; guard for it
             self._record(resp.usage.prompt_tokens, resp.usage.completion_tokens)
         return resp.choices[0].message.content or ""

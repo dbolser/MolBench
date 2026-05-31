@@ -80,6 +80,13 @@
       }
     ]
   },
+  "categories": [
+    "load",
+    "representation",
+    "color",
+    "camera",
+    "multi-component"
+  ],
   "skills": [
     "ligand-selector",
     "focus",

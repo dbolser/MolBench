@@ -146,12 +146,24 @@ tasks/                  the benchmark corpus
 results/                scorecards (generated)
 ```
 
+## Corpus & data
+
+* **Graded Component-1 tasks** live in `tasks/` (`mvs/` curated scene trees,
+  `api_calling/` imperative). Reference MVS scenes are authored with the real
+  `molviewspec` builder (`scripts/author_mvs_tasks.py`).
+* **`data/molviewstories/`** holds curated MolViewStories scenes (caption + tree).
+  These are **Component-2 (VLM-judged) material**, not C1 tasks: experiment showed
+  their educational captions are under-determined for exact-tree matching
+  (`scripts/ingest_molviewstories.py`; see the triage in git history).
+* **Scaling Component 1** is therefore a *template-generation* problem (synthesize
+  fully-specified imperative prompts over a structure/representation/colour grid),
+  not a scraping problem — that keeps every task deterministically gradeable.
+
 ## Roadmap
 
-* Headless render path (playwright + `adapter.apply_actions`) to feed real PNGs
-  to the VLM judge.
-* More tasks per skill; multiple reference answers per task; per-skill score
-  breakdowns.
+* Template-based MVS task generator for category-balanced Component-1 volume.
+* Headless render path (playwright + ipymolstar `MolViewSpec`) to turn the
+  `data/molviewstories/` scenes into real Component-2 VLM-judged tasks.
 * Selection-equivalence via a structure-aware checker (resolve label vs author
   numbering against the actual mmCIF) instead of string-level tolerance.
 ```

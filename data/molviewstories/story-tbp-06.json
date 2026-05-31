@@ -1,0 +1,357 @@
+{
+  "id": "story-tbp-06",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "tbp",
+  "title": "TBP: H-Bonds in Minor Groove [4/5]",
+  "caption": "TBP: H-Bonds in Minor Groove 4/5. Hydrogen Bonds in the Minor Groove Polar side chains make minor groove hydrogen bonds with acceptors of base pairs centred about the approximate 2-fold symmetry axis (Asn163, Asn253, and Thr309).",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1cdw.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.4665815186,
+                        0.6063873444,
+                        -0.6438913535,
+                        -0.581544075,
+                        -0.7588303199,
+                        -0.2932286385,
+                        -0.6664144171,
+                        0.2376361381,
+                        0.7066971703
+                      ],
+                      "translation": [
+                        135.0863694935,
+                        105.5007997009,
+                        153.6890178993
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#BC536D"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#c5a3af"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "B"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#c5a3af"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 9,
+                            "label_atom_id": "ND2"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 8,
+                            "label_atom_id": "O2"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 9,
+                            "label_atom_id": "ND2"
+                          },
+                          "end": {
+                            "label_asym_id": "B",
+                            "label_seq_id": 9,
+                            "label_atom_id": "O2"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "tube",
+                          "start": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 155,
+                            "label_atom_id": "OG1"
+                          },
+                          "end": {
+                            "label_asym_id": "A",
+                            "label_seq_id": 8,
+                            "label_atom_id": "N3"
+                          },
+                          "color": "#4289B5",
+                          "tooltip": "H-bond",
+                          "radius": 0.1,
+                          "dash_length": 0.1
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C",
+                        "label_seq_id": 9
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "Asn163"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C",
+                        "label_seq_id": 155
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "label",
+                        "params": {
+                          "text": "Thr309"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "label_asym_id": "C",
+                          "label_seq_id": 99
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": [
+                                      null,
+                                      0.0392156862745098,
+                                      null
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "label_asym_id": "C",
+                            "label_seq_id": 99
+                          },
+                          "text": "Asn253",
+                          "label_color": "#BC536D",
+                          "label_size": 1.5
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "label_asym_id": "C",
+                          "label_seq_id": 9
+                        },
+                        {
+                          "label_asym_id": "C",
+                          "label_seq_id": 155
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "element-symbol",
+                                  "params": {}
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            81.49686367877851,
+            70.13480384021055,
+            46.58370019559135
+          ],
+          "target": [
+            75.68,
+            63.48,
+            32.29
+          ],
+          "up": [
+            -0.9,
+            0.39,
+            0.18
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "annotation",
+    "volume"
+  ]
+}

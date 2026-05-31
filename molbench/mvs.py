@@ -21,6 +21,7 @@ Grading reuses the precision/recall/F1 + greedy-bipartite shape from
 
 from __future__ import annotations
 
+import re
 from typing import Any, Iterable
 
 # --- selection normalisation (the ComponentExpression sub-language) ---------------
@@ -81,9 +82,11 @@ def _param_signature(kind: str, params: dict | None) -> Any:
     if kind == "color" and "color" in params:
         return ("color", _color_signature(params["color"]))
     if kind == "download" and "url" in params:
-        # Compare on the structure id, not the exact host/path (rcsb vs ebi etc).
+        # Compare on the structure id, not the exact host/path (rcsb vs ebi etc) or
+        # file variant (1cbs vs 1cbs_updated vs 1cbs-assembly1).
         url = str(params["url"]).lower()
         ident = url.rsplit("/", 1)[-1].split(".")[0]
+        ident = re.sub(r"[_-](updated|full|bcif|cif|assembly\d*|model\d*)$", "", ident)
         return ("ref", ident)
     return tuple(sorted((k, _color_signature(v) if k == "color" else v)
                         for k, v in params.items()))
@@ -132,15 +135,32 @@ def flatten_paths(root: dict) -> list[tuple]:
     return paths
 
 
+# Boilerplate nodes carry little signal (almost every scene parses mmcif into a
+# model), so they're down-weighted; the root is structural scaffolding worth 0.
+# Everything else (download target, component, representation, color, focus...)
+# is the discriminating content and keeps full weight.
+_SEG_WEIGHT = {"root": 0.0, "parse": 0.25, "structure": 0.25}
+
+
 def _path_similarity(p: tuple, q: tuple) -> float:
-    """Longest common prefix / longest path — semantics accrue down the tree."""
-    lcp = 0
-    for a, b in zip(p, q):
+    """Weighted position-wise segment agreement.
+
+    Earlier this used longest-common-*prefix*, which let an incidental mismatch
+    near the root (e.g. a file-variant in the download node) zero out credit for
+    a correct representation/colour further down. Position-wise scoring keeps that
+    downstream credit; boilerplate nodes are down-weighted so they neither dominate
+    nor mask the real differences.
+    """
+    num = den = 0.0
+    for i in range(max(len(p), len(q))):
+        a = p[i] if i < len(p) else None
+        b = q[i] if i < len(q) else None
+        kind = (a or b)[0]
+        w = _SEG_WEIGHT.get(kind, 1.0)
+        den += w
         if a == b:
-            lcp += 1
-        else:
-            break
-    return lcp / max(len(p), len(q))
+            num += w
+    return num / den if den else 0.0
 
 
 # --- grading ----------------------------------------------------------------------
@@ -186,6 +206,53 @@ def grade_mvs(reference: Any, predicted: Any) -> dict[str, Any]:
         "n_ref_paths": n_ref,
         "n_pred_paths": n_pred,
     }
+
+
+def categorize(root: dict) -> list[str]:
+    """Derive skill categories from a scene tree, for leaderboard drill-down.
+
+    The categories *are* the tree's content: what node kinds and selector shapes
+    appear. This means every task — hand-authored or ingested — gets consistent,
+    objective tags without manual labelling.
+    """
+    kinds: dict[str, int] = {}
+    has_expr = False
+    reps: set[str] = set()
+
+    def walk(node: dict) -> None:
+        nonlocal has_expr
+        k = node.get("kind")
+        kinds[k] = kinds.get(k, 0) + 1
+        params = node.get("params") or {}
+        if k == "component" and not isinstance(params.get("selector"), str):
+            has_expr = True
+        if k == "representation":
+            reps.add(params.get("type"))
+        for c in node.get("children") or []:
+            if isinstance(c, dict):
+                walk(c)
+
+    walk(root)
+    cats: list[str] = []
+    if "download" in kinds:
+        cats.append("load")
+    if has_expr:
+        cats.append("selection")
+    if "representation" in kinds:
+        cats.append("representation")
+    if "color" in kinds:
+        cats.append("color")
+    if kinds.get("focus") or kinds.get("camera"):
+        cats.append("camera")
+    if kinds.get("component", 0) > 1:
+        cats.append("multi-component")
+    if kinds.get("label") or kinds.get("tooltip"):
+        cats.append("annotation")
+    if reps & {"surface", "isosurface", "gaussian-surface", "molecular-surface"}:
+        cats.append("surface")
+    if kinds.get("volume") or kinds.get("primitives"):
+        cats.append("volume")
+    return cats
 
 
 def validate_mvs(obj: Any) -> list[str]:

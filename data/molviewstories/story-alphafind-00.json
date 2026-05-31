@@ -1,21 +1,23 @@
 {
-  "id": "mvs-005",
-  "category": "mvs",
-  "title": "Surface representation",
-  "prompt": "Load insulin (4INS) and render the protein as a steel-blue molecular surface.",
-  "reference_mvs": {
+  "id": "story-alphafind-00",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "alphafind",
+  "title": "Fast similarity of protein structures",
+  "caption": "Fast similarity of protein structures. Fast similarity of protein structures Cytochromes are enzymes important for the metabolism of many endogenous compounds and xenobiotics.",
+  "scene_mvs": {
     "kind": "root",
     "children": [
       {
         "kind": "download",
         "params": {
-          "url": "https://files.rcsb.org/download/4ins.cif"
+          "url": "https://alphafold.ebi.ac.uk/files/AF-A0A1D6JW22-F1-model_v6.pdb"
         },
         "children": [
           {
             "kind": "parse",
             "params": {
-              "format": "mmcif"
+              "format": "pdb"
             },
             "children": [
               {
@@ -27,20 +29,19 @@
                   {
                     "kind": "component",
                     "params": {
-                      "selector": "polymer"
+                      "selector": "all"
                     },
                     "children": [
                       {
                         "kind": "representation",
                         "params": {
-                          "type": "surface",
-                          "surface_type": "molecular"
+                          "type": "cartoon"
                         },
                         "children": [
                           {
                             "kind": "color",
                             "params": {
-                              "color": "steelblue"
+                              "color": "red"
                             }
                           }
                         ]
@@ -58,12 +59,6 @@
   "categories": [
     "load",
     "representation",
-    "color",
-    "surface"
-  ],
-  "skills": [
-    "representation-surface",
     "color"
-  ],
-  "notes": "Uses the 'surface' representation type."
+  ]
 }

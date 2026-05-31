@@ -1,0 +1,197 @@
+{
+  "id": "story-mvs-examples-05",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "mvs-examples",
+  "title": "Geometric Primitives",
+  "caption": "Geometric Primitives. Geometric Primitives Draw various geometrical primitives including ellipses, arrows, and ellipsoids with custom colors and opacity.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "primitives",
+        "params": {
+          "opacity": 0.66
+        },
+        "children": [
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipse",
+              "color": "red",
+              "center": [
+                1,
+                1,
+                1
+              ],
+              "major_axis": [
+                1.5,
+                0,
+                0
+              ],
+              "minor_axis": [
+                0,
+                2,
+                0
+              ],
+              "theta_start": 0,
+              "theta_end": 1.5707963267948966,
+              "tooltip": "XY"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipse",
+              "color": "green",
+              "center": [
+                1,
+                1,
+                1
+              ],
+              "major_axis_endpoint": [
+                2.5,
+                1,
+                1
+              ],
+              "minor_axis_endpoint": [
+                1,
+                1,
+                2
+              ],
+              "theta_start": 0,
+              "theta_end": 1.5707963267948966,
+              "tooltip": "XZ"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipse",
+              "color": "blue",
+              "center": [
+                1,
+                1,
+                1
+              ],
+              "major_axis": [
+                0,
+                10,
+                0
+              ],
+              "minor_axis": [
+                0,
+                0,
+                1
+              ],
+              "radius_major": 2,
+              "radius_minor": 1,
+              "theta_start": 0,
+              "theta_end": 1.5707963267948966,
+              "tooltip": "YZ"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                1,
+                1,
+                1
+              ],
+              "end": [
+                2.5,
+                1,
+                1
+              ],
+              "tube_radius": 0.05,
+              "length": 1.7,
+              "show_end_cap": true,
+              "color": "#ffff00",
+              "tooltip": "X"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "start": [
+                1,
+                1,
+                1
+              ],
+              "direction": [
+                0,
+                2.2,
+                0
+              ],
+              "tube_radius": 0.05,
+              "show_end_cap": true,
+              "color": "#ff00ff",
+              "tooltip": "Y"
+            }
+          },
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "arrow",
+              "end": [
+                1,
+                1,
+                1
+              ],
+              "start": [
+                1,
+                1,
+                2.2
+              ],
+              "show_start_cap": true,
+              "tube_radius": 0.05,
+              "color": "#00ffff",
+              "tooltip": "Z"
+            }
+          }
+        ]
+      },
+      {
+        "kind": "primitives",
+        "params": {
+          "opacity": 0.33
+        },
+        "children": [
+          {
+            "kind": "primitive",
+            "params": {
+              "kind": "ellipsoid",
+              "center": [
+                1,
+                1,
+                1
+              ],
+              "major_axis": [
+                1,
+                0,
+                0
+              ],
+              "minor_axis": [
+                0,
+                1,
+                0
+              ],
+              "radius": [
+                1.5,
+                2,
+                1
+              ],
+              "color": "#cccccc"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "volume"
+  ]
+}

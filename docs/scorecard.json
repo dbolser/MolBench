@@ -24,10 +24,41 @@
       "cost_usd": null,
       "wall_seconds": 0.0,
       "sec_per_call": null,
+      "by_skill": {
+        "camera": {
+          "mean_f1": 0.0,
+          "n": 1
+        },
+        "color": {
+          "mean_f1": 0.0,
+          "n": 5
+        },
+        "load": {
+          "mean_f1": 0.0,
+          "n": 5
+        },
+        "multi-component": {
+          "mean_f1": 0.0,
+          "n": 3
+        },
+        "representation": {
+          "mean_f1": 0.0,
+          "n": 5
+        },
+        "selection": {
+          "mean_f1": 0.0,
+          "n": 1
+        },
+        "surface": {
+          "mean_f1": 0.0,
+          "n": 1
+        }
+      },
       "tasks": [
         {
           "id": "api-001",
           "category": "api_calling",
+          "categories": [],
           "f1": 0.6667,
           "f1_std": 0.0,
           "f1_min": 0.6667,
@@ -54,6 +85,7 @@
         {
           "id": "api-002",
           "category": "api_calling",
+          "categories": [],
           "f1": 0.6667,
           "f1_std": 0.0,
           "f1_min": 0.6667,
@@ -84,6 +116,7 @@
         {
           "id": "api-003",
           "category": "api_calling",
+          "categories": [],
           "f1": 0.8,
           "f1_std": 0.0,
           "f1_min": 0.8,
@@ -114,6 +147,7 @@
         {
           "id": "api-004",
           "category": "api_calling",
+          "categories": [],
           "f1": 0.8,
           "f1_std": 0.0,
           "f1_min": 0.8,
@@ -144,6 +178,7 @@
         {
           "id": "api-005",
           "category": "api_calling",
+          "categories": [],
           "f1": 0.8,
           "f1_std": 0.0,
           "f1_min": 0.8,
@@ -175,6 +210,7 @@
         {
           "id": "api-006",
           "category": "api_calling",
+          "categories": [],
           "f1": 0.5714,
           "f1_std": 0.0,
           "f1_min": 0.5714,
@@ -206,6 +242,11 @@
         {
           "id": "mvs-001",
           "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color"
+          ],
           "f1": 0.0,
           "f1_std": 0.0,
           "f1_min": 0.0,
@@ -227,6 +268,12 @@
         {
           "id": "mvs-002",
           "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "multi-component"
+          ],
           "f1": 0.0,
           "f1_std": 0.0,
           "f1_min": 0.0,
@@ -248,6 +295,13 @@
         {
           "id": "mvs-003",
           "category": "mvs",
+          "categories": [
+            "load",
+            "selection",
+            "representation",
+            "color",
+            "multi-component"
+          ],
           "f1": 0.0,
           "f1_std": 0.0,
           "f1_min": 0.0,
@@ -269,6 +323,13 @@
         {
           "id": "mvs-004",
           "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "camera",
+            "multi-component"
+          ],
           "f1": 0.0,
           "f1_std": 0.0,
           "f1_min": 0.0,
@@ -290,6 +351,12 @@
         {
           "id": "mvs-005",
           "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "surface"
+          ],
           "f1": 0.0,
           "f1_std": 0.0,
           "f1_min": 0.0,
@@ -312,32 +379,63 @@
     },
     "claude-haiku-4-5": {
       "spec": "anthropic:claude-haiku-4-5",
-      "mean_f1": 0.9416,
+      "mean_f1": 0.9187,
       "n_graded": 11,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.9114,
-          "std": 0.0498,
+          "mean_f1": 0.8978,
+          "std": 0.0679,
           "n": 5
         },
         "api_calling": {
-          "mean_f1": 0.9667,
-          "std": 0.0745,
+          "mean_f1": 0.9361,
+          "std": 0.1219,
           "n": 6
         }
       },
       "usage": {
         "input_tokens": 149470,
-        "output_tokens": 9953,
+        "output_tokens": 9561,
         "calls": 55
       },
-      "cost_usd": 0.199235,
-      "wall_seconds": 91.52,
-      "sec_per_call": 1.66,
+      "cost_usd": 0.197275,
+      "wall_seconds": 87.67,
+      "sec_per_call": 1.59,
+      "by_skill": {
+        "camera": {
+          "mean_f1": 0.9259,
+          "n": 1
+        },
+        "color": {
+          "mean_f1": 0.8978,
+          "n": 5
+        },
+        "load": {
+          "mean_f1": 0.8978,
+          "n": 5
+        },
+        "multi-component": {
+          "mean_f1": 0.9333,
+          "n": 3
+        },
+        "representation": {
+          "mean_f1": 0.8978,
+          "n": 5
+        },
+        "selection": {
+          "mean_f1": 0.9852,
+          "n": 1
+        },
+        "surface": {
+          "mean_f1": 0.7778,
+          "n": 1
+        }
+      },
       "tasks": [
         {
           "id": "api-001",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -369,19 +467,20 @@
         {
           "id": "api-002",
           "category": "api_calling",
-          "f1": 1.0,
-          "f1_std": 0.0,
-          "f1_min": 1.0,
+          "categories": [],
+          "f1": 0.95,
+          "f1_std": 0.1,
+          "f1_min": 0.75,
           "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "precision": 0.95,
+          "recall": 0.95,
           "n_samples": 5,
           "samples_f1": [
             1.0,
             1.0,
             1.0,
             1.0,
-            1.0
+            0.75
           ],
           "predicted": [
             {
@@ -412,6 +511,7 @@
         {
           "id": "api-003",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -429,7 +529,7 @@
           "predicted": [
             {
               "action": "load",
-              "molecule_id": "1HHO"
+              "molecule_id": "1hho"
             },
             {
               "action": "set_visual_style",
@@ -457,6 +557,7 @@
         {
           "id": "api-004",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -502,18 +603,19 @@
         {
           "id": "api-005",
           "category": "api_calling",
-          "f1": 0.8,
-          "f1_std": 0.1633,
+          "categories": [],
+          "f1": 0.6667,
+          "f1_std": 0.0,
           "f1_min": 0.6667,
-          "f1_max": 1.0,
-          "precision": 0.8,
-          "recall": 0.8,
+          "f1_max": 0.6667,
+          "precision": 0.6667,
+          "recall": 0.6667,
           "n_samples": 5,
           "samples_f1": [
             0.6667,
             0.6667,
-            1.0,
-            1.0,
+            0.6667,
+            0.6667,
             0.6667
           ],
           "predicted": [
@@ -523,7 +625,7 @@
             },
             {
               "action": "set_property",
-              "name": "superposition",
+              "name": "validation_annotation",
               "value": true
             },
             {
@@ -538,6 +640,7 @@
         {
           "id": "api-006",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -584,19 +687,24 @@
         {
           "id": "mvs-001",
           "category": "mvs",
-          "f1": 0.9143,
-          "f1_std": 0.1714,
-          "f1_min": 0.5714,
+          "categories": [
+            "load",
+            "representation",
+            "color"
+          ],
+          "f1": 0.9111,
+          "f1_std": 0.1089,
+          "f1_min": 0.7778,
           "f1_max": 1.0,
-          "precision": 0.9143,
-          "recall": 0.9143,
+          "precision": 0.9111,
+          "recall": 0.9111,
           "n_samples": 5,
           "samples_f1": [
-            0.5714,
+            1.0,
+            0.7778,
             1.0,
             1.0,
-            1.0,
-            1.0
+            0.7778
           ],
           "predicted": {
             "root": {
@@ -659,19 +767,25 @@
         {
           "id": "mvs-002",
           "category": "mvs",
-          "f1": 0.8714,
-          "f1_std": 0.105,
-          "f1_min": 0.7857,
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "multi-component"
+          ],
+          "f1": 0.8889,
+          "f1_std": 0.0994,
+          "f1_min": 0.7778,
           "f1_max": 1.0,
-          "precision": 0.8714,
-          "recall": 0.8714,
+          "precision": 0.8889,
+          "recall": 0.8889,
           "n_samples": 5,
           "samples_f1": [
-            0.7857,
             1.0,
-            0.7857,
+            0.7778,
+            0.8889,
             1.0,
-            0.7857
+            0.7778
           ],
           "predicted": {
             "root": {
@@ -756,15 +870,22 @@
         {
           "id": "mvs-003",
           "category": "mvs",
-          "f1": 1.0,
-          "f1_std": 0.0,
-          "f1_min": 1.0,
+          "categories": [
+            "load",
+            "selection",
+            "representation",
+            "color",
+            "multi-component"
+          ],
+          "f1": 0.9852,
+          "f1_std": 0.0296,
+          "f1_min": 0.9259,
           "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "precision": 0.9852,
+          "recall": 0.9852,
           "n_samples": 5,
           "samples_f1": [
-            1.0,
+            0.9259,
             1.0,
             1.0,
             1.0,
@@ -862,19 +983,26 @@
         {
           "id": "mvs-004",
           "category": "mvs",
-          "f1": 0.8571,
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "camera",
+            "multi-component"
+          ],
+          "f1": 0.9259,
           "f1_std": 0.0,
-          "f1_min": 0.8571,
-          "f1_max": 0.8571,
-          "precision": 0.8571,
-          "recall": 0.8571,
+          "f1_min": 0.9259,
+          "f1_max": 0.9259,
+          "precision": 0.9259,
+          "recall": 0.9259,
           "n_samples": 5,
           "samples_f1": [
-            0.8571,
-            0.8571,
-            0.8571,
-            0.8571,
-            0.8571
+            0.9259,
+            0.9259,
+            0.9259,
+            0.9259,
+            0.9259
           ],
           "predicted": {
             "root": {
@@ -962,19 +1090,25 @@
         {
           "id": "mvs-005",
           "category": "mvs",
-          "f1": 0.9143,
-          "f1_std": 0.1714,
-          "f1_min": 0.5714,
-          "f1_max": 1.0,
-          "precision": 0.9143,
-          "recall": 0.9143,
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "surface"
+          ],
+          "f1": 0.7778,
+          "f1_std": 0.0,
+          "f1_min": 0.7778,
+          "f1_max": 0.7778,
+          "precision": 0.7778,
+          "recall": 0.7778,
           "n_samples": 5,
           "samples_f1": [
-            1.0,
-            0.5714,
-            1.0,
-            1.0,
-            1.0
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778
           ],
           "predicted": {
             "root": {
@@ -1001,7 +1135,7 @@
                             {
                               "kind": "component",
                               "params": {
-                                "selector": "polymer"
+                                "selector": "protein"
                               },
                               "children": [
                                 {
@@ -1038,32 +1172,63 @@
     },
     "gemini-3.5-flash": {
       "spec": "gemini:gemini-3.5-flash",
-      "mean_f1": 0.9013,
+      "mean_f1": 0.9589,
       "n_graded": 11,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8629,
-          "std": 0.159,
+          "mean_f1": 0.923,
+          "std": 0.074,
           "n": 5
         },
         "api_calling": {
-          "mean_f1": 0.9333,
-          "std": 0.1491,
+          "mean_f1": 0.9889,
+          "std": 0.0249,
           "n": 6
         }
       },
       "usage": {
         "input_tokens": 143445,
-        "output_tokens": 8533,
+        "output_tokens": 8500,
         "calls": 55
       },
-      "cost_usd": 0.064366,
-      "wall_seconds": 234.97,
-      "sec_per_call": 4.27,
+      "cost_usd": 0.0642835,
+      "wall_seconds": 246.57,
+      "sec_per_call": 4.48,
+      "by_skill": {
+        "camera": {
+          "mean_f1": 0.9407,
+          "n": 1
+        },
+        "color": {
+          "mean_f1": 0.923,
+          "n": 5
+        },
+        "load": {
+          "mean_f1": 0.923,
+          "n": 5
+        },
+        "multi-component": {
+          "mean_f1": 0.9605,
+          "n": 3
+        },
+        "representation": {
+          "mean_f1": 0.923,
+          "n": 5
+        },
+        "selection": {
+          "mean_f1": 0.9852,
+          "n": 1
+        },
+        "surface": {
+          "mean_f1": 0.7778,
+          "n": 1
+        }
+      },
       "tasks": [
         {
           "id": "api-001",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -1095,6 +1260,7 @@
         {
           "id": "api-002",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -1138,6 +1304,7 @@
         {
           "id": "api-003",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -1182,6 +1349,7 @@
         {
           "id": "api-004",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -1218,7 +1386,8 @@
                   "residue_number": 52,
                   "representation": "molecular-surface"
                 }
-              ]
+              ],
+              "keep_colors": true
             }
           ],
           "error": null,
@@ -1227,18 +1396,19 @@
         {
           "id": "api-005",
           "category": "api_calling",
-          "f1": 0.6,
-          "f1_std": 0.4899,
-          "f1_min": 0.0,
+          "categories": [],
+          "f1": 0.9333,
+          "f1_std": 0.1333,
+          "f1_min": 0.6667,
           "f1_max": 1.0,
-          "precision": 0.6,
-          "recall": 0.6,
+          "precision": 0.9333,
+          "recall": 0.9333,
           "n_samples": 5,
           "samples_f1": [
             1.0,
-            0.0,
             1.0,
-            0.0,
+            0.6667,
+            1.0,
             1.0
           ],
           "predicted": [
@@ -1263,6 +1433,7 @@
         {
           "id": "api-006",
           "category": "api_calling",
+          "categories": [],
           "f1": 1.0,
           "f1_std": 0.0,
           "f1_min": 1.0,
@@ -1309,19 +1480,24 @@
         {
           "id": "mvs-001",
           "category": "mvs",
-          "f1": 0.8286,
-          "f1_std": 0.21,
-          "f1_min": 0.5714,
+          "categories": [
+            "load",
+            "representation",
+            "color"
+          ],
+          "f1": 0.9556,
+          "f1_std": 0.0889,
+          "f1_min": 0.7778,
           "f1_max": 1.0,
-          "precision": 0.8286,
-          "recall": 0.8286,
+          "precision": 0.9556,
+          "recall": 0.9556,
           "n_samples": 5,
           "samples_f1": [
             1.0,
             1.0,
+            0.7778,
             1.0,
-            0.5714,
-            0.5714
+            1.0
           ],
           "predicted": {
             "root": {
@@ -1384,17 +1560,23 @@
         {
           "id": "mvs-002",
           "category": "mvs",
-          "f1": 1.0,
-          "f1_std": 0.0,
-          "f1_min": 1.0,
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "multi-component"
+          ],
+          "f1": 0.9556,
+          "f1_std": 0.0544,
+          "f1_min": 0.8889,
           "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "precision": 0.9556,
+          "recall": 0.9556,
           "n_samples": 5,
           "samples_f1": [
+            0.8889,
             1.0,
-            1.0,
-            1.0,
+            0.8889,
             1.0,
             1.0
           ],
@@ -1481,19 +1663,26 @@
         {
           "id": "mvs-003",
           "category": "mvs",
-          "f1": 1.0,
-          "f1_std": 0.0,
-          "f1_min": 1.0,
+          "categories": [
+            "load",
+            "selection",
+            "representation",
+            "color",
+            "multi-component"
+          ],
+          "f1": 0.9852,
+          "f1_std": 0.0296,
+          "f1_min": 0.9259,
           "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "precision": 0.9852,
+          "recall": 0.9852,
           "n_samples": 5,
           "samples_f1": [
             1.0,
             1.0,
             1.0,
             1.0,
-            1.0
+            0.9259
           ],
           "predicted": {
             "root": {
@@ -1587,19 +1776,26 @@
         {
           "id": "mvs-004",
           "category": "mvs",
-          "f1": 0.9143,
-          "f1_std": 0.07,
-          "f1_min": 0.8571,
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "camera",
+            "multi-component"
+          ],
+          "f1": 0.9407,
+          "f1_std": 0.0296,
+          "f1_min": 0.9259,
           "f1_max": 1.0,
-          "precision": 0.9143,
-          "recall": 0.9143,
+          "precision": 0.9407,
+          "recall": 0.9407,
           "n_samples": 5,
           "samples_f1": [
-            0.8571,
-            0.8571,
-            1.0,
-            1.0,
-            0.8571
+            0.9259,
+            0.9259,
+            0.9259,
+            0.9259,
+            1.0
           ],
           "predicted": {
             "root": {
@@ -1687,19 +1883,861 @@
         {
           "id": "mvs-005",
           "category": "mvs",
-          "f1": 0.5714,
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "surface"
+          ],
+          "f1": 0.7778,
           "f1_std": 0.0,
-          "f1_min": 0.5714,
-          "f1_max": 0.5714,
-          "precision": 0.5714,
-          "recall": 0.5714,
+          "f1_min": 0.7778,
+          "f1_max": 0.7778,
+          "precision": 0.7778,
+          "recall": 0.7778,
+          "n_samples": 5,
+          "samples_f1": [
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/4ins.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "protein"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "surface"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "steelblue"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...teelblue'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        }
+      ]
+    },
+    "gpt-5.4-nano": {
+      "spec": "openai:gpt-5.4-nano",
+      "mean_f1": 0.7793,
+      "n_graded": 11,
+      "by_category": {
+        "mvs": {
+          "mean_f1": 0.7088,
+          "std": 0.1768,
+          "n": 5
+        },
+        "api_calling": {
+          "mean_f1": 0.838,
+          "std": 0.141,
+          "n": 6
+        }
+      },
+      "usage": {
+        "input_tokens": 125775,
+        "output_tokens": 10381,
+        "calls": 55
+      },
+      "cost_usd": 0.010441150000000001,
+      "wall_seconds": 146.51,
+      "sec_per_call": 2.66,
+      "by_skill": {
+        "camera": {
+          "mean_f1": 0.8493,
+          "n": 1
+        },
+        "color": {
+          "mean_f1": 0.7088,
+          "n": 5
+        },
+        "load": {
+          "mean_f1": 0.7088,
+          "n": 5
+        },
+        "multi-component": {
+          "mean_f1": 0.7146,
+          "n": 3
+        },
+        "representation": {
+          "mean_f1": 0.7088,
+          "n": 5
+        },
+        "selection": {
+          "mean_f1": 0.4056,
+          "n": 1
+        },
+        "surface": {
+          "mean_f1": 0.7778,
+          "n": 1
+        }
+      },
+      "tasks": [
+        {
+          "id": "api-001",
+          "category": "api_calling",
+          "categories": [],
+          "f1": 0.88,
+          "f1_std": 0.098,
+          "f1_min": 0.8,
+          "f1_max": 1.0,
+          "precision": 0.8,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            0.8,
+            0.8,
+            1.0,
+            0.8
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1MBN"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-002",
+          "category": "api_calling",
+          "categories": [],
+          "f1": 0.95,
+          "f1_std": 0.1,
+          "f1_min": 0.75,
+          "f1_max": 1.0,
+          "precision": 0.95,
+          "recall": 0.95,
+          "n_samples": 5,
+          "samples_f1": [
+            0.75,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hvr",
+              "preset": "default"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            },
+            {
+              "action": "focus",
+              "data": [
+                {
+                  "label_comp_id": "XK2"
+                }
+              ]
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-003",
+          "category": "api_calling",
+          "categories": [],
+          "f1": 0.9067,
+          "f1_std": 0.12,
+          "f1_min": 0.6667,
+          "f1_max": 0.9667,
+          "precision": 0.9067,
+          "recall": 0.9067,
+          "n_samples": 5,
+          "samples_f1": [
+            0.9667,
+            0.9667,
+            0.6667,
+            0.9667,
+            0.9667
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hho",
+              "preset": "default"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "color",
+              "data": [
+                {
+                  "label_comp_id": "HEM",
+                  "representation": "ball-and-stick",
+                  "color": {
+                    "r": 255,
+                    "g": 140,
+                    "b": 0
+                  }
+                }
+              ],
+              "non_selected_color": {
+                "r": 200,
+                "g": 200,
+                "b": 200
+              }
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-004",
+          "category": "api_calling",
+          "categories": [],
+          "f1": 0.5762,
+          "f1_std": 0.053,
+          "f1_min": 0.5,
+          "f1_max": 0.6667,
+          "precision": 0.5133,
+          "recall": 0.6667,
           "n_samples": 5,
           "samples_f1": [
             0.5714,
             0.5714,
-            0.5714,
-            0.5714,
+            0.6667,
+            0.5,
             0.5714
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1lyz",
+              "preset": "default"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "color",
+              "data": [
+                {
+                  "auth_asym_id": "A",
+                  "label_comp_id": "GLU",
+                  "residue_number": 35,
+                  "representation": "molecular-surface"
+                },
+                {
+                  "auth_asym_id": "A",
+                  "label_comp_id": "ASP",
+                  "residue_number": 52,
+                  "representation": "molecular-surface"
+                }
+              ],
+              "keep_representations": true
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-005",
+          "category": "api_calling",
+          "categories": [],
+          "f1": 0.7333,
+          "f1_std": 0.1693,
+          "f1_min": 0.5714,
+          "f1_max": 1.0,
+          "precision": 0.6833,
+          "recall": 0.8,
+          "n_samples": 5,
+          "samples_f1": [
+            0.5714,
+            1.0,
+            0.6667,
+            0.5714,
+            0.8571
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "2HHB",
+              "preset": "default"
+            },
+            {
+              "action": "set_property",
+              "name": "superposition",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "bg_color",
+              "value": "#FFFFFF"
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-006",
+          "category": "api_calling",
+          "categories": [],
+          "f1": 0.9818,
+          "f1_std": 0.0364,
+          "f1_min": 0.9091,
+          "f1_max": 1.0,
+          "precision": 0.9667,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.9091
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "4ins",
+              "preset": "default"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "hide_heteroatoms",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "lighting",
+              "value": "glossy"
+            },
+            {
+              "action": "set_property",
+              "name": "spin",
+              "value": true
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "mvs-001",
+          "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color"
+          ],
+          "f1": 0.6222,
+          "f1_std": 0.3111,
+          "f1_min": 0.0,
+          "f1_max": 0.7778,
+          "precision": 0.6222,
+          "recall": 0.6222,
+          "n_samples": 5,
+          "samples_f1": [
+            0.0,
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1hho.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "protein"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...': 'gray'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-002",
+          "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "multi-component"
+          ],
+          "f1": 0.8889,
+          "f1_std": 0.0994,
+          "f1_min": 0.7778,
+          "f1_max": 1.0,
+          "precision": 0.8889,
+          "recall": 0.8889,
+          "n_samples": 5,
+          "samples_f1": [
+            0.7778,
+            1.0,
+            0.7778,
+            1.0,
+            0.8889
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1HHO.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "polymer"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "ligand"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "ball_and_stick"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "orange"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'... 'orange'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-003",
+          "category": "mvs",
+          "categories": [
+            "load",
+            "selection",
+            "representation",
+            "color",
+            "multi-component"
+          ],
+          "f1": 0.4056,
+          "f1_std": 0.3313,
+          "f1_min": 0.0,
+          "f1_max": 0.6944,
+          "precision": 0.3111,
+          "recall": 0.5852,
+          "n_samples": 5,
+          "samples_f1": [
+            0.6667,
+            0.6944,
+            0.0,
+            0.6667,
+            0.0
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1LYZ.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "protein"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": {
+                                  "auth_asym_id": "A",
+                                  "auth_seq_id": 35
+                                }
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "ball_and_stick"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "red"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": "label",
+                                  "params": {
+                                    "text": "Glu35"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": {
+                                  "auth_asym_id": "A",
+                                  "auth_seq_id": 52
+                                }
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "ball_and_stick"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "red"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": "label",
+                                  "params": {
+                                    "text": "Asp52"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...t': 'Asp52'}}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-004",
+          "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "camera",
+            "multi-component"
+          ],
+          "f1": 0.8493,
+          "f1_std": 0.0949,
+          "f1_min": 0.712,
+          "f1_max": 0.9259,
+          "precision": 0.8315,
+          "recall": 0.873,
+          "n_samples": 5,
+          "samples_f1": [
+            0.9259,
+            0.9259,
+            0.712,
+            0.7566,
+            0.9259
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1hvr.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "protein"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "ligand"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "ball_and_stick"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "magenta"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": "focus"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...nd': 'focus'}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-005",
+          "category": "mvs",
+          "categories": [
+            "load",
+            "representation",
+            "color",
+            "surface"
+          ],
+          "f1": 0.7778,
+          "f1_std": 0.0,
+          "f1_min": 0.7778,
+          "f1_max": 0.7778,
+          "precision": 0.7778,
+          "recall": 0.7778,
+          "n_samples": 5,
+          "samples_f1": [
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778,
+            0.7778
           ],
           "predicted": {
             "root": {

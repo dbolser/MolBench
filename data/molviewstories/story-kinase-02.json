@@ -1,0 +1,354 @@
+{
+  "id": "story-kinase-02",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "kinase",
+  "title": "The Birth of a Rogue Kinase",
+  "caption": "The Birth of a Rogue Kinase. The Birth of a Rogue Kinase But in BCR-ABL, this safety mechanism is gone.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1opl.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        -0.6321036327,
+                        0.3450463255,
+                        0.6938213248,
+                        -0.6288677634,
+                        -0.7515716885,
+                        -0.1991615756,
+                        0.4527364948,
+                        -0.5622126202,
+                        0.6920597055
+                      ],
+                      "translation": [
+                        36.3924122492,
+                        118.2516908402,
+                        -26.4992054179
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#4577B2"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 146,
+                                "end_auth_seq_id": 247
+                              },
+                              "color": "#8ED1A4"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 83,
+                                "end_auth_seq_id": 145
+                              },
+                              "color": "#64B9AA"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "C"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#4577B2"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "D"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": 4552626
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.33
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol",
+                              "molstar_color_theme_params": {
+                                "carbonColor": {
+                                  "name": "uniform",
+                                  "params": {
+                                    "value": 4552626
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 146,
+                            "end_auth_seq_id": 247
+                          },
+                          "text": "SH2",
+                          "label_color": "#8ED1A4",
+                          "label_size": 9
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 83,
+                            "end_auth_seq_id": 145
+                          },
+                          "text": "SH3",
+                          "label_color": "#64B9AA",
+                          "label_size": 9
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/2gqg.bcif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "transform",
+                    "params": {
+                      "rotation": [
+                        0.0648740828,
+                        -0.7163272638,
+                        0.6947421137,
+                        0.0160329972,
+                        -0.6953706204,
+                        -0.7184724374,
+                        0.9977646498,
+                        0.0577490387,
+                        -0.0336266582
+                      ],
+                      "translation": [
+                        -31.0690973964,
+                        146.0940883054,
+                        39.7107422531
+                      ]
+                    }
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_asym_id": "A"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "#BF99A1"
+                            }
+                          },
+                          {
+                            "kind": "color",
+                            "params": {
+                              "selector": {
+                                "auth_asym_id": "A",
+                                "beg_auth_seq_id": 146,
+                                "end_auth_seq_id": 247
+                              },
+                              "color": "#D03B4B"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "kind": "label",
+                          "position": {
+                            "auth_asym_id": "A",
+                            "beg_auth_seq_id": 146,
+                            "end_auth_seq_id": 247
+                          },
+                          "text": "SH2 (BCR)",
+                          "label_color": "#D03B4B",
+                          "label_size": 6
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "camera",
+        "params": {
+          "position": [
+            24.4329489569431,
+            -3.025944728955345,
+            10.328262318737105
+          ],
+          "target": [
+            3.99,
+            47.45,
+            0.08
+          ],
+          "up": [
+            -0.22,
+            -0.28,
+            -0.94
+          ]
+        }
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "surface",
+    "volume"
+  ]
+}

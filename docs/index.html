@@ -9,6 +9,7 @@
   body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
           max-width: 860px; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
   h1 { margin-bottom: .2rem; }
+  h2 { margin-top: 2.5rem; font-size: 1.15rem; }
   .sub { color: #888; margin-top: 0; }
   table { border-collapse: collapse; width: 100%; margin-top: 1.5rem; }
   th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid #8884; }
@@ -36,11 +37,13 @@
       </tr>
     </thead>
     <tbody>
-<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.911 <span class='pm'>±0.05</span></td><td>0.967 <span class='pm'>±0.07</span></td><td class='spec'>anthropic:claude-haiku-4-5</td><td>149,470 / 9,953</td><td>$0.1992</td><td>1.66s/call</td></tr>
-<tr><td class='rank'>2</td><td class='model'>gemini-3.5-flash</td><td class='f1'>0.863 <span class='pm'>±0.16</span></td><td>0.933 <span class='pm'>±0.15</span></td><td class='spec'>gemini:gemini-3.5-flash</td><td>143,445 / 8,533</td><td>$0.0644</td><td>4.27s/call</td></tr>
-<tr><td class='rank'>3</td><td class='model'>baseline-rules</td><td class='f1'>0.000</td><td>0.718 <span class='pm'>±0.09</span></td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class='rank'>1</td><td class='model'>gemini-3.5-flash</td><td class='f1'>0.923 <span class='pm'>±0.07</span></td><td>0.989 <span class='pm'>±0.02</span></td><td class='spec'>gemini:gemini-3.5-flash</td><td>143,445 / 8,500</td><td>$0.0643</td><td>4.48s/call</td></tr>
+<tr><td class='rank'>2</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.898 <span class='pm'>±0.07</span></td><td>0.936 <span class='pm'>±0.12</span></td><td class='spec'>anthropic:claude-haiku-4-5</td><td>149,470 / 9,561</td><td>$0.1973</td><td>1.59s/call</td></tr>
+<tr><td class='rank'>3</td><td class='model'>gpt-5.4-nano</td><td class='f1'>0.709 <span class='pm'>±0.18</span></td><td>0.838 <span class='pm'>±0.14</span></td><td class='spec'>openai:gpt-5.4-nano</td><td>125,775 / 10,381</td><td>$0.0104</td><td>2.66s/call</td></tr>
+<tr><td class='rank'>4</td><td class='model'>baseline-rules</td><td class='f1'>0.000</td><td>0.718 <span class='pm'>±0.09</span></td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
     </tbody>
   </table>
+  <h2>Drill-down by skill</h2><p class='sub'>Mean F1 on tasks tagged with each skill (task count in parens). Skills are derived automatically from the reference scene tree.</p><table><thead><tr><th>Skill</th><th>gemini-3.5-flash</th><th>claude-haiku-4-5</th><th>gpt-5.4-nano</th><th>baseline-rules</th></tr></thead><tbody><tr><td class='model'>camera <span class='pm'>(1)</span></td><td class='f1'>0.941</td><td>0.926</td><td>0.849</td><td>0.000</td></tr><tr><td class='model'>color <span class='pm'>(5)</span></td><td class='f1'>0.923</td><td>0.898</td><td>0.709</td><td>0.000</td></tr><tr><td class='model'>load <span class='pm'>(5)</span></td><td class='f1'>0.923</td><td>0.898</td><td>0.709</td><td>0.000</td></tr><tr><td class='model'>multi-component <span class='pm'>(3)</span></td><td class='f1'>0.961</td><td>0.933</td><td>0.715</td><td>0.000</td></tr><tr><td class='model'>representation <span class='pm'>(5)</span></td><td class='f1'>0.923</td><td>0.898</td><td>0.709</td><td>0.000</td></tr><tr><td class='model'>selection <span class='pm'>(1)</span></td><td class='f1'>0.985</td><td class='f1'>0.985</td><td>0.406</td><td>0.000</td></tr><tr><td class='model'>surface <span class='pm'>(1)</span></td><td class='f1'>0.778</td><td class='f1'>0.778</td><td class='f1'>0.778</td><td>0.000</td></tr></tbody></table>
   <footer>
     <p>Higher F1 is better. <b>MVS&nbsp;F1</b> is the primary, engine-agnostic
        scene-tree score; <b>API&nbsp;F1</b> is the secondary imperative-PDBeMolstar

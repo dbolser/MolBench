@@ -1,0 +1,206 @@
+{
+  "id": "story-mvs-examples-06",
+  "kind": "scene",
+  "source": "molviewstories",
+  "story": "mvs-examples",
+  "title": "Volume Visualization",
+  "caption": "Volume Visualization. Volume and Electron Density Load a structure and a volume from the Mol Volume Server.",
+  "scene_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/entry-files/download/1tqn_updated.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "white"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "ligand"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {},
+                            "custom": {
+                              "molstar_color_theme_name": "element-symbol"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "kind": "focus",
+                        "params": {
+                          "up": [
+                            0.98,
+                            -0.19,
+                            0
+                          ],
+                          "direction": [
+                            -28.47,
+                            -17.66,
+                            -16.32
+                          ],
+                          "radius": 14,
+                          "radius_extent": 5
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://www.ebi.ac.uk/pdbe/densities/x-ray/1tqn/box/-22.367,-33.367,-21.634/-7.106,-10.042,-0.937?detail=3"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "bcif"
+            },
+            "children": [
+              {
+                "kind": "volume",
+                "params": {
+                  "channel_id": "2FO-FC"
+                },
+                "children": [
+                  {
+                    "kind": "volume_representation",
+                    "params": {
+                      "type": "isosurface",
+                      "relative_isovalue": 1.5,
+                      "show_wireframe": true,
+                      "show_faces": false
+                    },
+                    "children": [
+                      {
+                        "kind": "color",
+                        "params": {
+                          "color": "blue"
+                        }
+                      },
+                      {
+                        "kind": "opacity",
+                        "params": {
+                          "opacity": 0.3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "kind": "volume",
+                "params": {
+                  "channel_id": "FO-FC"
+                },
+                "children": [
+                  {
+                    "kind": "volume_representation",
+                    "params": {
+                      "type": "isosurface",
+                      "relative_isovalue": 3,
+                      "show_wireframe": true
+                    },
+                    "children": [
+                      {
+                        "kind": "color",
+                        "params": {
+                          "color": "green"
+                        }
+                      },
+                      {
+                        "kind": "opacity",
+                        "params": {
+                          "opacity": 0.3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "volume_representation",
+                    "params": {
+                      "type": "isosurface",
+                      "relative_isovalue": -3,
+                      "show_wireframe": true
+                    },
+                    "children": [
+                      {
+                        "kind": "color",
+                        "params": {
+                          "color": "red"
+                        }
+                      },
+                      {
+                        "kind": "opacity",
+                        "params": {
+                          "opacity": 0.3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "representation",
+    "color",
+    "camera",
+    "multi-component",
+    "volume"
+  ]
+}
