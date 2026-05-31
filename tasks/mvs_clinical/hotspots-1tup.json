@@ -1,0 +1,164 @@
+{
+  "id": "hotspots-1tup",
+  "category": "mvs",
+  "source": "clinvar-hotspots",
+  "pdb": "1tup",
+  "prompt": "In p53 (PDB 1TUP), highlight the mutational hotspot residues \u2014 the positions carrying the most pathogenic ClinVar variants \u2014 as red spheres.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1tup.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 215
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 109
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 239
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 241
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 281
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 158
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "spacefill"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "red"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ],
+  "provenance": {
+    "hotspots": [
+      {
+        "unp_pos": 215,
+        "n_variants": 12,
+        "auth": [
+          "A",
+          215
+        ]
+      },
+      {
+        "unp_pos": 109,
+        "n_variants": 11,
+        "auth": [
+          "A",
+          109
+        ]
+      },
+      {
+        "unp_pos": 239,
+        "n_variants": 10,
+        "auth": [
+          "A",
+          239
+        ]
+      },
+      {
+        "unp_pos": 241,
+        "n_variants": 10,
+        "auth": [
+          "A",
+          241
+        ]
+      },
+      {
+        "unp_pos": 281,
+        "n_variants": 10,
+        "auth": [
+          "A",
+          281
+        ]
+      },
+      {
+        "unp_pos": 158,
+        "n_variants": 9,
+        "auth": [
+          "A",
+          158
+        ]
+      }
+    ]
+  }
+}
