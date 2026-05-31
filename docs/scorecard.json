@@ -312,28 +312,28 @@
     },
     "claude-haiku-4-5": {
       "spec": "anthropic:claude-haiku-4-5",
-      "mean_f1": 0.8898,
+      "mean_f1": 0.9416,
       "n_graded": 11,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8343,
-          "std": 0.1218,
+          "mean_f1": 0.9114,
+          "std": 0.0498,
           "n": 5
         },
         "api_calling": {
-          "mean_f1": 0.9361,
-          "std": 0.1219,
+          "mean_f1": 0.9667,
+          "std": 0.0745,
           "n": 6
         }
       },
       "usage": {
         "input_tokens": 149470,
-        "output_tokens": 9250,
+        "output_tokens": 9953,
         "calls": 55
       },
-      "cost_usd": 0.19572,
-      "wall_seconds": 85.28,
-      "sec_per_call": 1.55,
+      "cost_usd": 0.199235,
+      "wall_seconds": 91.52,
+      "sec_per_call": 1.66,
       "tasks": [
         {
           "id": "api-001",
@@ -369,17 +369,17 @@
         {
           "id": "api-002",
           "category": "api_calling",
-          "f1": 0.95,
-          "f1_std": 0.1,
-          "f1_min": 0.75,
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
           "f1_max": 1.0,
-          "precision": 0.95,
-          "recall": 0.95,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 5,
           "samples_f1": [
             1.0,
             1.0,
-            0.75,
+            1.0,
             1.0,
             1.0
           ],
@@ -429,7 +429,7 @@
           "predicted": [
             {
               "action": "load",
-              "molecule_id": "1hho"
+              "molecule_id": "1HHO"
             },
             {
               "action": "set_visual_style",
@@ -502,18 +502,18 @@
         {
           "id": "api-005",
           "category": "api_calling",
-          "f1": 0.6667,
-          "f1_std": 0.0,
+          "f1": 0.8,
+          "f1_std": 0.1633,
           "f1_min": 0.6667,
-          "f1_max": 0.6667,
-          "precision": 0.6667,
-          "recall": 0.6667,
+          "f1_max": 1.0,
+          "precision": 0.8,
+          "recall": 0.8,
           "n_samples": 5,
           "samples_f1": [
             0.6667,
             0.6667,
-            0.6667,
-            0.6667,
+            1.0,
+            1.0,
             0.6667
           ],
           "predicted": [
@@ -523,7 +523,7 @@
             },
             {
               "action": "set_property",
-              "name": "validation_annotation",
+              "name": "superposition",
               "value": true
             },
             {
@@ -592,10 +592,10 @@
           "recall": 0.9143,
           "n_samples": 5,
           "samples_f1": [
-            1.0,
-            1.0,
-            1.0,
             0.5714,
+            1.0,
+            1.0,
+            1.0,
             1.0
           ],
           "predicted": {
@@ -659,19 +659,19 @@
         {
           "id": "mvs-002",
           "category": "mvs",
-          "f1": 0.7428,
-          "f1_std": 0.1604,
-          "f1_min": 0.5714,
+          "f1": 0.8714,
+          "f1_std": 0.105,
+          "f1_min": 0.7857,
           "f1_max": 1.0,
-          "precision": 0.7428,
-          "recall": 0.7428,
+          "precision": 0.8714,
+          "recall": 0.8714,
           "n_samples": 5,
           "samples_f1": [
             0.7857,
-            0.5714,
+            1.0,
             0.7857,
-            0.5714,
-            1.0
+            1.0,
+            0.7857
           ],
           "predicted": {
             "root": {
@@ -962,17 +962,742 @@
         {
           "id": "mvs-005",
           "category": "mvs",
-          "f1": 0.6571,
+          "f1": 0.9143,
           "f1_std": 0.1714,
           "f1_min": 0.5714,
           "f1_max": 1.0,
-          "precision": 0.6571,
-          "recall": 0.6571,
+          "precision": 0.9143,
+          "recall": 0.9143,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            0.5714,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/4ins.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "polymer"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "surface"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "steelblue"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...teelblue'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        }
+      ]
+    },
+    "gemini-3.5-flash": {
+      "spec": "gemini:gemini-3.5-flash",
+      "mean_f1": 0.9013,
+      "n_graded": 11,
+      "by_category": {
+        "mvs": {
+          "mean_f1": 0.8629,
+          "std": 0.159,
+          "n": 5
+        },
+        "api_calling": {
+          "mean_f1": 0.9333,
+          "std": 0.1491,
+          "n": 6
+        }
+      },
+      "usage": {
+        "input_tokens": 143445,
+        "output_tokens": 8533,
+        "calls": 55
+      },
+      "cost_usd": 0.064366,
+      "wall_seconds": 234.97,
+      "sec_per_call": 4.27,
+      "tasks": [
+        {
+          "id": "api-001",
+          "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1mbn"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-002",
+          "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hvr"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            },
+            {
+              "action": "focus",
+              "data": [
+                {
+                  "label_comp_id": "XK2"
+                }
+              ]
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-003",
+          "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hho"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "color",
+              "data": [
+                {
+                  "label_comp_id": "HEM",
+                  "color": {
+                    "r": 255,
+                    "g": 165,
+                    "b": 0
+                  },
+                  "representation": "ball-and-stick"
+                }
+              ]
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-004",
+          "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1lyz"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "color",
+              "data": [
+                {
+                  "auth_asym_id": "A",
+                  "residue_number": 35,
+                  "representation": "molecular-surface"
+                },
+                {
+                  "auth_asym_id": "A",
+                  "residue_number": 52,
+                  "representation": "molecular-surface"
+                }
+              ]
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-005",
+          "category": "api_calling",
+          "f1": 0.6,
+          "f1_std": 0.4899,
+          "f1_min": 0.0,
+          "f1_max": 1.0,
+          "precision": 0.6,
+          "recall": 0.6,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "2hhb"
+            },
+            {
+              "action": "set_property",
+              "name": "superposition",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "bg_color",
+              "value": "#FFFFFF"
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "api-006",
+          "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "4ins"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "hide_heteroatoms",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "lighting",
+              "value": "glossy"
+            },
+            {
+              "action": "set_property",
+              "name": "spin",
+              "value": true
+            }
+          ],
+          "error": null,
+          "schema_errors": []
+        },
+        {
+          "id": "mvs-001",
+          "category": "mvs",
+          "f1": 0.8286,
+          "f1_std": 0.21,
+          "f1_min": 0.5714,
+          "f1_max": 1.0,
+          "precision": 0.8286,
+          "recall": 0.8286,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            0.5714,
+            0.5714
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1hho.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "polymer"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...': 'gray'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-002",
+          "category": "mvs",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1hho.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "polymer"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "ligand"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "ball_and_stick"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "orange"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'... 'orange'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-003",
+          "category": "mvs",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1lyz.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "polymer"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": [
+                                  {
+                                    "auth_asym_id": "A",
+                                    "auth_seq_id": 35
+                                  },
+                                  {
+                                    "auth_asym_id": "A",
+                                    "auth_seq_id": 52
+                                  }
+                                ]
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "ball_and_stick"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "red"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...r': 'red'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-004",
+          "category": "mvs",
+          "f1": 0.9143,
+          "f1_std": 0.07,
+          "f1_min": 0.8571,
+          "f1_max": 1.0,
+          "precision": 0.9143,
+          "recall": 0.9143,
+          "n_samples": 5,
+          "samples_f1": [
+            0.8571,
+            0.8571,
+            1.0,
+            1.0,
+            0.8571
+          ],
+          "predicted": {
+            "root": {
+              "kind": "root",
+              "children": [
+                {
+                  "kind": "download",
+                  "params": {
+                    "url": "https://files.rcsb.org/download/1hvr.cif"
+                  },
+                  "children": [
+                    {
+                      "kind": "parse",
+                      "params": {
+                        "format": "mmcif"
+                      },
+                      "children": [
+                        {
+                          "kind": "structure",
+                          "params": {
+                            "type": "model"
+                          },
+                          "children": [
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "polymer"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "cartoon"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "gray"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "kind": "component",
+                              "params": {
+                                "selector": "ligand"
+                              },
+                              "children": [
+                                {
+                                  "kind": "representation",
+                                  "params": {
+                                    "type": "ball_and_stick"
+                                  },
+                                  "children": [
+                                    {
+                                      "kind": "color",
+                                      "params": {
+                                        "color": "magenta"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "kind": "focus"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...nd': 'focus'}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
+        },
+        {
+          "id": "mvs-005",
+          "category": "mvs",
+          "f1": 0.5714,
+          "f1_std": 0.0,
+          "f1_min": 0.5714,
+          "f1_max": 0.5714,
+          "precision": 0.5714,
+          "recall": 0.5714,
           "n_samples": 5,
           "samples_f1": [
             0.5714,
             0.5714,
-            1.0,
+            0.5714,
             0.5714,
             0.5714
           ],
@@ -1001,7 +1726,7 @@
                             {
                               "kind": "component",
                               "params": {
-                                "selector": "polymer"
+                                "selector": "protein"
                               },
                               "children": [
                                 {
