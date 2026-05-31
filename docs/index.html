@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MolBench &mdash; Leaderboard</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+          max-width: 860px; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
+  h1 { margin-bottom: .2rem; }
+  .sub { color: #888; margin-top: 0; }
+  table { border-collapse: collapse; width: 100%; margin-top: 1.5rem; }
+  th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid #8884; }
+  th { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: #888; }
+  td.f1 { font-variant-numeric: tabular-nums; font-weight: 600; }
+  td.rank { color: #888; }
+  td.model { font-weight: 600; }
+  td.spec { font-family: ui-monospace, monospace; font-size: .85rem; color: #888; }
+  tr:first-child td.rank { color: #d4a017; font-weight: 700; }
+  footer { margin-top: 2rem; font-size: .85rem; color: #888; }
+  code { background: #8882; padding: .1em .35em; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <h1>MolBench</h1>
+  <p class="sub">Molecular-visualization benchmark for CI assistants &mdash;
+     Component&nbsp;1 (API calling), 8 tasks.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Model</th><th>Mean&nbsp;F1</th><th>Perfect</th>
+        <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.944</td><td>5 / 6</td><td class='spec'>anthropic:claude-haiku-4-5</td><td>30,576 / 1,238</td><td>$0.0368</td></tr>
+<tr><td class='rank'>2</td><td class='model'>baseline-rules</td><td class='f1'>0.718</td><td>0 / 6</td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+  <footer>
+    <p>Higher F1 is better. &ldquo;Perfect&rdquo; counts API tasks scored exactly 1.0.
+       Costs use the published per-token list prices at run time.</p>
+    <p>Reproduce: <code>python -m molbench.runner --models &lt;spec&gt;</code> &middot;
+       <a href="./scorecard.json">raw scorecard.json</a> &middot;
+       <a href="https://github.com/dbolser/MolBench">source</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,884 @@
+{
+  "models": {
+    "baseline-rules": {
+      "spec": "baseline",
+      "mean_f1": 0.7175,
+      "n_graded": 6,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "calls": 0
+      },
+      "cost_usd": null,
+      "tasks": [
+        {
+          "id": "api-001",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "n_ref": 2,
+          "n_pred": 1,
+          "matches": [
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "set_property",
+              "miss": true
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1mbn"
+            }
+          ]
+        },
+        {
+          "id": "api-002",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "n_ref": 4,
+          "n_pred": 2,
+          "matches": [
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_visual_style"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            },
+            {
+              "ref_index": 2,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "set_property",
+              "miss": true
+            },
+            {
+              "ref_index": 3,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "focus",
+              "miss": true
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hvr"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            }
+          ]
+        },
+        {
+          "id": "api-003",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "n_ref": 3,
+          "n_pred": 2,
+          "matches": [
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_visual_style"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            },
+            {
+              "ref_index": 2,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "color",
+              "miss": true
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hho"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            }
+          ]
+        },
+        {
+          "id": "api-004",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "n_ref": 3,
+          "n_pred": 2,
+          "matches": [
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_visual_style"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            },
+            {
+              "ref_index": 2,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "color",
+              "miss": true
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1lyz"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            }
+          ]
+        },
+        {
+          "id": "api-005",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "n_ref": 3,
+          "n_pred": 2,
+          "matches": [
+            {
+              "ref_index": 2,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "set_property",
+              "miss": true
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "2hhb"
+            },
+            {
+              "action": "set_property",
+              "name": "bg_color",
+              "value": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "id": "api-006",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1": 0.5714,
+          "n_ref": 5,
+          "n_pred": 2,
+          "matches": [
+            {
+              "ref_index": 4,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "set_property",
+              "miss": true
+            },
+            {
+              "ref_index": 2,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "set_property",
+              "miss": true
+            },
+            {
+              "ref_index": 3,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "set_property",
+              "miss": true
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "4ins"
+            },
+            {
+              "action": "set_property",
+              "name": "spin",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "vis-101",
+          "category": "visual_rubric",
+          "plan_parsed": true,
+          "vlm": {
+            "score": null,
+            "status": "unscored",
+            "criteria": [
+              {
+                "text": "A heme (HEM) group is clearly visible",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The iron (FE) atom is shown",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The proximal histidine (His F8) side chain is shown near the iron",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "An explicit bond/contact is drawn between the His NE2 and the heme iron",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The rest of the protein is de-emphasised (cartoon or faded) so the contact is legible",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              }
+            ]
+          },
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hho"
+            }
+          ]
+        },
+        {
+          "id": "vis-102",
+          "category": "visual_rubric",
+          "plan_parsed": true,
+          "vlm": {
+            "score": null,
+            "status": "unscored",
+            "criteria": [
+              {
+                "text": "A structure containing both an HIV envelope (gp120/gp41) chain and antibody (Fab/Ig) chains is loaded",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "Antibody and antigen are visually distinguishable (e.g. coloured differently)",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "Interface residues (those in contact across the two partners) are highlighted distinctly",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The camera is focused on the interface region rather than the whole complex",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              }
+            ]
+          },
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hvr"
+            }
+          ]
+        }
+      ]
+    },
+    "claude-haiku-4-5": {
+      "spec": "anthropic:claude-haiku-4-5",
+      "mean_f1": 0.9444,
+      "n_graded": 6,
+      "usage": {
+        "input_tokens": 30576,
+        "output_tokens": 1238,
+        "calls": 8
+      },
+      "cost_usd": 0.036766,
+      "tasks": [
+        {
+          "id": "api-001",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "n_ref": 2,
+          "n_pred": 2,
+          "matches": [
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1mbn"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "api-002",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "n_ref": 4,
+          "n_pred": 4,
+          "matches": [
+            {
+              "ref_index": 3,
+              "pred_index": 3,
+              "score": 1.0,
+              "action": "focus"
+            },
+            {
+              "ref_index": 2,
+              "pred_index": 2,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_visual_style"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hvr"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            },
+            {
+              "action": "focus",
+              "data": [
+                {
+                  "label_comp_id": "XK2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "api-003",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "n_ref": 3,
+          "n_pred": 3,
+          "matches": [
+            {
+              "ref_index": 2,
+              "pred_index": 2,
+              "score": 1.0,
+              "action": "color"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_visual_style"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hho"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "color",
+              "data": [
+                {
+                  "label_comp_id": "HEM",
+                  "representation": "ball-and-stick",
+                  "color": {
+                    "r": 255,
+                    "g": 165,
+                    "b": 0
+                  }
+                }
+              ],
+              "non_selected_color": null
+            }
+          ]
+        },
+        {
+          "id": "api-004",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "n_ref": 3,
+          "n_pred": 3,
+          "matches": [
+            {
+              "ref_index": 2,
+              "pred_index": 2,
+              "score": 1.0,
+              "action": "color"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_visual_style"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1lyz"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "color",
+              "data": [
+                {
+                  "auth_asym_id": "A",
+                  "residue_number": 35,
+                  "representation": "molecular-surface"
+                },
+                {
+                  "auth_asym_id": "A",
+                  "residue_number": 52,
+                  "representation": "molecular-surface"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "api-005",
+          "category": "api_calling",
+          "precision": 0.6667,
+          "recall": 0.6667,
+          "f1": 0.6667,
+          "n_ref": 3,
+          "n_pred": 3,
+          "matches": [
+            {
+              "ref_index": 2,
+              "pred_index": 2,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": null,
+              "score": 0.0,
+              "action": "set_property",
+              "miss": true
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "2hhb"
+            },
+            {
+              "action": "set_property",
+              "name": "validation_annotation",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "bg_color",
+              "value": "#FFFFFF"
+            }
+          ]
+        },
+        {
+          "id": "api-006",
+          "category": "api_calling",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "n_ref": 5,
+          "n_pred": 5,
+          "matches": [
+            {
+              "ref_index": 4,
+              "pred_index": 4,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 3,
+              "pred_index": 3,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 2,
+              "pred_index": 2,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 1,
+              "pred_index": 1,
+              "score": 1.0,
+              "action": "set_property"
+            },
+            {
+              "ref_index": 0,
+              "pred_index": 0,
+              "score": 1.0,
+              "action": "load"
+            }
+          ],
+          "schema_errors": [],
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "4ins"
+            },
+            {
+              "action": "set_property",
+              "name": "hide_water",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "hide_heteroatoms",
+              "value": true
+            },
+            {
+              "action": "set_property",
+              "name": "lighting",
+              "value": "glossy"
+            },
+            {
+              "action": "set_property",
+              "name": "spin",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "vis-101",
+          "category": "visual_rubric",
+          "plan_parsed": true,
+          "vlm": {
+            "score": null,
+            "status": "unscored",
+            "criteria": [
+              {
+                "text": "A heme (HEM) group is clearly visible",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The iron (FE) atom is shown",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The proximal histidine (His F8) side chain is shown near the iron",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "An explicit bond/contact is drawn between the His NE2 and the heme iron",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The rest of the protein is de-emphasised (cartoon or faded) so the contact is legible",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              }
+            ]
+          },
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hba"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "ball-and-stick"
+            },
+            {
+              "action": "color",
+              "data": [
+                {
+                  "label_comp_id": "HEM",
+                  "color": {
+                    "r": 255,
+                    "g": 100,
+                    "b": 0
+                  }
+                },
+                {
+                  "auth_asym_id": "A",
+                  "residue_number": 92,
+                  "color": {
+                    "r": 0,
+                    "g": 150,
+                    "b": 255
+                  }
+                }
+              ]
+            },
+            {
+              "action": "focus",
+              "data": [
+                {
+                  "label_comp_id": "HEM"
+                },
+                {
+                  "auth_asym_id": "A",
+                  "residue_number": 92
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "vis-102",
+          "category": "visual_rubric",
+          "plan_parsed": true,
+          "vlm": {
+            "score": null,
+            "status": "unscored",
+            "criteria": [
+              {
+                "text": "A structure containing both an HIV envelope (gp120/gp41) chain and antibody (Fab/Ig) chains is loaded",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "Antibody and antigen are visually distinguishable (e.g. coloured differently)",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "Interface residues (those in contact across the two partners) are highlighted distinctly",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              },
+              {
+                "text": "The camera is focused on the interface region rather than the whole complex",
+                "passed": null,
+                "reason": "no VLM judge wired"
+              }
+            ]
+          },
+          "predicted": [
+            {
+              "action": "load",
+              "molecule_id": "1hzh"
+            },
+            {
+              "action": "set_visual_style",
+              "style": "cartoon"
+            },
+            {
+              "action": "highlight",
+              "data": [
+                {
+                  "auth_asym_id": "C",
+                  "start_residue_number": 54,
+                  "end_residue_number": 102,
+                  "color": {
+                    "r": 255,
+                    "g": 165,
+                    "b": 0
+                  }
+                },
+                {
+                  "auth_asym_id": "C",
+                  "start_residue_number": 123,
+                  "end_residue_number": 134,
+                  "color": {
+                    "r": 255,
+                    "g": 165,
+                    "b": 0
+                  }
+                },
+                {
+                  "auth_asym_id": "C",
+                  "start_residue_number": 165,
+                  "end_residue_number": 172,
+                  "color": {
+                    "r": 255,
+                    "g": 165,
+                    "b": 0
+                  }
+                },
+                {
+                  "auth_asym_id": "A",
+                  "start_residue_number": 30,
+                  "end_residue_number": 35,
+                  "color": {
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                  }
+                },
+                {
+                  "auth_asym_id": "A",
+                  "start_residue_number": 50,
+                  "end_residue_number": 65,
+                  "color": {
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                  }
+                },
+                {
+                  "auth_asym_id": "B",
+                  "start_residue_number": 30,
+                  "end_residue_number": 35,
+                  "color": {
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                  }
+                },
+                {
+                  "auth_asym_id": "B",
+                  "start_residue_number": 50,
+                  "end_residue_number": 65,
+                  "color": {
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "n_tasks": 8
+}

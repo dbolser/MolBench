@@ -1,5 +1,9 @@
 # MolBench
 
+[![CI](https://github.com/dbolser/MolBench/actions/workflows/ci.yml/badge.svg)](https://github.com/dbolser/MolBench/actions/workflows/ci.yml)
+[![Leaderboard](https://img.shields.io/badge/leaderboard-live-blue)](https://dbolser.github.io/MolBench/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 A molecular-visualization benchmark and harness for LLM-based assistants ("CI"
 assistants). It measures whether a model can turn natural-language requests
 ("load HIV protease, hide the waters, focus the inhibitor") into correct calls
@@ -70,6 +74,23 @@ Each model gets a column in the scorecard. Filter the corpus with
 If a host isn't OpenAI-compatible, add ~6 lines: write an adapter implementing
 `generate(system, user) -> str` in `molbench/models.py`, then register a `provider:`
 branch in `build_model()`. That's the entire contract.
+
+## CI & publishing results
+
+* **CI** (`.github/workflows/ci.yml`) runs on every push: sanity tests + the
+  keyless baseline on Python 3.10 and 3.12. It needs **no API keys** and spends
+  nothing — it validates the harness, not the models.
+* **Leaderboard** ([dbolser.github.io/MolBench](https://dbolser.github.io/MolBench/))
+  is served from `docs/` via GitHub Pages. Publishing a result is a deliberate step:
+
+  ```bash
+  python -m molbench.runner --models baseline anthropic:claude-haiku-4-5   # run
+  python scripts/build_leaderboard.py                                      # render docs/
+  git add docs/ && git commit -m "results: <when/what>" && git push        # publish
+  ```
+
+  Real model results are never produced in CI (that would need secrets + spend),
+  so the published leaderboard only ever shows runs you chose to commit.
 
 ## How it fits together
 
