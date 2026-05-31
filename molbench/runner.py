@@ -18,6 +18,7 @@ import argparse
 import json
 import os
 import pathlib
+import statistics
 import sys
 import time
 from typing import Any
@@ -48,6 +49,11 @@ PRICING: dict[str, tuple[float, float]] = {
     "claude-sonnet-4": (3.0, 15.0),
     "claude-opus-4": (15.0, 75.0),
     "gpt-4o": (2.5, 10.0),
+    # Gemini prices are approximate (they change / vary by tier) — token counts are
+    # exact, so cost just rescales if you correct the rate.
+    "gemini-3.5-flash": (0.3, 2.5),
+    "gemini-2.5-flash": (0.3, 2.5),
+    "gemini-2.0-flash": (0.1, 0.4),
 }
 
 
@@ -178,14 +184,41 @@ def run_mvs_task(model, system: str, task: dict) -> dict[str, Any]:
     return result
 
 
-def run(models: list[str], categories: list[str] | None) -> dict[str, Any]:
+def _aggregate(samples: list[dict]) -> dict[str, Any]:
+    """Reduce N graded samples of one task to mean/std/min/max + a representative.
+
+    LLMs are stochastic, so a single sample is noisy. We score each task as the
+    *mean over N samples* and keep the spread so the report can show mean±std and
+    callers can tell a real gap from sampling noise.
+    """
+    f1s = [s["f1"] for s in samples]
+    ps = [s.get("precision", 0.0) for s in samples]
+    rs = [s.get("recall", 0.0) for s in samples]
+    rep = max(samples, key=lambda s: s["f1"])  # keep the best sample's detail to show
+    return {
+        "f1": round(statistics.fmean(f1s), 4),
+        "f1_std": round(statistics.pstdev(f1s), 4) if len(f1s) > 1 else 0.0,
+        "f1_min": round(min(f1s), 4),
+        "f1_max": round(max(f1s), 4),
+        "precision": round(statistics.fmean(ps), 4),
+        "recall": round(statistics.fmean(rs), 4),
+        "n_samples": len(samples),
+        "samples_f1": [round(x, 4) for x in f1s],
+        "predicted": rep.get("predicted"),
+        "error": rep.get("error"),
+        "schema_errors": rep.get("schema_errors"),
+    }
+
+
+def run(models: list[str], categories: list[str] | None,
+        samples: int = 1) -> dict[str, Any]:
     tasks = load_tasks(categories)
     if not tasks:
         sys.exit("no tasks matched; check tasks/ and --categories")
     prompts = build_system_prompts()
     vlm = StubVLMJudge()
 
-    report: dict[str, Any] = {"models": {}, "n_tasks": len(tasks)}
+    report: dict[str, Any] = {"models": {}, "n_tasks": len(tasks), "samples": samples}
     for spec in models:
         model = build_model(spec)
         per_task = []
@@ -201,12 +234,10 @@ def run(models: list[str], categories: list[str] | None) -> dict[str, Any]:
                                    prompt=task["prompt"])
                 per_task.append({"id": task["id"], "category": cat,
                                  "plan_parsed": err is None, "vlm": judged})
-            elif cat == "mvs":
-                per_task.append({"id": task["id"], "category": cat,
-                                 **run_mvs_task(model, system, task)})
-            else:  # api_calling
-                per_task.append({"id": task["id"], "category": "api_calling",
-                                 **run_api_task(model, system, task)})
+            elif cat in GRADED_CATEGORIES:
+                run_task = run_mvs_task if cat == "mvs" else run_api_task
+                got = [run_task(model, system, task) for _ in range(samples)]
+                per_task.append({"id": task["id"], "category": cat, **_aggregate(got)})
 
         wall_seconds = time.perf_counter() - started
         graded = [t for t in per_task if t["category"] in GRADED_CATEGORIES]
@@ -231,9 +262,10 @@ def _means_by_category(per_task: list[dict]) -> dict[str, dict]:
     """Per-category mean F1 + count, so the leaderboard can break scores down."""
     out: dict[str, dict] = {}
     for cat in GRADED_CATEGORIES:
-        rows = [t for t in per_task if t["category"] == cat]
+        rows = [t["f1"] for t in per_task if t["category"] == cat]
         if rows:
-            out[cat] = {"mean_f1": round(sum(t["f1"] for t in rows) / len(rows), 4),
+            out[cat] = {"mean_f1": round(statistics.fmean(rows), 4),
+                        "std": round(statistics.pstdev(rows), 4) if len(rows) > 1 else 0.0,
                         "n": len(rows)}
     return out
 
@@ -241,7 +273,8 @@ def _means_by_category(per_task: list[dict]) -> dict[str, dict]:
 # --- presentation -----------------------------------------------------------------
 
 def print_scorecard(report: dict[str, Any]) -> None:
-    print(f"\nMolBench scorecard  ({report['n_tasks']} tasks)\n" + "=" * 48)
+    n = report.get("samples", 1)
+    print(f"\nMolBench scorecard  ({report['n_tasks']} tasks, {n} sample(s)/task)\n" + "=" * 52)
     for name, m in report["models"].items():
         u = m["usage"]
         cost = m["cost_usd"]
@@ -250,7 +283,7 @@ def print_scorecard(report: dict[str, Any]) -> None:
                             for c, d in m.get("by_category", {}).items())
         print(f"\n{name}   mean F1 = {m['mean_f1']:.3f}  (over {m['n_graded']} graded tasks)")
         if cat_str:
-            print(f"    by category: {cat_str}")
+            print(f"    by track: {cat_str}")
         if u["calls"]:
             spc = m.get("sec_per_call")
             rt = f"{m.get('wall_seconds', 0):.1f}s total" + (f" ({spc:.2f}s/call)" if spc else "")
@@ -259,7 +292,8 @@ def print_scorecard(report: dict[str, Any]) -> None:
         for t in m["tasks"]:
             if t["category"] in GRADED_CATEGORIES:
                 flag = "  !" + t["error"] if t.get("error") else ""
-                print(f"    {t['id']:<14} [{t['category']:<11}] f1={t['f1']:.2f}  "
+                spread = f" ±{t['f1_std']:.2f}" if t.get("n_samples", 1) > 1 else ""
+                print(f"    {t['id']:<14} [{t['category']:<11}] f1={t['f1']:.2f}{spread}  "
                       f"P={t['precision']:.2f} R={t['recall']:.2f}{flag}")
             else:
                 status = t["vlm"]["status"]
@@ -271,12 +305,14 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--models", nargs="+", default=["baseline"],
                     help="model specs: baseline | anthropic:<id> | openai:<id>")
     ap.add_argument("--categories", nargs="*", default=None,
-                    help="filter tasks, e.g. api_calling visual_rubric")
+                    help="filter tasks, e.g. mvs api_calling visual_rubric")
+    ap.add_argument("--samples", type=int, default=1,
+                    help="runs per task (>1 to average out LLM sampling noise)")
     ap.add_argument("--out", default=str(RESULTS_DIR / "scorecard.json"))
     args = ap.parse_args(argv)
 
     load_dotenv()  # make keys in .env available before any model is built
-    report = run(args.models, args.categories)
+    report = run(args.models, args.categories, samples=args.samples)
     RESULTS_DIR.mkdir(exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(report, indent=2))
     print_scorecard(report)

@@ -7,10 +7,12 @@
       "by_category": {
         "mvs": {
           "mean_f1": 0.0,
+          "std": 0.0,
           "n": 5
         },
         "api_calling": {
           "mean_f1": 0.7175,
+          "std": 0.0884,
           "n": 6
         }
       },
@@ -26,71 +28,46 @@
         {
           "id": "api-001",
           "category": "api_calling",
+          "f1": 0.6667,
+          "f1_std": 0.0,
+          "f1_min": 0.6667,
+          "f1_max": 0.6667,
           "precision": 1.0,
           "recall": 0.5,
-          "f1": 0.6667,
-          "n_ref": 2,
-          "n_pred": 1,
-          "matches": [
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "set_property",
-              "miss": true
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
               "molecule_id": "1mbn"
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-002",
           "category": "api_calling",
+          "f1": 0.6667,
+          "f1_std": 0.0,
+          "f1_min": 0.6667,
+          "f1_max": 0.6667,
           "precision": 1.0,
           "recall": 0.5,
-          "f1": 0.6667,
-          "n_ref": 4,
-          "n_pred": 2,
-          "matches": [
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_visual_style"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            },
-            {
-              "ref_index": 2,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "set_property",
-              "miss": true
-            },
-            {
-              "ref_index": 3,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "focus",
-              "miss": true
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -100,38 +77,27 @@
               "action": "set_visual_style",
               "style": "cartoon"
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-003",
           "category": "api_calling",
+          "f1": 0.8,
+          "f1_std": 0.0,
+          "f1_min": 0.8,
+          "f1_max": 0.8,
           "precision": 1.0,
           "recall": 0.6667,
-          "f1": 0.8,
-          "n_ref": 3,
-          "n_pred": 2,
-          "matches": [
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_visual_style"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            },
-            {
-              "ref_index": 2,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "color",
-              "miss": true
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -141,38 +107,27 @@
               "action": "set_visual_style",
               "style": "cartoon"
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-004",
           "category": "api_calling",
+          "f1": 0.8,
+          "f1_std": 0.0,
+          "f1_min": 0.8,
+          "f1_max": 0.8,
           "precision": 1.0,
           "recall": 0.6667,
-          "f1": 0.8,
-          "n_ref": 3,
-          "n_pred": 2,
-          "matches": [
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_visual_style"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            },
-            {
-              "ref_index": 2,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "color",
-              "miss": true
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -182,38 +137,27 @@
               "action": "set_visual_style",
               "style": "cartoon"
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-005",
           "category": "api_calling",
+          "f1": 0.8,
+          "f1_std": 0.0,
+          "f1_min": 0.8,
+          "f1_max": 0.8,
           "precision": 1.0,
           "recall": 0.6667,
-          "f1": 0.8,
-          "n_ref": 3,
-          "n_pred": 2,
-          "matches": [
-            {
-              "ref_index": 2,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "set_property",
-              "miss": true
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            0.8,
+            0.8,
+            0.8,
+            0.8,
+            0.8
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -224,52 +168,27 @@
               "name": "bg_color",
               "value": "#FFFFFF"
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-006",
           "category": "api_calling",
+          "f1": 0.5714,
+          "f1_std": 0.0,
+          "f1_min": 0.5714,
+          "f1_max": 0.5714,
           "precision": 1.0,
           "recall": 0.4,
-          "f1": 0.5714,
-          "n_ref": 5,
-          "n_pred": 2,
-          "matches": [
-            {
-              "ref_index": 4,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "set_property",
-              "miss": true
-            },
-            {
-              "ref_index": 2,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "set_property",
-              "miss": true
-            },
-            {
-              "ref_index": 3,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "set_property",
-              "miss": true
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            0.5714,
+            0.5714,
+            0.5714,
+            0.5714,
+            0.5714
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -280,168 +199,159 @@
               "name": "spin",
               "value": true
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "mvs-001",
           "category": "mvs",
           "f1": 0.0,
+          "f1_std": 0.0,
+          "f1_min": 0.0,
+          "f1_max": 0.0,
           "precision": 0.0,
           "recall": 0.0,
+          "n_samples": 5,
+          "samples_f1": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "predicted": null,
           "error": "JSON parse error: Extra data: line 1 column 42 (char 41)",
-          "raw": "[{\"action\": \"load\", \"molecule_id\": \"1hho\"}, {\"action\": \"set_visual_style\", \"style\": \"cartoon\"}]"
+          "schema_errors": null
         },
         {
           "id": "mvs-002",
           "category": "mvs",
           "f1": 0.0,
+          "f1_std": 0.0,
+          "f1_min": 0.0,
+          "f1_max": 0.0,
           "precision": 0.0,
           "recall": 0.0,
+          "n_samples": 5,
+          "samples_f1": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "predicted": null,
           "error": "JSON parse error: Extra data: line 1 column 42 (char 41)",
-          "raw": "[{\"action\": \"load\", \"molecule_id\": \"1hho\"}, {\"action\": \"set_visual_style\", \"style\": \"cartoon\"}]"
+          "schema_errors": null
         },
         {
           "id": "mvs-003",
           "category": "mvs",
           "f1": 0.0,
+          "f1_std": 0.0,
+          "f1_min": 0.0,
+          "f1_max": 0.0,
           "precision": 0.0,
           "recall": 0.0,
+          "n_samples": 5,
+          "samples_f1": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "predicted": null,
           "error": "JSON parse error: Extra data: line 1 column 42 (char 41)",
-          "raw": "[{\"action\": \"load\", \"molecule_id\": \"1lyz\"}, {\"action\": \"set_visual_style\", \"style\": \"cartoon\"}]"
+          "schema_errors": null
         },
         {
           "id": "mvs-004",
           "category": "mvs",
           "f1": 0.0,
+          "f1_std": 0.0,
+          "f1_min": 0.0,
+          "f1_max": 0.0,
           "precision": 0.0,
           "recall": 0.0,
+          "n_samples": 5,
+          "samples_f1": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "predicted": null,
           "error": "JSON parse error: Extra data: line 1 column 42 (char 41)",
-          "raw": "[{\"action\": \"load\", \"molecule_id\": \"1hvr\"}, {\"action\": \"set_visual_style\", \"style\": \"cartoon\"}]"
+          "schema_errors": null
         },
         {
           "id": "mvs-005",
           "category": "mvs",
           "f1": 0.0,
+          "f1_std": 0.0,
+          "f1_min": 0.0,
+          "f1_max": 0.0,
           "precision": 0.0,
           "recall": 0.0,
+          "n_samples": 5,
+          "samples_f1": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "predicted": null,
           "error": "JSON parse error: Extra data: line 1 column 42 (char 41)",
-          "raw": "[{\"action\": \"load\", \"molecule_id\": \"4ins\"}, {\"action\": \"set_visual_style\", \"style\": \"molecular-surface\"}]"
-        },
-        {
-          "id": "vis-101",
-          "category": "visual_rubric",
-          "plan_parsed": true,
-          "vlm": {
-            "score": null,
-            "status": "unscored",
-            "criteria": [
-              {
-                "text": "A heme (HEM) group is clearly visible",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The iron (FE) atom is shown",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The proximal histidine (His F8) side chain is shown near the iron",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "An explicit bond/contact is drawn between the His NE2 and the heme iron",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The rest of the protein is de-emphasised (cartoon or faded) so the contact is legible",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              }
-            ]
-          }
-        },
-        {
-          "id": "vis-102",
-          "category": "visual_rubric",
-          "plan_parsed": true,
-          "vlm": {
-            "score": null,
-            "status": "unscored",
-            "criteria": [
-              {
-                "text": "A structure containing both an HIV envelope (gp120/gp41) chain and antibody (Fab/Ig) chains is loaded",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "Antibody and antigen are visually distinguishable (e.g. coloured differently)",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "Interface residues (those in contact across the two partners) are highlighted distinctly",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The camera is focused on the interface region rather than the whole complex",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              }
-            ]
-          }
+          "schema_errors": null
         }
       ]
     },
     "claude-haiku-4-5": {
       "spec": "anthropic:claude-haiku-4-5",
-      "mean_f1": 0.8983,
+      "mean_f1": 0.8898,
       "n_graded": 11,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8428,
+          "mean_f1": 0.8343,
+          "std": 0.1218,
           "n": 5
         },
         "api_calling": {
-          "mean_f1": 0.9444,
+          "mean_f1": 0.9361,
+          "std": 0.1219,
           "n": 6
         }
       },
       "usage": {
-        "input_tokens": 32674,
-        "output_tokens": 3164,
-        "calls": 13
+        "input_tokens": 149470,
+        "output_tokens": 9250,
+        "calls": 55
       },
-      "cost_usd": 0.048494,
-      "wall_seconds": 24.41,
-      "sec_per_call": 1.88,
+      "cost_usd": 0.19572,
+      "wall_seconds": 85.28,
+      "sec_per_call": 1.55,
       "tasks": [
         {
           "id": "api-001",
           "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0,
-          "n_ref": 2,
-          "n_pred": 2,
-          "matches": [
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -452,43 +362,27 @@
               "name": "hide_water",
               "value": true
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-002",
           "category": "api_calling",
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "n_ref": 4,
-          "n_pred": 4,
-          "matches": [
-            {
-              "ref_index": 3,
-              "pred_index": 3,
-              "score": 1.0,
-              "action": "focus"
-            },
-            {
-              "ref_index": 2,
-              "pred_index": 2,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_visual_style"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            }
+          "f1": 0.95,
+          "f1_std": 0.1,
+          "f1_min": 0.75,
+          "f1_max": 1.0,
+          "precision": 0.95,
+          "recall": 0.95,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            0.75,
+            1.0,
+            1.0
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -511,41 +405,31 @@
                 }
               ]
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-003",
           "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0,
-          "n_ref": 3,
-          "n_pred": 3,
-          "matches": [
-            {
-              "ref_index": 2,
-              "pred_index": 2,
-              "score": 1.0,
-              "action": "color"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_visual_style"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
-              "molecule_id": "1HHO"
+              "molecule_id": "1hho"
             },
             {
               "action": "set_visual_style",
@@ -566,37 +450,27 @@
               ],
               "non_selected_color": null
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-004",
           "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0,
-          "n_ref": 3,
-          "n_pred": 3,
-          "matches": [
-            {
-              "ref_index": 2,
-              "pred_index": 2,
-              "score": 1.0,
-              "action": "color"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_visual_style"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -621,38 +495,27 @@
                 }
               ]
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-005",
           "category": "api_calling",
+          "f1": 0.6667,
+          "f1_std": 0.0,
+          "f1_min": 0.6667,
+          "f1_max": 0.6667,
           "precision": 0.6667,
           "recall": 0.6667,
-          "f1": 0.6667,
-          "n_ref": 3,
-          "n_pred": 3,
-          "matches": [
-            {
-              "ref_index": 2,
-              "pred_index": 2,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": null,
-              "score": 0.0,
-              "action": "set_property",
-              "miss": true
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667,
+            0.6667
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -668,49 +531,27 @@
               "name": "bg_color",
               "value": "#FFFFFF"
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "api-006",
           "category": "api_calling",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0,
-          "n_ref": 5,
-          "n_pred": 5,
-          "matches": [
-            {
-              "ref_index": 4,
-              "pred_index": 4,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 3,
-              "pred_index": 3,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 2,
-              "pred_index": 2,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 1,
-              "pred_index": 1,
-              "score": 1.0,
-              "action": "set_property"
-            },
-            {
-              "ref_index": 0,
-              "pred_index": 0,
-              "score": 1.0,
-              "action": "load"
-            }
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
           ],
-          "schema_errors": [],
           "predicted": [
             {
               "action": "load",
@@ -736,18 +577,26 @@
               "name": "spin",
               "value": true
             }
-          ]
+          ],
+          "error": null,
+          "schema_errors": []
         },
         {
           "id": "mvs-001",
           "category": "mvs",
-          "precision": 1.0,
-          "recall": 1.0,
-          "f1": 1.0,
-          "n_ref_paths": 1,
-          "n_pred_paths": 1,
-          "schema_errors": [
-            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...': 'gray'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          "f1": 0.9143,
+          "f1_std": 0.1714,
+          "f1_min": 0.5714,
+          "f1_max": 1.0,
+          "precision": 0.9143,
+          "recall": 0.9143,
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            0.5714,
+            1.0
           ],
           "predicted": {
             "root": {
@@ -801,18 +650,28 @@
                 }
               ]
             }
-          }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...': 'gray'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
         },
         {
           "id": "mvs-002",
           "category": "mvs",
-          "precision": 0.7857,
-          "recall": 0.7857,
-          "f1": 0.7857,
-          "n_ref_paths": 2,
-          "n_pred_paths": 2,
-          "schema_errors": [
-            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'... 'orange'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          "f1": 0.7428,
+          "f1_std": 0.1604,
+          "f1_min": 0.5714,
+          "f1_max": 1.0,
+          "precision": 0.7428,
+          "recall": 0.7428,
+          "n_samples": 5,
+          "samples_f1": [
+            0.7857,
+            0.5714,
+            0.7857,
+            0.5714,
+            1.0
           ],
           "predicted": {
             "root": {
@@ -861,9 +720,7 @@
                             {
                               "kind": "component",
                               "params": {
-                                "selector": {
-                                  "label_comp_id": "HEM"
-                                }
+                                "selector": "ligand"
                               },
                               "children": [
                                 {
@@ -890,18 +747,28 @@
                 }
               ]
             }
-          }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'... 'orange'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
         },
         {
           "id": "mvs-003",
           "category": "mvs",
+          "f1": 1.0,
+          "f1_std": 0.0,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0,
-          "n_ref_paths": 3,
-          "n_pred_paths": 3,
-          "schema_errors": [
-            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...r': 'red'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          "n_samples": 5,
+          "samples_f1": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
           ],
           "predicted": {
             "root": {
@@ -986,18 +853,28 @@
                 }
               ]
             }
-          }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...r': 'red'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
         },
         {
           "id": "mvs-004",
           "category": "mvs",
+          "f1": 0.8571,
+          "f1_std": 0.0,
+          "f1_min": 0.8571,
+          "f1_max": 0.8571,
           "precision": 0.8571,
           "recall": 0.8571,
-          "f1": 0.8571,
-          "n_ref_paths": 3,
-          "n_pred_paths": 3,
-          "schema_errors": [
-            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...nd': 'focus'}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          "n_samples": 5,
+          "samples_f1": [
+            0.8571,
+            0.8571,
+            0.8571,
+            0.8571,
+            0.8571
           ],
           "predicted": {
             "root": {
@@ -1076,18 +953,28 @@
                 }
               ]
             }
-          }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...nd': 'focus'}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
         },
         {
           "id": "mvs-005",
           "category": "mvs",
-          "precision": 0.5714,
-          "recall": 0.5714,
-          "f1": 0.5714,
-          "n_ref_paths": 1,
-          "n_pred_paths": 1,
-          "schema_errors": [
-            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...teelblue'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          "f1": 0.6571,
+          "f1_std": 0.1714,
+          "f1_min": 0.5714,
+          "f1_max": 1.0,
+          "precision": 0.6571,
+          "recall": 0.6571,
+          "n_samples": 5,
+          "samples_f1": [
+            0.5714,
+            0.5714,
+            1.0,
+            0.5714,
+            0.5714
           ],
           "predicted": {
             "root": {
@@ -1114,7 +1001,7 @@
                             {
                               "kind": "component",
                               "params": {
-                                "selector": "protein"
+                                "selector": "polymer"
                               },
                               "children": [
                                 {
@@ -1141,77 +1028,15 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "id": "vis-101",
-          "category": "visual_rubric",
-          "plan_parsed": true,
-          "vlm": {
-            "score": null,
-            "status": "unscored",
-            "criteria": [
-              {
-                "text": "A heme (HEM) group is clearly visible",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The iron (FE) atom is shown",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The proximal histidine (His F8) side chain is shown near the iron",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "An explicit bond/contact is drawn between the His NE2 and the heme iron",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The rest of the protein is de-emphasised (cartoon or faded) so the contact is legible",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              }
-            ]
-          }
-        },
-        {
-          "id": "vis-102",
-          "category": "visual_rubric",
-          "plan_parsed": true,
-          "vlm": {
-            "score": null,
-            "status": "unscored",
-            "criteria": [
-              {
-                "text": "A structure containing both an HIV envelope (gp120/gp41) chain and antibody (Fab/Ig) chains is loaded",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "Antibody and antigen are visually distinguishable (e.g. coloured differently)",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "Interface residues (those in contact across the two partners) are highlighted distinctly",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              },
-              {
-                "text": "The camera is focused on the interface region rather than the whole complex",
-                "passed": null,
-                "reason": "no VLM judge wired"
-              }
-            ]
-          }
+          },
+          "error": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\n  JSON input should be string, bytes or bytearray [type=json_type, input_value={'kind': 'single', 'root'...teelblue'}}]}]}]}]}]}]}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/json_type"
+          ]
         }
       ]
     }
   },
-  "n_tasks": 13
+  "n_tasks": 11,
+  "samples": 5
 }

@@ -17,6 +17,7 @@
   td.rank { color: #888; }
   td.model { font-weight: 600; }
   td.spec { font-family: ui-monospace, monospace; font-size: .85rem; color: #888; }
+  td .pm { color: #999; font-weight: 400; font-size: .85em; }
   tr:first-child td.rank { color: #d4a017; font-weight: 700; }
   footer { margin-top: 2rem; font-size: .85rem; color: #888; }
   code { background: #8882; padding: .1em .35em; border-radius: 4px; }
@@ -25,23 +26,25 @@
 <body>
   <h1>MolBench</h1>
   <p class="sub">Molecular-visualization benchmark for CI assistants &mdash;
-     Component&nbsp;1 (API calling), 13 tasks.</p>
+     11 tasks, 5 sample(s)/task. Ranked by the primary
+     <b>MVS</b> (MolViewSpec scene-tree) track.</p>
   <table>
     <thead>
       <tr>
-        <th>#</th><th>Model</th><th>Mean&nbsp;F1</th><th>Perfect</th>
+        <th>#</th><th>Model</th><th>MVS&nbsp;F1</th><th>API&nbsp;F1</th>
         <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th><th>Speed</th>
       </tr>
     </thead>
     <tbody>
-<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.898</td><td>5 / 11</td><td class='spec'>anthropic:claude-haiku-4-5</td><td>32,674 / 3,164</td><td>$0.0485</td><td>1.88s/call</td></tr>
-<tr><td class='rank'>2</td><td class='model'>baseline-rules</td><td class='f1'>0.391</td><td>0 / 11</td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.834 <span class='pm'>±0.12</span></td><td>0.936 <span class='pm'>±0.12</span></td><td class='spec'>anthropic:claude-haiku-4-5</td><td>149,470 / 9,250</td><td>$0.1957</td><td>1.55s/call</td></tr>
+<tr><td class='rank'>2</td><td class='model'>baseline-rules</td><td class='f1'>0.000</td><td>0.718 <span class='pm'>±0.09</span></td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
     </tbody>
   </table>
   <footer>
-    <p>Higher F1 is better. &ldquo;Perfect&rdquo; counts API tasks scored exactly 1.0.
-       Costs use the published per-token list prices at run time.</p>
-    <p>Reproduce: <code>python -m molbench.runner --models &lt;spec&gt;</code> &middot;
+    <p>Higher F1 is better. <b>MVS&nbsp;F1</b> is the primary, engine-agnostic
+       scene-tree score; <b>API&nbsp;F1</b> is the secondary imperative-PDBeMolstar
+       track. &plusmn; is the spread across tasks. Costs use published list prices.</p>
+    <p>Reproduce: <code>python -m molbench.runner --models &lt;spec&gt; --samples 5</code> &middot;
        <a href="./scorecard.json">raw scorecard.json</a> &middot;
        <a href="https://github.com/dbolser/MolBench">source</a></p>
   </footer>

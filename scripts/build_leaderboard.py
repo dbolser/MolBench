@@ -21,16 +21,22 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 DOCS = REPO / "docs"
 
 
-def perfect_count(model: dict) -> int:
-    return sum(1 for t in model["tasks"]
-               if t.get("category") == "api_calling" and t.get("f1") == 1.0)
+def mvs_f1(m: dict) -> float | None:
+    d = m.get("by_category", {}).get("mvs")
+    return d["mean_f1"] if d else None
+
+
+def track_cell(m: dict, cat: str) -> str:
+    d = m.get("by_category", {}).get(cat)
+    if not d:
+        return "&mdash;"
+    std = f" <span class='pm'>±{d['std']:.2f}</span>" if d.get("std") else ""
+    return f"{d['mean_f1']:.3f}{std}"
 
 
 def runtime_str(m: dict) -> str:
     spc = m.get("sec_per_call")
-    if spc is None:
-        return "&mdash;"
-    return f"{spc:.2f}s/call"
+    return f"{spc:.2f}s/call" if spc is not None else "&mdash;"
 
 
 def row(rank: int, name: str, m: dict) -> str:
@@ -43,8 +49,8 @@ def row(rank: int, name: str, m: dict) -> str:
         "<tr>"
         f"<td class='rank'>{rank}</td>"
         f"<td class='model'>{html.escape(name)}</td>"
-        f"<td class='f1'>{m['mean_f1']:.3f}</td>"
-        f"<td>{perfect_count(m)} / {m['n_graded']}</td>"
+        f"<td class='f1'>{track_cell(m, 'mvs')}</td>"
+        f"<td>{track_cell(m, 'api_calling')}</td>"
         f"<td class='spec'>{html.escape(m.get('spec', ''))}</td>"
         f"<td>{toks}</td>"
         f"<td>{cost_str}</td>"
@@ -56,9 +62,14 @@ def row(rank: int, name: str, m: dict) -> str:
 def build(scorecard_path: pathlib.Path) -> None:
     data = json.loads(scorecard_path.read_text())
     models = data.get("models", {})
-    ranked = sorted(models.items(), key=lambda kv: kv[1]["mean_f1"], reverse=True)
+    # Rank by the primary track (MVS); fall back to overall mean if absent.
+    ranked = sorted(models.items(),
+                    key=lambda kv: (mvs_f1(kv[1]) if mvs_f1(kv[1]) is not None
+                                    else kv[1]["mean_f1"]),
+                    reverse=True)
     rows = "\n".join(row(i + 1, name, m) for i, (name, m) in enumerate(ranked))
     n_tasks = data.get("n_tasks", "?")
+    n_samples = data.get("samples", 1)
 
     page = f"""<!doctype html>
 <html lang="en">
@@ -79,6 +90,7 @@ def build(scorecard_path: pathlib.Path) -> None:
   td.rank {{ color: #888; }}
   td.model {{ font-weight: 600; }}
   td.spec {{ font-family: ui-monospace, monospace; font-size: .85rem; color: #888; }}
+  td .pm {{ color: #999; font-weight: 400; font-size: .85em; }}
   tr:first-child td.rank {{ color: #d4a017; font-weight: 700; }}
   footer {{ margin-top: 2rem; font-size: .85rem; color: #888; }}
   code {{ background: #8882; padding: .1em .35em; border-radius: 4px; }}
@@ -87,11 +99,12 @@ def build(scorecard_path: pathlib.Path) -> None:
 <body>
   <h1>MolBench</h1>
   <p class="sub">Molecular-visualization benchmark for CI assistants &mdash;
-     Component&nbsp;1 (API calling), {n_tasks} tasks.</p>
+     {n_tasks} tasks, {n_samples} sample(s)/task. Ranked by the primary
+     <b>MVS</b> (MolViewSpec scene-tree) track.</p>
   <table>
     <thead>
       <tr>
-        <th>#</th><th>Model</th><th>Mean&nbsp;F1</th><th>Perfect</th>
+        <th>#</th><th>Model</th><th>MVS&nbsp;F1</th><th>API&nbsp;F1</th>
         <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th><th>Speed</th>
       </tr>
     </thead>
@@ -100,9 +113,10 @@ def build(scorecard_path: pathlib.Path) -> None:
     </tbody>
   </table>
   <footer>
-    <p>Higher F1 is better. &ldquo;Perfect&rdquo; counts API tasks scored exactly 1.0.
-       Costs use the published per-token list prices at run time.</p>
-    <p>Reproduce: <code>python -m molbench.runner --models &lt;spec&gt;</code> &middot;
+    <p>Higher F1 is better. <b>MVS&nbsp;F1</b> is the primary, engine-agnostic
+       scene-tree score; <b>API&nbsp;F1</b> is the secondary imperative-PDBeMolstar
+       track. &plusmn; is the spread across tasks. Costs use published list prices.</p>
+    <p>Reproduce: <code>python -m molbench.runner --models &lt;spec&gt; --samples 5</code> &middot;
        <a href="./scorecard.json">raw scorecard.json</a> &middot;
        <a href="https://github.com/dbolser/MolBench">source</a></p>
   </footer>

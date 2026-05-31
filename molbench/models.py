@@ -184,7 +184,11 @@ def build_model(spec: str) -> Model:
         if provider == "openrouter":
             return OpenAIModel(model_id, api_key_env="OPENROUTER_API_KEY",
                                base_url="https://openrouter.ai/api/v1")
+        if provider in ("gemini", "google"):
+            # Google's OpenAI-compatibility layer — same OpenAIModel, different host.
+            return OpenAIModel(model_id, api_key_env="GEMINI_API_KEY",
+                               base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     raise ValueError(
         f"unknown model spec {spec!r}. Use 'baseline', 'anthropic:<id>', "
-        "'openai:<id>', or 'openrouter:<vendor>/<id>'."
+        "'openai:<id>', 'openrouter:<vendor>/<id>', or 'gemini:<id>'."
     )
