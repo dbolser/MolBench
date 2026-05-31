@@ -25,9 +25,21 @@ from typing import Any
 
 
 class Model:
-    """Common interface."""
+    """Common interface.
+
+    Also carries a token-usage tally so the runner can report cost. Subclasses that
+    call a paid API record tokens via ``_record``; the baseline leaves it at zero.
+    """
 
     name: str = "abstract"
+
+    def __init__(self) -> None:
+        self.usage = {"input_tokens": 0, "output_tokens": 0, "calls": 0}
+
+    def _record(self, input_tokens: int, output_tokens: int) -> None:
+        self.usage["input_tokens"] += int(input_tokens or 0)
+        self.usage["output_tokens"] += int(output_tokens or 0)
+        self.usage["calls"] += 1
 
     def generate(self, system: str, user: str) -> str:  # pragma: no cover - interface
         raise NotImplementedError
@@ -89,6 +101,7 @@ class BaselineModel(Model):
 
 class AnthropicModel(Model):
     def __init__(self, model_id: str = "claude-opus-4-8", max_tokens: int = 2000):
+        super().__init__()
         self.name = model_id
         self.model_id = model_id
         self.max_tokens = max_tokens
@@ -102,6 +115,7 @@ class AnthropicModel(Model):
             system=system,
             messages=[{"role": "user", "content": user}],
         )
+        self._record(resp.usage.input_tokens, resp.usage.output_tokens)
         return "".join(b.text for b in resp.content if getattr(b, "type", None) == "text")
 
 
@@ -119,6 +133,7 @@ class OpenAIModel(Model):
                  base_url: str | None = None,
                  base_url_env: str = "OPENAI_BASE_URL",
                  max_tokens: int = 2000):
+        super().__init__()
         self.name = model_id
         self.model_id = model_id
         self.max_tokens = max_tokens
@@ -138,6 +153,8 @@ class OpenAIModel(Model):
                 {"role": "user", "content": user},
             ],
         )
+        if resp.usage:  # OpenAI-compatible hosts may omit usage; guard for it
+            self._record(resp.usage.prompt_tokens, resp.usage.completion_tokens)
         return resp.choices[0].message.content or ""
 
 

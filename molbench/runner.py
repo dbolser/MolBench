@@ -33,6 +33,31 @@ RESULTS_DIR = REPO / "results"
 PROMPT_TEMPLATE = REPO / "prompts" / "system_api.md"
 API_REFERENCE = ROOT / "api_reference.md"
 
+# Published list prices in USD per 1,000,000 tokens (input, output), no caching.
+# Keyed by a substring of the model id. Update as prices change — cost is just
+# tokens x rate, so the token counts in the scorecard stay valid regardless.
+PRICING: dict[str, tuple[float, float]] = {
+    "claude-haiku-4-5": (1.0, 5.0),
+    "claude-sonnet-4": (3.0, 15.0),
+    "claude-opus-4": (15.0, 75.0),
+    "gpt-4o": (2.5, 10.0),
+}
+
+
+def price_for(model_id: str) -> tuple[float, float] | None:
+    for key, rate in PRICING.items():
+        if key in model_id:
+            return rate
+    return None
+
+
+def cost_usd(model_id: str, usage: dict[str, int]) -> float | None:
+    rate = price_for(model_id)
+    if rate is None:
+        return None
+    inp, out = rate
+    return (usage["input_tokens"] * inp + usage["output_tokens"] * out) / 1_000_000
+
 
 # --- environment ------------------------------------------------------------------
 
@@ -146,6 +171,8 @@ def run(models: list[str], categories: list[str] | None) -> dict[str, Any]:
             "spec": spec,
             "mean_f1": round(mean_f1, 4),
             "n_graded": len(graded),
+            "usage": model.usage,
+            "cost_usd": cost_usd(model.name, model.usage),
             "tasks": per_task,
         }
     return report
@@ -156,7 +183,13 @@ def run(models: list[str], categories: list[str] | None) -> dict[str, Any]:
 def print_scorecard(report: dict[str, Any]) -> None:
     print(f"\nMolBench scorecard  ({report['n_tasks']} tasks)\n" + "=" * 48)
     for name, m in report["models"].items():
+        u = m["usage"]
+        cost = m["cost_usd"]
+        cost_str = f"${cost:.4f}" if cost is not None else "n/a (no price set)"
         print(f"\n{name}   mean F1 = {m['mean_f1']:.3f}  (over {m['n_graded']} API tasks)")
+        if u["calls"]:
+            print(f"    tokens: {u['input_tokens']:,} in / {u['output_tokens']:,} out "
+                  f"over {u['calls']} calls   cost: {cost_str}")
         for t in m["tasks"]:
             if t["category"] == "api_calling":
                 flag = "  !" + t["error"] if t.get("error") else ""
