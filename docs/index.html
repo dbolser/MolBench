@@ -27,7 +27,7 @@
 <body>
   <h1>MolBench</h1>
   <p class="sub">Molecular-visualization benchmark for CI assistants &mdash;
-     11 tasks, 5 sample(s)/task. Ranked by the primary
+     53 tasks, 3 sample(s)/task. Ranked by the primary
      <b>MVS</b> (MolViewSpec scene-tree) track.</p>
   <table>
     <thead>
@@ -37,13 +37,13 @@
       </tr>
     </thead>
     <tbody>
-<tr><td class='rank'>1</td><td class='model'>gemini-3.5-flash</td><td class='f1'>0.923 <span class='pm'>±0.07</span></td><td>0.989 <span class='pm'>±0.02</span></td><td class='spec'>gemini:gemini-3.5-flash</td><td>143,445 / 8,500</td><td>$0.0643</td><td>4.48s/call</td></tr>
-<tr><td class='rank'>2</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.898 <span class='pm'>±0.07</span></td><td>0.936 <span class='pm'>±0.12</span></td><td class='spec'>anthropic:claude-haiku-4-5</td><td>149,470 / 9,561</td><td>$0.1973</td><td>1.59s/call</td></tr>
-<tr><td class='rank'>3</td><td class='model'>gpt-5.4-nano</td><td class='f1'>0.709 <span class='pm'>±0.18</span></td><td>0.838 <span class='pm'>±0.14</span></td><td class='spec'>openai:gpt-5.4-nano</td><td>125,775 / 10,381</td><td>$0.0104</td><td>2.66s/call</td></tr>
+<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.912 <span class='pm'>±0.06</span></td><td>0.931 <span class='pm'>±0.12</span></td><td class='spec'>anthropic:claude-haiku-4-5</td><td>263,850 / 39,868</td><td>$0.4632</td><td>1.82s/call</td></tr>
+<tr><td class='rank'>2</td><td class='model'>gemini-3.5-flash</td><td class='f1'>0.886 <span class='pm'>±0.09</span></td><td>0.944 <span class='pm'>±0.12</span></td><td class='spec'>gemini:gemini-3.5-flash</td><td>250,932 / 29,743</td><td>$0.1496</td><td>4.42s/call</td></tr>
+<tr><td class='rank'>3</td><td class='model'>gpt-5.4-nano</td><td class='f1'>0.812 <span class='pm'>±0.15</span></td><td>0.838 <span class='pm'>±0.18</span></td><td class='spec'>openai:gpt-5.4-nano</td><td>230,550 / 36,244</td><td>$0.0260</td><td>3.02s/call</td></tr>
 <tr><td class='rank'>4</td><td class='model'>baseline-rules</td><td class='f1'>0.000</td><td>0.718 <span class='pm'>±0.09</span></td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
     </tbody>
   </table>
-  <h2>Drill-down by skill</h2><p class='sub'>Mean F1 on tasks tagged with each skill (task count in parens). Skills are derived automatically from the reference scene tree.</p><table><thead><tr><th>Skill</th><th>gemini-3.5-flash</th><th>claude-haiku-4-5</th><th>gpt-5.4-nano</th><th>baseline-rules</th></tr></thead><tbody><tr><td class='model'>camera <span class='pm'>(1)</span></td><td class='f1'>0.941</td><td>0.926</td><td>0.849</td><td>0.000</td></tr><tr><td class='model'>color <span class='pm'>(5)</span></td><td class='f1'>0.923</td><td>0.898</td><td>0.709</td><td>0.000</td></tr><tr><td class='model'>load <span class='pm'>(5)</span></td><td class='f1'>0.923</td><td>0.898</td><td>0.709</td><td>0.000</td></tr><tr><td class='model'>multi-component <span class='pm'>(3)</span></td><td class='f1'>0.961</td><td>0.933</td><td>0.715</td><td>0.000</td></tr><tr><td class='model'>representation <span class='pm'>(5)</span></td><td class='f1'>0.923</td><td>0.898</td><td>0.709</td><td>0.000</td></tr><tr><td class='model'>selection <span class='pm'>(1)</span></td><td class='f1'>0.985</td><td class='f1'>0.985</td><td>0.406</td><td>0.000</td></tr><tr><td class='model'>surface <span class='pm'>(1)</span></td><td class='f1'>0.778</td><td class='f1'>0.778</td><td class='f1'>0.778</td><td>0.000</td></tr></tbody></table>
+  <h2>Drill-down by skill</h2><p class='sub'>Mean F1 on tasks tagged with each skill (task count in parens). Skills are derived automatically from the reference scene tree.</p><table><thead><tr><th>Skill</th><th>claude-haiku-4-5</th><th>gemini-3.5-flash</th><th>gpt-5.4-nano</th><th>baseline-rules</th></tr></thead><tbody><tr><td class='model'>camera <span class='pm'>(7)</span></td><td>0.972</td><td class='f1'>0.975</td><td>0.898</td><td>0.000</td></tr><tr><td class='model'>color <span class='pm'>(47)</span></td><td class='f1'>0.912</td><td>0.886</td><td>0.812</td><td>0.000</td></tr><tr><td class='model'>load <span class='pm'>(47)</span></td><td class='f1'>0.912</td><td>0.886</td><td>0.812</td><td>0.000</td></tr><tr><td class='model'>multi-component <span class='pm'>(33)</span></td><td class='f1'>0.929</td><td>0.921</td><td>0.850</td><td>0.000</td></tr><tr><td class='model'>representation <span class='pm'>(47)</span></td><td class='f1'>0.912</td><td>0.886</td><td>0.812</td><td>0.000</td></tr><tr><td class='model'>selection <span class='pm'>(13)</span></td><td class='f1'>0.926</td><td>0.889</td><td>0.784</td><td>0.000</td></tr><tr><td class='model'>surface <span class='pm'>(7)</span></td><td class='f1'>0.831</td><td>0.788</td><td>0.651</td><td>0.000</td></tr></tbody></table>
   <footer>
     <p>Higher F1 is better. <b>MVS&nbsp;F1</b> is the primary, engine-agnostic
        scene-tree score; <b>API&nbsp;F1</b> is the secondary imperative-PDBeMolstar
