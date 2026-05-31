@@ -1,0 +1,14 @@
+{
+  "id": "api-002",
+  "category": "api_calling",
+  "title": "Cartoon protein, focus the inhibitor",
+  "prompt": "Show HIV-1 protease (PDB 1HVR) as a cartoon, hide the waters, and centre the view on the bound inhibitor.",
+  "reference": [
+    {"action": "load", "molecule_id": "1hvr"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "set_property", "name": "hide_water", "value": true},
+    {"action": "focus", "data": [{"label_comp_id": "XK2"}]}
+  ],
+  "skills": ["load", "global-style", "hide-component", "focus-ligand"],
+  "notes": "1HVR ligand is the cyclic urea inhibitor XK2. Tolerant grading accepts focusing the heteroatom by comp id."
+}

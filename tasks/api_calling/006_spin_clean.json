@@ -1,0 +1,15 @@
+{
+  "id": "api-006",
+  "category": "api_calling",
+  "title": "Presentation view",
+  "prompt": "Show insulin (4INS), hide the waters and the heteroatoms, set glossy lighting, and make it slowly spin.",
+  "reference": [
+    {"action": "load", "molecule_id": "4ins"},
+    {"action": "set_property", "name": "hide_water", "value": true},
+    {"action": "set_property", "name": "hide_heteroatoms", "value": true},
+    {"action": "set_property", "name": "lighting", "value": "glossy"},
+    {"action": "set_property", "name": "spin", "value": true}
+  ],
+  "skills": ["load", "hide-component", "lighting", "spin"],
+  "notes": "Several independent property toggles; order among them does not matter to the grader."
+}

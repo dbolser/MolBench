@@ -1,0 +1,17 @@
+{
+  "id": "vis-102",
+  "category": "visual_rubric",
+  "title": "Antibody-antigen interface",
+  "prompt": "Load a structure of an HIV envelope protein in complex with a human broadly-neutralising antibody, and highlight the residues at the interface between them.",
+  "rubric": [
+    "A structure containing both an HIV envelope (gp120/gp41) chain and antibody (Fab/Ig) chains is loaded",
+    "Antibody and antigen are visually distinguishable (e.g. coloured differently)",
+    "Interface residues (those in contact across the two partners) are highlighted distinctly",
+    "The camera is focused on the interface region rather than the whole complex"
+  ],
+  "reference_hint": [
+    {"action": "load", "molecule_id": "3ngb"},
+    {"action": "set_visual_style", "style": "cartoon"}
+  ],
+  "notes": "Open-ended: many PDB entries satisfy this (e.g. 3NGB = gp120 + VRC01). Tests whether the model can pick a real, appropriate complex and reason about an interface. VLM-graded."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "api-004",
+  "category": "api_calling",
+  "title": "Active-site residues as surface",
+  "prompt": "Load hen egg-white lysozyme (1LYZ), keep the backbone as cartoon, and render the two catalytic residues Glu35 and Asp52 on chain A as a molecular surface.",
+  "reference": [
+    {"action": "load", "molecule_id": "1lyz"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"auth_asym_id": "A", "residue_number": 35, "representation": "molecular-surface"},
+      {"auth_asym_id": "A", "residue_number": 52, "representation": "molecular-surface"}
+    ]}
+  ],
+  "skills": ["load", "global-style", "select-by-residue", "per-selection-representation"],
+  "notes": "Tests domain knowledge: lysozyme catalytic dyad is Glu35/Asp52. Grader gives partial credit if the model gets the chain/residues but the wrong surface flavour."
+}

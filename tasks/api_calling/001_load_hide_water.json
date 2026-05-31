@@ -1,0 +1,12 @@
+{
+  "id": "api-001",
+  "category": "api_calling",
+  "title": "Load a structure and hide waters",
+  "prompt": "Load the myoglobin structure 1MBN and hide all the water molecules.",
+  "reference": [
+    {"action": "load", "molecule_id": "1mbn"},
+    {"action": "set_property", "name": "hide_water", "value": true}
+  ],
+  "skills": ["load", "hide-component"],
+  "notes": "Baseline sanity task: explicit PDB id + a single boolean toggle."
+}

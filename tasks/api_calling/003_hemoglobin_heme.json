@@ -1,0 +1,15 @@
+{
+  "id": "api-003",
+  "category": "api_calling",
+  "title": "Highlight the heme groups",
+  "prompt": "Open haemoglobin (1HHO) and show the heme groups in ball-and-stick coloured orange, with the rest as cartoon.",
+  "reference": [
+    {"action": "load", "molecule_id": "1hho"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"label_comp_id": "HEM", "representation": "ball-and-stick", "color": {"r": 255, "g": 165, "b": 0}}
+    ]}
+  ],
+  "skills": ["load", "global-style", "select-by-ligand", "per-selection-representation", "color"],
+  "notes": "Heme is the HEM ligand. Tests selecting by label_comp_id and attaching both a representation and colour to that selection."
+}

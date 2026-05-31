@@ -1,0 +1,23 @@
+{
+  "id": "vis-101",
+  "category": "visual_rubric",
+  "title": "Key proximal-histidine bond to heme iron",
+  "prompt": "In haemoglobin, show the key bond between the heme iron and the proximal histidine that holds the heme in place.",
+  "rubric": [
+    "A heme (HEM) group is clearly visible",
+    "The iron (FE) atom is shown",
+    "The proximal histidine (His F8) side chain is shown near the iron",
+    "An explicit bond/contact is drawn between the His NE2 and the heme iron",
+    "The rest of the protein is de-emphasised (cartoon or faded) so the contact is legible"
+  ],
+  "reference_hint": [
+    {"action": "load", "molecule_id": "1hho"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"label_comp_id": "HEM", "representation": "ball-and-stick"},
+      {"auth_asym_id": "A", "residue_number": 87, "sideChain": true, "representation": "ball-and-stick"}
+    ]},
+    {"action": "focus", "data": [{"label_comp_id": "HEM"}]}
+  ],
+  "notes": "Graded by a VLM against the rubric, not by action match. reference_hint is one acceptable scene for calibration; His F8 is auth residue 87 on the alpha chain of 1HHO."
+}

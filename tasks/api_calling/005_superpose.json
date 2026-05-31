@@ -1,0 +1,13 @@
+{
+  "id": "api-005",
+  "category": "api_calling",
+  "title": "Superpose / align view",
+  "prompt": "Load the deoxy-haemoglobin structure 2HHB and turn on the PDBe superposition view so it is structurally aligned, then give it a white background.",
+  "reference": [
+    {"action": "load", "molecule_id": "2hhb"},
+    {"action": "set_property", "name": "superposition", "value": true},
+    {"action": "set_property", "name": "bg_color", "value": "#FFFFFF"}
+  ],
+  "skills": ["load", "superposition", "set-background"],
+  "notes": "ipymolstar exposes structural alignment via the boolean `superposition` trait. Colour comparison is tolerant of hex case and a missing leading '#'."
+}
