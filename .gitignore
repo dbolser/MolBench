@@ -20,3 +20,6 @@ results/
 .DS_Store
 .idea/
 .vscode/
+
+# Local research docs (PDFs never published to Pages)
+*.pdf

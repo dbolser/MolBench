@@ -19,9 +19,11 @@ import json
 import os
 import pathlib
 import sys
+import time
 from typing import Any
 
 from . import grader as grader_mod
+from . import mvs as mvs_mod
 from . import schema
 from .models import build_model
 from .vlm_grader import StubVLMJudge
@@ -30,8 +32,13 @@ ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
 TASKS_DIR = REPO / "tasks"
 RESULTS_DIR = REPO / "results"
-PROMPT_TEMPLATE = REPO / "prompts" / "system_api.md"
+PROMPT_API = REPO / "prompts" / "system_api.md"
+PROMPT_MVS = REPO / "prompts" / "system_mvs.md"
 API_REFERENCE = ROOT / "api_reference.md"
+MVS_REFERENCE = ROOT / "mvs_reference.md"
+
+# Categories whose tasks produce a numeric F1 (vs. visual_rubric, which is VLM-judged).
+GRADED_CATEGORIES = ("mvs", "api_calling")
 
 # Published list prices in USD per 1,000,000 tokens (input, output), no caching.
 # Keyed by a substring of the model id. Update as prices change — cost is just
@@ -91,14 +98,18 @@ def load_tasks(categories: list[str] | None) -> list[dict[str, Any]]:
     return tasks
 
 
-def build_system_prompt() -> str:
-    """Assemble the model context: instructions + vendored API ref + JSON schema."""
-    template = PROMPT_TEMPLATE.read_text()
-    api_ref = API_REFERENCE.read_text()
-    json_schema = json.dumps(schema.build_json_schema(), indent=2)
-    return (template
-            .replace("{{API_REFERENCE}}", api_ref)
-            .replace("{{JSON_SCHEMA}}", json_schema))
+def build_system_prompts() -> dict[str, str]:
+    """One assembled system prompt per task category.
+
+    Each target speaks a different IR, so each gets its own instructions + vendored
+    reference: the imperative PDBeMolstar API for 'api_calling', the MolViewSpec
+    scene tree for 'mvs' (also used to elicit a plan for 'visual_rubric').
+    """
+    api_prompt = (PROMPT_API.read_text()
+                  .replace("{{API_REFERENCE}}", API_REFERENCE.read_text())
+                  .replace("{{JSON_SCHEMA}}", json.dumps(schema.build_json_schema(), indent=2)))
+    mvs_prompt = PROMPT_MVS.read_text().replace("{{MVS_REFERENCE}}", MVS_REFERENCE.read_text())
+    return {"api_calling": api_prompt, "mvs": mvs_prompt, "visual_rubric": mvs_prompt}
 
 
 # --- prediction parsing -----------------------------------------------------------
@@ -122,6 +133,24 @@ def extract_actions(raw: str) -> tuple[Any, str | None]:
         return None, f"JSON parse error: {e}"
 
 
+def extract_json_object(raw: str) -> tuple[Any, str | None]:
+    """Pull a single JSON object (e.g. an MVS state tree) out of model text."""
+    raw = raw.strip()
+    if raw.startswith("```"):
+        raw = raw.split("```", 2)[1]
+        if raw.startswith("json"):
+            raw = raw[4:]
+    try:
+        start = raw.index("{")
+        end = raw.rindex("}") + 1
+    except ValueError:
+        return None, "no JSON object found in output"
+    try:
+        return json.loads(raw[start:end]), None
+    except json.JSONDecodeError as e:
+        return None, f"JSON parse error: {e}"
+
+
 # --- running ----------------------------------------------------------------------
 
 def run_api_task(model, system: str, task: dict) -> dict[str, Any]:
@@ -137,45 +166,76 @@ def run_api_task(model, system: str, task: dict) -> dict[str, Any]:
     return result
 
 
+def run_mvs_task(model, system: str, task: dict) -> dict[str, Any]:
+    raw = model.generate(system, task["prompt"])
+    tree, err = extract_json_object(raw)
+    if err:
+        return {"f1": 0.0, "precision": 0.0, "recall": 0.0,
+                "error": err, "raw": raw[:500]}
+    result = mvs_mod.grade_mvs(task["reference_mvs"], tree)
+    result["schema_errors"] = mvs_mod.validate_mvs(tree)
+    result["predicted"] = tree
+    return result
+
+
 def run(models: list[str], categories: list[str] | None) -> dict[str, Any]:
     tasks = load_tasks(categories)
     if not tasks:
         sys.exit("no tasks matched; check tasks/ and --categories")
-    system = build_system_prompt()
+    prompts = build_system_prompts()
     vlm = StubVLMJudge()
 
     report: dict[str, Any] = {"models": {}, "n_tasks": len(tasks)}
     for spec in models:
         model = build_model(spec)
         per_task = []
+        started = time.perf_counter()
         for task in tasks:
-            if task.get("category") == "visual_rubric":
-                # Component 2: we still ask the model for a plan (useful signal),
-                # but scoring needs a render + VLM judge (stubbed here).
-                raw = model.generate(system, task["prompt"])
-                actions, err = extract_actions(raw)
+            cat = task.get("category")
+            system = prompts.get(cat, prompts["mvs"])
+            if cat == "visual_rubric":
+                # Component 2: we still elicit a plan (useful signal), but scoring
+                # needs a render + VLM judge (stubbed here).
+                _, err = extract_json_object(model.generate(system, task["prompt"]))
                 judged = vlm.score(image_path="", rubric=task.get("rubric", []),
                                    prompt=task["prompt"])
-                per_task.append({
-                    "id": task["id"], "category": "visual_rubric",
-                    "plan_parsed": err is None, "vlm": judged,
-                    "predicted": actions,
-                })
-            else:
-                res = run_api_task(model, system, task)
-                per_task.append({"id": task["id"], "category": "api_calling", **res})
+                per_task.append({"id": task["id"], "category": cat,
+                                 "plan_parsed": err is None, "vlm": judged})
+            elif cat == "mvs":
+                per_task.append({"id": task["id"], "category": cat,
+                                 **run_mvs_task(model, system, task)})
+            else:  # api_calling
+                per_task.append({"id": task["id"], "category": "api_calling",
+                                 **run_api_task(model, system, task)})
 
-        graded = [t for t in per_task if t["category"] == "api_calling"]
+        wall_seconds = time.perf_counter() - started
+        graded = [t for t in per_task if t["category"] in GRADED_CATEGORIES]
         mean_f1 = sum(t["f1"] for t in graded) / len(graded) if graded else 0.0
+        by_cat = _means_by_category(per_task)
+        calls = model.usage.get("calls", 0)
         report["models"][model.name] = {
             "spec": spec,
             "mean_f1": round(mean_f1, 4),
             "n_graded": len(graded),
+            "by_category": by_cat,
             "usage": model.usage,
             "cost_usd": cost_usd(model.name, model.usage),
+            "wall_seconds": round(wall_seconds, 2),
+            "sec_per_call": round(wall_seconds / calls, 2) if calls else None,
             "tasks": per_task,
         }
     return report
+
+
+def _means_by_category(per_task: list[dict]) -> dict[str, dict]:
+    """Per-category mean F1 + count, so the leaderboard can break scores down."""
+    out: dict[str, dict] = {}
+    for cat in GRADED_CATEGORIES:
+        rows = [t for t in per_task if t["category"] == cat]
+        if rows:
+            out[cat] = {"mean_f1": round(sum(t["f1"] for t in rows) / len(rows), 4),
+                        "n": len(rows)}
+    return out
 
 
 # --- presentation -----------------------------------------------------------------
@@ -186,14 +246,20 @@ def print_scorecard(report: dict[str, Any]) -> None:
         u = m["usage"]
         cost = m["cost_usd"]
         cost_str = f"${cost:.4f}" if cost is not None else "n/a (no price set)"
-        print(f"\n{name}   mean F1 = {m['mean_f1']:.3f}  (over {m['n_graded']} API tasks)")
+        cat_str = "  ".join(f"{c}={d['mean_f1']:.3f}({d['n']})"
+                            for c, d in m.get("by_category", {}).items())
+        print(f"\n{name}   mean F1 = {m['mean_f1']:.3f}  (over {m['n_graded']} graded tasks)")
+        if cat_str:
+            print(f"    by category: {cat_str}")
         if u["calls"]:
+            spc = m.get("sec_per_call")
+            rt = f"{m.get('wall_seconds', 0):.1f}s total" + (f" ({spc:.2f}s/call)" if spc else "")
             print(f"    tokens: {u['input_tokens']:,} in / {u['output_tokens']:,} out "
-                  f"over {u['calls']} calls   cost: {cost_str}")
+                  f"over {u['calls']} calls   cost: {cost_str}   runtime: {rt}")
         for t in m["tasks"]:
-            if t["category"] == "api_calling":
+            if t["category"] in GRADED_CATEGORIES:
                 flag = "  !" + t["error"] if t.get("error") else ""
-                print(f"    {t['id']:<14} f1={t['f1']:.2f}  "
+                print(f"    {t['id']:<14} [{t['category']:<11}] f1={t['f1']:.2f}  "
                       f"P={t['precision']:.2f} R={t['recall']:.2f}{flag}")
             else:
                 status = t["vlm"]["status"]

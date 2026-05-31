@@ -10,12 +10,20 @@ assistants). It measures whether a model can turn natural-language requests
 against a real molecular viewer — [`ipymolstar`](https://github.com/molstar/ipymolstar)'s
 `PDBeMolstar` (Mol\*).
 
-## Two components
+## Tracks
 
-| Component | Tasks | How it's graded |
-|---|---|---|
-| **1. API calling** | `tasks/api_calling/*.json` | **Deterministic, no browser.** The model emits a JSON list of *canonical actions*; we compare it to a reference with a tolerant, field-aware grader (precision / recall / F1). |
-| **2. Visual rubric** | `tasks/visual_rubric/*.json` | **VLM-judged.** Tasks like "show the key H-bond in haemoglobin" are rendered, then a vision model scores the image against a rubric. The render+judge interface is scaffolded (`vlm_grader.py`, `adapter.py`); a stub keeps the harness runnable today. |
+| Track | Tasks | What the model emits | How it's graded |
+|---|---|---|---|
+| **MVS scene tree** (primary) | `tasks/mvs/*.json` | A [MolViewSpec](https://molstar.org/mol-view-spec/) state tree as JSON | **Deterministic, no browser.** Tree-matching: precision/recall/F1 over root-to-leaf paths, tolerant of child order, default params, and equivalent selectors (`molbench/mvs.py`). Engine-agnostic — tests *visualization* competence, not one viewer's quirks. |
+| **API calling** (secondary) | `tasks/api_calling/*.json` | A list of imperative `PDBeMolstar` *canonical actions* | Field-aware list matching (`molbench/grader.py`). Tests whether a model can drive *this specific widget*. |
+| **Visual rubric** (Component 2) | `tasks/visual_rubric/*.json` | A scene plan (scored later from a render) | **VLM-judged.** Rendered to PNG, then a vision model scores it against a rubric. Interface scaffolded (`vlm_grader.py`); a stub keeps the harness runnable today. |
+
+The **MVS track is the primary target** (v0.2). MVS separates *what the scene is*
+from *which engine draws it*, so the same answer key works for Mol\*, ipymolstar,
+or any MVS-aware viewer — and curated MVS corpora (MolViewStories, Proteopedia)
+become a path to scaling the benchmark to hundreds of tasks. Reference scenes are
+authored with the official `molviewspec` builder (`scripts/author_mvs_tasks.py`),
+so ground truth is correct by construction.
 
 ## Quick start (zero credentials)
 

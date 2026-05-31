@@ -26,6 +26,13 @@ def perfect_count(model: dict) -> int:
                if t.get("category") == "api_calling" and t.get("f1") == 1.0)
 
 
+def runtime_str(m: dict) -> str:
+    spc = m.get("sec_per_call")
+    if spc is None:
+        return "&mdash;"
+    return f"{spc:.2f}s/call"
+
+
 def row(rank: int, name: str, m: dict) -> str:
     u = m.get("usage", {}) or {}
     cost = m.get("cost_usd")
@@ -41,6 +48,7 @@ def row(rank: int, name: str, m: dict) -> str:
         f"<td class='spec'>{html.escape(m.get('spec', ''))}</td>"
         f"<td>{toks}</td>"
         f"<td>{cost_str}</td>"
+        f"<td>{runtime_str(m)}</td>"
         "</tr>"
     )
 
@@ -84,7 +92,7 @@ def build(scorecard_path: pathlib.Path) -> None:
     <thead>
       <tr>
         <th>#</th><th>Model</th><th>Mean&nbsp;F1</th><th>Perfect</th>
-        <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th>
+        <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th><th>Speed</th>
       </tr>
     </thead>
     <tbody>

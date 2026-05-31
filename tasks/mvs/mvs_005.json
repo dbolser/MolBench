@@ -1,0 +1,63 @@
+{
+  "id": "mvs-005",
+  "category": "mvs",
+  "title": "Surface representation",
+  "prompt": "Load insulin (4INS) and render the protein as a steel-blue molecular surface.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/4ins.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface",
+                          "surface_type": "molecular"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "steelblue"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "skills": [
+    "representation-surface",
+    "color"
+  ],
+  "notes": "Uses the 'surface' representation type."
+}

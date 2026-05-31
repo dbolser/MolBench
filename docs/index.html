@@ -25,17 +25,17 @@
 <body>
   <h1>MolBench</h1>
   <p class="sub">Molecular-visualization benchmark for CI assistants &mdash;
-     Component&nbsp;1 (API calling), 8 tasks.</p>
+     Component&nbsp;1 (API calling), 13 tasks.</p>
   <table>
     <thead>
       <tr>
         <th>#</th><th>Model</th><th>Mean&nbsp;F1</th><th>Perfect</th>
-        <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th>
+        <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th><th>Speed</th>
       </tr>
     </thead>
     <tbody>
-<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.944</td><td>5 / 6</td><td class='spec'>anthropic:claude-haiku-4-5</td><td>30,576 / 1,238</td><td>$0.0368</td></tr>
-<tr><td class='rank'>2</td><td class='model'>baseline-rules</td><td class='f1'>0.718</td><td>0 / 6</td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.898</td><td>5 / 11</td><td class='spec'>anthropic:claude-haiku-4-5</td><td>32,674 / 3,164</td><td>$0.0485</td><td>1.88s/call</td></tr>
+<tr><td class='rank'>2</td><td class='model'>baseline-rules</td><td class='f1'>0.391</td><td>0 / 11</td><td class='spec'>baseline</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
     </tbody>
   </table>
   <footer>
