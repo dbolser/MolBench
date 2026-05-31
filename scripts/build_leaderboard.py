@@ -15,10 +15,66 @@ from __future__ import annotations
 import html
 import json
 import pathlib
+import statistics
 import sys
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 DOCS = REPO / "docs"
+TASKS_DIR = REPO / "tasks"
+
+# How a task's `source` maps to a difficulty regime, ordered easy -> hard.
+REGIMES = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
+
+
+def _regime_of(source: str) -> str:
+    if source in ("generated", "curated"):
+        return "Translation"
+    if source == "grounded":
+        return "Grounded (ligand/SS)"
+    return "Clinical (SIFTS/ClinVar)"
+
+
+def _task_regimes() -> dict[str, str]:
+    out: dict[str, str] = {}
+    for f in TASKS_DIR.rglob("*.json"):
+        try:
+            t = json.loads(f.read_text())
+        except (ValueError, OSError):
+            continue
+        if t.get("category") == "mvs":
+            out[t["id"]] = _regime_of(t.get("source", "curated"))
+    return out
+
+
+def regime_table(ranked: list) -> str:
+    """Mean F1 per difficulty regime — shows the gradient and where models separate."""
+    reg = _task_regimes()
+    if not reg:
+        return ""
+    head = "".join(f"<th>{html.escape(n)}</th>" for n, m in ranked if m.get("by_category", {}).get("mvs"))
+    cols = [(n, m) for n, m in ranked if m.get("by_category", {}).get("mvs")]
+    body = []
+    for rg in REGIMES:
+        n_tasks = sum(1 for v in reg.values() if v == rg)
+        if not n_tasks:
+            continue
+        vals = {}
+        for n, m in cols:
+            fs = [t["f1"] for t in m["tasks"] if reg.get(t["id"]) == rg]
+            vals[n] = statistics.fmean(fs) if fs else None
+        best = max((v for v in vals.values() if v is not None), default=None)
+        cells = []
+        for n, _ in cols:
+            v = vals[n]
+            cells.append("<td>&mdash;</td>" if v is None else
+                         f"<td{' class=\"f1\"' if v == best else ''}>{v:.3f}</td>")
+        body.append(f"<tr><td class='model'>{rg} <span class='pm'>({n_tasks})</span></td>{''.join(cells)}</tr>")
+    return (
+        "<h2>Difficulty gradient by task regime</h2>"
+        "<p class='sub'>Mean F1 by how the answer key is grounded, easy to hard. "
+        "Harder regimes separate the models more &mdash; the property a benchmark wants.</p>"
+        f"<table><thead><tr><th>Regime</th>{head}</tr></thead><tbody>{''.join(body)}</tbody></table>"
+    )
 
 
 def mvs_f1(m: dict) -> float | None:
@@ -104,6 +160,7 @@ def build(scorecard_path: pathlib.Path) -> None:
     rows = "\n".join(row(i + 1, name, m) for i, (name, m) in enumerate(ranked))
     n_tasks = data.get("n_tasks", "?")
     n_samples = data.get("samples", 1)
+    regimes = regime_table(ranked)
     drill = drilldown(ranked)
 
     page = f"""<!doctype html>
@@ -148,6 +205,7 @@ def build(scorecard_path: pathlib.Path) -> None:
 {rows}
     </tbody>
   </table>
+  {regimes}
   {drill}
   <footer>
     <p>Higher F1 is better. <b>MVS&nbsp;F1</b> is the primary, engine-agnostic
