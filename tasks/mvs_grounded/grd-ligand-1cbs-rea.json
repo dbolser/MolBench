@@ -1,0 +1,92 @@
+{
+  "id": "grd-ligand-1cbs-rea",
+  "category": "mvs",
+  "source": "grounded",
+  "pdb": "1cbs",
+  "prompt": "Load 1CBS; show the protein as a grey cartoon and the REA as orange ball-and-stick.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1cbs.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_comp_id": "REA"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "orange"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ],
+  "provenance": {
+    "ligand": "REA"
+  }
+}

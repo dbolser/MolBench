@@ -1,0 +1,212 @@
+{
+  "id": "grd-disulfide-4ins",
+  "category": "mvs",
+  "source": "grounded",
+  "pdb": "4ins",
+  "prompt": "Load 4INS; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/4ins.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 6
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 11
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 7
+                        },
+                        {
+                          "auth_asym_id": "B",
+                          "auth_seq_id": 7
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 20
+                        },
+                        {
+                          "auth_asym_id": "B",
+                          "auth_seq_id": 19
+                        },
+                        {
+                          "auth_asym_id": "C",
+                          "auth_seq_id": 6
+                        },
+                        {
+                          "auth_asym_id": "C",
+                          "auth_seq_id": 11
+                        },
+                        {
+                          "auth_asym_id": "C",
+                          "auth_seq_id": 7
+                        },
+                        {
+                          "auth_asym_id": "D",
+                          "auth_seq_id": 7
+                        },
+                        {
+                          "auth_asym_id": "C",
+                          "auth_seq_id": 20
+                        },
+                        {
+                          "auth_asym_id": "D",
+                          "auth_seq_id": 19
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "yellow"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ],
+  "provenance": {
+    "disulfides": [
+      [
+        [
+          "A",
+          6,
+          "CYS"
+        ],
+        [
+          "A",
+          11,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "A",
+          7,
+          "CYS"
+        ],
+        [
+          "B",
+          7,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "A",
+          20,
+          "CYS"
+        ],
+        [
+          "B",
+          19,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "C",
+          6,
+          "CYS"
+        ],
+        [
+          "C",
+          11,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "C",
+          7,
+          "CYS"
+        ],
+        [
+          "D",
+          7,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "C",
+          20,
+          "CYS"
+        ],
+        [
+          "D",
+          19,
+          "CYS"
+        ]
+      ]
+    ]
+  }
+}

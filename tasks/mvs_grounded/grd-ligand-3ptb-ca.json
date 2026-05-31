@@ -1,0 +1,92 @@
+{
+  "id": "grd-ligand-3ptb-ca",
+  "category": "mvs",
+  "source": "grounded",
+  "pdb": "3ptb",
+  "prompt": "Load 3PTB; show the protein as a grey cartoon and the CA as orange ball-and-stick.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/3ptb.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_comp_id": "CA"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "orange"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ],
+  "provenance": {
+    "ligand": "CA"
+  }
+}

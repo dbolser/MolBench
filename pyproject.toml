@@ -12,9 +12,9 @@ dependencies = []
 [project.optional-dependencies]
 anthropic = ["anthropic>=0.40"]
 openai = ["openai>=1.0"]
-# 'authoring' builds MVS reference scenes (scripts/author_mvs_tasks.py) and enables
-# deep MVS schema validation in the grader.
-authoring = ["molviewspec>=1.8"]
+# 'authoring' builds MVS reference scenes (scripts/author_mvs_tasks.py), grounds
+# Tier-2 tasks in real structures (gemmi), and enables deep MVS schema validation.
+authoring = ["molviewspec>=1.8", "gemmi>=0.6"]
 # 'execute' pulls in the real viewer so reference answers can be run/rendered headlessly.
 execute = ["ipymolstar>=0.0.9", "molviewspec>=1.8", "anywidget", "playwright"]
 all = ["anthropic>=0.40", "openai>=1.0", "molviewspec>=1.8", "ipymolstar>=0.0.9", "anywidget"]

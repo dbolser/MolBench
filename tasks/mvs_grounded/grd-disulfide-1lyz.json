@@ -1,0 +1,172 @@
+{
+  "id": "grd-disulfide-1lyz",
+  "category": "mvs",
+  "source": "grounded",
+  "pdb": "1lyz",
+  "prompt": "Load 1LYZ; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1lyz.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": [
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 6
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 127
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 30
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 115
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 64
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 80
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 76
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 94
+                        }
+                      ]
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "yellow"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ],
+  "provenance": {
+    "disulfides": [
+      [
+        [
+          "A",
+          6,
+          "CYS"
+        ],
+        [
+          "A",
+          127,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "A",
+          30,
+          "CYS"
+        ],
+        [
+          "A",
+          115,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "A",
+          64,
+          "CYS"
+        ],
+        [
+          "A",
+          80,
+          "CYS"
+        ]
+      ],
+      [
+        [
+          "A",
+          76,
+          "CYS"
+        ],
+        [
+          "A",
+          94,
+          "CYS"
+        ]
+      ]
+    ]
+  }
+}
