@@ -106,14 +106,30 @@ class AnthropicModel(Model):
 
 
 class OpenAIModel(Model):
-    def __init__(self, model_id: str = "gpt-4o", max_tokens: int = 2000):
+    """Talks to any OpenAI-compatible endpoint.
+
+    OpenAI, OpenRouter, Together, Groq, DeepInfra and local Ollama/vLLM all expose
+    the same ``/chat/completions`` wire format, so we cover them all with one class
+    by varying ``base_url`` and which env var holds the key. That's why adding e.g.
+    Qwen-via-OpenRouter is a spec string, not a new adapter.
+    """
+
+    def __init__(self, model_id: str = "gpt-4o", *,
+                 api_key_env: str = "OPENAI_API_KEY",
+                 base_url: str | None = None,
+                 base_url_env: str = "OPENAI_BASE_URL",
+                 max_tokens: int = 2000):
         self.name = model_id
         self.model_id = model_id
         self.max_tokens = max_tokens
+        self.api_key_env = api_key_env
+        # explicit base_url wins; else an env override (for OpenAI-compatible hosts);
+        # else None, which makes the SDK use api.openai.com.
+        self.base_url = base_url or os.environ.get(base_url_env)
 
     def generate(self, system: str, user: str) -> str:
         from openai import OpenAI  # lazy import
-        client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+        client = OpenAI(api_key=os.environ[self.api_key_env], base_url=self.base_url)
         resp = client.chat.completions.create(
             model=self.model_id,
             max_tokens=self.max_tokens,
@@ -125,9 +141,21 @@ class OpenAIModel(Model):
         return resp.choices[0].message.content or ""
 
 
-# Registry the CLI resolves --models against.
+# Registry the CLI resolves --models against. A "spec" is 'provider:model-id'
+# (or the bare word 'baseline'). Keeping providers as data here means adding one
+# is a couple of lines; see README "Adding a provider".
 def build_model(spec: str) -> Model:
-    """spec is 'baseline', 'anthropic:<id>', or 'openai:<id>'."""
+    """Resolve a spec string to a Model.
+
+    Supported:
+      baseline                              keyless rule-based floor
+      anthropic:<id>                        e.g. anthropic:claude-opus-4-8         (ANTHROPIC_API_KEY)
+      openai:<id>                           e.g. openai:gpt-4o                     (OPENAI_API_KEY)
+      openrouter:<vendor>/<id>              e.g. openrouter:qwen/qwen-2.5-72b-instruct (OPENROUTER_API_KEY)
+
+    For any other OpenAI-compatible host (Together, Groq, local Ollama/vLLM), use
+    the openai: provider and set OPENAI_BASE_URL (+ OPENAI_API_KEY) in your .env.
+    """
     if spec in ("baseline", "baseline-rules"):
         return BaselineModel()
     if ":" in spec:
@@ -136,5 +164,10 @@ def build_model(spec: str) -> Model:
             return AnthropicModel(model_id)
         if provider == "openai":
             return OpenAIModel(model_id)
-    raise ValueError(f"unknown model spec {spec!r} "
-                     "(use 'baseline', 'anthropic:<id>', or 'openai:<id>')")
+        if provider == "openrouter":
+            return OpenAIModel(model_id, api_key_env="OPENROUTER_API_KEY",
+                               base_url="https://openrouter.ai/api/v1")
+    raise ValueError(
+        f"unknown model spec {spec!r}. Use 'baseline', 'anthropic:<id>', "
+        "'openai:<id>', or 'openrouter:<vendor>/<id>'."
+    )

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
 import sys
 from typing import Any
@@ -31,6 +32,25 @@ TASKS_DIR = REPO / "tasks"
 RESULTS_DIR = REPO / "results"
 PROMPT_TEMPLATE = REPO / "prompts" / "system_api.md"
 API_REFERENCE = ROOT / "api_reference.md"
+
+
+# --- environment ------------------------------------------------------------------
+
+def load_dotenv(path: pathlib.Path = REPO / ".env") -> None:
+    """Minimal, dependency-free .env loader.
+
+    Reads KEY=VALUE lines from the repo-root .env (if present). Existing
+    environment variables win, so `export FOO=...` still overrides the file.
+    Avoids pulling in python-dotenv just to read a handful of API keys.
+    """
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
 
 
 # --- task loading -----------------------------------------------------------------
@@ -156,6 +176,7 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--out", default=str(RESULTS_DIR / "scorecard.json"))
     args = ap.parse_args(argv)
 
+    load_dotenv()  # make keys in .env available before any model is built
     report = run(args.models, args.categories)
     RESULTS_DIR.mkdir(exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(report, indent=2))

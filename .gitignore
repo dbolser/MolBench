@@ -1,0 +1,22 @@
+# Secrets — never commit real keys. Use .env.example as the template.
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Generated benchmark output (commit specific scorecards by force-adding if you want to share them)
+results/
+
+# OS / editor cruft
+.DS_Store
+.idea/
+.vscode/

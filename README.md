@@ -23,17 +23,53 @@ This runs the keyless rule-based **baseline** over the whole corpus and writes
 `results/scorecard.json`. The baseline exists to (a) prove the harness runs with
 no setup and (b) give real models a floor to beat.
 
-## Plugging in real models
+## Models & API keys
+
+A "model" is selected with a **spec string** `provider:model-id` (or the bare word
+`baseline`). Keys live in a `.env` file at the repo root, which the runner loads
+automatically (no `python-dotenv` needed; exported shell vars override it).
 
 ```bash
-pip install -e ".[anthropic]"   # or .[openai] / .[all]
-export ANTHROPIC_API_KEY=...
-python -m molbench.runner --models baseline anthropic:claude-opus-4-8
-python -m molbench.runner --models openai:gpt-4o --categories api_calling
+cp .env.example .env        # then fill in only the providers you want
 ```
 
-A "model" is anything implementing `generate(system, user) -> str` (see
-`molbench/models.py`). Add an adapter to benchmark a new provider.
+### Supported providers
+
+| Spec | Example | Env var(s) | Install extra |
+|---|---|---|---|
+| `baseline` | `baseline` | — (keyless) | none |
+| `anthropic:<id>` | `anthropic:claude-opus-4-8`<br>`anthropic:claude-haiku-4-5-20251001` | `ANTHROPIC_API_KEY` | `.[anthropic]` |
+| `openai:<id>` | `openai:gpt-4o` | `OPENAI_API_KEY` | `.[openai]` |
+| `openrouter:<vendor>/<id>` | `openrouter:qwen/qwen-2.5-72b-instruct`<br>`openrouter:meta-llama/llama-3.3-70b-instruct` | `OPENROUTER_API_KEY` | `.[openai]` |
+| any OpenAI-compatible host | `openai:llama3.1` (+ `OPENAI_BASE_URL`) | `OPENAI_API_KEY`, `OPENAI_BASE_URL` | `.[openai]` |
+
+> **Why so few adapters?** OpenRouter, Together, Groq, DeepInfra and local
+> Ollama/vLLM all speak the OpenAI wire format, so the single `openai:` adapter
+> covers them via `OPENAI_BASE_URL`. OpenRouter alone unlocks Qwen, Llama,
+> DeepSeek, Mistral, Gemini, Claude, GPT… behind one key.
+
+### Run half a dozen models
+
+```bash
+pip install -e ".[all]"          # anthropic + openai SDKs
+# (edit .env with the keys you have)
+python -m molbench.runner --models \
+    baseline \
+    anthropic:claude-opus-4-8 \
+    anthropic:claude-haiku-4-5-20251001 \
+    openai:gpt-4o \
+    openrouter:qwen/qwen-2.5-72b-instruct \
+    openrouter:meta-llama/llama-3.3-70b-instruct
+```
+
+Each model gets a column in the scorecard. Filter the corpus with
+`--categories api_calling` while iterating.
+
+### Adding a provider
+
+If a host isn't OpenAI-compatible, add ~6 lines: write an adapter implementing
+`generate(system, user) -> str` in `molbench/models.py`, then register a `provider:`
+branch in `build_model()`. That's the entire contract.
 
 ## How it fits together
 
