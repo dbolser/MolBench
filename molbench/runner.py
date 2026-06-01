@@ -56,6 +56,11 @@ PRICING: dict[str, tuple[float, float]] = {
     "gemini-3.5-flash": (0.3, 2.5),
     "gemini-2.5-flash": (0.3, 2.5),
     "gemini-2.0-flash": (0.1, 0.4),
+    # Open-weight models via OpenRouter (matched as substrings of the full slug).
+    "qwen3-30b-a3b": (0.04, 0.17),
+    "gemma-3-27b": (0.08, 0.16),
+    "gpt-oss-20b": (0.03, 0.14),
+    "deepseek-v3.2": (0.23, 0.34),
 }
 
 
