@@ -19,8 +19,10 @@ import json
 import os
 import pathlib
 import statistics
+import subprocess
 import sys
 import time
+from datetime import datetime, timezone
 from typing import Any
 
 from . import grader as grader_mod
@@ -33,6 +35,16 @@ ROOT = pathlib.Path(__file__).resolve().parent
 REPO = ROOT.parent
 TASKS_DIR = REPO / "tasks"
 RESULTS_DIR = REPO / "results"
+RUNS_DIR = REPO / "runs"   # timestamped per-run archives (full raw outputs)
+
+
+def _git_commit() -> str | None:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=REPO, text=True,
+            stderr=subprocess.DEVNULL).strip()
+    except Exception:  # noqa: BLE001 - provenance is best-effort
+        return None
 PROMPT_API = REPO / "prompts" / "system_api.md"
 PROMPT_MVS = REPO / "prompts" / "system_mvs.md"
 API_REFERENCE = ROOT / "api_reference.md"
@@ -170,12 +182,12 @@ def run_api_task(model, system: str, task: dict) -> dict[str, Any]:
     raw = model.generate(system, task["prompt"])
     actions, err = extract_actions(raw)
     if err:
-        return {"f1": 0.0, "precision": 0.0, "recall": 0.0,
-                "error": err, "raw": raw[:500]}
+        return {"f1": 0.0, "precision": 0.0, "recall": 0.0, "error": err, "raw": raw}
     schema_errors = schema.validate_actions(actions)
     result = grader_mod.grade(task["reference"], actions)
     result["schema_errors"] = schema_errors
     result["predicted"] = actions
+    result["raw"] = raw
     return result
 
 
@@ -183,11 +195,11 @@ def run_mvs_task(model, system: str, task: dict) -> dict[str, Any]:
     raw = model.generate(system, task["prompt"])
     tree, err = extract_json_object(raw)
     if err:
-        return {"f1": 0.0, "precision": 0.0, "recall": 0.0,
-                "error": err, "raw": raw[:500]}
+        return {"f1": 0.0, "precision": 0.0, "recall": 0.0, "error": err, "raw": raw}
     result = mvs_mod.grade_mvs(task["reference_mvs"], tree)
     result["schema_errors"] = mvs_mod.validate_mvs(tree)
     result["predicted"] = tree
+    result["raw"] = raw
     return result
 
 
@@ -218,17 +230,34 @@ def _aggregate(samples: list[dict]) -> dict[str, Any]:
 
 
 def run(models: list[str], categories: list[str] | None,
-        samples: int = 1) -> dict[str, Any]:
+        samples: int = 1) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Returns (report, raw_samples).
+
+    `report` is the lightweight scorecard (aggregates + best-sample prediction).
+    `raw_samples` holds every sample's full raw model text and prediction, keyed
+    by [model][task_id] — heavy, written only to the per-run archive so you can
+    drill into "what did model X actually emit on task Y" long after the run.
+    """
     tasks = load_tasks(categories)
     if not tasks:
         sys.exit("no tasks matched; check tasks/ and --categories")
     prompts = build_system_prompts()
     vlm = StubVLMJudge()
 
-    report: dict[str, Any] = {"models": {}, "n_tasks": len(tasks), "samples": samples}
+    report: dict[str, Any] = {
+        "models": {}, "n_tasks": len(tasks), "samples": samples,
+        "meta": {
+            "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "git_commit": _git_commit(),
+            "models": models,
+            "categories": categories,
+        },
+    }
+    raw_samples: dict[str, Any] = {}
     for spec in models:
         model = build_model(spec)
         per_task = []
+        raw_samples[model.name] = {}
         started = time.perf_counter()
         for task in tasks:
             cat = task.get("category")
@@ -236,17 +265,22 @@ def run(models: list[str], categories: list[str] | None,
             if cat == "visual_rubric":
                 # Component 2: we still elicit a plan (useful signal), but scoring
                 # needs a render + VLM judge (stubbed here).
-                _, err = extract_json_object(model.generate(system, task["prompt"]))
+                raw = model.generate(system, task["prompt"])
+                _, err = extract_json_object(raw)
                 judged = vlm.score(image_path="", rubric=task.get("rubric", []),
                                    prompt=task["prompt"])
                 per_task.append({"id": task["id"], "category": cat,
                                  "plan_parsed": err is None, "vlm": judged})
+                raw_samples[model.name][task["id"]] = [{"raw": raw}]
             elif cat in GRADED_CATEGORIES:
                 run_task = run_mvs_task if cat == "mvs" else run_api_task
                 got = [run_task(model, system, task) for _ in range(samples)]
                 per_task.append({"id": task["id"], "category": cat,
                                  "categories": task.get("categories", []),
                                  **_aggregate(got)})
+                raw_samples[model.name][task["id"]] = [
+                    {"f1": g["f1"], "predicted": g.get("predicted"),
+                     "raw": g.get("raw"), "error": g.get("error")} for g in got]
 
         wall_seconds = time.perf_counter() - started
         graded = [t for t in per_task if t["category"] in GRADED_CATEGORIES]
@@ -265,7 +299,7 @@ def run(models: list[str], categories: list[str] | None,
             "by_skill": _means_by_skill(per_task),
             "tasks": per_task,
         }
-    return report
+    return report, raw_samples
 
 
 def _means_by_skill(per_task: list[dict]) -> dict[str, dict]:
@@ -333,14 +367,26 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--samples", type=int, default=1,
                     help="runs per task (>1 to average out LLM sampling noise)")
     ap.add_argument("--out", default=str(RESULTS_DIR / "scorecard.json"))
+    ap.add_argument("--no-archive", action="store_true",
+                    help="skip writing the timestamped per-run archive in runs/")
     args = ap.parse_args(argv)
 
     load_dotenv()  # make keys in .env available before any model is built
-    report = run(args.models, args.categories, samples=args.samples)
+    report, raw_samples = run(args.models, args.categories, samples=args.samples)
     RESULTS_DIR.mkdir(exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(report, indent=2))
     print_scorecard(report)
     print(f"\nfull results -> {args.out}")
+
+    # Archive the full run (incl. raw outputs + all samples) under a timestamped,
+    # never-overwritten file, so any run can be drilled into later. The published
+    # scorecard stays lightweight; this is the forensic copy.
+    if not args.no_archive:
+        RUNS_DIR.mkdir(exist_ok=True)
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        archive_path = RUNS_DIR / f"run_{stamp}.json"
+        archive_path.write_text(json.dumps({**report, "raw_samples": raw_samples}, indent=2))
+        print(f"archived -> {archive_path}")
 
 
 if __name__ == "__main__":

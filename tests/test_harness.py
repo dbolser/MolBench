@@ -104,6 +104,16 @@ def test_mvs_downstream_credit_survives_upstream_mismatch():
     assert 0.5 < f1 < 1.0, f"expected downstream credit, got {f1}"
 
 
+def test_run_archives_raw_samples_and_meta():
+    from molbench.runner import run
+    report, raw = run(["baseline"], ["api_calling"], samples=2)
+    assert report["meta"]["models"] == ["baseline"]
+    tasks = raw["baseline-rules"]
+    tid = next(iter(tasks))
+    assert len(tasks[tid]) == 2, "every sample must be retained for drill-in"
+    assert "raw" in tasks[tid][0], "raw model output must be archived"
+
+
 if __name__ == "__main__":
     test_all_reference_answers_are_schema_valid()
     test_self_grading_is_perfect()
@@ -116,4 +126,5 @@ if __name__ == "__main__":
     test_mvs_non_tree_scores_zero()
     test_mvs_download_variant_is_normalised()
     test_mvs_downstream_credit_survives_upstream_mismatch()
+    test_run_archives_raw_samples_and_meta()
     print("all sanity checks passed")
