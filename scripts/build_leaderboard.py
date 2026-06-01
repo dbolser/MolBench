@@ -66,8 +66,11 @@ def regime_table(ranked: list) -> str:
         cells = []
         for n, _ in cols:
             v = vals[n]
-            cells.append("<td>&mdash;</td>" if v is None else
-                         f"<td{' class=\"f1\"' if v == best else ''}>{v:.3f}</td>")
+            if v is None:
+                cells.append("<td>&mdash;</td>")
+            else:
+                lead = " class='f1'" if v == best else ""
+                cells.append(f"<td{lead}>{v:.3f}</td>")
         body.append(f"<tr><td class='model'>{rg} <span class='pm'>({n_tasks})</span></td>{''.join(cells)}</tr>")
     return (
         "<h2>Difficulty gradient by task regime</h2>"
