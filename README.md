@@ -159,6 +159,34 @@ results/                scorecards (generated)
   fully-specified imperative prompts over a structure/representation/colour grid),
   not a scraping problem — that keeps every task deterministically gradeable.
 
+## Data sources & acknowledgements
+
+MolBench builds on open data and tools; reference answers are *derived from* these
+sources and frozen into task JSON. With gratitude:
+
+* **[Mol\*](https://molstar.org/), [MolViewSpec](https://molstar.org/mol-view-spec/),
+  and [ipymolstar](https://github.com/molstar/ipymolstar)** (MIT) — the scene-spec
+  standard, renderer, and Python widget the benchmark targets.
+* **[MolViewStories](https://github.com/molstar/mol-view-stories)** (MIT) — curated
+  example scenes used as Component-2 (VLM-judged) material. Narrative stories
+  (e.g. *TATA-Binding Protein*) are derived from **RCSB [PDB-101 Molecule of the
+  Month](https://pdb101.rcsb.org/motm/motm-about)** by David S. Goodsell
+  (CC-BY-4.0).
+* **[RCSB PDB](https://www.rcsb.org/)** (CC0) — macromolecular structures (mmCIF).
+* **[PDBe SIFTS](https://www.ebi.ac.uk/pdbe/docs/sifts/)** (EMBL-EBI, CC-BY-4.0) —
+  UniProt↔PDB residue-numbering mappings.
+* **[UniProt](https://www.uniprot.org/)** (CC-BY-4.0) — the Variation API for
+  clinical variants.
+* **[ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/)** (NCBI, public domain) —
+  pathogenic variant classifications.
+* **[gemmi](https://gemmi.readthedocs.io/)** (MPL-2.0) — mmCIF parsing for Tier-2
+  grounding.
+
+Related work (no data reused): **[ChatMol](https://github.com/ChatMol/ChatMol)**
+(MIT; [L+M @ ACL 2024](https://aclanthology.org/2024.langmol-1.7/)) — an LLM agent
+for PyMOL. A different (agentic, PyMOL) paradigm, but its interaction/interface
+commands inspired planned Tier-2 task types.
+
 ## Roadmap
 
 * Template-based MVS task generator for category-balanced Component-1 volume.
