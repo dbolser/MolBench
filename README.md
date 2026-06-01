@@ -167,11 +167,12 @@ sources and frozen into task JSON. With gratitude:
 * **[Mol\*](https://molstar.org/), [MolViewSpec](https://molstar.org/mol-view-spec/),
   and [ipymolstar](https://github.com/molstar/ipymolstar)** (MIT) — the scene-spec
   standard, renderer, and Python widget the benchmark targets.
-* **[MolViewStories](https://github.com/molstar/mol-view-stories)** (MIT) — curated
-  example scenes used as Component-2 (VLM-judged) material. Narrative stories
-  (e.g. *TATA-Binding Protein*) are derived from **RCSB [PDB-101 Molecule of the
-  Month](https://pdb101.rcsb.org/motm/motm-about)** by David S. Goodsell
-  (CC-BY-4.0).
+* **[MolViewStories](https://github.com/molstar/mol-view-stories)** (MIT,
+  © 2025– MolViewSpec contributors) — curated example scenes used as Component-2
+  (VLM-judged) material; see [`data/molviewstories/SOURCE.md`](data/molviewstories/SOURCE.md)
+  for the full notice. Some narrative stories cover topics also featured in RCSB
+  **[PDB-101 Molecule of the Month](https://pdb101.rcsb.org/motm/motm-about)**
+  (David S. Goodsell, CC-BY-4.0), which is acknowledged but not redistributed here.
 * **[RCSB PDB](https://www.rcsb.org/)** (CC0) — macromolecular structures (mmCIF).
 * **[PDBe SIFTS](https://www.ebi.ac.uk/pdbe/docs/sifts/)** (EMBL-EBI, CC-BY-4.0) —
   UniProt↔PDB residue-numbering mappings.
