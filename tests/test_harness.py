@@ -104,6 +104,16 @@ def test_mvs_downstream_credit_survives_upstream_mismatch():
     assert 0.5 < f1 < 1.0, f"expected downstream credit, got {f1}"
 
 
+def test_render_state_wrapping():
+    # Pure (no browser): a root node wraps into a valid single-state .mvsj payload.
+    from molbench.render import to_mvs_state
+    import json as _json
+    root = _scene()["root"]
+    state = _json.loads(to_mvs_state(root))
+    assert state["kind"] == "single"
+    assert state["root"]["kind"] == "root"
+
+
 def test_run_archives_raw_samples_and_meta():
     from molbench.runner import run
     report, raw = run(["baseline"], ["api_calling"], samples=2)
@@ -126,5 +136,6 @@ if __name__ == "__main__":
     test_mvs_non_tree_scores_zero()
     test_mvs_download_variant_is_normalised()
     test_mvs_downstream_credit_survives_upstream_mismatch()
+    test_render_state_wrapping()
     test_run_archives_raw_samples_and_meta()
     print("all sanity checks passed")

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="./molstar/molstar.css">
+<script src="./molstar/molstar.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  #app { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// Render an MVS state to a PNG data URI. Returns {ok, png} or {ok:false, error}.
+// Called by Playwright via page.evaluate; the returned promise resolves when the
+// scene has loaded (remote structure fetched + parsed) and a frame is captured.
+window.renderMvs = async (mvsString) => {
+  try {
+    const viewer = await molstar.Viewer.create('app', {
+      layoutIsExpanded: false,
+      layoutShowControls: false,
+      layoutShowSequence: false,
+      layoutShowLog: false,
+      viewportShowExpand: false,
+      viewportShowControls: false,
+    });
+    const plugin = viewer.plugin;
+    await viewer.loadMvsData(mvsString, 'mvsj', { replaceExisting: true });
+
+    // Wait until the plugin is idle (structure downloaded, parsed, represented).
+    const busy = plugin.behaviors.state.isBusy;
+    const deadline = Date.now() + 25000;
+    await new Promise((resolve) => {
+      const tick = () => {
+        if (!busy.value || Date.now() > deadline) return resolve();
+        setTimeout(tick, 150);
+      };
+      tick();
+    });
+    // A couple of extra frames to let the camera/representation settle.
+    await new Promise(r => setTimeout(r, 600));
+
+    const helper = plugin.helpers.viewportScreenshot;
+    const uri = await helper.getImageDataUri();
+    return { ok: true, png: uri };
+  } catch (e) {
+    return { ok: false, error: String(e && e.stack || e) };
+  }
+};
+</script>
+</body>
+</html>

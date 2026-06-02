@@ -25,3 +25,6 @@ runs/
 
 # Local research docs (PDFs never published to Pages)
 *.pdf
+
+# Fetched Mol* bundle (run scripts/fetch_molstar.py)
+molbench/static/molstar/
