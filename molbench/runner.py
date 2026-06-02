@@ -297,9 +297,28 @@ def run(models: list[str], categories: list[str] | None,
             "wall_seconds": round(wall_seconds, 2),
             "sec_per_call": round(wall_seconds / calls, 2) if calls else None,
             "by_skill": _means_by_skill(per_task),
+            **_format_stats(raw_samples[model.name]),
             "tasks": per_task,
         }
     return report, raw_samples
+
+
+def _format_stats(model_raw: dict) -> dict[str, Any]:
+    """Separate output-format reliability from scene competence.
+
+    `parse_success` = fraction of graded samples that produced valid output;
+    `cond_f1` = mean F1 *conditional on* parsing. The gap between cond_f1 and the
+    unconditional mean reveals how much a model's score is dragged by malformed
+    output (a JSON-validity problem) versus genuine visualization error.
+    """
+    samples = [s for task in model_raw.values() for s in task if "f1" in s]
+    if not samples:
+        return {"parse_success": None, "cond_f1": None}
+    parsed = [s for s in samples if not s.get("error")]
+    return {
+        "parse_success": round(len(parsed) / len(samples), 4),
+        "cond_f1": round(statistics.fmean(s["f1"] for s in parsed), 4) if parsed else 0.0,
+    }
 
 
 def _means_by_skill(per_task: list[dict]) -> dict[str, dict]:

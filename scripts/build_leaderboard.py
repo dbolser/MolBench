@@ -98,20 +98,25 @@ def runtime_str(m: dict) -> str:
     return f"{spc:.2f}s/call" if spc is not None else "&mdash;"
 
 
+def _pct(v) -> str:
+    return "&mdash;" if v is None else f"{v * 100:.0f}%"
+
+
+def _f1(v) -> str:
+    return "&mdash;" if v is None else f"{v:.3f}"
+
+
 def row(rank: int, name: str, m: dict) -> str:
-    u = m.get("usage", {}) or {}
     cost = m.get("cost_usd")
     cost_str = f"${cost:.4f}" if isinstance(cost, (int, float)) else "&mdash;"
-    toks = (f"{u.get('input_tokens', 0):,} / {u.get('output_tokens', 0):,}"
-            if u.get("calls") else "&mdash;")
     return (
         "<tr>"
         f"<td class='rank'>{rank}</td>"
         f"<td class='model'>{html.escape(name)}</td>"
         f"<td class='f1'>{track_cell(m, 'mvs')}</td>"
+        f"<td>{_pct(m.get('parse_success'))}</td>"
+        f"<td>{_f1(m.get('cond_f1'))}</td>"
         f"<td>{track_cell(m, 'api_calling')}</td>"
-        f"<td class='spec'>{html.escape(m.get('spec', ''))}</td>"
-        f"<td>{toks}</td>"
         f"<td>{cost_str}</td>"
         f"<td>{runtime_str(m)}</td>"
         "</tr>"
@@ -200,8 +205,8 @@ def build(scorecard_path: pathlib.Path) -> None:
   <table>
     <thead>
       <tr>
-        <th>#</th><th>Model</th><th>MVS&nbsp;F1</th><th>API&nbsp;F1</th>
-        <th>Spec</th><th>Tokens&nbsp;(in/out)</th><th>Cost</th><th>Speed</th>
+        <th>#</th><th>Model</th><th>MVS&nbsp;F1</th><th>Parse&nbsp;%</th>
+        <th>Cond&nbsp;F1</th><th>API&nbsp;F1</th><th>Cost</th><th>Speed</th>
       </tr>
     </thead>
     <tbody>
@@ -211,9 +216,12 @@ def build(scorecard_path: pathlib.Path) -> None:
   {regimes}
   {drill}
   <footer>
-    <p>Higher F1 is better. <b>MVS&nbsp;F1</b> is the primary, engine-agnostic
-       scene-tree score; <b>API&nbsp;F1</b> is the secondary imperative-PDBeMolstar
-       track. &plusmn; is the spread across tasks. Costs use published list prices.</p>
+    <p><b>MVS&nbsp;F1</b> is the primary, engine-agnostic scene-tree score (parse
+       failures count as 0). <b>Parse&nbsp;%</b> is the share of samples that emitted
+       valid output, and <b>Cond&nbsp;F1</b> is scene quality <i>given</i> valid
+       output &mdash; their gap shows how much a model is dragged by malformed JSON
+       rather than visualization error. <b>API&nbsp;F1</b> is the secondary
+       imperative track. &plusmn; is the spread across tasks; costs use list prices.</p>
     <p>Reproduce: <code>python -m molbench.runner --models &lt;spec&gt; --samples 5</code> &middot;
        <a href="./scorecard.json">raw scorecard.json</a> &middot;
        <a href="https://github.com/dbolser/MolBench">source</a></p>
