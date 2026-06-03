@@ -3,62 +3,145 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MolBench &mdash; Leaderboard</title>
-<style>
-  :root { color-scheme: light dark; }
-  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-          max-width: 860px; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
-  h1 { margin-bottom: .2rem; }
-  h2 { margin-top: 2.5rem; font-size: 1.15rem; }
-  .sub { color: #888; margin-top: 0; }
-  table { border-collapse: collapse; width: 100%; margin-top: 1.5rem; }
-  th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid #8884; }
-  th { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: #888; }
-  td.f1 { font-variant-numeric: tabular-nums; font-weight: 600; }
-  td.rank { color: #888; }
-  td.model { font-weight: 600; }
-  td.spec { font-family: ui-monospace, monospace; font-size: .85rem; color: #888; }
-  td .pm { color: #999; font-weight: 400; font-size: .85em; }
-  tr:first-child td.rank { color: #d4a017; font-weight: 700; }
-  footer { margin-top: 2rem; font-size: .85rem; color: #888; }
-  code { background: #8882; padding: .1em .35em; border-radius: 4px; }
-</style>
+<meta name="description" content="A benchmark measuring whether LLM assistants can control molecular visualization via MolViewSpec scene trees.">
+<title>MolBench — Leaderboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark">M</span>
+      <span>MolBench</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="active">Leaderboard</a>
+      <a href="gallery.html" class="">Evaluator gallery</a>
+      <a href="https://github.com/dbolser/MolBench" class="gh"
+         rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+<section class="hero wrap" aria-label="Overview">
+  <span class="eyebrow">Molecular-visualization benchmark</span>
   <h1>MolBench</h1>
-  <p class="sub">Molecular-visualization benchmark for CI assistants &mdash;
-     70 tasks, 3 sample(s)/task. Ranked by the primary
-     <b>MVS</b> (MolViewSpec scene-tree) track.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>#</th><th>Model</th><th>MVS&nbsp;F1</th><th>Parse&nbsp;%</th>
-        <th>Cond&nbsp;F1</th><th>API&nbsp;F1</th><th>Cost</th><th>Speed</th>
-      </tr>
-    </thead>
-    <tbody>
-<tr><td class='rank'>1</td><td class='model'>claude-haiku-4-5</td><td class='f1'>0.869 <span class='pm'>±0.11</span></td><td>100%</td><td>0.876</td><td>0.944 <span class='pm'>±0.12</span></td><td>$0.6254</td><td>1.87s/call</td></tr>
-<tr><td class='rank'>2</td><td class='model'>deepseek/deepseek-v3.2</td><td class='f1'>0.847 <span class='pm'>±0.18</span></td><td>99%</td><td>0.864</td><td>0.952 <span class='pm'>±0.11</span></td><td>$0.0873</td><td>8.85s/call</td></tr>
-<tr><td class='rank'>3</td><td class='model'>google/gemma-3-27b-it</td><td class='f1'>0.830 <span class='pm'>±0.25</span></td><td>94%</td><td>0.895</td><td>0.949 <span class='pm'>±0.08</span></td><td>$0.0329</td><td>5.61s/call</td></tr>
-<tr><td class='rank'>4</td><td class='model'>gemini-3.5-flash</td><td class='f1'>0.811 <span class='pm'>±0.22</span></td><td>96%</td><td>0.855</td><td>0.944 <span class='pm'>±0.12</span></td><td>$0.2008</td><td>5.20s/call</td></tr>
-<tr><td class='rank'>5</td><td class='model'>gpt-5.4-nano</td><td class='f1'>0.681 <span class='pm'>±0.22</span></td><td>84%</td><td>0.832</td><td>0.870 <span class='pm'>±0.16</span></td><td>$0.0324</td><td>2.53s/call</td></tr>
-<tr><td class='rank'>6</td><td class='model'>qwen/qwen3-30b-a3b-instruct-2507</td><td class='f1'>0.605 <span class='pm'>±0.29</span></td><td>78%</td><td>0.813</td><td>0.907 <span class='pm'>±0.13</span></td><td>$0.0199</td><td>4.35s/call</td></tr>
-<tr><td class='rank'>7</td><td class='model'>openai/gpt-oss-20b</td><td class='f1'>0.529 <span class='pm'>±0.27</span></td><td>65%</td><td>0.863</td><td>0.924 <span class='pm'>±0.08</span></td><td>$0.0280</td><td>7.15s/call</td></tr>
-<tr><td class='rank'>8</td><td class='model'>baseline-rules</td><td class='f1'>0.000</td><td>9%</td><td>0.718</td><td>0.718 <span class='pm'>±0.09</span></td><td>&mdash;</td><td>&mdash;</td></tr>
-    </tbody>
-  </table>
-  <h2>Difficulty gradient by task regime</h2><p class='sub'>Mean F1 by how the answer key is grounded, easy to hard. Harder regimes separate the models more &mdash; the property a benchmark wants.</p><table><thead><tr><th>Regime</th><th>claude-haiku-4-5</th><th>deepseek/deepseek-v3.2</th><th>google/gemma-3-27b-it</th><th>gemini-3.5-flash</th><th>gpt-5.4-nano</th><th>qwen/qwen3-30b-a3b-instruct-2507</th><th>openai/gpt-oss-20b</th><th>baseline-rules</th></tr></thead><tbody><tr><td class='model'>Translation <span class='pm'>(47)</span></td><td>0.912</td><td class='f1'>0.925</td><td>0.882</td><td>0.899</td><td>0.727</td><td>0.674</td><td>0.587</td><td>0.000</td></tr><tr><td class='model'>Grounded (ligand/SS) <span class='pm'>(8)</span></td><td class='f1'>0.870</td><td>0.704</td><td>0.745</td><td>0.666</td><td>0.662</td><td>0.613</td><td>0.167</td><td>0.000</td></tr><tr><td class='model'>Clinical (SIFTS/ClinVar) <span class='pm'>(9)</span></td><td class='f1'>0.646</td><td>0.565</td><td>0.630</td><td>0.482</td><td>0.460</td><td>0.237</td><td>0.549</td><td>0.000</td></tr></tbody></table>
-  <h2>Drill-down by skill</h2><p class='sub'>Mean F1 on tasks tagged with each skill (task count in parens). Skills are derived automatically from the reference scene tree.</p><table><thead><tr><th>Skill</th><th>claude-haiku-4-5</th><th>deepseek/deepseek-v3.2</th><th>google/gemma-3-27b-it</th><th>gemini-3.5-flash</th><th>gpt-5.4-nano</th><th>qwen/qwen3-30b-a3b-instruct-2507</th><th>openai/gpt-oss-20b</th><th>baseline-rules</th></tr></thead><tbody><tr><td class='model'>camera <span class='pm'>(7)</span></td><td>0.968</td><td>0.986</td><td>0.462</td><td class='f1'>0.993</td><td>0.895</td><td>0.579</td><td>0.547</td><td>0.000</td></tr><tr><td class='model'>color <span class='pm'>(64)</span></td><td class='f1'>0.869</td><td>0.847</td><td>0.830</td><td>0.811</td><td>0.681</td><td>0.605</td><td>0.529</td><td>0.000</td></tr><tr><td class='model'>load <span class='pm'>(64)</span></td><td class='f1'>0.869</td><td>0.847</td><td>0.830</td><td>0.811</td><td>0.681</td><td>0.605</td><td>0.529</td><td>0.000</td></tr><tr><td class='model'>multi-component <span class='pm'>(50)</span></td><td class='f1'>0.873</td><td>0.847</td><td>0.788</td><td>0.817</td><td>0.688</td><td>0.629</td><td>0.475</td><td>0.000</td></tr><tr><td class='model'>representation <span class='pm'>(64)</span></td><td class='f1'>0.869</td><td>0.847</td><td>0.830</td><td>0.811</td><td>0.681</td><td>0.605</td><td>0.529</td><td>0.000</td></tr><tr><td class='model'>selection <span class='pm'>(30)</span></td><td class='f1'>0.830</td><td>0.767</td><td>0.793</td><td>0.733</td><td>0.589</td><td>0.546</td><td>0.381</td><td>0.000</td></tr><tr><td class='model'>surface <span class='pm'>(7)</span></td><td>0.799</td><td>0.852</td><td class='f1'>0.952</td><td>0.778</td><td>0.603</td><td>0.407</td><td>0.649</td><td>0.000</td></tr></tbody></table>
-  <footer>
-    <p><b>MVS&nbsp;F1</b> is the primary, engine-agnostic scene-tree score (parse
-       failures count as 0). <b>Parse&nbsp;%</b> is the share of samples that emitted
-       valid output, and <b>Cond&nbsp;F1</b> is scene quality <i>given</i> valid
-       output &mdash; their gap shows how much a model is dragged by malformed JSON
-       rather than visualization error. <b>API&nbsp;F1</b> is the secondary
-       imperative track. &plusmn; is the spread across tasks; costs use list prices.</p>
-    <p>Reproduce: <code>python -m molbench.runner --models &lt;spec&gt; --samples 5</code> &middot;
-       <a href="./scorecard.json">raw scorecard.json</a> &middot;
-       <a href="https://github.com/dbolser/MolBench">source</a></p>
-  </footer>
+  <p class="pitch">Can LLM assistants <b>control</b> a molecular viewer? MolBench
+     turns natural-language requests &mdash; <i>&ldquo;show the heme as orange
+     ball-and-stick&rdquo;</i>, <i>&ldquo;highlight the R175H pathogenic
+     variant&rdquo;</i> &mdash; into <b>MolViewSpec</b> scene trees and grades
+     them deterministically, engine-neutral.</p>
+  <div class="stats">
+<div class='stat'><div class='label'>Models evaluated</div><div class='value'>8</div><div class='sub'>open &amp; closed</div></div>
+<div class='stat'><div class='label'>Benchmark tasks</div><div class='value'>70</div><div class='sub'>&times;3 samples each</div></div>
+<div class='stat'><div class='label'>MVS&nbsp;F1 leader</div><div class='value'>0.87</div><div class='sub'>claude-haiku-4-5</div></div>
+<div class='stat'><div class='label'>Top open model</div><div class='value'>0.85</div><div class='sub'>deepseek-v3.2 at $0.0873</div></div>
+  </div>
+</section>
+<section class="wrap" aria-label="Leaderboard">
+  <h2>Leaderboard</h2>
+  <p class="section-sub">Ranked by the primary <b>MVS&nbsp;F1</b> track
+     (MolViewSpec scene-tree match; parse failures count as 0). The leader is
+     highlighted. Open-weight models are namespaced with a provider slash.</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th class="left">#</th>
+          <th class="left">Model</th>
+          <th>MVS&nbsp;F1</th>
+          <th>Parse&nbsp;%</th>
+          <th>Cond&nbsp;F1</th>
+          <th>API&nbsp;F1</th>
+          <th>Cost</th>
+          <th>Speed</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr class='leader'><td class='rank'>1</td><td class='model'>claude-haiku-4-5<span class='badge closed'>closed</span><span class='spec'>anthropic:claude-haiku-4-5</span></td><td class='metric-primary'>0.869 <span class='pm'>&plusmn;0.11</span></td><td>100%</td><td>0.876</td><td>0.944 <span class='pm'>&plusmn;0.12</span></td><td>$0.6254</td><td>1.87s</td></tr>
+<tr><td class='rank'>2</td><td class='model'>deepseek/deepseek-v3.2<span class='badge open'>open</span><span class='spec'>openrouter:deepseek/deepseek-v3.2</span></td><td class='metric-primary'>0.847 <span class='pm'>&plusmn;0.18</span></td><td>99%</td><td>0.864</td><td>0.952 <span class='pm'>&plusmn;0.11</span></td><td>$0.0873</td><td>8.85s</td></tr>
+<tr><td class='rank'>3</td><td class='model'>google/gemma-3-27b-it<span class='badge open'>open</span><span class='spec'>openrouter:google/gemma-3-27b-it</span></td><td class='metric-primary'>0.830 <span class='pm'>&plusmn;0.25</span></td><td>94%</td><td>0.895</td><td>0.949 <span class='pm'>&plusmn;0.08</span></td><td>$0.0329</td><td>5.61s</td></tr>
+<tr><td class='rank'>4</td><td class='model'>gemini-3.5-flash<span class='badge closed'>closed</span><span class='spec'>gemini:gemini-3.5-flash</span></td><td class='metric-primary'>0.811 <span class='pm'>&plusmn;0.22</span></td><td>96%</td><td>0.855</td><td>0.944 <span class='pm'>&plusmn;0.12</span></td><td>$0.2008</td><td>5.20s</td></tr>
+<tr><td class='rank'>5</td><td class='model'>gpt-5.4-nano<span class='badge closed'>closed</span><span class='spec'>openai:gpt-5.4-nano</span></td><td class='metric-primary'>0.681 <span class='pm'>&plusmn;0.22</span></td><td>84%</td><td>0.832</td><td>0.870 <span class='pm'>&plusmn;0.16</span></td><td>$0.0324</td><td>2.53s</td></tr>
+<tr><td class='rank'>6</td><td class='model'>qwen/qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span><span class='spec'>openrouter:qwen/qwen3-30b-a3b-instruct-2507</span></td><td class='metric-primary'>0.605 <span class='pm'>&plusmn;0.29</span></td><td>78%</td><td>0.813</td><td>0.907 <span class='pm'>&plusmn;0.13</span></td><td>$0.0199</td><td>4.35s</td></tr>
+<tr><td class='rank'>7</td><td class='model'>openai/gpt-oss-20b<span class='badge open'>open</span><span class='spec'>openrouter:openai/gpt-oss-20b</span></td><td class='metric-primary'>0.529 <span class='pm'>&plusmn;0.27</span></td><td>65%</td><td>0.863</td><td>0.924 <span class='pm'>&plusmn;0.08</span></td><td>$0.0280</td><td>7.15s</td></tr>
+<tr><td class='rank'>8</td><td class='model'>baseline-rules<span class='badge closed'>closed</span></td><td class='metric-primary'>0.000</td><td>9%</td><td>0.718</td><td>0.718 <span class='pm'>&plusmn;0.09</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
+    <b>MVS&nbsp;F1</b>: primary, engine-agnostic scene-tree score (parse
+    failures = 0). <b>Parse&nbsp;%</b>: share of samples that emitted valid
+    output. <b>Cond&nbsp;F1</b>: scene quality <i>given</i> valid output &mdash;
+    the gap from MVS&nbsp;F1 measures how much a model is dragged down by
+    malformed JSON rather than visualization error. <b>API&nbsp;F1</b>: the
+    secondary imperative-call track. <span class="pm">&plusmn;</span> is the
+    spread across tasks; costs use provider list prices.
+  </p>
+</section>
+<section class="wrap" aria-label="Key findings">
+  <h2>Key findings</h2>
+  <p class="section-sub">What the leaderboard actually tells you &mdash; read
+     these before the table.</p>
+  <div class="findings">
+<div class='finding headline'><div class='fnum'>FINDING 01 &middot; THE HEADLINE</div><h3>Format reliability, not competence, drives the ranking</h3><p>The MVS ranking is largely a <b>JSON-validity</b> ranking. Conditional on producing valid output, every LLM clusters tightly at <b>0.81&ndash;0.90</b> Cond&nbsp;F1 &mdash; yet the unconditional spread is ~<b>0.34</b>, driven almost entirely by Parse&nbsp;%.</p><p><code>gpt-oss-20b</code> is <b>last overall</b> (~0.53 MVS&nbsp;F1) but ~4th (tied for 3rd) by Cond&nbsp;F1 (~0.86): a competent visualizer that is simply format-unreliable.</p></div>
+<div class='finding'><div class='fnum'>FINDING 02</div><h3>Open weights reached the closed frontier-small tier</h3><p>Open models match the small closed frontier at <b>6&ndash;19&times; lower cost</b> &mdash; Gemma-3-27B at $0.0329, DeepSeek-V3.2 close behind. But &ldquo;open&rdquo; spans a wide range: Qwen3-30B and gpt-oss-20b still lag well behind on reliability.</p></div>
+<div class='finding'><div class='fnum'>FINDING 03</div><h3>A difficulty gradient that discriminates</h3><p>Tasks span translation &rarr; structure-grounded &rarr; clinical. Harder regimes separate models <b>more</b> &mdash; model spread grows from ~0.10 to ~0.24 &mdash; exactly the property a benchmark wants. See the per-regime table below.</p></div>
+<div class='finding'><div class='fnum'>FINDING 04 &middot; NOVEL</div><h3>Clinical grounding into 3D structure</h3><p>Tasks bridge clinical genetics and structure: ClinVar pathogenic variants mapped via UniProt&nbsp;+&nbsp;PDBe&nbsp;SIFTS numbering onto the correct residues (e.g. p53 <b>R175H</b>). No other molecular-viz benchmark does this.</p></div>
+  </div>
+</section>
+<section class="wrap" aria-label="Difficulty gradient">
+  <h2>Difficulty gradient by task regime</h2>
+  <p class="section-sub">Mean MVS&nbsp;F1 by how the answer key is grounded,
+     easy&nbsp;&rarr;&nbsp;hard. Harder regimes pull the models apart &mdash; the
+     spread you want from a benchmark.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th class="left">Regime</th><th>claude-haiku-4-5</th><th>deepseek-v3.2</th><th>gemma-3-27b-it</th><th>gemini-3.5-flash</th><th>gpt-5.4-nano</th><th>qwen3-30b-a3b-instruct-2507</th><th>gpt-oss-20b</th><th>baseline-rules</th></tr></thead>
+      <tbody>
+<tr><td class='rowhead'>Translation <span class='pm'>(n=47)</span></td><td>0.912</td><td class='best'>0.925</td><td>0.882</td><td>0.899</td><td>0.727</td><td>0.674</td><td>0.587</td><td>0.000</td></tr>
+<tr><td class='rowhead'>Grounded (ligand/SS) <span class='pm'>(n=8)</span></td><td class='best'>0.870</td><td>0.704</td><td>0.745</td><td>0.666</td><td>0.662</td><td>0.613</td><td>0.167</td><td>0.000</td></tr>
+<tr><td class='rowhead'>Clinical (SIFTS/ClinVar) <span class='pm'>(n=9)</span></td><td class='best'>0.646</td><td>0.565</td><td>0.630</td><td>0.482</td><td>0.460</td><td>0.237</td><td>0.549</td><td>0.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="wrap" aria-label="Skill drill-down">
+  <h2>Where models differ by skill</h2>
+  <p class="section-sub">Mean F1 on tasks tagged with each skill (task count in
+     parentheses). Skills are derived automatically from the reference scene
+     tree.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th class="left">Skill</th><th>claude-haiku-4-5</th><th>deepseek-v3.2</th><th>gemma-3-27b-it</th><th>gemini-3.5-flash</th><th>gpt-5.4-nano</th><th>qwen3-30b-a3b-instruct-2507</th><th>gpt-oss-20b</th><th>baseline-rules</th></tr></thead>
+      <tbody>
+<tr><td class='rowhead'>camera <span class='pm'>(n=7)</span></td><td>0.968</td><td>0.986</td><td>0.462</td><td class='best'>0.993</td><td>0.895</td><td>0.579</td><td>0.547</td><td>0.000</td></tr>
+<tr><td class='rowhead'>color <span class='pm'>(n=64)</span></td><td class='best'>0.869</td><td>0.847</td><td>0.830</td><td>0.811</td><td>0.681</td><td>0.605</td><td>0.529</td><td>0.000</td></tr>
+<tr><td class='rowhead'>load <span class='pm'>(n=64)</span></td><td class='best'>0.869</td><td>0.847</td><td>0.830</td><td>0.811</td><td>0.681</td><td>0.605</td><td>0.529</td><td>0.000</td></tr>
+<tr><td class='rowhead'>multi-component <span class='pm'>(n=50)</span></td><td class='best'>0.873</td><td>0.847</td><td>0.788</td><td>0.817</td><td>0.688</td><td>0.629</td><td>0.475</td><td>0.000</td></tr>
+<tr><td class='rowhead'>representation <span class='pm'>(n=64)</span></td><td class='best'>0.869</td><td>0.847</td><td>0.830</td><td>0.811</td><td>0.681</td><td>0.605</td><td>0.529</td><td>0.000</td></tr>
+<tr><td class='rowhead'>selection <span class='pm'>(n=30)</span></td><td class='best'>0.830</td><td>0.767</td><td>0.793</td><td>0.733</td><td>0.589</td><td>0.546</td><td>0.381</td><td>0.000</td></tr>
+<tr><td class='rowhead'>surface <span class='pm'>(n=7)</span></td><td>0.799</td><td>0.852</td><td class='best'>0.952</td><td>0.778</td><td>0.603</td><td>0.407</td><td>0.649</td><td>0.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><b>Data sources.</b> Structures from the
+       <a href="https://www.rcsb.org/" rel="noopener">RCSB&nbsp;PDB</a>;
+       clinical grounding via
+       <a href="https://www.ebi.ac.uk/pdbe/docs/sifts/" rel="noopener">PDBe&nbsp;SIFTS</a>
+       (UniProt&harr;PDB residue numbering, CC-BY-4.0),
+       <a href="https://www.uniprot.org/" rel="noopener">UniProt</a> (CC-BY-4.0),
+       and <a href="https://www.ncbi.nlm.nih.gov/clinvar/" rel="noopener">ClinVar</a>
+       (NCBI, public domain). See the
+       <a href="https://github.com/dbolser/MolBench#data-sources--acknowledgements"
+          rel="noopener">data sources &amp; acknowledgements</a> in the README.</p>
+    <p><b>Reproduce.</b> <span class="repro">python -m molbench.runner --models &lt;spec&gt; --samples 5</span></p>
+    <p>MolBench is open source (MIT) &middot;
+       <a href="https://github.com/dbolser/MolBench" rel="noopener">github.com/dbolser/MolBench</a>
+       &middot; <a href="scorecard.json">raw scorecard.json</a></p>
+  </div>
+</footer>
 </body>
 </html>
