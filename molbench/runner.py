@@ -230,13 +230,21 @@ def _aggregate(samples: list[dict]) -> dict[str, Any]:
 
 
 def run(models: list[str], categories: list[str] | None,
-        samples: int = 1) -> tuple[dict[str, Any], dict[str, Any]]:
+        samples: int = 1, escalate: bool = False,
+        judge: str | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     """Returns (report, raw_samples).
 
     `report` is the lightweight scorecard (aggregates + best-sample prediction).
     `raw_samples` holds every sample's full raw model text and prediction, keyed
-    by [model][task_id] — heavy, written only to the per-run archive so you can
-    drill into "what did model X actually emit on task Y" long after the run.
+    by [model][task_id] — heavy, written only to the per-run archive.
+
+    With `escalate=True`, each imperfect MVS prediction is run through the
+    rendering cascade (`escalate.escalating_grade`): perfect trees short-circuit at
+    the tree tier (no render), imperfect ones render reference+prediction for a
+    visual diff, and genuinely-different images escalate to a VLM judge (if `judge`
+    is a vision-model id). The per-task `escalation` field then records
+    tree-F1-vs-what-the-image-shows — the "grader score vs human-visible" data.
+    Requires the `execute` extra (Playwright + the Mol* bundle).
     """
     tasks = load_tasks(categories)
     if not tasks:
@@ -251,8 +259,23 @@ def run(models: list[str], categories: list[str] | None,
             "git_commit": _git_commit(),
             "models": models,
             "categories": categories,
+            "escalate": escalate,
+            "judge": judge,
         },
     }
+
+    # Escalation is opt-in and lazy so the core path stays browser-free.
+    render_fn = vlm_fn = gallery = None
+    escalating_grade = None
+    if escalate:
+        from .render import render_scene
+        from .escalate import escalating_grade
+        render_fn = lambda tree, png: render_scene(tree, png, width=600, height=450)
+        if judge:
+            from .vlm_grader import AnthropicImagePairJudge
+            vlm_fn = AnthropicImagePairJudge(judge)
+        gallery = RUNS_DIR / ("gallery_" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
+
     raw_samples: dict[str, Any] = {}
     for spec in models:
         model = build_model(spec)
@@ -275,9 +298,15 @@ def run(models: list[str], categories: list[str] | None,
             elif cat in GRADED_CATEGORIES:
                 run_task = run_mvs_task if cat == "mvs" else run_api_task
                 got = [run_task(model, system, task) for _ in range(samples)]
-                per_task.append({"id": task["id"], "category": cat,
-                                 "categories": task.get("categories", []),
-                                 **_aggregate(got)})
+                pt = {"id": task["id"], "category": cat,
+                      "categories": task.get("categories", []), **_aggregate(got)}
+                if (escalate and cat == "mvs" and not pt.get("error")
+                        and pt.get("predicted") is not None):
+                    wd = gallery / model.name.replace("/", "_") / task["id"]
+                    pt["escalation"] = escalating_grade(
+                        task["reference_mvs"], pt["predicted"], prompt=task.get("prompt"),
+                        render=render_fn, vlm=vlm_fn, workdir=str(wd))
+                per_task.append(pt)
                 raw_samples[model.name][task["id"]] = [
                     {"f1": g["f1"], "predicted": g.get("predicted"),
                      "raw": g.get("raw"), "error": g.get("error")} for g in got]
@@ -385,13 +414,20 @@ def main(argv: list[str] | None = None) -> None:
                     help="filter tasks, e.g. mvs api_calling visual_rubric")
     ap.add_argument("--samples", type=int, default=1,
                     help="runs per task (>1 to average out LLM sampling noise)")
+    ap.add_argument("--escalate", action="store_true",
+                    help="render imperfect MVS predictions for a visual-diff (+VLM) "
+                         "cross-check; needs the 'execute' extra")
+    ap.add_argument("--judge", default=None,
+                    help="vision model id for the T2 VLM tier (e.g. claude-opus-4-8); "
+                         "off by default (T0/T1 only)")
     ap.add_argument("--out", default=str(RESULTS_DIR / "scorecard.json"))
     ap.add_argument("--no-archive", action="store_true",
                     help="skip writing the timestamped per-run archive in runs/")
     args = ap.parse_args(argv)
 
     load_dotenv()  # make keys in .env available before any model is built
-    report, raw_samples = run(args.models, args.categories, samples=args.samples)
+    report, raw_samples = run(args.models, args.categories, samples=args.samples,
+                              escalate=args.escalate, judge=args.judge)
     RESULTS_DIR.mkdir(exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(report, indent=2))
     print_scorecard(report)
