@@ -1,0 +1,23 @@
+{
+  "preliminary": true,
+  "judge": "claude-opus-4-8",
+  "tiers": [
+    "tree-match",
+    "visual diff",
+    "VLM judge"
+  ],
+  "models": {
+    "gemini-3.5-flash": {
+      "mvs_tasks": 64,
+      "perfect": 22,
+      "escalated": 39,
+      "unparseable": 3,
+      "rescued_visual": 30,
+      "rescued_vlm": 2,
+      "confirmed_different": 7,
+      "tree_f1": 0.798,
+      "validated_f1": 0.844
+    }
+  },
+  "gallery_url": "gallery.html"
+}

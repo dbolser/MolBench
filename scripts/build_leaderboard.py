@@ -510,7 +510,59 @@ def drilldown(ranked: list) -> str:
 </section>"""
 
 
-def build_index(data: dict, ranked: list) -> str:
+def tiered_grading(esc: dict | None) -> str:
+    """Preliminary results of the escalating (tiered) grader, + a gallery link."""
+    if not esc or not esc.get("models"):
+        return ""
+    name, s = next(iter(esc["models"].items()))
+    tree, val = s["tree_f1"], s["validated_f1"]
+    lift = val - tree
+    rescued = s.get("rescued_visual", 0) + s.get("rescued_vlm", 0)
+    escd = s.get("escalated", 0)
+    prelim = bool(esc.get("preliminary"))
+    badge = "<span class='badge open'>preliminary</span>" if prelim else ""
+    gallery_url = esc.get("gallery_url", "gallery.html")
+    judge = html.escape(esc.get("judge", ""))
+
+    cards = [
+        ("Tree-match F1", f"{tree:.3f}", "strict scene-tree match"),
+        ("Visually-validated F1", f"{val:.3f}", f"+{lift:.3f} after the cascade"),
+        ("Rescued by rendering", f"{rescued}/{escd}",
+         "imperfect trees that draw the right scene"),
+        ("Confirmed different", f"{s.get('confirmed_different', 0)}",
+         "genuine errors the cascade kept"),
+    ]
+    cards_html = NL.join(
+        "<div class='stat'>"
+        f"<div class='label'>{lab}</div>"
+        f"<div class='value'>{val_}</div>"
+        f"<div class='sub'>{sub}</div></div>"
+        for lab, val_, sub in cards
+    )
+    prelim_note = ("<i>Preliminary: one model so far; the full multi-model "
+                   "analysis is running.</i> " if prelim else "")
+
+    return f"""<section class="wrap" aria-label="Tiered grading">
+  <h2>Tiered grading {badge}</h2>
+  <p class="section-sub">Strict tree-matching is <b>conservative</b> &mdash; it
+     penalises scenes that are <i>rendered-equivalent</i> but expressed with a
+     different (sometimes cleaner) tree. The <b>escalating grader</b> renders each
+     imperfect prediction and escalates only when needed:
+     <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. On
+     <b>{html.escape(name)}</b> it rescued {rescued} of {escd} imperfect-tree
+     tasks &mdash; lifting the score from {tree:.2f} to {val:.2f} &mdash; while
+     confirming {s.get('confirmed_different', 0)} as genuinely different.</p>
+  <div class="stats">
+{cards_html}
+  </div>
+  <p class="section-sub" style="margin-top:1rem">
+     See the side-by-side <b>reference vs. model</b> renders, both scores, and each
+     verdict in the <a href="{gallery_url}"><b>evaluator gallery &rarr;</b></a>.
+     {prelim_note}Judge: {judge}.</p>
+</section>"""
+
+
+def build_index(data: dict, ranked: list, esc: dict | None = None) -> str:
     parts = [
         head("MolBench — Leaderboard",
              "A benchmark measuring whether LLM assistants can control "
@@ -521,6 +573,7 @@ def build_index(data: dict, ranked: list) -> str:
         findings(ranked),
         regime_table(ranked),
         drilldown(ranked),
+        tiered_grading(esc),
         footer(),
     ]
     return NL.join(p for p in parts if p)
@@ -710,8 +763,11 @@ def build(scorecard_path: pathlib.Path) -> None:
         reverse=True,
     )
 
+    esc_path = DOCS / "escalation_data.json"
+    esc = json.loads(esc_path.read_text()) if esc_path.exists() else None
+
     DOCS.mkdir(exist_ok=True)
-    (DOCS / "index.html").write_text(build_index(data, ranked))
+    (DOCS / "index.html").write_text(build_index(data, ranked, esc))
     # Keep a transparent copy of the scorecard alongside the site.
     (DOCS / "scorecard.json").write_text(json.dumps(data, indent=2))
 

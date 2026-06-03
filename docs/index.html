@@ -125,6 +125,27 @@
     </table>
   </div>
 </section>
+<section class="wrap" aria-label="Tiered grading">
+  <h2>Tiered grading <span class='badge open'>preliminary</span></h2>
+  <p class="section-sub">Strict tree-matching is <b>conservative</b> &mdash; it
+     penalises scenes that are <i>rendered-equivalent</i> but expressed with a
+     different (sometimes cleaner) tree. The <b>escalating grader</b> renders each
+     imperfect prediction and escalates only when needed:
+     <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. On
+     <b>gemini-3.5-flash</b> it rescued 32 of 39 imperfect-tree
+     tasks &mdash; lifting the score from 0.80 to 0.84 &mdash; while
+     confirming 7 as genuinely different.</p>
+  <div class="stats">
+<div class='stat'><div class='label'>Tree-match F1</div><div class='value'>0.798</div><div class='sub'>strict scene-tree match</div></div>
+<div class='stat'><div class='label'>Visually-validated F1</div><div class='value'>0.844</div><div class='sub'>+0.046 after the cascade</div></div>
+<div class='stat'><div class='label'>Rescued by rendering</div><div class='value'>32/39</div><div class='sub'>imperfect trees that draw the right scene</div></div>
+<div class='stat'><div class='label'>Confirmed different</div><div class='value'>7</div><div class='sub'>genuine errors the cascade kept</div></div>
+  </div>
+  <p class="section-sub" style="margin-top:1rem">
+     See the side-by-side <b>reference vs. model</b> renders, both scores, and each
+     verdict in the <a href="gallery.html"><b>evaluator gallery &rarr;</b></a>.
+     <i>Preliminary: one model so far; the full multi-model analysis is running.</i> Judge: claude-opus-4-8.</p>
+</section>
 <footer class="site-footer">
   <div class="wrap">
     <p><b>Data sources.</b> Structures from the
