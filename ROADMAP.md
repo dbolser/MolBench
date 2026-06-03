@@ -85,6 +85,37 @@ strong judge, structured protocol, self-variance reporting); rubric quality
 
 ---
 
+## Escalating C1 grader (DONE — scaffold)
+
+Cost-cascading grader so we only pay for expensive grading when needed
+(`molbench/escalate.py`):
+
+* **T0 tree-match** (free) → `correct` if F1 ≥ threshold.
+* **T1 visual diff** (`molbench/render.py` + `molbench/visual.py`, cheap) → render
+  reference & prediction, pixel-diff; `rendering-equivalent` if near-identical.
+  *Rescues `all` vs `polymer` etc. that tree-match under-scores* (demonstrated:
+  tree F1 0.78 → visual_sim 1.0 → rescued).
+* **T2 VLM judge** (`AnthropicImagePairJudge`, expensive) → semantic "same/different"
+  on the image pair, ignoring camera. *Rescues same-scene-different-angle*
+  (demonstrated: visual_sim 0.70 → VLM "same" 0.85). Also concentrates human review
+  on the genuinely-ambiguous T2 cases only.
+
+## Benchmark the grader (meta-evaluation)  ← TODO
+
+The grader is a system with its own error rate; validate it against ground truth.
+
+* **Positive control — `c1-identical-mvs`:** identical trees MUST render to
+  identical images (visual_sim ≈ 1.0) and be judged "same" — calibrates the T1
+  threshold and is a regression guard.
+* **Hard positives:** hand-built semantically-equivalent pairs (selector synonyms,
+  numbering aliases, child reordering, camera-only changes) that MUST be rescued at
+  T1 or T2.
+* **Negatives:** wrong colour / missing component / wrong structure pairs that MUST
+  NOT be rescued.
+* **Metric:** grader precision/recall on this control set; for T2, human-agreement
+  (κ) on the verdicts. Report it — a rescuing grader is only trustworthy with a
+  measured false-rescue rate.
+
 ## Phase C — rigor & paper-readiness
 
 * **C1. Human-agreement studies** for both the C1 grader (does tree-match F1 track

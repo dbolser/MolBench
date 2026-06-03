@@ -104,6 +104,15 @@ def test_mvs_downstream_credit_survives_upstream_mismatch():
     assert 0.5 < f1 < 1.0, f"expected downstream credit, got {f1}"
 
 
+def test_escalate_tree_tier():
+    # CI-safe: only the T0 (tree) tier, which needs no renderer/VLM.
+    from molbench.escalate import escalating_grade
+    same = escalating_grade(_scene(), _scene())            # identical trees
+    assert same["decision"] == "correct" and same["tier"] == "tree"
+    diff = escalating_grade(_scene("gray"), _scene("red"))  # differ, no render wired
+    assert diff["decision"] == "tree-only"                 # cannot escalate without render
+
+
 def test_render_state_wrapping():
     # Pure (no browser): a root node wraps into a valid single-state .mvsj payload.
     from molbench.render import to_mvs_state
@@ -136,6 +145,7 @@ if __name__ == "__main__":
     test_mvs_non_tree_scores_zero()
     test_mvs_download_variant_is_normalised()
     test_mvs_downstream_credit_survives_upstream_mismatch()
+    test_escalate_tree_tier()
     test_render_state_wrapping()
     test_run_archives_raw_samples_and_meta()
     print("all sanity checks passed")

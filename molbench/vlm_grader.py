@@ -44,6 +44,59 @@ class StubVLMJudge:
         }
 
 
+class AnthropicImagePairJudge:
+    """Tier-2 judge for the escalating C1 grader.
+
+    Given the reference and predicted renderings (which already differ at the pixel
+    level), decide whether they nonetheless depict the *same molecular
+    visualization* — the "semantically correct from another angle" case. Callable
+    as ``judge(ref_png, pred_png, prompt) -> {label, score, reason}``, matching the
+    ``vlm`` hook in ``escalate.escalating_grade``. The judge is itself a model, so
+    its id is recorded with each verdict.
+    """
+
+    def __init__(self, model_id: str = "claude-opus-4-8"):
+        self.model_id = model_id
+
+    def _b64(self, path: str) -> str:
+        import base64
+        with open(path, "rb") as fh:
+            return base64.standard_b64encode(fh.read()).decode()
+
+    def __call__(self, ref_png: str, pred_png: str, prompt: str | None) -> dict:
+        import json
+        import os
+        import anthropic
+
+        instruction = (
+            "Two images are renderings of a requested molecular scene"
+            + (f". The request was: {prompt!r}.\n" if prompt else ".\n")
+            + "Image 1 is the REFERENCE (a correct answer); image 2 is a model's "
+            "OUTPUT. Ignore camera angle/zoom/orientation. Judge whether image 2 "
+            "depicts the SAME visualization as image 1 — same structure, the same "
+            "components shown, equivalent representations (cartoon/surface/ball-and-"
+            "stick), equivalent colours, and the same regions highlighted/focused.\n"
+            'Return JSON only: {"label":"same"|"different","score":0..1,"reason":"..."}'
+        )
+        client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        content = []
+        for tag, path in (("Reference", ref_png), ("Output", pred_png)):
+            content.append({"type": "text", "text": tag + ":"})
+            content.append({"type": "image", "source": {
+                "type": "base64", "media_type": "image/png", "data": self._b64(path)}})
+        content.append({"type": "text", "text": instruction})
+        resp = client.messages.create(
+            model=self.model_id, max_tokens=600,
+            messages=[{"role": "user", "content": content}])
+        text = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text")
+        try:
+            data = json.loads(text[text.index("{"):text.rindex("}") + 1])
+        except (ValueError, json.JSONDecodeError):
+            return {"label": "?", "score": None, "reason": text[:200], "judge": self.model_id}
+        data["judge"] = self.model_id
+        return data
+
+
 class AnthropicVLMJudge:
     """Reference implementation sketch: send the PNG + rubric to a vision model.
 
