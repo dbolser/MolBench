@@ -126,25 +126,54 @@
   </div>
 </section>
 <section class="wrap" aria-label="Tiered grading">
-  <h2>Tiered grading <span class='badge open'>preliminary</span></h2>
+  <h2>Tiered grading </h2>
   <p class="section-sub">Strict tree-matching is <b>conservative</b> &mdash; it
      penalises scenes that are <i>rendered-equivalent</i> but expressed with a
-     different (sometimes cleaner) tree. The <b>escalating grader</b> renders each
-     imperfect prediction and escalates only when needed:
-     <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. On
-     <b>gemini-3.5-flash</b> it rescued 32 of 39 imperfect-tree
-     tasks &mdash; lifting the score from 0.80 to 0.84 &mdash; while
-     confirming 7 as genuinely different.</p>
+     different (sometimes cleaner) tree, e.g. selecting all cysteines with one
+     <code>label_comp_id&nbsp;CYS</code> rather than enumerating them. The
+     <b>escalating grader</b> renders each imperfect prediction and escalates only
+     when needed: <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. Across
+     7 models it confirmed 196 of 253
+     imperfect-tree tasks (77%) as the <i>right</i> scene &mdash; so
+     tree-match <b>under-credits every model</b> by +0.04 to
+     +0.11&nbsp;F1.</p>
   <div class="stats">
-<div class='stat'><div class='label'>Tree-match F1</div><div class='value'>0.798</div><div class='sub'>strict scene-tree match</div></div>
-<div class='stat'><div class='label'>Visually-validated F1</div><div class='value'>0.844</div><div class='sub'>+0.046 after the cascade</div></div>
-<div class='stat'><div class='label'>Rescued by rendering</div><div class='value'>32/39</div><div class='sub'>imperfect trees that draw the right scene</div></div>
-<div class='stat'><div class='label'>Confirmed different</div><div class='value'>7</div><div class='sub'>genuine errors the cascade kept</div></div>
+<div class='stat'><div class='label'>Models analysed</div><div class='value'>7</div><div class='sub'>tiered grading run</div></div>
+<div class='stat'><div class='label'>Imperfect-tree tasks</div><div class='value'>253</div><div class='sub'>escalated for a visual check</div></div>
+<div class='stat'><div class='label'>Rescued by rendering</div><div class='value'>196 <span class='pm'>(77%)</span></div><div class='sub'>drew the right scene despite a different tree</div></div>
+<div class='stat'><div class='label'>Tree-match under-credits</div><div class='value'>+0.04&ndash;0.11</div><div class='sub'>F1 gap recovered, every model</div></div>
   </div>
-  <p class="section-sub" style="margin-top:1rem">
-     See the side-by-side <b>reference vs. model</b> renders, both scores, and each
-     verdict in the <a href="gallery.html"><b>evaluator gallery &rarr;</b></a>.
-     <i>Preliminary: one model so far; the full multi-model analysis is running.</i> Judge: claude-opus-4-8.</p>
+  <div class="table-scroll" style="margin-top:1.5rem">
+    <table>
+      <thead>
+        <tr>
+          <th class="left">Model</th>
+          <th>Tree&nbsp;F1</th>
+          <th>Validated&nbsp;F1</th>
+          <th>&Delta;</th>
+          <th>Rescued</th>
+          <th>Diff.</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr><td class='model'>claude-haiku-4-5<span class='badge closed'>closed</span></td><td>0.853</td><td class='metric-primary'>0.945</td><td class='pm'>+0.092</td><td>41/51</td><td>10</td></tr>
+<tr><td class='model'>deepseek/deepseek-v3.2<span class='badge open'>open</span></td><td>0.865</td><td class='metric-primary'>0.939</td><td class='pm'>+0.074</td><td>28/37</td><td>9</td></tr>
+<tr><td class='model'>gemini-3.5-flash<span class='badge closed'>closed</span></td><td>0.798</td><td class='metric-primary'>0.907</td><td class='pm'>+0.109</td><td>32/39</td><td>7</td></tr>
+<tr><td class='model'>google/gemma-3-27b-it<span class='badge open'>open</span></td><td>0.858</td><td class='metric-primary'>0.903</td><td class='pm'>+0.045</td><td>10/18</td><td>8</td></tr>
+<tr><td class='model'>gpt-5.4-nano<span class='badge closed'>closed</span></td><td>0.690</td><td class='metric-primary'>0.781</td><td class='pm'>+0.091</td><td>35/41</td><td>6</td></tr>
+<tr><td class='model'>qwen/qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span></td><td>0.620</td><td class='metric-primary'>0.704</td><td class='pm'>+0.084</td><td>36/46</td><td>10</td></tr>
+<tr><td class='model'>openai/gpt-oss-20b<span class='badge open'>open</span></td><td>0.423</td><td class='metric-primary'>0.461</td><td class='pm'>+0.038</td><td>14/21</td><td>7</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
+     <b>Validated&nbsp;F1</b> uses a <i>rescue-only</i> policy: a task scores 1.0
+     when the cascade confirms it renders the reference scene, otherwise it keeps
+     its tree-match score (the VLM gives a binary same/different, not a graded
+     score). <b>Rescued</b> = render-equivalent or VLM-"same" of the escalated
+     (imperfect-tree) tasks; <b>Diff.</b> = confirmed genuinely different. See the
+     side-by-side evidence in the
+     <a href="gallery.html"><b>evaluator gallery &rarr;</b></a>. Judge: claude-opus-4-8.</p>
 </section>
 <footer class="site-footer">
   <div class="wrap">

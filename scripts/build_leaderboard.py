@@ -511,26 +511,29 @@ def drilldown(ranked: list) -> str:
 
 
 def tiered_grading(esc: dict | None) -> str:
-    """Preliminary results of the escalating (tiered) grader, + a gallery link."""
+    """Escalating (tiered) grader results across models, + a gallery link."""
     if not esc or not esc.get("models"):
         return ""
-    name, s = next(iter(esc["models"].items()))
-    tree, val = s["tree_f1"], s["validated_f1"]
-    lift = val - tree
-    rescued = s.get("rescued_visual", 0) + s.get("rescued_vlm", 0)
-    escd = s.get("escalated", 0)
+    models = esc["models"]
     prelim = bool(esc.get("preliminary"))
     badge = "<span class='badge open'>preliminary</span>" if prelim else ""
     gallery_url = esc.get("gallery_url", "gallery.html")
     judge = html.escape(esc.get("judge", ""))
+    totals = esc.get("totals", {})
+    lift_lo = esc.get("lift_min", 0.0)
+    lift_hi = esc.get("lift_max", 0.0)
+    resc = totals.get("rescued", 0)
+    escd = totals.get("escalated", 0)
+    resc_pct = f"{(resc / escd * 100):.0f}%" if escd else "&mdash;"
 
     cards = [
-        ("Tree-match F1", f"{tree:.3f}", "strict scene-tree match"),
-        ("Visually-validated F1", f"{val:.3f}", f"+{lift:.3f} after the cascade"),
-        ("Rescued by rendering", f"{rescued}/{escd}",
-         "imperfect trees that draw the right scene"),
-        ("Confirmed different", f"{s.get('confirmed_different', 0)}",
-         "genuine errors the cascade kept"),
+        ("Models analysed", f"{totals.get('n_models', len(models))}",
+         "tiered grading run"),
+        ("Imperfect-tree tasks", f"{escd}", "escalated for a visual check"),
+        ("Rescued by rendering", f"{resc} <span class='pm'>({resc_pct})</span>",
+         "drew the right scene despite a different tree"),
+        ("Tree-match under-credits", f"+{lift_lo:.2f}&ndash;{lift_hi:.2f}",
+         "F1 gap recovered, every model"),
     ]
     cards_html = NL.join(
         "<div class='stat'>"
@@ -539,26 +542,67 @@ def tiered_grading(esc: dict | None) -> str:
         f"<div class='sub'>{sub}</div></div>"
         for lab, val_, sub in cards
     )
-    prelim_note = ("<i>Preliminary: one model so far; the full multi-model "
-                   "analysis is running.</i> " if prelim else "")
+
+    ordered = sorted(models.items(), key=lambda kv: kv[1]["validated_f1"],
+                     reverse=True)
+    trows = []
+    for name, s in ordered:
+        open_badge = ("<span class='badge open'>open</span>" if is_open(name)
+                      else "<span class='badge closed'>closed</span>")
+        lift = s["validated_f1"] - s["tree_f1"]
+        rr = f"{s.get('rescued', 0)}/{s.get('escalated', 0)}"
+        trows.append(
+            "<tr>"
+            f"<td class='model'>{html.escape(name)}{open_badge}</td>"
+            f"<td>{s['tree_f1']:.3f}</td>"
+            f"<td class='metric-primary'>{s['validated_f1']:.3f}</td>"
+            f"<td class='pm'>+{lift:.3f}</td>"
+            f"<td>{rr}</td>"
+            f"<td>{s.get('confirmed_different', 0)}</td>"
+            "</tr>"
+        )
+    trows_html = NL.join(trows)
 
     return f"""<section class="wrap" aria-label="Tiered grading">
   <h2>Tiered grading {badge}</h2>
   <p class="section-sub">Strict tree-matching is <b>conservative</b> &mdash; it
      penalises scenes that are <i>rendered-equivalent</i> but expressed with a
-     different (sometimes cleaner) tree. The <b>escalating grader</b> renders each
-     imperfect prediction and escalates only when needed:
-     <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. On
-     <b>{html.escape(name)}</b> it rescued {rescued} of {escd} imperfect-tree
-     tasks &mdash; lifting the score from {tree:.2f} to {val:.2f} &mdash; while
-     confirming {s.get('confirmed_different', 0)} as genuinely different.</p>
+     different (sometimes cleaner) tree, e.g. selecting all cysteines with one
+     <code>label_comp_id&nbsp;CYS</code> rather than enumerating them. The
+     <b>escalating grader</b> renders each imperfect prediction and escalates only
+     when needed: <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. Across
+     {totals.get('n_models', len(models))} models it confirmed {resc} of {escd}
+     imperfect-tree tasks ({resc_pct}) as the <i>right</i> scene &mdash; so
+     tree-match <b>under-credits every model</b> by +{lift_lo:.2f} to
+     +{lift_hi:.2f}&nbsp;F1.</p>
   <div class="stats">
 {cards_html}
   </div>
-  <p class="section-sub" style="margin-top:1rem">
-     See the side-by-side <b>reference vs. model</b> renders, both scores, and each
-     verdict in the <a href="{gallery_url}"><b>evaluator gallery &rarr;</b></a>.
-     {prelim_note}Judge: {judge}.</p>
+  <div class="table-scroll" style="margin-top:1.5rem">
+    <table>
+      <thead>
+        <tr>
+          <th class="left">Model</th>
+          <th>Tree&nbsp;F1</th>
+          <th>Validated&nbsp;F1</th>
+          <th>&Delta;</th>
+          <th>Rescued</th>
+          <th>Diff.</th>
+        </tr>
+      </thead>
+      <tbody>
+{trows_html}
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
+     <b>Validated&nbsp;F1</b> uses a <i>rescue-only</i> policy: a task scores 1.0
+     when the cascade confirms it renders the reference scene, otherwise it keeps
+     its tree-match score (the VLM gives a binary same/different, not a graded
+     score). <b>Rescued</b> = render-equivalent or VLM-"same" of the escalated
+     (imperfect-tree) tasks; <b>Diff.</b> = confirmed genuinely different. See the
+     side-by-side evidence in the
+     <a href="{gallery_url}"><b>evaluator gallery &rarr;</b></a>. Judge: {judge}.</p>
 </section>"""
 
 
