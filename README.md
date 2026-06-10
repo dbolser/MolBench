@@ -10,6 +10,33 @@ assistants). It measures whether a model can turn natural-language requests
 against a real molecular viewer — [`ipymolstar`](https://github.com/molstar/ipymolstar)'s
 `PDBeMolstar` (Mol\*).
 
+## Example task
+
+Each task pairs a natural-language **prompt** with a frozen **reference
+answer**. For the API-calling track the answer is a list of canonical actions:
+
+```json
+{
+  "prompt": "Load hen egg-white lysozyme (1LYZ), keep the backbone as cartoon, and render the two catalytic residues Glu35 and Asp52 on chain A as a molecular surface.",
+  "reference": [
+    {"action": "load", "molecule_id": "1lyz"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"auth_asym_id": "A", "residue_number": 35, "representation": "molecular-surface"},
+      {"auth_asym_id": "A", "residue_number": 52, "representation": "molecular-surface"}
+    ]}
+  ]
+}
+```
+
+The model sees only the prompt (plus the frozen API reference) and must emit the
+actions. Grading is tolerant: a model that finds the right chain and residues but
+picks the wrong surface flavour still earns partial credit. Tasks also probe
+domain knowledge; here, the lysozyme catalytic dyad is Glu35/Asp52. The primary
+**MVS track** works the same way, but the reference answer is a
+[MolViewSpec](https://molstar.org/mol-view-spec/) scene tree
+(see [`tasks/mvs/mvs_001.json`](tasks/mvs/mvs_001.json)).
+
 ## Tracks
 
 | Track | Tasks | What the model emits | How it's graded |
