@@ -213,11 +213,14 @@ def hero(data: dict, ranked: list) -> str:
     return f"""<section class="hero wrap" aria-label="Overview">
   <span class="eyebrow">Molecular-visualization benchmark</span>
   <h1>MolBench</h1>
-  <p class="pitch">Can LLM assistants <b>control</b> a molecular viewer? MolBench
-     turns natural-language requests &mdash; <i>&ldquo;show the heme as orange
-     ball-and-stick&rdquo;</i>, <i>&ldquo;highlight the R175H pathogenic
-     variant&rdquo;</i> &mdash; into <b>MolViewSpec</b> scene trees and grades
-     them deterministically, engine-neutral.</p>
+  <p class="pitch">Can LLM assistants turn natural-language requests &mdash;
+     <i>&ldquo;show the heme as orange ball-and-stick&rdquo;</i>,
+     <i>&ldquo;superpose the subunits and hide the waters&rdquo;</i> &mdash; into
+     correct molecular visualizations? MolBench measures <b>two distinct
+     skills</b>: <b>authoring</b> a declarative <b>MolViewSpec</b> scene (<i>what
+     the picture is</i>) and <b>controlling</b> a live <b>Mol*</b> viewer through
+     imperative API calls (<i>what the tool does</i>). Both are graded
+     deterministically against frozen, correct-by-construction answers.</p>
   <div class="stats">
 {cards_html}
   </div>
@@ -254,9 +257,13 @@ def leaderboard_table(ranked: list) -> str:
 
     return f"""<section class="wrap" aria-label="Leaderboard">
   <h2>Leaderboard</h2>
-  <p class="section-sub">Ranked by the primary <b>MVS&nbsp;F1</b> track
-     (MolViewSpec scene-tree match; parse failures count as 0). The leader is
-     highlighted. Open-weight models are namespaced with a provider slash.</p>
+  <p class="section-sub">Two tracks, two skills. <b>MVS&nbsp;F1</b> (the primary
+     ranking) scores <i>scene authoring</i> &mdash; the declarative MolViewSpec
+     tree a model emits, matched against the reference (parse failures count as 0).
+     <b>API&nbsp;F1</b> scores <i>tool control</i> &mdash; the imperative
+     Mol*/PDBeMolstar calls that drive a live viewer (superpose, hide waters, spin,
+     focus), the operations a static scene cannot express. The leader is
+     highlighted; open-weight models are namespaced with a provider slash.</p>
   <div class="table-scroll">
     <table>
       <thead>
@@ -277,13 +284,17 @@ def leaderboard_table(ranked: list) -> str:
     </table>
   </div>
   <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
-    <b>MVS&nbsp;F1</b>: primary, engine-agnostic scene-tree score (parse
-    failures = 0). <b>Parse&nbsp;%</b>: share of samples that emitted valid
-    output. <b>Cond&nbsp;F1</b>: scene quality <i>given</i> valid output &mdash;
-    the gap from MVS&nbsp;F1 measures how much a model is dragged down by
-    malformed JSON rather than visualization error. <b>API&nbsp;F1</b>: the
-    secondary imperative-call track. <span class="pm">&plusmn;</span> is the
-    spread across tasks; costs use provider list prices.
+    <b>MVS&nbsp;F1</b>: primary scene-authoring score (parse failures = 0).
+    Engine-neutral <i>by design</i> &mdash; though Mol* is currently the only
+    viewer that implements MolViewSpec. <b>Parse&nbsp;%</b>: share of samples that
+    emitted valid output. <b>Cond&nbsp;F1</b>: scene quality <i>given</i> valid
+    output &mdash; the gap from MVS&nbsp;F1 measures how much a model is dragged
+    down by malformed JSON rather than visualization error. <b>API&nbsp;F1</b>:
+    the tool-control track &mdash; imperative PDBeMolstar calls (superposition,
+    component toggles, camera) that specify a <i>sequence of actions</i> on a live
+    viewer rather than a scene. <b>Parse&nbsp;%</b> and <b>Cond&nbsp;F1</b> reflect
+    the primary MVS run. <span class="pm">&plusmn;</span> is the spread across
+    tasks; costs use provider list prices.
   </p>
 </section>"""
 
@@ -609,8 +620,9 @@ def tiered_grading(esc: dict | None) -> str:
 def build_index(data: dict, ranked: list, esc: dict | None = None) -> str:
     parts = [
         head("MolBench — Leaderboard",
-             "A benchmark measuring whether LLM assistants can control "
-             "molecular visualization via MolViewSpec scene trees."),
+             "A benchmark measuring whether LLM assistants can author declarative "
+             "MolViewSpec molecular scenes and drive a live Mol* viewer through "
+             "imperative API calls."),
         header("index"),
         hero(data, ranked),
         leaderboard_table(ranked),
