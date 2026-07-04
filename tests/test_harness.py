@@ -48,6 +48,39 @@ def test_partial_credit_for_right_residues_wrong_colour():
     assert 0.6 < f1 < 1.0, f"expected partial credit, got {f1}"
 
 
+def test_load_modifiers_are_scored():
+    # A task about loading a specific assembly must not be satisfied by a bare load.
+    ref = [{"action": "load", "molecule_id": "6vxx", "assembly_id": "1"}]
+    assert grader.grade(ref, ref)["f1"] == 1.0
+    bare = [{"action": "load", "molecule_id": "6vxx"}]
+    assert grader.grade(ref, bare)["f1"] < 1.0, "bare load must not fully satisfy an assembly task"
+    # Same for the AlphaFold flag.
+    ref_af = [{"action": "load", "molecule_id": "P04637", "alphafold": True}]
+    assert grader.grade(ref_af, ref_af)["f1"] == 1.0
+    assert grader.grade(ref_af, [{"action": "load", "molecule_id": "P04637"}])["f1"] < 1.0
+
+
+def test_tooltip_text_is_scored():
+    ref = [{"action": "tooltips", "data": [
+        {"auth_asym_id": "A", "residue_number": 35, "tooltip": "catalytic glutamate"}]}]
+    right = [{"action": "tooltips", "data": [
+        {"auth_asym_id": "A", "residue_number": 35, "tooltip": "Catalytic  Glutamate"}]}]
+    wrong = [{"action": "tooltips", "data": [
+        {"auth_asym_id": "A", "residue_number": 35, "tooltip": "something else"}]}]
+    assert grader.grade(ref, right)["f1"] == 1.0, "case/whitespace should still match"
+    assert grader.grade(ref, wrong)["f1"] < 1.0, "wrong tooltip text must lose credit"
+
+
+def test_sidechain_flag_is_scored():
+    ref = [{"action": "color", "data": [
+        {"auth_asym_id": "A", "residue_number": 57, "sideChain": True,
+         "color": {"r": 220, "g": 0, "b": 220}}]}]
+    without = [{"action": "color", "data": [
+        {"auth_asym_id": "A", "residue_number": 57, "color": {"r": 220, "g": 0, "b": 220}}]}]
+    assert grader.grade(ref, ref)["f1"] == 1.0
+    assert grader.grade(ref, without)["f1"] < 1.0, "omitting required side chains must lose credit"
+
+
 # --- MVS (scene-tree) grader calibration -----------------------------------------
 
 def _scene(color="gray"):
@@ -138,6 +171,9 @@ if __name__ == "__main__":
     test_self_grading_is_perfect()
     test_wrong_prediction_scores_low()
     test_partial_credit_for_right_residues_wrong_colour()
+    test_load_modifiers_are_scored()
+    test_tooltip_text_is_scored()
+    test_sidechain_flag_is_scored()
     test_mvs_self_grading_is_perfect()
     test_mvs_is_metadata_insensitive()
     test_mvs_partial_credit_for_wrong_colour()

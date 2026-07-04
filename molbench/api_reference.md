@@ -32,6 +32,7 @@ operations by calling **methods**.
 | `select_color` | str | Selection colour (hex). |
 | `lighting` | enum | `flat` \| `matte` \| `glossy` \| `metallic` \| `plastic`. |
 | `spin` | bool | Spin the camera. |
+| `superposition` | bool | Turn on the PDBe superposition view (structural alignment of the entry's chains/assemblies). |
 | `validation_annotation` | bool | Overlay PDBe validation colours. |
 | `domain_annotation` | bool | Overlay domain annotations. |
 | `symmetry_annotation` | bool | Overlay symmetry annotations. |
