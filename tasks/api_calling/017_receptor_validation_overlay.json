@@ -1,0 +1,13 @@
+{
+  "id": "api-017",
+  "category": "api_calling",
+  "title": "Validation overlay on a cartoon",
+  "prompt": "Load the A2A adenosine receptor (3EML) as a cartoon and overlay the PDBe geometry-validation colouring.",
+  "reference": [
+    {"action": "load", "molecule_id": "3eml"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "set_property", "name": "validation_annotation", "value": true}
+  ],
+  "skills": ["load", "global-style", "annotation"],
+  "notes": "Tests the validation_annotation overlay trait, a PDBe-specific viewer feature with no scene-tree equivalent."
+}

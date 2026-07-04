@@ -50,15 +50,29 @@ def _selection_signature(sel: dict[str, Any]) -> tuple:
 
 
 def _attr_agreement(a: dict[str, Any], b: dict[str, Any]) -> Number:
-    """How well two matched selections agree on *styling* (colour/representation)."""
+    """How well two matched selections agree on *styling*: colour, representation,
+    side-chain visibility, and tooltip text. Each attribute is only scored when at
+    least one side asks for it, so a task that requires (say) a specific tooltip
+    string or shown side chains is graded on it rather than getting it for free."""
     checks: list[bool] = []
     if "color" in a or "color" in b:
         checks.append(_color_eq(a.get("color"), b.get("color")))
     if "representation" in a or "representation" in b:
         checks.append(a.get("representation") == b.get("representation"))
+    if "sideChain" in a or "sideChain" in b:
+        checks.append(bool(a.get("sideChain")) == bool(b.get("sideChain")))
+    if "tooltip" in a or "tooltip" in b:
+        checks.append(_text_eq(a.get("tooltip"), b.get("tooltip")))
     if not checks:
         return 1.0
     return sum(checks) / len(checks)
+
+
+def _text_eq(a: Any, b: Any) -> bool:
+    """Whitespace- and case-insensitive text match (for tooltip labels)."""
+    if isinstance(a, str) and isinstance(b, str):
+        return " ".join(a.split()).casefold() == " ".join(b.split()).casefold()
+    return a == b
 
 
 def _color_eq(a: Any, b: Any) -> bool:
@@ -104,12 +118,25 @@ def action_similarity(ref: dict[str, Any], pred: dict[str, Any]) -> Number:
         return 0.0
 
     if a == "load":
-        if _norm_id(ref.get("molecule_id")) == _norm_id(pred.get("molecule_id")) \
-                and ref.get("molecule_id") is not None:
+        id_match = (ref.get("molecule_id") is not None
+                    and _norm_id(ref.get("molecule_id")) == _norm_id(pred.get("molecule_id")))
+        if not id_match:
+            return 0.6 if (ref.get("custom_data") and pred.get("custom_data")) else 0.0
+        # Right structure. If the reference asked for load modifiers (a specific
+        # biological assembly, the AlphaFold model, a preset), score whether the
+        # prediction requested them too — otherwise "load 6vxx" would earn full
+        # marks on a task whose whole point is "load assembly 1 of 6vxx".
+        mods: list[bool] = []
+        if ref.get("assembly_id") is not None:
+            mods.append(str(ref.get("assembly_id")) == str(pred.get("assembly_id")))
+        if ref.get("preset") is not None:
+            mods.append(ref.get("preset") == pred.get("preset"))
+        if ref.get("alphafold"):
+            mods.append(bool(pred.get("alphafold")))
+        if not mods:
             return 1.0
-        if ref.get("custom_data") and pred.get("custom_data"):
-            return 0.6
-        return 0.0
+        # 70% for the right structure, 30% for the requested load modifiers.
+        return 0.7 + 0.3 * (sum(mods) / len(mods))
 
     if a == "set_visual_style":
         return 1.0 if ref.get("style") == pred.get("style") else 0.0

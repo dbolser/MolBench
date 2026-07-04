@@ -1,0 +1,13 @@
+{
+  "id": "api-015",
+  "category": "api_calling",
+  "title": "Spike trimer assembly as surface",
+  "prompt": "Load the SARS-CoV-2 spike glycoprotein (6VXX), build the biological assembly (assembly 1), show it as a molecular surface, and hide the carbohydrates.",
+  "reference": [
+    {"action": "load", "molecule_id": "6vxx", "assembly_id": "1"},
+    {"action": "set_visual_style", "style": "molecular-surface"},
+    {"action": "set_property", "name": "hide_carbs", "value": true}
+  ],
+  "skills": ["load", "assembly", "global-style", "surface", "hide-component"],
+  "notes": "Tests loading a specific biological assembly (assembly_id) plus a component toggle. 6VXX is a heavily glycosylated homotrimer, so hide_carbs is meaningful."
+}

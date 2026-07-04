@@ -1,0 +1,16 @@
+{
+  "id": "api-010",
+  "category": "api_calling",
+  "title": "Presentation view of ubiquitin",
+  "prompt": "Load ubiquitin (1UBQ) as a cartoon with glossy lighting on a black background, hide the waters, and set it slowly spinning.",
+  "reference": [
+    {"action": "load", "molecule_id": "1ubq"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "set_property", "name": "lighting", "value": "glossy"},
+    {"action": "set_property", "name": "bg_color", "value": "#000000"},
+    {"action": "set_property", "name": "hide_water", "value": true},
+    {"action": "set_property", "name": "spin", "value": true}
+  ],
+  "skills": ["load", "global-style", "lighting", "set-background", "hide-component", "spin"],
+  "notes": "Pure tool-control: four independent widget toggles. Order among the set_property calls does not matter to the grader."
+}

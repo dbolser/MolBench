@@ -1,0 +1,22 @@
+{
+  "id": "api-019",
+  "category": "api_calling",
+  "title": "Trypsin catalytic triad, side chains and focus",
+  "prompt": "Load trypsin (3PTB) as a cartoon, colour the catalytic triad (His57, Asp102 and Ser195 on chain A) magenta with their side chains shown, and centre the camera on them.",
+  "reference": [
+    {"action": "load", "molecule_id": "3ptb"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"auth_asym_id": "A", "residue_number": 57, "sideChain": true, "color": {"r": 220, "g": 0, "b": 220}},
+      {"auth_asym_id": "A", "residue_number": 102, "sideChain": true, "color": {"r": 220, "g": 0, "b": 220}},
+      {"auth_asym_id": "A", "residue_number": 195, "sideChain": true, "color": {"r": 220, "g": 0, "b": 220}}
+    ]},
+    {"action": "focus", "data": [
+      {"auth_asym_id": "A", "residue_number": 57},
+      {"auth_asym_id": "A", "residue_number": 102},
+      {"auth_asym_id": "A", "residue_number": 195}
+    ]}
+  ],
+  "skills": ["load", "global-style", "select-by-residue", "sidechain", "color", "focus-selection"],
+  "notes": "Domain fact: the serine-protease catalytic triad is His57/Asp102/Ser195. Tests a multi-residue selection with side chains and a camera focus on the same set."
+}
