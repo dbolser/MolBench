@@ -1,0 +1,15 @@
+{
+  "id": "api-012",
+  "category": "api_calling",
+  "title": "Rhodopsin and its retinal",
+  "prompt": "Load bovine rhodopsin (1F88) as a cartoon and show the covalently bound retinal as orange ball-and-stick.",
+  "reference": [
+    {"action": "load", "molecule_id": "1f88"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"label_comp_id": "RET", "representation": "ball-and-stick", "color": {"r": 255, "g": 165, "b": 0}}
+    ]}
+  ],
+  "skills": ["load", "global-style", "select-by-ligand", "per-selection-representation", "color"],
+  "notes": "Domain fact: rhodopsin's chromophore is 11-cis retinal (RET), Schiff-base linked to Lys296. Tests ligand selection in a membrane GPCR."
+}

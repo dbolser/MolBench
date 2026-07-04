@@ -1,0 +1,13 @@
+{
+  "id": "api-007",
+  "category": "api_calling",
+  "title": "Cartoon streptavidin, focus the biotin",
+  "prompt": "Load streptavidin (1STP), show it as a cartoon, and centre the view on the bound biotin.",
+  "reference": [
+    {"action": "load", "molecule_id": "1stp"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "focus", "data": [{"label_comp_id": "BTN"}]}
+  ],
+  "skills": ["load", "global-style", "focus-ligand"],
+  "notes": "Domain fact: streptavidin's ligand is biotin, comp id BTN. Tests selecting a ligand by label_comp_id and driving the camera to it."
+}

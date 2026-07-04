@@ -1,0 +1,13 @@
+{
+  "id": "api-020",
+  "category": "api_calling",
+  "title": "Set UI colours, then reset the camera",
+  "prompt": "Load haemoglobin (1HHO), set the hover-highlight colour to yellow and the selection colour to cyan, then reset the camera to the default view.",
+  "reference": [
+    {"action": "load", "molecule_id": "1hho"},
+    {"action": "set_color", "highlight": {"r": 255, "g": 255, "b": 0}, "select": {"r": 0, "g": 255, "b": 255}},
+    {"action": "reset", "camera": true}
+  ],
+  "skills": ["load", "set-ui-colors", "reset-camera"],
+  "notes": "Tests the set_color and reset actions, which no earlier task exercised. reset takes boolean flags (camera/theme/highlightColor/selectColor)."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "api-016",
+  "category": "api_calling",
+  "title": "AlphaFold model with confidence colouring",
+  "prompt": "Load the AlphaFold model of human tumour suppressor p53 (UniProt P04637) as a cartoon, coloured by the model's per-residue confidence.",
+  "reference": [
+    {"action": "load", "molecule_id": "P04637", "alphafold": true},
+    {"action": "set_visual_style", "style": "cartoon"}
+  ],
+  "skills": ["load", "alphafold", "global-style"],
+  "notes": "Tests the AlphaFold path: alphafold_view loads the predicted model addressed by UniProt accession and applies pLDDT confidence colouring automatically."
+}

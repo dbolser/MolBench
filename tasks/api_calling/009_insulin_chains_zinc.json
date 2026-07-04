@@ -1,0 +1,17 @@
+{
+  "id": "api-009",
+  "category": "api_calling",
+  "title": "Colour insulin by chain, zinc as spacefill",
+  "prompt": "Load insulin (4INS) as a cartoon, colour the A chain blue and the B chain gold, and render the zinc ions as grey spacefill.",
+  "reference": [
+    {"action": "load", "molecule_id": "4ins"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"auth_asym_id": "A", "color": {"r": 30, "g": 90, "b": 220}},
+      {"auth_asym_id": "B", "color": {"r": 220, "g": 180, "b": 20}},
+      {"label_comp_id": "ZN", "representation": "spacefill", "color": {"r": 130, "g": 130, "b": 130}}
+    ]}
+  ],
+  "skills": ["load", "global-style", "select-by-chain", "select-by-ligand", "per-selection-representation", "color"],
+  "notes": "Domain fact: 4INS carries structural zinc ions (ZN). Tests per-chain colouring (auth_asym_id A/B) alongside a ligand selection."
+}

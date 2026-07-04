@@ -1,0 +1,16 @@
+{
+  "id": "api-018",
+  "category": "api_calling",
+  "title": "Domain overlay and a residue tooltip",
+  "prompt": "Load hen egg-white lysozyme (1AKI) as a cartoon, overlay the domain annotations, and attach a tooltip reading 'catalytic glutamate' to Glu35 on chain A.",
+  "reference": [
+    {"action": "load", "molecule_id": "1aki"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "set_property", "name": "domain_annotation", "value": true},
+    {"action": "tooltips", "data": [
+      {"auth_asym_id": "A", "residue_number": 35, "tooltip": "catalytic glutamate"}
+    ]}
+  ],
+  "skills": ["load", "global-style", "annotation", "select-by-residue", "tooltip"],
+  "notes": "Domain fact: lysozyme's catalytic dyad is Glu35/Asp52. Tests the tooltips action and the domain_annotation overlay together."
+}

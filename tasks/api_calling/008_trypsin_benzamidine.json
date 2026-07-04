@@ -1,0 +1,16 @@
+{
+  "id": "api-008",
+  "category": "api_calling",
+  "title": "Trypsin inhibitor and catalytic serine",
+  "prompt": "Load bovine trypsin (3PTB) as a cartoon, then show the benzamidine inhibitor as green ball-and-stick and the catalytic Ser195 on chain A as red ball-and-stick.",
+  "reference": [
+    {"action": "load", "molecule_id": "3ptb"},
+    {"action": "set_visual_style", "style": "cartoon"},
+    {"action": "color", "data": [
+      {"label_comp_id": "BEN", "representation": "ball-and-stick", "color": {"r": 0, "g": 180, "b": 0}},
+      {"auth_asym_id": "A", "residue_number": 195, "representation": "ball-and-stick", "color": {"r": 220, "g": 0, "b": 0}}
+    ]}
+  ],
+  "skills": ["load", "global-style", "select-by-ligand", "select-by-residue", "per-selection-representation", "color"],
+  "notes": "Domain facts: 3PTB's inhibitor is benzamidine (BEN); trypsin's catalytic triad is His57/Asp102/Ser195. Mixes a ligand selection and a residue selection in one color call."
+}
