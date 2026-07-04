@@ -35,7 +35,7 @@
      deterministically against frozen, correct-by-construction answers.</p>
   <div class="stats">
 <div class='stat'><div class='label'>Models evaluated</div><div class='value'>8</div><div class='sub'>open &amp; closed</div></div>
-<div class='stat'><div class='label'>Benchmark tasks</div><div class='value'>70</div><div class='sub'>&times;3 samples each</div></div>
+<div class='stat'><div class='label'>Benchmark tasks</div><div class='value'>84</div><div class='sub'>&times;3 samples each</div></div>
 <div class='stat'><div class='label'>MVS&nbsp;F1 leader</div><div class='value'>0.87</div><div class='sub'>claude-haiku-4-5</div></div>
 <div class='stat'><div class='label'>Top open model</div><div class='value'>0.85</div><div class='sub'>deepseek-v3.2 at $0.0873</div></div>
   </div>
@@ -64,14 +64,14 @@
         </tr>
       </thead>
       <tbody>
-<tr class='leader'><td class='rank'>1</td><td class='model'>claude-haiku-4-5<span class='badge closed'>closed</span><span class='spec'>anthropic:claude-haiku-4-5</span></td><td class='metric-primary'>0.869 <span class='pm'>&plusmn;0.11</span></td><td>100%</td><td>0.876</td><td>0.944 <span class='pm'>&plusmn;0.12</span></td><td>$0.6254</td><td>1.87s</td></tr>
-<tr><td class='rank'>2</td><td class='model'>deepseek/deepseek-v3.2<span class='badge open'>open</span><span class='spec'>openrouter:deepseek/deepseek-v3.2</span></td><td class='metric-primary'>0.847 <span class='pm'>&plusmn;0.18</span></td><td>99%</td><td>0.864</td><td>0.952 <span class='pm'>&plusmn;0.11</span></td><td>$0.0873</td><td>8.85s</td></tr>
-<tr><td class='rank'>3</td><td class='model'>google/gemma-3-27b-it<span class='badge open'>open</span><span class='spec'>openrouter:google/gemma-3-27b-it</span></td><td class='metric-primary'>0.830 <span class='pm'>&plusmn;0.25</span></td><td>94%</td><td>0.895</td><td>0.949 <span class='pm'>&plusmn;0.08</span></td><td>$0.0329</td><td>5.61s</td></tr>
-<tr><td class='rank'>4</td><td class='model'>gemini-3.5-flash<span class='badge closed'>closed</span><span class='spec'>gemini:gemini-3.5-flash</span></td><td class='metric-primary'>0.811 <span class='pm'>&plusmn;0.22</span></td><td>96%</td><td>0.855</td><td>0.944 <span class='pm'>&plusmn;0.12</span></td><td>$0.2008</td><td>5.20s</td></tr>
-<tr><td class='rank'>5</td><td class='model'>gpt-5.4-nano<span class='badge closed'>closed</span><span class='spec'>openai:gpt-5.4-nano</span></td><td class='metric-primary'>0.681 <span class='pm'>&plusmn;0.22</span></td><td>84%</td><td>0.832</td><td>0.870 <span class='pm'>&plusmn;0.16</span></td><td>$0.0324</td><td>2.53s</td></tr>
-<tr><td class='rank'>6</td><td class='model'>qwen/qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span><span class='spec'>openrouter:qwen/qwen3-30b-a3b-instruct-2507</span></td><td class='metric-primary'>0.605 <span class='pm'>&plusmn;0.29</span></td><td>78%</td><td>0.813</td><td>0.907 <span class='pm'>&plusmn;0.13</span></td><td>$0.0199</td><td>4.35s</td></tr>
-<tr><td class='rank'>7</td><td class='model'>openai/gpt-oss-20b<span class='badge open'>open</span><span class='spec'>openrouter:openai/gpt-oss-20b</span></td><td class='metric-primary'>0.529 <span class='pm'>&plusmn;0.27</span></td><td>65%</td><td>0.863</td><td>0.924 <span class='pm'>&plusmn;0.08</span></td><td>$0.0280</td><td>7.15s</td></tr>
-<tr><td class='rank'>8</td><td class='model'>baseline-rules<span class='badge closed'>closed</span></td><td class='metric-primary'>0.000</td><td>9%</td><td>0.718</td><td>0.718 <span class='pm'>&plusmn;0.09</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr class='leader'><td class='rank'>1</td><td class='model'>claude-haiku-4-5<span class='badge closed'>closed</span><span class='spec'>anthropic:claude-haiku-4-5</span></td><td class='metric-primary'>0.869 <span class='pm'>&plusmn;0.11</span></td><td>100%</td><td>0.876</td><td>0.928 <span class='pm'>&plusmn;0.14</span></td><td>$0.6254</td><td>1.87s</td></tr>
+<tr><td class='rank'>2</td><td class='model'>deepseek/deepseek-v3.2<span class='badge open'>open</span><span class='spec'>openrouter:deepseek/deepseek-v3.2</span></td><td class='metric-primary'>0.847 <span class='pm'>&plusmn;0.18</span></td><td>99%</td><td>0.864</td><td>0.859 <span class='pm'>&plusmn;0.28</span></td><td>$0.0873</td><td>8.85s</td></tr>
+<tr><td class='rank'>3</td><td class='model'>google/gemma-3-27b-it<span class='badge open'>open</span><span class='spec'>openrouter:google/gemma-3-27b-it</span></td><td class='metric-primary'>0.830 <span class='pm'>&plusmn;0.25</span></td><td>94%</td><td>0.895</td><td>0.834 <span class='pm'>&plusmn;0.15</span></td><td>$0.0329</td><td>5.61s</td></tr>
+<tr><td class='rank'>4</td><td class='model'>gemini-3.5-flash<span class='badge closed'>closed</span><span class='spec'>gemini:gemini-3.5-flash</span></td><td class='metric-primary'>0.811 <span class='pm'>&plusmn;0.22</span></td><td>96%</td><td>0.855</td><td>0.951 <span class='pm'>&plusmn;0.10</span></td><td>$0.2008</td><td>5.20s</td></tr>
+<tr><td class='rank'>5</td><td class='model'>gpt-5.4-nano<span class='badge closed'>closed</span><span class='spec'>openai:gpt-5.4-nano</span></td><td class='metric-primary'>0.681 <span class='pm'>&plusmn;0.22</span></td><td>84%</td><td>0.832</td><td>0.835 <span class='pm'>&plusmn;0.17</span></td><td>$0.0324</td><td>2.53s</td></tr>
+<tr><td class='rank'>6</td><td class='model'>qwen/qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span><span class='spec'>openrouter:qwen/qwen3-30b-a3b-instruct-2507</span></td><td class='metric-primary'>0.605 <span class='pm'>&plusmn;0.29</span></td><td>78%</td><td>0.813</td><td>0.897 <span class='pm'>&plusmn;0.13</span></td><td>$0.0199</td><td>4.35s</td></tr>
+<tr><td class='rank'>7</td><td class='model'>openai/gpt-oss-20b<span class='badge open'>open</span><span class='spec'>openrouter:openai/gpt-oss-20b</span></td><td class='metric-primary'>0.529 <span class='pm'>&plusmn;0.27</span></td><td>65%</td><td>0.863</td><td>0.881 <span class='pm'>&plusmn;0.14</span></td><td>$0.0280</td><td>7.15s</td></tr>
+<tr><td class='rank'>8</td><td class='model'>baseline-rules<span class='badge closed'>closed</span></td><td class='metric-primary'>0.000</td><td>9%</td><td>0.718</td><td>0.715 <span class='pm'>&plusmn;0.10</span></td><td>&mdash;</td><td>&mdash;</td></tr>
       </tbody>
     </table>
   </div>
@@ -84,8 +84,9 @@
     down by malformed JSON rather than visualization error. <b>API&nbsp;F1</b>:
     the tool-control track &mdash; imperative PDBeMolstar calls (superposition,
     component toggles, camera) that specify a <i>sequence of actions</i> on a live
-    viewer rather than a scene. <span class="pm">&plusmn;</span> is the spread
-    across tasks; costs use provider list prices.
+    viewer rather than a scene. <b>Parse&nbsp;%</b> and <b>Cond&nbsp;F1</b> reflect
+    the primary MVS run. <span class="pm">&plusmn;</span> is the spread across
+    tasks; costs use provider list prices.
   </p>
 </section>
 <section class="wrap" aria-label="Key findings">
