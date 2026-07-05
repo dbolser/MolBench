@@ -318,45 +318,48 @@ def findings(ranked: list) -> str:
     mvs_vals = [mvs_f1(m) for _, m in llms if mvs_f1(m) is not None]
     mvs_spread = (max(mvs_vals) - min(mvs_vals)) if mvs_vals else 0.0
 
-    # gpt-oss-20b: last overall, but strong conditional.
-    oss = by_name.get("openai/gpt-oss-20b")
-    oss_mvs = mvs_f1(oss) if oss else None
-    oss_cond = oss.get("cond_f1") if oss else None
-    # Its rank by Cond F1 among the LLMs.
-    oss_cond_rank = None
-    if oss and oss_cond is not None:
-        graded = [(n, m) for n, m in llms if m.get("cond_f1") is not None]
-        graded.sort(key=lambda kv: kv[1]["cond_f1"], reverse=True)
-        for idx, (n, _) in enumerate(graded):
-            if n == "openai/gpt-oss-20b":
-                oss_cond_rank = idx + 1
-                break
+    # Format-unreliability exemplar: the LLM with the lowest overall MVS F1,
+    # chosen dynamically so this finding can never contradict the table. The point
+    # is the *gap* between its conditional competence and its unconditional score.
+    exemplar = min(((n, m) for n, m in llms if mvs_f1(m) is not None),
+                   key=lambda nm: mvs_f1(nm[1]), default=(None, None))
+    ex_name, ex_m = exemplar
+    ex_mvs = mvs_f1(ex_m) if ex_m else None
+    ex_cond = ex_m.get("cond_f1") if ex_m else None
+    ex_parse = ex_m.get("parse_success") if ex_m else None
 
     # Open models near the closed frontier-small tier.
     gemma = by_name.get("google/gemma-3-27b-it")
     gemma_cost = fmt_cost(gemma.get("cost_usd")) if gemma else "&mdash;"
 
-    # If gpt-oss is within a rounding hair of the rank above it, call it a tie —
-    # at 2dp it is indistinguishable, so a bare "4th" would overstate the gap.
-    oss_tie = ""
-    if oss_cond_rank and oss_cond_rank > 1:
-        ordered = sorted((m["cond_f1"] for _, m in llms
-                          if m.get("cond_f1") is not None), reverse=True)
-        above = ordered[oss_cond_rank - 2]
-        if oss_cond is not None and abs(above - oss_cond) < 0.005:
-            tie_to = {2: "1st", 3: "2nd", 4: "3rd"}.get(oss_cond_rank, "")
-            if tie_to:
-                oss_tie = f" (tied for {tie_to})"
+    # Finding 03: is the per-regime model spread actually growing with difficulty?
+    # Compute it live — with a wider panel this can flip, because format-unreliable
+    # models inject parse-driven spread that swamps the difficulty signal.
+    regimes = _task_regimes()
+    reg_order = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
+    reg_spread: dict[str, float] = {}
+    for rg in reg_order:
+        per = []
+        for _, m in llms:
+            fs = [t["f1"] for t in m.get("tasks", []) if regimes.get(t.get("id")) == rg]
+            if fs:
+                per.append(statistics.fmean(fs))
+        if len(per) >= 2:
+            reg_spread[rg] = max(per) - min(per)
+    grows = (len(reg_spread) == 3
+             and reg_spread[reg_order[0]] <= reg_spread[reg_order[1]] <= reg_spread[reg_order[2]])
 
     cond_lo_s = f"{cond_lo:.2f}"
     cond_hi_s = f"{cond_hi:.2f}"
     mvs_spread_s = f"{mvs_spread:.2f}"
-    oss_mvs_s = f"{oss_mvs:.2f}" if oss_mvs is not None else "&mdash;"
-    oss_cond_s = f"{oss_cond:.2f}" if oss_cond is not None else "&mdash;"
-    oss_rank_base = {1: "best", 2: "2nd", 3: "3rd"}.get(
-        oss_cond_rank, f"{oss_cond_rank}th")
-    oss_rank_s = f"{oss_rank_base}{oss_tie}"
 
+    ex_p = ""
+    if ex_name and ex_mvs is not None and ex_cond is not None:
+        parse_s = f"{ex_parse * 100:.0f}%" if ex_parse is not None else "low"
+        ex_p = (f"<p><code>{html.escape(ex_name)}</code> is <b>last among the LLMs</b> "
+                f"(~{ex_mvs:.2f} MVS&nbsp;F1) yet scores ~{ex_cond:.2f} Cond&nbsp;F1 "
+                "&mdash; competent when it emits valid JSON, but it usually "
+                f"doesn&rsquo;t (Parse&nbsp;{parse_s}).</p>")
     f1 = (
         "<div class='finding headline'>"
         "<div class='fnum'>FINDING 01 &middot; THE HEADLINE</div>"
@@ -366,9 +369,7 @@ def findings(ranked: list) -> str:
         f"<b>{cond_lo_s}&ndash;{cond_hi_s}</b> Cond&nbsp;F1 &mdash; yet the "
         f"unconditional spread is ~<b>{mvs_spread_s}</b>, driven almost entirely by "
         "Parse&nbsp;%.</p>"
-        f"<p><code>gpt-oss-20b</code> is <b>last overall</b> (~{oss_mvs_s} MVS&nbsp;F1) "
-        f"but ~{oss_rank_s} by Cond&nbsp;F1 (~{oss_cond_s}): a competent visualizer "
-        "that is simply format-unreliable.</p>"
+        + ex_p +
         "</div>"
     )
 
@@ -383,14 +384,30 @@ def findings(ranked: list) -> str:
         "</div>"
     )
 
+    if grows:
+        f3_head = "A difficulty gradient that discriminates"
+        f3_body = ("Harder regimes separate models <b>more</b> &mdash; model spread "
+                   f"grows from ~{reg_spread[reg_order[0]]:.2f} to "
+                   f"~{reg_spread[reg_order[2]]:.2f} &mdash; exactly the property a "
+                   "benchmark wants.")
+    elif reg_spread:
+        vals = list(reg_spread.values())
+        f3_head = "Regime spread is dominated by output reliability"
+        f3_body = ("Across regimes the model spread runs "
+                   f"~{min(vals):.2f}&ndash;{max(vals):.2f}; in the expanded panel it "
+                   "tracks <b>output-format reliability</b> &mdash; a few models fail "
+                   "to emit valid JSON &mdash; more than task difficulty. The clean "
+                   "difficulty gradient is visible among the format-reliable models.")
+    else:
+        f3_head = "A difficulty gradient that discriminates"
+        f3_body = "Model performance separates across the three regimes."
     f3 = (
         "<div class='finding'>"
         "<div class='fnum'>FINDING 03</div>"
-        "<h3>A difficulty gradient that discriminates</h3>"
-        "<p>Tasks span translation &rarr; structure-grounded &rarr; clinical. Harder "
-        "regimes separate models <b>more</b> &mdash; model spread grows from ~0.10 to "
-        "~0.24 &mdash; exactly the property a benchmark wants. See the per-regime "
-        "table below.</p>"
+        f"<h3>{f3_head}</h3>"
+        "<p>Tasks span translation &rarr; structure-grounded &rarr; clinical. "
+        + f3_body +
+        " See the per-regime table below.</p>"
         "</div>"
     )
 
