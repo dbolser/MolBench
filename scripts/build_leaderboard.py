@@ -20,6 +20,7 @@ Python 3.10 compatible: no backslashes inside f-string expressions.
 
 from __future__ import annotations
 
+import functools
 import html
 import json
 import pathlib
@@ -47,7 +48,10 @@ def _regime_of(source: str) -> str:
     return "Clinical (SIFTS/ClinVar)"
 
 
+@functools.lru_cache(maxsize=1)
 def _task_regimes() -> dict[str, str]:
+    # Scans + parses every task file; memoised so the several call sites
+    # (findings, regime_table) share one pass per build.
     out: dict[str, str] = {}
     for f in TASKS_DIR.rglob("*.json"):
         try:
