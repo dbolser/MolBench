@@ -119,6 +119,16 @@ def test_mvs_non_tree_scores_zero():
     assert mvs.grade_mvs(_scene(), [{"action": "load"}])["f1"] == 0.0
 
 
+def test_mvs_grader_survives_non_dict_params():
+    # A model may emit a structurally-odd tree (params as a list, not a dict).
+    # Grading must degrade gracefully, not crash the whole run on one bad node.
+    bad = {"root": {"kind": "root", "children": [
+        {"kind": "component", "params": [{"selector": "polymer"}], "children": [
+            {"kind": "representation", "params": {"type": "cartoon"}}]}]}}
+    g = mvs.grade_mvs(_scene(), bad)
+    assert 0.0 <= g["f1"] <= 1.0, "malformed params must be scored, not raised"
+
+
 def _scene_pdb(pdb="1hho"):
     s = _scene()
     s["root"]["children"][0]["params"]["url"] = f"https://x/{pdb}.cif"
@@ -179,6 +189,7 @@ if __name__ == "__main__":
     test_mvs_partial_credit_for_wrong_colour()
     test_mvs_grey_gray_fold()
     test_mvs_non_tree_scores_zero()
+    test_mvs_grader_survives_non_dict_params()
     test_mvs_download_variant_is_normalised()
     test_mvs_downstream_credit_survives_upstream_mismatch()
     test_escalate_tree_tier()

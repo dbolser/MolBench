@@ -111,7 +111,12 @@ def flatten_paths(root: dict) -> list[tuple]:
 
     def walk(node: dict, prefix: tuple) -> None:
         kind = node.get("kind")
-        params = node.get("params") or {}
+        params = node.get("params")
+        # A model may emit a structurally-odd tree (e.g. params as a list, not a
+        # dict). Grade it gracefully — treat malformed params as empty — rather
+        # than crashing the whole run on one bad node.
+        if not isinstance(params, dict):
+            params = {}
         children = node.get("children") or []
 
         # A component selecting N residues via a list selector is equivalent to N
