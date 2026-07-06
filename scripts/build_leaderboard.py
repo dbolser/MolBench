@@ -20,6 +20,7 @@ Python 3.10 compatible: no backslashes inside f-string expressions.
 
 from __future__ import annotations
 
+import functools
 import html
 import json
 import pathlib
@@ -47,7 +48,10 @@ def _regime_of(source: str) -> str:
     return "Clinical (SIFTS/ClinVar)"
 
 
+@functools.lru_cache(maxsize=1)
 def _task_regimes() -> dict[str, str]:
+    # Scans + parses every task file; memoised so the several call sites
+    # (findings, regime_table) share one pass per build.
     out: dict[str, str] = {}
     for f in TASKS_DIR.rglob("*.json"):
         try:
@@ -318,45 +322,48 @@ def findings(ranked: list) -> str:
     mvs_vals = [mvs_f1(m) for _, m in llms if mvs_f1(m) is not None]
     mvs_spread = (max(mvs_vals) - min(mvs_vals)) if mvs_vals else 0.0
 
-    # gpt-oss-20b: last overall, but strong conditional.
-    oss = by_name.get("openai/gpt-oss-20b")
-    oss_mvs = mvs_f1(oss) if oss else None
-    oss_cond = oss.get("cond_f1") if oss else None
-    # Its rank by Cond F1 among the LLMs.
-    oss_cond_rank = None
-    if oss and oss_cond is not None:
-        graded = [(n, m) for n, m in llms if m.get("cond_f1") is not None]
-        graded.sort(key=lambda kv: kv[1]["cond_f1"], reverse=True)
-        for idx, (n, _) in enumerate(graded):
-            if n == "openai/gpt-oss-20b":
-                oss_cond_rank = idx + 1
-                break
+    # Format-unreliability exemplar: the LLM with the lowest overall MVS F1,
+    # chosen dynamically so this finding can never contradict the table. The point
+    # is the *gap* between its conditional competence and its unconditional score.
+    exemplar = min(((n, m) for n, m in llms if mvs_f1(m) is not None),
+                   key=lambda nm: mvs_f1(nm[1]), default=(None, None))
+    ex_name, ex_m = exemplar
+    ex_mvs = mvs_f1(ex_m) if ex_m else None
+    ex_cond = ex_m.get("cond_f1") if ex_m else None
+    ex_parse = ex_m.get("parse_success") if ex_m else None
 
     # Open models near the closed frontier-small tier.
     gemma = by_name.get("google/gemma-3-27b-it")
     gemma_cost = fmt_cost(gemma.get("cost_usd")) if gemma else "&mdash;"
 
-    # If gpt-oss is within a rounding hair of the rank above it, call it a tie —
-    # at 2dp it is indistinguishable, so a bare "4th" would overstate the gap.
-    oss_tie = ""
-    if oss_cond_rank and oss_cond_rank > 1:
-        ordered = sorted((m["cond_f1"] for _, m in llms
-                          if m.get("cond_f1") is not None), reverse=True)
-        above = ordered[oss_cond_rank - 2]
-        if oss_cond is not None and abs(above - oss_cond) < 0.005:
-            tie_to = {2: "1st", 3: "2nd", 4: "3rd"}.get(oss_cond_rank, "")
-            if tie_to:
-                oss_tie = f" (tied for {tie_to})"
+    # Finding 03: is the per-regime model spread actually growing with difficulty?
+    # Compute it live — with a wider panel this can flip, because format-unreliable
+    # models inject parse-driven spread that swamps the difficulty signal.
+    regimes = _task_regimes()
+    reg_order = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
+    reg_spread: dict[str, float] = {}
+    for rg in reg_order:
+        per = []
+        for _, m in llms:
+            fs = [t["f1"] for t in m.get("tasks", []) if regimes.get(t.get("id")) == rg]
+            if fs:
+                per.append(statistics.fmean(fs))
+        if len(per) >= 2:
+            reg_spread[rg] = max(per) - min(per)
+    grows = (len(reg_spread) == 3
+             and reg_spread[reg_order[0]] <= reg_spread[reg_order[1]] <= reg_spread[reg_order[2]])
 
     cond_lo_s = f"{cond_lo:.2f}"
     cond_hi_s = f"{cond_hi:.2f}"
     mvs_spread_s = f"{mvs_spread:.2f}"
-    oss_mvs_s = f"{oss_mvs:.2f}" if oss_mvs is not None else "&mdash;"
-    oss_cond_s = f"{oss_cond:.2f}" if oss_cond is not None else "&mdash;"
-    oss_rank_base = {1: "best", 2: "2nd", 3: "3rd"}.get(
-        oss_cond_rank, f"{oss_cond_rank}th")
-    oss_rank_s = f"{oss_rank_base}{oss_tie}"
 
+    ex_p = ""
+    if ex_name and ex_mvs is not None and ex_cond is not None:
+        parse_s = f"{ex_parse * 100:.0f}%" if ex_parse is not None else "low"
+        ex_p = (f"<p><code>{html.escape(ex_name)}</code> is <b>last among the LLMs</b> "
+                f"(~{ex_mvs:.2f} MVS&nbsp;F1) yet scores ~{ex_cond:.2f} Cond&nbsp;F1 "
+                "&mdash; competent when it emits valid JSON, but it usually "
+                f"doesn&rsquo;t (Parse&nbsp;{parse_s}).</p>")
     f1 = (
         "<div class='finding headline'>"
         "<div class='fnum'>FINDING 01 &middot; THE HEADLINE</div>"
@@ -366,9 +373,7 @@ def findings(ranked: list) -> str:
         f"<b>{cond_lo_s}&ndash;{cond_hi_s}</b> Cond&nbsp;F1 &mdash; yet the "
         f"unconditional spread is ~<b>{mvs_spread_s}</b>, driven almost entirely by "
         "Parse&nbsp;%.</p>"
-        f"<p><code>gpt-oss-20b</code> is <b>last overall</b> (~{oss_mvs_s} MVS&nbsp;F1) "
-        f"but ~{oss_rank_s} by Cond&nbsp;F1 (~{oss_cond_s}): a competent visualizer "
-        "that is simply format-unreliable.</p>"
+        + ex_p +
         "</div>"
     )
 
@@ -383,14 +388,30 @@ def findings(ranked: list) -> str:
         "</div>"
     )
 
+    if grows:
+        f3_head = "A difficulty gradient that discriminates"
+        f3_body = ("Harder regimes separate models <b>more</b> &mdash; model spread "
+                   f"grows from ~{reg_spread[reg_order[0]]:.2f} to "
+                   f"~{reg_spread[reg_order[2]]:.2f} &mdash; exactly the property a "
+                   "benchmark wants.")
+    elif reg_spread:
+        vals = list(reg_spread.values())
+        f3_head = "Regime spread is dominated by output reliability"
+        f3_body = ("Across regimes the model spread runs "
+                   f"~{min(vals):.2f}&ndash;{max(vals):.2f}; in the expanded panel it "
+                   "tracks <b>output-format reliability</b> &mdash; a few models fail "
+                   "to emit valid JSON &mdash; more than task difficulty. The clean "
+                   "difficulty gradient is visible among the format-reliable models.")
+    else:
+        f3_head = "A difficulty gradient that discriminates"
+        f3_body = "Model performance separates across the three regimes."
     f3 = (
         "<div class='finding'>"
         "<div class='fnum'>FINDING 03</div>"
-        "<h3>A difficulty gradient that discriminates</h3>"
-        "<p>Tasks span translation &rarr; structure-grounded &rarr; clinical. Harder "
-        "regimes separate models <b>more</b> &mdash; model spread grows from ~0.10 to "
-        "~0.24 &mdash; exactly the property a benchmark wants. See the per-regime "
-        "table below.</p>"
+        f"<h3>{f3_head}</h3>"
+        "<p>Tasks span translation &rarr; structure-grounded &rarr; clinical. "
+        + f3_body +
+        " See the per-regime table below.</p>"
         "</div>"
     )
 
@@ -617,13 +638,15 @@ def tiered_grading(esc: dict | None) -> str:
 </section>"""
 
 
-def build_index(data: dict, ranked: list, esc: dict | None = None) -> str:
+def build_index(data: dict, ranked: list, esc: dict | None = None,
+                banner: str | None = None) -> str:
     parts = [
         head("MolBench — Leaderboard",
              "A benchmark measuring whether LLM assistants can author declarative "
              "MolViewSpec molecular scenes and drive a live Mol* viewer through "
              "imperative API calls."),
         header("index"),
+        banner or "",
         hero(data, ranked),
         leaderboard_table(ranked),
         findings(ranked),
@@ -808,7 +831,8 @@ def build_gallery(gd: dict) -> str:
 # --------------------------------------------------------------------------- #
 # Entry point
 # --------------------------------------------------------------------------- #
-def build(scorecard_path: pathlib.Path) -> None:
+def build(scorecard_path: pathlib.Path, out_dir: pathlib.Path = DOCS,
+          banner: str | None = None) -> None:
     data = json.loads(scorecard_path.read_text())
     models = data.get("models", {})
     ranked = sorted(
@@ -819,32 +843,51 @@ def build(scorecard_path: pathlib.Path) -> None:
         reverse=True,
     )
 
-    esc_path = DOCS / "escalation_data.json"
+    # Escalation / gallery data live alongside the output (a staging dir carries
+    # its own copies), so the page is self-contained wherever it is deployed.
+    esc_path = out_dir / "escalation_data.json"
     esc = json.loads(esc_path.read_text()) if esc_path.exists() else None
 
-    DOCS.mkdir(exist_ok=True)
-    (DOCS / "index.html").write_text(build_index(data, ranked, esc))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "index.html").write_text(build_index(data, ranked, esc, banner=banner))
     # Keep a transparent copy of the scorecard alongside the site.
-    (DOCS / "scorecard.json").write_text(json.dumps(data, indent=2))
+    (out_dir / "scorecard.json").write_text(json.dumps(data, indent=2))
 
-    gallery_path = DOCS / "gallery_data.json"
+    gallery_path = out_dir / "gallery_data.json"
     wrote_gallery = False
     if gallery_path.exists():
         gd = json.loads(gallery_path.read_text())
-        (DOCS / "gallery.html").write_text(build_gallery(gd))
+        (out_dir / "gallery.html").write_text(build_gallery(gd))
         wrote_gallery = True
 
     extra = " and gallery.html" if wrote_gallery else ""
     print(
-        f"wrote {DOCS / 'index.html'}{extra} "
+        f"wrote {out_dir / 'index.html'}{extra} "
         f"({len(ranked)} models)"
     )
 
 
+# Amber notice injected at the top of a non-production build so a staging URL is
+# never mistaken for the published leaderboard.
+STAGING_BANNER = (
+    '<div style="background:#b45309;color:#fff;text-align:center;'
+    'padding:.6rem 1rem;font-weight:600;font-size:.9rem;letter-spacing:.01em">'
+    '&#9888; STAGING PREVIEW &mdash; expanded 17-model panel under review; '
+    'not the published leaderboard. '
+    '<a href="../" style="color:#fff;text-decoration:underline">'
+    '&larr; live leaderboard</a></div>'
+)
+
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        src = pathlib.Path(sys.argv[1])
-    else:
-        # Default to the published scorecard so the script is runnable as-is.
-        src = DOCS / "scorecard.json"
-    build(src)
+    argv = sys.argv[1:]
+    banner = STAGING_BANNER if "--staging" in argv else None
+    argv = [a for a in argv if a != "--staging"]
+    out_dir = DOCS
+    if "--out-dir" in argv:
+        i = argv.index("--out-dir")
+        out_dir = pathlib.Path(argv[i + 1])
+        del argv[i:i + 2]
+    # Default to the published scorecard so the script is runnable as-is.
+    src = pathlib.Path(argv[0]) if argv else DOCS / "scorecard.json"
+    build(src, out_dir=out_dir, banner=banner)

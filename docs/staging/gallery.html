@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Reference vs model-output renders with tree-match and visual scores, for human raters to calibrate the MolBench grader.">
+<title>MolBench — Evaluator gallery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark">M</span>
+      <span>MolBench</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html" class="">Leaderboard</a>
+      <a href="gallery.html" class="active">Evaluator gallery</a>
+      <a href="https://github.com/dbolser/MolBench" class="gh"
+         rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+<section class="hero wrap" aria-label="Gallery overview">
+  <span class="eyebrow">For human evaluators</span>
+  <h1>Evaluator gallery</h1>
+  <p class="pitch">What the grader scored vs what a human sees. MolBench uses an
+     <b>escalating grader</b>: a fast scene-tree match, then a pixel-level
+     <b>visual diff</b>, then a <b>VLM judge</b> for the ambiguous cases.
+     Tree-match is a deliberately conservative approximation &mdash; the
+     <b>rendered image is the real ground truth</b>. Each card below shows the
+     reference and the model output with both scores, so you can judge whether the
+     grader got it right.</p>
+  <div class="pipeline">
+    <div class="step"><div class="n">STAGE 1</div><div class="t">Tree-match</div>
+      <div class="d">Deterministic F1 over the MolViewSpec scene tree. Fast,
+        engine-neutral, conservative.</div></div>
+    <div class="step"><div class="n">STAGE 2</div><div class="t">Visual diff</div>
+      <div class="d">Pixel/structural similarity of the two renders. Catches
+        tree-mismatches that look identical.</div></div>
+    <div class="step"><div class="n">STAGE 3</div><div class="t">VLM judge</div>
+      <div class="d">A vision model adjudicates the remaining ambiguous cases:
+        same scene, or genuinely different?</div></div>
+  </div>
+  <div class="legend">
+    <span class="li"><b>Model evaluated:</b> <span class="chip">gemini-3.5-flash</span></span>
+    <span class="li"><b>VLM judge:</b> <span class="chip">claude-opus-4-8</span></span>
+    <span class="li"><b>Rows:</b> 9</span>
+  </div>
+  <div class='callout' style='margin-top:1.25rem'><b>Read the featured row first.</b> The model used a single, <i>cleaner</i> selector (e.g. <code>{label_comp_id: CYS}</code>) that the tree-grader couldn't recognize against a reference that enumerates every component &mdash; so MVS&nbsp;F1 collapses even though the render is pixel-identical.</div>
+</section>
+<section class="wrap" aria-label="Evaluation cases">
+  <div class="gallery-list">
+<article class="gcard featured">
+  <div class="gcard-head">
+    <span class="gid">grd-disulfide-4ins</span>
+    <span class='featured-flag'>Most dramatic gap</span>
+    <p class="rubric">Load 4INS; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/grd-disulfide-4ins_ref.png" loading="lazy" alt="Reference render for: Load 4INS; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/grd-disulfide-4ins_pred.png" loading="lazy" alt="Model output render for: Load 4INS; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v lo">0.21</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">1.00</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">Rendering-equivalent</span>
+    </div>
+    <p class='note'>Gemini used one elegant selector {label_comp_id:CYS}; the reference enumerates 12 cysteine components. Identical render.</p>
+    
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">grd-disulfide-3ptb</span>
+    
+    <p class="rubric">Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/grd-disulfide-3ptb_ref.png" loading="lazy" alt="Reference render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/grd-disulfide-3ptb_pred.png" loading="lazy" alt="Model output render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v lo">0.24</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">1.00</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">Rendering-equivalent</span>
+    </div>
+    <p class='note'>Same selector-elegance rescue as 4INS on trypsin.</p>
+    
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">gen-cartoon-1cbs</span>
+    
+    <p class="rubric">Load cellular retinoic-acid binding protein (1CBS) and show the protein as a purple cartoon.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/gen-cartoon-1cbs_ref.png" loading="lazy" alt="Reference render for: Load cellular retinoic-acid binding protein (1CBS) and show the protein as a purple cartoon.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/gen-cartoon-1cbs_pred.png" loading="lazy" alt="Model output render for: Load cellular retinoic-acid binding protein (1CBS) and show the protein as a purple cartoon.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.78</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">1.00</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">Rendering-equivalent</span>
+    </div>
+    <p class='note'>Selector synonym (all vs polymer) on a single-chain protein.</p>
+    
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">gen-surface-1hho</span>
+    
+    <p class="rubric">Load 1HHO; render the protein as a steelblue molecular surface.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/gen-surface-1hho_ref.png" loading="lazy" alt="Reference render for: Load 1HHO; render the protein as a steelblue molecular surface.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/gen-surface-1hho_pred.png" loading="lazy" alt="Model output render for: Load 1HHO; render the protein as a steelblue molecular surface.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.78</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">1.00</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">Rendering-equivalent</span>
+    </div>
+    <p class='note'>Equivalent surface representation; tree penalised a default param.</p>
+    
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">hotspots-1tup</span>
+    
+    <p class="rubric">In p53 (PDB 1TUP), highlight the mutational hotspot residues — the positions carrying the most pathogenic ClinVar variants — as red spheres.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/hotspots-1tup_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), highlight the mutational hotspot residues — the positions carrying the most pathogenic ClinVar variants — as red spheres.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/hotspots-1tup_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), highlight the mutational hotspot residues — the positions carrying the most pathogenic ClinVar variants — as red spheres.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.54</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">0.80</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">VLM: same</span>
+    </div>
+    <p class='note'>Same hotspot residues shown; camera/styling differ. VLM judged SAME.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the p53 protein-DNA complex with protein in gray cartoon and DNA double helix, and mutational hotspot residues highlighted as red spheres clustered near the protein-DNA interface. The representations, colors, and highlighted regions match; only camera angle and the apparent size/number of red spheres differ slightly.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">named-1tup-248</span>
+    
+    <p class="rubric">In p53 (PDB 1TUP), select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/named-1tup-248_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/named-1tup-248_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.62</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v">0.75</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">VLM: same</span>
+    </div>
+    <p class='note'>Correct residue selected from another angle. VLM judged SAME.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the p53-DNA complex as gray cartoon with DNA double helix, and a residue highlighted in blue ball-and-stick representation at the protein-DNA interface. The output shows blue residues consistent with the highlighted position 248, matching the reference visualization style and colors.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">clinvar-1tup-D281</span>
+    
+    <p class="rubric">In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant D281Y as red ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/clinvar-1tup-D281_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant D281Y as red ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/clinvar-1tup-D281_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant D281Y as red ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.52</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v">0.78</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict red">VLM: different</span>
+    </div>
+    <p class='note'>Genuine divergence: VLM judged DIFFERENT. Cascade did NOT rescue.</p>
+    <p class='reason'><b>VLM rationale:</b> While both show the p53-DNA complex in grey cartoon with red highlighted residues, the output displays multiple red ball-and-stick residues in several locations (including one near the bottom and others near the DNA), plus a text label, whereas the reference shows a single highlighted residue at the DNA interface. The output does not match the single-residue D281Y highlight of the reference.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">clinvar-1tup-S215</span>
+    
+    <p class="rubric">In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant S215T as red ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/clinvar-1tup-S215_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant S215T as red ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/clinvar-1tup-S215_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant S215T as red ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.52</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v">0.64</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict red">VLM: different</span>
+    </div>
+    <p class='note'>Clearest miss (lowest visual similarity). VLM DIFFERENT.</p>
+    <p class='reason'><b>VLM rationale:</b> The reference shows the full p53-DNA complex as a gray cartoon with a small red ball-and-stick residue highlighted. The output is a zoomed-in close-up showing only a red ball-and-stick molecule with large text overlay (&#x27;Pathogenic Va...&#x27;), lacking the protein cartoon, DNA, and overall structure context. It does not depict the same visualization.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">named-1tup-175</span>
+    
+    <p class="rubric">In p53 (PDB 1TUP), select the residue at canonical UniProt position 175 and show it as blue ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/named-1tup-175_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 175 and show it as blue ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/named-1tup-175_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 175 and show it as blue ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.62</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v">0.73</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict red">VLM: different</span>
+    </div>
+    <p class='note'>p53 R175 hotspot; output differs. VLM DIFFERENT.</p>
+    <p class='reason'><b>VLM rationale:</b> The reference shows the full p53-DNA complex with cartoon protein and DNA double helix, with the residue 175 highlighted somewhere within. The output shows only a zoomed-in cartoon protein region with a blue ball-and-stick residue and no DNA visible. While both show a blue ball-and-stick residue, the highlighted residue appears to be a long-chain residue (like arginine) in the output, which is consistent with R175 in p53, but the overall scene/components differ substantially (no DNA shown). However, the core request element (blue ball-and-stick residue 175) is present. The discrepancy in shown components makes this borderline different.</p>
+  </div>
+</article>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><b>Data sources.</b> Structures from the
+       <a href="https://www.rcsb.org/" rel="noopener">RCSB&nbsp;PDB</a>;
+       clinical grounding via
+       <a href="https://www.ebi.ac.uk/pdbe/docs/sifts/" rel="noopener">PDBe&nbsp;SIFTS</a>
+       (UniProt&harr;PDB residue numbering, CC-BY-4.0),
+       <a href="https://www.uniprot.org/" rel="noopener">UniProt</a> (CC-BY-4.0),
+       and <a href="https://www.ncbi.nlm.nih.gov/clinvar/" rel="noopener">ClinVar</a>
+       (NCBI, public domain). See the
+       <a href="https://github.com/dbolser/MolBench#data-sources--acknowledgements"
+          rel="noopener">data sources &amp; acknowledgements</a> in the README.</p>
+    <p><b>Reproduce.</b> <span class="repro">python -m molbench.runner --models &lt;spec&gt; --samples 5</span></p>
+    <p>MolBench is open source (MIT) &middot;
+       <a href="https://github.com/dbolser/MolBench" rel="noopener">github.com/dbolser/MolBench</a>
+       &middot; <a href="scorecard.json">raw scorecard.json</a></p>
+  </div>
+</footer>
+</body>
+</html>
