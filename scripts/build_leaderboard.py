@@ -638,13 +638,15 @@ def tiered_grading(esc: dict | None) -> str:
 </section>"""
 
 
-def build_index(data: dict, ranked: list, esc: dict | None = None) -> str:
+def build_index(data: dict, ranked: list, esc: dict | None = None,
+                banner: str | None = None) -> str:
     parts = [
         head("MolBench — Leaderboard",
              "A benchmark measuring whether LLM assistants can author declarative "
              "MolViewSpec molecular scenes and drive a live Mol* viewer through "
              "imperative API calls."),
         header("index"),
+        banner or "",
         hero(data, ranked),
         leaderboard_table(ranked),
         findings(ranked),
@@ -829,7 +831,8 @@ def build_gallery(gd: dict) -> str:
 # --------------------------------------------------------------------------- #
 # Entry point
 # --------------------------------------------------------------------------- #
-def build(scorecard_path: pathlib.Path) -> None:
+def build(scorecard_path: pathlib.Path, out_dir: pathlib.Path = DOCS,
+          banner: str | None = None) -> None:
     data = json.loads(scorecard_path.read_text())
     models = data.get("models", {})
     ranked = sorted(
@@ -840,32 +843,51 @@ def build(scorecard_path: pathlib.Path) -> None:
         reverse=True,
     )
 
-    esc_path = DOCS / "escalation_data.json"
+    # Escalation / gallery data live alongside the output (a staging dir carries
+    # its own copies), so the page is self-contained wherever it is deployed.
+    esc_path = out_dir / "escalation_data.json"
     esc = json.loads(esc_path.read_text()) if esc_path.exists() else None
 
-    DOCS.mkdir(exist_ok=True)
-    (DOCS / "index.html").write_text(build_index(data, ranked, esc))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "index.html").write_text(build_index(data, ranked, esc, banner=banner))
     # Keep a transparent copy of the scorecard alongside the site.
-    (DOCS / "scorecard.json").write_text(json.dumps(data, indent=2))
+    (out_dir / "scorecard.json").write_text(json.dumps(data, indent=2))
 
-    gallery_path = DOCS / "gallery_data.json"
+    gallery_path = out_dir / "gallery_data.json"
     wrote_gallery = False
     if gallery_path.exists():
         gd = json.loads(gallery_path.read_text())
-        (DOCS / "gallery.html").write_text(build_gallery(gd))
+        (out_dir / "gallery.html").write_text(build_gallery(gd))
         wrote_gallery = True
 
     extra = " and gallery.html" if wrote_gallery else ""
     print(
-        f"wrote {DOCS / 'index.html'}{extra} "
+        f"wrote {out_dir / 'index.html'}{extra} "
         f"({len(ranked)} models)"
     )
 
 
+# Amber notice injected at the top of a non-production build so a staging URL is
+# never mistaken for the published leaderboard.
+STAGING_BANNER = (
+    '<div style="background:#b45309;color:#fff;text-align:center;'
+    'padding:.6rem 1rem;font-weight:600;font-size:.9rem;letter-spacing:.01em">'
+    '&#9888; STAGING PREVIEW &mdash; expanded 17-model panel under review; '
+    'not the published leaderboard. '
+    '<a href="../" style="color:#fff;text-decoration:underline">'
+    '&larr; live leaderboard</a></div>'
+)
+
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        src = pathlib.Path(sys.argv[1])
-    else:
-        # Default to the published scorecard so the script is runnable as-is.
-        src = DOCS / "scorecard.json"
-    build(src)
+    argv = sys.argv[1:]
+    banner = STAGING_BANNER if "--staging" in argv else None
+    argv = [a for a in argv if a != "--staging"]
+    out_dir = DOCS
+    if "--out-dir" in argv:
+        i = argv.index("--out-dir")
+        out_dir = pathlib.Path(argv[i + 1])
+        del argv[i:i + 2]
+    # Default to the published scorecard so the script is runnable as-is.
+    src = pathlib.Path(argv[0]) if argv else DOCS / "scorecard.json"
+    build(src, out_dir=out_dir, banner=banner)
