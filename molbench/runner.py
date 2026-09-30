@@ -196,7 +196,8 @@ def run_mvs_task(model, system: str, task: dict) -> dict[str, Any]:
     tree, err = extract_json_object(raw)
     if err:
         return {"f1": 0.0, "precision": 0.0, "recall": 0.0, "error": err, "raw": raw}
-    result = mvs_mod.grade_mvs(task["reference_mvs"], tree)
+    result = mvs_mod.grade_mvs(task["reference_mvs"], tree,
+                               accepted_refs=task.get("accepted_ids"))
     result["schema_errors"] = mvs_mod.validate_mvs(tree)
     result["predicted"] = tree
     result["raw"] = raw
@@ -305,7 +306,8 @@ def run(models: list[str], categories: list[str] | None,
                     wd = gallery / model.name.replace("/", "_") / task["id"]
                     pt["escalation"] = escalating_grade(
                         task["reference_mvs"], pt["predicted"], prompt=task.get("prompt"),
-                        render=render_fn, vlm=vlm_fn, workdir=str(wd))
+                        render=render_fn, vlm=vlm_fn, workdir=str(wd),
+                        accepted_refs=task.get("accepted_ids"))
                 per_task.append(pt)
                 raw_samples[model.name][task["id"]] = [
                     {"f1": g["f1"], "predicted": g.get("predicted"),

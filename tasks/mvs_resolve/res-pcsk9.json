@@ -1,0 +1,136 @@
+{
+  "id": "res-pcsk9",
+  "category": "mvs",
+  "source": "resolve",
+  "title": "Resolve by name: pcsk9",
+  "prompt": "show the structure of PCSK9",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/2p4e.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "accepted_ids": [
+    "10sb",
+    "2p4e",
+    "2pmw",
+    "2qtw",
+    "2w2m",
+    "2w2n",
+    "2w2o",
+    "2w2p",
+    "2w2q",
+    "2xtj",
+    "37hf",
+    "3bps",
+    "3gcw",
+    "3gcx",
+    "3h42",
+    "3m0c",
+    "3p5b",
+    "3p5c",
+    "3sqo",
+    "4k8r",
+    "4ne9",
+    "4nmx",
+    "4ov6",
+    "5oca",
+    "5vl7",
+    "5vla",
+    "5vlh",
+    "5vlk",
+    "5vll",
+    "5vlp",
+    "6e4y",
+    "6e4z",
+    "6mv5",
+    "6olz",
+    "6om0",
+    "6om7",
+    "6u26",
+    "6u2f",
+    "6u2n",
+    "6u2p",
+    "6u36",
+    "6u38",
+    "6u3i",
+    "6u3x",
+    "6xib",
+    "6xic",
+    "6xid",
+    "6xie",
+    "6xif",
+    "7anq",
+    "7kev",
+    "7kfa",
+    "7s5g",
+    "7s5h",
+    "8fpo",
+    "8fpq",
+    "8fvl",
+    "8fvm",
+    "8fvn",
+    "8fvo",
+    "8fvp",
+    "8fvq",
+    "8vdv",
+    "8wfr",
+    "9hz3",
+    "9szy"
+  ],
+  "categories": [
+    "load",
+    "representation",
+    "resolve"
+  ],
+  "skills": [
+    "resolve",
+    "download",
+    "component",
+    "representation"
+  ],
+  "notes": "Probe: Haiku answered 1D0G (death receptor 5 / TRAIL).",
+  "provenance": {
+    "uniprot": "Q8NBP7",
+    "n_entries": 66,
+    "source": "RCSB search, reference_sequence_identifiers",
+    "fetched": "2026-09-30"
+  }
+}

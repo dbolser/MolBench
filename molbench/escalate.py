@@ -37,8 +37,9 @@ def escalating_grade(
     tree_threshold: float = 0.999,
     visual_threshold: float = 0.97,
     workdir: str | pathlib.Path | None = None,
+    accepted_refs: set[str] | list[str] | None = None,
 ) -> dict[str, Any]:
-    g = grade_mvs(reference_tree, predicted_tree)
+    g = grade_mvs(reference_tree, predicted_tree, accepted_refs=accepted_refs)
     out: dict[str, Any] = {"tree_f1": g["f1"], "tier": "tree"}
 
     # T0 — tree match is conclusive (identical / normalised-equivalent).
