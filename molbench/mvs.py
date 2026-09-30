@@ -170,8 +170,39 @@ def _path_similarity(p: tuple, q: tuple) -> float:
 
 # --- grading ----------------------------------------------------------------------
 
-def grade_mvs(reference: Any, predicted: Any) -> dict[str, Any]:
-    """Grade a predicted MVS scene against a reference. Returns precision/recall/f1."""
+def _fold_accepted_refs(ref_paths: list[tuple], pred_paths: list[tuple],
+                        accepted: set[str]) -> list[tuple]:
+    """Treat any accepted structure id in the prediction as the reference's own.
+
+    A prompt that names a protein ("a structure of PDE5A") has many right answers;
+    the task lists them in ``accepted_ids``. The reference carries one canonical id,
+    so a prediction that downloaded another accepted entry is rewritten to that id
+    before matching. An id outside the set (a made-up one, say) stays as it is and
+    mismatches the download segment like any other wrong answer.
+    """
+    ref_ids = {seg[1][1] for path in ref_paths for seg in path
+               if seg[0] == "download" and isinstance(seg[1], tuple) and seg[1][0] == "ref"}
+    if len(ref_ids) != 1:
+        return pred_paths  # several structures: no single canonical id to fold onto
+    canonical = next(iter(ref_ids))
+    accepted = {a.lower() for a in accepted}
+
+    def fold(seg: tuple) -> tuple:
+        if seg[0] == "download" and isinstance(seg[1], tuple) and seg[1][0] == "ref" \
+                and seg[1][1] in accepted:
+            return ("download", ("ref", canonical))
+        return seg
+
+    return [tuple(fold(seg) for seg in path) for path in pred_paths]
+
+
+def grade_mvs(reference: Any, predicted: Any,
+              accepted_refs: set[str] | list[str] | None = None) -> dict[str, Any]:
+    """Grade a predicted MVS scene against a reference. Returns precision/recall/f1.
+
+    ``accepted_refs``: other structure ids that count as the reference's (see
+    ``_fold_accepted_refs``); used by tasks that name a protein instead of an id.
+    """
     ref_root, pred_root = extract_root(reference), extract_root(predicted)
     if ref_root is None:
         return {"precision": 0.0, "recall": 0.0, "f1": 0.0, "error": "bad reference tree"}
@@ -181,6 +212,8 @@ def grade_mvs(reference: Any, predicted: Any) -> dict[str, Any]:
 
     ref_paths = flatten_paths(ref_root)
     pred_paths = flatten_paths(pred_root)
+    if accepted_refs:
+        pred_paths = _fold_accepted_refs(ref_paths, pred_paths, set(accepted_refs))
     n_ref, n_pred = len(ref_paths), len(pred_paths)
     if n_ref == 0:
         f1 = 1.0 if n_pred == 0 else 0.0

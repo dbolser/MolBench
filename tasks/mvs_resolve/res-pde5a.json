@@ -1,0 +1,120 @@
+{
+  "id": "res-pde5a",
+  "category": "mvs",
+  "source": "resolve",
+  "title": "Resolve by name: pde5a",
+  "prompt": "I wanna see a structure of PDE5A",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1udt.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "accepted_ids": [
+    "1rkp",
+    "1t9r",
+    "1t9s",
+    "1tbf",
+    "1udt",
+    "1udu",
+    "1uho",
+    "1xoz",
+    "1xp0",
+    "2chm",
+    "2h40",
+    "2h42",
+    "2h44",
+    "2xss",
+    "3b2r",
+    "3bjc",
+    "3hc8",
+    "3hdz",
+    "3jwq",
+    "3jwr",
+    "3lfv",
+    "3mf0",
+    "3shy",
+    "3shz",
+    "3sie",
+    "3tge",
+    "3tgg",
+    "4g2w",
+    "4g2y",
+    "4i9z",
+    "4ia0",
+    "4md6",
+    "4oew",
+    "4oex",
+    "5jo3",
+    "5zz2",
+    "6acb",
+    "6iwi",
+    "6l6e",
+    "6vbi",
+    "7faq",
+    "7far",
+    "8w4s",
+    "8w4t",
+    "8wkf",
+    "8wkg",
+    "8xww",
+    "9lsl",
+    "9lsm",
+    "9lss"
+  ],
+  "categories": [
+    "load",
+    "representation",
+    "resolve"
+  ],
+  "skills": [
+    "resolve",
+    "download",
+    "component",
+    "representation"
+  ],
+  "notes": "Evaluator prompt (2026-09-30). Haiku answered 1UJ7, which does not exist.",
+  "provenance": {
+    "uniprot": "O76074",
+    "n_entries": 50,
+    "source": "RCSB search, reference_sequence_identifiers",
+    "fetched": "2026-09-30"
+  }
+}
