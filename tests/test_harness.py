@@ -176,28 +176,6 @@ def test_run_archives_raw_samples_and_meta():
     assert "raw" in tasks[tid][0], "raw model output must be archived"
 
 
-if __name__ == "__main__":
-    test_all_reference_answers_are_schema_valid()
-    test_self_grading_is_perfect()
-    test_wrong_prediction_scores_low()
-    test_partial_credit_for_right_residues_wrong_colour()
-    test_load_modifiers_are_scored()
-    test_tooltip_text_is_scored()
-    test_sidechain_flag_is_scored()
-    test_mvs_self_grading_is_perfect()
-    test_mvs_is_metadata_insensitive()
-    test_mvs_partial_credit_for_wrong_colour()
-    test_mvs_grey_gray_fold()
-    test_mvs_non_tree_scores_zero()
-    test_mvs_grader_survives_non_dict_params()
-    test_mvs_download_variant_is_normalised()
-    test_mvs_downstream_credit_survives_upstream_mismatch()
-    test_escalate_tree_tier()
-    test_render_state_wrapping()
-    test_run_archives_raw_samples_and_meta()
-    print("all sanity checks passed")
-
-
 # --- entry resolution (tasks/mvs_resolve) ------------------------------------------
 
 def _resolve_tasks():
@@ -253,3 +231,41 @@ def test_accepted_fold_ignores_multi_structure_references():
     ]}
     # Two canonical ids → nothing to fold onto; grading is unchanged.
     assert mvs.grade_mvs(ref, pred, accepted_refs=["1a3n"]) == mvs.grade_mvs(ref, pred)
+
+
+def test_accepted_fold_survives_download_without_params():
+    """A model may emit a download node with no params; the fold must not crash on it."""
+    task = next(t for t in _resolve_tasks() if t["id"] == "res-pde5a")
+    pred = {"kind": "root", "children": [{"kind": "download", "children": [
+        {"kind": "parse", "params": {"format": "mmcif"}}]}]}
+    result = mvs.grade_mvs(task["reference_mvs"], pred, accepted_refs=task["accepted_ids"])
+    assert 0.0 <= result["f1"] < 1.0
+    bare_ref = {"kind": "root", "children": [{"kind": "download"}]}
+    assert mvs.grade_mvs(bare_ref, pred, accepted_refs=["1udt"])["f1"] >= 0.0
+
+
+if __name__ == "__main__":
+    test_all_reference_answers_are_schema_valid()
+    test_self_grading_is_perfect()
+    test_wrong_prediction_scores_low()
+    test_partial_credit_for_right_residues_wrong_colour()
+    test_load_modifiers_are_scored()
+    test_tooltip_text_is_scored()
+    test_sidechain_flag_is_scored()
+    test_mvs_self_grading_is_perfect()
+    test_mvs_is_metadata_insensitive()
+    test_mvs_partial_credit_for_wrong_colour()
+    test_mvs_grey_gray_fold()
+    test_mvs_non_tree_scores_zero()
+    test_mvs_grader_survives_non_dict_params()
+    test_mvs_download_variant_is_normalised()
+    test_mvs_downstream_credit_survives_upstream_mismatch()
+    test_escalate_tree_tier()
+    test_render_state_wrapping()
+    test_run_archives_raw_samples_and_meta()
+    test_resolve_tasks_have_a_valid_accepted_set()
+    test_any_accepted_entry_scores_as_the_reference()
+    test_made_up_entry_is_penalised()
+    test_accepted_fold_ignores_multi_structure_references()
+    test_accepted_fold_survives_download_without_params()
+    print("all sanity checks passed")

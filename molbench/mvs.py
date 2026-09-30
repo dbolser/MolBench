@@ -170,6 +170,15 @@ def _path_similarity(p: tuple, q: tuple) -> float:
 
 # --- grading ----------------------------------------------------------------------
 
+def _download_id(seg: tuple) -> str | None:
+    """The structure id in a ``download`` path segment, or None (a download node with
+    no/malformed params has an empty signature — a model can emit that)."""
+    kind, sig = seg
+    if kind == "download" and isinstance(sig, tuple) and len(sig) == 2 and sig[0] == "ref":
+        return sig[1]
+    return None
+
+
 def _fold_accepted_refs(ref_paths: list[tuple], pred_paths: list[tuple],
                         accepted: set[str]) -> list[tuple]:
     """Treat any accepted structure id in the prediction as the reference's own.
@@ -180,16 +189,14 @@ def _fold_accepted_refs(ref_paths: list[tuple], pred_paths: list[tuple],
     before matching. An id outside the set (a made-up one, say) stays as it is and
     mismatches the download segment like any other wrong answer.
     """
-    ref_ids = {seg[1][1] for path in ref_paths for seg in path
-               if seg[0] == "download" and isinstance(seg[1], tuple) and seg[1][0] == "ref"}
+    ref_ids = {_download_id(seg) for path in ref_paths for seg in path} - {None}
     if len(ref_ids) != 1:
         return pred_paths  # several structures: no single canonical id to fold onto
     canonical = next(iter(ref_ids))
     accepted = {a.lower() for a in accepted}
 
     def fold(seg: tuple) -> tuple:
-        if seg[0] == "download" and isinstance(seg[1], tuple) and seg[1][0] == "ref" \
-                and seg[1][1] in accepted:
+        if _download_id(seg) in accepted:
             return ("download", ("ref", canonical))
         return seg
 
