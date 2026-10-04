@@ -1,0 +1,85 @@
+{
+  "id": "int-005",
+  "category": "mvs",
+  "source": "interactions",
+  "pdb": "3ptb",
+  "title": "Computed interactions around benzamidine",
+  "prompt": "Show trypsin 3PTB as a grey cartoon and display the interactions between the benzamidine inhibitor and the protein.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/3ptb.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_comp_id": "BEN"
+                      }
+                    },
+                    "custom": {
+                      "molstar_show_non_covalent_interactions": true
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component",
+    "interactions"
+  ],
+  "skills": [
+    "interactions"
+  ],
+  "provenance": {
+    "checked_against": "https://files.rcsb.org/download/3ptb.cif",
+    "measured": []
+  }
+}

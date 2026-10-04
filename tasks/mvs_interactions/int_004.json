@@ -1,0 +1,85 @@
+{
+  "id": "int-004",
+  "category": "mvs",
+  "source": "interactions",
+  "pdb": "1a6m",
+  "title": "Computed interactions around bound O2",
+  "prompt": "Load 1A6M with the protein as a grey cartoon and show all the non-covalent interactions (hydrogen bonds, metal contacts) around the bound oxygen molecule.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1a6m.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "label_comp_id": "OXY"
+                      }
+                    },
+                    "custom": {
+                      "molstar_show_non_covalent_interactions": true
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component",
+    "interactions"
+  ],
+  "skills": [
+    "interactions"
+  ],
+  "provenance": {
+    "checked_against": "https://files.rcsb.org/download/1a6m.cif",
+    "measured": []
+  }
+}

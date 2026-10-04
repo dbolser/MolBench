@@ -269,3 +269,58 @@ if __name__ == "__main__":
     test_accepted_fold_ignores_multi_structure_references()
     test_accepted_fold_survives_download_without_params()
     print("all sanity checks passed")
+
+
+def _with_structure_child(child: dict) -> dict:
+    s = _scene()
+    s["root"]["children"][0]["children"][0]["children"][0]["children"].append(child)
+    return s
+
+
+def _hbond(start: dict, end: dict, **style) -> dict:
+    return {"kind": "primitives", "params": style.pop("group", {}), "children": [
+        {"kind": "primitive", "params": {"kind": "distance_measurement",
+                                         "start": start, "end": end, **style}}]}
+
+
+_HIS = {"auth_asym_id": "A", "auth_seq_id": 64, "label_atom_id": "NE2"}
+_O2 = {"auth_asym_id": "A", "label_comp_id": "OXY", "label_atom_id": "O2"}
+
+
+def test_primitive_ignores_styling_and_direction():
+    ref = _with_structure_child(_hbond(_HIS, _O2))
+    pred = _with_structure_child(_hbond(_O2, _HIS, radius=0.1, dash_length=0.3,
+                                        label_template="H-bond {{distance}}",
+                                        group={"color": "yellow"}))
+    assert mvs.grade_mvs(ref, pred)["f1"] == 1.0
+
+
+def test_primitive_wrong_atom_loses_credit():
+    ref = _with_structure_child(_hbond(_HIS, _O2))
+    pred = _with_structure_child(_hbond({**_HIS, "label_atom_id": "ND1"}, _O2))
+    assert mvs.grade_mvs(ref, pred)["f1"] < 1.0
+
+
+def test_interactions_flag_is_graded():
+    comp = {"kind": "component", "params": {"selector": {"label_comp_id": "OXY"}}}
+    ref = _with_structure_child({**comp, "custom": {"molstar_show_non_covalent_interactions": True}})
+    assert mvs.grade_mvs(ref, ref)["f1"] == 1.0
+    assert mvs.grade_mvs(ref, _with_structure_child(comp))["f1"] < 1.0
+    assert "interactions" in mvs.categorize(mvs.extract_root(ref))
+
+
+def test_colour_theme_grades_the_theme_not_the_placeholder():
+    def themed(theme, placeholder):
+        s = _scene(placeholder)
+        rep = s["root"]["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]
+        rep["children"][0]["custom"] = {"molstar_color_theme_name": theme}
+        return s
+    assert mvs.grade_mvs(themed("chain-id", "gray"), themed("chain-id", "white"))["f1"] == 1.0
+    assert mvs.grade_mvs(themed("chain-id", "gray"), themed("sequence-id", "gray"))["f1"] < 1.0
+
+
+def test_bare_condition_drops_the_reference():
+    from molbench.runner import build_system_prompts
+    spec, bare = build_system_prompts("spec")["mvs"], build_system_prompts("bare")["mvs"]
+    assert "Node kinds" in spec and "Node kinds" not in bare
+    assert "{{MVS_REFERENCE}}" not in bare

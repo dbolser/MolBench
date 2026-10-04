@@ -28,3 +28,6 @@ runs/
 
 # Fetched Mol* bundle (run scripts/fetch_molstar.py)
 molbench/static/molstar/
+
+# mmCIF cache for task authoring (scripts/author_interaction_tasks.py)
+data/cif/

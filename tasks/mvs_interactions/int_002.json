@@ -1,0 +1,148 @@
+{
+  "id": "int-002",
+  "category": "mvs",
+  "source": "interactions",
+  "pdb": "1a6m",
+  "title": "Distance: heme iron to proximal histidine",
+  "prompt": "Load 1A6M with the protein as a grey cartoon. Show the heme and the proximal histidine as ball-and-stick and measure the distance from the heme iron to the histidine's coordinating nitrogen.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1a6m.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "label_comp_id": "HEM"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "auth_seq_id": 93
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "start": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "FE",
+                            "label_comp_id": "HEM"
+                          },
+                          "end": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "NE2",
+                            "auth_seq_id": 93
+                          },
+                          "dash_length": 0.15,
+                          "kind": "distance_measurement",
+                          "label_template": "{{distance}}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component",
+    "measurement"
+  ],
+  "skills": [
+    "primitives",
+    "atom-selection",
+    "domain-knowledge"
+  ],
+  "provenance": {
+    "checked_against": "https://files.rcsb.org/download/1a6m.cif",
+    "measured": [
+      {
+        "start": {
+          "auth_asym_id": "A",
+          "label_atom_id": "FE",
+          "label_comp_id": "HEM"
+        },
+        "end": {
+          "auth_asym_id": "A",
+          "label_atom_id": "NE2",
+          "auth_seq_id": 93
+        },
+        "distance_A": 2.06
+      }
+    ]
+  }
+}

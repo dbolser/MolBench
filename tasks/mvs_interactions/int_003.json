@@ -1,0 +1,197 @@
+{
+  "id": "int-003",
+  "category": "mvs",
+  "source": "interactions",
+  "pdb": "3ptb",
+  "title": "Catalytic-triad H-bonds in trypsin",
+  "prompt": "In trypsin (3PTB), show the protein as a grey cartoon and the catalytic triad (His57, Asp102, Ser195) as ball-and-stick. Draw the two triad hydrogen bonds as dashed lines with their lengths.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/3ptb.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "auth_seq_id": 57
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "auth_seq_id": 102
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "auth_seq_id": 195
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "start": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "OG",
+                            "auth_seq_id": 195
+                          },
+                          "end": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "NE2",
+                            "auth_seq_id": 57
+                          },
+                          "dash_length": 0.15,
+                          "kind": "distance_measurement",
+                          "label_template": "{{distance}}"
+                        }
+                      },
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "start": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "ND1",
+                            "auth_seq_id": 57
+                          },
+                          "end": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "OD2",
+                            "auth_seq_id": 102
+                          },
+                          "dash_length": 0.15,
+                          "kind": "distance_measurement",
+                          "label_template": "{{distance}}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component",
+    "measurement"
+  ],
+  "skills": [
+    "primitives",
+    "atom-selection",
+    "hbond",
+    "domain-knowledge"
+  ],
+  "provenance": {
+    "checked_against": "https://files.rcsb.org/download/3ptb.cif",
+    "measured": [
+      {
+        "start": {
+          "auth_asym_id": "A",
+          "label_atom_id": "OG",
+          "auth_seq_id": 195
+        },
+        "end": {
+          "auth_asym_id": "A",
+          "label_atom_id": "NE2",
+          "auth_seq_id": 57
+        },
+        "distance_A": 2.96
+      },
+      {
+        "start": {
+          "auth_asym_id": "A",
+          "label_atom_id": "ND1",
+          "auth_seq_id": 57
+        },
+        "end": {
+          "auth_asym_id": "A",
+          "label_atom_id": "OD2",
+          "auth_seq_id": 102
+        },
+        "distance_A": 2.67
+      }
+    ]
+  }
+}

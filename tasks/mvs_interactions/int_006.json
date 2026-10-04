@@ -1,0 +1,89 @@
+{
+  "id": "int-006",
+  "category": "mvs",
+  "source": "interactions",
+  "pdb": "1hho",
+  "title": "Half-transparent surface over the hemes",
+  "prompt": "Load haemoglobin 1HHO; show the protein as a 50% transparent surface and the heme groups as ball-and-stick.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1hho.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "surface",
+                          "surface_type": "molecular"
+                        },
+                        "children": [
+                          {
+                            "kind": "opacity",
+                            "params": {
+                              "opacity": 0.5
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "ligand"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "representation",
+    "multi-component",
+    "surface",
+    "transparency"
+  ],
+  "skills": [
+    "opacity",
+    "surface"
+  ],
+  "provenance": {
+    "checked_against": "https://files.rcsb.org/download/1hho.cif",
+    "measured": []
+  }
+}
