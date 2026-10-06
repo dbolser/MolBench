@@ -244,28 +244,24 @@ def test_accepted_fold_survives_download_without_params():
     assert mvs.grade_mvs(bare_ref, pred, accepted_refs=["1udt"])["f1"] >= 0.0
 
 
+
+
+def test_escalation_renders_the_reference_on_the_accepted_entry():
+    from molbench import escalate
+    task = _resolve_tasks()[0]
+    other = next(i for i in task["accepted_ids"] if i not in json.dumps(task["reference_mvs"]))
+    pred = _with_pdb(task, other)
+    moved = escalate._reference_on_accepted(task["reference_mvs"], pred, task["accepted_ids"])
+    assert escalate._download_ids(moved) == {other}
+    assert escalate._download_ids(task["reference_mvs"]) != {other}  # the task is untouched
+    made_up = _with_pdb(task, "9zzz")
+    assert escalate._reference_on_accepted(task["reference_mvs"], made_up, task["accepted_ids"]) \
+        is task["reference_mvs"]
+
+
 if __name__ == "__main__":
-    test_all_reference_answers_are_schema_valid()
-    test_self_grading_is_perfect()
-    test_wrong_prediction_scores_low()
-    test_partial_credit_for_right_residues_wrong_colour()
-    test_load_modifiers_are_scored()
-    test_tooltip_text_is_scored()
-    test_sidechain_flag_is_scored()
-    test_mvs_self_grading_is_perfect()
-    test_mvs_is_metadata_insensitive()
-    test_mvs_partial_credit_for_wrong_colour()
-    test_mvs_grey_gray_fold()
-    test_mvs_non_tree_scores_zero()
-    test_mvs_grader_survives_non_dict_params()
-    test_mvs_download_variant_is_normalised()
-    test_mvs_downstream_credit_survives_upstream_mismatch()
-    test_escalate_tree_tier()
-    test_render_state_wrapping()
-    test_run_archives_raw_samples_and_meta()
-    test_resolve_tasks_have_a_valid_accepted_set()
-    test_any_accepted_entry_scores_as_the_reference()
-    test_made_up_entry_is_penalised()
-    test_accepted_fold_ignores_multi_structure_references()
-    test_accepted_fold_survives_download_without_params()
-    print("all sanity checks passed")
+    # Run every test_* function, so a new test can't be missed by CI (which runs this file).
+    tests = [f for name, f in sorted(globals().items()) if name.startswith("test_") and callable(f)]
+    for t in tests:
+        t()
+    print(f"all {len(tests)} harness checks passed")
