@@ -324,3 +324,17 @@ def test_bare_condition_drops_the_reference():
     spec, bare = build_system_prompts("spec")["mvs"], build_system_prompts("bare")["mvs"]
     assert "Node kinds" in spec and "Node kinds" not in bare
     assert "{{MVS_REFERENCE}}" not in bare
+
+
+def test_primitive_coordinates_keep_their_order():
+    a = _with_structure_child({"kind": "primitives", "children": [{"kind": "primitive", "params": {
+        "kind": "label", "position": [1.0, 2.0, 3.0], "text": "x"}}]})
+    b = _with_structure_child({"kind": "primitives", "children": [{"kind": "primitive", "params": {
+        "kind": "label", "position": [3.0, 2.0, 1.0], "text": "x"}}]})
+    assert mvs.grade_mvs(a, a)["f1"] == 1.0
+    assert mvs.grade_mvs(a, b)["f1"] < 1.0
+
+
+def test_categorize_survives_non_dict_custom():
+    s = _with_structure_child({"kind": "component", "params": {"selector": "ligand"}, "custom": ["x"]})
+    assert "interactions" not in mvs.categorize(mvs.extract_root(s))

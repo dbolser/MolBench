@@ -168,6 +168,8 @@ def _load(pdb: str) -> gemmi.Structure:
 
 def _match(st: gemmi.Structure, e: dict) -> list[gemmi.Atom]:
     """Atoms a ComponentExpression selects (the fields this script uses)."""
+    if not isinstance(e, dict):
+        return []  # an [x, y, z] coordinate, not a selection
     out = []
     for chain in st[0]:
         if e.get("auth_asym_id") not in (None, chain.name):
@@ -191,11 +193,14 @@ def _check(root: dict, st: gemmi.Structure, task_id: str) -> list[dict]:
         if node.get("kind") == "component" and isinstance(sel, dict):
             assert _match(st, sel), f"{task_id}: selector matches nothing: {sel}"
         if node.get("kind") == "primitive":
-            ends = [_match(st, params[k]) for k in ("start", "end")]
-            assert all(ends), f"{task_id}: primitive end matches nothing: {params}"
-            # Mol* uses the centre of an end's atoms (alt locs included); record the first.
-            measured.append({"start": params["start"], "end": params["end"],
-                             "distance_A": round(ends[0][0].pos.dist(ends[1][0].pos), 2)})
+            points = {k: params[k] for k in ("start", "end", "position", "a", "b", "c")
+                      if isinstance(params.get(k), dict)}
+            atoms = {k: _match(st, e) for k, e in points.items()}
+            assert all(atoms.values()), f"{task_id}: primitive point matches nothing: {params}"
+            if "start" in atoms and "end" in atoms:
+                # Mol* uses the centre of an end's atoms (alt locs included); record the first.
+                measured.append({"start": params["start"], "end": params["end"],
+                                 "distance_A": round(atoms["start"][0].pos.dist(atoms["end"][0].pos), 2)})
         for c in node.get("children") or []:
             walk(c)
 

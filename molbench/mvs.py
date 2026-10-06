@@ -73,6 +73,13 @@ def _color_signature(value: Any) -> Any:
 _PRIMITIVE_POINTS = ("start", "end", "position", "a", "b", "c")
 
 
+def _point_signature(point: Any) -> Any:
+    """A primitive position: an [x, y, z] coordinate (order matters) or an atom selection."""
+    if isinstance(point, list) and all(isinstance(v, (int, float)) for v in point):
+        return ("xyz", tuple(float(v) for v in point))
+    return _selector_signature(point)
+
+
 def _param_signature(kind: str, params: dict | None, custom: dict | None = None) -> Any:
     params = params or {}
     custom = custom if isinstance(custom, dict) else {}
@@ -86,7 +93,7 @@ def _param_signature(kind: str, params: dict | None, custom: dict | None = None)
     if kind == "primitive":
         # Key on the shape and the atoms it joins. Radius, dash length and label text
         # are styling; a line is the same line whichever end the model starts from.
-        points = frozenset(_selector_signature(params[k]) for k in _PRIMITIVE_POINTS
+        points = frozenset(_point_signature(params[k]) for k in _PRIMITIVE_POINTS
                            if k in params)
         return ("primitive", params.get("kind"), points)
     if kind == "primitives":
@@ -292,7 +299,9 @@ def categorize(root: dict) -> list[str]:
         params = node.get("params") or {}
         if k == "component" and not isinstance(params.get("selector"), str):
             has_expr = True
-        if k == "component" and (node.get("custom") or {}).get("molstar_show_non_covalent_interactions"):
+        custom = node.get("custom")
+        if k == "component" and isinstance(custom, dict) \
+                and custom.get("molstar_show_non_covalent_interactions"):
             interactions = True
         if k == "representation":
             reps.add(params.get("type"))
