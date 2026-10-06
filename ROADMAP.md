@@ -58,12 +58,33 @@ than an API-calling benchmark.
 | R2 | Grader: primitives keyed on shape + atom pair (styling/direction ignored); interactions flag and colour theme graded | done |
 | R3 | `tasks/mvs_interactions/` — 6 tasks, every atom checked against the mmCIF with gemmi (`scripts/author_interaction_tasks.py`) | done |
 | R4 | `--condition bare\|spec` in the runner, recorded in run meta | done |
-| R5 | Regression run: old vs spec vs bare on 3 cheap models, all MVS tasks | blocked (API credit) |
+| R5 | Regression run: old vs spec vs bare on 3 cheap models, all MVS tasks | done — see below |
 | R6 | Grounding packs: offline builder (gemmi + SIFTS + existing resolve/clinical provenance) and `--grounding` flag | todo |
 | R7 | Grader: resolve selections to atom sets against the mmCIF, so equivalent namings (`label_comp_id`+atom vs residue number+atom) match and empty selections score zero | todo |
-| R8 | Chat driver v2: new reference in its prompt + empty-selection lint (a primitive end that matches nothing is drawn to the origin by Mol\*) | in PR |
+| R8 | Chat driver v2: new reference in its prompt + empty-selection lint (a primitive end that matches nothing is drawn to the origin by Mol\*) | shipped (chat-driver #18, deployed 2026-10-06) |
 | R9 | Chat driver: thumbs up/down per turn, for grading real traffic | todo |
 | R10 | Leaderboard: a regime for `source: interactions` (unknown sources currently fall into "Clinical") | todo |
+
+**R5 result (2026-10-06, 1 sample, 76 tasks, ~$0.85).** Mean F1:
+
+| model | old ref | spec | bare | interaction tasks old → spec |
+|---|---|---|---|---|
+| Claude Haiku 4.5 | 0.800 | 0.806 | 0.061 | 0.52 → 0.72 |
+| DeepSeek V3.2 | 0.827 | 0.814 | 0.018 | 0.58 → 0.56 |
+| Qwen3-30B-A3B | 0.576 | 0.522 | 0.000 | 0.22 → 0.18 |
+
+* **Bare ≈ 0 for every model.** MVS is not in pretraining in any usable form;
+  the bare row measures nothing but "can't". Keep it as one line in the paper,
+  not a leaderboard column.
+* **Spec costs ~0.01 on the old tasks for the strong models** (within 1-sample
+  noise: 57 tasks better, 63 worse of 228). Part of it is real: with a richer
+  reference, Haiku adds unrequested ball-and-stick on the resolve tasks
+  (same, correct entries; precision drops).
+* **The small model loses ~0.05, almost all to JSON bracket-count errors** on a
+  ~2.4× longer prompt (parse success 0.78 → 0.67). Longer documentation hurts
+  small models — a finding, and an argument for B6 (structured outputs).
+* Interaction tasks are not yet solved by anyone: line endpoints are named with
+  the wrong atoms or chains. That is the grounding gap (R6).
 
 ---
 
