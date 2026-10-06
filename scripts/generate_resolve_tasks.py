@@ -43,7 +43,7 @@ SPECS = [
      "Probe: Haiku answered 1D0G (death receptor 5 / TRAIL)."),
     ("cftr", "show me the CFTR channel", "P13569", "5uak",
      "Probe: Haiku answered 5UAY (a plant Toc75 POTRA domain).", 0.7),
-    ("gfp", "show green fluorescent protein", "P42212", "1ema",
+    ("gfp", "show green fluorescent protein from Aequorea victoria", "P42212", "1ema",
      "The starter chip's target; the model tends to be right here — a control."),
     ("myoglobin", "Show me sperm whale myoglobin", "P02185", "1mbn",
      "Corpus prompt asked for 'crab myoglobin' (no such entry); sperm whale is the classic."),

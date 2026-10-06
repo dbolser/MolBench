@@ -92,7 +92,13 @@ def _param_signature(kind: str, params: dict | None, custom: dict | None = None)
         # Mol* computes and draws the interactions itself when this flag is set, so
         # it is part of what the component shows, not a styling detail.
         if custom.get("molstar_show_non_covalent_interactions"):
-            sig += ("interactions",)
+            # The radius decides which neighbours are drawn; Mol*'s default is 5 Å.
+            radius = custom.get("molstar_non_covalent_interactions_radius_ang", 5)
+            try:
+                radius = round(float(radius), 1)
+            except (TypeError, ValueError):
+                pass
+            sig += ("interactions", radius)
         return sig
     if kind == "primitive":
         # Key on the shape and the atoms it joins. Radius, dash length and label text
@@ -111,8 +117,11 @@ def _param_signature(kind: str, params: dict | None, custom: dict | None = None)
     if kind == "primitives":
         return ()  # a grouping node; its colour is styling
     if kind == "color" and custom.get("molstar_color_theme_name"):
-        # The theme overrides the placeholder colour, so grade the theme.
-        return ("theme", custom["molstar_color_theme_name"])
+        # The theme overrides the placeholder colour, so grade the theme (and where it applies).
+        sig = ("theme", custom["molstar_color_theme_name"])
+        if "selector" in params:
+            sig += (_selector_signature(params["selector"]),)
+        return sig
     if kind == "representation":
         # Key on the representation *type* only. The builder injects secondary
         # defaults (e.g. surface_type='molecular') that a model shouldn't be

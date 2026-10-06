@@ -359,6 +359,23 @@ def test_label_text_and_element_selectors_are_graded():
     assert mvs.grade_mvs(prim(kind="tube", start=o, end=at), prim(kind="tube", start=n, end=at))["f1"] < 1.0
 
 
+
+def test_interaction_radius_and_theme_selector_are_graded():
+    def comp(**custom):
+        return _with_structure_child({"kind": "component", "params": {"selector": {"label_comp_id": "OXY"}},
+                                      "custom": {"molstar_show_non_covalent_interactions": True, **custom}})
+    assert mvs.grade_mvs(comp(), comp(molstar_non_covalent_interactions_radius_ang=5))["f1"] == 1.0
+    assert mvs.grade_mvs(comp(), comp(molstar_non_covalent_interactions_radius_ang=12))["f1"] < 1.0
+
+    def themed(sel):
+        s = _scene()
+        color = s["root"]["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]
+        color["custom"] = {"molstar_color_theme_name": "chain-id"}
+        color["params"]["selector"] = sel
+        return s
+    assert mvs.grade_mvs(themed({"auth_seq_id": 1}), themed({"auth_seq_id": 1}))["f1"] == 1.0
+    assert mvs.grade_mvs(themed({"auth_seq_id": 1}), themed({"auth_seq_id": 9}))["f1"] < 1.0
+
 if __name__ == "__main__":
     # Run every test_* function, so a new test can't be missed by CI (which runs this file).
     tests = [f for name, f in sorted(globals().items()) if name.startswith("test_") and callable(f)]
