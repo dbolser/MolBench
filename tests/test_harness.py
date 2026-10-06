@@ -338,3 +338,21 @@ def test_primitive_coordinates_keep_their_order():
 def test_categorize_survives_non_dict_custom():
     s = _with_structure_child({"kind": "component", "params": {"selector": "ligand"}, "custom": ["x"]})
     assert "interactions" not in mvs.categorize(mvs.extract_root(s))
+
+
+def test_arrow_direction_and_angle_vertex_are_graded():
+    def prim(**params):
+        return _with_structure_child({"kind": "primitives", "children": [
+            {"kind": "primitive", "params": params}]})
+    a, b, c = ({"auth_seq_id": n} for n in (1, 2, 3))
+    assert mvs.grade_mvs(prim(kind="arrow", start=a, end=b), prim(kind="arrow", start=b, end=a))["f1"] < 1.0
+    assert mvs.grade_mvs(prim(kind="angle_measurement", a=a, b=b, c=c),
+                         prim(kind="angle_measurement", a=b, b=a, c=c))["f1"] < 1.0
+
+
+def test_interactions_flag_survives_list_selector_expansion():
+    sel = [{"label_comp_id": "OXY"}, {"label_comp_id": "HEM"}]
+    comp = {"kind": "component", "params": {"selector": sel}}
+    ref = _with_structure_child({**comp, "custom": {"molstar_show_non_covalent_interactions": True}})
+    assert mvs.grade_mvs(ref, ref)["f1"] == 1.0
+    assert mvs.grade_mvs(ref, _with_structure_child(comp))["f1"] < 1.0

@@ -71,6 +71,7 @@ def _color_signature(value: Any) -> Any:
 
 
 _PRIMITIVE_POINTS = ("start", "end", "position", "a", "b", "c")
+_UNDIRECTED_PRIMITIVES = {"tube", "distance_measurement"}
 
 
 def _point_signature(point: Any) -> Any:
@@ -92,10 +93,16 @@ def _param_signature(kind: str, params: dict | None, custom: dict | None = None)
         return sig
     if kind == "primitive":
         # Key on the shape and the atoms it joins. Radius, dash length and label text
-        # are styling; a line is the same line whichever end the model starts from.
-        points = frozenset(_point_signature(params[k]) for k in _PRIMITIVE_POINTS
+        # are styling. A line or distance is the same whichever end comes first; an
+        # arrow's direction and an angle's vertex are not, so those keep their roles.
+        pkind = params.get("kind")
+        if pkind in _UNDIRECTED_PRIMITIVES:
+            points = frozenset(_point_signature(params[k]) for k in _PRIMITIVE_POINTS
+                               if k in params)
+        else:
+            points = tuple((k, _point_signature(params[k])) for k in _PRIMITIVE_POINTS
                            if k in params)
-        return ("primitive", params.get("kind"), points)
+        return ("primitive", pkind, points)
     if kind == "primitives":
         return ()  # a grouping node; its colour is styling
     if kind == "color" and custom.get("molstar_color_theme_name"):
@@ -151,7 +158,8 @@ def flatten_paths(root: dict) -> list[tuple]:
         # "group residues in one component" and "one component each" score alike.
         if kind == "component" and isinstance(params.get("selector"), list) \
                 and len(params["selector"]) > 1:
-            variants = [("selector", _selector_signature(e)) for e in params["selector"]]
+            flag = _param_signature(kind, {"selector": "all"}, node.get("custom"))[2:]
+            variants = [("selector", _selector_signature(e)) + flag for e in params["selector"]]
         else:
             variants = [_param_signature(kind, params, node.get("custom"))]
 
