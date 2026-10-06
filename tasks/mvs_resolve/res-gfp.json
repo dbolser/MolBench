@@ -3,7 +3,7 @@
   "category": "mvs",
   "source": "resolve",
   "title": "Resolve by name: gfp",
-  "prompt": "show green fluorescent protein",
+  "prompt": "show green fluorescent protein from Aequorea victoria",
   "reference_mvs": {
     "kind": "root",
     "children": [
@@ -702,6 +702,6 @@
     "uniprot": "P42212",
     "n_entries": 637,
     "source": "RCSB search, reference_sequence_identifiers",
-    "fetched": "2026-09-30"
+    "fetched": "2026-10-06"
   }
 }

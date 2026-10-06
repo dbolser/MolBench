@@ -34,8 +34,10 @@ TASKS_DIR = REPO / "tasks"
 NL = "\n"
 
 # How a task's `source` maps to a difficulty regime, ordered easy -> hard.
-REGIMES = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)", "Resolution (by name)"]
-# The first three form the difficulty gradient (Finding 03); later regimes test other skills.
+GRADIENT = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
+# Regimes that test another skill, not a harder step on the gradient: shown below it, unordered.
+OTHER_REGIMES = ["Resolution (by name)"]
+REGIMES = GRADIENT + OTHER_REGIMES
 _SOURCE_REGIME = {
     "generated": "Translation", "curated": "Translation",
     "grounded": "Grounded (ligand/SS)",
@@ -347,7 +349,7 @@ def findings(ranked: list) -> str:
     # Compute it live — with a wider panel this can flip, because format-unreliable
     # models inject parse-driven spread that swamps the difficulty signal.
     regimes = _task_regimes()
-    reg_order = REGIMES[:3]
+    reg_order = GRADIENT
     reg_spread: dict[str, float] = {}
     for rg in reg_order:
         per = []
@@ -456,10 +458,15 @@ def regime_table(ranked: list) -> str:
         f"<th>{html.escape(n.split('/')[-1])}</th>" for n, _ in cols
     )
     body = []
+    other_header = False
     for rg in REGIMES:
         n_tasks = sum(1 for v in reg.values() if v == rg)
         if not n_tasks:
             continue
+        if rg in OTHER_REGIMES and not other_header:
+            other_header = True
+            body.append(f"<tr><td class='rowhead' colspan='{len(cols) + 1}'><i>Other skills "
+                        "(not part of the gradient)</i></td></tr>")
         vals = {}
         for n, m in cols:
             fs = [t["f1"] for t in m["tasks"] if reg.get(t["id"]) == rg]
@@ -483,7 +490,8 @@ def regime_table(ranked: list) -> str:
   <h2>Difficulty gradient by task regime</h2>
   <p class="section-sub">Mean MVS&nbsp;F1 by how the answer key is grounded,
      easy&nbsp;&rarr;&nbsp;hard. Harder regimes pull the models apart &mdash; the
-     spread you want from a benchmark.</p>
+     spread you want from a benchmark. Rows under <i>Other skills</i> test a
+     different ability and are not ordered by difficulty.</p>
   <div class="table-scroll">
     <table>
       <thead><tr><th class="left">Regime</th>{head_cells}</tr></thead>
