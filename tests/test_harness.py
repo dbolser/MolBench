@@ -346,6 +346,19 @@ def test_interactions_flag_survives_list_selector_expansion():
     assert mvs.grade_mvs(ref, _with_structure_child(comp))["f1"] < 1.0
 
 
+def test_label_text_and_element_selectors_are_graded():
+    def prim(**params):
+        return _with_structure_child({"kind": "primitives", "children": [
+            {"kind": "primitive", "params": params}]})
+    at = {"auth_seq_id": 64}
+    assert mvs.grade_mvs(prim(kind="label", position=at, text="His64"),
+                         prim(kind="label", position=at, text="his64 "))["f1"] == 1.0
+    assert mvs.grade_mvs(prim(kind="label", position=at, text="His64"),
+                         prim(kind="label", position=at, text="Gly65"))["f1"] < 1.0
+    o, n = ({"auth_seq_id": 64, "type_symbol": el} for el in ("O", "N"))
+    assert mvs.grade_mvs(prim(kind="tube", start=o, end=at), prim(kind="tube", start=n, end=at))["f1"] < 1.0
+
+
 if __name__ == "__main__":
     # Run every test_* function, so a new test can't be missed by CI (which runs this file).
     tests = [f for name, f in sorted(globals().items()) if name.startswith("test_") and callable(f)]

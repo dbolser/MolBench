@@ -53,12 +53,15 @@ def _selector_signature(sel: Any) -> Any:
         comp = e.get("label_comp_id") or e.get("auth_comp_id")
         comp = comp.upper() if isinstance(comp, str) else comp
         atom = e.get("label_atom_id") or e.get("auth_atom_id")
+        element = e.get("type_symbol")
+        element = element.upper() if isinstance(element, str) else element
         sigs.append((
             ("chain", str(chain) if chain is not None else None),
             ("resnum", resnum),
             ("range", (beg, end) if (beg is not None or end is not None) else None),
             ("comp", comp),
             ("atom", atom),
+            ("element", element),
         ))
     return tuple(sorted(map(str, sigs)))
 
@@ -102,7 +105,9 @@ def _param_signature(kind: str, params: dict | None, custom: dict | None = None)
         else:
             points = tuple((k, _point_signature(params[k])) for k in _PRIMITIVE_POINTS
                            if k in params)
-        return ("primitive", pkind, points)
+        # A 3D label's text is its content (unlike a measurement's label template).
+        text = (" ".join(str(params.get("text", "")).split()).casefold(),) if pkind == "label" else ()
+        return ("primitive", pkind, points) + text
     if kind == "primitives":
         return ()  # a grouping node; its colour is styling
     if kind == "color" and custom.get("molstar_color_theme_name"):

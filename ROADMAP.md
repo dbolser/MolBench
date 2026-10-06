@@ -63,7 +63,7 @@ than an API-calling benchmark.
 | R7 | Grader: resolve selections to atom sets against the mmCIF, so equivalent namings (`label_comp_id`+atom vs residue number+atom) match and empty selections score zero | todo |
 | R8 | Chat driver v2: new reference in its prompt + empty-selection lint (a primitive end that matches nothing is drawn to the origin by Mol\*) | shipped (chat-driver #18, deployed 2026-10-06) |
 | R9 | Chat driver: thumbs up/down per turn, for grading real traffic | todo |
-| R10 | Leaderboard: a regime for `source: interactions` (unknown sources currently fall into "Clinical") | todo |
+| R10 | Leaderboard: regimes for `resolve` and `interactions` sources (unknown sources now raise) | done |
 
 **R5 result (2026-10-06, 1 sample, 76 tasks, ~$0.85).** Mean F1:
 

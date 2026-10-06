@@ -34,7 +34,8 @@ TASKS_DIR = REPO / "tasks"
 NL = "\n"
 
 # How a task's `source` maps to a difficulty regime, ordered easy -> hard.
-REGIMES = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)", "Resolution (by name)"]
+REGIMES = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)", "Resolution (by name)",
+           "Interactions (atoms)"]
 # The first three form the difficulty gradient (Finding 03); later regimes test other skills.
 _SOURCE_REGIME = {
     "generated": "Translation", "curated": "Translation",
@@ -42,6 +43,7 @@ _SOURCE_REGIME = {
     "clinvar-variant": "Clinical (SIFTS/ClinVar)", "clinvar-hotspots": "Clinical (SIFTS/ClinVar)",
     "sifts-named": "Clinical (SIFTS/ClinVar)",
     "resolve": "Resolution (by name)",
+    "interactions": "Interactions (atoms)",
 }
 
 
