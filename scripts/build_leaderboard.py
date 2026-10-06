@@ -34,18 +34,25 @@ TASKS_DIR = REPO / "tasks"
 NL = "\n"
 
 # How a task's `source` maps to a difficulty regime, ordered easy -> hard.
-REGIMES = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
+REGIMES = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)", "Resolution (by name)"]
+# The first three form the difficulty gradient (Finding 03); later regimes test other skills.
+_SOURCE_REGIME = {
+    "generated": "Translation", "curated": "Translation",
+    "grounded": "Grounded (ligand/SS)",
+    "clinvar-variant": "Clinical (SIFTS/ClinVar)", "clinvar-hotspots": "Clinical (SIFTS/ClinVar)",
+    "sifts-named": "Clinical (SIFTS/ClinVar)",
+    "resolve": "Resolution (by name)",
+}
 
 
 # --------------------------------------------------------------------------- #
 # Data helpers
 # --------------------------------------------------------------------------- #
 def _regime_of(source: str) -> str:
-    if source in ("generated", "curated"):
-        return "Translation"
-    if source == "grounded":
-        return "Grounded (ligand/SS)"
-    return "Clinical (SIFTS/ClinVar)"
+    # Explicit, so a new task source can't silently land in another regime's numbers.
+    if source not in _SOURCE_REGIME:
+        raise ValueError(f"task source {source!r} has no regime; add it to _SOURCE_REGIME")
+    return _SOURCE_REGIME[source]
 
 
 @functools.lru_cache(maxsize=1)
@@ -340,7 +347,7 @@ def findings(ranked: list) -> str:
     # Compute it live — with a wider panel this can flip, because format-unreliable
     # models inject parse-driven spread that swamps the difficulty signal.
     regimes = _task_regimes()
-    reg_order = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
+    reg_order = REGIMES[:3]
     reg_spread: dict[str, float] = {}
     for rg in reg_order:
         per = []
