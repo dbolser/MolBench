@@ -78,6 +78,22 @@ strong judge, structured protocol, self-variance reporting); rubric quality
   search to extract interface/contact residues (ligand–protein, protein–protein),
   giving grounded "show the binding-site residues" / "show the PPI interface"
   tasks — a realistic, high-value class we currently lack.
+* **B4. Entry resolution (STARTED — `tasks/mvs_resolve/`).** Every task used to hand
+  the model the PDB id; real users name the protein. The first live failure was
+  "a structure of PDE5A" → PDB 1UJ7 (does not exist), and probing found real ids
+  for the wrong protein too. Six tasks now grade against *all* entries for the
+  protein's UniProt accession (`accepted_ids`, folded by the grader). Next: more
+  targets, and an `exists` sub-metric (did the id resolve at RCSB at all?) — a
+  hallucinated id and a wrong-but-real id are different failures.
+* **B5. Colour schemes.** The chat-driver's prompt now teaches Mol*'s
+  `custom.molstar_color_theme_name` on a `color` node for rainbow / by-chain /
+  by-SS colouring (models kept writing `"spectrum"` as a colour). Porting that here
+  needs the grader to treat a theme-coloured representation as equivalent to the
+  per-chain component references it would replace; until then the two prompts differ.
+* **B6. Structured outputs.** Constrained decoding (`response_format: json_schema`,
+  `strict`) with a trimmed MVS schema makes invalid trees impossible by
+  construction. Measure validation failures + F1 against the prompt-only path on
+  the cheap models.
 * **B3. Corpus scaling & de-correlation.** More clinical targets (BRCA1, CFTR,
   kinases, more p53 structures incl. one with a numbering *offset* to exercise the
   SIFTS bridge); more Tier-1 template diversity so per-skill items are less

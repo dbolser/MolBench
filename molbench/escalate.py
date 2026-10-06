@@ -19,12 +19,48 @@ function degrades gracefully to whatever tiers are wired.
 
 from __future__ import annotations
 
+import copy
 import tempfile
 import pathlib
 from typing import Any, Callable
 
-from .mvs import grade_mvs
+from .mvs import _download_id, extract_root, flatten_paths, grade_mvs
 from .visual import image_similarity
+
+
+def _download_ids(tree: Any) -> set[str]:
+    root = extract_root(tree)
+    if root is None:
+        return set()
+    return {_download_id(seg) for path in flatten_paths(root) for seg in path} - {None}
+
+
+def _reference_on_accepted(reference_tree: dict, predicted_tree: Any,
+                           accepted: set[str] | list[str] | None) -> dict:
+    """The reference re-pointed at the accepted entry the prediction loaded.
+
+    The tree tier folds an accepted id onto the canonical one; the visual tiers must
+    do the same, or they compare two different structures and an otherwise
+    equivalent scene can never be rescued.
+    """
+    ref_ids, pred_ids = _download_ids(reference_tree), _download_ids(predicted_tree)
+    if not accepted or len(ref_ids) != 1 or len(pred_ids) != 1:
+        return reference_tree
+    (ref_id,), (pred_id,) = ref_ids, pred_ids
+    if pred_id == ref_id or pred_id not in {a.lower() for a in accepted}:
+        return reference_tree
+    moved = copy.deepcopy(reference_tree)
+
+    def walk(node: dict) -> None:
+        params = node.get("params")
+        if node.get("kind") == "download" and isinstance(params, dict) and "url" in params:
+            params["url"] = params["url"].replace(f"/{ref_id}.", f"/{pred_id}.")
+        for c in node.get("children") or []:
+            if isinstance(c, dict):
+                walk(c)
+
+    walk(extract_root(moved))
+    return moved
 
 
 def escalating_grade(
@@ -37,8 +73,9 @@ def escalating_grade(
     tree_threshold: float = 0.999,
     visual_threshold: float = 0.97,
     workdir: str | pathlib.Path | None = None,
+    accepted_refs: set[str] | list[str] | None = None,
 ) -> dict[str, Any]:
-    g = grade_mvs(reference_tree, predicted_tree)
+    g = grade_mvs(reference_tree, predicted_tree, accepted_refs=accepted_refs)
     out: dict[str, Any] = {"tree_f1": g["f1"], "tier": "tree"}
 
     # T0 — tree match is conclusive (identical / normalised-equivalent).
@@ -53,7 +90,7 @@ def escalating_grade(
     wd.mkdir(parents=True, exist_ok=True)
     ref_png, pred_png = wd / "ref.png", wd / "pred.png"
     try:
-        render(reference_tree, str(ref_png))
+        render(_reference_on_accepted(reference_tree, predicted_tree, accepted_refs), str(ref_png))
         render(predicted_tree, str(pred_png))
     except Exception as e:  # noqa: BLE001 - a render failure is itself informative
         return {**out, "decision": "render-failed", "note": str(e)}

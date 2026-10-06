@@ -1,0 +1,96 @@
+{
+  "id": "res-cftr",
+  "category": "mvs",
+  "source": "resolve",
+  "title": "Resolve by name: cftr",
+  "prompt": "show me the CFTR channel",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/5uak.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "accepted_ids": [
+    "5uak",
+    "6msm",
+    "6o1v",
+    "6o2p",
+    "7sv7",
+    "7svd",
+    "7svr",
+    "8eig",
+    "8eio",
+    "8eiq",
+    "8ej1",
+    "8fzq",
+    "8gls",
+    "8ubr",
+    "8v7z",
+    "8v81",
+    "9dw4",
+    "9dw5",
+    "9dw7",
+    "9dw8",
+    "9dw9",
+    "9mxl",
+    "9y1q",
+    "9y4t"
+  ],
+  "categories": [
+    "load",
+    "representation",
+    "resolve"
+  ],
+  "skills": [
+    "resolve",
+    "download",
+    "component",
+    "representation"
+  ],
+  "notes": "Probe: Haiku answered 5UAY (a plant Toc75 POTRA domain).",
+  "provenance": {
+    "uniprot": "P13569",
+    "n_entries": 24,
+    "source": "RCSB search, reference_sequence_identifiers",
+    "fetched": "2026-10-06",
+    "min_coverage": 0.7,
+    "min_length": 1036
+  }
+}
