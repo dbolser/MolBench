@@ -36,7 +36,7 @@ NL = "\n"
 # How a task's `source` maps to a difficulty regime, ordered easy -> hard.
 GRADIENT = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
 # Regimes that test another skill, not a harder step on the gradient: shown below it, unordered.
-OTHER_REGIMES = ["Resolution (by name)"]
+OTHER_REGIMES = ["Resolution (by name)", "Interactions (atoms)"]
 REGIMES = GRADIENT + OTHER_REGIMES
 _SOURCE_REGIME = {
     "generated": "Translation", "curated": "Translation",
@@ -44,6 +44,7 @@ _SOURCE_REGIME = {
     "clinvar-variant": "Clinical (SIFTS/ClinVar)", "clinvar-hotspots": "Clinical (SIFTS/ClinVar)",
     "sifts-named": "Clinical (SIFTS/ClinVar)",
     "resolve": "Resolution (by name)",
+    "interactions": "Interactions (atoms)",
 }
 
 

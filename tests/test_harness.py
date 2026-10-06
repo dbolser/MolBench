@@ -259,6 +259,123 @@ def test_escalation_renders_the_reference_on_the_accepted_entry():
         is task["reference_mvs"]
 
 
+def _with_structure_child(child: dict) -> dict:
+    s = _scene()
+    s["root"]["children"][0]["children"][0]["children"][0]["children"].append(child)
+    return s
+
+
+def _hbond(start: dict, end: dict, **style) -> dict:
+    return {"kind": "primitives", "params": style.pop("group", {}), "children": [
+        {"kind": "primitive", "params": {"kind": "distance_measurement",
+                                         "start": start, "end": end, **style}}]}
+
+
+_HIS = {"auth_asym_id": "A", "auth_seq_id": 64, "label_atom_id": "NE2"}
+_O2 = {"auth_asym_id": "A", "label_comp_id": "OXY", "label_atom_id": "O2"}
+
+
+def test_primitive_ignores_styling_and_direction():
+    ref = _with_structure_child(_hbond(_HIS, _O2))
+    pred = _with_structure_child(_hbond(_O2, _HIS, radius=0.1, dash_length=0.3,
+                                        label_template="H-bond {{distance}}",
+                                        group={"color": "yellow"}))
+    assert mvs.grade_mvs(ref, pred)["f1"] == 1.0
+
+
+def test_primitive_wrong_atom_loses_credit():
+    ref = _with_structure_child(_hbond(_HIS, _O2))
+    pred = _with_structure_child(_hbond({**_HIS, "label_atom_id": "ND1"}, _O2))
+    assert mvs.grade_mvs(ref, pred)["f1"] < 1.0
+
+
+def test_interactions_flag_is_graded():
+    comp = {"kind": "component", "params": {"selector": {"label_comp_id": "OXY"}}}
+    ref = _with_structure_child({**comp, "custom": {"molstar_show_non_covalent_interactions": True}})
+    assert mvs.grade_mvs(ref, ref)["f1"] == 1.0
+    assert mvs.grade_mvs(ref, _with_structure_child(comp))["f1"] < 1.0
+    assert "interactions" in mvs.categorize(mvs.extract_root(ref))
+
+
+def test_colour_theme_grades_the_theme_not_the_placeholder():
+    def themed(theme, placeholder):
+        s = _scene(placeholder)
+        rep = s["root"]["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]
+        rep["children"][0]["custom"] = {"molstar_color_theme_name": theme}
+        return s
+    assert mvs.grade_mvs(themed("chain-id", "gray"), themed("chain-id", "white"))["f1"] == 1.0
+    assert mvs.grade_mvs(themed("chain-id", "gray"), themed("sequence-id", "gray"))["f1"] < 1.0
+
+
+def test_bare_condition_drops_the_reference():
+    from molbench.runner import build_system_prompts
+    spec, bare = build_system_prompts("spec")["mvs"], build_system_prompts("bare")["mvs"]
+    assert "Node kinds" in spec and "Node kinds" not in bare
+    assert "{{MVS_REFERENCE}}" not in bare
+
+
+def test_primitive_coordinates_keep_their_order():
+    a = _with_structure_child({"kind": "primitives", "children": [{"kind": "primitive", "params": {
+        "kind": "label", "position": [1.0, 2.0, 3.0], "text": "x"}}]})
+    b = _with_structure_child({"kind": "primitives", "children": [{"kind": "primitive", "params": {
+        "kind": "label", "position": [3.0, 2.0, 1.0], "text": "x"}}]})
+    assert mvs.grade_mvs(a, a)["f1"] == 1.0
+    assert mvs.grade_mvs(a, b)["f1"] < 1.0
+
+
+def test_categorize_survives_non_dict_custom():
+    s = _with_structure_child({"kind": "component", "params": {"selector": "ligand"}, "custom": ["x"]})
+    assert "interactions" not in mvs.categorize(mvs.extract_root(s))
+
+
+def test_arrow_direction_and_angle_vertex_are_graded():
+    def prim(**params):
+        return _with_structure_child({"kind": "primitives", "children": [
+            {"kind": "primitive", "params": params}]})
+    a, b, c = ({"auth_seq_id": n} for n in (1, 2, 3))
+    assert mvs.grade_mvs(prim(kind="arrow", start=a, end=b), prim(kind="arrow", start=b, end=a))["f1"] < 1.0
+    assert mvs.grade_mvs(prim(kind="angle_measurement", a=a, b=b, c=c),
+                         prim(kind="angle_measurement", a=b, b=a, c=c))["f1"] < 1.0
+
+
+def test_interactions_flag_survives_list_selector_expansion():
+    sel = [{"label_comp_id": "OXY"}, {"label_comp_id": "HEM"}]
+    comp = {"kind": "component", "params": {"selector": sel}}
+    ref = _with_structure_child({**comp, "custom": {"molstar_show_non_covalent_interactions": True}})
+    assert mvs.grade_mvs(ref, ref)["f1"] == 1.0
+    assert mvs.grade_mvs(ref, _with_structure_child(comp))["f1"] < 1.0
+
+
+def test_label_text_and_element_selectors_are_graded():
+    def prim(**params):
+        return _with_structure_child({"kind": "primitives", "children": [
+            {"kind": "primitive", "params": params}]})
+    at = {"auth_seq_id": 64}
+    assert mvs.grade_mvs(prim(kind="label", position=at, text="His64"),
+                         prim(kind="label", position=at, text="his64 "))["f1"] == 1.0
+    assert mvs.grade_mvs(prim(kind="label", position=at, text="His64"),
+                         prim(kind="label", position=at, text="Gly65"))["f1"] < 1.0
+    o, n = ({"auth_seq_id": 64, "type_symbol": el} for el in ("O", "N"))
+    assert mvs.grade_mvs(prim(kind="tube", start=o, end=at), prim(kind="tube", start=n, end=at))["f1"] < 1.0
+
+
+
+def test_interaction_radius_and_theme_selector_are_graded():
+    def comp(**custom):
+        return _with_structure_child({"kind": "component", "params": {"selector": {"label_comp_id": "OXY"}},
+                                      "custom": {"molstar_show_non_covalent_interactions": True, **custom}})
+    assert mvs.grade_mvs(comp(), comp(molstar_non_covalent_interactions_radius_ang=5))["f1"] == 1.0
+    assert mvs.grade_mvs(comp(), comp(molstar_non_covalent_interactions_radius_ang=12))["f1"] < 1.0
+
+    def themed(sel):
+        s = _scene()
+        color = s["root"]["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]
+        color["custom"] = {"molstar_color_theme_name": "chain-id"}
+        color["params"]["selector"] = sel
+        return s
+    assert mvs.grade_mvs(themed({"auth_seq_id": 1}), themed({"auth_seq_id": 1}))["f1"] == 1.0
+    assert mvs.grade_mvs(themed({"auth_seq_id": 1}), themed({"auth_seq_id": 9}))["f1"] < 1.0
+
 if __name__ == "__main__":
     # Run every test_* function, so a new test can't be missed by CI (which runs this file).
     tests = [f for name, f in sorted(globals().items()) if name.startswith("test_") and callable(f)]

@@ -50,6 +50,11 @@ PROMPT_MVS = REPO / "prompts" / "system_mvs.md"
 API_REFERENCE = ROOT / "api_reference.md"
 MVS_REFERENCE = ROOT / "mvs_reference.md"
 
+# Prompting conditions for the scene-tree track. 'spec' hands the model the vendored
+# MVS reference (the headline number); 'bare' gives only the output contract, so the
+# gap between them measures what a model gains from documentation.
+CONDITIONS = ("spec", "bare")
+
 # Categories whose tasks produce a numeric F1 (vs. visual_rubric, which is VLM-judged).
 GRADED_CATEGORIES = ("mvs", "api_calling")
 
@@ -123,7 +128,7 @@ def load_tasks(categories: list[str] | None) -> list[dict[str, Any]]:
     return tasks
 
 
-def build_system_prompts() -> dict[str, str]:
+def build_system_prompts(condition: str = "spec") -> dict[str, str]:
     """One assembled system prompt per task category.
 
     Each target speaks a different IR, so each gets its own instructions + vendored
@@ -133,7 +138,11 @@ def build_system_prompts() -> dict[str, str]:
     api_prompt = (PROMPT_API.read_text()
                   .replace("{{API_REFERENCE}}", API_REFERENCE.read_text())
                   .replace("{{JSON_SCHEMA}}", json.dumps(schema.build_json_schema(), indent=2)))
-    mvs_prompt = PROMPT_MVS.read_text().replace("{{MVS_REFERENCE}}", MVS_REFERENCE.read_text())
+    mvs_prompt = PROMPT_MVS.read_text()
+    if condition == "bare":
+        mvs_prompt = mvs_prompt.replace("## MVS reference\n\n{{MVS_REFERENCE}}", "").rstrip() + "\n"
+    else:
+        mvs_prompt = mvs_prompt.replace("{{MVS_REFERENCE}}", MVS_REFERENCE.read_text())
     return {"api_calling": api_prompt, "mvs": mvs_prompt, "visual_rubric": mvs_prompt}
 
 
@@ -232,7 +241,7 @@ def _aggregate(samples: list[dict]) -> dict[str, Any]:
 
 def run(models: list[str], categories: list[str] | None,
         samples: int = 1, escalate: bool = False,
-        judge: str | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
+        judge: str | None = None, condition: str = "spec") -> tuple[dict[str, Any], dict[str, Any]]:
     """Returns (report, raw_samples).
 
     `report` is the lightweight scorecard (aggregates + best-sample prediction).
@@ -250,7 +259,7 @@ def run(models: list[str], categories: list[str] | None,
     tasks = load_tasks(categories)
     if not tasks:
         sys.exit("no tasks matched; check tasks/ and --categories")
-    prompts = build_system_prompts()
+    prompts = build_system_prompts(condition)
     vlm = StubVLMJudge()
 
     report: dict[str, Any] = {
@@ -262,6 +271,7 @@ def run(models: list[str], categories: list[str] | None,
             "categories": categories,
             "escalate": escalate,
             "judge": judge,
+            "condition": condition,
         },
     }
 
@@ -422,6 +432,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--judge", default=None,
                     help="vision model id for the T2 VLM tier (e.g. claude-opus-4-8); "
                          "off by default (T0/T1 only)")
+    ap.add_argument("--condition", choices=CONDITIONS, default="spec",
+                    help="MVS prompting condition: 'spec' (with the MVS reference) or "
+                         "'bare' (output contract only)")
     ap.add_argument("--out", default=str(RESULTS_DIR / "scorecard.json"))
     ap.add_argument("--no-archive", action="store_true",
                     help="skip writing the timestamped per-run archive in runs/")
@@ -429,7 +442,8 @@ def main(argv: list[str] | None = None) -> None:
 
     load_dotenv()  # make keys in .env available before any model is built
     report, raw_samples = run(args.models, args.categories, samples=args.samples,
-                              escalate=args.escalate, judge=args.judge)
+                              escalate=args.escalate, judge=args.judge,
+                              condition=args.condition)
     RESULTS_DIR.mkdir(exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(report, indent=2))
     print_scorecard(report)

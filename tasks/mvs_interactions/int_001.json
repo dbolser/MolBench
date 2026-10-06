@@ -1,0 +1,148 @@
+{
+  "id": "int-001",
+  "category": "mvs",
+  "source": "interactions",
+  "pdb": "1a6m",
+  "title": "H-bond: distal His64 to bound O2",
+  "prompt": "In oxymyoglobin 1A6M, show the protein as a grey cartoon, His64 and the bound O2 as ball-and-stick, and draw the hydrogen bond from His64 NE2 to the O2 molecule's terminal oxygen (atom O2) as a dashed line labelled with its length.",
+  "reference_mvs": {
+    "kind": "root",
+    "children": [
+      {
+        "kind": "download",
+        "params": {
+          "url": "https://files.rcsb.org/download/1a6m.cif"
+        },
+        "children": [
+          {
+            "kind": "parse",
+            "params": {
+              "format": "mmcif"
+            },
+            "children": [
+              {
+                "kind": "structure",
+                "params": {
+                  "type": "model"
+                },
+                "children": [
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": "polymer"
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "cartoon"
+                        },
+                        "children": [
+                          {
+                            "kind": "color",
+                            "params": {
+                              "color": "gray"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "auth_seq_id": 64
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "component",
+                    "params": {
+                      "selector": {
+                        "auth_asym_id": "A",
+                        "label_comp_id": "OXY"
+                      }
+                    },
+                    "children": [
+                      {
+                        "kind": "representation",
+                        "params": {
+                          "type": "ball_and_stick"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "primitives",
+                    "params": {},
+                    "children": [
+                      {
+                        "kind": "primitive",
+                        "params": {
+                          "start": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "NE2",
+                            "auth_seq_id": 64
+                          },
+                          "end": {
+                            "auth_asym_id": "A",
+                            "label_atom_id": "O2",
+                            "label_comp_id": "OXY"
+                          },
+                          "dash_length": 0.15,
+                          "kind": "distance_measurement",
+                          "label_template": "{{distance}}"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component",
+    "measurement"
+  ],
+  "skills": [
+    "primitives",
+    "atom-selection",
+    "hbond"
+  ],
+  "provenance": {
+    "checked_against": "https://files.rcsb.org/download/1a6m.cif",
+    "measured": [
+      {
+        "start": {
+          "auth_asym_id": "A",
+          "label_atom_id": "NE2",
+          "auth_seq_id": 64
+        },
+        "end": {
+          "auth_asym_id": "A",
+          "label_atom_id": "O2",
+          "label_comp_id": "OXY"
+        },
+        "distance_A": 2.97
+      }
+    ]
+  }
+}

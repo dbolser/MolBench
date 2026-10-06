@@ -53,12 +53,15 @@ def _selector_signature(sel: Any) -> Any:
         comp = e.get("label_comp_id") or e.get("auth_comp_id")
         comp = comp.upper() if isinstance(comp, str) else comp
         atom = e.get("label_atom_id") or e.get("auth_atom_id")
+        element = e.get("type_symbol")
+        element = element.upper() if isinstance(element, str) else element
         sigs.append((
             ("chain", str(chain) if chain is not None else None),
             ("resnum", resnum),
             ("range", (beg, end) if (beg is not None or end is not None) else None),
             ("comp", comp),
             ("atom", atom),
+            ("element", element),
         ))
     return tuple(sorted(map(str, sigs)))
 
@@ -70,10 +73,55 @@ def _color_signature(value: Any) -> Any:
     return value
 
 
-def _param_signature(kind: str, params: dict | None) -> Any:
+_PRIMITIVE_POINTS = ("start", "end", "position", "a", "b", "c")
+_UNDIRECTED_PRIMITIVES = {"tube", "distance_measurement"}
+
+
+def _point_signature(point: Any) -> Any:
+    """A primitive position: an [x, y, z] coordinate (order matters) or an atom selection."""
+    if isinstance(point, list) and all(isinstance(v, (int, float)) for v in point):
+        return ("xyz", tuple(float(v) for v in point))
+    return _selector_signature(point)
+
+
+def _param_signature(kind: str, params: dict | None, custom: dict | None = None) -> Any:
     params = params or {}
+    custom = custom if isinstance(custom, dict) else {}
     if kind == "component" and "selector" in params:
-        return ("selector", _selector_signature(params["selector"]))
+        sig = ("selector", _selector_signature(params["selector"]))
+        # Mol* computes and draws the interactions itself when this flag is set, so
+        # it is part of what the component shows, not a styling detail.
+        if custom.get("molstar_show_non_covalent_interactions"):
+            # The radius decides which neighbours are drawn; Mol*'s default is 5 Å.
+            radius = custom.get("molstar_non_covalent_interactions_radius_ang", 5)
+            try:
+                radius = round(float(radius), 1)
+            except (TypeError, ValueError):
+                pass
+            sig += ("interactions", radius)
+        return sig
+    if kind == "primitive":
+        # Key on the shape and the atoms it joins. Radius, dash length and label text
+        # are styling. A line or distance is the same whichever end comes first; an
+        # arrow's direction and an angle's vertex are not, so those keep their roles.
+        pkind = params.get("kind")
+        if pkind in _UNDIRECTED_PRIMITIVES:
+            points = frozenset(_point_signature(params[k]) for k in _PRIMITIVE_POINTS
+                               if k in params)
+        else:
+            points = tuple((k, _point_signature(params[k])) for k in _PRIMITIVE_POINTS
+                           if k in params)
+        # A 3D label's text is its content (unlike a measurement's label template).
+        text = (" ".join(str(params.get("text", "")).split()).casefold(),) if pkind == "label" else ()
+        return ("primitive", pkind, points) + text
+    if kind == "primitives":
+        return ()  # a grouping node; its colour is styling
+    if kind == "color" and custom.get("molstar_color_theme_name"):
+        # The theme overrides the placeholder colour, so grade the theme (and where it applies).
+        sig = ("theme", custom["molstar_color_theme_name"])
+        if "selector" in params:
+            sig += (_selector_signature(params["selector"]),)
+        return sig
     if kind == "representation":
         # Key on the representation *type* only. The builder injects secondary
         # defaults (e.g. surface_type='molecular') that a model shouldn't be
@@ -124,9 +172,10 @@ def flatten_paths(root: dict) -> list[tuple]:
         # "group residues in one component" and "one component each" score alike.
         if kind == "component" and isinstance(params.get("selector"), list) \
                 and len(params["selector"]) > 1:
-            variants = [("selector", _selector_signature(e)) for e in params["selector"]]
+            flag = _param_signature(kind, {"selector": "all"}, node.get("custom"))[2:]
+            variants = [("selector", _selector_signature(e)) + flag for e in params["selector"]]
         else:
-            variants = [_param_signature(kind, params)]
+            variants = [_param_signature(kind, params, node.get("custom"))]
 
         for vsig in variants:
             here = prefix + ((kind, vsig),)
@@ -263,14 +312,19 @@ def categorize(root: dict) -> list[str]:
     kinds: dict[str, int] = {}
     has_expr = False
     reps: set[str] = set()
+    interactions = False
 
     def walk(node: dict) -> None:
-        nonlocal has_expr
+        nonlocal has_expr, interactions
         k = node.get("kind")
         kinds[k] = kinds.get(k, 0) + 1
         params = node.get("params") or {}
         if k == "component" and not isinstance(params.get("selector"), str):
             has_expr = True
+        custom = node.get("custom")
+        if k == "component" and isinstance(custom, dict) \
+                and custom.get("molstar_show_non_covalent_interactions"):
+            interactions = True
         if k == "representation":
             reps.add(params.get("type"))
         for c in node.get("children") or []:
@@ -295,7 +349,13 @@ def categorize(root: dict) -> list[str]:
         cats.append("annotation")
     if reps & {"surface", "isosurface", "gaussian-surface", "molecular-surface"}:
         cats.append("surface")
-    if kinds.get("volume") or kinds.get("primitives"):
+    if kinds.get("opacity"):
+        cats.append("transparency")
+    if kinds.get("primitive"):
+        cats.append("measurement")
+    if interactions:
+        cats.append("interactions")
+    if kinds.get("volume"):
         cats.append("volume")
     return cats
 
