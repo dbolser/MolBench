@@ -117,10 +117,26 @@ scenes pass. On `clinvar-1tup-D281` (red ball-and-stick at A281):
 | blue instead of red | 0.889 | 0.997 | rescued |
 | chain B instead of A | 0.889 | 0.994 | rescued |
 
-So the live "validated F1" (+0.04–0.11) is inflated by an unknown share. Fix
-before re-running: T1 must compare the *difference region*, not the whole frame
-(or be dropped in favour of R7 atom-set grading), and the meta-evaluation
-negatives below must pass.
+**Fixed and measured (2026-10-18).** T1 now rescues only near-identical renders
+(≤ 2 pixels changing by > 48 in any channel, at 256 px; `visual.changed_pixels`).
+A re-render changes 0 pixels; the four wrong scenes above change 8–30. On the
+June escalation, 176 of the 187 T1 rescues are pixel-identical and stay rescued;
+11 (partial disulfide sets, `mvs-003` wrong residue, `ligand` vs `HEM`) now go to
+T2. Re-scoring offline with R7 + strict T1 (stored VLM verdicts reused, the 11
+counted as not rescued) moves every model's validated F1 by +0.00 to +0.03, so
+the published numbers stand. And R7 tree match alone, with no rendering, lands
+within ~0.01 of the published validated F1 for most models: atom-set grading
+recovers what the render cascade was rescuing.
+
+| model | published validated | R7 tree only | R7 + strict T1 + stored T2 |
+|---|---|---|---|
+| claude-haiku-4-5 | 0.945 | 0.948 | 0.955 |
+| deepseek-v3.2 | 0.939 | 0.945 | 0.949 |
+| gemini-3.5-flash | 0.907 | 0.897 | 0.909 |
+| gemma-3-27b-it | 0.903 | 0.898 | 0.903 |
+| gpt-5.4-nano | 0.781 | 0.776 | 0.786 |
+| qwen3-30b-a3b | 0.704 | 0.727 | 0.735 |
+| gpt-oss-20b | 0.461 | 0.455 | 0.458 |
 
 **Not run on:** the 9 newer models, or any `spec`-condition run.
 
@@ -216,7 +232,7 @@ strong judge, structured protocol, self-variance reporting); rubric quality
 
 ---
 
-## Escalating C1 grader (built; T1 needs fixing — see Phase A status)
+## Escalating C1 grader (built; T1 made strict 2026-10-18 — see Phase A status)
 
 Cost-cascading grader so we only pay for expensive grading when needed
 (`molbench/escalate.py`):
