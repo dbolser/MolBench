@@ -59,5 +59,9 @@
     "load",
     "representation",
     "color"
-  ]
+  ],
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 1LYZ: Real-space refinement of the structure of hen egg-white lysozyme\nMethod: X-RAY DIFFRACTION, 2.00 \u00c5\nEntities:\n  1: polymer, protein: HEN EGG WHITE LYSOZYME\n  2: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  A [A]: entity 1, 129 of 129 SEQRES residues observed: auth 1-129 = label 1-129\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P00698 (LYSC_CHICK) UniProt 19-147 = label 1-129; observed: UniProt 19-147 = auth 1-129\nHetero groups: none\nWaters: 101"
+  }
 }

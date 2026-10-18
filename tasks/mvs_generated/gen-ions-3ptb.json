@@ -82,5 +82,9 @@
     "representation",
     "color",
     "multi-component"
-  ]
+  ],
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 3PTB: THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND ITS COMPLEXES WITH INHIBITORS\nMethod: X-RAY DIFFRACTION, 1.70 \u00c5\nEntities:\n  1: polymer, protein: BETA-TRYPSIN\n  2: nonpolymer: CALCIUM ION\n  3: nonpolymer: BENZAMIDINE\n  4: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  A [A]: entity 1, 223 of 223 SEQRES residues observed: auth 16-34 = label 1-19; auth 37-67 = label 20-50; auth 69-125 = label 51-107; auth 127-130 = label 108-111; auth 132-183 = label 112-163; auth 184A = label 164; auth 184-187 = label 165-168; auth 188A = label 169; auth 188-204 = label 170-186; auth 209-217 = label 187-195; auth 219-220 = label 196-197; auth 221A = label 198; auth 221-245 = label 199-223\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P00760 (TRY1_BOVIN) UniProt 24-246 = label 1-223; observed: UniProt 24-42 = auth 16-34; UniProt 43-73 = auth 37-67; UniProt 74-130 = auth 69-125; UniProt 131-134 = auth 127-130; UniProt 135-186 = auth 132-183; UniProt 187 = auth 184A; UniProt 188-191 = auth 184-187; UniProt 192 = auth 188A; UniProt 193-209 = auth 188-204; UniProt 210-218 = auth 209-217; UniProt 219-220 = auth 219-220; UniProt 221 = auth 221A; UniProt 222-246 = auth 221-245\nHetero groups (auth chain + auth residue number [label chain]):\n  BEN (BENZAMIDINE), 1 copy: A 1 [C]; atoms: C1 C2 C3 C4 C5 C6 C N1 N2\n  CA (CALCIUM ION), 1 copy: A 480 [B]; atoms: CA\nWaters: 62"
+  }
 }

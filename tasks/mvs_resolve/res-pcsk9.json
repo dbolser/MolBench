@@ -132,5 +132,9 @@
     "n_entries": 66,
     "source": "RCSB search, reference_sequence_identifiers",
     "fetched": "2026-09-30"
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 2P4E: Crystal Structure of PCSK9\nMethod: X-RAY DIFFRACTION, 1.98 \u00c5\nEntities:\n  1: polymer, protein: Proprotein convertase subtilisin/kexin type 9\n  2: nonpolymer: MERCURY (II) ION\n  3: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  P [A]: entity 1, 92 of 692 SEQRES residues observed: auth 61-152 = label 61-152\n  A [B]: entity 1, 494 of 692 SEQRES residues observed: auth 153-168 = label 153-168; auth 176-212 = label 176-212; auth 219-449 = label 219-449; auth 453-572 = label 453-572; auth 585-659 = label 585-659; auth 668-682 = label 668-682\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: Q8NBP7 (PCSK9_HUMAN) UniProt 1-692 = label 1-692; observed: UniProt 153-168 = auth 153-168; UniProt 176-212 = auth 176-212; UniProt 219-449 = auth 219-449; UniProt 453-572 = auth 453-572; UniProt 585-659 = auth 585-659; UniProt 668-682 = auth 668-682\n  P: Q8NBP7 (PCSK9_HUMAN) UniProt 1-692 = label 1-692; observed: UniProt 61-152 = auth 61-152\nHetero groups (auth chain + auth residue number [label chain]):\n  HG (MERCURY (II) ION), 2 copies: P 693 [C], P 694 [D]; atoms: HG\nWaters: 371\n\nFrom the request:\n  Protein named in the prompt: UniProt Q8NBP7 (PCSK9_HUMAN, Proprotein convertase subtilisin/kexin type 9)\n  PDB entries containing it: 66; the 10 with the best resolution: 7S5H (X-ray, 1.27 \u00c5), 6XIC (X-ray, 1.38 \u00c5), 6XIE (X-ray, 1.43 \u00c5), 9HZ3 (X-ray, 1.43 \u00c5), 6XID (X-ray, 1.48 \u00c5), 6U26 (X-ray, 1.53 \u00c5), 6XIB (X-ray, 1.55 \u00c5), 9SZY (X-ray, 1.76 \u00c5), 6XIF (X-ray, 1.77 \u00c5), 10SB (X-ray, 1.83 \u00c5)"
   }
 }

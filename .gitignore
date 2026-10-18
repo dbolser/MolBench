@@ -31,3 +31,5 @@ molbench/static/molstar/
 
 # mmCIF cache for task authoring (scripts/author_interaction_tasks.py)
 data/cif/
+# Build-time API cache for scripts/build_grounding_packs.py
+data/grounding_cache/

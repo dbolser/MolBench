@@ -55,6 +55,10 @@ MVS_REFERENCE = ROOT / "mvs_reference.md"
 # gap between them measures what a model gains from documentation.
 CONDITIONS = ("spec", "bare")
 
+# --grounding appends a task's frozen grounding pack (scripts/build_grounding_packs.py)
+# to the *user* message in this one fixed template; the system prompt is unchanged.
+GROUNDING_TEMPLATE = "{prompt}\n\nFacts about the structures involved:\n{facts}"
+
 # Categories whose tasks produce a numeric F1 (vs. visual_rubric, which is VLM-judged).
 GRADED_CATEGORIES = ("mvs", "api_calling")
 
@@ -187,8 +191,16 @@ def extract_json_object(raw: str) -> tuple[Any, str | None]:
 
 # --- running ----------------------------------------------------------------------
 
-def run_api_task(model, system: str, task: dict) -> dict[str, Any]:
-    raw = model.generate(system, task["prompt"])
+def user_message(task: dict, grounding: bool = False) -> str:
+    """The task prompt, plus its grounding pack when `grounding` is on and it has one."""
+    pack = task.get("grounding")
+    if not grounding or not pack:
+        return task["prompt"]
+    return GROUNDING_TEMPLATE.format(prompt=task["prompt"], facts=pack["text"])
+
+
+def run_api_task(model, system: str, task: dict, user: str | None = None) -> dict[str, Any]:
+    raw = model.generate(system, task["prompt"] if user is None else user)
     actions, err = extract_actions(raw)
     if err:
         return {"f1": 0.0, "precision": 0.0, "recall": 0.0, "error": err, "raw": raw}
@@ -200,8 +212,8 @@ def run_api_task(model, system: str, task: dict) -> dict[str, Any]:
     return result
 
 
-def run_mvs_task(model, system: str, task: dict) -> dict[str, Any]:
-    raw = model.generate(system, task["prompt"])
+def run_mvs_task(model, system: str, task: dict, user: str | None = None) -> dict[str, Any]:
+    raw = model.generate(system, task["prompt"] if user is None else user)
     tree, err = extract_json_object(raw)
     if err:
         return {"f1": 0.0, "precision": 0.0, "recall": 0.0, "error": err, "raw": raw}
@@ -241,7 +253,8 @@ def _aggregate(samples: list[dict]) -> dict[str, Any]:
 
 def run(models: list[str], categories: list[str] | None,
         samples: int = 1, escalate: bool = False,
-        judge: str | None = None, condition: str = "spec") -> tuple[dict[str, Any], dict[str, Any]]:
+        judge: str | None = None, condition: str = "spec",
+        grounding: bool = False) -> tuple[dict[str, Any], dict[str, Any]]:
     """Returns (report, raw_samples).
 
     `report` is the lightweight scorecard (aggregates + best-sample prediction).
@@ -272,6 +285,8 @@ def run(models: list[str], categories: list[str] | None,
             "escalate": escalate,
             "judge": judge,
             "condition": condition,
+            "grounding": grounding,
+            **(_grounding_meta(tasks) if grounding else {}),
         },
     }
 
@@ -299,7 +314,7 @@ def run(models: list[str], categories: list[str] | None,
             if cat == "visual_rubric":
                 # Component 2: we still elicit a plan (useful signal), but scoring
                 # needs a render + VLM judge (stubbed here).
-                raw = model.generate(system, task["prompt"])
+                raw = model.generate(system, user_message(task, grounding))
                 _, err = extract_json_object(raw)
                 judged = vlm.score(image_path="", rubric=task.get("rubric", []),
                                    prompt=task["prompt"])
@@ -308,7 +323,8 @@ def run(models: list[str], categories: list[str] | None,
                 raw_samples[model.name][task["id"]] = [{"raw": raw}]
             elif cat in GRADED_CATEGORIES:
                 run_task = run_mvs_task if cat == "mvs" else run_api_task
-                got = [run_task(model, system, task) for _ in range(samples)]
+                user = user_message(task, grounding)
+                got = [run_task(model, system, task, user) for _ in range(samples)]
                 pt = {"id": task["id"], "category": cat,
                       "categories": task.get("categories", []), **_aggregate(got)}
                 if (escalate and cat == "mvs" and not pt.get("error")
@@ -342,6 +358,13 @@ def run(models: list[str], categories: list[str] | None,
             "tasks": per_task,
         }
     return report, raw_samples
+
+
+def _grounding_meta(tasks: list[dict]) -> dict[str, Any]:
+    """How many of the run's tasks carried a grounding pack (the rest ran unchanged)."""
+    packs = [t["grounding"] for t in tasks if t.get("grounding")]
+    return {"grounding_rules": sorted({p["rule"] for p in packs}),
+            "n_tasks_with_pack": len(packs), "n_tasks_without_pack": len(tasks) - len(packs)}
 
 
 def _format_stats(model_raw: dict) -> dict[str, Any]:
@@ -435,6 +458,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--condition", choices=CONDITIONS, default="spec",
                     help="MVS prompting condition: 'spec' (with the MVS reference) or "
                          "'bare' (output contract only)")
+    ap.add_argument("--grounding", action="store_true",
+                    help="append each task's frozen grounding pack (facts about its "
+                         "structures) to the user message; tasks without one run unchanged")
     ap.add_argument("--out", default=str(RESULTS_DIR / "scorecard.json"))
     ap.add_argument("--no-archive", action="store_true",
                     help="skip writing the timestamped per-run archive in runs/")
@@ -443,7 +469,7 @@ def main(argv: list[str] | None = None) -> None:
     load_dotenv()  # make keys in .env available before any model is built
     report, raw_samples = run(args.models, args.categories, samples=args.samples,
                               escalate=args.escalate, judge=args.judge,
-                              condition=args.condition)
+                              condition=args.condition, grounding=args.grounding)
     RESULTS_DIR.mkdir(exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(report, indent=2))
     print_scorecard(report)

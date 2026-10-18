@@ -85,5 +85,9 @@
     "representation",
     "color",
     "multi-component"
-  ]
+  ],
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 1CBS: CRYSTAL STRUCTURE OF CELLULAR RETINOIC-ACID-BINDING PROTEINS I AND II IN COMPLEX WITH ALL-TRANS-RETINOIC ACID AND A SYNTHETIC RETINOID\nMethod: X-RAY DIFFRACTION, 1.80 \u00c5\nEntities:\n  1: polymer, protein: CELLULAR RETINOIC ACID BINDING PROTEIN TYPE II\n  2: nonpolymer: RETINOIC ACID\n  3: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  A [A]: entity 1, 137 of 137 SEQRES residues observed: auth 1-137 = label 1-137\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P29373 (RABP2_HUMAN) UniProt 2-138 = label 1-137; observed: UniProt 2-138 = auth 1-137\nHetero groups (auth chain + auth residue number [label chain]):\n  REA (RETINOIC ACID), 1 copy: A 200 [B]; atoms: C1 C2 C3 C4 C5 C6 C7 C8 C9 C10 C11 C12 C13 C14 C15 C16 C17 C18 C19 C20 O1 O2\nWaters: 100"
+  }
 }

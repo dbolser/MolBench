@@ -116,5 +116,9 @@
     "ComponentExpression",
     "color"
   ],
-  "notes": "Tests the ComponentExpression selection sub-language (auth_asym_id/auth_seq_id)."
+  "notes": "Tests the ComponentExpression selection sub-language (auth_asym_id/auth_seq_id).",
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 1LYZ: Real-space refinement of the structure of hen egg-white lysozyme\nMethod: X-RAY DIFFRACTION, 2.00 \u00c5\nEntities:\n  1: polymer, protein: HEN EGG WHITE LYSOZYME\n  2: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  A [A]: entity 1, 129 of 129 SEQRES residues observed: auth 1-129 = label 1-129\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P00698 (LYSC_CHICK) UniProt 19-147 = label 1-129; observed: UniProt 19-147 = auth 1-129\nHetero groups: none\nWaters: 101\n\nFrom the request:\n  Glu35: 1LYZ auth A 35 GLU (label A 35); atoms: N CA C O CB CG CD OE1 OE2\n  Asp52: 1LYZ auth A 52 ASP (label A 52); atoms: N CA C O CB CG OD1 OD2"
+  }
 }

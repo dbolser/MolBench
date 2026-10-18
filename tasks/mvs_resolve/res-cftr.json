@@ -92,5 +92,9 @@
     "fetched": "2026-10-06",
     "min_coverage": 0.7,
     "min_length": 1036
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 5UAK: Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (CFTR)\nMethod: ELECTRON MICROSCOPY, 3.87 \u00c5\nEntities:\n  1: polymer, protein: Cystic fibrosis transmembrane conductance regulator\n  2: polymer, protein: Cystic fibrosis transmembrane conductance regulator\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  A [A]: entity 1, 1139 of 1489 SEQRES residues observed: auth 5-402 = label 5-402; auth 439-645 = label 439-645; auth 844-883 = label 844-883; auth 909-1172 = label 909-1172; auth 1207-1436 = label 1207-1436\n  R [B]: entity 2, 19 of 19 SEQRES residues observed: auth 1-19 = label 1-19\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P13569 (CFTR_HUMAN) UniProt 1-1480 = label 1-1480; observed: UniProt 5-402 = auth 5-402; UniProt 439-645 = auth 439-645; UniProt 844-883 = auth 844-883; UniProt 909-1172 = auth 909-1172; UniProt 1207-1436 = auth 1207-1436\nHetero groups: none\nWaters: none\n\nFrom the request:\n  Protein named in the prompt: UniProt P13569 (CFTR_HUMAN, Cystic fibrosis transmembrane conductance regulator)\n  PDB entries containing it: 24; the 10 with the best resolution: 9MXL (EM, 2.10 \u00c5), 7SVD (EM, 2.70 \u00c5), 8UBR (EM, 2.70 \u00c5), 8EIO (EM, 2.80 \u00c5), 9DW9 (EM, 2.80 \u00c5), 8EIQ (EM, 3.00 \u00c5), 9Y4T (EM, 3.14 \u00c5), 6MSM (EM, 3.20 \u00c5), 6O1V (EM, 3.20 \u00c5), 6O2P (EM, 3.30 \u00c5)"
   }
 }

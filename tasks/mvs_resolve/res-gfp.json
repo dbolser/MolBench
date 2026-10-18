@@ -703,5 +703,9 @@
     "n_entries": 637,
     "source": "RCSB search, reference_sequence_identifiers",
     "fetched": "2026-10-06"
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 1EMA: GREEN FLUORESCENT PROTEIN FROM AEQUOREA VICTORIA\nMethod: X-RAY DIFFRACTION, 1.90 \u00c5\nEntities:\n  1: polymer, protein: GREEN FLUORESCENT PROTEIN\n  2: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  A [A]: entity 1, 226 of 236 SEQRES residues observed: auth 2-64 = label 2-64; auth 66 = label 65; auth 68-229 = label 66-227\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P42212 (GFP_AEQVI) UniProt 1-236 = label 1-236; observed: UniProt 2-64 = auth 2-64; UniProt 65 = auth 66; UniProt 66-227 = auth 68-229\nHetero groups: none\nWaters: 95\n\nFrom the request:\n  Protein named in the prompt: UniProt P42212 (GFP_AEQVI, Green fluorescent protein)\n  PDB entries containing it: 637; the 10 with the best resolution: 6L27 (X-ray, 0.77 \u00c5), 6JGJ (X-ray, 0.78 \u00c5), 6KL0 (X-ray, 0.80 \u00c5), 6JGI (X-ray, 0.85 \u00c5), 6KL1 (X-ray, 0.85 \u00c5), 2WUR (X-ray, 0.90 \u00c5), 6KKZ (X-ray, 0.90 \u00c5), 6JGH (X-ray, 0.94 \u00c5), 4AS8 (X-ray, 1.02 \u00c5), 5OXC (X-ray, 1.02 \u00c5)"
   }
 }
