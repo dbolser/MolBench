@@ -18,8 +18,9 @@ without its pack, so re-run this script afterwards.
 
 The rule (the same for every MVS task; no per-task edits)
 -----------------------------------------------------------
-Structures covered: every entry downloaded by the task's ``reference_mvs`` plus
-every PDB id written in the prompt, in sorted order. For each structure, from its
+Structures covered: every PDB id written in the prompt, in sorted order. Never the
+answer key's: a resolve task names a protein, not an entry, so its pack lists
+candidate entries (below) without singling out the reference's. For each structure, from its
 mmCIF (gemmi, first model):
 
   * title, experimental method and resolution;
@@ -98,7 +99,6 @@ AA1_TO_3 = dict(zip("ARNDCQEGHILKMFPSTWYV", (a.upper() for a in AA3)))
 WATER = {"HOH", "DOD"}
 
 RE_PDB = re.compile(r"\b(\d[a-z0-9]{3})\b", re.I)
-RE_DOWNLOAD = re.compile(r"/download/(\w{4})\.(?:cif|bcif)")
 RE_RESIDUE = re.compile(r"\b(" + "|".join(AA3) + r")(\d+)\b")
 RE_VARIANT = re.compile(r"\b([ACDEFGHIKLMNPQRSTVWY])(\d+)([ACDEFGHIKLMNPQRSTVWY])\b")
 RE_UNP_POS = re.compile(r"\bUniProt position (\d+)\b", re.I)
@@ -362,9 +362,7 @@ def _prompt_pdbs(prompt: str) -> list[str]:
 
 
 def _structures(task: dict) -> list[str]:
-    ref = json.dumps(task.get("reference_mvs", {}))
-    ids = {m.lower() for m in RE_DOWNLOAD.findall(ref)} | set(_prompt_pdbs(task["prompt"]))
-    return sorted(ids)
+    return sorted(set(_prompt_pdbs(task["prompt"])))
 
 
 def _unp_to_residues(segs, observed, acc, pos) -> list[tuple[str, str | None]]:
@@ -459,8 +457,6 @@ def task_facts(task: dict, loaded: dict) -> list[str]:
 
 def build_pack(task: dict) -> str | None:
     pdbs = _structures(task)
-    if not pdbs:
-        return None
     loaded = {}
     for pdb in pdbs:
         block, st = load(cif_path(pdb))
@@ -469,7 +465,7 @@ def build_pack(task: dict) -> str | None:
     extra = task_facts(task, loaded)
     if extra:
         parts.append("From the request:\n" + "\n".join(f"  {x}" for x in extra))
-    return "\n\n".join(parts)
+    return "\n\n".join(parts) or None
 
 
 # --- writing ------------------------------------------------------------------------
