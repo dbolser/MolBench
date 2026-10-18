@@ -464,14 +464,16 @@ def regime_table(ranked: list) -> str:
         n_tasks = sum(1 for v in reg.values() if v == rg)
         if not n_tasks:
             continue
-        if rg in OTHER_REGIMES and not other_header:
-            other_header = True
-            body.append(f"<tr><td class='rowhead' colspan='{len(cols) + 1}'><i>Other skills "
-                        "(not part of the gradient)</i></td></tr>")
         vals = {}
         for n, m in cols:
             fs = [t["f1"] for t in m["tasks"] if reg.get(t["id"]) == rg]
             vals[n] = statistics.fmean(fs) if fs else None
+        if all(v is None for v in vals.values()):
+            continue  # no model in this scorecard ran these tasks
+        if rg in OTHER_REGIMES and not other_header:
+            other_header = True
+            body.append(f"<tr><td class='rowhead' colspan='{len(cols) + 1}'><i>Other skills "
+                        "(not part of the gradient)</i></td></tr>")
         best = max((v for v in vals.values() if v is not None), default=None)
         cells = []
         for n, _ in cols:
@@ -487,12 +489,13 @@ def regime_table(ranked: list) -> str:
             f"</td>{cells_html}</tr>"
         )
     body_html = NL.join(body)
+    other_note = (" Rows under <i>Other skills</i> test a\n     different ability and are not "
+                  "ordered by difficulty." if other_header else "")
     return f"""<section class="wrap" aria-label="Difficulty gradient">
   <h2>Difficulty gradient by task regime</h2>
   <p class="section-sub">Mean MVS&nbsp;F1 by how the answer key is grounded,
      easy&nbsp;&rarr;&nbsp;hard. Harder regimes pull the models apart &mdash; the
-     spread you want from a benchmark. Rows under <i>Other skills</i> test a
-     different ability and are not ordered by difficulty.</p>
+     spread you want from a benchmark.{other_note}</p>
   <div class="table-scroll">
     <table>
       <thead><tr><th class="left">Regime</th>{head_cells}</tr></thead>
