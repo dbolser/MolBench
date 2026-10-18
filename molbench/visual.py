@@ -43,8 +43,9 @@ def changed_pixels(a: str | pathlib.Path, b: str | pathlib.Path,
     "equivalent" can mean "no pixel clearly changed".
     """
     from PIL import Image, ImageChops
-    ia = Image.open(a).convert("RGB").resize((size, size))
-    ib = Image.open(b).convert("RGB").resize((size, size))
+    with Image.open(a) as img_a, Image.open(b) as img_b:
+        ia = img_a.convert("RGB").resize((size, size))
+        ib = img_b.convert("RGB").resize((size, size))
     r, g, b = ImageChops.difference(ia, ib).split()
     worst = ImageChops.lighter(ImageChops.lighter(r, g), b)  # per-pixel max over channels
     return sum(worst.histogram()[tolerance + 1:])
