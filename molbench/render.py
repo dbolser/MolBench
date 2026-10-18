@@ -95,11 +95,8 @@ def molstar_issues(scenes: list[dict], timeout_ms: int = 60000) -> list[list[str
         return []
     if not (STATIC / "molstar" / "molstar.js").exists():
         raise RuntimeError("Mol* bundle missing — run scripts/fetch_molstar.py")
-    with sync_playwright() as p:
-        browser = p.chromium.launch(args=_GL_ARGS)
+    with sync_playwright() as p, p.chromium.launch(args=_GL_ARGS) as browser:
         page = browser.new_page()
         page.set_default_timeout(timeout_ms)
         page.goto(RENDER_HTML.as_uri())
-        issues = page.evaluate(_ISSUES_JS, [to_mvs_state(s) for s in scenes])
-        browser.close()
-    return issues
+        return page.evaluate(_ISSUES_JS, [to_mvs_state(s) for s in scenes])

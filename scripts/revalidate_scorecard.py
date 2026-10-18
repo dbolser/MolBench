@@ -5,8 +5,9 @@ Apply Mol* validation to a scorecard written before ``--validate`` existed.
 Gives each MVS task an ``outcome`` (see ``runner.OUTCOMES``): a parse error is
 ``invalid_json``, a parsed object with no MVS root is ``not_mvs``, a scene Mol*'s
 validator rejects is ``invalid_mvs`` (with its messages), and a scene that passed
-validation but failed to render during escalation is ``load_failed``. All but
-``valid`` score 0. Then recomputes the model aggregates in place. No model calls.
+validation but failed to render during escalation is ``load_failed`` — re-rendered
+here on its own first, since older records don't say whether the prediction or the
+reference failed. All but ``valid`` score 0. Then recomputes the model aggregates in place. No model calls.
 
 Only single-sample scorecards: with N samples the per-task record keeps just the
 best one, so the other samples can't be re-checked.
@@ -31,8 +32,20 @@ def _sample(t: dict) -> dict:
     if t.get("error"):
         s["outcome"] = "not_mvs" if "not an MVS" in t["error"] else "invalid_json"
     else:
-        s["outcome"] = "valid"
+        s["outcome"] = "unchecked"
     return s
+
+
+def _prediction_render_error(tree: dict) -> str | None:
+    """The error if Mol* can't render this scene on its own, else None."""
+    import tempfile
+    from molbench.render import render_scene
+    with tempfile.TemporaryDirectory() as d:
+        try:
+            render_scene(tree, pathlib.Path(d) / "pred.png")
+        except Exception as e:  # noqa: BLE001 - the error is the finding
+            return str(e)
+    return None
 
 
 def revalidate(path: pathlib.Path) -> None:
@@ -49,7 +62,11 @@ def revalidate(path: pathlib.Path) -> None:
             s = samples[t["id"]]
             esc = t.get("escalation") or {}
             if s["outcome"] == "valid" and esc.get("decision") == "render-failed":
-                runner._invalidate(s, "load_failed", esc.get("note", ""))
+                err = (esc.get("note", "") if esc.get("failed_side") == "prediction"
+                       else None if esc.get("failed_side") == "reference"
+                       else _prediction_render_error(s["predicted"]))
+                if err:
+                    runner._invalidate(s, "load_failed", err)
             t.update(runner._aggregate([s]))
         graded = [t for t in m["tasks"] if t["category"] in runner.GRADED_CATEGORIES]
         m["mean_f1"] = round(sum(t["f1"] for t in graded) / len(graded), 4) if graded else 0.0

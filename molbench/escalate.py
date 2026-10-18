@@ -89,11 +89,15 @@ def escalating_grade(
     wd = pathlib.Path(workdir or tempfile.mkdtemp(prefix="molbench_esc_"))
     wd.mkdir(parents=True, exist_ok=True)
     ref_png, pred_png = wd / "ref.png", wd / "pred.png"
-    try:
-        render(_reference_on_accepted(reference_tree, predicted_tree, accepted_refs), str(ref_png))
-        render(predicted_tree, str(pred_png))
-    except Exception as e:  # noqa: BLE001 - a render failure is itself informative
-        return {**out, "decision": "render-failed", "note": str(e)}
+    # Render each side separately: only a prediction that fails to render is the
+    # model's fault; a failing reference (or a download glitch there) is ours.
+    for side, tree, png in (("reference", _reference_on_accepted(reference_tree, predicted_tree,
+                                                                 accepted_refs), ref_png),
+                            ("prediction", predicted_tree, pred_png)):
+        try:
+            render(tree, str(png))
+        except Exception as e:  # noqa: BLE001 - a render failure is itself informative
+            return {**out, "decision": "render-failed", "failed_side": side, "note": str(e)}
     # Rescue only near-identical renders; see ``changed_pixels`` for why a
     # whole-image similarity threshold is not enough. ``visual_sim`` is kept as a
     # descriptive number.

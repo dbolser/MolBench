@@ -83,7 +83,7 @@ def load_condition(results: pathlib.Path, cond: str) -> dict[str, dict]:
     return out
 
 
-def index_archives(runs: pathlib.Path) -> dict[tuple, pathlib.Path]:
+def index_archives(runs: pathlib.Path) -> dict[tuple, list[pathlib.Path]]:
     idx: dict[tuple, list] = {}
     for f in sorted(runs.glob("run_*.json")):
         meta = json.loads(f.read_text()).get("meta", {})

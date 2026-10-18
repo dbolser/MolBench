@@ -221,16 +221,17 @@ def run_mvs_task(model, system: str, task: dict, user: str | None = None) -> dic
                 "outcome": "invalid_json"}
     result = mvs_mod.grade_mvs(task["reference_mvs"], tree,
                                accepted_refs=task.get("accepted_ids"))
-    result["outcome"] = "not_mvs" if result.get("error") else "valid"
+    result["outcome"] = "not_mvs" if result.get("error") else "unchecked"
     result["schema_errors"] = mvs_mod.validate_mvs(tree)
     result["predicted"] = tree
     result["raw"] = raw
     return result
 
 
-# Why an MVS sample scored what it did. Everything but 'valid' scores 0: Mol* shows
-# nothing for it. 'invalid_mvs' and 'load_failed' need Mol* (``--validate``).
-OUTCOMES = ("valid", "invalid_json", "not_mvs", "invalid_mvs", "load_failed")
+# Why an MVS sample scored what it did. 'invalid_*', 'not_mvs' and 'load_failed' score
+# 0: Mol* shows nothing for them. A parsed scene is 'unchecked' until Mol* validates it
+# (``--validate``), then 'valid' or 'invalid_mvs'.
+OUTCOMES = ("valid", "unchecked", "invalid_json", "not_mvs", "invalid_mvs", "load_failed")
 
 
 def _invalidate(sample: dict, outcome: str, detail: list[str] | str) -> None:
@@ -242,10 +243,12 @@ def _invalidate(sample: dict, outcome: str, detail: list[str] | str) -> None:
 def validate_samples(samples: list[dict]) -> None:
     """Run Mol*'s own validation over every parsed MVS sample, in one batch."""
     from .render import molstar_issues
-    todo = [s for s in samples if s.get("outcome") == "valid"]
+    todo = [s for s in samples if s.get("outcome") == "unchecked"]
     for s, issues in zip(todo, molstar_issues([s["predicted"] for s in todo])):
         if issues:
             _invalidate(s, "invalid_mvs", issues)
+        else:
+            s["outcome"] = "valid"
 
 
 def _aggregate(samples: list[dict]) -> dict[str, Any]:
@@ -363,18 +366,20 @@ def run(models: list[str], categories: list[str] | None,
             cat = task["category"]
             pt = {"id": task["id"], "category": cat,
                   "categories": task.get("categories", []), **_aggregate(got)}
-            if (escalate and cat == "mvs" and pt.get("outcome") == "valid"
+            while (escalate and cat == "mvs" and pt.get("outcome") == "valid"
                     and pt.get("predicted") is not None):
                 wd = gallery / model.name.replace("/", "_") / task["id"]
-                pt["escalation"] = escalating_grade(
+                pt["escalation"] = esc = escalating_grade(
                     task["reference_mvs"], pt["predicted"], prompt=task.get("prompt"),
                     render=render_fn, vlm=vlm_fn, workdir=str(wd),
                     accepted_refs=task.get("accepted_ids"))
-                if pt["escalation"].get("decision") == "render-failed":
-                    # Valid by Mol*'s rules, but Mol* still could not load it.
-                    best = max(got, key=lambda s: s["f1"])
-                    _invalidate(best, "load_failed", pt["escalation"].get("note", ""))
-                    pt.update(_aggregate(got))
+                if esc.get("decision") != "render-failed" or esc.get("failed_side") != "prediction":
+                    break
+                # Valid by Mol*'s rules, but Mol* still could not load it: score 0 and
+                # escalate the next-best sample, if any, as the task's representative.
+                best = max(got, key=lambda s: s["f1"])
+                _invalidate(best, "load_failed", esc.get("note", ""))
+                pt.update(_aggregate(got))
             per_task[next(slots)] = pt
             raw_samples[model.name][task["id"]] = [
                 {"f1": g["f1"], "predicted": g.get("predicted"), "raw": g.get("raw"),
@@ -430,10 +435,11 @@ def _format_stats(model_raw: dict) -> dict[str, Any]:
     if mvs:
         # With Mol* validation, cond_f1 is over scenes Mol* can show, and the outcome
         # counts say why the rest score 0.
-        valid = [s for s in mvs if s["outcome"] == "valid"]
         out["outcomes"] = {o: sum(s["outcome"] == o for s in mvs) for o in OUTCOMES}
-        out["valid_scene"] = round(len(valid) / len(mvs), 4)
-        out["cond_f1"] = round(statistics.fmean(s["f1"] for s in valid), 4) if valid else 0.0
+        if not out["outcomes"]["unchecked"]:  # only claim validity Mol* confirmed
+            valid = [s for s in mvs if s["outcome"] == "valid"]
+            out["valid_scene"] = round(len(valid) / len(mvs), 4)
+            out["cond_f1"] = round(statistics.fmean(s["f1"] for s in valid), 4) if valid else 0.0
     return out
 
 

@@ -30,7 +30,7 @@ def _sample(reply):
 def test_parse_outcomes():
     assert _sample("{not json")["outcome"] == "invalid_json"
     assert _sample('{"kind": "component"}')["outcome"] == "not_mvs"
-    assert _sample(json.dumps(REF))["outcome"] == "valid"
+    assert _sample(json.dumps(REF))["outcome"] == "unchecked"  # until Mol* validates it
 
 
 def test_molstar_rejection_scores_zero_and_keeps_the_message(monkeypatch):
@@ -54,14 +54,22 @@ def test_only_parsed_scenes_go_to_molstar(monkeypatch):
 
 def test_format_stats_counts_outcomes_and_conditions_on_valid():
     valid, broken = _sample(json.dumps(REF)), _sample("{not json")
+    valid["outcome"] = "valid"  # as after Mol* validation
     rejected = _sample(json.dumps(REF))
     runner._invalidate(rejected, "invalid_mvs", ["bad"])
     stats = runner._format_stats({"a": [valid], "b": [broken], "c": [rejected]})
-    assert stats["outcomes"] == {"valid": 1, "invalid_json": 1, "not_mvs": 0,
-                                 "invalid_mvs": 1, "load_failed": 0}
+    assert stats["outcomes"] == {"valid": 1, "unchecked": 0, "invalid_json": 1,
+                                 "not_mvs": 0, "invalid_mvs": 1, "load_failed": 0}
     assert stats["valid_scene"] == round(1 / 3, 4)
     assert stats["parse_success"] == round(2 / 3, 4)  # JSON parsed, whatever Mol* says
     assert stats["cond_f1"] == 1.0                   # over scenes Mol* can show
+
+
+def test_without_validation_no_validity_is_claimed():
+    stats = runner._format_stats({"a": [_sample(json.dumps(REF))], "b": [_sample("{x")]})
+    assert stats["outcomes"]["unchecked"] == 1
+    assert "valid_scene" not in stats
+    assert stats["cond_f1"] == 1.0  # over parsed scenes, as before validation existed
 
 
 def test_archives_never_overwrite(monkeypatch, tmp_path):

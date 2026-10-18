@@ -502,7 +502,8 @@ def validate_mvs(obj: Any) -> list[str]:
         from molviewspec import validate_state_tree  # type: ignore
         state = obj if obj.get("kind") in ("single", "multiple") else {"kind": "single", "root": root}
         # Models are asked for the tree only; the envelope's metadata is the caller's job.
-        state = {"metadata": {"version": "1", "timestamp": "1970-01-01T00:00:00Z"}, **state}
+        meta = state.get("metadata") if isinstance(state.get("metadata"), dict) else {}
+        state = {**state, "metadata": {"version": "1", "timestamp": "1970-01-01T00:00:00Z", **meta}}
         validate_state_tree(json.dumps(state))  # it parses JSON text, not a dict
         return []
     except ImportError:
