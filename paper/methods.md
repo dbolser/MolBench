@@ -104,8 +104,9 @@ scored by a vision–language judge under a decompose-then-verify protocol: the
 prompt is decomposed into discrete visual constraints, the judge first extracts
 observed features and then checks them against each constraint, separating
 *faithfulness* (matches the explicit request) from *factuality* (respects
-established conventions). The render-and-judge interface is specified; wiring a
-headless renderer and judge is future work.
+established conventions). A headless renderer (Playwright + Mol\* 5.9.0) is
+implemented and drives an escalating Component-1 grader (tree match → image diff →
+image-pair VLM judge); the rubric judge for Component 2 is not yet implemented.
 
 ## 5. Evaluation protocol
 

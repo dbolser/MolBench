@@ -44,7 +44,7 @@ Not "another tool-use benchmark." The differentiators to lead with:
 | Need | Now | For workshop/journal (A/B) | For NeurIPS D&B (C) |
 |---|---|---|---|
 | Corpus size/diversity | ~70 tasks, few proteins | enough with modest growth | hundreds–thousands, many proteins/folds |
-| Component 2 (VLM-judged) | scaffolded | nice-to-have | required (the novel hard part) |
+| Component 2 (VLM-judged) | renderer + pair judge built; rubric judge not | nice-to-have | required (the novel hard part) |
 | Grader validation | unit-calibrated | adequate | + human agreement study |
 | Model coverage | ~8 | adequate | broad, incl. frontier |
 | Analysis | regime/skill breakdowns | adequate | + error taxonomy, what-the-field-learns |

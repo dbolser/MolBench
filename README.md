@@ -43,7 +43,7 @@ domain knowledge; here, the lysozyme catalytic dyad is Glu35/Asp52. The primary
 |---|---|---|---|
 | **MVS scene tree** (primary) | `tasks/mvs/*.json` | A [MolViewSpec](https://molstar.org/mol-view-spec/) state tree as JSON | **Deterministic, no browser.** Tree-matching: precision/recall/F1 over root-to-leaf paths, tolerant of child order, default params, and equivalent selectors (`molbench/mvs.py`). Engine-agnostic — tests *visualization* competence, not one viewer's quirks. |
 | **API calling** (secondary) | `tasks/api_calling/*.json` | A list of imperative `PDBeMolstar` *canonical actions* | Field-aware list matching (`molbench/grader.py`). Tests whether a model can drive *this specific widget*. |
-| **Visual rubric** (Component 2) | `tasks/visual_rubric/*.json` | A scene plan (scored later from a render) | **VLM-judged.** Rendered to PNG, then a vision model scores it against a rubric. Interface scaffolded (`vlm_grader.py`); a stub keeps the harness runnable today. |
+| **Visual rubric** (Component 2) | `tasks/visual_rubric/*.json` | A scene plan (scored later from a render) | **VLM-judged.** Rendered to PNG, then a vision model scores it against a rubric. Not yet: the rubric judge (`vlm_grader.py`) is a sketch and the runner uses a stub. The renderer and an image-pair judge are live, but only inside the MVS escalation grader. |
 
 The **MVS track is the primary target** (v0.2). MVS separates *what the scene is*
 from *which engine draws it*, so the same answer key works for Mol\*, ipymolstar,
@@ -166,7 +166,7 @@ molbench/
   models.py         baseline + Anthropic/OpenAI adapters
   grader.py         Component-1 structured grader
   adapter.py        canonical actions -> live ipymolstar calls
-  vlm_grader.py     Component-2 VLM-judge interface + stub
+  vlm_grader.py     VLM judges: image-pair (live) + rubric (sketch) + stub
   runner.py         load tasks, run models, write scorecard
 prompts/system_api.md   model instructions (template)
 tasks/                  the benchmark corpus
@@ -218,8 +218,8 @@ commands inspired planned Tier-2 task types.
 ## Roadmap
 
 * Template-based MVS task generator for category-balanced Component-1 volume.
-* Headless render path (playwright + ipymolstar `MolViewSpec`) to turn the
-  `data/molviewstories/` scenes into real Component-2 VLM-judged tasks.
+* Turn the `data/molviewstories/` scenes into real Component-2 VLM-judged tasks
+  (the headless renderer, `molbench/render.py`, now exists).
 * Selection-equivalence via a structure-aware checker (resolve label vs author
   numbering against the actual mmCIF) instead of string-level tolerance.
 ```

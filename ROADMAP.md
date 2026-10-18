@@ -90,6 +90,40 @@ than an API-calling benchmark.
 
 ## Phase A — Component 2: render + VLM judge  ← the headline
 
+### Status (2026-10-18)
+
+"The VLM" is two separate judges. One is live, one is a sketch.
+
+| piece | state |
+|---|---|
+| A0 renderer (`render.py`, Playwright + Mol\* 5.9.0) | **done** |
+| Image-pair judge (`AnthropicImagePairJudge`, escalation tier T2) | **live** — run once, on the original 7 models (Jun 2026, judge `claude-opus-4-8`) |
+| Rubric judge (`AnthropicVLMJudge`, Component 2 proper) | **sketch** — one call, no decompose/extract protocol, never run. The runner uses `StubVLMJudge` |
+| A2 runner wiring for `visual_rubric` | not started |
+| A3 Component-2 corpus | 2 tasks, written as API actions, not MVS, so `render.py` can't draw their references |
+| A4 human-agreement study | not started |
+
+**The escalation result is mostly the pixel diff, not the VLM.** Of 196 rescues
+(253 escalated, 7 models), 187 came from T1 visual diff and 9 from the VLM.
+
+**T1 gives false rescues (measured 2026-10-18).** It is a whole-image RMSE at
+128 px with a 0.97 threshold. A one-residue highlight is a few pixels, so wrong
+scenes pass. On `clinvar-1tup-D281` (red ball-and-stick at A281):
+
+| wrong prediction | tree F1 | visual sim | T1 verdict |
+|---|---|---|---|
+| residue 175 instead of 281 | 0.889 | 0.994 | rescued |
+| residue 282 (neighbour) | 0.889 | 0.992 | rescued |
+| blue instead of red | 0.889 | 0.997 | rescued |
+| chain B instead of A | 0.889 | 0.994 | rescued |
+
+So the live "validated F1" (+0.04–0.11) is inflated by an unknown share. Fix
+before re-running: T1 must compare the *difference region*, not the whole frame
+(or be dropped in favour of R7 atom-set grading), and the meta-evaluation
+negatives below must pass.
+
+**Not run on:** the 9 newer models, or any `spec`-condition run.
+
 Open-ended requests ("show the key hydrogen bond", "highlight the allosteric
 change") cannot be graded by tree-matching: many distinct scenes satisfy them.
 Component 2 renders the model's scene and scores the *image* against a rubric.
@@ -182,7 +216,7 @@ strong judge, structured protocol, self-variance reporting); rubric quality
 
 ---
 
-## Escalating C1 grader (DONE — scaffold)
+## Escalating C1 grader (built; T1 needs fixing — see Phase A status)
 
 Cost-cascading grader so we only pay for expensive grading when needed
 (`molbench/escalate.py`):
