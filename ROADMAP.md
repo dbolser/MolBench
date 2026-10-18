@@ -60,7 +60,7 @@ than an API-calling benchmark.
 | R4 | `--condition bare\|spec` in the runner, recorded in run meta | done |
 | R5 | Regression run: old vs spec vs bare on 3 cheap models, all MVS tasks | done — see below |
 | R6 | Grounding packs: offline builder (gemmi + SIFTS + existing resolve/clinical provenance) and `--grounding` flag | done (PR #9) |
-| R7 | Grader: resolve selections to atom sets against the mmCIF, so equivalent namings (`label_comp_id`+atom vs residue number+atom) match and empty selections score zero | done (PR #N) |
+| R7 | Grader: resolve selections to atom sets against the mmCIF, so equivalent namings (`label_comp_id`+atom vs residue number+atom) match and empty selections score zero | done (PR #10) |
 | R8 | Chat driver v2: new reference in its prompt + empty-selection lint (a primitive end that matches nothing is drawn to the origin by Mol\*) | shipped (chat-driver #18, deployed 2026-10-06) |
 | R9 | Chat driver: thumbs up/down per turn, for grading real traffic | todo |
 | R10 | Leaderboard: regimes for `resolve` and `interactions` sources (unknown sources now raise) | done |
