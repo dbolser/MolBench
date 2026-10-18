@@ -8,7 +8,7 @@ against a per-structure atom table and graded by the atom set it selects.
 
 Grading stays stdlib-only and offline: ``scripts/build_atom_tables.py`` (gemmi +
 headless Mol*) freezes one table per structure a task references into
-``data/atom_tables/<id>.json.gz``. A structure with no table returns ``None`` here and
+``molbench/atom_tables/<id>.json.gz``. A structure with no table returns ``None`` here and
 the grader falls back to string signatures. Nothing is fetched at grade time.
 
 Selection semantics follow Mol* 5.9.0, which renders the scenes:
@@ -42,7 +42,7 @@ import json
 import pathlib
 from typing import Any
 
-TABLES = pathlib.Path(__file__).resolve().parent.parent / "data" / "atom_tables"
+TABLES = pathlib.Path(__file__).resolve().parent / "atom_tables"  # shipped in the wheel
 
 # The MVS ComponentExpression fields, by type (``extensions/mvs/tree/mvs/param-types.js``).
 _STR_FIELDS = ("label_entity_id", "label_asym_id", "auth_asym_id", "pdbx_PDB_ins_code",

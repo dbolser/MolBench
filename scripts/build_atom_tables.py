@@ -3,7 +3,7 @@
 Freeze the per-structure atom tables the MVS grader resolves selections against.
 
 For every structure a task's ``reference_mvs`` downloads, write
-``data/atom_tables/<id>.json.gz``: the ``_atom_site`` columns a ComponentExpression can
+``molbench/atom_tables/<id>.json.gz``: the ``_atom_site`` columns a ComponentExpression can
 test (model 1, asymmetric unit, file order, read with gemmi), plus the atoms Mol*
 5.9.0 puts in each static selector (``polymer``, ``ligand``, ...). Those depend on
 entity types and on bonds (``ligand`` pulls in covalently and metal-bonded

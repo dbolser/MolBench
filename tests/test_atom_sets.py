@@ -1,6 +1,6 @@
 """
 Selections graded by the atoms they select (``molbench/atoms.py`` + the frozen
-tables in ``data/atom_tables/``).
+tables in ``molbench/atom_tables/``).
 
 The point is to be right on negatives as well as positives: equivalent namings of
 the same atoms score 1.0, while a wrong residue, a neighbour, a wrong chain or a
