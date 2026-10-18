@@ -88,5 +88,9 @@
   ],
   "provenance": {
     "ligand": "HEM"
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 2HHB: THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION\nMethod: X-RAY DIFFRACTION, 1.74 \u00c5\nEntities:\n  1: polymer, protein: HEMOGLOBIN (DEOXY) (ALPHA CHAIN)\n  2: polymer, protein: HEMOGLOBIN (DEOXY) (BETA CHAIN)\n  3: nonpolymer: PROTOPORPHYRIN IX CONTAINING FE\n  4: nonpolymer: PHOSPHATE ION\n  5: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  A [A]: entity 1, 141 of 141 SEQRES residues observed: auth 1-141 = label 1-141\n  B [B]: entity 2, 146 of 146 SEQRES residues observed: auth 1-146 = label 1-146\n  C [C]: entity 1, 141 of 141 SEQRES residues observed: auth 1-141 = label 1-141\n  D [D]: entity 2, 146 of 146 SEQRES residues observed: auth 1-146 = label 1-146\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P69905 (HBA_HUMAN) UniProt 2-142 = label 1-141; observed: UniProt 2-142 = auth 1-141\n  B: P68871 (HBB_HUMAN) UniProt 2-147 = label 1-146; observed: UniProt 2-147 = auth 1-146\n  C: P69905 (HBA_HUMAN) UniProt 2-142 = label 1-141; observed: UniProt 2-142 = auth 1-141\n  D: P68871 (HBB_HUMAN) UniProt 2-147 = label 1-146; observed: UniProt 2-147 = auth 1-146\nHetero groups (auth chain + auth residue number [label chain]):\n  HEM (PROTOPORPHYRIN IX CONTAINING FE), 4 copies: A 142 [E], B 148 [G], C 142 [H], D 148 [J]; atoms: CHA CHB CHC CHD C1A C2A C3A C4A CMA CAA CBA CGA O1A O2A C1B C2B C3B C4B CMB CAB CBB C1C C2C C3C C4C CMC CAC CBC C1D C2D C3D C4D CMD CAD CBD CGD O1D O2D NA NB NC ND FE\n  PO4 (PHOSPHATE ION), 2 copies: B 147 [F], D 147 [I]; atoms: P\nWaters: 221"
   }
 }

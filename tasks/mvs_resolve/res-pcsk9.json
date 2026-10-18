@@ -132,5 +132,9 @@
     "n_entries": 66,
     "source": "RCSB search, reference_sequence_identifiers",
     "fetched": "2026-09-30"
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "From the request:\n  Protein named in the prompt: UniProt Q8NBP7 (PCSK9_HUMAN, Proprotein convertase subtilisin/kexin type 9)\n  PDB entries containing it: 66; the 10 with the best resolution: 7S5H (X-ray, 1.27 \u00c5), 6XIC (X-ray, 1.38 \u00c5), 6XIE (X-ray, 1.43 \u00c5), 9HZ3 (X-ray, 1.43 \u00c5), 6XID (X-ray, 1.48 \u00c5), 6U26 (X-ray, 1.53 \u00c5), 6XIB (X-ray, 1.55 \u00c5), 9SZY (X-ray, 1.76 \u00c5), 6XIF (X-ray, 1.77 \u00c5), 10SB (X-ray, 1.83 \u00c5)"
   }
 }

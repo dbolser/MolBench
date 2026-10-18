@@ -3,7 +3,7 @@
   "category": "mvs",
   "source": "clinvar-hotspots",
   "pdb": "1tup",
-  "prompt": "In p53 (PDB 1TUP), highlight the mutational hotspot residues \u2014 the positions carrying the most pathogenic ClinVar variants \u2014 as red spheres.",
+  "prompt": "In p53 (PDB 1TUP), chain A, highlight the 6 mutational hotspot residues \u2014 the positions carrying the most pathogenic ClinVar variants \u2014 as red spheres.",
   "reference_mvs": {
     "kind": "root",
     "children": [
@@ -61,19 +61,19 @@
                         },
                         {
                           "auth_asym_id": "A",
+                          "auth_seq_id": 281
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 110
+                        },
+                        {
+                          "auth_asym_id": "A",
                           "auth_seq_id": 239
                         },
                         {
                           "auth_asym_id": "A",
                           "auth_seq_id": 241
-                        },
-                        {
-                          "auth_asym_id": "A",
-                          "auth_seq_id": 281
-                        },
-                        {
-                          "auth_asym_id": "A",
-                          "auth_seq_id": 158
                         }
                       ]
                     },
@@ -128,6 +128,22 @@
         ]
       },
       {
+        "unp_pos": 281,
+        "n_variants": 11,
+        "auth": [
+          "A",
+          281
+        ]
+      },
+      {
+        "unp_pos": 110,
+        "n_variants": 10,
+        "auth": [
+          "A",
+          110
+        ]
+      },
+      {
         "unp_pos": 239,
         "n_variants": 10,
         "auth": [
@@ -142,23 +158,11 @@
           "A",
           241
         ]
-      },
-      {
-        "unp_pos": 281,
-        "n_variants": 10,
-        "auth": [
-          "A",
-          281
-        ]
-      },
-      {
-        "unp_pos": 158,
-        "n_variants": 9,
-        "auth": [
-          "A",
-          158
-        ]
       }
     ]
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "PDB 1TUP: TUMOR SUPPRESSOR P53 COMPLEXED WITH DNA\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nEntities:\n  1: polymer, DNA: DNA (5'-D(*TP*TP*TP*CP*CP*TP*AP*GP*AP*CP*TP*TP*GP*CP*CP*CP*A P*AP*TP*TP*A)-3')\n  2: polymer, DNA: DNA (5'-D(*AP*TP*AP*AP*TP*TP*GP*GP*GP*CP*AP*AP*GP*TP*CP*TP*A P*GP*GP*AP*A)-3')\n  3: polymer, protein: PROTEIN (P53 TUMOR SUPPRESSOR )\n  4: nonpolymer: ZINC ION\n  5: water: water\nPolymer chains (auth chain [label chain]; observed residues as auth numbering = label numbering):\n  E [A]: entity 1, 21 of 21 SEQRES residues observed: auth 1001-1021 = label 1-21\n  F [B]: entity 2, 21 of 21 SEQRES residues observed: auth 1101-1121 = label 1-21\n  A [C]: entity 3, 196 of 219 SEQRES residues observed: auth 94-289 = label 1-196\n  B [D]: entity 3, 194 of 219 SEQRES residues observed: auth 96-289 = label 3-196\n  C [E]: entity 3, 195 of 219 SEQRES residues observed: auth 95-289 = label 2-196\nUniProt mapping (SIFTS; label numbering = SEQRES index):\n  A: P04637 (P53_HUMAN) UniProt 94-312 = label 1-219; observed: UniProt 94-289 = auth 94-289\n  B: P04637 (P53_HUMAN) UniProt 94-312 = label 1-219; observed: UniProt 96-289 = auth 96-289\n  C: P04637 (P53_HUMAN) UniProt 94-312 = label 1-219; observed: UniProt 95-289 = auth 95-289\nHetero groups (auth chain + auth residue number [label chain]):\n  ZN (ZINC ION), 3 copies: A 951 [F], B 952 [G], C 953 [H]; atoms: ZN\nWaters: 384\n\nFrom the request:\n  Pathogenic ClinVar single-residue variants for P04637, UniProt positions in 1TUP with the most variants (position: count): 215: 12, 109: 11, 281: 11, 110: 10, 239: 10, 241: 10, 158: 9, 179: 9, 238: 9, 240: 9"
   }
 }

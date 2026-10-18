@@ -423,5 +423,9 @@
     "n_entries": 357,
     "source": "RCSB search, reference_sequence_identifiers",
     "fetched": "2026-09-30"
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "From the request:\n  Protein named in the prompt: UniProt P02185 (MYG_PHYMC, Myoglobin)\n  PDB entries containing it: 357; the 10 with the best resolution: 5YCE (X-ray, 0.77 \u00c5), 7VDN (X-ray, 0.93 \u00c5), 1A6M (X-ray, 1.00 \u00c5), 1NAZ (X-ray, 1.04 \u00c5), 8ESU (X-ray, 1.04 \u00c5), 1A6K (X-ray, 1.10 \u00c5), 2EKT (X-ray, 1.10 \u00c5), 3O89 (X-ray, 1.10 \u00c5), 6M8F (X-ray, 1.10 \u00c5), 9P1F (X-ray, 1.10 \u00c5)"
   }
 }

@@ -92,5 +92,9 @@
     "fetched": "2026-10-06",
     "min_coverage": 0.7,
     "min_length": 1036
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "From the request:\n  Protein named in the prompt: UniProt P13569 (CFTR_HUMAN, Cystic fibrosis transmembrane conductance regulator)\n  PDB entries containing it: 24; the 10 with the best resolution: 9MXL (EM, 2.10 \u00c5), 7SVD (EM, 2.70 \u00c5), 8UBR (EM, 2.70 \u00c5), 8EIO (EM, 2.80 \u00c5), 9DW9 (EM, 2.80 \u00c5), 8EIQ (EM, 3.00 \u00c5), 9Y4T (EM, 3.14 \u00c5), 6MSM (EM, 3.20 \u00c5), 6O1V (EM, 3.20 \u00c5), 6O2P (EM, 3.30 \u00c5)"
   }
 }

@@ -1464,5 +1464,9 @@
     "n_entries": 1398,
     "source": "RCSB search, reference_sequence_identifiers",
     "fetched": "2026-09-30"
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "From the request:\n  Protein named in the prompt: UniProt P00698 (LYSC_CHICK, Lysozyme C)\n  PDB entries containing it: 1398; the 10 with the best resolution: 2VB1 (X-ray, 0.65 \u00c5), 8ZST (X-ray, 0.80 \u00c5), 9QUM (EM, 0.83 \u00c5), 7SKW (EM, 0.87 \u00c5), 7ULY (EM, 0.87 \u00c5), 7P6M (X-ray, 0.89 \u00c5), 9RZL (X-ray, 0.90 \u00c5), 8RLI (Neutron, 0.91 \u00c5), 7YRK (X-ray, 0.92 \u00c5), 3LZT (X-ray, 0.93 \u00c5)"
   }
 }

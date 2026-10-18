@@ -120,6 +120,24 @@ aggregate to per-model means, so that differences can be read against sampling
 noise rather than single draws. The harness also records token usage, monetary
 cost at published per-token prices, and wall-clock latency per model.
 
+**Grounding packs.** To separate what a model knows about *molecules* from what it
+knows about *MVS*, every scene-tree task carries a frozen grounding pack: a short
+block of facts (≈190–750 tokens, median ≈550) that an offline lookup pipeline could
+have produced, built once by `scripts/build_grounding_packs.py` and stored in the task
+file. Under `--grounding` it is appended to the user message after a fixed header
+("Facts about the structures involved:"); the system prompt is unchanged, so the
+grounding axis is orthogonal to the bare/spec axis. One rule generates every pack:
+for each structure the task downloads or the prompt names, the title, method and
+resolution; entities; each polymer chain's author and label chain ids and its observed
+residues in both numberings; the SIFTS UniProt mapping; hetero groups with location
+and (for small groups) atom names; and the water count. Facts derived from the task
+come only from what the prompt names: a residue such as "His64" (its chains and atom
+names), a UniProt position or ClinVar variant (the structure residues SIFTS maps it
+to), pathogenic-variant counts per position when ClinVar is mentioned, and, when the
+prompt names a protein rather than an entry, its UniProt accession and up to ten PDB
+entries for it, best resolution first. A pack states facts; it never contains a scene,
+a colour or a representation, and never says what to draw.
+
 ## 6. Model harness
 
 Models are accessed through a uniform `generate(system, user) → text` interface.

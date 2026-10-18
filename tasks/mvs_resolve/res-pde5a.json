@@ -116,5 +116,9 @@
     "n_entries": 50,
     "source": "RCSB search, reference_sequence_identifiers",
     "fetched": "2026-09-30"
+  },
+  "grounding": {
+    "rule": "r6-v1",
+    "text": "From the request:\n  Protein named in the prompt: UniProt O76074 (PDE5A_HUMAN, cGMP-specific 3',5'-cyclic phosphodiesterase)\n  PDB entries containing it: 50; the 10 with the best resolution: 1TBF (X-ray, 1.30 \u00c5), 1XOZ (X-ray, 1.37 \u00c5), 5JO3 (X-ray, 1.49 \u00c5), 2CHM (X-ray, 1.60 \u00c5), 1XP0 (X-ray, 1.79 \u00c5), 3HC8 (X-ray, 1.79 \u00c5), 2H44 (X-ray, 1.80 \u00c5), 3HDZ (X-ray, 1.80 \u00c5), 8W4S (X-ray, 1.85 \u00c5), 2H40 (X-ray, 1.85 \u00c5)"
   }
 }
