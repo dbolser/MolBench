@@ -32,12 +32,16 @@ CIF = "https://files.rcsb.org/download/{}.cif"
 # Real structures (so scenes also render later for Component 2), each annotated
 # with a chain and a residue range it actually contains. Selector validity for
 # grading does not depend on these being right, but realism helps downstream.
+# ``lacks`` names what the entry doesn't contain, so templates that select it are
+# skipped: a reference that selects nothing grades nothing.
 STRUCTURES = [
     {"pdb": "1hho", "name": "haemoglobin", "chain": "A", "range": (30, 90)},
-    {"pdb": "4ins", "name": "insulin", "chain": "B", "range": (5, 25)},
-    {"pdb": "1lyz", "name": "lysozyme", "chain": "A", "range": (40, 80)},
+    {"pdb": "4ins", "name": "insulin", "chain": "B", "range": (5, 25), "lacks": {"ligand"}},
+    {"pdb": "1lyz", "name": "lysozyme", "chain": "A", "range": (40, 80),
+     "lacks": {"ligand", "ion"}},
     {"pdb": "3ptb", "name": "trypsin", "chain": "A", "range": (50, 110)},
-    {"pdb": "1cbs", "name": "cellular retinoic-acid binding protein", "chain": "A", "range": (20, 60)},
+    {"pdb": "1cbs", "name": "cellular retinoic-acid binding protein", "chain": "A",
+     "range": (20, 60), "lacks": {"ion"}},
     {"pdb": "2hhb", "name": "deoxyhaemoglobin", "chain": "B", "range": (10, 70)},
 ]
 
@@ -120,6 +124,8 @@ TEMPLATES = {
     "cartoon": t_cartoon, "surface": t_surface, "ligands": t_ligands,
     "ions": t_ions, "chain": t_chain, "range": t_range, "focus": t_focus_ligand,
 }
+# What a template selects, for templates that need the entry to contain it.
+REQUIRES = {"ligands": "ligand", "focus": "ligand", "ions": "ion"}
 
 
 def main() -> None:
@@ -129,6 +135,8 @@ def main() -> None:
     written = 0
     for i, st in enumerate(STRUCTURES):
         for tname, tfn in TEMPLATES.items():
+            if REQUIRES.get(tname) in st.get("lacks", ()):
+                continue
             prompt, builder = tfn(st, i)
             root = json.loads(builder.get_state().dumps())["root"]
             doc = {

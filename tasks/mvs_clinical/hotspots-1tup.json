@@ -3,7 +3,7 @@
   "category": "mvs",
   "source": "clinvar-hotspots",
   "pdb": "1tup",
-  "prompt": "In p53 (PDB 1TUP), highlight the mutational hotspot residues \u2014 the positions carrying the most pathogenic ClinVar variants \u2014 as red spheres.",
+  "prompt": "In p53 (PDB 1TUP), chain A, highlight the 6 mutational hotspot residues \u2014 the positions carrying the most pathogenic ClinVar variants \u2014 as red spheres.",
   "reference_mvs": {
     "kind": "root",
     "children": [
@@ -61,19 +61,19 @@
                         },
                         {
                           "auth_asym_id": "A",
+                          "auth_seq_id": 281
+                        },
+                        {
+                          "auth_asym_id": "A",
+                          "auth_seq_id": 110
+                        },
+                        {
+                          "auth_asym_id": "A",
                           "auth_seq_id": 239
                         },
                         {
                           "auth_asym_id": "A",
                           "auth_seq_id": 241
-                        },
-                        {
-                          "auth_asym_id": "A",
-                          "auth_seq_id": 281
-                        },
-                        {
-                          "auth_asym_id": "A",
-                          "auth_seq_id": 158
                         }
                       ]
                     },
@@ -128,6 +128,22 @@
         ]
       },
       {
+        "unp_pos": 281,
+        "n_variants": 11,
+        "auth": [
+          "A",
+          281
+        ]
+      },
+      {
+        "unp_pos": 110,
+        "n_variants": 10,
+        "auth": [
+          "A",
+          110
+        ]
+      },
+      {
         "unp_pos": 239,
         "n_variants": 10,
         "auth": [
@@ -141,22 +157,6 @@
         "auth": [
           "A",
           241
-        ]
-      },
-      {
-        "unp_pos": 281,
-        "n_variants": 10,
-        "auth": [
-          "A",
-          281
-        ]
-      },
-      {
-        "unp_pos": 158,
-        "n_variants": 9,
-        "auth": [
-          "A",
-          158
         ]
       }
     ]

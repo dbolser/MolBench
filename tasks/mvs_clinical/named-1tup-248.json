@@ -3,7 +3,7 @@
   "category": "mvs",
   "source": "sifts-named",
   "pdb": "1tup",
-  "prompt": "In p53 (PDB 1TUP), select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.",
+  "prompt": "In p53 (PDB 1TUP), chain A, select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.",
   "reference_mvs": {
     "kind": "root",
     "children": [

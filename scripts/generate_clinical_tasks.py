@@ -86,8 +86,8 @@ def main() -> None:
             b, s = _base(t["pdb"])
             root = _residues_component(b, s, [(ch, num)], "ball_and_stick", "blue")
             _write(f"named-{t['pdb']}-{pos}", t,
-                   f"In {t['name']} (PDB {t['pdb'].upper()}), select the residue at "
-                   f"canonical UniProt position {pos} and show it as blue ball-and-stick.",
+                   f"In {t['name']} (PDB {t['pdb'].upper()}), chain {ch}, select the residue "
+                   f"at canonical UniProt position {pos} and show it as blue ball-and-stick.",
                    root, {"unp_pos": pos, "auth": [ch, num], "residue": name}, "sifts-named")
             written += 1
 
@@ -104,8 +104,8 @@ def main() -> None:
             b, s = _base(t["pdb"])
             root = _residues_component(b, s, [(ch, num)], "ball_and_stick", "red")
             _write(f"clinvar-{t['pdb']}-{v.wild_type}{pos}", t,
-                   f"In {t['name']} (PDB {t['pdb'].upper()}), highlight the residue affected "
-                   f"by the pathogenic ClinVar variant {v.wild_type}{pos}{v.alt} as red "
+                   f"In {t['name']} (PDB {t['pdb'].upper()}), chain {ch}, highlight the residue "
+                   f"affected by the pathogenic ClinVar variant {v.wild_type}{pos}{v.alt} as red "
                    f"ball-and-stick.",
                    root, {"variant": f"{v.wild_type}{pos}{v.alt}", "auth": [ch, num],
                           "significance": v.significance}, "clinvar-variant")
@@ -119,13 +119,14 @@ def main() -> None:
             if auth:
                 residues.append(auth[0])
                 prov.append({"unp_pos": pos, "n_variants": counts[pos], "auth": list(auth[0])})
+        chains = sorted({ch for ch, _ in residues})
         if residues:
             b, s = _base(t["pdb"])
             root = _residues_component(b, s, residues, "spacefill", "red")
             _write(f"hotspots-{t['pdb']}", t,
-                   f"In {t['name']} (PDB {t['pdb'].upper()}), highlight the mutational hotspot "
-                   f"residues — the positions carrying the most pathogenic ClinVar variants "
-                   f"— as red spheres.",
+                   f"In {t['name']} (PDB {t['pdb'].upper()}), chain {', '.join(chains)}, "
+                   f"highlight the {len(residues)} mutational hotspot residues — the positions "
+                   f"carrying the most pathogenic ClinVar variants — as red spheres.",
                    root, {"hotspots": prov}, "clinvar-hotspots")
             written += 1
 
