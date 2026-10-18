@@ -16,6 +16,7 @@
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="index.html" class="active">Leaderboard</a>
+      <a href="failures.html" class="">Failures</a>
       <a href="gallery.html" class="">Evaluator gallery</a>
       <a href="https://github.com/dbolser/MolBench" class="gh"
          rel="noopener">GitHub</a>
@@ -34,17 +35,18 @@
      imperative API calls (<i>what the tool does</i>). Both are graded
      deterministically against frozen, correct-by-construction answers.</p>
   <div class="stats">
-<div class='stat'><div class='label'>Models evaluated</div><div class='value'>17</div><div class='sub'>open &amp; closed</div></div>
-<div class='stat'><div class='label'>Benchmark tasks</div><div class='value'>84</div><div class='sub'>&times;3 samples each</div></div>
-<div class='stat'><div class='label'>MVS&nbsp;F1 leader</div><div class='value'>0.87</div><div class='sub'>claude-haiku-4-5</div></div>
-<div class='stat'><div class='label'>Top open model</div><div class='value'>0.87</div><div class='sub'>qwen3-next-80b-a3b-instruct</div></div>
+<div class='stat'><div class='label'>LLMs evaluated</div><div class='value'>15</div><div class='sub'>open &amp; closed</div></div>
+<div class='stat'><div class='label'>Benchmark tasks</div><div class='value'>70&thinsp;+&thinsp;20</div><div class='sub'>MVS &times;1 &middot; API &times;3</div></div>
+<div class='stat'><div class='label'>MVS&nbsp;F1 leader</div><div class='value'>0.92</div><div class='sub'>deepseek-v3.2</div></div>
+<div class='stat'><div class='label'>Median valid scenes</div><div class='value'>81%</div><div class='sub'>Mol* accepts the scene</div></div>
   </div>
 </section>
 <section class="wrap" aria-label="Leaderboard">
   <h2>Leaderboard</h2>
   <p class="section-sub">Two tracks, two skills. <b>MVS&nbsp;F1</b> (the primary
      ranking) scores <i>scene authoring</i> &mdash; the declarative MolViewSpec
-     tree a model emits, matched against the reference (parse failures count as 0).
+     tree a model emits, matched against the reference by the atoms each selection
+     picks out. A scene scores 0 unless Mol* would show it.
      <b>API&nbsp;F1</b> scores <i>tool control</i> &mdash; the imperative
      Mol*/PDBeMolstar calls that drive a live viewer (superpose, hide waters, spin,
      focus), the operations a static scene cannot express. The leader is
@@ -56,7 +58,8 @@
           <th class="left">#</th>
           <th class="left">Model</th>
           <th>MVS&nbsp;F1</th>
-          <th>Parse&nbsp;%</th>
+          <th>Validated&nbsp;F1</th>
+          <th>Valid&nbsp;scene</th>
           <th>Cond&nbsp;F1</th>
           <th>API&nbsp;F1</th>
           <th>Cost</th>
@@ -64,125 +67,247 @@
         </tr>
       </thead>
       <tbody>
-<tr class='leader'><td class='rank'>1</td><td class='model'>claude-haiku-4-5<span class='badge closed'>closed</span><span class='spec'>anthropic:claude-haiku-4-5</span></td><td class='metric-primary'>0.869 <span class='pm'>&plusmn;0.11</span></td><td>100%</td><td>0.876</td><td>0.928 <span class='pm'>&plusmn;0.14</span></td><td>$0.6254</td><td>1.87s</td></tr>
-<tr><td class='rank'>2</td><td class='model'>qwen/qwen3-next-80b-a3b-instruct<span class='badge open'>open</span><span class='spec'>openrouter:qwen/qwen3-next-80b-a3b-instruct</span></td><td class='metric-primary'>0.869 <span class='pm'>&plusmn;0.19</span></td><td>98%</td><td>0.883</td><td>0.871 <span class='pm'>&plusmn;0.16</span></td><td>&mdash;</td><td>1.62s</td></tr>
-<tr><td class='rank'>3</td><td class='model'>deepseek/deepseek-v3.2<span class='badge open'>open</span><span class='spec'>openrouter:deepseek/deepseek-v3.2</span></td><td class='metric-primary'>0.847 <span class='pm'>&plusmn;0.18</span></td><td>99%</td><td>0.864</td><td>0.859 <span class='pm'>&plusmn;0.28</span></td><td>$0.0873</td><td>8.85s</td></tr>
-<tr><td class='rank'>4</td><td class='model'>minimax/minimax-m3<span class='badge open'>open</span><span class='spec'>openrouter:minimax/minimax-m3</span></td><td class='metric-primary'>0.830 <span class='pm'>&plusmn;0.18</span></td><td>90%</td><td>0.896</td><td>0.721 <span class='pm'>&plusmn;0.28</span></td><td>&mdash;</td><td>6.31s</td></tr>
-<tr><td class='rank'>5</td><td class='model'>google/gemma-3-27b-it<span class='badge open'>open</span><span class='spec'>openrouter:google/gemma-3-27b-it</span></td><td class='metric-primary'>0.830 <span class='pm'>&plusmn;0.25</span></td><td>94%</td><td>0.895</td><td>0.834 <span class='pm'>&plusmn;0.15</span></td><td>$0.0329</td><td>5.61s</td></tr>
-<tr><td class='rank'>6</td><td class='model'>mistralai/mistral-small-2603<span class='badge open'>open</span><span class='spec'>openrouter:mistralai/mistral-small-2603</span></td><td class='metric-primary'>0.812 <span class='pm'>&plusmn;0.21</span></td><td>96%</td><td>0.850</td><td>0.817 <span class='pm'>&plusmn;0.17</span></td><td>&mdash;</td><td>1.39s</td></tr>
-<tr><td class='rank'>7</td><td class='model'>gemini-3.5-flash<span class='badge closed'>closed</span><span class='spec'>gemini:gemini-3.5-flash</span></td><td class='metric-primary'>0.811 <span class='pm'>&plusmn;0.22</span></td><td>96%</td><td>0.855</td><td>0.951 <span class='pm'>&plusmn;0.10</span></td><td>$0.2008</td><td>5.20s</td></tr>
-<tr><td class='rank'>8</td><td class='model'>deepseek/deepseek-v4-flash<span class='badge open'>open</span><span class='spec'>openrouter:deepseek/deepseek-v4-flash</span></td><td class='metric-primary'>0.810 <span class='pm'>&plusmn;0.20</span></td><td>93%</td><td>0.903</td><td>0.930 <span class='pm'>&plusmn;0.10</span></td><td>&mdash;</td><td>9.03s</td></tr>
-<tr><td class='rank'>9</td><td class='model'>z-ai/glm-5.2<span class='badge open'>open</span><span class='spec'>openrouter:z-ai/glm-5.2</span></td><td class='metric-primary'>0.756 <span class='pm'>&plusmn;0.22</span></td><td>93%</td><td>0.860</td><td>0.932 <span class='pm'>&plusmn;0.10</span></td><td>&mdash;</td><td>7.22s</td></tr>
-<tr><td class='rank'>10</td><td class='model'>meta-llama/llama-4-maverick<span class='badge open'>open</span><span class='spec'>openrouter:meta-llama/llama-4-maverick</span></td><td class='metric-primary'>0.738 <span class='pm'>&plusmn;0.18</span></td><td>92%</td><td>0.816</td><td>0.807 <span class='pm'>&plusmn;0.23</span></td><td>&mdash;</td><td>4.42s</td></tr>
-<tr><td class='rank'>11</td><td class='model'>gpt-5.4-nano<span class='badge closed'>closed</span><span class='spec'>openai:gpt-5.4-nano</span></td><td class='metric-primary'>0.681 <span class='pm'>&plusmn;0.22</span></td><td>84%</td><td>0.832</td><td>0.835 <span class='pm'>&plusmn;0.17</span></td><td>$0.0324</td><td>2.53s</td></tr>
-<tr><td class='rank'>12</td><td class='model'>openai/gpt-oss-120b<span class='badge open'>open</span><span class='spec'>openrouter:openai/gpt-oss-120b</span></td><td class='metric-primary'>0.653 <span class='pm'>&plusmn;0.31</span></td><td>79%</td><td>0.900</td><td>0.894 <span class='pm'>&plusmn;0.15</span></td><td>&mdash;</td><td>7.56s</td></tr>
-<tr><td class='rank'>13</td><td class='model'>qwen/qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span><span class='spec'>openrouter:qwen/qwen3-30b-a3b-instruct-2507</span></td><td class='metric-primary'>0.605 <span class='pm'>&plusmn;0.29</span></td><td>78%</td><td>0.813</td><td>0.897 <span class='pm'>&plusmn;0.13</span></td><td>$0.0199</td><td>4.35s</td></tr>
-<tr><td class='rank'>14</td><td class='model'>moonshotai/kimi-k2.6<span class='badge open'>open</span><span class='spec'>openrouter:moonshotai/kimi-k2.6</span></td><td class='metric-primary'>0.555 <span class='pm'>&plusmn;0.32</span></td><td>68%</td><td>0.894</td><td>0.787 <span class='pm'>&plusmn;0.30</span></td><td>&mdash;</td><td>21.24s</td></tr>
-<tr><td class='rank'>15</td><td class='model'>openai/gpt-oss-20b<span class='badge open'>open</span><span class='spec'>openrouter:openai/gpt-oss-20b</span></td><td class='metric-primary'>0.529 <span class='pm'>&plusmn;0.27</span></td><td>65%</td><td>0.863</td><td>0.881 <span class='pm'>&plusmn;0.14</span></td><td>$0.0280</td><td>7.15s</td></tr>
-<tr><td class='rank'>16</td><td class='model'>nvidia/nemotron-3-super-120b-a12b<span class='badge open'>open</span><span class='spec'>openrouter:nvidia/nemotron-3-super-120b-a12b</span></td><td class='metric-primary'>0.112 <span class='pm'>&plusmn;0.21</span></td><td>34%</td><td>0.859</td><td>0.860 <span class='pm'>&plusmn;0.17</span></td><td>&mdash;</td><td>8.27s</td></tr>
-<tr><td class='rank'>17</td><td class='model'>baseline-rules<span class='badge closed'>closed</span></td><td class='metric-primary'>0.000</td><td>9%</td><td>0.718</td><td>0.715 <span class='pm'>&plusmn;0.10</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr class='leader'><td class='rank'>1</td><td class='model'>deepseek/deepseek-v3.2<span class='badge open'>open</span><span class='spec'>openrouter:deepseek/deepseek-v3.2</span></td><td class='metric-primary'>0.916 <span class='pm'>&plusmn;0.18</span></td><td>0.935</td><td><a href='failures.html#spec-deepseek_deepseek-v3.2' title='valid scene: 69 · failed to load: 1'>99%</a></td><td>0.930</td><td>0.859 <span class='pm'>&plusmn;0.28</span></td><td>$0.0453</td><td>8.85s</td></tr>
+<tr><td class='rank'>2</td><td class='model'>claude-haiku-4-5<span class='badge closed'>closed</span><span class='spec'>anthropic:claude-haiku-4-5</span></td><td class='metric-primary'>0.870 <span class='pm'>&plusmn;0.24</span></td><td>0.891</td><td><a href='failures.html#spec-claude-haiku-4-5' title='valid scene: 67 · invalid MVS: 3'>96%</a></td><td>0.909</td><td>0.928 <span class='pm'>&plusmn;0.14</span></td><td>$0.3073</td><td>1.87s</td></tr>
+<tr><td class='rank'>3</td><td class='model'>deepseek/deepseek-v4-flash<span class='badge open'>open</span><span class='spec'>openrouter:deepseek/deepseek-v4-flash</span></td><td class='metric-primary'>0.861 <span class='pm'>&plusmn;0.27</span></td><td>0.874</td><td><a href='failures.html#spec-deepseek_deepseek-v4-flash' title='valid scene: 65 · invalid JSON: 4 · invalid MVS: 1'>93%</a></td><td>0.928</td><td>0.930 <span class='pm'>&plusmn;0.10</span></td><td>&mdash;</td><td>9.03s</td></tr>
+<tr><td class='rank'>4</td><td class='model'>gemini-3.5-flash<sup>1</sup><span class='badge closed'>closed</span><span class='spec'>openrouter:google/gemini-3.5-flash</span></td><td class='metric-primary'>0.845 <span class='pm'>&plusmn;0.27</span></td><td>0.870</td><td><a href='failures.html#spec-gemini-3.5-flash' title='valid scene: 66 · invalid JSON: 4'>94%</a></td><td>0.896</td><td>0.951 <span class='pm'>&plusmn;0.10</span></td><td>$0.2420</td><td>5.20s</td></tr>
+<tr><td class='rank'>5</td><td class='model'>minimax/minimax-m3<span class='badge open'>open</span><span class='spec'>openrouter:minimax/minimax-m3</span></td><td class='metric-primary'>0.830 <span class='pm'>&plusmn;0.31</span></td><td>0.838</td><td><a href='failures.html#spec-minimax_minimax-m3' title='valid scene: 63 · invalid JSON: 5 · invalid MVS: 2'>90%</a></td><td>0.922</td><td>0.721 <span class='pm'>&plusmn;0.28</span></td><td>&mdash;</td><td>6.31s</td></tr>
+<tr><td class='rank'>6</td><td class='model'>qwen/qwen3-next-80b-a3b-instruct<span class='badge open'>open</span><span class='spec'>openrouter:qwen/qwen3-next-80b-a3b-instruct</span></td><td class='metric-primary'>0.819 <span class='pm'>&plusmn;0.29</span></td><td>0.845</td><td><a href='failures.html#spec-qwen_qwen3-next-80b-a3b-instruct' title='valid scene: 64 · invalid JSON: 3 · invalid MVS: 3'>91%</a></td><td>0.895</td><td>0.871 <span class='pm'>&plusmn;0.16</span></td><td>&mdash;</td><td>1.62s</td></tr>
+<tr><td class='rank'>7</td><td class='model'>z-ai/glm-5.2<span class='badge open'>open</span><span class='spec'>openrouter:z-ai/glm-5.2</span></td><td class='metric-primary'>0.807 <span class='pm'>&plusmn;0.31</span></td><td>0.838</td><td><a href='failures.html#spec-z-ai_glm-5.2' title='valid scene: 63 · invalid JSON: 5 · invalid MVS: 1 · failed to load: 1'>90%</a></td><td>0.897</td><td>0.932 <span class='pm'>&plusmn;0.10</span></td><td>&mdash;</td><td>7.22s</td></tr>
+<tr><td class='rank'>8</td><td class='model'>meta-llama/llama-4-maverick<span class='badge open'>open</span><span class='spec'>openrouter:meta-llama/llama-4-maverick</span></td><td class='metric-primary'>0.794 <span class='pm'>&plusmn;0.39</span></td><td>0.804</td><td><a href='failures.html#spec-meta-llama_llama-4-maverick' title='valid scene: 57 · invalid JSON: 1 · invalid MVS: 11 · failed to load: 1'>81%</a></td><td>0.975</td><td>0.807 <span class='pm'>&plusmn;0.23</span></td><td>&mdash;</td><td>4.42s</td></tr>
+<tr><td class='rank'>9</td><td class='model'>google/gemma-3-27b-it<span class='badge open'>open</span><span class='spec'>openrouter:google/gemma-3-27b-it</span></td><td class='metric-primary'>0.724 <span class='pm'>&plusmn;0.39</span></td><td>0.729</td><td><a href='failures.html#spec-google_gemma-3-27b-it' title='valid scene: 57 · invalid JSON: 4 · invalid MVS: 9'>81%</a></td><td>0.889</td><td>0.834 <span class='pm'>&plusmn;0.15</span></td><td>$0.0167</td><td>5.61s</td></tr>
+<tr><td class='rank'>10</td><td class='model'>moonshotai/kimi-k2.6<span class='badge open'>open</span><span class='spec'>openrouter:moonshotai/kimi-k2.6</span></td><td class='metric-primary'>0.663 <span class='pm'>&plusmn;0.43</span></td><td>0.686</td><td><a href='failures.html#spec-moonshotai_kimi-k2.6' title='valid scene: 51 · invalid JSON: 18 · invalid MVS: 1'>73%</a></td><td>0.910</td><td>0.787 <span class='pm'>&plusmn;0.30</span></td><td>&mdash;</td><td>21.24s</td></tr>
+<tr><td class='rank'>11</td><td class='model'>gpt-5.4-nano<sup>1</sup><span class='badge closed'>closed</span><span class='spec'>openrouter:openai/gpt-5.4-nano</span></td><td class='metric-primary'>0.658 <span class='pm'>&plusmn;0.40</span></td><td>0.688</td><td><a href='failures.html#spec-gpt-5.4-nano' title='valid scene: 53 · invalid JSON: 15 · invalid MVS: 2'>76%</a></td><td>0.870</td><td>0.835 <span class='pm'>&plusmn;0.17</span></td><td>$0.0156</td><td>2.53s</td></tr>
+<tr><td class='rank'>12</td><td class='model'>openai/gpt-oss-120b<span class='badge open'>open</span><span class='spec'>openrouter:openai/gpt-oss-120b</span></td><td class='metric-primary'>0.574 <span class='pm'>&plusmn;0.46</span></td><td>0.587</td><td><a href='failures.html#spec-openai_gpt-oss-120b' title='valid scene: 44 · invalid JSON: 26'>63%</a></td><td>0.914</td><td>0.894 <span class='pm'>&plusmn;0.15</span></td><td>&mdash;</td><td>7.56s</td></tr>
+<tr><td class='rank'>13</td><td class='model'>qwen/qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span><span class='spec'>openrouter:qwen/qwen3-30b-a3b-instruct-2507</span></td><td class='metric-primary'>0.529 <span class='pm'>&plusmn;0.48</span></td><td>0.540</td><td><a href='failures.html#spec-qwen_qwen3-30b-a3b-instruct-2507' title='valid scene: 39 · invalid JSON: 28 · invalid MVS: 3'>56%</a></td><td>0.950</td><td>0.897 <span class='pm'>&plusmn;0.13</span></td><td>$0.0099</td><td>4.35s</td></tr>
+<tr><td class='rank'>14</td><td class='model'>openai/gpt-oss-20b<span class='badge open'>open</span><span class='spec'>openrouter:openai/gpt-oss-20b</span></td><td class='metric-primary'>0.252 <span class='pm'>&plusmn;0.41</span></td><td>0.256</td><td><a href='failures.html#spec-openai_gpt-oss-20b' title='valid scene: 20 · invalid JSON: 50'>29%</a></td><td>0.883</td><td>0.881 <span class='pm'>&plusmn;0.14</span></td><td>$0.0131</td><td>7.15s</td></tr>
+<tr><td class='rank'>15</td><td class='model'>nvidia/nemotron-3-super-120b-a12b<span class='badge open'>open</span><span class='spec'>openrouter:nvidia/nemotron-3-super-120b-a12b</span></td><td class='metric-primary'>0.077 <span class='pm'>&plusmn;0.26</span></td><td>0.079</td><td><a href='failures.html#spec-nvidia_nemotron-3-super-120b-a12b' title='valid scene: 6 · invalid JSON: 64'>9%</a></td><td>0.897</td><td>0.860 <span class='pm'>&plusmn;0.17</span></td><td>&mdash;</td><td>8.27s</td></tr>
+<tr><td class='rank'>16</td><td class='model'>baseline-rules<span class='badge closed'>closed</span></td><td class='metric-primary'>0.000</td><td>&mdash;</td><td><a href='failures.html#spec' title='invalid JSON: 67 · not an MVS tree: 3'>0%</a></td><td>0.000</td><td>0.715 <span class='pm'>&plusmn;0.10</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class='rank'>&mdash;</td><td class='model'>mistralai/mistral-small-2603<sup>2</sup><span class='badge open'>open</span><span class='spec'>openrouter:mistralai/mistral-small-2603</span></td><td class='metric-primary'>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>0.817 <span class='pm'>&plusmn;0.17</span></td><td>&mdash;</td><td>1.39s</td></tr>
       </tbody>
     </table>
   </div>
   <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
-    <b>MVS&nbsp;F1</b>: primary scene-authoring score (parse failures = 0).
-    Engine-neutral <i>by design</i> &mdash; though Mol* is currently the only
-    viewer that implements MolViewSpec. <b>Parse&nbsp;%</b>: share of samples that
-    emitted valid output. <b>Cond&nbsp;F1</b>: scene quality <i>given</i> valid
-    output &mdash; the gap from MVS&nbsp;F1 measures how much a model is dragged
-    down by malformed JSON rather than visualization error. <b>API&nbsp;F1</b>:
-    the tool-control track &mdash; imperative PDBeMolstar calls (superposition,
-    component toggles, camera) that specify a <i>sequence of actions</i> on a live
-    viewer rather than a scene. <b>Parse&nbsp;%</b> and <b>Cond&nbsp;F1</b> reflect
-    the primary MVS run. <span class="pm">&plusmn;</span> is the spread across
-    tasks; costs use provider list prices.
+    <b>MVS&nbsp;F1</b>: primary scene-authoring score, 70 tasks,
+    1 sample each, run 2026-10-18.
+    Engine-neutral <i>by design</i> &mdash; though Mol* is currently the only viewer
+    that implements MolViewSpec. <b>Validated&nbsp;F1</b>: the same scenes after the
+    render-and-judge cascade (see <a href="#tiered">Tiered grading</a>).
+    <b>Valid&nbsp;scene</b>: share of samples Mol* accepts and renders; the rest are
+    invalid JSON, invalid MVS or failed to load, and score 0 &mdash; hover for the
+    breakdown, click for <a href="failures.html">every failing sample</a>.
+    <b>Cond&nbsp;F1</b>: scene quality over valid scenes only &mdash; the gap from
+    MVS&nbsp;F1 is how much a model loses to broken output rather than to
+    visualization error. <b>API&nbsp;F1</b>: the tool-control track, not re-run in
+    October: these are the 2026-07-04 results (20 tasks,
+    &times;3 samples, same grader). <b>Cost</b>: the October
+    MVS run at provider list prices (&mdash; = not reported). <b>Speed</b>: seconds
+    per call from the July run (October timings include rendering).
+    <span class="pm">&plusmn;</span> is the spread across tasks.
   </p>
+  <p class="section-sub" style="font-size:.85rem"><sup>1</sup>&nbsp;Ran via OpenRouter in October (the July API-track result used the provider&#x27;s native API). Treated as the same model. <sup>2</sup>&nbsp;Not re-run in October: OpenRouter&#x27;s upstream (Mistral) rate-limited every attempt (11 tries). MVS columns blank; API track from July.</p>
 </section>
 <section class="wrap" aria-label="Key findings">
   <h2>Key findings</h2>
   <p class="section-sub">What the leaderboard actually tells you &mdash; read
      these before the table.</p>
   <div class="findings">
-<div class='finding headline'><div class='fnum'>FINDING 01 &middot; THE HEADLINE</div><h3>Format reliability, not competence, drives the ranking</h3><p>The MVS ranking is largely a <b>JSON-validity</b> ranking. Conditional on producing valid output, every LLM clusters tightly at <b>0.81&ndash;0.90</b> Cond&nbsp;F1 &mdash; yet the unconditional spread is ~<b>0.76</b>, driven almost entirely by Parse&nbsp;%.</p><p><code>nvidia/nemotron-3-super-120b-a12b</code> is <b>last among the LLMs</b> (~0.11 MVS&nbsp;F1) yet scores ~0.86 Cond&nbsp;F1 &mdash; competent when it emits valid JSON, but it usually doesn&rsquo;t (Parse&nbsp;34%).</p></div>
-<div class='finding'><div class='fnum'>FINDING 02</div><h3>Open weights reached the closed frontier-small tier</h3><p>Open models match the small closed frontier at <b>6&ndash;19&times; lower cost</b> &mdash; Gemma-3-27B at $0.0329, DeepSeek-V3.2 close behind. But &ldquo;open&rdquo; spans a wide range: Qwen3-30B and gpt-oss-20b still lag well behind on reliability.</p></div>
-<div class='finding'><div class='fnum'>FINDING 03</div><h3>Regime spread is dominated by output reliability</h3><p>Tasks span translation &rarr; structure-grounded &rarr; clinical. Across regimes the model spread runs ~0.71&ndash;0.84; in the expanded panel it tracks <b>output-format reliability</b> &mdash; a few models fail to emit valid JSON &mdash; more than task difficulty. The clean difficulty gradient is visible among the format-reliable models. See the per-regime table below.</p></div>
+<div class='finding headline'><div class='fnum'>FINDING 01 &middot; THE HEADLINE</div><h3>Output validity, not competence, drives the ranking</h3><p>The MVS ranking is largely a <b>valid-output</b> ranking. Over valid scenes, every LLM clusters at <b>0.87&ndash;0.98</b> Cond&nbsp;F1 &mdash; yet the unconditional spread is ~<b>0.84</b>. Valid-scene rate alone correlates with MVS&nbsp;F1 at <b>r&nbsp;=&nbsp;0.996</b>. Of the 266 failed samples, <b>227</b> are invalid JSON and 36 are JSON that Mol* rejects as MVS (3 more failed to load) &mdash; <a href='failures.html'>details</a>.</p><p><code>nvidia/nemotron-3-super-120b-a12b</code> is <b>last among the LLMs</b> (~0.08 MVS&nbsp;F1) yet scores ~0.90 Cond&nbsp;F1 &mdash; competent when its scene is valid, but it usually isn&rsquo;t (valid scene 9%; 64 of 70 samples are invalid JSON).</p></div>
+<div class='finding'><div class='fnum'>FINDING 02</div><h3>The best open model is at the closed frontier-small tier</h3><p>The top open model, <b>deepseek-v3.2</b> (0.92), beats the best closed model, claude-haiku-4-5 (0.87) at <b>7&times; lower cost</b> ($0.0453 vs $0.3073 for the run). But &ldquo;open&rdquo; spans a wide range: gpt-oss-20b (0.25), nemotron-3-super-120b-a12b (0.08) sit at the bottom, mostly on invalid output.</p></div>
+<div class='finding'><div class='fnum'>FINDING 03</div><h3>Regime spread is dominated by output reliability</h3><p>Tasks span translation &rarr; structure-grounded &rarr; clinical. Across regimes the model spread runs ~0.67&ndash;1.00; in the expanded panel it tracks <b>output validity</b> &mdash; a few models rarely emit a valid scene &mdash; more than task difficulty. See the per-regime table below.</p></div>
 <div class='finding'><div class='fnum'>FINDING 04 &middot; NOVEL</div><h3>Clinical grounding into 3D structure</h3><p>Tasks bridge clinical genetics and structure: ClinVar pathogenic variants mapped via UniProt&nbsp;+&nbsp;PDBe&nbsp;SIFTS numbering onto the correct residues (e.g. p53 <b>R175H</b>). No other molecular-viz benchmark does this.</p></div>
+<div class='finding'><div class='fnum'>FINDING 05</div><h3>Grounding dossiers don&rsquo;t lift scores</h3><p>Adding a frozen fact sheet about each structure (chains, ligands, numbering) changes MVS&nbsp;F1 by <b>-0.042</b> on average across 15 models. On the 647 task&times;model pairs whose scene is valid in both runs the effect is <b>-0.005</b>. The drop comes from more invalid output on the longer prompt, worst for qwen3-30b-a3b-instruct-2507 (valid scenes 56% &rarr; 31%). <a href='#conditions'>The 2&times;2 &darr;</a></p></div>
+<div class='finding'><div class='fnum'>FINDING 06</div><h3>Without the MVS reference, no model writes a valid scene</h3><p>With only the output contract (&ldquo;bare&rdquo;), <b>0 of 420</b> scenes are valid across 3 models, with or without a dossier. Mostly the JSON parses but Mol* rejects it &mdash; parameters written straight onto the node instead of under <code>params</code>. Models don&rsquo;t know MVS from pretraining.</p></div>
   </div>
+</section>
+<section class="wrap" aria-label="Prompting conditions" id="conditions">
+  <h2>Prompting conditions (the 2&times;2)</h2>
+  <p class="section-sub">Every model above ran with the <b>spec</b> prompt: the output
+     contract plus a neutral MolViewSpec reference. We also ran it with a
+     <b>dossier</b> &mdash; a grounding pack of facts about the task&rsquo;s structure
+     (chains, residue ranges, ligand codes and atom names, SIFTS/UniProt numbering,
+     ClinVar positions), built offline and frozen with the task. And a <b>bare</b>
+     prompt, the output contract only, on three models. 70
+     MVS tasks, 1 sample, run 2026-10-18.</p>
+  <div class="callout">
+    <b>Dossiers don&rsquo;t help.</b> Mean change in MVS&nbsp;F1: -0.042
+    over 15 models. On the 647 task&times;model pairs valid in
+    both runs: -0.005 (66 better,
+    93 worse, 488 unchanged). The overall drop is
+    more invalid output on the longer prompt (worst:
+    qwen3-30b-a3b-instruct-2507, valid scenes 56% &rarr; 31%).
+    On the 15 lookup-heavy tasks (clinical and resolve-by-name) the mean
+    change is -0.021. 2 models pass +0.10 there &mdash; gpt-oss-120b (+0.16; +0.033 on the 4 valid in both), llama-4-maverick (+0.13; -0.044 on the 2 valid in both) &mdash; and 4 lose as much. With 15 tasks and one sample, one task flipping between invalid and valid moves the mean by ~0.05; the gains come from such flips, not from better answers.
+    <b>Bare:</b> 0 valid scenes of 420.
+  </div>
+  <div class="table-scroll" style="margin-top:1.5rem">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th class="left">Model</th>
+          <th>Spec&nbsp;F1</th>
+          <th>+Dossier&nbsp;F1</th>
+          <th>&Delta;</th>
+          <th>Valid (spec)</th>
+          <th>Valid (+dossier)</th>
+          <th>&Delta; valid in both</th>
+          <th>&Delta; lookup tasks</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr><td class='model' title='deepseek/deepseek-v3.2'>deepseek-v3.2</td><td>0.916</td><td>0.901</td><td class='metric-primary'>-0.016</td><td><a href='failures.html#spec-deepseek_deepseek-v3.2'>99%</a></td><td><a href='failures.html#spec_grounded-deepseek_deepseek-v3.2'>97%</a></td><td>-0.013 <span class='pm'>(n=67)</span></td><td>-0.152</td></tr>
+<tr><td class='model' title='claude-haiku-4-5'>claude-haiku-4-5</td><td>0.870</td><td>0.855</td><td class='metric-primary'>-0.015</td><td><a href='failures.html#spec-claude-haiku-4-5'>96%</a></td><td><a href='failures.html#spec_grounded-claude-haiku-4-5'>93%</a></td><td>-0.002 <span class='pm'>(n=65)</span></td><td>-0.051</td></tr>
+<tr><td class='model' title='deepseek/deepseek-v4-flash'>deepseek-v4-flash</td><td>0.861</td><td>0.778</td><td class='metric-primary'>-0.084</td><td><a href='failures.html#spec-deepseek_deepseek-v4-flash'>93%</a></td><td><a href='failures.html#spec_grounded-deepseek_deepseek-v4-flash'>84%</a></td><td>-0.012 <span class='pm'>(n=55)</span></td><td>-0.073</td></tr>
+<tr><td class='model' title='gemini-3.5-flash'>gemini-3.5-flash</td><td>0.845</td><td>0.812</td><td class='metric-primary'>-0.033</td><td><a href='failures.html#spec-gemini-3.5-flash'>94%</a></td><td><a href='failures.html#spec_grounded-gemini-3.5-flash'>90%</a></td><td>-0.013 <span class='pm'>(n=62)</span></td><td>-0.130</td></tr>
+<tr><td class='model' title='minimax/minimax-m3'>minimax-m3</td><td>0.830</td><td>0.827</td><td class='metric-primary'>-0.002</td><td><a href='failures.html#spec-minimax_minimax-m3'>90%</a></td><td><a href='failures.html#spec_grounded-minimax_minimax-m3'>91%</a></td><td>-0.013 <span class='pm'>(n=59)</span></td><td>-0.037</td></tr>
+<tr><td class='model' title='qwen/qwen3-next-80b-a3b-instruct'>qwen3-next-80b-a3b-instruct</td><td>0.819</td><td>0.843</td><td class='metric-primary'>+0.025</td><td><a href='failures.html#spec-qwen_qwen3-next-80b-a3b-instruct'>91%</a></td><td><a href='failures.html#spec_grounded-qwen_qwen3-next-80b-a3b-instruct'>91%</a></td><td>+0.020 <span class='pm'>(n=60)</span></td><td>+0.040</td></tr>
+<tr><td class='model' title='z-ai/glm-5.2'>glm-5.2</td><td>0.807</td><td>0.786</td><td class='metric-primary'>-0.021</td><td><a href='failures.html#spec-z-ai_glm-5.2'>90%</a></td><td><a href='failures.html#spec_grounded-z-ai_glm-5.2'>86%</a></td><td>+0.007 <span class='pm'>(n=56)</span></td><td>-0.124</td></tr>
+<tr><td class='model' title='meta-llama/llama-4-maverick'>llama-4-maverick</td><td>0.794</td><td>0.789</td><td class='metric-primary'>-0.005</td><td><a href='failures.html#spec-meta-llama_llama-4-maverick'>81%</a></td><td><a href='failures.html#spec_grounded-meta-llama_llama-4-maverick'>83%</a></td><td>-0.007 <span class='pm'>(n=52)</span></td><td>+0.127</td></tr>
+<tr><td class='model' title='google/gemma-3-27b-it'>gemma-3-27b-it</td><td>0.724</td><td>0.662</td><td class='metric-primary'>-0.061</td><td><a href='failures.html#spec-google_gemma-3-27b-it'>81%</a></td><td><a href='failures.html#spec_grounded-google_gemma-3-27b-it'>70%</a></td><td>+0.028 <span class='pm'>(n=47)</span></td><td>-0.159</td></tr>
+<tr><td class='model' title='moonshotai/kimi-k2.6'>kimi-k2.6</td><td>0.663</td><td>0.573</td><td class='metric-primary'>-0.090</td><td><a href='failures.html#spec-moonshotai_kimi-k2.6'>73%</a></td><td><a href='failures.html#spec_grounded-moonshotai_kimi-k2.6'>64%</a></td><td>-0.008 <span class='pm'>(n=36)</span></td><td>-0.027</td></tr>
+<tr><td class='model' title='gpt-5.4-nano'>gpt-5.4-nano</td><td>0.658</td><td>0.613</td><td class='metric-primary'>-0.045</td><td><a href='failures.html#spec-gpt-5.4-nano'>76%</a></td><td><a href='failures.html#spec_grounded-gpt-5.4-nano'>76%</a></td><td>-0.046 <span class='pm'>(n=40)</span></td><td>+0.085</td></tr>
+<tr><td class='model' title='openai/gpt-oss-120b'>gpt-oss-120b</td><td>0.574</td><td>0.590</td><td class='metric-primary'>+0.016</td><td><a href='failures.html#spec-openai_gpt-oss-120b'>63%</a></td><td><a href='failures.html#spec_grounded-openai_gpt-oss-120b'>66%</a></td><td>-0.011 <span class='pm'>(n=26)</span></td><td>+0.160</td></tr>
+<tr><td class='model' title='qwen/qwen3-30b-a3b-instruct-2507'>qwen3-30b-a3b-instruct-2507</td><td>0.529</td><td>0.276</td><td class='metric-primary'>-0.253</td><td><a href='failures.html#spec-qwen_qwen3-30b-a3b-instruct-2507'>56%</a></td><td><a href='failures.html#spec_grounded-qwen_qwen3-30b-a3b-instruct-2507'>31%</a></td><td>-0.011 <span class='pm'>(n=16)</span></td><td>+0.042</td></tr>
+<tr><td class='model' title='openai/gpt-oss-20b'>gpt-oss-20b</td><td>0.252</td><td>0.205</td><td class='metric-primary'>-0.047</td><td><a href='failures.html#spec-openai_gpt-oss-20b'>29%</a></td><td><a href='failures.html#spec_grounded-openai_gpt-oss-20b'>24%</a></td><td>+0.033 <span class='pm'>(n=6)</span></td><td>+0.012</td></tr>
+<tr><td class='model' title='nvidia/nemotron-3-super-120b-a12b'>nemotron-3-super-120b-a12b</td><td>0.077</td><td>0.081</td><td class='metric-primary'>+0.004</td><td><a href='failures.html#spec-nvidia_nemotron-3-super-120b-a12b'>9%</a></td><td><a href='failures.html#spec_grounded-nvidia_nemotron-3-super-120b-a12b'>9%</a></td><td>&mdash; <span class='pm'>(n=0)</span></td><td>-0.035</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
+     <b>&Delta;</b> = dossier &minus; spec, MVS&nbsp;F1 (tree match, no rendering).
+     <b>&Delta; valid in both</b>: mean paired change over the tasks whose scene Mol*
+     accepts in both runs (n tasks). <b>&Delta; lookup tasks</b>: all
+     15 clinical and resolve-by-name tasks, valid or not.</p>
+  <h3 style="margin-top:2rem">Bare prompt (no MVS reference)</h3>
+  <div class="table-scroll">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th class="left">Model</th>
+          <th>Valid (spec)</th><th>F1 (spec)</th>
+          <th>Valid (bare)</th><th>F1 (bare)</th>
+          <th>Valid (bare+dossier)</th><th>F1 (bare+dossier)</th>
+        </tr>
+      </thead>
+      <tbody>
+<tr><td class='model' title='deepseek/deepseek-v3.2'>deepseek-v3.2</td><td>99%</td><td>0.916</td><td>0%</td><td>0.000</td><td>0%</td><td>0.000</td></tr>
+<tr><td class='model' title='claude-haiku-4-5'>claude-haiku-4-5</td><td>96%</td><td>0.870</td><td>0%</td><td>0.000</td><td>0%</td><td>0.000</td></tr>
+<tr><td class='model' title='qwen/qwen3-30b-a3b-instruct-2507'>qwen3-30b-a3b-instruct-2507</td><td>56%</td><td>0.529</td><td>0%</td><td>0.000</td><td>0%</td><td>0.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
+     Bare scenes mostly parse as JSON but are invalid MVS &mdash; see the
+     <a href="failures.html#messages">Mol* messages</a>. Without the reference, models
+     don&rsquo;t know the MVS tree format.</p>
 </section>
 <section class="wrap" aria-label="Difficulty gradient">
   <h2>Difficulty gradient by task regime</h2>
   <p class="section-sub">Mean MVS&nbsp;F1 by how the answer key is grounded,
-     easy&nbsp;&rarr;&nbsp;hard. Harder regimes pull the models apart &mdash; the
-     spread you want from a benchmark.</p>
+     easy&nbsp;&rarr;&nbsp;hard, left to right. Best per column highlighted. Columns marked <i>other</i> test a different skill and are not ordered by difficulty.</p>
   <div class="table-scroll">
-    <table>
-      <thead><tr><th class="left">Regime</th><th>claude-haiku-4-5</th><th>qwen3-next-80b-a3b-instruct</th><th>deepseek-v3.2</th><th>minimax-m3</th><th>gemma-3-27b-it</th><th>mistral-small-2603</th><th>gemini-3.5-flash</th><th>deepseek-v4-flash</th><th>glm-5.2</th><th>llama-4-maverick</th><th>gpt-5.4-nano</th><th>gpt-oss-120b</th><th>qwen3-30b-a3b-instruct-2507</th><th>kimi-k2.6</th><th>gpt-oss-20b</th><th>nemotron-3-super-120b-a12b</th><th>baseline-rules</th></tr></thead>
+    <table class="matrix">
+      <thead><tr><th class="left">Model</th><th>Translation<br><span class='pm'>n=41</span></th><th>Grounded (ligand/SS)<br><span class='pm'>n=8</span></th><th>Clinical (SIFTS/ClinVar)<br><span class='pm'>n=9</span></th><th>Resolution (by name)<br><span class='pm'>n=6</span> <span class='pm'>(other)</span></th><th>Interactions (atoms)<br><span class='pm'>n=6</span> <span class='pm'>(other)</span></th></tr></thead>
       <tbody>
-<tr><td class='rowhead'>Translation <span class='pm'>(n=47)</span></td><td>0.912</td><td class='best'>0.959</td><td>0.925</td><td>0.884</td><td>0.882</td><td>0.879</td><td>0.899</td><td>0.844</td><td>0.827</td><td>0.749</td><td>0.727</td><td>0.686</td><td>0.674</td><td>0.662</td><td>0.587</td><td>0.122</td><td>0.000</td></tr>
-<tr><td class='rowhead'>Grounded (ligand/SS) <span class='pm'>(n=8)</span></td><td class='best'>0.870</td><td>0.599</td><td>0.704</td><td>0.788</td><td>0.745</td><td>0.704</td><td>0.666</td><td>0.851</td><td>0.622</td><td>0.677</td><td>0.662</td><td>0.599</td><td>0.613</td><td>0.467</td><td>0.167</td><td>0.147</td><td>0.000</td></tr>
-<tr><td class='rowhead'>Clinical (SIFTS/ClinVar) <span class='pm'>(n=9)</span></td><td>0.646</td><td>0.639</td><td>0.565</td><td>0.583</td><td>0.630</td><td>0.558</td><td>0.482</td><td>0.598</td><td>0.505</td><td class='best'>0.738</td><td>0.460</td><td>0.534</td><td>0.237</td><td>0.072</td><td>0.549</td><td>0.025</td><td>0.000</td></tr>
+<tr><td class='model' title='deepseek/deepseek-v3.2'>deepseek-v3.2</td><td class='best'>0.999</td><td>0.973</td><td class='best'>0.731</td><td>0.673</td><td>0.798</td></tr>
+<tr><td class='model' title='claude-haiku-4-5'>claude-haiku-4-5</td><td>0.999</td><td>0.963</td><td>0.650</td><td>0.238</td><td class='best'>0.830</td></tr>
+<tr><td class='model' title='deepseek/deepseek-v4-flash'>deepseek-v4-flash</td><td>0.944</td><td>0.875</td><td>0.634</td><td>0.685</td><td>0.795</td></tr>
+<tr><td class='model' title='gemini-3.5-flash'>gemini-3.5-flash</td><td>0.970</td><td class='best'>1.000</td><td>0.719</td><td>0.426</td><td>0.395</td></tr>
+<tr><td class='model' title='minimax/minimax-m3'>minimax-m3</td><td>0.949</td><td>0.986</td><td>0.630</td><td>0.367</td><td>0.569</td></tr>
+<tr><td class='model' title='qwen/qwen3-next-80b-a3b-instruct'>qwen3-next-80b-a3b-instruct</td><td>0.887</td><td>0.824</td><td>0.576</td><td class='best'>0.704</td><td>0.823</td></tr>
+<tr><td class='model' title='z-ai/glm-5.2'>glm-5.2</td><td>0.943</td><td>0.748</td><td>0.675</td><td>0.475</td><td>0.488</td></tr>
+<tr><td class='model' title='meta-llama/llama-4-maverick'>llama-4-maverick</td><td>0.971</td><td>0.991</td><td>0.358</td><td>0.000</td><td>0.773</td></tr>
+<tr><td class='model' title='google/gemma-3-27b-it'>gemma-3-27b-it</td><td>0.804</td><td>0.863</td><td>0.593</td><td>0.472</td><td>0.438</td></tr>
+<tr><td class='model' title='moonshotai/kimi-k2.6'>kimi-k2.6</td><td>0.771</td><td>0.622</td><td>0.502</td><td>0.281</td><td>0.602</td></tr>
+<tr><td class='model' title='gpt-5.4-nano'>gpt-5.4-nano</td><td>0.786</td><td>0.855</td><td>0.362</td><td>0.111</td><td>0.515</td></tr>
+<tr><td class='model' title='openai/gpt-oss-120b'>gpt-oss-120b</td><td>0.682</td><td>0.856</td><td>0.311</td><td>0.179</td><td>0.258</td></tr>
+<tr><td class='model' title='qwen/qwen3-30b-a3b-instruct-2507'>qwen3-30b-a3b-instruct-2507</td><td>0.747</td><td>0.375</td><td>0.222</td><td>0.000</td><td>0.235</td></tr>
+<tr><td class='model' title='openai/gpt-oss-20b'>gpt-oss-20b</td><td>0.317</td><td>0.000</td><td>0.222</td><td>0.278</td><td>0.167</td></tr>
+<tr><td class='model' title='nvidia/nemotron-3-super-120b-a12b'>nemotron-3-super-120b-a12b</td><td>0.096</td><td>0.118</td><td>0.058</td><td>0.000</td><td>0.000</td></tr>
+<tr><td class='model' title='baseline-rules'>baseline-rules</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 <section class="wrap" aria-label="Skill drill-down">
   <h2>Where models differ by skill</h2>
-  <p class="section-sub">Mean F1 on tasks tagged with each skill (task count in
-     parentheses). Skills are derived automatically from the reference scene
+  <p class="section-sub">Mean MVS&nbsp;F1 on tasks tagged with each skill (task count
+     under the name). Skills are derived automatically from the reference scene
      tree.</p>
   <div class="table-scroll">
-    <table>
-      <thead><tr><th class="left">Skill</th><th>claude-haiku-4-5</th><th>qwen3-next-80b-a3b-instruct</th><th>deepseek-v3.2</th><th>minimax-m3</th><th>gemma-3-27b-it</th><th>mistral-small-2603</th><th>gemini-3.5-flash</th><th>deepseek-v4-flash</th><th>glm-5.2</th><th>llama-4-maverick</th><th>gpt-5.4-nano</th><th>gpt-oss-120b</th><th>qwen3-30b-a3b-instruct-2507</th><th>kimi-k2.6</th><th>gpt-oss-20b</th><th>nemotron-3-super-120b-a12b</th><th>baseline-rules</th></tr></thead>
+    <table class="matrix">
+      <thead><tr><th class="left">Model</th><th>camera<br><span class='pm'>n=5</span></th><th>color<br><span class='pm'>n=63</span></th><th>interactions<br><span class='pm'>n=2</span></th><th>load<br><span class='pm'>n=70</span></th><th>measurement<br><span class='pm'>n=3</span></th><th>multi-component<br><span class='pm'>n=50</span></th><th>representation<br><span class='pm'>n=70</span></th><th>resolve<br><span class='pm'>n=6</span></th><th>selection<br><span class='pm'>n=35</span></th><th>surface<br><span class='pm'>n=8</span></th><th>transparency<br><span class='pm'>n=1</span></th></tr></thead>
       <tbody>
-<tr><td class='rowhead'>camera <span class='pm'>(n=7)</span></td><td>0.968</td><td>0.940</td><td>0.986</td><td>0.704</td><td>0.462</td><td>0.823</td><td class='best'>0.993</td><td>0.802</td><td>0.956</td><td>0.511</td><td>0.895</td><td>0.619</td><td>0.579</td><td>0.591</td><td>0.547</td><td>0.044</td><td>0.000</td></tr>
-<tr><td class='rowhead'>color <span class='pm'>(n=64)</span></td><td class='best'>0.869</td><td>0.869</td><td>0.847</td><td>0.830</td><td>0.830</td><td>0.812</td><td>0.811</td><td>0.810</td><td>0.756</td><td>0.738</td><td>0.681</td><td>0.653</td><td>0.605</td><td>0.555</td><td>0.529</td><td>0.112</td><td>0.000</td></tr>
-<tr><td class='rowhead'>load <span class='pm'>(n=64)</span></td><td class='best'>0.869</td><td>0.869</td><td>0.847</td><td>0.830</td><td>0.830</td><td>0.812</td><td>0.811</td><td>0.810</td><td>0.756</td><td>0.738</td><td>0.681</td><td>0.653</td><td>0.605</td><td>0.555</td><td>0.529</td><td>0.112</td><td>0.000</td></tr>
-<tr><td class='rowhead'>multi-component <span class='pm'>(n=50)</span></td><td class='best'>0.873</td><td>0.848</td><td>0.847</td><td>0.812</td><td>0.788</td><td>0.782</td><td>0.817</td><td>0.820</td><td>0.775</td><td>0.732</td><td>0.688</td><td>0.687</td><td>0.629</td><td>0.488</td><td>0.475</td><td>0.105</td><td>0.000</td></tr>
-<tr><td class='rowhead'>representation <span class='pm'>(n=64)</span></td><td class='best'>0.869</td><td>0.869</td><td>0.847</td><td>0.830</td><td>0.830</td><td>0.812</td><td>0.811</td><td>0.810</td><td>0.756</td><td>0.738</td><td>0.681</td><td>0.653</td><td>0.605</td><td>0.555</td><td>0.529</td><td>0.112</td><td>0.000</td></tr>
-<tr><td class='rowhead'>selection <span class='pm'>(n=30)</span></td><td class='best'>0.830</td><td>0.761</td><td>0.767</td><td>0.763</td><td>0.793</td><td>0.705</td><td>0.733</td><td>0.766</td><td>0.688</td><td>0.725</td><td>0.589</td><td>0.624</td><td>0.546</td><td>0.374</td><td>0.381</td><td>0.112</td><td>0.000</td></tr>
-<tr><td class='rowhead'>surface <span class='pm'>(n=7)</span></td><td>0.799</td><td>0.905</td><td>0.852</td><td>0.861</td><td class='best'>0.952</td><td>0.915</td><td>0.778</td><td>0.730</td><td>0.593</td><td>0.746</td><td>0.603</td><td>0.460</td><td>0.407</td><td>0.778</td><td>0.649</td><td>0.159</td><td>0.000</td></tr>
+<tr><td class='model' title='deepseek/deepseek-v3.2'>deepseek-v3.2</td><td class='best'>1.000</td><td class='best'>0.938</td><td>0.500</td><td class='best'>0.916</td><td>0.929</td><td class='best'>0.922</td><td class='best'>0.916</td><td>0.673</td><td class='best'>0.889</td><td class='best'>1.000</td><td class='best'>1.000</td></tr>
+<tr><td class='model' title='claude-haiku-4-5'>claude-haiku-4-5</td><td class='best'>1.000</td><td>0.933</td><td class='best'>1.000</td><td>0.870</td><td>0.763</td><td>0.909</td><td>0.870</td><td>0.238</td><td>0.879</td><td>0.962</td><td>0.692</td></tr>
+<tr><td class='model' title='deepseek/deepseek-v4-flash'>deepseek-v4-flash</td><td>0.781</td><td>0.876</td><td>0.900</td><td>0.861</td><td>0.667</td><td>0.864</td><td>0.861</td><td>0.685</td><td>0.837</td><td>0.996</td><td>0.969</td></tr>
+<tr><td class='model' title='gemini-3.5-flash'>gemini-3.5-flash</td><td class='best'>1.000</td><td>0.882</td><td>0.686</td><td>0.845</td><td>0.000</td><td>0.852</td><td>0.845</td><td>0.426</td><td>0.788</td><td class='best'>1.000</td><td class='best'>1.000</td></tr>
+<tr><td class='model' title='minimax/minimax-m3'>minimax-m3</td><td>0.781</td><td>0.876</td><td class='best'>1.000</td><td>0.830</td><td>0.233</td><td>0.837</td><td>0.830</td><td>0.367</td><td>0.836</td><td>0.964</td><td>0.711</td></tr>
+<tr><td class='model' title='qwen/qwen3-next-80b-a3b-instruct'>qwen3-next-80b-a3b-instruct</td><td>0.486</td><td>0.831</td><td>0.900</td><td>0.819</td><td>0.809</td><td>0.781</td><td>0.819</td><td class='best'>0.704</td><td>0.827</td><td>0.964</td><td>0.711</td></tr>
+<tr><td class='model' title='z-ai/glm-5.2'>glm-5.2</td><td>0.781</td><td>0.841</td><td>0.333</td><td>0.807</td><td>0.523</td><td>0.813</td><td>0.807</td><td>0.475</td><td>0.773</td><td>0.837</td><td>0.692</td></tr>
+<tr><td class='model' title='meta-llama/llama-4-maverick'>llama-4-maverick</td><td class='best'>1.000</td><td>0.871</td><td>0.500</td><td>0.794</td><td class='best'>0.976</td><td>0.852</td><td>0.794</td><td>0.000</td><td>0.797</td><td>0.839</td><td>0.711</td></tr>
+<tr><td class='model' title='google/gemma-3-27b-it'>gemma-3-27b-it</td><td>0.000</td><td>0.744</td><td>0.000</td><td>0.724</td><td>0.542</td><td>0.677</td><td>0.724</td><td>0.472</td><td>0.738</td><td class='best'>1.000</td><td class='best'>1.000</td></tr>
+<tr><td class='model' title='moonshotai/kimi-k2.6'>kimi-k2.6</td><td>0.600</td><td>0.694</td><td>0.843</td><td>0.663</td><td>0.309</td><td>0.622</td><td>0.663</td><td>0.281</td><td>0.545</td><td>0.958</td><td class='best'>1.000</td></tr>
+<tr><td class='model' title='gpt-5.4-nano'>gpt-5.4-nano</td><td>0.912</td><td>0.710</td><td>0.461</td><td>0.658</td><td>0.500</td><td>0.696</td><td>0.658</td><td>0.111</td><td>0.607</td><td>0.799</td><td>0.667</td></tr>
+<tr><td class='model' title='openai/gpt-oss-120b'>gpt-oss-120b</td><td>0.400</td><td>0.610</td><td>0.428</td><td>0.574</td><td>0.000</td><td>0.663</td><td>0.574</td><td>0.179</td><td>0.642</td><td>0.462</td><td>0.692</td></tr>
+<tr><td class='model' title='qwen/qwen3-30b-a3b-instruct-2507'>qwen3-30b-a3b-instruct-2507</td><td>0.562</td><td>0.577</td><td>0.000</td><td>0.529</td><td>0.233</td><td>0.501</td><td>0.529</td><td>0.000</td><td>0.390</td><td>0.714</td><td>0.711</td></tr>
+<tr><td class='model' title='openai/gpt-oss-20b'>gpt-oss-20b</td><td>0.000</td><td>0.238</td><td>0.000</td><td>0.252</td><td>0.000</td><td>0.160</td><td>0.252</td><td>0.278</td><td>0.114</td><td>0.500</td><td class='best'>1.000</td></tr>
+<tr><td class='model' title='nvidia/nemotron-3-super-120b-a12b'>nemotron-3-super-120b-a12b</td><td>0.000</td><td>0.085</td><td>0.000</td><td>0.077</td><td>0.000</td><td>0.108</td><td>0.077</td><td>0.000</td><td>0.125</td><td>0.000</td><td>0.000</td></tr>
+<tr><td class='model' title='baseline-rules'>baseline-rules</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td><td>0.000</td></tr>
       </tbody>
     </table>
   </div>
 </section>
-<section class="wrap" aria-label="Tiered grading">
+<section class="wrap" aria-label="Tiered grading" id="tiered">
   <h2>Tiered grading </h2>
-  <p class="section-sub">Strict tree-matching is <b>conservative</b> &mdash; it
-     penalises scenes that are <i>rendered-equivalent</i> but expressed with a
-     different (sometimes cleaner) tree, e.g. selecting all cysteines with one
-     <code>label_comp_id&nbsp;CYS</code> rather than enumerating them. The
-     <b>escalating grader</b> renders each imperfect prediction and escalates only
-     when needed: <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. Across
-     7 models it confirmed 196 of 253
-     imperfect-tree tasks (77%) as the <i>right</i> scene &mdash; so
-     tree-match <b>under-credits every model</b> by +0.04 to
-     +0.11&nbsp;F1.</p>
+  <p class="section-sub">Tree-matching can under-credit a scene that renders the same
+     through a different tree. The <b>escalating grader</b> renders each valid but
+     imperfect scene and escalates only when needed: <b>tree-match &rarr; visual
+     diff &rarr; VLM judge</b>. The visual diff rescues only near-identical renders
+     (≤ 2 pixels changing by &gt; 48 in any channel, at 256 px), because a one-residue highlight changes just a few pixels. Across
+     15 models it confirmed 127 of 285 imperfect scenes (45%) as
+     the <i>right</i> scene &mdash; 48 pixel-identical, 79 judged the same
+     by the VLM. That moves validated F1 by only +0.00 to
+     +0.03: grading selections by the atoms they pick out already credits
+     most equivalent namings.</p>
   <div class="stats">
-<div class='stat'><div class='label'>Models analysed</div><div class='value'>7</div><div class='sub'>tiered grading run</div></div>
-<div class='stat'><div class='label'>Imperfect-tree tasks</div><div class='value'>253</div><div class='sub'>escalated for a visual check</div></div>
-<div class='stat'><div class='label'>Rescued by rendering</div><div class='value'>196 <span class='pm'>(77%)</span></div><div class='sub'>drew the right scene despite a different tree</div></div>
-<div class='stat'><div class='label'>Tree-match under-credits</div><div class='value'>+0.04&ndash;0.11</div><div class='sub'>F1 gap recovered, every model</div></div>
+<div class='stat'><div class='label'>Models analysed</div><div class='value'>15</div><div class='sub'>spec run, 2026-10-18</div></div>
+<div class='stat'><div class='label'>Imperfect valid scenes</div><div class='value'>285</div><div class='sub'>rendered for a visual check</div></div>
+<div class='stat'><div class='label'>Rescued</div><div class='value'>127 <span class='pm'>(45%)</span></div><div class='sub'>48 pixel-identical &middot; 79 by the VLM</div></div>
+<div class='stat'><div class='label'>Validated &minus; tree F1</div><div class='value'>+0.00&ndash;0.03</div><div class='sub'>range across models</div></div>
   </div>
   <div class="table-scroll" style="margin-top:1.5rem">
-    <table>
+    <table class="matrix">
       <thead>
         <tr>
           <th class="left">Model</th>
           <th>Tree&nbsp;F1</th>
           <th>Validated&nbsp;F1</th>
           <th>&Delta;</th>
-          <th>Rescued</th>
-          <th>Diff.</th>
+          <th>Perfect</th>
+          <th>Escalated</th>
+          <th>Pixel&nbsp;same</th>
+          <th>VLM&nbsp;same</th>
+          <th>Different</th>
+          <th>Failed</th>
         </tr>
       </thead>
       <tbody>
-<tr><td class='model'>claude-haiku-4-5<span class='badge closed'>closed</span></td><td>0.853</td><td class='metric-primary'>0.945</td><td class='pm'>+0.092</td><td>41/51</td><td>10</td></tr>
-<tr><td class='model'>deepseek/deepseek-v3.2<span class='badge open'>open</span></td><td>0.865</td><td class='metric-primary'>0.939</td><td class='pm'>+0.074</td><td>28/37</td><td>9</td></tr>
-<tr><td class='model'>gemini-3.5-flash<span class='badge closed'>closed</span></td><td>0.798</td><td class='metric-primary'>0.907</td><td class='pm'>+0.109</td><td>32/39</td><td>7</td></tr>
-<tr><td class='model'>google/gemma-3-27b-it<span class='badge open'>open</span></td><td>0.858</td><td class='metric-primary'>0.903</td><td class='pm'>+0.045</td><td>10/18</td><td>8</td></tr>
-<tr><td class='model'>gpt-5.4-nano<span class='badge closed'>closed</span></td><td>0.690</td><td class='metric-primary'>0.781</td><td class='pm'>+0.091</td><td>35/41</td><td>6</td></tr>
-<tr><td class='model'>qwen/qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span></td><td>0.620</td><td class='metric-primary'>0.704</td><td class='pm'>+0.084</td><td>36/46</td><td>10</td></tr>
-<tr><td class='model'>openai/gpt-oss-20b<span class='badge open'>open</span></td><td>0.423</td><td class='metric-primary'>0.461</td><td class='pm'>+0.038</td><td>14/21</td><td>7</td></tr>
+<tr><td class='model' title='deepseek/deepseek-v3.2'>deepseek-v3.2<span class='badge open'>open</span></td><td>0.916</td><td class='metric-primary'>0.935</td><td class='pm'>+0.019</td><td>49</td><td>20</td><td>2</td><td>6</td><td>12</td><td>1</td></tr>
+<tr><td class='model' title='claude-haiku-4-5'>claude-haiku-4-5<span class='badge closed'>closed</span></td><td>0.870</td><td class='metric-primary'>0.891</td><td class='pm'>+0.021</td><td>44</td><td>23</td><td>4</td><td>3</td><td>16</td><td>3</td></tr>
+<tr><td class='model' title='deepseek/deepseek-v4-flash'>deepseek-v4-flash<span class='badge open'>open</span></td><td>0.861</td><td class='metric-primary'>0.874</td><td class='pm'>+0.013</td><td>44</td><td>21</td><td>2</td><td>7</td><td>12</td><td>5</td></tr>
+<tr><td class='model' title='gemini-3.5-flash'>gemini-3.5-flash<span class='badge closed'>closed</span></td><td>0.845</td><td class='metric-primary'>0.870</td><td class='pm'>+0.025</td><td>43</td><td>23</td><td>0</td><td>10</td><td>13</td><td>4</td></tr>
+<tr><td class='model' title='qwen/qwen3-next-80b-a3b-instruct'>qwen3-next-80b-a3b-instruct<span class='badge open'>open</span></td><td>0.818</td><td class='metric-primary'>0.845</td><td class='pm'>+0.027</td><td>32</td><td>32</td><td>6</td><td>8</td><td>18</td><td>6</td></tr>
+<tr><td class='model' title='minimax/minimax-m3'>minimax-m3<span class='badge open'>open</span></td><td>0.830</td><td class='metric-primary'>0.838</td><td class='pm'>+0.008</td><td>48</td><td>15</td><td>0</td><td>3</td><td>12</td><td>7</td></tr>
+<tr><td class='model' title='z-ai/glm-5.2'>glm-5.2<span class='badge open'>open</span></td><td>0.807</td><td class='metric-primary'>0.838</td><td class='pm'>+0.031</td><td>39</td><td>24</td><td>1</td><td>10</td><td>13</td><td>7</td></tr>
+<tr><td class='model' title='meta-llama/llama-4-maverick'>llama-4-maverick<span class='badge open'>open</span></td><td>0.794</td><td class='metric-primary'>0.804</td><td class='pm'>+0.010</td><td>46</td><td>11</td><td>2</td><td>6</td><td>3</td><td>13</td></tr>
+<tr><td class='model' title='google/gemma-3-27b-it'>gemma-3-27b-it<span class='badge open'>open</span></td><td>0.724</td><td class='metric-primary'>0.729</td><td class='pm'>+0.005</td><td>36</td><td>21</td><td>3</td><td>3</td><td>15</td><td>13</td></tr>
+<tr><td class='model' title='gpt-5.4-nano'>gpt-5.4-nano<span class='badge closed'>closed</span></td><td>0.658</td><td class='metric-primary'>0.688</td><td class='pm'>+0.030</td><td>12</td><td>41</td><td>20</td><td>4</td><td>17</td><td>17</td></tr>
+<tr><td class='model' title='moonshotai/kimi-k2.6'>kimi-k2.6<span class='badge open'>open</span></td><td>0.663</td><td class='metric-primary'>0.686</td><td class='pm'>+0.023</td><td>33</td><td>18</td><td>4</td><td>6</td><td>8</td><td>19</td></tr>
+<tr><td class='model' title='openai/gpt-oss-120b'>gpt-oss-120b<span class='badge open'>open</span></td><td>0.574</td><td class='metric-primary'>0.587</td><td class='pm'>+0.013</td><td>30</td><td>14</td><td>1</td><td>5</td><td>8</td><td>26</td></tr>
+<tr><td class='model' title='qwen/qwen3-30b-a3b-instruct-2507'>qwen3-30b-a3b-instruct-2507<span class='badge open'>open</span></td><td>0.529</td><td class='metric-primary'>0.540</td><td class='pm'>+0.011</td><td>27</td><td>12</td><td>3</td><td>4</td><td>5</td><td>31</td></tr>
+<tr><td class='model' title='openai/gpt-oss-20b'>gpt-oss-20b<span class='badge open'>open</span></td><td>0.252</td><td class='metric-primary'>0.256</td><td class='pm'>+0.004</td><td>13</td><td>7</td><td>0</td><td>2</td><td>5</td><td>50</td></tr>
+<tr><td class='model' title='nvidia/nemotron-3-super-120b-a12b'>nemotron-3-super-120b-a12b<span class='badge open'>open</span></td><td>0.077</td><td class='metric-primary'>0.079</td><td class='pm'>+0.002</td><td>3</td><td>3</td><td>0</td><td>2</td><td>1</td><td>64</td></tr>
       </tbody>
     </table>
   </div>
@@ -190,9 +315,12 @@
      <b>Validated&nbsp;F1</b> uses a <i>rescue-only</i> policy: a task scores 1.0
      when the cascade confirms it renders the reference scene, otherwise it keeps
      its tree-match score (the VLM gives a binary same/different, not a graded
-     score). <b>Rescued</b> = render-equivalent or VLM-"same" of the escalated
-     (imperfect-tree) tasks; <b>Diff.</b> = confirmed genuinely different. See the
-     side-by-side evidence in the
+     score). <b>Perfect</b>: tree match already 1.0, not rendered.
+     <b>Escalated</b>: valid, imperfect scenes that were rendered. <b>Pixel same</b> /
+     <b>VLM same</b>: rescued at the visual-diff / VLM tier. <b>Different</b>: the VLM
+     saw a different scene. <b>Failed</b>: no valid scene, scores 0 (see
+     <a href="failures.html">failures</a>). The VLM verdicts are not yet checked
+     against human raters &mdash; see the side-by-side evidence in the
      <a href="gallery.html"><b>evaluator gallery &rarr;</b></a>. Judge: claude-opus-4-8.</p>
 </section>
 <footer class="site-footer">
@@ -207,7 +335,7 @@
        (NCBI, public domain). See the
        <a href="https://github.com/dbolser/MolBench#data-sources--acknowledgements"
           rel="noopener">data sources &amp; acknowledgements</a> in the README.</p>
-    <p><b>Reproduce.</b> <span class="repro">python -m molbench.runner --models &lt;spec&gt; --samples 5</span></p>
+    <p><b>Reproduce.</b> <span class="repro">python -m molbench.runner --models &lt;spec&gt; --categories mvs --validate --escalate --judge claude-opus-4-8</span></p>
     <p>MolBench is open source (MIT) &middot;
        <a href="https://github.com/dbolser/MolBench" rel="noopener">github.com/dbolser/MolBench</a>
        &middot; <a href="scorecard.json">raw scorecard.json</a></p>

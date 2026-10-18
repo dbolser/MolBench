@@ -645,3 +645,75 @@ td.rowhead { text-align: left; font-weight: 600; white-space: normal; }
   .gcard-foot { grid-template-columns: 1fr 1fr; }
   .gcard-foot .note { grid-column: 1 / -1; }
 }
+
+/* ---------- Gallery: model name on a card ---------- */
+.gcard-head .gmodel {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+  margin-left: 0.4rem;
+}
+
+/* ---------- Failures page ---------- */
+sup { font-size: 0.7em; color: var(--fg-faint); margin-left: 0.15em; }
+.oc {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid transparent;
+  vertical-align: middle;
+}
+.oc-valid { color: var(--good); background: var(--good-soft); }
+.oc-invalid_json { color: var(--bad); background: var(--bad-soft); }
+.oc-not_mvs { color: var(--warn); background: var(--warn-soft); }
+.oc-invalid_mvs { color: var(--warn); background: var(--warn-soft); }
+.oc-load_failed { color: var(--fg-muted); background: var(--bg-sunken); border-color: var(--border); }
+.oc-legend { list-style: none; padding: 0; margin: 1.25rem 0; }
+.oc-legend li { margin: 0.4rem 0; color: var(--fg-muted); }
+.fail-model { margin: 1.5rem 0 2rem; }
+.fail-model h3 { margin-bottom: 0.4rem; }
+.fail-model h4 { margin: 1rem 0 0.4rem; }
+details.fail {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  margin: 0.35rem 0;
+}
+details.fail > summary {
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+details.fail > summary .why { color: var(--fg-muted); margin-left: 0.4rem; font-size: 0.85rem; }
+.fail-body { padding: 0 0.9rem 0.8rem; font-size: 0.9rem; }
+.fail-body p { margin: 0.5rem 0; }
+.fail-body details > summary { cursor: pointer; color: var(--accent); margin: 0.4rem 0; }
+.fail-body pre, td.msg pre {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 32rem;
+  overflow-y: auto;
+}
+td.msg { white-space: normal; max-width: 42rem; }
+td.msg code { font-size: 0.8rem; white-space: normal; word-break: break-word; }
+td.msg summary { cursor: pointer; }
+td.msg ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+
+/* Matrices (models as rows): let long column headers wrap. */
+table.matrix thead th { white-space: normal; vertical-align: bottom; }
+table.matrix td.model { white-space: nowrap; }
