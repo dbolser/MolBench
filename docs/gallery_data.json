@@ -24,7 +24,7 @@
    "judge": null,
    "ref_img": "gallery/img/gpt-5.4-nano__grd-ligand-4ins-zn_ref.png",
    "pred_img": "gallery/img/gpt-5.4-nano__grd-ligand-4ins-zn_pred.png",
-   "note": "Picked: lowest tree F1 among pixel-identical renders."
+   "note": "Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ)."
   },
   {
    "id": "int-004",
@@ -39,7 +39,7 @@
    "judge": null,
    "ref_img": "gallery/img/gpt-5.4-nano__int-004_ref.png",
    "pred_img": "gallery/img/gpt-5.4-nano__int-004_pred.png",
-   "note": "Picked: lowest tree F1 among pixel-identical renders."
+   "note": "Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ)."
   },
   {
    "id": "int-003",
@@ -54,7 +54,7 @@
    "judge": null,
    "ref_img": "gallery/img/meta-llama_llama-4-maverick__int-003_ref.png",
    "pred_img": "gallery/img/meta-llama_llama-4-maverick__int-003_pred.png",
-   "note": "Picked: lowest tree F1 among pixel-identical renders."
+   "note": "Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ)."
   },
   {
    "id": "gen-cartoon-2hhb",
@@ -69,7 +69,7 @@
    "judge": null,
    "ref_img": "gallery/img/gpt-5.4-nano__gen-cartoon-2hhb_ref.png",
    "pred_img": "gallery/img/gpt-5.4-nano__gen-cartoon-2hhb_pred.png",
-   "note": "Picked: lowest tree F1 among pixel-identical renders."
+   "note": "Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ)."
   },
   {
    "id": "res-lysozyme",

@@ -2808,7 +2808,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -2914,7 +2914,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -3030,7 +3030,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -3140,7 +3140,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -3224,7 +3224,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -3315,7 +3315,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6668,
             "tier": "vlm",
@@ -3413,7 +3413,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -3511,7 +3511,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -3609,7 +3609,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -3707,7 +3707,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -3827,7 +3827,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -3925,7 +3925,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -4023,7 +4023,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -4121,7 +4121,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -4214,7 +4214,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -4297,7 +4297,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -4380,7 +4380,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -4463,7 +4463,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -4546,7 +4546,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -4629,7 +4629,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -4738,7 +4738,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -4847,7 +4847,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9905,
             "tier": "visual",
@@ -4960,7 +4960,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9898,
             "tier": "visual",
@@ -5073,7 +5073,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -5182,7 +5182,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "visual",
@@ -5295,7 +5295,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9669,
             "tier": "visual",
@@ -5409,7 +5409,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -5519,7 +5519,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -5629,7 +5629,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -5739,7 +5739,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -5845,7 +5845,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -5951,7 +5951,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6057,7 +6057,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6163,7 +6163,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6269,7 +6269,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6375,7 +6375,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6481,7 +6481,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6587,7 +6587,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6698,7 +6698,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6809,7 +6809,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -6920,7 +6920,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7031,7 +7031,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7142,7 +7142,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7253,7 +7253,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7337,7 +7337,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7421,7 +7421,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7505,7 +7505,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7589,7 +7589,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7673,7 +7673,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7757,7 +7757,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -7905,7 +7905,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9074,
             "tier": "vlm",
@@ -8053,7 +8053,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8966,
             "tier": "vlm",
@@ -8201,7 +8201,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8966,
             "tier": "vlm",
@@ -8320,7 +8320,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -8429,7 +8429,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -8538,7 +8538,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -8647,7 +8647,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -8756,7 +8756,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -8918,7 +8918,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7866,
             "tier": "vlm",
@@ -9090,7 +9090,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7,
             "tier": "vlm",
@@ -9268,7 +9268,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8016,
             "tier": "vlm",
@@ -9376,7 +9376,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -9472,7 +9472,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -9587,7 +9587,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6917,
             "tier": "vlm",
@@ -9705,7 +9705,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.1667,
             "tier": "tree",
@@ -9814,7 +9814,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -9932,7 +9932,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3889,
             "tier": "vlm",
@@ -10051,7 +10051,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3889,
             "tier": "tree",
@@ -10163,7 +10163,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.1667,
             "tier": "tree",
@@ -10272,7 +10272,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -11335,7 +11335,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -11441,7 +11441,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -11557,7 +11557,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -11667,7 +11667,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -11751,7 +11751,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -11839,7 +11839,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -11937,7 +11937,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -12050,7 +12050,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -12176,7 +12176,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "vlm",
@@ -12280,7 +12280,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6668,
             "tier": "vlm",
@@ -12422,7 +12422,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -12520,7 +12520,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -12618,7 +12618,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -12716,7 +12716,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -12809,7 +12809,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -12892,7 +12892,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -12975,7 +12975,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13058,7 +13058,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13141,7 +13141,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13224,7 +13224,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13333,7 +13333,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13442,7 +13442,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13551,7 +13551,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13660,7 +13660,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -13769,7 +13769,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "visual",
@@ -13882,7 +13882,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9669,
             "tier": "visual",
@@ -13996,7 +13996,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14106,7 +14106,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14216,7 +14216,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14326,7 +14326,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14432,7 +14432,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14538,7 +14538,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14644,7 +14644,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14750,7 +14750,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14856,7 +14856,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -14962,7 +14962,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15068,7 +15068,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15174,7 +15174,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15285,7 +15285,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15396,7 +15396,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15507,7 +15507,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15618,7 +15618,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15729,7 +15729,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15840,7 +15840,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -15924,7 +15924,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16008,7 +16008,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16092,7 +16092,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16176,7 +16176,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16260,7 +16260,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16344,7 +16344,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16482,7 +16482,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9722,
             "tier": "vlm",
@@ -16632,7 +16632,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9259,
             "tier": "vlm",
@@ -16757,7 +16757,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16866,7 +16866,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -16975,7 +16975,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -17084,7 +17084,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -17191,7 +17191,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -17310,7 +17310,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -17447,7 +17447,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -17594,7 +17594,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -17761,7 +17761,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7857,
             "tier": "vlm",
@@ -17869,7 +17869,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -17967,7 +17967,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "tree",
@@ -18068,7 +18068,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -18151,7 +18151,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5556,
             "tier": "vlm",
@@ -18244,7 +18244,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -18337,7 +18337,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -18452,7 +18452,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3704,
             "tier": "vlm",
@@ -18545,7 +18545,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5556,
             "tier": "vlm",
@@ -18630,7 +18630,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -19649,7 +19649,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -19755,7 +19755,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -19871,7 +19871,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -19982,7 +19982,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -20066,7 +20066,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -20154,7 +20154,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -20255,7 +20255,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6669,
             "tier": "vlm",
@@ -20353,7 +20353,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -20451,7 +20451,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -20552,7 +20552,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6668,
             "tier": "vlm",
@@ -20672,7 +20672,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -20770,7 +20770,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -20868,7 +20868,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -20966,7 +20966,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -21059,7 +21059,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -21168,7 +21168,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -21251,7 +21251,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -21334,7 +21334,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -21417,7 +21417,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -21511,7 +21511,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9888,
             "tier": "vlm",
@@ -21630,7 +21630,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9905,
             "tier": "visual",
@@ -21743,7 +21743,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -21837,7 +21837,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9082,
             "tier": "vlm",
@@ -21941,7 +21941,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "vlm",
@@ -22045,7 +22045,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9212,
             "tier": "vlm",
@@ -22196,7 +22196,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -22316,7 +22316,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -22426,7 +22426,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -22532,7 +22532,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -22638,7 +22638,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -22744,7 +22744,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -22850,7 +22850,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -22956,7 +22956,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23062,7 +23062,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23168,7 +23168,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23274,7 +23274,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23385,7 +23385,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23496,7 +23496,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23607,7 +23607,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23718,7 +23718,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23829,7 +23829,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -23940,7 +23940,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24024,7 +24024,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24108,7 +24108,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24192,7 +24192,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24276,7 +24276,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24360,7 +24360,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24444,7 +24444,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24581,7 +24581,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24690,7 +24690,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24799,7 +24799,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -24908,7 +24908,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -25017,7 +25017,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -25126,7 +25126,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -25235,7 +25235,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -25372,7 +25372,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -25506,7 +25506,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -25633,7 +25633,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -25732,7 +25732,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "vlm",
@@ -25843,7 +25843,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9688,
             "tier": "visual",
@@ -25935,7 +25935,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.4815,
             "tier": "tree",
@@ -26022,7 +26022,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -26107,7 +26107,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -26193,7 +26193,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -26286,7 +26286,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -26379,7 +26379,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -27438,7 +27438,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -27544,7 +27544,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -27660,7 +27660,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -27770,7 +27770,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -27854,7 +27854,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -27967,7 +27967,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "vlm",
@@ -28090,7 +28090,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -28213,7 +28213,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -28336,7 +28336,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -28459,7 +28459,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.786,
             "tier": "vlm",
@@ -28604,7 +28604,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6222,
             "tier": "vlm",
@@ -28727,7 +28727,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -28850,7 +28850,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -28973,7 +28973,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -29066,7 +29066,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -29149,7 +29149,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -29232,7 +29232,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -29315,7 +29315,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -29398,7 +29398,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -29481,7 +29481,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -29575,7 +29575,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9888,
             "tier": "vlm",
@@ -29679,7 +29679,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9408,
             "tier": "vlm",
@@ -29783,7 +29783,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9898,
             "tier": "vlm",
@@ -29887,7 +29887,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9167,
             "tier": "vlm",
@@ -29991,7 +29991,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "vlm",
@@ -30095,7 +30095,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9212,
             "tier": "vlm",
@@ -30215,7 +30215,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -30325,7 +30325,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -30435,7 +30435,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -30545,7 +30545,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -30651,7 +30651,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -30757,7 +30757,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -30863,7 +30863,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -30969,7 +30969,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31075,7 +31075,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31181,7 +31181,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31287,7 +31287,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31393,7 +31393,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31504,7 +31504,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31615,7 +31615,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31726,7 +31726,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31837,7 +31837,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -31976,7 +31976,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32060,7 +32060,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32144,7 +32144,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32228,7 +32228,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32312,7 +32312,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32396,7 +32396,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32480,7 +32480,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32589,7 +32589,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32698,7 +32698,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32807,7 +32807,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -32916,7 +32916,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -33025,7 +33025,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -33134,7 +33134,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -33243,7 +33243,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -33352,7 +33352,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -33556,7 +33556,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6857,
             "tier": "vlm",
@@ -33675,7 +33675,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6857,
             "tier": "vlm",
@@ -33784,7 +33784,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -33892,7 +33892,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3704,
             "tier": "vlm",
@@ -34012,7 +34012,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3889,
             "tier": "vlm",
@@ -34122,7 +34122,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -34240,7 +34240,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3704,
             "tier": "vlm",
@@ -34350,7 +34350,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -34468,7 +34468,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3889,
             "tier": "vlm",
@@ -35534,7 +35534,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -35640,7 +35640,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -35756,7 +35756,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -35868,7 +35868,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -35956,7 +35956,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36054,7 +36054,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36152,7 +36152,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36250,7 +36250,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36350,7 +36350,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36471,7 +36471,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3704,
             "tier": "tree",
@@ -36565,7 +36565,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36663,7 +36663,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36763,7 +36763,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -36856,7 +36856,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -36939,7 +36939,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -37022,7 +37022,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -37105,7 +37105,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -37188,7 +37188,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -37271,7 +37271,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -37380,7 +37380,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9888,
             "tier": "visual",
@@ -37521,7 +37521,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -37630,7 +37630,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9908,
             "tier": "visual",
@@ -37743,7 +37743,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "visual",
@@ -37856,7 +37856,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -37969,7 +37969,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8095,
             "tier": "tree",
@@ -38086,7 +38086,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8095,
             "tier": "tree",
@@ -38231,7 +38231,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8095,
             "tier": "tree",
@@ -38341,7 +38341,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "tree",
@@ -38453,7 +38453,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -38559,7 +38559,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "tree",
@@ -38671,7 +38671,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -38777,7 +38777,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -38883,7 +38883,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -38989,7 +38989,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39095,7 +39095,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39208,7 +39208,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39321,7 +39321,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39434,7 +39434,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39547,7 +39547,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39660,7 +39660,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39773,7 +39773,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39857,7 +39857,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -39941,7 +39941,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40025,7 +40025,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40109,7 +40109,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40193,7 +40193,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40277,7 +40277,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40393,7 +40393,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40509,7 +40509,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40625,7 +40625,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9259,
             "tier": "vlm",
@@ -40742,7 +40742,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40851,7 +40851,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -40958,7 +40958,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.979,
             "tier": "vlm",
@@ -41075,7 +41075,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "tree",
@@ -41190,7 +41190,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -41356,7 +41356,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9259,
             "tier": "vlm",
@@ -41529,7 +41529,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7,
             "tier": "vlm",
@@ -41684,7 +41684,9 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\nroot.children.0.children.0.children.0.children.2.children.0.kind\n  Input should be 'root', 'camera', 'canvas', 'clip', 'color', 'color_from_source', 'color_from_uri', 'component', 'component_from_source', 'component_from_uri', 'coordinates', 'download', 'focus', 'instance', 'label', 'label_from_source', 'label_from_uri', 'mesh_from_source', 'mesh_from_uri', 'opacity', 'parse', 'primitives', 'primitives_from_uri', 'primitive', 'representation', 'structure', 'tooltip', 'tooltip_from_source', 'tooltip_from_uri', 'transform', 'volume' or 'volume_representation' [type=literal_error, input_value='custom', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+          ],
           "escalation": {
             "tree_f1": 0.5714,
             "tier": "tree",
@@ -41796,7 +41798,9 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [
+            "MVS validation: 1 validation error for State\nroot.children.0.children.0.children.0.children.1.children.1.kind\n  Input should be 'root', 'camera', 'canvas', 'clip', 'color', 'color_from_source', 'color_from_uri', 'component', 'component_from_source', 'component_from_uri', 'coordinates', 'download', 'focus', 'instance', 'label', 'label_from_source', 'label_from_uri', 'mesh_from_source', 'mesh_from_uri', 'opacity', 'parse', 'primitives', 'primitives_from_uri', 'primitive', 'representation', 'structure', 'tooltip', 'tooltip_from_source', 'tooltip_from_uri', 'transform', 'volume' or 'volume_representation' [type=literal_error, input_value='custom', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+          ],
           "escalation": {
             "tree_f1": 0.5714,
             "tier": "tree",
@@ -41899,7 +41903,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -42019,7 +42023,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3889,
             "tier": "vlm",
@@ -42112,7 +42116,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -42205,7 +42209,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5556,
             "tier": "vlm",
@@ -42334,7 +42338,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.2778,
             "tier": "vlm",
@@ -42463,7 +42467,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.2778,
             "tier": "vlm",
@@ -42556,7 +42560,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5556,
             "tier": "vlm",
@@ -43680,7 +43684,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -43835,7 +43839,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -43930,7 +43934,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -44020,7 +44024,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6296,
             "tier": "vlm",
@@ -44205,7 +44209,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6296,
             "tier": "vlm",
@@ -44332,7 +44336,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -44433,7 +44437,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -44532,7 +44536,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -44626,7 +44630,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -44736,7 +44740,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -44821,7 +44825,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -44910,7 +44914,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -44998,7 +45002,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -45109,7 +45113,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -45224,7 +45228,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -45344,7 +45348,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6585,
             "tier": "tree",
@@ -45486,7 +45490,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -45631,7 +45635,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -45745,7 +45749,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -45870,7 +45874,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -46004,7 +46008,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8439,
             "tier": "vlm",
@@ -46123,7 +46127,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8333,
             "tier": "vlm",
@@ -46241,7 +46245,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8333,
             "tier": "vlm",
@@ -46359,7 +46363,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -46466,7 +46470,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -46584,7 +46588,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -46691,7 +46695,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -46803,7 +46807,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -46915,7 +46919,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -47032,7 +47036,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -47149,7 +47153,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -47265,7 +47269,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -47377,7 +47381,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -47490,7 +47494,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -47606,7 +47610,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -47719,7 +47723,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -47808,7 +47812,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -47898,7 +47902,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -47988,7 +47992,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -48078,7 +48082,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -48211,7 +48215,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9306,
             "tier": "vlm",
@@ -48341,7 +48345,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -48482,7 +48486,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8333,
             "tier": "vlm",
@@ -48603,7 +48607,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -48715,7 +48719,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -48830,7 +48834,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "visual",
@@ -48958,7 +48962,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5778,
             "tier": "vlm",
@@ -49079,7 +49083,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7222,
             "tier": "visual",
@@ -49278,7 +49282,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7,
             "tier": "vlm",
@@ -49460,7 +49464,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8016,
             "tier": "vlm",
@@ -49569,7 +49573,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9222,
             "tier": "visual",
@@ -49671,7 +49675,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7143,
             "tier": "tree",
@@ -49791,7 +49795,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -50022,7 +50026,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.1667,
             "tier": "vlm",
@@ -50142,7 +50146,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5,
             "tier": "vlm",
@@ -51270,7 +51274,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -51376,7 +51380,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -51492,7 +51496,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -51602,7 +51606,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -51686,7 +51690,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -51813,7 +51817,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "tree",
@@ -51933,7 +51937,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "tree",
@@ -52052,7 +52056,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "tree",
@@ -52172,7 +52176,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "tree",
@@ -52278,7 +52282,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -52426,7 +52430,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7184,
             "tier": "tree",
@@ -52518,7 +52522,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -52638,7 +52642,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -52726,7 +52730,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -52819,7 +52823,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -52902,7 +52906,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -52985,7 +52989,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -53068,7 +53072,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -53151,7 +53155,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -53234,7 +53238,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -53343,7 +53347,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -53437,7 +53441,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9408,
             "tier": "vlm",
@@ -53541,7 +53545,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9898,
             "tier": "vlm",
@@ -53645,7 +53649,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9167,
             "tier": "vlm",
@@ -53749,7 +53753,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "vlm",
@@ -53868,7 +53872,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9669,
             "tier": "visual",
@@ -53982,7 +53986,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54092,7 +54096,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54202,7 +54206,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54312,7 +54316,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54418,7 +54422,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54524,7 +54528,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54630,7 +54634,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54736,7 +54740,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54842,7 +54846,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -54948,7 +54952,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55054,7 +55058,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55160,7 +55164,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55271,7 +55275,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55382,7 +55386,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55493,7 +55497,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55604,7 +55608,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55715,7 +55719,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55828,7 +55832,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55912,7 +55916,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -55996,7 +56000,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -56080,7 +56084,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -56164,7 +56168,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -56251,7 +56255,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "tree",
@@ -56339,7 +56343,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -56448,7 +56452,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -56572,7 +56576,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9259,
             "tier": "vlm",
@@ -56691,7 +56695,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -56800,7 +56804,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -56909,7 +56913,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -57018,7 +57022,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -57127,7 +57131,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -57236,7 +57240,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -57371,7 +57375,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -57517,7 +57521,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -57677,7 +57681,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9286,
             "tier": "visual",
@@ -57779,7 +57783,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -57875,7 +57879,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "tree",
@@ -57990,7 +57994,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -58112,7 +58116,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3704,
             "tier": "tree",
@@ -58202,7 +58206,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3704,
             "tier": "tree",
@@ -58314,7 +58318,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.1667,
             "tier": "tree",
@@ -58404,7 +58408,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3704,
             "tier": "tree",
@@ -58516,7 +58520,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.2778,
             "tier": "tree",
@@ -59594,7 +59598,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -59700,7 +59704,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -59818,7 +59822,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -59930,7 +59934,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -60040,7 +60044,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -60129,7 +60133,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -60227,7 +60231,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -60325,7 +60329,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -60424,7 +60428,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -60550,7 +60554,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -60651,7 +60655,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6669,
             "tier": "vlm",
@@ -60749,7 +60753,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -60842,7 +60846,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -60925,7 +60929,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61008,7 +61012,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61091,7 +61095,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61174,7 +61178,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61257,7 +61261,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61366,7 +61370,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61475,7 +61479,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61584,7 +61588,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61693,7 +61697,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61802,7 +61806,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -61911,7 +61915,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62021,7 +62025,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62131,7 +62135,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62241,7 +62245,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62354,7 +62358,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -62497,7 +62501,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62603,7 +62607,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62709,7 +62713,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62815,7 +62819,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -62921,7 +62925,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63027,7 +63031,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63133,7 +63137,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63244,7 +63248,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63355,7 +63359,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63466,7 +63470,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63577,7 +63581,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63688,7 +63692,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63799,7 +63803,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63883,7 +63887,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -63967,7 +63971,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64051,7 +64055,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64135,7 +64139,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64219,7 +64223,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64303,7 +64307,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64451,7 +64455,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64589,7 +64593,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -64708,7 +64712,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64817,7 +64821,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -64926,7 +64930,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -65035,7 +65039,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -65144,7 +65148,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -65253,7 +65257,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -65446,7 +65450,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7,
             "tier": "vlm",
@@ -65583,7 +65587,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -65681,7 +65685,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -65794,7 +65798,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -65894,7 +65898,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "tree",
@@ -66005,7 +66009,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -66107,7 +66111,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "tree",
@@ -66216,7 +66220,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -66312,7 +66316,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -66441,7 +66445,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3889,
             "tier": "vlm",
@@ -68437,7 +68441,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -68543,7 +68547,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -68659,7 +68663,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -68771,7 +68775,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -68887,7 +68891,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -68985,7 +68989,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -69087,7 +69091,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6668,
             "tier": "vlm",
@@ -69189,7 +69193,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6668,
             "tier": "vlm",
@@ -69412,7 +69416,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -69514,7 +69518,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "tree",
@@ -69606,7 +69610,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -69704,7 +69708,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -69797,7 +69801,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -69880,7 +69884,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -69963,7 +69967,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -70046,7 +70050,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -70129,7 +70133,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -70212,7 +70216,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -70321,7 +70325,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9888,
             "tier": "visual",
@@ -70462,7 +70466,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9898,
             "tier": "visual",
@@ -70575,7 +70579,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9908,
             "tier": "visual",
@@ -70673,7 +70677,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "vlm",
@@ -70822,7 +70826,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -70933,7 +70937,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71044,7 +71048,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71178,7 +71182,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71284,7 +71288,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71390,7 +71394,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71496,7 +71500,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71602,7 +71606,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71708,7 +71712,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71841,7 +71845,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -71952,7 +71956,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72091,7 +72095,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72259,7 +72263,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72343,7 +72347,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72431,7 +72435,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -72525,7 +72529,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72609,7 +72613,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72693,7 +72697,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72833,7 +72837,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -72998,7 +73002,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -73105,7 +73109,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9758,
             "tier": "vlm",
@@ -73224,7 +73228,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -73361,7 +73365,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -73578,7 +73582,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9286,
             "tier": "visual",
@@ -73681,7 +73685,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -73799,7 +73803,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6857,
             "tier": "vlm",
@@ -73908,7 +73912,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -74017,7 +74021,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -74136,7 +74140,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3889,
             "tier": "vlm",
@@ -74251,7 +74255,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -75600,7 +75604,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -76028,7 +76032,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9167,
             "tier": "vlm",
@@ -76393,7 +76397,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -76612,7 +76616,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -76807,7 +76811,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -77191,7 +77195,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9444,
             "tier": "vlm",
@@ -78758,7 +78762,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -78866,7 +78870,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9758,
             "tier": "vlm",
@@ -78992,7 +78996,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -79216,7 +79220,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "vlm",
@@ -79314,7 +79318,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -79468,7 +79472,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -79566,7 +79570,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -79739,7 +79743,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -79822,7 +79826,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -79983,7 +79987,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -80092,7 +80096,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -80201,7 +80205,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -80310,7 +80314,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -80419,7 +80423,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -80528,7 +80532,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9669,
             "tier": "visual",
@@ -80642,7 +80646,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -80808,7 +80812,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -80914,7 +80918,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81020,7 +81024,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81126,7 +81130,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81259,7 +81263,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81365,7 +81369,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81471,7 +81475,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81577,7 +81581,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81688,7 +81692,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81799,7 +81803,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -81910,7 +81914,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82021,7 +82025,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82160,7 +82164,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82244,7 +82248,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82409,7 +82413,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82493,7 +82497,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82633,7 +82637,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82742,7 +82746,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82851,7 +82855,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -82960,7 +82964,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -83067,7 +83071,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9758,
             "tier": "vlm",
@@ -83184,7 +83188,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.979,
             "tier": "vlm",
@@ -83303,7 +83307,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8894,
             "tier": "vlm",
@@ -83531,7 +83535,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8571,
             "tier": "vlm",
@@ -83685,7 +83689,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6917,
             "tier": "vlm",
@@ -83781,7 +83785,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -83962,7 +83966,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.2778,
             "tier": "vlm",
@@ -84064,7 +84068,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.2778,
             "tier": "vlm",
@@ -85185,7 +85189,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -85325,7 +85329,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -85413,7 +85417,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -85679,7 +85683,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -85777,7 +85781,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -85870,7 +85874,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -85953,7 +85957,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -86062,7 +86066,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -86145,7 +86149,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -86228,7 +86232,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -86322,7 +86326,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9888,
             "tier": "vlm",
@@ -86690,7 +86694,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -86931,7 +86935,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -87209,7 +87213,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -87320,7 +87324,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -87458,7 +87462,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -87953,7 +87957,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -88062,7 +88066,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.3333,
             "tier": "vlm",
@@ -88155,7 +88159,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -88300,7 +88304,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5556,
             "tier": "vlm",
@@ -89379,7 +89383,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -89487,7 +89491,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9758,
             "tier": "vlm",
@@ -89613,7 +89617,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -89742,7 +89746,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7354,
             "tier": "tree",
@@ -89830,7 +89834,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -89974,7 +89978,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -90100,7 +90104,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -90206,7 +90210,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "tree",
@@ -90330,7 +90334,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -90451,7 +90455,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -90534,7 +90538,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -90617,7 +90621,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -90700,7 +90704,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -90783,7 +90787,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -90866,7 +90870,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -91003,7 +91007,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -91112,7 +91116,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9898,
             "tier": "visual",
@@ -91225,7 +91229,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9908,
             "tier": "visual",
@@ -91366,7 +91370,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9669,
             "tier": "visual",
@@ -91519,7 +91523,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -91648,7 +91652,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -91769,7 +91773,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -91885,7 +91889,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -91991,7 +91995,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -92098,7 +92102,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -92235,7 +92239,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -92351,7 +92355,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -92457,7 +92461,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -92563,7 +92567,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -92704,7 +92708,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -92817,7 +92821,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -92930,7 +92934,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -93070,7 +93074,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -93181,7 +93185,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -93265,7 +93269,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -93349,7 +93353,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -93597,7 +93601,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -93734,7 +93738,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -93843,7 +93847,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -94035,7 +94039,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7,
             "tier": "vlm",
@@ -94246,7 +94250,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -94498,7 +94502,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.1852,
             "tier": "tree",
@@ -95625,7 +95629,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -95731,7 +95735,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -95847,7 +95851,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -95959,7 +95963,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8307,
             "tier": "vlm",
@@ -96053,7 +96057,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -96141,7 +96145,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -96239,7 +96243,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -96337,7 +96341,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -96435,7 +96439,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -96533,7 +96537,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -96756,7 +96760,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -96854,7 +96858,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -96952,7 +96956,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -97048,7 +97052,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "tree",
@@ -97136,7 +97140,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -97219,7 +97223,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -97302,7 +97306,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -97385,7 +97389,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -97468,7 +97472,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -97551,7 +97555,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -97660,7 +97664,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9888,
             "tier": "visual",
@@ -97773,7 +97777,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9905,
             "tier": "visual",
@@ -97886,7 +97890,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9898,
             "tier": "visual",
@@ -97999,7 +98003,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9908,
             "tier": "visual",
@@ -98112,7 +98116,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9953,
             "tier": "visual",
@@ -98225,7 +98229,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9669,
             "tier": "visual",
@@ -98342,7 +98346,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8095,
             "tier": "tree",
@@ -98459,7 +98463,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8095,
             "tier": "tree",
@@ -98570,7 +98574,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "vlm",
@@ -98687,7 +98691,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "vlm",
@@ -98803,7 +98807,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -98909,7 +98913,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99015,7 +99019,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99121,7 +99125,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99281,7 +99285,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99387,7 +99391,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99498,7 +99502,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99609,7 +99613,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99720,7 +99724,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99831,7 +99835,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -99942,7 +99946,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100053,7 +100057,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100137,7 +100141,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100221,7 +100225,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100305,7 +100309,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100389,7 +100393,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100473,7 +100477,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100557,7 +100561,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -100675,7 +100679,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9074,
             "tier": "vlm",
@@ -100813,7 +100817,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9074,
             "tier": "vlm",
@@ -100951,7 +100955,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8889,
             "tier": "vlm",
@@ -101070,7 +101074,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -101207,7 +101211,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -101316,7 +101320,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8894,
             "tier": "vlm",
@@ -101435,7 +101439,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -101580,7 +101584,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9259,
             "tier": "vlm",
@@ -101753,7 +101757,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7,
             "tier": "vlm",
@@ -101931,7 +101935,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8016,
             "tier": "vlm",
@@ -102039,7 +102043,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -102137,7 +102141,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "vlm",
@@ -102260,7 +102264,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -102353,7 +102357,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5556,
             "tier": "vlm",
@@ -102446,7 +102450,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -102539,7 +102543,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -102632,7 +102636,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -102725,7 +102729,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5556,
             "tier": "vlm",
@@ -102818,7 +102822,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -103895,7 +103899,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -104001,7 +104005,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -104117,7 +104121,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -104227,7 +104231,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -104367,7 +104371,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6971,
             "tier": "vlm",
@@ -104493,7 +104497,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -104616,7 +104620,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6971,
             "tier": "vlm",
@@ -104739,7 +104743,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7111,
             "tier": "vlm",
@@ -104866,7 +104870,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6464,
             "tier": "vlm",
@@ -105011,7 +105015,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6083,
             "tier": "vlm",
@@ -105109,7 +105113,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -105210,7 +105214,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6669,
             "tier": "vlm",
@@ -105308,7 +105312,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -105401,7 +105405,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -105484,7 +105488,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -105567,7 +105571,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -105650,7 +105654,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -105733,7 +105737,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -105816,7 +105820,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -105925,7 +105929,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9888,
             "tier": "visual",
@@ -106023,7 +106027,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9408,
             "tier": "vlm",
@@ -106142,7 +106146,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -106236,7 +106240,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9167,
             "tier": "vlm",
@@ -106355,7 +106359,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -106449,7 +106453,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9212,
             "tier": "vlm",
@@ -106572,7 +106576,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9048,
             "tier": "vlm",
@@ -106692,7 +106696,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -106831,7 +106835,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -106937,7 +106941,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107043,7 +107047,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107149,7 +107153,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107255,7 +107259,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107361,7 +107365,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107467,7 +107471,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107573,7 +107577,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107679,7 +107683,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107790,7 +107794,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -107901,7 +107905,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108012,7 +108016,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108123,7 +108127,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108234,7 +108238,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108345,7 +108349,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108429,7 +108433,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108513,7 +108517,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108597,7 +108601,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108681,7 +108685,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108765,7 +108769,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108849,7 +108853,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -108997,7 +109001,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -109155,7 +109159,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.9815,
             "tier": "vlm",
@@ -109274,7 +109278,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -109383,7 +109387,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -109548,7 +109552,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -109657,7 +109661,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 1.0,
             "tier": "tree",
@@ -109820,7 +109824,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7866,
             "tier": "vlm",
@@ -109993,7 +109997,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7817,
             "tier": "vlm",
@@ -110130,7 +110134,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.8,
             "tier": "tree",
@@ -110246,7 +110250,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6667,
             "tier": "vlm",
@@ -110371,7 +110375,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.6917,
             "tier": "vlm",
@@ -110514,7 +110518,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.2222,
             "tier": "tree",
@@ -110623,7 +110627,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -110741,7 +110745,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -110859,7 +110863,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",
@@ -110952,7 +110956,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.7778,
             "tier": "vlm",
@@ -111067,7 +111071,7 @@
             }
           },
           "error": null,
-          "schema_errors": null,
+          "schema_errors": [],
           "escalation": {
             "tree_f1": 0.5185,
             "tier": "vlm",

@@ -266,14 +266,14 @@
      diff &rarr; VLM judge</b>. The visual diff rescues only near-identical renders
      (≤ 2 pixels changing by &gt; 48 in any channel, at 256 px), because a one-residue highlight changes just a few pixels. Across
      15 models it confirmed 127 of 285 imperfect scenes (45%) as
-     the <i>right</i> scene &mdash; 48 pixel-identical, 79 judged the same
+     the <i>right</i> scene &mdash; 48 rendering the same (&le;&nbsp;2 pixels differ), 79 judged the same
      by the VLM. That moves validated F1 by only +0.00 to
      +0.03: grading selections by the atoms they pick out already credits
      most equivalent namings.</p>
   <div class="stats">
 <div class='stat'><div class='label'>Models analysed</div><div class='value'>15</div><div class='sub'>spec run, 2026-10-18</div></div>
 <div class='stat'><div class='label'>Imperfect valid scenes</div><div class='value'>285</div><div class='sub'>rendered for a visual check</div></div>
-<div class='stat'><div class='label'>Rescued</div><div class='value'>127 <span class='pm'>(45%)</span></div><div class='sub'>48 pixel-identical &middot; 79 by the VLM</div></div>
+<div class='stat'><div class='label'>Rescued</div><div class='value'>127 <span class='pm'>(45%)</span></div><div class='sub'>48 by render match &middot; 79 by the VLM</div></div>
 <div class='stat'><div class='label'>Validated &minus; tree F1</div><div class='value'>+0.00&ndash;0.03</div><div class='sub'>range across models</div></div>
   </div>
   <div class="table-scroll" style="margin-top:1.5rem">

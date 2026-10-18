@@ -24,11 +24,13 @@ import sys
 REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from molbench import runner  # noqa: E402
+from molbench import mvs, runner  # noqa: E402
 
 
 def _sample(t: dict) -> dict:
     s = {k: t[k] for k in ("f1", "precision", "recall", "predicted", "error") if k in t}
+    if not t.get("error"):  # recompute: before the fix, validate_mvs failed on every scene
+        s["schema_errors"] = mvs.validate_mvs(t["predicted"])
     if t.get("error"):
         s["outcome"] = "not_mvs" if "not an MVS" in t["error"] else "invalid_json"
     else:

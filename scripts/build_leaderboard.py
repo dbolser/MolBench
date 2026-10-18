@@ -446,7 +446,7 @@ def findings(ranked: list, cond: dict | None = None) -> str:
         verb = "beats" if mvs_f1(om) > mvs_f1(cm) else "trails"
         cost_s = ""
         oc_, cc_ = om.get("cost_usd"), cm.get("cost_usd")
-        if isinstance(oc_, (int, float)) and isinstance(cc_, (int, float)) and oc_ > 0:
+        if isinstance(oc_, (int, float)) and isinstance(cc_, (int, float)) and 0 < oc_ < cc_:
             cost_s = (f" at <b>{cc_ / oc_:.0f}&times; lower cost</b> ({fmt_cost(oc_)} vs "
                       f"{fmt_cost(cc_)} for the run)")
         tail = ", ".join(f"{html.escape(short(n))} ({mvs_f1(m):.2f})" for n, m in opens[-2:])
@@ -814,7 +814,7 @@ def tiered_grading(esc: dict | None) -> str:
         ("Models analysed", f"{n_models}", f"spec run, {html.escape(esc.get('run', ''))}"),
         ("Imperfect valid scenes", f"{escd}", "rendered for a visual check"),
         ("Rescued", f"{resc} <span class='pm'>({resc_pct})</span>",
-         f"{r_vis} pixel-identical &middot; {r_vlm} by the VLM"),
+         f"{r_vis} by render match &middot; {r_vlm} by the VLM"),
         ("Validated &minus; tree F1", f"+{lift_lo:.2f}&ndash;{lift_hi:.2f}",
          "range across models"),
     ]
@@ -858,7 +858,7 @@ def tiered_grading(esc: dict | None) -> str:
      diff &rarr; VLM judge</b>. The visual diff rescues only near-identical renders
      ({t1_rule}), because a one-residue highlight changes just a few pixels. Across
      {n_models} models it confirmed {resc} of {escd} imperfect scenes ({resc_pct}) as
-     the <i>right</i> scene &mdash; {r_vis} pixel-identical, {r_vlm} judged the same
+     the <i>right</i> scene &mdash; {r_vis} rendering the same (&le;&nbsp;2 pixels differ), {r_vlm} judged the same
      by the VLM. That moves validated F1 by only +{lift_lo:.2f} to
      +{lift_hi:.2f}: grading selections by the atoms they pick out already credits
      most equivalent namings.</p>
@@ -1276,7 +1276,7 @@ def build_gallery(gd: dict) -> str:
 
     feat_frame = ""
     if featured is not None and isinstance(featured.get("mvs_score"), (int, float)):
-        how = {"rendering-equivalent": "renders pixel-identically to the reference",
+        how = {"rendering-equivalent": "renders the same as the reference (at most 2 pixels differ)",
                "vlm:same": "was judged the same scene by the VLM",
                "vlm:different": "was judged a different scene by the VLM"}.get(
                    featured.get("decision"), "was rendered and compared")

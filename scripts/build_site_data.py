@@ -69,6 +69,8 @@ def canonical(name: str) -> str:
 # Loading
 # --------------------------------------------------------------------------- #
 def _run_key(meta: dict) -> tuple:
+    if meta.get("run_id"):  # runs since 2026-10-18 carry a unique id
+        return (meta["run_id"],)
     return (meta.get("started_at"), tuple(meta.get("models", [])), meta.get("condition"),
             bool(meta.get("grounding")), bool(meta.get("escalate")))
 
@@ -77,7 +79,7 @@ def load_condition(results: pathlib.Path, cond: str) -> dict[str, dict]:
     """{canonical model: {"card": scorecard, "model": model record, "file": path}}."""
     out = {}
     for f in sorted((results / cond).glob("*.json")):
-        card = json.loads(f.read_text())
+        card = json.loads(f.read_text(encoding="utf-8"))
         for name, m in card["models"].items():
             out[canonical(name)] = {"card": card, "model": m, "raw_name": name, "file": f}
     return out
@@ -86,7 +88,7 @@ def load_condition(results: pathlib.Path, cond: str) -> dict[str, dict]:
 def index_archives(runs: pathlib.Path) -> dict[tuple, list[pathlib.Path]]:
     idx: dict[tuple, list] = {}
     for f in sorted(runs.glob("run_*.json")):
-        meta = json.loads(f.read_text()).get("meta", {})
+        meta = json.loads(f.read_text(encoding="utf-8")).get("meta", {})
         idx.setdefault(_run_key(meta), []).append(f)
     return idx
 
@@ -101,14 +103,14 @@ def raw_samples_for(entry: dict, archives: dict, cache: dict) -> dict | None:
     if len(hits) > 1:
         raise SystemExit(f"{entry['file']}: {len(hits)} matching run archives (need 1)")
     if hits[0] not in cache:
-        cache[hits[0]] = json.loads(hits[0].read_text())["raw_samples"]
+        cache[hits[0]] = json.loads(hits[0].read_text(encoding="utf-8"))["raw_samples"]
     return cache[hits[0]][entry["raw_name"]]
 
 
 def load_tasks() -> dict[str, dict]:
     out = {}
     for f in (REPO / "tasks").rglob("*.json"):
-        t = json.loads(f.read_text())
+        t = json.loads(f.read_text(encoding="utf-8"))
         if t.get("category") == "mvs":
             out[t["id"]] = t
     return out
@@ -357,7 +359,7 @@ def build_gallery(spec: dict, tasks: dict, docs: pathlib.Path) -> dict:
             shutil.copyfile(r.pop(f"_{side}"), img / f"{stem}_{side}.png")
             r[f"{side}_img"] = f"gallery/img/{stem}_{side}.png"
         r["note"] = {
-            "rendering-equivalent": "Picked: lowest tree F1 among pixel-identical renders.",
+            "rendering-equivalent": "Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ).",
             "vlm:same": "Picked: lowest tree F1 among scenes the VLM judged the same.",
             "vlm:different": "Picked: highest tree F1 among scenes the VLM judged different.",
         }[r["decision"]]
@@ -485,8 +487,8 @@ def main(argv=None) -> None:
     tasks = load_tasks()
     archives = index_archives(a.runs)
     bpath = a.results / "baseline_spec.json"
-    baseline = json.loads(bpath.read_text()) if bpath.exists() else None
-    old_card = json.loads((a.docs / "scorecard.json").read_text())
+    baseline = json.loads(bpath.read_text(encoding="utf-8")) if bpath.exists() else None
+    old_card = json.loads((a.docs / "scorecard.json").read_text(encoding="utf-8"))
 
     esc = build_escalation(conds["spec"])
     card = build_scorecard(conds, baseline, old_card, esc["models"])
@@ -501,7 +503,7 @@ def main(argv=None) -> None:
         # scorecard.json in build_leaderboard.py's own format, so a rebuild is a no-op.
         text = (json.dumps(data, indent=2) if fname == "scorecard.json"
                 else json.dumps(data, indent=1, ensure_ascii=False) + "\n")
-        (a.docs / fname).write_text(text)
+        (a.docs / fname).write_text(text, encoding="utf-8")
         print(f"wrote {a.docs / fname}")
 
 

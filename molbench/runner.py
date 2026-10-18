@@ -23,6 +23,7 @@ import statistics
 import subprocess
 import sys
 import time
+import uuid
 from datetime import datetime, timezone
 from typing import Any
 
@@ -308,6 +309,7 @@ def run(models: list[str], categories: list[str] | None,
         "models": {}, "n_tasks": len(tasks), "samples": samples,
         "meta": {
             "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "run_id": uuid.uuid4().hex,  # ties a scorecard to its archive unambiguously
             "git_commit": _git_commit(),
             "models": models,
             "categories": categories,
