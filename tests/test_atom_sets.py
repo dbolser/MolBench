@@ -180,12 +180,6 @@ def test_unknown_structure_falls_back_to_signatures():
 
 # --- calibration ---------------------------------------------------------------------
 
-# Templated prompts ("show the ligands") on entries that have none: the reference
-# selection is empty, so it is graded by signature (see _selection_similarity).
-_EMPTY_REFERENCES = {"gen-focus-1lyz", "gen-focus-4ins", "gen-ions-1cbs", "gen-ions-1lyz",
-                     "gen-ligands-1lyz", "gen-ligands-4ins"}
-
-
 def test_every_reference_selection_resolves():
     empty = set()
     for task in load_tasks(["mvs"]):
@@ -198,7 +192,7 @@ def test_every_reference_selection_resolves():
                         assert s.atoms is not None, f"{task['id']}: no atom table"
                         if not s.atoms[1]:
                             empty.add(task["id"])
-    assert empty == _EMPTY_REFERENCES
+    assert not empty, f"references that select nothing: {sorted(empty)}"
 
 
 if __name__ == "__main__":
