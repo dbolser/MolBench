@@ -5,7 +5,7 @@ Each tier is more expensive than the last, so we only escalate when the cheaper
 tier is inconclusive:
 
   T0  tree-match (free)        F1 >= tree_threshold        -> "correct"
-  T1  visual diff (cheap)      sim >= visual_threshold     -> "rendering-equivalent"
+  T1  visual diff (cheap)      no pixel clearly changed    -> "rendering-equivalent"
   T2  VLM judge (expensive)    semantic verdict on images  -> "vlm:same"/"vlm:different"
 
 This rescues semantically-equivalent trees that strict tree-matching under-scores
@@ -25,7 +25,7 @@ import pathlib
 from typing import Any, Callable
 
 from .mvs import _download_id, extract_root, flatten_paths, grade_mvs
-from .visual import image_similarity
+from .visual import changed_pixels, image_similarity
 
 
 def _download_ids(tree: Any) -> set[str]:
@@ -71,7 +71,7 @@ def escalating_grade(
     render: Callable[[dict, str], Any] | None = None,
     vlm: Callable[..., dict] | None = None,
     tree_threshold: float = 0.999,
-    visual_threshold: float = 0.97,
+    max_changed_pixels: int = 2,
     workdir: str | pathlib.Path | None = None,
     accepted_refs: set[str] | list[str] | None = None,
 ) -> dict[str, Any]:
@@ -94,10 +94,13 @@ def escalating_grade(
         render(predicted_tree, str(pred_png))
     except Exception as e:  # noqa: BLE001 - a render failure is itself informative
         return {**out, "decision": "render-failed", "note": str(e)}
-    sim = image_similarity(ref_png, pred_png)
-    out.update(tier="visual", visual_sim=round(sim, 4),
-               ref_png=str(ref_png), pred_png=str(pred_png))
-    if sim >= visual_threshold:
+    # Rescue only near-identical renders; see ``changed_pixels`` for why a
+    # whole-image similarity threshold is not enough. ``visual_sim`` is kept as a
+    # descriptive number.
+    changed = changed_pixels(ref_png, pred_png)
+    out.update(tier="visual", visual_sim=round(image_similarity(ref_png, pred_png), 4),
+               changed_pixels=changed, ref_png=str(ref_png), pred_png=str(pred_png))
+    if changed <= max_changed_pixels:
         return {**out, "decision": "rendering-equivalent"}
 
     # T2 — VLM judge on the image pair.

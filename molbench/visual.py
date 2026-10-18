@@ -29,3 +29,22 @@ def image_similarity(a: str | pathlib.Path, b: str | pathlib.Path,
              for x, y in zip(pa, pb))
     rmse = (se / (len(pa) * 3)) ** 0.5
     return max(0.0, 1.0 - rmse / 255.0)
+
+
+def changed_pixels(a: str | pathlib.Path, b: str | pathlib.Path,
+                   size: int = 256, tolerance: int = 48) -> int:
+    """Pixels (on a ``size``x``size`` downscale) where any channel differs by more
+    than ``tolerance``.
+
+    This, not ``image_similarity``, decides a Tier-1 rescue. A whole-image average
+    cannot see a small wrong detail: a ball-and-stick on the wrong residue, chain or
+    colour of p53 still scores > 0.99 similarity, yet changes 8-30 pixels here. The
+    renderer is deterministic (the same scene re-renders to 0 changed pixels), so
+    "equivalent" can mean "no pixel clearly changed".
+    """
+    from PIL import Image, ImageChops
+    ia = Image.open(a).convert("RGB").resize((size, size))
+    ib = Image.open(b).convert("RGB").resize((size, size))
+    r, g, b = ImageChops.difference(ia, ib).split()
+    worst = ImageChops.lighter(ImageChops.lighter(r, g), b)  # per-pixel max over channels
+    return sum(worst.histogram()[tolerance + 1:])
