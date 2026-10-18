@@ -21,12 +21,18 @@ Grading reuses the precision/recall/F1 + greedy-bipartite shape from
 
 from __future__ import annotations
 
+import itertools
 import re
+from dataclasses import dataclass
 from typing import Any, Iterable
 
+from .atoms import AtomTable, load_table
+
 # --- selection normalisation (the ComponentExpression sub-language) ---------------
-# Treat author/label chain ids as interchangeable, and the various residue-number
-# spellings as one "resnum" axis — same tolerance philosophy as the imperative grader.
+# Selections are graded by the atoms they pick (``atoms.py``) when the structure has a
+# frozen atom table. Without one (a structure no task references, an assembly) we
+# fall back to these string signatures, which treat author/label chain ids as
+# interchangeable and the residue-number spellings as one "resnum" axis.
 _CHAIN_FIELDS = ("auth_asym_id", "label_asym_id")
 _RESNUM_FIELDS = ("auth_seq_id", "label_seq_id", "residue_index")
 _BEG_FIELDS = ("beg_auth_seq_id", "beg_label_seq_id")
@@ -66,6 +72,49 @@ def _selector_signature(sel: Any) -> Any:
     return tuple(sorted(map(str, sigs)))
 
 
+@dataclass(frozen=True)
+class Selection:
+    """What a component or primitive end selects.
+
+    ``atoms`` is (structure id, bitmask) when resolved against a frozen atom table;
+    ``sigs`` holds one string signature per expression, used when either side of a
+    comparison couldn't be resolved.
+    """
+    sigs: frozenset
+    atoms: tuple[str, int] | None = None
+
+
+def _selection(selectors: list, table: AtomTable | None) -> Selection:
+    """The union of several selectors (a component's, or a merged group's)."""
+    sigs = frozenset(_selector_signature(e) for s in selectors
+                     for e in (s if isinstance(s, list) else [s]))
+    if table is None:
+        return Selection(sigs)
+    mask = 0
+    for s in selectors:
+        m = table.selector(s)
+        if m is None:
+            return Selection(sigs)
+        mask |= m
+    return Selection(sigs, (table.id, mask))
+
+
+def _selection_similarity(a: Selection, b: Selection) -> float:
+    """Jaccard overlap of the selected atoms (else of the signatures).
+
+    An empty selection overlaps nothing, so it never earns credit: Mol* draws
+    nothing for it (or, for a primitive end, a point at the origin). The exception
+    is a reference that is itself empty (a templated "show the ligands" on an entry
+    with none): atoms can't grade that, so both sides fall back to signatures.
+    """
+    if a.atoms and b.atoms and a.atoms[0] == b.atoms[0] and (a.atoms[1] or b.atoms[1]):
+        x, y = a.atoms[1], b.atoms[1]
+        both = (x & y).bit_count()
+        return both / (x | y).bit_count() if both else 0.0
+    either = a.sigs | b.sigs
+    return len(a.sigs & b.sigs) / len(either) if either else 0.0
+
+
 def _color_signature(value: Any) -> Any:
     if isinstance(value, str):
         v = value.strip().lower().lstrip("#")
@@ -77,40 +126,50 @@ _PRIMITIVE_POINTS = ("start", "end", "position", "a", "b", "c")
 _UNDIRECTED_PRIMITIVES = {"tube", "distance_measurement"}
 
 
-def _point_signature(point: Any) -> Any:
+def _point_signature(point: Any, table: AtomTable | None = None) -> Any:
     """A primitive position: an [x, y, z] coordinate (order matters) or an atom selection."""
     if isinstance(point, list) and all(isinstance(v, (int, float)) for v in point):
         return ("xyz", tuple(float(v) for v in point))
-    return _selector_signature(point)
+    if isinstance(point, dict) and "expressions" in point:
+        # {structure_ref, expressions}: a union. Another structure's ref isn't resolved.
+        exprs = point["expressions"] if isinstance(point["expressions"], list) else []
+        return _selection([exprs], None if point.get("structure_ref") else table)
+    return _selection([point], table)
 
 
-def _param_signature(kind: str, params: dict | None, custom: dict | None = None) -> Any:
+def _points_match(p: Any, q: Any) -> bool:
+    if isinstance(p, Selection) and isinstance(q, Selection):
+        return _selection_similarity(p, q) == 1.0
+    return p == q
+
+
+def _interactions_flag(custom: dict) -> tuple:
+    # Mol* computes and draws the interactions itself when this flag is set, so
+    # it is part of what the component shows, not a styling detail.
+    if not custom.get("molstar_show_non_covalent_interactions"):
+        return ()
+    # The radius decides which neighbours are drawn; Mol*'s default is 5 Å.
+    radius = custom.get("molstar_non_covalent_interactions_radius_ang", 5)
+    try:
+        radius = round(float(radius), 1)
+    except (TypeError, ValueError):
+        pass
+    return ("interactions", radius)
+
+
+def _param_signature(kind: str, params: dict | None, custom: dict | None = None,
+                     table: AtomTable | None = None) -> Any:
     params = params or {}
     custom = custom if isinstance(custom, dict) else {}
     if kind == "component" and "selector" in params:
-        sig = ("selector", _selector_signature(params["selector"]))
-        # Mol* computes and draws the interactions itself when this flag is set, so
-        # it is part of what the component shows, not a styling detail.
-        if custom.get("molstar_show_non_covalent_interactions"):
-            # The radius decides which neighbours are drawn; Mol*'s default is 5 Å.
-            radius = custom.get("molstar_non_covalent_interactions_radius_ang", 5)
-            try:
-                radius = round(float(radius), 1)
-            except (TypeError, ValueError):
-                pass
-            sig += ("interactions", radius)
-        return sig
+        return ("selector", _selection([params["selector"]], table)) + _interactions_flag(custom)
     if kind == "primitive":
         # Key on the shape and the atoms it joins. Radius, dash length and label text
         # are styling. A line or distance is the same whichever end comes first; an
         # arrow's direction and an angle's vertex are not, so those keep their roles.
         pkind = params.get("kind")
-        if pkind in _UNDIRECTED_PRIMITIVES:
-            points = frozenset(_point_signature(params[k]) for k in _PRIMITIVE_POINTS
-                               if k in params)
-        else:
-            points = tuple((k, _point_signature(params[k])) for k in _PRIMITIVE_POINTS
-                           if k in params)
+        points = tuple((k, _point_signature(params[k], table)) for k in _PRIMITIVE_POINTS
+                       if k in params)
         # A 3D label's text is its content (unlike a measurement's label template).
         text = (" ".join(str(params.get("text", "")).split()).casefold(),) if pkind == "label" else ()
         return ("primitive", pkind, points) + text
@@ -153,11 +212,49 @@ def extract_root(obj: Any) -> dict | None:
     return None
 
 
-def flatten_paths(root: dict) -> list[tuple]:
-    """Return every root-to-leaf path as a tuple of (kind, param_signature) segments."""
-    paths: list[tuple] = []
+def _structure_source(kind: str, params: dict, source: str | None) -> str | None:
+    """Track which frozen atom table (if any) the selections below a node refer to."""
+    if kind == "download":
+        url = str(params.get("url", "")).lower()
+        name = url.rsplit("/", 1)[-1]
+        if "." in name and not re.search(r"\.(cif|mmcif|bcif)(\.gz)?$", name):
+            return None  # e.g. a .pdb file: Mol* derives its label_* fields differently
+        sig = _param_signature("download", params)
+        return sig[1] if sig and sig[0] == "ref" else None
+    if kind == "parse" and params.get("format") not in (None, "mmcif", "bcif"):
+        return None
+    return source
 
-    def walk(node: dict, prefix: tuple) -> None:
+
+def _structure_table(params: dict, source: str | None) -> AtomTable | None:
+    # Tables hold model 1 of the asymmetric unit; an assembly, symmetry mates or
+    # another model keep the string signatures.
+    if params.get("type", "model") != "model" or params.get("model_index") not in (None, 0):
+        return None
+    return load_table(source)
+
+
+def _canon(x: Any) -> Any:
+    """A deterministic, comparable form of a path (for grouping identical ones)."""
+    if isinstance(x, Selection):
+        return ("sel", tuple(sorted(map(repr, x.sigs))), x.atoms)
+    if isinstance(x, tuple):
+        return tuple(_canon(v) for v in x)
+    return x
+
+
+def flatten_paths(root: dict) -> list[tuple]:
+    """Return every root-to-leaf path as a tuple of (kind, param_signature) segments.
+
+    Under one structure, component paths that do the same thing below the component
+    (same representation, colour, ...) are merged into one path whose selection is
+    the union of their atoms: "one component listing six residues", "six components
+    with the same style" and "one expression covering the same atoms" are the same
+    scene, so they become the same single path. A residue that also gets its own
+    label keeps that label as a separate path, so the shared style still merges.
+    """
+
+    def paths(node: dict, source: str | None, table: AtomTable | None) -> list[tuple]:
         kind = node.get("kind")
         params = node.get("params")
         # A model may emit a structurally-odd tree (e.g. params as a list, not a
@@ -165,28 +262,40 @@ def flatten_paths(root: dict) -> list[tuple]:
         # than crashing the whole run on one bad node.
         if not isinstance(params, dict):
             params = {}
-        children = node.get("children") or []
-
-        # A component selecting N residues via a list selector is equivalent to N
-        # single-residue components with the same children. Expand it so that
-        # "group residues in one component" and "one component each" score alike.
-        if kind == "component" and isinstance(params.get("selector"), list) \
-                and len(params["selector"]) > 1:
-            flag = _param_signature(kind, {"selector": "all"}, node.get("custom"))[2:]
-            variants = [("selector", _selector_signature(e)) + flag for e in params["selector"]]
+        children = [c for c in node.get("children") or [] if isinstance(c, dict)]
+        source = _structure_source(kind, params, source)
+        if kind == "structure":
+            table = _structure_table(params, source)
+            below = merged_children(children, source, table)
         else:
-            variants = [_param_signature(kind, params, node.get("custom"))]
+            below = [p for c in children for p in paths(c, source, table)]
+        here = ((kind, _param_signature(kind, params, node.get("custom"), table)),)
+        return [here + p for p in below] or [here]
 
-        for vsig in variants:
-            here = prefix + ((kind, vsig),)
-            if not children:
-                paths.append(here)
-            for child in children:
-                if isinstance(child, dict):
-                    walk(child, here)
+    def merged_children(children: list[dict], source: str | None,
+                        table: AtomTable | None) -> list[tuple]:
+        # Group the components' paths by what is done to the atoms (the rest of the
+        # path below the component), and union the atoms per group.
+        out: list[tuple] = []
+        groups: dict[tuple, tuple] = {}
+        for c in children:
+            params = c.get("params")
+            if c.get("kind") != "component" or not isinstance(params, dict) \
+                    or "selector" not in params:
+                out.extend(paths(c, source, table))
+                continue
+            custom = c.get("custom") if isinstance(c.get("custom"), dict) else {}
+            flag = _interactions_flag(custom)
+            below = [p for cc in c.get("children") or [] if isinstance(cc, dict)
+                     for p in paths(cc, source, table)]
+            for p in below or [()]:
+                key = (flag, repr(_canon(p)))
+                groups.setdefault(key, (flag, p, []))[2].append(params["selector"])
+        for flag, below, selectors in groups.values():
+            out.append((("component", ("selector", _selection(selectors, table)) + flag),) + below)
+        return out
 
-    walk(root, ())
-    return paths
+    return paths(root, None, None)
 
 
 # Boilerplate nodes carry little signal (almost every scene parses mmcif into a
@@ -196,6 +305,29 @@ def flatten_paths(root: dict) -> list[tuple]:
 _SEG_WEIGHT = {"root": 0.0, "parse": 0.25, "structure": 0.25}
 
 
+def _primitives_match(x: tuple, y: tuple) -> bool:
+    (_, kind, p, *text), (_, kind_y, q, *text_y) = x, y
+    if kind != kind_y or text != text_y or len(p) != len(q):
+        return False
+    if kind in _UNDIRECTED_PRIMITIVES:
+        ends = [v for _, v in p]
+        return any(all(_points_match(a, b) for a, b in zip(ends, perm))
+                   for perm in itertools.permutations(v for _, v in q))
+    return all(k == k_y and _points_match(a, b) for (k, a), (k_y, b) in zip(p, q))
+
+
+def _segment_similarity(a: tuple | None, b: tuple | None) -> float:
+    """1 for the same node, 0 for a different one; a component's selection can score between."""
+    if a is None or b is None or a[0] != b[0]:
+        return 0.0
+    kind, x, y = a[0], a[1], b[1]
+    if kind == "component" and x[:1] == y[:1] == ("selector",):
+        return _selection_similarity(x[1], y[1]) if x[2:] == y[2:] else 0.0
+    if kind == "primitive" and x[:1] == y[:1] == ("primitive",):
+        return float(_primitives_match(x, y))
+    return float(x == y)
+
+
 def _path_similarity(p: tuple, q: tuple) -> float:
     """Weighted position-wise segment agreement.
 
@@ -203,7 +335,8 @@ def _path_similarity(p: tuple, q: tuple) -> float:
     near the root (e.g. a file-variant in the download node) zero out credit for
     a correct representation/colour further down. Position-wise scoring keeps that
     downstream credit; boilerplate nodes are down-weighted so they neither dominate
-    nor mask the real differences.
+    nor mask the real differences. A component's selection earns the share of
+    atoms it gets right (see ``_selection_similarity``).
     """
     num = den = 0.0
     for i in range(max(len(p), len(q))):
@@ -212,8 +345,7 @@ def _path_similarity(p: tuple, q: tuple) -> float:
         kind = (a or b)[0]
         w = _SEG_WEIGHT.get(kind, 1.0)
         den += w
-        if a == b:
-            num += w
+        num += w * _segment_similarity(a, b)
     return num / den if den else 0.0
 
 

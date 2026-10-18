@@ -89,11 +89,21 @@ recall (matched / reference) and their harmonic mean **F1**.
 
 Matching is made tolerant to semantically irrelevant variation through explicit
 normalisation: scene metadata and timestamps are stripped; structure identifiers
-are normalised across file variants (`1cbs` ≡ `1cbs_updated`); author and label
-residue/chain numbering are treated on a common axis; colour names are folded
-(`grey` ≡ `gray`); library-default parameters are ignored; and a multi-residue
-*list* selector is treated as equivalent to the corresponding set of
-single-residue components. The grader is itself unit-tested for calibration:
+are normalised across file variants (`1cbs` ≡ `1cbs_updated`); colour names are
+folded (`grey` ≡ `gray`); and library-default parameters are ignored. Selections
+are graded by the **atoms they select**: each component selector and primitive
+endpoint is resolved, with Mol\* 5.9.0 semantics, against a per-structure atom
+table frozen offline (model 1 of the asymmetric unit; static selectors such as
+`polymer` or `ligand` recorded from Mol\* itself). Author and label numbering are
+therefore distinct (on 1TUP, label chain A is a DNA strand, not p53 chain A), any
+naming of the same atoms is equivalent (`label_comp_id: CYS` ≡ the cysteines
+listed one by one), and a selection that matches no atom earns no credit. Under
+one structure, component paths that apply the same styling are merged into one
+path selecting the union of their atoms, so one list selector, N single-residue
+components and one covering expression all score alike; a selection segment
+earns the Jaccard overlap of its atom set with the reference's. Structures
+without a frozen table (or assemblies) fall back to string signatures, where
+author and label numbering share one axis. The grader is itself unit-tested for calibration:
 reference-vs-reference scores 1.0, clearly-wrong predictions score near 0, and
 partial-credit cases fall in between.
 

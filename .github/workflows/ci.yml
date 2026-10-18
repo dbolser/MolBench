@@ -25,7 +25,9 @@ jobs:
       - name: Install (core only, no model SDKs)
         run: pip install -e .
       - name: Sanity tests (grader calibration + schema validity)
-        run: PYTHONPATH=. python tests/test_harness.py
+        run: |
+          PYTHONPATH=. python tests/test_harness.py
+          PYTHONPATH=. python tests/test_atom_sets.py
       - name: Baseline smoke run
         run: python -m molbench.runner --models baseline --categories api_calling
       - name: Leaderboard builder runs

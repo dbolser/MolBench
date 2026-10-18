@@ -271,7 +271,7 @@ def _hbond(start: dict, end: dict, **style) -> dict:
                                          "start": start, "end": end, **style}}]}
 
 
-_HIS = {"auth_asym_id": "A", "auth_seq_id": 64, "label_atom_id": "NE2"}
+_HIS = {"auth_asym_id": "A", "auth_seq_id": 58, "label_atom_id": "NE2"}  # 1hho distal His
 _O2 = {"auth_asym_id": "A", "label_comp_id": "OXY", "label_atom_id": "O2"}
 
 
