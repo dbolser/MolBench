@@ -70,3 +70,36 @@ def render_scene(scene: dict, out_png: str | pathlib.Path,
     b64 = data_uri.split(",", 1)[1]
     out_png.write_bytes(base64.b64decode(b64))
     return out_png
+
+
+# Validity per Mol* itself: the tree rules (allowed parents, required and typed
+# params) that decide whether Mol* will load a scene at all. The molviewspec
+# library's validator is looser; on the 2026-10 runs it missed 37 of 39 scenes
+# that Mol* rejected.
+_ISSUES_JS = """(scenes) => scenes.map((s) => {
+  try {
+    const mvs = molstar.PluginExtensions.mvs.MVSData;
+    return mvs.validationIssues(mvs.fromMVSJ(s)) || [];
+  } catch (e) {
+    return [String(e)];
+  }
+})"""
+
+
+def molstar_issues(scenes: list[dict], timeout_ms: int = 60000) -> list[list[str]]:
+    """Mol*'s validation messages for each scene (empty list = valid). No rendering,
+    one browser for the whole batch."""
+    from playwright.sync_api import sync_playwright
+
+    if not scenes:
+        return []
+    if not (STATIC / "molstar" / "molstar.js").exists():
+        raise RuntimeError("Mol* bundle missing — run scripts/fetch_molstar.py")
+    with sync_playwright() as p:
+        browser = p.chromium.launch(args=_GL_ARGS)
+        page = browser.new_page()
+        page.set_default_timeout(timeout_ms)
+        page.goto(RENDER_HTML.as_uri())
+        issues = page.evaluate(_ISSUES_JS, [to_mvs_state(s) for s in scenes])
+        browser.close()
+    return issues
