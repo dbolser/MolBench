@@ -62,3 +62,9 @@ def test_format_stats_counts_outcomes_and_conditions_on_valid():
     assert stats["valid_scene"] == round(1 / 3, 4)
     assert stats["parse_success"] == round(2 / 3, 4)  # JSON parsed, whatever Mol* says
     assert stats["cond_f1"] == 1.0                   # over scenes Mol* can show
+
+
+def test_archives_never_overwrite(monkeypatch, tmp_path):
+    monkeypatch.setattr(runner, "RUNS_DIR", tmp_path)
+    paths = {runner._new_archive_path() for _ in range(3)}
+    assert len(paths) == 3 and all(p.exists() for p in paths)

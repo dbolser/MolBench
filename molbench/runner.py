@@ -15,6 +15,7 @@ Everything is plain stdlib so the baseline path has no install step.
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import os
 import pathlib
@@ -535,10 +536,23 @@ def main(argv: list[str] | None = None) -> None:
     # scorecard stays lightweight; this is the forensic copy.
     if not args.no_archive:
         RUNS_DIR.mkdir(exist_ok=True)
-        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        archive_path = RUNS_DIR / f"run_{stamp}.json"
+        archive_path = _new_archive_path()
         archive_path.write_text(json.dumps({**report, "raw_samples": raw_samples}, indent=2))
         print(f"archived -> {archive_path}")
+
+
+def _new_archive_path() -> pathlib.Path:
+    """``runs/run_<UTC stamp>.json``, claimed atomically. Runs started in parallel can
+    finish in the same second; the later one gets a ``-2``, ``-3``... suffix rather
+    than overwriting the first (which once lost a whole run's raw outputs)."""
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    for n in itertools.count(1):
+        path = RUNS_DIR / (f"run_{stamp}.json" if n == 1 else f"run_{stamp}-{n}.json")
+        try:
+            path.open("x").close()
+            return path
+        except FileExistsError:
+            continue
 
 
 if __name__ == "__main__":
