@@ -1,0 +1,800 @@
+{
+ "run": "2026-10-18",
+ "samples": 1,
+ "n_tasks": 70,
+ "n_lookup_tasks": 15,
+ "lookup_sources": [
+  "clinvar-hotspots",
+  "clinvar-variant",
+  "resolve",
+  "sifts-named"
+ ],
+ "models": {
+  "claude-haiku-4-5": {
+   "spec": {
+    "mvs_f1": 0.87,
+    "valid_scene": 0.9571,
+    "cond_f1": 0.909,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 67,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 3,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.8548,
+    "valid_scene": 0.9286,
+    "cond_f1": 0.9205,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 65,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 5,
+     "load_failed": 0
+    }
+   },
+   "bare": {
+    "mvs_f1": 0.0,
+    "valid_scene": 0.0,
+    "cond_f1": 0.0,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 0,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 70,
+     "load_failed": 0
+    }
+   },
+   "bare_grounded": {
+    "mvs_f1": 0.0,
+    "valid_scene": 0.0,
+    "cond_f1": 0.0,
+    "parse_success": 0.9714,
+    "outcomes": {
+     "valid": 0,
+     "unchecked": 0,
+     "invalid_json": 2,
+     "not_mvs": 0,
+     "invalid_mvs": 68,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0152,
+    "n_both_valid": 65,
+    "delta_both_valid": -0.0024,
+    "better": 4,
+    "worse": 7
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.0506,
+    "n_both_valid": 10,
+    "delta_both_valid": 0.0148,
+    "better": 1,
+    "worse": 1
+   }
+  },
+  "deepseek/deepseek-v3.2": {
+   "spec": {
+    "mvs_f1": 0.9164,
+    "valid_scene": 0.9857,
+    "cond_f1": 0.9297,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 69,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 1
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.9008,
+    "valid_scene": 0.9714,
+    "cond_f1": 0.9273,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 68,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 2,
+     "load_failed": 0
+    }
+   },
+   "bare": {
+    "mvs_f1": 0.0,
+    "valid_scene": 0.0,
+    "cond_f1": 0.0,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 0,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 70,
+     "load_failed": 0
+    }
+   },
+   "bare_grounded": {
+    "mvs_f1": 0.0,
+    "valid_scene": 0.0,
+    "cond_f1": 0.0,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 0,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 70,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0156,
+    "n_both_valid": 67,
+    "delta_both_valid": -0.013,
+    "better": 7,
+    "worse": 12
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.1521,
+    "n_both_valid": 13,
+    "delta_both_valid": -0.0815,
+    "better": 2,
+    "worse": 6
+   }
+  },
+  "deepseek/deepseek-v4-flash": {
+   "spec": {
+    "mvs_f1": 0.8613,
+    "valid_scene": 0.9286,
+    "cond_f1": 0.9276,
+    "parse_success": 0.9429,
+    "outcomes": {
+     "valid": 65,
+     "unchecked": 0,
+     "invalid_json": 4,
+     "not_mvs": 0,
+     "invalid_mvs": 1,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.7778,
+    "valid_scene": 0.8429,
+    "cond_f1": 0.9229,
+    "parse_success": 0.8429,
+    "outcomes": {
+     "valid": 59,
+     "unchecked": 0,
+     "invalid_json": 11,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0835,
+    "n_both_valid": 55,
+    "delta_both_valid": -0.0116,
+    "better": 3,
+    "worse": 7
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.0727,
+    "n_both_valid": 12,
+    "delta_both_valid": -0.0569,
+    "better": 1,
+    "worse": 5
+   }
+  },
+  "gemini-3.5-flash": {
+   "spec": {
+    "mvs_f1": 0.8451,
+    "valid_scene": 0.9429,
+    "cond_f1": 0.8963,
+    "parse_success": 0.9429,
+    "outcomes": {
+     "valid": 66,
+     "unchecked": 0,
+     "invalid_json": 4,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.8124,
+    "valid_scene": 0.9,
+    "cond_f1": 0.9027,
+    "parse_success": 0.9286,
+    "outcomes": {
+     "valid": 63,
+     "unchecked": 0,
+     "invalid_json": 5,
+     "not_mvs": 0,
+     "invalid_mvs": 2,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0326,
+    "n_both_valid": 62,
+    "delta_both_valid": -0.0125,
+    "better": 2,
+    "worse": 8
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.1302,
+    "n_both_valid": 12,
+    "delta_both_valid": -0.0368,
+    "better": 2,
+    "worse": 6
+   }
+  },
+  "google/gemma-3-27b-it": {
+   "spec": {
+    "mvs_f1": 0.7239,
+    "valid_scene": 0.8143,
+    "cond_f1": 0.889,
+    "parse_success": 0.9429,
+    "outcomes": {
+     "valid": 57,
+     "unchecked": 0,
+     "invalid_json": 4,
+     "not_mvs": 0,
+     "invalid_mvs": 9,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.6625,
+    "valid_scene": 0.7,
+    "cond_f1": 0.9464,
+    "parse_success": 0.8714,
+    "outcomes": {
+     "valid": 49,
+     "unchecked": 0,
+     "invalid_json": 9,
+     "not_mvs": 0,
+     "invalid_mvs": 12,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0614,
+    "n_both_valid": 47,
+    "delta_both_valid": 0.0278,
+    "better": 7,
+    "worse": 2
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.1593,
+    "n_both_valid": 8,
+    "delta_both_valid": 0.1528,
+    "better": 3,
+    "worse": 0
+   }
+  },
+  "meta-llama/llama-4-maverick": {
+   "spec": {
+    "mvs_f1": 0.7942,
+    "valid_scene": 0.8143,
+    "cond_f1": 0.9754,
+    "parse_success": 0.9857,
+    "outcomes": {
+     "valid": 57,
+     "unchecked": 0,
+     "invalid_json": 1,
+     "not_mvs": 0,
+     "invalid_mvs": 11,
+     "load_failed": 1
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.7895,
+    "valid_scene": 0.8286,
+    "cond_f1": 0.9528,
+    "parse_success": 0.9857,
+    "outcomes": {
+     "valid": 58,
+     "unchecked": 0,
+     "invalid_json": 1,
+     "not_mvs": 0,
+     "invalid_mvs": 11,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0048,
+    "n_both_valid": 52,
+    "delta_both_valid": -0.0075,
+    "better": 1,
+    "worse": 6
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": 0.1265,
+    "n_both_valid": 2,
+    "delta_both_valid": -0.0444,
+    "better": 0,
+    "worse": 1
+   }
+  },
+  "minimax/minimax-m3": {
+   "spec": {
+    "mvs_f1": 0.8297,
+    "valid_scene": 0.9,
+    "cond_f1": 0.9218,
+    "parse_success": 0.9286,
+    "outcomes": {
+     "valid": 63,
+     "unchecked": 0,
+     "invalid_json": 5,
+     "not_mvs": 0,
+     "invalid_mvs": 2,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.8273,
+    "valid_scene": 0.9143,
+    "cond_f1": 0.9049,
+    "parse_success": 0.9571,
+    "outcomes": {
+     "valid": 64,
+     "unchecked": 0,
+     "invalid_json": 3,
+     "not_mvs": 0,
+     "invalid_mvs": 3,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0023,
+    "n_both_valid": 59,
+    "delta_both_valid": -0.0127,
+    "better": 3,
+    "worse": 8
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.037,
+    "n_both_valid": 10,
+    "delta_both_valid": -0.0463,
+    "better": 1,
+    "worse": 3
+   }
+  },
+  "moonshotai/kimi-k2.6": {
+   "spec": {
+    "mvs_f1": 0.6632,
+    "valid_scene": 0.7286,
+    "cond_f1": 0.9103,
+    "parse_success": 0.7429,
+    "outcomes": {
+     "valid": 51,
+     "unchecked": 0,
+     "invalid_json": 18,
+     "not_mvs": 0,
+     "invalid_mvs": 1,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.5728,
+    "valid_scene": 0.6429,
+    "cond_f1": 0.891,
+    "parse_success": 0.6571,
+    "outcomes": {
+     "valid": 45,
+     "unchecked": 0,
+     "invalid_json": 24,
+     "not_mvs": 0,
+     "invalid_mvs": 1,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0905,
+    "n_both_valid": 36,
+    "delta_both_valid": -0.008,
+    "better": 5,
+    "worse": 4
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.0272,
+    "n_both_valid": 7,
+    "delta_both_valid": 0.0027,
+    "better": 3,
+    "worse": 1
+   }
+  },
+  "nvidia/nemotron-3-super-120b-a12b": {
+   "spec": {
+    "mvs_f1": 0.0769,
+    "valid_scene": 0.0857,
+    "cond_f1": 0.8966,
+    "parse_success": 0.0857,
+    "outcomes": {
+     "valid": 6,
+     "unchecked": 0,
+     "invalid_json": 64,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.081,
+    "valid_scene": 0.0857,
+    "cond_f1": 0.9444,
+    "parse_success": 0.1,
+    "outcomes": {
+     "valid": 6,
+     "unchecked": 0,
+     "invalid_json": 63,
+     "not_mvs": 0,
+     "invalid_mvs": 1,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": 0.0041,
+    "n_both_valid": 0,
+    "delta_both_valid": null,
+    "better": 0,
+    "worse": 0
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.0346,
+    "n_both_valid": 0,
+    "delta_both_valid": null,
+    "better": 0,
+    "worse": 0
+   }
+  },
+  "gpt-5.4-nano": {
+   "spec": {
+    "mvs_f1": 0.6583,
+    "valid_scene": 0.7571,
+    "cond_f1": 0.8695,
+    "parse_success": 0.7857,
+    "outcomes": {
+     "valid": 53,
+     "unchecked": 0,
+     "invalid_json": 15,
+     "not_mvs": 0,
+     "invalid_mvs": 2,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.6134,
+    "valid_scene": 0.7571,
+    "cond_f1": 0.8102,
+    "parse_success": 0.8286,
+    "outcomes": {
+     "valid": 53,
+     "unchecked": 0,
+     "invalid_json": 12,
+     "not_mvs": 0,
+     "invalid_mvs": 5,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0449,
+    "n_both_valid": 40,
+    "delta_both_valid": -0.0461,
+    "better": 10,
+    "worse": 19
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": 0.0847,
+    "n_both_valid": 4,
+    "delta_both_valid": 0.0167,
+    "better": 2,
+    "worse": 0
+   }
+  },
+  "openai/gpt-oss-120b": {
+   "spec": {
+    "mvs_f1": 0.5744,
+    "valid_scene": 0.6286,
+    "cond_f1": 0.9139,
+    "parse_success": 0.6286,
+    "outcomes": {
+     "valid": 44,
+     "unchecked": 0,
+     "invalid_json": 26,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.5903,
+    "valid_scene": 0.6571,
+    "cond_f1": 0.8982,
+    "parse_success": 0.6571,
+    "outcomes": {
+     "valid": 46,
+     "unchecked": 0,
+     "invalid_json": 24,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": 0.0158,
+    "n_both_valid": 26,
+    "delta_both_valid": -0.0113,
+    "better": 3,
+    "worse": 7
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": 0.1603,
+    "n_both_valid": 4,
+    "delta_both_valid": 0.0334,
+    "better": 2,
+    "worse": 2
+   }
+  },
+  "openai/gpt-oss-20b": {
+   "spec": {
+    "mvs_f1": 0.2522,
+    "valid_scene": 0.2857,
+    "cond_f1": 0.8828,
+    "parse_success": 0.2857,
+    "outcomes": {
+     "valid": 20,
+     "unchecked": 0,
+     "invalid_json": 50,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.2054,
+    "valid_scene": 0.2429,
+    "cond_f1": 0.8457,
+    "parse_success": 0.2429,
+    "outcomes": {
+     "valid": 17,
+     "unchecked": 0,
+     "invalid_json": 53,
+     "not_mvs": 0,
+     "invalid_mvs": 0,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0468,
+    "n_both_valid": 6,
+    "delta_both_valid": 0.033,
+    "better": 1,
+    "worse": 1
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": 0.0124,
+    "n_both_valid": 2,
+    "delta_both_valid": 0.1111,
+    "better": 1,
+    "worse": 0
+   }
+  },
+  "qwen/qwen3-30b-a3b-instruct-2507": {
+   "spec": {
+    "mvs_f1": 0.529,
+    "valid_scene": 0.5571,
+    "cond_f1": 0.9496,
+    "parse_success": 0.6,
+    "outcomes": {
+     "valid": 39,
+     "unchecked": 0,
+     "invalid_json": 28,
+     "not_mvs": 0,
+     "invalid_mvs": 3,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.2758,
+    "valid_scene": 0.3143,
+    "cond_f1": 0.8777,
+    "parse_success": 0.3429,
+    "outcomes": {
+     "valid": 22,
+     "unchecked": 0,
+     "invalid_json": 46,
+     "not_mvs": 0,
+     "invalid_mvs": 2,
+     "load_failed": 0
+    }
+   },
+   "bare": {
+    "mvs_f1": 0.0,
+    "valid_scene": 0.0,
+    "cond_f1": 0.0,
+    "parse_success": 0.7857,
+    "outcomes": {
+     "valid": 0,
+     "unchecked": 0,
+     "invalid_json": 15,
+     "not_mvs": 0,
+     "invalid_mvs": 55,
+     "load_failed": 0
+    }
+   },
+   "bare_grounded": {
+    "mvs_f1": 0.0,
+    "valid_scene": 0.0,
+    "cond_f1": 0.0,
+    "parse_success": 0.8857,
+    "outcomes": {
+     "valid": 0,
+     "unchecked": 0,
+     "invalid_json": 8,
+     "not_mvs": 0,
+     "invalid_mvs": 62,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.2532,
+    "n_both_valid": 16,
+    "delta_both_valid": -0.0112,
+    "better": 1,
+    "worse": 1
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": 0.042,
+    "n_both_valid": 1,
+    "delta_both_valid": 0.0,
+    "better": 0,
+    "worse": 0
+   }
+  },
+  "qwen/qwen3-next-80b-a3b-instruct": {
+   "spec": {
+    "mvs_f1": 0.8185,
+    "valid_scene": 0.9143,
+    "cond_f1": 0.8952,
+    "parse_success": 0.9571,
+    "outcomes": {
+     "valid": 64,
+     "unchecked": 0,
+     "invalid_json": 3,
+     "not_mvs": 0,
+     "invalid_mvs": 3,
+     "load_failed": 0
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.8434,
+    "valid_scene": 0.9143,
+    "cond_f1": 0.9225,
+    "parse_success": 1.0,
+    "outcomes": {
+     "valid": 64,
+     "unchecked": 0,
+     "invalid_json": 0,
+     "not_mvs": 0,
+     "invalid_mvs": 6,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": 0.0249,
+    "n_both_valid": 60,
+    "delta_both_valid": 0.0196,
+    "better": 12,
+    "worse": 1
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": 0.0395,
+    "n_both_valid": 13,
+    "delta_both_valid": 0.0456,
+    "better": 3,
+    "worse": 0
+   }
+  },
+  "z-ai/glm-5.2": {
+   "spec": {
+    "mvs_f1": 0.8072,
+    "valid_scene": 0.9,
+    "cond_f1": 0.8969,
+    "parse_success": 0.9286,
+    "outcomes": {
+     "valid": 63,
+     "unchecked": 0,
+     "invalid_json": 5,
+     "not_mvs": 0,
+     "invalid_mvs": 1,
+     "load_failed": 1
+    }
+   },
+   "spec_grounded": {
+    "mvs_f1": 0.7864,
+    "valid_scene": 0.8571,
+    "cond_f1": 0.9175,
+    "parse_success": 0.8857,
+    "outcomes": {
+     "valid": 60,
+     "unchecked": 0,
+     "invalid_json": 8,
+     "not_mvs": 0,
+     "invalid_mvs": 2,
+     "load_failed": 0
+    }
+   },
+   "dossier": {
+    "n": 70,
+    "delta": -0.0208,
+    "n_both_valid": 56,
+    "delta_both_valid": 0.0075,
+    "better": 7,
+    "worse": 10
+   },
+   "dossier_lookup": {
+    "n": 15,
+    "delta": -0.1237,
+    "n_both_valid": 11,
+    "delta_both_valid": 0.008,
+    "better": 2,
+    "worse": 6
+   }
+  }
+ },
+ "summary": {
+  "n_models": 15,
+  "mean_delta": -0.0418,
+  "pooled_both_valid": {
+   "n": 647,
+   "delta": -0.0048,
+   "better": 66,
+   "worse": 93,
+   "same": 488
+  },
+  "mean_lookup_delta": -0.0215
+ }
+}

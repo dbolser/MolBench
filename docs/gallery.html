@@ -16,6 +16,7 @@
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="index.html" class="">Leaderboard</a>
+      <a href="failures.html" class="">Failures</a>
       <a href="gallery.html" class="active">Evaluator gallery</a>
       <a href="https://github.com/dbolser/MolBench" class="gh"
          rel="noopener">GitHub</a>
@@ -44,34 +45,68 @@
         same scene, or genuinely different?</div></div>
   </div>
   <div class="legend">
-    <span class="li"><b>Model evaluated:</b> <span class="chip">gemini-3.5-flash</span></span>
+    <span class="li"><b>Models:</b> <span class="chip">15 models (spec run, 2026-10-18)</span></span>
     <span class="li"><b>VLM judge:</b> <span class="chip">claude-opus-4-8</span></span>
-    <span class="li"><b>Rows:</b> 9</span>
+    <span class="li"><b>Rows:</b> 12</span>
   </div>
-  <div class='callout' style='margin-top:1.25rem'><b>Read the featured row first.</b> The model used a single, <i>cleaner</i> selector (e.g. <code>{label_comp_id: CYS}</code>) that the tree-grader couldn't recognize against a reference that enumerates every component &mdash; so MVS&nbsp;F1 collapses even though the render is pixel-identical.</div>
+  <div class='callout' style='margin-top:1.25rem'><b>Read the featured card first.</b> Its tree scored 0.39 by tree match, yet the scene was judged the same scene by the VLM. Do you agree? The VLM-judged cards are where a human check matters most: the VLM&rsquo;s verdicts have not yet been validated against human raters.</div><p class='section-sub' style='margin-top:1rem;font-size:.85rem'><b>How cards are picked:</b> 4 per verdict, distinct tasks: lowest tree F1 for rescues, highest tree F1 for VLM-different; ties by model, task.</p>
 </section>
 <section class="wrap" aria-label="Evaluation cases">
   <div class="gallery-list">
 <article class="gcard featured">
   <div class="gcard-head">
-    <span class="gid">grd-disulfide-4ins</span>
+    <span class="gid">res-lysozyme</span>
+    <span class='gmodel'>claude-haiku-4-5</span>
     <span class='featured-flag'>Most dramatic gap</span>
-    <p class="rubric">Load 4INS; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.</p>
+    <p class="rubric">Show me hen egg white lysozyme</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/grd-disulfide-4ins_ref.png" loading="lazy" alt="Reference render for: Load 4INS; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+      <img src="gallery/img/claude-haiku-4-5__res-lysozyme_ref.png" loading="lazy" alt="Reference render for: Show me hen egg white lysozyme">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/grd-disulfide-4ins_pred.png" loading="lazy" alt="Model output render for: Load 4INS; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+      <img src="gallery/img/claude-haiku-4-5__res-lysozyme_pred.png" loading="lazy" alt="Model output render for: Show me hen egg white lysozyme">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v lo">0.21</div>
+      <div class="v lo">0.39</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">0.92</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">VLM: same</span>
+    </div>
+    <p class='note'>Picked: lowest tree F1 among scenes the VLM judged the same. 3,576 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the same lysozyme structure in cartoon representation with identical secondary structure features (helices, beta sheets, loops). The only difference is color (white/gray vs blue), which is a minor styling difference; the structure, representation type, and focus are equivalent.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">grd-ligand-4ins-zn</span>
+    <span class='gmodel'>gpt-5.4-nano</span>
+    
+    <p class="rubric">Load 4INS; show the protein as a grey cartoon and the ZN as orange ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__grd-ligand-4ins-zn_ref.png" loading="lazy" alt="Reference render for: Load 4INS; show the protein as a grey cartoon and the ZN as orange ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__grd-ligand-4ins-zn_pred.png" loading="lazy" alt="Model output render for: Load 4INS; show the protein as a grey cartoon and the ZN as orange ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.72</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
@@ -80,264 +115,338 @@
     <div class="verdict-wrap">
       <span class="verdict green">Rendering-equivalent</span>
     </div>
-    <p class='note'>Gemini used one elegant selector {label_comp_id:CYS}; the reference enumerates 12 cysteine components. Identical render.</p>
+    <p class='note'>Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ). 0 pixels differ.</p>
     
   </div>
 </article>
 <article class="gcard">
   <div class="gcard-head">
+    <span class="gid">int-004</span>
+    <span class='gmodel'>gpt-5.4-nano</span>
+    
+    <p class="rubric">Load 1A6M with the protein as a grey cartoon and show all the non-covalent interactions (hydrogen bonds, metal contacts) around the bound oxygen molecule.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__int-004_ref.png" loading="lazy" alt="Reference render for: Load 1A6M with the protein as a grey cartoon and show all the non-covalent interactions (hydrogen bonds, metal contacts) around the bound oxygen molecule.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__int-004_pred.png" loading="lazy" alt="Model output render for: Load 1A6M with the protein as a grey cartoon and show all the non-covalent interactions (hydrogen bonds, metal contacts) around the bound oxygen molecule.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.92</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">1.00</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">Rendering-equivalent</span>
+    </div>
+    <p class='note'>Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ). 0 pixels differ.</p>
+    
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">int-003</span>
+    <span class='gmodel'>meta-llama/llama-4-maverick</span>
+    
+    <p class="rubric">In trypsin (3PTB), show the protein as a grey cartoon and the catalytic triad (His57, Asp102, Ser195) as ball-and-stick. Draw the two triad hydrogen bonds as dashed lines with their lengths.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/meta-llama_llama-4-maverick__int-003_ref.png" loading="lazy" alt="Reference render for: In trypsin (3PTB), show the protein as a grey cartoon and the catalytic triad (His57, Asp102, Ser195) as ball-and-stick. Draw the two triad hydrogen bonds as dashed lines with their lengths.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/meta-llama_llama-4-maverick__int-003_pred.png" loading="lazy" alt="Model output render for: In trypsin (3PTB), show the protein as a grey cartoon and the catalytic triad (His57, Asp102, Ser195) as ball-and-stick. Draw the two triad hydrogen bonds as dashed lines with their lengths.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.93</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">1.00</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">Rendering-equivalent</span>
+    </div>
+    <p class='note'>Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ). 2 pixels differ.</p>
+    
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">gen-cartoon-2hhb</span>
+    <span class='gmodel'>gpt-5.4-nano</span>
+    
+    <p class="rubric">Load deoxyhaemoglobin (2HHB) and show the protein as a teal cartoon.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__gen-cartoon-2hhb_ref.png" loading="lazy" alt="Reference render for: Load deoxyhaemoglobin (2HHB) and show the protein as a teal cartoon.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__gen-cartoon-2hhb_pred.png" loading="lazy" alt="Model output render for: Load deoxyhaemoglobin (2HHB) and show the protein as a teal cartoon.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.94</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">1.00</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">Rendering-equivalent</span>
+    </div>
+    <p class='note'>Picked: lowest tree F1 among renders matching the reference (≤ 2 pixels differ). 0 pixels differ.</p>
+    
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">res-gfp</span>
+    <span class='gmodel'>claude-haiku-4-5</span>
+    
+    <p class="rubric">show green fluorescent protein from Aequorea victoria</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/claude-haiku-4-5__res-gfp_ref.png" loading="lazy" alt="Reference render for: show green fluorescent protein from Aequorea victoria">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/claude-haiku-4-5__res-gfp_pred.png" loading="lazy" alt="Model output render for: show green fluorescent protein from Aequorea victoria">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.52</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">0.83</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">VLM: same</span>
+    </div>
+    <p class='note'>Picked: lowest tree F1 among scenes the VLM judged the same. 7,201 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both images show the GFP beta-barrel structure in cartoon representation with the same fold and secondary structure elements. The only difference is coloring (grayscale vs green), but both depict the same protein, same components, and equivalent cartoon representation. The green color in the output is actually appropriate for GFP.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">res-pcsk9</span>
+    <span class='gmodel'>gemini-3.5-flash</span>
+    
+    <p class="rubric">show the structure of PCSK9</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/gemini-3.5-flash__res-pcsk9_ref.png" loading="lazy" alt="Reference render for: show the structure of PCSK9">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/gemini-3.5-flash__res-pcsk9_pred.png" loading="lazy" alt="Model output render for: show the structure of PCSK9">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.52</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">0.89</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">VLM: same</span>
+    </div>
+    <p class='note'>Picked: lowest tree F1 among scenes the VLM judged the same. 6,048 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both images show the same PCSK9 structure in cartoon representation with identical fold, including the dashed loop region and beta-sheet domain. The topology and components match; only difference is coloring (grayscale vs. teal/orange), which is an acceptable representational variation of the same visualization.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">res-cftr</span>
+    <span class='gmodel'>openai/gpt-oss-120b</span>
+    
+    <p class="rubric">show me the CFTR channel</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/openai_gpt-oss-120b__res-cftr_ref.png" loading="lazy" alt="Reference render for: show me the CFTR channel">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/openai_gpt-oss-120b__res-cftr_pred.png" loading="lazy" alt="Model output render for: show me the CFTR channel">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.52</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">0.93</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict green">VLM: same</span>
+    </div>
+    <p class='note'>Picked: lowest tree F1 among scenes the VLM judged the same. 4,237 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the same CFTR structure in cartoon representation with identical fold, including the characteristic dashed-line disordered region at the bottom. The only difference is coloring (gray vs blue), which is a minor stylistic variation; the structure, representation, and highlighted regions are equivalent.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
+    <span class="gid">grd-disulfide-1lyz</span>
+    <span class='gmodel'>gpt-5.4-nano</span>
+    
+    <p class="rubric">Load 1LYZ; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.</p>
+  </div>
+  <div class="gcard-imgs">
+    <figure class="imgcell ref">
+      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__grd-disulfide-1lyz_ref.png" loading="lazy" alt="Reference render for: Load 1LYZ; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+    </figure>
+    <figure class="imgcell pred">
+      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
+      <img src="gallery/img/gpt-5.4-nano__grd-disulfide-1lyz_pred.png" loading="lazy" alt="Model output render for: Load 1LYZ; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+    </figure>
+  </div>
+  <div class="gcard-foot">
+    <div class="scorebox">
+      <div class="k">MVS score</div>
+      <div class="v">0.93</div>
+    </div>
+    <div class="scorebox">
+      <div class="k">Visual score</div>
+      <div class="v hi">0.97</div>
+    </div>
+    <div class="verdict-wrap">
+      <span class="verdict red">VLM: different</span>
+    </div>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 376 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the same lysozyme structure as grey cartoon with yellow ball-and-stick cysteines, but the reference highlights all disulfide-bonded cysteines (multiple clusters throughout), while the output only shows a couple of cysteine residues, missing most of the disulfide bonds.</p>
+  </div>
+</article>
+<article class="gcard">
+  <div class="gcard-head">
     <span class="gid">grd-disulfide-3ptb</span>
+    <span class='gmodel'>deepseek/deepseek-v3.2</span>
     
     <p class="rubric">Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/grd-disulfide-3ptb_ref.png" loading="lazy" alt="Reference render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+      <img src="gallery/img/deepseek_deepseek-v3.2__grd-disulfide-3ptb_ref.png" loading="lazy" alt="Reference render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/grd-disulfide-3ptb_pred.png" loading="lazy" alt="Model output render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
+      <img src="gallery/img/deepseek_deepseek-v3.2__grd-disulfide-3ptb_pred.png" loading="lazy" alt="Model output render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v lo">0.24</div>
+      <div class="v">0.93</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
-      <div class="v hi">1.00</div>
-    </div>
-    <div class="verdict-wrap">
-      <span class="verdict green">Rendering-equivalent</span>
-    </div>
-    <p class='note'>Same selector-elegance rescue as 4INS on trypsin.</p>
-    
-  </div>
-</article>
-<article class="gcard">
-  <div class="gcard-head">
-    <span class="gid">gen-cartoon-1cbs</span>
-    
-    <p class="rubric">Load cellular retinoic-acid binding protein (1CBS) and show the protein as a purple cartoon.</p>
-  </div>
-  <div class="gcard-imgs">
-    <figure class="imgcell ref">
-      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/gen-cartoon-1cbs_ref.png" loading="lazy" alt="Reference render for: Load cellular retinoic-acid binding protein (1CBS) and show the protein as a purple cartoon.">
-    </figure>
-    <figure class="imgcell pred">
-      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/gen-cartoon-1cbs_pred.png" loading="lazy" alt="Model output render for: Load cellular retinoic-acid binding protein (1CBS) and show the protein as a purple cartoon.">
-    </figure>
-  </div>
-  <div class="gcard-foot">
-    <div class="scorebox">
-      <div class="k">MVS score</div>
-      <div class="v">0.78</div>
-    </div>
-    <div class="scorebox">
-      <div class="k">Visual score</div>
-      <div class="v hi">1.00</div>
-    </div>
-    <div class="verdict-wrap">
-      <span class="verdict green">Rendering-equivalent</span>
-    </div>
-    <p class='note'>Selector synonym (all vs polymer) on a single-chain protein.</p>
-    
-  </div>
-</article>
-<article class="gcard">
-  <div class="gcard-head">
-    <span class="gid">gen-surface-1hho</span>
-    
-    <p class="rubric">Load 1HHO; render the protein as a steelblue molecular surface.</p>
-  </div>
-  <div class="gcard-imgs">
-    <figure class="imgcell ref">
-      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/gen-surface-1hho_ref.png" loading="lazy" alt="Reference render for: Load 1HHO; render the protein as a steelblue molecular surface.">
-    </figure>
-    <figure class="imgcell pred">
-      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/gen-surface-1hho_pred.png" loading="lazy" alt="Model output render for: Load 1HHO; render the protein as a steelblue molecular surface.">
-    </figure>
-  </div>
-  <div class="gcard-foot">
-    <div class="scorebox">
-      <div class="k">MVS score</div>
-      <div class="v">0.78</div>
-    </div>
-    <div class="scorebox">
-      <div class="k">Visual score</div>
-      <div class="v hi">1.00</div>
-    </div>
-    <div class="verdict-wrap">
-      <span class="verdict green">Rendering-equivalent</span>
-    </div>
-    <p class='note'>Equivalent surface representation; tree penalised a default param.</p>
-    
-  </div>
-</article>
-<article class="gcard">
-  <div class="gcard-head">
-    <span class="gid">hotspots-1tup</span>
-    
-    <p class="rubric">In p53 (PDB 1TUP), highlight the mutational hotspot residues — the positions carrying the most pathogenic ClinVar variants — as red spheres.</p>
-  </div>
-  <div class="gcard-imgs">
-    <figure class="imgcell ref">
-      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/hotspots-1tup_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), highlight the mutational hotspot residues — the positions carrying the most pathogenic ClinVar variants — as red spheres.">
-    </figure>
-    <figure class="imgcell pred">
-      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/hotspots-1tup_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), highlight the mutational hotspot residues — the positions carrying the most pathogenic ClinVar variants — as red spheres.">
-    </figure>
-  </div>
-  <div class="gcard-foot">
-    <div class="scorebox">
-      <div class="k">MVS score</div>
-      <div class="v">0.54</div>
-    </div>
-    <div class="scorebox">
-      <div class="k">Visual score</div>
-      <div class="v hi">0.80</div>
-    </div>
-    <div class="verdict-wrap">
-      <span class="verdict green">VLM: same</span>
-    </div>
-    <p class='note'>Same hotspot residues shown; camera/styling differ. VLM judged SAME.</p>
-    <p class='reason'><b>VLM rationale:</b> Both show the p53 protein-DNA complex with protein in gray cartoon and DNA double helix, and mutational hotspot residues highlighted as red spheres clustered near the protein-DNA interface. The representations, colors, and highlighted regions match; only camera angle and the apparent size/number of red spheres differ slightly.</p>
-  </div>
-</article>
-<article class="gcard">
-  <div class="gcard-head">
-    <span class="gid">named-1tup-248</span>
-    
-    <p class="rubric">In p53 (PDB 1TUP), select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.</p>
-  </div>
-  <div class="gcard-imgs">
-    <figure class="imgcell ref">
-      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/named-1tup-248_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.">
-    </figure>
-    <figure class="imgcell pred">
-      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/named-1tup-248_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 248 and show it as blue ball-and-stick.">
-    </figure>
-  </div>
-  <div class="gcard-foot">
-    <div class="scorebox">
-      <div class="k">MVS score</div>
-      <div class="v">0.62</div>
-    </div>
-    <div class="scorebox">
-      <div class="k">Visual score</div>
-      <div class="v">0.75</div>
-    </div>
-    <div class="verdict-wrap">
-      <span class="verdict green">VLM: same</span>
-    </div>
-    <p class='note'>Correct residue selected from another angle. VLM judged SAME.</p>
-    <p class='reason'><b>VLM rationale:</b> Both show the p53-DNA complex as gray cartoon with DNA double helix, and a residue highlighted in blue ball-and-stick representation at the protein-DNA interface. The output shows blue residues consistent with the highlighted position 248, matching the reference visualization style and colors.</p>
-  </div>
-</article>
-<article class="gcard">
-  <div class="gcard-head">
-    <span class="gid">clinvar-1tup-D281</span>
-    
-    <p class="rubric">In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant D281Y as red ball-and-stick.</p>
-  </div>
-  <div class="gcard-imgs">
-    <figure class="imgcell ref">
-      <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/clinvar-1tup-D281_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant D281Y as red ball-and-stick.">
-    </figure>
-    <figure class="imgcell pred">
-      <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/clinvar-1tup-D281_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant D281Y as red ball-and-stick.">
-    </figure>
-  </div>
-  <div class="gcard-foot">
-    <div class="scorebox">
-      <div class="k">MVS score</div>
-      <div class="v">0.52</div>
-    </div>
-    <div class="scorebox">
-      <div class="k">Visual score</div>
-      <div class="v">0.78</div>
+      <div class="v hi">0.97</div>
     </div>
     <div class="verdict-wrap">
       <span class="verdict red">VLM: different</span>
     </div>
-    <p class='note'>Genuine divergence: VLM judged DIFFERENT. Cascade did NOT rescue.</p>
-    <p class='reason'><b>VLM rationale:</b> While both show the p53-DNA complex in grey cartoon with red highlighted residues, the output displays multiple red ball-and-stick residues in several locations (including one near the bottom and others near the DNA), plus a text label, whereas the reference shows a single highlighted residue at the DNA interface. The output does not match the single-residue D281Y highlight of the reference.</p>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 312 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show 3PTB as grey cartoon with yellow cysteine highlights, but the reference displays multiple disulfide-bonded cysteine clusters (6+ yellow sites) distributed across the structure, while the output shows far fewer yellow ball-and-stick residues (only ~2 visible). The output appears to be missing most of the highlighted disulfide cysteines.</p>
   </div>
 </article>
 <article class="gcard">
   <div class="gcard-head">
-    <span class="gid">clinvar-1tup-S215</span>
+    <span class="gid">int-001</span>
+    <span class='gmodel'>google/gemma-3-27b-it</span>
     
-    <p class="rubric">In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant S215T as red ball-and-stick.</p>
+    <p class="rubric">In oxymyoglobin 1A6M, show the protein as a grey cartoon, His64 and the bound O2 as ball-and-stick, and draw the hydrogen bond from His64 NE2 to the O2 molecule&#x27;s terminal oxygen (atom O2) as a dashed line labelled with its length.</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/clinvar-1tup-S215_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant S215T as red ball-and-stick.">
+      <img src="gallery/img/google_gemma-3-27b-it__int-001_ref.png" loading="lazy" alt="Reference render for: In oxymyoglobin 1A6M, show the protein as a grey cartoon, His64 and the bound O2 as ball-and-stick, and draw the hydrogen bond from His64 NE2 to the O2 molecule&#x27;s terminal oxygen (atom O2) as a dashed line labelled with its length.">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/clinvar-1tup-S215_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), highlight the residue affected by the pathogenic ClinVar variant S215T as red ball-and-stick.">
+      <img src="gallery/img/google_gemma-3-27b-it__int-001_pred.png" loading="lazy" alt="Model output render for: In oxymyoglobin 1A6M, show the protein as a grey cartoon, His64 and the bound O2 as ball-and-stick, and draw the hydrogen bond from His64 NE2 to the O2 molecule&#x27;s terminal oxygen (atom O2) as a dashed line labelled with its length.">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v">0.52</div>
+      <div class="v">0.93</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
-      <div class="v">0.64</div>
+      <div class="v hi">0.99</div>
     </div>
     <div class="verdict-wrap">
       <span class="verdict red">VLM: different</span>
     </div>
-    <p class='note'>Clearest miss (lowest visual similarity). VLM DIFFERENT.</p>
-    <p class='reason'><b>VLM rationale:</b> The reference shows the full p53-DNA complex as a gray cartoon with a small red ball-and-stick residue highlighted. The output is a zoomed-in close-up showing only a red ball-and-stick molecule with large text overlay (&#x27;Pathogenic Va...&#x27;), lacking the protein cartoon, DNA, and overall structure context. It does not depict the same visualization.</p>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 98 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the grey protein cartoon of myoglobin. However, the reference shows the His64/O2 region as a faint grey ball-and-stick with a dashed hydrogen-bond line, whereas the output simply shows an orange blob with no visible dashed hydrogen-bond line or length label. The key highlighted feature (the labelled dashed H-bond) is missing, so the visualizations differ.</p>
   </div>
 </article>
 <article class="gcard">
   <div class="gcard-head">
-    <span class="gid">named-1tup-175</span>
+    <span class="gid">gen-focus-1hho</span>
+    <span class='gmodel'>deepseek/deepseek-v4-flash</span>
     
-    <p class="rubric">In p53 (PDB 1TUP), select the residue at canonical UniProt position 175 and show it as blue ball-and-stick.</p>
+    <p class="rubric">Load 1HHO; grey cartoon protein, magenta ball-and-stick ligands, and focus the camera on the ligand.</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/named-1tup-175_ref.png" loading="lazy" alt="Reference render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 175 and show it as blue ball-and-stick.">
+      <img src="gallery/img/deepseek_deepseek-v4-flash__gen-focus-1hho_ref.png" loading="lazy" alt="Reference render for: Load 1HHO; grey cartoon protein, magenta ball-and-stick ligands, and focus the camera on the ligand.">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/named-1tup-175_pred.png" loading="lazy" alt="Model output render for: In p53 (PDB 1TUP), select the residue at canonical UniProt position 175 and show it as blue ball-and-stick.">
+      <img src="gallery/img/deepseek_deepseek-v4-flash__gen-focus-1hho_pred.png" loading="lazy" alt="Model output render for: Load 1HHO; grey cartoon protein, magenta ball-and-stick ligands, and focus the camera on the ligand.">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v">0.62</div>
+      <div class="v">0.90</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
-      <div class="v">0.73</div>
+      <div class="v">0.58</div>
     </div>
     <div class="verdict-wrap">
       <span class="verdict red">VLM: different</span>
     </div>
-    <p class='note'>p53 R175 hotspot; output differs. VLM DIFFERENT.</p>
-    <p class='reason'><b>VLM rationale:</b> The reference shows the full p53-DNA complex with cartoon protein and DNA double helix, with the residue 175 highlighted somewhere within. The output shows only a zoomed-in cartoon protein region with a blue ball-and-stick residue and no DNA visible. While both show a blue ball-and-stick residue, the highlighted residue appears to be a long-chain residue (like arginine) in the output, which is consistent with R175 in p53, but the overall scene/components differ substantially (no DNA shown). However, the core request element (blue ball-and-stick residue 175) is present. The discrepancy in shown components makes this borderline different.</p>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 25,748 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> The reference shows grey cartoon protein with magenta ball-and-stick ligands visible. The output shows only a few dark grey cartoon fragments zoomed in far too close, with no magenta ligands visible at all. The required ligand focus and magenta ball-and-stick representation are absent.</p>
   </div>
 </article>
   </div>
@@ -354,7 +463,7 @@
        (NCBI, public domain). See the
        <a href="https://github.com/dbolser/MolBench#data-sources--acknowledgements"
           rel="noopener">data sources &amp; acknowledgements</a> in the README.</p>
-    <p><b>Reproduce.</b> <span class="repro">python -m molbench.runner --models &lt;spec&gt; --samples 5</span></p>
+    <p><b>Reproduce.</b> <span class="repro">python -m molbench.runner --models &lt;spec&gt; --categories mvs --validate --escalate --judge claude-opus-4-8</span></p>
     <p>MolBench is open source (MIT) &middot;
        <a href="https://github.com/dbolser/MolBench" rel="noopener">github.com/dbolser/MolBench</a>
        &middot; <a href="scorecard.json">raw scorecard.json</a></p>

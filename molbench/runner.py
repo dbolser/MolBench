@@ -15,6 +15,7 @@ Everything is plain stdlib so the baseline path has no install step.
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 import os
 import pathlib
@@ -22,6 +23,7 @@ import statistics
 import subprocess
 import sys
 import time
+import uuid
 from datetime import datetime, timezone
 from typing import Any
 
@@ -216,13 +218,38 @@ def run_mvs_task(model, system: str, task: dict, user: str | None = None) -> dic
     raw = model.generate(system, task["prompt"] if user is None else user)
     tree, err = extract_json_object(raw)
     if err:
-        return {"f1": 0.0, "precision": 0.0, "recall": 0.0, "error": err, "raw": raw}
+        return {"f1": 0.0, "precision": 0.0, "recall": 0.0, "error": err, "raw": raw,
+                "outcome": "invalid_json"}
     result = mvs_mod.grade_mvs(task["reference_mvs"], tree,
                                accepted_refs=task.get("accepted_ids"))
+    result["outcome"] = "not_mvs" if result.get("error") else "unchecked"
     result["schema_errors"] = mvs_mod.validate_mvs(tree)
     result["predicted"] = tree
     result["raw"] = raw
     return result
+
+
+# Why an MVS sample scored what it did. 'invalid_*', 'not_mvs' and 'load_failed' score
+# 0: Mol* shows nothing for them. A parsed scene is 'unchecked' until Mol* validates it
+# (``--validate``), then 'valid' or 'invalid_mvs'.
+OUTCOMES = ("valid", "unchecked", "invalid_json", "not_mvs", "invalid_mvs", "load_failed")
+
+
+def _invalidate(sample: dict, outcome: str, detail: list[str] | str) -> None:
+    """Mark a parsed scene that Mol* will not show: score 0 and record why."""
+    sample.update(f1=0.0, precision=0.0, recall=0.0, outcome=outcome)
+    sample["mvs_issues" if outcome == "invalid_mvs" else "load_error"] = detail
+
+
+def validate_samples(samples: list[dict]) -> None:
+    """Run Mol*'s own validation over every parsed MVS sample, in one batch."""
+    from .render import molstar_issues
+    todo = [s for s in samples if s.get("outcome") == "unchecked"]
+    for s, issues in zip(todo, molstar_issues([s["predicted"] for s in todo])):
+        if issues:
+            _invalidate(s, "invalid_mvs", issues)
+        else:
+            s["outcome"] = "valid"
 
 
 def _aggregate(samples: list[dict]) -> dict[str, Any]:
@@ -248,13 +275,16 @@ def _aggregate(samples: list[dict]) -> dict[str, Any]:
         "predicted": rep.get("predicted"),
         "error": rep.get("error"),
         "schema_errors": rep.get("schema_errors"),
+        **{k: rep[k] for k in ("outcome", "mvs_issues", "load_error") if k in rep},
+        **({"outcomes": [s.get("outcome") for s in samples]}
+           if any("outcome" in s for s in samples) else {}),
     }
 
 
 def run(models: list[str], categories: list[str] | None,
         samples: int = 1, escalate: bool = False,
         judge: str | None = None, condition: str = "spec",
-        grounding: bool = False) -> tuple[dict[str, Any], dict[str, Any]]:
+        grounding: bool = False, validate: bool = False) -> tuple[dict[str, Any], dict[str, Any]]:
     """Returns (report, raw_samples).
 
     `report` is the lightweight scorecard (aggregates + best-sample prediction).
@@ -279,6 +309,7 @@ def run(models: list[str], categories: list[str] | None,
         "models": {}, "n_tasks": len(tasks), "samples": samples,
         "meta": {
             "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "run_id": uuid.uuid4().hex,  # ties a scorecard to its archive unambiguously
             "git_commit": _git_commit(),
             "models": models,
             "categories": categories,
@@ -287,6 +318,7 @@ def run(models: list[str], categories: list[str] | None,
             "condition": condition,
             "grounding": grounding,
             **(_grounding_meta(tasks) if grounding else {}),
+            "validate": validate or escalate,
         },
     }
 
@@ -306,6 +338,7 @@ def run(models: list[str], categories: list[str] | None,
     for spec in models:
         model = build_model(spec)
         per_task = []
+        pending = []  # (task, samples) for graded tasks, aggregated after validation
         raw_samples[model.name] = {}
         started = time.perf_counter()
         for task in tasks:
@@ -324,20 +357,37 @@ def run(models: list[str], categories: list[str] | None,
             elif cat in GRADED_CATEGORIES:
                 run_task = run_mvs_task if cat == "mvs" else run_api_task
                 user = user_message(task, grounding)
-                got = [run_task(model, system, task, user) for _ in range(samples)]
-                pt = {"id": task["id"], "category": cat,
-                      "categories": task.get("categories", []), **_aggregate(got)}
-                if (escalate and cat == "mvs" and not pt.get("error")
-                        and pt.get("predicted") is not None):
-                    wd = gallery / model.name.replace("/", "_") / task["id"]
-                    pt["escalation"] = escalating_grade(
-                        task["reference_mvs"], pt["predicted"], prompt=task.get("prompt"),
-                        render=render_fn, vlm=vlm_fn, workdir=str(wd),
-                        accepted_refs=task.get("accepted_ids"))
-                per_task.append(pt)
-                raw_samples[model.name][task["id"]] = [
-                    {"f1": g["f1"], "predicted": g.get("predicted"),
-                     "raw": g.get("raw"), "error": g.get("error")} for g in got]
+                pending.append((task, [run_task(model, system, task, user)
+                                       for _ in range(samples)]))
+                per_task.append(None)  # placeholder keeps task order
+
+        if validate or escalate:
+            validate_samples([s for t, got in pending if t["category"] == "mvs" for s in got])
+        slots = iter(i for i, t in enumerate(per_task) if t is None)
+        for task, got in pending:
+            cat = task["category"]
+            pt = {"id": task["id"], "category": cat,
+                  "categories": task.get("categories", []), **_aggregate(got)}
+            while (escalate and cat == "mvs" and pt.get("outcome") == "valid"
+                    and pt.get("predicted") is not None):
+                wd = gallery / model.name.replace("/", "_") / task["id"]
+                pt["escalation"] = esc = escalating_grade(
+                    task["reference_mvs"], pt["predicted"], prompt=task.get("prompt"),
+                    render=render_fn, vlm=vlm_fn, workdir=str(wd),
+                    accepted_refs=task.get("accepted_ids"))
+                if esc.get("decision") != "render-failed" or esc.get("failed_side") != "prediction":
+                    break
+                # Valid by Mol*'s rules, but Mol* still could not load it: score 0 and
+                # escalate the next-best sample, if any, as the task's representative.
+                best = max(got, key=lambda s: s["f1"])
+                _invalidate(best, "load_failed", esc.get("note", ""))
+                pt.update(_aggregate(got))
+            per_task[next(slots)] = pt
+            raw_samples[model.name][task["id"]] = [
+                {"f1": g["f1"], "predicted": g.get("predicted"), "raw": g.get("raw"),
+                 "error": g.get("error"),
+                 **{k: g[k] for k in ("outcome", "mvs_issues", "load_error") if k in g}}
+                for g in got]
 
         wall_seconds = time.perf_counter() - started
         graded = [t for t in per_task if t["category"] in GRADED_CATEGORIES]
@@ -379,10 +429,20 @@ def _format_stats(model_raw: dict) -> dict[str, Any]:
     if not samples:
         return {"parse_success": None, "cond_f1": None}
     parsed = [s for s in samples if not s.get("error")]
-    return {
+    out = {
         "parse_success": round(len(parsed) / len(samples), 4),
         "cond_f1": round(statistics.fmean(s["f1"] for s in parsed), 4) if parsed else 0.0,
     }
+    mvs = [s for s in samples if "outcome" in s]
+    if mvs:
+        # With Mol* validation, cond_f1 is over scenes Mol* can show, and the outcome
+        # counts say why the rest score 0.
+        out["outcomes"] = {o: sum(s["outcome"] == o for s in mvs) for o in OUTCOMES}
+        if not out["outcomes"]["unchecked"]:  # only claim validity Mol* confirmed
+            valid = [s for s in mvs if s["outcome"] == "valid"]
+            out["valid_scene"] = round(len(valid) / len(mvs), 4)
+            out["cond_f1"] = round(statistics.fmean(s["f1"] for s in valid), 4) if valid else 0.0
+    return out
 
 
 def _means_by_skill(per_task: list[dict]) -> dict[str, dict]:
@@ -458,6 +518,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--condition", choices=CONDITIONS, default="spec",
                     help="MVS prompting condition: 'spec' (with the MVS reference) or "
                          "'bare' (output contract only)")
+    ap.add_argument("--validate", action="store_true",
+                    help="check every parsed MVS scene with Mol*'s own validator (needs the "
+                         "'execute' extra); scenes Mol* rejects score 0. Implied by --escalate")
     ap.add_argument("--grounding", action="store_true",
                     help="append each task's frozen grounding pack (facts about its "
                          "structures) to the user message; tasks without one run unchanged")
@@ -469,7 +532,8 @@ def main(argv: list[str] | None = None) -> None:
     load_dotenv()  # make keys in .env available before any model is built
     report, raw_samples = run(args.models, args.categories, samples=args.samples,
                               escalate=args.escalate, judge=args.judge,
-                              condition=args.condition, grounding=args.grounding)
+                              condition=args.condition, grounding=args.grounding,
+                              validate=args.validate)
     RESULTS_DIR.mkdir(exist_ok=True)
     pathlib.Path(args.out).write_text(json.dumps(report, indent=2))
     print_scorecard(report)
@@ -480,10 +544,23 @@ def main(argv: list[str] | None = None) -> None:
     # scorecard stays lightweight; this is the forensic copy.
     if not args.no_archive:
         RUNS_DIR.mkdir(exist_ok=True)
-        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        archive_path = RUNS_DIR / f"run_{stamp}.json"
+        archive_path = _new_archive_path()
         archive_path.write_text(json.dumps({**report, "raw_samples": raw_samples}, indent=2))
         print(f"archived -> {archive_path}")
+
+
+def _new_archive_path() -> pathlib.Path:
+    """``runs/run_<UTC stamp>.json``, claimed atomically. Runs started in parallel can
+    finish in the same second; the later one gets a ``-2``, ``-3``... suffix rather
+    than overwriting the first (which once lost a whole run's raw outputs)."""
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    for n in itertools.count(1):
+        path = RUNS_DIR / (f"run_{stamp}.json" if n == 1 else f"run_{stamp}-{n}.json")
+        try:
+            path.open("x").close()
+            return path
+        except FileExistsError:
+            continue
 
 
 if __name__ == "__main__":

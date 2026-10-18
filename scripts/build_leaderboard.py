@@ -4,16 +4,19 @@ Render the MolBench scorecard + gallery into a static site for GitHub Pages.
 
     python scripts/build_leaderboard.py [docs/scorecard.json]
 
-Writes two self-contained pages that share ``docs/style.css`` (no JS, no CDN —
+Writes three self-contained pages that share ``docs/style.css`` (no JS, no CDN —
 works fully offline):
 
-  * ``docs/index.html``   — leaderboard, difficulty gradient, skill drill-down,
-                            and the "Key findings" narrative.
-  * ``docs/gallery.html`` — the human-evaluator gallery (reference vs model
-                            render, with tree-match + visual scores + verdict).
+  * ``docs/index.html``    — leaderboard, key findings, prompting conditions (2×2),
+                             difficulty gradient, skill drill-down, tiered grading.
+  * ``docs/failures.html`` — why each failing MVS sample scored 0 (outcome
+                             breakdown, Mol* messages, every failing sample).
+  * ``docs/gallery.html``  — the human-evaluator gallery (reference vs model
+                             render, with tree-match + visual scores + verdict).
 
-All numbers are read from ``docs/scorecard.json`` and ``docs/gallery_data.json``
-— nothing is hard-coded. Publishing is therefore a deliberate, reviewable commit.
+All numbers are read from ``docs/scorecard.json`` and the ``docs/*_data.json``
+files written by ``scripts/build_site_data.py`` — nothing is hard-coded.
+Publishing is therefore a deliberate, reviewable commit.
 
 Python 3.10 compatible: no backslashes inside f-string expressions.
 """
@@ -48,6 +51,12 @@ _SOURCE_REGIME = {
 }
 
 
+OUTCOME_LABELS = {
+    "valid": "valid scene", "invalid_json": "invalid JSON", "not_mvs": "not an MVS tree",
+    "invalid_mvs": "invalid MVS", "load_failed": "failed to load",
+}
+
+
 # --------------------------------------------------------------------------- #
 # Data helpers
 # --------------------------------------------------------------------------- #
@@ -76,6 +85,18 @@ def _task_regimes() -> dict[str, str]:
 def mvs_f1(m: dict) -> float | None:
     d = m.get("by_category", {}).get("mvs")
     return d["mean_f1"] if d else None
+
+
+def has_mvs(m: dict) -> bool:
+    return mvs_f1(m) is not None
+
+
+def slug(name: str) -> str:
+    return name.replace("/", "_")
+
+
+def short(name: str) -> str:
+    return name.split("/")[-1]
 
 
 def is_open(name: str) -> bool:
@@ -141,6 +162,7 @@ def header(active: str) -> str:
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="index.html" class="{cls('index')}">Leaderboard</a>
+      <a href="failures.html" class="{cls('failures')}">Failures</a>
       <a href="gallery.html" class="{cls('gallery')}">Evaluator gallery</a>
       <a href="https://github.com/dbolser/MolBench" class="gh"
          rel="noopener">GitHub</a>
@@ -151,7 +173,8 @@ def header(active: str) -> str:
 
 def footer() -> str:
     repro = (
-        "python -m molbench.runner --models &lt;spec&gt; --samples 5"
+        "python -m molbench.runner --models &lt;spec&gt; --categories mvs --validate "
+        "--escalate --judge claude-opus-4-8"
     )
     return f"""<footer class="site-footer">
   <div class="wrap">
@@ -179,39 +202,39 @@ def footer() -> str:
 # Leaderboard page sections
 # --------------------------------------------------------------------------- #
 def hero(data: dict, ranked: list) -> str:
-    n_models = len(ranked)
-    n_tasks = data.get("n_tasks", "?")
-    n_samples = data.get("samples", 1)
+    meta = data.get("meta", {})
+    mt = meta.get("mvs_track", {})
+    at = meta.get("api_track", {})
+    llms = [(n, m) for n, m in ranked if has_mvs(m) and m.get("spec") != "baseline"]
 
     leader_name, leader_m = ranked[0]
     leader_f1 = mvs_f1(leader_m)
 
     # Best open-weight model by MVS F1, and its cost.
-    open_models = [(n, m) for n, m in ranked if is_open(n)]
+    open_models = [(n, m) for n, m in llms if is_open(n)]
     best_open = open_models[0] if open_models else None
 
     stats = []
-    stats.append(("Models evaluated", f"{n_models}", "open &amp; closed"))
+    stats.append(("LLMs evaluated", f"{len(llms)}", "open &amp; closed"))
     stats.append(
-        ("Benchmark tasks", f"{n_tasks}",
-         f"&times;{n_samples} samples each"))
+        ("Benchmark tasks", f"{mt.get('n_tasks', '?')}&thinsp;+&thinsp;{at.get('n_tasks', '?')}",
+         f"MVS &times;{mt.get('samples', 1)} &middot; API &times;{at.get('samples', '?')}"))
 
-    short_leader = leader_name.split("/")[-1]
     stats.append(
         ("MVS&nbsp;F1 leader", f"{leader_f1:.2f}",
-         html.escape(short_leader)))
+         html.escape(short(leader_name))))
 
-    if best_open is not None:
+    if best_open is not None and best_open[0] != leader_name:
         bo_name, bo_m = best_open
-        bo_short = bo_name.split("/")[-1]
         bo_cost = bo_m.get("cost_usd")
-        cost_note = ""
+        cost_note = html.escape(short(bo_name))
         if isinstance(bo_cost, (int, float)):
-            cost_note = f"{html.escape(bo_short)} at {fmt_cost(bo_cost)}"
-        else:
-            cost_note = html.escape(bo_short)
-        stats.append(
-            ("Top open model", f"{mvs_f1(bo_m):.2f}", cost_note))
+            cost_note += f" at {fmt_cost(bo_cost)}"
+        stats.append(("Top open model", f"{mvs_f1(bo_m):.2f}", cost_note))
+    else:
+        valid = [m["valid_scene"] for _, m in llms if m.get("valid_scene") is not None]
+        stats.append(("Median valid scenes", fmt_pct(statistics.median(valid)) if valid else "&mdash;",
+                      "Mol* accepts the scene"))
 
     cards = []
     for label, value, sub in stats:
@@ -241,39 +264,73 @@ def hero(data: dict, ranked: list) -> str:
 </section>"""
 
 
-def leaderboard_table(ranked: list) -> str:
+def _valid_cell(name: str, m: dict) -> str:
+    """Valid-scene % with the outcome breakdown as a tooltip, linked to the details."""
+    vs = m.get("valid_scene")
+    oc = m.get("outcomes")
+    if vs is None or not oc:
+        return "&mdash;"
+    tip = html.escape(" · ".join(f"{OUTCOME_LABELS[o]}: {n}" for o, n in oc.items() if n))
+    anchor = "spec" if m.get("spec") == "baseline" else f"spec-{slug(name)}"
+    return f"<a href='failures.html#{anchor}' title='{tip}'>{fmt_pct(vs)}</a>"
+
+
+def leaderboard_table(data: dict, ranked: list) -> str:
+    meta = data.get("meta", {})
     leader_name = ranked[0][0]
     rows = []
-    for i, (name, m) in enumerate(ranked):
-        rank = i + 1
+    rank = 0
+    notes: dict[str, int] = {}
+
+    def mark(text: str) -> str:
+        notes.setdefault(text, len(notes) + 1)
+        return f"<sup>{notes[text]}</sup>"
+
+    for name, m in ranked:
+        scored = has_mvs(m)
+        if scored:
+            rank += 1
         leader_cls = " class='leader'" if name == leader_name else ""
         open_badge = (
             "<span class='badge open'>open</span>" if is_open(name)
             else "<span class='badge closed'>closed</span>"
         )
+        sup = ""
+        if m.get("route_note"):
+            sup = mark("Ran via OpenRouter in October (the July API-track result used the "
+                       "provider's native API). Treated as the same model.")
+        if m.get("mvs_not_run"):
+            sup = mark("Not re-run in October: OpenRouter's upstream (Mistral) rate-limited "
+                       "every attempt (11 tries). MVS columns blank; API track from July.")
         spec = m.get("spec", "")
         spec_line = ""
         if spec and spec != "baseline":
             spec_line = f"<span class='spec'>{html.escape(spec)}</span>"
         rows.append(
             f"<tr{leader_cls}>"
-            f"<td class='rank'>{rank}</td>"
-            f"<td class='model'>{html.escape(name)}{open_badge}{spec_line}</td>"
+            f"<td class='rank'>{rank if scored else '&mdash;'}</td>"
+            f"<td class='model'>{html.escape(name)}{sup}{open_badge}{spec_line}</td>"
             f"<td class='metric-primary'>{track_cell(m, 'mvs')}</td>"
-            f"<td>{fmt_pct(m.get('parse_success'))}</td>"
-            f"<td>{fmt_f1(m.get('cond_f1'))}</td>"
+            f"<td>{fmt_f1(m.get('validated_f1'))}</td>"
+            f"<td>{_valid_cell(name, m)}</td>"
+            f"<td>{fmt_f1(m.get('cond_f1')) if scored else '&mdash;'}</td>"
             f"<td>{track_cell(m, 'api_calling')}</td>"
             f"<td>{fmt_cost(m.get('cost_usd'))}</td>"
             f"<td>{fmt_speed(m)}</td>"
             "</tr>"
         )
     rows_html = NL.join(rows)
+    notes_html = " ".join(f"<sup>{i}</sup>&nbsp;{html.escape(t)}" for t, i in notes.items())
+    mt = meta.get("mvs_track", {})
+    at = meta.get("api_track", {})
+    api_when = (at.get("run") or "")[:10]
 
     return f"""<section class="wrap" aria-label="Leaderboard">
   <h2>Leaderboard</h2>
   <p class="section-sub">Two tracks, two skills. <b>MVS&nbsp;F1</b> (the primary
      ranking) scores <i>scene authoring</i> &mdash; the declarative MolViewSpec
-     tree a model emits, matched against the reference (parse failures count as 0).
+     tree a model emits, matched against the reference by the atoms each selection
+     picks out. A scene scores 0 unless Mol* would show it.
      <b>API&nbsp;F1</b> scores <i>tool control</i> &mdash; the imperative
      Mol*/PDBeMolstar calls that drive a live viewer (superpose, hide waters, spin,
      focus), the operations a static scene cannot express. The leader is
@@ -285,7 +342,8 @@ def leaderboard_table(ranked: list) -> str:
           <th class="left">#</th>
           <th class="left">Model</th>
           <th>MVS&nbsp;F1</th>
-          <th>Parse&nbsp;%</th>
+          <th>Validated&nbsp;F1</th>
+          <th>Valid&nbsp;scene</th>
           <th>Cond&nbsp;F1</th>
           <th>API&nbsp;F1</th>
           <th>Cost</th>
@@ -298,57 +356,114 @@ def leaderboard_table(ranked: list) -> str:
     </table>
   </div>
   <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
-    <b>MVS&nbsp;F1</b>: primary scene-authoring score (parse failures = 0).
-    Engine-neutral <i>by design</i> &mdash; though Mol* is currently the only
-    viewer that implements MolViewSpec. <b>Parse&nbsp;%</b>: share of samples that
-    emitted valid output. <b>Cond&nbsp;F1</b>: scene quality <i>given</i> valid
-    output &mdash; the gap from MVS&nbsp;F1 measures how much a model is dragged
-    down by malformed JSON rather than visualization error. <b>API&nbsp;F1</b>:
-    the tool-control track &mdash; imperative PDBeMolstar calls (superposition,
-    component toggles, camera) that specify a <i>sequence of actions</i> on a live
-    viewer rather than a scene. <b>Parse&nbsp;%</b> and <b>Cond&nbsp;F1</b> reflect
-    the primary MVS run. <span class="pm">&plusmn;</span> is the spread across
-    tasks; costs use provider list prices.
+    <b>MVS&nbsp;F1</b>: primary scene-authoring score, {mt.get('n_tasks', '?')} tasks,
+    {mt.get('samples', 1)} sample each, run {html.escape(mt.get('run', '?'))}.
+    Engine-neutral <i>by design</i> &mdash; though Mol* is currently the only viewer
+    that implements MolViewSpec. <b>Validated&nbsp;F1</b>: the same scenes after the
+    render-and-judge cascade (see <a href="#tiered">Tiered grading</a>).
+    <b>Valid&nbsp;scene</b>: share of samples Mol* accepts and renders; the rest are
+    invalid JSON, invalid MVS or failed to load, and score 0 &mdash; hover for the
+    breakdown, click for <a href="failures.html">every failing sample</a>.
+    <b>Cond&nbsp;F1</b>: scene quality over valid scenes only &mdash; the gap from
+    MVS&nbsp;F1 is how much a model loses to broken output rather than to
+    visualization error. <b>API&nbsp;F1</b>: the tool-control track, not re-run in
+    October: these are the {api_when} results ({at.get('n_tasks', '?')} tasks,
+    &times;{at.get('samples', '?')} samples, same grader). <b>Cost</b>: the October
+    MVS run at provider list prices (&mdash; = not reported). <b>Speed</b>: seconds
+    per call from the July run (October timings include rendering).
+    <span class="pm">&plusmn;</span> is the spread across tasks.
   </p>
+  <p class="section-sub" style="font-size:.85rem">{notes_html}</p>
 </section>"""
 
 
-def findings(ranked: list) -> str:
+def findings(ranked: list, cond: dict | None = None) -> str:
     """Key-findings cards, with numbers pulled live from the scorecard."""
-    by_name = dict(ranked)
-
     # The findings narrative is about the LLMs; the non-LLM rules baseline
-    # (spec == "baseline") is a reference floor, not a competitor, so exclude it
-    # from the cluster/spread statistics.
-    llms = [(n, m) for n, m in ranked if m.get("spec") != "baseline"]
+    # (spec == "baseline") is a reference floor, not a competitor, and a model with
+    # no MVS run has nothing to say here.
+    llms = [(n, m) for n, m in ranked if m.get("spec") != "baseline" and has_mvs(m)]
 
-    # Conditional-F1 cluster bounds (LLMs that produced valid output).
-    cond_vals = [m["cond_f1"] for _, m in llms
-                 if m.get("cond_f1") and m.get("parse_success")]
+    # Conditional-F1 cluster bounds (LLMs that produced valid scenes).
+    cond_vals = [m["cond_f1"] for _, m in llms if m.get("cond_f1") and m.get("valid_scene")]
     cond_lo = min(cond_vals) if cond_vals else 0.0
     cond_hi = max(cond_vals) if cond_vals else 0.0
 
-    # Unconditional MVS spread across the LLMs.
-    mvs_vals = [mvs_f1(m) for _, m in llms if mvs_f1(m) is not None]
+    # Unconditional MVS spread across the LLMs, and how well validity alone predicts it.
+    mvs_vals = [mvs_f1(m) for _, m in llms]
     mvs_spread = (max(mvs_vals) - min(mvs_vals)) if mvs_vals else 0.0
+    pairs = [(m["valid_scene"], mvs_f1(m)) for _, m in llms if m.get("valid_scene") is not None]
+    corr = (statistics.correlation(*zip(*pairs)) if len(pairs) > 2 else None)
+
+    # Why the failures fail: invalid JSON vs a parsed scene Mol* rejects.
+    tot = {o: sum((m.get("outcomes") or {}).get(o, 0) for _, m in llms) for o in OUTCOME_LABELS}
+    n_fail = sum(v for o, v in tot.items() if o != "valid")
 
     # Format-unreliability exemplar: the LLM with the lowest overall MVS F1,
     # chosen dynamically so this finding can never contradict the table. The point
     # is the *gap* between its conditional competence and its unconditional score.
-    exemplar = min(((n, m) for n, m in llms if mvs_f1(m) is not None),
-                   key=lambda nm: mvs_f1(nm[1]), default=(None, None))
-    ex_name, ex_m = exemplar
-    ex_mvs = mvs_f1(ex_m) if ex_m else None
-    ex_cond = ex_m.get("cond_f1") if ex_m else None
-    ex_parse = ex_m.get("parse_success") if ex_m else None
+    ex_name, ex_m = min(llms, key=lambda nm: mvs_f1(nm[1]), default=(None, None))
 
-    # Open models near the closed frontier-small tier.
-    gemma = by_name.get("google/gemma-3-27b-it")
-    gemma_cost = fmt_cost(gemma.get("cost_usd")) if gemma else "&mdash;"
+    cond_lo_s = f"{cond_lo:.2f}"
+    cond_hi_s = f"{cond_hi:.2f}"
+    mvs_spread_s = f"{mvs_spread:.2f}"
+
+    ex_p = ""
+    if ex_name and ex_m.get("cond_f1") is not None:
+        oc = ex_m.get("outcomes") or {}
+        ex_p = (f"<p><code>{html.escape(ex_name)}</code> is <b>last among the LLMs</b> "
+                f"(~{mvs_f1(ex_m):.2f} MVS&nbsp;F1) yet scores ~{ex_m['cond_f1']:.2f} "
+                "Cond&nbsp;F1 &mdash; competent when its scene is valid, but it usually "
+                f"isn&rsquo;t (valid scene {fmt_pct(ex_m.get('valid_scene'))}; "
+                f"{oc.get('invalid_json', 0)} of {sum(oc.values())} samples are invalid "
+                "JSON).</p>")
+    corr_s = (f" Valid-scene rate alone correlates with MVS&nbsp;F1 at "
+              f"<b>r&nbsp;=&nbsp;{corr:.3f}</b>." if corr is not None else "")
+    split_s = ""
+    if n_fail:
+        split_s = (f" Of the {n_fail} failed samples, <b>{tot['invalid_json']}</b> are "
+                   f"invalid JSON and {tot['invalid_mvs']} are JSON that Mol* rejects as "
+                   f"MVS ({tot['load_failed']} more failed to load) &mdash; "
+                   "<a href='failures.html'>details</a>.")
+    f1 = (
+        "<div class='finding headline'>"
+        "<div class='fnum'>FINDING 01 &middot; THE HEADLINE</div>"
+        "<h3>Output validity, not competence, drives the ranking</h3>"
+        "<p>The MVS ranking is largely a <b>valid-output</b> ranking. Over valid "
+        f"scenes, every LLM clusters at <b>{cond_lo_s}&ndash;{cond_hi_s}</b> Cond&nbsp;F1 "
+        f"&mdash; yet the unconditional spread is ~<b>{mvs_spread_s}</b>.{corr_s}"
+        f"{split_s}</p>"
+        + ex_p +
+        "</div>"
+    )
+
+    # Finding 02: open vs closed, computed.
+    opens = [(n, m) for n, m in llms if is_open(n)]
+    closeds = [(n, m) for n, m in llms if not is_open(n)]
+    f2 = ""
+    if opens and closeds:
+        (on, om), (cn, cm) = opens[0], closeds[0]
+        verb = "beats" if mvs_f1(om) > mvs_f1(cm) else "trails"
+        cost_s = ""
+        oc_, cc_ = om.get("cost_usd"), cm.get("cost_usd")
+        if isinstance(oc_, (int, float)) and isinstance(cc_, (int, float)) and 0 < oc_ < cc_:
+            cost_s = (f" at <b>{cc_ / oc_:.0f}&times; lower cost</b> ({fmt_cost(oc_)} vs "
+                      f"{fmt_cost(cc_)} for the run)")
+        tail = ", ".join(f"{html.escape(short(n))} ({mvs_f1(m):.2f})" for n, m in opens[-2:])
+        f2 = (
+            "<div class='finding'>"
+            "<div class='fnum'>FINDING 02</div>"
+            "<h3>The best open model is at the closed frontier-small tier</h3>"
+            f"<p>The top open model, <b>{html.escape(short(on))}</b> ({mvs_f1(om):.2f}), "
+            f"{verb} the best closed model, {html.escape(short(cn))} ({mvs_f1(cm):.2f}){cost_s}. "
+            f"But &ldquo;open&rdquo; spans a wide range: {tail} sit at the bottom, "
+            "mostly on invalid output.</p>"
+            "</div>"
+        )
 
     # Finding 03: is the per-regime model spread actually growing with difficulty?
     # Compute it live — with a wider panel this can flip, because format-unreliable
-    # models inject parse-driven spread that swamps the difficulty signal.
+    # models inject validity-driven spread that swamps the difficulty signal.
     regimes = _task_regimes()
     reg_order = GRADIENT
     reg_spread: dict[str, float] = {}
@@ -363,41 +478,6 @@ def findings(ranked: list) -> str:
     grows = (len(reg_spread) == 3
              and reg_spread[reg_order[0]] <= reg_spread[reg_order[1]] <= reg_spread[reg_order[2]])
 
-    cond_lo_s = f"{cond_lo:.2f}"
-    cond_hi_s = f"{cond_hi:.2f}"
-    mvs_spread_s = f"{mvs_spread:.2f}"
-
-    ex_p = ""
-    if ex_name and ex_mvs is not None and ex_cond is not None:
-        parse_s = f"{ex_parse * 100:.0f}%" if ex_parse is not None else "low"
-        ex_p = (f"<p><code>{html.escape(ex_name)}</code> is <b>last among the LLMs</b> "
-                f"(~{ex_mvs:.2f} MVS&nbsp;F1) yet scores ~{ex_cond:.2f} Cond&nbsp;F1 "
-                "&mdash; competent when it emits valid JSON, but it usually "
-                f"doesn&rsquo;t (Parse&nbsp;{parse_s}).</p>")
-    f1 = (
-        "<div class='finding headline'>"
-        "<div class='fnum'>FINDING 01 &middot; THE HEADLINE</div>"
-        "<h3>Format reliability, not competence, drives the ranking</h3>"
-        "<p>The MVS ranking is largely a <b>JSON-validity</b> ranking. Conditional "
-        f"on producing valid output, every LLM clusters tightly at "
-        f"<b>{cond_lo_s}&ndash;{cond_hi_s}</b> Cond&nbsp;F1 &mdash; yet the "
-        f"unconditional spread is ~<b>{mvs_spread_s}</b>, driven almost entirely by "
-        "Parse&nbsp;%.</p>"
-        + ex_p +
-        "</div>"
-    )
-
-    f2 = (
-        "<div class='finding'>"
-        "<div class='fnum'>FINDING 02</div>"
-        "<h3>Open weights reached the closed frontier-small tier</h3>"
-        f"<p>Open models match the small closed frontier at <b>6&ndash;19&times; lower "
-        f"cost</b> &mdash; Gemma-3-27B at {gemma_cost}, DeepSeek-V3.2 close behind. "
-        "But &ldquo;open&rdquo; spans a wide range: Qwen3-30B and gpt-oss-20b still "
-        "lag well behind on reliability.</p>"
-        "</div>"
-    )
-
     if grows:
         f3_head = "A difficulty gradient that discriminates"
         f3_body = ("Harder regimes separate models <b>more</b> &mdash; model spread "
@@ -409,9 +489,8 @@ def findings(ranked: list) -> str:
         f3_head = "Regime spread is dominated by output reliability"
         f3_body = ("Across regimes the model spread runs "
                    f"~{min(vals):.2f}&ndash;{max(vals):.2f}; in the expanded panel it "
-                   "tracks <b>output-format reliability</b> &mdash; a few models fail "
-                   "to emit valid JSON &mdash; more than task difficulty. The clean "
-                   "difficulty gradient is visible among the format-reliable models.")
+                   "tracks <b>output validity</b> &mdash; a few models rarely emit a "
+                   "valid scene &mdash; more than task difficulty.")
     else:
         f3_head = "A difficulty gradient that discriminates"
         f3_body = "Model performance separates across the three regimes."
@@ -436,128 +515,278 @@ def findings(ranked: list) -> str:
         "</div>"
     )
 
+    f5 = f6 = ""
+    if cond:
+        cs = conditions_summary(cond)
+        if cs.get("n_models"):
+            drop = cs["biggest_valid_drop"]
+            f5 = (
+                "<div class='finding'>"
+                "<div class='fnum'>FINDING 05</div>"
+                "<h3>Grounding dossiers don&rsquo;t lift scores</h3>"
+                "<p>Adding a frozen fact sheet about each structure (chains, ligands, "
+                f"numbering) changes MVS&nbsp;F1 by <b>{cs['mean_delta']:+.3f}</b> on "
+                f"average across {cs['n_models']} models. On the {cs['pooled_n']} "
+                "task&times;model pairs whose scene is valid in both runs the effect is "
+                f"<b>{cs['pooled_delta']:+.3f}</b>. The drop comes from more invalid "
+                "output on the longer prompt, worst for "
+                f"{html.escape(short(drop[0]))} (valid scenes {fmt_pct(drop[1])} &rarr; "
+                f"{fmt_pct(drop[2])}). <a href='#conditions'>The 2&times;2 &darr;</a></p>"
+                "</div>"
+            )
+        if cs.get("bare_n"):
+            f6 = (
+                "<div class='finding'>"
+                "<div class='fnum'>FINDING 06</div>"
+                "<h3>Without the MVS reference, no model writes a valid scene</h3>"
+                f"<p>With only the output contract (&ldquo;bare&rdquo;), "
+                f"<b>{cs['bare_valid']} of {cs['bare_n']}</b> scenes are valid across "
+                f"{cs['bare_models']} models, with or without a dossier. Mostly the JSON "
+                "parses but Mol* rejects it &mdash; parameters written straight onto the "
+                "node instead of under <code>params</code>. Models don&rsquo;t know MVS "
+                "from pretraining.</p>"
+                "</div>"
+            )
+
+    cards = NL.join(c for c in (f1, f2, f3, f4, f5, f6) if c)
     return f"""<section class="wrap" aria-label="Key findings">
   <h2>Key findings</h2>
   <p class="section-sub">What the leaderboard actually tells you &mdash; read
      these before the table.</p>
   <div class="findings">
-{f1}
-{f2}
-{f3}
-{f4}
+{cards}
   </div>
 </section>"""
+
+
+def conditions_summary(cond: dict) -> dict:
+    """Headline numbers of the 2×2, from ``conditions_data.json``."""
+    rows = cond.get("models", {})
+    paired = {n: r for n, r in rows.items() if "dossier" in r}
+    s = cond.get("summary", {})
+    out: dict = {"n_models": len(paired), "mean_delta": s.get("mean_delta"),
+                 "pooled_n": s.get("pooled_both_valid", {}).get("n"),
+                 "pooled_delta": s.get("pooled_both_valid", {}).get("delta"),
+                 "pooled": s.get("pooled_both_valid", {}),
+                 "mean_lookup_delta": s.get("mean_lookup_delta"),
+                 "n_lookup": cond.get("n_lookup_tasks")}
+    if paired:
+        n = max(paired, key=lambda k: (paired[k]["spec"]["valid_scene"]
+                                       - paired[k]["spec_grounded"]["valid_scene"], k))
+        out["biggest_valid_drop"] = (n, paired[n]["spec"]["valid_scene"],
+                                     paired[n]["spec_grounded"]["valid_scene"])
+        out["lookup_gainers"] = sorted(
+            ((k, r["dossier_lookup"]) for k, r in paired.items()
+             if (r["dossier_lookup"]["delta"] or 0) >= 0.10),
+            key=lambda kv: -kv[1]["delta"])
+        out["lookup_losers"] = sum((r["dossier_lookup"]["delta"] or 0) <= -0.10
+                                   for r in paired.values())
+    bare = [r[c] for r in rows.values() for c in ("bare", "bare_grounded") if c in r]
+    out["bare_models"] = sum("bare" in r for r in rows.values())
+    out["bare_n"] = sum(sum(b["outcomes"].values()) for b in bare)
+    out["bare_valid"] = sum(b["outcomes"]["valid"] for b in bare)
+    return out
+
+
+def _delta(v) -> str:
+    return "&mdash;" if v is None else f"{v:+.3f}"
+
+
+def conditions_section(cond: dict | None, ranked: list) -> str:
+    if not cond or not cond.get("models"):
+        return ""
+    rows = cond["models"]
+    cs = conditions_summary(cond)
+    order = [n for n, _ in ranked if n in rows]
+    body = []
+    for n in order:
+        r = rows[n]
+        sp, gr = r["spec"], r.get("spec_grounded")
+        if not gr:
+            continue
+        d, dl = r["dossier"], r["dossier_lookup"]
+        body.append(
+            "<tr>"
+            f"<td class='model' title='{html.escape(n)}'>{html.escape(short(n))}</td>"
+            f"<td>{sp['mvs_f1']:.3f}</td><td>{gr['mvs_f1']:.3f}</td>"
+            f"<td class='metric-primary'>{_delta(d['delta'])}</td>"
+            f"<td><a href='failures.html#spec-{slug(n)}'>{fmt_pct(sp['valid_scene'])}</a></td>"
+            f"<td><a href='failures.html#spec_grounded-{slug(n)}'>{fmt_pct(gr['valid_scene'])}</a></td>"
+            f"<td>{_delta(d['delta_both_valid'])} <span class='pm'>(n={d['n_both_valid']})</span></td>"
+            f"<td>{_delta(dl['delta'])}</td>"
+            "</tr>")
+    bare = []
+    for n in order:
+        r = rows[n]
+        if "bare" not in r:
+            continue
+        cells = "".join(
+            f"<td>{fmt_pct(r[c]['valid_scene'])}</td><td>{r[c]['mvs_f1']:.3f}</td>"
+            if c in r else "<td>&mdash;</td><td>&mdash;</td>"
+            for c in ("spec", "bare", "bare_grounded"))
+        bare.append(f"<tr><td class='model' title='{html.escape(n)}'>{html.escape(short(n))}</td>"
+                    f"{cells}</tr>")
+    body_html, bare_html = NL.join(body), NL.join(bare)
+
+    pooled = cs["pooled"]
+    gainers = cs.get("lookup_gainers", [])
+    if gainers:
+        names = ", ".join(
+            f"{html.escape(short(k))} ({v['delta']:+.2f}; {_delta(v['delta_both_valid'])} "
+            f"on the {v['n_both_valid']} valid in both)" for k, v in gainers)
+        trigger = (f"{len(gainers)} model{'s' if len(gainers) > 1 else ''} pass +0.10 there "
+                   f"&mdash; {names} &mdash; and {cs['lookup_losers']} lose as much. With "
+                   f"{cs['n_lookup']} tasks and one sample, one task flipping between invalid "
+                   f"and valid moves the mean by ~{0.7 / cs['n_lookup']:.2f}; the gains come "
+                   "from such flips, not from better answers.")
+    else:
+        trigger = "No model gains +0.10 there."
+    drop = cs["biggest_valid_drop"]
+    return f"""<section class="wrap" aria-label="Prompting conditions" id="conditions">
+  <h2>Prompting conditions (the 2&times;2)</h2>
+  <p class="section-sub">Every model above ran with the <b>spec</b> prompt: the output
+     contract plus a neutral MolViewSpec reference. We also ran it with a
+     <b>dossier</b> &mdash; a grounding pack of facts about the task&rsquo;s structure
+     (chains, residue ranges, ligand codes and atom names, SIFTS/UniProt numbering,
+     ClinVar positions), built offline and frozen with the task. And a <b>bare</b>
+     prompt, the output contract only, on three models. {cond.get('n_tasks', '?')}
+     MVS tasks, {cond.get('samples', 1)} sample, run {html.escape(cond.get('run', '?'))}.</p>
+  <div class="callout">
+    <b>Dossiers don&rsquo;t help.</b> Mean change in MVS&nbsp;F1: {_delta(cs['mean_delta'])}
+    over {cs['n_models']} models. On the {pooled.get('n')} task&times;model pairs valid in
+    both runs: {_delta(pooled.get('delta'))} ({pooled.get('better')} better,
+    {pooled.get('worse')} worse, {pooled.get('same')} unchanged). The overall drop is
+    more invalid output on the longer prompt (worst:
+    {html.escape(short(drop[0]))}, valid scenes {fmt_pct(drop[1])} &rarr; {fmt_pct(drop[2])}).
+    On the {cs['n_lookup']} lookup-heavy tasks (clinical and resolve-by-name) the mean
+    change is {_delta(cs['mean_lookup_delta'])}. {trigger}
+    <b>Bare:</b> {cs['bare_valid']} valid scenes of {cs['bare_n']}.
+  </div>
+  <div class="table-scroll" style="margin-top:1.5rem">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th class="left">Model</th>
+          <th>Spec&nbsp;F1</th>
+          <th>+Dossier&nbsp;F1</th>
+          <th>&Delta;</th>
+          <th>Valid (spec)</th>
+          <th>Valid (+dossier)</th>
+          <th>&Delta; valid in both</th>
+          <th>&Delta; lookup tasks</th>
+        </tr>
+      </thead>
+      <tbody>
+{body_html}
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
+     <b>&Delta;</b> = dossier &minus; spec, MVS&nbsp;F1 (tree match, no rendering).
+     <b>&Delta; valid in both</b>: mean paired change over the tasks whose scene Mol*
+     accepts in both runs (n tasks). <b>&Delta; lookup tasks</b>: all
+     {cs['n_lookup']} clinical and resolve-by-name tasks, valid or not.</p>
+  <h3 style="margin-top:2rem">Bare prompt (no MVS reference)</h3>
+  <div class="table-scroll">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th class="left">Model</th>
+          <th>Valid (spec)</th><th>F1 (spec)</th>
+          <th>Valid (bare)</th><th>F1 (bare)</th>
+          <th>Valid (bare+dossier)</th><th>F1 (bare+dossier)</th>
+        </tr>
+      </thead>
+      <tbody>
+{bare_html}
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1rem;font-size:.85rem">
+     Bare scenes mostly parse as JSON but are invalid MVS &mdash; see the
+     <a href="failures.html#messages">Mol* messages</a>. Without the reference, models
+     don&rsquo;t know the MVS tree format.</p>
+</section>"""
+
+
+def _matrix(rows: list[tuple[str, dict]], cols: list[tuple[str, str]], value) -> str:
+    """Models as rows, ``cols`` = [(key, header html)]; best value per column marked."""
+    vals = {n: {k: value(m, k) for k, _ in cols} for n, m in rows}
+    best = {k: max((v[k] for v in vals.values() if v[k] is not None), default=None)
+            for k, _ in cols}
+    head_cells = "".join(f"<th>{h}</th>" for _, h in cols)
+    body = []
+    for n, _ in rows:
+        cells = []
+        for k, _ in cols:
+            v = vals[n][k]
+            if v is None:
+                cells.append("<td>&mdash;</td>")
+            else:
+                cls = " class='best'" if v == best[k] else ""
+                cells.append(f"<td{cls}>{v:.3f}</td>")
+        body.append(f"<tr><td class='model' title='{html.escape(n)}'>{html.escape(short(n))}</td>"
+                    f"{''.join(cells)}</tr>")
+    body_html = NL.join(body)
+    return f"""  <div class="table-scroll">
+    <table class="matrix">
+      <thead><tr><th class="left">Model</th>{head_cells}</tr></thead>
+      <tbody>
+{body_html}
+      </tbody>
+    </table>
+  </div>"""
 
 
 def regime_table(ranked: list) -> str:
     """Mean F1 per difficulty regime — shows the gradient and where models separate."""
     reg = _task_regimes()
-    cols = [(n, m) for n, m in ranked if m.get("by_category", {}).get("mvs")]
-    if not reg or not cols:
+    rows = [(n, m) for n, m in ranked if has_mvs(m)]
+    if not reg or not rows:
         return ""
-    head_cells = "".join(
-        f"<th>{html.escape(n.split('/')[-1])}</th>" for n, _ in cols
-    )
-    body = []
-    other_header = False
+    cols = []
     for rg in REGIMES:
         n_tasks = sum(1 for v in reg.values() if v == rg)
-        if not n_tasks:
-            continue
-        vals = {}
-        for n, m in cols:
-            fs = [t["f1"] for t in m["tasks"] if reg.get(t["id"]) == rg]
-            vals[n] = statistics.fmean(fs) if fs else None
-        if all(v is None for v in vals.values()):
-            continue  # no model in this scorecard ran these tasks
-        if rg in OTHER_REGIMES and not other_header:
-            other_header = True
-            body.append(f"<tr><td class='rowhead' colspan='{len(cols) + 1}'><i>Other skills "
-                        "(not part of the gradient)</i></td></tr>")
-        best = max((v for v in vals.values() if v is not None), default=None)
-        cells = []
-        for n, _ in cols:
-            v = vals[n]
-            if v is None:
-                cells.append("<td>&mdash;</td>")
-            else:
-                cls = " class='best'" if v == best else ""
-                cells.append(f"<td{cls}>{v:.3f}</td>")
-        cells_html = "".join(cells)
-        body.append(
-            f"<tr><td class='rowhead'>{rg} <span class='pm'>(n={n_tasks})</span>"
-            f"</td>{cells_html}</tr>"
-        )
-    body_html = NL.join(body)
-    other_note = (" Rows under <i>Other skills</i> test a\n     different ability and are not "
-                  "ordered by difficulty." if other_header else "")
+        ran = any(reg.get(t["id"]) == rg for _, m in rows for t in m["tasks"])
+        if n_tasks and ran:
+            other = " <span class='pm'>(other)</span>" if rg in OTHER_REGIMES else ""
+            cols.append((rg, f"{html.escape(rg)}<br><span class='pm'>n={n_tasks}</span>{other}"))
+
+    def value(m, rg):
+        fs = [t["f1"] for t in m["tasks"] if reg.get(t["id"]) == rg]
+        return statistics.fmean(fs) if fs else None
+
+    other_note = (" Columns marked <i>other</i> test a different skill and are not "
+                  "ordered by difficulty." if any(c in OTHER_REGIMES for c, _ in cols) else "")
     return f"""<section class="wrap" aria-label="Difficulty gradient">
   <h2>Difficulty gradient by task regime</h2>
   <p class="section-sub">Mean MVS&nbsp;F1 by how the answer key is grounded,
-     easy&nbsp;&rarr;&nbsp;hard. Harder regimes pull the models apart &mdash; the
-     spread you want from a benchmark.{other_note}</p>
-  <div class="table-scroll">
-    <table>
-      <thead><tr><th class="left">Regime</th>{head_cells}</tr></thead>
-      <tbody>
-{body_html}
-      </tbody>
-    </table>
-  </div>
+     easy&nbsp;&rarr;&nbsp;hard, left to right. Best per column highlighted.{other_note}</p>
+{_matrix(rows, cols, value)}
 </section>"""
 
 
 def drilldown(ranked: list) -> str:
-    """A skill x model matrix: 'on selection, model X beats Y'."""
-    skills: list[str] = []
-    for _, m in ranked:
-        for s in m.get("by_skill", {}):
-            if s not in skills:
-                skills.append(s)
+    """A model x skill matrix: 'on selection, model X beats Y'."""
+    rows = [(n, m) for n, m in ranked if m.get("by_skill") and has_mvs(m)]
+    skills = sorted({s for _, m in rows for s in m["by_skill"]})
     if not skills:
         return ""
-    skills.sort()
-    head_cells = "".join(
-        f"<th>{html.escape(n.split('/')[-1])}</th>" for n, _ in ranked
-    )
-    body = []
+    cols = []
     for skill in skills:
-        best = max(
-            (m["by_skill"].get(skill, {}).get("mean_f1", -1) for _, m in ranked),
-            default=-1,
-        )
-        n = next(
-            (m["by_skill"][skill]["n"] for _, m in ranked
-             if skill in m.get("by_skill", {})),
-            0,
-        )
-        cells = []
-        for _, m in ranked:
-            d = m.get("by_skill", {}).get(skill)
-            if not d:
-                cells.append("<td>&mdash;</td>")
-            else:
-                cls = " class='best'" if d["mean_f1"] == best else ""
-                cells.append(f"<td{cls}>{d['mean_f1']:.3f}</td>")
-        cells_html = "".join(cells)
-        body.append(
-            f"<tr><td class='rowhead'>{html.escape(skill)} "
-            f"<span class='pm'>(n={n})</span></td>{cells_html}</tr>"
-        )
-    body_html = NL.join(body)
+        n = next(m["by_skill"][skill]["n"] for _, m in rows if skill in m["by_skill"])
+        cols.append((skill, f"{html.escape(skill)}<br><span class='pm'>n={n}</span>"))
+
+    def value(m, skill):
+        d = m["by_skill"].get(skill)
+        return d["mean_f1"] if d else None
+
     return f"""<section class="wrap" aria-label="Skill drill-down">
   <h2>Where models differ by skill</h2>
-  <p class="section-sub">Mean F1 on tasks tagged with each skill (task count in
-     parentheses). Skills are derived automatically from the reference scene
+  <p class="section-sub">Mean MVS&nbsp;F1 on tasks tagged with each skill (task count
+     under the name). Skills are derived automatically from the reference scene
      tree.</p>
-  <div class="table-scroll">
-    <table>
-      <thead><tr><th class="left">Skill</th>{head_cells}</tr></thead>
-      <tbody>
-{body_html}
-      </tbody>
-    </table>
-  </div>
+{_matrix(rows, cols, value)}
 </section>"""
 
 
@@ -571,20 +800,23 @@ def tiered_grading(esc: dict | None) -> str:
     gallery_url = esc.get("gallery_url", "gallery.html")
     judge = html.escape(esc.get("judge", ""))
     totals = esc.get("totals", {})
+    n_models = totals.get("n_models", len(models))
     lift_lo = esc.get("lift_min", 0.0)
     lift_hi = esc.get("lift_max", 0.0)
     resc = totals.get("rescued", 0)
     escd = totals.get("escalated", 0)
+    r_vis = totals.get("rescued_visual", 0)
+    r_vlm = totals.get("rescued_vlm", 0)
     resc_pct = f"{(resc / escd * 100):.0f}%" if escd else "&mdash;"
+    t1_rule = html.escape(esc.get("t1_rule", "near-identical renders"))
 
     cards = [
-        ("Models analysed", f"{totals.get('n_models', len(models))}",
-         "tiered grading run"),
-        ("Imperfect-tree tasks", f"{escd}", "escalated for a visual check"),
-        ("Rescued by rendering", f"{resc} <span class='pm'>({resc_pct})</span>",
-         "drew the right scene despite a different tree"),
-        ("Tree-match under-credits", f"+{lift_lo:.2f}&ndash;{lift_hi:.2f}",
-         "F1 gap recovered, every model"),
+        ("Models analysed", f"{n_models}", f"spec run, {html.escape(esc.get('run', ''))}"),
+        ("Imperfect valid scenes", f"{escd}", "rendered for a visual check"),
+        ("Rescued", f"{resc} <span class='pm'>({resc_pct})</span>",
+         f"{r_vis} by render match &middot; {r_vlm} by the VLM"),
+        ("Validated &minus; tree F1", f"+{lift_lo:.2f}&ndash;{lift_hi:.2f}",
+         "range across models"),
     ]
     cards_html = NL.join(
         "<div class='stat'>"
@@ -601,44 +833,52 @@ def tiered_grading(esc: dict | None) -> str:
         open_badge = ("<span class='badge open'>open</span>" if is_open(name)
                       else "<span class='badge closed'>closed</span>")
         lift = s["validated_f1"] - s["tree_f1"]
-        rr = f"{s.get('rescued', 0)}/{s.get('escalated', 0)}"
         trows.append(
             "<tr>"
-            f"<td class='model'>{html.escape(name)}{open_badge}</td>"
+            f"<td class='model' title='{html.escape(name)}'>{html.escape(short(name))}"
+            f"{open_badge}</td>"
             f"<td>{s['tree_f1']:.3f}</td>"
             f"<td class='metric-primary'>{s['validated_f1']:.3f}</td>"
             f"<td class='pm'>+{lift:.3f}</td>"
-            f"<td>{rr}</td>"
+            f"<td>{s.get('perfect', 0)}</td>"
+            f"<td>{s.get('escalated', 0)}</td>"
+            f"<td>{s.get('rescued_visual', 0)}</td>"
+            f"<td>{s.get('rescued_vlm', 0)}</td>"
             f"<td>{s.get('confirmed_different', 0)}</td>"
+            f"<td>{s.get('failed', s.get('unparseable', 0))}</td>"
             "</tr>"
         )
     trows_html = NL.join(trows)
 
-    return f"""<section class="wrap" aria-label="Tiered grading">
+    return f"""<section class="wrap" aria-label="Tiered grading" id="tiered">
   <h2>Tiered grading {badge}</h2>
-  <p class="section-sub">Strict tree-matching is <b>conservative</b> &mdash; it
-     penalises scenes that are <i>rendered-equivalent</i> but expressed with a
-     different (sometimes cleaner) tree, e.g. selecting all cysteines with one
-     <code>label_comp_id&nbsp;CYS</code> rather than enumerating them. The
-     <b>escalating grader</b> renders each imperfect prediction and escalates only
-     when needed: <b>tree-match &rarr; visual diff &rarr; VLM judge</b>. Across
-     {totals.get('n_models', len(models))} models it confirmed {resc} of {escd}
-     imperfect-tree tasks ({resc_pct}) as the <i>right</i> scene &mdash; so
-     tree-match <b>under-credits every model</b> by +{lift_lo:.2f} to
-     +{lift_hi:.2f}&nbsp;F1.</p>
+  <p class="section-sub">Tree-matching can under-credit a scene that renders the same
+     through a different tree. The <b>escalating grader</b> renders each valid but
+     imperfect scene and escalates only when needed: <b>tree-match &rarr; visual
+     diff &rarr; VLM judge</b>. The visual diff rescues only near-identical renders
+     ({t1_rule}), because a one-residue highlight changes just a few pixels. Across
+     {n_models} models it confirmed {resc} of {escd} imperfect scenes ({resc_pct}) as
+     the <i>right</i> scene &mdash; {r_vis} rendering the same (&le;&nbsp;2 pixels differ), {r_vlm} judged the same
+     by the VLM. That moves validated F1 by only +{lift_lo:.2f} to
+     +{lift_hi:.2f}: grading selections by the atoms they pick out already credits
+     most equivalent namings.</p>
   <div class="stats">
 {cards_html}
   </div>
   <div class="table-scroll" style="margin-top:1.5rem">
-    <table>
+    <table class="matrix">
       <thead>
         <tr>
           <th class="left">Model</th>
           <th>Tree&nbsp;F1</th>
           <th>Validated&nbsp;F1</th>
           <th>&Delta;</th>
-          <th>Rescued</th>
-          <th>Diff.</th>
+          <th>Perfect</th>
+          <th>Escalated</th>
+          <th>Pixel&nbsp;same</th>
+          <th>VLM&nbsp;same</th>
+          <th>Different</th>
+          <th>Failed</th>
         </tr>
       </thead>
       <tbody>
@@ -650,15 +890,18 @@ def tiered_grading(esc: dict | None) -> str:
      <b>Validated&nbsp;F1</b> uses a <i>rescue-only</i> policy: a task scores 1.0
      when the cascade confirms it renders the reference scene, otherwise it keeps
      its tree-match score (the VLM gives a binary same/different, not a graded
-     score). <b>Rescued</b> = render-equivalent or VLM-"same" of the escalated
-     (imperfect-tree) tasks; <b>Diff.</b> = confirmed genuinely different. See the
-     side-by-side evidence in the
+     score). <b>Perfect</b>: tree match already 1.0, not rendered.
+     <b>Escalated</b>: valid, imperfect scenes that were rendered. <b>Pixel same</b> /
+     <b>VLM same</b>: rescued at the visual-diff / VLM tier. <b>Different</b>: the VLM
+     saw a different scene. <b>Failed</b>: no valid scene, scores 0 (see
+     <a href="failures.html">failures</a>). The VLM verdicts are not yet checked
+     against human raters &mdash; see the side-by-side evidence in the
      <a href="{gallery_url}"><b>evaluator gallery &rarr;</b></a>. Judge: {judge}.</p>
 </section>"""
 
 
 def build_index(data: dict, ranked: list, esc: dict | None = None,
-                banner: str | None = None) -> str:
+                banner: str | None = None, cond: dict | None = None) -> str:
     parts = [
         head("MolBench — Leaderboard",
              "A benchmark measuring whether LLM assistants can author declarative "
@@ -667,14 +910,242 @@ def build_index(data: dict, ranked: list, esc: dict | None = None,
         header("index"),
         banner or "",
         hero(data, ranked),
-        leaderboard_table(ranked),
-        findings(ranked),
+        leaderboard_table(data, ranked),
+        findings(ranked, cond),
+        conditions_section(cond, ranked),
         regime_table(ranked),
         drilldown(ranked),
         tiered_grading(esc),
         footer(),
     ]
     return NL.join(p for p in parts if p)
+
+
+# --------------------------------------------------------------------------- #
+# Failures page
+# --------------------------------------------------------------------------- #
+COND_LABELS = {
+    "spec": "Spec (headline run)",
+    "spec_grounded": "Spec + dossier",
+    "bare": "Bare (no MVS reference)",
+    "bare_grounded": "Bare + dossier",
+}
+RAW_SHOW = 4000
+TREE_SHOW = 6000
+
+
+def _clip(text: str, limit: int) -> str:
+    if len(text) <= limit:
+        return html.escape(text)
+    return (html.escape(text[:limit])
+            + f"\n<span class='pm'>&hellip; {len(text) - limit:,} more characters; full "
+              "text in <a href='failures_data.json'>failures_data.json</a></span>")
+
+
+def _outcome_badge(o: str) -> str:
+    return f"<span class='oc oc-{o}'>{html.escape(OUTCOME_LABELS.get(o, o))}</span>"
+
+
+def _first_line(f: dict) -> str:
+    if f.get("error"):
+        return f["error"]
+    if f.get("mvs_issues"):
+        return " ".join(x.strip() for x in f["mvs_issues"][:2])
+    if f.get("load_error"):
+        return f["load_error"].splitlines()[0]
+    return ""
+
+
+def failure_item(f: dict, raw_missing: bool = False) -> str:
+    o = f["outcome"]
+    parts = [f"<p class='prompt'><b>Prompt:</b> {html.escape(f.get('prompt', ''))}</p>"]
+    if o in ("invalid_json", "not_mvs"):
+        parts.append(f"<p><b>Parser:</b> <code>{html.escape(f.get('error') or '')}</code></p>")
+        raw = f.get("raw")
+        if raw is None:
+            parts.append("<p class='pm'>Raw model text was not archived for this run.</p>")
+        elif not raw:
+            parts.append("<p class='pm'>The model returned an empty response.</p>")
+        else:
+            parts.append(f"<details><summary>Raw model text ({len(raw):,} chars)</summary>"
+                         f"<pre>{_clip(raw, RAW_SHOW)}</pre></details>")
+    else:
+        if o == "invalid_mvs":
+            msgs = html.escape("\n".join(f.get("mvs_issues") or []))
+            parts.append(f"<p><b>Mol* validator:</b></p><pre class='msgs'>{msgs}</pre>")
+        if o == "load_failed":
+            err = f.get("load_error") or ""
+            head_, _, rest = err.partition("\n")
+            parts.append(f"<p><b>Load error:</b> <code>{html.escape(head_)}</code></p>")
+            if rest:
+                parts.append(f"<details><summary>Stack trace</summary>"
+                             f"<pre>{_clip(rest, RAW_SHOW)}</pre></details>")
+        tree = json.dumps(f.get("predicted"), indent=1)
+        parts.append(f"<details><summary>Predicted tree</summary>"
+                     f"<pre>{_clip(tree, TREE_SHOW)}</pre></details>")
+    summary = (f"<code>{html.escape(f['id'])}</code> {_outcome_badge(o)} "
+               f"<span class='why'>{html.escape(_first_line(f)[:160])}</span>")
+    return (f"<details class='fail'><summary>{summary}</summary>"
+            f"<div class='fail-body'>{''.join(parts)}</div></details>")
+
+
+def outcome_table(cond: str, per: dict, order: list[str]) -> str:
+    rows = []
+    for n in order:
+        if n not in per:
+            continue
+        r = per[n]
+        cells = []
+        for o in OUTCOME_LABELS:
+            v = r["outcomes"].get(o, 0)
+            if "failures" in r and v and o != "valid":
+                cells.append(f"<td><a href='#{cond}-{slug(n)}-{o}'>{v}</a></td>")
+            else:
+                cells.append(f"<td>{v if v else '<span class=pm>0</span>'}</td>")
+        name = (f"<a href='#{cond}-{slug(n)}'>{html.escape(n)}</a>" if "failures" in r
+                else html.escape(n))
+        rows.append(f"<tr><td class='model'>{name}</td>{''.join(cells)}"
+                    f"<td class='metric-primary'>{r['mvs_f1']:.3f}</td></tr>")
+    heads = "".join(f"<th>{html.escape(l)}</th>" for l in OUTCOME_LABELS.values())
+    return f"""<div class="table-scroll">
+    <table>
+      <thead><tr><th class="left">Model</th>{heads}<th>MVS&nbsp;F1</th></tr></thead>
+      <tbody>
+{NL.join(rows)}
+      </tbody>
+    </table>
+  </div>"""
+
+
+def messages_section(fd: dict) -> str:
+    conds = [c for c in COND_LABELS if c in fd.get("conditions", {})]
+    heads = "".join(f"<th>{html.escape(COND_LABELS[c].split(' (')[0])}</th>" for c in conds)
+    rows = []
+    for g in fd.get("mvs_messages", []):
+        ex = "".join(f"<li><code>{html.escape(e['text'])}</code> <span class='pm'>&times;{e['n']}</span></li>"
+                     for e in g["examples"])
+        cells = "".join(f"<td>{g['counts'].get(c, 0) or '<span class=pm>0</span>'}</td>"
+                        for c in conds)
+        top = g["examples"][0] if g["examples"] else None
+        top_html = (f"<div class='pm'>most often: <code>{html.escape(top['text'])}</code> "
+                    f"&times;{top['n']}</div>" if top else "")
+        rows.append(f"<tr><td class='left msg'><details><summary><code>{html.escape(g['pattern'])}"
+                    f"</code>{top_html}</summary><ul>{ex}</ul></details></td>{cells}"
+                    f"<td>{g['n_models']}</td></tr>")
+    jrows = []
+    for g in fd.get("json_errors", []):
+        cells = "".join(f"<td>{g['counts'].get(c, 0) or '<span class=pm>0</span>'}</td>"
+                        for c in conds)
+        jrows.append(f"<tr><td class='left msg'><code>{html.escape(g['pattern'])}</code></td>{cells}</tr>")
+    return f"""<section class="wrap" aria-label="Common messages" id="messages">
+  <h2>Most common failure messages</h2>
+  <p class="section-sub">Mol*&rsquo;s validator messages for <b>invalid MVS</b>,
+     grouped with quoted names replaced by &ldquo;&hellip;&rdquo; (click a row for
+     the concrete messages). Counts are issues, across all models; a scene can
+     have several. Mol* stops at the first bad node, so one issue per scene is
+     typical.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th class="left">Mol* message</th>{heads}<th>Models</th></tr></thead>
+      <tbody>
+{NL.join(rows)}
+      </tbody>
+    </table>
+  </div>
+  <p class="section-sub" style="margin-top:1.5rem">JSON parser errors for
+     <b>invalid JSON</b>, with line/column positions removed. &ldquo;No JSON object
+     found&rdquo; is usually an empty response.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th class="left">Parser error</th>{heads}</tr></thead>
+      <tbody>
+{NL.join(jrows)}
+      </tbody>
+    </table>
+  </div>
+</section>"""
+
+
+def build_failures(fd: dict, order: list[str]) -> str:
+    conds = fd.get("conditions", {})
+    tables = []
+    for c in COND_LABELS:
+        if c not in conds:
+            continue
+        per = conds[c]
+        link = any("failures" in r for r in per.values())
+        names = [n for n in order if n in per] + sorted(set(per) - set(order))
+        note = "" if link else (" <span class='pm'>(counts only: every scene fails the "
+                                "same way; see the messages below)</span>")
+        tables.append(f"<h3 id='{c}'>{html.escape(COND_LABELS[c])}{note}</h3>"
+                      + outcome_table(c, per, names))
+    lists = []
+    for c in COND_LABELS:
+        per = conds.get(c, {})
+        names = [n for n in order if n in per and "failures" in per[n]]
+        if not names:
+            continue
+        lists.append(f"<h2 id='{c}-samples'>Failing samples &middot; "
+                     f"{html.escape(COND_LABELS[c])}</h2>")
+        for n in names:
+            r = per[n]
+            nf = len(r["failures"])
+            missing = (" <span class='pm'>Raw text not archived for this run.</span>"
+                       if r.get("raw_missing") else "")
+            blocks = [f"<h3 id='{c}-{slug(n)}'>{html.escape(n)} "
+                      f"<span class='pm'>&middot; {nf} of {r['n']} failed &middot; "
+                      f"{html.escape(COND_LABELS[c])}</span>{missing}</h3>"]
+            if not nf:
+                blocks.append("<p class='pm'>No failures.</p>")
+            for o in OUTCOME_LABELS:
+                fs = [f for f in r["failures"] if f["outcome"] == o]
+                if not fs:
+                    continue
+                blocks.append(f"<h4 id='{c}-{slug(n)}-{o}'>{_outcome_badge(o)} "
+                              f"<span class='pm'>{len(fs)}</span></h4>")
+                blocks.extend(failure_item(f) for f in fs)
+            lists.append(f"<div class='fail-model'>{NL.join(blocks)}</div>")
+    explain = "".join(
+        f"<li>{_outcome_badge(o)} {d}</li>" for o, d in (
+            ("valid", "Mol* accepts and renders the scene; graded by tree match."),
+            ("invalid_json", "the output does not parse as JSON (the parser error is shown)."),
+            ("not_mvs", "valid JSON, but not an MVS tree (no <code>root</code> node)."),
+            ("invalid_mvs", "an MVS-shaped tree that Mol*&rsquo;s own validator rejects "
+                            "(its messages are shown)."),
+            ("load_failed", "passes validation but Mol* fails to load or render it."),
+        ))
+    return NL.join([
+        head("MolBench — Failure details",
+             "Why each failing MolBench MVS sample scored zero: invalid JSON, invalid "
+             "MVS, or a scene Mol* failed to load."),
+        header("failures"),
+        f"""<section class="hero wrap" aria-label="Failures overview">
+  <span class="eyebrow">Every sample that scored 0</span>
+  <h1>Failure details</h1>
+  <p class="pitch">The leaderboard groups these as &ldquo;not a valid scene&rdquo;.
+     Here they are apart. Each MVS sample gets one outcome; everything but a valid
+     scene scores 0, because Mol* shows nothing for it. Run
+     {html.escape(fd.get('run', '?'))}, 1 sample per task.</p>
+  <ul class="oc-legend">{explain}</ul>
+  <p class="section-sub">Jump to: <a href="#breakdown">outcome breakdown</a> &middot;
+     <a href="#messages">common messages</a> &middot;
+     <a href="#spec-samples">failing samples (spec)</a> &middot;
+     <a href="#spec_grounded-samples">failing samples (spec + dossier)</a>.
+     Full data: <a href="failures_data.json">failures_data.json</a>.</p>
+</section>""",
+        f"""<section class="wrap" aria-label="Outcome breakdown" id="breakdown">
+  <h2>Outcome breakdown</h2>
+  <p class="section-sub">Samples per outcome, per model and prompting condition
+     (70 tasks each). Click a count to jump to those samples. The <b>spec</b> run is
+     the leaderboard; the others are the <a href="index.html#conditions">2&times;2</a>.</p>
+  {NL.join(tables)}
+</section>""",
+        messages_section(fd),
+        f"""<section class="wrap" aria-label="Failing samples">
+{NL.join(lists)}
+</section>""",
+        footer(),
+    ])
 
 
 # --------------------------------------------------------------------------- #
@@ -701,8 +1172,12 @@ def _verdict_label(decision: str) -> str:
 
 def gallery_card(row: dict, featured: bool = False) -> str:
     rid = html.escape(row.get("id", ""))
+    model_html = (f"<span class='gmodel'>{html.escape(row['model'])}</span>"
+                  if row.get("model") else "")
     rubric = html.escape(row.get("rubric", ""))
     note = html.escape(row.get("note") or "")
+    if isinstance(row.get("changed_pixels"), int):
+        note += f" {row['changed_pixels']:,} pixels differ."
     decision = row.get("decision", "")
     vclass = _verdict_class(decision)
     vlabel = html.escape(_verdict_label(decision))
@@ -736,6 +1211,7 @@ def gallery_card(row: dict, featured: bool = False) -> str:
     return f"""<article class="gcard{fclass}">
   <div class="gcard-head">
     <span class="gid">{rid}</span>
+    {model_html}
     {flag}
     <p class="rubric">{rubric}</p>
   </div>
@@ -793,21 +1269,29 @@ def build_gallery(gd: dict) -> str:
     cards_html = NL.join(cards)
 
     legend = f"""<div class="legend">
-    <span class="li"><b>Model evaluated:</b> <span class="chip">{model}</span></span>
+    <span class="li"><b>Models:</b> <span class="chip">{model}</span></span>
     <span class="li"><b>VLM judge:</b> <span class="chip">{judge}</span></span>
     <span class="li"><b>Rows:</b> {n}</span>
   </div>"""
 
     feat_frame = ""
-    if featured is not None:
+    if featured is not None and isinstance(featured.get("mvs_score"), (int, float)):
+        how = {"rendering-equivalent": "renders the same as the reference (at most 2 pixels differ)",
+               "vlm:same": "was judged the same scene by the VLM",
+               "vlm:different": "was judged a different scene by the VLM"}.get(
+                   featured.get("decision"), "was rendered and compared")
         feat_frame = (
             "<div class='callout' style='margin-top:1.25rem'>"
-            "<b>Read the featured row first.</b> The model used a single, "
-            "<i>cleaner</i> selector (e.g. <code>{label_comp_id: CYS}</code>) that "
-            "the tree-grader couldn't recognize against a reference that enumerates "
-            "every component &mdash; so MVS&nbsp;F1 collapses even though the render "
-            "is pixel-identical.</div>"
+            "<b>Read the featured card first.</b> Its tree scored "
+            f"{featured['mvs_score']:.2f} by tree match, yet the scene {how}. "
+            "Do you agree? The VLM-judged cards are where a human check matters "
+            "most: the VLM&rsquo;s verdicts have not yet been validated against "
+            "human raters.</div>"
         )
+    rule = meta.get("rule")
+    if rule:
+        feat_frame += (f"<p class='section-sub' style='margin-top:1rem;font-size:.85rem'>"
+                       f"<b>How cards are picked:</b> {html.escape(rule)}</p>")
 
     return NL.join([
         head("MolBench — Evaluator gallery",
@@ -850,40 +1334,44 @@ def build_gallery(gd: dict) -> str:
 # --------------------------------------------------------------------------- #
 # Entry point
 # --------------------------------------------------------------------------- #
+def rank_models(models: dict) -> list:
+    """MVS F1 descending; models with no MVS run go last (by overall F1)."""
+    return sorted(models.items(),
+                  key=lambda kv: (has_mvs(kv[1]),
+                                  mvs_f1(kv[1]) if has_mvs(kv[1]) else kv[1]["mean_f1"]),
+                  reverse=True)
+
+
+def _load(path: pathlib.Path) -> dict | None:
+    return json.loads(path.read_text()) if path.exists() else None
+
+
 def build(scorecard_path: pathlib.Path, out_dir: pathlib.Path = DOCS,
           banner: str | None = None) -> None:
     data = json.loads(scorecard_path.read_text())
-    models = data.get("models", {})
-    ranked = sorted(
-        models.items(),
-        key=lambda kv: (
-            mvs_f1(kv[1]) if mvs_f1(kv[1]) is not None else kv[1]["mean_f1"]
-        ),
-        reverse=True,
-    )
+    ranked = rank_models(data.get("models", {}))
 
-    # Escalation / gallery data live alongside the output (a staging dir carries
-    # its own copies), so the page is self-contained wherever it is deployed.
-    esc_path = out_dir / "escalation_data.json"
-    esc = json.loads(esc_path.read_text()) if esc_path.exists() else None
+    # Escalation / gallery / 2x2 / failures data live alongside the output (a staging
+    # dir carries its own copies), so the page is self-contained wherever it is deployed.
+    esc = _load(out_dir / "escalation_data.json")
+    cond = _load(out_dir / "conditions_data.json")
 
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "index.html").write_text(build_index(data, ranked, esc, banner=banner))
+    (out_dir / "index.html").write_text(build_index(data, ranked, esc, banner=banner,
+                                                    cond=cond))
     # Keep a transparent copy of the scorecard alongside the site.
     (out_dir / "scorecard.json").write_text(json.dumps(data, indent=2))
 
-    gallery_path = out_dir / "gallery_data.json"
-    wrote_gallery = False
-    if gallery_path.exists():
-        gd = json.loads(gallery_path.read_text())
+    wrote = ["index.html"]
+    gd = _load(out_dir / "gallery_data.json")
+    if gd:
         (out_dir / "gallery.html").write_text(build_gallery(gd))
-        wrote_gallery = True
-
-    extra = " and gallery.html" if wrote_gallery else ""
-    print(
-        f"wrote {out_dir / 'index.html'}{extra} "
-        f"({len(ranked)} models)"
-    )
+        wrote.append("gallery.html")
+    fd = _load(out_dir / "failures_data.json")
+    if fd:
+        (out_dir / "failures.html").write_text(build_failures(fd, [n for n, _ in ranked]))
+        wrote.append("failures.html")
+    print(f"wrote {', '.join(wrote)} to {out_dir} ({len(ranked)} models)")
 
 
 # Amber notice injected at the top of a non-production build so a staging URL is

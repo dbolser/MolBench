@@ -22,6 +22,7 @@ Grading reuses the precision/recall/F1 + greedy-bipartite shape from
 from __future__ import annotations
 
 import itertools
+import json
 import re
 from dataclasses import dataclass
 from typing import Any, Iterable
@@ -499,7 +500,11 @@ def validate_mvs(obj: Any) -> list[str]:
         return ["not an MVS state tree (need a 'root' node)"]
     try:
         from molviewspec import validate_state_tree  # type: ignore
-        validate_state_tree(obj if obj.get("kind") in ("single", "multiple") else {"kind": "single", "root": root})
+        state = obj if obj.get("kind") in ("single", "multiple") else {"kind": "single", "root": root}
+        # Models are asked for the tree only; the envelope's metadata is the caller's job.
+        meta = state.get("metadata") if isinstance(state.get("metadata"), dict) else {}
+        state = {**state, "metadata": {"version": "1", "timestamp": "1970-01-01T00:00:00Z", **meta}}
+        validate_state_tree(json.dumps(state))  # it parses JSON text, not a dict
         return []
     except ImportError:
         return []  # library absent: skip deep validation, tree shape already checked

@@ -46,7 +46,8 @@ superposition, style the computed interactions. Those stay in the API track.
 **3. External resources (PubMed, PDB, UniProt, ClinVar): closed-book core.**
 Lookups enter only as the frozen grounding pack above. Build a live tool loop
 only if grounding lifts the lookup-heavy tasks (`mvs_clinical`, `mvs_resolve`)
-by ≥10 F1 points on a few cheap models. PubMed is out of scope. This keeps
+by ≥10 F1 points on a few cheap models. *(Tested 2026-10-18: not met — see the
+2×2 result below.)* PubMed is out of scope. This keeps
 MolBench a visualization benchmark that *measures* the value of lookups rather
 than an API-calling benchmark.
 
@@ -86,6 +87,49 @@ than an API-calling benchmark.
 * Interaction tasks are not yet solved by anyone: line endpoints are named with
   the wrong atoms or chains. That is the grounding gap (R6).
 
+**2×2 result (2026-10-18, 1 sample, 70 tasks, R7 grader, Mol*-validated).**
+15 models × spec / spec + grounding pack ("dossier"); 3 models × bare / bare +
+dossier. A scene Mol* rejects scores 0. Published on the leaderboard
+(`scripts/build_site_data.py`).
+
+| model | spec | + dossier | valid scenes | Δ on tasks valid in both (n) | Δ lookup tasks (15) |
+|---|---|---|---|---|---|
+| deepseek-v3.2 | 0.916 | 0.901 | 99% → 97% | −0.013 (67) | −0.152 |
+| claude-haiku-4-5 | 0.870 | 0.855 | 96% → 93% | −0.002 (65) | −0.051 |
+| deepseek-v4-flash | 0.861 | 0.778 | 93% → 84% | −0.012 (55) | −0.073 |
+| gemini-3.5-flash | 0.845 | 0.812 | 94% → 90% | −0.013 (62) | −0.130 |
+| minimax-m3 | 0.830 | 0.827 | 90% → 91% | −0.013 (59) | −0.037 |
+| qwen3-next-80b | 0.819 | 0.843 | 91% → 91% | +0.020 (60) | +0.040 |
+| glm-5.2 | 0.807 | 0.786 | 90% → 86% | +0.007 (56) | −0.124 |
+| llama-4-maverick | 0.794 | 0.789 | 81% → 83% | −0.007 (52) | +0.127 |
+| gemma-3-27b | 0.724 | 0.662 | 81% → 70% | +0.028 (47) | −0.159 |
+| kimi-k2.6 | 0.663 | 0.573 | 73% → 64% | −0.008 (36) | −0.027 |
+| gpt-5.4-nano | 0.658 | 0.613 | 76% → 76% | −0.046 (40) | +0.085 |
+| gpt-oss-120b | 0.574 | 0.590 | 63% → 66% | −0.011 (26) | +0.160 |
+| qwen3-30b | 0.529 | 0.276 | 56% → 31% | −0.011 (16) | +0.042 |
+| gpt-oss-20b | 0.252 | 0.205 | 29% → 24% | +0.033 (6) | +0.012 |
+| nemotron-3-super | 0.077 | 0.081 | 9% → 9% | — (0) | −0.035 |
+
+* **Dossiers don't lift scores.** Mean Δ −0.042. On the 647 task × model pairs
+  valid in both runs, Δ −0.005 (66 better, 93 worse, 488 the same). The overall
+  drop is more invalid output on the longer prompt (qwen3-30b 56% → 31% valid).
+* **The tool-loop trigger is not met.** On the 15 lookup-heavy tasks (clinical +
+  resolve) the mean Δ is −0.021. Two models pass +0.10 (gpt-oss-120b, llama-4),
+  four lose as much; the gains are invalid → valid flips (one flip ≈ 0.05 here),
+  not better answers. No live tool loop for now.
+* **Bare = 0 for all.** 0 of 420 bare scenes are valid. Most parse as JSON but put
+  parameters on the node instead of under `params`; Mol* rejects them. MVS is not
+  in pretraining.
+* **Failures are mostly invalid JSON.** Spec run: 227 of 266 failed samples are
+  invalid JSON (mostly "Expecting ',' delimiter"), 36 invalid MVS (mostly `focus`
+  placed under `structure`), 3 failed to load. Valid-scene rate alone tracks MVS
+  F1 at r = 0.996 across the 15 models; over valid scenes they cluster at
+  0.87–0.98. B6 (structured outputs) is the obvious next lever.
+* Gaps: `mistral-small-2603` could not be run (OpenRouter upstream rate limit,
+  11 attempts). The qwen3-30b spec run's archive was never written, so its raw
+  text is missing on the failures page (outcomes and errors are intact).
+  gemini-3.5-flash and gpt-5.4-nano ran via OpenRouter, not the native APIs.
+
 ---
 
 ## Phase A — Component 2: render + VLM judge  ← the headline
@@ -97,7 +141,7 @@ than an API-calling benchmark.
 | piece | state |
 |---|---|
 | A0 renderer (`render.py`, Playwright + Mol\* 5.9.0) | **done** |
-| Image-pair judge (`AnthropicImagePairJudge`, escalation tier T2) | **live** — run once, on the original 7 models (Jun 2026, judge `claude-opus-4-8`) |
+| Image-pair judge (`AnthropicImagePairJudge`, escalation tier T2) | **live** — run on the original 7 models (Jun 2026), then on 15 models with R7 + strict T1 (2026-10-18, spec condition, judge `claude-opus-4-8`) |
 | Rubric judge (`AnthropicVLMJudge`, Component 2 proper) | **sketch** — one call, no decompose/extract protocol, never run. The runner uses `StubVLMJudge` |
 | A2 runner wiring for `visual_rubric` | not started |
 | A3 Component-2 corpus | 2 tasks, written as API actions, not MVS, so `render.py` can't draw their references |
@@ -138,7 +182,13 @@ recovers what the render cascade was rescuing.
 | qwen3-30b-a3b | 0.704 | 0.727 | 0.735 |
 | gpt-oss-20b | 0.461 | 0.455 | 0.458 |
 
-**Not run on:** the 9 newer models, or any `spec`-condition run.
+**Re-run 2026-10-18 on 15 models** (spec condition, R7, strict T1, Mol*-validated).
+Of 285 valid but imperfect scenes, 127 were rescued: 48 pixel-identical at T1,
+79 judged "same" by the VLM; 158 judged different. With strict T1 the VLM now
+does most of the rescuing, so its verdicts need the human check (A4) before
+validated F1 is more than a side column. Validated − tree F1 is +0.00 to +0.03
+per model. Now on the leaderboard, with a gallery of 12 cards picked by a fixed
+rule.
 
 Open-ended requests ("show the key hydrogen bond", "highlight the allosteric
 change") cannot be graded by tree-matching: many distinct scenes satisfy them.
