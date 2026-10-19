@@ -188,7 +188,11 @@ def _param_signature(kind: str, params: dict | None, custom: dict | None = None,
         # required to reproduce; the benchmark asks "did you pick 'surface'?".
         return ("type", params.get("type"))
     if kind == "color" and "color" in params:
-        return ("color", _color_signature(params["color"]))
+        # A colour may apply to part of the representation; where it lands is content.
+        sig = ("color", _color_signature(params["color"]))
+        if "selector" in params:
+            sig += (("on", _selection([params["selector"]], table)),)
+        return sig
     if kind == "download" and "url" in params:
         # Compare on the structure id, not the exact host/path (rcsb vs ebi etc) or
         # file variant (1cbs vs 1cbs_updated vs 1cbs-assembly1).
@@ -324,6 +328,9 @@ def _segment_similarity(a: tuple | None, b: tuple | None) -> float:
     kind, x, y = a[0], a[1], b[1]
     if kind == "component" and x[:1] == y[:1] == ("selector",):
         return _selection_similarity(x[1], y[1]) if x[2:] == y[2:] else 0.0
+    if kind == "color" and x[:1] == y[:1] == ("color",) and len(x) == len(y) == 3:
+        # Same colour on part of the structure: credit the share of atoms it covers.
+        return _selection_similarity(x[2][1], y[2][1]) if x[1] == y[1] else 0.0
     if kind == "primitive" and x[:1] == y[:1] == ("primitive",):
         return float(_primitives_match(x, y))
     return float(x == y)
@@ -454,6 +461,8 @@ def categorize(root: dict) -> list[str]:
         params = node.get("params") or {}
         if k == "component" and not isinstance(params.get("selector"), str):
             has_expr = True
+        if k == "color" and "selector" in params and not isinstance(params["selector"], str):
+            has_expr = True  # recolouring part of a representation is a selection too
         custom = node.get("custom")
         if k == "component" and isinstance(custom, dict) \
                 and custom.get("molstar_show_non_covalent_interactions"):

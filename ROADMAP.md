@@ -243,14 +243,31 @@ rubrics; compute agreement (e.g. Cohen's κ) between human and VLM judge. Report
 — a VLM judge is only credible with a measured agreement number.
 
 **Built (2026-10-19).** `scripts/build_rating_set.py` turns the pairs the judge saw in
-the 2026-10-18 spec run (229 of 237; the 8 shown with their verdict on the public
-gallery are left out) into a blind rating set (opaque ids; the model and verdict
+the 2026-10-18 spec run (leaving out the ones the public gallery shows with a verdict,
+and keeping at most 3 per task, balanced across the judge's calls: 114 pairs over 44
+tasks, 38 of them judged "same"; 113 after the fix below) into a blind rating set (opaque ids; the model and verdict
 stay in a private key under `results/a4/`), plus 12 known-same checks (T1 rescues) and
 12 known-different checks (two references on different structures). Volunteers rate
 them on the evaluator site's `rate.html` (molstar-chat-driver), two raters per pair.
 `scripts/agreement.py` reports human-human Fleiss' κ, human-vs-judge Cohen's κ, and
 rescue precision (of the judge's "same" calls, how many humans agree), after dropping
 raters who fail the checks.
+
+**First rater (Dan, 70 pairs, 2026-10-19).** Passed all 9 checks; agreed with the
+judge on 50/61; disagreed more by the judge being too strict (7) than too lenient (4);
+rescue precision 19/23. His "reference looks wrong" flags found a real bug: the six
+`gen-chain-*` references drew the chain as a second cartoon on top of the grey one,
+and Mol* drew the grey on top, so the reference showed no colour. Most models wrote the
+same overlapping scene (also all grey) and were scored correct or pixel-rescued
+against it. The template now recolours one cartoon; `scripts/regrade_tasks.py`
+re-graded the stored answers: on those tasks the 52 overlapping scenes are now judged
+different and the 20 one-cartoon scenes correct. Codex then found the tree grader
+ignored where a plain `color` node with a `selector` applies (chain B for chain A
+scored 1.0); it now grades that selection like a component's. Re-grading every task
+with it moved only the overlapping chain scenes (~0.95 → ~0.85). Headline MVS F1 moves
+by up to 0.010 (DeepSeek V3.2 0.916 → 0.903). The two p53
+residue tasks he flagged (`named-1tup-143/248`) have right trees; the residue is just
+too small to see in a whole-complex render.
 
 **Phase-A risks:** headless-render reliability (mitigate: render-complete signal +
 retries + a golden-image regression test); judge variance/bias (mitigate:

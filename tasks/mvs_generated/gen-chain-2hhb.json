@@ -42,28 +42,13 @@
                             "params": {
                               "color": "gray"
                             }
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "kind": "component",
-                    "params": {
-                      "selector": {
-                        "auth_asym_id": "B"
-                      }
-                    },
-                    "children": [
-                      {
-                        "kind": "representation",
-                        "params": {
-                          "type": "cartoon"
-                        },
-                        "children": [
+                          },
                           {
                             "kind": "color",
                             "params": {
+                              "selector": {
+                                "auth_asym_id": "B"
+                              },
                               "color": "teal"
                             }
                           }
@@ -83,8 +68,7 @@
     "load",
     "selection",
     "representation",
-    "color",
-    "multi-component"
+    "color"
   ],
   "grounding": {
     "rule": "r6-v1",

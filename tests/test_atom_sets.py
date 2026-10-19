@@ -195,6 +195,19 @@ def test_every_reference_selection_resolves():
     assert not empty, f"references that select nothing: {sorted(empty)}"
 
 
+def test_a_colour_on_part_of_a_representation_is_graded_by_where_it_lands():
+    """Recolouring one chain of a cartoon: the chain is content, not styling."""
+    import copy
+    ref = json.loads((TASKS / "mvs_generated" / "gen-chain-1hho.json").read_text())["reference_mvs"]
+    rep = ref["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]
+    assert rep["children"][1]["params"]["selector"] == {"auth_asym_id": "A"}
+    wrong = copy.deepcopy(ref)
+    wrong["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]["children"][1]["params"]["selector"] = {"auth_asym_id": "B"}
+    assert mvs.grade_mvs(ref, ref)["f1"] == 1.0
+    assert mvs.grade_mvs(ref, wrong)["f1"] < 0.9
+    assert "selection" in mvs.categorize(ref)
+
+
 if __name__ == "__main__":
     tests = [f for name, f in sorted(globals().items()) if name.startswith("test_") and callable(f)]
     for t in tests:

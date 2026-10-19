@@ -5,9 +5,9 @@
   "n": 12,
   "rule": "4 per verdict, distinct tasks: lowest tree F1 for rescues, highest tree F1 for VLM-different; ties by model, task.",
   "pool": {
-   "vlm:different": 158,
-   "rendering-equivalent": 48,
-   "vlm:same": 79
+   "vlm:different": 210,
+   "vlm:same": 59,
+   "rendering-equivalent": 25
   }
  },
  "rows": [

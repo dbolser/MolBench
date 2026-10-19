@@ -12,9 +12,9 @@
  "models": {
   "claude-haiku-4-5": {
    "spec": {
-    "mvs_f1": 0.87,
+    "mvs_f1": 0.857,
     "valid_scene": 0.9571,
-    "cond_f1": 0.909,
+    "cond_f1": 0.8953,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 67,
@@ -26,9 +26,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8548,
+    "mvs_f1": 0.8417,
     "valid_scene": 0.9286,
-    "cond_f1": 0.9205,
+    "cond_f1": 0.9065,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 65,
@@ -86,9 +86,9 @@
   },
   "deepseek/deepseek-v3.2": {
    "spec": {
-    "mvs_f1": 0.9164,
+    "mvs_f1": 0.9034,
     "valid_scene": 0.9857,
-    "cond_f1": 0.9297,
+    "cond_f1": 0.9165,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 69,
@@ -100,9 +100,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.9008,
+    "mvs_f1": 0.8877,
     "valid_scene": 0.9714,
-    "cond_f1": 0.9273,
+    "cond_f1": 0.9138,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 68,
@@ -160,9 +160,9 @@
   },
   "deepseek/deepseek-v4-flash": {
    "spec": {
-    "mvs_f1": 0.8613,
+    "mvs_f1": 0.8591,
     "valid_scene": 0.9286,
-    "cond_f1": 0.9276,
+    "cond_f1": 0.9252,
     "parse_success": 0.9429,
     "outcomes": {
      "valid": 65,
@@ -176,7 +176,7 @@
    "spec_grounded": {
     "mvs_f1": 0.7778,
     "valid_scene": 0.8429,
-    "cond_f1": 0.9229,
+    "cond_f1": 0.9228,
     "parse_success": 0.8429,
     "outcomes": {
      "valid": 59,
@@ -189,10 +189,10 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0835,
+    "delta": -0.0813,
     "n_both_valid": 55,
-    "delta_both_valid": -0.0116,
-    "better": 3,
+    "delta_both_valid": -0.011,
+    "better": 4,
     "worse": 7
    },
    "dossier_lookup": {
@@ -206,9 +206,9 @@
   },
   "gemini-3.5-flash": {
    "spec": {
-    "mvs_f1": 0.8451,
+    "mvs_f1": 0.8486,
     "valid_scene": 0.9429,
-    "cond_f1": 0.8963,
+    "cond_f1": 0.9,
     "parse_success": 0.9429,
     "outcomes": {
      "valid": 66,
@@ -220,9 +220,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8124,
+    "mvs_f1": 0.816,
     "valid_scene": 0.9,
-    "cond_f1": 0.9027,
+    "cond_f1": 0.9066,
     "parse_success": 0.9286,
     "outcomes": {
      "valid": 63,
@@ -252,9 +252,9 @@
   },
   "google/gemma-3-27b-it": {
    "spec": {
-    "mvs_f1": 0.7239,
+    "mvs_f1": 0.7133,
     "valid_scene": 0.8143,
-    "cond_f1": 0.889,
+    "cond_f1": 0.8759,
     "parse_success": 0.9429,
     "outcomes": {
      "valid": 57,
@@ -266,9 +266,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.6625,
+    "mvs_f1": 0.6538,
     "valid_scene": 0.7,
-    "cond_f1": 0.9464,
+    "cond_f1": 0.934,
     "parse_success": 0.8714,
     "outcomes": {
      "valid": 49,
@@ -281,7 +281,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0614,
+    "delta": -0.0595,
     "n_both_valid": 47,
     "delta_both_valid": 0.0278,
     "better": 7,
@@ -298,9 +298,9 @@
   },
   "meta-llama/llama-4-maverick": {
    "spec": {
-    "mvs_f1": 0.7942,
+    "mvs_f1": 0.792,
     "valid_scene": 0.8143,
-    "cond_f1": 0.9754,
+    "cond_f1": 0.9727,
     "parse_success": 0.9857,
     "outcomes": {
      "valid": 57,
@@ -312,9 +312,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.7895,
+    "mvs_f1": 0.7927,
     "valid_scene": 0.8286,
-    "cond_f1": 0.9528,
+    "cond_f1": 0.9567,
     "parse_success": 0.9857,
     "outcomes": {
      "valid": 58,
@@ -327,11 +327,11 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0048,
+    "delta": 0.0007,
     "n_both_valid": 52,
-    "delta_both_valid": -0.0075,
-    "better": 1,
-    "worse": 6
+    "delta_both_valid": -0.0002,
+    "better": 3,
+    "worse": 5
    },
    "dossier_lookup": {
     "n": 15,
@@ -344,9 +344,9 @@
   },
   "minimax/minimax-m3": {
    "spec": {
-    "mvs_f1": 0.8297,
+    "mvs_f1": 0.8166,
     "valid_scene": 0.9,
-    "cond_f1": 0.9218,
+    "cond_f1": 0.9073,
     "parse_success": 0.9286,
     "outcomes": {
      "valid": 63,
@@ -358,9 +358,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8273,
+    "mvs_f1": 0.8188,
     "valid_scene": 0.9143,
-    "cond_f1": 0.9049,
+    "cond_f1": 0.8956,
     "parse_success": 0.9571,
     "outcomes": {
      "valid": 64,
@@ -373,9 +373,9 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0023,
+    "delta": 0.0022,
     "n_both_valid": 59,
-    "delta_both_valid": -0.0127,
+    "delta_both_valid": -0.0104,
     "better": 3,
     "worse": 8
    },
@@ -390,9 +390,9 @@
   },
   "moonshotai/kimi-k2.6": {
    "spec": {
-    "mvs_f1": 0.6632,
+    "mvs_f1": 0.6569,
     "valid_scene": 0.7286,
-    "cond_f1": 0.9103,
+    "cond_f1": 0.9016,
     "parse_success": 0.7429,
     "outcomes": {
      "valid": 51,
@@ -404,9 +404,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.5728,
+    "mvs_f1": 0.5676,
     "valid_scene": 0.6429,
-    "cond_f1": 0.891,
+    "cond_f1": 0.8829,
     "parse_success": 0.6571,
     "outcomes": {
      "valid": 45,
@@ -419,7 +419,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0905,
+    "delta": -0.0893,
     "n_both_valid": 36,
     "delta_both_valid": -0.008,
     "better": 5,
@@ -436,9 +436,9 @@
   },
   "nvidia/nemotron-3-super-120b-a12b": {
    "spec": {
-    "mvs_f1": 0.0769,
+    "mvs_f1": 0.078,
     "valid_scene": 0.0857,
-    "cond_f1": 0.8966,
+    "cond_f1": 0.9105,
     "parse_success": 0.0857,
     "outcomes": {
      "valid": 6,
@@ -465,7 +465,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": 0.0041,
+    "delta": 0.0029,
     "n_both_valid": 0,
     "delta_both_valid": null,
     "better": 0,
@@ -482,9 +482,9 @@
   },
   "gpt-5.4-nano": {
    "spec": {
-    "mvs_f1": 0.6583,
+    "mvs_f1": 0.6541,
     "valid_scene": 0.7571,
-    "cond_f1": 0.8695,
+    "cond_f1": 0.8639,
     "parse_success": 0.7857,
     "outcomes": {
      "valid": 53,
@@ -496,9 +496,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.6134,
+    "mvs_f1": 0.6049,
     "valid_scene": 0.7571,
-    "cond_f1": 0.8102,
+    "cond_f1": 0.7989,
     "parse_success": 0.8286,
     "outcomes": {
      "valid": 53,
@@ -511,9 +511,9 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0449,
+    "delta": -0.0492,
     "n_both_valid": 40,
-    "delta_both_valid": -0.0461,
+    "delta_both_valid": -0.0474,
     "better": 10,
     "worse": 19
    },
@@ -528,9 +528,9 @@
   },
   "openai/gpt-oss-120b": {
    "spec": {
-    "mvs_f1": 0.5744,
+    "mvs_f1": 0.5614,
     "valid_scene": 0.6286,
-    "cond_f1": 0.9139,
+    "cond_f1": 0.8931,
     "parse_success": 0.6286,
     "outcomes": {
      "valid": 44,
@@ -542,9 +542,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.5903,
+    "mvs_f1": 0.5817,
     "valid_scene": 0.6571,
-    "cond_f1": 0.8982,
+    "cond_f1": 0.8852,
     "parse_success": 0.6571,
     "outcomes": {
      "valid": 46,
@@ -557,7 +557,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": 0.0158,
+    "delta": 0.0204,
     "n_both_valid": 26,
     "delta_both_valid": -0.0113,
     "better": 3,
@@ -574,9 +574,9 @@
   },
   "openai/gpt-oss-20b": {
    "spec": {
-    "mvs_f1": 0.2522,
+    "mvs_f1": 0.2524,
     "valid_scene": 0.2857,
-    "cond_f1": 0.8828,
+    "cond_f1": 0.8833,
     "parse_success": 0.2857,
     "outcomes": {
      "valid": 20,
@@ -588,9 +588,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.2054,
+    "mvs_f1": 0.2066,
     "valid_scene": 0.2429,
-    "cond_f1": 0.8457,
+    "cond_f1": 0.8506,
     "parse_success": 0.2429,
     "outcomes": {
      "valid": 17,
@@ -603,7 +603,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0468,
+    "delta": -0.0458,
     "n_both_valid": 6,
     "delta_both_valid": 0.033,
     "better": 1,
@@ -620,9 +620,9 @@
   },
   "qwen/qwen3-30b-a3b-instruct-2507": {
    "spec": {
-    "mvs_f1": 0.529,
+    "mvs_f1": 0.5194,
     "valid_scene": 0.5571,
-    "cond_f1": 0.9496,
+    "cond_f1": 0.9322,
     "parse_success": 0.6,
     "outcomes": {
      "valid": 39,
@@ -634,9 +634,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.2758,
+    "mvs_f1": 0.2659,
     "valid_scene": 0.3143,
-    "cond_f1": 0.8777,
+    "cond_f1": 0.8459,
     "parse_success": 0.3429,
     "outcomes": {
      "valid": 22,
@@ -677,9 +677,9 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.2532,
+    "delta": -0.2535,
     "n_both_valid": 16,
-    "delta_both_valid": -0.0112,
+    "delta_both_valid": -0.013,
     "better": 1,
     "worse": 1
    },
@@ -694,9 +694,9 @@
   },
   "qwen/qwen3-next-80b-a3b-instruct": {
    "spec": {
-    "mvs_f1": 0.8185,
+    "mvs_f1": 0.8054,
     "valid_scene": 0.9143,
-    "cond_f1": 0.8952,
+    "cond_f1": 0.8809,
     "parse_success": 0.9571,
     "outcomes": {
      "valid": 64,
@@ -708,9 +708,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8434,
+    "mvs_f1": 0.8303,
     "valid_scene": 0.9143,
-    "cond_f1": 0.9225,
+    "cond_f1": 0.9082,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 64,
@@ -740,9 +740,9 @@
   },
   "z-ai/glm-5.2": {
    "spec": {
-    "mvs_f1": 0.8072,
+    "mvs_f1": 0.8052,
     "valid_scene": 0.9,
-    "cond_f1": 0.8969,
+    "cond_f1": 0.8947,
     "parse_success": 0.9286,
     "outcomes": {
      "valid": 63,
@@ -754,9 +754,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.7864,
+    "mvs_f1": 0.7832,
     "valid_scene": 0.8571,
-    "cond_f1": 0.9175,
+    "cond_f1": 0.9138,
     "parse_success": 0.8857,
     "outcomes": {
      "valid": 60,
@@ -769,9 +769,9 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0208,
+    "delta": -0.022,
     "n_both_valid": 56,
-    "delta_both_valid": 0.0075,
+    "delta_both_valid": 0.0048,
     "better": 7,
     "worse": 10
    },
@@ -787,13 +787,13 @@
  },
  "summary": {
   "n_models": 15,
-  "mean_delta": -0.0418,
+  "mean_delta": -0.0409,
   "pooled_both_valid": {
    "n": 647,
-   "delta": -0.0048,
-   "better": 66,
-   "worse": 93,
-   "same": 488
+   "delta": -0.0043,
+   "better": 69,
+   "worse": 92,
+   "same": 486
   },
   "mean_lookup_delta": -0.0215
  }

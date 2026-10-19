@@ -92,9 +92,11 @@ def t_ions(st, i):
 def t_chain(st, i):
     color = COLORS[i % len(COLORS)]
     b, s = _struct(st["pdb"])
-    s.component(selector="polymer").representation(type="cartoon").color(color="gray")
-    s.component(selector=ComponentExpression(auth_asym_id=st["chain"])) \
-        .representation(type="cartoon").color(color=color)
+    # One cartoon, recoloured on the chain. A second cartoon for the chain would sit
+    # exactly on the grey one, and Mol* may draw either on top.
+    cartoon = s.component(selector="polymer").representation(type="cartoon")
+    cartoon.color(color="gray")
+    cartoon.color(color=color, selector=ComponentExpression(auth_asym_id=st["chain"]))
     return (f"Load {st['pdb'].upper()}; show everything as a grey cartoon, then colour "
             f"chain {st['chain']} {color}."), b
 
