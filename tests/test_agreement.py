@@ -96,3 +96,19 @@ def test_cant_tell_on_a_check_counts_as_a_miss():
     out = ag.analyse(key, dodger, min_checks=0.8)
     assert out["raters"]["d-dddddd"]["check_accuracy"] == {"control-same": 0.5, "control-different": 0.5}
     assert out["raters_kept"] == 0
+
+
+def test_preferences_flag_references_a_model_beat():
+    key = {"set": "t", "items": {
+        "v1": {"kind": "vlm", "vlm_label": "same", "task": "t1", "model": "m1"},
+        "v2": {"kind": "vlm", "vlm_label": "same", "task": "t2", "model": "m2"},
+        "cs": {"kind": "control-same", "expected": "same", "task": "t3", "model": "m3"},
+        "cd": {"kind": "control-different", "expected": "different", "task": "t4"},
+    }}
+    rs = [_r("a-aaaaaaa", "cs", "same"), _r("a-aaaaaaa", "cd", "different"),
+          {**_r("a-aaaaaaa", "v1", "different"), "prefer": "model"},
+          {**_r("a-aaaaaaa", "v2", "same"), "prefer": "equal"},
+          {**_r("z-zzzzzzz", "v2", "same"), "prefer": "model"}]  # z never passed a check: ignored
+    out = ag.analyse(key, rs, min_checks=0.8)
+    assert out["preferences"] == {"model": 1, "equal": 1}
+    assert out["model_preferred"] == {"t1": {"m1": 1}}
