@@ -91,7 +91,10 @@ def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int) -> tup
     structure = {t: frozenset(_download_ids(tasks[t]["reference_mvs"])) for t in refs}
     names = sorted(refs)
     for a in rng.sample(names, min(n_controls, len(names))):
-        b = rng.choice([t for t in names if structure[t].isdisjoint(structure[a])])
+        others = [t for t in names if structure[t].isdisjoint(structure[a])]
+        if not others:
+            raise SystemExit(f"no reference on a different structure to pair with {a}")
+        b = rng.choice(others)
         add("control-different", a, refs[a], refs[b], (a, b), other_task=b, expected="different")
 
     rng.shuffle(items)
@@ -107,8 +110,11 @@ def write(items: list[dict], key: dict, set_id: str, out: pathlib.Path, key_path
         rec = {"id": it["id"], "prompt": it["prompt"]}
         for side, src in (("ref", it["_ref"]), ("out", it["_out"])):
             rel = f"img/{it['id']}-{side}.jpg"
-            with Image.open(src) as im:
-                im.convert("RGB").save(out / rel, "JPEG", quality=quality)
+            with Image.open(src) as im:  # flatten any transparency onto white, not black
+                rgba = im.convert("RGBA")
+                flat = Image.new("RGB", rgba.size, (255, 255, 255))
+                flat.paste(rgba, mask=rgba.getchannel("A"))
+                flat.save(out / rel, "JPEG", quality=quality)
             rec[side] = rel
         public.append(rec)
     (out / "items.json").write_text(json.dumps(

@@ -5,12 +5,14 @@ A4: how well does the VLM judge agree with human raters?
 Joins the ratings collected on the rating site with the private answer key written
 by scripts/build_rating_set.py, and reports:
 
-  * per rater: items rated and attention-check accuracy (raters below --min-checks
-    are dropped from everything after)
+  * per rater: items rated and attention-check accuracy. Raters are dropped from
+    everything after unless they answered --min-check-count checks with at least
+    --min-checks accuracy
   * human vs human: Fleiss' kappa over the judged items with 2+ ratings
-  * human vs VLM: the human majority per item against the judge's label — Cohen's
+  * human vs VLM: every human rating against the judge's label (so pairs the
+    humans split on count, rather than vanishing from a majority vote) — Cohen's
     kappa, raw agreement, and the number that matters under the rescue-only
-    policy: of the pairs the judge called "same", how many humans call same too
+    policy: of the ratings on pairs the judge called "same", how many say same
 
 "Can't tell" answers count as rated but carry no label.
 
@@ -37,7 +39,7 @@ def fetch_ratings(set_id: str) -> list[dict]:
     url = f"{os.environ['SUPABASE_URL']}/rest/v1/ratings?set_id=eq.{set_id}&select=*"
     key = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
     req = urllib.request.Request(url, headers={"apikey": key, "authorization": f"Bearer {key}"})
-    with urllib.request.urlopen(req) as r:
+    with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
 
 
@@ -64,13 +66,7 @@ def cohen_kappa(pairs: list[tuple[str, str]]) -> float | None:
     return None if p_e == 1 else (p_o - p_e) / (1 - p_e)
 
 
-def majority(c: collections.Counter) -> str | None:
-    if c["same"] == c["different"]:
-        return None
-    return "same" if c["same"] > c["different"] else "different"
-
-
-def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
+def analyse(key: dict, ratings: list[dict], min_checks: float, min_check_count: int = 2) -> dict:
     items = key["items"]
     by_rater = collections.defaultdict(list)
     for r in ratings:
@@ -84,7 +80,7 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
         right = sum(r["label"] == items[r["item"]]["expected"] for r in checks)
         acc = right / len(checks) if checks else None
         raters[tok[:8]] = {"rated": len(rs), "checks": len(checks), "check_accuracy": acc}
-        if acc is None or acc >= min_checks:
+        if len(checks) >= min_check_count and acc >= min_checks:
             kept.add(tok)
 
     votes = collections.defaultdict(collections.Counter)
@@ -92,9 +88,9 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
         if r["evaluator_token"] in kept and r["label"] in LABELS and items.get(r["item"], {}).get("kind") == "vlm":
             votes[r["item"]][r["label"]] += 1
 
-    vs_vlm = [(m, items[i]["vlm_label"]) for i, c in votes.items() if (m := majority(c))]
-    judged_same = [m for m, v in vs_vlm if v == "same"]
-    confusion = collections.Counter(f"human {m} / vlm {v}" for m, v in vs_vlm)
+    vs_vlm = [(lab, items[i]["vlm_label"]) for i, c in votes.items() for lab in c.elements()]
+    judged_same = [h for h, v in vs_vlm if v == "same"]
+    confusion = collections.Counter(f"human {h} / vlm {v}" for h, v in vs_vlm)
     return {
         "set": key["set"],
         "raters": raters,
@@ -102,9 +98,9 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
         "items_rated": len(votes),
         "items_with_2plus": sum(sum(c.values()) >= 2 for c in votes.values()),
         "human_fleiss_kappa": fleiss_kappa(list(votes.values())),
-        "vlm_items_with_majority": len(vs_vlm),
+        "human_vlm_pairs": len(vs_vlm),
         "human_vs_vlm_cohen_kappa": cohen_kappa(vs_vlm),
-        "human_vs_vlm_agreement": sum(m == v for m, v in vs_vlm) / len(vs_vlm) if vs_vlm else None,
+        "human_vs_vlm_agreement": sum(h == v for h, v in vs_vlm) / len(vs_vlm) if vs_vlm else None,
         "rescue_precision": judged_same.count("same") / len(judged_same) if judged_same else None,
         "confusion": dict(confusion),
     }
@@ -117,6 +113,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--from-supabase", action="store_true")
     ap.add_argument("--min-checks", type=float, default=0.8,
                     help="drop raters whose attention-check accuracy is below this")
+    ap.add_argument("--min-check-count", type=int, default=2,
+                    help="drop raters who answered fewer checks than this")
     a = ap.parse_args(argv)
     key = json.loads(a.key.read_text())
     if a.from_supabase:
@@ -125,7 +123,7 @@ def main(argv: list[str] | None = None) -> None:
         ratings = json.loads(a.ratings.read_text())
     else:
         ap.error("give a ratings file or --from-supabase")
-    print(json.dumps(analyse(key, ratings, a.min_checks), indent=2))
+    print(json.dumps(analyse(key, ratings, a.min_checks, a.min_check_count), indent=2))
 
 
 if __name__ == "__main__":

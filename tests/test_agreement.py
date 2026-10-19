@@ -50,6 +50,20 @@ def test_analyse_drops_raters_who_fail_checks():
     assert out["raters_kept"] == 2
     assert out["items_with_2plus"] == 2  # v3 has one labelled vote; "unsure" carries none
     assert out["human_fleiss_kappa"] == 1.0
-    # Judge said same on v1 (humans agree) and v2 (humans disagree).
+    # Judge said same on v1 (both humans agree) and v2 (both disagree); v3 one vote agrees.
     assert out["rescue_precision"] == 0.5
-    assert out["human_vs_vlm_agreement"] == 2 / 3
+    assert out["human_vs_vlm_agreement"] == 3 / 5
+
+
+def test_split_pairs_still_count_against_the_judge():
+    a = [_r("a-aaaaaaa", i, lab) for i, lab in (("v1", "same"), ("cs", "same"), ("cd", "different"))]
+    b = [_r("b-bbbbbbb", i, lab) for i, lab in (("v1", "different"), ("cs", "same"), ("cd", "different"))]
+    out = ag.analyse(KEY, a + b, min_checks=0.8)
+    assert out["human_vlm_pairs"] == 2
+    assert out["rescue_precision"] == 0.5
+
+
+def test_raters_without_enough_checks_are_dropped():
+    unsure = [_r("u-uuuuuuu", "cs", "unsure"), _r("u-uuuuuuu", "cd", "unsure"), _r("u-uuuuuuu", "v1", "same")]
+    out = ag.analyse(KEY, unsure, min_checks=0.8)
+    assert out["raters_kept"] == 0 and out["human_vlm_pairs"] == 0
