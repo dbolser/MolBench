@@ -3,7 +3,7 @@
 Build the A4 human-agreement rating set from the VLM-judged pairs of a run.
 
 Every pair the T2 judge saw (reference render vs a model's render) becomes one item,
-plus two kinds of attention check with a known answer that doesn't depend on the judge:
+except those the public gallery already shows with their verdict (--public), plus two kinds of attention check with a known answer that doesn't depend on the judge:
 
   control-same       a T1 rescue: the two renders differ by <= 2 pixels
   control-different  one task's reference vs another task's, on a different structure
@@ -68,11 +68,23 @@ def judged_pairs(results: pathlib.Path) -> list[dict]:
     return out
 
 
+def _short(model: str) -> str:
+    """The model name without its provider prefix; the gallery uses both forms."""
+    return model.split("/")[-1]
+
+
+def public_pairs(gallery: pathlib.Path | None) -> set[tuple[str, str]]:
+    """(model, task) pairs on the public gallery page, which shows the judge's verdict."""
+    if gallery is None:
+        return set()
+    return {(_short(r["model"]), r["id"]) for r in json.loads(gallery.read_text())["rows"]}
+
+
 def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int,
-          secret: str) -> tuple[list[dict], dict]:
+          secret: str, public: set[tuple[str, str]] = frozenset()) -> tuple[list[dict], dict]:
     """(items, key). Items carry source image paths under `_ref`/`_out` until written."""
     tasks = {t["id"]: t for t in runner.load_tasks(None)}
-    pairs = judged_pairs(results)
+    pairs = [p for p in judged_pairs(results) if (_short(p["model"]), p["task"]) not in public]
     if not pairs:
         raise SystemExit(f"{results}: no escalated pairs with renders")
     rng = random.Random(seed)
@@ -138,10 +150,12 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--key", type=pathlib.Path, required=True, help="private answer key (json)")
     ap.add_argument("--controls", type=int, default=12, help="checks of each kind")
     ap.add_argument("--seed", type=int, default=4)
+    ap.add_argument("--public", type=pathlib.Path, default=REPO / "docs" / "gallery_data.json",
+                    help="published gallery; its pairs are left out so raters can't copy a verdict")
     a = ap.parse_args(argv)
     secret = (json.loads(a.key.read_text())["secret"] if a.key.exists()
               else secrets.token_hex(32))
-    items, key = build(a.results, a.set_id, a.controls, a.seed, secret)
+    items, key = build(a.results, a.set_id, a.controls, a.seed, secret, public_pairs(a.public))
     write(items, key, a.set_id, secret, a.out, a.key)
     kinds = {}
     for v in key.values():

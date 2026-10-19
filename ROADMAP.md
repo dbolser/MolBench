@@ -242,8 +242,9 @@ Small **human-agreement study**: a human rates N rendered images against the
 rubrics; compute agreement (e.g. Cohen's κ) between human and VLM judge. Report it
 — a VLM judge is only credible with a measured agreement number.
 
-**Built (2026-10-19).** `scripts/build_rating_set.py` turns the 237 pairs the judge saw
-in the 2026-10-18 spec run into a blind rating set (opaque ids; the model and verdict
+**Built (2026-10-19).** `scripts/build_rating_set.py` turns the pairs the judge saw in
+the 2026-10-18 spec run (229 of 237; the 8 shown with their verdict on the public
+gallery are left out) into a blind rating set (opaque ids; the model and verdict
 stay in a private key under `results/a4/`), plus 12 known-same checks (T1 rescues) and
 12 known-different checks (two references on different structures). Volunteers rate
 them on the evaluator site's `rate.html` (molstar-chat-driver), two raters per pair.
