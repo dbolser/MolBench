@@ -13,9 +13,9 @@ by scripts/build_rating_set.py, and reports:
     humans split on count, rather than vanishing from a majority vote) — Cohen's
     kappa, raw agreement, and the number that matters under the rescue-only
     policy: of the ratings on pairs the judge called "same", how many say same
-  * preferences (optional on the site): how often raters preferred the reference,
-    the model's scene, or neither — and which tasks had a model scene preferred,
-    i.e. references worth revisiting
+  * reference flags (optional on the site): per task, how many raters said the
+    reference looks wrong, and which models' scenes looked better than it —
+    the references worth revisiting
 
 "Can't tell" answers count as rated but carry no label, except on attention
 checks, where they count as wrong.
@@ -101,14 +101,17 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
     judged_same = [h for h, v in vs_vlm if v == "same"]
     confusion = collections.Counter(f"human {h} / vlm {v}" for h, v in vs_vlm)
 
-    prefer = collections.Counter()
-    model_better = collections.defaultdict(collections.Counter)  # task -> model -> votes
+    # Distinct raters: one rater sees a task's reference once per model, but counts once.
+    ref_wrong = collections.defaultdict(set)  # task -> raters flagging its reference
+    model_better = collections.defaultdict(lambda: collections.defaultdict(set))  # task -> model -> raters
     for r in ratings:
-        p, it = r.get("prefer"), items.get(r["item"], {})
-        if r["evaluator_token"] in kept and p and it.get("model"):
-            prefer[p] += 1
-            if p == "model":
-                model_better[it["task"]][it["model"]] += 1
+        it = items.get(r["item"], {})
+        if r["evaluator_token"] not in kept or "task" not in it:
+            continue
+        if r.get("ref_wrong"):
+            ref_wrong[it["task"]].add(r["evaluator_token"])
+        if r.get("model_better") and it.get("model"):
+            model_better[it["task"]][it["model"]].add(r["evaluator_token"])
     return {
         "set": key["set"],
         "raters": raters,
@@ -121,8 +124,10 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
         "human_vs_vlm_agreement": sum(h == v for h, v in vs_vlm) / len(vs_vlm) if vs_vlm else None,
         "rescue_precision": judged_same.count("same") / len(judged_same) if judged_same else None,
         "confusion": dict(confusion),
-        "preferences": dict(sorted(prefer.items())),
-        "model_preferred": {t: dict(sorted(c.items())) for t, c in sorted(model_better.items())},
+        "reference_flags": {
+            t: {"ref_wrong": len(ref_wrong.get(t, ())),
+                "model_better": {m: len(v) for m, v in sorted(model_better.get(t, {}).items())}}
+            for t in sorted(set(ref_wrong) | set(model_better))},
     }
 
 
