@@ -319,134 +319,134 @@
 </article>
 <article class="gcard">
   <div class="gcard-head">
-    <span class="gid">gen-chain-3ptb</span>
-    <span class='gmodel'>minimax/minimax-m3</span>
+    <span class="gid">grd-disulfide-1lyz</span>
+    <span class='gmodel'>gpt-5.4-nano</span>
     
-    <p class="rubric">Load 3PTB; show everything as a grey cartoon, then colour chain A orange.</p>
+    <p class="rubric">Load 1LYZ; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/minimax_minimax-m3__gen-chain-3ptb_ref.png" loading="lazy" alt="Reference render for: Load 3PTB; show everything as a grey cartoon, then colour chain A orange.">
+      <img src="gallery/img/gpt-5.4-nano__grd-disulfide-1lyz_ref.png" loading="lazy" alt="Reference render for: Load 1LYZ; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/minimax_minimax-m3__gen-chain-3ptb_pred.png" loading="lazy" alt="Model output render for: Load 3PTB; show everything as a grey cartoon, then colour chain A orange.">
+      <img src="gallery/img/gpt-5.4-nano__grd-disulfide-1lyz_pred.png" loading="lazy" alt="Model output render for: Load 1LYZ; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v">1.00</div>
+      <div class="v">0.93</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
-      <div class="v hi">0.93</div>
+      <div class="v hi">0.97</div>
     </div>
     <div class="verdict-wrap">
       <span class="verdict red">VLM: different</span>
     </div>
-    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 5,052 pixels differ.</p>
-    <p class='reason'><b>VLM rationale:</b> The reference shows chain A coloured orange as requested, while the output renders the entire structure in grey with no orange colouring applied. The chain A orange recolouring step is missing in the output.</p>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 376 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the same lysozyme structure as grey cartoon with yellow ball-and-stick cysteines, but the reference highlights all disulfide-bonded cysteines (multiple clusters throughout), while the output only shows a couple of cysteine residues, missing most of the disulfide bonds.</p>
   </div>
 </article>
 <article class="gcard">
   <div class="gcard-head">
-    <span class="gid">gen-chain-1lyz</span>
+    <span class="gid">grd-disulfide-3ptb</span>
     <span class='gmodel'>deepseek/deepseek-v3.2</span>
     
-    <p class="rubric">Load 1LYZ; show everything as a grey cartoon, then colour chain A green.</p>
+    <p class="rubric">Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/deepseek_deepseek-v3.2__gen-chain-1lyz_ref.png" loading="lazy" alt="Reference render for: Load 1LYZ; show everything as a grey cartoon, then colour chain A green.">
+      <img src="gallery/img/deepseek_deepseek-v3.2__grd-disulfide-3ptb_ref.png" loading="lazy" alt="Reference render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/deepseek_deepseek-v3.2__gen-chain-1lyz_pred.png" loading="lazy" alt="Model output render for: Load 1LYZ; show everything as a grey cartoon, then colour chain A green.">
+      <img src="gallery/img/deepseek_deepseek-v3.2__grd-disulfide-3ptb_pred.png" loading="lazy" alt="Model output render for: Load 3PTB; protein as grey cartoon, and highlight the disulfide-bonded cysteines as yellow ball-and-stick.">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v">0.99</div>
+      <div class="v">0.93</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
-      <div class="v hi">0.94</div>
+      <div class="v hi">0.97</div>
     </div>
     <div class="verdict-wrap">
       <span class="verdict red">VLM: different</span>
     </div>
-    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 3,031 pixels differ.</p>
-    <p class='reason'><b>VLM rationale:</b> The reference shows chain A coloured green as requested, while the output shows the entire structure in grey with no green colouring applied. The chain A colouring step is missing in the output.</p>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 312 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show 3PTB as grey cartoon with yellow cysteine highlights, but the reference displays multiple disulfide-bonded cysteine clusters (6+ yellow sites) distributed across the structure, while the output shows far fewer yellow ball-and-stick residues (only ~2 visible). The output appears to be missing most of the highlighted disulfide cysteines.</p>
   </div>
 </article>
 <article class="gcard">
   <div class="gcard-head">
-    <span class="gid">gen-chain-1cbs</span>
-    <span class='gmodel'>claude-haiku-4-5</span>
+    <span class="gid">int-001</span>
+    <span class='gmodel'>google/gemma-3-27b-it</span>
     
-    <p class="rubric">Load 1CBS; show everything as a grey cartoon, then colour chain A purple.</p>
+    <p class="rubric">In oxymyoglobin 1A6M, show the protein as a grey cartoon, His64 and the bound O2 as ball-and-stick, and draw the hydrogen bond from His64 NE2 to the O2 molecule&#x27;s terminal oxygen (atom O2) as a dashed line labelled with its length.</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/claude-haiku-4-5__gen-chain-1cbs_ref.png" loading="lazy" alt="Reference render for: Load 1CBS; show everything as a grey cartoon, then colour chain A purple.">
+      <img src="gallery/img/google_gemma-3-27b-it__int-001_ref.png" loading="lazy" alt="Reference render for: In oxymyoglobin 1A6M, show the protein as a grey cartoon, His64 and the bound O2 as ball-and-stick, and draw the hydrogen bond from His64 NE2 to the O2 molecule&#x27;s terminal oxygen (atom O2) as a dashed line labelled with its length.">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/claude-haiku-4-5__gen-chain-1cbs_pred.png" loading="lazy" alt="Model output render for: Load 1CBS; show everything as a grey cartoon, then colour chain A purple.">
+      <img src="gallery/img/google_gemma-3-27b-it__int-001_pred.png" loading="lazy" alt="Model output render for: In oxymyoglobin 1A6M, show the protein as a grey cartoon, His64 and the bound O2 as ball-and-stick, and draw the hydrogen bond from His64 NE2 to the O2 molecule&#x27;s terminal oxygen (atom O2) as a dashed line labelled with its length.">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v">0.99</div>
+      <div class="v">0.93</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
-      <div class="v hi">0.95</div>
+      <div class="v hi">0.99</div>
     </div>
     <div class="verdict-wrap">
       <span class="verdict red">VLM: different</span>
     </div>
-    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 3,772 pixels differ.</p>
-    <p class='reason'><b>VLM rationale:</b> The reference shows chain A coloured purple as requested, while the output renders the entire structure in grey with no purple colouring applied, failing the chain A colour requirement.</p>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 98 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> Both show the grey protein cartoon of myoglobin. However, the reference shows the His64/O2 region as a faint grey ball-and-stick with a dashed hydrogen-bond line, whereas the output simply shows an orange blob with no visible dashed hydrogen-bond line or length label. The key highlighted feature (the labelled dashed H-bond) is missing, so the visualizations differ.</p>
   </div>
 </article>
 <article class="gcard">
   <div class="gcard-head">
-    <span class="gid">gen-chain-1hho</span>
-    <span class='gmodel'>deepseek/deepseek-v3.2</span>
+    <span class="gid">gen-focus-1hho</span>
+    <span class='gmodel'>deepseek/deepseek-v4-flash</span>
     
-    <p class="rubric">Load 1HHO; show everything as a grey cartoon, then colour chain A red.</p>
+    <p class="rubric">Load 1HHO; grey cartoon protein, magenta ball-and-stick ligands, and focus the camera on the ligand.</p>
   </div>
   <div class="gcard-imgs">
     <figure class="imgcell ref">
       <figcaption class="imglabel"><span class="dot"></span>Reference scene</figcaption>
-      <img src="gallery/img/deepseek_deepseek-v3.2__gen-chain-1hho_ref.png" loading="lazy" alt="Reference render for: Load 1HHO; show everything as a grey cartoon, then colour chain A red.">
+      <img src="gallery/img/deepseek_deepseek-v4-flash__gen-focus-1hho_ref.png" loading="lazy" alt="Reference render for: Load 1HHO; grey cartoon protein, magenta ball-and-stick ligands, and focus the camera on the ligand.">
     </figure>
     <figure class="imgcell pred">
       <figcaption class="imglabel"><span class="dot"></span>Model output</figcaption>
-      <img src="gallery/img/deepseek_deepseek-v3.2__gen-chain-1hho_pred.png" loading="lazy" alt="Model output render for: Load 1HHO; show everything as a grey cartoon, then colour chain A red.">
+      <img src="gallery/img/deepseek_deepseek-v4-flash__gen-focus-1hho_pred.png" loading="lazy" alt="Model output render for: Load 1HHO; grey cartoon protein, magenta ball-and-stick ligands, and focus the camera on the ligand.">
     </figure>
   </div>
   <div class="gcard-foot">
     <div class="scorebox">
       <div class="k">MVS score</div>
-      <div class="v">0.94</div>
+      <div class="v">0.90</div>
     </div>
     <div class="scorebox">
       <div class="k">Visual score</div>
-      <div class="v hi">0.91</div>
+      <div class="v">0.58</div>
     </div>
     <div class="verdict-wrap">
       <span class="verdict red">VLM: different</span>
     </div>
-    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 4,352 pixels differ.</p>
-    <p class='reason'><b>VLM rationale:</b> The reference shows chain A colored red while the rest is grey cartoon. The output shows the entire structure in grey with no red chain, so the required coloring of chain A is missing.</p>
+    <p class='note'>Picked: highest tree F1 among scenes the VLM judged different. 25,748 pixels differ.</p>
+    <p class='reason'><b>VLM rationale:</b> The reference shows grey cartoon protein with magenta ball-and-stick ligands visible. The output shows only a few dark grey cartoon fragments zoomed in far too close, with no magenta ligands visible at all. The required ligand focus and magenta ball-and-stick representation are absent.</p>
   </div>
 </article>
   </div>

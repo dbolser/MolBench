@@ -245,7 +245,7 @@ rubrics; compute agreement (e.g. Cohen's κ) between human and VLM judge. Report
 **Built (2026-10-19).** `scripts/build_rating_set.py` turns the pairs the judge saw in
 the 2026-10-18 spec run (leaving out the ones the public gallery shows with a verdict,
 and keeping at most 3 per task, balanced across the judge's calls: 114 pairs over 44
-tasks, 38 of them judged "same") into a blind rating set (opaque ids; the model and verdict
+tasks, 38 of them judged "same"; 113 after the fix below) into a blind rating set (opaque ids; the model and verdict
 stay in a private key under `results/a4/`), plus 12 known-same checks (T1 rescues) and
 12 known-different checks (two references on different structures). Volunteers rate
 them on the evaluator site's `rate.html` (molstar-chat-driver), two raters per pair.
@@ -261,8 +261,11 @@ and Mol* drew the grey on top, so the reference showed no colour. Most models wr
 same overlapping scene (also all grey) and were scored correct or pixel-rescued
 against it. The template now recolours one cartoon; `scripts/regrade_tasks.py`
 re-graded the stored answers: on those tasks the 52 overlapping scenes are now judged
-different and the 20 one-cartoon scenes correct, a 0.003 move at most on headline F1.
-Open: the tree grader still gives an overlapping (all-grey) scene ~0.95. The two p53
+different and the 20 one-cartoon scenes correct. Codex then found the tree grader
+ignored where a plain `color` node with a `selector` applies (chain B for chain A
+scored 1.0); it now grades that selection like a component's. Re-grading every task
+with it moved only the overlapping chain scenes (~0.95 → ~0.85). Headline MVS F1 moves
+by up to 0.010 (DeepSeek V3.2 0.916 → 0.903). The two p53
 residue tasks he flagged (`named-1tup-143/248`) have right trees; the residue is just
 too small to see in a whole-complex render.
 

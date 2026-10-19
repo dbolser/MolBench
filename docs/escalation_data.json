@@ -22,8 +22,8 @@
    "rescued_vlm": 3,
    "confirmed_different": 22,
    "rescued": 3,
-   "tree_f1": 0.866,
-   "validated_f1": 0.886
+   "tree_f1": 0.857,
+   "validated_f1": 0.877
   },
   "deepseek/deepseek-v3.2": {
    "mvs": 70,
@@ -34,8 +34,8 @@
    "rescued_vlm": 6,
    "confirmed_different": 18,
    "rescued": 6,
-   "tree_f1": 0.913,
-   "validated_f1": 0.93
+   "tree_f1": 0.903,
+   "validated_f1": 0.921
   },
   "deepseek/deepseek-v4-flash": {
    "mvs": 70,
@@ -46,8 +46,8 @@
    "rescued_vlm": 3,
    "confirmed_different": 14,
    "rescued": 7,
-   "tree_f1": 0.862,
-   "validated_f1": 0.873
+   "tree_f1": 0.859,
+   "validated_f1": 0.87
   },
   "gemini-3.5-flash": {
    "mvs": 70,
@@ -70,8 +70,8 @@
    "rescued_vlm": 3,
    "confirmed_different": 20,
    "rescued": 3,
-   "tree_f1": 0.721,
-   "validated_f1": 0.726
+   "tree_f1": 0.713,
+   "validated_f1": 0.718
   },
   "meta-llama/llama-4-maverick": {
    "mvs": 70,
@@ -82,8 +82,8 @@
    "rescued_vlm": 2,
    "confirmed_different": 5,
    "rescued": 3,
-   "tree_f1": 0.795,
-   "validated_f1": 0.802
+   "tree_f1": 0.792,
+   "validated_f1": 0.799
   },
   "minimax/minimax-m3": {
    "mvs": 70,
@@ -94,8 +94,8 @@
    "rescued_vlm": 3,
    "confirmed_different": 18,
    "rescued": 3,
-   "tree_f1": 0.826,
-   "validated_f1": 0.835
+   "tree_f1": 0.817,
+   "validated_f1": 0.825
   },
   "moonshotai/kimi-k2.6": {
    "mvs": 70,
@@ -106,8 +106,8 @@
    "rescued_vlm": 5,
    "confirmed_different": 11,
    "rescued": 7,
-   "tree_f1": 0.662,
-   "validated_f1": 0.684
+   "tree_f1": 0.657,
+   "validated_f1": 0.68
   },
   "nvidia/nemotron-3-super-120b-a12b": {
    "mvs": 70,
@@ -130,8 +130,8 @@
    "rescued_vlm": 4,
    "confirmed_different": 20,
    "rescued": 22,
-   "tree_f1": 0.657,
-   "validated_f1": 0.685
+   "tree_f1": 0.654,
+   "validated_f1": 0.682
   },
   "openai/gpt-oss-120b": {
    "mvs": 70,
@@ -142,8 +142,8 @@
    "rescued_vlm": 5,
    "confirmed_different": 14,
    "rescued": 5,
-   "tree_f1": 0.571,
-   "validated_f1": 0.583
+   "tree_f1": 0.561,
+   "validated_f1": 0.574
   },
   "openai/gpt-oss-20b": {
    "mvs": 70,
@@ -166,8 +166,8 @@
    "rescued_vlm": 4,
    "confirmed_different": 9,
    "rescued": 4,
-   "tree_f1": 0.526,
-   "validated_f1": 0.536
+   "tree_f1": 0.519,
+   "validated_f1": 0.53
   },
   "qwen/qwen3-next-80b-a3b-instruct": {
    "mvs": 70,
@@ -178,8 +178,8 @@
    "rescued_vlm": 8,
    "confirmed_different": 24,
    "rescued": 8,
-   "tree_f1": 0.815,
-   "validated_f1": 0.84
+   "tree_f1": 0.805,
+   "validated_f1": 0.831
   },
   "z-ai/glm-5.2": {
    "mvs": 70,
@@ -190,8 +190,8 @@
    "rescued_vlm": 7,
    "confirmed_different": 16,
    "rescued": 7,
-   "tree_f1": 0.81,
-   "validated_f1": 0.837
+   "tree_f1": 0.805,
+   "validated_f1": 0.832
   }
  },
  "totals": {

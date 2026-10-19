@@ -12,9 +12,9 @@
  "models": {
   "claude-haiku-4-5": {
    "spec": {
-    "mvs_f1": 0.8665,
+    "mvs_f1": 0.857,
     "valid_scene": 0.9571,
-    "cond_f1": 0.9053,
+    "cond_f1": 0.8953,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 67,
@@ -26,9 +26,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8513,
+    "mvs_f1": 0.8417,
     "valid_scene": 0.9286,
-    "cond_f1": 0.9167,
+    "cond_f1": 0.9065,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 65,
@@ -86,9 +86,9 @@
   },
   "deepseek/deepseek-v3.2": {
    "spec": {
-    "mvs_f1": 0.9129,
+    "mvs_f1": 0.9034,
     "valid_scene": 0.9857,
-    "cond_f1": 0.9261,
+    "cond_f1": 0.9165,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 69,
@@ -100,9 +100,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8973,
+    "mvs_f1": 0.8877,
     "valid_scene": 0.9714,
-    "cond_f1": 0.9236,
+    "cond_f1": 0.9138,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 68,
@@ -160,9 +160,9 @@
   },
   "deepseek/deepseek-v4-flash": {
    "spec": {
-    "mvs_f1": 0.8623,
+    "mvs_f1": 0.8591,
     "valid_scene": 0.9286,
-    "cond_f1": 0.9286,
+    "cond_f1": 0.9252,
     "parse_success": 0.9429,
     "outcomes": {
      "valid": 65,
@@ -174,9 +174,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.7794,
+    "mvs_f1": 0.7778,
     "valid_scene": 0.8429,
-    "cond_f1": 0.9247,
+    "cond_f1": 0.9228,
     "parse_success": 0.8429,
     "outcomes": {
      "valid": 59,
@@ -189,7 +189,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0829,
+    "delta": -0.0813,
     "n_both_valid": 55,
     "delta_both_valid": -0.011,
     "better": 4,
@@ -252,9 +252,9 @@
   },
   "google/gemma-3-27b-it": {
    "spec": {
-    "mvs_f1": 0.7212,
+    "mvs_f1": 0.7133,
     "valid_scene": 0.8143,
-    "cond_f1": 0.8857,
+    "cond_f1": 0.8759,
     "parse_success": 0.9429,
     "outcomes": {
      "valid": 57,
@@ -266,9 +266,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.6602,
+    "mvs_f1": 0.6538,
     "valid_scene": 0.7,
-    "cond_f1": 0.9431,
+    "cond_f1": 0.934,
     "parse_success": 0.8714,
     "outcomes": {
      "valid": 49,
@@ -281,7 +281,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0611,
+    "delta": -0.0595,
     "n_both_valid": 47,
     "delta_both_valid": 0.0278,
     "better": 7,
@@ -298,9 +298,9 @@
   },
   "meta-llama/llama-4-maverick": {
    "spec": {
-    "mvs_f1": 0.7952,
+    "mvs_f1": 0.792,
     "valid_scene": 0.8143,
-    "cond_f1": 0.9766,
+    "cond_f1": 0.9727,
     "parse_success": 0.9857,
     "outcomes": {
      "valid": 57,
@@ -327,9 +327,9 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0025,
+    "delta": 0.0007,
     "n_both_valid": 52,
-    "delta_both_valid": -0.0045,
+    "delta_both_valid": -0.0002,
     "better": 3,
     "worse": 5
    },
@@ -344,9 +344,9 @@
   },
   "minimax/minimax-m3": {
    "spec": {
-    "mvs_f1": 0.8261,
+    "mvs_f1": 0.8166,
     "valid_scene": 0.9,
-    "cond_f1": 0.9179,
+    "cond_f1": 0.9073,
     "parse_success": 0.9286,
     "outcomes": {
      "valid": 63,
@@ -358,9 +358,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8252,
+    "mvs_f1": 0.8188,
     "valid_scene": 0.9143,
-    "cond_f1": 0.9025,
+    "cond_f1": 0.8956,
     "parse_success": 0.9571,
     "outcomes": {
      "valid": 64,
@@ -373,9 +373,9 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0009,
+    "delta": 0.0022,
     "n_both_valid": 59,
-    "delta_both_valid": -0.0123,
+    "delta_both_valid": -0.0104,
     "better": 3,
     "worse": 8
    },
@@ -390,9 +390,9 @@
   },
   "moonshotai/kimi-k2.6": {
    "spec": {
-    "mvs_f1": 0.6617,
+    "mvs_f1": 0.6569,
     "valid_scene": 0.7286,
-    "cond_f1": 0.9082,
+    "cond_f1": 0.9016,
     "parse_success": 0.7429,
     "outcomes": {
      "valid": 51,
@@ -404,9 +404,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.5707,
+    "mvs_f1": 0.5676,
     "valid_scene": 0.6429,
-    "cond_f1": 0.8878,
+    "cond_f1": 0.8829,
     "parse_success": 0.6571,
     "outcomes": {
      "valid": 45,
@@ -419,7 +419,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0909,
+    "delta": -0.0893,
     "n_both_valid": 36,
     "delta_both_valid": -0.008,
     "better": 5,
@@ -482,9 +482,9 @@
   },
   "gpt-5.4-nano": {
    "spec": {
-    "mvs_f1": 0.6572,
+    "mvs_f1": 0.6541,
     "valid_scene": 0.7571,
-    "cond_f1": 0.8681,
+    "cond_f1": 0.8639,
     "parse_success": 0.7857,
     "outcomes": {
      "valid": 53,
@@ -496,9 +496,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.6096,
+    "mvs_f1": 0.6049,
     "valid_scene": 0.7571,
-    "cond_f1": 0.8052,
+    "cond_f1": 0.7989,
     "parse_success": 0.8286,
     "outcomes": {
      "valid": 53,
@@ -511,7 +511,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0476,
+    "delta": -0.0492,
     "n_both_valid": 40,
     "delta_both_valid": -0.0474,
     "better": 10,
@@ -528,9 +528,9 @@
   },
   "openai/gpt-oss-120b": {
    "spec": {
-    "mvs_f1": 0.5709,
+    "mvs_f1": 0.5614,
     "valid_scene": 0.6286,
-    "cond_f1": 0.9082,
+    "cond_f1": 0.8931,
     "parse_success": 0.6286,
     "outcomes": {
      "valid": 44,
@@ -542,9 +542,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.5881,
+    "mvs_f1": 0.5817,
     "valid_scene": 0.6571,
-    "cond_f1": 0.8949,
+    "cond_f1": 0.8852,
     "parse_success": 0.6571,
     "outcomes": {
      "valid": 46,
@@ -557,7 +557,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": 0.0172,
+    "delta": 0.0204,
     "n_both_valid": 26,
     "delta_both_valid": -0.0113,
     "better": 3,
@@ -620,9 +620,9 @@
   },
   "qwen/qwen3-30b-a3b-instruct-2507": {
    "spec": {
-    "mvs_f1": 0.5257,
+    "mvs_f1": 0.5194,
     "valid_scene": 0.5571,
-    "cond_f1": 0.9436,
+    "cond_f1": 0.9322,
     "parse_success": 0.6,
     "outcomes": {
      "valid": 39,
@@ -634,9 +634,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.2722,
+    "mvs_f1": 0.2659,
     "valid_scene": 0.3143,
-    "cond_f1": 0.8661,
+    "cond_f1": 0.8459,
     "parse_success": 0.3429,
     "outcomes": {
      "valid": 22,
@@ -694,9 +694,9 @@
   },
   "qwen/qwen3-next-80b-a3b-instruct": {
    "spec": {
-    "mvs_f1": 0.8149,
+    "mvs_f1": 0.8054,
     "valid_scene": 0.9143,
-    "cond_f1": 0.8913,
+    "cond_f1": 0.8809,
     "parse_success": 0.9571,
     "outcomes": {
      "valid": 64,
@@ -708,9 +708,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.8399,
+    "mvs_f1": 0.8303,
     "valid_scene": 0.9143,
-    "cond_f1": 0.9186,
+    "cond_f1": 0.9082,
     "parse_success": 1.0,
     "outcomes": {
      "valid": 64,
@@ -740,9 +740,9 @@
   },
   "z-ai/glm-5.2": {
    "spec": {
-    "mvs_f1": 0.81,
+    "mvs_f1": 0.8052,
     "valid_scene": 0.9,
-    "cond_f1": 0.9,
+    "cond_f1": 0.8947,
     "parse_success": 0.9286,
     "outcomes": {
      "valid": 63,
@@ -754,9 +754,9 @@
     }
    },
    "spec_grounded": {
-    "mvs_f1": 0.7864,
+    "mvs_f1": 0.7832,
     "valid_scene": 0.8571,
-    "cond_f1": 0.9175,
+    "cond_f1": 0.9138,
     "parse_success": 0.8857,
     "outcomes": {
      "valid": 60,
@@ -769,7 +769,7 @@
    },
    "dossier": {
     "n": 70,
-    "delta": -0.0236,
+    "delta": -0.022,
     "n_both_valid": 56,
     "delta_both_valid": 0.0048,
     "better": 7,
@@ -787,10 +787,10 @@
  },
  "summary": {
   "n_models": 15,
-  "mean_delta": -0.0418,
+  "mean_delta": -0.0409,
   "pooled_both_valid": {
    "n": 647,
-   "delta": -0.0048,
+   "delta": -0.0043,
    "better": 69,
    "worse": 92,
    "same": 486
