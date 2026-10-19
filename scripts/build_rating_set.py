@@ -2,8 +2,10 @@
 """
 Build the A4 human-agreement rating set from the VLM-judged pairs of a run.
 
-Every pair the T2 judge saw (reference render vs a model's render) becomes one item,
-except those the public gallery already shows with their verdict (--public), plus two kinds of attention check with a known answer that doesn't depend on the judge:
+Every pair the T2 judge saw (reference render vs a model's render) is a candidate,
+except those the public gallery already shows with their verdict (--public). At most
+--max-per-task are kept per task, so raters don't see one prompt a dozen times;
+ids listed in --keep (pairs already rated) are kept first. Plus two kinds of attention check with a known answer that doesn't depend on the judge:
 
   control-same       a T1 rescue: the two renders differ by <= 2 pixels
   control-different  one task's reference vs another task's, on a different structure
@@ -24,6 +26,7 @@ Writes two things, kept apart so raters stay blind:
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import hmac
 import json
@@ -81,7 +84,8 @@ def public_pairs(gallery: pathlib.Path | None) -> set[tuple[str, str]]:
 
 
 def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int,
-          secret: str, public: set[tuple[str, str]] = frozenset()) -> tuple[list[dict], dict]:
+          secret: str, public: set[tuple[str, str]] = frozenset(),
+          max_per_task: int | None = None, keep: set[str] = frozenset()) -> tuple[list[dict], dict]:
     """(items, key). Items carry source image paths under `_ref`/`_out` until written."""
     tasks = {t["id"]: t for t in runner.load_tasks(None)}
     pairs = [p for p in judged_pairs(results) if (_short(p["model"]), p["task"]) not in public]
@@ -95,8 +99,19 @@ def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int,
         items.append({"id": i, "prompt": tasks[task]["prompt"], "_ref": ref, "_out": out})
         key[i] = {"kind": kind, "task": task, **info}
 
+    judged = collections.defaultdict(list)
     for p in pairs:
         if p["decision"].startswith("vlm:"):
+            judged[p["task"]].append(p)
+    for task, ps in judged.items():
+        # Already-rated pairs first; then alternate the judge's "same" and "different"
+        # calls so the cap keeps both, each in keyed-id order (fixed, unpredictable).
+        ident = {id(p): item_id(secret, set_id, "vlm", p["model"], task) for p in ps}
+        by_label = {lab: sorted((p for p in ps if p["vlm"]["label"] == lab), key=lambda p: ident[id(p)])
+                    for lab in ("same", "different")}
+        rank = {id(p): n for lab in by_label for n, p in enumerate(by_label[lab])}
+        ps.sort(key=lambda p: (ident[id(p)] not in keep, rank.get(id(p), len(ps)), p["vlm"]["label"] != "same"))
+        for p in ps[:max_per_task]:
             add("vlm", p["task"], p["ref_png"], p["pred_png"], (p["model"], p["task"]),
                 model=p["model"], vlm_label=p["vlm"]["label"], vlm_score=p["vlm"].get("score"),
                 judge=p["vlm"].get("judge"), tree_f1=p["tree_f1"], changed_pixels=p["changed_pixels"])
@@ -150,12 +165,17 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--key", type=pathlib.Path, required=True, help="private answer key (json)")
     ap.add_argument("--controls", type=int, default=12, help="checks of each kind")
     ap.add_argument("--seed", type=int, default=4)
+    ap.add_argument("--max-per-task", type=int, default=3, help="judged pairs kept per task")
+    ap.add_argument("--keep", type=pathlib.Path,
+                    help="JSON list of item ids already rated; kept first under the cap")
     ap.add_argument("--public", type=pathlib.Path, default=REPO / "docs" / "gallery_data.json",
                     help="published gallery; its pairs are left out so raters can't copy a verdict")
     a = ap.parse_args(argv)
     secret = (json.loads(a.key.read_text())["secret"] if a.key.exists()
               else secrets.token_hex(32))
-    items, key = build(a.results, a.set_id, a.controls, a.seed, secret, public_pairs(a.public))
+    keep = set(json.loads(a.keep.read_text())) if a.keep else set()
+    items, key = build(a.results, a.set_id, a.controls, a.seed, secret, public_pairs(a.public),
+                       a.max_per_task, keep)
     write(items, key, a.set_id, secret, a.out, a.key)
     kinds = {}
     for v in key.values():

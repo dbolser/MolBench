@@ -20,7 +20,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.87,
+    "mvs_f1": 0.8665,
     "failures": [
      {
       "id": "res-cftr",
@@ -293,7 +293,7 @@
      "load_failed": 1
     },
     "n": 70,
-    "mvs_f1": 0.9164,
+    "mvs_f1": 0.9129,
     "failures": [
      {
       "id": "int-005",
@@ -378,7 +378,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8613,
+    "mvs_f1": 0.8623,
     "failures": [
      {
       "id": "gen-cartoon-1hho",
@@ -486,7 +486,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8451,
+    "mvs_f1": 0.8486,
     "failures": [
      {
       "id": "gen-range-3ptb",
@@ -528,7 +528,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.7239,
+    "mvs_f1": 0.7212,
     "failures": [
      {
       "id": "mvs-004",
@@ -1357,7 +1357,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.6583,
+    "mvs_f1": 0.6572,
     "failures": [
      {
       "id": "mvs-001",
@@ -1641,7 +1641,7 @@
      "load_failed": 1
     },
     "n": 70,
-    "mvs_f1": 0.7942,
+    "mvs_f1": 0.7952,
     "failures": [
      {
       "id": "clinvar-1tup-D281",
@@ -2651,7 +2651,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8297,
+    "mvs_f1": 0.8261,
     "failures": [
      {
       "id": "mvs-004",
@@ -2838,7 +2838,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.6632,
+    "mvs_f1": 0.6617,
     "failures": [
      {
       "id": "mvs-004",
@@ -3046,7 +3046,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.0769,
+    "mvs_f1": 0.078,
     "failures": [
      {
       "id": "mvs-001",
@@ -3508,7 +3508,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.5744,
+    "mvs_f1": 0.5709,
     "failures": [
      {
       "id": "mvs-004",
@@ -3704,7 +3704,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.2522,
+    "mvs_f1": 0.2524,
     "failures": [
      {
       "id": "mvs-001",
@@ -4068,7 +4068,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.529,
+    "mvs_f1": 0.5257,
     "raw_missing": true,
     "failures": [
      {
@@ -4602,7 +4602,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8185,
+    "mvs_f1": 0.8149,
     "failures": [
      {
       "id": "named-1tup-248",
@@ -4878,7 +4878,7 @@
      "load_failed": 1
     },
     "n": 70,
-    "mvs_f1": 0.8072,
+    "mvs_f1": 0.81,
     "failures": [
      {
       "id": "mvs-005",
@@ -5123,7 +5123,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8548,
+    "mvs_f1": 0.8513,
     "failures": [
      {
       "id": "res-cftr",
@@ -5545,7 +5545,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.9008,
+    "mvs_f1": 0.8973,
     "failures": [
      {
       "id": "clinvar-1tup-F109",
@@ -5713,7 +5713,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.7778,
+    "mvs_f1": 0.7794,
     "failures": [
      {
       "id": "mvs-001",
@@ -5804,7 +5804,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8124,
+    "mvs_f1": 0.816,
     "failures": [
      {
       "id": "hotspots-1tup",
@@ -6034,7 +6034,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.6625,
+    "mvs_f1": 0.6602,
     "failures": [
      {
       "id": "mvs-004",
@@ -7424,7 +7424,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.6134,
+    "mvs_f1": 0.6096,
     "failures": [
      {
       "id": "clinvar-1tup-N239",
@@ -7981,7 +7981,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.7895,
+    "mvs_f1": 0.7927,
     "failures": [
      {
       "id": "clinvar-1tup-F109",
@@ -8932,7 +8932,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8273,
+    "mvs_f1": 0.8252,
     "failures": [
      {
       "id": "gen-chain-4ins",
@@ -9241,7 +9241,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.5728,
+    "mvs_f1": 0.5707,
     "failures": [
      {
       "id": "mvs-004",
@@ -10080,7 +10080,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.5903,
+    "mvs_f1": 0.5881,
     "failures": [
      {
       "id": "clinvar-1tup-S241",
@@ -10262,7 +10262,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.2054,
+    "mvs_f1": 0.2066,
     "failures": [
      {
       "id": "mvs-003",
@@ -10647,7 +10647,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.2758,
+    "mvs_f1": 0.2722,
     "failures": [
      {
       "id": "mvs-002",
@@ -11207,7 +11207,7 @@
      "load_failed": 0
     },
     "n": 70,
-    "mvs_f1": 0.8434,
+    "mvs_f1": 0.8399,
     "failures": [
      {
       "id": "mvs-004",

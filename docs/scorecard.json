@@ -2656,12 +2656,12 @@
     },
     "claude-haiku-4-5": {
       "spec": "anthropic:claude-haiku-4-5",
-      "mean_f1": 0.883,
+      "mean_f1": 0.8803,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.87,
-          "std": 0.2413,
+          "mean_f1": 0.8665,
+          "std": 0.2401,
           "n": 70
         },
         "api_calling": {
@@ -2684,7 +2684,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.9331,
+          "mean_f1": 0.9291,
           "n": 63
         },
         "interactions": {
@@ -2692,7 +2692,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.87,
+          "mean_f1": 0.8665,
           "n": 70
         },
         "measurement": {
@@ -2700,11 +2700,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.9095,
+          "mean_f1": 0.9046,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.87,
+          "mean_f1": 0.8665,
           "n": 70
         },
         "resolve": {
@@ -2712,7 +2712,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.8795,
+          "mean_f1": 0.8725,
           "n": 35
         },
         "surface": {
@@ -2725,7 +2725,7 @@
         }
       },
       "parse_success": 1.0,
-      "cond_f1": 0.909,
+      "cond_f1": 0.9053,
       "outcomes": {
         "valid": 67,
         "unchecked": 0,
@@ -4650,15 +4650,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9888,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9888,
+          "f1_max": 0.9888,
+          "precision": 0.9888,
+          "recall": 0.9888,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9888
           ],
           "predicted": {
             "root": {
@@ -4738,11 +4738,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9888,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/claude-haiku-4-5/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/claude-haiku-4-5/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured purple as requested, while the output renders the entire structure in grey with no purple colouring applied, failing the chain A colour requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -4759,15 +4769,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9905,
+          "f1": 0.9313,
           "f1_std": 0.0,
-          "f1_min": 0.9905,
-          "f1_max": 0.9905,
-          "precision": 0.9905,
-          "recall": 0.9905,
+          "f1_min": 0.9313,
+          "f1_max": 0.9313,
+          "precision": 0.9313,
+          "recall": 0.9313,
           "n_samples": 1,
           "samples_f1": [
-            0.9905
+            0.9313
           ],
           "predicted": {
             "root": {
@@ -4847,15 +4857,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9905,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9313,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-1hho/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-1hho/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored red while the rest is grey cartoon. The output shows the entire structure as grey cartoon with no red coloring applied to chain A, so the required highlighting is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -4872,15 +4888,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9898,
+          "f1": 0.9796,
           "f1_std": 0.0,
-          "f1_min": 0.9898,
-          "f1_max": 0.9898,
-          "precision": 0.9898,
-          "recall": 0.9898,
+          "f1_min": 0.9796,
+          "f1_max": 0.9796,
+          "precision": 0.9796,
+          "recall": 0.9796,
           "n_samples": 1,
           "samples_f1": [
-            0.9898
+            0.9796
           ],
           "predicted": {
             "root": {
@@ -4960,15 +4976,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9898,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9796,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-1lyz/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-1lyz/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured green as requested, but the output renders the entire structure in grey with no green colouring applied, so the chain A highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -4985,15 +5007,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9167,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9167,
+          "f1_max": 0.9167,
+          "precision": 0.9167,
+          "recall": 0.9167,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9167
           ],
           "predicted": {
             "root": {
@@ -5073,11 +5095,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9167,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/claude-haiku-4-5/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/claude-haiku-4-5/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain B coloured teal while the rest is grey cartoon. The output shows the entire structure as grey cartoon with no teal-coloured chain, so the required chain B highlighting is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -5094,15 +5126,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 0.9906,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 0.9906,
+          "f1_max": 0.9906,
+          "precision": 0.9906,
+          "recall": 0.9906,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            0.9906
           ],
           "predicted": {
             "root": {
@@ -5182,15 +5214,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9906,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-3ptb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-3ptb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored orange as requested, but the output renders the entire structure in grey with no orange coloring applied, so the chain A highlighting is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -5207,15 +5245,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9669,
+          "f1": 0.8881,
           "f1_std": 0.0,
-          "f1_min": 0.9669,
-          "f1_max": 0.9669,
-          "precision": 0.9669,
-          "recall": 0.9669,
+          "f1_min": 0.8881,
+          "f1_max": 0.8881,
+          "precision": 0.8881,
+          "recall": 0.8881,
           "n_samples": 1,
           "samples_f1": [
-            0.9669
+            0.8881
           ],
           "predicted": {
             "root": {
@@ -5295,15 +5333,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9669,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.8881,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-4ins/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/claude-haiku-4-5/gen-chain-4ins/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly shows chain B coloured blue while the rest is grey cartoon; the output shows the entire structure as grey cartoon with no blue chain, so the chain B colouring is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -11179,16 +11223,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.891
+      "validated_f1": 0.886
     },
     "deepseek/deepseek-v3.2": {
       "spec": "openrouter:deepseek/deepseek-v3.2",
-      "mean_f1": 0.9038,
+      "mean_f1": 0.901,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.9164,
-          "std": 0.1772,
+          "mean_f1": 0.9129,
+          "std": 0.1764,
           "n": 70
         },
         "api_calling": {
@@ -11211,7 +11255,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.9383,
+          "mean_f1": 0.9344,
           "n": 63
         },
         "interactions": {
@@ -11219,7 +11263,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.9164,
+          "mean_f1": 0.9129,
           "n": 70
         },
         "measurement": {
@@ -11227,11 +11271,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.9223,
+          "mean_f1": 0.9173,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.9164,
+          "mean_f1": 0.9129,
           "n": 70
         },
         "resolve": {
@@ -11239,7 +11283,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.8889,
+          "mean_f1": 0.8819,
           "n": 35
         },
         "surface": {
@@ -11252,7 +11296,7 @@
         }
       },
       "parse_success": 1.0,
-      "cond_f1": 0.9297,
+      "cond_f1": 0.9261,
       "outcomes": {
         "valid": 69,
         "unchecked": 0,
@@ -13245,15 +13289,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9888,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9888,
+          "f1_max": 0.9888,
+          "precision": 0.9888,
+          "recall": 0.9888,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9888
           ],
           "predicted": {
             "root": {
@@ -13333,11 +13377,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9888,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/deepseek_deepseek-v3.2/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/deepseek_deepseek-v3.2/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored purple as requested, but the output renders the entire structure in grey with no purple coloring applied, so the chain A highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -13354,15 +13408,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9408,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9408,
+          "f1_max": 0.9408,
+          "precision": 0.9408,
+          "recall": 0.9408,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9408
           ],
           "predicted": {
             "root": {
@@ -13442,11 +13496,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9408,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/deepseek_deepseek-v3.2/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/deepseek_deepseek-v3.2/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored red while the rest is grey cartoon. The output shows the entire structure in grey with no red chain, so the required coloring of chain A is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -13463,15 +13527,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9898,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9898,
+          "f1_max": 0.9898,
+          "precision": 0.9898,
+          "recall": 0.9898,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9898
           ],
           "predicted": {
             "root": {
@@ -13551,11 +13615,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9898,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/deepseek_deepseek-v3.2/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/deepseek_deepseek-v3.2/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured green as requested, while the output shows the entire structure in grey with no green colouring applied. The chain A colouring step is missing in the output.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -13572,15 +13646,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9167,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9167,
+          "f1_max": 0.9167,
+          "precision": 0.9167,
+          "recall": 0.9167,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9167
           ],
           "predicted": {
             "root": {
@@ -13660,11 +13734,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9167,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/deepseek_deepseek-v3.2/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/deepseek_deepseek-v3.2/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain B coloured teal while the rest of the structure is grey. The output renders the entire structure in grey with no teal-coloured chain, so the required chain B colouring is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -13681,15 +13765,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 0.9906,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 0.9906,
+          "f1_max": 0.9906,
+          "precision": 0.9906,
+          "recall": 0.9906,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            0.9906
           ],
           "predicted": {
             "root": {
@@ -13769,15 +13853,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9906,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v3.2/gen-chain-3ptb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v3.2/gen-chain-3ptb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured orange as requested, but the output renders the entire structure in grey with no orange colouring applied, so the required highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -13794,15 +13884,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9669,
+          "f1": 0.8881,
           "f1_std": 0.0,
-          "f1_min": 0.9669,
-          "f1_max": 0.9669,
-          "precision": 0.9669,
-          "recall": 0.9669,
+          "f1_min": 0.8881,
+          "f1_max": 0.8881,
+          "precision": 0.8881,
+          "recall": 0.8881,
           "n_samples": 1,
           "samples_f1": [
-            0.9669
+            0.8881
           ],
           "predicted": {
             "root": {
@@ -13882,15 +13972,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9669,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.8881,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v3.2/gen-chain-4ins/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v3.2/gen-chain-4ins/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly colors chain B blue while keeping the rest grey cartoon. The output shows the entire structure in grey with no blue chain B highlighting, so the required coloring is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -19493,16 +19589,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.935
+      "validated_f1": 0.93
     },
     "deepseek/deepseek-v4-flash": {
       "spec": "openrouter:deepseek/deepseek-v4-flash",
-      "mean_f1": 0.8766,
+      "mean_f1": 0.8774,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8613,
-          "std": 0.2714,
+          "mean_f1": 0.8623,
+          "std": 0.2717,
           "n": 70
         },
         "api_calling": {
@@ -19525,7 +19621,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.8764,
+          "mean_f1": 0.8775,
           "n": 63
         },
         "interactions": {
@@ -19533,7 +19629,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.8613,
+          "mean_f1": 0.8623,
           "n": 70
         },
         "measurement": {
@@ -19541,11 +19637,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.8636,
+          "mean_f1": 0.865,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.8613,
+          "mean_f1": 0.8623,
           "n": 70
         },
         "resolve": {
@@ -19553,7 +19649,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.8374,
+          "mean_f1": 0.8393,
           "n": 35
         },
         "surface": {
@@ -19566,7 +19662,7 @@
         }
       },
       "parse_success": 0.9429,
-      "cond_f1": 0.9276,
+      "cond_f1": 0.9286,
       "outcomes": {
         "valid": 65,
         "unchecked": 0,
@@ -21438,15 +21534,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9888,
+          "f1": 0.9776,
           "f1_std": 0.0,
-          "f1_min": 0.9888,
-          "f1_max": 0.9888,
-          "precision": 0.9888,
-          "recall": 0.9888,
+          "f1_min": 0.9776,
+          "f1_max": 0.9776,
+          "precision": 0.9776,
+          "recall": 0.9776,
           "n_samples": 1,
           "samples_f1": [
-            0.9888
+            0.9776
           ],
           "predicted": {
             "root": {
@@ -21511,21 +21607,15 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9888,
-            "tier": "vlm",
-            "visual_sim": 0.9532,
-            "changed_pixels": 3772,
+            "tree_f1": 0.9776,
+            "tier": "visual",
+            "visual_sim": 1.0,
+            "changed_pixels": 0,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-1cbs/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-1cbs/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same 1CBS structure as a cartoon representation with identical fold (beta-barrel with helices). Chain A is coloured purple in the output, matching the request. The representations and colouring are equivalent; only camera orientation differs slightly.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "decision": "rendering-equivalent"
           },
           "outcome": "valid",
           "outcomes": [
@@ -21542,15 +21632,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9905,
+          "f1": 0.9313,
           "f1_std": 0.0,
-          "f1_min": 0.9905,
-          "f1_max": 0.9905,
-          "precision": 0.9905,
-          "recall": 0.9905,
+          "f1_min": 0.9313,
+          "f1_max": 0.9313,
+          "precision": 0.9313,
+          "recall": 0.9313,
           "n_samples": 1,
           "samples_f1": [
-            0.9905
+            0.9313
           ],
           "predicted": {
             "root": {
@@ -21630,15 +21720,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9905,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9313,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-1hho/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-1hho/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored red with the rest grey, but the output shows the entire structure in grey with no red coloring applied, failing the chain A coloring requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -21655,15 +21751,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9898,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9898,
+          "f1_max": 0.9898,
+          "precision": 0.9898,
+          "recall": 0.9898,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9898
           ],
           "predicted": {
             "root": {
@@ -21743,11 +21839,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9898,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/deepseek_deepseek-v4-flash/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/deepseek_deepseek-v4-flash/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured green as requested, while the output renders the entire structure in grey with no green colouring applied, so the required chain-A highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -21764,15 +21870,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9082,
+          "f1": 0.9816,
           "f1_std": 0.0,
-          "f1_min": 0.9082,
-          "f1_max": 0.9082,
-          "precision": 0.9082,
-          "recall": 0.9082,
+          "f1_min": 0.9816,
+          "f1_max": 0.9816,
+          "precision": 0.9816,
+          "recall": 0.9816,
           "n_samples": 1,
           "samples_f1": [
-            0.9082
+            0.9816
           ],
           "predicted": {
             "root": {
@@ -21837,21 +21943,15 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9082,
-            "tier": "vlm",
-            "visual_sim": 0.9558,
-            "changed_pixels": 3504,
+            "tree_f1": 0.9816,
+            "tier": "visual",
+            "visual_sim": 1.0,
+            "changed_pixels": 0,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-2hhb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-2hhb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.92,
-              "reason": "Both show the 2HHB hemoglobin tetramer as grey cartoon with one chain colored teal, occupying roughly a quarter of the structure consistent with a single chain. Representations and coloring match the request.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "decision": "rendering-equivalent"
           },
           "outcome": "valid",
           "outcomes": [
@@ -21868,15 +21968,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 0.9906,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 0.9906,
+          "f1_max": 0.9906,
+          "precision": 0.9906,
+          "recall": 0.9906,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            0.9906
           ],
           "predicted": {
             "root": {
@@ -21941,21 +22041,15 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "vlm",
-            "visual_sim": 0.9257,
-            "changed_pixels": 5052,
+            "tree_f1": 0.9906,
+            "tier": "visual",
+            "visual_sim": 1.0,
+            "changed_pixels": 0,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-3ptb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-3ptb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same 3PTB structure as a cartoon representation with identical fold topology. Chain A is colored orange in both, matching the request. The representations and coloring are equivalent, differing only in overall tint (reference appears grey/orange, output fully orange since chain A is the whole visible structure).",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "decision": "rendering-equivalent"
           },
           "outcome": "valid",
           "outcomes": [
@@ -21972,15 +22066,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9212,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9212,
-          "f1_max": 0.9212,
-          "precision": 0.9212,
-          "recall": 0.9212,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9212
+            1.0
           ],
           "predicted": {
             "root": {
@@ -22045,21 +22139,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9212,
-            "tier": "vlm",
-            "visual_sim": 0.9642,
-            "changed_pixels": 805,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-4ins/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/deepseek_deepseek-v4-flash/gen-chain-4ins/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.92,
-              "reason": "Both show the 4INS structure as grey cartoon with one chain (chain B) coloured blue, including the blue helix and extended segment. The representations, colours, and highlighted regions match; only camera orientation differs.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -27282,16 +27366,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.874
+      "validated_f1": 0.873
     },
     "gemini-3.5-flash": {
       "spec": "openrouter:google/gemini-3.5-flash",
-      "mean_f1": 0.8687,
+      "mean_f1": 0.8714,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8451,
-          "std": 0.2743,
+          "mean_f1": 0.8486,
+          "std": 0.2758,
           "n": 70
         },
         "api_calling": {
@@ -27314,7 +27398,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.8825,
+          "mean_f1": 0.8864,
           "n": 63
         },
         "interactions": {
@@ -27322,7 +27406,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.8451,
+          "mean_f1": 0.8486,
           "n": 70
         },
         "measurement": {
@@ -27330,11 +27414,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.852,
+          "mean_f1": 0.8569,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.8451,
+          "mean_f1": 0.8486,
           "n": 70
         },
         "resolve": {
@@ -27342,7 +27426,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.7885,
+          "mean_f1": 0.7956,
           "n": 35
         },
         "surface": {
@@ -27355,7 +27439,7 @@
         }
       },
       "parse_success": 0.9429,
-      "cond_f1": 0.8963,
+      "cond_f1": 0.9,
       "outcomes": {
         "valid": 66,
         "unchecked": 0,
@@ -29502,15 +29586,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9888,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9888,
-          "f1_max": 0.9888,
-          "precision": 0.9888,
-          "recall": 0.9888,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9888
+            1.0
           ],
           "predicted": {
             "root": {
@@ -29575,21 +29659,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9888,
-            "tier": "vlm",
-            "visual_sim": 0.9532,
-            "changed_pixels": 3772,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-1cbs/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-1cbs/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same 1CBS structure as a cartoon representation with identical secondary structure topology (beta sheets and helices). Chain A is colored purple in the output, matching the requested visualization. The reference shows grey but the request specified coloring chain A purple, which the output correctly depicts.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -29606,15 +29680,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9408,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9408,
-          "f1_max": 0.9408,
-          "precision": 0.9408,
-          "recall": 0.9408,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9408
+            1.0
           ],
           "predicted": {
             "root": {
@@ -29679,21 +29753,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9408,
-            "tier": "vlm",
-            "visual_sim": 0.914,
-            "changed_pixels": 4352,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-1hho/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-1hho/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the 1HHO structure as a cartoon representation with one chain (chain A) coloured red and the remaining chain in grey. The representations, colours, and highlighted regions match; only camera orientation differs.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -29710,15 +29774,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9898,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9898,
-          "f1_max": 0.9898,
-          "precision": 0.9898,
-          "recall": 0.9898,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9898
+            1.0
           ],
           "predicted": {
             "root": {
@@ -29783,21 +29847,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9898,
-            "tier": "vlm",
-            "visual_sim": 0.9433,
-            "changed_pixels": 3031,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-1lyz/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-1lyz/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same lysozyme structure as a cartoon representation with identical fold (helices, beta sheets, loops). The reference shows grey while the output shows chain A coloured green, which matches the request to colour chain A green. Same structure and representation.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -29814,15 +29868,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9167,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9167,
-          "f1_max": 0.9167,
-          "precision": 0.9167,
-          "recall": 0.9167,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9167
+            1.0
           ],
           "predicted": {
             "root": {
@@ -29887,21 +29941,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9167,
-            "tier": "vlm",
-            "visual_sim": 0.9558,
-            "changed_pixels": 3504,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-2hhb/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-2hhb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.92,
-              "reason": "Both show the 2HHB hemoglobin tetramer as a grey cartoon with one chain (chain B) coloured teal. The representation (cartoon), colours (grey + teal), and highlighted region (a single chain) match. Camera angle differs but that is to be ignored.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -29918,15 +29962,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            1.0
           ],
           "predicted": {
             "root": {
@@ -29991,21 +30035,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "vlm",
-            "visual_sim": 0.9257,
-            "changed_pixels": 5052,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-3ptb/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-3ptb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same protein structure (3PTB) rendered as cartoon with identical fold. The output correctly colours chain A orange, matching the requested visualization. The reference shows grey but the request specifies colouring chain A orange, which the output depicts; since 3PTB is single-chain, the entire structure appears orange as expected.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -30022,15 +30056,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9212,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9212,
-          "f1_max": 0.9212,
-          "precision": 0.9212,
-          "recall": 0.9212,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9212
+            1.0
           ],
           "predicted": {
             "root": {
@@ -30095,21 +30129,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9212,
-            "tier": "vlm",
-            "visual_sim": 0.9642,
-            "changed_pixels": 805,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-4ins/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemini-3.5-flash/gen-chain-4ins/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.9,
-              "reason": "Both show the same structure as grey cartoon with one chain highlighted in blue, consistent with colouring chain B blue. The blue regions correspond to equivalent portions of the molecule.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -35382,12 +35406,12 @@
     },
     "google/gemma-3-27b-it": {
       "spec": "openrouter:google/gemma-3-27b-it",
-      "mean_f1": 0.7483,
+      "mean_f1": 0.7462,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.7239,
-          "std": 0.3876,
+          "mean_f1": 0.7212,
+          "std": 0.3859,
           "n": 70
         },
         "api_calling": {
@@ -35410,7 +35434,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.7435,
+          "mean_f1": 0.7405,
           "n": 63
         },
         "interactions": {
@@ -35418,7 +35442,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.7239,
+          "mean_f1": 0.7212,
           "n": 70
         },
         "measurement": {
@@ -35426,11 +35450,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.6768,
+          "mean_f1": 0.673,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.7239,
+          "mean_f1": 0.7212,
           "n": 70
         },
         "resolve": {
@@ -35438,7 +35462,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.7383,
+          "mean_f1": 0.7329,
           "n": 35
         },
         "surface": {
@@ -35451,7 +35475,7 @@
         }
       },
       "parse_success": 0.9429,
-      "cond_f1": 0.889,
+      "cond_f1": 0.8857,
       "outcomes": {
         "valid": 57,
         "unchecked": 0,
@@ -37292,15 +37316,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9888,
+          "f1": 0.9776,
           "f1_std": 0.0,
-          "f1_min": 0.9888,
-          "f1_max": 0.9888,
-          "precision": 0.9888,
-          "recall": 0.9888,
+          "f1_min": 0.9776,
+          "f1_max": 0.9776,
+          "precision": 0.9776,
+          "recall": 0.9776,
           "n_samples": 1,
           "samples_f1": [
-            0.9888
+            0.9776
           ],
           "predicted": {
             "root": {
@@ -37380,15 +37404,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9888,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9776,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemma-3-27b-it/gen-chain-1cbs/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemma-3-27b-it/gen-chain-1cbs/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored purple as requested, but the output renders the entire structure in grey with no purple coloring, failing the chain A colour instruction.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -37433,15 +37463,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9898,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9898,
+          "f1_max": 0.9898,
+          "precision": 0.9898,
+          "recall": 0.9898,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9898
           ],
           "predicted": {
             "root": {
@@ -37521,11 +37551,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9898,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/google_gemma-3-27b-it/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/google_gemma-3-27b-it/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured green as requested, but the output renders the entire structure in grey with no green colouring applied, so the required chain A colouring is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -37542,15 +37582,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9908,
+          "f1": 0.9075,
           "f1_std": 0.0,
-          "f1_min": 0.9908,
-          "f1_max": 0.9908,
-          "precision": 0.9908,
-          "recall": 0.9908,
+          "f1_min": 0.9075,
+          "f1_max": 0.9075,
+          "precision": 0.9075,
+          "recall": 0.9075,
           "n_samples": 1,
           "samples_f1": [
-            0.9908
+            0.9075
           ],
           "predicted": {
             "root": {
@@ -37630,15 +37670,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9908,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9075,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemma-3-27b-it/gen-chain-2hhb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemma-3-27b-it/gen-chain-2hhb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows one chain colored teal while the rest is grey cartoon. The output shows the entire structure as grey cartoon with no teal coloring on chain B, so the required highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -37655,15 +37701,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 0.9906,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 0.9906,
+          "f1_max": 0.9906,
+          "precision": 0.9906,
+          "recall": 0.9906,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            0.9906
           ],
           "predicted": {
             "root": {
@@ -37743,15 +37789,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9906,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemma-3-27b-it/gen-chain-3ptb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/google_gemma-3-27b-it/gen-chain-3ptb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured orange as requested, but the output renders the entire structure in grey with no orange colouring applied, so the key colour highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -37768,15 +37820,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9212,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9212,
+          "f1_max": 0.9212,
+          "precision": 0.9212,
+          "recall": 0.9212,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9212
           ],
           "predicted": {
             "root": {
@@ -37856,11 +37908,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9212,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-4ins/google_gemma-3-27b-it/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-4ins/google_gemma-3-27b-it/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly colours chain B blue, but the output shows the entire structure in grey cartoon with no blue chain highlighted, so the required colouring of chain B is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -43477,16 +43539,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.729
+      "validated_f1": 0.726
     },
     "gpt-5.4-nano": {
       "spec": "openrouter:openai/gpt-5.4-nano",
-      "mean_f1": 0.6976,
+      "mean_f1": 0.6968,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.6583,
-          "std": 0.3982,
+          "mean_f1": 0.6572,
+          "std": 0.3975,
           "n": 70
         },
         "api_calling": {
@@ -43509,7 +43571,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.7103,
+          "mean_f1": 0.7091,
           "n": 63
         },
         "interactions": {
@@ -43517,7 +43579,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.6583,
+          "mean_f1": 0.6572,
           "n": 70
         },
         "measurement": {
@@ -43525,11 +43587,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.6961,
+          "mean_f1": 0.6946,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.6583,
+          "mean_f1": 0.6572,
           "n": 70
         },
         "resolve": {
@@ -43537,7 +43599,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.607,
+          "mean_f1": 0.6049,
           "n": 35
         },
         "surface": {
@@ -43550,7 +43612,7 @@
         }
       },
       "parse_success": 0.7857,
-      "cond_f1": 0.8695,
+      "cond_f1": 0.8681,
       "outcomes": {
         "valid": 53,
         "unchecked": 0,
@@ -45023,15 +45085,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9888,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9888,
+          "f1_max": 0.9888,
+          "precision": 0.9888,
+          "recall": 0.9888,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9888
           ],
           "predicted": {
             "root": {
@@ -45113,11 +45175,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9888,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/openai_gpt-5.4-nano/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/openai_gpt-5.4-nano/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored purple as requested, while the output renders the entire structure in grey with no purple coloring, failing to highlight chain A.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -45134,15 +45206,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9444,
+          "f1": 0.8852,
           "f1_std": 0.0,
-          "f1_min": 0.9444,
-          "f1_max": 0.9444,
-          "precision": 0.9444,
-          "recall": 0.9444,
+          "f1_min": 0.8852,
+          "f1_max": 0.8852,
+          "precision": 0.8852,
+          "recall": 0.8852,
           "n_samples": 1,
           "samples_f1": [
-            0.9444
+            0.8852
           ],
           "predicted": {
             "root": {
@@ -45228,15 +45300,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9444,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.8852,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T175033Z/openai_gpt-5.4-nano/gen-chain-1hho/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T175033Z/openai_gpt-5.4-nano/gen-chain-1hho/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored red with the rest grey, but the output renders the entire structure in grey with no red coloring, missing the required chain A highlight.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -45401,15 +45479,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9444,
+          "f1": 0.9397,
           "f1_std": 0.0,
-          "f1_min": 0.9444,
-          "f1_max": 0.9444,
-          "precision": 0.9444,
-          "recall": 0.9444,
+          "f1_min": 0.9397,
+          "f1_max": 0.9397,
+          "precision": 0.9397,
+          "recall": 0.9397,
           "n_samples": 1,
           "samples_f1": [
-            0.9444
+            0.9397
           ],
           "predicted": {
             "root": {
@@ -45490,15 +45568,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9444,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9397,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T175033Z/openai_gpt-5.4-nano/gen-chain-3ptb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T175033Z/openai_gpt-5.4-nano/gen-chain-3ptb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored orange as requested, but the output renders the entire structure in grey with no orange coloring, so the chain A highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -51117,17 +51201,17 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.688,
+      "validated_f1": 0.685,
       "route_note": "ran via OpenRouter (openrouter:openai/gpt-5.4-nano) on 2026-10-18; July API-track result via the native API (openai:gpt-5.4-nano)"
     },
     "meta-llama/llama-4-maverick": {
       "spec": "openrouter:meta-llama/llama-4-maverick",
-      "mean_f1": 0.797,
+      "mean_f1": 0.7978,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.7942,
-          "std": 0.385,
+          "mean_f1": 0.7952,
+          "std": 0.3856,
           "n": 70
         },
         "api_calling": {
@@ -51150,7 +51234,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.8712,
+          "mean_f1": 0.8723,
           "n": 63
         },
         "interactions": {
@@ -51158,7 +51242,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.7942,
+          "mean_f1": 0.7952,
           "n": 70
         },
         "measurement": {
@@ -51166,11 +51250,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.8519,
+          "mean_f1": 0.8533,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.7942,
+          "mean_f1": 0.7952,
           "n": 70
         },
         "resolve": {
@@ -51178,7 +51262,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.7968,
+          "mean_f1": 0.7987,
           "n": 35
         },
         "surface": {
@@ -51191,7 +51275,7 @@
         }
       },
       "parse_success": 0.9857,
-      "cond_f1": 0.9754,
+      "cond_f1": 0.9766,
       "outcomes": {
         "valid": 57,
         "unchecked": 0,
@@ -53259,15 +53343,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9888,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9888,
+          "f1_max": 0.9888,
+          "precision": 0.9888,
+          "recall": 0.9888,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9888
           ],
           "predicted": {
             "root": {
@@ -53347,11 +53431,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9888,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/meta-llama_llama-4-maverick/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/meta-llama_llama-4-maverick/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured purple as requested, while the output shows the entire structure in grey with no purple colouring applied, failing the key colour requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -53368,15 +53462,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9408,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9408,
-          "f1_max": 0.9408,
-          "precision": 0.9408,
-          "recall": 0.9408,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9408
+            1.0
           ],
           "predicted": {
             "root": {
@@ -53441,21 +53535,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9408,
-            "tier": "vlm",
-            "visual_sim": 0.914,
-            "changed_pixels": 4352,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-1hho/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-1hho/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same structure as cartoon with one chain colored red and the other grey, matching the request to color chain A red while the rest remains grey.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -53472,15 +53556,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9898,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9898,
-          "f1_max": 0.9898,
-          "precision": 0.9898,
-          "recall": 0.9898,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9898
+            1.0
           ],
           "predicted": {
             "root": {
@@ -53545,21 +53629,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9898,
-            "tier": "vlm",
-            "visual_sim": 0.9433,
-            "changed_pixels": 3031,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-1lyz/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-1lyz/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same lysozyme structure as a cartoon representation with identical fold (helices, beta sheets, loops). Chain A is coloured green in the output, matching the request. The only difference is the reference shows grey while the output shows green, which is expected since chain A is the entire visible structure being coloured green.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -53576,15 +53650,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9167,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9167,
-          "f1_max": 0.9167,
-          "precision": 0.9167,
-          "recall": 0.9167,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9167
+            1.0
           ],
           "predicted": {
             "root": {
@@ -53649,21 +53723,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9167,
-            "tier": "vlm",
-            "visual_sim": 0.9558,
-            "changed_pixels": 3504,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-2hhb/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-2hhb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.92,
-              "reason": "Both show the hemoglobin (2HHB) tetramer as a grey cartoon with one chain (approximately a quarter of the structure) coloured teal. The representation, colours, and highlighted region all match.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -53680,15 +53744,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            1.0
           ],
           "predicted": {
             "root": {
@@ -53753,21 +53817,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "vlm",
-            "visual_sim": 0.9257,
-            "changed_pixels": 5052,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-3ptb/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-3ptb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same 3PTB structure rendered as a cartoon with identical fold/topology. Chain A is coloured orange in the output, matching the requested visualization. Only camera/color-shade differences, which are ignored.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -53784,15 +53838,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9669,
+          "f1": 0.8881,
           "f1_std": 0.0,
-          "f1_min": 0.9669,
-          "f1_max": 0.9669,
-          "precision": 0.9669,
-          "recall": 0.9669,
+          "f1_min": 0.8881,
+          "f1_max": 0.8881,
+          "precision": 0.8881,
+          "recall": 0.8881,
           "n_samples": 1,
           "samples_f1": [
-            0.9669
+            0.8881
           ],
           "predicted": {
             "root": {
@@ -53872,15 +53926,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9669,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.8881,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-4ins/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170351Z/meta-llama_llama-4-maverick/gen-chain-4ins/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly shows chain B coloured blue while the rest is grey cartoon. The output shows the entire structure in grey cartoon with no blue chain, so the chain B colouring was not applied.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -59442,16 +59502,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.804
+      "validated_f1": 0.802
     },
     "minimax/minimax-m3": {
       "spec": "openrouter:minimax/minimax-m3",
-      "mean_f1": 0.8054,
+      "mean_f1": 0.8027,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8297,
-          "std": 0.3123,
+          "mean_f1": 0.8261,
+          "std": 0.3107,
           "n": 70
         },
         "api_calling": {
@@ -59474,7 +59534,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.8756,
+          "mean_f1": 0.8716,
           "n": 63
         },
         "interactions": {
@@ -59482,7 +59542,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.8297,
+          "mean_f1": 0.8261,
           "n": 70
         },
         "measurement": {
@@ -59490,11 +59550,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.8374,
+          "mean_f1": 0.8325,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.8297,
+          "mean_f1": 0.8261,
           "n": 70
         },
         "resolve": {
@@ -59502,7 +59562,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.8359,
+          "mean_f1": 0.8288,
           "n": 35
         },
         "surface": {
@@ -59515,7 +59575,7 @@
         }
       },
       "parse_success": 0.9286,
-      "cond_f1": 0.9218,
+      "cond_f1": 0.9179,
       "outcomes": {
         "valid": 63,
         "unchecked": 0,
@@ -61282,15 +61342,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9888,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9888,
+          "f1_max": 0.9888,
+          "precision": 0.9888,
+          "recall": 0.9888,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9888
           ],
           "predicted": {
             "root": {
@@ -61370,11 +61430,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9888,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/minimax_minimax-m3/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/minimax_minimax-m3/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored purple as requested, but the output renders the entire structure in grey with no purple coloring applied, failing the key requirement to color chain A purple.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -61391,15 +61461,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9408,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9408,
+          "f1_max": 0.9408,
+          "precision": 0.9408,
+          "recall": 0.9408,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9408
           ],
           "predicted": {
             "root": {
@@ -61479,11 +61549,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9408,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/minimax_minimax-m3/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/minimax_minimax-m3/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored red while the rest is grey cartoon, but the output renders the entire structure in grey with no red chain, failing the required coloring.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -61500,15 +61580,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9898,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9898,
+          "f1_max": 0.9898,
+          "precision": 0.9898,
+          "recall": 0.9898,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9898
           ],
           "predicted": {
             "root": {
@@ -61588,11 +61668,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9898,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/minimax_minimax-m3/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/minimax_minimax-m3/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured green as requested, while the output shows the entire structure in grey with no green colouring applied, failing the key colour requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -61609,15 +61699,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9167,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9167,
+          "f1_max": 0.9167,
+          "precision": 0.9167,
+          "recall": 0.9167,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9167
           ],
           "predicted": {
             "root": {
@@ -61697,11 +61787,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9167,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/minimax_minimax-m3/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/minimax_minimax-m3/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain B coloured teal while the rest is grey, but the output renders the entire structure in grey with no teal-coloured chain, so the requested chain B highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -61718,15 +61818,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9953,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9953,
+          "f1_max": 0.9953,
+          "precision": 0.9953,
+          "recall": 0.9953,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9953
           ],
           "predicted": {
             "root": {
@@ -61806,11 +61906,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9953,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-3ptb/minimax_minimax-m3/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-3ptb/minimax_minimax-m3/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured orange as requested, while the output renders the entire structure in grey with no orange colouring applied. The chain A orange recolouring step is missing in the output.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -61827,15 +61937,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9212,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9212,
+          "f1_max": 0.9212,
+          "precision": 0.9212,
+          "recall": 0.9212,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9212
           ],
           "predicted": {
             "root": {
@@ -61915,11 +62025,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9212,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-4ins/minimax_minimax-m3/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-4ins/minimax_minimax-m3/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly shows chain B coloured blue against a grey cartoon, but the output is entirely grey with no blue chain B highlighted, failing the colouring requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -67351,7 +67471,7 @@
           "schema_errors": null
         }
       ],
-      "validated_f1": 0.838
+      "validated_f1": 0.835
     },
     "mistralai/mistral-small-2603": {
       "spec": "openrouter:mistralai/mistral-small-2603",
@@ -68289,12 +68409,12 @@
     },
     "moonshotai/kimi-k2.6": {
       "spec": "openrouter:moonshotai/kimi-k2.6",
-      "mean_f1": 0.6908,
+      "mean_f1": 0.6896,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.6632,
-          "std": 0.4281,
+          "mean_f1": 0.6617,
+          "std": 0.427,
           "n": 70
         },
         "api_calling": {
@@ -68317,7 +68437,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.6943,
+          "mean_f1": 0.6926,
           "n": 63
         },
         "interactions": {
@@ -68325,7 +68445,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.6632,
+          "mean_f1": 0.6617,
           "n": 70
         },
         "measurement": {
@@ -68333,11 +68453,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.6215,
+          "mean_f1": 0.6193,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.6632,
+          "mean_f1": 0.6617,
           "n": 70
         },
         "resolve": {
@@ -68345,7 +68465,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.545,
+          "mean_f1": 0.5418,
           "n": 35
         },
         "surface": {
@@ -68358,7 +68478,7 @@
         }
       },
       "parse_success": 0.7429,
-      "cond_f1": 0.9103,
+      "cond_f1": 0.9082,
       "outcomes": {
         "valid": 51,
         "unchecked": 0,
@@ -70237,15 +70357,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9888,
+          "f1": 0.9776,
           "f1_std": 0.0,
-          "f1_min": 0.9888,
-          "f1_max": 0.9888,
-          "precision": 0.9888,
-          "recall": 0.9888,
+          "f1_min": 0.9776,
+          "f1_max": 0.9776,
+          "precision": 0.9776,
+          "recall": 0.9776,
           "n_samples": 1,
           "samples_f1": [
-            0.9888
+            0.9776
           ],
           "predicted": {
             "root": {
@@ -70325,15 +70445,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9888,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9776,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-1cbs/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-1cbs/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored purple as requested, but the output renders the entire structure in grey with no purple coloring applied, failing the coloring requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -70378,15 +70504,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9898,
+          "f1": 0.9796,
           "f1_std": 0.0,
-          "f1_min": 0.9898,
-          "f1_max": 0.9898,
-          "precision": 0.9898,
-          "recall": 0.9898,
+          "f1_min": 0.9796,
+          "f1_max": 0.9796,
+          "precision": 0.9796,
+          "recall": 0.9796,
           "n_samples": 1,
           "samples_f1": [
-            0.9898
+            0.9796
           ],
           "predicted": {
             "root": {
@@ -70466,15 +70592,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9898,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9796,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-1lyz/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-1lyz/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored green as requested, but the output shows the entire structure in grey with no green coloring applied, failing to highlight chain A.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -70491,15 +70623,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9908,
+          "f1": 0.9075,
           "f1_std": 0.0,
-          "f1_min": 0.9908,
-          "f1_max": 0.9908,
-          "precision": 0.9908,
-          "recall": 0.9908,
+          "f1_min": 0.9075,
+          "f1_max": 0.9075,
+          "precision": 0.9075,
+          "recall": 0.9075,
           "n_samples": 1,
           "samples_f1": [
-            0.9908
+            0.9075
           ],
           "predicted": {
             "root": {
@@ -70579,15 +70711,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9908,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9075,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-2hhb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-2hhb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows one chain (B) coloured teal while the rest is grey cartoon. The output is entirely grey with no teal chain, so the requested colouring of chain B is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -70604,15 +70742,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 0.9906,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 0.9906,
+          "f1_max": 0.9906,
+          "precision": 0.9906,
+          "recall": 0.9906,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            0.9906
           ],
           "predicted": {
             "root": {
@@ -70677,21 +70815,15 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "vlm",
-            "visual_sim": 0.9257,
-            "changed_pixels": 5052,
+            "tree_f1": 0.9906,
+            "tier": "visual",
+            "visual_sim": 1.0,
+            "changed_pixels": 0,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-3ptb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171635Z/moonshotai_kimi-k2.6/gen-chain-3ptb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same 3PTB structure as a cartoon representation with identical fold/topology. Chain A is coloured orange in both, matching the request. The output matches the reference visualization.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "decision": "rendering-equivalent"
           },
           "outcome": "valid",
           "outcomes": [
@@ -75145,16 +75277,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.686
+      "validated_f1": 0.684
     },
     "nvidia/nemotron-3-super-120b-a12b": {
       "spec": "openrouter:nvidia/nemotron-3-super-120b-a12b",
-      "mean_f1": 0.2508,
+      "mean_f1": 0.2517,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.0769,
-          "std": 0.256,
+          "mean_f1": 0.078,
+          "std": 0.2601,
           "n": 70
         },
         "api_calling": {
@@ -75177,7 +75309,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.0854,
+          "mean_f1": 0.0867,
           "n": 63
         },
         "interactions": {
@@ -75185,7 +75317,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.0769,
+          "mean_f1": 0.078,
           "n": 70
         },
         "measurement": {
@@ -75193,11 +75325,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.1076,
+          "mean_f1": 0.1093,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.0769,
+          "mean_f1": 0.078,
           "n": 70
         },
         "resolve": {
@@ -75205,7 +75337,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.1251,
+          "mean_f1": 0.1275,
           "n": 35
         },
         "surface": {
@@ -75218,7 +75350,7 @@
         }
       },
       "parse_success": 0.0857,
-      "cond_f1": 0.8966,
+      "cond_f1": 0.9105,
       "outcomes": {
         "valid": 6,
         "unchecked": 0,
@@ -75959,15 +76091,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9167,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9167,
-          "f1_max": 0.9167,
-          "precision": 0.9167,
-          "recall": 0.9167,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9167
+            1.0
           ],
           "predicted": {
             "root": {
@@ -76032,21 +76164,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9167,
-            "tier": "vlm",
-            "visual_sim": 0.9558,
-            "changed_pixels": 3504,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171726Z/nvidia_nemotron-3-super-120b-a12b/gen-chain-2hhb/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171726Z/nvidia_nemotron-3-super-120b-a12b/gen-chain-2hhb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.92,
-              "reason": "Both show the hemoglobin tetramer as grey cartoon with one chain (comparable size, a single globin subunit) coloured teal, matching the requested visualization. Representation and colours are equivalent; only camera orientation differs.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -78610,12 +78732,12 @@
     },
     "openai/gpt-oss-120b": {
       "spec": "openrouter:openai/gpt-oss-120b",
-      "mean_f1": 0.6455,
+      "mean_f1": 0.6427,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.5744,
-          "std": 0.4645,
+          "mean_f1": 0.5709,
+          "std": 0.4615,
           "n": 70
         },
         "api_calling": {
@@ -78638,7 +78760,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.6102,
+          "mean_f1": 0.6063,
           "n": 63
         },
         "interactions": {
@@ -78646,7 +78768,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.5744,
+          "mean_f1": 0.5709,
           "n": 70
         },
         "measurement": {
@@ -78654,11 +78776,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.6627,
+          "mean_f1": 0.6578,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.5744,
+          "mean_f1": 0.5709,
           "n": 70
         },
         "resolve": {
@@ -78666,7 +78788,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.642,
+          "mean_f1": 0.6349,
           "n": 35
         },
         "surface": {
@@ -78679,7 +78801,7 @@
         }
       },
       "parse_success": 0.6286,
-      "cond_f1": 0.9139,
+      "cond_f1": 0.9082,
       "outcomes": {
         "valid": 44,
         "unchecked": 0,
@@ -79899,15 +80021,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9888,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9888,
+          "f1_max": 0.9888,
+          "precision": 0.9888,
+          "recall": 0.9888,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9888
           ],
           "predicted": {
             "root": {
@@ -79987,11 +80109,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9888,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/openai_gpt-oss-120b/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1cbs/openai_gpt-oss-120b/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored purple as requested, but the output renders the entire structure in grey without the purple chain A coloring, failing the color requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -80008,15 +80140,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9408,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9408,
+          "f1_max": 0.9408,
+          "precision": 0.9408,
+          "recall": 0.9408,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9408
           ],
           "predicted": {
             "root": {
@@ -80096,11 +80228,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9408,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/openai_gpt-oss-120b/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/openai_gpt-oss-120b/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored red with the rest in grey cartoon, but the output renders the entire structure in grey with no red chain, failing the required coloring of chain A.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -80117,15 +80259,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9898,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9898,
+          "f1_max": 0.9898,
+          "precision": 0.9898,
+          "recall": 0.9898,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9898
           ],
           "predicted": {
             "root": {
@@ -80205,11 +80347,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9898,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/openai_gpt-oss-120b/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/openai_gpt-oss-120b/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured green as requested, while the output renders the entire structure in grey with no green colouring applied. The chain A colouring step was not reflected in the output.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -80226,15 +80378,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9167,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9167,
+          "f1_max": 0.9167,
+          "precision": 0.9167,
+          "recall": 0.9167,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9167
           ],
           "predicted": {
             "root": {
@@ -80314,11 +80466,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9167,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/openai_gpt-oss-120b/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-2hhb/openai_gpt-oss-120b/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain B coloured teal while the rest is grey cartoon. The output shows the entire structure as grey cartoon with no teal-coloured chain, so the required colouring of chain B is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -80335,15 +80497,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9953,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9953,
+          "f1_max": 0.9953,
+          "precision": 0.9953,
+          "recall": 0.9953,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9953
           ],
           "predicted": {
             "root": {
@@ -80423,11 +80585,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9953,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-3ptb/openai_gpt-oss-120b/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-3ptb/openai_gpt-oss-120b/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured orange, but the output renders the entire structure in grey with no orange colouring, failing the key requirement to colour chain A orange.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -80444,15 +80616,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9669,
+          "f1": 0.8881,
           "f1_std": 0.0,
-          "f1_min": 0.9669,
-          "f1_max": 0.9669,
-          "precision": 0.9669,
-          "recall": 0.9669,
+          "f1_min": 0.8881,
+          "f1_max": 0.8881,
+          "precision": 0.8881,
+          "recall": 0.8881,
           "n_samples": 1,
           "samples_f1": [
-            0.9669
+            0.8881
           ],
           "predicted": {
             "root": {
@@ -80532,15 +80704,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9669,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.8881,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171758Z/openai_gpt-oss-120b/gen-chain-4ins/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T171758Z/openai_gpt-oss-120b/gen-chain-4ins/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain B coloured blue as requested, while the output renders the entire structure in grey with no blue chain highlighted, failing the colour requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -84984,16 +85162,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.587
+      "validated_f1": 0.583
     },
     "openai/gpt-oss-20b": {
       "spec": "openrouter:openai/gpt-oss-20b",
-      "mean_f1": 0.3921,
+      "mean_f1": 0.3922,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.2522,
-          "std": 0.412,
+          "mean_f1": 0.2524,
+          "std": 0.4123,
           "n": 70
         },
         "api_calling": {
@@ -85016,7 +85194,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.2379,
+          "mean_f1": 0.2381,
           "n": 63
         },
         "interactions": {
@@ -85024,7 +85202,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.2522,
+          "mean_f1": 0.2524,
           "n": 70
         },
         "measurement": {
@@ -85032,11 +85210,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.1598,
+          "mean_f1": 0.16,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.2522,
+          "mean_f1": 0.2524,
           "n": 70
         },
         "resolve": {
@@ -85044,7 +85222,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.114,
+          "mean_f1": 0.1143,
           "n": 35
         },
         "surface": {
@@ -85057,7 +85235,7 @@
         }
       },
       "parse_success": 0.2857,
-      "cond_f1": 0.8828,
+      "cond_f1": 0.8833,
       "outcomes": {
         "valid": 20,
         "unchecked": 0,
@@ -86253,15 +86431,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9888,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9888,
-          "f1_max": 0.9888,
-          "precision": 0.9888,
-          "recall": 0.9888,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9888
+            1.0
           ],
           "predicted": {
             "root": {
@@ -86326,21 +86504,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9888,
-            "tier": "vlm",
-            "visual_sim": 0.9532,
-            "changed_pixels": 3772,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/openai_gpt-oss-20b/gen-chain-1cbs/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/openai_gpt-oss-20b/gen-chain-1cbs/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same 1CBS structure as a cartoon representation with identical fold/topology. The reference colors chain A purple (shown as grey here is just the base, but output shows the purple chain A coloring matching the request). Representations and highlighted regions are equivalent.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -89231,12 +89399,12 @@
     },
     "qwen/qwen3-30b-a3b-instruct-2507": {
       "spec": "openrouter:qwen/qwen3-30b-a3b-instruct-2507",
-      "mean_f1": 0.6109,
+      "mean_f1": 0.6083,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.529,
-          "std": 0.4783,
+          "mean_f1": 0.5257,
+          "std": 0.4754,
           "n": 70
         },
         "api_calling": {
@@ -89259,7 +89427,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.5765,
+          "mean_f1": 0.5729,
           "n": 63
         },
         "interactions": {
@@ -89267,7 +89435,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.529,
+          "mean_f1": 0.5257,
           "n": 70
         },
         "measurement": {
@@ -89275,11 +89443,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.5007,
+          "mean_f1": 0.496,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.529,
+          "mean_f1": 0.5257,
           "n": 70
         },
         "resolve": {
@@ -89287,7 +89455,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.3899,
+          "mean_f1": 0.3833,
           "n": 35
         },
         "surface": {
@@ -89300,7 +89468,7 @@
         }
       },
       "parse_success": 0.6,
-      "cond_f1": 0.9496,
+      "cond_f1": 0.9436,
       "outcomes": {
         "valid": 39,
         "unchecked": 0,
@@ -90919,15 +91087,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9408,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9408,
+          "f1_max": 0.9408,
+          "precision": 0.9408,
+          "recall": 0.9408,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9408
           ],
           "predicted": {
             "root": {
@@ -91007,11 +91175,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9408,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/qwen_qwen3-30b-a3b-instruct-2507/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1hho/qwen_qwen3-30b-a3b-instruct-2507/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly shows chain A coloured red while the rest is grey cartoon. The output shows the entire structure as grey cartoon with no red colouring, so chain A was not coloured red as requested.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -91028,15 +91206,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9898,
+          "f1": 0.9796,
           "f1_std": 0.0,
-          "f1_min": 0.9898,
-          "f1_max": 0.9898,
-          "precision": 0.9898,
-          "recall": 0.9898,
+          "f1_min": 0.9796,
+          "f1_max": 0.9796,
+          "precision": 0.9796,
+          "recall": 0.9796,
           "n_samples": 1,
           "samples_f1": [
-            0.9898
+            0.9796
           ],
           "predicted": {
             "root": {
@@ -91116,15 +91294,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9898,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9796,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/qwen_qwen3-30b-a3b-instruct-2507/gen-chain-1lyz/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/qwen_qwen3-30b-a3b-instruct-2507/gen-chain-1lyz/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured green as requested, but the output renders the entire structure in grey with no green colouring applied, failing the 'colour chain A green' step.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -91141,15 +91325,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9908,
+          "f1": 0.9075,
           "f1_std": 0.0,
-          "f1_min": 0.9908,
-          "f1_max": 0.9908,
-          "precision": 0.9908,
-          "recall": 0.9908,
+          "f1_min": 0.9075,
+          "f1_max": 0.9075,
+          "precision": 0.9075,
+          "recall": 0.9075,
           "n_samples": 1,
           "samples_f1": [
-            0.9908
+            0.9075
           ],
           "predicted": {
             "root": {
@@ -91229,15 +91413,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9908,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9075,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/qwen_qwen3-30b-a3b-instruct-2507/gen-chain-2hhb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/qwen_qwen3-30b-a3b-instruct-2507/gen-chain-2hhb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain B coloured teal while the rest is grey cartoon, but the output renders the entire structure in grey with no teal-coloured chain, so the requested highlight is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -91282,15 +91472,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9669,
+          "f1": 0.8881,
           "f1_std": 0.0,
-          "f1_min": 0.9669,
-          "f1_max": 0.9669,
-          "precision": 0.9669,
-          "recall": 0.9669,
+          "f1_min": 0.8881,
+          "f1_max": 0.8881,
+          "precision": 0.8881,
+          "recall": 0.8881,
           "n_samples": 1,
           "samples_f1": [
-            0.9669
+            0.8881
           ],
           "predicted": {
             "root": {
@@ -91370,15 +91560,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9669,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.8881,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/qwen_qwen3-30b-a3b-instruct-2507/gen-chain-4ins/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T170346Z/qwen_qwen3-30b-a3b-instruct-2507/gen-chain-4ins/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly colours chain B blue while the rest is grey cartoon. The output shows the entire structure as grey cartoon with no blue chain, so the chain B colouring requirement is not met.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -95473,16 +95669,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.54
+      "validated_f1": 0.536
     },
     "qwen/qwen3-next-80b-a3b-instruct": {
       "spec": "openrouter:qwen/qwen3-next-80b-a3b-instruct",
-      "mean_f1": 0.8301,
+      "mean_f1": 0.8274,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8185,
-          "std": 0.2855,
+          "mean_f1": 0.8149,
+          "std": 0.2838,
           "n": 70
         },
         "api_calling": {
@@ -95505,7 +95701,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.8311,
+          "mean_f1": 0.8272,
           "n": 63
         },
         "interactions": {
@@ -95513,7 +95709,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.8185,
+          "mean_f1": 0.8149,
           "n": 70
         },
         "measurement": {
@@ -95521,11 +95717,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.7814,
+          "mean_f1": 0.7764,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.8185,
+          "mean_f1": 0.8149,
           "n": 70
         },
         "resolve": {
@@ -95533,7 +95729,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.8265,
+          "mean_f1": 0.8194,
           "n": 35
         },
         "surface": {
@@ -95546,7 +95742,7 @@
         }
       },
       "parse_success": 0.9571,
-      "cond_f1": 0.8952,
+      "cond_f1": 0.8913,
       "outcomes": {
         "valid": 64,
         "unchecked": 0,
@@ -97576,15 +97772,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9888,
+          "f1": 0.9776,
           "f1_std": 0.0,
-          "f1_min": 0.9888,
-          "f1_max": 0.9888,
-          "precision": 0.9888,
-          "recall": 0.9888,
+          "f1_min": 0.9776,
+          "f1_max": 0.9776,
+          "precision": 0.9776,
+          "recall": 0.9776,
           "n_samples": 1,
           "samples_f1": [
-            0.9888
+            0.9776
           ],
           "predicted": {
             "root": {
@@ -97664,15 +97860,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9888,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9776,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-1cbs/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-1cbs/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored purple as requested, but the output renders the entire structure in grey with no purple coloring applied to chain A.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -97689,15 +97891,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9905,
+          "f1": 0.9313,
           "f1_std": 0.0,
-          "f1_min": 0.9905,
-          "f1_max": 0.9905,
-          "precision": 0.9905,
-          "recall": 0.9905,
+          "f1_min": 0.9313,
+          "f1_max": 0.9313,
+          "precision": 0.9313,
+          "recall": 0.9313,
           "n_samples": 1,
           "samples_f1": [
-            0.9905
+            0.9313
           ],
           "predicted": {
             "root": {
@@ -97777,15 +97979,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9905,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9313,
+            "tier": "vlm",
+            "visual_sim": 0.914,
+            "changed_pixels": 4352,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-1hho/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-1hho/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored red with the rest grey, as requested. The output shows the entire structure in grey with no red chain, failing the 'colour chain A red' requirement.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -97802,15 +98010,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9898,
+          "f1": 0.9796,
           "f1_std": 0.0,
-          "f1_min": 0.9898,
-          "f1_max": 0.9898,
-          "precision": 0.9898,
-          "recall": 0.9898,
+          "f1_min": 0.9796,
+          "f1_max": 0.9796,
+          "precision": 0.9796,
+          "recall": 0.9796,
           "n_samples": 1,
           "samples_f1": [
-            0.9898
+            0.9796
           ],
           "predicted": {
             "root": {
@@ -97890,15 +98098,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9898,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9796,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-1lyz/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-1lyz/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "Both show the same lysozyme cartoon structure, but the reference colours chain A green while the output is entirely grey, missing the required green colouring.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -97915,15 +98129,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9908,
+          "f1": 0.9075,
           "f1_std": 0.0,
-          "f1_min": 0.9908,
-          "f1_max": 0.9908,
-          "precision": 0.9908,
-          "recall": 0.9908,
+          "f1_min": 0.9075,
+          "f1_max": 0.9075,
+          "precision": 0.9075,
+          "recall": 0.9075,
           "n_samples": 1,
           "samples_f1": [
-            0.9908
+            0.9075
           ],
           "predicted": {
             "root": {
@@ -98003,15 +98217,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9908,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9075,
+            "tier": "vlm",
+            "visual_sim": 0.9558,
+            "changed_pixels": 3504,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-2hhb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-2hhb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain B coloured teal while the rest is grey cartoon. The output shows the entire structure as grey cartoon with no teal-coloured chain, so the required highlight of chain B is missing.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -98028,15 +98248,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9953,
+          "f1": 0.9906,
           "f1_std": 0.0,
-          "f1_min": 0.9953,
-          "f1_max": 0.9953,
-          "precision": 0.9953,
-          "recall": 0.9953,
+          "f1_min": 0.9906,
+          "f1_max": 0.9906,
+          "precision": 0.9906,
+          "recall": 0.9906,
           "n_samples": 1,
           "samples_f1": [
-            0.9953
+            0.9906
           ],
           "predicted": {
             "root": {
@@ -98116,15 +98336,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9953,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9906,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-3ptb/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-3ptb/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A colored orange as requested, while the output shows the entire structure in grey with no orange coloring. The chain A coloring step was not applied in the output.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -98141,15 +98367,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9669,
+          "f1": 0.8881,
           "f1_std": 0.0,
-          "f1_min": 0.9669,
-          "f1_max": 0.9669,
-          "precision": 0.9669,
-          "recall": 0.9669,
+          "f1_min": 0.8881,
+          "f1_max": 0.8881,
+          "precision": 0.8881,
+          "recall": 0.8881,
           "n_samples": 1,
           "samples_f1": [
-            0.9669
+            0.8881
           ],
           "predicted": {
             "root": {
@@ -98229,15 +98455,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9669,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.8881,
+            "tier": "vlm",
+            "visual_sim": 0.9642,
+            "changed_pixels": 805,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-4ins/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172023Z/qwen_qwen3-next-80b-a3b-instruct/gen-chain-4ins/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference correctly shows chain B coloured blue against a grey cartoon, while the output is entirely grey with no blue chain highlighted.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -103743,16 +103975,16 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.845
+      "validated_f1": 0.84
     },
     "z-ai/glm-5.2": {
       "spec": "openrouter:z-ai/glm-5.2",
-      "mean_f1": 0.835,
+      "mean_f1": 0.8372,
       "n_graded": 90,
       "by_category": {
         "mvs": {
-          "mean_f1": 0.8072,
-          "std": 0.3085,
+          "mean_f1": 0.81,
+          "std": 0.3099,
           "n": 70
         },
         "api_calling": {
@@ -103775,7 +104007,7 @@
           "n": 5
         },
         "color": {
-          "mean_f1": 0.8406,
+          "mean_f1": 0.8437,
           "n": 63
         },
         "interactions": {
@@ -103783,7 +104015,7 @@
           "n": 2
         },
         "load": {
-          "mean_f1": 0.8072,
+          "mean_f1": 0.81,
           "n": 70
         },
         "measurement": {
@@ -103791,11 +104023,11 @@
           "n": 3
         },
         "multi-component": {
-          "mean_f1": 0.813,
+          "mean_f1": 0.8169,
           "n": 50
         },
         "representation": {
-          "mean_f1": 0.8072,
+          "mean_f1": 0.81,
           "n": 70
         },
         "resolve": {
@@ -103803,7 +104035,7 @@
           "n": 6
         },
         "selection": {
-          "mean_f1": 0.773,
+          "mean_f1": 0.7786,
           "n": 35
         },
         "surface": {
@@ -103816,7 +104048,7 @@
         }
       },
       "parse_success": 0.9286,
-      "cond_f1": 0.8969,
+      "cond_f1": 0.9,
       "outcomes": {
         "valid": 63,
         "unchecked": 0,
@@ -105841,15 +106073,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9888,
+          "f1": 0.9776,
           "f1_std": 0.0,
-          "f1_min": 0.9888,
-          "f1_max": 0.9888,
-          "precision": 0.9888,
-          "recall": 0.9888,
+          "f1_min": 0.9776,
+          "f1_max": 0.9776,
+          "precision": 0.9776,
+          "recall": 0.9776,
           "n_samples": 1,
           "samples_f1": [
-            0.9888
+            0.9776
           ],
           "predicted": {
             "root": {
@@ -105929,15 +106161,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9888,
-            "tier": "visual",
-            "visual_sim": 1.0,
-            "changed_pixels": 0,
+            "tree_f1": 0.9776,
+            "tier": "vlm",
+            "visual_sim": 0.9532,
+            "changed_pixels": 3772,
             "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-1cbs/ref.png",
             "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-1cbs/pred.png",
-            "decision": "rendering-equivalent"
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows chain A coloured purple as requested, while the output renders the entire structure in grey with no purple colouring applied.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -105954,15 +106192,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9408,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9408,
-          "f1_max": 0.9408,
-          "precision": 0.9408,
-          "recall": 0.9408,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9408
+            1.0
           ],
           "predicted": {
             "root": {
@@ -106027,21 +106265,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9408,
-            "tier": "vlm",
-            "visual_sim": 0.914,
-            "changed_pixels": 4352,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-1hho/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-1hho/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.95,
-              "reason": "Both show the same structure as grey cartoon with one chain (chain A) coloured red, matching the request. The representations and colouring are equivalent.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -106058,15 +106286,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9898,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9898,
+          "f1_max": 0.9898,
+          "precision": 0.9898,
+          "recall": 0.9898,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9898
           ],
           "predicted": {
             "root": {
@@ -106146,11 +106374,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9898,
+            "tier": "vlm",
+            "visual_sim": 0.9433,
+            "changed_pixels": 3031,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/z-ai_glm-5.2/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-1lyz/z-ai_glm-5.2/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "Both show the same lysozyme cartoon structure, but the reference colours chain A green as requested, while the output is entirely grey with no green colouring applied.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -106167,15 +106405,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9167,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9167,
-          "f1_max": 0.9167,
-          "precision": 0.9167,
-          "recall": 0.9167,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9167
+            1.0
           ],
           "predicted": {
             "root": {
@@ -106240,21 +106478,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9167,
-            "tier": "vlm",
-            "visual_sim": 0.9558,
-            "changed_pixels": 3504,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-2hhb/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-2hhb/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.92,
-              "reason": "Both show the 2HHB hemoglobin tetramer as a grey cartoon with one chain (approximately a quarter of the structure) coloured teal. The representation (cartoon), colours (grey + teal), and the single highlighted chain match the request and reference.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -106271,15 +106499,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 1.0,
+          "f1": 0.9953,
           "f1_std": 0.0,
-          "f1_min": 1.0,
-          "f1_max": 1.0,
-          "precision": 1.0,
-          "recall": 1.0,
+          "f1_min": 0.9953,
+          "f1_max": 0.9953,
+          "precision": 0.9953,
+          "recall": 0.9953,
           "n_samples": 1,
           "samples_f1": [
-            1.0
+            0.9953
           ],
           "predicted": {
             "root": {
@@ -106359,11 +106587,21 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 1.0,
-            "tier": "tree",
-            "decision": "correct"
+            "tree_f1": 0.9953,
+            "tier": "vlm",
+            "visual_sim": 0.9257,
+            "changed_pixels": 5052,
+            "ref_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-3ptb/z-ai_glm-5.2/ref.png",
+            "pred_png": "/home/danbolser/Build/MolBench-fix/runs/regrade_gen-chain-3ptb/z-ai_glm-5.2/pred.png",
+            "vlm": {
+              "label": "different",
+              "score": 0.9,
+              "reason": "The reference shows the cartoon colored orange (chain A colored orange as requested), while the output shows the entire structure in grey with no orange coloring applied. The chain A coloring step was not reflected in the output.",
+              "judge": "claude-opus-4-8"
+            },
+            "decision": "vlm:different"
           },
           "outcome": "valid",
           "outcomes": [
@@ -106380,15 +106618,15 @@
             "color",
             "multi-component"
           ],
-          "f1": 0.9212,
+          "f1": 1.0,
           "f1_std": 0.0,
-          "f1_min": 0.9212,
-          "f1_max": 0.9212,
-          "precision": 0.9212,
-          "recall": 0.9212,
+          "f1_min": 1.0,
+          "f1_max": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
           "n_samples": 1,
           "samples_f1": [
-            0.9212
+            1.0
           ],
           "predicted": {
             "root": {
@@ -106453,21 +106691,11 @@
             }
           },
           "error": null,
-          "schema_errors": [],
+          "schema_errors": null,
           "escalation": {
-            "tree_f1": 0.9212,
-            "tier": "vlm",
-            "visual_sim": 0.9642,
-            "changed_pixels": 805,
-            "ref_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-4ins/ref.png",
-            "pred_png": "/home/danbolser/Build/MolBench/runs/gallery_20261018T172050Z/z-ai_glm-5.2/gen-chain-4ins/pred.png",
-            "vlm": {
-              "label": "same",
-              "score": 0.9,
-              "reason": "Both show the 4INS structure as a grey cartoon with one chain (chain B) coloured blue, matching the requested visualization. The highlighted blue region and overall representation are equivalent, differing only in camera orientation.",
-              "judge": "claude-opus-4-8"
-            },
-            "decision": "vlm:same"
+            "tree_f1": 1.0,
+            "tier": "tree",
+            "decision": "correct"
           },
           "outcome": "valid",
           "outcomes": [
@@ -111991,7 +112219,7 @@
           "schema_errors": []
         }
       ],
-      "validated_f1": 0.838
+      "validated_f1": 0.837
     }
   }
 }
