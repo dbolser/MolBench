@@ -575,6 +575,8 @@ all = [
     { name = "ipymolstar" },
     { name = "molviewspec" },
     { name = "openai" },
+    { name = "pillow", version = "12.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "pillow", version = "13.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
 ]
 anthropic = [
     { name = "anthropic" },
@@ -614,6 +616,7 @@ requires-dist = [
     { name = "molviewspec", marker = "extra == 'execute'", specifier = ">=1.8" },
     { name = "openai", marker = "extra == 'all'", specifier = ">=1.0" },
     { name = "openai", marker = "extra == 'openai'", specifier = ">=1.0" },
+    { name = "pillow", marker = "extra == 'all'" },
     { name = "pillow", marker = "extra == 'execute'" },
     { name = "playwright", marker = "extra == 'execute'" },
 ]

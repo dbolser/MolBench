@@ -73,3 +73,9 @@ def test_checks_of_only_one_kind_are_not_enough():
     key = {"set": "t", "items": {**KEY["items"], "cs2": {"kind": "control-same", "expected": "same"}}}
     always_same = [_r("s-sssssss", i, "same") for i in ("cs", "cs2", "v1")]
     assert ag.analyse(key, always_same, min_checks=0.8)["raters_kept"] == 0
+
+
+def test_duplicate_ratings_are_rejected():
+    import pytest
+    with pytest.raises(ValueError):
+        ag.analyse(KEY, [_r("a-aaaaaaa", "v1", "same"), _r("a-aaaaaaa", "v1", "different")], min_checks=0.8)

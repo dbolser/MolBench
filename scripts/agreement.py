@@ -68,6 +68,9 @@ def cohen_kappa(pairs: list[tuple[str, str]]) -> float | None:
 
 def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
     items = key["items"]
+    pairs = collections.Counter((r["evaluator_token"], r["item"]) for r in ratings)
+    if dup := [p for p, n in pairs.items() if n > 1]:
+        raise ValueError(f"{len(dup)} rater-item pairs rated more than once, e.g. {dup[0][1]}")
     by_rater = collections.defaultdict(list)
     for r in ratings:
         if r["item"] in items:
