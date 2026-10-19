@@ -111,3 +111,16 @@ def test_flags_point_at_references_to_fix():
           {**_r("z-zzzzzzz", "v2", "same"), "model_better": True}]  # z never passed a check: ignored
     out = ag.analyse(key, rs, min_checks=0.8)
     assert out["reference_flags"] == {"t1": {"ref_wrong": 1, "model_better": {"m1": 1}}}
+
+
+def test_a_rater_flags_a_reference_once_however_many_models_they_see():
+    key = {"set": "t", "items": {
+        "v1": {"kind": "vlm", "vlm_label": "same", "task": "t1", "model": "m1"},
+        "v2": {"kind": "vlm", "vlm_label": "same", "task": "t1", "model": "m2"},
+        "cs": {"kind": "control-same", "expected": "same", "task": "t3", "model": "m3"},
+        "cd": {"kind": "control-different", "expected": "different", "task": "t4"},
+    }}
+    rs = [_r("a-aaaaaaa", "cs", "same"), _r("a-aaaaaaa", "cd", "different"),
+          {**_r("a-aaaaaaa", "v1", "different"), "ref_wrong": True},
+          {**_r("a-aaaaaaa", "v2", "different"), "ref_wrong": True}]
+    assert ag.analyse(key, rs, min_checks=0.8)["reference_flags"]["t1"]["ref_wrong"] == 1

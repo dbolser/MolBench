@@ -101,16 +101,17 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
     judged_same = [h for h, v in vs_vlm if v == "same"]
     confusion = collections.Counter(f"human {h} / vlm {v}" for h, v in vs_vlm)
 
-    ref_wrong = collections.Counter()  # task -> raters flagging its reference
-    model_better = collections.defaultdict(collections.Counter)  # task -> model -> raters
+    # Distinct raters: one rater sees a task's reference once per model, but counts once.
+    ref_wrong = collections.defaultdict(set)  # task -> raters flagging its reference
+    model_better = collections.defaultdict(lambda: collections.defaultdict(set))  # task -> model -> raters
     for r in ratings:
         it = items.get(r["item"], {})
         if r["evaluator_token"] not in kept or "task" not in it:
             continue
         if r.get("ref_wrong"):
-            ref_wrong[it["task"]] += 1
+            ref_wrong[it["task"]].add(r["evaluator_token"])
         if r.get("model_better") and it.get("model"):
-            model_better[it["task"]][it["model"]] += 1
+            model_better[it["task"]][it["model"]].add(r["evaluator_token"])
     return {
         "set": key["set"],
         "raters": raters,
@@ -123,8 +124,10 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
         "human_vs_vlm_agreement": sum(h == v for h, v in vs_vlm) / len(vs_vlm) if vs_vlm else None,
         "rescue_precision": judged_same.count("same") / len(judged_same) if judged_same else None,
         "confusion": dict(confusion),
-        "reference_flags": {t: {"ref_wrong": ref_wrong[t], "model_better": dict(sorted(model_better[t].items()))}
-                            for t in sorted(set(ref_wrong) | set(model_better))},
+        "reference_flags": {
+            t: {"ref_wrong": len(ref_wrong.get(t, ())),
+                "model_better": {m: len(v) for m, v in sorted(model_better.get(t, {}).items())}}
+            for t in sorted(set(ref_wrong) | set(model_better))},
     }
 
 
