@@ -6,8 +6,8 @@ Joins the ratings collected on the rating site with the private answer key writt
 by scripts/build_rating_set.py, and reports:
 
   * per rater: items rated and attention-check accuracy. Raters are dropped from
-    everything after unless they answered --min-check-count checks with at least
-    --min-checks accuracy
+    everything after unless they answered at least one check of each kind (so
+    answering everything "same" can't pass) with at least --min-checks accuracy
   * human vs human: Fleiss' kappa over the judged items with 2+ ratings
   * human vs VLM: every human rating against the judge's label (so pairs the
     humans split on count, rather than vanishing from a majority vote) — Cohen's
@@ -66,7 +66,7 @@ def cohen_kappa(pairs: list[tuple[str, str]]) -> float | None:
     return None if p_e == 1 else (p_o - p_e) / (1 - p_e)
 
 
-def analyse(key: dict, ratings: list[dict], min_checks: float, min_check_count: int = 2) -> dict:
+def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
     items = key["items"]
     by_rater = collections.defaultdict(list)
     for r in ratings:
@@ -80,7 +80,8 @@ def analyse(key: dict, ratings: list[dict], min_checks: float, min_check_count: 
         right = sum(r["label"] == items[r["item"]]["expected"] for r in checks)
         acc = right / len(checks) if checks else None
         raters[tok[:8]] = {"rated": len(rs), "checks": len(checks), "check_accuracy": acc}
-        if len(checks) >= min_check_count and acc >= min_checks:
+        kinds = {items[r["item"]]["kind"] for r in checks}
+        if kinds == {"control-same", "control-different"} and acc >= min_checks:
             kept.add(tok)
 
     votes = collections.defaultdict(collections.Counter)
@@ -113,8 +114,6 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--from-supabase", action="store_true")
     ap.add_argument("--min-checks", type=float, default=0.8,
                     help="drop raters whose attention-check accuracy is below this")
-    ap.add_argument("--min-check-count", type=int, default=2,
-                    help="drop raters who answered fewer checks than this")
     a = ap.parse_args(argv)
     key = json.loads(a.key.read_text())
     if a.from_supabase:
@@ -123,7 +122,7 @@ def main(argv: list[str] | None = None) -> None:
         ratings = json.loads(a.ratings.read_text())
     else:
         ap.error("give a ratings file or --from-supabase")
-    print(json.dumps(analyse(key, ratings, a.min_checks, a.min_check_count), indent=2))
+    print(json.dumps(analyse(key, ratings, a.min_checks), indent=2))
 
 
 if __name__ == "__main__":

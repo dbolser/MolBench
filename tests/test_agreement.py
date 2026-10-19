@@ -67,3 +67,9 @@ def test_raters_without_enough_checks_are_dropped():
     unsure = [_r("u-uuuuuuu", "cs", "unsure"), _r("u-uuuuuuu", "cd", "unsure"), _r("u-uuuuuuu", "v1", "same")]
     out = ag.analyse(KEY, unsure, min_checks=0.8)
     assert out["raters_kept"] == 0 and out["human_vlm_pairs"] == 0
+
+
+def test_checks_of_only_one_kind_are_not_enough():
+    key = {"set": "t", "items": {**KEY["items"], "cs2": {"kind": "control-same", "expected": "same"}}}
+    always_same = [_r("s-sssssss", i, "same") for i in ("cs", "cs2", "v1")]
+    assert ag.analyse(key, always_same, min_checks=0.8)["raters_kept"] == 0
