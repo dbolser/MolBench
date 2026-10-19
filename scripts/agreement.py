@@ -6,8 +6,8 @@ Joins the ratings collected on the rating site with the private answer key writt
 by scripts/build_rating_set.py, and reports:
 
   * per rater: items rated and attention-check accuracy. Raters are dropped from
-    everything after unless they answered at least one check of each kind (so
-    answering everything "same" can't pass) with at least --min-checks accuracy
+    everything after unless they reach --min-checks accuracy on each kind of
+    check separately (so answering everything "same" can't pass)
   * human vs human: Fleiss' kappa over the judged items with 2+ ratings
   * human vs VLM: every human rating against the judge's label (so pairs the
     humans split on count, rather than vanishing from a majority vote) — Cohen's
@@ -78,13 +78,13 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
 
     raters, kept = {}, set()
     for tok, rs in by_rater.items():
-        checks = [r for r in rs if items[r["item"]]["kind"].startswith("control")
-                  and r["label"] in LABELS]
-        right = sum(r["label"] == items[r["item"]]["expected"] for r in checks)
-        acc = right / len(checks) if checks else None
-        raters[tok[:8]] = {"rated": len(rs), "checks": len(checks), "check_accuracy": acc}
-        kinds = {items[r["item"]]["kind"] for r in checks}
-        if kinds == {"control-same", "control-different"} and acc >= min_checks:
+        acc = {}  # per kind, so lopsided luck can't carry a one-answer rater
+        for kind in ("control-same", "control-different"):
+            checks = [r for r in rs if items[r["item"]]["kind"] == kind and r["label"] in LABELS]
+            right = sum(r["label"] == items[r["item"]]["expected"] for r in checks)
+            acc[kind] = right / len(checks) if checks else None
+        raters[tok[:8]] = {"rated": len(rs), "check_accuracy": acc}
+        if all(v is not None and v >= min_checks for v in acc.values()):
             kept.add(tok)
 
     votes = collections.defaultdict(collections.Counter)

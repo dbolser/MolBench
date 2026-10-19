@@ -46,7 +46,7 @@ def test_analyse_drops_raters_who_fail_checks():
              (("v1", "same"), ("v2", "different"), ("v3", "unsure"), ("cs", "same"), ("cd", "different"))]
     lazy = [_r("lazy-cccc", i, "same") for i in KEY["items"]]  # fails the different-check
     out = ag.analyse(KEY, good + good2 + lazy, min_checks=0.8)
-    assert out["raters"]["lazy-ccc"]["check_accuracy"] == 0.5
+    assert out["raters"]["lazy-ccc"]["check_accuracy"] == {"control-same": 1.0, "control-different": 0.0}
     assert out["raters_kept"] == 2
     assert out["items_with_2plus"] == 2  # v3 has one labelled vote; "unsure" carries none
     assert out["human_fleiss_kappa"] == 1.0
@@ -79,3 +79,10 @@ def test_duplicate_ratings_are_rejected():
     import pytest
     with pytest.raises(ValueError):
         ag.analyse(KEY, [_r("a-aaaaaaa", "v1", "same"), _r("a-aaaaaaa", "v1", "different")], min_checks=0.8)
+
+
+def test_each_kind_of_check_must_pass_on_its_own():
+    same = {f"cs{i}": {"kind": "control-same", "expected": "same"} for i in range(5)}
+    key = {"set": "t", "items": {**KEY["items"], **same}}
+    always_same = [_r("s-sssssss", i, "same") for i in [*same, "cd", "v1"]]  # 5/6 overall
+    assert ag.analyse(key, always_same, min_checks=0.8)["raters_kept"] == 0
