@@ -461,6 +461,8 @@ def categorize(root: dict) -> list[str]:
         params = node.get("params") or {}
         if k == "component" and not isinstance(params.get("selector"), str):
             has_expr = True
+        if k == "color" and "selector" in params and not isinstance(params["selector"], str):
+            has_expr = True  # recolouring part of a representation is a selection too
         custom = node.get("custom")
         if k == "component" and isinstance(custom, dict) \
                 and custom.get("molstar_show_non_covalent_interactions"):

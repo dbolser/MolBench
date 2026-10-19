@@ -66,6 +66,7 @@
   },
   "categories": [
     "load",
+    "selection",
     "representation",
     "color"
   ],
