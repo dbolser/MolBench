@@ -121,8 +121,8 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
         "human_vs_vlm_agreement": sum(h == v for h, v in vs_vlm) / len(vs_vlm) if vs_vlm else None,
         "rescue_precision": judged_same.count("same") / len(judged_same) if judged_same else None,
         "confusion": dict(confusion),
-        "preferences": dict(prefer),
-        "model_preferred": {t: dict(c) for t, c in sorted(model_better.items())},
+        "preferences": dict(sorted(prefer.items())),
+        "model_preferred": {t: dict(sorted(c.items())) for t, c in sorted(model_better.items())},
     }
 
 
