@@ -86,3 +86,13 @@ def test_each_kind_of_check_must_pass_on_its_own():
     key = {"set": "t", "items": {**KEY["items"], **same}}
     always_same = [_r("s-sssssss", i, "same") for i in [*same, "cd", "v1"]]  # 5/6 overall
     assert ag.analyse(key, always_same, min_checks=0.8)["raters_kept"] == 0
+
+
+def test_cant_tell_on_a_check_counts_as_a_miss():
+    key = {"set": "t", "items": {**KEY["items"], "cs2": {"kind": "control-same", "expected": "same"},
+                                 "cd2": {"kind": "control-different", "expected": "different"}}}
+    dodger = [_r("d-ddddddd", "cs", "same"), _r("d-ddddddd", "cd", "different"),
+              _r("d-ddddddd", "cs2", "unsure"), _r("d-ddddddd", "cd2", "unsure"), _r("d-ddddddd", "v1", "same")]
+    out = ag.analyse(key, dodger, min_checks=0.8)
+    assert out["raters"]["d-dddddd"]["check_accuracy"] == {"control-same": 0.5, "control-different": 0.5}
+    assert out["raters_kept"] == 0

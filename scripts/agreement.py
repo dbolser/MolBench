@@ -14,7 +14,8 @@ by scripts/build_rating_set.py, and reports:
     kappa, raw agreement, and the number that matters under the rescue-only
     policy: of the ratings on pairs the judge called "same", how many say same
 
-"Can't tell" answers count as rated but carry no label.
+"Can't tell" answers count as rated but carry no label, except on attention
+checks, where they count as wrong.
 
     python scripts/agreement.py results/a4/a4-v1/key.json --from-supabase
     python scripts/agreement.py results/a4/a4-v1/key.json ratings.json
@@ -80,7 +81,8 @@ def analyse(key: dict, ratings: list[dict], min_checks: float) -> dict:
     for tok, rs in by_rater.items():
         acc = {}  # per kind, so lopsided luck can't carry a one-answer rater
         for kind in ("control-same", "control-different"):
-            checks = [r for r in rs if items[r["item"]]["kind"] == kind and r["label"] in LABELS]
+            # "Can't tell" counts as a miss: the checks are obvious, so skipping them can't dodge them.
+            checks = [r for r in rs if items[r["item"]]["kind"] == kind]
             right = sum(r["label"] == items[r["item"]]["expected"] for r in checks)
             acc[kind] = right / len(checks) if checks else None
         raters[tok[:8]] = {"rated": len(rs), "check_accuracy": acc}
