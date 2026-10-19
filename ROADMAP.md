@@ -145,7 +145,7 @@ dossier. A scene Mol* rejects scores 0. Published on the leaderboard
 | Rubric judge (`AnthropicVLMJudge`, Component 2 proper) | **sketch** — one call, no decompose/extract protocol, never run. The runner uses `StubVLMJudge` |
 | A2 runner wiring for `visual_rubric` | not started |
 | A3 Component-2 corpus | 2 tasks, written as API actions, not MVS, so `render.py` can't draw their references |
-| A4 human-agreement study | not started |
+| A4 human-agreement study | rating set + analysis built; rating page on the evaluator site; collecting |
 
 **The escalation result is mostly the pixel diff, not the VLM.** Of 196 rescues
 (253 escalated, 7 models), 187 came from T1 visual diff and 9 from the VLM.
@@ -241,6 +241,16 @@ triad). Store rubric + an acceptable reference scene per task.
 Small **human-agreement study**: a human rates N rendered images against the
 rubrics; compute agreement (e.g. Cohen's κ) between human and VLM judge. Report it
 — a VLM judge is only credible with a measured agreement number.
+
+**Built (2026-10-19).** `scripts/build_rating_set.py` turns the pairs the judge saw in
+the 2026-10-18 spec run (229 of 237; the 8 shown with their verdict on the public
+gallery are left out) into a blind rating set (opaque ids; the model and verdict
+stay in a private key under `results/a4/`), plus 12 known-same checks (T1 rescues) and
+12 known-different checks (two references on different structures). Volunteers rate
+them on the evaluator site's `rate.html` (molstar-chat-driver), two raters per pair.
+`scripts/agreement.py` reports human-human Fleiss' κ, human-vs-judge Cohen's κ, and
+rescue precision (of the judge's "same" calls, how many humans agree), after dropping
+raters who fail the checks.
 
 **Phase-A risks:** headless-render reliability (mitigate: render-complete signal +
 retries + a golden-image regression test); judge variance/bias (mitigate:
