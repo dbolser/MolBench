@@ -13,7 +13,9 @@ Writes two things, kept apart so raters stay blind:
   <out>/items.json + <out>/img/   PUBLIC — prompt and two images per item, opaque ids,
                                   no model name or verdict. Copied to the rating site.
   <key>                           PRIVATE answer key — model, task, VLM verdict, control
-                                  type per id. Read by scripts/agreement.py.
+                                  type per id, and the secret the ids are keyed with
+                                  (reused on rebuild, so ids stay stable). Read by
+                                  scripts/agreement.py.
 
     python scripts/build_rating_set.py results/r2x2/spec \\
         --out ../molstar-chat-driver/site/rate/a4-v1 --key results/a4/a4-v1/key.json
@@ -23,9 +25,11 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import hmac
 import json
 import pathlib
 import random
+import secrets
 import sys
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -42,8 +46,10 @@ QUESTION = (
 )
 
 
-def item_id(set_id: str, *parts: str) -> str:
-    return hashlib.sha256(":".join((set_id, *parts)).encode()).hexdigest()[:12]
+def item_id(secret: str, set_id: str, *parts: str) -> str:
+    """Keyed, so a rater can't recompute ids from the public model and task lists."""
+    msg = ":".join((set_id, *parts)).encode()
+    return hmac.new(bytes.fromhex(secret), msg, hashlib.sha256).hexdigest()[:12]
 
 
 def judged_pairs(results: pathlib.Path) -> list[dict]:
@@ -62,7 +68,8 @@ def judged_pairs(results: pathlib.Path) -> list[dict]:
     return out
 
 
-def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int) -> tuple[list[dict], dict]:
+def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int,
+          secret: str) -> tuple[list[dict], dict]:
     """(items, key). Items carry source image paths under `_ref`/`_out` until written."""
     tasks = {t["id"]: t for t in runner.load_tasks(None)}
     pairs = judged_pairs(results)
@@ -72,7 +79,7 @@ def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int) -> tup
     items, key = [], {}
 
     def add(kind: str, task: str, ref: str, out: str, ident: tuple[str, ...], **info) -> None:
-        i = item_id(set_id, kind, *ident)
+        i = item_id(secret, set_id, kind, *ident)
         items.append({"id": i, "prompt": tasks[task]["prompt"], "_ref": ref, "_out": out})
         key[i] = {"kind": kind, "task": task, **info}
 
@@ -101,7 +108,7 @@ def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int) -> tup
     return items, key
 
 
-def write(items: list[dict], key: dict, set_id: str, out: pathlib.Path, key_path: pathlib.Path,
+def write(items: list[dict], key: dict, set_id: str, secret: str, out: pathlib.Path, key_path: pathlib.Path,
           quality: int = 85) -> None:
     from PIL import Image
     (out / "img").mkdir(parents=True, exist_ok=True)
@@ -120,7 +127,7 @@ def write(items: list[dict], key: dict, set_id: str, out: pathlib.Path, key_path
     (out / "items.json").write_text(json.dumps(
         {"set": set_id, "question": QUESTION, "items": public}, indent=1) + "\n")
     key_path.parent.mkdir(parents=True, exist_ok=True)
-    key_path.write_text(json.dumps({"set": set_id, "items": key}, indent=1, sort_keys=True) + "\n")
+    key_path.write_text(json.dumps({"set": set_id, "secret": secret, "items": key}, indent=1, sort_keys=True) + "\n")
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -132,8 +139,10 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--controls", type=int, default=12, help="checks of each kind")
     ap.add_argument("--seed", type=int, default=4)
     a = ap.parse_args(argv)
-    items, key = build(a.results, a.set_id, a.controls, a.seed)
-    write(items, key, a.set_id, a.out, a.key)
+    secret = (json.loads(a.key.read_text())["secret"] if a.key.exists()
+              else secrets.token_hex(32))
+    items, key = build(a.results, a.set_id, a.controls, a.seed, secret)
+    write(items, key, a.set_id, secret, a.out, a.key)
     kinds = {}
     for v in key.values():
         kinds[v["kind"]] = kinds.get(v["kind"], 0) + 1
