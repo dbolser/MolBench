@@ -26,24 +26,37 @@ from typing import Any
 # We split them because the grader scores "did you point at the right residues"
 # (locators) separately from "did you style them right" (attributes).
 
+# Names and meanings follow pdbe-molstar 3.3.2's QueryParam (helpers.ts:180-222) and
+# ipymolstar 0.1.0's copy of it; ``molbench/pdbe_state.py`` implements the semantics.
 SELECTION_LOCATOR_FIELDS = [
-    "entity_id",            # entity index, e.g. "1"
-    "struct_asym_id",       # label asym (mmCIF) chain id
+    "entity_id",            # mmCIF entity id (a string, e.g. "1")
+    "struct_asym_id",       # label chain id (mmCIF label_asym_id); wins over auth_asym_id
     "auth_asym_id",         # author chain id (the one users see, e.g. "A")
-    "residue_number",       # label residue number
-    "auth_seq_id",          # author residue number
-    "start_residue_number",
+    "label_comp_id",        # residue/ligand code, e.g. "HEM", "HOH"; overrides residue numbers
+    "residue_number",       # LABEL residue number (label_seq_id)
+    "start_residue_number",  # label range, inclusive
     "end_residue_number",
-    "label_comp_id",        # residue/ligand 3-letter code, e.g. "HEM", "HOH", "RTV"
+    "auth_seq_id",          # AUTHOR residue number
+    "auth_residue_number",  # alias of auth_seq_id
+    "auth_ins_code_id",     # accepted by the viewer, never tested in 3.3.2
+    "start_auth_residue_number",  # author range, inclusive
+    "end_auth_residue_number",
+    "start_auth_ins_code_id",
+    "end_auth_ins_code_id",
+    "uniprot_accession",    # with uniprot_residue_number or the uniprot range
+    "uniprot_residue_number",
+    "start_uniprot_residue_number",
+    "end_uniprot_residue_number",
     "atoms",                # list of atom names, e.g. ["NE2", "FE"]
-    "uniprot_accession",
+    "atom_id",              # list of _atom_site.id values; overrides atoms
 ]
 
 SELECTION_ATTR_FIELDS = [
-    "color",                # {"r":int,"g":int,"b":int}
-    "representation",       # one of REPRESENTATIONS (per-selection visual)
-    "representationColor",
-    "sideChain",            # bool
+    "color",                # {"r":int,"g":int,"b":int} | "#rrggbb" | colour name; paints the
+                            # default representations (absent = default orange, null = none)
+    "representation",       # one of REPRESENTATIONS: adds a representation for the selection
+    "representationColor",  # colour of that added representation
+    "sideChain",            # bool: add ball-and-stick (when no representation is given)
     "focus",                # bool
     "tooltip",              # str
 ]
@@ -72,12 +85,15 @@ SETTABLE_PROPERTIES = {
     "hide_non_standard": "bool",
     "hide_coarse": "bool",
     "spin": "bool",
-    "superposition": "bool",   # PDBe superposition view (structural alignment)
+    "superposition": "bool",   # PDBe-KB superposition view; molecule_id is then a UniProt accession
+    "superposition_params": "dict",
     "load_maps": "bool",
+    "map_settings": "dict",
     "validation_annotation": "bool",
     "domain_annotation": "bool",
     "symmetry_annotation": "bool",
-    "alphafold_view": "bool",
+    "alphafold_view": "bool",  # pLDDT colouring only; the model itself comes in as custom_data
+    "sequence_panel": "bool",
     "bg_color": "str",
     "highlight_color": "str",
     "select_color": "str",
@@ -98,7 +114,9 @@ ACTION_SPECS: dict[str, dict[str, Any]] = {
     "load": {
         "doc": "Load a structure into the viewer.",
         "required": [],   # one of molecule_id / custom_data must be present (checked below)
-        "optional": ["molecule_id", "custom_data", "assembly_id", "preset", "alphafold"],
+        # custom_data: {"url", "format", "binary"}; alphafold: shorthand for alphafold_view
+        "optional": ["molecule_id", "custom_data", "assembly_id", "preset", "ligand_view",
+                     "alphafold"],
     },
     "set_visual_style": {
         "doc": "Set the global representation for the whole structure.",
@@ -123,7 +141,7 @@ ACTION_SPECS: dict[str, dict[str, Any]] = {
     "highlight": {
         "doc": "Transiently highlight a selection (PDBeMolstar.highlight).",
         "required": ["data"],
-        "optional": [],
+        "optional": ["color", "focus"],
     },
     "tooltips": {
         "doc": "Attach tooltips to a selection (PDBeMolstar.tooltips).",
@@ -214,6 +232,10 @@ def validate_actions(actions: Any) -> list[str]:
                 errors.append(f"{where} ({name}): missing required field {req!r}")
         if name == "load" and not (act.get("molecule_id") or act.get("custom_data")):
             errors.append(f"{where} (load): needs molecule_id or custom_data")
+        if name == "load" and act.get("custom_data") is not None:
+            cd = act["custom_data"]
+            if not (isinstance(cd, dict) and cd.get("url") and cd.get("format")):
+                errors.append(f"{where} (load): custom_data needs url and format")
         if name == "set_visual_style" and act.get("style") not in REPRESENTATIONS:
             errors.append(f"{where}: style {act.get('style')!r} not in {REPRESENTATIONS}")
         if name == "set_property":
@@ -222,4 +244,22 @@ def validate_actions(actions: Any) -> list[str]:
         for sel_field in ("data",):
             if sel_field in act and not isinstance(act[sel_field], list):
                 errors.append(f"{where}: {sel_field!r} must be a list of selections")
+            elif sel_field in act and not all(isinstance(p, dict) for p in act[sel_field]):
+                errors.append(f"{where}: every item of {sel_field!r} must be an object")
     return errors
+
+
+def schema_text() -> str:
+    """The action schema as a few lines of text: the same content as
+    ``build_json_schema`` at about a tenth of the tokens, for use in a prompt."""
+    lines = ["Each action is an object {\"action\": <name>, ...fields}. Fields marked * are required."]
+    for name, spec in ACTION_SPECS.items():
+        fields = [f + "*" for f in spec["required"]] + spec["optional"]
+        lines.append(f"- {name}({', '.join(fields)}): {spec['doc']}")
+    lines.append("set_visual_style.style and a selection's representation: " + " | ".join(REPRESENTATIONS))
+    lines.append("load.preset: " + " | ".join(LOAD_PRESETS))
+    lines.append("set_property.name: " + ", ".join(f"{k} ({v})" for k, v in SETTABLE_PROPERTIES.items()))
+    lines.append("data is a list of selections (QueryParam objects). Locator keys: "
+                 + ", ".join(SELECTION_LOCATOR_FIELDS) + ". Styling keys: "
+                 + ", ".join(SELECTION_ATTR_FIELDS) + ".")
+    return "\n".join(lines)
