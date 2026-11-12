@@ -41,7 +41,7 @@ sys.path.insert(0, str(REPO))
 from molbench import grader  # noqa: E402
 
 TASKS = REPO / "tasks" / "api_calling"
-DEFAULT_SCORECARD = pathlib.Path("/home/danbolser/Build/MolBench/docs/scorecard.json")
+DEFAULT_SCORECARD = REPO / "docs" / "scorecard.json"
 GROUPS = ("unchanged", "reworded")
 
 

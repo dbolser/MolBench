@@ -43,6 +43,7 @@ not available.
 
     python scripts/check_api_refs.py            # offline checks
     python scripts/check_api_refs.py --viewer   # + real-viewer fidelity
+    python scripts/check_api_refs.py --viewer --updated   # the same on PDBe's updated mmCIF
     python scripts/check_api_refs.py --uniprot  # + real-viewer fidelity of UniProt selectors
     python scripts/check_api_refs.py --cif      # + assembly checks
 """
@@ -498,7 +499,7 @@ class Viewer:
 
 
 def _rgb(n: int) -> tuple:
-    return (n >> 16, (n >> 8) & 255, n & 255)
+    return ((n >> 16) & 255, (n >> 8) & 255, n & 255)
 
 
 def _mask(rows_: list[int]) -> int:
@@ -649,6 +650,10 @@ def probes() -> list[tuple[str, list[dict]]]:
             {"auth_asym_id": "B", "auth_seq_id": 63, "color": "Red"},
             {"auth_asym_id": "B", "auth_seq_id": 92, "color": "#f00"}],
             non_selected_color={"r": 200, "g": 200, "b": 200})]),
+        ("colour as a list, channel out of range, channel missing", [L("3ptb"), C([
+            {"auth_seq_id": 57, "color": [255, 0, 0]},
+            {"auth_seq_id": 102, "color": {"r": 300, "g": 0, "b": 0}},
+            {"auth_seq_id": 195, "color": {"g": 128}}])]),
         ("style reload wipes colour; tooltips and hide flags survive", [L("3ptb"),
             C([{"auth_seq_id": 57, "color": "red", "representation": "ball-and-stick"}]),
             {"action": "tooltips", "data": [{"auth_seq_id": 195, "tooltip": "Ser195"}]},
@@ -727,6 +732,9 @@ def main() -> None:
     ap.add_argument("--cif", action="store_true", help="also run the mmCIF (gemmi) checks")
     ap.add_argument("--uniprot", action="store_true",
                     help="also compare UniProt-numbered selections with real pdbe-molstar")
+    ap.add_argument("--updated", action="store_true",
+                    help="with --viewer: load PDBe's updated mmCIF (the file a molecule_id "
+                         "load really fetches) instead of the RCSB file the tables were built from")
     ap.add_argument("--only", nargs="*", help="task ids (or probe name fragments) to run")
     args = ap.parse_args()
 
@@ -774,7 +782,7 @@ def main() -> None:
                           "this view is compared by its settings)")
                     continue
                 try:
-                    dump = viewer.run(actions)
+                    dump = viewer.run(actions, updated=args.updated)
                 except Exception as e:  # report and carry on with the rest
                     n_bad += 1
                     print(f"viewer  {name}: FAILED TO RUN: {str(e).splitlines()[0][:200]}")
@@ -787,7 +795,8 @@ def main() -> None:
                       + (f"  (not run: {'; '.join(dump['notes'])})" if dump.get("notes") else ""))
                 for b in bad:
                     print(f"    - {b}")
-        print(f"viewer: {n_run} action lists run in pdbe-molstar {PDBE_VERSION}, "
+        print(f"viewer: {n_run} action lists run in pdbe-molstar {PDBE_VERSION}"
+              f"{' on PDBe updated mmCIF' if args.updated else ''}, "
               f"{n_sel} selections compared atom for atom")
     if args.uniprot:
         todo = []
