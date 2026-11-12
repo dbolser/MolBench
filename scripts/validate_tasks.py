@@ -82,14 +82,15 @@ def main(argv: list[str] | None = None) -> int:
 
     tasks, errors = load_all(a.tasks_dir)
     more, notes = T.check_corpus(tasks, grade=None if a.no_grade else runner.grade_parsed,
-                                 final=a.final)
+                                 final=a.final,
+                                 check=None if a.no_grade else runner.grader_problems)
     errors += more
     print(f"{a.tasks_dir}: {len(tasks)} tasks read")
     for line in summary(tasks):
         print(line)
     for n in notes:
         print(f"  note: {n}")
-    if not getattr(runner.grader_mod, "GRADES_MVS", False) and not a.no_grade:
+    if not runner.grader_grades_mvs() and not a.no_grade:
         print("  note: MVS references were graded by mvs.grade_mvs (grader.grade_task does not "
               "grade the MVS track yet)")
     if errors:

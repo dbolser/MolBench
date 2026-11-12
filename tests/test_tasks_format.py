@@ -282,3 +282,21 @@ def test_a_reference_or_alternative_that_is_not_right_is_caught(fixtures):
     assert any("has target score 0.5" in e for e in errors)
     errors, notes = T.check_corpus(fixtures, grade=None)
     assert errors == [] and any("self-grading checks skipped" in n for n in notes)
+
+
+def test_the_graders_own_task_check_is_reported_and_the_grounding_pack_is_searched():
+    tasks = T.load_corpus(FIXTURES)
+    errors, _ = T.check_corpus(tasks, grade=runner.grade_parsed,
+                               check=lambda t: ["selects no atoms"]
+                               if t["id"] == tasks[0]["id"] else [])
+    assert errors == [f"{tasks[0]['id']}: grader check: selects no atoms"]
+    assert runner.grader_problems(tasks[0]) == [] or hasattr(runner.grader_mod, "check_task")
+
+    def boom(t):
+        raise KeyError("x")
+    errors, _ = T.check_corpus(tasks[:1], check=boom, grade=lambda t, p: {
+        "f1": 1.0, "success": True, "target_f1": 1.0})
+    assert any("task check failed: KeyError" in e for e in errors)
+    tasks[0]["grounding"] = {"rule": "r", "text": "as in 1HSG"}
+    errors, _ = T.check_corpus(tasks)
+    assert any("worked example" in e for e in errors)

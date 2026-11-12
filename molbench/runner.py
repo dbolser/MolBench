@@ -328,13 +328,108 @@ def check_gradable(task: dict) -> None:
                            "graded on atoms (scripts/build_atom_tables.py)")
 
 
+def grader_grades_mvs() -> bool:
+    """Whether `grader.grade_task` grades the MVS track too (on the drawn state, with a
+    target score). It says so with ``GRADES_MVS = True`` or by having ``is_mvs_task``;
+    the grader of the October runs has neither and takes call lists only."""
+    return bool(getattr(grader_mod, "GRADES_MVS", False)
+                or callable(getattr(grader_mod, "is_mvs_task", None)))
+
+
+def grader_target(task: dict, target: Any) -> Any:
+    """A task ``target`` in the form the grader reads: ``{"selector": ..., "entry": ...}``.
+
+    TASK_FORMAT.md writes a target as a list of parts (``selector``, ``representation``,
+    ``color``, ``structure``); the grader takes one object naming the atoms and reads the
+    representation and colour off the reference. Handing it the list would be ignored
+    without a word and the target score would silently become "everything the reference
+    draws", so the list is translated here, and a target that cannot be translated
+    raises `GradingError`. None and an object are passed through."""
+    if target is None or isinstance(target, dict):
+        return target
+    parts = [p for p in target if isinstance(p, dict)] if isinstance(target, list) else []
+    structures = {p.get("structure") for p in parts}
+    selectors = [p.get("selector") for p in parts]
+    if not parts or len(parts) != len(target) or len(structures) != 1:
+        raise GradingError(f"task {task.get('id')}: a target on more than one structure (or "
+                           "a malformed one) cannot be handed to the grader")
+    if len(selectors) == 1:
+        selector = selectors[0]
+    elif all(isinstance(sel, (dict, list)) for sel in selectors):
+        selector = [e for sel in selectors for e in (sel if isinstance(sel, list) else [sel])]
+    else:
+        raise GradingError(f"task {task.get('id')}: a target of several parts, one of them a "
+                           "static selector name, cannot be handed to the grader as one "
+                           "selector; write it as one part")
+    out = {"selector": selector}
+    structure = structures.pop()
+    if structure and len(task.get("structures") or []) > 1:
+        out["entry"] = structure
+    return out
+
+
+def _grader_view(task: dict, reference: Any, target: Any, accepted: list) -> dict:
+    """The task as `grader.grade_task` is handed it: one reference, its alternatives and
+    the target in the grader's own form."""
+    out = {**task, "reference": reference, "accepted": accepted,
+           "target": grader_target(task, target)}
+    out.pop("accepted_targets", None)
+    if task.get("category") == "mvs":
+        out["reference_mvs"] = reference
+    return out
+
+
+def _grade_task(task: dict, prediction: Any) -> dict[str, Any]:
+    """`grader.grade_task`, with the task's target translated (`grader_target`). When
+    the alternatives have targets of their own (``accepted_targets``: "either copy will
+    do") each right answer is graded with its own target and the best is kept; the
+    grader knows one target per task, and would score the other copy's target 0."""
+    reference = task["reference"] if "reference" in task else task["reference_mvs"]
+    accepted = list(task.get("accepted") or [])
+    alt_targets = task.get("accepted_targets")
+    if not alt_targets:
+        return grader_mod.grade_task(
+            _grader_view(task, reference, task.get("target"), accepted), prediction)
+    best, best_rank = None, None
+    answers = [(reference, task.get("target"))] + list(zip(accepted, alt_targets))
+    for i, (state, target) in enumerate(answers):
+        res = grader_mod.grade_task(_grader_view(task, state, target, []), prediction)
+        res["matched_reference"] = i
+        rank = (bool(res.get("success")), res.get("f1") or 0.0, res.get("target_f1") or 0.0)
+        if best is None or rank > best_rank:
+            best, best_rank = res, rank
+    return best
+
+
+def grader_problems(task: dict) -> list[str]:
+    """What the grader's own task check (`grader.check_task`, when the grader has one)
+    says about a task: a selection that resolves to no atoms, a state it cannot place
+    on an atom table, a target the reference does not draw. Empty = fine. The grader is
+    handed the task in its own form: the target translated, and a follow-up's start
+    state as the bare scene / call list."""
+    check = getattr(grader_mod, "check_task", None)
+    if not callable(check):
+        return []
+    try:
+        view = _grader_view(task, task["reference"], task.get("target"),
+                            list(task.get("accepted") or []))
+    except GradingError as e:
+        return [str(e)]
+    state = start_state(task)
+    if state is None:
+        view.pop("context", None)
+    else:
+        view["context"] = state
+    return [str(p) for p in check(view)]
+
+
 def _mvs_grade(task: dict, tree: Any) -> dict[str, Any]:
-    """Grade a parsed MVS scene. `grader.grade_task` is the one entry point; until it
-    grades the MVS track too (it says so with ``GRADES_MVS = True``) the scene is
-    scored by `mvs.grade_mvs` against the reference and each accepted alternative,
-    keeping the best."""
-    if getattr(grader_mod, "GRADES_MVS", False):
-        return grader_mod.grade_task(task, tree)
+    """Grade a parsed MVS scene. `grader.grade_task` is the one entry point; with a
+    grader that does not grade the MVS track (`grader_grades_mvs`) the scene is scored
+    by `mvs.grade_mvs` against the reference and each accepted alternative, keeping
+    the best."""
+    if grader_grades_mvs():
+        return _grade_task(task, tree)
     reference = task["reference"] if "reference" in task else task["reference_mvs"]
     best = None
     for i, ref in enumerate([reference] + list(task.get("accepted") or [])):
@@ -357,7 +452,7 @@ def grade_parsed(task: dict, prediction: Any) -> dict[str, Any]:
     `GradingError` instead of quietly producing a different kind of score."""
     if task["category"] == "mvs":
         return _mvs_grade(task, prediction)
-    result = grader_mod.grade_task(task, prediction)
+    result = _grade_task(task, prediction)
     if result.get("grader") != "state":
         raise GradingError(
             f"task {task['id']}: graded by {result.get('grader')!r}, not by the final-state "
@@ -1222,11 +1317,18 @@ def validate_all(samples: list[dict], mode: str, log: Callable[[str], None] = pr
     try:
         for i in range(0, len(todo), VALIDATE_CHUNK):
             validate_samples(todo[i:i + VALIDATE_CHUNK])
-    except (ImportError, RuntimeError) as e:
+    except Exception as e:  # noqa: BLE001 - narrowed just below
+        # Not available: the 'execute' extra or the Mol* bundle is missing (ImportError,
+        # RuntimeError), or Playwright is installed without its browser (its own Error
+        # class, which is neither). Anything else is a real failure.
+        if not (isinstance(e, (ImportError, RuntimeError))
+                or type(e).__module__.startswith("playwright")):
+            raise
         if mode == "required":
             raise ManifestError(
                 "Mol* validation is required (run.validate) but is not available: "
-                f"{e}. Install the 'execute' extra and fetch the Mol* bundle.") from e
+                f"{e}. Install the 'execute' extra, fetch the Mol* bundle and install "
+                "Playwright's browser (playwright install chromium).") from e
         log(f"note: Mol* validation unavailable ({type(e).__name__}); parsed scenes stay "
             "'unchecked' and valid-scene rates are not reported")
         return False
@@ -1803,7 +1905,7 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     if not targets:
         notes.append("the grader reports no target score yet (target_f1): the target columns "
                      "are empty")
-    if not getattr(grader_mod, "GRADES_MVS", False):
+    if not grader_grades_mvs():
         notes.append("MVS scenes were graded by mvs.grade_mvs (grader.grade_task does not grade "
                      "the MVS track yet); success there is 'F1 = 1'")
     if not validated and "mvs" in present_tracks:

@@ -100,6 +100,13 @@ of parts:
 - `structure` names the structure the part is on; needed only when the task loads
   more than one.
 
+The grader reads a target as one object naming the atoms (`{"selector": ..., "entry":
+...}`) and takes the representation and colour from the reference, so the runner
+translates the list before grading (`runner.grader_target`). Two limits follow, both
+refused loudly: every part of one target is on the same structure, and a target of
+several parts uses expressions, not a static name. When alternatives have targets of
+their own (`accepted_targets`), each right answer is graded with its own target.
+
 ### Twins and paraphrases
 
 - **Twins** are the same request on the two tracks: the same `prompt`, `structures`,
@@ -125,10 +132,13 @@ of parts:
    once the grader reports it, target score 1. Every accepted alternative grades as
    itself and is accepted by its task; in the accept-set tier it is a different final
    state from the reference.
+   The grader's own task check (`grader.check_task`, when the grader has one) finds
+   nothing wrong: no selection that matches no atoms, no state it cannot place.
 6. A follow-up's start state grades as itself, and `noop` agrees with the grader.
 7. `provenance.script` exists in the repository.
 8. No task uses 1HSG. It is the worked example in the API system prompt, so the
-   prompt, structures, reference, alternatives and start state are all searched.
+   prompt, structures, reference, alternatives, start state and grounding pack are
+   all searched.
 
 `--final` adds: no task in the old format, and a target score reported for every
 reference.

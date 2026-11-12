@@ -473,17 +473,20 @@ def target_atoms(task: dict, target: Any = None) -> dict[str, int] | None:
 
 def _mentions_worked_example(task: dict) -> bool:
     text = json.dumps({k: task.get(k) for k in ("prompt", "reference", "accepted", "context",
-                                                "structures", "target",
+                                                "structures", "target", "grounding",
                                                 "accepted_structures")})
     return re.search(rf"(?<![A-Za-z0-9]){WORKED_EXAMPLE}(?![A-Za-z0-9])", text, re.I) is not None
 
 
 def check_corpus(tasks: list[dict], grade: Callable[[dict, Any], dict] | None = None,
-                 final: bool = False, repo: pathlib.Path = REPO) -> tuple[list[str], list[str]]:
+                 final: bool = False, repo: pathlib.Path = REPO,
+                 check: Callable[[dict], list[str]] | None = None) -> tuple[list[str], list[str]]:
     """The checks that need more than one task file. Returns ``(errors, notes)``.
 
     ``grade(task, prediction)`` is the benchmark's grader (``runner.grade_parsed``);
-    without it the self-grading checks are skipped and a note says so. ``final`` adds
+    without it the self-grading checks are skipped and a note says so. ``check(task)``
+    is the grader's own task check (``runner.grader_problems``): a reference that grades
+    as itself can still select no atoms at all, and only the grader sees that. ``final`` adds
     what only the frozen corpus must satisfy: no old-format task, and a target score
     reported for every reference.
     """
@@ -589,6 +592,11 @@ def check_corpus(tasks: list[dict], grade: Callable[[dict, Any], dict] | None = 
     no_target = 0
     for t in tasks:
         tid = t["id"]
+        if check is not None:
+            try:
+                errors += [f"{tid}: grader check: {p}" for p in check(t)]
+            except Exception as e:  # noqa: BLE001 - report it against the task
+                errors.append(f"{tid}: the grader's task check failed: {type(e).__name__}: {e}")
         try:
             res = grade(t, t["reference"])
         except Exception as e:  # noqa: BLE001 - report it against the task
@@ -598,7 +606,7 @@ def check_corpus(tasks: list[dict], grade: Callable[[dict, Any], dict] | None = 
             errors.append(f"{tid}: its own reference does not grade as exactly right "
                           f"(f1 {res.get('f1')}, success {res.get('success')})")
         if res.get("target_f1") is None:
-            no_target += 1
+            no_target += t["target"] is not None  # no atom target: none to report
         elif res["target_f1"] != 1.0:
             errors.append(f"{tid}: its own reference has target score {res['target_f1']}")
         # An alternative is in the accept set, so grading it against the task proves
@@ -638,7 +646,8 @@ def check_corpus(tasks: list[dict], grade: Callable[[dict, Any], dict] | None = 
                     f"{tid}: context.noop is {t['context']['noop']} but the start state "
                     + ("already is" if same else "is not") + " the requested final state")
     if no_target:
-        msg = (f"the grader reported no target score (target_f1) for {no_target} of "
-               f"{len(tasks)} reference(s)")
+        msg = (f"the grader reported no target score (target_f1) for {no_target} "
+               f"reference(s) of the {sum(t['target'] is not None for t in tasks)} "
+               "task(s) that have a target")
         (errors if final else notes).append(msg)
     return errors, notes

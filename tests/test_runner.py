@@ -525,6 +525,60 @@ def test_grader_extras_are_carried_and_a_target_score_reaches_the_scorecard(tmp_
     assert rec["tasks"][0]["target_f1"] is not None
 
 
+def test_the_grader_is_handed_the_target_in_its_own_form(fixtures, monkeypatch):
+    """TASK_FORMAT.md writes a target as a list of parts; the grader reads one object.
+    A list handed over as it is would be ignored without a word."""
+    seen = []
+
+    def fake(task, pred):
+        seen.append(task)
+        return {"f1": 1.0, "success": True, "target_f1": 1.0, "grader": "state"}
+
+    monkeypatch.setattr(runner.grader_mod, "grade_task", fake)
+    monkeypatch.setattr(runner.grader_mod, "GRADES_MVS", True, raising=False)
+    for t in fixtures:
+        if t["target"] and not t.get("accepted_targets"):
+            runner.grade_parsed(t, t["reference"])
+            got = seen[-1]
+            assert got["target"] == {"selector": t["target"][0]["selector"]}, t["id"]
+            assert got["accepted"] == t["accepted"] and "accepted_targets" not in got
+            assert isinstance(t["target"], list)  # the loaded task itself is not changed
+    one = fixtures[0]
+    parts = [{"selector": {"label_asym_id": "A"}}, {"selector": [{"label_asym_id": "B"}]}]
+    assert runner.grader_target(one, parts) == {
+        "selector": [{"label_asym_id": "A"}, {"label_asym_id": "B"}]}
+    assert runner.grader_target(one, None) is None
+    assert runner.grader_target(one, {"selector": "polymer"}) == {"selector": "polymer"}
+    two = {**one, "structures": ["1cbs", "1stp"]}
+    assert runner.grader_target(two, [{"selector": "ligand", "structure": "1stp"}]) == {
+        "selector": "ligand", "entry": "1stp"}
+    for bad in ([{"selector": "polymer"}, {"selector": {"label_asym_id": "A"}}],
+                [{"selector": "ligand", "structure": "1cbs"},
+                 {"selector": "ligand", "structure": "1stp"}]):
+        with pytest.raises(runner.GradingError, match="cannot be handed to the grader"):
+            runner.grader_target(two, bad)
+
+
+def test_each_accepted_alternative_is_graded_with_its_own_target(fixtures, monkeypatch):
+    """"Either copy will do": the second copy is right on its own target, not scored 0
+    on the first copy's."""
+    task = next(t for t in fixtures if t.get("accepted_targets"))
+
+    def fake(t, pred):  # right only against the reference it is handed, like a grader
+        assert t["accepted"] == [] and isinstance(t["target"], dict)
+        hit = t["reference"] == pred
+        return {"f1": float(hit), "success": hit, "grader": "state",
+                "target_f1": float(hit), "seen_target": t["target"]}
+
+    monkeypatch.setattr(runner.grader_mod, "grade_task", fake)
+    monkeypatch.setattr(runner.grader_mod, "GRADES_MVS", True, raising=False)
+    for i, state in enumerate([task["reference"]] + task["accepted"]):
+        res = runner.grade_parsed(task, state)
+        want = (task["target"] if i == 0 else task["accepted_targets"][i - 1])[0]["selector"]
+        assert res["success"] and res["target_f1"] == 1.0 and res["matched_reference"] == i
+        assert res["seen_target"] == {"selector": want}
+
+
 def test_task_success_is_reported_as_the_mean_and_as_all_samples_right():
     def sample(f1, success, finish="stop", outcome="valid"):
         return {"f1": f1, "success": success, "finish_reason": finish, "outcome": outcome}
@@ -775,6 +829,22 @@ def test_validation_required_fails_loudly_without_molstar(monkeypatch, corpus):
     got = sample()
     assert runner.validate_all(got, "auto", log=lambda s: None) is False
     assert got[0]["outcome"] == "unchecked"   # no validity is claimed
+
+    # Playwright installed without its browser raises its own error class.
+    NoBrowser = type("Error", (Exception,), {"__module__": "playwright._impl._errors"})
+
+    def no_browser(scenes):
+        raise NoBrowser("BrowserType.launch: Executable doesn't exist")
+    monkeypatch.setattr(render, "molstar_issues", no_browser)
+    with pytest.raises(mf.ManifestError, match="Mol\\* validation is required"):
+        runner.validate_all(sample(), "required")
+    assert runner.validate_all(sample(), "auto", log=lambda s: None) is False
+
+    def bug(scenes):  # anything else is a real failure and is not swallowed
+        raise KeyError("x")
+    monkeypatch.setattr(render, "molstar_issues", bug)
+    with pytest.raises(KeyError):
+        runner.validate_all(sample(), "auto", log=lambda s: None)
 
 
 def test_validated_scenes_and_repairs_get_molstar_outcomes(monkeypatch, tmp_path, corpus):
