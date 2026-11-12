@@ -2,7 +2,7 @@
 
 # Rating study a4-v1: tables
 
-Every interval is a 95% bootstrap interval that resamples tasks (2000 replicates). Raters are pseudonyms.
+Every interval is a 95% bootstrap interval that resamples tasks (2000 replicates). Raters are pseudonyms. "No interval" means too few ratings for the bootstrap to give one; such a number is an anecdote.
 
 ## The data
 
@@ -63,7 +63,7 @@ Counts behind the unweighted per-rating numbers:
 | measure | all raters | without the author | passed-checks only |
 |---|---|---|---|
 | pairs (of which split) | 5 (3) | 2 (0) | 0 (0) |
-| raw agreement | 0.40 (0.00 to 0.80) | 1.00 (1.00 to 1.00) | n/a |
+| raw agreement | 0.40 (0.00 to 0.80) | 1.00 (no interval) | n/a |
 | Fleiss' kappa | -0.20 (-1.00 to 0.60) | 1.00 (no interval) | n/a |
 | Krippendorff's alpha | -0.08 (-0.80 to 0.64) | 1.00 (no interval) | n/a |
 
@@ -98,7 +98,7 @@ Counts behind the unweighted per-rating numbers:
 |---|---|---|---|---|---|
 | Clinical (SIFTS/ClinVar) | 7 | 2 | 0.43 (0.00 to 0.80) | -0.08 (-0.80 to 0.60) | 0.50 (0.00 to 1.00) |
 | Grounded (ligand/SS) | 10 | 6 | 0.60 (0.12 to 0.92) | 0.29 (0.00 to 0.81) | 0.33 (0.00 to 0.86) |
-| Interactions (atoms) | 8 | 1 | 0.75 (0.56 to 1.00) | -0.14 (-0.20 to 0.00) | 0.00 (0.00 to 0.00) |
+| Interactions (atoms) | 8 | 1 | 0.75 (0.56 to 1.00) | -0.14 (-0.20 to 0.00) | 0.00 (no interval) |
 | Resolution (by name) | 10 | 6 | 0.80 (0.50 to 1.00) | 0.58 (0.00 to 1.00) | 0.83 (0.40 to 1.00) |
 | Translation | 30 | 6 | 0.87 (0.76 to 0.97) | 0.63 (0.31 to 0.90) | 0.83 (0.62 to 1.00) |
 
@@ -108,17 +108,17 @@ Counts behind the unweighted per-rating numbers:
 |---|---|---|---|---|---|
 | claude-haiku-4-5 | 10 | 0 | 0.70 (0.40 to 1.00) | 0.00 (0.00 to 0.00) | n/a |
 | deepseek-v3.2 | 11 | 5 | 0.55 (0.27 to 0.82) | 0.10 (-0.47 to 0.65) | 0.60 (0.00 to 1.00) |
-| deepseek-v4-flash | 3 | 0 | 1.00 (1.00 to 1.00) | n/a | n/a |
-| gemini-3.5-flash | 6 | 2 | 0.50 (0.17 to 0.83) | -0.29 (-0.67 to 0.00) | 0.00 (0.00 to 0.00) |
+| deepseek-v4-flash | 3 | 0 | 1.00 (no interval) | n/a | n/a |
+| gemini-3.5-flash | 6 | 2 | 0.50 (0.17 to 0.83) | -0.29 (-0.67 to 0.00) | 0.00 (no interval) |
 | gemma-3-27b-it | 9 | 3 | 0.44 (0.11 to 0.78) | -0.15 (-0.62 to 0.50) | 0.33 (0.00 to 1.00) |
-| glm-5.2 | 10 | 5 | 0.90 (0.73 to 1.00) | 0.80 (0.41 to 1.00) | 1.00 (1.00 to 1.00) |
-| gpt-5.4-nano | 12 | 2 | 1.00 (1.00 to 1.00) | 1.00 (1.00 to 1.00) | 1.00 (1.00 to 1.00) |
+| glm-5.2 | 10 | 5 | 0.90 (0.73 to 1.00) | 0.80 (0.41 to 1.00) | 1.00 (no interval) |
+| gpt-5.4-nano | 12 | 2 | 1.00 (no interval) | 1.00 (no interval) | 1.00 (no interval) |
 | gpt-oss-120b | 7 | 4 | 0.86 (0.57 to 1.00) | 0.72 (0.00 to 1.00) | 0.75 (0.25 to 1.00) |
-| gpt-oss-20b | 1 | 1 | 1.00 (1.00 to 1.00) | n/a | 1.00 (1.00 to 1.00) |
-| kimi-k2.6 | 7 | 2 | 1.00 (1.00 to 1.00) | 1.00 (1.00 to 1.00) | 1.00 (1.00 to 1.00) |
-| llama-4-maverick | 2 | 1 | 1.00 (1.00 to 1.00) | 1.00 (no interval) | 1.00 (1.00 to 1.00) |
+| gpt-oss-20b | 1 | 1 | 1.00 (no interval) | n/a | 1.00 (no interval) |
+| kimi-k2.6 | 7 | 2 | 1.00 (no interval) | 1.00 (no interval) | 1.00 (no interval) |
+| llama-4-maverick | 2 | 1 | 1.00 (no interval) | 1.00 (no interval) | 1.00 (no interval) |
 | minimax-m3 | 8 | 3 | 0.75 (0.50 to 1.00) | 0.47 (-0.20 to 1.00) | 0.67 (0.00 to 1.00) |
-| nemotron-3-super-120b-a12b | 1 | 0 | 1.00 (1.00 to 1.00) | n/a | n/a |
+| nemotron-3-super-120b-a12b | 1 | 0 | 1.00 (no interval) | n/a | n/a |
 | qwen3-30b-a3b-instruct-2507 | 10 | 3 | 0.80 (0.58 to 1.00) | 0.52 (0.00 to 1.00) | 0.67 (0.50 to 1.00) |
 | qwen3-next-80b-a3b-instruct | 17 | 7 | 0.88 (0.71 to 1.00) | 0.76 (0.36 to 1.00) | 0.86 (0.50 to 1.00) |
 
@@ -128,16 +128,16 @@ Counts behind the unweighted per-rating numbers:
 |---|---|---|---|---|---|
 | claude-haiku-4-5 | 5 | 0 | 0.80 (0.25 to 1.00) | 0.00 (0.00 to 0.00) | n/a |
 | deepseek-v3.2 | 8 | 4 | 0.50 (0.12 to 0.88) | 0.00 (-0.60 to 0.71) | 0.50 (0.00 to 1.00) |
-| deepseek-v4-flash | 1 | 0 | 1.00 (1.00 to 1.00) | n/a | n/a |
-| gemini-3.5-flash | 3 | 1 | 0.67 (0.00 to 1.00) | 0.00 (0.00 to 0.00) | 0.00 (0.00 to 0.00) |
-| gemma-3-27b-it | 5 | 2 | 0.20 (0.00 to 0.60) | -0.67 (-0.92 to 0.00) | 0.00 (0.00 to 0.00) |
-| glm-5.2 | 7 | 3 | 0.86 (0.50 to 1.00) | 0.72 (0.00 to 1.00) | 1.00 (1.00 to 1.00) |
-| gpt-5.4-nano | 7 | 0 | 1.00 (1.00 to 1.00) | n/a | n/a |
+| deepseek-v4-flash | 1 | 0 | 1.00 (no interval) | n/a | n/a |
+| gemini-3.5-flash | 3 | 1 | 0.67 (0.00 to 1.00) | 0.00 (0.00 to 0.00) | 0.00 (no interval) |
+| gemma-3-27b-it | 5 | 2 | 0.20 (0.00 to 0.60) | -0.67 (-0.92 to 0.00) | 0.00 (no interval) |
+| glm-5.2 | 7 | 3 | 0.86 (0.50 to 1.00) | 0.72 (0.00 to 1.00) | 1.00 (no interval) |
+| gpt-5.4-nano | 7 | 0 | 1.00 (no interval) | n/a | n/a |
 | gpt-oss-120b | 5 | 2 | 0.80 (0.40 to 1.00) | 0.55 (0.00 to 1.00) | 0.50 (0.00 to 1.00) |
-| kimi-k2.6 | 5 | 2 | 1.00 (1.00 to 1.00) | 1.00 (1.00 to 1.00) | 1.00 (1.00 to 1.00) |
-| minimax-m3 | 3 | 1 | 0.33 (0.00 to 1.00) | -0.50 (-0.80 to 0.00) | 0.00 (0.00 to 0.00) |
-| nemotron-3-super-120b-a12b | 1 | 0 | 1.00 (1.00 to 1.00) | n/a | n/a |
-| qwen3-30b-a3b-instruct-2507 | 5 | 2 | 0.80 (0.40 to 1.00) | 0.62 (0.00 to 1.00) | 1.00 (1.00 to 1.00) |
+| kimi-k2.6 | 5 | 2 | 1.00 (no interval) | 1.00 (no interval) | 1.00 (no interval) |
+| minimax-m3 | 3 | 1 | 0.33 (0.00 to 1.00) | -0.50 (-0.80 to 0.00) | 0.00 (no interval) |
+| nemotron-3-super-120b-a12b | 1 | 0 | 1.00 (no interval) | n/a | n/a |
+| qwen3-30b-a3b-instruct-2507 | 5 | 2 | 0.80 (0.40 to 1.00) | 0.62 (0.00 to 1.00) | 1.00 (no interval) |
 | qwen3-next-80b-a3b-instruct | 10 | 4 | 0.90 (0.70 to 1.00) | 0.78 (0.00 to 1.00) | 0.75 (0.00 to 1.00) |
 
 ## Flags and notes

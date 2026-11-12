@@ -200,6 +200,28 @@ def test_flags_must_be_booleans():
         analyse(KEY, [_r("a-aaaaaaa", "v1", S, ref_wrong="false")])
 
 
+def test_unknown_labels_are_rejected():
+    with pytest.raises(ValueError, match="label must be"):
+        analyse(KEY, [_r("a-aaaaaaa", "v1", "Same")])
+    with pytest.raises(ValueError, match="label must be"):
+        analyse(KEY, [_r("a-aaaaaaa", "v1", None)])
+
+
+def test_tables_survive_a_group_with_no_raters_when_weighted():
+    # Nobody passes the checks (none answered), so that group is empty; with a
+    # population the weighted block must still exist for the tables.
+    pop = {"cells": [["t1", S, 3], ["t3", D, 5]]}
+    res = analyse(KEY, [_r("a-aaaaaaa", "v1", S), _r("a-aaaaaaa", "v3", D)], population=pop)
+    assert res["cohorts"]["passed_checks"]["weighted"]["ratings"] == 0
+    assert res["cohorts"]["all"]["weighted"]["table"]["human same / judge same"] == 3
+    assert "weighted" in ag.markdown(res)
+
+
+def test_a_zero_width_interval_is_not_printed_as_certainty():
+    assert ag._ci({"est": 1.0, "lo": 1.0, "hi": 1.0}) == "1.00 (no interval)"
+    assert ag._ci({"est": 0.5, "lo": 0.25, "hi": 0.75}) == "0.50 (0.25 to 0.75)"
+
+
 def test_each_kind_of_check_must_pass_on_its_own():
     same = {f"cs{i}": {"kind": "control-same", "expected": S, "task": f"s{i}"} for i in range(5)}
     key = {"set": "t", "items": {**KEY["items"], **same}}

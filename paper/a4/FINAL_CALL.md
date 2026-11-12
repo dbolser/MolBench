@@ -40,7 +40,10 @@ column is reported as "not validated" and kept out of every headline table.
 samples per task per model: take **at most one sample per (task, model)**, chosen by the keyed id
 order the builder already uses, so near-identical triplets do not fill the set.
 
-**Size: 300 judged pairs.** That is what ±0.10 on kappa needs with 2 raters per pair.
+**Size: 300 judged pairs.** That is the smallest set that can plausibly give ±0.10 on kappa with
+2 raters per pair. The simulation is for the unweighted, all-rater kappa; the primary analysis
+(weighted, without the author) will be somewhat wider. If more than 22 raters come, open more
+pairs rather than adding third ratings.
 
 **Strata.**
 
@@ -74,7 +77,7 @@ Do not put API-track comparisons in a4-v2.
   There is nothing for humans to validate there with this instrument.
 - No renders exist for API answers. Producing them means driving pdbe-molstar 3.3.2 headlessly for
   both reference and answer: new machinery, new failure modes, right before the final call.
-- Raters are the scarce resource. 600 judged ratings is already about 21 people.
+- Raters are the scarce resource. 600 judged ratings is already about 22 people.
 
 If renders of API final states come for free from the final run, a separate block of at most 30
 *paired-task* comparisons (API answer render vs the MVS twin's reference render) would support
@@ -133,7 +136,7 @@ single-rated ones.
 
 (Half-widths of 95% intervals from `tables/power.md`, 50:50 mix; ranges cover 10% to 30% of pairs
 being split between two raters. The 135-pair row is read between the simulated 113 and 150 rows;
-the 65-pair row is scaled from the 113 row and is the least certain.) 18 invite tokens already exist; 3 have been used. **Aim for 20 people; 10 is the
+the 65-pair row is scaled from the 113 row and is the least certain.) 20 invite tokens exist (two look like testing tokens); 3 have been used. **Aim for 20 people; 10 is the
 minimum for a result worth a paragraph.**
 
 ## What would make it publication-grade
