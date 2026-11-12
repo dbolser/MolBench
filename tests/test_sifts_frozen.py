@@ -133,6 +133,19 @@ def test_a_range_is_the_union_of_its_positions():
     assert sifts.uniprot_atoms("2hhb", "P00000", 7) == 0
 
 
+def test_numbers_from_a_model_cannot_crash_or_stall_the_lookup():
+    # The numbers may be a model's output. A huge range costs nothing extra, and a
+    # non-number selects nothing (the PDBe viewer compares with ===).
+    whole = sifts.uniprot_atoms("1tup", "P04637", 1, 10 ** 15)
+    assert whole == sifts.uniprot_atoms("1tup", "P04637", 1, 393)
+    one = sifts.uniprot_atoms("1tup", "P04637", 175)
+    assert one and sifts.uniprot_atoms("1tup", "P04637", 175.0) == one
+    for bad in ("175", None, True, 175.5, float("nan")):
+        assert sifts.uniprot_atoms("1tup", "P04637", bad) == 0, bad
+    assert sifts.uniprot_atoms("1tup", "P04637", 180, 170) == 0
+    assert sifts.uniprot_atoms("1TUP", "P04637", 175) == one   # ids are case-insensitive
+
+
 # --- residue numbers known from the literature -------------------------------------
 # (entry, accession, UniProt number) -> (author chains, author number, residue). Each is a
 # textbook residue whose two numberings are both published, so none of this comes from

@@ -29,6 +29,7 @@ as a bitmask over the rows of the entry's frozen atom table (``molbench.atoms``)
 
 from __future__ import annotations
 
+import bisect
 import functools
 import gzip
 import json
@@ -38,6 +39,10 @@ from typing import NamedTuple
 TABLES = pathlib.Path(__file__).resolve().parent / "sifts_tables"  # shipped in the wheel
 
 PDBE = "https://www.ebi.ac.uk/pdbe/api/mappings/{}"
+
+
+def _is_number(x) -> bool:
+    return isinstance(x, (int, float)) and not isinstance(x, bool) and x == x
 
 
 class NetworkNotAllowed(LookupError):
@@ -73,13 +78,23 @@ class SiftsTable:
         self._by_pos: dict[tuple[str, int], list[Residue]] = {}
         for r in self.rows:
             self._by_pos.setdefault((r.accession, r.unp_num), []).append(r)
+        self._positions: dict[str, list[int]] = {}
+        for acc, n in sorted(self._by_pos):
+            self._positions.setdefault(acc, []).append(n)
 
     def residues(self, accession: str, unp_num: int, end: int | None = None,
                  observed_only: bool = True) -> list[Residue]:
-        """Residues mapped to a UniProt position, or to the range ``unp_num..end``."""
+        """Residues mapped to a UniProt position, or to the range ``unp_num..end``
+        (in position order). The numbers may come straight from a model's output:
+        anything that is not a number selects nothing, and the cost does not grow
+        with the width of the range."""
+        hi = unp_num if end is None else end
+        if not (_is_number(unp_num) and _is_number(hi)):
+            return []
+        mapped = self._positions.get(accession, [])
         out: list[Residue] = []
-        for n in range(unp_num, (unp_num if end is None else end) + 1):
-            out += [r for r in self._by_pos.get((accession, n), ())
+        for n in mapped[bisect.bisect_left(mapped, unp_num):bisect.bisect_right(mapped, hi)]:
+            out += [r for r in self._by_pos[(accession, n)]
                     if r.observed or not observed_only]
         return out
 
