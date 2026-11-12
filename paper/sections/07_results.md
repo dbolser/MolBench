@@ -79,9 +79,10 @@ bounds. And the raw text of {{mvs.spec.repair.n_no_raw}} invalid outputs was nev
 On strict F1 the regimes mostly reflect validity. Once invalid output is set aside, a gradient
 appears (Figure 4). Translation and structure-grounded tasks are near the ceiling: F1 over valid
 scenes is {{mvs.spec.regime.Translation.f1_valid_mean:.2f}} and
-{{mvs.spec.regime.Grounded.f1_valid_mean:.2f}}. Clinical tasks are much harder
+{{mvs.spec.regime.Grounded.f1_valid_mean:.2f}}. Clinical tasks score much lower
 ({{mvs.spec.regime.Clinical.f1_valid_mean:.2f}}), and almost no clinical output was exactly
-right (success {{mvs.spec.regime.Clinical.success_mean:.1%}}).
+right (success {{mvs.spec.regime.Clinical.success_mean:.1%}}). The two tables after Figure 4
+show that, in this panel, most of that loss is not a failure to find the residue.
 
 These numbers rest on thin samples, and we state them with that caveat. The clinical regime is
 {{mvs.spec.regime.Clinical.n_tasks}} tasks on {{mvs.spec.regime.Clinical.n_structures}}
@@ -96,18 +97,39 @@ interactions regime has {{mvs.spec.regime.Interactions.n_valid}} valid outputs o
 
 {{include:generated/table_mvs_differences.md}}
 
+{{include:generated/table_mvs_targets.md}}
+
 The breakdown of where valid scenes lose points shows what each regime measures, and exposes a
-flaw. In the clinical regime the commonest fault is a missing component
+flaw in the two lookup regimes of the preliminary corpus.
+
+In the clinical regime the commonest fault is a missing component
 ({{mvs.spec.diff_regime.Clinical.missing_component}} of the
-{{mvs.spec.diff_regime.Clinical.n}} imperfect valid scenes): a part of the reference scene is
-absent from the answer. In the resolution regime,
+{{mvs.spec.diff_regime.Clinical.n}} imperfect valid scenes). The missing part is rarely the
+residue. The clinical references draw the whole protein as a grey cartoon behind the highlighted
+residue, and the requests ask only for the residue. Of the
+{{mvs.spec.target.Clinical.n}} valid clinical scenes,
+{{mvs.spec.target.Clinical.target_exact}}
+({{mvs.spec.target.Clinical.target_exact_share:.0%}}) drew the requested residue with exactly
+the reference atoms, representation and colour. Only {{mvs.spec.target.Clinical.perfect}}
+scored 1. Of the {{mvs.spec.target.Clinical.target_exact_imperfect}} that had the residue right
+and still lost points, {{mvs.spec.target.Clinical.target_exact_context_differs}} left out the
+grey cartoon or drew it differently. {{mvs.spec.target.Clinical.target_wrong}} valid clinical
+scenes selected the wrong atoms.
+
+In the resolution regime,
 {{mvs.spec.diff_regime.Resolution.unrequested_colour}} of the
 {{mvs.spec.diff_regime.Resolution.n}} imperfect valid scenes lost points for a colour that the
-request did not ask for and the reference does not contain. Only
+request did not ask for and the reference does not contain.
 {{mvs.spec.diff_regime.Resolution.structure}} of them loaded an entry outside the accepted
-list. The low resolution score is therefore mostly a penalty for unrequested styling, and not a
-failure to find the protein. ⟦PENDING: decide whether unrequested styling is penalised in the final corpus;
-if not, references or grader change before the final run⟧
+list.
+
+The low clinical and resolution scores are therefore mostly penalties for scenery that the
+request did not specify: context that the reference adds, or styling that the output adds. They
+are not, in this panel, evidence that the lookup is hard. The clinical structure also has no
+numbering offset (Section 3.3), so the residue could be found without a mapping.
+⟦PENDING: decide before the final run whether a reference may contain context the request does
+not ask for, and whether unrequested styling in an answer is penalised; references or grader
+change accordingly⟧
 
 ### 6.5 Grounding packs did not help
 
@@ -128,7 +150,7 @@ a lookup. It did not. We give three numbers, because each answers a different qu
   worse and {{mvs.grounding.both_valid.same}} did not change.
 
 The first number is negative mainly because the longer request produced more invalid output.
-The mean valid-scene rate changed by {{mvs.grounding.valid_delta_mean:+.1%}} in absolute terms,
+The mean valid-scene rate changed by {{mvs.grounding.valid_delta_mean_pp:+.1f}} percentage points,
 and for {{mvs.grounding.valid_drop_max.name}} it fell from
 {{mvs.grounding.valid_drop_max.from:.0%}} to {{mvs.grounding.valid_drop_max.to:.0%}}. The third
 number removes that effect and is indistinguishable from zero. Individual models moved in both

@@ -47,9 +47,10 @@ its documentation notes that the assistant "will often make mistakes" [@chimerax
 [@cortes2026speech] control molecular scenes by spoken language and were evaluated with users,
 not with scored tasks. The Mol\* project has merged an optional assistant and a command-language
 layer into its next viewer [@molstarprism]. We found no published benchmark from that work.
-A community tool that builds MolViewSpec scenes from chat [@molstarmcp] instructs its model that
-residue numbers from variant databases "are always author numbers". That holds for some entries
-and fails for many [@faezov2021pdbrenum]. It is the error our clinical tier is built to catch.
+A community tool that builds MolViewSpec scenes from chat [@molstarmcp] states in its
+documentation that the residue numbers researchers take from ClinVar, publications and mutation
+databases "are always author numbers". That holds for some entries and fails for many
+[@faezov2021pdbrenum]. It is the error our clinical tier is built to catch.
 
 ### 2.3 The data and software MolBench stands on
 

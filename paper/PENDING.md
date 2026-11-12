@@ -9,7 +9,7 @@ Numbers currently come from: **October 2026 panel** (PRELIMINARY).
 | # | Section | Line | Waiting for |
 |---:|:---|---:|:---|
 | 1 | `00_title.md` | 3 | Dan — author list, affiliations, corresponding author |
-| 2 | `01_abstract.md` | 19 | replace the preliminary numbers with the final run (both tracks, three samples per task) and add the paired-format result |
+| 2 | `01_abstract.md` | 21 | replace the preliminary numbers with the final run (both tracks, three samples per task) and add the paired-format result |
 | 3 | `02_introduction.md` | 41 | final task count (target: about 300 across both tracks) |
 | 4 | `02_introduction.md` | 42 | final structure count (target: at least 50 PDB entries) |
 | 5 | `04_benchmark_design.md` | 69 | final count (target: at least 40 tasks on at least 12 proteins, at least 8 of them with a UniProt-to-author offset) |
@@ -27,13 +27,13 @@ Numbers currently come from: **October 2026 panel** (PRELIMINARY).
 | 17 | `06_setup.md` | 25 | structured-output condition, final run only |
 | 18 | `06_setup.md` | 28 | confirm for the rebuilt API prompt |
 | 19 | `06_setup.md` | 51 | run manifest and dry run (runner work package) |
-| 20 | `07_results.md` | 203 | decide whether unrequested styling is penalised in the final corpus; if not, references or grader change before the final run |
-| 21 | `07_results.md` | 291 | rating-study readout |
-| 22 | `07_results.md` | 308 | API-track leaderboard (final run) |
-| 23 | `07_results.md` | 310 | paired MVS–API analysis: discordant pairs and McNemar test per model, with and without clinical twins (final run) |
-| 24 | `07_results.md` | 312 | follow-up and accept-set tiers (final run) |
-| 25 | `07_results.md` | 344 | prices for the 8 models with no recorded price; final-run cost for all models and both tracks |
-| 26 | `08_discussion.md` | 42 | paired-format discussion, after the final run. Planned reading: where a model succeeds on one twin and fails on the other, the content was known and the format was the obstacle |
+| 20 | `07_results.md` | 231 | decide before the final run whether a reference may contain context the request does not ask for, and whether unrequested styling in an answer is penalised; references or grader change accordingly |
+| 21 | `07_results.md` | 320 | rating-study readout |
+| 22 | `07_results.md` | 337 | API-track leaderboard (final run) |
+| 23 | `07_results.md` | 339 | paired MVS–API analysis: discordant pairs and McNemar test per model, with and without clinical twins (final run) |
+| 24 | `07_results.md` | 341 | follow-up and accept-set tiers (final run) |
+| 25 | `07_results.md` | 373 | prices for the 8 models with no recorded price; final-run cost for all models and both tracks |
+| 26 | `08_discussion.md` | 49 | paired-format discussion, after the final run. Planned reading: where a model succeeds on one twin and fails on the other, the content was known and the format was the obstacle |
 | 27 | `09_limitations.md` | 9 | state the final panel's coverage of frontier models |
 | 28 | `09_limitations.md` | 29 | report the deposition-date spread of the final panel |
 | 29 | `10_ethics_licences.md` | 12 | Dan — what was collected from raters, consent wording, and whether an ethics statement is required by the target journal |

@@ -14,8 +14,10 @@ structure. In a preliminary panel of {{mvs.spec.n_models}} models on {{mvs.n_tas
 strict scores ranged from {{mvs.spec.f1_min:.2f}} to {{mvs.spec.f1_max:.2f}}. Almost all of that
 range came from whether the output was a valid scene at all (correlation between valid-scene rate
 and score: r = {{mvs.spec.r_valid_f1:.3f}}). Over valid scenes only, models were close
-({{mvs.spec.f1_valid_min:.2f}} to {{mvs.spec.f1_valid_max:.2f}}), and the hard tasks were the
-clinical and name-lookup ones. Adding frozen facts about the structure to the request did not
+({{mvs.spec.f1_valid_min:.2f}} to {{mvs.spec.f1_valid_max:.2f}}). Clinical tasks scored lowest,
+but {{mvs.spec.target.Clinical.target_exact}} of {{mvs.spec.target.Clinical.n}} valid clinical
+scenes drew the requested residue exactly; most points were lost on parts of the scene that the
+request did not specify. Adding frozen facts about the structure to the request did not
 help (mean change {{mvs.grounding.all.delta:+.3f}}). ⟦PENDING: replace the preliminary numbers
 with the final run (both tracks, three samples per task) and add the paired-format result⟧
 The tasks, references, graders, raw model outputs and the scripts that produce every number in

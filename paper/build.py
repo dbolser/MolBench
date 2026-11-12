@@ -34,6 +34,7 @@ import re
 import shutil
 import subprocess
 import sys
+import unicodedata
 
 PAPER = pathlib.Path(__file__).resolve().parent
 SECTIONS = PAPER / "sections"
@@ -112,6 +113,21 @@ def substitute(text: str, values: dict, where: str, problems: list[str], depth: 
 # --------------------------------------------------------------------------- #
 # References
 # --------------------------------------------------------------------------- #
+_ACCENT = {'"': "\u0308", "'": "\u0301", "`": "\u0300", "^": "\u0302", "~": "\u0303",
+           "c": "\u0327", "v": "\u030c", "u": "\u0306", "H": "\u030b", "k": "\u0328",
+           "r": "\u030a", "=": "\u0304", ".": "\u0307"}
+_LATEX_ACCENT = re.compile(r"""\\(["'`^~=.]|[cvuHkr](?![A-Za-z]))\s*(?:\{([A-Za-z])\}|([A-Za-z]))""")
+
+
+def delatex(text: str) -> str:
+    """BibTeX text as plain Unicode: accents, quotes and escaped characters."""
+    text = _LATEX_ACCENT.sub(lambda m: unicodedata.normalize(
+        "NFC", (m.group(2) or m.group(3)) + _ACCENT[m.group(1)]), text)
+    text = text.replace("``", "\u201c").replace("''", "\u201d")
+    text = re.sub(r"\\([_&%#$])", r"\1", text)
+    return text.replace("{", "").replace("}", "")
+
+
 def parse_bib(text: str) -> dict[str, dict]:
     """A small BibTeX reader: ``@type{key, field = {value}, …}`` with braces or quotes."""
     out: dict[str, dict] = {}
@@ -145,7 +161,7 @@ def parse_bib(text: str) -> dict[str, dict]:
                 val = body[j:k]
             name = fm.group(1).lower()
             if name not in fields:
-                fields[name] = " ".join(val.replace("{", "").replace("}", "").split())
+                fields[name] = " ".join(delatex(val).split())
         out[key] = fields
     return out
 
@@ -171,7 +187,7 @@ def fmt_authors(raw: str) -> str:
 def fmt_reference(e: dict) -> str:
     parts = []
     if e.get("author"):
-        parts.append(fmt_authors(e["author"]) + ".")
+        parts.append(fmt_authors(e["author"]).rstrip(".") + ".")
     parts.append(e.get("title", "(untitled)").rstrip(".") + ".")
     venue = e.get("journal") or e.get("booktitle") or e.get("howpublished") or e.get("publisher")
     tail = []

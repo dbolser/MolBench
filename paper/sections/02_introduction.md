@@ -12,7 +12,7 @@ correct one. A model that colours residue 175 of the wrong chain, or residue 175
 numbering scheme, still produces a clean picture. For a clinical variant, that picture points a
 reader at the wrong amino acid. The problem is not rare: a survey of the Protein Data Bank found
 that more than a third of entries contain proteins that are not numbered as their UniProt sequences
-are (38.6% of the 176,507 entries examined in 2021) [@faezov2021pdbrenum].
+are (38.6% of the 176,507 entries examined) [@faezov2021pdbrenum].
 
 We built MolBench to measure this. It rests on four choices.
 

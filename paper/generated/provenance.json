@@ -3,7 +3,7 @@
  "manifest": "paper/inputs.json",
  "label": "October 2026 panel",
  "status": "preliminary",
- "code_commit": "a1a38b510dda888d069c785cfbe890f8dca4dbb3",
+ "code_commit": "eb7d6a65b8cb79db3005bfda204f071a31b5b0e7",
  "bootstrap": {
   "replicates": 10000,
   "seed": 20261112,
@@ -93,5 +93,7 @@
   "mvs/spec_grounded/qwen/qwen3-next-80b-a3b-instruct",
   "mvs/spec_grounded/z-ai/glm-5.2"
  ],
- "notes": []
+ "notes": [
+  "mvs: baseline 'baseline-rules' has no valid output in this track; left out of the leaderboard table"
+ ]
 }

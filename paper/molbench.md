@@ -27,8 +27,10 @@ structure. In a preliminary panel of 15 models on 70 scene tasks,
 strict scores ranged from 0.08 to 0.90. Almost all of that
 range came from whether the output was a valid scene at all (correlation between valid-scene rate
 and score: r = 0.996). Over valid scenes only, models were close
-(0.86 to 0.97), and the hard tasks were the
-clinical and name-lookup ones. Adding frozen facts about the structure to the request did not
+(0.86 to 0.97). Clinical tasks scored lowest,
+but 85 of 96 valid clinical
+scenes drew the requested residue exactly; most points were lost on parts of the scene that the
+request did not specify. Adding frozen facts about the structure to the request did not
 help (mean change -0.041). ⟦PENDING: replace the preliminary numbers
 with the final run (both tracks, three samples per task) and add the paired-format result⟧
 The tasks, references, graders, raw model outputs and the scripts that produce every number in
@@ -48,7 +50,7 @@ correct one. A model that colours residue 175 of the wrong chain, or residue 175
 numbering scheme, still produces a clean picture. For a clinical variant, that picture points a
 reader at the wrong amino acid. The problem is not rare: a survey of the Protein Data Bank found
 that more than a third of entries contain proteins that are not numbered as their UniProt sequences
-are (38.6% of the 176,507 entries examined in 2021) [5].
+are (38.6% of the 176,507 entries examined) [5].
 
 We built MolBench to measure this. It rests on four choices.
 
@@ -135,9 +137,10 @@ its documentation notes that the assistant "will often make mistakes" [1]. **VOI
 [21] control molecular scenes by spoken language and were evaluated with users,
 not with scored tasks. The Mol\* project has merged an optional assistant and a command-language
 layer into its next viewer [2]. We found no published benchmark from that work.
-A community tool that builds MolViewSpec scenes from chat [22] instructs its model that
-residue numbers from variant databases "are always author numbers". That holds for some entries
-and fails for many [5]. It is the error our clinical tier is built to catch.
+A community tool that builds MolViewSpec scenes from chat [22] states in its
+documentation that the residue numbers researchers take from ClinVar, publications and mutation
+databases "are always author numbers". That holds for some entries and fails for many
+[5]. It is the error our clinical tier is built to catch.
 
 ### 2.3 The data and software MolBench stands on
 
@@ -475,7 +478,6 @@ model exercises the whole path at no cost.
 | 13 | qwen3-30b-a3b-instruct-2507 | open | 0.519 | 0.332–0.665 | 55.7% | 37.9%–70.2% | 0.932 | 0.856–0.969 | 37.1% |
 | 14 | gpt-oss-20b | open | 0.252 | 0.165–0.333 | 28.6% | 19.7%–37.0% | 0.883 | 0.726–0.981 | 20.0% |
 | 15 | nemotron-3-super-120b-a12b | open | 0.078 | 0.027–0.130 | 8.6% | 3.3%–13.8% | 0.910 | 0.700–1.000 | 5.7% |
-| – | baseline-rules (no model) | – | 0.000 | – | 0.0% | – | n/a | – | 0.0% |
 
 Strict F1 ranged from 0.078 (nemotron-3-super-120b-a12b) to
 0.903 (deepseek-v3.2), a spread of 0.83. The
@@ -596,9 +598,10 @@ bounds. And the raw text of 28 invalid outputs was never archived
 On strict F1 the regimes mostly reflect validity. Once invalid output is set aside, a gradient
 appears (Figure 4). Translation and structure-grounded tasks are near the ceiling: F1 over valid
 scenes is 0.98 and
-0.97. Clinical tasks are much harder
+0.97. Clinical tasks score much lower
 (0.67), and almost no clinical output was exactly
-right (success 1.5%).
+right (success 1.5%). The two tables after Figure 4
+show that, in this panel, most of that loss is not a failure to find the residue.
 
 These numbers rest on thin samples, and we state them with that caveat. The clinical regime is
 9 tasks on 1
@@ -627,18 +630,47 @@ interactions regime has 54 valid outputs out of
 | missing colour | 10 | 3.4% | 0 | 0 | 10 | 0 | 0 |
 | *imperfect valid scenes* | 294 |  | 89 | 27 | 94 | 50 | 34 |
 
+**Is the requested component itself right? `spec` condition (PRELIMINARY).** Valid scenes only. The *target* of a task is every component of the reference scene except, when the reference has more than one, the component with the most atoms, which is treated as *context* (for example a grey cartoon of the whole protein behind one highlighted residue). *Target exact*: the output draws every target with exactly the reference atoms, representation and colour. *Scene exact*: the whole scene scores 1. *Target exact, scene not*: the target is right and the scene still loses points for something else (missing or different context, extra components). *Atoms only*: the target atoms are selected exactly, in the reference entry or an accepted one, but drawn or coloured differently. *Target wrong*: no component selects exactly the target atoms.
+
+| Regime | Valid scenes | Target exact | Share | Scene exact | Target exact, scene not | Atoms only | Target wrong |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Translation | 491 | 404 | 82.3% | 402 | 2 | 55 | 32 |
+| Grounded | 91 | 64 | 70.3% | 64 | 0 | 2 | 25 |
+| Clinical | 96 | 85 | 88.5% | 2 | 83 | 2 | 9 |
+| Resolution | 52 | 2 | 3.9% | 2 | 0 | 33 | 17 |
+| Interactions | 54 | 22 | 40.7% | 20 | 2 | 15 | 17 |
+
 The breakdown of where valid scenes lose points shows what each regime measures, and exposes a
-flaw. In the clinical regime the commonest fault is a missing component
+flaw in the two lookup regimes of the preliminary corpus.
+
+In the clinical regime the commonest fault is a missing component
 (66 of the
-94 imperfect valid scenes): a part of the reference scene is
-absent from the answer. In the resolution regime,
+94 imperfect valid scenes). The missing part is rarely the
+residue. The clinical references draw the whole protein as a grey cartoon behind the highlighted
+residue, and the requests ask only for the residue. Of the
+96 valid clinical scenes,
+85
+(89%) drew the requested residue with exactly
+the reference atoms, representation and colour. Only 2
+scored 1. Of the 83 that had the residue right
+and still lost points, 80 left out the
+grey cartoon or drew it differently. 9 valid clinical
+scenes selected the wrong atoms.
+
+In the resolution regime,
 50 of the
 50 imperfect valid scenes lost points for a colour that the
-request did not ask for and the reference does not contain. Only
+request did not ask for and the reference does not contain.
 16 of them loaded an entry outside the accepted
-list. The low resolution score is therefore mostly a penalty for unrequested styling, and not a
-failure to find the protein. ⟦PENDING: decide whether unrequested styling is penalised in the final corpus;
-if not, references or grader change before the final run⟧
+list.
+
+The low clinical and resolution scores are therefore mostly penalties for scenery that the
+request did not specify: context that the reference adds, or styling that the output adds. They
+are not, in this panel, evidence that the lookup is hard. The clinical structure also has no
+numbering offset (Section 3.3), so the residue could be found without a mapping.
+⟦PENDING: decide before the final run whether a reference may contain context the request does
+not ask for, and whether unrequested styling in an answer is penalised; references or grader
+change accordingly⟧
 
 ### 6.5 Grounding packs did not help
 
@@ -665,7 +697,7 @@ a lookup. It did not. We give three numbers, because each answers a different qu
   worse and 486 did not change.
 
 The first number is negative mainly because the longer request produced more invalid output.
-The mean valid-scene rate changed by -4.3% in absolute terms,
+The mean valid-scene rate changed by -4.3 percentage points,
 and for qwen3-30b-a3b-instruct-2507 it fell from
 56% to 31%. The third
 number removes that effect and is indistinguishable from zero. Individual models moved in both
@@ -794,33 +826,40 @@ reports only the first rewards output discipline; one that reports only the seco
 report both, with the repair counterfactual between them, and we add a structured-output
 condition to the final run so that the provider's own remedy is measured as well.
 
-**The hard part is knowing which atoms.** Once validity is set aside, translation tasks are
-nearly solved, and the difficulty lies where the request does not name the atoms: clinical
-variants and proteins named without an entry. That is the part of the task that matters most to
-a user, because a wrong selection is silent. The preliminary data cannot say how much of the
-clinical difficulty is the numbering problem, because its one clinical structure has no
-numbering offset. The final corpus is built to answer that.
+**The preliminary panel does not yet show that lookup is hard.** Once validity is set aside,
+translation and structure-grounded tasks are nearly solved, and the clinical and resolution
+regimes score much lower. It would be easy to read that as the cost of not being told which
+atoms. The error analysis does not support that reading. In
+85 of 96 valid clinical
+scenes the requested residue was drawn exactly as in the reference, and the points were lost on
+a grey cartoon that the reference adds and the request does not mention. In the resolution
+regime the points were lost on colours that the answers add. Two things follow. The references
+of the final corpus must contain only what the request asks for, or the request must ask for
+all that the reference contains. And the preliminary clinical tier cannot test the numbering
+problem at all, because its one structure has no numbering offset. The final corpus is built to
+answer that.
 
-**Giving the model the facts was not enough.** The grounding packs contain the chain
+**Grounding packs did not help, and here they had little to add.** The packs contain the chain
 identifiers, the mapping and the residues that each clinical task needs. Scores did not rise.
-We see two readings and cannot yet choose between them. Either the models already had enough of
-these facts for the tasks at hand, so the pack added length and no information; or they have
-the facts in front of them and still fail to turn them into the right selection. The offset
-proteins of the final corpus separate the two: there, the pack holds a fact the model cannot
-guess.
+The result above explains much of this: without a pack, the models already selected the right
+residue in most valid clinical scenes, so the pack added length and little information. Whether
+a pack helps when it holds a fact the model cannot guess is a question for the offset proteins
+of the final corpus.
 
 **Partial credit and exact success tell different stories.** Mean F1 over valid clinical scenes
-is moderate, while almost none is exactly right. A scene that shows the protein and highlights
-the wrong residue earns most of the credit and is useless. This is why task success is reported
-next to F1 throughout.
+is moderate, while almost none is exactly right. In this panel the gap comes from the context
+rule above. In general the two measures can part in the opposite and more dangerous way: a scene
+that shows the protein and highlights the wrong residue earns most of the credit and is useless.
+This is why task success is reported next to F1 throughout.
 
 **What the tree score misses.** Rendering the imperfect scenes rescued
 84 of 294 and raised no model's score
 by more than 0.028, so the tree score is close to what the eye
-sees. The error analysis found one place where it is not: scenes
-that add a colour nobody asked for. A grader that follows "what the viewer would show" strictly
-must count that as a difference. A user probably would not mind. We flag the rule as a design
-decision to settle before the final run.
+sees. The error analysis found one place where the score and a user part ways: parts of a
+scene that nobody asked for, whether a context in the reference or a colour in the answer. A
+grader that follows "what the viewer would show" strictly must count them as differences. A
+user probably would not mind. We flag the rule as a design decision to settle before the final
+run.
 
 **Two formats.** ⟦PENDING: paired-format discussion, after the final run. Planned reading: where
 a model succeeds on one twin and fails on the other, the content was known and the format was
@@ -921,34 +960,34 @@ check need a headless browser and the Mol\* bundle, both free.
 
 1. Goddard T. Claude Chat to operate ChimeraX. *UCSF RBVI web page, 4 December 2025* 2025. <https://www.rbvi.ucsf.edu/chimerax/data/claude-dec2025/claude_mcp.html>
 2. Mol* developers. Prism viewer (pull request 1978) and v6: PyMOL and VMD commands (pull request 2052), molstar/molstar. *Source-code pull requests, merged 2026-10-16 and 2026-10-25* 2026. <https://github.com/molstar/molstar/pull/1978>
-3. Navarro C, Torrens-Fontanals M, Th\"olke P, Doerr S, De Fabritiis G. Speak to a Protein: An Interactive Multimodal Co-Scientist for Protein Analysis. *Journal of Chemical Information and Modeling* 2026;66(19):12391–12401. Preprint: arXiv:2510.17826. doi:[10.1021/acs.jcim.6c01738](https://doi.org/10.1021/acs.jcim.6c01738)
+3. Navarro C, Torrens-Fontanals M, Thölke P, Doerr S, De Fabritiis G. Speak to a Protein: An Interactive Multimodal Co-Scientist for Protein Analysis. *Journal of Chemical Information and Modeling* 2026;66(19):12391–12401. Preprint: arXiv:2510.17826. doi:[10.1021/acs.jcim.6c01738](https://doi.org/10.1021/acs.jcim.6c01738)
 4. Sun J, Li A, Deng Y, Li J. ChatMol Copilot: An Agent for Molecular Modeling and Computation Powered by LLMs. *Proceedings of the 1st Workshop on Language + Molecules (L+M 2024)* 2024:55–65. doi:[10.18653/v1/2024.langmol-1.7](https://doi.org/10.18653/v1/2024.langmol-1.7)
 5. Faezov B, Dunbrack RL. PDBrenum: A webserver and program providing Protein Data Bank files renumbered according to their UniProt sequences. *PLOS ONE* 2021;16(7):e0253411. doi:[10.1371/journal.pone.0253411](https://doi.org/10.1371/journal.pone.0253411)
-6. Midlik A, Bittrich S, Fleming JR, Nair S, Velankar S, Burley SK, Young JY, Vallat B et al.. MolViewSpec: a Mol* extension for describing and sharing molecular visualizations. *Nucleic Acids Research* 2025;53(W1):W408–W414. doi:[10.1093/nar/gkaf370](https://doi.org/10.1093/nar/gkaf370)
+6. Midlik A, Bittrich S, Fleming JR, Nair S, Velankar S, Burley SK, Young JY, Vallat B et al. MolViewSpec: a Mol* extension for describing and sharing molecular visualizations. *Nucleic Acids Research* 2025;53(W1):W408–W414. doi:[10.1093/nar/gkaf370](https://doi.org/10.1093/nar/gkaf370)
 7. Bittrich S, Midlik A, Varadi M, Velankar S, Burley SK, Young JY, Sehnal D, Vallat B. Describing and Sharing Molecular Visualizations Using the MolViewSpec Toolkit. *Current Protocols* 2024;4(7):e1099. doi:[10.1002/cpz1.1099](https://doi.org/10.1002/cpz1.1099)
 8. PDBe. PDBe Molstar (pdbe-molstar): the PDBe implementation of Mol*, version 3.3.2. *Software, Apache-2.0; version 3.3.2 published on npm 2024-11-25* 2024. <https://github.com/molstar/pdbe-molstar>
 9. Smit J, ipymolstar contributors. ipymolstar: Mol* as an anywidget, version 0.1.0. *Software, MIT; version 0.1.0 released on PyPI 2025-04-10* 2025. <https://github.com/molstar/ipymolstar>
 10. The UniProt Consortium. UniProt: the Universal Protein Knowledgebase in 2025. *Nucleic Acids Research* 2025;53(D1):D609–D617. doi:[10.1093/nar/gkae1010](https://doi.org/10.1093/nar/gkae1010)
-11. Landrum MJ, Lee JM, Benson M, Brown GR, Chao C, Chitipiralla S, Gu B, Hart J et al.. ClinVar: improving access to variant interpretations and supporting evidence. *Nucleic Acids Research* 2018;46(D1):D1062–D1067. doi:[10.1093/nar/gkx1153](https://doi.org/10.1093/nar/gkx1153)
+11. Landrum MJ, Lee JM, Benson M, Brown GR, Chao C, Chitipiralla S, Gu B, Hart J et al. ClinVar: improving access to variant interpretations and supporting evidence. *Nucleic Acids Research* 2018;46(D1):D1062–D1067. doi:[10.1093/nar/gkx1153](https://doi.org/10.1093/nar/gkx1153)
 12. Dana JM, Gutmanas A, Tyagi N, Qi G, O'Donovan C, Martin M, Velankar S. SIFTS: updated Structure Integration with Function, Taxonomy and Sequences resource allows 40-fold increase in coverage of structure-based annotations for proteins. *Nucleic Acids Research* 2019;47(D1):D482–D489. doi:[10.1093/nar/gky1114](https://doi.org/10.1093/nar/gky1114)
-13. Sun Q, Liu Z, Ma C, Ding Z, Xu F, Yin Z, Zhao H, Wu Z et al.. ScienceBoard: Evaluating Multimodal Autonomous Agents in Realistic Scientific Workflows. *arXiv preprint* 2025. v3 is marked ``ICLR 2026 Camera Ready Version''. arXiv:[2505.19897](https://arxiv.org/abs/2505.19897) <https://arxiv.org/abs/2505.19897>
+13. Sun Q, Liu Z, Ma C, Ding Z, Xu F, Yin Z, Zhao H, Wu Z et al. ScienceBoard: Evaluating Multimodal Autonomous Agents in Realistic Scientific Workflows. *arXiv preprint* 2025. v3 is marked “ICLR 2026 Camera Ready Version”. arXiv:[2505.19897](https://arxiv.org/abs/2505.19897) <https://arxiv.org/abs/2505.19897>
 14. Goddard TD, Huang CC, Meng EC, Pettersen EF, Couch GS, Morris JH, Ferrin TE. UCSF ChimeraX: Meeting modern challenges in visualization and analysis. *Protein Science* 2018;27(1):14–25. doi:[10.1002/pro.3235](https://doi.org/10.1002/pro.3235)
-15. Ai K, Miao H, Tang K, Gorski N, Sun J, Liu G, Ingolfsson HI, Lenz D et al.. SciVisAgentBench: A Benchmark for Evaluating Scientific Data Analysis and Visualization Agents. *arXiv preprint* 2026. arXiv comment: IEEE Transactions on Visualization and Computer Graphics (IEEE VIS '26). arXiv:[2603.29139](https://arxiv.org/abs/2603.29139) <https://arxiv.org/abs/2603.29139>
-16. Dai D, Qi H, Liu L, Li Y, Chen B, Dou Z, Zeng Q, Kang Q et al.. OSWorld-Science: A Benchmark of Computer Use Agents for Learning and Using Scientific Software. *arXiv preprint* 2026. arXiv:[2609.39903](https://arxiv.org/abs/2609.39903) <https://arxiv.org/abs/2609.39903>
-17. Xie T, Zhang D, Chen J, Li X, Zhao S, Cao R, Toh JH, Cheng Z et al.. OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments. *arXiv preprint* 2024. arXiv:[2404.07972](https://arxiv.org/abs/2404.07972) <https://arxiv.org/abs/2404.07972>
-18. Qin Y, Liang S, Ye Y, Zhu K, Yan L, Lu Y, Lin Y, Cong X et al.. ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs. *arXiv preprint* 2023. arXiv:[2307.16789](https://arxiv.org/abs/2307.16789) <https://arxiv.org/abs/2307.16789>
+15. Ai K, Miao H, Tang K, Gorski N, Sun J, Liu G, Ingolfsson HI, Lenz D et al. SciVisAgentBench: A Benchmark for Evaluating Scientific Data Analysis and Visualization Agents. *arXiv preprint* 2026. arXiv comment: IEEE Transactions on Visualization and Computer Graphics (IEEE VIS '26). arXiv:[2603.29139](https://arxiv.org/abs/2603.29139) <https://arxiv.org/abs/2603.29139>
+16. Dai D, Qi H, Liu L, Li Y, Chen B, Dou Z, Zeng Q, Kang Q et al. OSWorld-Science: A Benchmark of Computer Use Agents for Learning and Using Scientific Software. *arXiv preprint* 2026. arXiv:[2609.39903](https://arxiv.org/abs/2609.39903) <https://arxiv.org/abs/2609.39903>
+17. Xie T, Zhang D, Chen J, Li X, Zhao S, Cao R, Toh JH, Cheng Z et al. OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments. *arXiv preprint* 2024. arXiv:[2404.07972](https://arxiv.org/abs/2404.07972) <https://arxiv.org/abs/2404.07972>
+18. Qin Y, Liang S, Ye Y, Zhu K, Yan L, Lu Y, Lin Y, Cong X et al. ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs. *arXiv preprint* 2023. arXiv:[2307.16789](https://arxiv.org/abs/2307.16789) <https://arxiv.org/abs/2307.16789>
 19. Yao S, Shinn N, Razavi P, Narasimhan K. tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains. *arXiv preprint* 2024. arXiv:[2406.12045](https://arxiv.org/abs/2406.12045) <https://arxiv.org/abs/2406.12045>
-20. Jia D, Irger A, Besan\ccon L, Strnad O, Luo D, Bj\"orklund J, Ynnerman A, Viola I. VOICE: Visual Oracle for Interaction, Conversation, and Explanation. *IEEE Transactions on Visualization and Computer Graphics* 2025;31(10):8828–8845. Journal reference and DOI as given on arXiv:2304.04083. doi:[10.1109/TVCG.2025.3579956](https://doi.org/10.1109/TVCG.2025.3579956)
+20. Jia D, Irger A, Besançon L, Strnad O, Luo D, Björklund J, Kouyoumdjian A, Ynnerman A et al. VOICE: Visual Oracle for Interaction, Conversation, and Explanation. *IEEE Transactions on Visualization and Computer Graphics* 2025;31(10):8828–8845. Preprint: arXiv:2304.04083. doi:[10.1109/TVCG.2025.3579956](https://doi.org/10.1109/TVCG.2025.3579956)
 21. Cortes Rodriguez F, Abriata L. Speech recognition assisted by large language models to command software orally -- Application to an augmented and virtual reality web app for immersive molecular graphics. *arXiv preprint* 2026. arXiv:[2603.02901](https://arxiv.org/abs/2603.02901) <https://arxiv.org/abs/2603.02901>
 22. RenhaoL. molstar-mcp: a Model Context Protocol server that builds MolViewSpec scenes for Mol*. *Software, MIT; repository created 2026-05-31* 2026. <https://github.com/RenhaoL/molstar-mcp>
-23. Sehnal D, Bittrich S, Deshpande M, Svobodov\'a R, Berka K, Bazgier V, Velankar S, Burley SK et al.. Mol* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures. *Nucleic Acids Research* 2021;49(W1):W431–W437. doi:[10.1093/nar/gkab314](https://doi.org/10.1093/nar/gkab314)
+23. Sehnal D, Bittrich S, Deshpande M, Svobodová R, Berka K, Bazgier V, Velankar S, Burley SK et al. Mol* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures. *Nucleic Acids Research* 2021;49(W1):W431–W437. doi:[10.1093/nar/gkab314](https://doi.org/10.1093/nar/gkab314)
 24. wwPDB consortium. Protein Data Bank: the single global archive for 3D macromolecular structure data. *Nucleic Acids Research* 2019;47(D1):D520–D528. doi:[10.1093/nar/gky949](https://doi.org/10.1093/nar/gky949)
-25. Varadi M, Bertoni D, Magana P, Paramval U, Pidruchna I, Radhakrishnan M, Tsenkov M, Nair S et al.. AlphaFold Protein Structure Database in 2024: providing structure coverage for over 214 million protein sequences. *Nucleic Acids Research* 2024;52(D1):D368–D375. doi:[10.1093/nar/gkad1011](https://doi.org/10.1093/nar/gkad1011)
+25. Varadi M, Bertoni D, Magana P, Paramval U, Pidruchna I, Radhakrishnan M, Tsenkov M, Nair S et al. AlphaFold Protein Structure Database in 2024: providing structure coverage for over 214 million protein sequences. *Nucleic Acids Research* 2024;52(D1):D368–D375. doi:[10.1093/nar/gkad1011](https://doi.org/10.1093/nar/gkad1011)
 26. PDBe-KB consortium. PDBe-KB: a community-driven resource for structural and functional annotations. *Nucleic Acids Research* 2020;48(D1):D344–D353. doi:[10.1093/nar/gkz853](https://doi.org/10.1093/nar/gkz853)
 27. PDBe-KB consortium. PDBe-KB: collaboratively defining the biological context of structural data. *Nucleic Acids Research* 2022;50(D1):D534–D542. doi:[10.1093/nar/gkab988](https://doi.org/10.1093/nar/gkab988)
 28. Wojdyr M. GEMMI: A library for structural biology. *Journal of Open Source Software* 2022;7(73):4200. doi:[10.21105/joss.04200](https://doi.org/10.21105/joss.04200)
 29. Vollmar M, Westrip S, Nair S, Balasubramaniyan B, Velankar S, Jones L, Strickland P. Associating protein residues in the literature with structural data. *Acta Crystallographica Section D Structural Biology* 2026;82(2):113–125. doi:[10.1107/S2059798326000021](https://doi.org/10.1107/S2059798326000021)
-30. Li Z, Kong X, Su J, Ma Z, Li M, Li S, Zhang Y, Rong Y et al.. From Macro to Micro: Benchmarking Microscopic Spatial Intelligence on Molecules via Vision-Language Models. *arXiv preprint* 2025. arXiv:[2512.10867](https://arxiv.org/abs/2512.10867) <https://arxiv.org/abs/2512.10867>
+30. Li Z, Kong X, Su J, Ma Z, Li M, Li S, Zhang Y, Rong Y et al. From Macro to Micro: Benchmarking Microscopic Spatial Intelligence on Molecules via Vision-Language Models. *arXiv preprint* 2025. arXiv:[2512.10867](https://arxiv.org/abs/2512.10867) <https://arxiv.org/abs/2512.10867>
 31. McNemar Q. Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages. *Psychometrika* 1947;12(2):153–157. doi:[10.1007/BF02295996](https://doi.org/10.1007/BF02295996)
-32. Baccianella S. json\_repair: repair malformed JSON from LLMs, APIs, logs, and user input in Python. *Software, MIT* 2026. <https://github.com/mangiucugna/json_repair>
+32. Baccianella S. json_repair: repair malformed JSON from LLMs, APIs, logs, and user input in Python. *Software, MIT* 2026. <https://github.com/mangiucugna/json_repair>
 33. Efron B. Bootstrap Methods: Another Look at the Jackknife. *The Annals of Statistics* 1979;7(1):1–26. doi:[10.1214/aos/1176344552](https://doi.org/10.1214/aos/1176344552)
