@@ -17,10 +17,20 @@ Writes two things, kept apart so raters stay blind:
   <key>                           PRIVATE answer key — model, task, VLM verdict, control
                                   type per id, and the secret the ids are keyed with
                                   (reused on rebuild, so ids stay stable). Read by
-                                  scripts/agreement.py.
+                                  scripts/agreement.py. Also holds `population`:
+                                  how many judged pairs the run has per task and
+                                  judge label, so agreement.py can weight the
+                                  sample back to the run (the set over-samples the
+                                  judge's "same" calls and caps pairs per task).
 
     python scripts/build_rating_set.py results/r2x2/spec \\
         --out ../molstar-chat-driver/site/rate/a4-v1 --key results/a4/a4-v1/key.json
+
+For a set built before the key held `population`, write just those counts (no
+images, key untouched):
+
+    python scripts/build_rating_set.py results/r2x2/spec \
+        --population-only results/a4/a4-v1/population.json
 """
 
 from __future__ import annotations
@@ -83,6 +93,15 @@ def public_pairs(gallery: pathlib.Path | None) -> set[tuple[str, str]]:
     return {(_short(r["model"]), r["id"]) for r in json.loads(gallery.read_text())["rows"]}
 
 
+def population(results: pathlib.Path, public: set[tuple[str, str]] = frozenset()) -> dict:
+    """Judged pairs of the run per (task, judge label): what the rating set is sampled from."""
+    cells = collections.Counter(
+        (p["task"], p["vlm"]["label"]) for p in judged_pairs(results)
+        if p["decision"].startswith("vlm:") and (_short(p["model"]), p["task"]) not in public)
+    return {"frame": "VLM-judged pairs of the run, minus pairs shown on the public gallery",
+            "cells": [[task, label, n] for (task, label), n in sorted(cells.items())]}
+
+
 def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int,
           secret: str, public: set[tuple[str, str]] = frozenset(),
           max_per_task: int | None = None, keep: set[str] = frozenset()) -> tuple[list[dict], dict]:
@@ -136,7 +155,7 @@ def build(results: pathlib.Path, set_id: str, n_controls: int, seed: int,
 
 
 def write(items: list[dict], key: dict, set_id: str, secret: str, out: pathlib.Path, key_path: pathlib.Path,
-          quality: int = 85) -> None:
+          quality: int = 85, population: dict | None = None) -> None:
     from PIL import Image
     (out / "img").mkdir(parents=True, exist_ok=True)
     public = []
@@ -154,15 +173,18 @@ def write(items: list[dict], key: dict, set_id: str, secret: str, out: pathlib.P
     (out / "items.json").write_text(json.dumps(
         {"set": set_id, "question": QUESTION, "items": public}, indent=1) + "\n")
     key_path.parent.mkdir(parents=True, exist_ok=True)
-    key_path.write_text(json.dumps({"set": set_id, "secret": secret, "items": key}, indent=1, sort_keys=True) + "\n")
+    full = {"set": set_id, "secret": secret, "items": key, **({"population": population} if population else {})}
+    key_path.write_text(json.dumps(full, indent=1, sort_keys=True) + "\n")
 
 
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("results", type=pathlib.Path, help="directory of scorecards with escalation")
     ap.add_argument("--set", dest="set_id", default="a4-v1")
-    ap.add_argument("--out", type=pathlib.Path, required=True, help="public item dir")
-    ap.add_argument("--key", type=pathlib.Path, required=True, help="private answer key (json)")
+    ap.add_argument("--out", type=pathlib.Path, help="public item dir")
+    ap.add_argument("--key", type=pathlib.Path, help="private answer key (json)")
+    ap.add_argument("--population-only", type=pathlib.Path, metavar="PATH",
+                    help="write only the run's judged-pair counts per task and label, then stop")
     ap.add_argument("--controls", type=int, default=12, help="checks of each kind")
     ap.add_argument("--seed", type=int, default=4)
     ap.add_argument("--max-per-task", type=int, default=3, help="judged pairs kept per task")
@@ -171,12 +193,19 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--public", type=pathlib.Path, default=REPO / "docs" / "gallery_data.json",
                     help="published gallery; its pairs are left out so raters can't copy a verdict")
     a = ap.parse_args(argv)
+    pop = population(a.results, public_pairs(a.public))
+    if a.population_only:
+        a.population_only.write_text(json.dumps(pop, indent=1) + "\n")
+        print(f"{sum(n for _, _, n in pop['cells'])} judged pairs -> {a.population_only}")
+        return
+    if not (a.out and a.key):
+        ap.error("--out and --key are required to build a set")
     secret = (json.loads(a.key.read_text())["secret"] if a.key.exists()
               else secrets.token_hex(32))
     keep = set(json.loads(a.keep.read_text())) if a.keep else set()
     items, key = build(a.results, a.set_id, a.controls, a.seed, secret, public_pairs(a.public),
                        a.max_per_task, keep)
-    write(items, key, a.set_id, secret, a.out, a.key)
+    write(items, key, a.set_id, secret, a.out, a.key, population=pop)
     kinds = {}
     for v in key.values():
         kinds[v["kind"]] = kinds.get(v["kind"], 0) + 1
