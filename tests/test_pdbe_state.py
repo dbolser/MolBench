@@ -422,3 +422,63 @@ def test_ligand_view_is_compared_by_the_ligand_it_names():
     assert ps.grade_state(by_name, by_number)["success"]
     assert not ps.grade_state(by_name, other)["success"]
     assert not ps.grade_state(by_name, [L("3ptb")])["success"]
+
+
+# --- found in review --------------------------------------------------------------------
+
+def test_colour_objects_follow_color_fromrgb():
+    assert ps.normalize_color([255, 0, 0]) == (0, 0, 0)            # a list has no r/g/b: black
+    assert ps.normalize_color({"g": 128}) == (0, 128, 0)
+    assert ps.normalize_color({"r": 300, "g": 0, "b": 0}) == (44, 0, 0)   # no clamping in Mol*
+    assert ps.normalize_color(float("inf")) == (0, 0, 0)
+    assert ps.normalize_color({"r": float("nan"), "g": float("inf"), "b": 7}) == (0, 0, 7)
+
+
+def test_boolean_traits_take_booleans_only():
+    ref = [L("1a6m"), PROP("hide_water", True)]
+    assert ps.grade_state(ref, [L("1a6m"), PROP("hide_water", 1)])["success"]
+    for junk in ("false", "true", "yes", 2, 1.0, None, [True]):
+        res = ps.grade_state(ref, [L("1a6m"), PROP("hide_water", junk)])
+        assert not res["success"] and res["ignored"], junk
+    spin = [L("1a6m"), PROP("spin", True)]
+    assert not ps.grade_state(spin, [L("1a6m"), PROP("spin", "false")])["success"]
+    over = [L("3eml"), PROP("validation_annotation", True)]
+    assert not ps.grade_state(over, [L("3eml"), PROP("validation_annotation", "no")])["success"]
+
+
+def test_a_huge_uniprot_range_costs_nothing(monkeypatch):
+    calls = []
+    monkeypatch.setattr(ps, "uniprot_residue_atoms", lambda entry, acc, num: calls.append(num) or 0)
+    wide = [L("1tup"), C([{"uniprot_accession": "P04637", "start_uniprot_residue_number": -10**15,
+                           "end_uniprot_residue_number": 10**15, "color": "red"}]),
+            C([{"uniprot_accession": "P04637", "start_uniprot_residue_number": 1,
+                "end_uniprot_residue_number": float("inf")}], keep_colors=True),
+            C([{"uniprot_accession": "P04637", "start_uniprot_residue_number": float("nan"),
+                "end_uniprot_residue_number": 5}], keep_colors=True),
+            C([{"uniprot_accession": "P04637", "uniprot_residue_number": 10**400}], keep_colors=True)]
+    state = ps.replay(wide)
+    assert not state.log                                   # nothing crashed and was skipped
+    assert len(calls) <= 2 * ps.MAX_UNIPROT_POSITION + 1 and min(calls) >= 1
+    # reversed range selects nothing; a one-position range is that position
+    monkeypatch.setattr(ps, "uniprot_residue_atoms", lambda entry, acc, num: 1 if num == 248 else 0)
+    t = load_table("1tup")
+    one = {"uniprot_accession": "P04637", "start_uniprot_residue_number": 248, "end_uniprot_residue_number": 248}
+    rev = {"uniprot_accession": "P04637", "start_uniprot_residue_number": 249, "end_uniprot_residue_number": 247}
+    assert ps.resolve_param(t, one, "1tup") == 1 and ps.resolve_param(t, rev, "1tup") == 0
+
+
+def test_alphafold_table_is_found_under_a_versioned_name(tmp_path, monkeypatch):
+    import shutil
+    from molbench import atoms
+    shutil.copy(atoms.TABLES / "1ubq.json.gz", tmp_path / "af-p12345-f1-model_v4.json.gz")
+    shutil.copy(atoms.TABLES / "1aki.json.gz", tmp_path / "af-p12345-f1-model_v6.json.gz")
+    monkeypatch.setattr(atoms, "TABLES", tmp_path)
+
+    def tables(entry):
+        path = tmp_path / f"{entry}.json.gz"
+        return atoms.AtomTable(json.loads(__import__("gzip").open(path, "rt").read())) if path.exists() else None
+    load = [{"action": "load", "custom_data": {
+        "url": "https://alphafold.ebi.ac.uk/files/AF-P12345-F1-model_v4.cif", "format": "cif"}}]
+    state = ps.replay(load, tables)
+    assert state.entry == "af-p12345-f1" and state.table.n == load_table("1aki").n   # newest version
+    assert ps.replay([L("1zzz")], tables).table is None

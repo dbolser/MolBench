@@ -74,7 +74,8 @@ Known simplifications (stated so nobody has to discover them)
 * ``ligand_view`` and ``superposition`` scenes are compared by their settings; the
   atoms drawn in those views (surroundings, superposed entries) are not modelled.
 * ``uniprot_*`` selectors need a frozen SIFTS table. ``uniprot_residue_atoms`` below
-  is the single hook: it uses ``molbench.sifts.uniprot_atoms`` when that exists, and
+  is the single hook (``uniprot_range_atoms`` answers a range through it, or in one
+  call to the frozen lookup, so a huge range in an answer costs nothing): it uses ``molbench.sifts.uniprot_atoms`` when that exists, and
   otherwise (or for an entry with no frozen table) raises ``NotImplementedError``;
   the selection is then reported as unresolved and selects nothing. In the viewer the
   mapping comes from the ``_atom_site.pdbx_sifts_xref_db_*`` columns of the file it
@@ -191,6 +192,13 @@ def _is_num(v: Any) -> bool:
     return isinstance(v, (int, float)) and not isinstance(v, bool)
 
 
+def _whole(v: Any) -> bool:
+    """A number equal to an integer (5 and 5.0; not 5.5, NaN, Infinity or "5")."""
+    if isinstance(v, int) and not isinstance(v, bool):
+        return True
+    return isinstance(v, float) and v.is_integer()
+
+
 def _truthy(v: Any) -> bool:
     """JavaScript truthiness for JSON values."""
     if v is None or v is False or v == "":
@@ -201,7 +209,8 @@ def _truthy(v: Any) -> bool:
 
 
 def _channel(v: Any) -> int:
-    return max(0, min(255, int(v))) if _is_num(v) else 0
+    """A channel as JavaScript's ``<<`` and ``|`` read it: truncated, NaN/Infinity = 0."""
+    return int(v) if _is_num(v) and v == v and abs(v) != float("inf") else 0
 
 
 def normalize_color(v: Any, default: RGB = GREY) -> RGB:
@@ -209,6 +218,8 @@ def normalize_color(v: Any, default: RGB = GREY) -> RGB:
     if v is None:
         return default
     if _is_num(v):
+        if v != v or v in (float("inf"), float("-inf")):
+            return (0, 0, 0)     # NaN and Infinity are 0 under JavaScript's bit operators
         n = int(v) & 0xFFFFFF
         return (n >> 16, (n >> 8) & 255, n & 255)
     if isinstance(v, str) and v[:1] == "#":
@@ -221,7 +232,12 @@ def normalize_color(v: Any, default: RGB = GREY) -> RGB:
     if isinstance(v, str) and v in COLOR_NAMES:
         return COLOR_NAMES[v]
     if isinstance(v, dict):
-        return (_channel(v.get("r")), _channel(v.get("g")), _channel(v.get("b")))
+        # Color.fromRgb is (r << 16) | (g << 8) | b with no clamping: a channel above
+        # 255 spills into its neighbour (checked in the viewer: r 300 is drawn as r 44)
+        n = ((_channel(v.get("r")) << 16) | (_channel(v.get("g")) << 8) | _channel(v.get("b"))) & 0xFFFFFF
+        return (n >> 16, (n >> 8) & 255, n & 255)
+    if isinstance(v, list):
+        return (0, 0, 0)         # typeof [] is 'object': r, g and b are undefined, read as 0
     return default
 
 
@@ -281,6 +297,36 @@ def uniprot_residue_atoms(entry: str, accession: str, uniprot_resnum: int) -> in
     return atoms
 
 
+_frozen_uniprot_residue_atoms = uniprot_residue_atoms
+#: Longest UniProt range walked position by position when another mapping is plugged
+#: in (the longest UniProt sequence, titin, has about 36,000 residues).
+MAX_UNIPROT_POSITION = 50_000
+
+
+def uniprot_range_atoms(entry: str, accession: str, lo: float, hi: float) -> int:
+    """Atoms mapped to UniProt positions ``lo..hi`` (inclusive). The numbers come from
+    a model's answer, so the cost must not grow with the width of the range: the
+    frozen lookup takes the range in one call; a plugged-in per-position mapping is
+    walked over at most ``MAX_UNIPROT_POSITION`` positions."""
+    if not (lo == lo and hi == hi) or hi < lo:       # NaN, or an empty range
+        return 0
+    if uniprot_residue_atoms is _frozen_uniprot_residue_atoms:
+        from . import sifts
+        frozen = getattr(sifts, "uniprot_atoms", None)
+        if frozen is None:
+            return uniprot_residue_atoms(entry, accession, 0)     # raises: not wired in
+        atoms = frozen(entry, accession, lo, hi)
+        if atoms is None:
+            raise NotImplementedError(f"no frozen SIFTS table for {entry!r}")
+        return atoms
+    first = int(-(-max(lo, 1) // 1))
+    last = int(min(hi, MAX_UNIPROT_POSITION) // 1)
+    out = 0
+    for n in range(first, last + 1):
+        out |= uniprot_residue_atoms(entry, accession, n)
+    return out
+
+
 # --- selection resolution (getQueryObject) -------------------------------------------
 
 LOCATOR_KEYS = (
@@ -328,7 +374,7 @@ def resolve_param(table: AtomTable, param: dict[str, Any], entry: str = "") -> i
         return k in p
 
     def num_eq(column: str, v: Any) -> int:
-        return _eq(table, column, int(v)) if _is_num(v) and float(v).is_integer() else 0
+        return _eq(table, column, int(v)) if _whole(v) else 0
 
     def num_range(column: str, lo: Any, hi: Any) -> int:
         return _between(table, column, lo, hi)
@@ -347,16 +393,12 @@ def resolve_param(table: AtomTable, param: dict[str, Any], entry: str = "") -> i
         sel &= _eq(table, "label_comp_id", p["label_comp_id"]) if isinstance(p["label_comp_id"], str) else 0
     elif _truthy(p.get("uniprot_accession")) and defined("uniprot_residue_number"):
         n = p["uniprot_residue_number"]
-        sel &= uniprot_residue_atoms(entry, p["uniprot_accession"], int(n)) \
-            if _is_num(n) and float(n).is_integer() else 0
+        sel &= uniprot_residue_atoms(entry, p["uniprot_accession"], int(n)) if _whole(n) else 0
     elif (_truthy(p.get("uniprot_accession")) and defined("start_uniprot_residue_number")
           and defined("end_uniprot_residue_number")):
         lo, hi = p["start_uniprot_residue_number"], p["end_uniprot_residue_number"]
-        m = 0
-        if _is_num(lo) and _is_num(hi):
-            for n in range(int(-(-lo // 1)), int(hi // 1) + 1):
-                m |= uniprot_residue_atoms(entry, p["uniprot_accession"], n)
-        sel &= m
+        sel &= uniprot_range_atoms(entry, p["uniprot_accession"], lo, hi) \
+            if _is_num(lo) and _is_num(hi) else 0
     elif defined("residue_number"):
         sel &= num_eq("label_seq_id", p["residue_number"])
     elif ordered("start_residue_number", "end_residue_number"):
@@ -677,9 +719,23 @@ def replay(actions: Any, tables: Callable[[str | None], AtomTable | None] = load
     return s
 
 
+def _table_for(entry: str, tables) -> AtomTable | None:
+    """The atom table of an entry. An AlphaFold model is compared whatever its file
+    version, so when there is no table under the version-free name ``af-<acc>-f<n>``
+    the table of a versioned file (``af-<acc>-f<n>-model_v6``, the newest) is used."""
+    table = tables(entry)
+    if table is None and entry.startswith("af-"):
+        from .atoms import TABLES
+        versioned = sorted(TABLES.glob(f"{entry}-model_v*.json.gz"),
+                           key=lambda q: int(re.sub(r"\D", "", q.name.rsplit("_v", 1)[-1]) or 0))
+        if versioned:
+            table = tables(versioned[-1].name[:-len(".json.gz")])
+    return table
+
+
 def _reload(s: ViewerState, tables) -> None:
     s.paint, s.added, s.focus = [], [], None
-    s.table = tables(s.entry) if s.entry and re.fullmatch(r"[a-z0-9_-]+", s.entry) else None
+    s.table = _table_for(s.entry, tables) if s.entry and re.fullmatch(r"[a-z0-9_-]+", s.entry) else None
 
 
 def _data(act: dict) -> list | None:
@@ -815,7 +871,12 @@ def _apply(s: ViewerState, act: dict, tables) -> None:
 
 
 def _set_property(s: ViewerState, name: Any, value: Any, tables) -> None:
-    if name in HIDE_FLAGS:
+    if (name in HIDE_FLAGS or name == "spin" or isinstance(OPTION_DEFAULTS.get(name), bool)) \
+            and not (isinstance(value, bool) or (isinstance(value, int) and value in (0, 1))):
+        # traitlets.Bool takes true, false, 1 or 0: anything else ("false", "yes", 2)
+        # raises and changes nothing
+        s.log.append(f"set_property {name}: {value!r} is not true or false")
+    elif name in HIDE_FLAGS:
         s.hide[name] = bool(value)
     elif name == "spin":
         s.spin = bool(value)
@@ -1070,8 +1131,6 @@ def compare(reference: ViewerState, predicted: ViewerState) -> dict[str, Any]:
         # (or none) there is nothing to compare them with
         return {"precision": 0.0, "recall": 0.0, "f1": 0.0, "success": False,
                 "n_ref": 0, "n_pred": 0, "reference_facts": [], "predicted_facts": [], **base}
-    comparable = True
-
     def side(mine: dict, theirs: dict) -> tuple[float, float, list]:
         total = got = 0.0
         trace = []
@@ -1105,7 +1164,7 @@ def compare(reference: ViewerState, predicted: ViewerState) -> dict[str, Any]:
                 trace.append({"fact": key, "atoms": _size(val), "score": round(sc, 3)})
                 continue
             if facet in ("focus", "highlight"):
-                sc = _jaccard(val, other) if other is not None and comparable else 0.0
+                sc = _jaccard(val, other) if other is not None else 0.0
                 shown: Any = f"{_size(val)} atoms"
             else:
                 sc = 1.0 if other is not None and _value_eq(key, val, other) else 0.0
