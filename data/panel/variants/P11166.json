@@ -7,7 +7,9 @@
  "disease": "GLUT1 deficiency syndrome",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P11166",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 492,
  "uniprot_sequence_sha256": "cc16edbc0d573ad46f7962c2fe3e99ac43b7c21d34fb1928ce67f24cc951f022",
  "primary_entry": "6tha",
@@ -32,8 +34,8 @@
     "offset": false,
     "auth_chain_differs_from_label_chain": false
    },
-   "not_observed": 10,
-   "verified": 119
+   "not_observed": 8,
+   "verified": 92
   }
  },
  "variants": [
@@ -55,6 +57,17 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Inborn genetic diseases"
+   ],
+   "clinvar_vcv": [
+    "VCV002264109",
+    "VCV002748659"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -79,6 +92,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "Epilepsy, idiopathic generalized, susceptibility to, 12 (EIG12)",
     "Hereditary cryohydrocytosis with reduced stomatin"
+   ],
+   "clinvar_vcv": [
+    "VCV002682545"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -106,6 +128,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "SLC2A1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000488790"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -127,45 +158,16 @@
     "Dystonia 9 (DYT9)",
     "Encephalopathy due to GLUT1 deficiency"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "T9M",
-   "position": 9,
-   "wild_type": "T",
-   "mutant": "M",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV001686206"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000812775",
-    "RCV001731941",
-    "RCV003446444",
-    "RCV003446445",
-    "RCV003446446",
-    "RCV003446447",
-    "RCV003446448",
-    "RCV004028777"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
-   "dbsnp": [
-    "rs1570601100"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive",
-    "Gliomas"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 9,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 9,
-      "comp_id": "THR"
-     }
-    ]
-   }
+   "structures": {}
   },
   {
    "variant": "G17R",
@@ -187,6 +189,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000597357"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -195,39 +206,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 17,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G27D",
-   "position": 27,
-   "wild_type": "G",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000175828",
-    "RCV004794372",
-    "RCV006659252"
-   ],
-   "dbsnp": [
-    "rs794727283"
-   ],
-   "diseases": [
-    "Encephalopathy due to GLUT1 deficiency",
-    "Inborn genetic diseases"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 27,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 27,
       "comp_id": "GLY"
      }
     ]
@@ -253,6 +231,15 @@
     "Dystonia 9 (DYT9)",
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000159921"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -285,6 +272,15 @@
     "Childhood onset GLUT1 deficiency syndrome 2",
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)"
    ],
+   "clinvar_vcv": [
+    "VCV000016115"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6tha": [
      {
@@ -314,6 +310,15 @@
    ],
    "diseases": [
     "Encephalopathy due to GLUT1 deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV000666289"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -356,6 +361,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Hereditary cryohydrocytosis with reduced stomatin"
    ],
+   "clinvar_vcv": [
+    "VCV000662199"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -365,101 +379,6 @@
       "label_asym_id": "A",
       "label_seq_id": 34,
       "comp_id": "ASN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P36L",
-   "position": 36,
-   "wild_type": "P",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000850198",
-    "RCV005001108"
-   ],
-   "dbsnp": [
-    "rs1570600997"
-   ],
-   "diseases": [
-    "Intellectual disability"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 36,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 36,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R51P",
-   "position": 51,
-   "wild_type": "R",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000533560",
-    "RCV005410906"
-   ],
-   "dbsnp": [
-    "rs201815571"
-   ],
-   "diseases": [
-    "Childhood onset GLUT1 deficiency syndrome 2"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 51,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 51,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S68L",
-   "position": 68,
-   "wild_type": "S",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000799246",
-    "RCV001759518"
-   ],
-   "dbsnp": [
-    "rs1570593865"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive",
-    "Squamous Cell Neoplasms",
-    "Transitional Cell Papillomas and Carcinomas"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 68,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 68,
-      "comp_id": "SER"
      }
     ]
    }
@@ -481,6 +400,15 @@
    ],
    "diseases": [
     "Encephalopathy due to GLUT1 deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV001691858"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -512,6 +440,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002023008"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -542,6 +479,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV001464739"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -551,38 +497,6 @@
       "label_asym_id": "A",
       "label_seq_id": 76,
       "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V87I",
-   "position": 87,
-   "wild_type": "V",
-   "mutant": "I",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001218614",
-    "RCV004783924",
-    "RCV006655893"
-   ],
-   "dbsnp": [
-    "rs1643484242"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 87,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 87,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -605,6 +519,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000016110"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6tha": [
      {
@@ -614,40 +537,6 @@
       "label_asym_id": "A",
       "label_seq_id": 91,
       "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R92Q",
-   "position": 92,
-   "wild_type": "R",
-   "mutant": "Q",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003038116",
-    "RCV003410036",
-    "RCV003445193",
-    "RCV003445194",
-    "RCV003445195",
-    "RCV003445196",
-    "RCV003445197"
-   ],
-   "dbsnp": [
-    "rs779073410"
-   ],
-   "diseases": [],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 92,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 92,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -680,6 +569,15 @@
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)",
     "Intellectual disability"
    ],
+   "clinvar_vcv": [
+    "VCV000016119"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -688,38 +586,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 92,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R93Q",
-   "position": 93,
-   "wild_type": "R",
-   "mutant": "Q",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000761655",
-    "RCV001387742",
-    "RCV002249465"
-   ],
-   "dbsnp": [
-    "rs80359815"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 93,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 93,
       "comp_id": "ARG"
      }
     ]
@@ -755,6 +621,15 @@
     "Inborn genetic diseases",
     "SLC2A1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000016117"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -786,6 +661,15 @@
     "Childhood onset GLUT1 deficiency syndrome 2",
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)"
    ],
+   "clinvar_vcv": [
+    "VCV000016116"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6tha": [
      {
@@ -795,41 +679,6 @@
       "label_asym_id": "A",
       "label_seq_id": 95,
       "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M96T",
-   "position": 96,
-   "wild_type": "M",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001051269",
-    "RCV001449666",
-    "RCV003446600",
-    "RCV005278719"
-   ],
-   "dbsnp": [
-    "rs1643481875"
-   ],
-   "diseases": [
-    "Childhood onset GLUT1 deficiency syndrome 2",
-    "Encephalopathy due to GLUT1 deficiency",
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 96,
-      "comp_id": "MET"
      }
     ]
    }
@@ -855,6 +704,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000538680"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -884,6 +742,15 @@
     "rs2524998344"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002507237"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -931,6 +798,15 @@
     "Inborn genetic diseases",
     "SLC2A1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000016118"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -969,6 +845,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Inborn genetic diseases"
    ],
+   "clinvar_vcv": [
+    "VCV000016111"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1002,6 +887,15 @@
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000016109"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1031,6 +925,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV002836371"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -1062,6 +965,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV001385165"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1092,6 +1004,15 @@
    ],
    "diseases": [
     "Inborn genetic diseases"
+   ],
+   "clinvar_vcv": [
+    "VCV000207190"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -1129,6 +1050,15 @@
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000627587"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1157,6 +1087,15 @@
     "rs1553156161"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000451198"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1186,6 +1125,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000944098"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -1221,6 +1169,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000374181"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1251,6 +1208,17 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000538677",
+    "VCV002697280"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -1286,6 +1254,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000372507"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1295,35 +1272,6 @@
       "label_asym_id": "A",
       "label_seq_id": 140,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M142I",
-   "position": 142,
-   "wild_type": "M",
-   "mutant": "I",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001822826",
-    "RCV003992563"
-   ],
-   "dbsnp": [
-    "rs2124450183"
-   ],
-   "diseases": [],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 142,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 142,
-      "comp_id": "MET"
      }
     ]
    }
@@ -1344,6 +1292,15 @@
    ],
    "diseases": [
     "Childhood onset GLUT1 deficiency syndrome 2"
+   ],
+   "clinvar_vcv": [
+    "VCV002573078"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -1375,6 +1332,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)"
    ],
+   "clinvar_vcv": [
+    "VCV001686713"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1405,6 +1371,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Transitional Cell Papillomas and Carcinomas"
+   ],
+   "clinvar_vcv": [
+    "VCV000862413"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -1439,42 +1414,14 @@
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 153,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 153,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R153H",
-   "position": 153,
-   "wild_type": "R",
-   "mutant": "H",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV001076377"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000178275",
-    "RCV001852209",
-    "RCV004767121",
-    "RCV005243146"
-   ],
-   "dbsnp": [
-    "rs794727642"
-   ],
-   "diseases": [
-    "Encephalopathy due to GLUT1 deficiency",
-    "Epilepsy, idiopathic generalized, susceptibility to, 12 (EIG12)",
-    "GLUT1 deficiency syndrome 1, autosomal recessive",
-    "GLUT1 deficiency syndrome 2 (GLUT1DS2)",
-    "Gliomas"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -1509,6 +1456,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "Intellectual disability"
    ],
+   "clinvar_vcv": [
+    "VCV000207227"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1540,6 +1496,15 @@
    "diseases": [
     "Encephalopathy due to GLUT1 deficiency"
    ],
+   "clinvar_vcv": [
+    "VCV000453131"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1570,6 +1535,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002815351"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1598,6 +1572,15 @@
     "rs1553156154"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000444165"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1636,6 +1619,15 @@
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)",
     "Inborn genetic diseases"
    ],
+   "clinvar_vcv": [
+    "VCV000379258"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1668,6 +1660,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "Intellectual disability"
    ],
+   "clinvar_vcv": [
+    "VCV000976168"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1696,6 +1697,15 @@
     "rs2524997284"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002575732"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1705,71 +1715,6 @@
       "label_asym_id": "A",
       "label_seq_id": 169,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G175R",
-   "position": 175,
-   "wild_type": "G",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000489014",
-    "RCV002298620"
-   ],
-   "dbsnp": [
-    "rs1085308009"
-   ],
-   "diseases": [],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 175,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 175,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G175S",
-   "position": 175,
-   "wild_type": "G",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001776560",
-    "RCV001868808",
-    "RCV003446911",
-    "RCV003446912",
-    "RCV003446913",
-    "RCV003446914",
-    "RCV003446915"
-   ],
-   "dbsnp": [
-    "rs1085308009"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 175,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 175,
-      "comp_id": "GLY"
      }
     ]
    }
@@ -1791,6 +1736,15 @@
    ],
    "diseases": [
     "Dystonia 9 (DYT9)"
+   ],
+   "clinvar_vcv": [
+    "VCV001686202"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -1822,6 +1776,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002202744"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1831,35 +1794,6 @@
       "label_asym_id": "A",
       "label_seq_id": 180,
       "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L198P",
-   "position": 198,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001773311",
-    "RCV002540585"
-   ],
-   "dbsnp": [
-    "rs2124449372"
-   ],
-   "diseases": [],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 198,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 198,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -1881,6 +1815,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000207192"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -1918,6 +1861,15 @@
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000037300"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1953,6 +1905,15 @@
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000265386"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1984,6 +1945,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000663633"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -1993,41 +1963,6 @@
       "label_asym_id": "A",
       "label_seq_id": 215,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R218H",
-   "position": 218,
-   "wild_type": "R",
-   "mutant": "H",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000657887",
-    "RCV001079315",
-    "RCV001098262",
-    "RCV001098263",
-    "RCV001266484",
-    "RCV004737938"
-   ],
-   "dbsnp": [
-    "rs374080633"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 218,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 218,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -2059,6 +1994,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Hereditary cryohydrocytosis with reduced stomatin"
    ],
+   "clinvar_vcv": [
+    "VCV000207193"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2089,6 +2033,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002756128"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2118,6 +2071,15 @@
    ],
    "diseases": [
     "Childhood onset GLUT1 deficiency syndrome 2"
+   ],
+   "clinvar_vcv": [
+    "VCV001098716"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -2155,39 +2117,14 @@
     "Epilepsy, idiopathic generalized 12 (EIG12)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 232,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 232,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R232H",
-   "position": 232,
-   "wild_type": "R",
-   "mutant": "H",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000037301"
    ],
-   "clinvar": [
-    "RCV000761654",
-    "RCV001823005",
-    "RCV001855704"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs139412383"
-   ],
-   "diseases": [
-    "Cystic, Mucinous and Serous Neoplasms",
-    "Epilepsy, idiopathic generalized, susceptibility to, 12 (EIG12)",
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -2217,6 +2154,15 @@
     "rs796053249"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000207194"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2226,66 +2172,6 @@
       "label_asym_id": "A",
       "label_seq_id": 236,
       "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M244R",
-   "position": 244,
-   "wild_type": "M",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000482535",
-    "RCV006612346"
-   ],
-   "dbsnp": [
-    "rs1064795363"
-   ],
-   "diseases": [],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 244,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 244,
-      "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M244T",
-   "position": 244,
-   "wild_type": "M",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001251646",
-    "RCV003517319"
-   ],
-   "dbsnp": [
-    "rs1064795363"
-   ],
-   "diseases": [
-    "Encephalopathy due to GLUT1 deficiency"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 244,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 244,
-      "comp_id": "MET"
      }
     ]
    }
@@ -2305,6 +2191,15 @@
     "rs80359821"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000429797"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2341,6 +2236,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)"
    ],
+   "clinvar_vcv": [
+    "VCV000016114"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2371,6 +2275,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV001070464"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2399,6 +2312,15 @@
     "rs796053251"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000207197"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2429,6 +2351,15 @@
    ],
    "diseases": [
     "Childhood onset GLUT1 deficiency syndrome 2"
+   ],
+   "clinvar_vcv": [
+    "VCV001184481"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -2462,6 +2393,15 @@
     "Hereditary cryohydrocytosis with reduced stomatin",
     "Stomatin-deficient cryohydrocytosis with neurologic defects (SDCHCN)"
    ],
+   "clinvar_vcv": [
+    "VCV000218333"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2494,6 +2434,15 @@
     "Intellectual disability",
     "Microcephaly"
    ],
+   "clinvar_vcv": [
+    "VCV000625201"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2503,68 +2452,6 @@
       "label_asym_id": "A",
       "label_seq_id": 287,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A289T",
-   "position": 289,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000189363",
-    "RCV002252036",
-    "RCV006461965",
-    "RCV006704617"
-   ],
-   "dbsnp": [
-    "rs796053252"
-   ],
-   "diseases": [],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 289,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 289,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y293H",
-   "position": 293,
-   "wild_type": "Y",
-   "mutant": "H",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001768376",
-    "RCV001868746"
-   ],
-   "dbsnp": [
-    "rs2124448410"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 293,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 293,
-      "comp_id": "TYR"
      }
     ]
    }
@@ -2585,6 +2472,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV001471511"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -2616,6 +2512,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002083849"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2645,6 +2550,15 @@
    ],
    "diseases": [
     "Inborn genetic diseases"
+   ],
+   "clinvar_vcv": [
+    "VCV000590033"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -2676,6 +2590,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)"
+   ],
+   "clinvar_vcv": [
+    "VCV002733879"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -2715,6 +2638,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Intellectual disability"
    ],
+   "clinvar_vcv": [
+    "VCV000207229"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2724,42 +2656,6 @@
       "label_asym_id": "A",
       "label_seq_id": 295,
       "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A301V",
-   "position": 301,
-   "wild_type": "A",
-   "mutant": "V",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001305693",
-    "RCV001779153",
-    "RCV005278805",
-    "RCV005910983"
-   ],
-   "dbsnp": [
-    "rs1425773776"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "GLUT1 deficiency syndrome 1, autosomal recessive",
-    "Gastric cancer",
-    "Gliomas"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 301,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 301,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -2781,35 +2677,15 @@
    "diseases": [
     "Childhood onset GLUT1 deficiency syndrome 2"
    ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 313,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 313,
-      "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S313P",
-   "position": 313,
-   "wild_type": "S",
-   "mutant": "P",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000224104"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV000329396",
-    "RCV003631101"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
-   "dbsnp": [
-    "rs886041633"
-   ],
-   "diseases": [],
    "structures": {
     "6tha": [
      {
@@ -2839,6 +2715,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV001479049"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -2879,6 +2764,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)"
    ],
+   "clinvar_vcv": [
+    "VCV000016113"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2915,6 +2809,15 @@
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)",
     "Inborn genetic diseases"
    ],
+   "clinvar_vcv": [
+    "VCV000207201"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2943,6 +2846,15 @@
     "rs1553156002"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000450685"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -2973,6 +2885,17 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000207203",
+    "VCV001442999"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -3007,6 +2930,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV001027418"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3038,6 +2970,15 @@
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002202741"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3067,6 +3008,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV002855633"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -3107,6 +3057,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "GLUT1 deficiency syndrome 2 (GLUT1DS2)",
     "SLC2A1-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV000448897"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -3155,6 +3114,15 @@
     "Inborn genetic diseases",
     "SLC2A1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000198842"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3184,6 +3152,15 @@
    ],
    "diseases": [
     "Self-limited epilepsy with centrotemporal spikes"
+   ],
+   "clinvar_vcv": [
+    "VCV000433085"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "6tha": [
@@ -3215,6 +3192,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002855620"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3245,6 +3231,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000965573"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3254,42 +3249,6 @@
       "label_asym_id": "A",
       "label_seq_id": 372,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A377D",
-   "position": 377,
-   "wild_type": "A",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002302276",
-    "RCV003443025",
-    "RCV003445165",
-    "RCV003445166",
-    "RCV003445167",
-    "RCV003445168",
-    "RCV003445169"
-   ],
-   "dbsnp": [
-    "rs2524984796"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 377,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 377,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -3310,6 +3269,15 @@
    ],
    "diseases": [
     "Childhood onset GLUT1 deficiency syndrome 2"
+   ],
+   "clinvar_vcv": [
+    "VCV001338756"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "6tha": [
@@ -3339,6 +3307,15 @@
     "rs1057521632"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000383454"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3347,37 +3324,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 383,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P385L",
-   "position": 385,
-   "wild_type": "P",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000624680",
-    "RCV003229848"
-   ],
-   "dbsnp": [
-    "rs1553155891"
-   ],
-   "diseases": [
-    "Nevi and Melanomas"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 385,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 385,
       "comp_id": "PRO"
      }
     ]
@@ -3399,6 +3345,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV002702186"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -3428,6 +3383,15 @@
     "rs2524984571"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002571718"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3437,35 +3401,6 @@
       "label_asym_id": "A",
       "label_seq_id": 393,
       "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P399R",
-   "position": 399,
-   "wild_type": "P",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001309039",
-    "RCV005624479"
-   ],
-   "dbsnp": [
-    "rs1643442142"
-   ],
-   "diseases": [],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 399,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 399,
-      "comp_id": "PRO"
      }
     ]
    }
@@ -3493,6 +3428,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Inborn genetic diseases"
+   ],
+   "clinvar_vcv": [
+    "VCV000207212"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6tha": [
@@ -3531,6 +3475,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Inborn genetic diseases"
    ],
+   "clinvar_vcv": [
+    "VCV000280046"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3564,6 +3517,15 @@
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000538678"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3593,6 +3555,15 @@
    ],
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV002804586"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -3624,6 +3595,15 @@
    "diseases": [
     "SLC2A1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000986351"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3654,6 +3634,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002133173"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3663,40 +3652,6 @@
       "label_asym_id": "A",
       "label_seq_id": 403,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "N411S",
-   "position": 411,
-   "wild_type": "N",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000082869",
-    "RCV001224070",
-    "RCV001588909",
-    "RCV005600656"
-   ],
-   "dbsnp": [
-    "rs398123069"
-   ],
-   "diseases": [
-    "Encephalopathy due to GLUT1 deficiency",
-    "Epilepsy, idiopathic generalized 12 (EIG12)"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 411,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 411,
-      "comp_id": "ASN"
      }
     ]
    }
@@ -3717,6 +3672,15 @@
    ],
    "diseases": [
     "Encephalopathy due to GLUT1 deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV000807494"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -3746,6 +3710,15 @@
     "rs1570590859"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001173043"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3778,6 +3751,15 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Inborn genetic diseases"
    ],
+   "clinvar_vcv": [
+    "VCV000947682"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3800,14 +3782,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV002012001",
-    "RCV002265051",
-    "RCV003221773",
-    "RCV003446968",
-    "RCV003446969",
-    "RCV003446970",
-    "RCV003446971",
-    "RCV003446972"
+    "RCV003221773"
    ],
    "dbsnp": [
     "rs2124446216"
@@ -3815,6 +3790,15 @@
    "diseases": [
     "Epilepsy, idiopathic generalized, susceptibility to, 12 (EIG12)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV002499475"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -3847,6 +3831,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV001491716"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3877,6 +3870,15 @@
    "diseases": [
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV002015012"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6tha": [
      {
@@ -3886,37 +3888,6 @@
       "label_asym_id": "A",
       "label_seq_id": 420,
       "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "C421R",
-   "position": 421,
-   "wild_type": "C",
-   "mutant": "R",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000684767",
-    "RCV003489802"
-   ],
-   "dbsnp": [
-    "rs1557644984"
-   ],
-   "diseases": [
-    "Encephalopathy due to GLUT1 deficiency"
-   ],
-   "structures": {
-    "6tha": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 421,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 421,
-      "comp_id": "CYS"
      }
     ]
    }
@@ -3942,6 +3913,18 @@
    "diseases": [
     "Encephalopathy due to GLUT1 deficiency",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000653107",
+    "VCV001440651"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6tha": [
@@ -3973,6 +3956,15 @@
    "diseases": [
     "Childhood onset GLUT1 deficiency syndrome 2"
    ],
+   "clinvar_vcv": [
+    "VCV000812510"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6tha": [
      {
@@ -4001,6 +3993,15 @@
     "rs752143706"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001806702"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -4018,6 +4019,15 @@
     "rs752143706"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000380233"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -4046,53 +4056,14 @@
     "GLUT1 deficiency syndrome 1, autosomal recessive",
     "Hereditary cryohydrocytosis with reduced stomatin"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "I463F",
-   "position": 463,
-   "wild_type": "I",
-   "mutant": "F",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000096708"
    ],
-   "clinvar": [
-    "RCV001905251",
-    "RCV004770241",
-    "RCV006362691"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs2124445461"
-   ],
-   "diseases": [
-    "GLUT1 deficiency syndrome 1, autosomal recessive",
-    "Inborn genetic diseases"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "R468W",
-   "position": 468,
-   "wild_type": "R",
-   "mutant": "W",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000017500",
-    "RCV001548577",
-    "RCV002271988",
-    "RCV004737155"
-   ],
-   "dbsnp": [
-    "rs267607059"
-   ],
-   "diseases": [
-    "Encephalopathy due to GLUT1 deficiency",
-    "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
-    "GLUT1 deficiency syndrome 1, autosomal recessive",
-    "Gliomas",
-    "SLC2A1-related disorder"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -4118,10 +4089,339 @@
     "GLUT1 deficiency syndrome 1 (GLUT1DS1)",
     "GLUT1 deficiency syndrome 1, autosomal recessive"
    ],
+   "clinvar_vcv": [
+    "VCV000871442"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   }
  ],
- "rejected": [],
+ "rejected": [
+  {
+   "variant": "T9M",
+   "position": 9,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000656374"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G27D",
+   "position": 27,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000195267"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P36L",
+   "position": 36,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000625202"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R51P",
+   "position": 51,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000471343"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S68L",
+   "position": 68,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000645206"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V87I",
+   "position": 87,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000947521"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R92Q",
+   "position": 92,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002108956"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R93Q",
+   "position": 93,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000623684"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M96T",
+   "position": 96,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000847673"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M142I",
+   "position": 142,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001338228"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R153H",
+   "position": 153,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000197281"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G175R",
+   "position": 175,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000427185"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G175S",
+   "position": 175,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001320581"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L198P",
+   "position": 198,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001315117"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R218H",
+   "position": 218,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000546093"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R232H",
+   "position": 232,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000623683"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M244R",
+   "position": 244,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000421792"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M244T",
+   "position": 244,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000975168"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "A289T",
+   "position": 289,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000207198"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y293H",
+   "position": 293,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001318752"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A301V",
+   "position": 301,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001008366"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S313P",
+   "position": 313,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000280423"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A377D",
+   "position": 377,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001721931"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P385L",
+   "position": 385,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000521734"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P399R",
+   "position": 399,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001011273"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "N411S",
+   "position": 411,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000096709"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C421R",
+   "position": 421,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000565292"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I463F",
+   "position": 463,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001364139"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R468W",
+   "position": 468,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000016120"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
  "structure_mismatches": [],
  "pathogenic_single_residue_variants_per_position": {
   "1": 4,

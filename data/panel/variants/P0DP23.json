@@ -7,7 +7,9 @@
  "disease": "long QT syndrome 14; CPVT4",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P0DP23",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 149,
  "uniprot_sequence_sha256": "4a9f2f38a0afe61f9cd35d05788764536c1b394551a521687d0e537ad2760ff5",
  "primary_entry": "6m7h",
@@ -33,7 +35,7 @@
     "auth_chain_differs_from_label_chain": false
    },
    "verified": 29,
-   "wild_type_mismatch": 2
+   "wild_type_mismatch": 1
   }
  },
  "variants": [
@@ -52,6 +54,15 @@
     "rs1057521851"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000384090"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -81,6 +92,15 @@
    ],
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002734184"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -112,6 +132,15 @@
    ],
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000409871"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6m7h": [
@@ -145,6 +174,15 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 16"
    ],
+   "clinvar_vcv": [
+    "VCV000409870"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -177,6 +215,15 @@
    "diseases": [
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000183233"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6m7h": [
@@ -214,6 +261,18 @@
     "Long QT syndrome 14 (LQT14)",
     "Long QT syndrome 15 (LQT15)"
    ],
+   "clinvar_vcv": [
+    "VCV000641544",
+    "VCV002100843"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -246,6 +305,15 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 15 (LQT15)"
    ],
+   "clinvar_vcv": [
+    "VCV000096721"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -270,7 +338,6 @@
    "clinvar": [
     "RCV000032977",
     "RCV000143836",
-    "RCV000157134",
     "RCV000162067",
     "RCV000526484",
     "RCV000714909",
@@ -293,6 +360,17 @@
     "Long QT syndrome 14 (LQT14)",
     "Long QT syndrome 15 (LQT15)",
     "Ventricular tachycardia, catecholaminergic polymorphic, 4 (CPVT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV000039758",
+    "VCV000096720"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6m7h": [
@@ -322,6 +400,15 @@
     "rs1057523130"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000388500"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -352,6 +439,15 @@
    "diseases": [
     "Long QT syndrome 15 (LQT15)"
    ],
+   "clinvar_vcv": [
+    "VCV002500174"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -364,26 +460,6 @@
      }
     ]
    }
-  },
-  {
-   "variant": "M110L",
-   "position": 110,
-   "wild_type": "M",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000544269",
-    "RCV006662870"
-   ],
-   "dbsnp": [
-    "rs1553431711"
-   ],
-   "diseases": [
-    "Long QT syndrome 1 (LQT1)"
-   ],
-   "structures": {}
   },
   {
    "variant": "G114R",
@@ -401,6 +477,15 @@
    ],
    "diseases": [
     "SUDDEN INFANT DEATH SYNDROME (SIDS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001327459"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "6m7h": [
@@ -431,6 +516,15 @@
    ],
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001358003"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -471,6 +565,20 @@
     "Long QT syndrome 15 (LQT15)",
     "Long QT syndrome 16"
    ],
+   "clinvar_vcv": [
+    "VCV000183230",
+    "VCV000812676",
+    "VCV000812710"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter",
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -501,6 +609,15 @@
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
    ],
+   "clinvar_vcv": [
+    "VCV001398892"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -524,9 +641,7 @@
    ],
    "clinvar": [
     "RCV000143838",
-    "RCV000162069",
-    "RCV000484148",
-    "RCV006463016"
+    "RCV000162069"
    ],
    "dbsnp": [
     "rs1064796271",
@@ -535,6 +650,15 @@
    "diseases": [
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000096722"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -573,6 +697,18 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 14 (LQT14)"
    ],
+   "clinvar_vcv": [
+    "VCV000389576",
+    "VCV000955533",
+    "VCV001362982"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -603,6 +739,15 @@
    "diseases": [
     "Catecholaminergic polymorphic ventricular tachycardia 4",
     "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000639902"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -635,6 +780,15 @@
     "Catecholaminergic polymorphic ventricular tachycardia 4",
     "Long QT syndrome 14 (LQT14)"
    ],
+   "clinvar_vcv": [
+    "VCV000948239"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -664,6 +818,15 @@
    ],
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001456260"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -696,6 +859,15 @@
     "Catecholaminergic polymorphic ventricular tachycardia 4",
     "Long QT syndrome 14 (LQT14)"
    ],
+   "clinvar_vcv": [
+    "VCV000542137"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -725,6 +897,15 @@
    ],
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001067140"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -758,6 +939,15 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 15 (LQT15)"
    ],
+   "clinvar_vcv": [
+    "VCV000096723"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -790,6 +980,15 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 15 (LQT15)"
    ],
+   "clinvar_vcv": [
+    "VCV000096724"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -821,6 +1020,15 @@
    "diseases": [
     "CALM1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000418107"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -850,6 +1058,15 @@
    ],
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001467722"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -885,6 +1102,17 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 14 (LQT14)"
    ],
+   "clinvar_vcv": [
+    "VCV000458198",
+    "VCV000974612"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -917,6 +1145,15 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 16"
    ],
+   "clinvar_vcv": [
+    "VCV000812678"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -946,6 +1183,15 @@
    ],
    "diseases": [
     "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000974613"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6m7h": [
@@ -986,6 +1232,19 @@
     "Long QT syndrome 1 (LQT1)",
     "Long QT syndrome 14 (LQT14)"
    ],
+   "clinvar_vcv": [
+    "VCV000183231",
+    "VCV000426161",
+    "VCV000961658",
+    "VCV002138308"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6m7h": [
      {
@@ -1016,20 +1275,32 @@
    "diseases": [
     "Long QT syndrome 1 (LQT1)"
    ],
+   "clinvar_vcv": [
+    "VCV000576319"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   }
  ],
- "rejected": [],
- "structure_mismatches": [
+ "rejected": [
   {
    "variant": "M110L",
-   "entry": "6m7h",
-   "auth_asym_id": "A",
-   "auth_seq_id": 109,
-   "pdbx_PDB_ins_code": "",
-   "structure_residue": "MSE",
-   "reason": "wild-type residue differs in the structure"
-  },
+   "position": 110,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000458191"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
+ "structure_mismatches": [
   {
    "variant": "M145R",
    "entry": "6m7h",

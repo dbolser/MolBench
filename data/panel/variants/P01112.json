@@ -7,7 +7,9 @@
  "disease": "Costello syndrome",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P01112",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 189,
  "uniprot_sequence_sha256": "d9360238882c010c8474ef1eba1d2532cd96e706c7d7f689ea2014f37f8f886c",
  "primary_entry": "1ctq",
@@ -32,7 +34,7 @@
     "offset": false,
     "auth_chain_differs_from_label_chain": false
    },
-   "verified": 19
+   "verified": 16
   }
  },
  "variants": [
@@ -51,6 +53,15 @@
     "rs727503094"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000040430"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -97,6 +108,15 @@
     "Squamous Cell Neoplasms",
     "Thyroid cancer, nonmedullary, 2 (NMTC2)"
    ],
+   "clinvar_vcv": [
+    "VCV000012613"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -125,6 +145,15 @@
     "rs727503094"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000180854"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -155,6 +184,15 @@
    ],
    "diseases": [
     "Costello syndrome (CSTLO)"
+   ],
+   "clinvar_vcv": [
+    "VCV000163690"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1ctq": [
@@ -220,6 +258,15 @@
     "Transitional Cell Papillomas and Carcinomas",
     "Wooly hair nevus"
    ],
+   "clinvar_vcv": [
+    "VCV000012602"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -251,6 +298,17 @@
    ],
    "diseases": [
     "Costello syndrome (CSTLO)"
+   ],
+   "clinvar_vcv": [
+    "VCV000279921",
+    "VCV001209208"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1ctq": [
@@ -288,6 +346,15 @@
     "HRAS-related disorder",
     "Myopathy, congenital, with excess of muscle spindles"
    ],
+   "clinvar_vcv": [
+    "VCV000012609"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -297,37 +364,6 @@
       "label_asym_id": "A",
       "label_seq_id": 22,
       "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E49K",
-   "position": 49,
-   "wild_type": "E",
-   "mutant": "K",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000662269",
-    "RCV002530595"
-   ],
-   "dbsnp": [
-    "rs1277340795"
-   ],
-   "diseases": [
-    "Vascular Tumors Including Pyogenic Granuloma"
-   ],
-   "structures": {
-    "1ctq": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 49,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 49,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -354,6 +390,15 @@
     "HRAS-related disorder",
     "Nevi and Melanomas",
     "RASopathy"
+   ],
+   "clinvar_vcv": [
+    "VCV000012610"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1ctq": [
@@ -384,6 +429,15 @@
    ],
    "diseases": [
     "Costello syndrome (CSTLO)"
+   ],
+   "clinvar_vcv": [
+    "VCV000179260"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1ctq": [
@@ -416,6 +470,15 @@
    "diseases": [
     "Costello syndrome (CSTLO)"
    ],
+   "clinvar_vcv": [
+    "VCV000040436"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -447,6 +510,15 @@
     "Adenomas and Adenocarcinomas",
     "Costello syndrome (CSTLO)",
     "Epithelial Neoplasms, NOS"
+   ],
+   "clinvar_vcv": [
+    "VCV000660897"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1ctq": [
@@ -487,6 +559,15 @@
     "Thymic Epithelial Neoplasms",
     "Thyroid cancer, nonmedullary, 2 (NMTC2)"
    ],
+   "clinvar_vcv": [
+    "VCV000391700"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -516,6 +597,15 @@
    ],
    "diseases": [
     "Noonan syndrome 3 (NS3)"
+   ],
+   "clinvar_vcv": [
+    "VCV000376318"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1ctq": [
@@ -570,50 +660,14 @@
     "Thyroid cancer, nonmedullary, 2 (NMTC2)",
     "Transitional Cell Papillomas and Carcinomas"
    ],
-   "structures": {
-    "1ctq": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 61,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 61,
-      "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Q61L",
-   "position": 61,
-   "wild_type": "Q",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000012601"
    ],
-   "clinvar": [
-    "RCV001255684",
-    "RCV001372584",
-    "RCV001849368",
-    "RCV004668927",
-    "RCV006253971"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs121913233"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Ductal and Lobular Neoplasms",
-    "KA-like vemurafenib-induced squamous lesions",
-    "Lip and oral cavity carcinoma",
-    "Myeloid Leukemias",
-    "Neoplasm",
-    "Neuroepitheliomatous Neoplasms",
-    "Paragangliomas and Glomus Tumors",
-    "Soft Tissue Tumors and Sarcomas, NOS",
-    "Soft tissue sarcoma",
-    "Squamous Cell Neoplasms",
-    "Transitional Cell Papillomas and Carcinomas"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1ctq": [
@@ -666,6 +720,15 @@
     "Transitional Cell Papillomas and Carcinomas",
     "Vascular Tumors Including Pyogenic Granuloma"
    ],
+   "clinvar_vcv": [
+    "VCV000160364"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -675,37 +738,6 @@
       "label_asym_id": "A",
       "label_seq_id": 61,
       "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R68W",
-   "position": 68,
-   "wild_type": "R",
-   "mutant": "W",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001906898",
-    "RCV003235615"
-   ],
-   "dbsnp": [
-    "rs1370690781"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas"
-   ],
-   "structures": {
-    "1ctq": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 68,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 68,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -731,6 +763,15 @@
     "RASopathy",
     "Thymic Epithelial Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000012605"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1ctq": [
      {
@@ -745,7 +786,41 @@
    }
   }
  ],
- "rejected": [],
+ "rejected": [
+  {
+   "variant": "E49K",
+   "position": 49,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000548638"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "Q61L",
+   "position": 61,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000376033"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R68W",
+   "position": 68,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001406399"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
  "structure_mismatches": [],
  "pathogenic_single_residue_variants_per_position": {
   "12": 6,

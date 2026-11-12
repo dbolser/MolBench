@@ -7,7 +7,9 @@
  "disease": "hereditary pancreatitis",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P07477",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 247,
  "uniprot_sequence_sha256": "796377537c0eaf1bf6344dfe0ef3b287d84934267233f526f4e40eb6bf5a86e3",
  "primary_entry": "1trn",
@@ -63,6 +65,15 @@
     "Hereditary pancreatitis (PCTT)",
     "Pancreatitis, hereditary (PCTT)"
    ],
+   "clinvar_vcv": [
+    "VCV000038363"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -90,6 +101,15 @@
     "Pancreatitis, hereditary (PCTT)",
     "Trypsinogen deficiency",
     "Vitamin D-dependent rickets type II with alopecia (VDDR2A)"
+   ],
+   "clinvar_vcv": [
+    "VCV000011877"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1trn": [
@@ -130,6 +150,15 @@
     "Hereditary pancreatitis (PCTT)",
     "Pancreatitis, hereditary (PCTT)"
    ],
+   "clinvar_vcv": [
+    "VCV000038366"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1trn": [
      {
@@ -167,6 +196,15 @@
    ],
    "diseases": [
     "Hereditary pancreatitis (PCTT)"
+   ],
+   "clinvar_vcv": [
+    "VCV001454580"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1trn": [
@@ -208,6 +246,15 @@
     "Hereditary pancreatitis (PCTT)",
     "Pancreatitis, hereditary (PCTT)"
    ],
+   "clinvar_vcv": [
+    "VCV000029923"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1trn": [
      {
@@ -245,6 +292,15 @@
    ],
    "diseases": [
     "Hereditary pancreatitis (PCTT)"
+   ],
+   "clinvar_vcv": [
+    "VCV000161986"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1trn": [
@@ -287,6 +343,15 @@
     "Hereditary pancreatitis (PCTT)",
     "PRSS1-related disorder",
     "Pancreatitis, hereditary (PCTT)"
+   ],
+   "clinvar_vcv": [
+    "VCV000011883"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1trn": [
@@ -332,6 +397,18 @@
     "Hereditary pancreatitis (PCTT)",
     "PRSS1-related disorder",
     "Pancreatitis, hereditary (PCTT)"
+   ],
+   "clinvar_vcv": [
+    "VCV000011876",
+    "VCV000011882"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
    ],
    "structures": {
     "1trn": [

@@ -2446,7 +2446,6 @@
     "clinical",
     "cryo-em",
     "membrane",
-    "modified-residue",
     "multi-chain"
    ],
    "uniprot": [
@@ -2458,7 +2457,6 @@
     "basic",
     "chains",
     "clinical",
-    "modified-residue",
     "numbering"
    ]
   },
@@ -3107,8 +3105,8 @@
     "1tup",
     "af-p04637-f1-model_v6"
    ],
-   "variants": 346,
-   "verified_on_entry": 329,
+   "variants": 213,
+   "verified_on_entry": 202,
    "offset": false,
    "auth_minus_unp": {
     "0": 585
@@ -3129,8 +3127,8 @@
     "2hhb",
     "5ni1"
    ],
-   "variants": 59,
-   "verified_on_entry": 55,
+   "variants": 48,
+   "verified_on_entry": 44,
    "offset": true,
    "auth_minus_unp": {
     "-1": 282
@@ -3152,8 +3150,8 @@
     "5ni1",
     "af-p68871-f1-model_v6"
    ],
-   "variants": 117,
-   "verified_on_entry": 111,
+   "variants": 98,
+   "verified_on_entry": 92,
    "offset": true,
    "auth_minus_unp": {
     "-1": 292
@@ -3172,8 +3170,8 @@
    "entries": [
     "5uak"
    ],
-   "variants": 350,
-   "verified_on_entry": 333,
+   "variants": 236,
+   "verified_on_entry": 227,
    "offset": false,
    "auth_minus_unp": {
     "0": 1139
@@ -3192,8 +3190,8 @@
    "entries": [
     "8c86"
    ],
-   "variants": 116,
-   "verified_on_entry": 116,
+   "variants": 98,
+   "verified_on_entry": 98,
    "offset": true,
    "auth_minus_unp": {
     "-20": 232
@@ -3248,8 +3246,8 @@
    "entries": [
     "2c9v"
    ],
-   "variants": 102,
-   "verified_on_entry": 102,
+   "variants": 90,
+   "verified_on_entry": 90,
    "offset": true,
    "auth_minus_unp": {
     "-1": 306
@@ -3276,8 +3274,8 @@
    "entries": [
     "8pi2"
    ],
-   "variants": 33,
-   "verified_on_entry": 30,
+   "variants": 28,
+   "verified_on_entry": 25,
    "offset": true,
    "auth_minus_unp": {
     "-24": 371
@@ -3304,8 +3302,8 @@
    "entries": [
     "6tc2"
    ],
-   "variants": 29,
-   "verified_on_entry": 21,
+   "variants": 20,
+   "verified_on_entry": 15,
    "offset": true,
    "auth_minus_unp": {
     "-89": 126,
@@ -3333,8 +3331,8 @@
    "entries": [
     "9fb2"
    ],
-   "variants": 111,
-   "verified_on_entry": 109,
+   "variants": 86,
+   "verified_on_entry": 86,
    "offset": false,
    "auth_minus_unp": {
     "0": 497
@@ -3362,8 +3360,8 @@
     "3kcg",
     "8eph"
    ],
-   "variants": 163,
-   "verified_on_entry": 124,
+   "variants": 150,
+   "verified_on_entry": 113,
    "offset": true,
    "auth_minus_unp": {
     "-216": 110,
@@ -3397,8 +3395,8 @@
    "entries": [
     "5edm"
    ],
-   "variants": 24,
-   "verified_on_entry": 21,
+   "variants": 20,
+   "verified_on_entry": 19,
    "offset": true,
    "auth_minus_unp": {
     "-57": 394,
@@ -3460,8 +3458,8 @@
    "entries": [
     "8ce0"
    ],
-   "variants": 28,
-   "verified_on_entry": 17,
+   "variants": 21,
+   "verified_on_entry": 13,
    "offset": true,
    "auth_minus_unp": {
     "-18": 143
@@ -3488,8 +3486,8 @@
    "entries": [
     "5cj6"
    ],
-   "variants": 161,
-   "verified_on_entry": 104,
+   "variants": 130,
+   "verified_on_entry": 91,
    "offset": true,
    "auth_minus_unp": {
     "-1": 244,
@@ -3546,8 +3544,8 @@
    "entries": [
     "9f69"
    ],
-   "variants": 5,
-   "verified_on_entry": 5,
+   "variants": 3,
+   "verified_on_entry": 3,
    "offset": false,
    "auth_minus_unp": {
     "0": 245
@@ -3574,7 +3572,7 @@
    "entries": [
     "6m7h"
    ],
-   "variants": 31,
+   "variants": 30,
    "verified_on_entry": 29,
    "offset": true,
    "auth_minus_unp": {
@@ -3602,8 +3600,8 @@
    "entries": [
     "3kcg"
    ],
-   "variants": 46,
-   "verified_on_entry": 45,
+   "variants": 44,
+   "verified_on_entry": 43,
    "offset": true,
    "auth_minus_unp": {
     "-32": 419
@@ -3630,8 +3628,8 @@
    "entries": [
     "3k34"
    ],
-   "variants": 5,
-   "verified_on_entry": 4,
+   "variants": 4,
+   "verified_on_entry": 3,
    "offset": true,
    "auth_minus_unp": {
     "0": 123,
@@ -3659,8 +3657,8 @@
    "entries": [
     "1ctq"
    ],
-   "variants": 19,
-   "verified_on_entry": 19,
+   "variants": 16,
+   "verified_on_entry": 16,
    "offset": false,
    "auth_minus_unp": {
     "0": 166
@@ -3687,8 +3685,8 @@
    "entries": [
     "6hpo"
    ],
-   "variants": 388,
-   "verified_on_entry": 322,
+   "variants": 371,
+   "verified_on_entry": 308,
    "offset": false,
    "auth_minus_unp": {
     "0": 310
@@ -3715,8 +3713,8 @@
    "entries": [
     "9gio"
    ],
-   "variants": 169,
-   "verified_on_entry": 165,
+   "variants": 138,
+   "verified_on_entry": 136,
    "offset": false,
    "auth_minus_unp": {
     "0": 146
@@ -3743,8 +3741,8 @@
    "entries": [
     "1d5r"
    ],
-   "variants": 269,
-   "verified_on_entry": 258,
+   "variants": 191,
+   "verified_on_entry": 181,
    "offset": false,
    "auth_minus_unp": {
     "0": 307
@@ -3771,8 +3769,8 @@
    "entries": [
     "3f9m"
    ],
-   "variants": 337,
-   "verified_on_entry": 337,
+   "variants": 277,
+   "verified_on_entry": 277,
    "offset": false,
    "auth_minus_unp": {
     "0": 443
@@ -3799,8 +3797,8 @@
    "entries": [
     "6tha"
    ],
-   "variants": 129,
-   "verified_on_entry": 119,
+   "variants": 100,
+   "verified_on_entry": 92,
    "offset": false,
    "auth_minus_unp": {
     "0": 448
@@ -3827,8 +3825,8 @@
    "entries": [
     "8k7f"
    ],
-   "variants": 298,
-   "verified_on_entry": 282,
+   "variants": 266,
+   "verified_on_entry": 251,
    "offset": false,
    "auth_minus_unp": {
     "0": 782

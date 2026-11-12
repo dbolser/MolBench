@@ -7,7 +7,9 @@
  "disease": "androgen insensitivity syndrome",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P10275",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 920,
  "uniprot_sequence_sha256": "043f80df5b673d9048e118735cb0230b0baaa23f788c3bae0010f9995412d852",
  "primary_entry": "5cj6",
@@ -33,9 +35,9 @@
     "offset": true,
     "auth_chain_differs_from_label_chain": false
    },
-   "not_observed": 3,
-   "outside_construct": 54,
-   "verified": 104
+   "not_observed": 1,
+   "outside_construct": 38,
+   "verified": 91
   }
  },
  "variants": [
@@ -59,6 +61,15 @@
     "Differences in sex development",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV001470535"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -80,76 +91,14 @@
     "Androgen insensitivity, partial (PAIS)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "V3M",
-   "position": 3,
-   "wild_type": "V",
-   "mutant": "M",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000009841"
    ],
-   "clinvar": [
-    "RCV001988640",
-    "RCV002492261",
-    "RCV003154053"
-   ],
-   "dbsnp": [
-    "rs778912582"
-   ],
-   "diseases": [
-    "Ovarian cancer"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "Q58L",
-   "position": 58,
-   "wild_type": "Q",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000455544",
-    "RCV000766100",
-    "RCV003983052",
-    "RCV004696189",
-    "RCV004796181",
-    "RCV005355784",
-    "RCV006273764",
-    "RCV006556009"
-   ],
-   "dbsnp": [
-    "rs200185441"
-   ],
-   "diseases": [
-    "Male infertility"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "A159T",
-   "position": 159,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000581733",
-    "RCV003767317",
-    "RCV003983133",
-    "RCV004586808",
-    "RCV004754481"
-   ],
-   "dbsnp": [
-    "rs370215797"
-   ],
-   "diseases": [
-    "Androgen resistance syndrome (AIS)",
-    "Male infertility"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {}
   },
@@ -170,65 +119,14 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "K301R",
-   "position": 301,
-   "wild_type": "K",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000492778"
    ],
-   "clinvar": [
-    "RCV003154799",
-    "RCV004587474"
-   ],
-   "dbsnp": [
-    "rs1452728096"
-   ],
-   "diseases": [
-    "Ovarian cancer"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "E355Q",
-   "position": 355,
-   "wild_type": "E",
-   "mutant": "Q",
-   "significance": [
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV002249260",
-    "RCV003774711"
-   ],
-   "dbsnp": [
-    "rs367604031"
-   ],
-   "diseases": [
-    "Prostate cancer"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "L369P",
-   "position": 369,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003779264",
-    "RCV003991609"
-   ],
-   "dbsnp": [
-    "rs777482882"
-   ],
-   "diseases": [
-    "Male infertility with azoospermia or oligozoospermia due to single gene mutation"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {}
   },
@@ -249,74 +147,14 @@
    "diseases": [
     "Ovarian cancer"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "P392R",
-   "position": 392,
-   "wild_type": "P",
-   "mutant": "R",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV002445360"
    ],
-   "clinvar": [
-    "RCV002249261",
-    "RCV003331336"
-   ],
-   "dbsnp": [
-    "rs773996740"
-   ],
-   "diseases": [
-    "Androgen insensitivity syndrome (AIS)",
-    "Prostate cancer"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "P392S",
-   "position": 392,
-   "wild_type": "P",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000196772",
-    "RCV000499525",
-    "RCV000627669",
-    "RCV000990850",
-    "RCV001269900",
-    "RCV001516905",
-    "RCV002221510",
-    "RCV003927863"
-   ],
-   "dbsnp": [
-    "rs201934623"
-   ],
-   "diseases": [
-    "Androgen insensitivity syndrome (AIS)",
-    "Androgen resistance syndrome (AIS)",
-    "Partial androgen insensitivity syndrome (PAIS)"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "G396R",
-   "position": 396,
-   "wild_type": "G",
-   "mutant": "R",
-   "significance": [
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV003154742",
-    "RCV003778921"
-   ],
-   "dbsnp": [
-    "rs202150225"
-   ],
-   "diseases": [
-    "Ovarian cancer"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -337,6 +175,15 @@
    "diseases": [
     "Prostate cancer"
    ],
+   "clinvar_vcv": [
+    "VCV001685537"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -356,31 +203,14 @@
    "diseases": [
     "Male infertility with azoospermia or oligozoospermia due to single gene mutation"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "S434F",
-   "position": 434,
-   "wild_type": "S",
-   "mutant": "F",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV002690958"
    ],
-   "clinvar": [
-    "RCV001517109",
-    "RCV001647308",
-    "RCV002246397",
-    "RCV003983938",
-    "RCV006696451"
+   "clinvar_classification": [
+    "Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs748457992"
-   ],
-   "diseases": [
-    "Hypospadias 1, X-linked (HYSP1)",
-    "Male infertility",
-    "Partial androgen insensitivity syndrome (PAIS)",
-    "Prostate cancer"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -401,6 +231,15 @@
    "diseases": [
     "Ovarian cancer"
    ],
+   "clinvar_vcv": [
+    "VCV002445393"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -420,67 +259,14 @@
    "diseases": [
     "Ovarian cancer"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "P505T",
-   "position": 505,
-   "wild_type": "P",
-   "mutant": "T",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV002445359"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV000625844",
-    "RCV003983149",
-    "RCV006697109"
-   ],
-   "dbsnp": [
-    "rs764238988"
-   ],
-   "diseases": [
-    "Male infertility"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "P549S",
-   "position": 549,
-   "wild_type": "P",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000010514",
-    "RCV004700212"
-   ],
-   "dbsnp": [
-    "rs137852588"
-   ],
-   "diseases": [
-    "Androgen insensitivity syndrome (AIS)",
-    "Hypospadias 1, X-linked (HYSP1)"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "D551H",
-   "position": 551,
-   "wild_type": "D",
-   "mutant": "H",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV002249266",
-    "RCV003774714"
-   ],
-   "dbsnp": [
-    "rs777461721"
-   ],
-   "diseases": [
-    "Prostate cancer"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -501,6 +287,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000268093"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {}
   },
   {
@@ -519,6 +314,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000492782"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {}
   },
@@ -546,6 +350,17 @@
     "Kennedy disease (SMAX1)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000533379",
+    "VCV000948376"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -572,6 +387,15 @@
     "Differences in sex development",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000863409"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -589,6 +413,15 @@
     "rs1057521121"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000381643"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -609,6 +442,15 @@
     "Androgen resistance syndrome (AIS)",
     "Nevi and Melanomas"
    ],
+   "clinvar_vcv": [
+    "VCV000009853"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -627,6 +469,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001713192"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -648,6 +499,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000464791"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -668,6 +528,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009838"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {}
   },
   {
@@ -687,6 +556,15 @@
    "diseases": [
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000492783"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {}
   },
@@ -709,6 +587,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV002942787"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -728,6 +615,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV001298366"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -746,6 +642,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001805862"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -767,6 +672,15 @@
     "Androgen insensitivity, partial (PAIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009839"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {}
   },
   {
@@ -786,6 +700,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001196591"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -816,52 +739,15 @@
     "Partial androgen insensitivity syndrome (PAIS)",
     "Plasma Cell Tumors"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "S598G",
-   "position": 598,
-   "wild_type": "S",
-   "mutant": "G",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000009813"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV001648499",
-    "RCV002246448",
-    "RCV002538523",
-    "RCV003984021",
-    "RCV006697716",
-    "RCV006702665",
-    "RCV006750185"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
-   "dbsnp": [
-    "rs142280455"
-   ],
-   "diseases": [
-    "Androgen insensitivity, partial (PAIS)",
-    "Male infertility",
-    "Partial androgen insensitivity syndrome (PAIS)",
-    "Prostate cancer"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "S598T",
-   "position": 598,
-   "wild_type": "S",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001269607",
-    "RCV002537724"
-   ],
-   "dbsnp": [
-    "rs2075964628"
-   ],
-   "diseases": [],
    "structures": {}
   },
   {
@@ -879,6 +765,15 @@
     "rs878853033"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000235415"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -900,6 +795,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000458359"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -920,6 +824,15 @@
    "diseases": [
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000492784"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -937,6 +850,15 @@
     "rs1266872442"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000451908"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -963,6 +885,15 @@
     "Partial androgen insensitivity syndrome (PAIS)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000009820"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -982,6 +913,15 @@
    "diseases": [
     "Androgen insensitivity, partial, with breast cancer"
    ],
+   "clinvar_vcv": [
+    "VCV000009828"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {}
   },
   {
@@ -999,6 +939,15 @@
     "rs2075964906"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000988308"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -1018,24 +967,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "C615S",
-   "position": 615,
-   "wild_type": "C",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV003255195"
    ],
-   "clinvar": [
-    "RCV000809289",
-    "RCV006708414"
+   "clinvar_classification": [
+    "Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs1602255415"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
-   "diseases": [],
    "structures": {}
   },
   {
@@ -1057,6 +997,15 @@
     "Adenomas and Adenocarcinomas",
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000434266"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -1085,6 +1034,15 @@
     "Kennedy disease (SMAX1)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000279684"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -1106,6 +1064,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000458360"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -1126,6 +1093,15 @@
     "Adenomas and Adenocarcinomas",
     "Male infertility"
    ],
+   "clinvar_vcv": [
+    "VCV003061773"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -1144,6 +1120,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV003062281"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -1164,30 +1149,14 @@
    "diseases": [
     "Adenomas and Adenocarcinomas"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "A646D",
-   "position": 646,
-   "wild_type": "A",
-   "mutant": "D",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000427107"
    ],
-   "clinvar": [
-    "RCV000010536",
-    "RCV000613283",
-    "RCV000824699",
-    "RCV000995934",
-    "RCV002512959",
-    "RCV003924823",
-    "RCV003982836"
+   "clinvar_classification": [
+    "Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs1800053"
-   ],
-   "diseases": [
-    "Partial androgen insensitivity syndrome (PAIS)"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -1208,25 +1177,14 @@
    "diseases": [
     "Prostate cancer, somatic"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "K659R",
-   "position": 659,
-   "wild_type": "K",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000009809"
    ],
-   "clinvar": [
-    "RCV003154751",
-    "RCV006460543"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs879021764"
-   ],
-   "diseases": [
-    "Ovarian cancer"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {}
   },
@@ -1247,6 +1205,15 @@
    "diseases": [
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000009832"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -1276,6 +1243,15 @@
     "rs2076093998"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000996791"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1307,6 +1283,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000492786"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1336,6 +1321,15 @@
    ],
    "diseases": [
     "Partial androgen insensitivity syndrome (PAIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001699192"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -1368,6 +1362,15 @@
     "Androgen insensitivity, partial (PAIS)",
     "Male infertility"
    ],
+   "clinvar_vcv": [
+    "VCV003061774"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1398,35 +1401,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 689,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 51,
-      "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "H690Q",
-   "position": 690,
-   "wild_type": "H",
-   "mutant": "Q",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000009856"
    ],
-   "clinvar": [
-    "RCV001217034",
-    "RCV003317455"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs754583155"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
-   "diseases": [],
    "structures": {
     "5cj6": [
      {
@@ -1456,6 +1439,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002575082"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -1496,6 +1488,15 @@
     "Kennedy disease (SMAX1)",
     "Nevi and Melanomas"
    ],
+   "clinvar_vcv": [
+    "VCV000492787"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1525,6 +1526,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000434267"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -1558,6 +1568,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)",
     "Nonpapillary renal cell carcinoma"
+   ],
+   "clinvar_vcv": [
+    "VCV000458361"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -1593,6 +1612,15 @@
     "Androgen resistance syndrome (AIS)",
     "Differences in sex development"
    ],
+   "clinvar_vcv": [
+    "VCV000492788"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1623,6 +1651,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Prostate cancer"
+   ],
+   "clinvar_vcv": [
+    "VCV000219296"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -1659,6 +1696,15 @@
     "Gliomas",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000492789"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1690,6 +1736,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009837"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1719,6 +1774,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001344487"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -1750,6 +1814,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000939472"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -1784,6 +1857,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000009852"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1814,6 +1896,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000492790"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1823,67 +1914,6 @@
       "label_asym_id": "A",
       "label_seq_id": 80,
       "comp_id": "TRP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A720V",
-   "position": 720,
-   "wild_type": "A",
-   "mutant": "V",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001372746",
-    "RCV003226464"
-   ],
-   "dbsnp": [
-    "rs2076094679"
-   ],
-   "diseases": [],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 719,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 81,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A722T",
-   "position": 722,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000010510",
-    "RCV001305872",
-    "RCV004767001"
-   ],
-   "dbsnp": [
-    "rs137852583"
-   ],
-   "diseases": [
-    "Prostate cancer, somatic"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 721,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 83,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -1904,6 +1934,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000492791"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -1936,6 +1975,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV001077100"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1967,6 +2015,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000458362"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -1976,40 +2033,6 @@
       "label_asym_id": "A",
       "label_seq_id": 87,
       "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R727L",
-   "position": 727,
-   "wild_type": "R",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000010523",
-    "RCV002247312",
-    "RCV003764545"
-   ],
-   "dbsnp": [
-    "rs137852593"
-   ],
-   "diseases": [
-    "Prostate cancer",
-    "Prostate cancer susceptibility",
-    "Prostate cancer, hereditary, X-linked 3 (HPCX3)"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 726,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 88,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -2032,6 +2055,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Prostate cancer"
    ],
+   "clinvar_vcv": [
+    "VCV001685540"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2041,40 +2073,6 @@
       "label_asym_id": "A",
       "label_seq_id": 89,
       "comp_id": "ASN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V731M",
-   "position": 731,
-   "wild_type": "V",
-   "mutant": "M",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000010491",
-    "RCV002247310",
-    "RCV003764544"
-   ],
-   "dbsnp": [
-    "rs137852571"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Prostate cancer",
-    "Prostate cancer, somatic"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 730,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 92,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -2099,6 +2097,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)",
     "Nevi and Melanomas"
+   ],
+   "clinvar_vcv": [
+    "VCV001338469"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -2130,6 +2137,15 @@
    "diseases": [
     "Ovarian cancer"
    ],
+   "clinvar_vcv": [
+    "VCV002445373"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2158,6 +2174,15 @@
     "rs2076118513"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000988439"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2187,6 +2212,15 @@
    ],
    "diseases": [
     "Partial androgen insensitivity syndrome (PAIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000009860"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -2219,6 +2253,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000988302"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2248,6 +2291,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002431800"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -2280,6 +2332,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV001068775"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2308,36 +2369,14 @@
     "rs1131691625"
    ],
    "diseases": [],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 742,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 104,
-      "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M743V",
-   "position": 743,
-   "wild_type": "M",
-   "mutant": "V",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000429837"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV001823565",
-    "RCV004719178"
-   ],
-   "dbsnp": [
-    "rs2147530802"
-   ],
-   "diseases": [
-    "Androgen insensitivity, partial (PAIS)"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -2369,6 +2408,15 @@
    "diseases": [
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000009858"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -2406,6 +2454,15 @@
     "Kennedy disease (SMAX1)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009857"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2436,6 +2493,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002925679"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -2470,6 +2536,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV001065434"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2502,6 +2577,15 @@
     "Androgen insensitivity, partial (PAIS)",
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000658947"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -2536,6 +2620,15 @@
     "Androgen insensitivity, partial (PAIS)",
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000426560"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -2572,6 +2665,15 @@
     "Androgen resistance syndrome (AIS)",
     "Differences in sex development",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000492792"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -2613,6 +2715,15 @@
     "Partial androgen insensitivity syndrome (PAIS)",
     "Prostate cancer, hereditary, X-linked 3"
    ],
+   "clinvar_vcv": [
+    "VCV002572770"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2622,35 +2733,6 @@
       "label_asym_id": "A",
       "label_seq_id": 118,
       "comp_id": "ASN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R761S",
-   "position": 761,
-   "wild_type": "R",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001227160",
-    "RCV004546621"
-   ],
-   "dbsnp": [
-    "rs2076118894"
-   ],
-   "diseases": [],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 760,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 122,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -2671,6 +2753,15 @@
    ],
    "diseases": [
     "Partial androgen insensitivity syndrome (PAIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000009810"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -2700,6 +2791,15 @@
     "rs1064794065"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000419720"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2735,6 +2835,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000458363"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2765,6 +2874,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000492794"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -2798,6 +2916,15 @@
     "Androgen insensitivity, partial (PAIS)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000280062"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2827,6 +2954,15 @@
    ],
    "diseases": [
     "Partial androgen insensitivity syndrome (PAIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002507021"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -2861,6 +2997,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000009804"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -2898,6 +3043,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000009819"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2927,6 +3081,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002674671"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -2962,6 +3125,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000989383"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -2996,6 +3168,18 @@
     "Androgen insensitivity, partial (PAIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009842",
+    "VCV000492796"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3026,6 +3210,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000915284"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3054,6 +3247,15 @@
     "rs2147535633"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002573828"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3086,6 +3288,15 @@
     "Male infertility",
     "Nevi and Melanomas"
    ],
+   "clinvar_vcv": [
+    "VCV003061775"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3117,6 +3328,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009814"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3126,42 +3346,6 @@
       "label_asym_id": "A",
       "label_seq_id": 149,
       "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Q799E",
-   "position": 799,
-   "wild_type": "Q",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000010520",
-    "RCV000224621",
-    "RCV001519068",
-    "RCV002247311",
-    "RCV003234899",
-    "RCV003982835"
-   ],
-   "dbsnp": [
-    "rs137852591"
-   ],
-   "diseases": [
-    "Partial androgen insensitivity syndrome (PAIS)",
-    "Prostate cancer"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 798,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 160,
-      "comp_id": "GLN"
      }
     ]
    }
@@ -3181,6 +3365,15 @@
     "rs2076137708"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000988427"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3190,38 +3383,6 @@
       "label_asym_id": "A",
       "label_seq_id": 165,
       "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "C807Y",
-   "position": 807,
-   "wild_type": "C",
-   "mutant": "Y",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000482241",
-    "RCV001056954"
-   ],
-   "dbsnp": [
-    "rs1064793480"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Androgen insensitivity, partial (PAIS)"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 806,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 168,
-      "comp_id": "CYS"
      }
     ]
    }
@@ -3248,6 +3409,15 @@
     "Kennedy disease (SMAX1)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009847"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3257,38 +3427,6 @@
       "label_asym_id": "A",
       "label_seq_id": 169,
       "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L813F",
-   "position": 813,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000581776",
-    "RCV000813385"
-   ],
-   "dbsnp": [
-    "rs1555997625"
-   ],
-   "diseases": [
-    "Androgen insensitivity syndrome (AIS)",
-    "Androgen resistance syndrome (AIS)"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 812,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 174,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -3308,6 +3446,15 @@
     "rs1555997626"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000449459"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3342,6 +3489,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV002631223"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3351,39 +3507,6 @@
       "label_asym_id": "A",
       "label_seq_id": 186,
       "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F827L",
-   "position": 827,
-   "wild_type": "F",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003795561",
-    "RCV003801553",
-    "RCV003966674",
-    "RCV003984425"
-   ],
-   "dbsnp": [
-    "rs200801099"
-   ],
-   "diseases": [
-    "Male infertility"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 826,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 188,
-      "comp_id": "PHE"
      }
     ]
    }
@@ -3404,6 +3527,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001686658"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -3436,6 +3568,15 @@
    "diseases": [
     "Male infertility"
    ],
+   "clinvar_vcv": [
+    "VCV001244244"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3467,6 +3608,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV002925681"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3496,6 +3646,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001699233"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -3531,6 +3690,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000458366"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3540,37 +3708,6 @@
       "label_asym_id": "A",
       "label_seq_id": 193,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I836S",
-   "position": 836,
-   "wild_type": "I",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001251210",
-    "RCV002568712"
-   ],
-   "dbsnp": [
-    "rs2076141961"
-   ],
-   "diseases": [
-    "Androgen resistance syndrome (AIS)"
-   ],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 835,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 197,
-      "comp_id": "ILE"
      }
     ]
    }
@@ -3592,6 +3729,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001460367"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -3632,6 +3778,15 @@
     "Kennedy disease (SMAX1)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009830"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3670,6 +3825,15 @@
     "Kennedy disease (SMAX1)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009829"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3704,6 +3868,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)",
     "Partial androgen insensitivity syndrome (PAIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000658124"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -3740,6 +3913,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)",
     "Neoplasm"
+   ],
+   "clinvar_vcv": [
+    "VCV000279687"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -3778,6 +3960,15 @@
     "Male infertility",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009823"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3808,6 +3999,15 @@
    ],
    "diseases": [
     "Differences in sex development"
+   ],
+   "clinvar_vcv": [
+    "VCV000279688"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "5cj6": [
@@ -3841,6 +4041,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000951460"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3872,6 +4081,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009816"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3881,35 +4099,6 @@
       "label_asym_id": "A",
       "label_seq_id": 218,
       "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L864P",
-   "position": 864,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001269737",
-    "RCV003770409"
-   ],
-   "dbsnp": [
-    "rs2076142560"
-   ],
-   "diseases": [],
-   "structures": {
-    "5cj6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 863,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 225,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -3931,6 +4120,15 @@
    "diseases": [
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000492800"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -3963,6 +4161,15 @@
     "Androgen insensitivity syndrome (AIS)",
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000009854"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -3993,6 +4200,15 @@
    "diseases": [
     "Androgen insensitivity, partial (PAIS)",
     "Partial androgen insensitivity syndrome (PAIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000009822"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -4032,6 +4248,15 @@
     "Partial androgen insensitivity syndrome (PAIS)",
     "Prostate cancer"
    ],
+   "clinvar_vcv": [
+    "VCV000009806"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4062,6 +4287,15 @@
    "diseases": [
     "Androgen insensitivity, partial (PAIS)",
     "Hypospadias 1, X-linked (HYSP1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000009824"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -4104,6 +4338,15 @@
     "Kennedy disease (SMAX1)",
     "Partial androgen insensitivity syndrome (PAIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000492801"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4137,6 +4380,15 @@
     "Neoplasm",
     "Prostate cancer, somatic"
    ],
+   "clinvar_vcv": [
+    "VCV000009834"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4169,6 +4421,15 @@
     "Neoplasm",
     "Prostate cancer, somatic"
    ],
+   "clinvar_vcv": [
+    "VCV000009831"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4198,6 +4459,15 @@
    ],
    "diseases": [
     "Prostate cancer, somatic"
+   ],
+   "clinvar_vcv": [
+    "VCV000009833"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -4229,6 +4499,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV002502891"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4258,6 +4537,15 @@
    ],
    "diseases": [
     "Androgen resistance syndrome (AIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001202585"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -4295,6 +4583,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000279690"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4329,6 +4626,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000654813"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4359,6 +4665,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002925682"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5cj6": [
@@ -4391,6 +4706,15 @@
     "Androgen resistance syndrome (AIS)",
     "Kennedy disease (SMAX1)"
    ],
+   "clinvar_vcv": [
+    "VCV000464801"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4420,6 +4744,15 @@
    ],
    "diseases": [
     "Prostate cancer, somatic"
+   ],
+   "clinvar_vcv": [
+    "VCV000009835"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5cj6": [
@@ -4451,6 +4784,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV001333387"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4479,6 +4821,15 @@
     "rs1131691681"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000429930"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4507,6 +4858,15 @@
     "rs1064795250"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000421614"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4537,6 +4897,15 @@
    "diseases": [
     "Androgen resistance syndrome (AIS)"
    ],
+   "clinvar_vcv": [
+    "VCV000987520"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5cj6": [
      {
@@ -4554,7 +4923,351 @@
  "rejected": [
   {
    "variant": "F575V",
+   "position": 575,
    "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "V3M",
+   "position": 3,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001488550"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Q58L",
+   "position": 58,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000402390"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A159T",
+   "position": 159,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000492777"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "K301R",
+   "position": 301,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002445389"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E355Q",
+   "position": 355,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001685533"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L369P",
+   "position": 369,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002690948"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P392R",
+   "position": 392,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001685534"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P392S",
+   "position": 392,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000216890"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G396R",
+   "position": 396,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002445332"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S434F",
+   "position": 434,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001167626"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P505T",
+   "position": 505,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000522694"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P549S",
+   "position": 549,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000009840"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "D551H",
+   "position": 551,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001685539"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S598G",
+   "position": 598,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001244234"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S598T",
+   "position": 598,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000988325"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C615S",
+   "position": 615,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000653501"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A646D",
+   "position": 646,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000009861"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "K659R",
+   "position": 659,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002445341"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "H690Q",
+   "position": 690,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000946216"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A720V",
+   "position": 720,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001062965"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A722T",
+   "position": 722,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000009836"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R727L",
+   "position": 727,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000009849"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V731M",
+   "position": 731,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000009817"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M743V",
+   "position": 743,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001339111"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R761S",
+   "position": 761,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000954661"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Q799E",
+   "position": 799,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000009846"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C807Y",
+   "position": 807,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000418862"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L813F",
+   "position": 813,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000492797"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "F827L",
+   "position": 827,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002932347",
+    "VCV002947363"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity",
+    "Likely benign"
+   ]
+  },
+  {
+   "variant": "I836S",
+   "position": 836,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000974911"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "L864P",
+   "position": 864,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000988401"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
   }
  ],
  "structure_mismatches": [],

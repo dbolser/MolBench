@@ -7,7 +7,9 @@
  "disease": "congenital cataract",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P07320",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 174,
  "uniprot_sequence_sha256": "d1b3e2505e53d2a5900867dadc574b42d9de143dfb44aa0420ad7cfc107b7ae0",
  "primary_entry": "1hk0",
@@ -58,6 +60,15 @@
     "Cataract 4 multiple types",
     "Cataract 4, multiple types (CTRCT4)"
    ],
+   "clinvar_vcv": [
+    "VCV000016937"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hk0": [
      {
@@ -89,6 +100,15 @@
     "Cataract 4 multiple types",
     "Cataract 4, multiple types (CTRCT4)"
    ],
+   "clinvar_vcv": [
+    "VCV000016942"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hk0": [
      {
@@ -117,6 +137,15 @@
     "rs1694933681"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002580739"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hk0": [
      {
@@ -140,12 +169,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000018448",
     "RCV000171329",
-    "RCV000203330",
-    "RCV001061709",
-    "RCV001596934",
-    "RCV004730848",
     "RCV004730893"
    ],
    "dbsnp": [
@@ -158,6 +182,15 @@
     "Cataract 4 multiple types",
     "Cataract 4, multiple types (CTRCT4)",
     "Developmental cataract"
+   ],
+   "clinvar_vcv": [
+    "VCV000191146"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hk0": [
@@ -188,6 +221,15 @@
    ],
    "diseases": [
     "Aculeiform cataract (CTRCT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV001994732"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hk0": [
@@ -222,6 +264,15 @@
     "Aculeiform cataract (CTRCT4)",
     "Cataract 4 multiple types",
     "Cataract 4, multiple types (CTRCT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV000016938"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hk0": [

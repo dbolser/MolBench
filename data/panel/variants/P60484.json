@@ -7,7 +7,9 @@
  "disease": "PTEN hamartoma tumour syndrome",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P60484",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 403,
  "uniprot_sequence_sha256": "2675a6cc946076d70342977845afe793269c5987a998382100bede64d1e61b42",
  "primary_entry": "1d5r",
@@ -33,8 +35,8 @@
     "auth_chain_differs_from_label_chain": false
    },
    "not_observed": 3,
-   "outside_construct": 8,
-   "verified": 258
+   "outside_construct": 7,
+   "verified": 181
   }
  },
  "variants": [
@@ -54,6 +56,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001457954"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -75,6 +86,15 @@
    "diseases": [
     "Cowden syndrome 1 (CWS1)",
     "Macrocephaly-autism syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV003148533"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -101,6 +121,15 @@
     "PTEN-related disorder",
     "Syndromic microphthalmia"
    ],
+   "clinvar_vcv": [
+    "VCV002674279"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -120,6 +149,15 @@
    "diseases": [
     "Cowden syndrome 1 (CWS1)",
     "Cystic, Mucinous and Serous Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV001686106"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -147,25 +185,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "I4V",
-   "position": 4,
-   "wild_type": "I",
-   "mutant": "V",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000484600"
    ],
-   "clinvar": [
-    "RCV002281488",
-    "RCV002295377",
-    "RCV002427753"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs1647701808"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
-   "diseases": [],
    "structures": {}
   },
   {
@@ -186,6 +214,15 @@
    "diseases": [
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV003254879"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -212,6 +249,15 @@
     "Gliomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000644390"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -230,6 +276,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000427586"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -260,41 +315,16 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000988004"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
-  },
-  {
-   "variant": "R14G",
-   "position": 14,
-   "wild_type": "R",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000490585",
-    "RCV000492940",
-    "RCV001262189",
-    "RCV003159590"
-   ],
-   "dbsnp": [
-    "rs1085308047"
-   ],
-   "diseases": [
-    "Cowden syndrome 1 (CWS1)",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 14,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 8,
-      "comp_id": "ARG"
-     }
-    ]
-   }
   },
   {
    "variant": "R15I",
@@ -317,6 +347,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Neoplasms, NOS",
     "Neuroepitheliomatous Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV004530405"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -350,6 +389,15 @@
     "Adenomas and Adenocarcinomas",
     "Gliomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000404147"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -393,6 +441,17 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000419769",
+    "VCV000428194"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -427,6 +486,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000428243"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -458,37 +526,14 @@
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 16,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 10,
-      "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y16H",
-   "position": 16,
-   "wild_type": "Y",
-   "mutant": "H",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000422899"
    ],
-   "clinvar": [
-    "RCV000491437",
-    "RCV001821414",
-    "RCV003449271"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs1064796078"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -499,70 +544,6 @@
       "label_asym_id": "A",
       "label_seq_id": 10,
       "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Q17E",
-   "position": 17,
-   "wild_type": "Q",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000563631",
-    "RCV001556501",
-    "RCV004553261",
-    "RCV004555587"
-   ],
-   "dbsnp": [
-    "rs786204910"
-   ],
-   "diseases": [
-    "Macrocephaly-autism syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 17,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 11,
-      "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D19N",
-   "position": 19,
-   "wild_type": "D",
-   "mutant": "N",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000008285",
-    "RCV001228979"
-   ],
-   "dbsnp": [
-    "rs121909233"
-   ],
-   "diseases": [
-    "Melanoma"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 19,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 13,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -584,6 +565,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002001733"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -618,6 +608,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000428266"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -627,38 +626,6 @@
       "label_asym_id": "A",
       "label_seq_id": 14,
       "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D22G",
-   "position": 22,
-   "wild_type": "D",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000571172",
-    "RCV004794415",
-    "RCV006463408"
-   ],
-   "dbsnp": [
-    "rs1554890398"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 22,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 16,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -682,6 +649,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000233456"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -713,6 +689,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV003231166"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -743,6 +728,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000468706"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -778,6 +772,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000234830"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -815,6 +818,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000208723"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -861,6 +873,15 @@
     "Ovarian neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000186005"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -895,6 +916,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000185200"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -927,6 +957,15 @@
     "Adenomas and Adenocarcinomas",
     "Cowden syndrome 1 (CWS1)",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001511392"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -961,6 +1000,15 @@
     "Cowden syndrome 1 (CWS1)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000189398"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -983,10 +1031,8 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000580950",
     "RCV001379693",
-    "RCV004728698",
-    "RCV006699293"
+    "RCV004728698"
    ],
    "dbsnp": [
     "rs786201506"
@@ -995,36 +1041,14 @@
     "Gliomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 25,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 19,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L25S",
-   "position": 25,
-   "wild_type": "L",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV001068214"
    ],
-   "clinvar": [
-    "RCV000169853",
-    "RCV004943766"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs786204912"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -1062,6 +1086,15 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000189399"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1092,6 +1125,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000234410"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -1130,6 +1172,15 @@
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000404160"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1158,6 +1209,15 @@
     "rs886041877"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002663192"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1190,6 +1250,15 @@
     "Adenomas and Adenocarcinomas",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002735432"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -1228,6 +1297,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000280724"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1237,76 +1315,6 @@
       "label_asym_id": "A",
       "label_seq_id": 21,
       "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I28S",
-   "position": 28,
-   "wild_type": "I",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001300064",
-    "RCV006424757"
-   ],
-   "dbsnp": [
-    "rs1355570425"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 28,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 22,
-      "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I28T",
-   "position": 28,
-   "wild_type": "I",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001553520",
-    "RCV003771693",
-    "RCV004762159",
-    "RCV004945693",
-    "RCV006705553"
-   ],
-   "dbsnp": [
-    "rs1355570425"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cowden syndrome 1 (CWS1)",
-    "Hereditary cancer-predisposing syndrome",
-    "Macrocephaly-autism syndrome",
-    "PTEN hamartoma tumor syndrome (PHTS)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 28,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 22,
-      "comp_id": "ILE"
      }
     ]
    }
@@ -1329,6 +1337,15 @@
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000943637"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1338,40 +1355,6 @@
       "label_asym_id": "A",
       "label_seq_id": 25,
       "comp_id": "ASN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I33T",
-   "position": 33,
-   "wild_type": "I",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000645042",
-    "RCV001019879",
-    "RCV001861665",
-    "RCV004586849"
-   ],
-   "dbsnp": [
-    "rs1554893771"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cowden syndrome 1 (CWS1)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 33,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 27,
-      "comp_id": "ILE"
      }
     ]
    }
@@ -1398,6 +1381,15 @@
     "Gliomas",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000822002"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -1432,6 +1424,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000007825"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -1471,6 +1472,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000231916"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1509,6 +1519,15 @@
     "Gliomas",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000486972"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -1553,6 +1572,16 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000189400",
+    "VCV001334551"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1583,6 +1612,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001012092"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -1619,6 +1657,15 @@
     "Nevi and Melanomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000818421"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1649,39 +1696,14 @@
    "diseases": [
     "Squamous Cell Neoplasms"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 38,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 32,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P38S",
-   "position": 38,
-   "wild_type": "P",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000424262"
    ],
-   "clinvar": [
-    "RCV000505774",
-    "RCV000580831",
-    "RCV001078172"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs587780004"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Hereditary cancer-predisposing syndrome",
-    "Nevi and Melanomas"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -1714,6 +1736,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000229912"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1745,6 +1776,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001506231"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -1782,6 +1822,15 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV002022313"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1791,39 +1840,6 @@
       "label_asym_id": "A",
       "label_seq_id": 33,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E43K",
-   "position": 43,
-   "wild_type": "E",
-   "mutant": "K",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000562181",
-    "RCV005091440"
-   ],
-   "dbsnp": [
-    "rs1554893808"
-   ],
-   "diseases": [
-    "Nevi and Melanomas",
-    "PTEN hamartoma tumor syndrome (PHTS)",
-    "Squamous Cell Neoplasms"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 43,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 37,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -1850,6 +1866,15 @@
     "Gliomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000427582"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -1859,70 +1884,6 @@
       "label_asym_id": "A",
       "label_seq_id": 38,
       "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y46C",
-   "position": 46,
-   "wild_type": "Y",
-   "mutant": "C",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001874356",
-    "RCV006635551",
-    "RCV006713774"
-   ],
-   "dbsnp": [
-    "rs786204915"
-   ],
-   "diseases": [
-    "Autosomal dominant PTEN-related disorders",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 46,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 40,
-      "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y46D",
-   "position": 46,
-   "wild_type": "Y",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000484857",
-    "RCV005702205"
-   ],
-   "dbsnp": [
-    "rs1064793325"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 46,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 40,
-      "comp_id": "TYR"
      }
     ]
    }
@@ -1943,6 +1904,15 @@
    ],
    "diseases": [
     "Gliomas"
+   ],
+   "clinvar_vcv": [
+    "VCV001701143"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -1976,6 +1946,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000189401"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -2013,6 +1992,15 @@
     "Lymphoid Leukemias",
     "Nevi and Melanomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000373446"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -2054,6 +2042,16 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000231771",
+    "VCV000580731"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2088,6 +2086,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Gliomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001379224"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -2124,6 +2131,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000492727"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2133,34 +2149,6 @@
       "label_asym_id": "A",
       "label_seq_id": 44,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V53A",
-   "position": 53,
-   "wild_type": "V",
-   "mutant": "A",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001171773"
-   ],
-   "dbsnp": [
-    "rs786203375"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 53,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 47,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -2183,6 +2171,15 @@
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV002136907"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2192,40 +2189,6 @@
       "label_asym_id": "A",
       "label_seq_id": 47,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F56C",
-   "position": 56,
-   "wild_type": "F",
-   "mutant": "C",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001365709",
-    "RCV004789549",
-    "RCV004945079",
-    "RCV006745536"
-   ],
-   "dbsnp": [
-    "rs748031178"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Macrocephaly-autism syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 56,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 50,
-      "comp_id": "PHE"
      }
     ]
    }
@@ -2247,6 +2210,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV001777889"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2256,98 +2228,6 @@
       "label_asym_id": "A",
       "label_seq_id": 50,
       "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L57S",
-   "position": 57,
-   "wild_type": "L",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002398877",
-    "RCV005097697"
-   ],
-   "dbsnp": [
-    "rs786202398"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 57,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 51,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S59P",
-   "position": 59,
-   "wild_type": "S",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000464900",
-    "RCV006550072"
-   ],
-   "dbsnp": [
-    "rs1060500118"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cowden syndrome 1 (CWS1)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 59,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 53,
-      "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "H61N",
-   "position": 61,
-   "wild_type": "H",
-   "mutant": "N",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV002410327",
-    "RCV004797998"
-   ],
-   "dbsnp": [
-    "rs121909236"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 61,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 55,
-      "comp_id": "HIS"
      }
     ]
    }
@@ -2368,6 +2248,15 @@
    ],
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV003231146"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -2403,6 +2292,15 @@
     "Osseous and Chondromatous Neoplasms",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV002574362"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2412,38 +2310,6 @@
       "label_asym_id": "A",
       "label_seq_id": 58,
       "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y65D",
-   "position": 65,
-   "wild_type": "Y",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV004698000",
-    "RCV005264552"
-   ],
-   "dbsnp": [
-    "rs587780005"
-   ],
-   "diseases": [
-    "Cystic, Mucinous and Serous Neoplasms",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 65,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 59,
-      "comp_id": "TYR"
      }
     ]
    }
@@ -2464,6 +2330,15 @@
    ],
    "diseases": [
     "Not Reported"
+   ],
+   "clinvar_vcv": [
+    "VCV002499958"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -2497,6 +2372,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001691744"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -2537,6 +2421,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000233777"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2567,6 +2460,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000536540"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -2615,6 +2517,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Prostate cancer"
    ],
+   "clinvar_vcv": [
+    "VCV000189474"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2624,35 +2535,6 @@
       "label_asym_id": "A",
       "label_seq_id": 62,
       "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "N69H",
-   "position": 69,
-   "wild_type": "N",
-   "mutant": "H",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001191786",
-    "RCV005648104"
-   ],
-   "dbsnp": [
-    "rs1859805185"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 63,
-      "comp_id": "ASN"
      }
     ]
    }
@@ -2685,36 +2567,14 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Prostate cancer"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 70,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 64,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L70R",
-   "position": 70,
-   "wild_type": "L",
-   "mutant": "R",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000007826"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV002424183",
-    "RCV006471132"
-   ],
-   "dbsnp": [
-    "rs121909226"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -2725,40 +2585,6 @@
       "label_asym_id": "A",
       "label_seq_id": 64,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "C71F",
-   "position": 71,
-   "wild_type": "C",
-   "mutant": "F",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000551939",
-    "RCV001014557",
-    "RCV004554806",
-    "RCV004791555"
-   ],
-   "dbsnp": [
-    "rs1554897856"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome",
-    "PTEN-related disorder"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 71,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 65,
-      "comp_id": "CYS"
      }
     ]
    }
@@ -2781,6 +2607,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000820795"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -2824,6 +2659,15 @@
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000936561"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2852,6 +2696,15 @@
     "rs876661177"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000234710"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2891,6 +2744,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000976246"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -2923,6 +2785,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428196"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -2960,6 +2831,15 @@
     "Cowden syndrome 4 (CWS4)",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000565960"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -2999,6 +2879,15 @@
     "Myomatous Neoplasms",
     "Soft Tissue Tumors and Sarcomas, NOS"
    ],
+   "clinvar_vcv": [
+    "VCV001795656"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3033,6 +2922,15 @@
     "Cystic, Mucinous and Serous Neoplasms",
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000468679"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -3077,6 +2975,15 @@
     "Squamous Cell Neoplasms",
     "Transitional Cell Papillomas and Carcinomas"
    ],
+   "clinvar_vcv": [
+    "VCV000007848"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3115,6 +3022,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000646993"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3124,38 +3040,6 @@
       "label_asym_id": "A",
       "label_seq_id": 87,
       "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P95A",
-   "position": 95,
-   "wild_type": "P",
-   "mutant": "A",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002435226",
-    "RCV003775392",
-    "RCV005645391"
-   ],
-   "dbsnp": [
-    "rs1114167630"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 95,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 89,
-      "comp_id": "PRO"
      }
     ]
    }
@@ -3183,104 +3067,23 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 95,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 89,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P95S",
-   "position": 95,
-   "wild_type": "P",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000189403"
    ],
-   "clinvar": [
-    "RCV001886558",
-    "RCV003236903"
-   ],
-   "dbsnp": [
-    "rs1114167630"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 95,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 89,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P95T",
-   "position": 95,
-   "wild_type": "P",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000490841",
-    "RCV001851331"
-   ],
-   "dbsnp": [
-    "rs1114167630"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 95,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 89,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P96A",
-   "position": 96,
-   "wild_type": "P",
-   "mutant": "A",
-   "significance": [
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000269234",
-    "RCV003619665",
-    "RCV006699250"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
-   "dbsnp": [
-    "rs398123320"
-   ],
-   "diseases": [],
    "structures": {
     "1d5r": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 96,
+      "auth_seq_id": 95,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 90,
+      "label_seq_id": 89,
       "comp_id": "PRO"
      }
     ]
@@ -3307,6 +3110,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000449089"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -3340,6 +3152,15 @@
     "Adenomas and Adenocarcinomas",
     "Cowden syndrome 1 (CWS1)",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001457597"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -3376,6 +3197,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000492730"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3405,6 +3235,15 @@
    ],
    "diseases": [
     "Adenomas and Adenocarcinomas"
+   ],
+   "clinvar_vcv": [
+    "VCV000092819"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -3440,6 +3279,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000404143"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3470,6 +3318,15 @@
    ],
    "diseases": [
     "Gliomas"
+   ],
+   "clinvar_vcv": [
+    "VCV001207213"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -3504,6 +3361,15 @@
     "Adenomas and Adenocarcinomas",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000648578"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -3551,6 +3417,15 @@
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000822660"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3560,37 +3435,6 @@
       "label_asym_id": "A",
       "label_seq_id": 95,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F104S",
-   "position": 104,
-   "wild_type": "F",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002991737",
-    "RCV005714892"
-   ],
-   "dbsnp": [
-    "rs1564829958"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 104,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 98,
-      "comp_id": "PHE"
      }
     ]
    }
@@ -3614,6 +3458,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Melanoma",
     "Nevi and Melanomas"
+   ],
+   "clinvar_vcv": [
+    "VCV001728081"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -3649,6 +3502,15 @@
     "Gliomas",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000142261"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -3686,6 +3548,15 @@
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000372481"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3721,6 +3592,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000484614"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3730,38 +3610,6 @@
       "label_asym_id": "A",
       "label_seq_id": 101,
       "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L108F",
-   "position": 108,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003310463",
-    "RCV003484414"
-   ],
-   "dbsnp": [
-    "rs2132242585"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome",
-    "Nevi and Melanomas"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 108,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 102,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -3790,6 +3638,15 @@
     "Nevi and Melanomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000418436"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -3799,38 +3656,6 @@
       "label_asym_id": "A",
       "label_seq_id": 102,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "W111G",
-   "position": 111,
-   "wild_type": "W",
-   "mutant": "G",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001205575",
-    "RCV006705468"
-   ],
-   "dbsnp": [
-    "rs398123321"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "PTEN-related disorder"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 111,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 105,
-      "comp_id": "TRP"
      }
     ]
    }
@@ -3861,6 +3686,15 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000092820"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -3897,36 +3731,14 @@
     "Lhermitte-Duclos disease (LDD)",
     "Transitional Cell Papillomas and Carcinomas"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 112,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 106,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L112Q",
-   "position": 112,
-   "wild_type": "L",
-   "mutant": "Q",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000007832"
    ],
-   "clinvar": [
-    "RCV003311157",
-    "RCV003509803"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs121909230"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -3959,6 +3771,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Cowden syndrome 1 (CWS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002674303"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -3996,6 +3817,15 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV001406308"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4005,38 +3835,6 @@
       "label_asym_id": "A",
       "label_seq_id": 106,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D115G",
-   "position": 115,
-   "wild_type": "D",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000210160",
-    "RCV000988418",
-    "RCV006249613"
-   ],
-   "dbsnp": [
-    "rs869312775"
-   ],
-   "diseases": [
-    "Cowden syndrome (CS)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 115,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 109,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -4060,38 +3858,14 @@
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 118,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 112,
-      "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "H118Y",
-   "position": 118,
-   "wild_type": "H",
-   "mutant": "Y",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV002624869"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV000684887",
-    "RCV002334244",
-    "RCV003233811"
-   ],
-   "dbsnp": [
-    "rs1564830084"
-   ],
-   "diseases": [
-    "Gliomas",
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -4128,6 +3902,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000428193"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4158,6 +3941,15 @@
    "diseases": [
     "Gliomas",
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000484619"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -4192,6 +3984,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000428226"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4201,97 +4002,6 @@
       "label_asym_id": "A",
       "label_seq_id": 113,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A120E",
-   "position": 120,
-   "wild_type": "A",
-   "mutant": "E",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000491068",
-    "RCV002523976"
-   ],
-   "dbsnp": [
-    "rs1114167647"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 120,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 114,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A120T",
-   "position": 120,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000169875",
-    "RCV006461693"
-   ],
-   "dbsnp": [
-    "rs786204930"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 120,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 114,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A121G",
-   "position": 121,
-   "wild_type": "A",
-   "mutant": "G",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000008291",
-    "RCV006634356"
-   ],
-   "dbsnp": [
-    "rs121909237"
-   ],
-   "diseases": [
-    "Squamous cell carcinoma of the head and neck (HNSCC)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 121,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 115,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -4312,6 +4022,15 @@
     "rs2132242979"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002687614"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4343,6 +4062,15 @@
    "diseases": [
     "Gliomas"
    ],
+   "clinvar_vcv": [
+    "VCV002502558"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4352,40 +4080,6 @@
       "label_asym_id": "A",
       "label_seq_id": 115,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I122S",
-   "position": 122,
-   "wild_type": "I",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001020824",
-    "RCV001214316",
-    "RCV003455115",
-    "RCV006453517"
-   ],
-   "dbsnp": [
-    "rs1589646321"
-   ],
-   "diseases": [
-    "Cowden syndrome 1 (CWS1)",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 122,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 116,
-      "comp_id": "ILE"
      }
     ]
    }
@@ -4413,6 +4107,15 @@
     "Ductal and Lobular Neoplasms",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428277"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -4444,6 +4147,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000427587"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -4483,6 +4195,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000007816"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4520,6 +4241,15 @@
     "Not Reported",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000189486"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4556,6 +4286,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Not Reported",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000185817"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -4595,6 +4334,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000007817"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4630,6 +4378,15 @@
     "Glioma susceptibility 2 (GLM2)",
     "Hereditary cancer-predisposing syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV002447220"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4662,6 +4419,15 @@
    "diseases": [
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV001734391"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -4699,6 +4465,15 @@
     "Nevi and Melanomas",
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000233631"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -4738,6 +4513,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV001338262"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4767,6 +4551,15 @@
    ],
    "diseases": [
     "Macrocephaly-autism syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV001803052"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -4799,6 +4592,15 @@
    "diseases": [
     "Cowden syndrome 1 (CWS1)",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001067089"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -4840,6 +4642,15 @@
     "Macrocephaly",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000428234"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4873,6 +4684,15 @@
     "Gliomas",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428225"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -4914,6 +4734,18 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000139568",
+    "VCV002674283"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4949,6 +4781,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000958105"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -4982,6 +4823,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000428220"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5014,6 +4864,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000864223"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -5058,6 +4917,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000007812"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5098,6 +4966,16 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000189484",
+    "VCV000804339"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5135,6 +5013,18 @@
     "Gliomas",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000439290",
+    "VCV000856036"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -5180,6 +5070,15 @@
     "Neoplasms, NOS",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000375958"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5221,6 +5120,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000376509"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5255,6 +5163,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000142018"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -5308,6 +5225,15 @@
     "Soft Tissue Tumors and Sarcomas, NOS",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000007829"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5344,36 +5270,14 @@
     "Macrocephaly/autism syndrome (MCEPHAS)",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 131,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 125,
-      "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "T131N",
-   "position": 131,
-   "wild_type": "T",
-   "mutant": "N",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000039669"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV003326672",
-    "RCV003509780"
-   ],
-   "dbsnp": [
-    "rs397514560"
-   ],
-   "diseases": [
-    "Macrocephaly-autism syndrome"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -5414,6 +5318,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000092822"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5451,6 +5364,15 @@
     "Macrocephaly-autism syndrome",
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000856796"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -5492,6 +5414,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000007852"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5501,41 +5432,6 @@
       "label_asym_id": "A",
       "label_seq_id": 126,
       "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V133I",
-   "position": 133,
-   "wild_type": "V",
-   "mutant": "I",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001247012",
-    "RCV002265016",
-    "RCV004734078",
-    "RCV005232215",
-    "RCV006261703",
-    "RCV006424753"
-   ],
-   "dbsnp": [
-    "rs1859977307"
-   ],
-   "diseases": [
-    "PTEN hamartoma tumor syndrome (PHTS)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 133,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 127,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -5561,6 +5457,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000427588"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -5592,6 +5497,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002033861"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -5630,37 +5544,14 @@
     "Macrocephaly-autism syndrome",
     "Prostate cancer"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 135,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 129,
-      "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I135M",
-   "position": 135,
-   "wild_type": "I",
-   "mutant": "M",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000428235"
    ],
-   "clinvar": [
-    "RCV002321359",
-    "RCV003619769",
-    "RCV004774661"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs2132243411"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -5700,6 +5591,15 @@
     "Ovarian neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000142287"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5733,6 +5633,15 @@
     "Cowden syndrome 1 (CWS1)",
     "Hereditary cancer-predisposing syndrome",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV001737618"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -5787,6 +5696,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000183726"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5822,6 +5740,15 @@
     "Cowden syndrome (CS)",
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000224543"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -5863,6 +5790,15 @@
     "Malignant tumor of urinary bladder",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000189406"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -5872,36 +5808,6 @@
       "label_asym_id": "A",
       "label_seq_id": 130,
       "comp_id": "CYS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L139F",
-   "position": 139,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002333445",
-    "RCV002635345",
-    "RCV006742059"
-   ],
-   "dbsnp": [
-    "rs1057520407"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 139,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 133,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -5926,76 +5832,24 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 141,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 135,
-      "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "H141R",
-   "position": 141,
-   "wild_type": "H",
-   "mutant": "R",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000216422"
    ],
-   "clinvar": [
-    "RCV000485832",
-    "RCV000491388",
-    "RCV001270813",
-    "RCV006736236"
-   ],
-   "dbsnp": [
-    "rs863224666"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 141,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 135,
-      "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R142G",
-   "position": 142,
-   "wild_type": "R",
-   "mutant": "G",
-   "significance": [
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV002329840",
-    "RCV003102546",
-    "RCV006742055"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
-   "dbsnp": [
-    "rs746152219"
-   ],
-   "diseases": [],
    "structures": {
     "1d5r": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 142,
+      "auth_seq_id": 141,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 136,
-      "comp_id": "ARG"
+      "label_seq_id": 135,
+      "comp_id": "HIS"
      }
     ]
    }
@@ -6020,44 +5874,14 @@
     "Hereditary cancer-predisposing syndrome",
     "Squamous Cell Neoplasms"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 142,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 136,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R142W",
-   "position": 142,
-   "wild_type": "R",
-   "mutant": "W",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000486225"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV000178760",
-    "RCV000533070",
-    "RCV000777249",
-    "RCV002243863",
-    "RCV003454464",
-    "RCV004700542"
-   ],
-   "dbsnp": [
-    "rs746152219"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Complex Epithelial Neoplasms",
-    "Cowden syndrome 1 (CWS1)",
-    "Hereditary cancer-predisposing syndrome",
-    "Nevi and Melanomas"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -6068,187 +5892,6 @@
       "label_asym_id": "A",
       "label_seq_id": 136,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E150G",
-   "position": 150,
-   "wild_type": "E",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000534584",
-    "RCV002464252",
-    "RCV005702234"
-   ],
-   "dbsnp": [
-    "rs1554898193"
-   ],
-   "diseases": [
-    "Macrocephaly-autism syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 150,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 144,
-      "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L152P",
-   "position": 152,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000645058",
-    "RCV005260274"
-   ],
-   "dbsnp": [
-    "rs1554898197"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 152,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 146,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L152V",
-   "position": 152,
-   "wild_type": "L",
-   "mutant": "V",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003484271",
-    "RCV003619852",
-    "RCV004364860",
-    "RCV006742072"
-   ],
-   "dbsnp": [
-    "rs1064795450"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 152,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 146,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D153H",
-   "position": 153,
-   "wild_type": "D",
-   "mutant": "H",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001249696",
-    "RCV005057156",
-    "RCV006742030"
-   ],
-   "dbsnp": [
-    "rs9651492"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 153,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 147,
-      "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F154C",
-   "position": 154,
-   "wild_type": "F",
-   "mutant": "C",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001530011"
-   ],
-   "dbsnp": [
-    "rs1313989099"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 154,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 148,
-      "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F154I",
-   "position": 154,
-   "wild_type": "F",
-   "mutant": "I",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003510057",
-    "RCV006742077"
-   ],
-   "dbsnp": [
-    "rs2132243914"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 154,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 148,
-      "comp_id": "PHE"
      }
     ]
    }
@@ -6293,6 +5936,15 @@
     "Papillary tumor of the pineal region",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000404168"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -6328,6 +5980,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Macrocephaly-autism syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000428237"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -6359,6 +6020,15 @@
    "diseases": [
     "Cowden syndrome 1 (CWS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000547759"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -6368,37 +6038,6 @@
       "label_asym_id": "A",
       "label_seq_id": 149,
       "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E157G",
-   "position": 157,
-   "wild_type": "E",
-   "mutant": "G",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000490604",
-    "RCV000497161"
-   ],
-   "dbsnp": [
-    "rs1085308051"
-   ],
-   "diseases": [
-    "PTEN hamartoma tumor syndrome (PHTS)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 157,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 151,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -6425,6 +6064,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Not Reported",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000186094"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -6459,6 +6107,15 @@
     "Gliomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000646006"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -6482,7 +6139,6 @@
    ],
    "clinvar": [
     "RCV000790886",
-    "RCV002041713",
     "RCV004668923",
     "RCV006725812"
    ],
@@ -6494,6 +6150,15 @@
     "Neoplasm",
     "Neoplasms, NOS",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000375959"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -6523,36 +6188,14 @@
     "rs1554898225"
    ],
    "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 160,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 154,
-      "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "T160P",
-   "position": 160,
-   "wild_type": "T",
-   "mutant": "P",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000431851"
    ],
-   "clinvar": [
-    "RCV000469145",
-    "RCV000505947"
+   "clinvar_classification": [
+    "Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs1060500128"
-   ],
-   "diseases": [
-    "PTEN hamartoma tumor syndrome (PHTS)"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -6585,36 +6228,14 @@
    "diseases": [
     "Cowden syndrome (CS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 162,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 156,
-      "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D162V",
-   "position": 162,
-   "wild_type": "D",
-   "mutant": "V",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000224544"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV003510681",
-    "RCV005643484"
-   ],
-   "dbsnp": [
-    "rs2132244117"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -6625,42 +6246,6 @@
       "label_asym_id": "A",
       "label_seq_id": 156,
       "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G165E",
-   "position": 165,
-   "wild_type": "G",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001047166",
-    "RCV002471014"
-   ],
-   "dbsnp": [
-    "rs786204863"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cowden syndrome 1 (CWS1)",
-    "Epithelial Neoplasms, NOS",
-    "Gliomas",
-    "Nevi and Melanomas",
-    "Squamous Cell Neoplasms"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 165,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 159,
-      "comp_id": "GLY"
      }
     ]
    }
@@ -6695,6 +6280,18 @@
     "Hereditary cancer-predisposing syndrome",
     "Malignant tumor of urinary bladder",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428256",
+    "VCV001067498"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -6731,6 +6328,15 @@
     "Hereditary cancer-predisposing syndrome",
     "Macrocephaly-autism syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV001341516"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -6761,6 +6367,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000486974"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -6770,38 +6385,6 @@
       "label_asym_id": "A",
       "label_seq_id": 160,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "T167A",
-   "position": 167,
-   "wild_type": "T",
-   "mutant": "A",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV002250274",
-    "RCV005403197"
-   ],
-   "dbsnp": [
-    "rs1210737543"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cowden syndrome 1 (CWS1)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 167,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 161,
-      "comp_id": "THR"
      }
     ]
    }
@@ -6827,6 +6410,15 @@
     "Macrocephaly/autism syndrome (MCEPHAS)",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000039668"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -6836,72 +6428,6 @@
       "label_asym_id": "A",
       "label_seq_id": 161,
       "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I168T",
-   "position": 168,
-   "wild_type": "I",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000540780",
-    "RCV004024064",
-    "RCV006635482"
-   ],
-   "dbsnp": [
-    "rs1554900530"
-   ],
-   "diseases": [
-    "Cowden syndrome 1 (CWS1)",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 168,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 162,
-      "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S170G",
-   "position": 170,
-   "wild_type": "S",
-   "mutant": "G",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000645069",
-    "RCV005861151"
-   ],
-   "dbsnp": [
-    "rs1554900534"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cowden syndrome 1 (CWS1)",
-    "Gliomas"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 170,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 164,
-      "comp_id": "SER"
      }
     ]
    }
@@ -6932,6 +6458,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000233590"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -6975,6 +6510,18 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000007815",
+    "VCV000569301",
+    "VCV000825458"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7004,6 +6551,15 @@
    ],
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV001745325"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -7035,37 +6591,14 @@
    "diseases": [
     "Squamous Cell Neoplasms"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 171,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 165,
-      "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Q171P",
-   "position": 171,
-   "wild_type": "Q",
-   "mutant": "P",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV001198486"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000694765",
-    "RCV006250847",
-    "RCV006424657"
-   ],
-   "dbsnp": [
-    "rs786204865"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -7108,6 +6641,15 @@
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Prostate cancer"
+   ],
+   "clinvar_vcv": [
+    "VCV000189412"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -7161,6 +6703,15 @@
     "Prostate cancer",
     "VACTERL with hydrocephalus"
    ],
+   "clinvar_vcv": [
+    "VCV000189500"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7189,6 +6740,15 @@
     "rs121913293"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001176553"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7228,6 +6788,15 @@
     "PTEN hamartoma tumor syndrome (PHTS)",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000376032"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7261,38 +6830,14 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 173,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 167,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R173S",
-   "position": 173,
-   "wild_type": "R",
-   "mutant": "S",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000185195"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000460834",
-    "RCV005252897",
-    "RCV006713469"
-   ],
-   "dbsnp": [
-    "rs121913293"
-   ],
-   "diseases": [
-    "Cowden syndrome 1 (CWS1)",
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -7332,6 +6877,15 @@
     "Lymphoid Leukemias",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000220007"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7365,6 +6919,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000142220"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7397,6 +6960,15 @@
    "diseases": [
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001067224"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -7432,37 +7004,14 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 177,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 171,
-      "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y177D",
-   "position": 177,
-   "wild_type": "Y",
-   "mutant": "D",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000580948"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV001269398",
-    "RCV003353267"
-   ],
-   "dbsnp": [
-    "rs1860418425"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -7494,6 +7043,15 @@
    "diseases": [
     "Macrocephaly-autism syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000974864"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7524,6 +7082,15 @@
    "diseases": [
     "Cowden syndrome 1 (CWS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000873327"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7532,38 +7099,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 171,
-      "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y178C",
-   "position": 178,
-   "wild_type": "Y",
-   "mutant": "C",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000457017",
-    "RCV003133159"
-   ],
-   "dbsnp": [
-    "rs786204866"
-   ],
-   "diseases": [
-    "Gliomas",
-    "PTEN hamartoma tumor syndrome (PHTS)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 178,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 172,
       "comp_id": "TYR"
      }
     ]
@@ -7593,6 +7128,15 @@
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000825730"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7601,97 +7145,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 175,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L182S",
-   "position": 182,
-   "wild_type": "L",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000185586",
-    "RCV000790887",
-    "RCV001264833"
-   ],
-   "dbsnp": [
-    "rs794729664"
-   ],
-   "diseases": [
-    "Cowden syndrome 1 (CWS1)",
-    "Macrocephaly-autism syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 182,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 176,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y188D",
-   "position": 188,
-   "wild_type": "Y",
-   "mutant": "D",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001935088",
-    "RCV005225540"
-   ],
-   "dbsnp": [
-    "rs1860421158"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 188,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 182,
-      "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L193P",
-   "position": 193,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000497420",
-    "RCV001218143"
-   ],
-   "dbsnp": [
-    "rs1554900620"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 193,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 187,
       "comp_id": "LEU"
      }
     ]
@@ -7714,6 +7167,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV001750073"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -7745,6 +7207,15 @@
    "diseases": [
     "Ductal and Lobular Neoplasms",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000468702"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -7778,6 +7249,15 @@
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000189414"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7807,6 +7287,15 @@
    ],
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000142452"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -7839,6 +7328,15 @@
     "Adenomas and Adenocarcinomas",
     "Gliomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000427595"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1d5r": [
@@ -7873,73 +7371,14 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 204,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 198,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P204L",
-   "position": 204,
-   "wild_type": "P",
-   "mutant": "L",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000189415"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV001988239",
-    "RCV003382771",
-    "RCV006258730",
-    "RCV006699422"
-   ],
-   "dbsnp": [
-    "rs2132269834"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cowden syndrome 1 (CWS1)",
-    "Gliomas",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 204,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 198,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P204S",
-   "position": 204,
-   "wild_type": "P",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000556951",
-    "RCV000569618",
-    "RCV001568711"
-   ],
-   "dbsnp": [
-    "rs786204868"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -7975,6 +7414,15 @@
     "Cowden syndrome 1 (CWS1)",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000279878"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -7984,108 +7432,6 @@
       "label_asym_id": "A",
       "label_seq_id": 205,
       "comp_id": "CYS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V217I",
-   "position": 217,
-   "wild_type": "V",
-   "mutant": "I",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000008286",
-    "RCV001342733",
-    "RCV004018589"
-   ],
-   "dbsnp": [
-    "rs121909234"
-   ],
-   "diseases": [
-    "Melanoma"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 217,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 211,
-      "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Q219P",
-   "position": 219,
-   "wild_type": "Q",
-   "mutant": "P",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000777175",
-    "RCV003509557",
-    "RCV005620369",
-    "RCV005869577"
-   ],
-   "dbsnp": [
-    "rs1554825172"
-   ],
-   "diseases": [
-    "Cowden syndrome 1 (CWS1)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 219,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 213,
-      "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R234Q",
-   "position": 234,
-   "wild_type": "R",
-   "mutant": "Q",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000008288",
-    "RCV000008289",
-    "RCV000540379",
-    "RCV000566397",
-    "RCV001526987",
-    "RCV001555861",
-    "RCV004576888"
-   ],
-   "dbsnp": [
-    "rs121909235"
-   ],
-   "diseases": [
-    "Glioma 2 (GLM2)",
-    "Meningioma"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 234,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 228,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -8108,6 +7454,15 @@
    ],
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000440220"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -8143,6 +7498,15 @@
     "Macrocephaly-autism syndrome",
     "Macrocephaly/autism syndrome (MCEPHAS)",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000007850"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -8193,6 +7557,15 @@
     "Nevi and Melanomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000142269"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8225,6 +7598,15 @@
     "Macrocephaly-autism syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000223142"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8234,38 +7616,6 @@
       "label_asym_id": "A",
       "label_seq_id": 241,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V249E",
-   "position": 249,
-   "wild_type": "V",
-   "mutant": "E",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002036872",
-    "RCV005465701"
-   ],
-   "dbsnp": [
-    "rs2132277407"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 249,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 243,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -8288,6 +7638,15 @@
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV001066565"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8297,41 +7656,6 @@
       "label_asym_id": "A",
       "label_seq_id": 243,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G251D",
-   "position": 251,
-   "wild_type": "G",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001374613",
-    "RCV001762656",
-    "RCV003223419"
-   ],
-   "dbsnp": [
-    "rs1554825226"
-   ],
-   "diseases": [
-    "Bannayan-Riley-Ruvalcaba syndrome (BRRS)",
-    "Cowden syndrome (CS)",
-    "Gliomas",
-    "PTEN hamartoma tumor syndrome (PHTS)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 251,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 245,
-      "comp_id": "GLY"
      }
     ]
    }
@@ -8358,6 +7682,17 @@
     "Hereditary cancer-predisposing syndrome",
     "Nevi and Melanomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428249",
+    "VCV000536548"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter",
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -8400,6 +7735,15 @@
     "Macrocephaly/autism syndrome (MCEPHAS)",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000007849"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8437,6 +7781,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000575811"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8472,36 +7825,14 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 253,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 247,
-      "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I253S",
-   "position": 253,
-   "wild_type": "I",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000480942"
    ],
-   "clinvar": [
-    "RCV001974414",
-    "RCV004042381"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs1554825235"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -8533,6 +7864,15 @@
    ],
    "diseases": [
     "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000428207"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -8567,6 +7907,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000623214"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8576,67 +7925,6 @@
       "label_asym_id": "A",
       "label_seq_id": 249,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L265P",
-   "position": 265,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000558943",
-    "RCV003319371"
-   ],
-   "dbsnp": [
-    "rs1335033900"
-   ],
-   "diseases": [
-    "Cowden syndrome 1 (CWS1)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 265,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 259,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "K266E",
-   "position": 266,
-   "wild_type": "K",
-   "mutant": "E",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002833968",
-    "RCV003223762",
-    "RCV006424973"
-   ],
-   "dbsnp": [
-    "rs1554825260"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 266,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 260,
-      "comp_id": "LYS"
      }
     ]
    }
@@ -8664,6 +7952,17 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)",
     "Segmental outgrowth-lipomatosis-arteriovenous malformation-epidermal nevus syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000536549",
+    "VCV001014805"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -8696,6 +7995,15 @@
     "Gliomas",
     "Hereditary cancer-predisposing syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000428223"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8727,6 +8035,15 @@
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000427600"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8736,35 +8053,6 @@
       "label_asym_id": "A",
       "label_seq_id": 268,
       "comp_id": "TRP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "N276D",
-   "position": 276,
-   "wild_type": "N",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000809860",
-    "RCV001560152"
-   ],
-   "dbsnp": [
-    "rs1589665622"
-   ],
-   "diseases": [],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 276,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 270,
-      "comp_id": "ASN"
      }
     ]
    }
@@ -8790,6 +8078,15 @@
     "Glioma susceptibility 1 (GLM1)",
     "Gliomas",
     "Macrocephaly-autism syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV002502345"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -8820,6 +8117,15 @@
    ],
    "diseases": [
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000571869"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1d5r": [
@@ -8864,6 +8170,15 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000184277"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8901,6 +8216,15 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000566673"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -8924,6 +8248,15 @@
     "Macrocephaly-autism syndrome",
     "Nevi and Melanomas",
     "PTEN hamartoma tumor syndrome (PHTS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000418653"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "1d5r": [
@@ -8962,6 +8295,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV001043063"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -8971,72 +8313,6 @@
       "label_asym_id": "A",
       "label_seq_id": 291,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L325R",
-   "position": 325,
-   "wild_type": "L",
-   "mutant": "R",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000491769",
-    "RCV001223706",
-    "RCV004591435"
-   ],
-   "dbsnp": [
-    "rs1114167654"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Cystic, Mucinous and Serous Neoplasms",
-    "Hereditary cancer-predisposing syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 325,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 296,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D326G",
-   "position": 326,
-   "wild_type": "D",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001062721",
-    "RCV006666704"
-   ],
-   "dbsnp": [
-    "rs1860631246"
-   ],
-   "diseases": [
-    "Hereditary cancer-predisposing syndrome",
-    "PTEN hamartoma tumor syndrome (PHTS)"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 326,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 297,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -9061,6 +8337,15 @@
     "Neoplasm",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV002498032"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -9070,40 +8355,6 @@
       "label_asym_id": "A",
       "label_seq_id": 297,
       "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R335Q",
-   "position": 335,
-   "wild_type": "R",
-   "mutant": "Q",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000490592",
-    "RCV001799513",
-    "RCV002404284",
-    "RCV004767301"
-   ],
-   "dbsnp": [
-    "rs1085308040"
-   ],
-   "diseases": [
-    "Familial meningioma",
-    "Macrocephaly-autism syndrome"
-   ],
-   "structures": {
-    "1d5r": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 335,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 306,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -9128,6 +8379,15 @@
     "Hereditary cancer-predisposing syndrome",
     "PTEN hamartoma tumor syndrome (PHTS)"
    ],
+   "clinvar_vcv": [
+    "VCV000484605"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1d5r": [
      {
@@ -9145,19 +8405,883 @@
  "rejected": [
   {
    "variant": "G100A",
+   "position": 100,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "T313C",
+   "position": 313,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "G380C",
+   "position": 380,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "G457T",
+   "position": 457,
    "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "I4V",
+   "position": 4,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001704153"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R14G",
+   "position": 14,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000427589"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "Y16H",
+   "position": 16,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000428195"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "Q17E",
+   "position": 17,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000480386"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "D19N",
+   "position": 19,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000007837"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "D22G",
+   "position": 22,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000486221"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L25S",
+   "position": 25,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000189460"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I28S",
+   "position": 28,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001003503"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I28T",
+   "position": 28,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001192170"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I33T",
+   "position": 33,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000536543"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "P38S",
+   "position": 38,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000127688"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "E43K",
+   "position": 43,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000486222"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y46C",
+   "position": 46,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001368242"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y46D",
+   "position": 46,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000418614"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V53A",
+   "position": 53,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000916219"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "F56C",
+   "position": 56,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001056826"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "L57S",
+   "position": 57,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001778538"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S59P",
+   "position": 59,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000404153"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "H61N",
+   "position": 61,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001780734"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y65D",
+   "position": 65,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV003337498"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "N69H",
+   "position": 69,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000928126"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L70R",
+   "position": 70,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001785871"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C71F",
+   "position": 71,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000468675"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P95A",
+   "position": 95,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001796695"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P95S",
+   "position": 95,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001381124"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P95T",
+   "position": 95,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000428204"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "P96A",
+   "position": 96,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000280630"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "F104S",
+   "position": 104,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002091925"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L108F",
+   "position": 108,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002562403"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "W111G",
+   "position": 111,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000936720"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L112Q",
+   "position": 112,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002567268"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D115G",
+   "position": 115,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000224542"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "H118Y",
+   "position": 118,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000565348"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A120E",
+   "position": 120,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000428222"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "A120T",
+   "position": 120,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000189485"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A121G",
+   "position": 121,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000007842"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "I122S",
+   "position": 122,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000824039"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T131N",
+   "position": 131,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002443991"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "V133I",
+   "position": 133,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000971265"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I135M",
+   "position": 135,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001737440"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L139F",
+   "position": 139,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001738466",
+    "VCV001929420"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity",
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "H141R",
+   "position": 141,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000418438"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R142G",
+   "position": 142,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001739065"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R142W",
+   "position": 142,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000197662"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "E150G",
+   "position": 150,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000468687"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L152P",
+   "position": 152,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000536551"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "L152V",
+   "position": 152,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002687522"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D153H",
+   "position": 153,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000973270"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "F154C",
+   "position": 154,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001175130"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "F154I",
+   "position": 154,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002757141"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E157G",
+   "position": 157,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000427593"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T160P",
+   "position": 160,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000404170"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D162V",
+   "position": 162,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002707439"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G165E",
+   "position": 165,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000844343"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T167A",
+   "position": 167,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001686107"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I168T",
+   "position": 168,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000468694"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S170G",
+   "position": 170,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000536559"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "Q171P",
+   "position": 171,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000573168"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R173S",
+   "position": 173,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000404142"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y177D",
+   "position": 177,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000988005"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y178C",
+   "position": 178,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000189413"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L182S",
+   "position": 182,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000187827"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "Y188D",
+   "position": 188,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001401407"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L193P",
+   "position": 193,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000431875"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P204L",
+   "position": 204,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001481117"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P204S",
+   "position": 204,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000468704"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V217I",
+   "position": 217,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000007838"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "Q219P",
+   "position": 219,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000449090"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R234Q",
+   "position": 234,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000007840"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "V249E",
+   "position": 249,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001525684"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G251D",
+   "position": 251,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001064566"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I253S",
+   "position": 253,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001478930"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L265P",
+   "position": 265,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000468715"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "K266E",
+   "position": 266,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002010415"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "N276D",
+   "position": 276,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000653985"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L325R",
+   "position": 325,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000428251"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D326G",
+   "position": 326,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000857109"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R335Q",
+   "position": 335,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000427580"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
   }
  ],
  "structure_mismatches": [],

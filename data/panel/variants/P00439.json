@@ -7,7 +7,9 @@
  "disease": "phenylketonuria",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P00439",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 452,
  "uniprot_sequence_sha256": "82a10d76551a9414922a5d44292c93f21c722864c4991c2e42886d4fd0cd8353",
  "primary_entry": "6hpo",
@@ -32,8 +34,8 @@
     "offset": false,
     "auth_chain_differs_from_label_chain": false
    },
-   "not_observed": 66,
-   "verified": 322
+   "not_observed": 63,
+   "verified": 308
   }
  },
  "variants": [
@@ -56,6 +58,17 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000622",
+    "VCV000585206"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -76,6 +89,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102626"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -95,6 +117,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102647"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -118,6 +149,15 @@
     "Inborn genetic diseases",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000203873"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -140,6 +180,15 @@
     "Hyperphenylalaninemia",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000586"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -160,6 +209,15 @@
    "diseases": [
     "Cystic, Mucinous and Serous Neoplasms",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000225133"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -186,6 +244,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000605"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -206,6 +273,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102569"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -228,6 +304,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102573"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -247,6 +332,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001498472"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -265,6 +359,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000972021"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -289,6 +392,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000629"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -311,6 +423,15 @@
     "Hyperphenylalaninemia",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000000630"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -337,6 +458,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000608"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -356,6 +486,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102599"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -380,24 +519,14 @@
     "PAH-related disorder",
     "Phenylketonuria (PKU)"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "R53S",
-   "position": 53,
-   "wild_type": "R",
-   "mutant": "S",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000102600"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV001990771"
-   ],
-   "dbsnp": [
-    "rs199475619"
-   ],
-   "diseases": [
-    "Phenylketonuria (PKU)"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -419,6 +548,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102602"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -446,6 +584,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092734"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -464,6 +611,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000120266"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -486,24 +642,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "T63P",
-   "position": 63,
-   "wild_type": "T",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000102610"
    ],
-   "clinvar": [
-    "RCV000088861",
-    "RCV000758120"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs199475568"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
-   "diseases": [],
    "structures": {}
   },
   {
@@ -524,6 +671,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102624"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -551,6 +707,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000636"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -572,6 +737,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102622"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -590,6 +764,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002579754"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -612,6 +795,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102625"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -630,6 +822,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002108149"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -650,6 +851,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102627"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -674,6 +884,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092738"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -695,6 +914,15 @@
     "Ductal and Lobular Neoplasms",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102628"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -713,6 +941,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000987767"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -733,6 +970,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102631"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -757,6 +1003,15 @@
     "Phenylketonuria (PKU)",
     "Transitional Cell Papillomas and Carcinomas"
    ],
+   "clinvar_vcv": [
+    "VCV000102633"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -775,6 +1030,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619158"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -799,6 +1063,15 @@
     "Phenylketonuria (PKU)",
     "Propionic acidemia (PROP)"
    ],
+   "clinvar_vcv": [
+    "VCV000987769"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -818,6 +1091,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000650381"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -836,6 +1118,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619157"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -857,6 +1148,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102634"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -881,6 +1181,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000639"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -901,6 +1210,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102636"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -919,6 +1237,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000208180"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -940,6 +1267,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102637"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -958,6 +1294,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002829441"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -981,6 +1326,15 @@
     "Hyperphenylalaninemia",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102639"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -1009,6 +1363,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000583"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -1028,6 +1391,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102641"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -1050,6 +1422,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102643"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -1070,6 +1451,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102644"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -1089,6 +1479,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102645"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -1115,6 +1514,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000627"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -1134,6 +1542,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000805817"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -1152,6 +1569,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000553851"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -1173,6 +1599,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102648"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -1192,6 +1627,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001453858"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -1210,6 +1654,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000551968"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -1234,6 +1687,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102650"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -1253,6 +1715,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001810384"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -1271,6 +1742,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000225134"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -1293,62 +1773,16 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "R111Q",
-   "position": 111,
-   "wild_type": "R",
-   "mutant": "Q",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000102651"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV003236404",
-    "RCV006641333"
-   ],
-   "dbsnp": [
-    "rs868854935"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Nevi and Melanomas",
-    "Phenylketonuria (PKU)",
-    "Plasma Cell Tumors",
-    "Transitional Cell Papillomas and Carcinomas"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
-  },
-  {
-   "variant": "P119L",
-   "position": 119,
-   "wild_type": "P",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000385558",
-    "RCV002519074"
-   ],
-   "dbsnp": [
-    "rs374999809"
-   ],
-   "diseases": [
-    "Phenylketonuria (PKU)"
-   ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 119,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 119,
-      "comp_id": "PRO"
-     }
-    ]
-   }
   },
   {
    "variant": "P119S",
@@ -1369,6 +1803,15 @@
    "diseases": [
     "Inborn genetic diseases",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000092741"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -1401,6 +1844,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002137411"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1431,6 +1883,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102657"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -1463,6 +1924,15 @@
     "Lymphoid Leukemias",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000987906"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1493,6 +1963,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102661"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -1526,6 +2005,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102660"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1558,6 +2046,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102666"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1588,6 +2085,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001510805"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1617,6 +2123,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001503089"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -1653,6 +2168,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102667"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1682,6 +2206,15 @@
    ],
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102668"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -1715,6 +2248,15 @@
     "Nevi and Melanomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102670"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1746,6 +2288,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102669"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1775,6 +2326,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000872837"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -1810,6 +2370,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102680"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1840,6 +2409,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000552657"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -1872,6 +2450,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102683"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1901,6 +2488,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001185011"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -1933,6 +2529,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000619705"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1964,6 +2569,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102685"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -1993,6 +2607,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000554011"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -2026,6 +2649,15 @@
     "Adenomas and Adenocarcinomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102686"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2055,6 +2687,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001487998"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -2087,6 +2728,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102688"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2116,6 +2766,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001465203"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -2148,6 +2807,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102691"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2179,6 +2847,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102690"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2208,6 +2885,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002780254"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -2244,6 +2930,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000587"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2277,6 +2972,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102693"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2309,6 +3013,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102697"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2340,6 +3053,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102699"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -2375,6 +3097,15 @@
     "6-Pyruvoyl-tetrahydrobiopterin synthase deficiency",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102698"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2404,6 +3135,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000805818"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -2437,6 +3177,15 @@
     "Adenomas and Adenocarcinomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102700"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2468,6 +3217,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000125436"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2497,6 +3255,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000551103"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -2536,6 +3303,15 @@
     "Phenylketonuria (PKU)",
     "Pulmonary hypertension, primary, 1 (PPH1)"
    ],
+   "clinvar_vcv": [
+    "VCV000102706"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2566,6 +3342,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002677436"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2595,6 +3380,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932262"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -2628,6 +3422,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092744"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2657,6 +3460,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001494029"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -2691,6 +3503,16 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102715",
+    "VCV000944625"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2724,6 +3546,18 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102716",
+    "VCV001384858"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter",
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2753,6 +3587,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001983110"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -2786,6 +3629,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102721"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2815,6 +3667,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000555366"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -2855,6 +3716,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000631"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2886,6 +3756,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102725"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -2922,6 +3801,15 @@
     "Autosomal recessive PAH-related disorders",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102724"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -2955,6 +3843,15 @@
     "PAH-related disorder",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102727"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -2991,6 +3888,15 @@
     "PAH-related disorder",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102726"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3032,6 +3938,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092746"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3064,6 +3979,15 @@
     "PAH-related disorder",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000928885"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3094,6 +4018,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102730"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3126,6 +4059,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102729"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3156,6 +4098,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102731"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3188,6 +4139,15 @@
     "Adenomas and Adenocarcinomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001075546"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3217,6 +4177,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000120278"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3249,6 +4218,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102735"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3280,36 +4258,14 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 188,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 188,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G188S",
-   "position": 188,
-   "wild_type": "G",
-   "mutant": "S",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000102738"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV002018434",
-    "RCV005419317"
-   ],
-   "dbsnp": [
-    "rs2136649680"
-   ],
-   "diseases": [
-    "Phenylketonuria (PKU)"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3340,6 +4296,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001065370"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3373,6 +4338,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102740"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3405,6 +4379,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102742"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3435,6 +4418,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000120280"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3470,6 +4462,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102753"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3504,6 +4505,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102752"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3534,6 +4544,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002573213"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3563,6 +4582,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001327548"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3595,6 +4623,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102755"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3625,6 +4662,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102754"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3658,6 +4704,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000590"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3688,6 +4743,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001453298"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3717,6 +4781,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001491340"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -3750,6 +4823,15 @@
     "Nevi and Melanomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102759"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3781,6 +4863,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102762"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3810,6 +4901,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000120283"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -3847,6 +4947,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102766"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3856,37 +4965,6 @@
       "label_asym_id": "A",
       "label_seq_id": 211,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L213F",
-   "position": 213,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000493939",
-    "RCV000672958"
-   ],
-   "dbsnp": [
-    "rs1131691945"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas"
-   ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 213,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 213,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -3909,6 +4987,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000092747"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -3940,6 +5027,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002152160"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -3969,6 +5065,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001917938"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -4000,6 +5105,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102770"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -4037,6 +5151,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102773"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4066,6 +5189,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932276"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4097,6 +5229,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001496717"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4127,6 +5268,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102775"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4161,6 +5311,15 @@
     "PAH-related disorder",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000549912"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4191,6 +5350,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002139677"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -4223,6 +5391,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102777"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4253,6 +5430,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002153853"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4282,6 +5468,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932277"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4317,6 +5512,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102779"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4346,6 +5550,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932251"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4377,6 +5590,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001327559"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4406,6 +5628,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001065379"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4437,6 +5668,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001065380"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4466,6 +5706,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000557425"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4499,6 +5748,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102787"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4531,6 +5789,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102786"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4560,6 +5827,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619163"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4594,6 +5870,16 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102790",
+    "VCV001327558"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4625,6 +5911,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102791"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4654,6 +5949,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002812926"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -4687,6 +5991,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102796"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4718,6 +6031,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102799"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4748,6 +6070,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102798"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4781,6 +6112,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102797"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4812,6 +6152,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102801"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4849,6 +6198,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102803"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4883,6 +6241,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102804"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4915,6 +6282,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102805"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -4946,6 +6322,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102807"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -4983,6 +6368,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000591"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5012,6 +6406,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001327557"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5049,6 +6452,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000632"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5080,6 +6492,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102811"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -5115,6 +6536,17 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102810",
+    "VCV002503911"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5146,6 +6578,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102809"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5155,37 +6596,6 @@
       "label_asym_id": "A",
       "label_seq_id": 245,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A246D",
-   "position": 246,
-   "wild_type": "A",
-   "mutant": "D",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000089067",
-    "RCV002259592"
-   ],
-   "dbsnp": [
-    "rs199475610"
-   ],
-   "diseases": [
-    "Phenylalanine hydroxylase deficiency (PAH deficiency)"
-   ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 246,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 246,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -5207,6 +6617,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102816"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5240,6 +6659,15 @@
     "Phenylketonuria (PKU)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000102815"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5271,6 +6699,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102818"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -5304,6 +6741,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102821"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5334,6 +6780,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102822"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5367,6 +6822,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102823"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5399,6 +6863,15 @@
     "Gliomas",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102824"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5436,6 +6909,17 @@
     "Phenylketonuria (PKU)",
     "Pulmonary hypertension, primary, 1 (PPH1)"
    ],
+   "clinvar_vcv": [
+    "VCV000000584",
+    "VCV000217885"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided",
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5445,35 +6929,6 @@
       "label_asym_id": "A",
       "label_seq_id": 252,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D253N",
-   "position": 253,
-   "wild_type": "D",
-   "mutant": "N",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000484615",
-    "RCV000984203"
-   ],
-   "dbsnp": [
-    "rs765533320"
-   ],
-   "diseases": [],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 253,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 253,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -5496,6 +6951,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000000600"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -5528,6 +6992,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102827"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5559,6 +7032,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102830"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5588,6 +7070,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619159"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5621,6 +7112,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102831"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5653,6 +7153,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000602"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5682,6 +7191,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002419016"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -5714,6 +7232,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102832"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5749,6 +7276,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000582"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5779,6 +7315,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000120285"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5801,8 +7346,6 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000089092",
-    "RCV000758091",
     "RCV001377752"
    ],
    "dbsnp": [
@@ -5811,6 +7354,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001066686"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -5841,6 +7393,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619150"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5873,6 +7434,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102836"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5902,6 +7472,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002677435"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -5933,6 +7512,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000120286"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -5963,6 +7551,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102839"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -5996,6 +7593,15 @@
     "Phenylketonuria (PKU)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000102840"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6026,6 +7632,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000556296"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6055,6 +7670,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619165"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -6088,6 +7712,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102842"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6119,6 +7752,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102843"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6149,6 +7791,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102845"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -6184,6 +7835,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102846"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6216,6 +7876,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102847"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6245,6 +7914,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002816125"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -6276,6 +7954,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000619152"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6306,6 +7993,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102850"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -6339,6 +8035,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102855"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6370,6 +8075,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102853"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6392,9 +8106,7 @@
     "Likely pathogenic"
    ],
    "clinvar": [
-    "RCV000089120",
-    "RCV000666601",
-    "RCV001543637"
+    "RCV000666601"
    ],
    "dbsnp": [
     "rs62514954"
@@ -6402,6 +8114,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000551519"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -6434,6 +8155,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002152159"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6465,6 +8195,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102860"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -6500,6 +8239,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000603"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6529,6 +8277,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV004851289"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -6560,6 +8317,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102863"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -6593,6 +8359,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102862"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6623,6 +8398,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000458081"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6652,6 +8436,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001693227"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -6684,6 +8477,15 @@
     "Adenomas and Adenocarcinomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000208181"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6713,6 +8515,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002891786"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -6745,6 +8556,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002137406"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6775,6 +8595,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102866"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -6815,6 +8644,15 @@
     "Phenylketonuria (PKU)",
     "Polymicrogyria, perisylvian, with cerebellar hypoplasia and arthrogryposis (NEDSPLB)"
    ],
+   "clinvar_vcv": [
+    "VCV000000580"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6845,6 +8683,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000120289"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6874,6 +8721,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001334639"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -6911,6 +8767,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000589"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6940,6 +8805,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001458269"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -6972,6 +8846,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092749"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -6981,38 +8864,6 @@
       "label_asym_id": "A",
       "label_seq_id": 281,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D282G",
-   "position": 282,
-   "wild_type": "D",
-   "mutant": "G",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000089136",
-    "RCV002514547"
-   ],
-   "dbsnp": [
-    "rs199475660"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Phenylketonuria (PKU)"
-   ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 282,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 282,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -7035,6 +8886,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102874"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -7068,6 +8928,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102876"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7100,6 +8969,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102877"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7130,6 +9008,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102878"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -7163,6 +9050,15 @@
     "Nevi and Melanomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102880"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7193,6 +9089,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001068222"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7222,6 +9127,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619164"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -7256,6 +9170,16 @@
     "Nevi and Melanomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102882",
+    "VCV000458082"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7287,6 +9211,18 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000558612",
+    "VCV002036025"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter",
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7316,6 +9252,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000626282"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -7347,6 +9292,15 @@
    "diseases": [
     "Not Reported",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001493384"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -7383,6 +9337,15 @@
     "Phenylketonuria (PKU)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000092750"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7417,6 +9380,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000613"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7446,6 +9418,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002070899"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -7485,6 +9466,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092751"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7515,36 +9505,14 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 301,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 301,
-      "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Q301K",
-   "position": 301,
-   "wild_type": "Q",
-   "mutant": "K",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000805826"
    ],
-   "clinvar": [
-    "RCV000436688",
-    "RCV005090722"
+   "clinvar_classification": [
+    "Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs1057520732"
-   ],
-   "diseases": [
-    "Phenylketonuria (PKU)"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -7576,6 +9544,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000805825"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7606,6 +9583,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102890"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -7641,6 +9627,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000618"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7671,6 +9666,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001693235"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7700,6 +9704,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002017788"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -7734,6 +9747,15 @@
     "PAH-related disorder",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102896"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7766,6 +9788,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102897"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7796,6 +9827,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001468012"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7825,6 +9865,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001327567"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -7860,6 +9909,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092753"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7891,6 +9949,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102899"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -7924,6 +9991,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102898"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7956,6 +10032,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000578"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -7985,6 +10070,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000446506"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -8016,6 +10110,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001458264"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8025,35 +10128,6 @@
       "label_asym_id": "A",
       "label_seq_id": 312,
       "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A313T",
-   "position": 313,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000089166",
-    "RCV000669990"
-   ],
-   "dbsnp": [
-    "rs62642912"
-   ],
-   "diseases": [],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 313,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 313,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -8076,6 +10150,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102903"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8109,6 +10192,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102907"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8141,6 +10233,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102905"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8172,6 +10273,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102904"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8181,66 +10291,6 @@
       "label_asym_id": "A",
       "label_seq_id": 314,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D315Y",
-   "position": 315,
-   "wild_type": "D",
-   "mutant": "Y",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000089172",
-    "RCV005406822"
-   ],
-   "dbsnp": [
-    "rs62642917"
-   ],
-   "diseases": [
-    "Phenylketonuria (PKU)"
-   ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 315,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 315,
-      "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E319G",
-   "position": 319,
-   "wild_type": "E",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000994964",
-    "RCV005093000"
-   ],
-   "dbsnp": [
-    "rs1592949408"
-   ],
-   "diseases": [],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 319,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 319,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -8262,6 +10312,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102910"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -8297,6 +10356,15 @@
     "Mild non-PKU hyperphenylalanemia",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000000616"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8334,6 +10402,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102912"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8363,6 +10440,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002682170"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8396,6 +10482,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092756"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8426,6 +10521,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102923"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8458,6 +10562,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102926"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8488,6 +10601,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000371278"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8517,6 +10639,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002573212"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8552,6 +10683,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000624"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8581,6 +10721,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001693239"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8614,6 +10763,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102464"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8645,6 +10803,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102466"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8674,6 +10841,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002794180"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -8707,6 +10883,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102468"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8736,6 +10921,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001810388"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8767,6 +10961,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000208179"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8797,6 +11000,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102474"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -8830,6 +11042,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102473"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8862,6 +11083,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102477"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8893,6 +11123,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102476"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8922,6 +11161,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932256"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -8954,6 +11202,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102481"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -8985,6 +11242,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102479"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -9020,6 +11286,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102484"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9052,6 +11327,16 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102485",
+    "VCV000102486"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -9086,6 +11371,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102488"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9115,6 +11409,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932253"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -9155,6 +11458,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092727"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9185,6 +11497,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102490"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -9218,6 +11539,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102492"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9250,6 +11580,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000615"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9279,6 +11618,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002103816"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -9311,6 +11659,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102495"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9342,6 +11699,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102497"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9371,6 +11737,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000552458"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -9405,6 +11780,15 @@
     "Hepatocellular carcinoma (HCC)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000556817"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9435,6 +11819,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001327565"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9464,6 +11857,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002735932"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -9497,6 +11899,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102515"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9505,37 +11916,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 362,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P366L",
-   "position": 366,
-   "wild_type": "P",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001284319",
-    "RCV002537932"
-   ],
-   "dbsnp": [
-    "rs62516098"
-   ],
-   "diseases": [
-    "Phenylketonuria (PKU)"
-   ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 366,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 366,
       "comp_id": "PRO"
      }
     ]
@@ -9559,6 +11939,15 @@
     "Epithelial Neoplasms, NOS",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001067076"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9568,35 +11957,6 @@
       "label_asym_id": "A",
       "label_seq_id": 366,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E368G",
-   "position": 368,
-   "wild_type": "E",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001543655",
-    "RCV006447485"
-   ],
-   "dbsnp": [
-    "rs2136635784"
-   ],
-   "diseases": [],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 368,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 368,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -9619,6 +11979,15 @@
    "diseases": [
     "Phenylketonuria (PKU)",
     "Soft Tissue Tumors and Sarcomas, NOS"
+   ],
+   "clinvar_vcv": [
+    "VCV000625289"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -9650,6 +12019,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001327564"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9680,6 +12058,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000625290"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9709,6 +12096,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001327554"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -9741,6 +12137,15 @@
     "Not Reported",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000932260"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9772,6 +12177,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102529"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9802,6 +12216,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000660581"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9831,6 +12254,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932278"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -9874,6 +12306,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000628"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9907,6 +12348,17 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000556882",
+    "VCV000872835"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -9937,6 +12389,15 @@
    "diseases": [
     "Phenylketonuria (PKU)",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV002682167"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -9974,6 +12435,15 @@
     "Phenylketonuria (PKU)",
     "Polymicrogyria, perisylvian, with cerebellar hypoplasia and arthrogryposis (NEDSPLB)"
    ],
+   "clinvar_vcv": [
+    "VCV000102538"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10005,6 +12475,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102537"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10027,10 +12506,7 @@
     "Likely pathogenic"
    ],
    "clinvar": [
-    "RCV000173991",
-    "RCV001964349",
-    "RCV004700531",
-    "RCV005606650"
+    "RCV001964349"
    ],
    "dbsnp": [
     "rs199475691",
@@ -10038,6 +12514,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001470778"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -10072,6 +12557,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102539"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10101,6 +12595,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000120260"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10134,6 +12637,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102541"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10165,6 +12677,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000000619"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10204,6 +12725,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000625"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10233,6 +12763,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002137404"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -10267,6 +12806,15 @@
     "PAH-related disorder",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000853581"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10297,6 +12845,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102544"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10330,6 +12887,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102545"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10361,6 +12927,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102549"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -10394,6 +12969,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102547"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10426,6 +13010,15 @@
     "6-Pyruvoyl-tetrahydrobiopterin synthase deficiency",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000962987"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10456,6 +13049,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000120263"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10488,6 +13090,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102561"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10517,6 +13128,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000987907"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10550,6 +13170,15 @@
     "Adenomas and Adenocarcinomas",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102562"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10579,6 +13208,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000987755"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10611,6 +13249,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102566"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10640,6 +13287,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000987756"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10679,6 +13335,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000092731"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10709,6 +13374,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000552907"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10741,6 +13415,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102567"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10770,6 +13453,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000619167"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10803,6 +13495,15 @@
     "Adenomas and Adenocarcinomas",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102568"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "6hpo": [
@@ -10841,6 +13542,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000612"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10878,6 +13588,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000577"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10909,6 +13628,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102572"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10938,6 +13666,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932279"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -10971,6 +13708,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102571"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -10980,37 +13726,6 @@
       "label_asym_id": "A",
       "label_seq_id": 410,
       "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R413H",
-   "position": 413,
-   "wild_type": "R",
-   "mutant": "H",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001210291"
-   ],
-   "dbsnp": [
-    "rs79931499"
-   ],
-   "diseases": [
-    "Ductal and Lobular Neoplasms",
-    "Phenylketonuria (PKU)"
-   ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 413,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 413,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -11033,6 +13748,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000000592"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -11065,6 +13789,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000102575"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -11102,6 +13835,15 @@
     "PAH-related disorder",
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000000593"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -11141,6 +13883,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000000617"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -11170,6 +13921,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV001693245"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -11201,6 +13961,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001327547"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -11230,6 +13999,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000987913"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -11261,6 +14039,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV001327551"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -11291,6 +14078,15 @@
    "diseases": [
     "Phenylalanine hydroxylase deficiency (PAH deficiency)"
    ],
+   "clinvar_vcv": [
+    "VCV000102579"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -11320,6 +14116,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV002735927"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "6hpo": [
@@ -11353,6 +14158,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102580"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -11382,6 +14196,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000552488"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -11415,6 +14238,15 @@
     "Inborn genetic diseases",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV002421739"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -11446,36 +14278,14 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
-   "structures": {
-    "6hpo": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 420,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 420,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R420T",
-   "position": 420,
-   "wild_type": "R",
-   "mutant": "T",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000932268"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV002024160",
-    "RCV004801134"
-   ],
-   "dbsnp": [
-    "rs767075719"
-   ],
-   "diseases": [
-    "Phenylketonuria (PKU)"
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "6hpo": [
@@ -11508,6 +14318,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102582"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "6hpo": [
      {
@@ -11538,6 +14357,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000551555"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -11558,6 +14386,15 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102586"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -11576,6 +14413,15 @@
    ],
    "diseases": [
     "Phenylketonuria (PKU)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625291"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {}
   },
@@ -11601,6 +14447,15 @@
     "Phenylalanine hydroxylase deficiency (PAH deficiency)",
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000102595"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -11620,17 +14475,215 @@
    "diseases": [
     "Phenylketonuria (PKU)"
    ],
+   "clinvar_vcv": [
+    "VCV000857071"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   }
  ],
  "rejected": [
   {
    "variant": "A556G",
+   "position": 556,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "C1016T",
+   "position": 1016,
    "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "R53S",
+   "position": 53,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001478759"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T63P",
+   "position": 63,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000102619"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R111Q",
+   "position": 111,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002506173"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P119L",
+   "position": 119,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000281017"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G188S",
+   "position": 188,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001513560"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L213F",
+   "position": 213,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000430401"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "A246D",
+   "position": 246,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000102812"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "D253N",
+   "position": 253,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000422049"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "D282G",
+   "position": 282,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000102875"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Q301K",
+   "position": 301,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000379788"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A313T",
+   "position": 313,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000102902"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D315Y",
+   "position": 315,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000102908"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E319G",
+   "position": 319,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000806927"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P366L",
+   "position": 366,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000993142"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E368G",
+   "position": 368,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001185012"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R413H",
+   "position": 413,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000940659"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R420T",
+   "position": 420,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001518834"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
   }
  ],
  "structure_mismatches": [],

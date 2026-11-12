@@ -7,7 +7,9 @@
  "disease": "hereditary transthyretin amyloidosis",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P02766",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 147,
  "uniprot_sequence_sha256": "53ef846fd8d80a7ff20d41bc55ff0f5213a732e1c5471cfc2206e39be8fdd0c1",
  "primary_entry": "8c86",
@@ -32,7 +34,7 @@
     "offset": true,
     "auth_chain_differs_from_label_chain": true
    },
-   "verified": 116
+   "verified": 98
   }
  },
  "variants": [
@@ -55,6 +57,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013444"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -93,6 +104,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001490986"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -133,6 +153,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013457"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -175,6 +204,15 @@
     "Amyloidosis",
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001075407"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -214,6 +252,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001359774"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -251,6 +298,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013463"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -291,6 +347,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000571867"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -328,6 +393,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002584356"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -368,6 +442,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000565560"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -406,6 +489,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002169600"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -447,6 +539,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013455"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -487,6 +588,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000661615"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -524,6 +634,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000948928"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -565,6 +684,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000181693"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -601,6 +729,15 @@
     "rs104894664"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001770339"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8c86": [
      {
@@ -638,6 +775,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013437"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
@@ -677,6 +823,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013430"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -714,6 +869,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013465"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -757,6 +921,16 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "Charcot-Marie-Tooth disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000013440",
+    "VCV002138144"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -807,6 +981,15 @@
     "Hyperthyroxinemia, dystransthyretinemic",
     "TTR-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000013417"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -846,6 +1029,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000944589"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -883,6 +1075,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013418"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
@@ -924,6 +1125,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013456"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -962,44 +1172,14 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 34,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 34,
-      "comp_id": "ARG"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 34,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 34,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R54S",
-   "position": 54,
-   "wild_type": "R",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000660385"
    ],
-   "clinvar": [
-    "RCV002401230",
-    "RCV005097647"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs2510932394"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -1040,6 +1220,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000840757"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1057,45 +1246,6 @@
       "label_asym_id": "B",
       "label_seq_id": 34,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "K55E",
-   "position": 55,
-   "wild_type": "K",
-   "mutant": "E",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002904760",
-    "RCV003358018"
-   ],
-   "dbsnp": [
-    "rs2510932395"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 35,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 35,
-      "comp_id": "LYS"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 35,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 35,
-      "comp_id": "LYS"
      }
     ]
    }
@@ -1118,6 +1268,18 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000576496",
+    "VCV002138145"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -1158,6 +1320,15 @@
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "Epithelial Neoplasms, NOS"
    ],
+   "clinvar_vcv": [
+    "VCV000965016"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1196,6 +1367,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013432"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -1237,6 +1417,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000644083"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1276,6 +1465,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000962411"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1313,6 +1511,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001458932"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -1354,6 +1561,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001066429"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1392,6 +1608,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001075408"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1422,10 +1647,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000781919",
-    "RCV001342557",
-    "RCV001379926",
-    "RCV002406713"
+    "RCV001379926"
    ],
    "dbsnp": [
     "rs1340627860"
@@ -1433,6 +1655,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001068392"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -1472,6 +1703,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013428"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1489,51 +1729,6 @@
       "label_asym_id": "B",
       "label_seq_id": 42,
       "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F64L",
-   "position": 64,
-   "wild_type": "F",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000155021",
-    "RCV000474349",
-    "RCV000766993",
-    "RCV001173294",
-    "RCV001798511",
-    "RCV002408691",
-    "RCV005016472"
-   ],
-   "dbsnp": [
-    "rs138065384"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)",
-    "Charcot-Marie-Tooth disease"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 44,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 44,
-      "comp_id": "PHE"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 44,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 44,
-      "comp_id": "PHE"
      }
     ]
    }
@@ -1555,6 +1750,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013461"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -1594,6 +1798,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000181702"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -1635,6 +1848,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000850453"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1674,6 +1896,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000448841"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -1715,6 +1946,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013451"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1753,6 +1993,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000803481"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -1793,6 +2042,16 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013436",
+    "VCV000013459"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1832,6 +2091,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000938206"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1870,6 +2138,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013441"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
@@ -1912,6 +2189,15 @@
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "TTR-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV001454801"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1948,6 +2234,15 @@
     "rs121918081"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002920997"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8c86": [
      {
@@ -1965,45 +2260,6 @@
       "label_asym_id": "B",
       "label_seq_id": 49,
       "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S70G",
-   "position": 70,
-   "wild_type": "S",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003100652",
-    "RCV005626741"
-   ],
-   "dbsnp": [
-    "rs386134269"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 50,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 50,
-      "comp_id": "SER"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 50,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 50,
-      "comp_id": "SER"
      }
     ]
    }
@@ -2024,6 +2280,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013439"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -2071,6 +2336,18 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013429",
+    "VCV000036889",
+    "VCV000036890"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2088,46 +2365,6 @@
       "label_asym_id": "B",
       "label_seq_id": 50,
       "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E71K",
-   "position": 71,
-   "wild_type": "E",
-   "mutant": "K",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001301691",
-    "RCV001587329",
-    "RCV002418911"
-   ],
-   "dbsnp": [
-    "rs933476040"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 51,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 51,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 51,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 51,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -2149,6 +2386,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001178327"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -2189,6 +2435,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013462"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2227,6 +2482,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001067499"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -2269,6 +2533,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000811803"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2308,6 +2581,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000636837"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2346,6 +2628,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001712259"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -2387,62 +2678,32 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 54,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 54,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 54,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 54,
-      "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L75M",
-   "position": 75,
-   "wild_type": "L",
-   "mutant": "M",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000448842"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV001044452",
-    "RCV005502982"
-   ],
-   "dbsnp": [
-    "rs2073510448"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 55,
+      "auth_seq_id": 54,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 55,
-      "comp_id": "LEU"
+      "label_seq_id": 54,
+      "comp_id": "GLU"
      },
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 55,
+      "auth_seq_id": 54,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 55,
-      "comp_id": "LEU"
+      "label_seq_id": 54,
+      "comp_id": "GLU"
      }
     ]
    }
@@ -2463,6 +2724,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013438"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
@@ -2502,6 +2772,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000941337"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2540,6 +2819,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000660445"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -2581,6 +2869,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013420"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2618,6 +2915,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013435"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
@@ -2657,62 +2963,32 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 58,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 58,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 58,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 58,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "T79A",
-   "position": 79,
-   "wild_type": "T",
-   "mutant": "A",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV001799566"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV003100653",
-    "RCV005021565"
-   ],
-   "dbsnp": [
-    "rs770389488"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 59,
+      "auth_seq_id": 58,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 59,
-      "comp_id": "THR"
+      "label_seq_id": 58,
+      "comp_id": "LEU"
      },
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 59,
+      "auth_seq_id": 58,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 59,
-      "comp_id": "THR"
+      "label_seq_id": 58,
+      "comp_id": "LEU"
      }
     ]
    }
@@ -2736,6 +3012,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000181694"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -2781,6 +3066,15 @@
     "Cardiomyopathy (CMYO)",
     "Charcot-Marie-Tooth disease"
    ],
+   "clinvar_vcv": [
+    "VCV000013421"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2822,6 +3116,15 @@
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000577420"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2839,43 +3142,6 @@
       "label_asym_id": "B",
       "label_seq_id": 60,
       "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E81A",
-   "position": 81,
-   "wild_type": "E",
-   "mutant": "A",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002459863",
-    "RCV005433225"
-   ],
-   "dbsnp": [
-    "rs1567946170"
-   ],
-   "diseases": [],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 61,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 61,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 61,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 61,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -2897,6 +3163,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000495841"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -2946,6 +3221,17 @@
     "Charcot-Marie-Tooth disease",
     "Hyperthyroxinemia, dystransthyretinemic"
    ],
+   "clinvar_vcv": [
+    "VCV000013453",
+    "VCV000845368"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -2985,6 +3271,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001067500"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3023,61 +3318,32 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 64,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 64,
-      "comp_id": "PHE"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 64,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 64,
-      "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E86D",
-   "position": 86,
-   "wild_type": "E",
-   "mutant": "D",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV002014715"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV001204571"
-   ],
-   "dbsnp": [
-    "rs2073510816"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 66,
+      "auth_seq_id": 64,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 66,
-      "comp_id": "GLU"
+      "label_seq_id": 64,
+      "comp_id": "PHE"
      },
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 66,
+      "auth_seq_id": 64,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 66,
-      "comp_id": "GLU"
+      "label_seq_id": 64,
+      "comp_id": "PHE"
      }
     ]
    }
@@ -3099,6 +3365,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001006084"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -3143,6 +3418,15 @@
     "Carpal tunnel syndrome 1 (CTS1)",
     "Hyperthyroxinemia, dystransthyretinemic"
    ],
+   "clinvar_vcv": [
+    "VCV000013446"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3183,6 +3467,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013466"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3220,6 +3513,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002916831"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -3259,6 +3561,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013443"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3296,6 +3607,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002169603"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -3336,6 +3656,15 @@
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "Plasma Cell Tumors",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000013445"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
@@ -3378,6 +3707,15 @@
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "Hereditary amyloidosis"
    ],
+   "clinvar_vcv": [
+    "VCV000803482"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3395,49 +3733,6 @@
       "label_asym_id": "B",
       "label_seq_id": 73,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D94H",
-   "position": 94,
-   "wild_type": "D",
-   "mutant": "H",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000647355",
-    "RCV000725937",
-    "RCV001173300",
-    "RCV001731489",
-    "RCV002433710",
-    "RCV002478482"
-   ],
-   "dbsnp": [
-    "rs730881164"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 74,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 74,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 74,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 74,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -3457,6 +3752,15 @@
     "rs121918071"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001797565"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3502,6 +3806,15 @@
     "Charcot-Marie-Tooth disease",
     "Hyperthyroxinemia, dystransthyretinemic"
    ],
+   "clinvar_vcv": [
+    "VCV000013422"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3542,6 +3855,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001294424"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3559,126 +3881,6 @@
       "label_asym_id": "B",
       "label_seq_id": 78,
       "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A101T",
-   "position": 101,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000193128",
-    "RCV000589902",
-    "RCV001064362",
-    "RCV002433711",
-    "RCV002484992"
-   ],
-   "dbsnp": [
-    "rs730881165"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 81,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 81,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 81,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 81,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A101V",
-   "position": 101,
-   "wild_type": "A",
-   "mutant": "V",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000586381",
-    "RCV001221565",
-    "RCV002438524",
-    "RCV003486886"
-   ],
-   "dbsnp": [
-    "rs1555631417"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 81,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 81,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 81,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 81,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I104L",
-   "position": 104,
-   "wild_type": "I",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000996674",
-    "RCV001543343"
-   ],
-   "dbsnp": [
-    "rs781345808"
-   ],
-   "diseases": [],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 84,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 84,
-      "comp_id": "ILE"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 84,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 84,
-      "comp_id": "ILE"
      }
     ]
    }
@@ -3699,6 +3901,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002736721"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -3740,6 +3951,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013423"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3778,6 +3998,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001452255"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -3820,64 +4049,32 @@
     "Amyloidosis, hereditary systemic 1 (AMYLD1)",
     "Familial amyloid neuropathy"
    ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 88,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 88,
-      "comp_id": "HIS"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 88,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 88,
-      "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E109D",
-   "position": 109,
-   "wild_type": "E",
-   "mutant": "D",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000853918"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV002444876",
-    "RCV003626611",
-    "RCV006741163"
-   ],
-   "dbsnp": [
-    "rs876661395"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 89,
+      "auth_seq_id": 88,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 89,
-      "comp_id": "GLU"
+      "label_seq_id": 88,
+      "comp_id": "HIS"
      },
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 89,
+      "auth_seq_id": 88,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 89,
-      "comp_id": "GLU"
+      "label_seq_id": 88,
+      "comp_id": "HIS"
      }
     ]
    }
@@ -3898,6 +4095,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002762712"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -3939,6 +4145,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001073324"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -3978,6 +4193,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013442"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -4019,6 +4243,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000846359"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -4058,6 +4291,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001524375"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -4075,45 +4317,6 @@
       "label_asym_id": "B",
       "label_seq_id": 90,
       "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V114L",
-   "position": 114,
-   "wild_type": "V",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001894315",
-    "RCV004039667"
-   ],
-   "dbsnp": [
-    "rs2073528142"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 94,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 94,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 94,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 94,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -4134,6 +4337,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002057055"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -4172,6 +4384,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013448"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
@@ -4216,6 +4437,15 @@
     "Carpal tunnel syndrome 1 (CTS1)",
     "Hyperthyroxinemia, dystransthyretinemic"
    ],
+   "clinvar_vcv": [
+    "VCV000013468"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -4254,6 +4484,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001073325"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -4300,62 +4539,32 @@
     "Hereditary amyloidosis",
     "Hyperthyroxinemia, dystransthyretinemic"
    ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 107,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 107,
-      "comp_id": "ILE"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 107,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 107,
-      "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A129S",
-   "position": 129,
-   "wild_type": "A",
-   "mutant": "S",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000013450"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000770562",
-    "RCV001378795"
-   ],
-   "dbsnp": [
-    "rs267607159"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 109,
+      "auth_seq_id": 107,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 109,
-      "comp_id": "ALA"
+      "label_seq_id": 107,
+      "comp_id": "ILE"
      },
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 109,
+      "auth_seq_id": 107,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 109,
-      "comp_id": "ALA"
+      "label_seq_id": 107,
+      "comp_id": "ILE"
      }
     ]
    }
@@ -4377,6 +4586,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013424"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8c86": [
@@ -4418,6 +4636,15 @@
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013419"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -4456,111 +4683,32 @@
    "diseases": [
     "Carpal tunnel syndrome 1 (CTS1)"
    ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 114,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 114,
-      "comp_id": "TYR"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 114,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 114,
-      "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "T139M",
-   "position": 139,
-   "wild_type": "T",
-   "mutant": "M",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000013449"
    ],
-   "clinvar": [
-    "RCV000014376",
-    "RCV000036376",
-    "RCV000618448",
-    "RCV000714134",
-    "RCV000990084",
-    "RCV001170385",
-    "RCV001173303",
-    "RCV003993656",
-    "RCV006439569"
-   ],
-   "dbsnp": [
-    "rs28933981"
-   ],
-   "diseases": [
-    "Hyperthyroidism",
-    "Hyperthyroxinemia, dystransthyretinemic"
-   ],
-   "structures": {
-    "8c86": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 119,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 119,
-      "comp_id": "THR"
-     },
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 119,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 119,
-      "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A140S",
-   "position": 140,
-   "wild_type": "A",
-   "mutant": "S",
-   "significance": [
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000217098",
-    "RCV000588714",
-    "RCV000809803",
-    "RCV002327093"
-   ],
-   "dbsnp": [
-    "rs876658108"
-   ],
-   "diseases": [
-    "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8c86": [
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 120,
+      "auth_seq_id": 114,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 120,
-      "comp_id": "ALA"
+      "label_seq_id": 114,
+      "comp_id": "TYR"
      },
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 120,
+      "auth_seq_id": 114,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 120,
-      "comp_id": "ALA"
+      "label_seq_id": 114,
+      "comp_id": "TYR"
      }
     ]
    }
@@ -4581,6 +4729,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 1 (AMYLD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001333466"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8c86": [
@@ -4636,6 +4793,15 @@
     "Hyperthyroxinemia, dystransthyretinemic",
     "TTR-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000013426"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8c86": [
      {
@@ -4658,7 +4824,206 @@
    }
   }
  ],
- "rejected": [],
+ "rejected": [
+  {
+   "variant": "R54S",
+   "position": 54,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001776772"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "K55E",
+   "position": 55,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002051168"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "F64L",
+   "position": 64,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000178280"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S70G",
+   "position": 70,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002169601"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E71K",
+   "position": 71,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001004913"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L75M",
+   "position": 75,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000842099"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T79A",
+   "position": 79,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002169602"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E81A",
+   "position": 81,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001791134"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E86D",
+   "position": 86,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000935886"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D94H",
+   "position": 94,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000181695"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A101T",
+   "position": 101,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000181696"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A101V",
+   "position": 101,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000495842"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I104L",
+   "position": 104,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000808384"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E109D",
+   "position": 109,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000235066"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V114L",
+   "position": 114,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001358758"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A129S",
+   "position": 129,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000626843"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T139M",
+   "position": 139,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000013434"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A140S",
+   "position": 140,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000229597"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
  "structure_mismatches": [],
  "pathogenic_single_residue_variants_per_position": {
   "30": 2,

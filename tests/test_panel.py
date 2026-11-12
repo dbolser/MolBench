@@ -25,6 +25,7 @@ PANEL_DIR = REPO / "data" / "panel"
 PANEL = json.loads((PANEL_DIR / "panel.json").read_text())
 ENTRIES = {e["id"]: e for e in PANEL["entries"]}
 PROTEINS = PANEL["disease_proteins"]
+PATHOGENIC = {"Pathogenic", "Likely pathogenic", "Pathogenic/Likely pathogenic"}
 AA3 = {"ALA": "A", "ARG": "R", "ASN": "N", "ASP": "D", "CYS": "C", "GLN": "Q", "GLU": "E",
        "GLY": "G", "HIS": "H", "ILE": "I", "LEU": "L", "LYS": "K", "MET": "M", "PHE": "F",
        "PRO": "P", "SER": "S", "THR": "T", "TRP": "W", "TYR": "Y", "VAL": "V"}
@@ -165,7 +166,10 @@ def test_variants_are_frozen_with_provenance_and_verified_identity(protein):
     assert doc["accession"] == protein["accession"]
     assert doc["source"].startswith("https://www.ebi.ac.uk/proteins/api/variation/")
     assert re.fullmatch(r"\d{4}-\d\d-\d\d", doc["retrieved"])
+    assert doc["clinvar_source"].startswith("https://eutils.ncbi.nlm.nih.gov/")
+    assert re.fullmatch(r"\d{4}-\d\d-\d\d", doc["clinvar_retrieved"])
     assert doc["primary_entry"] == protein["entry"]
+    assert not {v["variant"] for v in doc["variants"]} & {r["variant"] for r in doc["rejected"]}
     assert len(doc["variants"]) == protein["variants"] > 0
     seen = set()
     n_verified = 0
@@ -175,7 +179,12 @@ def test_variants_are_frozen_with_provenance_and_verified_identity(protein):
         seen.add(v["variant"])
         assert v["wild_type"] != v["mutant"]
         assert set(v["significance"]) <= {"Pathogenic", "Likely pathogenic"} and v["significance"]
-        assert v["clinvar"] and all(re.fullmatch(r"[RV]CV\d+", x) for x in v["clinvar"])
+        assert v["clinvar"] and all(re.fullmatch(r"RCV\d+", x) for x in v["clinvar"])
+        # ClinVar's own aggregate verdict (not just one submitter's) is pathogenic.
+        assert v["clinvar_vcv"] and all(re.fullmatch(r"VCV\d+", x) for x in v["clinvar_vcv"])
+        assert v["clinvar_classification"] and all(
+            re.split(r"[;,]", c)[0].strip() in PATHOGENIC for c in v["clinvar_classification"])
+        assert v["clinvar_review_status"]
         n_verified += protein["entry"] in v["structures"]
         for entry, residues in v["structures"].items():
             atoms = load_table(entry)
@@ -195,6 +204,32 @@ def test_variants_are_frozen_with_provenance_and_verified_identity(protein):
         assert AA3.get(m["structure_residue"]) != v["wild_type"]
         assert not any((r["auth_asym_id"], r["auth_seq_id"]) == (m["auth_asym_id"], m["auth_seq_id"])
                        for r in v["structures"].get(m["entry"], []))
+
+
+def test_variants_clinvar_does_not_call_pathogenic_are_left_out():
+    # UniProt reports a variant as pathogenic when any one ClinVar submission does;
+    # ClinVar's aggregate can still be "Conflicting" or "Uncertain". Those are rejected,
+    # with the classification recorded. p53 F109V is one (an October task used it).
+    rejected = {r["variant"]: r for r in grounding.variants("P04637")["rejected"]}
+    assert rejected["F109V"]["clinvar_classification"] == [
+        "Conflicting classifications of pathogenicity"]
+    assert "F109V" not in {v["variant"] for v in grounding.variants("P04637")["variants"]}
+    n = 0
+    for p in PROTEINS:
+        for r in grounding.variants(p["accession"])["rejected"]:
+            if r["reason"].startswith("ClinVar"):
+                n += 1
+                assert not any(re.split(r"[;,]", c)[0].strip() in PATHOGENIC
+                               for c in r["clinvar_classification"])
+    assert n > 100
+
+
+def test_unknown_residues_are_not_called_modified():
+    for entry in ENTRIES:
+        comps = {m["comp_id"] for m in grounding.facts(entry)["modified_residues"]}
+        assert not comps & {"UNK", "N", "DN"}, entry
+    assert "modified-residue" not in ENTRIES["5uak"]["features"]   # its UNK helix
+    assert "modified-residue" in ENTRIES["1atp"]["features"]       # phospho-Thr/Ser
 
 
 def test_a_wild_type_mismatch_is_actually_caught():

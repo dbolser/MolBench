@@ -7,7 +7,9 @@
  "disease": "sickle cell disease; beta-thalassaemia",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P68871",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 147,
  "uniprot_sequence_sha256": "9ebf320eb707d71644444fe5006ed58af56a0bf0ec9568eb6a3a65e0e8191465",
  "primary_entry": "2hhb",
@@ -25,7 +27,7 @@
     "auth_chain_differs_from_label_chain": false
    },
    "outside_construct": 6,
-   "verified": 111
+   "verified": 92
   },
   "2hhb": {
    "numbering": {
@@ -37,7 +39,7 @@
     "auth_chain_differs_from_label_chain": false
    },
    "outside_construct": 6,
-   "verified": 111
+   "verified": 92
   },
   "5ni1": {
    "numbering": {
@@ -49,7 +51,7 @@
     "auth_chain_differs_from_label_chain": false
    },
    "outside_construct": 6,
-   "verified": 111
+   "verified": 92
   },
   "af-p68871-f1-model_v6": {
    "numbering": {
@@ -60,7 +62,7 @@
     "offset": false,
     "auth_chain_differs_from_label_chain": false
    },
-   "verified": 117
+   "verified": 98
   }
  },
  "variants": [
@@ -82,6 +84,18 @@
    ],
    "diseases": [
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000869315",
+    "VCV000869316"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
    ],
    "structures": {
     "af-p68871-f1-model_v6": [
@@ -114,6 +128,15 @@
    "diseases": [
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000495986"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "af-p68871-f1-model_v6": [
      {
@@ -144,6 +167,15 @@
    ],
    "diseases": [
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000869231"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "af-p68871-f1-model_v6": [
@@ -188,6 +220,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "Malaria, susceptibility to",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015434"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "af-p68871-f1-model_v6": [
@@ -234,6 +275,15 @@
     "Malaria, susceptibility to",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000036310"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "af-p68871-f1-model_v6": [
      {
@@ -276,6 +326,15 @@
     "Malaria, susceptibility to",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000439140"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "af-p68871-f1-model_v6": [
      {
@@ -290,81 +349,6 @@
    }
   },
   {
-   "variant": "V2L",
-   "position": 2,
-   "wild_type": "V",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016824",
-    "RCV005049378"
-   ],
-   "dbsnp": [
-    "rs33958358"
-   ],
-   "diseases": [],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 1,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 1,
-      "comp_id": "VAL"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 1,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 1,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 1,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 1,
-      "comp_id": "VAL"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 1,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 1,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 1,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 1,
-      "comp_id": "VAL"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 2,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 2,
-      "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
    "variant": "E7K",
    "position": 7,
    "wild_type": "E",
@@ -373,7 +357,6 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000016251",
     "RCV000016284",
     "RCV000016285",
     "RCV000202507",
@@ -412,6 +395,15 @@
     "Sickle cell-hemoglobin C disease",
     "alpha Thalassemia",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015126"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -489,6 +481,15 @@
    "diseases": [
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000036301"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -557,7 +558,6 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000016286",
     "RCV000016573",
     "RCV000016574",
     "RCV000016575",
@@ -566,8 +566,6 @@
     "RCV000016579",
     "RCV000016580",
     "RCV000016877",
-    "RCV000016879",
-    "RCV000030905",
     "RCV000224000",
     "RCV000477892",
     "RCV000576548",
@@ -607,6 +605,21 @@
     "Sickle cell-hemoglobin C disease",
     "alpha Thalassemia",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015333",
+    "VCV000446735",
+    "VCV000446736",
+    "VCV000446737",
+    "VCV000446738",
+    "VCV000446747"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -683,6 +696,15 @@
     "rs33926764"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015281"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -764,6 +786,15 @@
     "BETA-PLUS-THALASSEMIA",
     "Beta-Malay-thalassemia",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015258"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -855,6 +886,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "Malaria, susceptibility to"
    ],
+   "clinvar_vcv": [
+    "VCV000015300"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -934,6 +974,17 @@
     "Erythrocytosis, familial, 6",
     "Unstable hemoglobin disease"
    ],
+   "clinvar_vcv": [
+    "VCV000015306",
+    "VCV003777010"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1002,9 +1053,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000016576",
-    "RCV000736024",
-    "RCV005000227"
+    "RCV000016576"
    ],
    "dbsnp": [
     "rs33929459"
@@ -1012,6 +1061,15 @@
    "diseases": [
     "HEMOGLOBIN S (ANTILLES)",
     "Hemoglobinopathy"
+   ],
+   "clinvar_vcv": [
+    "VCV000446735"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -1087,6 +1145,15 @@
     "rs33915112"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015554"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1159,7 +1226,6 @@
     "RCV000016330",
     "RCV000016331",
     "RCV000016332",
-    "RCV000016617",
     "RCV000202534",
     "RCV000496072",
     "RCV000506024",
@@ -1202,6 +1268,17 @@
     "Unstable hemoglobin disease",
     "alpha Thalassemia",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015161",
+    "VCV003777010"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -1279,6 +1356,15 @@
     "rs33954632"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015386"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1375,6 +1461,15 @@
     "Malaria, susceptibility to",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015239"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1453,6 +1548,15 @@
    "diseases": [
     "Hemoglobinopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000015183"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1529,6 +1633,15 @@
    ],
    "diseases": [
     "Heinz body anemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015361"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -1607,6 +1720,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas"
    ],
+   "clinvar_vcv": [
+    "VCV000015252"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1684,6 +1806,15 @@
    "diseases": [
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000869243"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1752,12 +1883,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000016619",
-    "RCV000016620",
-    "RCV000985758",
-    "RCV001078384",
-    "RCV001831573",
-    "RCV002288497"
+    "RCV001078384"
    ],
    "dbsnp": [
     "rs1135071"
@@ -1765,6 +1891,15 @@
    "diseases": [
     "Heinz body anemia",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000869321"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -1858,6 +1993,15 @@
     "Malaria, susceptibility to",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015234"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -1935,6 +2079,15 @@
     "rs33948578"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015308"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -2023,6 +2176,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "Malaria, susceptibility to"
    ],
+   "clinvar_vcv": [
+    "VCV000015312"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -2099,6 +2261,15 @@
    "diseases": [
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000869262"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -2154,84 +2325,6 @@
       "label_asym_id": "A",
       "label_seq_id": 36,
       "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P37H",
-   "position": 37,
-   "wild_type": "P",
-   "mutant": "H",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016845",
-    "RCV001029750",
-    "RCV003886362"
-   ],
-   "dbsnp": [
-    "rs33993004"
-   ],
-   "diseases": [
-    "Erythrocytosis, familial, 6"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 36,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 36,
-      "comp_id": "PRO"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 36,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 36,
-      "comp_id": "PRO"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 36,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 36,
-      "comp_id": "PRO"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 36,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 36,
-      "comp_id": "PRO"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 36,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 36,
-      "comp_id": "PRO"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 37,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 37,
-      "comp_id": "PRO"
      }
     ]
    }
@@ -2254,6 +2347,15 @@
    "diseases": [
     "Hemolytic anemia",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015251"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -2336,6 +2438,15 @@
     "Heinz body anemia",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015190"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -2411,6 +2522,15 @@
    ],
    "diseases": [
     "Hemolytic anemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015347"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -2496,82 +2616,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "Malaria, susceptibility to"
    ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 45,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 45,
-      "comp_id": "PHE"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 45,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 45,
-      "comp_id": "PHE"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 45,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 45,
-      "comp_id": "PHE"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 45,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 45,
-      "comp_id": "PHE"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 45,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 45,
-      "comp_id": "PHE"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 46,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 46,
-      "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F46S",
-   "position": 46,
-   "wild_type": "F",
-   "mutant": "S",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000015546"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV000016298",
-    "RCV000757360",
-    "RCV003155027"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
-   "dbsnp": [
-    "rs33978338"
-   ],
-   "diseases": [],
    "structures": {
     "1hho": [
      {
@@ -2627,161 +2680,6 @@
       "label_asym_id": "A",
       "label_seq_id": 46,
       "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P59R",
-   "position": 59,
-   "wild_type": "P",
-   "mutant": "R",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016651",
-    "RCV000030905",
-    "RCV002222352",
-    "RCV004998092"
-   ],
-   "dbsnp": [
-    "rs33991472"
-   ],
-   "diseases": [
-    "Hemoglobinopathy"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 58,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 58,
-      "comp_id": "PRO"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 58,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 58,
-      "comp_id": "PRO"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 58,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 58,
-      "comp_id": "PRO"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 58,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 58,
-      "comp_id": "PRO"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 58,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 58,
-      "comp_id": "PRO"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 59,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 59,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "K60T",
-   "position": 60,
-   "wild_type": "K",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016418",
-    "RCV001284633",
-    "RCV005614372"
-   ],
-   "dbsnp": [
-    "rs35537181"
-   ],
-   "diseases": [],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 59,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 59,
-      "comp_id": "LYS"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 59,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 59,
-      "comp_id": "LYS"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 59,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 59,
-      "comp_id": "LYS"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 59,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 59,
-      "comp_id": "LYS"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 59,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 59,
-      "comp_id": "LYS"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 60,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 60,
-      "comp_id": "LYS"
      }
     ]
    }
@@ -2803,6 +2701,15 @@
    ],
    "diseases": [
     "BETA-PLUS-THALASSEMIA"
+   ],
+   "clinvar_vcv": [
+    "VCV000015411"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -2884,6 +2791,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000694445"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -2963,6 +2879,15 @@
    "diseases": [
     "Hemoglobinopathy",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015400"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -3049,6 +2974,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015256"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -3109,94 +3043,6 @@
    }
   },
   {
-   "variant": "K67E",
-   "position": 67,
-   "wild_type": "K",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016390",
-    "RCV000985737",
-    "RCV004586013",
-    "RCV005049348"
-   ],
-   "dbsnp": [
-    "rs34165323"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Beta-thalassemia HBB/LCRB",
-    "Dominant beta-thalassemia",
-    "Erythrocytosis, familial, 6",
-    "Hb SS disease (SCD)",
-    "Heinz body anemia",
-    "Hemoglobinopathy",
-    "Hereditary persistence of fetal hemoglobin",
-    "METHEMOGLOBINEMIA, BETA TYPE",
-    "Malaria, susceptibility to"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 66,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 66,
-      "comp_id": "LYS"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 66,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 66,
-      "comp_id": "LYS"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 66,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 66,
-      "comp_id": "LYS"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 66,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 66,
-      "comp_id": "LYS"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 66,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 66,
-      "comp_id": "LYS"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 67,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 67,
-      "comp_id": "LYS"
-     }
-    ]
-   }
-  },
-  {
    "variant": "K67T",
    "position": 67,
    "wild_type": "K",
@@ -3212,6 +3058,15 @@
     "rs35939489"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015136"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -3288,6 +3143,15 @@
    ],
    "diseases": [
     "METHEMOGLOBINEMIA, BETA TYPE"
+   ],
+   "clinvar_vcv": [
+    "VCV000015254"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -3368,6 +3232,15 @@
    "diseases": [
     "Hemoglobinopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000015536"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -3436,7 +3309,6 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000016879",
     "RCV000016880",
     "RCV001811167",
     "RCV002482878"
@@ -3454,6 +3326,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "Malaria, susceptibility to",
     "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015613"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -3533,6 +3414,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015117"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -3588,255 +3478,6 @@
       "label_asym_id": "A",
       "label_seq_id": 69,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G70D",
-   "position": 70,
-   "wild_type": "G",
-   "mutant": "D",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016423",
-    "RCV001811155"
-   ],
-   "dbsnp": [
-    "rs34718174"
-   ],
-   "diseases": [],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 70,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 70,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G70S",
-   "position": 70,
-   "wild_type": "G",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016301",
-    "RCV000396079",
-    "RCV000587680",
-    "RCV000709890",
-    "RCV000855646",
-    "RCV001004567",
-    "RCV001107022",
-    "RCV001107023",
-    "RCV001535933",
-    "RCV005049344",
-    "RCV005364880",
-    "RCV005417430",
-    "RCV006688354"
-   ],
-   "dbsnp": [
-    "rs33947415"
-   ],
-   "diseases": [
-    "Beta-thalassemia HBB/LCRB",
-    "Dominant beta-thalassemia",
-    "Erythrocytosis, familial, 6",
-    "Fetal hemoglobin quantitative trait locus 1 (HBFQTL1)",
-    "Hb SS disease (SCD)",
-    "Heinz body anemia",
-    "Hemoglobinopathy",
-    "Hereditary persistence of fetal hemoglobin",
-    "METHEMOGLOBINEMIA, BETA TYPE",
-    "Malaria, susceptibility to",
-    "alpha Thalassemia",
-    "beta Thalassemia (BTHAL)"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 69,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 69,
-      "comp_id": "GLY"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 70,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 70,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "K83E",
-   "position": 83,
-   "wild_type": "K",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016827",
-    "RCV006258923"
-   ],
-   "dbsnp": [
-    "rs33940051"
-   ],
-   "diseases": [],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 82,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 82,
-      "comp_id": "LYS"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 82,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 82,
-      "comp_id": "LYS"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 82,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 82,
-      "comp_id": "LYS"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 82,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 82,
-      "comp_id": "LYS"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 82,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 82,
-      "comp_id": "LYS"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 83,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 83,
-      "comp_id": "LYS"
      }
     ]
    }
@@ -3859,6 +3500,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015193"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -3940,6 +3590,20 @@
     "Erythrocytosis, familial, 6",
     "HEMOGLOBIN S (PROVIDENCE)"
    ],
+   "clinvar_vcv": [
+    "VCV000015319",
+    "VCV000446737",
+    "VCV000618675"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic",
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter",
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -4016,6 +3680,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015321"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -4094,6 +3767,15 @@
    "diseases": [
     "Hemoglobinopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000015122"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -4170,6 +3852,15 @@
    ],
    "diseases": [
     "Adenomas and Adenocarcinomas"
+   ],
+   "clinvar_vcv": [
+    "VCV000015493"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -4249,6 +3940,15 @@
    "diseases": [
     "Beta-thalassemia HBB/LCRB"
    ],
+   "clinvar_vcv": [
+    "VCV000015343"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -4325,6 +4025,15 @@
    ],
    "diseases": [
     "HBB-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV000015108"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -4405,6 +4114,15 @@
     "Erythrocytosis, familial, 6",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015147"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -4481,6 +4199,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015383"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -4559,6 +4286,15 @@
    "diseases": [
     "Hemoglobinopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000015311"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -4627,17 +4363,22 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000016244",
-    "RCV000016877",
-    "RCV000756232",
-    "RCV001835627",
-    "RCV002222351"
+    "RCV000016877"
    ],
    "dbsnp": [
     "rs33913712"
    ],
    "diseases": [
     "HEMOGLOBIN S (CAMEROON)"
+   ],
+   "clinvar_vcv": [
+    "VCV000446747"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -4714,6 +4455,15 @@
     "rs33917785"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015338"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -4789,6 +4539,15 @@
    ],
    "diseases": [
     "Hemoglobinopathy"
+   ],
+   "clinvar_vcv": [
+    "VCV000015494"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -4870,6 +4629,15 @@
    "diseases": [
     "METHEMOGLOBINEMIA, BETA TYPE"
    ],
+   "clinvar_vcv": [
+    "VCV000015255"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -4947,6 +4715,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015104"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -5007,83 +4784,6 @@
    }
   },
   {
-   "variant": "L97G",
-   "position": 97,
-   "wild_type": "L",
-   "mutant": "G",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003135515",
-    "RCV005860356"
-   ],
-   "dbsnp": [
-    "rs2494295133"
-   ],
-   "diseases": [
-    "Malaria, susceptibility to"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 96,
-      "comp_id": "LEU"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 96,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 96,
-      "comp_id": "LEU"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 96,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 96,
-      "comp_id": "LEU"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 97,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 97,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
    "variant": "H98L",
    "position": 98,
    "wild_type": "H",
@@ -5101,6 +4801,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015390"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -5177,6 +4886,15 @@
     "rs33950993"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015607"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -5255,6 +4973,18 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015259",
+    "VCV000801186"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic",
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -5325,7 +5055,6 @@
    "clinvar": [
     "RCV000016443",
     "RCV000016446",
-    "RCV000016807",
     "RCV001811157",
     "RCV001826464"
    ],
@@ -5336,6 +5065,15 @@
     "Heinz body anemia",
     "Hemoglobinopathy",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015241"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -5414,83 +5152,14 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 99,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 99,
-      "comp_id": "ASP"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 99,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 99,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 99,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 99,
-      "comp_id": "ASP"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 99,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 99,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 99,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 99,
-      "comp_id": "ASP"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 100,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 100,
-      "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D100E",
-   "position": 100,
-   "wild_type": "D",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000015315"
    ],
-   "clinvar": [
-    "RCV000016757",
-    "RCV001175128",
-    "RCV003226436"
+   "clinvar_classification": [
+    "Pathogenic; other"
    ],
-   "dbsnp": [
-    "rs34013622"
-   ],
-   "diseases": [
-    "Erythrocytosis, familial, 6"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -5569,6 +5238,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015204"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -5645,6 +5323,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015391"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -5723,6 +5410,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015236"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -5800,6 +5496,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015134"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -5876,6 +5581,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015397"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -5955,6 +5669,15 @@
     "Erythrocytosis, familial, 6",
     "Nevi and Melanomas"
    ],
+   "clinvar_vcv": [
+    "VCV000015116"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -6024,14 +5747,22 @@
    ],
    "clinvar": [
     "RCV000016557",
-    "RCV000641582",
-    "RCV003131099"
+    "RCV000641582"
    ],
    "dbsnp": [
     "rs35209591"
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015317"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -6110,6 +5841,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015094"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -6186,6 +5926,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015118"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -6264,6 +6013,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015192"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -6340,6 +6098,15 @@
    "diseases": [
     "METHEMOGLOBINEMIA, BETA TYPE",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000015378"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -6418,82 +6185,14 @@
    "diseases": [
     "BETA-PLUS-THALASSEMIA"
    ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 106,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 106,
-      "comp_id": "LEU"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 106,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 106,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 106,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 106,
-      "comp_id": "LEU"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 106,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 106,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 106,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 106,
-      "comp_id": "LEU"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 107,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 107,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L107V",
-   "position": 107,
-   "wild_type": "L",
-   "mutant": "V",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000015487"
    ],
-   "clinvar": [
-    "RCV001078325",
-    "RCV001284153"
+   "clinvar_classification": [
+    "Pathogenic; other"
    ],
-   "dbsnp": [
-    "rs63750596"
-   ],
-   "diseases": [
-    "beta Thalassemia (BTHAL)"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -6571,6 +6270,15 @@
    ],
    "diseases": [
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV002735520"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -6655,6 +6363,15 @@
     "Hemoglobinopathy",
     "Nevi and Melanomas",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015342"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -6742,6 +6459,15 @@
     "Hb SS disease (SCD)",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015352"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -6819,6 +6545,15 @@
    "diseases": [
     "Heinz body anemia"
    ],
+   "clinvar_vcv": [
+    "VCV000015207"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -6874,91 +6609,6 @@
       "label_asym_id": "A",
       "label_seq_id": 113,
       "comp_id": "CYS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V114E",
-   "position": 114,
-   "wild_type": "V",
-   "mutant": "E",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016516",
-    "RCV001284155",
-    "RCV005049352"
-   ],
-   "dbsnp": [
-    "rs34484056"
-   ],
-   "diseases": [
-    "Beta-thalassemia HBB/LCRB",
-    "Dominant beta-thalassemia",
-    "Erythrocytosis, familial, 6",
-    "Hb SS disease (SCD)",
-    "Heinz body anemia",
-    "Hereditary persistence of fetal hemoglobin",
-    "METHEMOGLOBINEMIA, BETA TYPE",
-    "Malaria, susceptibility to"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 113,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 113,
-      "comp_id": "VAL"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 113,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 113,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 113,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 113,
-      "comp_id": "VAL"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 113,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 113,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 113,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 113,
-      "comp_id": "VAL"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 114,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 114,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -6972,7 +6622,6 @@
     "Likely pathogenic"
    ],
    "clinvar": [
-    "RCV000016486",
     "RCV000016745",
     "RCV006644336"
    ],
@@ -6981,6 +6630,15 @@
    ],
    "diseases": [
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015486"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -7074,6 +6732,15 @@
     "Malaria, susceptibility to",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015513"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -7154,6 +6821,15 @@
     "Dominant beta-thalassemia",
     "Hemoglobinopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000015526"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -7231,6 +6907,15 @@
    "diseases": [
     "Dominant beta-thalassemia"
    ],
+   "clinvar_vcv": [
+    "VCV000015257"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -7302,7 +6987,6 @@
     "RCV000016524",
     "RCV000016525",
     "RCV000016577",
-    "RCV000016863",
     "RCV000029993",
     "RCV000202511",
     "RCV000508438",
@@ -7324,6 +7008,18 @@
     "Sickle cell-Hemoglobin O Arab disease",
     "alpha Thalassemia",
     "beta Thalassemia (BTHAL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000015292",
+    "VCV000446736"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -7394,9 +7090,6 @@
    ],
    "clinvar": [
     "RCV000016317",
-    "RCV000016617",
-    "RCV000016758",
-    "RCV000016858",
     "RCV000029994",
     "RCV000202465",
     "RCV000723826",
@@ -7422,92 +7115,14 @@
     "Malaria, susceptibility to",
     "beta Thalassemia (BTHAL)"
    ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 121,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 121,
-      "comp_id": "GLU"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 121,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 121,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 121,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 121,
-      "comp_id": "GLU"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 121,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 121,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 121,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 121,
-      "comp_id": "GLU"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 122,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 122,
-      "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E122V",
-   "position": 122,
-   "wild_type": "E",
-   "mutant": "V",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000015152"
    ],
-   "clinvar": [
-    "RCV000016264",
-    "RCV000016265",
-    "RCV004586012",
-    "RCV005049342",
-    "RCV006258919"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs33987957"
-   ],
-   "diseases": [
-    "Beta-thalassemia HBB/LCRB",
-    "Dominant beta-thalassemia",
-    "Erythrocytosis, familial, 6",
-    "Hb SS disease (SCD)",
-    "Heinz body anemia",
-    "Hereditary persistence of fetal hemoglobin",
-    "METHEMOGLOBINEMIA, BETA TYPE",
-    "Malaria, susceptibility to"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "1hho": [
@@ -7564,167 +7179,6 @@
       "label_asym_id": "A",
       "label_seq_id": 122,
       "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P125Q",
-   "position": 125,
-   "wild_type": "P",
-   "mutant": "Q",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016632",
-    "RCV000641615",
-    "RCV000759072"
-   ],
-   "dbsnp": [
-    "rs33983276"
-   ],
-   "diseases": [
-    "Erythrocytosis, familial, 6"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 124,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 124,
-      "comp_id": "PRO"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 124,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 124,
-      "comp_id": "PRO"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 124,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 124,
-      "comp_id": "PRO"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 124,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 124,
-      "comp_id": "PRO"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 124,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 124,
-      "comp_id": "PRO"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 125,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 125,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V127G",
-   "position": 127,
-   "wild_type": "V",
-   "mutant": "G",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016741",
-    "RCV000674175",
-    "RCV000756239",
-    "RCV001260263",
-    "RCV005430465"
-   ],
-   "dbsnp": [
-    "rs33925391"
-   ],
-   "diseases": [
-    "Beta thalassemia intermedia (BTHAL-ITMD)",
-    "Beta-thalassemia (B-THAL)",
-    "Hemoglobinopathy",
-    "beta Thalassemia (BTHAL)"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 126,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 126,
-      "comp_id": "VAL"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 126,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 126,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 126,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 126,
-      "comp_id": "VAL"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 126,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 126,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 126,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 126,
-      "comp_id": "VAL"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 127,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 127,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -7747,6 +7201,15 @@
    ],
    "diseases": [
     "BETA-PLUS-THALASSEMIA, DOMINANT"
+   ],
+   "clinvar_vcv": [
+    "VCV000015409"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -7825,6 +7288,15 @@
    "diseases": [
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015537"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -7885,175 +7357,6 @@
    }
   },
   {
-   "variant": "A130P",
-   "position": 130,
-   "wild_type": "A",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016309",
-    "RCV001823097",
-    "RCV004998083",
-    "RCV005437962"
-   ],
-   "dbsnp": [
-    "rs35939430"
-   ],
-   "diseases": [
-    "beta Thalassemia (BTHAL)"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 130,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 130,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A130V",
-   "position": 130,
-   "wild_type": "A",
-   "mutant": "V",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016450",
-    "RCV001004559",
-    "RCV001284158",
-    "RCV001804165",
-    "RCV005049351",
-    "RCV006644332"
-   ],
-   "dbsnp": [
-    "rs111645889"
-   ],
-   "diseases": [
-    "Beta-thalassemia HBB/LCRB",
-    "Dominant beta-thalassemia",
-    "Erythrocytosis, familial, 6",
-    "Hb SS disease (SCD)",
-    "Heinz body anemia",
-    "Hemoglobinopathy",
-    "Hereditary persistence of fetal hemoglobin",
-    "METHEMOGLOBINEMIA, BETA TYPE",
-    "Malaria, susceptibility to",
-    "beta Thalassemia (BTHAL)"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 129,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 129,
-      "comp_id": "ALA"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 130,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 130,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
    "variant": "Q132P",
    "position": 132,
    "wild_type": "Q",
@@ -8069,6 +7372,15 @@
     "rs33950778"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015348"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -8144,6 +7456,15 @@
    ],
    "diseases": [
     "Hemoglobinopathy"
+   ],
+   "clinvar_vcv": [
+    "VCV000015290"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -8222,6 +7543,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015339"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -8299,6 +7629,15 @@
    "diseases": [
     "Hemoglobinopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000015545"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -8359,84 +7698,6 @@
    }
   },
   {
-   "variant": "A143D",
-   "position": 143,
-   "wild_type": "A",
-   "mutant": "D",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000016527",
-    "RCV000641554",
-    "RCV004998091"
-   ],
-   "dbsnp": [
-    "rs33921821"
-   ],
-   "diseases": [
-    "Erythrocytosis, familial, 6"
-   ],
-   "structures": {
-    "1hho": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 142,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 142,
-      "comp_id": "ALA"
-     }
-    ],
-    "2hhb": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 142,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 142,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 142,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 142,
-      "comp_id": "ALA"
-     }
-    ],
-    "5ni1": [
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 142,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 142,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "D",
-      "auth_seq_id": 142,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "D",
-      "label_seq_id": 142,
-      "comp_id": "ALA"
-     }
-    ],
-    "af-p68871-f1-model_v6": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 143,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 143,
-      "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
    "variant": "A143V",
    "position": 143,
    "wild_type": "A",
@@ -8452,6 +7713,15 @@
    ],
    "diseases": [
     "HEMOGLOBIN S (TRAVIS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000446738"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -8530,6 +7800,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015365"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -8610,6 +7889,15 @@
     "Squamous Cell Neoplasms",
     "beta Thalassemia (BTHAL)"
    ],
+   "clinvar_vcv": [
+    "VCV000015090"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -8679,7 +7967,6 @@
    ],
    "clinvar": [
     "RCV000016249",
-    "RCV000144412",
     "RCV000641406",
     "RCV001811146"
    ],
@@ -8688,6 +7975,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015096"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -8767,6 +8063,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015322"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -8844,6 +8149,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015112"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "1hho": [
@@ -8931,6 +8245,15 @@
     "METHEMOGLOBINEMIA, BETA TYPE",
     "Malaria, susceptibility to"
    ],
+   "clinvar_vcv": [
+    "VCV000633256"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "1hho": [
      {
@@ -9008,6 +8331,15 @@
    "diseases": [
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015200"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "1hho": [
      {
@@ -9084,6 +8416,15 @@
    ],
    "diseases": [
     "Erythrocytosis, familial, 6"
+   ],
+   "clinvar_vcv": [
+    "VCV000015144"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "1hho": [
@@ -9164,6 +8505,15 @@
     "Beta-thalassemia HBB/LCRB",
     "Erythrocytosis, familial, 6"
    ],
+   "clinvar_vcv": [
+    "VCV000015395"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "1hho": [
      {
@@ -9227,7 +8577,221 @@
  "rejected": [
   {
    "variant": "G3A",
+   "position": 3,
    "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "V2L",
+   "position": 2,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015558"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "P37H",
+   "position": 37,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015578"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "F46S",
+   "position": 46,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015135"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P59R",
+   "position": 59,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015398",
+    "VCV000446731"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance",
+    "other"
+   ]
+  },
+  {
+   "variant": "K60T",
+   "position": 60,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015222"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "K67E",
+   "position": 67,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015206"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G70D",
+   "position": 70,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015226"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G70S",
+   "position": 70,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015138"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "K83E",
+   "position": 83,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015561"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "L97G",
+   "position": 97,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002432365"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D100E",
+   "position": 100,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015495",
+    "VCV000917854"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity",
+    "other"
+   ]
+  },
+  {
+   "variant": "L107V",
+   "position": 107,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000869278"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "V114E",
+   "position": 114,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015286"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E122V",
+   "position": 122,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015110"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P125Q",
+   "position": 125,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015380"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "V127G",
+   "position": 127,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015483"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "A130P",
+   "position": 130,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015146"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A130V",
+   "position": 130,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015245"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A143D",
+   "position": 143,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015294"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
   }
  ],
  "structure_mismatches": [],

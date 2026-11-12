@@ -7,7 +7,9 @@
  "disease": "alpha-1-antitrypsin deficiency",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P01009",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 418,
  "uniprot_sequence_sha256": "c69a255290b578990923895575ec773e400bd835aa56402d6db23e2f1f15c966",
  "primary_entry": "8pi2",
@@ -34,7 +36,7 @@
    },
    "not_observed": 1,
    "outside_construct": 2,
-   "verified": 30
+   "verified": 25
   }
  },
  "variants": [
@@ -55,6 +57,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000370522"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {}
   },
   {
@@ -73,6 +84,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000626304"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -93,6 +113,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000555691"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -111,6 +140,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV002678657"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8pi2": [
@@ -141,6 +179,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000444038"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8pi2": [
@@ -177,6 +224,18 @@
     "Alpha-1-antitrypsin deficiency (A1ATD)",
     "SERPINA1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000017974",
+    "VCV000219354"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -206,6 +265,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000440501"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8pi2": [
@@ -240,6 +308,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000017971"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -270,6 +347,15 @@
    "diseases": [
     "SERPINA1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV002636546"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -299,6 +385,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000444040"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8pi2": [
@@ -331,6 +426,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000017992"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -360,6 +464,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000626298"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8pi2": [
@@ -393,6 +506,15 @@
     "Alpha-1-antitrypsin deficiency (A1ATD)",
     "Not Reported"
    ],
+   "clinvar_vcv": [
+    "VCV000017966"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -425,6 +547,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000017987"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -434,41 +565,6 @@
       "label_asym_id": "A",
       "label_seq_id": 102,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G139S",
-   "position": 139,
-   "wild_type": "G",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000019597",
-    "RCV000019598",
-    "RCV000019599",
-    "RCV000019600",
-    "RCV000512622"
-   ],
-   "dbsnp": [
-    "rs11558261"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Alpha-1-antitrypsin deficiency (A1ATD)"
-   ],
-   "structures": {
-    "8pi2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 115,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 125,
-      "comp_id": "GLY"
      }
     ]
    }
@@ -489,6 +585,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000440500"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8pi2": [
@@ -520,6 +625,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000444044"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -542,19 +656,22 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000019561",
-    "RCV000148879",
-    "RCV000151833",
-    "RCV000205893",
-    "RCV000622899",
-    "RCV000727618",
-    "RCV004724750"
+    "RCV000205893"
    ],
    "dbsnp": [
     "rs28929470"
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000219354"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8pi2": [
@@ -565,68 +682,6 @@
       "label_asym_id": "A",
       "label_seq_id": 233,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G249R",
-   "position": 249,
-   "wild_type": "G",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000169405",
-    "RCV006743893"
-   ],
-   "dbsnp": [
-    "rs764220898"
-   ],
-   "diseases": [
-    "Alpha-1-antitrypsin deficiency (A1ATD)"
-   ],
-   "structures": {
-    "8pi2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 225,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 235,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L278P",
-   "position": 278,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000768545",
-    "RCV005256677"
-   ],
-   "dbsnp": [
-    "rs1566753480"
-   ],
-   "diseases": [
-    "Alpha-1-antitrypsin deficiency (A1ATD)"
-   ],
-   "structures": {
-    "8pi2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 254,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 264,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -657,6 +712,15 @@
     "Mitochondrial complex I deficiency, nuclear type 21",
     "SERPINA1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000017975"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -679,27 +743,9 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000019569",
-    "RCV000148878",
-    "RCV000177031",
     "RCV000508742",
     "RCV000508836",
-    "RCV000762932",
-    "RCV000768544",
-    "RCV000991136",
-    "RCV001195102",
-    "RCV002371777",
-    "RCV002466248",
-    "RCV003415722",
-    "RCV005887568",
-    "RCV005887569",
-    "RCV005887570",
-    "RCV005887571",
-    "RCV005887572",
-    "RCV005887573",
-    "RCV005887574",
-    "RCV005887575",
-    "RCV006554441"
+    "RCV000768544"
    ],
    "dbsnp": [
     "rs17580"
@@ -719,6 +765,17 @@
     "Sarcoma",
     "Susceptibility to severe coronavirus disease (COVID-19)",
     "Uterine corpus endometrial carcinoma"
+   ],
+   "clinvar_vcv": [
+    "VCV000440500",
+    "VCV000440501",
+    "VCV000626305"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8pi2": [
@@ -750,6 +807,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000692116"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -780,6 +846,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
    ],
+   "clinvar_vcv": [
+    "VCV000444036"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -789,38 +864,6 @@
       "label_asym_id": "A",
       "label_seq_id": 344,
       "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A360T",
-   "position": 360,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000019596",
-    "RCV000512619",
-    "RCV000734987"
-   ],
-   "dbsnp": [
-    "rs1802959"
-   ],
-   "diseases": [
-    "Alpha-1-antitrypsin deficiency (A1ATD)"
-   ],
-   "structures": {
-    "8pi2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 336,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 346,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -841,6 +884,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV001989795"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8pi2": [
@@ -891,6 +943,18 @@
     "SERPINA1-related disorder",
     "Susceptibility to severe coronavirus disease (COVID-19)"
    ],
+   "clinvar_vcv": [
+    "VCV000017967",
+    "VCV000626304"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic; risk factor"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -922,6 +986,15 @@
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)",
     "Hemorrhagic disease due to alpha-1-antitrypsin Pittsburgh mutation"
+   ],
+   "clinvar_vcv": [
+    "VCV000017982"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8pi2": [
@@ -959,6 +1032,15 @@
     "Inborn genetic diseases",
     "SERPINA1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000017965"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -988,6 +1070,15 @@
    ],
    "diseases": [
     "Alpha-1-antitrypsin deficiency (A1ATD)"
+   ],
+   "clinvar_vcv": [
+    "VCV001066793"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8pi2": [
@@ -1022,36 +1113,14 @@
     "Alpha-1-antitrypsin deficiency (A1ATD)",
     "SERPINA1-related disorder"
    ],
-   "structures": {
-    "8pi2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 369,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 379,
-      "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P393T",
-   "position": 393,
-   "wild_type": "P",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000289135"
    ],
-   "clinvar": [
-    "RCV000206411",
-    "RCV000729874"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs61761869"
-   ],
-   "diseases": [
-    "Alpha-1-antitrypsin deficiency (A1ATD)"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8pi2": [
@@ -1085,6 +1154,15 @@
     "Alpha-1-antitrypsin deficiency (A1ATD)",
     "SERPINA1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000440487"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8pi2": [
      {
@@ -1099,7 +1177,63 @@
    }
   }
  ],
- "rejected": [],
+ "rejected": [
+  {
+   "variant": "G139S",
+   "position": 139,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000017986"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "G249R",
+   "position": 249,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000189018"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L278P",
+   "position": 278,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000626306"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A360T",
+   "position": 360,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000017985"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "P393T",
+   "position": 393,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000219360"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
  "structure_mismatches": [],
  "pathogenic_single_residue_variants_per_position": {
   "1": 2,

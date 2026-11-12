@@ -7,7 +7,9 @@
  "disease": "amyotrophic lateral sclerosis 1",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P00441",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 154,
  "uniprot_sequence_sha256": "c56903dca972575883387736442f68a5206604d08604ddeb8dbc2e3f25a9f76d",
  "primary_entry": "2c9v",
@@ -32,7 +34,7 @@
     "offset": true,
     "auth_chain_differs_from_label_chain": true
    },
-   "verified": 102
+   "verified": 90
   }
  },
  "variants": [
@@ -55,6 +57,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV002138372"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -95,6 +106,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000873321"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -134,6 +154,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000014765"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -177,6 +206,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000014763"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -214,6 +252,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001926438"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -254,6 +301,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014771"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -292,6 +348,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV001500887"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -309,45 +374,6 @@
       "label_asym_id": "B",
       "label_seq_id": 6,
       "comp_id": "CYS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D12Y",
-   "position": 12,
-   "wild_type": "D",
-   "mutant": "Y",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003486397",
-    "RCV006276342"
-   ],
-   "dbsnp": [
-    "rs762628133"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 11,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 11,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 11,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 11,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -368,6 +394,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001514873"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -408,6 +443,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000873322"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -446,6 +490,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000586638"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -486,6 +539,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014776"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -524,6 +586,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001459352"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -565,6 +636,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "Spastic tetraplegia and axial hypotonia, progressive"
    ],
+   "clinvar_vcv": [
+    "VCV000859765"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -603,6 +683,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000014773"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "2c9v": [
@@ -643,6 +732,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000873323"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -681,63 +779,32 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 22,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 22,
-      "comp_id": "GLN"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 22,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 22,
-      "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V32A",
-   "position": 32,
-   "wild_type": "V",
-   "mutant": "A",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV002866770"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV001095392",
-    "RCV001196130",
-    "RCV002291718"
-   ],
-   "dbsnp": [
-    "rs1428716759"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 31,
+      "auth_seq_id": 22,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 31,
-      "comp_id": "VAL"
+      "label_seq_id": 22,
+      "comp_id": "GLN"
      },
      {
       "auth_asym_id": "F",
-      "auth_seq_id": 31,
+      "auth_seq_id": 22,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 31,
-      "comp_id": "VAL"
+      "label_seq_id": 22,
+      "comp_id": "GLN"
      }
     ]
    }
@@ -763,6 +830,16 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "Motor neuron disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000014752",
+    "VCV000549678"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -801,6 +878,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002138374"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -842,6 +928,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014753"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -879,6 +974,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000575420"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -918,6 +1022,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000014755"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -959,6 +1072,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "Spastic tetraplegia and axial hypotonia, progressive"
+   ],
+   "clinvar_vcv": [
+    "VCV000014754"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -1004,6 +1126,15 @@
     "Amyotrophic lateral sclerosis type 10 (ALS10)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000014756"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1042,6 +1173,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000014781"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "2c9v": [
@@ -1087,6 +1227,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000014764"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1124,6 +1273,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001018905"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -1165,6 +1323,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000807693"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1182,46 +1349,6 @@
       "label_asym_id": "B",
       "label_seq_id": 48,
       "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "F65L",
-   "position": 65,
-   "wild_type": "F",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001565742",
-    "RCV001882667",
-    "RCV004746428"
-   ],
-   "dbsnp": [
-    "rs1030039318"
-   ],
-   "diseases": [
-    "SOD1-related disorder"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 64,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 64,
-      "comp_id": "PHE"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 64,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 64,
-      "comp_id": "PHE"
      }
     ]
    }
@@ -1243,6 +1370,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001709733"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -1282,6 +1418,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000873197"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1319,6 +1464,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000873198"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -1358,6 +1512,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001030809"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -1399,6 +1562,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000805494"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1439,6 +1611,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000014782"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1476,6 +1657,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002059610"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -1518,6 +1708,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "Spastic tetraplegia and axial hypotonia, progressive"
    ],
+   "clinvar_vcv": [
+    "VCV000855744"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1556,6 +1755,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000014775"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "2c9v": [
@@ -1597,6 +1805,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV000014758"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -1640,6 +1857,15 @@
     "SOD1-related disorder",
     "Spastic tetraplegia and axial hypotonia, progressive"
    ],
+   "clinvar_vcv": [
+    "VCV000932081"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1679,6 +1905,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000468253"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -1720,6 +1955,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000858432"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1757,6 +2001,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000873199"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -1798,6 +2051,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV001191297"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1815,55 +2077,6 @@
       "label_asym_id": "B",
       "label_seq_id": 89,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D91A",
-   "position": 91,
-   "wild_type": "D",
-   "mutant": "A",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000015888",
-    "RCV000015889",
-    "RCV000713399",
-    "RCV001843455",
-    "RCV003415711",
-    "RCV005434603",
-    "RCV005865183"
-   ],
-   "dbsnp": [
-    "rs80265967"
-   ],
-   "diseases": [
-    "Adult onset neurodegenerative disorder",
-    "Amyotrophic lateral sclerosis (ALS)",
-    "Amyotrophic lateral sclerosis 1 (ALS1)",
-    "Amyotrophic lateral sclerosis 1, autosomal recessive",
-    "Amyotrophic lateral sclerosis type 1 (ALS1)",
-    "SOD1-related disorder"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 90,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 90,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 90,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 90,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -1885,6 +2098,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001802147"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -1925,6 +2147,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014760"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -1964,6 +2195,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014759"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2002,6 +2242,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001072003"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -2044,6 +2293,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "Motor neuron disease"
    ],
+   "clinvar_vcv": [
+    "VCV000014784"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2084,6 +2342,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV002634277"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2123,6 +2390,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV002197104"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2140,48 +2416,6 @@
       "label_asym_id": "B",
       "label_seq_id": 95,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D97N",
-   "position": 97,
-   "wild_type": "D",
-   "mutant": "N",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000015906",
-    "RCV000993041",
-    "RCV005859466"
-   ],
-   "dbsnp": [
-    "rs121912459"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Amyotrophic lateral sclerosis 1, autosomal recessive",
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 96,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 96,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 96,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -2202,6 +2436,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000692200"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -2245,6 +2488,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "Motor neuron disease"
    ],
+   "clinvar_vcv": [
+    "VCV000014761"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2287,6 +2539,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000574319"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2324,6 +2585,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001066874"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -2364,6 +2634,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV002736984"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2403,6 +2682,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis 1, autosomal recessive"
+   ],
+   "clinvar_vcv": [
+    "VCV000014767"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -2445,6 +2733,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000695024"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2482,6 +2779,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000934816"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -2525,6 +2831,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000014757"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2563,6 +2878,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002138376"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -2603,6 +2927,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014762"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2640,6 +2973,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002018599"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -2687,6 +3029,15 @@
     "SOD1-related disorder",
     "Spastic tetraplegia and axial hypotonia, progressive"
    ],
+   "clinvar_vcv": [
+    "VCV000197145"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2726,6 +3077,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV002138377"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2762,6 +3122,15 @@
     "rs2049604095"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000932453"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2802,47 +3171,14 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 115,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 115,
-      "comp_id": "ARG"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 115,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 115,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R116H",
-   "position": 116,
-   "wild_type": "R",
-   "mutant": "H",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000805495"
    ],
-   "clinvar": [
-    "RCV003148428",
-    "RCV003517461",
-    "RCV004725662"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs1240334553"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Amyotrophic lateral sclerosis type 1 (ALS1)",
-    "Neoplasms, NOS"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -2861,45 +3197,6 @@
       "label_asym_id": "B",
       "label_seq_id": 115,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L118V",
-   "position": 118,
-   "wild_type": "L",
-   "mutant": "V",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000997817",
-    "RCV001095396"
-   ],
-   "dbsnp": [
-    "rs199474723"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 117,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 117,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 117,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 117,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -2924,6 +3221,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV001489352"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -2941,45 +3247,6 @@
       "label_asym_id": "B",
       "label_seq_id": 119,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "H121L",
-   "position": 121,
-   "wild_type": "H",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002261635",
-    "RCV006470342"
-   ],
-   "dbsnp": [
-    "rs1410925719"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 120,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 120,
-      "comp_id": "HIS"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 120,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 120,
-      "comp_id": "HIS"
      }
     ]
    }
@@ -3002,6 +3269,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001212596"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -3043,6 +3319,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV001067619"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3081,6 +3366,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000973542"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3118,6 +3412,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000873200"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -3158,6 +3461,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV002138379"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3196,6 +3508,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV001064422"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3213,45 +3534,6 @@
       "label_asym_id": "B",
       "label_seq_id": 131,
       "comp_id": "ASN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E134A",
-   "position": 134,
-   "wild_type": "E",
-   "mutant": "A",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV002475374",
-    "RCV002571542"
-   ],
-   "dbsnp": [
-    "rs1568811426"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 133,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 133,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 133,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 133,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -3272,6 +3554,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002138380"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -3310,6 +3601,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000873201"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -3350,62 +3650,32 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 134,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 134,
-      "comp_id": "SER"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 134,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 134,
-      "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "T138A",
-   "position": 138,
-   "wild_type": "T",
-   "mutant": "A",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000014774"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV001095399",
-    "RCV001289238"
-   ],
-   "dbsnp": [
-    "rs1568811445"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "2c9v": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 137,
+      "auth_seq_id": 134,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 137,
-      "comp_id": "THR"
+      "label_seq_id": 134,
+      "comp_id": "SER"
      },
      {
       "auth_asym_id": "F",
-      "auth_seq_id": 137,
+      "auth_seq_id": 134,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 137,
-      "comp_id": "THR"
+      "label_seq_id": 134,
+      "comp_id": "SER"
      }
     ]
    }
@@ -3427,6 +3697,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001163753"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -3468,100 +3747,32 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 139,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 139,
-      "comp_id": "ASN"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 139,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 139,
-      "comp_id": "ASN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G142A",
-   "position": 142,
-   "wild_type": "G",
-   "mutant": "A",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000586635"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV003138556",
-    "RCV003517450"
-   ],
-   "dbsnp": [
-    "rs1568811489"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 141,
+      "auth_seq_id": 139,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 141,
-      "comp_id": "GLY"
+      "label_seq_id": 139,
+      "comp_id": "ASN"
      },
      {
       "auth_asym_id": "F",
-      "auth_seq_id": 141,
+      "auth_seq_id": 139,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 141,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G142V",
-   "position": 142,
-   "wild_type": "G",
-   "mutant": "V",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002810765"
-   ],
-   "dbsnp": [
-    "rs1568811489"
-   ],
-   "diseases": [
-    "Amyotrophic lateral sclerosis type 1 (ALS1)"
-   ],
-   "structures": {
-    "2c9v": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 141,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 141,
-      "comp_id": "GLY"
-     },
-     {
-      "auth_asym_id": "F",
-      "auth_seq_id": 141,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 141,
-      "comp_id": "GLY"
+      "label_seq_id": 139,
+      "comp_id": "ASN"
      }
     ]
    }
@@ -3587,6 +3798,17 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV000586637",
+    "VCV000873203"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -3631,6 +3853,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000014768"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3668,6 +3899,15 @@
    ],
    "diseases": [
     "Motor neuron disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000266063"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -3708,6 +3948,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014769"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3746,6 +3995,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV001475411"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3782,6 +4040,15 @@
     "rs1568811520"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002652587"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3820,6 +4087,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000536142"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "2c9v": [
@@ -3861,6 +4137,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000873204"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3899,6 +4184,15 @@
    "diseases": [
     "Amyotrophic lateral sclerosis (ALS)"
    ],
+   "clinvar_vcv": [
+    "VCV001343332"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -3936,6 +4230,15 @@
    ],
    "diseases": [
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "clinvar_vcv": [
+    "VCV003068571"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2c9v": [
@@ -3979,6 +4282,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV001455194"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -4019,6 +4331,15 @@
     "Amyotrophic lateral sclerosis type 1 (ALS1)",
     "SOD1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV001061106"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -4058,6 +4379,15 @@
     "Amyotrophic lateral sclerosis 1 (ALS1)",
     "Amyotrophic lateral sclerosis type 1 (ALS1)"
    ],
+   "clinvar_vcv": [
+    "VCV000014772"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "2c9v": [
      {
@@ -4080,7 +4410,140 @@
    }
   }
  ],
- "rejected": [],
+ "rejected": [
+  {
+   "variant": "D12Y",
+   "position": 12,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002690932"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V32A",
+   "position": 32,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000873196"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "F65L",
+   "position": 65,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001200656"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D91A",
+   "position": 91,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000014766"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D97N",
+   "position": 97,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000014783"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R116H",
+   "position": 116,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002442105"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L118V",
+   "position": 118,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000809280"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "H121L",
+   "position": 121,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001693766"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E134A",
+   "position": 134,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001807417"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T138A",
+   "position": 138,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000873202"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G142A",
+   "position": 142,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002436219"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G142V",
+   "position": 142,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002000951"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
  "structure_mismatches": [],
  "pathogenic_single_residue_variants_per_position": {
   "4": 1,

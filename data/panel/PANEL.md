@@ -63,7 +63,7 @@ Offset = author residue numbers differ from UniProt numbers for at least one map
 | 5cj6 | Crystal Structure of a Selective Androgen Receptor Modulator Bound to the Ligand Binding Domain of the Human Androgen Receptor | X-ray 2.07 Å | 2233 | yes | basic, chains, clinical, interactions, ligand, numbering | AR (P10275): androgen insensitivity syndrome. |
 | 5edm | Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I ) | X-ray 2.20 Å | 5005 | yes | basic, clinical, disulfide, glycan, interactions, ligand, metal, modified-residue, numbering | F2 (P00734): prothrombin deficiency; thrombophilia. |
 | 5ni1 | CryoEM structure of haemoglobin at 3.2 A determined with the Volta phase plate | EM 3.20 Å | 4579 | yes | basic, chains, clinical, interactions, ligand, metal, numbering | Human haemoglobin by cryo-EM: the same protein as 2HHB by another method. |
-| 5uak | Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (CFTR) | EM 3.87 Å | 9232 | no | basic, chains, clinical, modified-residue, numbering | Human CFTR by cryo-EM: a large membrane transporter, the cystic-fibrosis protein. CFTR (P13569): cystic fibrosis. |
+| 5uak | Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (CFTR) | EM 3.87 Å | 9232 | no | basic, chains, clinical, numbering | Human CFTR by cryo-EM: a large membrane transporter, the cystic-fibrosis protein. CFTR (P13569): cystic fibrosis. |
 | 6hpo | Crystallographic structure of the catalytic domain of Human Phenylalanine Hydroxylase (hPAH CD) in complex with iron at 1.6 Angstrom | X-ray 1.67 Å | 2880 | no | basic, clinical, metal | PAH (P00439): phenylketonuria. |
 | 6m7h | Structure of calmodulin with KN93 | X-ray 1.60 Å | 1311 | yes | basic, clinical, interactions, ligand, metal, modified-residue, numbering | CALM1 (P0DP23): long QT syndrome 14; CPVT4. |
 | 6tc2 | Monoclinic human insulin in complex with p-coumaric acid | X-ray 1.36 Å | 5094 | yes | basic, chains, clinical, disulfide, interactions, ligand, metal, numbering | INS (P01308): permanent neonatal diabetes; MODY10. |
@@ -87,33 +87,33 @@ Verified = pathogenic ClinVar missense variants whose wild-type residue is prese
 
 | gene | UniProt | entry | variants | verified | offset (author − UniProt: residues) | author chain ≠ label chain | disease |
 |---|---|---|---:|---:|---|---|---|
-| TP53 | P04637 | 1tup | 346 | 329 | no (0: 585) | yes | Li-Fraumeni syndrome; somatic cancers |
-| HBA1 | P69905 | 2hhb | 59 | 55 | yes (-1: 282) | no | alpha-thalassaemia; haemoglobin variants |
-| HBB | P68871 | 2hhb | 117 | 111 | yes (-1: 292) | no | sickle cell disease; beta-thalassaemia |
-| CFTR | P13569 | 5uak | 350 | 333 | no (0: 1139) | no | cystic fibrosis |
-| TTR | P02766 | 8c86 | 116 | 116 | yes (-20: 232) | yes | hereditary transthyretin amyloidosis |
+| TP53 | P04637 | 1tup | 213 | 202 | no (0: 585) | yes | Li-Fraumeni syndrome; somatic cancers |
+| HBA1 | P69905 | 2hhb | 48 | 44 | yes (-1: 282) | no | alpha-thalassaemia; haemoglobin variants |
+| HBB | P68871 | 2hhb | 98 | 92 | yes (-1: 292) | no | sickle cell disease; beta-thalassaemia |
+| CFTR | P13569 | 5uak | 236 | 227 | no (0: 1139) | no | cystic fibrosis |
+| TTR | P02766 | 8c86 | 98 | 98 | yes (-20: 232) | yes | hereditary transthyretin amyloidosis |
 | LYZ | P61626 | 2nwd | 3 | 3 | yes (-18: 130) | yes | hereditary lysozyme amyloidosis |
-| SOD1 | P00441 | 2c9v | 102 | 102 | yes (-1: 306) | yes | amyotrophic lateral sclerosis 1 |
-| SERPINA1 | P01009 | 8pi2 | 33 | 30 | yes (-24: 371) | no | alpha-1-antitrypsin deficiency |
-| INS | P01308 | 6tc2 | 29 | 21 | yes (-89: 126, -24: 170) | no | permanent neonatal diabetes; MODY10 |
-| GBA1 | P04062 | 9fb2 | 111 | 109 | no (0: 497) | no | Gaucher disease |
-| F9 | P00740 | 8eph | 163 | 124 | yes (-216: 110, -215: 50, -214: 78, -213: 70, -212: 2, -211: 114, -210: 46, -46: 182; 16 with insertion codes) | no | haemophilia B |
-| F2 | P00734 | 5edm | 24 | 21 | yes (-57: 394, -43: 153) | no | prothrombin deficiency; thrombophilia |
+| SOD1 | P00441 | 2c9v | 90 | 90 | yes (-1: 306) | yes | amyotrophic lateral sclerosis 1 |
+| SERPINA1 | P01009 | 8pi2 | 28 | 25 | yes (-24: 371) | no | alpha-1-antitrypsin deficiency |
+| INS | P01308 | 6tc2 | 20 | 15 | yes (-89: 126, -24: 170) | no | permanent neonatal diabetes; MODY10 |
+| GBA1 | P04062 | 9fb2 | 86 | 86 | no (0: 497) | no | Gaucher disease |
+| F9 | P00740 | 8eph | 150 | 113 | yes (-216: 110, -215: 50, -214: 78, -213: 70, -212: 2, -211: 114, -210: 46, -46: 182; 16 with insertion codes) | no | haemophilia B |
+| F2 | P00734 | 5edm | 20 | 19 | yes (-57: 394, -43: 153) | no | prothrombin deficiency; thrombophilia |
 | PRSS1 | P07477 | 1trn | 8 | 7 | yes (-8: 38, -6: 62, -5: 148, -4: 18, -3: 106, -1: 70, 0: 6; 6 with insertion codes) | no | hereditary pancreatitis |
-| APOE | P02649 | 8ce0 | 28 | 17 | yes (-18: 143) | no | hyperlipoproteinaemia type III; Alzheimer disease risk |
-| AR | P10275 | 5cj6 | 161 | 104 | yes (-1: 244, 0: 10) | no | androgen insensitivity syndrome |
+| APOE | P02649 | 8ce0 | 21 | 13 | yes (-18: 143) | no | hyperlipoproteinaemia type III; Alzheimer disease risk |
+| AR | P10275 | 5cj6 | 130 | 91 | yes (-1: 244, 0: 10) | no | androgen insensitivity syndrome |
 | CRYGD | P07320 | 1hk0 | 6 | 6 | yes (-1: 85, 0: 88) | yes | congenital cataract |
-| TPI1 | P60174 | 9f69 | 5 | 5 | no (0: 245) | no | triosephosphate isomerase deficiency |
-| CALM1 | P0DP23 | 6m7h | 31 | 29 | yes (-1: 144) | no | long QT syndrome 14; CPVT4 |
-| SERPINC1 | P01008 | 3kcg | 46 | 45 | yes (-32: 419) | yes | antithrombin III deficiency |
-| CA2 | P00918 | 3k34 | 5 | 4 | yes (0: 123, 1: 135) | no | osteopetrosis with renal tubular acidosis |
-| HRAS | P01112 | 1ctq | 19 | 19 | no (0: 166) | no | Costello syndrome |
-| PAH | P00439 | 6hpo | 388 | 322 | no (0: 310) | no | phenylketonuria |
-| VHL | P40337 | 9gio | 169 | 165 | no (0: 146) | no | von Hippel-Lindau disease |
-| PTEN | P60484 | 1d5r | 269 | 258 | no (0: 307) | no | PTEN hamartoma tumour syndrome |
-| GCK | P35557 | 3f9m | 337 | 337 | no (0: 443) | no | MODY2; hyperinsulinism |
-| SLC2A1 | P11166 | 6tha | 129 | 119 | no (0: 448) | no | GLUT1 deficiency syndrome |
-| GLA | P06280 | 8k7f | 298 | 282 | no (0: 782) | no | Fabry disease |
+| TPI1 | P60174 | 9f69 | 3 | 3 | no (0: 245) | no | triosephosphate isomerase deficiency |
+| CALM1 | P0DP23 | 6m7h | 30 | 29 | yes (-1: 144) | no | long QT syndrome 14; CPVT4 |
+| SERPINC1 | P01008 | 3kcg | 44 | 43 | yes (-32: 419) | yes | antithrombin III deficiency |
+| CA2 | P00918 | 3k34 | 4 | 3 | yes (0: 123, 1: 135) | no | osteopetrosis with renal tubular acidosis |
+| HRAS | P01112 | 1ctq | 16 | 16 | no (0: 166) | no | Costello syndrome |
+| PAH | P00439 | 6hpo | 371 | 308 | no (0: 310) | no | phenylketonuria |
+| VHL | P40337 | 9gio | 138 | 136 | no (0: 146) | no | von Hippel-Lindau disease |
+| PTEN | P60484 | 1d5r | 191 | 181 | no (0: 307) | no | PTEN hamartoma tumour syndrome |
+| GCK | P35557 | 3f9m | 277 | 277 | no (0: 443) | no | MODY2; hyperinsulinism |
+| SLC2A1 | P11166 | 6tha | 100 | 92 | no (0: 448) | no | GLUT1 deficiency syndrome |
+| GLA | P06280 | 8k7f | 266 | 251 | no (0: 782) | no | Fabry disease |
 
 ## Coverage
 
@@ -134,7 +134,7 @@ Features are read from each file by the build (never taken on trust).
 | ligand | 44 | 1a6m 1ake 1atp 1c3w 1cbs 1ctq 1d5r 1f88 1hho 1hrc 1hsg 1hvr 1iep 1k4c 1mbn 1rx2 1stp 1trn 1udt 1y26 2c9v 2cpp 2hhb 2omf 3eml 3ert 3f9m 3k34 3kcg 3ngb 3ptb 5cj6 5edm 5ni1 6m7h 6tc2 6tha 8c86 8ce0 8k7f 8pi2 9f69 9fb2 9gio |
 | membrane | 7 | 1c3w 1f88 1k4c 2omf 3eml 5uak 6tha |
 | metal | 36 | 1a6m 1aay 1aoi 1atp 1ctq 1ehz 1f88 1hho 1hrc 1iro 1k4c 1kf1 1mbn 1plc 1rx2 1tup 1udt 1y26 2c9v 2cpp 2hhb 2p4e 2ptc 3ave 3k34 3kcg 3ptb 4ins 5edm 5ni1 6hpo 6m7h 6tc2 7a4m 8eph 9fb2 |
-| modified-residue | 9 | 1atp 1ehz 1ema 1hrc 1hvr 1trn 5edm 5uak 6m7h |
+| modified-residue | 8 | 1atp 1ehz 1ema 1hrc 1hvr 1trn 5edm 6m7h |
 | multi-chain | 32 | 1aay 1ake 1aoi 1atp 1bna 1f88 1hho 1hsg 1hvr 1iep 1igt 1k4c 1lmb 1trn 1tup 2c9v 2hhb 2p4e 2ptc 3ave 3kcg 3ngb 4ins 5cj6 5ni1 5uak 6tc2 6vxx 8c86 8eph 8k7f 9gio |
 | nmr | 2 | 1d3z 1l2y |
 | nucleic | 8 | 1aay 1aoi 1bna 1ehz 1kf1 1lmb 1tup 1y26 |

@@ -7,7 +7,9 @@
  "disease": "prothrombin deficiency; thrombophilia",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P00734",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 622,
  "uniprot_sequence_sha256": "351664067c22d7e6a071e811ddb3b5759e91101e0c46d4454fc61ce4bca10fa2",
  "primary_entry": "5edm",
@@ -34,31 +36,10 @@
     "auth_chain_differs_from_label_chain": false
    },
    "not_observed": 1,
-   "outside_construct": 2,
-   "verified": 21
+   "verified": 19
   }
  },
  "variants": [
-  {
-   "variant": "R40W",
-   "position": 40,
-   "wild_type": "R",
-   "mutant": "W",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003147152",
-    "RCV003992747"
-   ],
-   "dbsnp": [
-    "rs1013222460"
-   ],
-   "diseases": [
-    "Congenital prothrombin deficiency"
-   ],
-   "structures": {}
-  },
   {
    "variant": "Y87C",
    "position": 87,
@@ -79,6 +60,15 @@
     "Coagulation factor deficiency syndrome",
     "Congenital prothrombin deficiency"
    ],
+   "clinvar_vcv": [
+    "VCV000627289"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5edm": [
      {
@@ -91,32 +81,6 @@
      }
     ]
    }
-  },
-  {
-   "variant": "E200K",
-   "position": 200,
-   "wild_type": "E",
-   "mutant": "K",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000014229",
-    "RCV000994617",
-    "RCV001108917",
-    "RCV001794445",
-    "RCV005394150",
-    "RCV005406743",
-    "RCV005419863"
-   ],
-   "dbsnp": [
-    "rs62623459"
-   ],
-   "diseases": [
-    "Congenital prothrombin deficiency",
-    "Factor II deficiency (FA2D)"
-   ],
-   "structures": {}
   },
   {
    "variant": "R314C",
@@ -138,6 +102,15 @@
     "Factor II deficiency (FA2D)",
     "Thrombophilia due to thrombin defect (THPH1)"
    ],
+   "clinvar_vcv": [
+    "VCV000013303"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -156,6 +129,15 @@
    ],
    "diseases": [
     "Congenital prothrombin deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV001098519"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5edm": [
@@ -186,6 +168,15 @@
    ],
    "diseases": [
     "Congenital prothrombin deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV000013311"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5edm": [
@@ -218,6 +209,15 @@
     "Congenital prothrombin deficiency",
     "Cystic, Mucinous and Serous Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000013312"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5edm": [
      {
@@ -248,6 +248,15 @@
    "diseases": [
     "Congenital prothrombin deficiency"
    ],
+   "clinvar_vcv": [
+    "VCV001098520"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5edm": [
      {
@@ -257,37 +266,6 @@
       "label_asym_id": "A",
       "label_seq_id": 300,
       "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R363H",
-   "position": 363,
-   "wild_type": "R",
-   "mutant": "H",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV003484575",
-    "RCV004790570"
-   ],
-   "dbsnp": [
-    "rs2064876977"
-   ],
-   "diseases": [
-    "Congenital prothrombin deficiency"
-   ],
-   "structures": {
-    "5edm": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 306,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 306,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -308,6 +286,15 @@
    ],
    "diseases": [
     "Congenital prothrombin deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV001684489"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5edm": [
@@ -340,6 +327,15 @@
     "Congenital prothrombin deficiency",
     "Factor II deficiency (FA2D)"
    ],
+   "clinvar_vcv": [
+    "VCV000013307"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5edm": [
      {
@@ -369,6 +365,15 @@
    ],
    "diseases": [
     "Congenital prothrombin deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV001098522"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5edm": [
@@ -401,6 +406,15 @@
     "Adenomas and Adenocarcinomas",
     "Congenital prothrombin deficiency"
    ],
+   "clinvar_vcv": [
+    "VCV000013313"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5edm": [
      {
@@ -431,6 +445,15 @@
    "diseases": [
     "Ductal and Lobular Neoplasms",
     "Factor II deficiency (FA2D)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013308"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5edm": [
@@ -464,6 +487,15 @@
     "Congenital prothrombin deficiency",
     "Factor II deficiency (FA2D)"
    ],
+   "clinvar_vcv": [
+    "VCV000013304"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5edm": [
      {
@@ -493,6 +525,15 @@
    ],
    "diseases": [
     "Congenital prothrombin deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV001098523"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5edm": [
@@ -530,6 +571,15 @@
     "Pregnancy loss, recurrent, susceptibility to, 2 (RPRGL2)",
     "Thrombophilia due to thrombin defect (THPH1)"
    ],
+   "clinvar_vcv": [
+    "VCV002706763"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5edm": [
      {
@@ -538,37 +588,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 443,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R541W",
-   "position": 541,
-   "wild_type": "R",
-   "mutant": "W",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001267437",
-    "RCV005420386"
-   ],
-   "dbsnp": [
-    "rs886048338"
-   ],
-   "diseases": [
-    "Thrombophilia due to thrombin defect (THPH1)"
-   ],
-   "structures": {
-    "5edm": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 484,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 484,
       "comp_id": "ARG"
      }
     ]
@@ -590,6 +609,15 @@
    ],
    "diseases": [
     "Congenital prothrombin deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV000013314"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5edm": [
@@ -620,6 +648,15 @@
    ],
    "diseases": [
     "Thrombophilia due to thrombin defect (THPH1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000031922"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "5edm": [
@@ -654,6 +691,15 @@
     "Congenital prothrombin deficiency",
     "Thrombophilia due to thrombin defect (THPH1)"
    ],
+   "clinvar_vcv": [
+    "VCV000692073"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "5edm": [
      {
@@ -683,6 +729,15 @@
    ],
    "diseases": [
     "Congenital prothrombin deficiency"
+   ],
+   "clinvar_vcv": [
+    "VCV002735586"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "5edm": [
@@ -715,6 +770,15 @@
     "Congenital prothrombin deficiency",
     "Factor II deficiency (FA2D)"
    ],
+   "clinvar_vcv": [
+    "VCV000013306"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "5edm": [
      {
@@ -743,6 +807,15 @@
     "rs1592422740"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000627173"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "5edm": [
      {
@@ -757,7 +830,52 @@
    }
   }
  ],
- "rejected": [],
+ "rejected": [
+  {
+   "variant": "R40W",
+   "position": 40,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002441323"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E200K",
+   "position": 200,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000013302"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity; risk factor"
+   ]
+  },
+  {
+   "variant": "R363H",
+   "position": 363,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002683974"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R541W",
+   "position": 541,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000986165"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
  "structure_mismatches": [],
  "pathogenic_single_residue_variants_per_position": {
   "5": 1,

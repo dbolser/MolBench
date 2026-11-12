@@ -41,7 +41,8 @@ The panel is the union of four groups. Rules 1–3 apply to every entry.
    built with symmetry operators or uses only part of the deposited chains ·
    `insertion-codes`, `auth-label-chain`, `auth-label-number` from `_atom_site` ·
    `uniprot-offset` an observed residue whose author number is not its UniProt
-   number (SIFTS) · `modified-residue` a non-standard residue inside a polymer ·
+   number (SIFTS) · `modified-residue` a non-standard residue inside a polymer (not `UNK`, the
+   placeholder for an unidentified residue) ·
    `membrane` listed by PDBTM or mpstruc (via RCSB annotations) · `cryo-em`, `nmr`
    the experimental method · `clinical` at least one verified variant (below).
 
@@ -83,16 +84,32 @@ URL.
 
 ## Clinical variants (`variants/<ACCESSION>.json`)
 
-Source: UniProt Proteins Variation API, `https://www.ebi.ac.uk/proteins/api/variation/<accession>`
-(the `source` and `retrieved` fields record the URL and date). A variant is kept when
-the feature is a single-residue `VARIANT` with `consequenceType` missense, its
-clinical significance is *Pathogenic* or *Likely pathogenic* **with ClinVar named as a
-source of that call**, it carries a ClinVar cross-reference, and its wild type equals
-the UniProt canonical residue at that position (otherwise it is listed under
-`rejected`). Duplicated features are merged.
+Two sources, both recorded with URL and retrieval date.
 
-Per variant: `variant` (e.g. `E7V`), `position`, `wild_type`, `mutant`, `significance`,
-`clinvar` (RCV accessions; `https://www.ncbi.nlm.nih.gov/clinvar/<RCV>`), `dbsnp`,
+1. **Candidates** from the UniProt Proteins Variation API,
+   `https://www.ebi.ac.uk/proteins/api/variation/<accession>` (`source`, `retrieved`):
+   a single-residue `VARIANT` feature with `consequenceType` missense, clinical
+   significance *Pathogenic* or *Likely pathogenic* **with ClinVar named as a source
+   of that call**, a ClinVar cross-reference, and a wild type equal to the UniProt
+   canonical residue at that position. Duplicated features are merged.
+2. **Confirmation** from ClinVar itself, through NCBI E-utilities (`clinvar_source`,
+   `clinvar_retrieved`). UniProt reports a variant as pathogenic when any one ClinVar
+   submission says so; ClinVar's own verdict is the aggregate over all submitters,
+   and for about one candidate in five it is "Conflicting classifications of
+   pathogenicity" or "Uncertain significance". A candidate is kept only if a ClinVar
+   variant record (VCV) reached through its cross-references names the same protein
+   change and has the aggregate germline classification *Pathogenic*, *Likely
+   pathogenic* or *Pathogenic/Likely pathogenic* (a trailing qualifier such as
+   "; other" or "; drug response" is allowed).
+
+Everything else is listed under `rejected` with the reason and, for step 2, the
+classification ClinVar gives. Disease-protein structures (group C) were ranked on the
+candidate positions of step 1.
+
+Per variant: `variant` (e.g. `E7V`), `position`, `wild_type`, `mutant`, `significance`
+(UniProt's), `clinvar_vcv`, `clinvar_classification` and `clinvar_review_status` (the
+confirming ClinVar records; `https://www.ncbi.nlm.nih.gov/clinvar/variation/<VCV>`),
+`clinvar` (their RCV accessions; `https://www.ncbi.nlm.nih.gov/clinvar/<RCV>`), `dbsnp`,
 `diseases`, and `structures`: for each panel entry holding the protein, the residues
 the position maps to (author chain, number and insertion code; label chain and
 number; residue name).
@@ -105,8 +122,10 @@ variant with no matching residue in an entry is simply not offered for that entr
 `not_observed` (in the construct, not modelled), `outside_construct`, or
 `wild_type_mismatch`, and gives that entry's author-minus-UniProt offsets.
 
-`pathogenic_single_residue_variants_per_position` counts every qualifying
-single-residue variant (not only missense) per UniProt position, for "hotspot" tasks.
+`pathogenic_single_residue_variants_per_position` counts every single-residue variant
+UniProt reports as pathogenic with ClinVar as a source (not only missense, and
+**before** the ClinVar confirmation of step 2) per UniProt position. For a "hotspot"
+count that matches the confirmed list, count `variants` by `position` instead.
 
 ## SIFTS tables (`molbench/sifts_tables/<id>.json.gz`)
 
@@ -146,7 +165,7 @@ Everything is from the frozen mmCIF, first model, plus the SIFTS table.
 | `disulfides`, `metal_bonds`, `covalent_links` | `_struct_conn` records: both ends (chain, number, residue, atom), distance, `to_symmetry_copy` |
 | `glycans` | per branched chain: its sugars and the residue it is attached to |
 | `glycosylation_sites` | every polymer residue with a sugar bonded to it (branched or single) |
-| `modified_residues` | non-standard residues inside polymer chains |
+| `modified_residues` | non-standard residues inside polymer chains (selenomethionine counts; `UNK` placeholders do not) |
 | `assemblies` | id, description, oligomeric count, copies of each polymer chain, `relation_to_deposited` (`same as deposited`, `part of deposited`, `built by symmetry`) |
 | `helices`, `strands` | as annotated in the file (author and label ranges) |
 | `numbering` | four flags: author chain ≠ label chain, author number ≠ label number, insertion codes, author number ≠ UniProt number |
@@ -165,3 +184,9 @@ Everything is from the frozen mmCIF, first model, plus the SIFTS table.
 - The tests in `tests/test_panel.py` and `tests/test_sifts_frozen.py` re-check the
   frozen files against each other and against residue numbers known from the
   literature, with the network blocked.
+- Independent review (2026-11-12): all 30,310 rows of the SIFTS tables name the
+  residue that the current UniProt sequence has at that position; every atom-table
+  column equals the frozen mmCIF read afresh, for all 76 entries; the variant lists
+  were rebuilt independently from the raw UniProt responses; a sample of ten variants
+  looked up in ClinVar found three that ClinVar calls "Conflicting", which is why
+  step 2 of the variant rule exists (it removed 657 of 3,352 candidates).

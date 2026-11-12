@@ -238,7 +238,9 @@ def pathogenic_counts(acc: str) -> dict[int, int]:
     from molbench import variants
     frozen = grounding.variants(acc)
     if frozen is not None and not (CACHE / f"clinvar_{acc}.json").exists():
-        # Frozen with the panel: variants ClinVar itself calls (likely) pathogenic.
+        # Frozen with the panel: variants UniProt reports as (likely) pathogenic with
+        # ClinVar as a source (the per-position count is taken before the panel's
+        # check against ClinVar's aggregate classification).
         return {int(p): n for p, n in
                 frozen["pathogenic_single_residue_variants_per_position"].items()}
     got = _cached_json(f"clinvar_{acc}",

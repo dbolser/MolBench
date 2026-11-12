@@ -84,12 +84,18 @@ UNIPROT = ("https://rest.uniprot.org/uniprotkb/{}.json"
 AFDB = "https://alphafold.ebi.ac.uk/api/prediction/{}"
 RCSB_GRAPHQL = "https://data.rcsb.org/graphql"
 RCSB_STATUS = "https://data.rcsb.org/rest/v1/holdings/status?ids={}"
+EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/{}.fcgi"
+# ClinVar's aggregate germline classifications that count as pathogenic (a trailing
+# qualifier such as "; risk factor" or ", low penetrance" is ignored).
+CLINVAR_PATHOGENIC = {"Pathogenic", "Likely pathogenic", "Pathogenic/Likely pathogenic"}
+NOT_PATHOGENIC_IN_CLINVAR = "ClinVar's aggregate germline classification is not pathogenic"
 
 AA3 = {"ALA": "A", "ARG": "R", "ASN": "N", "ASP": "D", "CYS": "C", "GLN": "Q", "GLU": "E",
        "GLY": "G", "HIS": "H", "ILE": "I", "LEU": "L", "LYS": "K", "MET": "M", "PHE": "F",
        "PRO": "P", "SER": "S", "THR": "T", "TRP": "W", "TYR": "Y", "VAL": "V"}
 NUCLEOTIDES = {"A", "C", "G", "U", "DA", "DC", "DG", "DT", "DU", "I", "DI"}
 WATER = {"HOH", "DOD"}
+UNKNOWN = {"UNK", "N", "DN", "UNX", "UNL"}   # placeholders for unidentified residues
 HEMES = {"HEM", "HEC", "HEA", "HEB", "HDD", "HAS"}
 METALS = set("LI NA K RB CS MG CA SR BA MN FE CO NI CU ZN CD HG MO W V CR PT AU AG PB AL "
              "GA TL SM GD TB YB LU LA EU HO ER IR OS RU RH PD".split())
@@ -579,7 +585,8 @@ def build_facts(entry: str, cols: dict[str, list], smap: dict | None) -> dict:
     # Non-standard residues inside polymer chains.
     modified = [_where(r) for r in res
                 if etype.get(r["label_entity_id"]) == "polymer"
-                and r["comp_id"] not in AA3 and r["comp_id"] not in NUCLEOTIDES]
+                and r["comp_id"] not in AA3 and r["comp_id"] not in NUCLEOTIDES
+                and r["comp_id"] not in UNKNOWN]
 
     # Assemblies.
     opers = {o["id"]: o for o in rows(block, "_pdbx_struct_oper_list.", ["id", "type", "name"])}
@@ -714,6 +721,57 @@ FAMILY_OF = {  # feature -> task families it can serve (every entry serves 'basi
 
 # --- clinical variants --------------------------------------------------------------
 
+def clinvar_records(acc: str, rcvs: list[str]) -> dict:
+    """ClinVar's own variant records (VCV) behind a list of RCV accessions, from NCBI
+    E-utilities: [{vcv, title, classification, review_status, last_evaluated,
+    protein_change, rcv}]. ``classification`` is the aggregate germline classification
+    over all submitters, which is what ClinVar's web page shows for the variant."""
+    def fetch():
+        import urllib.parse
+
+        def post(tool, **params):
+            time.sleep(0.4)   # NCBI asks for at most 3 requests a second without a key
+            body = urllib.parse.urlencode({"db": "clinvar", "retmode": "json", **params})
+            return json.loads(_get(EUTILS.format(tool), body.encode()))
+        uids: set[str] = set()
+        for i in range(0, len(rcvs), 100):
+            got = post("esearch", term=" OR ".join(rcvs[i:i + 100]), retmax=5000)
+            uids |= set(got["esearchresult"]["idlist"])
+        out = []
+        ordered = sorted(uids, key=int)
+        for i in range(0, len(ordered), 150):
+            res = post("esummary", id=",".join(ordered[i:i + 150]))["result"]
+            for uid in res.get("uids", []):
+                x = res[uid]
+                g = x.get("germline_classification") or {}
+                out.append({"vcv": x.get("accession"), "title": x.get("title"),
+                            "classification": g.get("description") or "",
+                            "review_status": g.get("review_status") or "",
+                            "last_evaluated": (g.get("last_evaluated") or "")[:10],
+                            "protein_change": [p.strip() for p in
+                                               (x.get("protein_change") or "").split(",")
+                                               if p.strip()],
+                            "rcv": sorted((x.get("supporting_submissions") or {}).get("rcv")
+                                          or [])})
+        return out
+    return cached(f"clinvarvcv_{acc}", EUTILS.format("esummary") + "?db=clinvar", fetch)
+
+
+def clinvar_is_pathogenic(classification: str) -> bool:
+    return re.split(r"[;,]", classification)[0].strip() in CLINVAR_PATHOGENIC
+
+
+def clinvar_protein_changes(record: dict) -> set[str]:
+    """One-letter protein changes a ClinVar record names: its ``protein_change`` list
+    (every transcript's numbering) plus the ``(p.Trp82Arg)`` of its title, which is the
+    only place some records give it."""
+    out = set(record["protein_change"])
+    m = re.search(r"\(p\.([A-Z][a-z]{2})(\d+)([A-Z][a-z]{2})\)", record.get("title") or "")
+    if m and m[1].upper() in AA3 and m[3].upper() in AA3:
+        out.add(f"{AA3[m[1].upper()]}{m[2]}{AA3[m[3].upper()]}")
+    return out
+
+
 def clinvar_variants(acc: str) -> dict:
     """Pathogenic / likely pathogenic ClinVar missense variants of an accession."""
     frozen = VARIANTS / f"{acc}.json"
@@ -725,6 +783,11 @@ def clinvar_variants(acc: str) -> dict:
                 "variants": [{k: v for k, v in x.items() if k != "structures"}
                              for x in f["variants"]],
                 "rejected": f["rejected"],
+                "clinvar_url": f["clinvar_source"], "clinvar_retrieved": f["clinvar_retrieved"],
+                "candidate_positions": sorted(
+                    {x["position"] for x in f["variants"]}
+                    | {x["position"] for x in f["rejected"]
+                       if x["reason"] == NOT_PATHOGENIC_IN_CLINVAR}),
                 "position_counts": f["pathogenic_single_residue_variants_per_position"]}
     rec = cached(f"variation_{acc}", VARIATION.format(acc))
     d = rec["data"]
@@ -751,7 +814,7 @@ def clinvar_variants(acc: str) -> dict:
                 or alt not in AA3.values() or wt == alt):
             continue
         if not 1 <= pos <= len(seq) or seq[pos - 1] != wt:
-            rejected.append({"variant": f"{wt}{pos}{alt}",
+            rejected.append({"variant": f"{wt}{pos}{alt}", "position": pos,
                              "reason": "wild type is not the UniProt canonical residue"})
             continue
         v = merged.setdefault((pos, wt, alt), {
@@ -763,11 +826,37 @@ def clinvar_variants(acc: str) -> dict:
                                               if x.get("name") == "dbSNP"})
         v["diseases"] = sorted(set(v["diseases"]) | {a["name"] for a in f.get("association") or []
                                                     if a.get("disease") and a.get("name")})
+    # UniProt reports a variant as pathogenic if any one ClinVar submission says so.
+    # ClinVar's own verdict is the aggregate over submitters, and it can be
+    # "Conflicting classifications" or "Uncertain significance" for the same variant.
+    # Keep a variant only if a ClinVar record with this protein change agrees.
+    crec = clinvar_records(acc, sorted({r for v in merged.values() for r in v["clinvar"]}))
+    kept = []
+    for k in sorted(merged):
+        v = merged[k]
+        recs = [x for x in crec["data"] if set(x["rcv"]) & set(v["clinvar"])
+                and v["variant"] in clinvar_protein_changes(x)]
+        good = [x for x in recs if clinvar_is_pathogenic(x["classification"])]
+        if not good:
+            rejected.append({
+                "variant": v["variant"], "position": v["position"],
+                "reason": NOT_PATHOGENIC_IN_CLINVAR,
+                "clinvar_vcv": sorted(x["vcv"] for x in recs),
+                "clinvar_classification": sorted({x["classification"] or "none"
+                                                  for x in recs})})
+            continue
+        v["clinvar"] = sorted(set(v["clinvar"]) & {r for x in good for r in x["rcv"]})
+        v["clinvar_vcv"] = sorted(x["vcv"] for x in good)
+        v["clinvar_classification"] = sorted({x["classification"] for x in good})
+        v["clinvar_review_status"] = sorted({x["review_status"] for x in good})
+        kept.append(v)
     return {"url": rec["url"], "retrieved": rec["retrieved"],
             "entry_name": d.get("entryName"), "protein": d.get("proteinName"),
             "gene": d.get("geneName"), "length": len(seq),
             "sequence_sha256": hashlib.sha256(seq.encode()).hexdigest(),
-            "variants": [merged[k] for k in sorted(merged)], "rejected": rejected,
+            "variants": kept, "rejected": rejected,
+            "clinvar_url": crec["url"], "clinvar_retrieved": crec["retrieved"],
+            "candidate_positions": sorted({k[0] for k in merged}),
             "position_counts": {str(k): counts[k] for k in sorted(counts)}}
 
 
@@ -885,7 +974,7 @@ def build(args) -> None:
     disease = []
     for d in seed["disease_proteins"]:
         cv = clinvar_variants(d["accession"])
-        positions = {v["position"] for v in cv["variants"]}
+        positions = set(cv["candidate_positions"])
         before = next((p for p in old_panel().get("disease_proteins", [])
                        if p["accession"] == d["accession"]), None)
         if d.get("entry"):
@@ -963,10 +1052,14 @@ def build(args) -> None:
         doc = {"accession": acc, "gene": d["gene"], "entry_name": cv["entry_name"],
                "protein": cv["protein"], "uniprot_gene": cv["gene"], "disease": d["disease"],
                "source": cv["url"], "retrieved": cv["retrieved"],
+               "clinvar_source": cv["clinvar_url"], "clinvar_retrieved": cv["clinvar_retrieved"],
                "filter": "UniProt Variation API features of type VARIANT, one residue, "
                          "consequenceType missense, clinical significance Pathogenic or "
                          "Likely pathogenic with ClinVar as a source, and a ClinVar "
-                         "cross-reference; wild type must equal the UniProt canonical residue",
+                         "cross-reference; wild type must equal the UniProt canonical "
+                         "residue; and a ClinVar variant record (VCV) with the same protein "
+                         "change whose aggregate germline classification is Pathogenic, "
+                         "Likely pathogenic or Pathogenic/Likely pathogenic",
                "uniprot_length": cv["length"], "uniprot_sequence_sha256": cv["sequence_sha256"],
                "primary_entry": d["entry"], "selection": d["selection"],
                "entries": {e: {"numbering": offs[e], **mapped["per_entry"][e]} for e in holders},

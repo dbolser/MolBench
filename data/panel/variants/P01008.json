@@ -7,7 +7,9 @@
  "disease": "antithrombin III deficiency",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P01008",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 464,
  "uniprot_sequence_sha256": "4d614fd7e710a9c2ec542f2c1fa94e23d9928786dcad8d5e0e05d31e0788ff80",
  "primary_entry": "3kcg",
@@ -33,7 +35,7 @@
     "auth_chain_differs_from_label_chain": true
    },
    "outside_construct": 1,
-   "verified": 45
+   "verified": 43
   }
  },
  "variants": [
@@ -57,6 +59,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018012"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {}
   },
   {
@@ -76,6 +87,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV001330272"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "3kcg": [
@@ -110,6 +130,15 @@
     "Hereditary antithrombin deficiency (AT3D)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000018022"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -142,6 +171,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018011"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -173,6 +211,15 @@
    "diseases": [
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV000018004"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -209,6 +256,15 @@
     "Hereditary antithrombin deficiency (AT3D)",
     "SERPINC1-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000018014"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -238,6 +294,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV001001692"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -269,6 +334,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000843350"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -297,6 +371,15 @@
     "rs2526594015"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001705949"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -327,6 +410,15 @@
    "diseases": [
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV002907297"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "3kcg": [
@@ -359,6 +451,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018044"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -388,6 +489,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV001684315"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "3kcg": [
@@ -422,6 +532,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018034"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -453,6 +572,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV001330290"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -476,8 +604,7 @@
    ],
    "clinvar": [
     "RCV001523260",
-    "RCV003956212",
-    "RCV006698397"
+    "RCV003956212"
    ],
    "dbsnp": [
     "rs2227606"
@@ -485,6 +612,15 @@
    "diseases": [
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV001170692"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -515,6 +651,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV002734043"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "3kcg": [
@@ -551,6 +696,15 @@
     "Gliomas",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018030"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -579,6 +733,15 @@
     "rs1131691435"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000429526"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -609,6 +772,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV002734042"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -638,6 +810,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV002683962"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "3kcg": [
@@ -670,6 +851,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018042"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -701,6 +891,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018043"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -731,6 +930,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV003012606"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -739,69 +947,6 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "C",
       "label_seq_id": 195,
-      "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "T250I",
-   "position": 250,
-   "wild_type": "T",
-   "mutant": "I",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003876451",
-    "RCV006276427"
-   ],
-   "dbsnp": [
-    "rs144084678"
-   ],
-   "diseases": [
-    "Hereditary antithrombin deficiency (AT3D)"
-   ],
-   "structures": {
-    "3kcg": [
-     {
-      "auth_asym_id": "I",
-      "auth_seq_id": 218,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "C",
-      "label_seq_id": 218,
-      "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E269K",
-   "position": 269,
-   "wild_type": "E",
-   "mutant": "K",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000471250",
-    "RCV003480641"
-   ],
-   "dbsnp": [
-    "rs758087836"
-   ],
-   "diseases": [
-    "Antithrombin III deficiency (AT3D)",
-    "Hereditary antithrombin deficiency (AT3D)"
-   ],
-   "structures": {
-    "3kcg": [
-     {
-      "auth_asym_id": "I",
-      "auth_seq_id": 237,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "C",
-      "label_seq_id": 237,
       "comp_id": "GLU"
      }
     ]
@@ -823,6 +968,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV001330280"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "3kcg": [
@@ -854,6 +1008,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV001684312"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -883,6 +1046,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV003021089"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "3kcg": [
@@ -914,6 +1086,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV003242375"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -943,6 +1124,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV001684311"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "3kcg": [
@@ -975,6 +1165,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000627161"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1005,6 +1204,15 @@
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV002734039"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1033,6 +1241,15 @@
     "rs2526569302"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV002683224"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1063,6 +1280,15 @@
    ],
    "diseases": [
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV000863657"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -1095,6 +1321,15 @@
    "diseases": [
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV000018020"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -1129,6 +1364,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)",
     "Thrombophilia with a likely monogenic cause"
+   ],
+   "clinvar_vcv": [
+    "VCV000018007"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -1165,6 +1409,15 @@
     "Hereditary antithrombin deficiency (AT3D)",
     "Thrombophilia with a likely monogenic cause"
    ],
+   "clinvar_vcv": [
+    "VCV000018023"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1195,6 +1448,15 @@
    "diseases": [
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV000018016"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -1228,6 +1490,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018019"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1259,6 +1530,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Cystic, Mucinous and Serous Neoplasms",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV000018010"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
    ],
    "structures": {
     "3kcg": [
@@ -1292,6 +1572,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV002734037"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1322,6 +1611,15 @@
    "diseases": [
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV000958071"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "3kcg": [
@@ -1355,6 +1653,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000627228"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1385,6 +1692,15 @@
    "diseases": [
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
+   ],
+   "clinvar_vcv": [
+    "VCV002683977"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "3kcg": [
@@ -1417,6 +1733,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV002202883"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1448,6 +1773,15 @@
     "Antithrombin III deficiency (AT3D)",
     "Hereditary antithrombin deficiency (AT3D)"
    ],
+   "clinvar_vcv": [
+    "VCV000018031"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "3kcg": [
      {
@@ -1465,7 +1799,30 @@
  "rejected": [
   {
    "variant": "C272T",
+   "position": 272,
    "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "T250I",
+   "position": 250,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV003016300"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E269K",
+   "position": 269,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000410383"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
   }
  ],
  "structure_mismatches": [],

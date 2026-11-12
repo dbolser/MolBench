@@ -7,7 +7,9 @@
  "disease": "Gaucher disease",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P04062",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 536,
  "uniprot_sequence_sha256": "38e97d50880fc5ed6f0b961be3eff31062d9e7c8ddaa271c5384bb59ca0ce846",
  "primary_entry": "9fb2",
@@ -32,53 +34,10 @@
     "offset": false,
     "auth_chain_differs_from_label_chain": false
    },
-   "not_observed": 2,
-   "verified": 109
+   "verified": 86
   }
  },
  "variants": [
-  {
-   "variant": "K13R",
-   "position": 13,
-   "wild_type": "K",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000177099",
-    "RCV000427488",
-    "RCV001832011",
-    "RCV005627242"
-   ],
-   "dbsnp": [
-    "rs150466109"
-   ],
-   "diseases": [
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {}
-  },
-  {
-   "variant": "L15S",
-   "position": 15,
-   "wild_type": "L",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV004091313",
-    "RCV004560069"
-   ],
-   "dbsnp": [
-    "rs1141802"
-   ],
-   "diseases": [
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {}
-  },
   {
    "variant": "V54L",
    "position": 54,
@@ -99,6 +58,15 @@
     "Gaucher disease (GD)",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000004313"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -108,34 +76,6 @@
       "label_asym_id": "A",
       "label_seq_id": 54,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P71L",
-   "position": 71,
-   "wild_type": "P",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003328056"
-   ],
-   "dbsnp": [
-    "rs2524847096"
-   ],
-   "diseases": [],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 71,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 71,
-      "comp_id": "PRO"
      }
     ]
    }
@@ -160,6 +100,15 @@
     "Gaucher disease",
     "Gaucher disease (GD)",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000004296"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -193,6 +142,15 @@
     "Gaucher disease",
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002503944"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -243,6 +201,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004321"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -252,37 +219,6 @@
       "label_asym_id": "A",
       "label_seq_id": 87,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L105P",
-   "position": 105,
-   "wild_type": "L",
-   "mutant": "P",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002254497",
-    "RCV006640908"
-   ],
-   "dbsnp": [
-    "rs1423108738"
-   ],
-   "diseases": [
-    "Gaucher disease"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 105,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 105,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -309,6 +245,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)",
     "Gaucher disease type III"
+   ],
+   "clinvar_vcv": [
+    "VCV000004330"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -338,6 +283,15 @@
     "rs2524844959"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001799861"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -368,6 +322,15 @@
    "diseases": [
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000236399"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -377,117 +340,6 @@
       "label_asym_id": "A",
       "label_seq_id": 139,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L144R",
-   "position": 144,
-   "wild_type": "L",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000178813",
-    "RCV001249026"
-   ],
-   "dbsnp": [
-    "rs794727708"
-   ],
-   "diseases": [
-    "Gaucher disease"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 144,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 144,
-      "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S146L",
-   "position": 146,
-   "wild_type": "S",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000178814",
-    "RCV001249027",
-    "RCV001808455",
-    "RCV004020131"
-   ],
-   "dbsnp": [
-    "rs758447515"
-   ],
-   "diseases": [
-    "Ductal and Lobular Neoplasms",
-    "Gaucher disease",
-    "Gaucher disease 2 (GD2)",
-    "Gaucher disease 3 (GD3)",
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 146,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 146,
-      "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R159Q",
-   "position": 159,
-   "wild_type": "R",
-   "mutant": "Q",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000004518",
-    "RCV000004519",
-    "RCV000020154",
-    "RCV001250522",
-    "RCV001781178",
-    "RCV005887293"
-   ],
-   "dbsnp": [
-    "rs79653797"
-   ],
-   "diseases": [
-    "Gaucher disease",
-    "Gaucher disease 1 (GD1)",
-    "Gaucher disease 2 (GD2)",
-    "Gaucher disease perinatal lethal",
-    "Gaucher disease type I (GD1)",
-    "Gaucher disease type II (GD2)",
-    "Gaucher disease type III",
-    "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome",
-    "Melanoma"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 159,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 159,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -516,6 +368,15 @@
     "Gaucher disease 2 (GD2)",
     "Gaucher disease type II (GD2)"
    ],
+   "clinvar_vcv": [
+    "VCV000065570"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -525,39 +386,6 @@
       "label_asym_id": "A",
       "label_seq_id": 159,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V160A",
-   "position": 160,
-   "wild_type": "V",
-   "mutant": "A",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003130999",
-    "RCV005433358",
-    "RCV006641292"
-   ],
-   "dbsnp": [
-    "rs2524839442"
-   ],
-   "diseases": [
-    "Gaucher disease",
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 160,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 160,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -582,6 +410,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000004308"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -591,37 +428,6 @@
       "label_asym_id": "A",
       "label_seq_id": 161,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M162T",
-   "position": 162,
-   "wild_type": "M",
-   "mutant": "T",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000179352",
-    "RCV003323429"
-   ],
-   "dbsnp": [
-    "rs794727783"
-   ],
-   "diseases": [
-    "Gaucher disease"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 162,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 162,
-      "comp_id": "MET"
      }
     ]
    }
@@ -645,6 +451,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001339116"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -685,6 +500,15 @@
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000093453"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -720,6 +544,15 @@
     "Gaucher disease 2 (GD2)",
     "Gaucher disease perinatal lethal"
    ],
+   "clinvar_vcv": [
+    "VCV000004329"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -748,6 +581,15 @@
     "rs1441909908"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001799703"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -776,6 +618,15 @@
     "rs78657146"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001214070"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -785,36 +636,6 @@
       "label_asym_id": "A",
       "label_seq_id": 173,
       "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y174C",
-   "position": 174,
-   "wild_type": "Y",
-   "mutant": "C",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000321615",
-    "RCV001249028",
-    "RCV004701364"
-   ],
-   "dbsnp": [
-    "rs781152868"
-   ],
-   "diseases": [],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 174,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 174,
-      "comp_id": "TYR"
      }
     ]
    }
@@ -835,6 +656,15 @@
    ],
    "diseases": [
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000446213"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -858,11 +688,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000004538",
-    "RCV000487788",
-    "RCV000586576",
-    "RCV002468938",
-    "RCV004594032"
+    "RCV000004538"
    ],
    "dbsnp": [
     "rs147138516"
@@ -870,6 +696,15 @@
    "diseases": [
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000004299"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -904,6 +739,15 @@
     "Gaucher disease",
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000004300"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "9fb2": [
@@ -943,6 +787,15 @@
     "Gaucher disease type II (GD2)",
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000093455"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -984,6 +837,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000932181"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -993,44 +855,6 @@
       "label_asym_id": "A",
       "label_seq_id": 221,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "W223R",
-   "position": 223,
-   "wild_type": "W",
-   "mutant": "R",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000079351",
-    "RCV000243066",
-    "RCV000588402",
-    "RCV004019535"
-   ],
-   "dbsnp": [
-    "rs61748906"
-   ],
-   "diseases": [
-    "Gaucher disease",
-    "Gaucher disease 1 (GD1)",
-    "Gaucher disease 2 (GD2)",
-    "Gaucher disease type I (GD1)",
-    "Gaucher disease type II (GD2)",
-    "Gaucher disease type III"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 223,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 223,
-      "comp_id": "TRP"
      }
     ]
    }
@@ -1052,6 +876,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease 2 (GD2)"
+   ],
+   "clinvar_vcv": [
+    "VCV003251365"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -1091,6 +924,15 @@
     "Gaucher disease type II (GD2)",
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000093458"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -1139,6 +981,15 @@
     "Parkinson disease, late-onset (PD)",
     "autosomal dominant GBA1-related disorders"
    ],
+   "clinvar_vcv": [
+    "VCV000004314"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1169,6 +1020,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease 1 (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000928835"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -1201,6 +1061,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease 1 (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000558788"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -1246,6 +1115,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000021072"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1255,36 +1133,6 @@
       "label_asym_id": "A",
       "label_seq_id": 235,
       "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L236F",
-   "position": 236,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001193937",
-    "RCV001751354",
-    "RCV001833750"
-   ],
-   "dbsnp": [
-    "rs1671865905"
-   ],
-   "diseases": [],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 236,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 236,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -1307,6 +1155,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease 2 (GD2)"
+   ],
+   "clinvar_vcv": [
+    "VCV000633239"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -1351,6 +1208,15 @@
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000093459"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1360,40 +1226,6 @@
       "label_asym_id": "A",
       "label_seq_id": 241,
       "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Y251H",
-   "position": 251,
-   "wild_type": "Y",
-   "mutant": "H",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000004551",
-    "RCV001248859",
-    "RCV003133115"
-   ],
-   "dbsnp": [
-    "rs121908300"
-   ],
-   "diseases": [
-    "Gaucher disease",
-    "Gaucher disease (GD)",
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 251,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 251,
-      "comp_id": "TYR"
      }
     ]
    }
@@ -1435,6 +1267,15 @@
     "Parkinson disease, late-onset (PD)",
     "Plasma Cell Tumors"
    ],
+   "clinvar_vcv": [
+    "VCV000004301"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1464,6 +1305,15 @@
    ],
    "diseases": [
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000004315"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -1508,6 +1358,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004298"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1540,6 +1399,15 @@
     "Gaucher disease",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV002581565"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1549,37 +1417,6 @@
       "label_asym_id": "A",
       "label_seq_id": 259,
       "comp_id": "TYR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E272D",
-   "position": 272,
-   "wild_type": "E",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV002254507",
-    "RCV006640910"
-   ],
-   "dbsnp": [
-    "rs2148075570"
-   ],
-   "diseases": [
-    "Gaucher disease"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 272,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 272,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -1601,6 +1438,15 @@
    "diseases": [
     "Gaucher disease 2 (GD2)"
    ],
+   "clinvar_vcv": [
+    "VCV003064209"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1610,39 +1456,6 @@
       "label_asym_id": "A",
       "label_seq_id": 274,
       "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S276F",
-   "position": 276,
-   "wild_type": "S",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003135334",
-    "RCV004579610",
-    "RCV006635578"
-   ],
-   "dbsnp": [
-    "rs755512507"
-   ],
-   "diseases": [
-    "Autosomal recessive GBA1-related disorders",
-    "Gaucher disease"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 276,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 276,
-      "comp_id": "SER"
      }
     ]
    }
@@ -1662,6 +1475,15 @@
     "rs2524831565"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001800198"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1692,6 +1514,15 @@
    "diseases": [
     "Gaucher disease"
    ],
+   "clinvar_vcv": [
+    "VCV002501093"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1720,6 +1551,15 @@
     "rs1057524702"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000392923"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1749,6 +1589,15 @@
    ],
    "diseases": [
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000236406"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -1781,6 +1630,15 @@
     "Gaucher disease perinatal lethal",
     "Gaucher disease perinatal lethal (GDPL)"
    ],
+   "clinvar_vcv": [
+    "VCV000004331"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1804,14 +1662,7 @@
    ],
    "clinvar": [
     "RCV000004580",
-    "RCV000004581",
-    "RCV000589369",
-    "RCV001004126",
-    "RCV001195955",
-    "RCV001248861",
-    "RCV001329068",
-    "RCV002247685",
-    "RCV004751398"
+    "RCV000004581"
    ],
    "dbsnp": [
     "rs367968666"
@@ -1825,6 +1676,15 @@
     "Gaucher disease type II (GD2)",
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000004334"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -1874,6 +1734,15 @@
     "Parkinson disease, late-onset (PD)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000004328"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1903,6 +1772,15 @@
    ],
    "diseases": [
     "Parkinson disease, late-onset (PD)"
+   ],
+   "clinvar_vcv": [
+    "VCV002500802"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "9fb2": [
@@ -1943,6 +1821,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000198757"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -1952,42 +1839,6 @@
       "label_asym_id": "A",
       "label_seq_id": 299,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P305A",
-   "position": 305,
-   "wild_type": "P",
-   "mutant": "A",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001004124",
-    "RCV003132139",
-    "RCV006642721"
-   ],
-   "dbsnp": [
-    "rs770796008"
-   ],
-   "diseases": [
-    "Gaucher disease",
-    "Gaucher disease type I (GD1)",
-    "Gaucher disease type II (GD2)",
-    "Gaucher disease type III",
-    "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 305,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 305,
-      "comp_id": "PRO"
      }
     ]
    }
@@ -2011,6 +1862,15 @@
     "Gaucher disease",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001065557"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2020,85 +1880,6 @@
       "label_asym_id": "A",
       "label_seq_id": 305,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S310G",
-   "position": 310,
-   "wild_type": "S",
-   "mutant": "G",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000733225",
-    "RCV002499368",
-    "RCV003336163",
-    "RCV005367531",
-    "RCV006748770"
-   ],
-   "dbsnp": [
-    "rs1057942"
-   ],
-   "diseases": [
-    "Gaucher disease",
-    "Gaucher disease perinatal lethal",
-    "Gaucher disease type I (GD1)",
-    "Gaucher disease type II (GD2)",
-    "Gaucher disease type III",
-    "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome",
-    "Lewy body dementia (DLB)",
-    "Parkinson disease, late-onset (PD)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 310,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 310,
-      "comp_id": "SER"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "R324C",
-   "position": 324,
-   "wild_type": "R",
-   "mutant": "C",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001004121",
-    "RCV001797810",
-    "RCV003132137"
-   ],
-   "dbsnp": [
-    "rs765633380"
-   ],
-   "diseases": [
-    "Gaucher disease",
-    "Gaucher disease 1 (GD1)",
-    "Gaucher disease 3 (GD3)",
-    "Gaucher disease type I (GD1)",
-    "Gaucher disease type II (GD2)",
-    "Gaucher disease type III",
-    "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 324,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 324,
-      "comp_id": "ARG"
      }
     ]
    }
@@ -2121,6 +1902,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000004305"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2130,39 +1920,6 @@
       "label_asym_id": "A",
       "label_seq_id": 328,
       "comp_id": "PRO"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A348V",
-   "position": 348,
-   "wild_type": "A",
-   "mutant": "V",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000004560",
-    "RCV005237351",
-    "RCV005632164"
-   ],
-   "dbsnp": [
-    "rs78396650"
-   ],
-   "diseases": [
-    "Gaucher disease 1 (GD1)",
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 348,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 348,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -2189,6 +1946,15 @@
     "Gaucher disease 2 (GD2)",
     "Gaucher disease perinatal lethal",
     "Gaucher disease perinatal lethal (GDPL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000004325"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -2223,6 +1989,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000004317"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2253,6 +2028,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease (GD)"
+   ],
+   "clinvar_vcv": [
+    "VCV002581173"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -2296,6 +2080,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004306"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2327,6 +2120,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease 1 (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001297534"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -2371,6 +2173,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004318"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2393,15 +2204,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000004538",
-    "RCV000252989",
-    "RCV000414984",
-    "RCV000415149",
-    "RCV000415387",
-    "RCV000487503",
-    "RCV001248923",
-    "RCV001509572",
-    "RCV001836745"
+    "RCV000004538"
    ],
    "dbsnp": [
     "rs2230288"
@@ -2410,6 +2213,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease perinatal lethal",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000004299"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -2444,6 +2256,15 @@
     "Gaucher disease 2 (GD2)",
     "Gaucher disease type II (GD2)"
    ],
+   "clinvar_vcv": [
+    "VCV000004319"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2453,37 +2274,6 @@
       "label_asym_id": "A",
       "label_seq_id": 381,
       "comp_id": "CYS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S384F",
-   "position": 384,
-   "wild_type": "S",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001175137",
-    "RCV001806032"
-   ],
-   "dbsnp": [
-    "rs868591897"
-   ],
-   "diseases": [
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 384,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 384,
-      "comp_id": "SER"
      }
     ]
    }
@@ -2512,36 +2302,14 @@
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
    ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 391,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 391,
-      "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V391M",
-   "position": 391,
-   "wild_type": "V",
-   "mutant": "M",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000093446"
    ],
-   "clinvar": [
-    "RCV003130997",
-    "RCV006641291"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs398123527"
-   ],
-   "diseases": [
-    "Gaucher disease"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -2576,6 +2344,15 @@
     "Gaucher disease (GD)",
     "Gaucher disease 3 (GD3)",
     "Gaucher disease type III"
+   ],
+   "clinvar_vcv": [
+    "VCV000004323"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "9fb2": [
@@ -2616,6 +2393,15 @@
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000813336"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2647,6 +2433,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000236400"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "9fb2": [
@@ -2680,6 +2475,15 @@
     "Gaucher disease",
     "Gaucher disease 1 (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV002682534"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2689,40 +2493,6 @@
       "label_asym_id": "A",
       "label_seq_id": 398,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M400I",
-   "position": 400,
-   "wild_type": "M",
-   "mutant": "I",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001580709",
-    "RCV001843595",
-    "RCV002506688",
-    "RCV003487491"
-   ],
-   "dbsnp": [
-    "rs149487315"
-   ],
-   "diseases": [
-    "Gaucher disease 2 (GD2)",
-    "Hepatoblastoma"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 400,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 400,
-      "comp_id": "MET"
      }
     ]
    }
@@ -2743,6 +2513,15 @@
    ],
    "diseases": [
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932297"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -2801,6 +2580,15 @@
     "Parkinson disease, late-onset (PD)",
     "autosomal dominant GBA1-related disorders"
    ],
+   "clinvar_vcv": [
+    "VCV000004290"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic; risk factor"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2834,6 +2622,15 @@
     "Gaucher disease (GD)",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000004332"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2863,6 +2660,15 @@
    ],
    "diseases": [
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000932296"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -2901,6 +2707,16 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000093448",
+    "VCV001176205"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -2910,37 +2726,6 @@
       "label_asym_id": "A",
       "label_seq_id": 414,
       "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G416R",
-   "position": 416,
-   "wild_type": "G",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV004527086",
-    "RCV005618357"
-   ],
-   "dbsnp": [
-    "rs121908311"
-   ],
-   "diseases": [
-    "Gaucher disease"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 416,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 416,
-      "comp_id": "GLY"
      }
     ]
    }
@@ -2977,6 +2762,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)",
     "Squamous Cell Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000004327"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -3018,6 +2812,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV001211295"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3053,6 +2856,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV001184271"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3084,6 +2896,15 @@
    "diseases": [
     "Gaucher disease",
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000623174"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -3119,6 +2940,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease perinatal lethal"
    ],
+   "clinvar_vcv": [
+    "VCV000931820"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3147,6 +2977,15 @@
     "rs77738682"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV003239090"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3179,6 +3018,15 @@
     "Gaucher disease",
     "Gaucher disease (GD)",
     "Parkinson disease, late-onset (PD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000599275"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "9fb2": [
@@ -3225,6 +3073,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004292"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3255,6 +3112,15 @@
    "diseases": [
     "Gaucher disease perinatal lethal",
     "Gaucher disease perinatal lethal (GDPL)"
+   ],
+   "clinvar_vcv": [
+    "VCV000004303"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -3290,6 +3156,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease 2 (GD2)"
    ],
+   "clinvar_vcv": [
+    "VCV000496081"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3321,6 +3196,15 @@
     "Gaucher disease 1 (GD1)",
     "Gaucher disease type I (GD1)",
     "Nevi and Melanomas"
+   ],
+   "clinvar_vcv": [
+    "VCV000004324"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -3377,6 +3261,18 @@
     "Not Reported",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004293",
+    "VCV000004334"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "no assertion criteria provided"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3412,6 +3308,15 @@
     "Gaucher disease type I (GD1)",
     "Gaucher disease type III"
    ],
+   "clinvar_vcv": [
+    "VCV000004294"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3444,6 +3349,15 @@
     "Gaucher disease",
     "Gaucher disease 1 (GD1)"
    ],
+   "clinvar_vcv": [
+    "VCV000496800"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3473,6 +3387,15 @@
    ],
    "diseases": [
     "Lewy body dementia (DLB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001722541"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -3505,6 +3428,15 @@
     "Gaucher disease 2 (GD2)",
     "Gaucher disease type II (GD2)"
    ],
+   "clinvar_vcv": [
+    "VCV000004289"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3534,6 +3466,15 @@
    ],
    "diseases": [
     "Gaucher disease type I (GD1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000236405"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "9fb2": [
@@ -3598,6 +3539,17 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004288",
+    "VCV000004297"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic; risk factor"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3641,6 +3593,15 @@
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000093449"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3667,10 +3628,8 @@
     "RCV000004534",
     "RCV000004535",
     "RCV000004536",
-    "RCV000079341",
     "RCV001781179",
-    "RCV001836696",
-    "RCV003129772"
+    "RCV001836696"
    ],
    "dbsnp": [
     "rs368060"
@@ -3683,6 +3642,15 @@
     "Gaucher disease type III",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004297"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3692,38 +3660,6 @@
       "label_asym_id": "A",
       "label_seq_id": 495,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V499L",
-   "position": 499,
-   "wild_type": "V",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000785070",
-    "RCV001759479",
-    "RCV004782545"
-   ],
-   "dbsnp": [
-    "rs369068553"
-   ],
-   "diseases": [
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 499,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 499,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -3765,6 +3701,15 @@
     "Nevi and Melanomas",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004295"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3802,6 +3747,15 @@
     "Gaucher disease type III",
     "Gaucher disease-ophthalmoplegia-cardiovascular calcification syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV000021070"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3830,6 +3784,15 @@
     "rs2148069969"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001691430"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3839,39 +3802,6 @@
       "label_asym_id": "A",
       "label_seq_id": 513,
       "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G517S",
-   "position": 517,
-   "wild_type": "G",
-   "mutant": "S",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000004552",
-    "RCV001171764",
-    "RCV004689409"
-   ],
-   "dbsnp": [
-    "rs121908301"
-   ],
-   "diseases": [
-    "Gaucher disease (GD)",
-    "Gaucher disease type I (GD1)"
-   ],
-   "structures": {
-    "9fb2": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 517,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 517,
-      "comp_id": "GLY"
      }
     ]
    }
@@ -3900,6 +3830,15 @@
     "Gaucher disease type I (GD1)",
     "Gaucher disease type II (GD2)",
     "Parkinson disease, late-onset (PD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000242383"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "9fb2": [
@@ -3946,6 +3885,15 @@
     "Lewy body dementia (DLB)",
     "Parkinson disease, late-onset (PD)"
    ],
+   "clinvar_vcv": [
+    "VCV000004311"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "9fb2": [
      {
@@ -3963,39 +3911,323 @@
  "rejected": [
   {
    "variant": "C256T",
+   "position": 256,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "G538A",
+   "position": 538,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "C886T",
+   "position": 886,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "C946T",
+   "position": 946,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "C1102T",
+   "position": 1102,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "C1184T",
+   "position": 1184,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "C1192T",
+   "position": 1192,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "C1300T",
+   "position": 1300,
    "reason": "wild type is not the UniProt canonical residue"
   },
   {
    "variant": "G1459A",
+   "position": 1459,
    "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "K13R",
+   "position": 13,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000196296"
+   ],
+   "clinvar_classification": [
+    "Benign/Likely benign"
+   ]
+  },
+  {
+   "variant": "L15S",
+   "position": 15,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002227653"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P71L",
+   "position": 71,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002579621"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L105P",
+   "position": 105,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001691424"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L144R",
+   "position": 144,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000197701"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S146L",
+   "position": 146,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000197702"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R159Q",
+   "position": 159,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000004291"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V160A",
+   "position": 160,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002432074"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M162T",
+   "position": 162,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000198110"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y174C",
+   "position": 174,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000280972"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "W223R",
+   "position": 223,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000093457"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L236F",
+   "position": 236,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000929061"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "Y251H",
+   "position": 251,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000004309"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E272D",
+   "position": 272,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001691434"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S276F",
+   "position": 276,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002432063"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P305A",
+   "position": 305,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000813340"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S310G",
+   "position": 310,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000597184"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R324C",
+   "position": 324,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000813337"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A348V",
+   "position": 348,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000004316"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "S384F",
+   "position": 384,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000917863"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "V391M",
+   "position": 391,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002432069"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M400I",
+   "position": 400,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001210413"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "G416R",
+   "position": 416,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV003233806"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V499L",
+   "position": 499,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000634558"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G517S",
+   "position": 517,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000004310"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
   }
  ],
  "structure_mismatches": [],

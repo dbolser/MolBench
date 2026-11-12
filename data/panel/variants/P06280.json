@@ -7,7 +7,9 @@
  "disease": "Fabry disease",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P06280",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 429,
  "uniprot_sequence_sha256": "a3757f6fbdeed39e8596df6cc5a20fd246063146afc4cbe937193a64fcc3e99e",
  "primary_entry": "8k7f",
@@ -32,8 +34,8 @@
     "offset": false,
     "auth_chain_differs_from_label_chain": false
    },
-   "outside_construct": 16,
-   "verified": 282
+   "outside_construct": 15,
+   "verified": 251
   }
  },
  "variants": [
@@ -56,6 +58,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001065155"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -74,6 +85,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001323013"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -94,6 +114,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004086977"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -113,6 +142,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000495694"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -135,6 +173,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001323011"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -155,6 +202,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000180846"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -174,6 +230,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002138674"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -192,6 +257,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087279"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -213,6 +287,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001743191"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -231,6 +314,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087303"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {}
   },
@@ -252,25 +344,14 @@
    "diseases": [
     "Fabry disease"
    ],
-   "structures": {}
-  },
-  {
-   "variant": "L19Q",
-   "position": 19,
-   "wild_type": "L",
-   "mutant": "Q",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV001328027"
    ],
-   "clinvar": [
-    "RCV001293632",
-    "RCV005645250"
+   "clinvar_classification": [
+    "Pathogenic"
    ],
-   "dbsnp": [
-    "rs1928592578"
-   ],
-   "diseases": [
-    "Fabry disease"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -292,6 +373,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000217373"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -315,6 +405,15 @@
     "Fabry disease (FABRYD)",
     "Fabry disease, cardiac variant"
    ],
+   "clinvar_vcv": [
+    "VCV000010764"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {}
   },
   {
@@ -336,6 +435,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217374"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {}
   },
   {
@@ -355,6 +463,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000222450"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {}
   },
@@ -378,6 +495,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000592219"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -395,45 +521,6 @@
       "label_asym_id": "B",
       "label_seq_id": 1,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "N34D",
-   "position": 34,
-   "wild_type": "N",
-   "mutant": "D",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000593782",
-    "RCV005645108"
-   ],
-   "dbsnp": [
-    "rs1555987150"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 34,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 3,
-      "comp_id": "ASN"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 34,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 3,
-      "comp_id": "ASN"
      }
     ]
    }
@@ -456,6 +543,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010724"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -497,6 +593,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217377"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -536,6 +641,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000566083"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -573,6 +687,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV002687480"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -612,6 +735,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000633248"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -653,6 +785,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010719"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -692,46 +833,14 @@
    "diseases": [
     "Fabry disease"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 42,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 11,
-      "comp_id": "MET"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 42,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 11,
-      "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M42L",
-   "position": 42,
-   "wild_type": "M",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000594121"
    ],
-   "clinvar": [
-    "RCV000235742",
-    "RCV000809963",
-    "RCV005572281"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs797044613"
-   ],
-   "diseases": [
-    "Fabry disease",
-    "Fabry disease (FABRYD)"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -772,6 +881,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000092541"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -815,6 +933,15 @@
     "Fabry disease (FABRYD)",
     "GLA-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000222174"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -853,6 +980,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV001458078"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -893,6 +1029,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000290742"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -930,6 +1075,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000928954"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -969,6 +1123,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000092543"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -1010,6 +1173,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000193057"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1049,6 +1221,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000992237"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1066,84 +1247,6 @@
       "label_asym_id": "B",
       "label_seq_id": 15,
       "comp_id": "HIS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "W47C",
-   "position": 47,
-   "wild_type": "W",
-   "mutant": "C",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000627817",
-    "RCV003488739"
-   ],
-   "dbsnp": [
-    "rs1555987101"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 47,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 16,
-      "comp_id": "TRP"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 47,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 16,
-      "comp_id": "TRP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E48Q",
-   "position": 48,
-   "wild_type": "E",
-   "mutant": "Q",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000078269",
-    "RCV005644508"
-   ],
-   "dbsnp": [
-    "rs398123204"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 48,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 17,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 48,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 17,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -1166,6 +1269,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000092545"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -1207,6 +1319,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV002432134"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1224,43 +1345,6 @@
       "label_asym_id": "B",
       "label_seq_id": 18,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M51L",
-   "position": 51,
-   "wild_type": "M",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000681675",
-    "RCV000797100"
-   ],
-   "dbsnp": [
-    "rs1569306069"
-   ],
-   "diseases": [],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 51,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 20,
-      "comp_id": "MET"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 51,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 20,
-      "comp_id": "MET"
      }
     ]
    }
@@ -1281,6 +1365,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000928955"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -1322,6 +1415,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000381475"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1360,6 +1462,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV004087280"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -1400,6 +1511,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010725"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1439,6 +1559,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000222186"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1477,45 +1606,14 @@
    "diseases": [
     "Fabry disease"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 57,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 26,
-      "comp_id": "GLN"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 57,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 26,
-      "comp_id": "GLN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "Q57R",
-   "position": 57,
-   "wild_type": "Q",
-   "mutant": "R",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV001199177"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV001762947",
-    "RCV005645292"
-   ],
-   "dbsnp": [
-    "rs869312260"
-   ],
-   "diseases": [
-    "Adenomas and Adenocarcinomas",
-    "Fabry disease"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -1555,6 +1653,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002822701"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1572,45 +1679,6 @@
       "label_asym_id": "B",
       "label_seq_id": 28,
       "comp_id": "GLU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "C63R",
-   "position": 63,
-   "wild_type": "C",
-   "mutant": "R",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001290654",
-    "RCV005645249"
-   ],
-   "dbsnp": [
-    "rs1928578294"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 63,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 32,
-      "comp_id": "CYS"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 63,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 32,
-      "comp_id": "CYS"
      }
     ]
    }
@@ -1632,6 +1700,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000595414"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -1672,6 +1749,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002689132"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1702,12 +1788,7 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000011470",
-    "RCV000150750",
-    "RCV000728539",
-    "RCV000822343",
-    "RCV003162613",
-    "RCV004752756"
+    "RCV000011470"
    ],
    "dbsnp": [
     "rs104894833"
@@ -1715,6 +1796,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010723"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "8k7f": [
@@ -1755,6 +1845,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000855220"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1772,45 +1871,6 @@
       "label_asym_id": "B",
       "label_seq_id": 37,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M76T",
-   "position": 76,
-   "wild_type": "M",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV003066355",
-    "RCV003491210"
-   ],
-   "dbsnp": [
-    "rs2520914744"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 76,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 45,
-      "comp_id": "MET"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 76,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 45,
-      "comp_id": "MET"
      }
     ]
    }
@@ -1831,6 +1891,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001027590"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -1873,6 +1942,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000594665"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1913,6 +1991,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217381"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1952,6 +2039,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000633245"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -1969,45 +2065,6 @@
       "label_asym_id": "B",
       "label_seq_id": 58,
       "comp_id": "LEU"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "C90R",
-   "position": 90,
-   "wild_type": "C",
-   "mutant": "R",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000341522",
-    "RCV005645063"
-   ],
-   "dbsnp": [
-    "rs886044767"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 90,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 59,
-      "comp_id": "CYS"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 90,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 59,
-      "comp_id": "CYS"
      }
     ]
    }
@@ -2032,6 +2089,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)",
     "GLA-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV000222204"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2070,6 +2136,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000996270"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2110,6 +2185,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV001192207"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2148,6 +2232,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000499270"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2189,6 +2282,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000280003"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2227,6 +2329,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000222205"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2269,6 +2380,17 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV001064718",
+    "VCV003724331"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2308,6 +2430,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000092549"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2349,6 +2480,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000594176"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2388,62 +2528,32 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 100,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 69,
-      "comp_id": "ARG"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 100,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 69,
-      "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L106F",
-   "position": 106,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV004087335"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV003131020",
-    "RCV005645449"
-   ],
-   "dbsnp": [
-    "rs1178979608"
-   ],
-   "diseases": [
-    "Fabry disease"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 106,
+      "auth_seq_id": 100,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 75,
-      "comp_id": "LEU"
+      "label_seq_id": 69,
+      "comp_id": "ARG"
      },
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 106,
+      "auth_seq_id": 100,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 75,
-      "comp_id": "LEU"
+      "label_seq_id": 69,
+      "comp_id": "ARG"
      }
     ]
    }
@@ -2465,6 +2575,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000419957"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2496,7 +2615,6 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000011470",
     "RCV000482440",
     "RCV000780291",
     "RCV002321570"
@@ -2508,6 +2626,15 @@
     "Adenomas and Adenocarcinomas",
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000092550"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2550,6 +2677,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000195028"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2590,6 +2726,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000092551"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2629,6 +2774,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV004081422"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2673,6 +2827,15 @@
     "Fabry disease (FABRYD)",
     "Fabry disease, cardiac variant"
    ],
+   "clinvar_vcv": [
+    "VCV000222218"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2712,6 +2875,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV001459744"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2748,6 +2920,15 @@
     "rs2147480453"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV001324467"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2785,6 +2966,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000981060"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2825,6 +3015,17 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000840073",
+    "VCV001324467"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2855,9 +3056,6 @@
     "Pathogenic"
    ],
    "clinvar": [
-    "RCV000209198",
-    "RCV000209589",
-    "RCV003128593",
     "RCV005644825"
    ],
    "dbsnp": [
@@ -2865,6 +3063,15 @@
    ],
    "diseases": [
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV004087236"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -2904,6 +3111,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001805066"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -2941,6 +3157,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000163546"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -2981,6 +3206,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV004087354"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3019,6 +3253,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000498788"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3059,6 +3302,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV004087360"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3098,6 +3350,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000632837"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3136,6 +3397,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000928956"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3153,46 +3423,6 @@
       "label_asym_id": "B",
       "label_seq_id": 105,
       "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V137F",
-   "position": 137,
-   "wild_type": "V",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001194308",
-    "RCV003130175",
-    "RCV005645221"
-   ],
-   "dbsnp": [
-    "rs1928326653"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 137,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 106,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 137,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 106,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -3214,6 +3444,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000946654"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3254,6 +3493,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000997946"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3292,6 +3540,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000285570"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3332,6 +3589,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000285618"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3374,6 +3640,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010769"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3413,6 +3688,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000937290"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3451,6 +3735,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000495692"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3492,6 +3785,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000496827"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3532,6 +3834,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000633251"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3570,6 +3881,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001038401"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3610,6 +3930,18 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000520521",
+    "VCV003385332"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3649,6 +3981,15 @@
     "Fabry disease",
     "Transitional Cell Papillomas and Carcinomas"
    ],
+   "clinvar_vcv": [
+    "VCV004087378"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3686,6 +4027,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087379"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3727,6 +4077,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010727"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3766,6 +4125,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV004087380"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3804,6 +4172,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV004087383"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -3845,6 +4222,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010728"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -3883,61 +4269,32 @@
    "diseases": [
     "Fabry disease"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 165,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 134,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 165,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 134,
-      "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L166G",
-   "position": 166,
-   "wild_type": "L",
-   "mutant": "G",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV004087391"
+   ],
+   "clinvar_classification": [
     "Pathogenic"
    ],
-   "clinvar": [
-    "RCV000820056"
-   ],
-   "dbsnp": [
-    "rs1603041916"
-   ],
-   "diseases": [
-    "Fabry disease"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 166,
+      "auth_seq_id": 165,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 135,
-      "comp_id": "LEU"
+      "label_seq_id": 134,
+      "comp_id": "ASP"
      },
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 166,
+      "auth_seq_id": 165,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 135,
-      "comp_id": "LEU"
+      "label_seq_id": 134,
+      "comp_id": "ASP"
      }
     ]
    }
@@ -3958,6 +4315,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000987845"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -3999,6 +4365,15 @@
     "Fabry disease",
     "Nephrotic syndrome"
    ],
+   "clinvar_vcv": [
+    "VCV001344883"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4038,6 +4413,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000092553"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4075,6 +4459,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087401"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -4116,6 +4509,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV001745537"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4154,6 +4556,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000222274"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -4195,6 +4606,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV002737318"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4235,6 +4655,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV001323002"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4273,6 +4702,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000641501"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4290,49 +4728,6 @@
       "label_asym_id": "B",
       "label_seq_id": 143,
       "comp_id": "CYS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L180F",
-   "position": 180,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000209274",
-    "RCV000209663",
-    "RCV002345718",
-    "RCV002349418",
-    "RCV005645380"
-   ],
-   "dbsnp": [
-    "rs869312145"
-   ],
-   "diseases": [
-    "Fabry disease",
-    "Fabry disease (FABRYD)"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 180,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 149,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 180,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 149,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -4353,6 +4748,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087415"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -4394,6 +4798,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000562419"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4434,6 +4847,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000222281"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4473,6 +4895,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000092555"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4510,6 +4941,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000997944"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -4551,6 +4991,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217388"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4588,6 +5037,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087420"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -4628,6 +5086,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000222310"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4665,6 +5132,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087422"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -4705,6 +5181,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002690610"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4722,45 +5207,6 @@
       "label_asym_id": "B",
       "label_seq_id": 163,
       "comp_id": "THR"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V199M",
-   "position": 199,
-   "wild_type": "V",
-   "mutant": "M",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000078284",
-    "RCV005644513"
-   ],
-   "dbsnp": [
-    "rs398123213"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 199,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 168,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 199,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 168,
-      "comp_id": "VAL"
      }
     ]
    }
@@ -4783,6 +5229,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV002690611"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -4822,6 +5277,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000633244"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4860,6 +5324,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010729"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -4901,6 +5374,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000222314"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -4918,45 +5400,6 @@
       "label_asym_id": "B",
       "label_seq_id": 171,
       "comp_id": "CYS"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E203K",
-   "position": 203,
-   "wild_type": "E",
-   "mutant": "K",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000443793",
-    "RCV001237227"
-   ],
-   "dbsnp": [
-    "rs869312345"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 203,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 172,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 203,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 172,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -4980,6 +5423,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000217390"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5019,6 +5471,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000288308"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5065,6 +5526,15 @@
     "Fabry disease (FABRYD)",
     "Hypertrophic cardiomyopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000042456"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5104,6 +5574,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000197113"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5142,6 +5621,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000585078"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5183,6 +5671,15 @@
     "Adenomas and Adenocarcinomas",
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000217392"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5229,6 +5726,15 @@
     "Fabry disease (FABRYD)",
     "Hypertrophic cardiomyopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000010730"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5267,6 +5773,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000092561"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5308,6 +5823,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000962893"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5348,6 +5872,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217393"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5385,6 +5918,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087456"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -5424,6 +5966,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV004087458"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -5466,6 +6017,15 @@
     "Fabry disease",
     "Hypertrophic cardiomyopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000520264"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5505,6 +6065,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000222364"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5546,6 +6115,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000499855"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5586,6 +6164,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000222365"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5624,6 +6211,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000945639"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5660,6 +6256,15 @@
     "rs1928196520"
    ],
    "diseases": [],
+   "clinvar_vcv": [
+    "VCV000988315"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5698,6 +6303,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001324473"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5739,6 +6353,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000988316"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5778,6 +6401,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000217394"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -5819,6 +6451,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010732"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -5836,45 +6477,6 @@
       "label_asym_id": "B",
       "label_seq_id": 196,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D231A",
-   "position": 231,
-   "wild_type": "D",
-   "mutant": "A",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000701032",
-    "RCV000788378"
-   ],
-   "dbsnp": [
-    "rs1569303295"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 231,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 200,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 231,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 200,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -5897,6 +6499,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000659973"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5936,6 +6547,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001432437"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -5977,6 +6597,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000197637"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -6022,6 +6651,18 @@
     "Fabry disease (FABRYD)",
     "Plasma Cell Tumors"
    ],
+   "clinvar_vcv": [
+    "VCV000501332",
+    "VCV004087475"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6061,6 +6702,18 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000593502",
+    "VCV000928486"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -6104,6 +6757,15 @@
     "Fabry disease",
     "GLA-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV000180841"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6143,6 +6805,15 @@
     "Adenomas and Adenocarcinomas",
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087480"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6160,85 +6831,6 @@
       "label_asym_id": "B",
       "label_seq_id": 208,
       "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I242F",
-   "position": 242,
-   "wild_type": "I",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000035310",
-    "RCV005644492"
-   ],
-   "dbsnp": [
-    "rs397515873"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 242,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 211,
-      "comp_id": "ILE"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 242,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 211,
-      "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "L243F",
-   "position": 243,
-   "wild_type": "L",
-   "mutant": "F",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000035311",
-    "RCV005644493"
-   ],
-   "dbsnp": [
-    "rs397515874"
-   ],
-   "diseases": [
-    "Fabry disease",
-    "Fabry disease (FABRYD)"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 243,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 212,
-      "comp_id": "LEU"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 243,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 212,
-      "comp_id": "LEU"
      }
     ]
    }
@@ -6262,45 +6854,14 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 244,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 213,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 244,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 213,
-      "comp_id": "ASP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D244N",
-   "position": 244,
-   "wild_type": "D",
-   "mutant": "N",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000562436"
    ],
-   "clinvar": [
-    "RCV000153319",
-    "RCV002516076"
+   "clinvar_classification": [
+    "Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs727503948"
-   ],
-   "diseases": [
-    "Fabry disease",
-    "Fabry disease (FABRYD)"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -6341,6 +6902,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV004087491"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6378,6 +6948,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000222379"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -6421,6 +7000,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000180021"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6458,6 +7046,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000633249"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -6500,6 +7097,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000222384"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6538,6 +7144,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001067733"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6575,6 +7190,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV002444327"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -6616,6 +7240,15 @@
     "Fabry disease",
     "Fabry disease, cardiac variant"
    ],
+   "clinvar_vcv": [
+    "VCV003248613"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6654,6 +7287,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000977728"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -6694,6 +7336,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000222387"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6732,6 +7383,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087511"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6769,6 +7429,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087512"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -6810,6 +7479,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217398"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6849,6 +7527,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV001323001"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -6890,6 +7577,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010734"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6930,6 +7626,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000222393"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -6969,6 +7674,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002440492"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7007,6 +7721,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000228701"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7048,6 +7771,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV002444391"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7087,6 +7819,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010735"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7128,6 +7869,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000180842"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7165,6 +7915,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001050824"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7205,44 +7964,14 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 269,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 238,
-      "comp_id": "VAL"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 269,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 238,
-      "comp_id": "VAL"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "V269E",
-   "position": 269,
-   "wild_type": "V",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
+   "clinvar_vcv": [
+    "VCV000010731"
    ],
-   "clinvar": [
-    "RCV000378974",
-    "RCV005645064"
+   "clinvar_classification": [
+    "Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs28935488"
-   ],
-   "diseases": [
-    "Fabry disease"
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -7284,6 +8013,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217399"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7323,6 +8061,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000222421"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7360,6 +8107,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV002737315"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7399,6 +8155,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087524"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7436,6 +8201,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000964447"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7475,6 +8249,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001507609"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7517,6 +8300,15 @@
     "Fabry disease (FABRYD)",
     "GLA-related disorder"
    ],
+   "clinvar_vcv": [
+    "VCV002634390"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7556,6 +8348,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010774"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7594,62 +8395,32 @@
    "diseases": [
     "Fabry disease"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 273,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 242,
-      "comp_id": "PHE"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 273,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 242,
-      "comp_id": "PHE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G274R",
-   "position": 274,
-   "wild_type": "G",
-   "mutant": "R",
-   "significance": [
+   "clinvar_vcv": [
+    "VCV000222425"
+   ],
+   "clinvar_classification": [
     "Likely pathogenic"
    ],
-   "clinvar": [
-    "RCV001368747",
-    "RCV003130507"
-   ],
-   "dbsnp": [
-    "rs2147472458"
-   ],
-   "diseases": [
-    "Fabry disease"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
      {
       "auth_asym_id": "A",
-      "auth_seq_id": 274,
+      "auth_seq_id": 273,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
-      "label_seq_id": 243,
-      "comp_id": "GLY"
+      "label_seq_id": 242,
+      "comp_id": "PHE"
      },
      {
       "auth_asym_id": "B",
-      "auth_seq_id": 274,
+      "auth_seq_id": 273,
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "B",
-      "label_seq_id": 243,
-      "comp_id": "GLY"
+      "label_seq_id": 242,
+      "comp_id": "PHE"
      }
     ]
    }
@@ -7671,6 +8442,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000092567"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7709,6 +8489,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087534"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -7750,6 +8539,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000222427"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7789,6 +8587,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000524215"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7832,6 +8639,15 @@
     "Fabry disease (FABRYD)",
     "Fabry disease, cardiac variant"
    ],
+   "clinvar_vcv": [
+    "VCV000010721"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7869,6 +8685,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV003896553"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7908,6 +8733,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000928485"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -7949,6 +8783,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000496868"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -7987,6 +8830,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087558"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8004,127 +8856,6 @@
       "label_asym_id": "B",
       "label_seq_id": 257,
       "comp_id": "ALA"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "I289F",
-   "position": 289,
-   "wild_type": "I",
-   "mutant": "F",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000078299",
-    "RCV003509488"
-   ],
-   "dbsnp": [
-    "rs140329381"
-   ],
-   "diseases": [
-    "Fabry disease",
-    "Fabry disease (FABRYD)"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 289,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 258,
-      "comp_id": "ILE"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 289,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 258,
-      "comp_id": "ILE"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M290I",
-   "position": 290,
-   "wild_type": "M",
-   "mutant": "I",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000733247",
-    "RCV001205029",
-    "RCV001280629",
-    "RCV001781622"
-   ],
-   "dbsnp": [
-    "rs869312438"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 290,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 259,
-      "comp_id": "MET"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 290,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 259,
-      "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "M290L",
-   "position": 290,
-   "wild_type": "M",
-   "mutant": "L",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000545099",
-    "RCV000786316",
-    "RCV002372207"
-   ],
-   "dbsnp": [
-    "rs375538532"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 290,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 259,
-      "comp_id": "MET"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 290,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 259,
-      "comp_id": "MET"
      }
     ]
    }
@@ -8147,6 +8878,15 @@
    "diseases": [
     "Fabry disease",
     "Primary familial hypertrophic cardiomyopathy (HCM)"
+   ],
+   "clinvar_vcv": [
+    "VCV000684855"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8186,6 +8926,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002138663"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8223,6 +8972,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000633247"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8262,6 +9020,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087561"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8299,6 +9066,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001077018"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8339,6 +9115,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002440481"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8376,6 +9161,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000997945"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8419,6 +9213,18 @@
     "Fabry disease (FABRYD)",
     "Fabry disease, cardiac variant"
    ],
+   "clinvar_vcv": [
+    "VCV000010763",
+    "VCV001396452"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8457,6 +9263,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV002737313"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8497,6 +9312,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000222441"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8540,6 +9364,15 @@
     "Fabry disease (FABRYD)",
     "Fabry disease, cardiac variant"
    ],
+   "clinvar_vcv": [
+    "VCV000010717"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8557,45 +9390,6 @@
       "label_asym_id": "B",
       "label_seq_id": 265,
       "comp_id": "MET"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "S297C",
-   "position": 297,
-   "wild_type": "S",
-   "mutant": "C",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000277132",
-    "RCV005645041"
-   ],
-   "dbsnp": [
-    "rs28935489"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 297,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 266,
-      "comp_id": "SER"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 297,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 266,
-      "comp_id": "SER"
      }
     ]
    }
@@ -8617,6 +9411,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010737"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8657,6 +9460,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000839647"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8695,6 +9507,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000996293"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8737,6 +9558,15 @@
     "Fabry disease (FABRYD)",
     "Thyroid cancer, nonmedullary, 1"
    ],
+   "clinvar_vcv": [
+    "VCV000928732"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8754,43 +9584,6 @@
       "label_asym_id": "B",
       "label_seq_id": 267,
       "comp_id": "ASN"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "D299E",
-   "position": 299,
-   "wild_type": "D",
-   "mutant": "E",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV001507539",
-    "RCV005645279"
-   ],
-   "dbsnp": [
-    "rs2147472136"
-   ],
-   "diseases": [],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 299,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 268,
-      "comp_id": "ASP"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 299,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 268,
-      "comp_id": "ASP"
      }
     ]
    }
@@ -8813,6 +9606,15 @@
    "diseases": [
     "Adenomas and Adenocarcinomas",
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000596689"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8852,6 +9654,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000092569"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -8894,6 +9705,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000179546"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8932,6 +9752,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087573"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -8969,6 +9798,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001455597"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9015,6 +9853,15 @@
     "Fabry disease, cardiac variant",
     "Primary familial hypertrophic cardiomyopathy (HCM)"
    ],
+   "clinvar_vcv": [
+    "VCV000010715"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9052,6 +9899,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087575"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -9091,6 +9947,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002737312"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9128,6 +9993,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001064719"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9167,6 +10041,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV003777728"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9204,6 +10087,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001712255"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9245,6 +10137,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000217405"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9283,6 +10184,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000844415"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9323,6 +10233,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001284447"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9360,6 +10279,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087600"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -9400,6 +10328,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000180830"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9438,6 +10375,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000928722"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9480,6 +10426,16 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000092572",
+    "VCV000222459"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9519,44 +10475,14 @@
    "diseases": [
     "Fabry disease"
    ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 325,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 294,
-      "comp_id": "GLY"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 325,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 294,
-      "comp_id": "GLY"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G325S",
-   "position": 325,
-   "wild_type": "G",
-   "mutant": "S",
-   "significance": [
-    "Likely pathogenic"
+   "clinvar_vcv": [
+    "VCV000092574"
    ],
-   "clinvar": [
-    "RCV000078305",
-    "RCV001337760"
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
    ],
-   "dbsnp": [
-    "rs398123227"
-   ],
-   "diseases": [
-    "Fabry disease"
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9598,6 +10524,15 @@
     "Fabry disease (FABRYD)",
     "Squamous Cell Neoplasms"
    ],
+   "clinvar_vcv": [
+    "VCV000010739"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9637,6 +10572,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000217408"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -9678,6 +10622,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010740"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9715,6 +10668,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV002138661"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9758,6 +10720,17 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010722",
+    "VCV000198053"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9797,6 +10770,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV001324469"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9838,6 +10820,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000546086"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9855,45 +10846,6 @@
       "label_asym_id": "B",
       "label_seq_id": 309,
       "comp_id": "TRP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "E341D",
-   "position": 341,
-   "wild_type": "E",
-   "mutant": "D",
-   "significance": [
-    "Pathogenic"
-   ],
-   "clinvar": [
-    "RCV000153316",
-    "RCV005644525"
-   ],
-   "dbsnp": [
-    "rs797044497"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 341,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 310,
-      "comp_id": "GLU"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 341,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 310,
-      "comp_id": "GLU"
      }
     ]
    }
@@ -9915,6 +10867,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000222125"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -9956,6 +10917,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010742"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -9973,45 +10943,6 @@
       "label_asym_id": "B",
       "label_seq_id": 311,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "P343L",
-   "position": 343,
-   "wild_type": "P",
-   "mutant": "L",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001782191",
-    "RCV001806264"
-   ],
-   "dbsnp": [
-    "rs1555984858"
-   ],
-   "diseases": [
-    "Fabry disease"
-   ],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 343,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 312,
-      "comp_id": "PRO"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 343,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 312,
-      "comp_id": "PRO"
      }
     ]
    }
@@ -10032,6 +10963,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087622"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -10073,6 +11013,15 @@
     "Fabry disease",
     "Primary familial hypertrophic cardiomyopathy (HCM)"
    ],
+   "clinvar_vcv": [
+    "VCV000684856"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10111,6 +11060,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000928970"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10128,43 +11086,6 @@
       "label_asym_id": "B",
       "label_seq_id": 318,
       "comp_id": "TRP"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "A350T",
-   "position": 350,
-   "wild_type": "A",
-   "mutant": "T",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV000659174",
-    "RCV004004196"
-   ],
-   "dbsnp": [
-    "rs1555984843"
-   ],
-   "diseases": [],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 350,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 319,
-      "comp_id": "ALA"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 350,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 319,
-      "comp_id": "ALA"
      }
     ]
    }
@@ -10185,6 +11106,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000992454"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -10229,6 +11159,15 @@
     "GLA-related disorder",
     "Gliomas"
    ],
+   "clinvar_vcv": [
+    "VCV000010713"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10266,6 +11205,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087633"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -10307,6 +11255,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000198399"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10344,6 +11301,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV001507485"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -10384,6 +11350,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000222139"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10422,6 +11397,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV004087635"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -10464,6 +11448,18 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010744",
+    "VCV000245750"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10504,6 +11500,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000180832"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10543,6 +11548,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000198401"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -10585,6 +11599,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000222141"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10602,43 +11625,6 @@
       "label_asym_id": "B",
       "label_seq_id": 332,
       "comp_id": "ARG"
-     }
-    ]
-   }
-  },
-  {
-   "variant": "G373C",
-   "position": 373,
-   "wild_type": "G",
-   "mutant": "C",
-   "significance": [
-    "Likely pathogenic"
-   ],
-   "clinvar": [
-    "RCV001193642",
-    "RCV003142120"
-   ],
-   "dbsnp": [
-    "rs1928127475"
-   ],
-   "diseases": [],
-   "structures": {
-    "8k7f": [
-     {
-      "auth_asym_id": "A",
-      "auth_seq_id": 373,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "A",
-      "label_seq_id": 342,
-      "comp_id": "GLY"
-     },
-     {
-      "auth_asym_id": "B",
-      "auth_seq_id": 373,
-      "pdbx_PDB_ins_code": "",
-      "label_asym_id": "B",
-      "label_seq_id": 342,
-      "comp_id": "GLY"
      }
     ]
    }
@@ -10661,6 +11647,15 @@
    "diseases": [
     "Fabry disease",
     "Fabry disease (FABRYD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000222145"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -10704,6 +11699,15 @@
     "Fabry disease (FABRYD)",
     "Hypertrophic cardiomyopathy"
    ],
+   "clinvar_vcv": [
+    "VCV000177834"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10742,6 +11746,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001455444"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10779,6 +11792,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087645"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -10819,6 +11841,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV002584496"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10857,6 +11888,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV003235259"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10894,6 +11934,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV004087647"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "8k7f": [
@@ -10934,6 +11983,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000198400"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -10972,6 +12030,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087651"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11009,6 +12076,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV003074904"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -11049,6 +12125,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV002440474"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11086,6 +12171,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV002573378"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -11126,6 +12220,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000495691"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11164,6 +12267,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000237123"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -11204,6 +12316,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000010771"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11242,6 +12363,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV000222643"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11279,6 +12409,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000180833"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -11320,6 +12459,15 @@
     "Adenomas and Adenocarcinomas",
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV001071124"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11360,6 +12508,15 @@
     "Fabry disease",
     "Fabry disease (FABRYD)"
    ],
+   "clinvar_vcv": [
+    "VCV000419956"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11397,6 +12554,15 @@
    ],
    "diseases": [
     "Fabry disease"
+   ],
+   "clinvar_vcv": [
+    "VCV000222172"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
    ],
    "structures": {
     "8k7f": [
@@ -11436,6 +12602,15 @@
    "diseases": [
     "Fabry disease"
    ],
+   "clinvar_vcv": [
+    "VCV004087673"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
    "structures": {
     "8k7f": [
      {
@@ -11461,7 +12636,354 @@
  "rejected": [
   {
    "variant": "G383A",
+   "position": 383,
    "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "L19Q",
+   "position": 19,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000997947"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "N34D",
+   "position": 34,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000498630"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M42L",
+   "position": 42,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000193056"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "W47C",
+   "position": 47,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000524213"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E48Q",
+   "position": 48,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000092544"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M51L",
+   "position": 51,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000562241"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "Q57R",
+   "position": 57,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001303489"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C63R",
+   "position": 63,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000996292"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M76T",
+   "position": 76,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002138670"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C90R",
+   "position": 90,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000280974"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L106F",
+   "position": 106,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV002432130"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V137F",
+   "position": 137,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000929201"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L166G",
+   "position": 166,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000662418"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L180F",
+   "position": 180,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000217387",
+    "VCV001747366"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V199M",
+   "position": 199,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000092556"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E203K",
+   "position": 203,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000222316"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D231A",
+   "position": 231,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000578114"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I242F",
+   "position": 242,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000042461"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L243F",
+   "position": 243,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000042462"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D244N",
+   "position": 244,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [],
+   "clinvar_classification": []
+  },
+  {
+   "variant": "V269E",
+   "position": 269,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000281865"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G274R",
+   "position": 274,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001059459"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I289F",
+   "position": 289,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000092568"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M290I",
+   "position": 290,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000222435",
+    "VCV000222436"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M290L",
+   "position": 290,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000222434"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "S297C",
+   "position": 297,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000222442"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D299E",
+   "position": 299,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001162909"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G325S",
+   "position": 325,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000092573"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E341D",
+   "position": 341,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [],
+   "clinvar_classification": []
+  },
+  {
+   "variant": "P343L",
+   "position": 343,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001324471"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A350T",
+   "position": 350,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000547092"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G373C",
+   "position": 373,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000928957"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
   }
  ],
  "structure_mismatches": [],

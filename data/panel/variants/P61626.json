@@ -7,7 +7,9 @@
  "disease": "hereditary lysozyme amyloidosis",
  "source": "https://www.ebi.ac.uk/proteins/api/variation/P61626",
  "retrieved": "2026-11-12",
- "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
  "uniprot_length": 148,
  "uniprot_sequence_sha256": "7d0e4fd9fdc4406e6179855d1e2bf7e9aa182416262a70dafca656fcada3f2f7",
  "primary_entry": "2nwd",
@@ -54,6 +56,15 @@
     "Amyloidosis, hereditary systemic 5",
     "Amyloidosis, hereditary systemic 5 (AMYLD5)"
    ],
+   "clinvar_vcv": [
+    "VCV000014374"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
    "structures": {
     "2nwd": [
      {
@@ -83,6 +94,15 @@
    ],
    "diseases": [
     "Amyloidosis, hereditary systemic 5"
+   ],
+   "clinvar_vcv": [
+    "VCV000014377"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
    ],
    "structures": {
     "2nwd": [
@@ -116,6 +136,16 @@
    ],
    "diseases": [
     "Familial visceral amyloidosis, Ostertag type (AMYLD2)"
+   ],
+   "clinvar_vcv": [
+    "VCV000014376",
+    "VCV000014378"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
    ],
    "structures": {
     "2nwd": [
