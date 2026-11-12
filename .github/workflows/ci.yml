@@ -1,9 +1,10 @@
 name: CI
 
-# Validates the *harness* on every push/PR. Deliberately keyless: it runs the
-# sanity tests and the rule-based baseline, so it never needs API secrets and
-# never spends credits. Publishing real model results is a separate, manual step
-# (run the bench locally, then `scripts/build_leaderboard.py` + commit docs/).
+# Validates the *harness* on every push/PR. Deliberately keyless: it runs the whole
+# test suite, the rule-based baseline and a dry run of the final-run manifest with the
+# mock model, so it never needs API secrets and never spends credits. Publishing real
+# model results is a separate, manual step (python -m molbench.runner --manifest
+# run/final_run.toml --go, then scripts/build_site_data.py + build_leaderboard.py).
 
 on:
   push:
@@ -15,20 +16,26 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.10", "3.12"]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install (core only, no model SDKs)
-        run: pip install -e .
-      - name: Sanity tests (grader calibration + schema validity)
-        run: |
-          PYTHONPATH=. python tests/test_harness.py
-          PYTHONPATH=. python tests/test_atom_sets.py
-      - name: Baseline smoke run
-        run: python -m molbench.runner --models baseline --categories api_calling
+          enable-cache: true
+      - name: Install (locked; 'authoring' so the structure-grounded tests run too)
+        run: uv sync --locked --extra authoring
+      - name: Test suite
+        run: uv run pytest -q
+      - name: Manifest is valid
+        run: uv run python -m molbench.manifest run/final_run.toml
+      - name: Baseline smoke run (rules baseline, both tracks)
+        run: uv run python -m molbench.runner --models baseline
+      - name: Dry run of the final-run manifest (mock model, $0)
+        run: uv run python -m molbench.runner --manifest run/final_run.toml --dry-run
+      - name: Cost estimate runs
+        run: uv run python scripts/estimate_cost.py --tasks mvs=300 api_calling=150
       - name: Leaderboard builder runs
-        run: python scripts/build_leaderboard.py
+        run: uv run python scripts/build_leaderboard.py --out-dir "$RUNNER_TEMP/site"
