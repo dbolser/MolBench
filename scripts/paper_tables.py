@@ -458,6 +458,7 @@ class Paper:
         self.conditions(T, track, conds, ids, boot)
         self.failures(T, track)
         self.semantic_errors(T, track)
+        self.targets(T, track)
         self.repair(T, track, board)
         self.escalation(T, track)
         self.cost(T, track, board)
@@ -549,7 +550,7 @@ class Paper:
             tied = sum(1 for r in llms[1:] if r["f1_ci"] and r["f1_ci"][1] >= best["f1_ci"][0])
             self.put(f"{T}.{H}.n_overlap_best", tied)
         base = [r for r in board if r["baseline"]]
-        if base:
+        if base and base[0]["n_valid"]:
             self.put(f"{T}.{H}.baseline_f1", base[0]["f1"])
 
         rows = []
@@ -558,6 +559,12 @@ class Paper:
                          pct(r["valid"]), ci_str(r["valid_ci"], pct), f3(r["f1_valid"]),
                          ci_str(r["f1_valid_ci"]), pct(r["success"])])
         for r in base:
+            if not r["n_valid"]:
+                # A rule script that never produces a valid answer in this track's format
+                # (the October one writes API calls only) is not a floor: leave it out.
+                self.notes.append(f"{T}: baseline '{r['short']}' has no valid output in this "
+                                  "track; left out of the leaderboard table")
+                continue
             rows.append(["–", r["short"] + " (no model)", "–", f3(r["f1"]), "–", pct(r["valid"]),
                          "–", f3(r["f1_valid"]), "–", pct(r["success"])])
         n_s = self.values[f"{T}.{H}.samples_per_task"]
@@ -798,6 +805,8 @@ class Paper:
         self.put(f"{k}.n_models_lookup_loss_10", sum((p["delta_lookup"] or 0) <= -0.10
                                                      for p in per_model))
         self.put(f"{k}.valid_delta_mean", statistics.fmean(p["delta_valid"] for p in per_model))
+        self.put(f"{k}.valid_delta_mean_pp",
+                 round(100 * statistics.fmean(p["delta_valid"] for p in per_model), 1))
         worst = min(per_model, key=lambda p: p["delta_valid"])
         self.put(f"{k}.valid_drop_max.name", worst["model"])
         self.put(f"{k}.valid_drop_max.from", worst["valid_spec"])
@@ -974,6 +983,81 @@ class Paper:
             "the reference scene is absent, or the output draws something the reference does "
             "not. *Structure*: a different entry or file is loaded.\n\n"
             + md_table(["Difference", "Scenes", "Share"] + regs, rows, "lrr" + "r" * len(regs)))
+
+    def targets(self, T: str, track: str) -> None:
+        """For valid scenes: is the component the request is about drawn exactly right?
+
+        Separates "picked the wrong atoms" from "left out (or added) scenery". See
+        ``target_check`` for the definition of target and context.
+        """
+        if track != "mvs":
+            return
+        H = self.headline
+        by: dict[str, Counter] = defaultdict(Counter)
+        for f in self.score_files:
+            card = json.loads(f.read_text(encoding="utf-8"))
+            if condition_of(card.get("meta", {})) != H:
+                continue
+            for name, m in card.get("models", {}).items():
+                if m.get("spec") == "baseline" or name.startswith("baseline"):
+                    continue
+                for row in m.get("tasks", []):
+                    if row.get("category", "mvs") != track or row["id"] not in self.tasks:
+                        continue
+                    samples = row_samples(row)
+                    if len(samples) != 1 or samples[0]["outcome"] != "valid":
+                        continue  # per-sample trees are not in the scorecard for N > 1
+                    t = self.tasks[row["id"]]
+                    res = target_check(t["reference_mvs"], row.get("predicted"),
+                                       t.get("accepted_ids"))
+                    c = by[t["regime"]]
+                    c["n_valid"] += 1
+                    if res is None:
+                        c["not_applicable"] += 1
+                        continue
+                    c["n"] += 1
+                    perfect = samples[0]["f1"] >= 1 - SUCCESS_EPS
+                    c["perfect"] += perfect
+                    if res["target_exact"]:
+                        c["target_exact"] += 1
+                        if not perfect:
+                            c["target_exact_imperfect"] += 1
+                            if res["has_context"] and not res["context_exact"]:
+                                c["target_exact_context_differs"] += 1
+                    elif res["target_atoms"]:
+                        c["target_atoms_only"] += 1
+                    else:
+                        c["target_wrong"] += 1
+        if not by:
+            return
+        regs = [r for r in REGIME_ORDER if r in by] + sorted(set(by) - set(REGIME_ORDER))
+        rows = []
+        fields = ("n_valid", "not_applicable", "n", "perfect", "target_exact",
+                  "target_exact_imperfect", "target_exact_context_differs",
+                  "target_atoms_only", "target_wrong")
+        for rg in regs:
+            c = by[rg]
+            for name in fields:
+                self.put(f"{T}.{H}.target.{rg}.{name}", c[name])
+            self.put(f"{T}.{H}.target.{rg}.target_exact_share",
+                     c["target_exact"] / c["n"] if c["n"] else None)
+            rows.append([rg, c["n"], c["target_exact"],
+                         pct(c["target_exact"] / c["n"]) if c["n"] else "n/a", c["perfect"],
+                         c["target_exact_imperfect"], c["target_atoms_only"], c["target_wrong"]])
+        self.tables[f"table_{T}_targets"] = (
+            f"**Is the requested component itself right? `{H}` condition{self.tag}.** Valid "
+            "scenes only. The *target* of a task is every component of the reference scene "
+            "except, when the reference has more than one, the component with the most atoms, "
+            "which is treated as *context* (for example a grey cartoon of the whole protein "
+            "behind one highlighted residue). *Target exact*: the output draws every target "
+            "with exactly the reference atoms, representation and colour. *Scene exact*: the "
+            "whole scene scores 1. *Target exact, scene not*: the target is right and the scene "
+            "still loses points for something else (missing or different context, extra "
+            "components). *Atoms only*: the target atoms are selected exactly, in the reference "
+            "entry or an accepted one, but drawn or coloured differently. *Target wrong*: no "
+            "component selects exactly the target atoms.\n\n"
+            + md_table(["Regime", "Valid scenes", "Target exact", "Share", "Scene exact",
+                        "Target exact, scene not", "Atoms only", "Target wrong"], rows))
 
     def repair(self, T: str, track: str, board: list[dict]) -> None:
         """Offline counterfactual: what if invalid JSON were repaired before grading?"""
@@ -1271,6 +1355,75 @@ def scene_differences(reference, predicted, accepted=None) -> list[str]:
     if len(used_p) < len(pred_paths):
         found.add("extra component")
     return sorted(found) or ["other"]
+
+
+def target_check(reference, predicted, accepted=None) -> dict | None:
+    """Is the component a request is about drawn exactly as in the reference?
+
+    The reference's component paths are split into *context* and *targets*: when the
+    reference draws more than one component, the one that selects the most atoms is the
+    context (the whole protein behind a highlighted residue, say) and the others are the
+    targets; a reference with one component has that component as its target. Returns
+    None when the split cannot be made (no component whose atoms were resolved against an
+    atom table). Otherwise: ``target_exact`` (every target path has an identical path in
+    the output), ``target_atoms`` (every target's atom set is selected by some output
+    component on the same structure), ``has_context`` and ``context_exact``.
+    """
+    ref_root, pred_root = mvs.extract_root(reference), mvs.extract_root(predicted)
+    if ref_root is None or pred_root is None:
+        return None
+    ref_paths, pred_paths = mvs.flatten_paths(ref_root), mvs.flatten_paths(pred_root)
+    if accepted:
+        pred_paths = mvs._fold_accepted_refs(ref_paths, pred_paths, set(accepted))
+
+    def selection(path):
+        for seg in path:
+            if seg[0] == "component" and len(seg[1]) >= 2 and seg[1][0] == "selector" \
+                    and isinstance(seg[1][1], mvs.Selection):
+                return seg[1][1]
+        return None
+
+    comps = [(p, selection(p)) for p in ref_paths]
+    comps = [(p, s) for p, s in comps if s is not None]
+    if not comps or any(s.atoms is None for _, s in comps):
+        return None
+    context = []
+    if len({s.atoms for _, s in comps}) > 1:
+        biggest = max(s.atoms[1].bit_count() for _, s in comps)
+        context = [(p, s) for p, s in comps if s.atoms[1].bit_count() == biggest]
+        if len({s.atoms for _, s in context}) > 1:
+            context = []  # no single largest component: everything is a target
+    ctx_atoms = {s.atoms for _, s in context}
+    targets = [(p, s) for p, s in comps if s.atoms not in ctx_atoms]
+    def download(path):
+        return next((seg for seg in path if seg[0] == "download"), None)
+
+    pred_sel = [(download(q), s) for q, s in ((q, selection(q)) for q in pred_paths)
+                if s is not None]
+
+    def exact(path) -> bool:
+        return any(mvs._path_similarity(path, q) >= 1 - SUCCESS_EPS for q in pred_paths)
+
+    def atoms_found(path, sel) -> bool:
+        # Same entry (after accepted entries are folded onto the reference's): the same
+        # atoms. Another accepted entry has its own atom table, so there the grader's
+        # own fallback applies: the same selector expressions.
+        for d, q in pred_sel:
+            if d != download(path):
+                continue
+            if q.atoms is not None and q.atoms[0] == sel.atoms[0]:
+                if q.atoms == sel.atoms:
+                    return True
+            elif q.sigs == sel.sigs:
+                return True
+        return False
+
+    return {
+        "target_exact": all(exact(p) for p, _ in targets),
+        "target_atoms": all(atoms_found(p, s) for p, s in targets),
+        "has_context": bool(context),
+        "context_exact": all(exact(p) for p, _ in context),
+    }
 
 
 # --------------------------------------------------------------------------- #

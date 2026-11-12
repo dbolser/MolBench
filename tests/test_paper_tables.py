@@ -273,3 +273,35 @@ def test_every_reference_has_a_locator():
     for key, e in bib.items():
         assert e.get("title") and e.get("year"), key
         assert e.get("url") or e.get("doi"), f"{key} has no URL or DOI"
+
+
+def test_target_check_separates_wrong_atoms_from_missing_context():
+    """Reference = grey cartoon of the protein (context) + one red residue (target)."""
+    def scene(parts):
+        comps = []
+        for selector, rep, colour in parts:
+            node = {"kind": "representation", "params": {"type": rep}}
+            if colour:
+                node["children"] = [{"kind": "color", "params": {"color": colour}}]
+            comps.append({"kind": "component", "params": {"selector": selector},
+                          "children": [node]})
+        return {"root": {"kind": "root", "children": [
+            {"kind": "download", "params": {"url": "https://files.rcsb.org/download/1tup.cif"},
+             "children": [{"kind": "parse", "params": {"format": "mmcif"}, "children": [
+                 {"kind": "structure", "params": {"type": "model"}, "children": comps}]}]}]}}
+
+    res = lambda n: {"auth_asym_id": "A", "auth_seq_id": n}  # noqa: E731
+    ref = scene([("polymer", "cartoon", "grey"), (res(175), "ball_and_stick", "red")])
+    if pt.target_check(ref, ref) is None:
+        pytest.skip("no frozen atom table for 1tup in this checkout")
+    assert pt.target_check(ref, ref) == {"target_exact": True, "target_atoms": True,
+                                         "has_context": True, "context_exact": True}
+    no_context = pt.target_check(ref, scene([(res(175), "ball_and_stick", "red")]))
+    assert no_context["target_exact"] and not no_context["context_exact"]
+    restyled = pt.target_check(ref, scene([("polymer", "cartoon", "grey"),
+                                           (res(175), "spacefill", "red")]))
+    assert not restyled["target_exact"] and restyled["target_atoms"]
+    wrong = pt.target_check(ref, scene([("polymer", "cartoon", "grey"),
+                                        (res(176), "ball_and_stick", "red")]))
+    assert not wrong["target_exact"] and not wrong["target_atoms"]
+    assert pt.target_check(ref, {"nonsense": 1}) is None
