@@ -15,7 +15,8 @@ works fully offline):
                              render, with tree-match + visual scores + verdict).
 
 All numbers are read from ``docs/scorecard.json`` and the ``docs/*_data.json``
-files written by ``scripts/build_site_data.py`` — nothing is hard-coded.
+files written by ``scripts/build_site_data.py`` — nothing is hard-coded: run dates,
+task and sample counts and every figure in the key findings come from those files.
 Publishing is therefore a deliberate, reviewable commit.
 
 Python 3.10 compatible: no backslashes inside f-string expressions.
@@ -23,6 +24,7 @@ Python 3.10 compatible: no backslashes inside f-string expressions.
 
 from __future__ import annotations
 
+import calendar
 import functools
 import html
 import json
@@ -99,9 +101,25 @@ def short(name: str) -> str:
     return name.split("/")[-1]
 
 
+# name -> open weights?, for scorecards that say so per model (manifest runs).
+_OPEN_FLAGS: dict[str, bool] = {}
+
+
 def is_open(name: str) -> bool:
-    """Open-weight models are namespaced with a slash (qwen/…, google/…)."""
+    """Open-weight model? Taken from the scorecard's ``open_weights`` flag when it has
+    one; older scorecards have none, and there open models are the ones namespaced
+    with a slash (qwen/…, google/…)."""
+    if name in _OPEN_FLAGS:
+        return _OPEN_FLAGS[name]
     return "/" in name
+
+
+def month_of(date) -> str:
+    """'2026-10-18...' -> 'October' ('?' without a date)."""
+    try:
+        return calendar.month_name[int(str(date)[5:7])]
+    except (ValueError, IndexError):
+        return "?"
 
 
 def fmt_cost(cost) -> str:
@@ -270,13 +288,16 @@ def _valid_cell(name: str, m: dict) -> str:
     oc = m.get("outcomes")
     if vs is None or not oc:
         return "&mdash;"
-    tip = html.escape(" · ".join(f"{OUTCOME_LABELS[o]}: {n}" for o, n in oc.items() if n))
+    tip = html.escape(" · ".join(f"{OUTCOME_LABELS.get(o, o)}: {n}" for o, n in oc.items() if n))
     anchor = "spec" if m.get("spec") == "baseline" else f"spec-{slug(name)}"
     return f"<a href='failures.html#{anchor}' title='{tip}'>{fmt_pct(vs)}</a>"
 
 
 def leaderboard_table(data: dict, ranked: list) -> str:
     meta = data.get("meta", {})
+    mvs_month = month_of(meta.get("mvs_track", {}).get("run"))
+    api_month = month_of(meta.get("api_track", {}).get("run"))
+    same_run = bool(meta.get("api_track", {}).get("same_run"))
     leader_name = ranked[0][0]
     rows = []
     rank = 0
@@ -297,11 +318,12 @@ def leaderboard_table(data: dict, ranked: list) -> str:
         )
         sup = ""
         if m.get("route_note"):
-            sup = mark("Ran via OpenRouter in October (the July API-track result used the "
-                       "provider's native API). Treated as the same model.")
+            sup = mark(f"Ran via OpenRouter in {mvs_month} (the {api_month} API-track result "
+                       "used the provider's native API). Treated as the same model.")
         if m.get("mvs_not_run"):
-            sup = mark("Not re-run in October: OpenRouter's upstream (Mistral) rate-limited "
-                       "every attempt (11 tries). MVS columns blank; API track from July.")
+            why = m["mvs_not_run"]
+            sup = mark(f"{why[:1].upper()}{why[1:]}. MVS columns blank; API track from "
+                       f"{api_month}.")
         spec = m.get("spec", "")
         spec_line = ""
         if spec and spec != "baseline":
@@ -324,6 +346,17 @@ def leaderboard_table(data: dict, ranked: list) -> str:
     mt = meta.get("mvs_track", {})
     at = meta.get("api_track", {})
     api_when = (at.get("run") or "")[:10]
+    if same_run:
+        tracks_note = f"""<b>API&nbsp;F1</b>: the tool-control track, from the same run
+    ({at.get('n_tasks', '?')} tasks, &times;{at.get('samples', '?')} samples). <b>Cost</b>: this
+    condition of the run, both tracks, at the prices in the run manifest (&mdash; = not
+    reported). <b>Speed</b>: mean seconds per call."""
+    else:
+        tracks_note = f"""<b>API&nbsp;F1</b>: the tool-control track, not re-run in
+    {mvs_month}: these are the {api_when} results ({at.get('n_tasks', '?')} tasks,
+    &times;{at.get('samples', '?')} samples, same grader). <b>Cost</b>: the {mvs_month}
+    MVS run at provider list prices (&mdash; = not reported). <b>Speed</b>: seconds
+    per call from the {api_month} run ({mvs_month} timings include rendering)."""
 
     return f"""<section class="wrap" aria-label="Leaderboard">
   <h2>Leaderboard</h2>
@@ -366,11 +399,7 @@ def leaderboard_table(data: dict, ranked: list) -> str:
     breakdown, click for <a href="failures.html">every failing sample</a>.
     <b>Cond&nbsp;F1</b>: scene quality over valid scenes only &mdash; the gap from
     MVS&nbsp;F1 is how much a model loses to broken output rather than to
-    visualization error. <b>API&nbsp;F1</b>: the tool-control track, not re-run in
-    October: these are the {api_when} results ({at.get('n_tasks', '?')} tasks,
-    &times;{at.get('samples', '?')} samples, same grader). <b>Cost</b>: the October
-    MVS run at provider list prices (&mdash; = not reported). <b>Speed</b>: seconds
-    per call from the July run (October timings include rendering).
+    visualization error. {tracks_note}
     <span class="pm">&plusmn;</span> is the spread across tasks.
   </p>
   <p class="section-sub" style="font-size:.85rem">{notes_html}</p>
@@ -504,21 +533,36 @@ def findings(ranked: list, cond: dict | None = None) -> str:
         "</div>"
     )
 
+    # Finding 04: the clinical tier, in numbers. (It used to end with an unchecked
+    # claim that no other benchmark does this; a claim like that belongs in the
+    # paper's related-work section, with citations, not on a results page.)
+    clin = GRADIENT[2]
+    clin_ids = {i for i, rg in regimes.items() if rg == clin}
+    clin_means = []
+    for _, m in llms:
+        fs = [t["f1"] for t in m.get("tasks", []) if t.get("id") in clin_ids]
+        if fs:
+            clin_means.append(statistics.fmean(fs))
+    clin_s = ""
+    if clin_means:
+        clin_s = (f" On the {len(clin_ids)} clinical tasks the LLMs score "
+                  f"<b>{min(clin_means):.2f}&ndash;{max(clin_means):.2f}</b> MVS&nbsp;F1 "
+                  f"(median {statistics.median(clin_means):.2f}).")
     f4 = (
         "<div class='finding'>"
-        "<div class='fnum'>FINDING 04 &middot; NOVEL</div>"
+        "<div class='fnum'>FINDING 04</div>"
         "<h3>Clinical grounding into 3D structure</h3>"
         "<p>Tasks bridge clinical genetics and structure: ClinVar pathogenic variants "
         "mapped via UniProt&nbsp;+&nbsp;PDBe&nbsp;SIFTS numbering onto the correct "
-        "residues (e.g. p53 <b>R175H</b>). No other molecular-viz benchmark does "
-        "this.</p>"
+        f"residues (e.g. p53 <b>R175H</b>).{clin_s}</p>"
         "</div>"
     )
 
     f5 = f6 = ""
     if cond:
         cs = conditions_summary(cond)
-        if cs.get("n_models"):
+        # Needs Mol*-validated scenes in both runs (not the case in a keyless dry run).
+        if cs.get("n_models") and cs.get("pooled_delta") is not None:
             drop = cs["biggest_valid_drop"]
             f5 = (
                 "<div class='finding'>"
@@ -571,8 +615,9 @@ def conditions_summary(cond: dict) -> dict:
                  "mean_lookup_delta": s.get("mean_lookup_delta"),
                  "n_lookup": cond.get("n_lookup_tasks")}
     if paired:
-        n = max(paired, key=lambda k: (paired[k]["spec"]["valid_scene"]
-                                       - paired[k]["spec_grounded"]["valid_scene"], k))
+        # valid_scene is None when Mol* validation did not run (a keyless dry run).
+        n = max(paired, key=lambda k: ((paired[k]["spec"]["valid_scene"] or 0)
+                                       - (paired[k]["spec_grounded"]["valid_scene"] or 0), k))
         out["biggest_valid_drop"] = (n, paired[n]["spec"]["valid_scene"],
                                      paired[n]["spec_grounded"]["valid_scene"])
         out["lookup_gainers"] = sorted(
@@ -927,6 +972,7 @@ def build_index(data: dict, ranked: list, esc: dict | None = None,
 COND_LABELS = {
     "spec": "Spec (headline run)",
     "spec_grounded": "Spec + dossier",
+    "spec_structured": "Spec + JSON mode",
     "bare": "Bare (no MVS reference)",
     "bare_grounded": "Bare + dossier",
 }
@@ -1068,6 +1114,7 @@ def messages_section(fd: dict) -> str:
 
 def build_failures(fd: dict, order: list[str]) -> str:
     conds = fd.get("conditions", {})
+    n_s = fd.get("samples", 1)
     tables = []
     for c in COND_LABELS:
         if c not in conds:
@@ -1125,7 +1172,7 @@ def build_failures(fd: dict, order: list[str]) -> str:
   <p class="pitch">The leaderboard groups these as &ldquo;not a valid scene&rdquo;.
      Here they are apart. Each MVS sample gets one outcome; everything but a valid
      scene scores 0, because Mol* shows nothing for it. Run
-     {html.escape(fd.get('run', '?'))}, 1 sample per task.</p>
+     {html.escape(fd.get('run', '?'))}, {n_s} sample{'' if n_s == 1 else 's'} per task.</p>
   <ul class="oc-legend">{explain}</ul>
   <p class="section-sub">Jump to: <a href="#breakdown">outcome breakdown</a> &middot;
      <a href="#messages">common messages</a> &middot;
@@ -1136,7 +1183,7 @@ def build_failures(fd: dict, order: list[str]) -> str:
         f"""<section class="wrap" aria-label="Outcome breakdown" id="breakdown">
   <h2>Outcome breakdown</h2>
   <p class="section-sub">Samples per outcome, per model and prompting condition
-     (70 tasks each). Click a count to jump to those samples. The <b>spec</b> run is
+     ({fd.get('n_tasks', '?')} tasks each). Click a count to jump to those samples. The <b>spec</b> run is
      the leaderboard; the others are the <a href="index.html#conditions">2&times;2</a>.</p>
   {NL.join(tables)}
 </section>""",
@@ -1349,6 +1396,9 @@ def _load(path: pathlib.Path) -> dict | None:
 def build(scorecard_path: pathlib.Path, out_dir: pathlib.Path = DOCS,
           banner: str | None = None) -> None:
     data = json.loads(scorecard_path.read_text())
+    _OPEN_FLAGS.clear()
+    _OPEN_FLAGS.update({n: bool(m["open_weights"]) for n, m in data.get("models", {}).items()
+                        if "open_weights" in m})
     ranked = rank_models(data.get("models", {}))
 
     # Escalation / gallery / 2x2 / failures data live alongside the output (a staging
@@ -1356,6 +1406,8 @@ def build(scorecard_path: pathlib.Path, out_dir: pathlib.Path = DOCS,
     esc = _load(out_dir / "escalation_data.json")
     cond = _load(out_dir / "conditions_data.json")
 
+    if banner is None and (data.get("meta", {}).get("run") or {}).get("mock"):
+        banner = MOCK_BANNER
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "index.html").write_text(build_index(data, ranked, esc, banner=banner,
                                                     cond=cond))
@@ -1383,6 +1435,15 @@ STAGING_BANNER = (
     'not the published leaderboard. '
     '<a href="../" style="color:#fff;text-decoration:underline">'
     '&larr; live leaderboard</a></div>'
+)
+
+
+# A dry run's scorecard is the mock model's output: never to be read as results.
+MOCK_BANNER = (
+    '<div style="background:#b91c1c;color:#fff;text-align:center;'
+    'padding:.6rem 1rem;font-weight:600;font-size:.9rem;letter-spacing:.01em">'
+    '&#9888; DRY RUN &mdash; every number on this page comes from a mock model, '
+    'not from the models named. It only shows that the pipeline runs.</div>'
 )
 
 

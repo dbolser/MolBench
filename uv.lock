@@ -543,6 +543,15 @@ wheels = [
 ]
 
 [[package]]
+name = "json-repair"
+version = "0.64.9"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/78/2b/537bf1dab1c058bfb2287662bf6c10de0c3907570781ccc0fc56878e39a7/json_repair-0.64.9.tar.gz", hash = "sha256:0e7e02e1c04d14b3677f97d13a8ff6b473cacb07b7111857c4202721b14efdc2", size = 56686, upload-time = "2026-11-10T04:29:13.966Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/40/1c/b38f71c1b4e859e10568336d8fbb271170150033c3a9d02b3e126b500828/json_repair-0.64.9-py3-none-any.whl", hash = "sha256:531c7d429db82731f3c9811157c025599a2ef620823c56d9143bab0b5ad97930", size = 54891, upload-time = "2026-11-10T04:29:12.575Z" },
+]
+
+[[package]]
 name = "jupyterlab-widgets"
 version = "3.0.16"
 source = { registry = "https://pypi.org/simple" }
@@ -567,6 +576,10 @@ wheels = [
 name = "molbench"
 version = "0.1.0"
 source = { editable = "." }
+dependencies = [
+    { name = "json-repair" },
+    { name = "tomli", marker = "python_full_version < '3.11'" },
+]
 
 [package.optional-dependencies]
 all = [
@@ -611,6 +624,7 @@ requires-dist = [
     { name = "gemmi", marker = "extra == 'authoring'", specifier = ">=0.6" },
     { name = "ipymolstar", marker = "extra == 'all'", specifier = ">=0.0.9" },
     { name = "ipymolstar", marker = "extra == 'execute'", specifier = ">=0.0.9" },
+    { name = "json-repair", specifier = ">=0.64.9" },
     { name = "molviewspec", marker = "extra == 'all'", specifier = ">=1.8" },
     { name = "molviewspec", marker = "extra == 'authoring'", specifier = ">=1.8" },
     { name = "molviewspec", marker = "extra == 'execute'", specifier = ">=1.8" },
@@ -619,6 +633,7 @@ requires-dist = [
     { name = "pillow", marker = "extra == 'all'" },
     { name = "pillow", marker = "extra == 'execute'" },
     { name = "playwright", marker = "extra == 'execute'" },
+    { name = "tomli", marker = "python_full_version < '3.11'", specifier = ">=2" },
 ]
 provides-extras = ["anthropic", "openai", "authoring", "execute", "all"]
 

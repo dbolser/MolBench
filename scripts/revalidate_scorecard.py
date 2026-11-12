@@ -10,7 +10,10 @@ here on its own first, since older records don't say whether the prediction or t
 reference failed. All but ``valid`` score 0. Then recomputes the model aggregates in place. No model calls.
 
 Only single-sample scorecards: with N samples the per-task record keeps just the
-best one, so the other samples can't be re-checked.
+best one, so the other samples can't be re-checked. Scorecards of a manifest run are
+refused for the same reason and do not need this: every raw output is archived, so
+``python -m molbench.runner --manifest <file> --grade-only`` re-grades and
+re-validates all of them.
 
     python scripts/revalidate_scorecard.py results/r2x2/spec/*.json
 """
@@ -52,6 +55,9 @@ def _prediction_render_error(tree: dict) -> str | None:
 
 def revalidate(path: pathlib.Path) -> None:
     card = json.loads(path.read_text())
+    if card.get("meta", {}).get("run_name"):
+        raise SystemExit(f"{path}: from a manifest run; re-grade its archive instead "
+                         "(python -m molbench.runner --manifest <file> --grade-only)")
     if card.get("samples", 1) != 1:
         raise SystemExit(f"{path}: {card['samples']} samples per task; only 1 is supported")
     for m in card["models"].values():

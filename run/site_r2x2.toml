@@ -1,0 +1,17 @@
+# Facts about the October 2026 leaderboard build (results/r2x2) that the scorecards
+# themselves do not carry. Read by scripts/build_site_data.py (--site-config).
+# A manifest run (--run) needs no such file: both tracks come from one run.
+
+# Models whose name changed because they ran through another route. The old name is
+# kept as the leaderboard key; 'native' is the route of the older (API-track) result.
+[aliases."google/gemini-3.5-flash"]
+name = "gemini-3.5-flash"
+native = "gemini:gemini-3.5-flash"
+
+[aliases."openai/gpt-5.4-nano"]
+name = "gpt-5.4-nano"
+native = "openai:gpt-5.4-nano"
+
+# In the older panel but absent from this run.
+[not_run."mistralai/mistral-small-2603"]
+reason = "not re-run: OpenRouter upstream rate limit at Mistral (11 attempts, 2026-10-18)"
