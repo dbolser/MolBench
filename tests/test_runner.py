@@ -190,6 +190,10 @@ def test_a_torn_last_line_is_ignored_and_a_duplicate_is_an_error(tmp_path, corpu
     whole = f.read_text()
     f.write_text(whole + '{"model": "plain", "cond')          # crash mid-write
     assert len(archive.load()) == len(cells)
+    # the next record starts on its own line instead of being glued to the torn one
+    extra = {**json.loads(whole.splitlines()[0]), "sample": 99}
+    archive.append("mock_plain", extra)
+    assert len(archive.load()) == len(cells) + 1
     f.write_text(whole + whole.splitlines()[0] + "\n")
     with pytest.raises(mf.ManifestError, match="archived twice"):
         archive.load()
@@ -324,10 +328,16 @@ def test_a_cell_that_keeps_failing_is_logged_not_archived_and_retried_next_start
     models = {"plain": MockModel("plain"), "json/mode": Flaky("json/mode", status=503, fails=3)}
     _, cells, archive, stats = _run(tmp_path, corpus, m, models)
     mine = [c for c in cells if c.model.id == "json/mode"]
-    # ... until the model is dropped for this start, after 10 failures in a row
-    # (plus at most the one other call that was already in flight).
-    assert 0 <= stats["failed"] - runner.MAX_CONSECUTIVE_FAILURES < m.per_model_concurrency
+    # ... until the model is dropped from a condition for this start, after 10 failures
+    # in a row there (plus at most the one other call that was already in flight).
+    # spec_grounded has only 4 cells, so it never reaches the limit.
+    per_cond = {c: sum(x.condition.name == c for x in mine)
+                for c in ("spec", "spec_structured", "spec_grounded")}
+    assert per_cond["spec_grounded"] < runner.MAX_CONSECUTIVE_FAILURES < per_cond["spec"]
+    floor = 2 * runner.MAX_CONSECUTIVE_FAILURES + per_cond["spec_grounded"]
+    assert 0 <= stats["failed"] - floor < 2 * m.per_model_concurrency
     assert stats["dropped_models"] == ["json/mode"]
+    assert stats["dropped"] == [("json/mode", "spec"), ("json/mode", "spec_structured")]
     assert stats["failed"] + stats["skipped"] == len(mine)
     assert not any(k[0] == "json/mode" for k in archive.load())
     errors = [json.loads(x) for x in (tmp_path / "arch" / "errors.jsonl").read_text().splitlines()]
@@ -342,8 +352,110 @@ def test_a_bad_key_is_not_retried(tmp_path, corpus):
     m = _manifest()
     bad = Flaky("plain", status=401, fails=99)
     _, _, _, stats = _run(tmp_path, corpus, m, {"plain": bad, "json/mode": MockModel("json/mode")})
-    assert 0 <= stats["failed"] - runner.MAX_CONSECUTIVE_FAILURES < m.per_model_concurrency
+    assert stats["failed"] and stats["dropped_models"] == ["plain"]
     assert set(bad.attempts.values()) == {1}
+
+
+class RejectsJsonMode(MockModel):
+    def complete(self, system, user, **kw):
+        if kw.get("structured"):
+            raise ApiError(404)   # "no endpoints found that support response_format"
+        return super().complete(system, user, **kw)
+
+
+def test_a_model_that_rejects_json_mode_still_runs_its_other_conditions(tmp_path, corpus):
+    m = _manifest()
+    models = {"plain": MockModel("plain"), "json/mode": RejectsJsonMode("json/mode")}
+    _, cells, archive, stats = _run(tmp_path, corpus, m, models)
+    assert stats["dropped"] == [("json/mode", "spec_structured")]
+    done = archive.load()
+    for cond in ("spec", "spec_grounded"):
+        want = [c.key for c in cells if c.model.id == "json/mode" and c.condition.name == cond]
+        assert want and all(k in done for k in want), cond
+    assert not any(k[:2] == ("json/mode", "spec_structured") for k in done)
+
+
+# --- provider adapters (no network: a fake client) -----------------------------------
+
+class _Obj:
+    def __init__(self, **kw):
+        self.__dict__.update(kw)
+
+
+def _openai_model(response):
+    from molbench.models import OpenAIModel
+    model = OpenAIModel("vendor/x", report_cost=True)
+    calls = []
+
+    def create(**kw):
+        calls.append(kw)
+        return response
+
+    model._client = lambda timeout: _Obj(chat=_Obj(completions=_Obj(create=create)))
+    return model, calls
+
+
+def test_openai_adapter_reports_text_usage_cost_and_finish_reason():
+    usage = _Obj(prompt_tokens=11, completion_tokens=7, cost=0.0123,
+                 completion_tokens_details=_Obj(reasoning_tokens=3))
+    resp = _Obj(id="r1", model="vendor/x-0801", usage=usage, choices=[
+        _Obj(finish_reason="length", message=_Obj(content='{"root": '))])
+    model, calls = _openai_model(resp)
+    got = model.complete("sys", "user", max_tokens=99, structured="json_object", timeout=5)
+    assert (got.text, got.finish_reason) == ('{"root": ', "length")
+    assert (got.input_tokens, got.output_tokens, got.reasoning_tokens) == (11, 7, 3)
+    assert got.cost_usd == 0.0123 and got.response_model == "vendor/x-0801"
+    sent = calls[0]
+    assert sent["response_format"] == {"type": "json_object"} and sent["max_tokens"] == 99
+    assert "temperature" not in sent           # plan decision 12: provider default
+    assert sent["extra_body"] == {"usage": {"include": True}}
+
+
+@pytest.mark.parametrize("resp", [
+    _Obj(id="r", model="m", usage=None, choices=None,
+         error={"code": 429, "message": "upstream rate limit"}),
+    _Obj(id="r", model="m", usage=None, choices=[]),
+    _Obj(id="r", model="m", usage=None,
+         choices=[_Obj(finish_reason="error", message=_Obj(content=""))]),
+])
+def test_a_provider_error_in_a_200_body_is_raised_not_archived_as_an_answer(resp, tmp_path, corpus):
+    from molbench.models import ProviderError
+    model, _ = _openai_model(resp)
+    with pytest.raises(ProviderError):
+        model.complete("sys", "user")
+    # ... and the runner retries it, then logs it; nothing is archived for scoring.
+    m = _manifest(**{'route = "mock:plain"': 'route = "openrouter:vendor/x"'})
+    _, _, archive, stats = _run(tmp_path, corpus[:1], m,
+                                {"plain": model, "json/mode": MockModel("json/mode")})
+    assert stats["failed"] and not any(k[0] == "plain" for k in archive.load())
+    errors = (tmp_path / "arch" / "errors.jsonl").read_text()
+    assert "ProviderError" in errors and '"attempts": 3' in errors
+
+
+# --- a grader that cannot cope --------------------------------------------------------
+
+@pytest.mark.parametrize("raw", ['[{"action": ["x"]}]', '[{"action": {"a": 1}}]'])
+def test_output_that_crashes_the_grader_scores_zero_and_is_marked(raw, corpus, monkeypatch):
+    api = next(t for t in corpus if t["category"] == "api_calling")
+
+    def boom(*a, **k):
+        raise TypeError("unhashable")
+
+    monkeypatch.setattr(runner.schema, "validate_actions", boom)
+    s = runner.grade_output(api, raw)
+    assert s["f1"] == 0.0 and s["outcome"] == "invalid_api" and "unhashable" in s["grader_crash"]
+    assert runner._track_stats([{**s, "finish_reason": "stop"}], "api_calling",
+                               False)["n_grader_crashes"] == 1
+    mvs = next(t for t in corpus if t["category"] == "mvs")
+    monkeypatch.setattr(runner.mvs_mod, "grade_mvs", boom)
+    s = runner.grade_output(mvs, '{"root": {}}')
+    assert s["f1"] == 0.0 and s["outcome"] == "not_mvs" and s["grader_crash"]
+
+
+def test_invalidating_a_scene_clears_a_grader_supplied_success():
+    s = {"f1": 1.0, "success": True, "outcome": "unchecked"}
+    runner._invalidate(s, "invalid_mvs", ["bad node"])
+    assert s["f1"] == 0.0 and not runner.is_success(s)
 
 
 # --- the mock model ----------------------------------------------------------------

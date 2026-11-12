@@ -47,6 +47,16 @@ class Completion:
     cost_usd: float | None = None        # only when the provider reports it (OpenRouter)
 
 
+class ProviderError(RuntimeError):
+    """The provider answered, but with an error instead of a completion (OpenRouter
+    does this with HTTP 200 when the upstream host fails or rate-limits). It is not
+    the model's answer, so it must never be archived and scored as one."""
+
+    def __init__(self, message: str, status_code: int | None = None):
+        super().__init__(message)
+        self.status_code = status_code
+
+
 class Model:
     """Common interface.
 
@@ -245,6 +255,18 @@ class OpenAIModel(Model):
             started = time.perf_counter()
             resp = client.chat.completions.create(max_completion_tokens=max_tokens, **base)
         latency = time.perf_counter() - started
+        # An error in a 200 body, no choices, or a choice that ended in "error" is a
+        # provider failure: raise, so the runner retries it instead of archiving an
+        # empty answer that would be scored as the model's.
+        err = getattr(resp, "error", None)
+        choices = getattr(resp, "choices", None)
+        if not err and choices and choices[0].finish_reason == "error":
+            err = getattr(choices[0], "error", None) or {"message": "finish_reason = error"}
+        if err or not choices:
+            code = err.get("code") if isinstance(err, dict) else getattr(err, "code", None)
+            msg = err.get("message") if isinstance(err, dict) else getattr(err, "message", err)
+            raise ProviderError(f"provider error in response body: {msg or 'no choices returned'}",
+                                status_code=code if isinstance(code, int) else None)
         out = Completion(text="", latency_s=round(latency, 3),
                          response_model=getattr(resp, "model", None),
                          response_id=getattr(resp, "id", None))
@@ -256,9 +278,8 @@ class OpenAIModel(Model):
             out.reasoning_tokens = getattr(details, "reasoning_tokens", None)
             cost = getattr(usage, "cost", None)
             out.cost_usd = float(cost) if isinstance(cost, (int, float)) else None
-        if resp.choices:
-            out.text = resp.choices[0].message.content or ""
-            out.finish_reason = resp.choices[0].finish_reason
+        out.text = choices[0].message.content or ""
+        out.finish_reason = choices[0].finish_reason
         return out
 
 

@@ -173,11 +173,28 @@ def _known(d: dict, allowed: set[str], where: str) -> None:
         raise ManifestError(f"{where}: unknown key(s) {sorted(extra)}")
 
 
+def _int(d: dict, key: str, where: str, default: Any = None) -> Any:
+    """A whole number (or the default when absent). 2.5 or "8k" is an error, not 2 or a
+    traceback: a mistyped manifest must not start a paid run with a different plan."""
+    v = d.get(key, default)
+    if v is not None and type(v) is not int:
+        raise ManifestError(f"{where}: '{key}' must be a whole number, not {v!r}")
+    return v
+
+
+def _num(d: dict, key: str, where: str, default: Any = None) -> Any:
+    v = d.get(key, default)
+    if v is not None and type(v) not in (int, float):
+        raise ManifestError(f"{where}: '{key}' must be a number, not {v!r}")
+    return v if v is None else float(v)
+
+
 def _price(d: dict | None, where: str) -> Price | None:
     if d is None:
         return None
     _known(d, {"input", "output", "source", "date", "verified", "note"}, where)
-    p = Price(float(_need(d, "input", where)), float(_need(d, "output", where)),
+    _need(d, "input", where), _need(d, "output", where)
+    p = Price(_num(d, "input", where), _num(d, "output", where),
               d.get("source", ""), str(d.get("date", "")), bool(d.get("verified", False)),
               d.get("note", ""))
     if p.input < 0 or p.output < 0:
@@ -194,13 +211,19 @@ def _model(d: dict, i: int) -> ModelSpec:
     structured = d.get("structured", "none")
     if structured not in STRUCTURED_MODES:
         raise ManifestError(f"{where}: structured must be one of {STRUCTURED_MODES}")
+
+    def _positive(key: str) -> int | None:
+        v = _int(d, key, where)
+        if v is not None and v < 1:
+            raise ManifestError(f"{where}: '{key}' must be >= 1")
+        return v
     return ModelSpec(
         id=_need(d, "id", where), route=_need(d, "route", where),
         price=_price(d.get("price"), where + ".price"),
         open_weights=bool(d.get("open_weights", False)),
         reasoning=bool(d.get("reasoning", False)), structured=structured,
-        optional=bool(d.get("optional", False)), max_tokens=d.get("max_tokens"),
-        max_concurrency=d.get("max_concurrency"), reason=d.get("reason", ""))
+        optional=bool(d.get("optional", False)), max_tokens=_positive("max_tokens"),
+        max_concurrency=_positive("max_concurrency"), reason=d.get("reason", ""))
 
 
 def _condition(d: dict, i: int, model_ids: set[str]) -> Condition:
@@ -261,23 +284,30 @@ def parse_manifest(text: str, path: pathlib.Path | str = "<string>") -> Manifest
     if not conditions or not models:
         raise ManifestError("the manifest needs at least one condition and one model")
 
+    for section, key, where in ((run, "samples", "run"), (run, "max_tokens", "run"),
+                                (budget, "cap_usd", "budget")):
+        _need(section, key, where)
     m = Manifest(
-        path=pathlib.Path(path), name=_need(run, "name", "run"),
-        samples=int(_need(run, "samples", "run")),
-        max_tokens=int(_need(run, "max_tokens", "run")),
-        reasoning_max_tokens=int(run.get("reasoning_max_tokens", run["max_tokens"])),
+        path=pathlib.Path(path), name=str(_need(run, "name", "run")),
+        samples=_int(run, "samples", "run"),
+        max_tokens=_int(run, "max_tokens", "run"),
+        reasoning_max_tokens=_int(run, "reasoning_max_tokens", "run", run["max_tokens"]),
         temperature=run.get("temperature", "provider-default"),
-        concurrency=int(run.get("concurrency", 4)),
-        per_model_concurrency=int(run.get("per_model_concurrency", 2)),
+        concurrency=_int(run, "concurrency", "run", 4),
+        per_model_concurrency=_int(run, "per_model_concurrency", "run", 2),
         validate=run.get("validate", "auto"),
-        retry=Retry(**retry),
-        budget_usd=float(_need(budget, "cap_usd", "budget")),
+        retry=Retry(**{k: (_int if k == "max_attempts" else _num)(retry, k, "run.retry")
+                       for k in retry}),
+        budget_usd=_num(budget, "cap_usd", "budget"),
         corpus_version=_need(corpus, "version", "corpus"),
         corpus_sha256=corpus.get("sha256", ""),
         conditions=conditions, models=models,
         sha256=hashlib.sha256(text.encode("utf-8")).hexdigest())
-    if m.samples < 1 or m.max_tokens < 1 or m.concurrency < 1 or m.per_model_concurrency < 1:
+    if min(m.samples, m.max_tokens, m.reasoning_max_tokens, m.concurrency,
+           m.per_model_concurrency) < 1:
         raise ManifestError("run: samples, max_tokens and concurrency must be >= 1")
+    if min(m.retry.backoff_seconds, m.retry.backoff_max_seconds) < 0 or m.retry.timeout_seconds <= 0:
+        raise ManifestError("run.retry: backoff must be >= 0 and timeout_seconds > 0")
     if m.retry.max_attempts < 1:
         raise ManifestError("run.retry: max_attempts must be >= 1")
     if m.budget_usd <= 0:

@@ -107,6 +107,16 @@ def test_minimal_manifest_parses_with_defaults():
     (_with(**{'name = "spec"': 'name = "spec"\nmodels = "structured"'}), "structured = true"),
     (_with(**{'output = 2.0': 'output = 2.0, verified = true'}), "source and a date"),
     (_with(**{'output = 2.0': 'output = -2.0'}), "negative price"),
+    (_with(**{'samples = 2': 'samples = 2.5'}), "whole number"),
+    (_with(**{'max_tokens = 100': 'max_tokens = "8k"'}), "whole number"),
+    (_with(**{'samples = 2\n': ''}), "missing 'samples'"),
+    (_with(**{'cap_usd = 1.0': 'cap_usd = "lots"'}), "must be a number"),
+    (_with(**{'max_tokens = 100': 'max_tokens = 100\n[run.retry]\nmax_attempts = "five"'}),
+     "whole number"),
+    (_with(**{'max_tokens = 100': 'max_tokens = 100\n[run.retry]\ntimeout_seconds = 0'}),
+     "timeout_seconds"),
+    (_with(**{'route = "mock:m1"': 'route = "mock:m1"\nmax_concurrency = 0'}), "must be >= 1"),
+    (_with(**{'output = 2.0': 'output = "cheap"'}), "must be a number"),
 ])
 def test_bad_manifests_are_rejected_with_a_reason(text, message):
     with pytest.raises(mf.ManifestError, match=message):

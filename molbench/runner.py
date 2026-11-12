@@ -240,9 +240,22 @@ def is_success(sample: dict) -> bool:
 _ZERO = {"f1": 0.0, "precision": 0.0, "recall": 0.0}
 
 
+def _grader_crash(exc: Exception, outcome: str, predicted: Any, raw: str) -> dict[str, Any]:
+    """The result for an output the grader itself could not handle. Model output is
+    arbitrary JSON, and one reply that trips a grader bug must not stop a whole run
+    from being graded: it scores 0 and is marked, and `grade_archive` reports the
+    count so the bug gets fixed rather than hidden."""
+    msg = f"{type(exc).__name__}: {exc}"
+    return {**_ZERO, "error": f"grader crashed: {msg}", "grader_crash": msg,
+            "outcome": outcome, "predicted": predicted, "raw": raw, "schema_errors": []}
+
+
 def _grade_actions(task: dict, actions: Any, raw: str) -> dict[str, Any]:
-    schema_errors = schema.validate_actions(actions)
-    result = grader_mod.grade(task["reference"], actions)
+    try:
+        schema_errors = schema.validate_actions(actions)
+        result = grader_mod.grade(task["reference"], actions)
+    except Exception as e:  # noqa: BLE001 - see _grader_crash
+        return {**_grader_crash(e, "invalid_api", actions, raw), "track": "api_calling"}
     # The grader may classify the output itself; otherwise derive it: 'invalid_api' when
     # the grader reports an error or the action schema is broken. The score is whatever
     # the grader gave - this label does not change it.
@@ -262,10 +275,14 @@ def grade_api_output(task: dict, raw: str) -> dict[str, Any]:
 
 
 def _grade_tree(task: dict, tree: Any, raw: str) -> dict[str, Any]:
-    result = mvs_mod.grade_mvs(task["reference_mvs"], tree,
-                               accepted_refs=task.get("accepted_ids"))
+    try:
+        result = mvs_mod.grade_mvs(task["reference_mvs"], tree,
+                                   accepted_refs=task.get("accepted_ids"))
+        schema_errors = mvs_mod.validate_mvs(tree)
+    except Exception as e:  # noqa: BLE001 - see _grader_crash
+        return _grader_crash(e, "not_mvs", tree, raw)
     result["outcome"] = "not_mvs" if result.get("error") else "unchecked"
-    result["schema_errors"] = mvs_mod.validate_mvs(tree)
+    result["schema_errors"] = schema_errors
     result["predicted"] = tree
     result["raw"] = raw
     return result
@@ -310,6 +327,8 @@ def repair_counterfactual(task: dict, sample: dict) -> dict[str, Any] | None:
         if not isinstance(obj, list) or not obj:
             return None
         fixed = _grade_actions(task, obj, "")
+    if "grader_crash" in fixed:
+        return None  # nothing gradeable was recovered
     return {k: fixed[k] for k in ("f1", "precision", "recall", "outcome", "predicted", "error")
             if k in fixed}
 
@@ -335,6 +354,8 @@ API_OUTCOMES = ("valid", "invalid_json", "invalid_api")
 def _invalidate(sample: dict, outcome: str, detail: list[str] | str) -> None:
     """Mark a parsed scene that Mol* will not show: score 0 and record why."""
     sample.update(f1=0.0, precision=0.0, recall=0.0, outcome=outcome)
+    if "success" in sample:  # a grader-supplied verdict must not outlive the zero
+        sample["success"] = False
     sample["mvs_issues" if outcome == "invalid_mvs" else "load_error"] = detail
 
 
@@ -593,9 +614,11 @@ ARCHIVE_VERSION = 1
 # HTTP statuses that will fail the same way on a retry: bad request, bad key, no
 # credit, unknown model. Everything else (rate limits, timeouts, 5xx) is retried.
 NO_RETRY_STATUS = (400, 401, 402, 403, 404, 422)
-# A model whose calls fail this many times in a row (after retries) is dropped for the
-# rest of this start: a dead key or a hard rate limit should not be hammered for hours.
-# Its cells stay un-archived, so the next start tries them again.
+# A model whose calls in one condition fail this many times in a row (after retries) is
+# dropped from that condition for the rest of this start: a dead key or a hard rate limit
+# should not be hammered for hours. Per condition, so a model whose provider rejects JSON
+# mode still runs its other conditions. Its cells stay un-archived, so the next start
+# tries them again.
 MAX_CONSECUTIVE_FAILURES = 10
 
 
@@ -728,6 +751,13 @@ class RunArchive:
         line = json.dumps(record, ensure_ascii=False) + "\n"
         with self._lock:
             f.parent.mkdir(parents=True, exist_ok=True)
+            with f.open("a+b") as fh:
+                # A crash mid-write can leave a torn last line with no newline; start
+                # on a fresh line so this record is not glued to it and lost as well.
+                if fh.tell() > 0:
+                    fh.seek(-1, os.SEEK_END)
+                    if fh.read(1) != b"\n":
+                        line = "\n" + line
             with f.open("a", encoding="utf-8") as fh:
                 fh.write(line)
                 fh.flush()
@@ -909,17 +939,18 @@ def generate(manifest: Manifest, cells: list[Cell], models: dict[str, Model],
 
     stop = threading.Event()
     state_lock = threading.Lock()
-    streak: Counter = Counter()   # consecutive failed cells per model
-    dropped: set[str] = set()
+    streak: Counter = Counter()   # consecutive failed cells per (model, condition)
+    dropped: set[tuple[str, str]] = set()
     gates = {m: threading.Semaphore(spec.max_concurrency or manifest.per_model_concurrency)
              for m, spec in {c.model.id: c.model for c in pending}.items()}
 
     def work(cell: Cell) -> None:
+        group = (cell.model.id, cell.condition.name)
         with gates[cell.model.id]:
-            if stop.is_set() or cell.model.id in dropped:
+            if stop.is_set() or group in dropped:
                 with state_lock:
                     stats["skipped"] += 1
-                    budget.remaining -= estimates[cell.key] if cell.model.id in dropped else 0.0
+                    budget.remaining -= estimates[cell.key] if group in dropped else 0.0
                 return
             try:
                 record = call_cell(manifest, cell, models[cell.model.id], sleep)
@@ -931,16 +962,16 @@ def generate(manifest: Manifest, cells: list[Cell], models: dict[str, Model],
                 with state_lock:
                     stats["failed"] += 1
                     budget.remaining -= estimates[cell.key]
-                    streak[cell.model.id] += 1
-                    if (streak[cell.model.id] >= MAX_CONSECUTIVE_FAILURES
-                            and cell.model.id not in dropped):
-                        dropped.add(cell.model.id)
-                        log(f"  {cell.model.id}: {MAX_CONSECUTIVE_FAILURES} calls failed in a "
-                            f"row ({e}); leaving this model for the next start")
+                    streak[group] += 1
+                    if streak[group] >= MAX_CONSECUTIVE_FAILURES and group not in dropped:
+                        dropped.add(group)
+                        log(f"  {cell.model.id} [{cell.condition.name}]: "
+                            f"{MAX_CONSECUTIVE_FAILURES} calls failed in a row ({e}); leaving "
+                            "this model and condition for the next start")
                 return
             archive.append(cell.model.slug, record)
             with state_lock:
-                streak[cell.model.id] = 0
+                streak[group] = 0
                 stats["called"] += 1
                 n = stats["called"]
                 if stop_after is not None and n >= stop_after:
@@ -962,7 +993,8 @@ def generate(manifest: Manifest, cells: list[Cell], models: dict[str, Model],
         for future in [pool.submit(work, c) for c in pending]:
             future.result()
     stats["spent_usd"] = budget.spent
-    stats["dropped_models"] = sorted(dropped)
+    stats["dropped_models"] = sorted({m for m, _ in dropped})
+    stats["dropped"] = sorted(dropped)
     if stats["budget_exceeded"]:
         raise BudgetExceeded(stats["budget_exceeded"] + f" - stopped after {stats['called']:,} "
                              "calls; the archive is intact and the run can be resumed")
@@ -1022,6 +1054,11 @@ def grade_archive(cells: list[Cell], records: dict[tuple, dict], validate: str =
         graded.setdefault((c.condition.name, c.model.id), {}).setdefault(
             c.task["id"], []).append(s)
     every = [s for per in graded.values() for got in per.values() for s in got]
+    crashed = Counter(s["grader_crash"] for s in every if "grader_crash" in s)
+    if crashed:
+        log(f"WARNING: the grader crashed on {sum(crashed.values()):,} output(s); they score 0 "
+            "and carry 'grader_crash'. Fix the grader and re-grade (--grade-only). Most common: "
+            + "; ".join(f"{n}x {m}" for m, n in crashed.most_common(3)))
     mvs = [s for s in every if s.get("track", "mvs") == "mvs"]
     repaired = [s["repair"] for s in mvs if "repair" in s]
     validated = validate_all(mvs + repaired, validate, log)
@@ -1045,6 +1082,7 @@ def _track_stats(samples: list[dict], track: str, validated: bool) -> dict[str, 
         "outcomes": outcomes,
         "repair_f1": round(statistics.fmean(_repaired_f1(s) for s in samples), 4),
         "n_repaired": sum("repair" in s for s in samples),
+        "n_grader_crashes": sum("grader_crash" in s for s in samples),
         "finish_reasons": dict(Counter(str(s.get("finish_reason")) for s in samples)),
     }
     if track == "api_calling" or validated:  # only claim validity that was checked
@@ -1057,7 +1095,7 @@ def _track_stats(samples: list[dict], track: str, validated: bool) -> dict[str, 
 def _sample_summary(s: dict) -> dict[str, Any]:
     out = {"sample": s["sample"], "f1": s["f1"], "outcome": s.get("outcome"),
            "success": is_success(s), "finish_reason": s.get("finish_reason")}
-    for k in ("error", "mvs_issues", "load_error"):
+    for k in ("error", "mvs_issues", "load_error", "grader_crash"):
         if s.get(k):
             out[k] = s[k]
     if "repair" in s:
