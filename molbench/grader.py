@@ -183,29 +183,107 @@ def _values_eq(a: Any, b: Any) -> bool:
 # --- top-level grading ------------------------------------------------------------
 
 def grade(reference: list[dict], predicted: Any, accepted: list[list] | None = None,
-          mode: str = "state") -> dict[str, Any]:
+          mode: str = "state", target: Any = None) -> dict[str, Any]:
     """Grade a predicted action list against the reference.
 
     ``mode="state"`` (default): by final viewer state; the result has precision,
-    recall, f1, ``success`` and the facts compared. ``accepted`` lists further action
-    lists that are equally right. ``mode="sequence"``: the legacy step-matching grader.
-    A reference the state grader cannot place on a structure is graded by sequence.
+    recall, f1, ``success``, the target score and the facts compared. ``accepted`` lists
+    further action lists that are equally right. ``mode="sequence"``: the legacy
+    step-matching grader. A reference the state grader cannot place on a structure is
+    graded by sequence (the result's ``grader`` key says so; ``check_task`` reports such
+    a task as a problem).
     """
     if mode not in ("state", "sequence"):
         raise ValueError(f"unknown grading mode {mode!r}")
     if mode == "state":
         from . import pdbe_state
         if pdbe_state.gradable(reference):
-            return pdbe_state.grade_state(reference, predicted, accepted=accepted)
-    result = grade_sequence(reference, predicted)
+            return pdbe_state.grade_state(reference, predicted, accepted=accepted, target=target)
+    from . import drawn
+    result = {**drawn.zero(), **grade_sequence(reference, predicted)}
     result["grader"] = "sequence"
     result["success"] = result["f1"] == 1.0
+    # the sequence grader knows no atoms: its target score is its F1
+    result.update(target_precision=result["precision"], target_recall=result["recall"],
+                  target_f1=result["f1"])
     return result
 
 
+def is_mvs_task(task: dict[str, Any]) -> bool:
+    return task.get("category") == "mvs" or "reference_mvs" in task
+
+
 def grade_task(task: dict[str, Any], predicted: Any, mode: str = "state") -> dict[str, Any]:
-    """Grade against a task: its ``reference`` plus any ``accepted`` alternatives."""
-    return grade(task["reference"], predicted, accepted=task.get("accepted"), mode=mode)
+    """Grade one answer against one task, on either track. **The one entry point.**
+
+    ``predicted`` is the parsed answer: an MVS scene tree for an MVS task
+    (``reference_mvs``), a list of actions for an API task (``reference``). The answer is
+    scored against the task's reference and every ``accepted`` alternative, and the best
+    is returned. For a follow-up task the answer is the complete final scene / call list:
+    only that final state is graded (the task's ``context`` is not).
+
+    The result has the same keys on both tracks (``drawn.RESULT_KEYS``), among them:
+
+    * ``f1``, ``precision``, ``recall`` - graded score over the facts of the final state;
+    * ``success`` - the final state is exactly right (nothing missing, nothing extra);
+    * ``target_f1`` (and ``target_precision``, ``target_recall``) - the same, for the
+      atoms the request is about (``task["target"]``; without one, everything the
+      reference draws or changes), ignoring unrequested context;
+    * ``outcome`` - ``not_mvs`` / ``unchecked`` (MVS; Mol*'s validation later makes
+      ``unchecked`` into ``valid`` or ``invalid_mvs``) or ``valid`` / ``invalid_api``
+      (API). ``invalid_json`` is decided earlier, by whoever parses the raw reply.
+
+    GRADING.md defines each of them in full.
+    """
+    if is_mvs_task(task):
+        from . import mvs
+        return mvs.grade_mvs_task(task, predicted)
+    result = grade(task["reference"], predicted, accepted=task.get("accepted"), mode=mode,
+                   target=task.get("target"))
+    from . import schema
+    try:
+        schema_errors = schema.validate_actions(predicted)
+    except Exception as e:  # noqa: BLE001 - arbitrary model output
+        schema_errors = [f"schema check failed: {type(e).__name__}: {e}"]
+    result["schema_errors"] = schema_errors
+    result["outcome"] = "invalid_api" if result.get("error") or schema_errors else "valid"
+    return result
+
+
+def check_task(task: dict[str, Any]) -> list[str]:
+    """Problems that would make a task ungradable or its scores misleading (empty list
+    = fine). Task loaders and generators should call this on every task."""
+    if is_mvs_task(task):
+        from . import mvs
+        return mvs.check_mvs_task(task)
+    from . import pdbe_state
+    problems: list[str] = []
+    lists = [("reference", task.get("reference"))]
+    lists += [(f"accepted[{i}]", a) for i, a in enumerate(task.get("accepted") or [])]
+    if "context" in task:
+        lists.append(("context", task["context"]))
+    for name, actions in lists:
+        if not isinstance(actions, list):
+            problems.append(f"{name}: not a list of actions")
+            continue
+        state = pdbe_state.replay(actions)
+        if not state.loaded:
+            problems.append(f"{name}: loads no structure")
+            continue
+        if not pdbe_state.gradable(actions):
+            problems.append(f"{name}: no frozen atom table for {state.entry!r} "
+                            "(it would be graded by the legacy sequence grader)")
+        if state.unresolved:
+            problems.append(f"{name}: unresolved selection(s): {state.unresolved[:3]}")
+        if name == "context":
+            continue
+        g = grade(actions, actions, target=task.get("target"))
+        if not g["success"]:
+            problems.append(f"{name}: does not succeed against itself")
+        if name == "reference" and g["target_f1"] != 1.0:
+            problems.append("target: the reference does not score 1 on its own target "
+                            "(does the target name atoms the reference changes?)")
+    return problems
 
 
 def grade_sequence(reference: list[dict], predicted: Any) -> dict[str, Any]:
