@@ -1,0 +1,141 @@
+{
+ "accession": "P61626",
+ "gene": "LYZ",
+ "entry_name": "LYSC_HUMAN",
+ "protein": "Lysozyme C",
+ "uniprot_gene": "LYZ",
+ "disease": "hereditary lysozyme amyloidosis",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P61626",
+ "retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "uniprot_length": 148,
+ "uniprot_sequence_sha256": "7d0e4fd9fdc4406e6179855d1e2bf7e9aa182416262a70dafca656fcada3f2f7",
+ "primary_entry": "2nwd",
+ "selection": {
+  "candidates": 215,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 3,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "5lsh",
+  "already_in_panel": false
+ },
+ "entries": {
+  "2nwd": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-18": 130
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": true
+   },
+   "verified": 3
+  }
+ },
+ "variants": [
+  {
+   "variant": "I74T",
+   "position": 74,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV004555833"
+   ],
+   "dbsnp": [
+    "rs121913547"
+   ],
+   "diseases": [
+    "Amyloidosis, hereditary systemic 5",
+    "Amyloidosis, hereditary systemic 5 (AMYLD5)"
+   ],
+   "structures": {
+    "2nwd": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 56,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 56,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F75I",
+   "position": 75,
+   "wild_type": "F",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV004555835"
+   ],
+   "dbsnp": [
+    "rs121913549"
+   ],
+   "diseases": [
+    "Amyloidosis, hereditary systemic 5"
+   ],
+   "structures": {
+    "2nwd": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 57,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 57,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W82R",
+   "position": 82,
+   "wild_type": "W",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015452",
+    "RCV000015454",
+    "RCV001509432",
+    "RCV003556025"
+   ],
+   "dbsnp": [
+    "rs387906536"
+   ],
+   "diseases": [
+    "Familial visceral amyloidosis, Ostertag type (AMYLD2)"
+   ],
+   "structures": {
+    "2nwd": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 64,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "74": 1,
+  "75": 1,
+  "82": 1
+ }
+}

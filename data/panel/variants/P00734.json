@@ -1,0 +1,799 @@
+{
+ "accession": "P00734",
+ "gene": "F2",
+ "entry_name": "THRB_HUMAN",
+ "protein": "Prothrombin",
+ "uniprot_gene": "F2",
+ "disease": "prothrombin deficiency; thrombophilia",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P00734",
+ "retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "uniprot_length": 622,
+ "uniprot_sequence_sha256": "351664067c22d7e6a071e811ddb3b5759e91101e0c46d4454fc61ce4bca10fa2",
+ "primary_entry": "5edm",
+ "selection": {
+  "candidates": 490,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 21,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "3k65",
+  "already_in_panel": false
+ },
+ "entries": {
+  "5edm": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-57": 394,
+     "-43": 153
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "not_observed": 1,
+   "outside_construct": 2,
+   "verified": 21
+  }
+ },
+ "variants": [
+  {
+   "variant": "R40W",
+   "position": 40,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003147152",
+    "RCV003992747"
+   ],
+   "dbsnp": [
+    "rs1013222460"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "Y87C",
+   "position": 87,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000852095",
+    "RCV001678590"
+   ],
+   "dbsnp": [
+    "rs1227147475"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Coagulation factor deficiency syndrome",
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 44,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 44,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E200K",
+   "position": 200,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000014229",
+    "RCV000994617",
+    "RCV001108917",
+    "RCV001794445",
+    "RCV005394150",
+    "RCV005406743",
+    "RCV005419863"
+   ],
+   "dbsnp": [
+    "rs62623459"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "Factor II deficiency (FA2D)"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R314C",
+   "position": 314,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468924",
+    "RCV005419864"
+   ],
+   "dbsnp": [
+    "rs121918477"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "Factor II deficiency (FA2D)",
+    "Thrombophilia due to thrombin defect (THPH1)"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "G332A",
+   "position": 332,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001420453"
+   ],
+   "dbsnp": [
+    "rs2134532862"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 275,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 275,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E343K",
+   "position": 343,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468929"
+   ],
+   "dbsnp": [
+    "rs121918483"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 286,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 286,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E352K",
+   "position": 352,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468930"
+   ],
+   "dbsnp": [
+    "rs121918484"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "Cystic, Mucinous and Serous Neoplasms"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 295,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 295,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E357G",
+   "position": 357,
+   "wild_type": "E",
+   "mutant": "G",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001420454"
+   ],
+   "dbsnp": [
+    "rs2134533215"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 300,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 300,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R363H",
+   "position": 363,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003484575",
+    "RCV004790570"
+   ],
+   "dbsnp": [
+    "rs2064876977"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 306,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 306,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V365E",
+   "position": 365,
+   "wild_type": "V",
+   "mutant": "E",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002245495"
+   ],
+   "dbsnp": [
+    "rs747234596"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 308,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 308,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "M380T",
+   "position": 380,
+   "wild_type": "M",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468928"
+   ],
+   "dbsnp": [
+    "rs121918481"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "Factor II deficiency (FA2D)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 323,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 323,
+      "comp_id": "MET"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V424M",
+   "position": 424,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001420456"
+   ],
+   "dbsnp": [
+    "rs1310397756"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 367,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 367,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R425H",
+   "position": 425,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468931"
+   ],
+   "dbsnp": [
+    "rs121918485"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 368,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 368,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R431H",
+   "position": 431,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000014235"
+   ],
+   "dbsnp": [
+    "rs121918482"
+   ],
+   "diseases": [
+    "Ductal and Lobular Neoplasms",
+    "Factor II deficiency (FA2D)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 374,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 374,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R461W",
+   "position": 461,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468925",
+    "RCV005411295"
+   ],
+   "dbsnp": [
+    "rs121918478"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "Factor II deficiency (FA2D)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 404,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 404,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G499E",
+   "position": 499,
+   "wild_type": "G",
+   "mutant": "E",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001420457"
+   ],
+   "dbsnp": [
+    "rs2134537035"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 442,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 442,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R500Q",
+   "position": 500,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003515537",
+    "RCV004736344",
+    "RCV005047641"
+   ],
+   "dbsnp": [
+    "rs202003146"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "F2-related disorder",
+    "Ischemic stroke",
+    "Pregnancy loss, recurrent, susceptibility to, 2 (RPRGL2)",
+    "Thrombophilia due to thrombin defect (THPH1)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 443,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 443,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R541W",
+   "position": 541,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001267437",
+    "RCV005420386"
+   ],
+   "dbsnp": [
+    "rs886048338"
+   ],
+   "diseases": [
+    "Thrombophilia due to thrombin defect (THPH1)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 484,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 484,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D595E",
+   "position": 595,
+   "wild_type": "D",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468932"
+   ],
+   "dbsnp": [
+    "rs121918486"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 538,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 538,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R596L",
+   "position": 596,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV005419875"
+   ],
+   "dbsnp": [
+    "rs387907201"
+   ],
+   "diseases": [
+    "Thrombophilia due to thrombin defect (THPH1)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 539,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 539,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R596Q",
+   "position": 596,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003156298",
+    "RCV003514423",
+    "RCV005420251"
+   ],
+   "dbsnp": [
+    "rs387907201"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "Thrombophilia due to thrombin defect (THPH1)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 539,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 539,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R596W",
+   "position": 596,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003516331"
+   ],
+   "dbsnp": [
+    "rs1183827513"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 539,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 539,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G601V",
+   "position": 601,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002468927"
+   ],
+   "dbsnp": [
+    "rs121918480"
+   ],
+   "diseases": [
+    "Congenital prothrombin deficiency",
+    "Factor II deficiency (FA2D)"
+   ],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 544,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 544,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L609P",
+   "position": 609,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000851931"
+   ],
+   "dbsnp": [
+    "rs1592422740"
+   ],
+   "diseases": [],
+   "structures": {
+    "5edm": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 552,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 552,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "5": 1,
+  "40": 1,
+  "87": 1,
+  "117": 1,
+  "132": 1,
+  "152": 1,
+  "155": 1,
+  "200": 1,
+  "308": 1,
+  "314": 1,
+  "319": 1,
+  "332": 1,
+  "339": 1,
+  "343": 1,
+  "345": 1,
+  "352": 1,
+  "357": 1,
+  "363": 1,
+  "365": 1,
+  "380": 1,
+  "387": 1,
+  "424": 1,
+  "425": 1,
+  "431": 1,
+  "461": 1,
+  "499": 1,
+  "500": 1,
+  "541": 1,
+  "560": 1,
+  "582": 1,
+  "584": 1,
+  "595": 1,
+  "596": 3,
+  "601": 1,
+  "609": 1
+ }
+}

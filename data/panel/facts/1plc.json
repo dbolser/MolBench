@@ -1,0 +1,287 @@
+{
+ "id": "1plc",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1plc.cif",
+ "title": "ACCURACY AND PRECISION IN PROTEIN CRYSTAL STRUCTURE ANALYSIS: RESTRAINED LEAST-SQUARES REFINEMENT OF THE CRYSTAL STRUCTURE OF POPLAR PLASTOCYANIN AT 1.33 ANGSTROMS RESOLUTION",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.33,
+ "n_models": 1,
+ "n_atoms": 1657,
+ "n_residues": 210,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "PLASTOCYANIN",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "COPPER (II) ION",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "C"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 99,
+   "n_observed": 99,
+   "auth_minus_label": {
+    "0": 99
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "99",
+     1,
+     99
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P00299",
+     "n_residues": 99,
+     "unp_first": 70,
+     "unp_last": 168,
+     "auth_minus_unp": {
+      "-69": 99
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "99",
+       70,
+       168
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "CU",
+   "name": "COPPER (II) ION",
+   "formula": "Cu 2",
+   "kind": "ion",
+   "metals": [
+    "CU"
+   ],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "CU"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 100,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "CU"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 37,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 37,
+    "comp_id": "HIS",
+    "atom": "ND1"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 100,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "CU",
+    "atom": "CU"
+   },
+   "distance": 1.906,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 84,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 84,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 100,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "CU",
+    "atom": "CU"
+   },
+   "distance": 2.067,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 87,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 87,
+    "comp_id": "HIS",
+    "atom": "ND1"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 100,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "CU",
+    "atom": "CU"
+   },
+   "distance": 2.059,
+   "to_symmetry_copy": false
+  }
+ ],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 52,
+   "end_auth_seq_id": 55,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 52,
+   "end_label_seq_id": 55
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 13,
+   "end_auth_seq_id": 15,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 13,
+   "end_label_seq_id": 15,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 1,
+   "end_auth_seq_id": 6,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 1,
+   "end_label_seq_id": 6,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 26,
+   "end_auth_seq_id": 33,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 26,
+   "end_label_seq_id": 33,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 67,
+   "end_auth_seq_id": 74,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 67,
+   "end_label_seq_id": 74,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 17,
+   "end_auth_seq_id": 21,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 17,
+   "end_label_seq_id": 21,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 92,
+   "end_auth_seq_id": 99,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 92,
+   "end_label_seq_id": 99,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 78,
+   "end_auth_seq_id": 84,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 78,
+   "end_label_seq_id": 84,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 40,
+   "end_auth_seq_id": 42,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 40,
+   "end_label_seq_id": 42,
+   "sheet_id": "B"
+  }
+ ],
+ "waters": 110,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

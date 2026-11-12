@@ -1,0 +1,182 @@
+{
+ "id": "8ce0",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/8ce0.cif",
+ "title": "N-terminal domain of human apolipoprotein E",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.75,
+ "n_models": 1,
+ "n_atoms": 1335,
+ "n_residues": 277,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "Maltodextrin-binding protein,Apolipoprotein E",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "GLYCEROL",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "C"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 675,
+   "n_observed": 143,
+   "auth_minus_label": {
+    "-376": 143
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "23",
+     "165",
+     399,
+     541
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P02649",
+     "n_residues": 143,
+     "unp_first": 41,
+     "unp_last": 183,
+     "auth_minus_unp": {
+      "-18": 143
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "23",
+       "165",
+       41,
+       183
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "GOL",
+   "name": "GLYCEROL",
+   "formula": "C3 H8 O3",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 6,
+   "atoms": [
+    "C1",
+    "O1",
+    "C2",
+    "O2",
+    "C3",
+    "O3"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 301,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "GOL"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 24,
+   "end_auth_seq_id": 43,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 400,
+   "end_label_seq_id": 419
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 44,
+   "end_auth_seq_id": 53,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 420,
+   "end_label_seq_id": 429
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 54,
+   "end_auth_seq_id": 79,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 430,
+   "end_label_seq_id": 455
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 86,
+   "end_auth_seq_id": 124,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 462,
+   "end_label_seq_id": 500
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 130,
+   "end_auth_seq_id": 163,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 506,
+   "end_label_seq_id": 539
+  }
+ ],
+ "strands": [],
+ "waters": 133,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

@@ -1,0 +1,762 @@
+{
+ "accession": "P01112",
+ "gene": "HRAS",
+ "entry_name": "RASH_HUMAN",
+ "protein": "GTPase HRas",
+ "uniprot_gene": "HRAS",
+ "disease": "Costello syndrome",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P01112",
+ "retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "uniprot_length": 189,
+ "uniprot_sequence_sha256": "d9360238882c010c8474ef1eba1d2532cd96e706c7d7f689ea2014f37f8f886c",
+ "primary_entry": "1ctq",
+ "selection": {
+  "candidates": 255,
+  "shortlisted": 30,
+  "eligible": 24,
+  "resolution_limit": 2.5,
+  "positions_covered": 9,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "3k8y",
+  "already_in_panel": false
+ },
+ "entries": {
+  "1ctq": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 166
+    },
+    "n_insertion_codes": 0,
+    "offset": false,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "verified": 19
+  }
+ },
+ "variants": [
+  {
+   "variant": "G12A",
+   "position": 12,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000157929"
+   ],
+   "dbsnp": [
+    "rs727503094"
+   ],
+   "diseases": [],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 12,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 12,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G12C",
+   "position": 12,
+   "wild_type": "G",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013447",
+    "RCV000029211",
+    "RCV000032851",
+    "RCV000149829",
+    "RCV000212495",
+    "RCV000762849",
+    "RCV006253539"
+   ],
+   "dbsnp": [
+    "rs104894229"
+   ],
+   "diseases": [
+    "Costello syndrome (CSTLO)",
+    "Ductal and Lobular Neoplasms",
+    "Embryonal rhabdomyosarcoma (ERMS)",
+    "Epidermal nevus",
+    "Large congenital melanocytic nevus (CMNS)",
+    "Linear nevus sebaceous syndrome",
+    "Malignant tumor of urinary bladder",
+    "RASopathy",
+    "Soft Tissue Tumors and Sarcomas, NOS",
+    "Squamous Cell Neoplasms",
+    "Thyroid cancer, nonmedullary, 2 (NMTC2)"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 12,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 12,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G12D",
+   "position": 12,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001678586"
+   ],
+   "dbsnp": [
+    "rs727503094"
+   ],
+   "diseases": [],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 12,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 12,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G12E",
+   "position": 12,
+   "wild_type": "G",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000150836",
+    "RCV000255809"
+   ],
+   "dbsnp": [
+    "rs727503094"
+   ],
+   "diseases": [
+    "Costello syndrome (CSTLO)"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 12,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 12,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G12S",
+   "position": 12,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013435",
+    "RCV000013436",
+    "RCV000022796",
+    "RCV000029209",
+    "RCV000081295",
+    "RCV000149828",
+    "RCV000487471",
+    "RCV001255689",
+    "RCV001257537",
+    "RCV001813185",
+    "RCV002453256",
+    "RCV003156059",
+    "RCV003398496",
+    "RCV003450635",
+    "RCV003450636",
+    "RCV006253536",
+    "RCV006688347"
+   ],
+   "dbsnp": [
+    "rs104894229"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Congenital myopathy with excess of muscle spindles (CMEMS)",
+    "Costello syndrome (CSTLO)",
+    "EPIDERMAL NEVUS WITH UROTHELIAL CANCER, SOMATIC",
+    "Embryonal rhabdomyosarcoma (ERMS)",
+    "Epidermal nevus",
+    "Fetal anomalies with a likely genetic cause",
+    "Gliomas",
+    "HRAS-related disorder",
+    "Lip and oral cavity carcinoma",
+    "Myopathy, congenital, with excess of muscle spindles",
+    "Noonan syndrome 1 (NS1)",
+    "Noonan syndrome and Noonan-related syndrome",
+    "RASopathy",
+    "Rhabdomyosarcoma",
+    "Soft Tissue Tumors and Sarcomas, NOS",
+    "Squamous Cell Neoplasms",
+    "Transitional Cell Papillomas and Carcinomas",
+    "Wooly hair nevus"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 12,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 12,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G12V",
+   "position": 12,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000322736",
+    "RCV001577794",
+    "RCV001732216"
+   ],
+   "dbsnp": [
+    "rs727503094"
+   ],
+   "diseases": [
+    "Costello syndrome (CSTLO)"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 12,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 12,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q22K",
+   "position": 22,
+   "wild_type": "Q",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013443",
+    "RCV000143898",
+    "RCV000157915",
+    "RCV005867747"
+   ],
+   "dbsnp": [
+    "rs121917757"
+   ],
+   "diseases": [
+    "Congenital myopathy with excess of muscle spindles (CMEMS)",
+    "Costello syndrome (CSTLO)",
+    "HRAS-related disorder",
+    "Myopathy, congenital, with excess of muscle spindles"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 22,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E49K",
+   "position": 49,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000662269",
+    "RCV002530595"
+   ],
+   "dbsnp": [
+    "rs1277340795"
+   ],
+   "diseases": [
+    "Vascular Tumors Including Pyogenic Granuloma"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 49,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 49,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T58I",
+   "position": 58,
+   "wild_type": "T",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013444",
+    "RCV003221783",
+    "RCV004724738",
+    "RCV005252034"
+   ],
+   "dbsnp": [
+    "rs121917758"
+   ],
+   "diseases": [
+    "Costello syndrome (CSTLO)",
+    "HRAS-related disorder",
+    "Nevi and Melanomas",
+    "RASopathy"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 58,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 58,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A59L",
+   "position": 59,
+   "wild_type": "A",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000156047"
+   ],
+   "dbsnp": [
+    "rs727504747"
+   ],
+   "diseases": [
+    "Costello syndrome (CSTLO)"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G60D",
+   "position": 60,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000157917",
+    "RCV001387769"
+   ],
+   "dbsnp": [
+    "rs730880460"
+   ],
+   "diseases": [
+    "Costello syndrome (CSTLO)"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 60,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 60,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G60S",
+   "position": 60,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000818197"
+   ],
+   "dbsnp": [
+    "rs1589792804"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Costello syndrome (CSTLO)",
+    "Epithelial Neoplasms, NOS"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 60,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 60,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G60V",
+   "position": 60,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000443979",
+    "RCV002060067",
+    "RCV005090865"
+   ],
+   "dbsnp": [
+    "rs730880460"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Costello syndrome (CSTLO)",
+    "Epidermal nevus",
+    "Large congenital melanocytic nevus (CMNS)",
+    "Linear nevus sebaceous syndrome",
+    "Malignant tumor of urinary bladder",
+    "Thymic Epithelial Neoplasms",
+    "Thyroid cancer, nonmedullary, 2 (NMTC2)"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 60,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 60,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q61H",
+   "position": 61,
+   "wild_type": "Q",
+   "mutant": "H",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000589258"
+   ],
+   "dbsnp": [
+    "rs121913496"
+   ],
+   "diseases": [
+    "Noonan syndrome 3 (NS3)"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 61,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 61,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q61K",
+   "position": 61,
+   "wild_type": "Q",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013434",
+    "RCV000022795",
+    "RCV000587258",
+    "RCV000681435",
+    "RCV001255683",
+    "RCV004562206",
+    "RCV006253533",
+    "RCV006253534",
+    "RCV006253535"
+   ],
+   "dbsnp": [
+    "rs28933406"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Embryonal rhabdomyosarcoma (ERMS)",
+    "Epidermal nevus",
+    "Familial medullary thyroid carcinoma (MTC)",
+    "Lip and oral cavity carcinoma",
+    "Neoplasms, NOS",
+    "Neuroblastoma (NB)",
+    "Nevi and Melanomas",
+    "Noonan syndrome 3 (NS3)",
+    "Paragangliomas and Glomus Tumors",
+    "Soft Tissue Tumors and Sarcomas, NOS",
+    "Spermatocytic seminoma",
+    "Squamous Cell Neoplasms",
+    "Thyroid cancer, non-medullary, 2 (NMTC2)",
+    "Thyroid cancer, nonmedullary, 2 (NMTC2)",
+    "Transitional Cell Papillomas and Carcinomas"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 61,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 61,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q61L",
+   "position": 61,
+   "wild_type": "Q",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001255684",
+    "RCV001372584",
+    "RCV001849368",
+    "RCV004668927",
+    "RCV006253971"
+   ],
+   "dbsnp": [
+    "rs121913233"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Ductal and Lobular Neoplasms",
+    "KA-like vemurafenib-induced squamous lesions",
+    "Lip and oral cavity carcinoma",
+    "Myeloid Leukemias",
+    "Neoplasm",
+    "Neuroepitheliomatous Neoplasms",
+    "Paragangliomas and Glomus Tumors",
+    "Soft Tissue Tumors and Sarcomas, NOS",
+    "Soft tissue sarcoma",
+    "Squamous Cell Neoplasms",
+    "Transitional Cell Papillomas and Carcinomas"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 61,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 61,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q61R",
+   "position": 61,
+   "wild_type": "Q",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000148033",
+    "RCV000157918",
+    "RCV000662268",
+    "RCV001813393",
+    "RCV001844808",
+    "RCV004796045",
+    "RCV006253831",
+    "RCV006273567"
+   ],
+   "dbsnp": [
+    "rs121913233"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Costello syndrome (CSTLO)",
+    "Epidermal nevus",
+    "Epithelial Neoplasms, NOS",
+    "Large congenital melanocytic nevus (CMNS)",
+    "Linear nevus sebaceous syndrome",
+    "Malignant tumor of urinary bladder",
+    "Neoplasm",
+    "Neuroblastoma (NB)",
+    "Noonan syndrome and Noonan-related syndrome",
+    "Not Reported",
+    "Paragangliomas and Glomus Tumors",
+    "Thyroid cancer, nonmedullary, 2 (NMTC2)",
+    "Transitional Cell Papillomas and Carcinomas",
+    "Vascular Tumors Including Pyogenic Granuloma"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 61,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 61,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R68W",
+   "position": 68,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001906898",
+    "RCV003235615"
+   ],
+   "dbsnp": [
+    "rs1370690781"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 68,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 68,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "K117R",
+   "position": 117,
+   "wild_type": "K",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013439",
+    "RCV000353386",
+    "RCV005252033"
+   ],
+   "dbsnp": [
+    "rs104894227"
+   ],
+   "diseases": [
+    "Costello syndrome (CSTLO)",
+    "RASopathy",
+    "Thymic Epithelial Neoplasms"
+   ],
+   "structures": {
+    "1ctq": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 117,
+      "comp_id": "LYS"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "12": 6,
+  "22": 1,
+  "37": 1,
+  "49": 1,
+  "58": 1,
+  "59": 1,
+  "60": 3,
+  "61": 4,
+  "68": 1,
+  "117": 1
+ }
+}

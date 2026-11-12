@@ -1,0 +1,4150 @@
+{
+ "accession": "P00441",
+ "gene": "SOD1",
+ "entry_name": "SODC_HUMAN",
+ "protein": "Superoxide dismutase [Cu-Zn]",
+ "uniprot_gene": "SOD1",
+ "disease": "amyotrophic lateral sclerosis 1",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P00441",
+ "retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "uniprot_length": 154,
+ "uniprot_sequence_sha256": "c56903dca972575883387736442f68a5206604d08604ddeb8dbc2e3f25a9f76d",
+ "primary_entry": "2c9v",
+ "selection": {
+  "candidates": 157,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 63,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "2v0a",
+  "already_in_panel": false
+ },
+ "entries": {
+  "2c9v": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-1": 306
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": true
+   },
+   "verified": 102
+  }
+ },
+ "variants": [
+  {
+   "variant": "K4E",
+   "position": 4,
+   "wild_type": "K",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003064620",
+    "RCV004700918",
+    "RCV004747185"
+   ],
+   "dbsnp": [
+    "rs1568807297"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 3,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 3,
+      "comp_id": "LYS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 3,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 3,
+      "comp_id": "LYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A5S",
+   "position": 5,
+   "wild_type": "A",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095541"
+   ],
+   "dbsnp": [
+    "rs121912444"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 4,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 4,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 4,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 4,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A5T",
+   "position": 5,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015887",
+    "RCV000518527"
+   ],
+   "dbsnp": [
+    "rs121912444"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 4,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 4,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 4,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 4,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A5V",
+   "position": 5,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015885",
+    "RCV000518025",
+    "RCV003390686"
+   ],
+   "dbsnp": [
+    "rs121912442"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 4,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 4,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 4,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 4,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V6M",
+   "position": 6,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002605188"
+   ],
+   "dbsnp": [
+    "rs1568807314"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 5,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 5,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 5,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 5,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C7F",
+   "position": 7,
+   "wild_type": "C",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015894"
+   ],
+   "dbsnp": [
+    "rs121912448"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 6,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 6,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C7S",
+   "position": 7,
+   "wild_type": "C",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002015993"
+   ],
+   "dbsnp": [
+    "rs1312702973"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 6,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 6,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D12Y",
+   "position": 12,
+   "wild_type": "D",
+   "mutant": "Y",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003486397",
+    "RCV006276342"
+   ],
+   "dbsnp": [
+    "rs762628133"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 11,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 11,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V15L",
+   "position": 15,
+   "wild_type": "V",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002029618"
+   ],
+   "dbsnp": [
+    "rs1568807400"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 14,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 14,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 14,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 14,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V15M",
+   "position": 15,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095542"
+   ],
+   "dbsnp": [
+    "rs1568807400"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 14,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 14,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 14,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 14,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G17A",
+   "position": 17,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000713408",
+    "RCV001386880"
+   ],
+   "dbsnp": [
+    "rs1200906022"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 16,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 16,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 16,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 16,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G17S",
+   "position": 17,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015899"
+   ],
+   "dbsnp": [
+    "rs121912453"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 16,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 16,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 16,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 16,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F21C",
+   "position": 21,
+   "wild_type": "F",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001958950"
+   ],
+   "dbsnp": [
+    "rs1555836169"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 20,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 20,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F21L",
+   "position": 21,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001065949",
+    "RCV005036375"
+   ],
+   "dbsnp": [
+    "rs1555836170"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Spastic tetraplegia and axial hypotonia, progressive"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 20,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 20,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E22K",
+   "position": 22,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015896"
+   ],
+   "dbsnp": [
+    "rs121912450"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 21,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 21,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 21,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 21,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q23L",
+   "position": 23,
+   "wild_type": "Q",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095543"
+   ],
+   "dbsnp": [
+    "rs1169198442"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 22,
+      "comp_id": "GLN"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 22,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q23P",
+   "position": 23,
+   "wild_type": "Q",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003628666"
+   ],
+   "dbsnp": [
+    "rs1169198442"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 22,
+      "comp_id": "GLN"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 22,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V32A",
+   "position": 32,
+   "wild_type": "V",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095392",
+    "RCV001196130",
+    "RCV002291718"
+   ],
+   "dbsnp": [
+    "rs1428716759"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 31,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 31,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G38R",
+   "position": 38,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015874",
+    "RCV000492487",
+    "RCV000664220",
+    "RCV003480031"
+   ],
+   "dbsnp": [
+    "rs121912431"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Motor neuron disease"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 37,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 37,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 37,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 37,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L39Q",
+   "position": 39,
+   "wild_type": "L",
+   "mutant": "Q",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003041393"
+   ],
+   "dbsnp": [
+    "rs1555836520"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 38,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 38,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 38,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 38,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L39V",
+   "position": 39,
+   "wild_type": "L",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015875",
+    "RCV000997816"
+   ],
+   "dbsnp": [
+    "rs121912432"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 38,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 38,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 38,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 38,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E41G",
+   "position": 41,
+   "wild_type": "E",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000697630"
+   ],
+   "dbsnp": [
+    "rs1568809149"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 40,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 40,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 40,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 40,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G42D",
+   "position": 42,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015877"
+   ],
+   "dbsnp": [
+    "rs121912434"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 41,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 41,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 41,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 41,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G42S",
+   "position": 42,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015876",
+    "RCV002496378"
+   ],
+   "dbsnp": [
+    "rs121912433"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Spastic tetraplegia and axial hypotonia, progressive"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 41,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 41,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 41,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 41,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H44R",
+   "position": 44,
+   "wild_type": "H",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015878",
+    "RCV000713397",
+    "RCV002463588",
+    "RCV003398522"
+   ],
+   "dbsnp": [
+    "rs121912435"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 10 (ALS10)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 43,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 43,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F46C",
+   "position": 46,
+   "wild_type": "F",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015904"
+   ],
+   "dbsnp": [
+    "rs121912457"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 45,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 45,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 45,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 45,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H47R",
+   "position": 47,
+   "wild_type": "H",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015886",
+    "RCV000281824",
+    "RCV001843454",
+    "RCV004745158"
+   ],
+   "dbsnp": [
+    "rs121912443"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis (ALS)",
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 46,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 46,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 46,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 46,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V48A",
+   "position": 48,
+   "wild_type": "V",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001318269"
+   ],
+   "dbsnp": [
+    "rs1568809169"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 47,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 47,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H49R",
+   "position": 49,
+   "wild_type": "H",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000995880",
+    "RCV003886463"
+   ],
+   "dbsnp": [
+    "rs1568809172"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 48,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 48,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 48,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 48,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F65L",
+   "position": 65,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001565742",
+    "RCV001882667",
+    "RCV004746428"
+   ],
+   "dbsnp": [
+    "rs1030039318"
+   ],
+   "diseases": [
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 64,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 64,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N66S",
+   "position": 66,
+   "wild_type": "N",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002290075"
+   ],
+   "dbsnp": [
+    "rs1568810275"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 65,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 65,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 65,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 65,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S69P",
+   "position": 69,
+   "wild_type": "S",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095393"
+   ],
+   "dbsnp": [
+    "rs2049594204"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 68,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 68,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 68,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 68,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H72Y",
+   "position": 72,
+   "wild_type": "H",
+   "mutant": "Y",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095394"
+   ],
+   "dbsnp": [
+    "rs2049594311"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 71,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 71,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 71,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 71,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D77V",
+   "position": 77,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001332469",
+    "RCV005630925"
+   ],
+   "dbsnp": [
+    "rs1568810316"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 76,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 76,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 76,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 76,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D77Y",
+   "position": 77,
+   "wild_type": "D",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000993040",
+    "RCV001858765"
+   ],
+   "dbsnp": [
+    "rs1601157750"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 76,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 76,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 76,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 76,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H81R",
+   "position": 81,
+   "wild_type": "H",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015905"
+   ],
+   "dbsnp": [
+    "rs121912458"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Squamous Cell Neoplasms"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 80,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 80,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H81Y",
+   "position": 81,
+   "wild_type": "H",
+   "mutant": "Y",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002933812"
+   ],
+   "dbsnp": [
+    "rs2516660280"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 80,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 80,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L85F",
+   "position": 85,
+   "wild_type": "L",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001061075",
+    "RCV005409768"
+   ],
+   "dbsnp": [
+    "rs1315541036"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Spastic tetraplegia and axial hypotonia, progressive"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 84,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 84,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 84,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 84,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L85V",
+   "position": 85,
+   "wild_type": "L",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015898"
+   ],
+   "dbsnp": [
+    "rs121912452"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 84,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 84,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 84,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 84,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G86R",
+   "position": 86,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015880",
+    "RCV004745157"
+   ],
+   "dbsnp": [
+    "rs121912436"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 85,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 85,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 85,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 85,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G86S",
+   "position": 86,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001199223",
+    "RCV002560266",
+    "RCV003413982"
+   ],
+   "dbsnp": [
+    "rs121912436"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder",
+    "Spastic tetraplegia and axial hypotonia, progressive"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 85,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 85,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 85,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 85,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N87S",
+   "position": 87,
+   "wild_type": "N",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000529591",
+    "RCV006277891"
+   ],
+   "dbsnp": [
+    "rs11556620"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 86,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 86,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 86,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 86,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V88A",
+   "position": 88,
+   "wild_type": "V",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001064307",
+    "RCV003132202"
+   ],
+   "dbsnp": [
+    "rs1339283341"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 87,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V88M",
+   "position": 88,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095395"
+   ],
+   "dbsnp": [
+    "rs1568810641"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 87,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A90V",
+   "position": 90,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001552307",
+    "RCV002568339"
+   ],
+   "dbsnp": [
+    "rs1280042397"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 89,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 89,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 89,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 89,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D91A",
+   "position": 91,
+   "wild_type": "D",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015888",
+    "RCV000015889",
+    "RCV000713399",
+    "RCV001843455",
+    "RCV003415711",
+    "RCV005434603",
+    "RCV005865183"
+   ],
+   "dbsnp": [
+    "rs80265967"
+   ],
+   "diseases": [
+    "Adult onset neurodegenerative disorder",
+    "Amyotrophic lateral sclerosis (ALS)",
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis 1, autosomal recessive",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 90,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 90,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D91V",
+   "position": 91,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002464965"
+   ],
+   "dbsnp": [
+    "rs80265967"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 90,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 90,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G94A",
+   "position": 94,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015882"
+   ],
+   "dbsnp": [
+    "rs121912438"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G94C",
+   "position": 94,
+   "wild_type": "G",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015881"
+   ],
+   "dbsnp": [
+    "rs121912437"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G94D",
+   "position": 94,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001384618"
+   ],
+   "dbsnp": [
+    "rs121912438"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G94R",
+   "position": 94,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015907",
+    "RCV000492720"
+   ],
+   "dbsnp": [
+    "rs121912437"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Motor neuron disease"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G94S",
+   "position": 94,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003408685",
+    "RCV003517499"
+   ],
+   "dbsnp": [
+    "rs121912437"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 93,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A96T",
+   "position": 96,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002624691",
+    "RCV004818241"
+   ],
+   "dbsnp": [
+    "rs1568810686"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 95,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 95,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D97N",
+   "position": 97,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015906",
+    "RCV000993041",
+    "RCV005859466"
+   ],
+   "dbsnp": [
+    "rs121912459"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Amyotrophic lateral sclerosis 1, autosomal recessive",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 96,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 96,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 96,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 96,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D97V",
+   "position": 97,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000853537"
+   ],
+   "dbsnp": [
+    "rs1555836803"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 96,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 96,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 96,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 96,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E101G",
+   "position": 101,
+   "wild_type": "E",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015883",
+    "RCV000492233",
+    "RCV001555083"
+   ],
+   "dbsnp": [
+    "rs121912439"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Motor neuron disease"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 100,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 100,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 100,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 100,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E101K",
+   "position": 101,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000696225",
+    "RCV000713400",
+    "RCV001843542"
+   ],
+   "dbsnp": [
+    "rs76731700"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis (ALS)",
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 100,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 100,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 100,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 100,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D102H",
+   "position": 102,
+   "wild_type": "D",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001377993"
+   ],
+   "dbsnp": [
+    "rs1568810715"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 101,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 101,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 101,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 101,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D102N",
+   "position": 102,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003518824"
+   ],
+   "dbsnp": [
+    "rs1568810715"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 101,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 101,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 101,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 101,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I105F",
+   "position": 105,
+   "wild_type": "I",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015890",
+    "RCV001813991"
+   ],
+   "dbsnp": [
+    "rs121912445"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis 1, autosomal recessive"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 104,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S106L",
+   "position": 106,
+   "wild_type": "S",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000857231",
+    "RCV001858533"
+   ],
+   "dbsnp": [
+    "rs1378590183"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis (ALS)",
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 105,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 105,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 105,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 105,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L107F",
+   "position": 107,
+   "wild_type": "L",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001203287"
+   ],
+   "dbsnp": [
+    "rs121912440"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L107V",
+   "position": 107,
+   "wild_type": "L",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015879",
+    "RCV003390685",
+    "RCV004791222"
+   ],
+   "dbsnp": [
+    "rs121912440"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C112Y",
+   "position": 112,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003064621"
+   ],
+   "dbsnp": [
+    "rs1601158483"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 111,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 111,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I113T",
+   "position": 113,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015884"
+   ],
+   "dbsnp": [
+    "rs74315452"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 112,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 112,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I114M",
+   "position": 114,
+   "wild_type": "I",
+   "mutant": "M",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002862104"
+   ],
+   "dbsnp": [
+    "rs750335577"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 113,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 113,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 113,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 113,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I114T",
+   "position": 114,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000178103",
+    "RCV000255754",
+    "RCV000492500",
+    "RCV003398894",
+    "RCV004767120"
+   ],
+   "dbsnp": [
+    "rs121912441"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Motor neuron disease",
+    "SOD1-related disorder",
+    "Spastic tetraplegia and axial hypotonia, progressive"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 113,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 113,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 113,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 113,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G115A",
+   "position": 115,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003064622"
+   ],
+   "dbsnp": [
+    "rs1568810789"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 114,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 114,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G115S",
+   "position": 115,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001200267"
+   ],
+   "dbsnp": [
+    "rs2049604095"
+   ],
+   "diseases": [],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 114,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 114,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R116G",
+   "position": 116,
+   "wild_type": "R",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000993042",
+    "RCV002290508"
+   ],
+   "dbsnp": [
+    "rs1301635320"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 115,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 115,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R116H",
+   "position": 116,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003148428",
+    "RCV003517461",
+    "RCV004725662"
+   ],
+   "dbsnp": [
+    "rs1240334553"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "Neoplasms, NOS"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 115,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 115,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L118V",
+   "position": 118,
+   "wild_type": "L",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000997817",
+    "RCV001095396"
+   ],
+   "dbsnp": [
+    "rs199474723"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 117,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 117,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V120L",
+   "position": 120,
+   "wild_type": "V",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001978284",
+    "RCV002252747",
+    "RCV003408051"
+   ],
+   "dbsnp": [
+    "rs1457889952"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 119,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 119,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H121L",
+   "position": 121,
+   "wild_type": "H",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002261635",
+    "RCV006470342"
+   ],
+   "dbsnp": [
+    "rs1410925719"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 120,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 120,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D125G",
+   "position": 125,
+   "wild_type": "D",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001586243",
+    "RCV001866126"
+   ],
+   "dbsnp": [
+    "rs1568811366"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 124,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 124,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D125V",
+   "position": 125,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001378934",
+    "RCV002255185"
+   ],
+   "dbsnp": [
+    "rs1568811366"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 124,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 124,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D126A",
+   "position": 126,
+   "wild_type": "D",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001250175"
+   ],
+   "dbsnp": [
+    "rs1164911383"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 125,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D126N",
+   "position": 126,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095397"
+   ],
+   "dbsnp": [
+    "rs1568811372"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 125,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L127S",
+   "position": 127,
+   "wild_type": "L",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003064624"
+   ],
+   "dbsnp": [
+    "rs121912454"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 126,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 126,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N132K",
+   "position": 132,
+   "wild_type": "N",
+   "mutant": "K",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001374388"
+   ],
+   "dbsnp": [
+    "rs1027128618"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 131,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 131,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E134A",
+   "position": 134,
+   "wild_type": "E",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002475374",
+    "RCV002571542"
+   ],
+   "dbsnp": [
+    "rs1568811426"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 133,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 133,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E134G",
+   "position": 134,
+   "wild_type": "E",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003064625"
+   ],
+   "dbsnp": [
+    "rs1568811426"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 133,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 133,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E134K",
+   "position": 134,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095398"
+   ],
+   "dbsnp": [
+    "rs2049618449"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 133,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 133,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S135N",
+   "position": 135,
+   "wild_type": "S",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015897"
+   ],
+   "dbsnp": [
+    "rs121912451"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 134,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 134,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 134,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 134,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T138A",
+   "position": 138,
+   "wild_type": "T",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095399",
+    "RCV001289238"
+   ],
+   "dbsnp": [
+    "rs1568811445"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 137,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 137,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 137,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 137,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T138I",
+   "position": 138,
+   "wild_type": "T",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001509076",
+    "RCV001882562"
+   ],
+   "dbsnp": [
+    "rs1568811454"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 137,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 137,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 137,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 137,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N140K",
+   "position": 140,
+   "wild_type": "N",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000713404",
+    "RCV001861989"
+   ],
+   "dbsnp": [
+    "rs1804449"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 139,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 139,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G142A",
+   "position": 142,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003138556",
+    "RCV003517450"
+   ],
+   "dbsnp": [
+    "rs1568811489"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 141,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G142V",
+   "position": 142,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002810765"
+   ],
+   "dbsnp": [
+    "rs1568811489"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 141,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L145F",
+   "position": 145,
+   "wild_type": "L",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000713407",
+    "RCV000808273",
+    "RCV001095400",
+    "RCV004745565"
+   ],
+   "dbsnp": [
+    "rs1482760341"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 144,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 144,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 144,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 144,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L145S",
+   "position": 145,
+   "wild_type": "L",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015891",
+    "RCV000516860",
+    "RCV004745159",
+    "RCV006252552"
+   ],
+   "dbsnp": [
+    "rs121912446"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 144,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 144,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 144,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 144,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A146D",
+   "position": 146,
+   "wild_type": "A",
+   "mutant": "D",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492706"
+   ],
+   "dbsnp": [
+    "rs1131690781"
+   ],
+   "diseases": [
+    "Motor neuron disease"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 145,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 145,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A146T",
+   "position": 146,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015892"
+   ],
+   "dbsnp": [
+    "rs121912447"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 145,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 145,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A146V",
+   "position": 146,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001976221"
+   ],
+   "dbsnp": [
+    "rs1131690781"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 145,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 145,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G148C",
+   "position": 148,
+   "wild_type": "G",
+   "mutant": "C",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003440534"
+   ],
+   "dbsnp": [
+    "rs1568811520"
+   ],
+   "diseases": [],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 147,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 147,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 147,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 147,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G148D",
+   "position": 148,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000644456",
+    "RCV001289239"
+   ],
+   "dbsnp": [
+    "rs1555836950"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 147,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 147,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 147,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 147,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V149G",
+   "position": 149,
+   "wild_type": "V",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001095401",
+    "RCV004702635"
+   ],
+   "dbsnp": [
+    "rs1476760624"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 148,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 148,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 148,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 148,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I150M",
+   "position": 150,
+   "wild_type": "I",
+   "mutant": "M",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001843934"
+   ],
+   "dbsnp": [
+    "rs2123437030"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis (ALS)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I150S",
+   "position": 150,
+   "wild_type": "I",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003994640"
+   ],
+   "dbsnp": [
+    "rs1424014997"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I150T",
+   "position": 150,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001942245",
+    "RCV002473336",
+    "RCV004746543"
+   ],
+   "dbsnp": [
+    "rs1424014997"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I150V",
+   "position": 150,
+   "wild_type": "I",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001370629",
+    "RCV004746354"
+   ],
+   "dbsnp": [
+    "rs1169917994"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis type 1 (ALS1)",
+    "SOD1-related disorder"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 149,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I152T",
+   "position": 152,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000015895"
+   ],
+   "dbsnp": [
+    "rs121912449"
+   ],
+   "diseases": [
+    "Amyotrophic lateral sclerosis 1 (ALS1)",
+    "Amyotrophic lateral sclerosis type 1 (ALS1)"
+   ],
+   "structures": {
+    "2c9v": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 151,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 151,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 151,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 151,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "4": 1,
+  "5": 3,
+  "6": 1,
+  "7": 2,
+  "12": 1,
+  "15": 2,
+  "17": 2,
+  "21": 2,
+  "22": 1,
+  "23": 2,
+  "32": 1,
+  "38": 1,
+  "39": 2,
+  "41": 1,
+  "42": 2,
+  "44": 1,
+  "46": 1,
+  "47": 1,
+  "48": 1,
+  "49": 1,
+  "65": 1,
+  "66": 1,
+  "69": 1,
+  "72": 1,
+  "77": 2,
+  "81": 2,
+  "85": 2,
+  "86": 2,
+  "87": 1,
+  "88": 2,
+  "90": 1,
+  "91": 2,
+  "94": 5,
+  "96": 1,
+  "97": 2,
+  "101": 2,
+  "102": 2,
+  "105": 1,
+  "106": 1,
+  "107": 2,
+  "112": 2,
+  "113": 1,
+  "114": 2,
+  "115": 2,
+  "116": 2,
+  "118": 1,
+  "120": 1,
+  "121": 1,
+  "125": 2,
+  "126": 2,
+  "127": 2,
+  "132": 1,
+  "134": 4,
+  "135": 1,
+  "138": 2,
+  "140": 1,
+  "142": 2,
+  "145": 2,
+  "146": 3,
+  "148": 2,
+  "149": 1,
+  "150": 4,
+  "152": 1
+ }
+}

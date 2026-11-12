@@ -1,0 +1,287 @@
+{
+ "id": "1hk0",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1hk0.cif",
+ "title": "Human GammaD Crystallin Structure at 1.25 A Resolution",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.25,
+ "n_models": 1,
+ "n_atoms": 1772,
+ "n_residues": 455,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "Gamma-crystallin D",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "B"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "X",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 173,
+   "n_observed": 173,
+   "auth_minus_label": {
+    "0": 85,
+    "1": 88
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "85",
+     1,
+     85
+    ],
+    [
+     "87",
+     "174",
+     86,
+     173
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P07320",
+     "n_residues": 173,
+     "unp_first": 2,
+     "unp_last": 174,
+     "auth_minus_unp": {
+      "-1": 85,
+      "0": 88
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "85",
+       2,
+       86
+      ],
+      [
+       "87",
+       "174",
+       87,
+       174
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_and_software_defined_assembly",
+   "method": "PQS",
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 64,
+   "end_auth_seq_id": 69,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 64,
+   "end_label_seq_id": 69
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 96,
+   "end_auth_seq_id": 98,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 95,
+   "end_label_seq_id": 97
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 111,
+   "end_auth_seq_id": 115,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 110,
+   "end_label_seq_id": 114
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 153,
+   "end_auth_seq_id": 158,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 152,
+   "end_label_seq_id": 157
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 12,
+   "end_auth_seq_id": 18,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 12,
+   "end_label_seq_id": 18,
+   "sheet_id": "XA"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 3,
+   "end_auth_seq_id": 8,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 3,
+   "end_label_seq_id": 8,
+   "sheet_id": "XA"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 34,
+   "end_auth_seq_id": 47,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 34,
+   "end_label_seq_id": 47,
+   "sheet_id": "XA"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 51,
+   "end_auth_seq_id": 62,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 51,
+   "end_label_seq_id": 62,
+   "sheet_id": "XA"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 12,
+   "end_auth_seq_id": 18,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 12,
+   "end_label_seq_id": 18,
+   "sheet_id": "XB"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 3,
+   "end_auth_seq_id": 8,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 3,
+   "end_label_seq_id": 8,
+   "sheet_id": "XB"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 34,
+   "end_auth_seq_id": 47,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 34,
+   "end_label_seq_id": 47,
+   "sheet_id": "XB"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 77,
+   "end_auth_seq_id": 81,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 77,
+   "end_label_seq_id": 81,
+   "sheet_id": "XB"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 99,
+   "end_auth_seq_id": 105,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 98,
+   "end_label_seq_id": 104,
+   "sheet_id": "XC"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 89,
+   "end_auth_seq_id": 95,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 88,
+   "end_label_seq_id": 94,
+   "sheet_id": "XC"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 123,
+   "end_auth_seq_id": 128,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 122,
+   "end_label_seq_id": 127,
+   "sheet_id": "XC"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 149,
+   "end_auth_seq_id": 151,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 148,
+   "end_label_seq_id": 150,
+   "sheet_id": "XC"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 140,
+   "end_auth_seq_id": 146,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 139,
+   "end_label_seq_id": 145,
+   "sheet_id": "XD"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 131,
+   "end_auth_seq_id": 136,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 130,
+   "end_label_seq_id": 135,
+   "sheet_id": "XD"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 166,
+   "end_auth_seq_id": 169,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 165,
+   "end_label_seq_id": 168,
+   "sheet_id": "XD"
+  }
+ ],
+ "waters": 282,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": true,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

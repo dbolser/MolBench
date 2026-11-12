@@ -1,0 +1,367 @@
+{
+ "accession": "P07477",
+ "gene": "PRSS1",
+ "entry_name": "TRY1_HUMAN",
+ "protein": "Serine protease 1",
+ "uniprot_gene": "PRSS1",
+ "disease": "hereditary pancreatitis",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P07477",
+ "retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "uniprot_length": 247,
+ "uniprot_sequence_sha256": "796377537c0eaf1bf6344dfe0ef3b287d84934267233f526f4e40eb6bf5a86e3",
+ "primary_entry": "1trn",
+ "selection": {
+  "candidates": 11,
+  "shortlisted": 5,
+  "eligible": 5,
+  "resolution_limit": 2.5,
+  "positions_covered": 4,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "2ra3",
+  "already_in_panel": false
+ },
+ "entries": {
+  "1trn": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-8": 38,
+     "-6": 62,
+     "-5": 148,
+     "-4": 18,
+     "-3": 106,
+     "-1": 70,
+     "0": 6
+    },
+    "n_insertion_codes": 6,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "outside_construct": 1,
+   "verified": 7
+  }
+ },
+ "variants": [
+  {
+   "variant": "A16V",
+   "position": 16,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000031920",
+    "RCV000626826",
+    "RCV002247406"
+   ],
+   "dbsnp": [
+    "rs202003805"
+   ],
+   "diseases": [
+    "Hereditary pancreatitis (PCTT)",
+    "Pancreatitis, hereditary (PCTT)"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "N29I",
+   "position": 29,
+   "wild_type": "N",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000012652",
+    "RCV000763166",
+    "RCV001507089",
+    "RCV002463587",
+    "RCV003103713",
+    "RCV004754255"
+   ],
+   "dbsnp": [
+    "rs111033566"
+   ],
+   "diseases": [
+    "Hereditary pancreatitis (PCTT)",
+    "PRSS1-related disorder",
+    "Pancreatitis, hereditary (PCTT)",
+    "Trypsinogen deficiency",
+    "Vitamin D-dependent rickets type II with alopecia (VDDR2A)"
+   ],
+   "structures": {
+    "1trn": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 21,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 6,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 21,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 6,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N29T",
+   "position": 29,
+   "wild_type": "N",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000031923"
+   ],
+   "dbsnp": [
+    "rs111033566"
+   ],
+   "diseases": [
+    "Hereditary pancreatitis (PCTT)",
+    "Pancreatitis, hereditary (PCTT)"
+   ],
+   "structures": {
+    "1trn": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 21,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 6,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 21,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 6,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V39A",
+   "position": 39,
+   "wild_type": "V",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001939531"
+   ],
+   "dbsnp": [
+    "rs397507439"
+   ],
+   "diseases": [
+    "Hereditary pancreatitis (PCTT)"
+   ],
+   "structures": {
+    "1trn": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 16,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 16,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R116C",
+   "position": 116,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000022814",
+    "RCV004557257"
+   ],
+   "dbsnp": [
+    "rs387906698"
+   ],
+   "diseases": [
+    "Hereditary pancreatitis (PCTT)",
+    "Pancreatitis, hereditary (PCTT)"
+   ],
+   "structures": {
+    "1trn": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 93,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R116P",
+   "position": 116,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000149411"
+   ],
+   "dbsnp": [
+    "rs199769221"
+   ],
+   "diseases": [
+    "Hereditary pancreatitis (PCTT)"
+   ],
+   "structures": {
+    "1trn": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 93,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R122C",
+   "position": 122,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000012658",
+    "RCV001530066",
+    "RCV004754256"
+   ],
+   "dbsnp": [
+    "rs111033568"
+   ],
+   "diseases": [
+    "Hereditary pancreatitis (PCTT)",
+    "PRSS1-related disorder",
+    "Pancreatitis, hereditary (PCTT)"
+   ],
+   "structures": {
+    "1trn": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 99,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 99,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R122H",
+   "position": 122,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000012651",
+    "RCV000012657",
+    "RCV000487005",
+    "RCV003944816"
+   ],
+   "dbsnp": [
+    "rs111033565",
+    "rs267606982"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary pancreatitis (PCTT)",
+    "PRSS1-related disorder",
+    "Pancreatitis, hereditary (PCTT)"
+   ],
+   "structures": {
+    "1trn": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 99,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 99,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "16": 1,
+  "29": 2,
+  "39": 1,
+  "116": 2,
+  "122": 3
+ }
+}

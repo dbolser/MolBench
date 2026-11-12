@@ -1,0 +1,893 @@
+{
+ "accession": "P02649",
+ "gene": "APOE",
+ "entry_name": "APOE_HUMAN",
+ "protein": "Apolipoprotein E",
+ "uniprot_gene": "APOE",
+ "disease": "hyperlipoproteinaemia type III; Alzheimer disease risk",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P02649",
+ "retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "uniprot_length": 317,
+ "uniprot_sequence_sha256": "eddd8b84fbb094df0b4067ca1d0b9b137ddaee4f8b3a548fcff5152e92a4dd4b",
+ "primary_entry": "8ce0",
+ "selection": {
+  "candidates": 31,
+  "shortlisted": 24,
+  "eligible": 24,
+  "resolution_limit": 2.5,
+  "positions_covered": 24,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "8cdy",
+  "already_in_panel": false
+ },
+ "entries": {
+  "8ce0": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-18": 143
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "not_observed": 10,
+   "verified": 17,
+   "wild_type_mismatch": 1
+  }
+ },
+ "variants": [
+  {
+   "variant": "E21K",
+   "position": 21,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019429"
+   ],
+   "dbsnp": [
+    "rs121918392"
+   ],
+   "diseases": [
+    "HYPERLIPOPROTEINEMIA, TYPE III, AND ATHEROSCLEROSIS ASSOCIATED WITH APOE5"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E31K",
+   "position": 31,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019443",
+    "RCV000019453",
+    "RCV002225641",
+    "RCV005027591"
+   ],
+   "dbsnp": [
+    "rs201672011"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia",
+    "Hyperlipoproteinemia 3 (HLPP3)"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R43C",
+   "position": 43,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019468",
+    "RCV002496418",
+    "RCV004984646",
+    "RCV005867786"
+   ],
+   "dbsnp": [
+    "rs121918399"
+   ],
+   "diseases": [
+    "Age related macular degeneration 1 (ARMD1)",
+    "Alzheimer disease 2 (AD2)",
+    "Alzheimer disease 3 (AD3)",
+    "Alzheimer disease 4 (AD4)",
+    "Familial type 3 hyperlipoproteinemia",
+    "Lipoprotein glomerulopathy (LPG)",
+    "Sea-blue histiocyte syndrome"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 401,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L46P",
+   "position": 46,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019456",
+    "RCV000429606",
+    "RCV001175124",
+    "RCV001195944",
+    "RCV002379036",
+    "RCV006748285"
+   ],
+   "dbsnp": [
+    "rs769452"
+   ],
+   "diseases": [
+    "APOE4(-)-FREIBURG"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 28,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 404,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T60A",
+   "position": 60,
+   "wild_type": "T",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019457",
+    "RCV005384642",
+    "RCV006696280"
+   ],
+   "dbsnp": [
+    "rs28931576"
+   ],
+   "diseases": [
+    "APOE3(-)-FREIBURG"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 418,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A117T",
+   "position": 117,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019459"
+   ],
+   "dbsnp": [
+    "rs28931577"
+   ],
+   "diseases": [
+    "APOE3 VARIANT"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 99,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 475,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C130R",
+   "position": 130,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019438",
+    "RCV000019448",
+    "RCV000019455",
+    "RCV000019456",
+    "RCV000019458",
+    "RCV000292119",
+    "RCV000826089",
+    "RCV000845581",
+    "RCV000991302",
+    "RCV001175124",
+    "RCV001195807",
+    "RCV001262791",
+    "RCV005434607",
+    "RCV006629061"
+   ],
+   "dbsnp": [
+    "rs429358"
+   ],
+   "diseases": [
+    "APOE4(-)-FREIBURG",
+    "Alzheimer disease",
+    "Alzheimer disease 2 (AD2)",
+    "Alzheimer disease 4 (AD4)",
+    "Familial hypercholesterolemia",
+    "Familial type 3 hyperlipoproteinemia",
+    "Hyperlipoproteinemia 3 (HLPP3)"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "G145D",
+   "position": 145,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019439",
+    "RCV001262660",
+    "RCV001579351",
+    "RCV002476210",
+    "RCV004984986"
+   ],
+   "dbsnp": [
+    "rs267606664"
+   ],
+   "diseases": [
+    "Hyperlipoproteinemia due to APOE1"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 127,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 503,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R152Q",
+   "position": 152,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019460"
+   ],
+   "dbsnp": [
+    "rs28931578"
+   ],
+   "diseases": [
+    "APOE2 VARIANT"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 134,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 510,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R154L",
+   "position": 154,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000417087"
+   ],
+   "dbsnp": [
+    "rs200703101"
+   ],
+   "diseases": [],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 512,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R154S",
+   "position": 154,
+   "wild_type": "R",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019430",
+    "RCV000856604",
+    "RCV006629060"
+   ],
+   "dbsnp": [
+    "rs121918393"
+   ],
+   "diseases": [
+    "Familial hypercholesterolemia",
+    "Familial type 3 hyperlipoproteinemia",
+    "Hyperlipoproteinemia 3 (HLPP3)"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 512,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R163C",
+   "position": 163,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019432",
+    "RCV000019443",
+    "RCV000884152",
+    "RCV001777143",
+    "RCV002326680",
+    "RCV003924846",
+    "RCV005357151",
+    "RCV006277655"
+   ],
+   "dbsnp": [
+    "rs769455"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia",
+    "Hyperlipoproteinemia 3 (HLPP3)"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 521,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R163H",
+   "position": 163,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019449",
+    "RCV002250463",
+    "RCV006629062"
+   ],
+   "dbsnp": [
+    "rs121918397"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia",
+    "Hyperlipoproteinemia 3 (HLPP3)",
+    "Lipoprotein glomerulopathy (LPG)"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 521,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R163P",
+   "position": 163,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019466"
+   ],
+   "dbsnp": [
+    "rs121918397"
+   ],
+   "diseases": [
+    "Lipoprotein glomerulopathy (LPG)"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 521,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "K164E",
+   "position": 164,
+   "wild_type": "K",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019440"
+   ],
+   "dbsnp": [
+    "rs121918394"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia",
+    "Hyperlipoproteinemia 3 (HLPP3)"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 146,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 522,
+      "comp_id": "LYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "K164Q",
+   "position": 164,
+   "wild_type": "K",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001804151"
+   ],
+   "dbsnp": [
+    "rs121918394"
+   ],
+   "diseases": [
+    "Hyperlipoproteinemia 3 (HLPP3)",
+    "Hyperlipoproteinemia, type III, due to APOE2"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 146,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 522,
+      "comp_id": "LYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R165P",
+   "position": 165,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001391116",
+    "RCV006705539"
+   ],
+   "dbsnp": [
+    "rs1332591068"
+   ],
+   "diseases": [
+    "Lipoprotein glomerulopathy (LPG)"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 147,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 523,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A170P",
+   "position": 170,
+   "wild_type": "A",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019459"
+   ],
+   "dbsnp": [
+    "rs267606662"
+   ],
+   "diseases": [
+    "APOE3 VARIANT"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 152,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 528,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R176C",
+   "position": 176,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019428",
+    "RCV000019439",
+    "RCV000019452",
+    "RCV000211178",
+    "RCV000346955",
+    "RCV000845582",
+    "RCV001262472",
+    "RCV001529800"
+   ],
+   "dbsnp": [
+    "rs7412"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia",
+    "Hyperlipoproteinemia 3 (HLPP3)",
+    "Hyperlipoproteinemia due to APOE1"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 158,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 534,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G183A",
+   "position": 183,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001837071"
+   ],
+   "dbsnp": [
+    "rs2122137937"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia"
+   ],
+   "structures": {
+    "8ce0": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 165,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 541,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R242Q",
+   "position": 242,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019452"
+   ],
+   "dbsnp": [
+    "rs267606663"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R246C",
+   "position": 246,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019442",
+    "RCV004556717"
+   ],
+   "dbsnp": [
+    "rs121918395"
+   ],
+   "diseases": [
+    "APOE2-DUNEDIN",
+    "Adenomas and Adenocarcinomas",
+    "HYPERLIPOPROTEINEMIA, TYPE IV/V, DUE TO APOE2-DUNEDIN"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "V254E",
+   "position": 254,
+   "wild_type": "V",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001579858",
+    "RCV001701092",
+    "RCV004559221",
+    "RCV006342377",
+    "RCV006738256"
+   ],
+   "dbsnp": [
+    "rs199768005"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E262K",
+   "position": 262,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019435",
+    "RCV004984984",
+    "RCV005357623"
+   ],
+   "dbsnp": [
+    "rs140808909"
+   ],
+   "diseases": [
+    "HYPERLIPOPROTEINEMIA, TYPE III, AND ATHEROSCLEROSIS ASSOCIATED WITH APOE7"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E263K",
+   "position": 263,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019435",
+    "RCV004984985",
+    "RCV005367404"
+   ],
+   "dbsnp": [
+    "rs190853081"
+   ],
+   "diseases": [
+    "HYPERLIPOPROTEINEMIA, TYPE III, AND ATHEROSCLEROSIS ASSOCIATED WITH APOE7"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R269G",
+   "position": 269,
+   "wild_type": "R",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019455",
+    "RCV001565388",
+    "RCV002483522",
+    "RCV003227792",
+    "RCV003352927",
+    "RCV004730981",
+    "RCV005367405",
+    "RCV006738257"
+   ],
+   "dbsnp": [
+    "rs267606661"
+   ],
+   "diseases": [
+    "Familial type 3 hyperlipoproteinemia"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R292H",
+   "position": 292,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019461"
+   ],
+   "dbsnp": [
+    "rs121918398"
+   ],
+   "diseases": [
+    "APOE4 VARIANT"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "S314R",
+   "position": 314,
+   "wild_type": "S",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000019462",
+    "RCV005692175",
+    "RCV006684513"
+   ],
+   "dbsnp": [
+    "rs28931579"
+   ],
+   "diseases": [
+    "APOE4(+)",
+    "Familial type 3 hyperlipoproteinemia",
+    "Sea-blue histiocyte syndrome"
+   ],
+   "structures": {}
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [
+  {
+   "variant": "C130R",
+   "entry": "8ce0",
+   "auth_asym_id": "A",
+   "auth_seq_id": 112,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "ARG",
+   "reason": "wild-type residue differs in the structure"
+  }
+ ],
+ "pathogenic_single_residue_variants_per_position": {
+  "21": 1,
+  "31": 1,
+  "43": 1,
+  "46": 1,
+  "49": 1,
+  "60": 1,
+  "117": 1,
+  "130": 2,
+  "145": 1,
+  "152": 1,
+  "154": 2,
+  "163": 3,
+  "164": 2,
+  "165": 1,
+  "167": 1,
+  "170": 1,
+  "176": 1,
+  "183": 1,
+  "228": 1,
+  "242": 1,
+  "246": 1,
+  "254": 1,
+  "262": 1,
+  "263": 1,
+  "269": 1,
+  "292": 1,
+  "314": 1
+ }
+}

@@ -1,0 +1,204 @@
+{
+ "accession": "P60174",
+ "gene": "TPI1",
+ "entry_name": "TPIS_HUMAN",
+ "protein": "Triosephosphate isomerase",
+ "uniprot_gene": "TPI1",
+ "disease": "triosephosphate isomerase deficiency",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P60174",
+ "retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue",
+ "uniprot_length": 249,
+ "uniprot_sequence_sha256": "1b8803dc85035ecd8f315290ba582a78e9c31ddafda53441b1dc67c488337787",
+ "primary_entry": "9f69",
+ "selection": {
+  "candidates": 29,
+  "shortlisted": 23,
+  "eligible": 22,
+  "resolution_limit": 2.5,
+  "positions_covered": 5,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "9ffc",
+  "already_in_panel": false
+ },
+ "entries": {
+  "9f69": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 245
+    },
+    "n_insertion_codes": 0,
+    "offset": false,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "verified": 5
+  }
+ },
+ "variants": [
+  {
+   "variant": "C42Y",
+   "position": 42,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013289"
+   ],
+   "dbsnp": [
+    "rs121964848"
+   ],
+   "diseases": [
+    "Triosephosphate isomerase deficiency (TPID)"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 38,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E105D",
+   "position": 105,
+   "wild_type": "E",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013284",
+    "RCV001851818"
+   ],
+   "dbsnp": [
+    "rs121964845"
+   ],
+   "diseases": [
+    "Triosephosphate isomerase deficiency (TPID)"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 105,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 101,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G123R",
+   "position": 123,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013285",
+    "RCV001851819"
+   ],
+   "dbsnp": [
+    "rs121964846"
+   ],
+   "diseases": [
+    "TRIOSEPHOSPHATE ISOMERASE MANCHESTER"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 123,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 119,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I171V",
+   "position": 171,
+   "wild_type": "I",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013290"
+   ],
+   "dbsnp": [
+    "rs121964849"
+   ],
+   "diseases": [
+    "Triosephosphate isomerase deficiency (TPID)"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 171,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 167,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F241S",
+   "position": 241,
+   "wild_type": "F",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000123389"
+   ],
+   "dbsnp": [
+    "rs587777440"
+   ],
+   "diseases": [
+    "Triosephosphate isomerase deficiency (TPID)"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 241,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 237,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "11": 1,
+  "12": 1,
+  "42": 1,
+  "105": 1,
+  "123": 2,
+  "146": 1,
+  "171": 1,
+  "241": 1
+ }
+}

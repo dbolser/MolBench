@@ -1,0 +1,437 @@
+{
+ "id": "1ctq",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1ctq.cif",
+ "title": "STRUCTURE OF P21RAS IN COMPLEX WITH GPPNHP AT 100 K",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.26,
+ "n_models": 1,
+ "n_atoms": 1655,
+ "n_residues": 415,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "PROTEIN (TRANSFORMING PROTEIN P21/H-RAS-1)",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "MAGNESIUM ION",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "PHOSPHOAMINOPHOSPHONIC ACID-GUANYLATE ESTER",
+   "label_asym_ids": [
+    "C"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "D"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 166,
+   "n_observed": 166,
+   "auth_minus_label": {
+    "0": 166
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "166",
+     1,
+     166
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P01112",
+     "n_residues": 166,
+     "unp_first": 1,
+     "unp_last": 166,
+     "auth_minus_unp": {
+      "0": 166
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "1",
+       "166",
+       1,
+       166
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "GNP",
+   "name": "PHOSPHOAMINOPHOSPHONIC ACID-GUANYLATE ESTER",
+   "formula": "C10 H17 N6 O13 P3",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 32,
+   "atoms": [
+    "PG",
+    "O1G",
+    "O2G",
+    "O3G",
+    "N3B",
+    "PB",
+    "O1B",
+    "O2B",
+    "O3A",
+    "PA",
+    "O1A",
+    "O2A",
+    "O5'",
+    "C5'",
+    "C4'",
+    "O4'",
+    "C3'",
+    "O3'",
+    "C2'",
+    "O2'",
+    "C1'",
+    "N9",
+    "C8",
+    "N7",
+    "C5",
+    "C6",
+    "O6",
+    "N1",
+    "C2",
+    "N2",
+    "N3",
+    "C4"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 167,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "GNP"
+    }
+   ]
+  },
+  {
+   "comp_id": "MG",
+   "name": "MAGNESIUM ION",
+   "formula": "Mg 2",
+   "kind": "ion",
+   "metals": [
+    "MG"
+   ],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "MG"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 168,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "MG"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 17,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 17,
+    "comp_id": "SER",
+    "atom": "OG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 168,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MG",
+    "atom": "MG"
+   },
+   "distance": 2.096,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 35,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 35,
+    "comp_id": "THR",
+    "atom": "OG1"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 168,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MG",
+    "atom": "MG"
+   },
+   "distance": 2.08,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 167,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "GNP",
+    "atom": "O2G"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 168,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MG",
+    "atom": "MG"
+   },
+   "distance": 1.986,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 167,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "GNP",
+    "atom": "O2B"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 168,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MG",
+    "atom": "MG"
+   },
+   "distance": 2.062,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 168,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MG",
+    "atom": "MG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 1001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 2.099,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 168,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MG",
+    "atom": "MG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 1002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 2.053,
+   "to_symmetry_copy": false
+  }
+ ],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 16,
+   "end_auth_seq_id": 25,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 16,
+   "end_label_seq_id": 25
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 62,
+   "end_auth_seq_id": 67,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 62,
+   "end_label_seq_id": 67
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 68,
+   "end_auth_seq_id": 74,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 68,
+   "end_label_seq_id": 74
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 87,
+   "end_auth_seq_id": 103,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 87,
+   "end_label_seq_id": 103
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 127,
+   "end_auth_seq_id": 137,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 127,
+   "end_label_seq_id": 137
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 152,
+   "end_auth_seq_id": 165,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 152,
+   "end_label_seq_id": 165
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 37,
+   "end_auth_seq_id": 46,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 37,
+   "end_label_seq_id": 46,
+   "sheet_id": "S"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 49,
+   "end_auth_seq_id": 58,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 49,
+   "end_label_seq_id": 58,
+   "sheet_id": "S"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 2,
+   "end_auth_seq_id": 10,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 2,
+   "end_label_seq_id": 10,
+   "sheet_id": "S"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 77,
+   "end_auth_seq_id": 83,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 77,
+   "end_label_seq_id": 83,
+   "sheet_id": "S"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 111,
+   "end_auth_seq_id": 116,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 111,
+   "end_label_seq_id": 116,
+   "sheet_id": "S"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 141,
+   "end_auth_seq_id": 143,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 141,
+   "end_label_seq_id": 143,
+   "sheet_id": "S"
+  }
+ ],
+ "waters": 247,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": false
+ }
+}

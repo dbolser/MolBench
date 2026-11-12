@@ -1,0 +1,198 @@
+{
+ "id": "1crn",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1crn.cif",
+ "title": "WATER STRUCTURE OF A HYDROPHOBIC PROTEIN AT ATOMIC RESOLUTION. PENTAGON RINGS OF WATER MOLECULES IN CRYSTALS OF CRAMBIN",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.5,
+ "n_models": 1,
+ "n_atoms": 327,
+ "n_residues": 46,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "CRAMBIN",
+   "label_asym_ids": [
+    "A"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 46,
+   "n_observed": 46,
+   "auth_minus_label": {
+    "0": 46
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "46",
+     1,
+     46
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P01542",
+     "n_residues": 46,
+     "unp_first": 1,
+     "unp_last": 46,
+     "auth_minus_unp": {
+      "0": 46
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "1",
+       "46",
+       1,
+       46
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [],
+ "disulfides": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 3,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 3,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 40,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 40,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.004,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 4,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 4,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 32,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 32,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.035,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 16,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 16,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 26,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 26,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.051,
+   "to_symmetry_copy": false
+  }
+ ],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 7,
+   "end_auth_seq_id": 19,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 7,
+   "end_label_seq_id": 19
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 23,
+   "end_auth_seq_id": 30,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 23,
+   "end_label_seq_id": 30
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 1,
+   "end_auth_seq_id": 4,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 1,
+   "end_label_seq_id": 4,
+   "sheet_id": "S1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 32,
+   "end_auth_seq_id": 35,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 32,
+   "end_label_seq_id": 35,
+   "sheet_id": "S1"
+  }
+ ],
+ "waters": 0,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": false
+ }
+}

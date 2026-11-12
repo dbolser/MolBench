@@ -1,0 +1,167 @@
+{
+ "id": "1ubq",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1ubq.cif",
+ "title": "STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.8,
+ "n_models": 1,
+ "n_atoms": 660,
+ "n_residues": 134,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "UBIQUITIN",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "B"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 76,
+   "n_observed": 76,
+   "auth_minus_label": {
+    "0": 76
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "76",
+     1,
+     76
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P0CG48",
+     "n_residues": 76,
+     "unp_first": 609,
+     "unp_last": 684,
+     "auth_minus_unp": {
+      "-608": 76
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "76",
+       609,
+       684
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 23,
+   "end_auth_seq_id": 34,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 23,
+   "end_label_seq_id": 34
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 56,
+   "end_auth_seq_id": 59,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 56,
+   "end_label_seq_id": 59
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 10,
+   "end_auth_seq_id": 17,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 10,
+   "end_label_seq_id": 17,
+   "sheet_id": "BET"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 1,
+   "end_auth_seq_id": 7,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 1,
+   "end_label_seq_id": 7,
+   "sheet_id": "BET"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 64,
+   "end_auth_seq_id": 72,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 64,
+   "end_label_seq_id": 72,
+   "sheet_id": "BET"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 40,
+   "end_auth_seq_id": 45,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 40,
+   "end_label_seq_id": 45,
+   "sheet_id": "BET"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 48,
+   "end_auth_seq_id": 50,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 48,
+   "end_label_seq_id": 50,
+   "sheet_id": "BET"
+  }
+ ],
+ "waters": 58,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

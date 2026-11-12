@@ -1,0 +1,3851 @@
+{
+ "rule": "panel-v1",
+ "max_atoms": 15000,
+ "entries": [
+  {
+   "id": "1a3k",
+   "why": "Galectin-3 carbohydrate-recognition domain with N-acetyllactosamine: a bound disaccharide (branched entity that is not a glycosylation).",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "X-RAY CRYSTAL STRUCTURE OF THE HUMAN GALECTIN-3 CARBOHYDRATE RECOGNITION DOMAIN (CRD) AT 2.1 ANGSTROM RESOLUTION",
+   "method": "X-ray",
+   "resolution": 2.1,
+   "deposited": "1998-01-22",
+   "atoms": 1253,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1a3k.cif",
+   "sha256": "68ddcafe1d9d81a8deb5c7c8ba3f9d3a89c7c5e02b3a77246b6d3477d642211c",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "glycan"
+   ],
+   "uniprot": [
+    "P17931"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "glycan",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1a6m",
+   "why": "Sperm-whale oxymyoglobin at 1.0 A: heme with bound O2, alternate conformations.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "OXY-MYOGLOBIN, ATOMIC RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.0,
+   "deposited": "1998-02-26",
+   "atoms": 1584,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "int-001",
+    "int-002",
+    "int-004"
+   ],
+   "source": "https://files.rcsb.org/download/1a6m.cif",
+   "sha256": "25ae24d2b518a7cb7ef24aeb1eb3fc5c35707ce4e696956d11b8f9fdf9fa7218",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "heme",
+    "ligand",
+    "metal",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P02185"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1aay",
+   "why": "Zif268 zinc fingers on DNA at 1.6 A: three zinc sites, protein-DNA.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "ZIF268 ZINC FINGER-DNA COMPLEX",
+   "method": "X-ray",
+   "resolution": 1.6,
+   "deposited": "1997-01-18",
+   "atoms": 1330,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1aay.cif",
+   "sha256": "41b8a72426810c08997e89928f8fb8dc897120dabff4011760bc0864aa8afe28",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "metal",
+    "multi-chain",
+    "nucleic",
+    "protein-dna",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P08046"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "interactions",
+    "metal",
+    "nucleic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1ake",
+   "why": "Adenylate kinase with the bisubstrate inhibitor AP5A: two copies, a large nucleotide ligand.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "STRUCTURE OF THE COMPLEX BETWEEN ADENYLATE KINASE FROM ESCHERICHIA COLI AND THE INHIBITOR AP5A REFINED AT 1.9 ANGSTROMS RESOLUTION: A MODEL FOR A CATALYTIC TRANSITION STATE",
+   "method": "X-ray",
+   "resolution": 2.0,
+   "deposited": "1991-11-08",
+   "atoms": 3816,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1ake.cif",
+   "sha256": "01f41b1b42318a1a5df7f650dbab881677aa0e8d825f7c42dd26ae16a94c0948",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "ligand",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "P69441"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "interactions",
+    "ligand"
+   ]
+  },
+  {
+   "id": "1aki",
+   "why": "Hen egg-white lysozyme (orthorhombic form): second copy of a familiar fold in another entry.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "THE STRUCTURE OF THE ORTHORHOMBIC FORM OF HEN EGG-WHITE LYSOZYME AT 1.5 ANGSTROMS RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.5,
+   "deposited": "1997-05-19",
+   "atoms": 1079,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-018"
+   ],
+   "source": "https://files.rcsb.org/download/1aki.cif",
+   "sha256": "16d16e232218abc7ce6352d76126821c23e7a79d88e1fc709368f269c6762f47",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "disulfide",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00698"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "disulfide",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1aoi",
+   "why": "Nucleosome core particle: eight histone chains and 146 bp of DNA, the largest multi-chain entry under the size limit.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "COMPLEX BETWEEN NUCLEOSOME CORE PARTICLE (H3,H4,H2A,H2B) AND 146 BP LONG DNA FRAGMENT",
+   "method": "X-ray",
+   "resolution": 2.8,
+   "deposited": "1997-07-03",
+   "atoms": 12385,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1aoi.cif",
+   "sha256": "24a18ac6c02cb4ac1bb455b59360b6d514a39dbc1e9f01b4be9a54533d0ea10d",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "metal",
+    "multi-chain",
+    "nucleic",
+    "protein-dna",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P02281",
+    "P02302",
+    "P06897",
+    "P62799"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "interactions",
+    "metal",
+    "nucleic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1atp",
+   "why": "Protein kinase A with ATP, manganese and an inhibitor peptide: phosphorylated residues, two protein chains.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "2.2 angstrom refined crystal structure of the catalytic subunit of cAMP-dependent protein kinase complexed with MNATP and a peptide inhibitor",
+   "method": "X-ray",
+   "resolution": 2.2,
+   "deposited": "1993-01-08",
+   "atoms": 3070,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1atp.cif",
+   "sha256": "66a0587c6a3b95e73a87e3e9d764eb3318ec13f8514b22242af682097babb4f2",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P05132",
+    "P63248"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "interactions",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1bna",
+   "why": "The Dickerson B-DNA dodecamer: DNA only, two chains.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "STRUCTURE OF A B-DNA DODECAMER. CONFORMATION AND DYNAMICS",
+   "method": "X-ray",
+   "resolution": 1.9,
+   "deposited": "1981-01-26",
+   "atoms": 566,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-013"
+   ],
+   "source": "https://files.rcsb.org/download/1bna.cif",
+   "sha256": "76d550f32963de46f4f3c63caacb530f91a24f333fbc4312766d240b14e8cf30",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "multi-chain",
+    "nucleic"
+   ],
+   "uniprot": [],
+   "sifts": false,
+   "offset": false,
+   "families": [
+    "basic",
+    "chains",
+    "nucleic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1c3w",
+   "why": "Bacteriorhodopsin at 1.55 A: seven helices, retinal covalently bound to a lysine, lipids.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "BACTERIORHODOPSIN/LIPID COMPLEX AT 1.55 A RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.55,
+   "deposited": "1999-07-28",
+   "atoms": 2073,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1c3w.cif",
+   "sha256": "460a1e18a378d4c48fa82d38fb56cec178ff3dfd271fcae73415e077a9162f44",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "MemProtMD",
+    "PDBTM",
+    "mpstruc"
+   ],
+   "features": [
+    "assembly-differs",
+    "auth-label-number",
+    "ligand",
+    "membrane",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P02945"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1cbs",
+   "why": "Cellular retinoic-acid-binding protein II with retinoic acid: small beta-barrel, one buried ligand.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "CRYSTAL STRUCTURE OF CELLULAR RETINOIC-ACID-BINDING PROTEINS I AND II IN COMPLEX WITH ALL-TRANS-RETINOIC ACID AND A SYNTHETIC RETINOID",
+   "method": "X-ray",
+   "resolution": 1.8,
+   "deposited": "1994-09-28",
+   "atoms": 1213,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "gen-cartoon-1cbs",
+    "gen-chain-1cbs",
+    "gen-focus-1cbs",
+    "gen-ligands-1cbs",
+    "gen-range-1cbs",
+    "gen-surface-1cbs",
+    "grd-ligand-1cbs-rea"
+   ],
+   "source": "https://files.rcsb.org/download/1cbs.cif",
+   "sha256": "f48f2a5b0f90aaa9115706f53302cc1ced12d1eacd9fc9887e452a27b19bb9a7",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "ligand",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P29373"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1crn",
+   "why": "Crambin: 46 residues, three disulfides, the smallest well-ordered protein in the panel.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "WATER STRUCTURE OF A HYDROPHOBIC PROTEIN AT ATOMIC RESOLUTION. PENTAGON RINGS OF WATER MOLECULES IN CRYSTALS OF CRAMBIN",
+   "method": "X-ray",
+   "resolution": 1.5,
+   "deposited": "1981-04-30",
+   "atoms": 327,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1crn.cif",
+   "sha256": "23787562c427d7c1abe5420e86d5f1d0a6c7007dec1e8ce85645a6d69c32e8ba",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "disulfide"
+   ],
+   "uniprot": [
+    "P01542"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "disulfide"
+   ]
+  },
+  {
+   "id": "1ctq",
+   "why": "HRAS (P01112): Costello syndrome.",
+   "origin": [
+    "disease:P01112"
+   ],
+   "kind": "pdb",
+   "title": "STRUCTURE OF P21RAS IN COMPLEX WITH GPPNHP AT 100 K",
+   "method": "X-ray",
+   "resolution": 1.26,
+   "deposited": "1999-08-20",
+   "atoms": 1655,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1ctq.cif",
+   "sha256": "157a817e39cd7cb8111063c2a4b71cb74ea73af77614113017b550320d869e1e",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "clinical",
+    "ligand",
+    "metal"
+   ],
+   "uniprot": [
+    "P01112"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "metal"
+   ]
+  },
+  {
+   "id": "1d3z",
+   "why": "Ubiquitin by NMR: the multi-model partner of 1UBQ.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "UBIQUITIN NMR STRUCTURE",
+   "method": "NMR",
+   "resolution": null,
+   "deposited": "1999-10-01",
+   "atoms": 1231,
+   "models": 10,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1d3z.cif",
+   "sha256": "7242859f3508ff1711e5b38a78b14c960f137c096f36302406223c93b909c407",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "nmr",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P0CG48"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1d5r",
+   "why": "PTEN (P60484): PTEN hamartoma tumour syndrome.",
+   "origin": [
+    "disease:P60484"
+   ],
+   "kind": "pdb",
+   "title": "Crystal Structure of the PTEN Tumor Suppressor",
+   "method": "X-ray",
+   "resolution": 2.1,
+   "deposited": "1999-10-11",
+   "atoms": 2968,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1d5r.cif",
+   "sha256": "ea6f0a6764edea3036979830ad4abb69c8750b5a45d3a06efecf4776be216fc3",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "ligand"
+   ],
+   "uniprot": [
+    "P60484"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1ehz",
+   "why": "Yeast phenylalanine tRNA at 1.93 A: RNA only, modified bases, magnesium.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "The crystal structure of yeast phenylalanine tRNA at 1.93 A resolution",
+   "method": "X-ray",
+   "resolution": 1.93,
+   "deposited": "2000-02-23",
+   "atoms": 1821,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1ehz.cif",
+   "sha256": "3021dd2b6461f850bb66d6748d3c22a5e1bb6cc891c625c15d793f38215b28ab",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "metal",
+    "modified-residue",
+    "nucleic"
+   ],
+   "uniprot": [],
+   "sifts": false,
+   "offset": false,
+   "families": [
+    "basic",
+    "metal",
+    "modified-residue",
+    "nucleic"
+   ]
+  },
+  {
+   "id": "1ema",
+   "why": "Green fluorescent protein: beta-barrel with the chromophore as a modified residue inside the chain.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "GREEN FLUORESCENT PROTEIN FROM AEQUOREA VICTORIA",
+   "method": "X-ray",
+   "resolution": 1.9,
+   "deposited": "1996-08-01",
+   "atoms": 1866,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-011",
+    "res-gfp"
+   ],
+   "source": "https://files.rcsb.org/download/1ema.cif",
+   "sha256": "b7d583424b6f960a7421fd4c88cdb6bbb10025667cd863d8cd14f70bc775aceb",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "modified-residue"
+   ],
+   "uniprot": [
+    "P42212"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1f88",
+   "why": "Bovine rhodopsin: the first GPCR structure, retinal, two chains.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "CRYSTAL STRUCTURE OF BOVINE RHODOPSIN",
+   "method": "X-ray",
+   "resolution": 2.8,
+   "deposited": "2000-06-29",
+   "atoms": 5267,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-012"
+   ],
+   "source": "https://files.rcsb.org/download/1f88.cif",
+   "sha256": "6bc49951984686f3ac98a0d98873b08dd545379ae305ddc973c86667f123a410",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "MemProtMD",
+    "PDBTM",
+    "mpstruc"
+   ],
+   "features": [
+    "disulfide",
+    "glycan",
+    "ligand",
+    "membrane",
+    "metal",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "P02699"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "chains",
+    "disulfide",
+    "glycan",
+    "interactions",
+    "ligand",
+    "metal"
+   ]
+  },
+  {
+   "id": "1fs3",
+   "why": "Ribonuclease A at 1.4 A: alpha+beta fold, four disulfides.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "CRYSTAL STRUCTURE OF WILD-TYPE BOVINE PANCREATIC RIBONUCLEASE A",
+   "method": "X-ray",
+   "resolution": 1.4,
+   "deposited": "2000-09-08",
+   "atoms": 1066,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1fs3.cif",
+   "sha256": "625f00d2061ef9cf93f7efe133af376e2dc7b893ffca349113483af453b45b14",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "disulfide",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P61823"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "disulfide",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1hho",
+   "why": "Human oxyhaemoglobin: one alpha-beta pair deposited, tetramer is the biological assembly.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "STRUCTURE OF HUMAN OXYHAEMOGLOBIN AT 2.1 ANGSTROMS RESOLUTION",
+   "method": "X-ray",
+   "resolution": 2.1,
+   "deposited": "1983-06-10",
+   "atoms": 2396,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-003",
+    "api-020",
+    "gen-cartoon-1hho",
+    "gen-chain-1hho",
+    "gen-focus-1hho",
+    "gen-ions-1hho",
+    "gen-ligands-1hho",
+    "gen-range-1hho",
+    "gen-surface-1hho",
+    "grd-ligand-1hho-hem",
+    "int-006",
+    "mvs-001",
+    "mvs-002",
+    "vis-101"
+   ],
+   "source": "https://files.rcsb.org/download/1hho.cif",
+   "sha256": "4d7b3ff09044c5d0a55f7adbfcfac71b0e33cbedd6c63896ecac5d865a05c434",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "clinical",
+    "heme",
+    "ligand",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P68871",
+    "P69905"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "clinical",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1hk0",
+   "why": "CRYGD (P07320): congenital cataract.",
+   "origin": [
+    "disease:P07320"
+   ],
+   "kind": "pdb",
+   "title": "Human GammaD Crystallin Structure at 1.25 A Resolution",
+   "method": "X-ray",
+   "resolution": 1.25,
+   "deposited": "2003-03-05",
+   "atoms": 1772,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1hk0.cif",
+   "sha256": "84e518e6dd1afbad281edb8b356417661eba5763507a82158d5338c9010f8951",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "clinical",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P07320"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "clinical",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1hrc",
+   "why": "Horse cytochrome c: heme covalently attached to two cysteines.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "HIGH-RESOLUTION THREE-DIMENSIONAL STRUCTURE OF HORSE HEART CYTOCHROME C",
+   "method": "X-ray",
+   "resolution": 1.9,
+   "deposited": "1994-08-16",
+   "atoms": 993,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1hrc.cif",
+   "sha256": "00ddc70047e8eb00d5acf2fa2ab5ab3ba6f942c75212ff2ebe3234130a16e17b",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "heme",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00004"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1hsg",
+   "why": "HIV-1 protease with indinavir: second protease-drug complex, different inhibitor class from 1HVR.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "CRYSTAL STRUCTURE AT 1.9 ANGSTROMS RESOLUTION OF HUMAN IMMUNODEFICIENCY VIRUS (HIV) II PROTEASE COMPLEXED WITH L-735,524, AN ORALLY BIOAVAILABLE INHIBITOR OF THE HIV PROTEASES",
+   "method": "X-ray",
+   "resolution": 2.0,
+   "deposited": "1995-03-31",
+   "atoms": 1686,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1hsg.cif",
+   "sha256": "d2ba73b5c4be05c45275571bbb4dd042347927f91c6c05038c0df5d1ce23c268",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "ligand",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P03367"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1hvr",
+   "why": "HIV-1 protease dimer with a cyclic-urea inhibitor at the dimer interface.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "RATIONAL DESIGN OF POTENT, BIOAVAILABLE, NONPEPTIDE CYCLIC UREAS AS HIV PROTEASE INHIBITORS",
+   "method": "X-ray",
+   "resolution": 1.8,
+   "deposited": "1994-02-14",
+   "atoms": 1890,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-002",
+    "mvs-004"
+   ],
+   "source": "https://files.rcsb.org/download/1hvr.cif",
+   "sha256": "88ae65ea8ab9756b408a94ab02fe922c1d80a79e6226d796f2a565aea3c0dda6",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "ligand",
+    "modified-residue",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P04585"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "interactions",
+    "ligand",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1iep",
+   "why": "Abl kinase domain with imatinib: a kinase-drug complex, two copies.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "CRYSTAL STRUCTURE OF THE C-ABL KINASE DOMAIN IN COMPLEX WITH STI-571.",
+   "method": "X-ray",
+   "resolution": 2.1,
+   "deposited": "2001-04-10",
+   "atoms": 4710,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1iep.cif",
+   "sha256": "0929a6fae4aa67875ed0c8d06b650f0a4ec7bb104011abfc7c8ee402c672ca27",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-number",
+    "ligand",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "P00520"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1igt",
+   "why": "Intact IgG2a antibody: four chains, many disulfides, Fc glycans.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "STRUCTURE OF IMMUNOGLOBULIN",
+   "method": "X-ray",
+   "resolution": 2.8,
+   "deposited": "1996-10-25",
+   "atoms": 12956,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1igt.cif",
+   "sha256": "d7b1a560ed993c7be669a15530b64f37e2af8e978c321a5779d20ab75746b63f",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "disulfide",
+    "glycan",
+    "insertion-codes",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P01863"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "disulfide",
+    "glycan",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1iro",
+   "why": "Rubredoxin at 1.1 A: one iron held by four cysteines, 53 residues.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "RUBREDOXIN (OXIDIZED, FE(III)) AT 1.1 ANGSTROMS RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.1,
+   "deposited": "1995-12-13",
+   "atoms": 858,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1iro.cif",
+   "sha256": "aa46fd61fc959edf586935538ebe22c0831bf95a75a12fa69ac7213c42b87150",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "metal"
+   ],
+   "uniprot": [
+    "P00268"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "assembly",
+    "basic",
+    "metal"
+   ]
+  },
+  {
+   "id": "1k4c",
+   "why": "KcsA potassium channel with a Fab: one channel subunit deposited, tetramer on a crystal axis; K+ ions in the selectivity filter.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Potassium Channel KcsA-Fab complex in high concentration of K+",
+   "method": "X-ray",
+   "resolution": 2.0,
+   "deposited": "2001-10-07",
+   "atoms": 4534,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1k4c.cif",
+   "sha256": "da8a06fa1d2a514b106fbbf43ec63c88450027a427ba751b2a61da0f02a38763",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "MemProtMD",
+    "PDBTM",
+    "mpstruc"
+   ],
+   "features": [
+    "assembly-differs",
+    "disulfide",
+    "ligand",
+    "membrane",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P01837",
+    "P0A334"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "disulfide",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1kf1",
+   "why": "Human telomeric G-quadruplex: non-duplex DNA with potassium ions on the axis.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Structure and Packing of Human Telomeric DNA",
+   "method": "X-ray",
+   "resolution": 2.1,
+   "deposited": "2001-11-19",
+   "atoms": 536,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1kf1.cif",
+   "sha256": "8f25b1fe6658173f323a7628620514d2adbbed690683cad0c314ea0ddd505d99",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "metal",
+    "nucleic"
+   ],
+   "uniprot": [],
+   "sifts": false,
+   "offset": false,
+   "families": [
+    "basic",
+    "metal",
+    "nucleic"
+   ]
+  },
+  {
+   "id": "1l2y",
+   "why": "Trp-cage miniprotein by NMR: 20 residues, 38 models (only the first is tabled).",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "NMR Structure of Trp-Cage Miniprotein Construct TC5b",
+   "method": "NMR",
+   "resolution": null,
+   "deposited": "2002-02-25",
+   "atoms": 304,
+   "models": 38,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1l2y.cif",
+   "sha256": "8face44439c270c7bb9734a5eda12551460a9228969153f9caa306e1da75c671",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "nmr"
+   ],
+   "uniprot": [],
+   "sifts": false,
+   "offset": false,
+   "families": [
+    "basic"
+   ]
+  },
+  {
+   "id": "1lmb",
+   "why": "Lambda repressor on operator DNA: a helix-turn-helix dimer on DNA.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "REFINED 1.8 ANGSTROM CRYSTAL STRUCTURE OF THE LAMBDA REPRESSOR-OPERATOR COMPLEX",
+   "method": "X-ray",
+   "resolution": 1.8,
+   "deposited": "1991-11-05",
+   "atoms": 2334,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1lmb.cif",
+   "sha256": "d7a7078d944fffea2f882a56224ed0c34dcec1d3867e3ad8d27c903a7a9f8e21",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "multi-chain",
+    "nucleic",
+    "protein-dna",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P03034"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "interactions",
+    "nucleic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1lyz",
+   "why": "Hen egg-white lysozyme: the textbook small enzyme, four disulfides.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Real-space refinement of the structure of hen egg-white lysozyme",
+   "method": "X-ray",
+   "resolution": 2.0,
+   "deposited": "1975-02-01",
+   "atoms": 1102,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-004",
+    "gen-cartoon-1lyz",
+    "gen-chain-1lyz",
+    "gen-range-1lyz",
+    "gen-surface-1lyz",
+    "grd-disulfide-1lyz",
+    "mvs-003",
+    "res-lysozyme"
+   ],
+   "source": "https://files.rcsb.org/download/1lyz.cif",
+   "sha256": "7d4eeceaeee0adf6946dd07903907066c3923e103797caee2d40318a1af3cad6",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "disulfide",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00698"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "disulfide",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1mbn",
+   "why": "Sperm-whale myoglobin, the first protein structure: all-alpha, heme.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "The stereochemistry of the protein myoglobin",
+   "method": "X-ray",
+   "resolution": 2.0,
+   "deposited": "1973-04-05",
+   "atoms": 1260,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-001",
+    "res-myoglobin"
+   ],
+   "source": "https://files.rcsb.org/download/1mbn.cif",
+   "sha256": "91c8a5754c748c7cc1c1508ee92bc1df4c332be2383c8ae93fd084292ec8722e",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "heme",
+    "ligand",
+    "metal",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P02185"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1plc",
+   "why": "Plastocyanin at 1.33 A: a copper site in a small beta-sandwich.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "ACCURACY AND PRECISION IN PROTEIN CRYSTAL STRUCTURE ANALYSIS: RESTRAINED LEAST-SQUARES REFINEMENT OF THE CRYSTAL STRUCTURE OF POPLAR PLASTOCYANIN AT 1.33 ANGSTROMS RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.33,
+   "deposited": "1992-03-11",
+   "atoms": 1657,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1plc.cif",
+   "sha256": "ff6dea63f20ee33eddffa2c7eaf599ab65562b92918feec0da49f7a282d48778",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "metal",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00299"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1rx2",
+   "why": "E. coli dihydrofolate reductase with folate and NADP+: two different ligands in one site.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "DIHYDROFOLATE REDUCTASE (E.C.1.5.1.3) COMPLEXED WITH WITH FOLATE AND NICOTINAMIDE ADENINE DINUCLEOTIDE PHOSPHATE (OXIDIZED FORM)",
+   "method": "X-ray",
+   "resolution": 1.8,
+   "deposited": "1996-09-19",
+   "atoms": 1503,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1rx2.cif",
+   "sha256": "93310dcda0be6f57ad0088afe4ebbbad8898431b9b99971a8fae65af1b373553",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "ligand",
+    "metal"
+   ],
+   "uniprot": [
+    "P0ABQ4"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "metal"
+   ]
+  },
+  {
+   "id": "1stp",
+   "why": "Streptavidin with biotin: one chain deposited, tetramer is the assembly.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "STRUCTURAL ORIGINS OF HIGH-AFFINITY BIOTIN BINDING TO STREPTAVIDIN",
+   "method": "X-ray",
+   "resolution": 2.6,
+   "deposited": "1992-03-12",
+   "atoms": 1001,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-007"
+   ],
+   "source": "https://files.rcsb.org/download/1stp.cif",
+   "sha256": "36be77b9722ebb9f603b27bf16cbc30057f87ab9923a2d2adab0eadbdb30c30f",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "ligand",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P22629"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1trn",
+   "why": "PRSS1 (P07477): hereditary pancreatitis.",
+   "origin": [
+    "disease:P07477"
+   ],
+   "kind": "pdb",
+   "title": "CRYSTAL STRUCTURE OF HUMAN TRYPSIN 1: UNEXPECTED PHOSPHORYLATION OF TYROSINE 151",
+   "method": "X-ray",
+   "resolution": 2.2,
+   "deposited": "1995-03-16",
+   "atoms": 3705,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1trn.cif",
+   "sha256": "8579e65095273f3903eee05c39b40a3bb94e961f70d2850531c89c16eb97d0c4",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "disulfide",
+    "insertion-codes",
+    "ligand",
+    "modified-residue",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P07477"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "disulfide",
+    "interactions",
+    "ligand",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1tup",
+   "why": "p53 core domain on DNA: three protein chains whose author chain ids differ from the label chain ids, zinc site, the main cancer-variant protein. TP53 (P04637): Li-Fraumeni syndrome; somatic cancers.",
+   "origin": [
+    "disease:P04637",
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "TUMOR SUPPRESSOR P53 COMPLEXED WITH DNA",
+   "method": "X-ray",
+   "resolution": 2.2,
+   "deposited": "1995-07-11",
+   "atoms": 5828,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "clinvar-1tup-D281",
+    "clinvar-1tup-F109",
+    "clinvar-1tup-N239",
+    "clinvar-1tup-S215",
+    "clinvar-1tup-S241",
+    "hotspots-1tup",
+    "named-1tup-143",
+    "named-1tup-175",
+    "named-1tup-248"
+   ],
+   "source": "https://files.rcsb.org/download/1tup.cif",
+   "sha256": "cbc6ebdae1444998cf55744339e1a500d8822ac0761841d1eed96f5e8b59cb37",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "clinical",
+    "metal",
+    "multi-chain",
+    "nucleic",
+    "protein-dna"
+   ],
+   "uniprot": [
+    "P04637"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "interactions",
+    "metal",
+    "nucleic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1ubq",
+   "why": "Ubiquitin at 1.8 A: a 76-residue single chain with no ligands, the plain baseline.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.8,
+   "deposited": "1987-01-02",
+   "atoms": 660,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-010"
+   ],
+   "source": "https://files.rcsb.org/download/1ubq.cif",
+   "sha256": "056f98710cb2b36f633c45e41902a02eb446e82871da21ff2dd44f74a56ca0f6",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P0CG48"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1udt",
+   "why": "Phosphodiesterase 5 catalytic domain with sildenafil: a drug in its target, zinc and magnesium.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of Human Phosphodiesterase 5 complexed with Sildenafil(Viagra)",
+   "method": "X-ray",
+   "resolution": 2.3,
+   "deposited": "2003-05-06",
+   "atoms": 2655,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "res-pde5a"
+   ],
+   "source": "https://files.rcsb.org/download/1udt.cif",
+   "sha256": "5f3e39031fc579ca6b31cdaab37dd7fbceba26126cf33a03fd6ab35e62eb16e9",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "ligand",
+    "metal"
+   ],
+   "uniprot": [
+    "O76074"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "1y26",
+   "why": "Adenine riboswitch with adenine: RNA binding a small ligand.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "A-riboswitch-adenine complex",
+   "method": "X-ray",
+   "resolution": 2.1,
+   "deposited": "2004-11-20",
+   "atoms": 1608,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/1y26.cif",
+   "sha256": "99b1118f0af4add047b9bc60760c8f0e5d0b288a1b25a63a6f4e1516aab7eb5b",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "ligand",
+    "metal",
+    "nucleic"
+   ],
+   "uniprot": [],
+   "sifts": false,
+   "offset": false,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "metal",
+    "nucleic",
+    "numbering"
+   ]
+  },
+  {
+   "id": "2c9v",
+   "why": "SOD1 (P00441): amyotrophic lateral sclerosis 1.",
+   "origin": [
+    "disease:P00441"
+   ],
+   "kind": "pdb",
+   "title": "Atomic resolution structure of Cu-Zn Human Superoxide dismutase",
+   "method": "X-ray",
+   "resolution": 1.07,
+   "deposited": "2005-12-14",
+   "atoms": 3043,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/2c9v.cif",
+   "sha256": "378722d38fea43812a185c331bb35e2fa2fd456d4e74d93bc7ab945698088145",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "clinical",
+    "disulfide",
+    "ligand",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00441"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "disulfide",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "2cpp",
+   "why": "Cytochrome P450cam with camphor: heme plus a substrate, cysteine-ligated iron.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "HIGH-RESOLUTION CRYSTAL STRUCTURE OF CYTOCHROME P450-CAM",
+   "method": "X-ray",
+   "resolution": 1.63,
+   "deposited": "1987-04-06",
+   "atoms": 3462,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/2cpp.cif",
+   "sha256": "9a4ebe0f42fae120151231fe307c44bac9cf1bf58f40485ca9afa720e067202b",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "heme",
+    "ligand",
+    "metal",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00183"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "2hhb",
+   "why": "Human deoxyhaemoglobin: full alpha2-beta2 tetramer deposited, four hemes. HBA1 (P69905): alpha-thalassaemia; haemoglobin variants. HBB (P68871): sickle cell disease; beta-thalassaemia.",
+   "origin": [
+    "disease:P68871",
+    "disease:P69905",
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.74,
+   "deposited": "1984-03-07",
+   "atoms": 4779,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-005",
+    "api-014",
+    "gen-cartoon-2hhb",
+    "gen-chain-2hhb",
+    "gen-focus-2hhb",
+    "gen-ions-2hhb",
+    "gen-ligands-2hhb",
+    "gen-range-2hhb",
+    "gen-surface-2hhb",
+    "grd-ligand-2hhb-hem"
+   ],
+   "source": "https://files.rcsb.org/download/2hhb.cif",
+   "sha256": "d41ec279c2fb8e9b53e6ab4c1e6ecca52e20346a3f3808a6d31d9e8307dd3810",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "clinical",
+    "heme",
+    "ligand",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P68871",
+    "P69905"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "2nwd",
+   "why": "LYZ (P61626): hereditary lysozyme amyloidosis.",
+   "origin": [
+    "disease:P61626"
+   ],
+   "kind": "pdb",
+   "title": "Structure of chemically synthesized human lysozyme at 1 Angstrom resolution",
+   "method": "X-ray",
+   "resolution": 1.04,
+   "deposited": "2006-11-14",
+   "atoms": 2691,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/2nwd.cif",
+   "sha256": "b043256f5bea6dd54ed8ee176ccfc641c27df203c32ba1afe723884e07654c2f",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "clinical",
+    "disulfide",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P61626"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "clinical",
+    "disulfide",
+    "numbering"
+   ]
+  },
+  {
+   "id": "2omf",
+   "why": "OmpF porin: a membrane beta-barrel, one chain deposited, trimer is the assembly.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "OMPF PORIN",
+   "method": "X-ray",
+   "resolution": 2.4,
+   "deposited": "1995-02-28",
+   "atoms": 2827,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/2omf.cif",
+   "sha256": "eae9f6e09784eb70be07a029d2102619efe5d56d2a8682ab1634d0e068a0910e",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "MemProtMD",
+    "PDBTM",
+    "mpstruc"
+   ],
+   "features": [
+    "assembly-differs",
+    "ligand",
+    "membrane",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P02931"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "2p4e",
+   "why": "PCSK9: multi-domain secreted protease with a prodomain chain.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Crystal Structure of PCSK9",
+   "method": "X-ray",
+   "resolution": 1.98,
+   "deposited": "2007-03-12",
+   "atoms": 4776,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "res-pcsk9"
+   ],
+   "source": "https://files.rcsb.org/download/2p4e.cif",
+   "sha256": "72b2a78b1b175b0448cceb9894b6fff031b3726eb4923830cd30f08c91f14728",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-chain",
+    "disulfide",
+    "metal",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "Q8NBP7"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "disulfide",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "2ptc",
+   "why": "Trypsin with its protein inhibitor BPTI: protein-protein complex, chymotrypsinogen numbering.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND ITS COMPLEXES WITH INHIBITORS",
+   "method": "X-ray",
+   "resolution": 1.9,
+   "deposited": "1982-09-27",
+   "atoms": 2241,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/2ptc.cif",
+   "sha256": "4b663a459fbbcb1052892c1ac2a1278ad8695f446e757133cbda0b780497e2df",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "disulfide",
+    "insertion-codes",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00760",
+    "P00974"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "disulfide",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3ave",
+   "why": "Human IgG1 Fc fragment: a biantennary N-glycan on each chain.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Crystal Structure of the Fucosylated Fc Fragment from Human Immunoglobulin G1",
+   "method": "X-ray",
+   "resolution": 2.0,
+   "deposited": "2011-03-04",
+   "atoms": 3796,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/3ave.cif",
+   "sha256": "a018f215035632cdfa429548cda561c608b464774ba91238e2f5ec791a0bc07b",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "disulfide",
+    "glycan",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P01857-1"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "disulfide",
+    "glycan",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3eml",
+   "why": "Human A2A adenosine receptor (T4-lysozyme fusion) with antagonist ZM241385: a drug-target GPCR with lipids.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "The 2.6 A Crystal Structure of a Human A2A Adenosine Receptor bound to ZM241385.",
+   "method": "X-ray",
+   "resolution": 2.6,
+   "deposited": "2008-09-24",
+   "atoms": 3757,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-017"
+   ],
+   "source": "https://files.rcsb.org/download/3eml.cif",
+   "sha256": "fc5e7cadd3951548025a382db1cd5e0b64aadfa2f160fe3436bf1f4ed840a888",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "MemProtMD",
+    "OPM",
+    "PDBTM",
+    "mpstruc"
+   ],
+   "features": [
+    "auth-label-number",
+    "disulfide",
+    "ligand",
+    "membrane",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00720",
+    "P29274"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "disulfide",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3ert",
+   "why": "Oestrogen receptor alpha ligand-binding domain with 4-hydroxytamoxifen: a nuclear receptor with its antagonist.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "HUMAN ESTROGEN RECEPTOR ALPHA LIGAND-BINDING DOMAIN IN COMPLEX WITH 4-HYDROXYTAMOXIFEN",
+   "method": "X-ray",
+   "resolution": 1.9,
+   "deposited": "1999-03-30",
+   "atoms": 2070,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/3ert.cif",
+   "sha256": "93e5225a94e21f490089666c0cab160bcc33ee6701b0a44d69eb99cedf771427",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-number",
+    "ligand"
+   ],
+   "uniprot": [
+    "P03372"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "assembly",
+    "basic",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3f9m",
+   "why": "GCK (P35557): MODY2; hyperinsulinism.",
+   "origin": [
+    "disease:P35557"
+   ],
+   "kind": "pdb",
+   "title": "Human pancreatic glucokinase in complex with glucose and activator showing a mobile flap",
+   "method": "X-ray",
+   "resolution": 1.5,
+   "deposited": "2008-11-14",
+   "atoms": 4065,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/3f9m.cif",
+   "sha256": "2ebc367654a3cc98f7927fecf7df0f15c8f0cc645df71684428601bc8f237a97",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "ligand"
+   ],
+   "uniprot": [
+    "P35557"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3k34",
+   "why": "CA2 (P00918): osteopetrosis with renal tubular acidosis.",
+   "origin": [
+    "disease:P00918"
+   ],
+   "kind": "pdb",
+   "title": "Human carbonic anhydrase II with a sulfonamide inhibitor",
+   "method": "X-ray",
+   "resolution": 0.9,
+   "deposited": "2009-10-01",
+   "atoms": 2387,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/3k34.cif",
+   "sha256": "5d67719e94c541941bf7c0356e132ad01d7605a95d9833cce89726dc113ceeb9",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "ligand",
+    "metal",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00918"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3kcg",
+   "why": "SERPINC1 (P01008): antithrombin III deficiency.",
+   "origin": [
+    "disease:P01008"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of the antithrombin-factor IXa-pentasaccharide complex",
+   "method": "X-ray",
+   "resolution": 1.7,
+   "deposited": "2009-10-21",
+   "atoms": 6669,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/3kcg.cif",
+   "sha256": "ba928d0c5851c16fb4b2d0c941d4017aa7b04432efbdf6cb961b41d0230cc6cc",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-chain",
+    "auth-label-number",
+    "clinical",
+    "disulfide",
+    "glycan",
+    "insertion-codes",
+    "ligand",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00740",
+    "P01008"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "disulfide",
+    "glycan",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3ngb",
+   "why": "HIV-1 gp120 with antibody VRC01: antibody-antigen complex with many N-glycans.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of broadly and potently neutralizing antibody VRC01 in complex with HIV-1 gp120",
+   "method": "X-ray",
+   "resolution": 2.68,
+   "deposited": "2010-06-11",
+   "atoms": 25808,
+   "models": 1,
+   "over_size_limit": true,
+   "used_by_tasks": [
+    "vis-102"
+   ],
+   "source": "https://files.rcsb.org/download/3ngb.cif",
+   "sha256": "cd51c6ce7d51d2d2a5838bd547e0393e4d18190f8f14b38d6df2c9fbbdfb7d6b",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-chain",
+    "auth-label-number",
+    "disulfide",
+    "glycan",
+    "insertion-codes",
+    "ligand",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "Q0ED31"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "disulfide",
+    "glycan",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "3ptb",
+   "why": "Bovine trypsin with benzamidine: chymotrypsinogen numbering with insertion codes, so author and label residue numbers differ.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND ITS COMPLEXES WITH INHIBITORS",
+   "method": "X-ray",
+   "resolution": 1.7,
+   "deposited": "1982-09-27",
+   "atoms": 1701,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-008",
+    "api-019",
+    "gen-cartoon-3ptb",
+    "gen-chain-3ptb",
+    "gen-focus-3ptb",
+    "gen-ions-3ptb",
+    "gen-ligands-3ptb",
+    "gen-range-3ptb",
+    "gen-surface-3ptb",
+    "grd-disulfide-3ptb",
+    "grd-ligand-3ptb-ca",
+    "int-003",
+    "int-005"
+   ],
+   "source": "https://files.rcsb.org/download/3ptb.cif",
+   "sha256": "d2744dbacfb97ec9b4ff7f5cf4b204418bccf92e46b63130bfebb3916260232f",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "disulfide",
+    "insertion-codes",
+    "ligand",
+    "metal",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00760"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "disulfide",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "4ins",
+   "why": "Pig insulin: two A-B pairs deposited, zinc hexamer is the assembly; inter-chain disulfides.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "THE STRUCTURE OF 2ZN PIG INSULIN CRYSTALS AT 1.5 ANGSTROMS RESOLUTION",
+   "method": "X-ray",
+   "resolution": 1.5,
+   "deposited": "1989-07-10",
+   "atoms": 1182,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-006",
+    "api-009",
+    "gen-cartoon-4ins",
+    "gen-chain-4ins",
+    "gen-ions-4ins",
+    "gen-range-4ins",
+    "gen-surface-4ins",
+    "grd-disulfide-4ins",
+    "grd-ligand-4ins-zn",
+    "mvs-005"
+   ],
+   "source": "https://files.rcsb.org/download/4ins.cif",
+   "sha256": "05f3c80f9e87d76f781d8d37d890c8c5707daaa41e3334fbb91e047ae63c8b38",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "disulfide",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P01315"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "disulfide",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "5cj6",
+   "why": "AR (P10275): androgen insensitivity syndrome.",
+   "origin": [
+    "disease:P10275"
+   ],
+   "kind": "pdb",
+   "title": "Crystal Structure of a Selective Androgen Receptor Modulator Bound to the Ligand Binding Domain of the Human Androgen Receptor",
+   "method": "X-ray",
+   "resolution": 2.07,
+   "deposited": "2015-07-14",
+   "atoms": 2233,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/5cj6.cif",
+   "sha256": "5ca7967f0a61cf5c23912ce6a017d684c371eacd8c689f3c8e92382cfeba6780",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "ligand",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P10275"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "5edm",
+   "why": "F2 (P00734): prothrombin deficiency; thrombophilia.",
+   "origin": [
+    "disease:P00734"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I )",
+   "method": "X-ray",
+   "resolution": 2.2,
+   "deposited": "2015-10-21",
+   "atoms": 5005,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/5edm.cif",
+   "sha256": "65f12fe5811fa0576cbbc35f5b10add74831c3dd10d1a4625aaa60c00924c344",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "OPM"
+   ],
+   "features": [
+    "clinical",
+    "disulfide",
+    "glycan",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00734"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "clinical",
+    "disulfide",
+    "glycan",
+    "interactions",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "5ni1",
+   "why": "Human haemoglobin by cryo-EM: the same protein as 2HHB by another method.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "CryoEM structure of haemoglobin at 3.2 A determined with the Volta phase plate",
+   "method": "EM",
+   "resolution": 3.2,
+   "deposited": "2017-03-22",
+   "atoms": 4579,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/5ni1.cif",
+   "sha256": "05a21457008dc93db4196e866c79d382904761b42bbec6054e042e2ca7bf9276",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "clinical",
+    "cryo-em",
+    "heme",
+    "ligand",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P68871",
+    "P69905"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "5uak",
+   "why": "Human CFTR by cryo-EM: a large membrane transporter, the cystic-fibrosis protein. CFTR (P13569): cystic fibrosis.",
+   "origin": [
+    "disease:P13569",
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (CFTR)",
+   "method": "EM",
+   "resolution": 3.87,
+   "deposited": "2016-12-19",
+   "atoms": 9232,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "res-cftr"
+   ],
+   "source": "https://files.rcsb.org/download/5uak.cif",
+   "sha256": "9df8db7f71796a6b66254012d0f64711725bce57f6d21f1b62c2563cd6afea23",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "MemProtMD",
+    "OPM",
+    "PDBTM",
+    "mpstruc"
+   ],
+   "features": [
+    "auth-label-chain",
+    "clinical",
+    "cryo-em",
+    "membrane",
+    "modified-residue",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "P13569"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "6hpo",
+   "why": "PAH (P00439): phenylketonuria.",
+   "origin": [
+    "disease:P00439"
+   ],
+   "kind": "pdb",
+   "title": "Crystallographic structure of the catalytic domain of Human Phenylalanine Hydroxylase (hPAH CD) in complex with iron at 1.6 Angstrom",
+   "method": "X-ray",
+   "resolution": 1.67,
+   "deposited": "2018-09-21",
+   "atoms": 2880,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/6hpo.cif",
+   "sha256": "4ef5d07c8c5cc0e2559a2f910b46c27f55f6f8c04ea049b6600214f16d28baf3",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "clinical",
+    "metal"
+   ],
+   "uniprot": [
+    "P00439"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "clinical",
+    "metal"
+   ]
+  },
+  {
+   "id": "6m7h",
+   "why": "CALM1 (P0DP23): long QT syndrome 14; CPVT4.",
+   "origin": [
+    "disease:P0DP23"
+   ],
+   "kind": "pdb",
+   "title": "Structure of calmodulin with KN93",
+   "method": "X-ray",
+   "resolution": 1.6,
+   "deposited": "2018-08-20",
+   "atoms": 1311,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/6m7h.cif",
+   "sha256": "cae01f89e7304d679d0f52b37861cebba3996345c39e8b982ed988563220d53b",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "clinical",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P0DP23"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "metal",
+    "modified-residue",
+    "numbering"
+   ]
+  },
+  {
+   "id": "6tc2",
+   "why": "INS (P01308): permanent neonatal diabetes; MODY10.",
+   "origin": [
+    "disease:P01308"
+   ],
+   "kind": "pdb",
+   "title": "Monoclinic human insulin in complex with p-coumaric acid",
+   "method": "X-ray",
+   "resolution": 1.36,
+   "deposited": "2019-11-04",
+   "atoms": 5094,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/6tc2.cif",
+   "sha256": "9e266bfdf5c5d6d573340364dd9ec62d46681422ff84c1913b01eb89751e4aa8",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "disulfide",
+    "ligand",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P01308"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "disulfide",
+    "interactions",
+    "ligand",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "6tha",
+   "why": "SLC2A1 (P11166): GLUT1 deficiency syndrome.",
+   "origin": [
+    "disease:P11166"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation",
+   "method": "X-ray",
+   "resolution": 2.4,
+   "deposited": "2019-11-19",
+   "atoms": 3556,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/6tha.cif",
+   "sha256": "6ebf844acedc1afd2c6ca0e768220076c2c0e43fde9f28fe80a6c22a25c94302",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [
+    "MemProtMD",
+    "PDBTM",
+    "mpstruc"
+   ],
+   "features": [
+    "clinical",
+    "ligand",
+    "membrane"
+   ],
+   "uniprot": [
+    "P11166"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand"
+   ]
+  },
+  {
+   "id": "6vxx",
+   "why": "SARS-CoV-2 spike trimer by cryo-EM: heavily glycosylated; over the size limit, kept because a task already uses it.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Structure of the SARS-CoV-2 spike glycoprotein (closed state)",
+   "method": "EM",
+   "resolution": 2.8,
+   "deposited": "2020-02-25",
+   "atoms": 23694,
+   "models": 1,
+   "over_size_limit": true,
+   "used_by_tasks": [
+    "api-015"
+   ],
+   "source": "https://files.rcsb.org/download/6vxx.cif",
+   "sha256": "74ceac62dc45e34818f7c6f32fc12690f250ad803b999c1d7399a362ecd86984",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "cryo-em",
+    "disulfide",
+    "glycan",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "P0DTC2"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "chains",
+    "disulfide",
+    "glycan",
+    "numbering"
+   ]
+  },
+  {
+   "id": "7a4m",
+   "why": "Human apoferritin by cryo-EM at 1.22 A: atomic-resolution cryo-EM.",
+   "origin": [
+    "named"
+   ],
+   "kind": "pdb",
+   "title": "Cryo-EM structure of mouse heavy-chain apoferritin at 1.22 A",
+   "method": "EM",
+   "resolution": 1.22,
+   "deposited": "2020-08-20",
+   "atoms": 3177,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/7a4m.cif",
+   "sha256": "1355a912de4492e8c0b06861b6ad3ec9b8190ab098723b5f56b779371705f2a8",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-number",
+    "cryo-em",
+    "metal",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P09528"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "8c86",
+   "why": "TTR (P02766): hereditary transthyretin amyloidosis.",
+   "origin": [
+    "disease:P02766"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2",
+   "method": "X-ray",
+   "resolution": 1.1,
+   "deposited": "2023-01-18",
+   "atoms": 4150,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/8c86.cif",
+   "sha256": "d27ac6ef494d77ed44ffbd97f83118337535ba59cf6b74ef1bcce4748acd2674",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-chain",
+    "clinical",
+    "ligand",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P02766"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "8ce0",
+   "why": "APOE (P02649): hyperlipoproteinaemia type III; Alzheimer disease risk.",
+   "origin": [
+    "disease:P02649"
+   ],
+   "kind": "pdb",
+   "title": "N-terminal domain of human apolipoprotein E",
+   "method": "X-ray",
+   "resolution": 1.75,
+   "deposited": "2023-02-01",
+   "atoms": 1335,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/8ce0.cif",
+   "sha256": "fa3ed8370bb1aee4693aadb521f0932ef9c1b938745690451e268afafcab0eee",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "ligand",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P02649"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "8eph",
+   "why": "F9 (P00740): haemophilia B.",
+   "origin": [
+    "disease:P00740"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of human coagulation factor IXa (S195A), apo-form, DES-GLA",
+   "method": "X-ray",
+   "resolution": 1.88,
+   "deposited": "2022-10-05",
+   "atoms": 5564,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/8eph.cif",
+   "sha256": "578a705ce6fb8b4e053874557d158cd24878d9d6ccc741f9c1bfbc001b0077ea",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-number",
+    "clinical",
+    "disulfide",
+    "insertion-codes",
+    "metal",
+    "multi-chain",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P00740"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "assembly",
+    "basic",
+    "chains",
+    "clinical",
+    "disulfide",
+    "metal",
+    "numbering"
+   ]
+  },
+  {
+   "id": "8k7f",
+   "why": "GLA (P06280): Fabry disease.",
+   "origin": [
+    "disease:P06280"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of human lysosomal alpha-galactosidase A in complex with (2R,3S,4R,5R)-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol",
+   "method": "X-ray",
+   "resolution": 1.98,
+   "deposited": "2023-07-26",
+   "atoms": 7126,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/8k7f.cif",
+   "sha256": "b1ee1f945aa77da7cf74cb58e2de4a0d78b232c552569e8d2d200728f4667dad",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "disulfide",
+    "glycan",
+    "ligand",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "P06280"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "disulfide",
+    "glycan",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "8pi2",
+   "why": "SERPINA1 (P01009): alpha-1-antitrypsin deficiency.",
+   "origin": [
+    "disease:P01009"
+   ],
+   "kind": "pdb",
+   "title": "Native alpha-1-antitrypsin at 1.5 Angstrom (Cys232Ser)",
+   "method": "X-ray",
+   "resolution": 1.48,
+   "deposited": "2023-06-20",
+   "atoms": 6156,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/8pi2.cif",
+   "sha256": "69008bbc6bd960621ba5837db9e92c81a6ac29ee36cff7ff64670357a57b013c",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "ligand",
+    "uniprot-offset"
+   ],
+   "uniprot": [
+    "P01009"
+   ],
+   "sifts": true,
+   "offset": true,
+   "families": [
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "9f69",
+   "why": "TPI1 (P60174): triosephosphate isomerase deficiency.",
+   "origin": [
+    "disease:P60174"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of human triose phosphate isomerase with methyl malonic acid ligand",
+   "method": "X-ray",
+   "resolution": 1.17,
+   "deposited": "2024-04-30",
+   "atoms": 4040,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/9f69.cif",
+   "sha256": "72aedf4d3f6652fe14fc14fd8ad287e4cc65fc03400641cea11f85bcf83258a5",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "assembly-differs",
+    "auth-label-number",
+    "clinical",
+    "ligand"
+   ],
+   "uniprot": [
+    "P60174"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "assembly",
+    "basic",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "9fb2",
+   "why": "GBA1 (P04062): Gaucher disease.",
+   "origin": [
+    "disease:P04062"
+   ],
+   "kind": "pdb",
+   "title": "Gcase in complex with small molecule inhibitor 1",
+   "method": "X-ray",
+   "resolution": 1.14,
+   "deposited": "2024-05-11",
+   "atoms": 4971,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/9fb2.cif",
+   "sha256": "06de5b9961e2a1c08a4de40bf61efecb40f38b2da6ea00b2de5802797a6c878b",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "clinical",
+    "disulfide",
+    "glycan",
+    "ligand",
+    "metal"
+   ],
+   "uniprot": [
+    "P04062"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "clinical",
+    "disulfide",
+    "glycan",
+    "interactions",
+    "ligand",
+    "metal"
+   ]
+  },
+  {
+   "id": "9gio",
+   "why": "VHL (P40337): von Hippel-Lindau disease.",
+   "origin": [
+    "disease:P40337"
+   ],
+   "kind": "pdb",
+   "title": "Crystal structure of the VHL-EloC-EloB complex with a covalent compound bound to C77 of VHL.",
+   "method": "X-ray",
+   "resolution": 1.486,
+   "deposited": "2024-08-19",
+   "atoms": 3043,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://files.rcsb.org/download/9gio.cif",
+   "sha256": "4693f5e5968aed789801ca5ae3d3b031d88d4a1989614ae03787382f059aab16",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "auth-label-number",
+    "clinical",
+    "ligand",
+    "multi-chain"
+   ],
+   "uniprot": [
+    "P40337",
+    "Q15369",
+    "Q15370"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "basic",
+    "chains",
+    "clinical",
+    "interactions",
+    "ligand",
+    "numbering"
+   ]
+  },
+  {
+   "id": "af-p04637-f1-model_v6",
+   "why": "AlphaFold model of full-length p53: used by an existing task; UniProt numbering by construction, long low-confidence regions.",
+   "origin": [
+    "alphafold:P04637"
+   ],
+   "kind": "alphafold",
+   "title": "AlphaFold DB model of Cellular tumor antigen p53 (TP53, Homo sapiens)",
+   "method": "AlphaFold prediction",
+   "resolution": null,
+   "deposited": "2025-08-01",
+   "atoms": 3060,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [
+    "api-016"
+   ],
+   "source": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v6.cif",
+   "sha256": "4332bff49301d04434b6e3b43c439aa5bd8238760e88c7142f7d0c0851a68e5d",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "alphafold",
+    "clinical"
+   ],
+   "uniprot": [
+    "P04637"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "alphafold",
+    "basic",
+    "clinical"
+   ]
+  },
+  {
+   "id": "af-p68871-f1-model_v6",
+   "why": "AlphaFold model of haemoglobin beta: same protein as 2HHB chain B but numbered as UniProt, so the same variant sits at a different residue number.",
+   "origin": [
+    "alphafold:P68871"
+   ],
+   "kind": "alphafold",
+   "title": "AlphaFold DB model of Hemoglobin subunit beta (HBB, Homo sapiens)",
+   "method": "AlphaFold prediction",
+   "resolution": null,
+   "deposited": "2025-08-01",
+   "atoms": 1131,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+   "sha256": "0c1603478734a034d38f807a57badc41c2e2086daaa98334d218a9c70ace1f4e",
+   "retrieved": "2026-11-12",
+   "membrane_sources": [],
+   "features": [
+    "alphafold",
+    "clinical"
+   ],
+   "uniprot": [
+    "P68871"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "alphafold",
+    "basic",
+    "clinical"
+   ]
+  }
+ ],
+ "disease_proteins": [
+  {
+   "accession": "P04637",
+   "gene": "TP53",
+   "disease": "Li-Fraumeni syndrome; somatic cancers",
+   "entry": "1tup",
+   "entries": [
+    "1tup",
+    "af-p04637-f1-model_v6"
+   ],
+   "variants": 346,
+   "verified_on_entry": 329,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 585
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": true,
+   "selection": {
+    "pinned": "already used by tasks"
+   }
+  },
+  {
+   "accession": "P69905",
+   "gene": "HBA1",
+   "disease": "alpha-thalassaemia; haemoglobin variants",
+   "entry": "2hhb",
+   "entries": [
+    "1hho",
+    "2hhb",
+    "5ni1"
+   ],
+   "variants": 59,
+   "verified_on_entry": 55,
+   "offset": true,
+   "auth_minus_unp": {
+    "-1": 282
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "pinned": "already used by tasks"
+   }
+  },
+  {
+   "accession": "P68871",
+   "gene": "HBB",
+   "disease": "sickle cell disease; beta-thalassaemia",
+   "entry": "2hhb",
+   "entries": [
+    "1hho",
+    "2hhb",
+    "5ni1",
+    "af-p68871-f1-model_v6"
+   ],
+   "variants": 117,
+   "verified_on_entry": 111,
+   "offset": true,
+   "auth_minus_unp": {
+    "-1": 292
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "pinned": "already used by tasks"
+   }
+  },
+  {
+   "accession": "P13569",
+   "gene": "CFTR",
+   "disease": "cystic fibrosis",
+   "entry": "5uak",
+   "entries": [
+    "5uak"
+   ],
+   "variants": 350,
+   "verified_on_entry": 333,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 1139
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "pinned": "already used by tasks"
+   }
+  },
+  {
+   "accession": "P02766",
+   "gene": "TTR",
+   "disease": "hereditary transthyretin amyloidosis",
+   "entry": "8c86",
+   "entries": [
+    "8c86"
+   ],
+   "variants": 116,
+   "verified_on_entry": 116,
+   "offset": true,
+   "auth_minus_unp": {
+    "-20": 232
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": true,
+   "selection": {
+    "candidates": 496,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 59,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "4qxv",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P61626",
+   "gene": "LYZ",
+   "disease": "hereditary lysozyme amyloidosis",
+   "entry": "2nwd",
+   "entries": [
+    "2nwd"
+   ],
+   "variants": 3,
+   "verified_on_entry": 3,
+   "offset": true,
+   "auth_minus_unp": {
+    "-18": 130
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": true,
+   "selection": {
+    "candidates": 215,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 3,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "5lsh",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P00441",
+   "gene": "SOD1",
+   "disease": "amyotrophic lateral sclerosis 1",
+   "entry": "2c9v",
+   "entries": [
+    "2c9v"
+   ],
+   "variants": 102,
+   "verified_on_entry": 102,
+   "offset": true,
+   "auth_minus_unp": {
+    "-1": 306
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": true,
+   "selection": {
+    "candidates": 157,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 63,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "2v0a",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P01009",
+   "gene": "SERPINA1",
+   "disease": "alpha-1-antitrypsin deficiency",
+   "entry": "8pi2",
+   "entries": [
+    "8pi2"
+   ],
+   "variants": 33,
+   "verified_on_entry": 30,
+   "offset": true,
+   "auth_minus_unp": {
+    "-24": 371
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 47,
+    "shortlisted": 27,
+    "eligible": 27,
+    "resolution_limit": 2.5,
+    "positions_covered": 27,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "7ael",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P01308",
+   "gene": "INS",
+   "disease": "permanent neonatal diabetes; MODY10",
+   "entry": "6tc2",
+   "entries": [
+    "6tc2"
+   ],
+   "variants": 29,
+   "verified_on_entry": 21,
+   "offset": true,
+   "auth_minus_unp": {
+    "-89": 126,
+    "-24": 170
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 387,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 22,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "8pi4",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P04062",
+   "gene": "GBA1",
+   "disease": "Gaucher disease",
+   "entry": "9fb2",
+   "entries": [
+    "9fb2"
+   ],
+   "variants": 111,
+   "verified_on_entry": 109,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 497
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 58,
+    "shortlisted": 30,
+    "eligible": 27,
+    "resolution_limit": 2.5,
+    "positions_covered": 94,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "9fa3",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P00740",
+   "gene": "F9",
+   "disease": "haemophilia B",
+   "entry": "8eph",
+   "entries": [
+    "3kcg",
+    "8eph"
+   ],
+   "variants": 163,
+   "verified_on_entry": 124,
+   "offset": true,
+   "auth_minus_unp": {
+    "-216": 110,
+    "-215": 50,
+    "-214": 78,
+    "-213": 70,
+    "-212": 2,
+    "-211": 114,
+    "-210": 46,
+    "-46": 182
+   },
+   "n_insertion_codes": 16,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 64,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 94,
+    "mutations": 1,
+    "polymer_entities": 2,
+    "runner_up": "6x5l",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P00734",
+   "gene": "F2",
+   "disease": "prothrombin deficiency; thrombophilia",
+   "entry": "5edm",
+   "entries": [
+    "5edm"
+   ],
+   "variants": 24,
+   "verified_on_entry": 21,
+   "offset": true,
+   "auth_minus_unp": {
+    "-57": 394,
+    "-43": 153
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 490,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 21,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "3k65",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P07477",
+   "gene": "PRSS1",
+   "disease": "hereditary pancreatitis",
+   "entry": "1trn",
+   "entries": [
+    "1trn"
+   ],
+   "variants": 8,
+   "verified_on_entry": 7,
+   "offset": true,
+   "auth_minus_unp": {
+    "-8": 38,
+    "-6": 62,
+    "-5": 148,
+    "-4": 18,
+    "-3": 106,
+    "-1": 70,
+    "0": 6
+   },
+   "n_insertion_codes": 6,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 11,
+    "shortlisted": 5,
+    "eligible": 5,
+    "resolution_limit": 2.5,
+    "positions_covered": 4,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "2ra3",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P02649",
+   "gene": "APOE",
+   "disease": "hyperlipoproteinaemia type III; Alzheimer disease risk",
+   "entry": "8ce0",
+   "entries": [
+    "8ce0"
+   ],
+   "variants": 28,
+   "verified_on_entry": 17,
+   "offset": true,
+   "auth_minus_unp": {
+    "-18": 143
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 31,
+    "shortlisted": 24,
+    "eligible": 24,
+    "resolution_limit": 2.5,
+    "positions_covered": 24,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "8cdy",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P10275",
+   "gene": "AR",
+   "disease": "androgen insensitivity syndrome",
+   "entry": "5cj6",
+   "entries": [
+    "5cj6"
+   ],
+   "variants": 161,
+   "verified_on_entry": 104,
+   "offset": true,
+   "auth_minus_unp": {
+    "-1": 244,
+    "0": 10
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 95,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 87,
+    "mutations": 0,
+    "polymer_entities": 2,
+    "runner_up": "2am9",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P07320",
+   "gene": "CRYGD",
+   "disease": "congenital cataract",
+   "entry": "1hk0",
+   "entries": [
+    "1hk0"
+   ],
+   "variants": 6,
+   "verified_on_entry": 6,
+   "offset": true,
+   "auth_minus_unp": {
+    "-1": 85,
+    "0": 88
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": true,
+   "selection": {
+    "candidates": 16,
+    "shortlisted": 14,
+    "eligible": 14,
+    "resolution_limit": 2.5,
+    "positions_covered": 6,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "1h4a",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P60174",
+   "gene": "TPI1",
+   "disease": "triosephosphate isomerase deficiency",
+   "entry": "9f69",
+   "entries": [
+    "9f69"
+   ],
+   "variants": 5,
+   "verified_on_entry": 5,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 245
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 29,
+    "shortlisted": 23,
+    "eligible": 22,
+    "resolution_limit": 2.5,
+    "positions_covered": 5,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "9ffc",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P0DP23",
+   "gene": "CALM1",
+   "disease": "long QT syndrome 14; CPVT4",
+   "entry": "6m7h",
+   "entries": [
+    "6m7h"
+   ],
+   "variants": 31,
+   "verified_on_entry": 29,
+   "offset": true,
+   "auth_minus_unp": {
+    "-1": 144
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 341,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 17,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "1cll",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P01008",
+   "gene": "SERPINC1",
+   "disease": "antithrombin III deficiency",
+   "entry": "3kcg",
+   "entries": [
+    "3kcg"
+   ],
+   "variants": 46,
+   "verified_on_entry": 45,
+   "offset": true,
+   "auth_minus_unp": {
+    "-32": 419
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": true,
+   "selection": {
+    "candidates": 27,
+    "shortlisted": 3,
+    "eligible": 3,
+    "resolution_limit": 2.5,
+    "positions_covered": 39,
+    "mutations": 2,
+    "polymer_entities": 3,
+    "runner_up": "2b5t",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P00918",
+   "gene": "CA2",
+   "disease": "osteopetrosis with renal tubular acidosis",
+   "entry": "3k34",
+   "entries": [
+    "3k34"
+   ],
+   "variants": 5,
+   "verified_on_entry": 4,
+   "offset": true,
+   "auth_minus_unp": {
+    "0": 123,
+    "1": 135
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 1263,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 5,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "3ks3",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P01112",
+   "gene": "HRAS",
+   "disease": "Costello syndrome",
+   "entry": "1ctq",
+   "entries": [
+    "1ctq"
+   ],
+   "variants": 19,
+   "verified_on_entry": 19,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 166
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 255,
+    "shortlisted": 30,
+    "eligible": 24,
+    "resolution_limit": 2.5,
+    "positions_covered": 9,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "3k8y",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P00439",
+   "gene": "PAH",
+   "disease": "phenylketonuria",
+   "entry": "6hpo",
+   "entries": [
+    "6hpo"
+   ],
+   "variants": 388,
+   "verified_on_entry": 322,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 310
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 22,
+    "shortlisted": 19,
+    "eligible": 19,
+    "resolution_limit": 2.5,
+    "positions_covered": 224,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "1j8u",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P40337",
+   "gene": "VHL",
+   "disease": "von Hippel-Lindau disease",
+   "entry": "9gio",
+   "entries": [
+    "9gio"
+   ],
+   "variants": 169,
+   "verified_on_entry": 165,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 146
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 143,
+    "shortlisted": 30,
+    "eligible": 30,
+    "resolution_limit": 2.5,
+    "positions_covered": 80,
+    "mutations": 0,
+    "polymer_entities": 3,
+    "runner_up": "8p0f",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P60484",
+   "gene": "PTEN",
+   "disease": "PTEN hamartoma tumour syndrome",
+   "entry": "1d5r",
+   "entries": [
+    "1d5r"
+   ],
+   "variants": 269,
+   "verified_on_entry": 258,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 307
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 12,
+    "shortlisted": 5,
+    "eligible": 5,
+    "resolution_limit": 2.5,
+    "positions_covered": 134,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "5bzz",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P35557",
+   "gene": "GCK",
+   "disease": "MODY2; hyperinsulinism",
+   "entry": "3f9m",
+   "entries": [
+    "3f9m"
+   ],
+   "variants": 337,
+   "verified_on_entry": 337,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 443
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 35,
+    "shortlisted": 26,
+    "eligible": 26,
+    "resolution_limit": 2.5,
+    "positions_covered": 196,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "4no7",
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P11166",
+   "gene": "SLC2A1",
+   "disease": "GLUT1 deficiency syndrome",
+   "entry": "6tha",
+   "entries": [
+    "6tha"
+   ],
+   "variants": 129,
+   "verified_on_entry": 119,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 448
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 5,
+    "shortlisted": 1,
+    "eligible": 1,
+    "resolution_limit": 2.5,
+    "positions_covered": 87,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": null,
+    "already_in_panel": false
+   }
+  },
+  {
+   "accession": "P06280",
+   "gene": "GLA",
+   "disease": "Fabry disease",
+   "entry": "8k7f",
+   "entries": [
+    "8k7f"
+   ],
+   "variants": 298,
+   "verified_on_entry": 282,
+   "offset": false,
+   "auth_minus_unp": {
+    "0": 782
+   },
+   "n_insertion_codes": 0,
+   "auth_chain_differs_from_label_chain": false,
+   "selection": {
+    "candidates": 31,
+    "shortlisted": 21,
+    "eligible": 21,
+    "resolution_limit": 2.5,
+    "positions_covered": 175,
+    "mutations": 0,
+    "polymer_entities": 1,
+    "runner_up": "6ibk",
+    "already_in_panel": false
+   }
+  }
+ ]
+}

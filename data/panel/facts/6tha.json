@@ -1,0 +1,449 @@
+{
+ "id": "6tha",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/6tha.cif",
+ "title": "Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 2.4,
+ "n_models": 1,
+ "n_atoms": 3556,
+ "n_residues": 465,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "Solute carrier family 2, facilitated glucose transporter member 1",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "nonyl beta-D-glucopyranoside",
+   "label_asym_ids": [
+    "B",
+    "C"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "3,6,9,12,15,18-HEXAOXAICOSANE-1,20-DIOL",
+   "label_asym_ids": [
+    "D"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "CHLORIDE ION",
+   "label_asym_ids": [
+    "E"
+   ]
+  },
+  {
+   "id": "5",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "F"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 496,
+   "n_observed": 448,
+   "auth_minus_label": {
+    "0": 448
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "8",
+     "455",
+     8,
+     455
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P11166",
+     "n_residues": 448,
+     "unp_first": 8,
+     "unp_last": 455,
+     "auth_minus_unp": {
+      "0": 448
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "8",
+       "455",
+       8,
+       455
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "BNG",
+   "name": "nonyl beta-D-glucopyranoside",
+   "formula": "C15 H30 O6",
+   "kind": "sugar",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 21,
+   "atoms": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C1'",
+    "C2'",
+    "C3'",
+    "C4'",
+    "C5'",
+    "C6'",
+    "C7'",
+    "C8'",
+    "C9'",
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 501,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "BNG"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 502,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "BNG"
+    }
+   ]
+  },
+  {
+   "comp_id": "CL",
+   "name": "CHLORIDE ION",
+   "formula": "Cl -1",
+   "kind": "ion",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "CL"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 504,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "E",
+     "label_seq_id": 0,
+     "comp_id": "CL"
+    }
+   ]
+  },
+  {
+   "comp_id": "P33",
+   "name": "3,6,9,12,15,18-HEXAOXAICOSANE-1,20-DIOL",
+   "formula": "C14 H30 O8",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 22,
+   "atoms": [
+    "O22",
+    "C21",
+    "C20",
+    "O19",
+    "C18",
+    "C17",
+    "O16",
+    "C15",
+    "C14",
+    "O13",
+    "C12",
+    "C11",
+    "O10",
+    "C9",
+    "C8",
+    "O7",
+    "C6",
+    "C5",
+    "O4",
+    "C3",
+    "C2",
+    "O1"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 503,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "D",
+     "label_seq_id": 0,
+     "comp_id": "P33"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_and_software_defined_assembly",
+   "method": "PISA",
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 10,
+   "end_auth_seq_id": 32,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 10,
+   "end_label_seq_id": 32
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 36,
+   "end_auth_seq_id": 53,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 36,
+   "end_label_seq_id": 53
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 57,
+   "end_auth_seq_id": 82,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 57,
+   "end_label_seq_id": 82
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 82,
+   "end_auth_seq_id": 91,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 82,
+   "end_label_seq_id": 91
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 91,
+   "end_auth_seq_id": 112,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 91,
+   "end_label_seq_id": 112
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 112,
+   "end_auth_seq_id": 117,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 112,
+   "end_label_seq_id": 117
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 118,
+   "end_auth_seq_id": 148,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 118,
+   "end_label_seq_id": 148
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 152,
+   "end_auth_seq_id": 158,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 152,
+   "end_label_seq_id": 158
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 158,
+   "end_auth_seq_id": 174,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 158,
+   "end_label_seq_id": 174
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 185,
+   "end_auth_seq_id": 192,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 185,
+   "end_label_seq_id": 192
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 193,
+   "end_auth_seq_id": 204,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 193,
+   "end_label_seq_id": 204
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 205,
+   "end_auth_seq_id": 207,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 205,
+   "end_label_seq_id": 207
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 210,
+   "end_auth_seq_id": 216,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 210,
+   "end_label_seq_id": 216
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 220,
+   "end_auth_seq_id": 232,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 220,
+   "end_label_seq_id": 232
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 237,
+   "end_auth_seq_id": 253,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 237,
+   "end_label_seq_id": 253
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 258,
+   "end_auth_seq_id": 265,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 258,
+   "end_label_seq_id": 265
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 265,
+   "end_auth_seq_id": 284,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 265,
+   "end_label_seq_id": 284
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 286,
+   "end_auth_seq_id": 301,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 286,
+   "end_label_seq_id": 301
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 305,
+   "end_auth_seq_id": 328,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 305,
+   "end_label_seq_id": 328
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 329,
+   "end_auth_seq_id": 331,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 329,
+   "end_label_seq_id": 331
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 332,
+   "end_auth_seq_id": 357,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 332,
+   "end_label_seq_id": 357
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 363,
+   "end_auth_seq_id": 382,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 363,
+   "end_label_seq_id": 382
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 385,
+   "end_auth_seq_id": 395,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 385,
+   "end_label_seq_id": 395
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 399,
+   "end_auth_seq_id": 430,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 399,
+   "end_label_seq_id": 430
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 432,
+   "end_auth_seq_id": 451,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 432,
+   "end_label_seq_id": 451
+  }
+ ],
+ "strands": [],
+ "waters": 13,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": false
+ }
+}

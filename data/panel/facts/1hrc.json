@@ -1,0 +1,342 @@
+{
+ "id": "1hrc",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1hrc.cif",
+ "title": "HIGH-RESOLUTION THREE-DIMENSIONAL STRUCTURE OF HORSE HEART CYTOCHROME C",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.9,
+ "n_models": 1,
+ "n_atoms": 993,
+ "n_residues": 230,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "CYTOCHROME C",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "HEME C",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "C"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 105,
+   "n_observed": 105,
+   "auth_minus_label": {
+    "-1": 105
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "0",
+     "104",
+     1,
+     105
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P00004",
+     "n_residues": 104,
+     "unp_first": 2,
+     "unp_last": 105,
+     "auth_minus_unp": {
+      "-1": 104
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "104",
+       2,
+       105
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "HEC",
+   "name": "HEME C",
+   "formula": "C34 H36 Fe N4 O4",
+   "kind": "ligand",
+   "metals": [
+    "FE"
+   ],
+   "heme": true,
+   "n_heavy_atoms": 43,
+   "atoms": [
+    "FE",
+    "CHA",
+    "CHB",
+    "CHC",
+    "CHD",
+    "NA",
+    "C1A",
+    "C2A",
+    "C3A",
+    "C4A",
+    "CMA",
+    "CAA",
+    "CBA",
+    "CGA",
+    "O1A",
+    "O2A",
+    "NB",
+    "C1B",
+    "C2B",
+    "C3B",
+    "C4B",
+    "CMB",
+    "CAB",
+    "CBB",
+    "NC",
+    "C1C",
+    "C2C",
+    "C3C",
+    "C4C",
+    "CMC",
+    "CAC",
+    "CBC",
+    "ND",
+    "C1D",
+    "C2D",
+    "C3D",
+    "C4D",
+    "CMD",
+    "CAD",
+    "CBD",
+    "CGD",
+    "O1D",
+    "O2D"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 105,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "HEC"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 18,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 19,
+    "comp_id": "HIS",
+    "atom": "NE2"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 105,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "HEC",
+    "atom": "FE"
+   },
+   "distance": 2.037,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 80,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 81,
+    "comp_id": "MET",
+    "atom": "SD"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 105,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "HEC",
+    "atom": "FE"
+   },
+   "distance": 2.324,
+   "to_symmetry_copy": false
+  }
+ ],
+ "covalent_links": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 0,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 1,
+    "comp_id": "ACE",
+    "atom": "C"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 2,
+    "comp_id": "GLY",
+    "atom": "N"
+   },
+   "distance": 1.334,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 14,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 15,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 105,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "HEC",
+    "atom": "CAB"
+   },
+   "distance": 1.754,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 17,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 18,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 105,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "HEC",
+    "atom": "CAC"
+   },
+   "distance": 1.864,
+   "to_symmetry_copy": false
+  }
+ ],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [
+  {
+   "auth_asym_id": "A",
+   "auth_seq_id": 0,
+   "pdbx_PDB_ins_code": "",
+   "label_asym_id": "A",
+   "label_seq_id": 1,
+   "comp_id": "ACE"
+  }
+ ],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 2,
+   "end_auth_seq_id": 14,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 3,
+   "end_label_seq_id": 15
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 49,
+   "end_auth_seq_id": 55,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 50,
+   "end_label_seq_id": 56
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 60,
+   "end_auth_seq_id": 68,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 61,
+   "end_label_seq_id": 69
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 70,
+   "end_auth_seq_id": 75,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 71,
+   "end_label_seq_id": 76
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 87,
+   "end_auth_seq_id": 104,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 88,
+   "end_label_seq_id": 105
+  }
+ ],
+ "strands": [],
+ "waters": 124,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}
