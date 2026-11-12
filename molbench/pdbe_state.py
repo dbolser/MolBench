@@ -1035,7 +1035,9 @@ def changes(s: ViewerState) -> dict[tuple, int]:
                 if d not in bval:
                     out[d] = out.get(d, 0) | hit
             for d in bval:
-                if d not in val:
+                # a draw that is gone altogether (hidden, or another style); one that is
+                # only recoloured is already stated by the new draw above
+                if d not in val and not any(v[0] == d[0] for v in val):
                     key = ("-" + d[0], d[1])
                     out[key] = out.get(key, 0) | hit
     return out
@@ -1059,6 +1061,18 @@ def target_atoms(target: Any, s: ViewerState) -> int | None:
     if "selector" in target:
         out |= s.table.selector(target["selector"]) or 0
     return out
+
+
+def _default_view(s: ViewerState, its_facts: dict) -> Any:
+    """What the camera frames when nothing was focused: everything that is drawn (as
+    whole residues)."""
+    if s.table is None or not s.atomistic:
+        return s.everything()
+    shown = 0
+    for val, mask in its_facts.get("_all", {}).items():
+        if val:
+            shown |= mask
+    return residues_of(s.table, shown)
 
 
 def _target_parts(reference: ViewerState, predicted: ViewerState, ref: dict, r_trace: list,
@@ -1091,9 +1105,7 @@ def _target_parts(reference: ViewerState, predicted: ViewerState, ref: dict, r_t
             theirs = pred.get(key)
             if theirs is None and key == "focus" and not drawn.GRADE_UNREQUESTED_FOCUS \
                     and predicted.loaded:
-                theirs = predicted.everything()      # no focus: the whole structure is framed
-                if predicted.table is not None:
-                    theirs = residues_of(predicted.table, theirs)
+                theirs = _default_view(predicted, pred)
             sc = _jaccard(ref[key], theirs) if theirs is not None else 0.0
             parts.append({"fact": key, "recall": sc, "precision": sc})
     if isinstance(ref.get("tooltip"), dict):
@@ -1235,9 +1247,7 @@ def compare(reference: ViewerState, predicted: ViewerState, target: Any = None) 
         if "focus" in pred and "focus" not in ref:
             del pred_seen["focus"]
         if "focus" in ref and "focus" not in pred and predicted.loaded:
-            everything = predicted.everything()
-            pred["focus"] = everything if predicted.table is None else residues_of(
-                predicted.table, everything)
+            pred["focus"] = _default_view(predicted, pred)
         n_pred_facts = sum(1 for k in pred_seen if not k.startswith("_"))
     r_got, r_total, r_trace = side(ref_seen, pred)
     p_got, p_total, p_trace = side(pred_seen, ref)

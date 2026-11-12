@@ -4,13 +4,14 @@ Escalating C1 grader — tree-match → visual diff → VLM judge.
 Each tier is more expensive than the last, so we only escalate when the cheaper
 tier is inconclusive:
 
-  T0  tree-match (free)        F1 >= tree_threshold        -> "correct"
+  T0  drawn state (free)       task success                -> "correct"
   T1  visual diff (cheap)      no pixel clearly changed    -> "rendering-equivalent"
   T2  VLM judge (expensive)    semantic verdict on images  -> "vlm:same"/"vlm:different"
 
-This rescues semantically-equivalent trees that strict tree-matching under-scores
-(e.g. `all` vs `polymer`), and concentrates any human review on the genuinely
-ambiguous cases that reach T2.
+The drawn-state grader (``mvs.grade_mvs``) already treats equivalent writings as equal
+(`all` vs `polymer` under a cartoon, ranges vs lists, ...), so the later tiers are a
+side column: they show what an image comparison and an image judge say about the
+answers the grader did not pass. They never change a score.
 
 `render` is a callable (tree -> png path), `vlm` is a callable
 (ref_png, pred_png, prompt -> {label, score, reason}); both optional, so the
@@ -70,7 +71,7 @@ def escalating_grade(
     prompt: str | None = None,
     render: Callable[[dict, str], Any] | None = None,
     vlm: Callable[..., dict] | None = None,
-    tree_threshold: float = 0.999,
+    tree_threshold: float = 1.0,
     max_changed_pixels: int = 2,
     workdir: str | pathlib.Path | None = None,
     accepted_refs: set[str] | list[str] | None = None,
@@ -78,8 +79,9 @@ def escalating_grade(
     g = grade_mvs(reference_tree, predicted_tree, accepted_refs=accepted_refs)
     out: dict[str, Any] = {"tree_f1": g["f1"], "tier": "tree"}
 
-    # T0 — tree match is conclusive (identical / normalised-equivalent).
-    if g["f1"] >= tree_threshold:
+    # T0 — the drawn state is exactly right (or, for a caller that lowers the
+    # threshold, F1 reaches it).
+    if g.get("success") or g["f1"] >= tree_threshold:
         return {**out, "decision": "correct"}
     # A prediction that doesn't even parse can't be rendered — stop at the tree tier.
     if render is None or g.get("error"):

@@ -245,13 +245,39 @@ def partition(draws: dict[tuple, Any]) -> list[tuple[Any, tuple]]:
     return [(m, look) for look, m in merged.items()]
 
 
+def look_coverage(mine: Iterable[tuple], theirs: Iterable[tuple]) -> float:
+    """How much of my drawing of an atom the other side has, in [0, 1]: each of my
+    draws scores 1 if they have the same draw, ``PARTIAL`` if they have the same
+    representation type in another colour or opacity, else 0; the mean over my draws.
+    Their extra draws do not count here (they count when the roles are swapped), so a
+    missing draw costs recall and an unrequested one costs precision."""
+    mine, left = list(mine), list(theirs)
+    if not mine:
+        return 1.0
+    got = 0.0
+    rest = []
+    for d in mine:
+        hit = next((x for x in left if draw_eq(d, x)), None)
+        if hit is None:
+            rest.append(d)
+        else:
+            left.remove(hit)
+            got += 1.0
+    for d in rest:
+        hit = next((x for x in left if x[0] == d[0]), None)
+        if hit is not None:
+            left.remove(hit)
+            got += PARTIAL
+    return got / len(mine)
+
+
 def class_score(mask: Any, look: tuple, theirs: list[tuple[Any, tuple]]) -> float:
-    """The share of a class's atoms that the other side draws the same way (graded by
-    ``look_similarity``; an atom the other side does not draw counts 0)."""
+    """The share of a class's drawing that the other side has: over the class's atoms,
+    the mean ``look_coverage`` (an atom the other side does not draw counts 0)."""
     n = size(mask)
     if not n:
         return 0.0
-    return sum(size(mask & om) * look_similarity(look, olook) for om, olook in theirs) / n
+    return sum(size(mask & om) * look_coverage(look, olook) for om, olook in theirs) / n
 
 
 # --- the target score -------------------------------------------------------------

@@ -988,16 +988,14 @@ def _share(mine: Any, theirs: Any) -> float:
 
 def _focus_score(st: DrawnStructure, other: DrawnStructure | None) -> float:
     """Overlap of two focus targets, as whole residues. A scene with no focus node
-    frames everything, so (unless every focus is graded) its target is the whole
-    structure."""
+    frames everything it draws, so (unless every focus is graded) that is its target."""
     if other is None:
         return 0.0
     theirs = other.focus
     if theirs is None:
         if _drawn.GRADE_UNREQUESTED_FOCUS:
             return 0.0
-        theirs = (_table_extras(other.table)["all"] if other.table is not None
-                  else frozenset(["static:all"]))
+        theirs = other.drawn_atoms()         # the default camera frames what is drawn
     return jaccard(st.residues(st.focus), other.residues(theirs))
 
 
@@ -1229,6 +1227,10 @@ def check_mvs_task(task: dict[str, Any]) -> list[str]:
             continue
         if not scene.structures:
             problems.append(f"{name}: loads no structure")
+        if name == "reference_mvs" and isinstance(task.get("target"), dict):
+            if not any(size(_target_atoms(task["target"], st) or st.none)
+                       for st in scene.structures.values()):
+                problems.append("target: selects no atoms of the reference's structure")
         for entry, st in scene.structures.items():
             if st.table is None:
                 problems.append(f"{name}: no frozen atom table for {entry!r}")
