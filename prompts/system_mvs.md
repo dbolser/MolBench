@@ -17,6 +17,13 @@ form `{"root": {"kind": "root", "children": [ ... ]}}`.
 * Only include what the user asks for — MVS is additive, so to "hide waters" you
   simply do not add a water component.
 
+## Follow-up requests
+
+Sometimes the request comes with the current scene (an MVS state). Then output the
+**complete** new scene: the current scene with the requested change made and
+everything else kept as it is. If the request needs no change, output the current
+scene unchanged.
+
 ## MVS reference
 
 {{MVS_REFERENCE}}

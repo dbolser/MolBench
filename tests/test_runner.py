@@ -48,7 +48,7 @@ models = "structured"
 name = "spec_grounded"
 grounding = true
 tracks = ["mvs"]
-where = { source = ["resolve", "sifts-named"] }
+where = { tier = ["resolve", "clinical"] }
 
 [[conditions]]
 name = "bare"
@@ -155,7 +155,9 @@ def test_every_call_is_archived_with_what_a_rerun_or_audit_needs(tmp_path, corpu
         assert r["prompt_sha256"] == c.prompt_sha256 and len(r["task_sha256"]) == 64
         assert r["usage"]["input_tokens"] > 0 and r["usage"]["output_tokens"] >= 0
         assert r["finish_reason"] in ("stop", "length") and r["latency_s"] is not None
-        assert r["request"] == {"max_tokens": 4000, "structured": c.structured, "temperature": None}
+        assert r["request"] == {"max_tokens": 4000, "structured": c.structured,
+                                "temperature": "provider-default"}  # none is ever sent
+        assert r["provider"] == "mock" and r["v"] == runner.ARCHIVE_VERSION
         assert r["cost_usd"] == pytest.approx(c.model.price.cost(
             r["usage"]["input_tokens"], r["usage"]["output_tokens"]))
         assert r["attempts"] == 1 and r["mock"] is True and r["route"] == c.model.route
@@ -435,21 +437,226 @@ def test_a_provider_error_in_a_200_body_is_raised_not_archived_as_an_answer(resp
 # --- a grader that cannot cope --------------------------------------------------------
 
 @pytest.mark.parametrize("raw", ['[{"action": ["x"]}]', '[{"action": {"a": 1}}]'])
-def test_output_that_crashes_the_grader_scores_zero_and_is_marked(raw, corpus, monkeypatch):
+def test_an_action_name_that_is_not_a_string_is_invalid_api_not_a_crash(raw, corpus):
+    """`schema.validate_actions` raises TypeError on these; the runner reports a schema
+    error instead (outcome invalid_api), and the state grader still scores the answer."""
     api = next(t for t in corpus if t["category"] == "api_calling")
+    s = runner.grade_output(api, raw)
+    assert s["f1"] == 0.0 and s["outcome"] == "invalid_api" and "grader_crash" not in s
+    assert s["schema_errors"] == ["action[0]: 'action' is not a string"]
+    assert s["grader"] == "state" and not runner.is_success(s)
+
+
+def test_output_that_crashes_the_grader_scores_zero_and_is_marked(corpus, monkeypatch):
+    api = next(t for t in corpus if t["category"] == "api_calling")
+    mvs = next(t for t in corpus if t["category"] == "mvs")
 
     def boom(*a, **k):
         raise TypeError("unhashable")
 
-    monkeypatch.setattr(runner.schema, "validate_actions", boom)
-    s = runner.grade_output(api, raw)
+    monkeypatch.setattr(runner.grader_mod, "grade_task", boom)
+    s = runner.grade_output(api, '[{"action": "load", "molecule_id": "1cbs"}]')
     assert s["f1"] == 0.0 and s["outcome"] == "invalid_api" and "unhashable" in s["grader_crash"]
+    assert not runner.is_success(s)
     assert runner._track_stats([{**s, "finish_reason": "stop"}], "api_calling",
                                False)["n_grader_crashes"] == 1
-    mvs = next(t for t in corpus if t["category"] == "mvs")
     monkeypatch.setattr(runner.mvs_mod, "grade_mvs", boom)
+    monkeypatch.setattr(runner.grader_mod, "GRADES_MVS", False, raising=False)
     s = runner.grade_output(mvs, '{"root": {}}')
     assert s["f1"] == 0.0 and s["outcome"] == "not_mvs" and s["grader_crash"]
+
+
+# --- the grader entry point --------------------------------------------------------
+
+def test_api_answers_go_through_grade_task_so_accepted_alternatives_count():
+    tasks = [t for t in runner.load_tasks(["api_calling"]) if t["accepted"]]
+    assert tasks
+    for t in tasks:
+        for alt in t["accepted"]:
+            s = runner.grade_output(t, json.dumps(alt))
+            assert s["f1"] == 1.0 and runner.is_success(s) and s["grader"] == "state", t["id"]
+
+
+def test_an_api_answer_not_graded_by_the_state_grader_stops_the_grading(corpus, monkeypatch):
+    """No silent fallback to the old sequence grader: it is a different kind of score."""
+    api = next(t for t in corpus if t["category"] == "api_calling")
+    monkeypatch.setattr(runner.grader_mod, "grade_task",
+                        lambda task, pred: {"f1": 1.0, "success": True, "grader": "sequence"})
+    with pytest.raises(runner.GradingError, match="not by the final-state grader"):
+        runner.grade_output(api, json.dumps(api["reference"]))
+
+
+def test_a_task_without_an_atom_table_is_refused_before_the_run(corpus):
+    m = _manifest()
+    ghost = {**corpus[0], "id": "ghost", "structures": ["9zzz"]}
+    with pytest.raises(runner.GradingError, match="no atom table for \\['9zzz'\\]"):
+        runner.build_plan(m, corpus + [ghost], m.panel())
+
+
+def test_a_reference_that_does_not_grade_itself_stops_the_grading(tmp_path, corpus, monkeypatch):
+    m, cells, archive, _ = _run(tmp_path, corpus[:1])
+    monkeypatch.setattr(runner.grader_mod, "grade_task",
+                        lambda task, pred: {"f1": 0.5, "success": False, "grader": "state"})
+    with pytest.raises(runner.GradingError, match="own reference does not grade"):
+        runner.grade_archive(cells, archive.load(), "off", log=lambda s: None)
+
+
+def test_grader_extras_are_carried_and_a_target_score_reaches_the_scorecard(tmp_path, corpus,
+                                                                             monkeypatch):
+    """The grader may return more than f1: success, target_f1, outcome, grader. An
+    unparseable answer gets target 0 when the grader reports targets for the task."""
+    api = [t for t in corpus if t["category"] == "api_calling"][:1]
+    m, cells, archive, _ = _run(tmp_path, api)
+    real = runner.grader_mod.grade_task
+
+    def with_target(task, pred):
+        res = real(task, pred)
+        return {**res, "target_f1": 1.0 if res["success"] else 0.25, "extra_key": "ignored"}
+
+    monkeypatch.setattr(runner.grader_mod, "grade_task", with_target)
+    graded, _ = runner.grade_archive(cells, archive.load(), "off", log=lambda s: None)
+    samples = [s for per in graded.values() for got in per.values() for s in got]
+    assert all(runner.target_score(s) is not None for s in samples)
+    assert all(s["target_f1"] == 0.0 for s in samples if s["outcome"] == "invalid_json")
+    cards = runner.write_scorecards(m, cells, graded, False, tmp_path / "cards", {})
+    rec = json.loads(cards[0].read_text())["models"]
+    rec = next(iter(rec.values()))
+    assert rec["target_f1"] is not None and rec["by_category"]["api_calling"]["target_f1"] is not None
+    assert rec["tasks"][0]["target_f1"] is not None
+
+
+def test_task_success_is_reported_as_the_mean_and_as_all_samples_right():
+    def sample(f1, success, finish="stop", outcome="valid"):
+        return {"f1": f1, "success": success, "finish_reason": finish, "outcome": outcome}
+    mixed = runner._aggregate([sample(1.0, True), sample(1.0, True), sample(0.4, False)])
+    assert mixed["success"] == round(2 / 3, 4) and mixed["success_all"] is False
+    assert mixed["target_f1"] is None                       # the grader reported none
+    clean = runner._aggregate([{**sample(1.0, True), "target_f1": 1.0}] * 3)
+    assert clean["success"] == 1.0 and clean["success_all"] is True and clean["target_f1"] == 1.0
+
+
+def test_truncation_is_counted_apart_from_malformed_output():
+    cut = {"f1": 0.0, "outcome": "invalid_json", "finish_reason": "length"}
+    cut_anthropic = {"f1": 0.0, "outcome": "invalid_json", "finish_reason": "max_tokens"}
+    garbled = {"f1": 0.0, "outcome": "invalid_json", "finish_reason": "stop"}
+    wrong = {"f1": 0.0, "outcome": "invalid_api", "finish_reason": "stop"}
+    fine = {"f1": 1.0, "outcome": "valid", "finish_reason": "stop"}
+    stats = runner._track_stats([cut, cut_anthropic, garbled, wrong, fine], "api_calling", False)
+    assert stats["n_truncated"] == 2
+    assert stats["not_valid"] == {"truncated": 2, "malformed": 2}
+    assert stats["valid_rate"] == 0.2                       # the API valid-output rate
+
+
+# --- follow-up turns, accept sets, twins, paraphrases, the held-back split ----------
+
+@pytest.fixture(scope="module")
+def fixtures():
+    return runner.tasks_mod.load_corpus(runner.FIXTURE_TASKS)
+
+
+def test_fixture_tasks_cover_every_special_kind_on_both_tracks(fixtures):
+    kinds = runner.kinds_present(fixtures)
+    assert set(kinds) == {"follow-up", "follow-up with no change", "accept-set", "twin",
+                          "paraphrase", "held-back"}
+    assert all(n >= 1 for per in kinds.values() for n in per.values()), kinds
+    tasks, added = runner.with_fixtures(runner.load_tasks(list(mf.TRACKS)))
+    assert added in (0, len(fixtures))    # added only while the corpus lacks a kind
+
+
+def test_a_follow_up_shows_the_start_state_then_the_request(fixtures):
+    for t in (x for x in fixtures if x["context"]):
+        user = runner.user_message(t)
+        head, _, request = user.partition("\n\nRequest: ")
+        assert request == t["prompt"]
+        label, _, state = head.partition("\n")
+        if t["category"] == "mvs":
+            assert label == "Current scene (MolViewSpec JSON):"
+            assert set(json.loads(state)) == {"root"}       # the form the answer must take
+            assert runner.grade_parsed({**t, "reference": t["context"]["scene"]},
+                                       json.loads(state))["f1"] == 1.0
+        else:
+            assert label == "Calls made so far (JSON array):"
+            assert json.loads(state) == t["context"]["calls"]
+    single = next(x for x in fixtures if not x["context"])
+    assert runner.user_message(single) == single["prompt"]
+
+
+def test_no_change_is_the_right_answer_to_a_no_op_follow_up(fixtures):
+    for t in (x for x in fixtures if x["context"]):
+        start = runner.start_state(t)
+        unchanged = runner.grade_output(t, json.dumps(start))
+        assert runner.is_success(unchanged) == t["context"]["noop"], t["id"]
+        assert runner.is_success(runner.grade_output(t, json.dumps(t["reference"])))
+
+
+def test_every_accepted_alternative_is_exactly_right(fixtures):
+    for t in (x for x in fixtures if x["accepted"]):
+        for alt in t["accepted"]:
+            s = runner.grade_output(t, json.dumps(alt))
+            assert s["f1"] == 1.0 and runner.is_success(s) and s["matched_reference"] == 1
+
+
+def test_system_prompts_frame_follow_ups_and_keep_the_worked_example_out_of_the_tasks():
+    prompts = runner.build_system_prompts("spec")
+    bare = runner.build_system_prompts("bare")
+    for text in (prompts["api_calling"], prompts["mvs"], bare["mvs"]):
+        assert "## Follow-up requests" in text and "{{" not in text.split("## MVS reference")[0]
+    api = prompts["api_calling"]
+    assert runner.schema.schema_text() in api               # the compact action list
+    assert '"$schema"' not in api                           # not the long JSON Schema
+    assert "pdbe-molstar 3.3.2" in api and "1HSG" in api
+    used = {s for t in runner.load_tasks(list(mf.TRACKS)) for s in t["structures"]}
+    assert "1hsg" not in used
+
+
+def test_the_keyword_baseline_answers_both_tracks_and_echoes_a_follow_up(fixtures):
+    baseline, prompts = build_model("baseline"), runner.build_system_prompts("spec")
+    for t in fixtures:
+        raw = baseline.generate(prompts[t["category"]], runner.user_message(t))
+        s = runner.grade_output(t, raw)
+        assert s["outcome"] in ("valid", "unchecked"), (t["id"], raw)
+        if t["context"]:                                    # doing nothing, scored as such
+            assert json.loads(raw) == runner.start_state(t)
+            assert runner.is_success(s) == t["context"]["noop"]
+
+
+# --- the archive lock and the per-sample records ------------------------------------
+
+def test_two_runs_cannot_write_one_archive(tmp_path, corpus):
+    m = _manifest()
+    cells = runner.build_plan(m, corpus[:1], m.panel())
+    first, second = runner.RunArchive(tmp_path / "arch"), runner.RunArchive(tmp_path / "arch")
+    first.open(m, "corpus-sha", mock=True)
+    with first.exclusive():
+        with first.exclusive():                             # re-entrant for its holder
+            pass
+        with pytest.raises(mf.ManifestError, match="being written by another run"):
+            runner.generate(m, cells, _mocks(m), second, CALIB, log=lambda s: None)
+        assert second.load() == {}                          # nothing was archived
+    stats = runner.generate(m, cells, _mocks(m), second, CALIB, log=lambda s: None)
+    assert stats["called"] == len(cells)                    # free again once released
+
+
+def test_a_record_per_sample_with_call_and_grade_together(tmp_path, corpus):
+    m, cells, archive, _ = _run(tmp_path, corpus)
+    graded, _ = runner.grade_archive(cells, archive.load(), "off", log=lambda s: None)
+    files = runner.write_sample_records(cells, graded, tmp_path / "out")
+    rows = [json.loads(line) for f in files for line in f.read_text().splitlines()]
+    assert len(rows) == len(cells)
+    assert sorted(f.relative_to(tmp_path / "out").as_posix() for f in files)[0] == \
+        "samples/bare/mock_plain.jsonl"
+    records = archive.load()
+    for row in rows:
+        assert tuple(row) == runner.SAMPLE_RECORD_FIELDS
+        raw = records[(row["model"], row["condition"], row["task_id"], row["sample"])]
+        assert row["raw"] == raw["raw"] and row["prompt_sha256"] == raw["prompt_sha256"]
+        assert row["temperature"] == "provider-default" and row["max_tokens"] == 4000
+        assert row["provider"] == "mock" and row["finish_reason"] in ("stop", "length")
+        assert row["truncated"] == (row["finish_reason"] == "length")
+        assert isinstance(row["success"], bool) and row["input_tokens"] > 0
+        assert row["cost_usd"] is not None and row["latency_s"] is not None
+        assert (row["predicted"] is None) == (row["outcome"] == "invalid_json")
+        assert row["tier"] and row["split"] == "public"
 
 
 def test_invalidating_a_scene_clears_a_grader_supplied_success():
@@ -500,8 +707,22 @@ def test_outcomes_on_both_tracks(corpus):
     assert runner.grade_output(mvs, json.dumps(mvs["reference_mvs"]))["outcome"] == "unchecked"
     assert runner.grade_output(mvs, '{"answer": 1}')["outcome"] == "not_mvs"
     assert runner.grade_output(mvs, "")["outcome"] == "invalid_json"
-    near = runner.grade_output(api, json.dumps(perturb_reference(api["reference"])))
-    assert 0 < near["f1"] < 1 and not runner.is_success(near)
+
+
+def test_a_near_miss_is_never_a_success_and_usually_earns_partial_credit():
+    """The state grader scores the *changes* an answer makes to a bare load. A near miss
+    that keeps some of them earns partial credit; one that drops the only change the
+    task asks for (api-001: load, hide water -> load) has no fact left and scores 0."""
+    partial = 0
+    tasks = runner.load_tasks(["api_calling"])
+    for t in tasks:
+        near = runner.grade_output(t, json.dumps(perturb_reference(t["reference"])))
+        assert near["outcome"] == "valid" and near["f1"] < 1 and not runner.is_success(near), t["id"]
+        partial += 0 < near["f1"]
+    assert partial >= len(tasks) - 2
+    lost = next(t for t in tasks if len(t["reference"]) == 2
+                and t["reference"][1].get("name") == "hide_water")
+    assert runner.grade_output(lost, json.dumps(lost["reference"][:1]))["f1"] == 0.0
 
 
 def test_api_tasks_report_their_skills():
@@ -591,10 +812,17 @@ def test_scorecards_report_strict_success_validity_and_repair(monkeypatch, tmp_p
         assert d["strict_f1"] <= d["repair_f1"] <= 1.0   # repair can only add points
         assert 0.0 <= d["success"] <= d["strict_f1"] <= 1.0  # exactly right <= partly right
         assert "valid_rate" in d and sum(d["finish_reasons"].values()) == 2 * n
+        assert 0.0 <= d["success_all"] <= d["success_tasks"] <= 1.0   # all samples <= mean
+        assert sum(d["not_valid"].values()) == 2 * n - d["outcomes"]["valid"]
+        assert sum(g["n_tasks"] for g in d["by_tier"].values()) == n
+        assert d["by_split"]["public"]["n_tasks"] == n
     assert set(rec["outcomes"]) == set(runner.OUTCOMES)   # the scene stats stay MVS-only
     assert sum(rec["outcomes"].values()) == 10
     task = rec["tasks"][0]
-    assert len(task["samples"]) == 2 and {"f1", "outcome", "success", "finish_reason"} <= set(task["samples"][0])
+    assert len(task["samples"]) == 2 and {"f1", "outcome", "success", "target_f1", "finish_reason",
+                                          "truncated"} <= set(task["samples"][0])
+    assert {"tier", "family", "structures", "split", "cluster", "success_all"} <= set(task)
+    assert 0.0 <= rec["success_all"] <= rec["success"] <= 1.0
     assert task["categories"]                              # skills, on either track
 
 
@@ -666,11 +894,13 @@ def test_dry_run_exercises_the_whole_pipeline_for_nothing(tmp_path, monkeypatch,
     assert e.value.code == 0, out
     assert "DRY RUN PASSED" in out and "[FAIL]" not in out
     assert "Projected cost of the real run" in out
+    assert "fixture tasks" in out and "follow-up: " in out   # every task kind is rehearsed
     arch, res = tmp_path / "runs" / "t.dryrun", tmp_path / "results" / "t.dryrun"
     assert (arch / "DRYRUN").exists() and json.loads((arch / "run.json").read_text())["mock"]
     n_cells = sum(len(p.read_text().splitlines()) for p in (arch / "cells").rglob("*.jsonl"))
     assert n_cells > 500   # the whole corpus x both models x every condition
     assert (res / "spec" / "mock_plain.json").exists()
+    assert (res / "samples" / "spec" / "mock_plain.jsonl").exists()
     site = res / "site"
     for name in ("scorecard.json", "conditions_data.json", "failures_data.json",
                  "index.html", "failures.html"):

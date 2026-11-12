@@ -139,6 +139,7 @@ class Manifest:
     conditions: tuple[Condition, ...]
     models: tuple[ModelSpec, ...]
     sha256: str  # of the manifest file itself
+    panel_rule: str = ""  # how the model panel was chosen, in words (plan decision 22)
 
     def panel(self, include_optional: bool = False,
               only: Iterable[str] | None = None) -> list[ModelSpec]:
@@ -247,6 +248,13 @@ def _condition(d: dict, i: int, model_ids: set[str]) -> Condition:
     if models == "structured" and not d.get("structured"):
         raise ManifestError(f"{where}: models = 'structured' needs structured = true")
     wh = {k: tuple(v if isinstance(v, list) else [v]) for k, v in d.get("where", {}).items()}
+    from . import tasks as tasks_mod
+    for key, allowed in (("tier", tasks_mod.TIERS), ("split", tasks_mod.SPLITS),
+                         ("style", tasks_mod.STYLES)):
+        unknown = sorted(set(wh.get(key, ())) - set(allowed))
+        if unknown:  # a typo here would silently select no task
+            raise ManifestError(f"{where}: where.{key} has unknown value(s) {unknown}; "
+                                f"known: {list(allowed)}")
     return Condition(name=_need(d, "name", where), prompt=prompt,
                      grounding=bool(d.get("grounding", False)),
                      structured=bool(d.get("structured", False)), tracks=tracks,
@@ -258,7 +266,11 @@ def parse_manifest(text: str, path: pathlib.Path | str = "<string>") -> Manifest
         raw = tomllib.loads(text)
     except tomllib.TOMLDecodeError as e:
         raise ManifestError(f"{path}: not valid TOML: {e}") from e
-    _known(raw, {"run", "budget", "corpus", "conditions", "models"}, str(path))
+    _known(raw, {"run", "budget", "corpus", "panel", "conditions", "models"}, str(path))
+    panel = raw.get("panel", {})
+    _known(panel, {"rule"}, "panel")
+    if not isinstance(panel.get("rule", ""), str):
+        raise ManifestError("panel: rule is text")
     run = _need(raw, "run", str(path))
     _known(run, {"name", "samples", "max_tokens", "reasoning_max_tokens", "temperature",
                  "concurrency", "per_model_concurrency", "validate", "retry"}, "run")
@@ -302,7 +314,8 @@ def parse_manifest(text: str, path: pathlib.Path | str = "<string>") -> Manifest
         corpus_version=_need(corpus, "version", "corpus"),
         corpus_sha256=corpus.get("sha256", ""),
         conditions=conditions, models=models,
-        sha256=hashlib.sha256(text.encode("utf-8")).hexdigest())
+        sha256=hashlib.sha256(text.encode("utf-8")).hexdigest(),
+        panel_rule=" ".join(panel.get("rule", "").split()))
     if min(m.samples, m.max_tokens, m.reasoning_max_tokens, m.concurrency,
            m.per_model_concurrency) < 1:
         raise ManifestError("run: samples, max_tokens and concurrency must be >= 1")
@@ -475,6 +488,8 @@ def main(argv: list[str] | None = None) -> None:
     print(f"  models: {len(core)} + {len(m.models) - len(core)} optional   "
           f"conditions: {', '.join(c.name for c in m.conditions)}")
     print(f"  corpus {m.corpus_version}: sha256 on disk {actual} ({pinned})")
+    if m.panel_rule:
+        print(f"  panel rule: {m.panel_rule}")
     unverified = [x.id for x in m.models if x.price is None or not x.price.verified]
     if unverified:
         print(f"  prices missing or unverified: {', '.join(unverified)}")

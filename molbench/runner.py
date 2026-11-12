@@ -22,6 +22,7 @@ Every run is archived; there is no way to switch that off.
 from __future__ import annotations
 
 import argparse
+import contextlib
 import hashlib
 import importlib.util
 import itertools
@@ -29,6 +30,7 @@ import json
 import math
 import os
 import pathlib
+import re
 import shutil
 import statistics
 import subprocess
@@ -46,6 +48,7 @@ from . import grader as grader_mod
 from . import manifest as manifest_mod
 from . import mvs as mvs_mod
 from . import schema
+from . import tasks as tasks_mod
 from .manifest import Budget, BudgetExceeded, Calibration, Manifest, ManifestError, ModelSpec
 from .models import MockModel, Model, build_model
 from .vlm_grader import StubVLMJudge
@@ -142,31 +145,43 @@ def load_dotenv(path: pathlib.Path = REPO / ".env") -> None:
 # --- task loading -----------------------------------------------------------------
 
 def load_tasks(categories: list[str] | None) -> list[dict[str, Any]]:
-    tasks = []
-    for path in sorted(TASKS_DIR.rglob("*.json")):
-        task = json.loads(path.read_text())
-        task["_path"] = str(path.relative_to(REPO))
-        if categories and task.get("category") not in categories:
-            continue
-        tasks.append(task)
-    return tasks
+    """The corpus under ``tasks/``, read and validated by `molbench.tasks` (new-format
+    files and, through its adapter, old ones). ``categories`` filters on the track's
+    scorecard name (``mvs``, ``api_calling``); None also returns the old, ungraded
+    ``visual_rubric`` files that the legacy ``--models`` path still elicits."""
+    tasks = tasks_mod.load_corpus(TASKS_DIR, repo=REPO)
+    if categories is None:
+        for path in sorted(TASKS_DIR.rglob("*.json")):
+            raw = json.loads(path.read_text(encoding="utf-8"))
+            if "track" not in raw and raw.get("category") not in tasks_mod.TRACK_OF:
+                raw["_path"] = str(path.relative_to(REPO))
+                tasks.append(raw)
+        return sorted(tasks, key=lambda t: t["_path"])
+    return [t for t in tasks if t["category"] in categories]
 
 
 def build_system_prompts(condition: str = "spec") -> dict[str, str]:
     """One assembled system prompt per task category.
 
     Each target speaks a different IR, so each gets its own instructions + vendored
-    reference: the imperative PDBeMolstar API for 'api_calling', the MolViewSpec
-    scene tree for 'mvs' (also used to elicit a plan for 'visual_rubric').
+    reference: pdbe-molstar calls for 'api_calling' (with the compact action list,
+    `schema.schema_text`), the MolViewSpec scene tree for 'mvs' (also used to elicit a
+    plan for 'visual_rubric'). One prompt per track serves single-turn and follow-up
+    requests alike; the user message carries the difference (`user_message`).
     """
-    api_prompt = (PROMPT_API.read_text()
-                  .replace("{{API_REFERENCE}}", API_REFERENCE.read_text())
-                  .replace("{{JSON_SCHEMA}}", json.dumps(schema.build_json_schema(), indent=2)))
-    mvs_prompt = PROMPT_MVS.read_text()
+    api_prompt = (PROMPT_API.read_text(encoding="utf-8")
+                  .replace("{{API_REFERENCE}}", API_REFERENCE.read_text(encoding="utf-8"))
+                  .replace("{{SCHEMA_TEXT}}", schema.schema_text()))
+    mvs_prompt = PROMPT_MVS.read_text(encoding="utf-8")
     if condition == "bare":
         mvs_prompt = mvs_prompt.replace("## MVS reference\n\n{{MVS_REFERENCE}}", "").rstrip() + "\n"
     else:
-        mvs_prompt = mvs_prompt.replace("{{MVS_REFERENCE}}", MVS_REFERENCE.read_text())
+        mvs_prompt = mvs_prompt.replace("{{MVS_REFERENCE}}",
+                                        MVS_REFERENCE.read_text(encoding="utf-8"))
+    for name, text in (("system_api.md", api_prompt), ("system_mvs.md", mvs_prompt)):
+        left = re.findall(r"\{\{[A-Z_]+\}\}", text)
+        if left:
+            raise RuntimeError(f"prompts/{name}: unfilled placeholder(s) {left}")
     return {"api_calling": api_prompt, "mvs": mvs_prompt, "visual_rubric": mvs_prompt}
 
 
@@ -216,12 +231,38 @@ def extract_json_object(raw: str) -> tuple[Any, str | None]:
 
 # --- running ----------------------------------------------------------------------
 
+# What a follow-up request looks like to the model (decision 19): the state the viewer
+# is in, then the new request. The answer is always the full new scene / call list.
+FOLLOWUP_TEMPLATE = {
+    "mvs": "Current scene (MolViewSpec JSON):\n{state}\n\nRequest: {prompt}",
+    "api_calling": "Calls made so far (JSON array):\n{state}\n\nRequest: {prompt}",
+}
+
+
+def start_state(task: dict) -> Any:
+    """A follow-up task's start state in the form the model must answer in: a full
+    ``{"root": ...}`` scene, or the list of calls made so far. None on a single turn."""
+    context = task.get("context")
+    if not context:
+        return None
+    if task["category"] == "mvs":
+        return {"root": tasks_mod.scene_root(context["scene"])}
+    return context["calls"]
+
+
 def user_message(task: dict, grounding: bool = False) -> str:
-    """The task prompt, plus its grounding pack when `grounding` is on and it has one."""
+    """What the model is sent as the user turn: the task prompt; on a follow-up, the
+    current scene / the calls made so far and then the request; plus the grounding
+    pack when ``grounding`` is on and the task has one."""
+    text = task["prompt"]
+    state = start_state(task)
+    if state is not None:
+        text = FOLLOWUP_TEMPLATE[task["category"]].format(
+            state=json.dumps(state, separators=(",", ":")), prompt=task["prompt"])
     pack = task.get("grounding")
     if not grounding or not pack:
-        return task["prompt"]
-    return GROUNDING_TEMPLATE.format(prompt=task["prompt"], facts=pack["text"])
+        return text
+    return GROUNDING_TEMPLATE.format(prompt=text, facts=pack["text"])
 
 
 def task_skills(task: dict) -> list[str]:
@@ -237,6 +278,23 @@ def is_success(sample: dict) -> bool:
     return sample.get("f1", 0.0) >= 1.0
 
 
+# Finish reasons that mean the provider cut the answer at the token limit ("length" on
+# OpenAI-compatible routes, "max_tokens" on Anthropic's). A truncated answer is counted
+# apart from a malformed one: it says the limit was too low, not that the model cannot
+# write the format.
+TRUNCATED_REASONS = ("length", "max_tokens")
+
+
+def is_truncated(sample: dict) -> bool:
+    return sample.get("finish_reason") in TRUNCATED_REASONS
+
+
+class GradingError(RuntimeError):
+    """A task cannot be graded the way the benchmark says it is graded (no atom table,
+    or an API answer the state grader did not grade). Never scored around: the run's
+    grading stops and names the task."""
+
+
 _ZERO = {"f1": 0.0, "precision": 0.0, "recall": 0.0}
 
 
@@ -246,16 +304,76 @@ def _grader_crash(exc: Exception, outcome: str, predicted: Any, raw: str) -> dic
     from being graded: it scores 0 and is marked, and `grade_archive` reports the
     count so the bug gets fixed rather than hidden."""
     msg = f"{type(exc).__name__}: {exc}"
-    return {**_ZERO, "error": f"grader crashed: {msg}", "grader_crash": msg,
+    return {**_ZERO, "success": False, "error": f"grader crashed: {msg}", "grader_crash": msg,
             "outcome": outcome, "predicted": predicted, "raw": raw, "schema_errors": []}
 
 
-def _grade_actions(task: dict, actions: Any, raw: str) -> dict[str, Any]:
+def action_schema_errors(actions: Any) -> list[str]:
+    """`schema.validate_actions`, which raises on an action whose name is not a string
+    (a list or an object cannot be looked up). That is a schema error, not a crash."""
     try:
-        schema_errors = schema.validate_actions(actions)
-        result = grader_mod.grade(task["reference"], actions)
+        return schema.validate_actions(actions)
+    except TypeError:
+        bad = [i for i, a in enumerate(actions)
+               if isinstance(a, dict) and not isinstance(a.get("action"), str)]
+        return [f"action[{i}]: 'action' is not a string" for i in bad] or ["malformed action"]
+
+
+def check_gradable(task: dict) -> None:
+    """Raise `GradingError` unless the task can be graded on atoms: every structure it
+    loads has a frozen atom table. Run for every task before a run is graded."""
+    missing = [s for s in task.get("structures", []) if not tasks_mod.has_table(s)]
+    if missing:
+        raise GradingError(f"task {task['id']}: no atom table for {missing}; it cannot be "
+                           "graded on atoms (scripts/build_atom_tables.py)")
+
+
+def _mvs_grade(task: dict, tree: Any) -> dict[str, Any]:
+    """Grade a parsed MVS scene. `grader.grade_task` is the one entry point; until it
+    grades the MVS track too (it says so with ``GRADES_MVS = True``) the scene is
+    scored by `mvs.grade_mvs` against the reference and each accepted alternative,
+    keeping the best."""
+    if getattr(grader_mod, "GRADES_MVS", False):
+        return grader_mod.grade_task(task, tree)
+    reference = task["reference"] if "reference" in task else task["reference_mvs"]
+    best = None
+    for i, ref in enumerate([reference] + list(task.get("accepted") or [])):
+        res = mvs_mod.grade_mvs(ref, tree, accepted_refs=task.get("accepted_ids"))
+        res["matched_reference"] = i
+        if best is None or res["f1"] > best["f1"]:
+            best = res
+    best.setdefault("success", best["f1"] >= 1.0 and not best.get("error"))
+    best.setdefault("grader", "mvs-paths")
+    return best
+
+
+def grade_parsed(task: dict, prediction: Any) -> dict[str, Any]:
+    """Grade an already-parsed answer (a scene tree or a call list) against a task:
+    its reference and its accepted alternatives. Returns the grader's own result
+    (``f1``, ``success``, ``target_f1`` when it reports one, ``grader``, ...).
+
+    An API answer must have been graded by the final-state grader; anything else
+    (the old sequence grader stepping in because no atom table was found) raises
+    `GradingError` instead of quietly producing a different kind of score."""
+    if task["category"] == "mvs":
+        return _mvs_grade(task, prediction)
+    result = grader_mod.grade_task(task, prediction)
+    if result.get("grader") != "state":
+        raise GradingError(
+            f"task {task['id']}: graded by {result.get('grader')!r}, not by the final-state "
+            "grader (is the atom table of its structure missing?)")
+    return result
+
+
+def _grade_actions(task: dict, actions: Any, raw: str) -> dict[str, Any]:
+    schema_errors = action_schema_errors(actions)
+    try:
+        result = grade_parsed(task, actions)
+    except GradingError:
+        raise
     except Exception as e:  # noqa: BLE001 - see _grader_crash
-        return {**_grader_crash(e, "invalid_api", actions, raw), "track": "api_calling"}
+        return {**_grader_crash(e, "invalid_api", actions, raw), "track": "api_calling",
+                "schema_errors": schema_errors}
     # The grader may classify the output itself; otherwise derive it: 'invalid_api' when
     # the grader reports an error or the action schema is broken. The score is whatever
     # the grader gave - this label does not change it.
@@ -269,22 +387,24 @@ def grade_api_output(task: dict, raw: str) -> dict[str, Any]:
     """Parse + grade one raw API-track reply."""
     actions, err = extract_actions(raw)
     if err:
-        return {**_ZERO, "error": err, "raw": raw, "outcome": "invalid_json",
+        return {**_ZERO, "success": False, "error": err, "raw": raw, "outcome": "invalid_json",
                 "track": "api_calling"}
     return _grade_actions(task, actions, raw)
 
 
 def _grade_tree(task: dict, tree: Any, raw: str) -> dict[str, Any]:
     try:
-        result = mvs_mod.grade_mvs(task["reference_mvs"], tree,
-                                   accepted_refs=task.get("accepted_ids"))
+        result = grade_parsed(task, tree)
         schema_errors = mvs_mod.validate_mvs(tree)
+    except GradingError:
+        raise
     except Exception as e:  # noqa: BLE001 - see _grader_crash
-        return _grader_crash(e, "not_mvs", tree, raw)
-    result["outcome"] = "not_mvs" if result.get("error") else "unchecked"
-    result["schema_errors"] = schema_errors
-    result["predicted"] = tree
-    result["raw"] = raw
+        return {**_grader_crash(e, "not_mvs", tree, raw), "track": "mvs"}
+    if result.get("outcome") not in ("not_mvs", "unchecked"):
+        # Mol* has the last word on validity (`validate_samples`); until it has run a
+        # parsed scene is 'unchecked', whatever the grader called it.
+        result["outcome"] = "not_mvs" if result.get("error") else "unchecked"
+    result.update(schema_errors=schema_errors, predicted=tree, raw=raw, track="mvs")
     return result
 
 
@@ -292,7 +412,8 @@ def grade_mvs_output(task: dict, raw: str) -> dict[str, Any]:
     """Parse + grade one raw MVS-track reply (Mol* validation comes later, in a batch)."""
     tree, err = extract_json_object(raw)
     if err:
-        return {**_ZERO, "error": err, "raw": raw, "outcome": "invalid_json"}
+        return {**_ZERO, "success": False, "error": err, "raw": raw, "outcome": "invalid_json",
+                "track": "mvs"}
     return _grade_tree(task, tree, raw)
 
 
@@ -356,6 +477,8 @@ def _invalidate(sample: dict, outcome: str, detail: list[str] | str) -> None:
     sample.update(f1=0.0, precision=0.0, recall=0.0, outcome=outcome)
     if "success" in sample:  # a grader-supplied verdict must not outlive the zero
         sample["success"] = False
+    if sample.get("target_f1") is not None:
+        sample["target_f1"] = 0.0
     sample["mvs_issues" if outcome == "invalid_mvs" else "load_error"] = detail
 
 
@@ -370,16 +493,35 @@ def validate_samples(samples: list[dict]) -> None:
             s["outcome"] = "valid"
 
 
+def target_score(sample: dict) -> float | None:
+    """The sample's target score (the requested atoms alone: selection, representation,
+    colour - decision 17), or None when the grader reports none for this task."""
+    v = sample.get("target_f1")
+    return float(v) if isinstance(v, (int, float)) and not isinstance(v, bool) else None
+
+
+def _mean_or_none(values: list) -> float | None:
+    values = list(values)
+    if not values or any(v is None for v in values):
+        return None
+    return round(statistics.fmean(values), 4)
+
+
 def _aggregate(samples: list[dict]) -> dict[str, Any]:
     """Reduce N graded samples of one task to mean/std/min/max + a representative.
 
     LLMs are stochastic, so a single sample is noisy. We score each task as the
     *mean over N samples* and keep the spread so the report can show mean±std and
-    callers can tell a real gap from sampling noise.
+    callers can tell a real gap from sampling noise. Task success is reported both
+    ways: ``success`` is the mean over the samples, ``success_all`` says whether every
+    sample was exactly right. ``target_f1`` is the mean target score (None when the
+    grader reports none).
     """
     f1s = [s["f1"] for s in samples]
     ps = [s.get("precision", 0.0) for s in samples]
     rs = [s.get("recall", 0.0) for s in samples]
+    wins = [is_success(s) for s in samples]
+    targets = [target_score(s) for s in samples]
     rep = max(samples, key=lambda s: s["f1"])  # keep the best sample's detail to show
     return {
         "f1": round(statistics.fmean(f1s), 4),
@@ -390,7 +532,10 @@ def _aggregate(samples: list[dict]) -> dict[str, Any]:
         "recall": round(statistics.fmean(rs), 4),
         "n_samples": len(samples),
         "samples_f1": [round(x, 4) for x in f1s],
-        "success": round(statistics.fmean(is_success(s) for s in samples), 4),
+        "success": round(statistics.fmean(wins), 4),
+        "success_all": all(wins),
+        "target_f1": _mean_or_none(targets),
+        "n_truncated": sum(is_truncated(s) for s in samples),
         "predicted": rep.get("predicted"),
         "error": rep.get("error"),
         "schema_errors": rep.get("schema_errors"),
@@ -610,7 +755,7 @@ API_STRUCTURED_SUFFIX = (
     '\n\n## JSON mode\n\nReturn one JSON object of the form {"actions": [...]}, where '
     '"actions" is the JSON array described above.\n')
 
-ARCHIVE_VERSION = 1
+ARCHIVE_VERSION = 2   # 2: adds 'provider' and request.temperature = "provider-default"
 # HTTP statuses that will fail the same way on a retry: bad request, bad key, no
 # credit, unknown model. Everything else (rate limits, timeouts, 5xx) is retried.
 NO_RETRY_STATUS = (400, 401, 402, 403, 404, 422)
@@ -627,6 +772,9 @@ def _sha(text: str) -> str:
 
 
 def task_hash(task: dict) -> str:
+    """SHA-256 of the task's file (of its content, for a task that was not loaded from one)."""
+    if task.get("_sha256"):
+        return task["_sha256"]
     return _sha(json.dumps({k: v for k, v in task.items() if not k.startswith("_")},
                            sort_keys=True))
 
@@ -668,6 +816,8 @@ def build_plan(manifest: Manifest, tasks: list[dict], panel: list[ModelSpec]) ->
     dup = sorted({i for i in ids if ids.count(i) > 1})
     if dup:
         raise ManifestError(f"duplicate task ids in the corpus: {dup}")
+    for task in tasks:
+        check_gradable(task)  # before any call is paid for, not after
     prompts = {kind: build_system_prompts(kind) for kind in manifest_mod.PROMPTS}
     cells: list[Cell] = []
     for cond in manifest.conditions:
@@ -699,6 +849,48 @@ class RunArchive:
     def __init__(self, root: pathlib.Path):
         self.root = pathlib.Path(root)
         self._lock = threading.Lock()
+        self._held = 0          # depth of `exclusive` on this object
+        self._lock_fh = None
+
+    @contextlib.contextmanager
+    def exclusive(self):
+        """Hold the archive for writing. A second run on the same archive (another
+        process, or another `RunArchive` in this one) is refused at once instead of
+        archiving every cell twice. The lock is an OS file lock on ``<root>/LOCK``: it
+        goes away with the process, so a crashed run leaves nothing to clean up."""
+        if self._held:
+            self._held += 1
+            try:
+                yield
+            finally:
+                self._held -= 1
+            return
+        self.root.mkdir(parents=True, exist_ok=True)
+        fh = (self.root / "LOCK").open("a+", encoding="utf-8")
+        try:
+            try:
+                import fcntl
+            except ImportError:  # not POSIX: no lock available; say so
+                print("warning: no file locking on this platform; do not start the same "
+                      "run twice at once", file=sys.stderr)
+            else:
+                try:
+                    fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                except OSError as e:
+                    fh.seek(0)
+                    raise ManifestError(
+                        f"{self.root} is being written by another run ({fh.read().strip() or '?'}). "
+                        "Two runs on one archive would archive every cell twice; wait for it "
+                        "to finish.") from e
+            fh.seek(0)
+            fh.truncate()
+            fh.write(f"pid {os.getpid()}, started {_now()}\n")
+            fh.flush()
+            self._held, self._lock_fh = 1, fh
+            yield
+        finally:
+            self._held, self._lock_fh = 0, None
+            fh.close()
 
     def _cell_file(self, model_slug: str, condition: str) -> pathlib.Path:
         return self.root / "cells" / model_slug / f"{condition}.jsonl"
@@ -895,14 +1087,16 @@ def call_cell(manifest: Manifest, cell: Cell, model: Model,
         "track": cell.task["category"],
         "prompt_sha256": cell.prompt_sha256, "system_sha256": _sha(cell.system),
         "task_sha256": task_hash(cell.task),
+        # No temperature is ever sent (decision 12): the provider's default applies.
         "request": {"max_tokens": max_tokens, "structured": cell.structured,
-                    "temperature": None},
+                    "temperature": "provider-default"},
         "raw": done.text, "finish_reason": done.finish_reason,
         "usage": {"input_tokens": done.input_tokens, "output_tokens": done.output_tokens,
                   "reasoning_tokens": done.reasoning_tokens},
         "cost_usd": cost, "cost_source": cost_source,
         "latency_s": done.latency_s, "attempts": attempt,
         "response_model": done.response_model, "response_id": done.response_id,
+        "provider": done.provider,     # who served the call (OpenRouter names the host)
         "started_at": started_at, "mock": bool(getattr(model, "is_mock", False)),
     }
 
@@ -915,8 +1109,18 @@ def generate(manifest: Manifest, cells: list[Cell], models: dict[str, Model],
 
     Raises `BudgetExceeded` - before the first call if the plan cannot fit under the
     cap, or mid-run as soon as (spent + still-to-run estimate) passes it. Either way
-    the archive keeps what was done and the next start resumes from it.
+    the archive keeps what was done and the next start resumes from it. The archive is
+    held exclusively while this runs (`RunArchive.exclusive`).
     """
+    with archive.exclusive():
+        return _generate(manifest, cells, models, archive, calib, enforce_budget=enforce_budget,
+                         stop_after=stop_after, sleep=sleep, log=log)
+
+
+def _generate(manifest: Manifest, cells: list[Cell], models: dict[str, Model],
+              archive: RunArchive, calib: Calibration, *, enforce_budget: bool,
+              stop_after: int | None, sleep: Callable[[float], None],
+              log: Callable[[str], None]) -> dict[str, Any]:
     done = archive.load()
     stale = [c.key for c in cells if c.key in done
              and done[c.key]["prompt_sha256"] != c.prompt_sha256]
@@ -1029,30 +1233,61 @@ def validate_all(samples: list[dict], mode: str, log: Callable[[str], None] = pr
     return True
 
 
+# Outcomes that score 0 because nothing the viewer could show came back.
+ZERO_OUTCOMES = ("invalid_json", "not_mvs", "invalid_mvs", "load_failed")
+
+
+def check_reference(task: dict) -> bool:
+    """Grade a task's reference against itself, before any answer to it is graded.
+    Raises `GradingError` unless it is exactly right (and, on the API track, graded by
+    the final-state grader). Returns whether the grader reports a target score for
+    this task."""
+    check_gradable(task)
+    own = grade_parsed(task, task["reference"])
+    if not (own.get("f1") == 1.0 and own.get("success", True) and not own.get("error")):
+        raise GradingError(f"task {task['id']}: its own reference does not grade as exactly "
+                           f"right (f1 {own.get('f1')}, success {own.get('success')})")
+    target = target_score(own)
+    if target is not None and target != 1.0:
+        raise GradingError(f"task {task['id']}: its own reference has target score {target}")
+    return target is not None
+
+
 def grade_archive(cells: list[Cell], records: dict[tuple, dict], validate: str = "auto",
                   log: Callable[[str], None] = print) -> tuple[dict, bool]:
     """Grade every archived cell of the plan.
 
     Returns ``({(condition, model id): {task id: [sample, ...]}}, validated)``; each
     sample is the grader's result plus the call's finish reason, tokens and latency,
-    and - for an invalid-JSON sample - its json-repair counterfactual.
+    and - for an invalid-JSON sample - its json-repair counterfactual. Every task's
+    reference is graded against itself first (`check_reference`): a task that cannot
+    be graded properly stops the grading, it is never scored some other way.
     """
     graded: dict[tuple, dict] = {}
+    has_target: dict[str, bool] = {}
     for c in cells:
         r = records.get(c.key)
         if r is None:
             continue
+        tid = c.task["id"]
+        if tid not in has_target:
+            has_target[tid] = check_reference(c.task)
         s = grade_output(c.task, r["raw"] or "")
+        if has_target[tid] and target_score(s) is None:
+            # The grader never saw it (unparseable) or could not place it: strict 0,
+            # like the score itself. Left None when the grader reports no targets.
+            s["target_f1"] = 0.0
         s["sample"] = c.sample
         s["finish_reason"] = r.get("finish_reason")
+        s["truncated"] = is_truncated(r)
         s["usage"] = r.get("usage") or {}
         s["latency_s"] = r.get("latency_s")
         s["cost_usd"] = r.get("cost_usd")
+        s["_record"] = r
         fixed = repair_counterfactual(c.task, s)
         if fixed:
             s["repair"] = fixed
-        graded.setdefault((c.condition.name, c.model.id), {}).setdefault(
-            c.task["id"], []).append(s)
+        graded.setdefault((c.condition.name, c.model.id), {}).setdefault(tid, []).append(s)
     every = [s for per in graded.values() for got in per.values() for s in got]
     crashed = Counter(s["grader_crash"] for s in every if "grader_crash" in s)
     if crashed:
@@ -1071,15 +1306,24 @@ def _repaired_f1(s: dict) -> float:
 
 
 def _track_stats(samples: list[dict], track: str, validated: bool) -> dict[str, Any]:
-    """Strict score, task success, validity and the two counterfactual scores of one
-    track's samples."""
+    """Strict score, task success, target score, validity, truncation and the two
+    counterfactual scores of one track's samples."""
     names = OUTCOMES if track == "mvs" else API_OUTCOMES
     outcomes = {o: sum(s.get("outcome") == o for s in samples) for o in names}
+    targets = [t for t in map(target_score, samples) if t is not None]
+    not_valid = [s for s in samples if s.get("outcome") not in ("valid", "unchecked")]
     out: dict[str, Any] = {
         "n_samples": len(samples),
         "strict_f1": round(statistics.fmean(s["f1"] for s in samples), 4),
         "success": round(statistics.fmean(is_success(s) for s in samples), 4),
+        "target_f1": round(statistics.fmean(targets), 4) if targets else None,
+        "n_target_samples": len(targets),
         "outcomes": outcomes,
+        # Truncation (the provider stopped at the token limit) apart from malformed
+        # output: of the samples that are not valid, how many were cut off.
+        "n_truncated": sum(is_truncated(s) for s in samples),
+        "not_valid": {"truncated": sum(is_truncated(s) for s in not_valid),
+                      "malformed": sum(not is_truncated(s) for s in not_valid)},
         "repair_f1": round(statistics.fmean(_repaired_f1(s) for s in samples), 4),
         "n_repaired": sum("repair" in s for s in samples),
         "n_grader_crashes": sum("grader_crash" in s for s in samples),
@@ -1094,8 +1338,9 @@ def _track_stats(samples: list[dict], track: str, validated: bool) -> dict[str, 
 
 def _sample_summary(s: dict) -> dict[str, Any]:
     out = {"sample": s["sample"], "f1": s["f1"], "outcome": s.get("outcome"),
-           "success": is_success(s), "finish_reason": s.get("finish_reason")}
-    for k in ("error", "mvs_issues", "load_error", "grader_crash"):
+           "success": is_success(s), "target_f1": target_score(s),
+           "finish_reason": s.get("finish_reason"), "truncated": bool(s.get("truncated"))}
+    for k in ("error", "mvs_issues", "load_error", "grader_crash", "matched_reference"):
         if s.get(k):
             out[k] = s[k]
     if "repair" in s:
@@ -1103,10 +1348,37 @@ def _sample_summary(s: dict) -> dict[str, Any]:
     return out
 
 
+# What a per-task scorecard entry says about the task itself, so tables can be broken
+# down and confidence intervals clustered without opening the corpus again.
+TASK_META = ("tier", "family", "structures", "split", "twin_of", "paraphrase_of", "style")
+
+
+def _group_stats(rows: list[dict]) -> dict[str, Any]:
+    """Task-level means of a group of per-task entries (each task counts once)."""
+    return {"n_tasks": len(rows),
+            "mean_f1": round(statistics.fmean(t["f1"] for t in rows), 4),
+            "success": round(statistics.fmean(t["success"] for t in rows), 4),
+            "success_all": round(statistics.fmean(t["success_all"] for t in rows), 4),
+            "target_f1": (lambda v: round(statistics.fmean(v), 4) if v else None)(
+                [t["target_f1"] for t in rows if t["target_f1"] is not None])}
+
+
+def _breakdown(rows: list[dict], key: str) -> dict[str, dict]:
+    groups: dict[str, list[dict]] = {}
+    for t in rows:
+        groups.setdefault(str(t.get(key)), []).append(t)
+    return {name: _group_stats(got) for name, got in sorted(groups.items())}
+
+
 def model_record(spec: ModelSpec, tasks: list[dict], per_task_samples: dict[str, list[dict]],
                  validated: bool) -> dict[str, Any]:
     """One model's scorecard entry for one condition (same shape as `run` writes, plus
-    task success, per-track validity and the json-repair counterfactual)."""
+    task success, the target score, per-track validity, truncation and the json-repair
+    counterfactual).
+
+    Task success is given two ways everywhere: ``success`` is the mean over tasks of
+    the share of a task's samples that are exactly right (the headline), and
+    ``success_all`` the share of tasks on which every sample is."""
     per_task = []
     for task in tasks:
         got = per_task_samples.get(task["id"])
@@ -1114,15 +1386,23 @@ def model_record(spec: ModelSpec, tasks: list[dict], per_task_samples: dict[str,
             continue
         got = sorted(got, key=lambda s: s["sample"])
         per_task.append({"id": task["id"], "category": task["category"],
-                         "categories": task_skills(task), **_aggregate(got),
+                         "categories": task_skills(task),
+                         **{k: task.get(k) for k in TASK_META},
+                         "cluster": tasks_mod.cluster_key(task),
+                         **_aggregate(got),
                          "samples": [_sample_summary(s) for s in got]})
     samples = [s for got in per_task_samples.values() for s in got]
     by_cat = _means_by_category(per_task)
     for cat, d in by_cat.items():
+        rows = [t for t in per_task if t["category"] == cat]
         d.update(_track_stats([s for s in samples if s.get("track", "mvs") == cat],
                               cat, validated))
-        d["success_tasks"] = round(statistics.fmean(
-            t["success"] for t in per_task if t["category"] == cat), 4)
+        group = _group_stats(rows)
+        d["success_tasks"] = group["success"]
+        d["success_all"] = group["success_all"]
+        d["target_f1_tasks"] = group["target_f1"]
+        d["by_tier"] = _breakdown(rows, "tier")
+        d["by_split"] = _breakdown(rows, "split")
     usage = {"input_tokens": sum(s["usage"].get("input_tokens") or 0 for s in samples),
              "output_tokens": sum(s["usage"].get("output_tokens") or 0 for s in samples),
              "reasoning_tokens": sum(s["usage"].get("reasoning_tokens") or 0 for s in samples),
@@ -1130,11 +1410,14 @@ def model_record(spec: ModelSpec, tasks: list[dict], per_task_samples: dict[str,
     costs = [s["cost_usd"] for s in samples]
     latency = [s["latency_s"] for s in samples if s.get("latency_s") is not None]
     price = spec.price
+    overall = _group_stats(per_task) if per_task else {}
     return {
         "spec": spec.route,
         "open_weights": spec.open_weights,
-        "mean_f1": round(statistics.fmean(t["f1"] for t in per_task), 4) if per_task else 0.0,
-        "success": round(statistics.fmean(t["success"] for t in per_task), 4) if per_task else 0.0,
+        "mean_f1": overall.get("mean_f1", 0.0),
+        "success": overall.get("success", 0.0),
+        "success_all": overall.get("success_all", 0.0),
+        "target_f1": overall.get("target_f1"),
         "n_graded": len(per_task),
         "by_category": by_cat,
         "usage": usage,
@@ -1184,8 +1467,70 @@ def write_scorecards(manifest: Manifest, cells: list[Cell], graded: dict, valida
     return written
 
 
+# Every field of a per-sample record (``results/<run>/samples/<condition>/<model>.jsonl``).
+SAMPLE_RECORD_FIELDS = (
+    "run", "model", "route", "condition", "task_id", "sample", "track", "tier", "split",
+    "structures", "raw", "predicted", "f1", "precision", "recall", "success", "target_f1",
+    "outcome", "error", "grader", "matched_reference", "finish_reason", "truncated",
+    "input_tokens", "output_tokens", "reasoning_tokens", "cost_usd", "cost_source",
+    "latency_s", "temperature", "max_tokens", "structured", "provider", "response_model",
+    "prompt_sha256", "task_sha256", "repair")
+
+
+def sample_record(cell: Cell, s: dict) -> dict[str, Any]:
+    """Everything known about one sample, call and grade together: the text the model
+    returned, what was parsed from it, its scores and outcome, and how the call went."""
+    r = s.get("_record") or {}
+    usage, request = r.get("usage") or {}, r.get("request") or {}
+    task = cell.task
+    out = {
+        "run": r.get("run"), "model": cell.model.id, "route": cell.model.route,
+        "condition": cell.condition.name, "task_id": task["id"], "sample": cell.sample,
+        "track": task["category"], "tier": task.get("tier"), "split": task.get("split"),
+        "structures": task.get("structures"),
+        "raw": r.get("raw"), "predicted": s.get("predicted"),
+        "f1": s["f1"], "precision": s.get("precision"), "recall": s.get("recall"),
+        "success": is_success(s), "target_f1": target_score(s),
+        "outcome": s.get("outcome"),
+        "error": s.get("error") or s.get("mvs_issues") or s.get("load_error"),
+        "grader": s.get("grader"), "matched_reference": s.get("matched_reference"),
+        "finish_reason": r.get("finish_reason"), "truncated": is_truncated(r),
+        "input_tokens": usage.get("input_tokens"), "output_tokens": usage.get("output_tokens"),
+        "reasoning_tokens": usage.get("reasoning_tokens"),
+        "cost_usd": r.get("cost_usd"), "cost_source": r.get("cost_source"),
+        "latency_s": r.get("latency_s"),
+        "temperature": request.get("temperature"), "max_tokens": request.get("max_tokens"),
+        "structured": request.get("structured"),
+        "provider": r.get("provider"), "response_model": r.get("response_model"),
+        "prompt_sha256": r.get("prompt_sha256"), "task_sha256": r.get("task_sha256"),
+        "repair": ({k: s["repair"].get(k) for k in ("f1", "outcome")} if "repair" in s else None),
+    }
+    assert tuple(out) == SAMPLE_RECORD_FIELDS
+    return out
+
+
+def write_sample_records(cells: list[Cell], graded: dict,
+                         out_dir: pathlib.Path) -> list[pathlib.Path]:
+    """One JSON line per graded sample: ``<out>/samples/<condition>/<model>.jsonl``, in
+    plan order. Rebuilt from the archive on every grading, like the scorecards."""
+    lines: dict[pathlib.Path, list[str]] = {}
+    index = {(cond, model, tid, s["sample"]): s for (cond, model), per in graded.items()
+             for tid, got in per.items() for s in got}
+    for c in cells:
+        s = index.get((c.condition.name, c.model.id, c.task["id"], c.sample))
+        if s is None:
+            continue
+        path = out_dir / "samples" / c.condition.name / f"{c.model.slug}.jsonl"
+        lines.setdefault(path, []).append(json.dumps(sample_record(c, s), ensure_ascii=False))
+    for path, rows in lines.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("\n".join(rows) + "\n", encoding="utf-8")
+    return sorted(lines)
+
+
 def print_run_summary(manifest: Manifest, out_dir: pathlib.Path, graded: dict) -> None:
-    print(f"\nScorecards ({manifest.name}): strict F1 / task success, per condition")
+    print(f"\nScorecards ({manifest.name}): strict F1 / task success (mean over samples), "
+          "per condition")
     conds = [c.name for c in manifest.conditions if any(k[0] == c.name for k in graded)]
     rows: dict[str, dict] = {}
     for (cond, model_id), per_task in graded.items():
@@ -1204,6 +1549,38 @@ def print_run_summary(manifest: Manifest, out_dir: pathlib.Path, graded: dict) -
 # --- the manifest command ---------------------------------------------------------
 
 DRYRUN_MARK = "DRYRUN"
+# Tiny tasks of every kind the final corpus has (tests/fixtures/build_fixture_tasks.py).
+# A dry run adds them when the corpus on disk lacks one of these kinds, so the whole
+# path is rehearsed before the real tasks exist. They are never part of a real run.
+FIXTURE_TASKS = REPO / "tests" / "fixtures" / "tasks"
+TASK_KINDS = {
+    "follow-up": lambda t: bool(t.get("context")),
+    "follow-up with no change": lambda t: bool(t.get("context")) and t["context"]["noop"],
+    "accept-set": lambda t: bool(t.get("accepted")),
+    "twin": lambda t: bool(t.get("twin_of")),
+    "paraphrase": lambda t: bool(t.get("paraphrase_of")),
+    "held-back": lambda t: t.get("split") == "heldback",
+}
+
+
+def kinds_present(tasks: list[dict]) -> dict[str, dict[str, int]]:
+    """How many tasks of each special kind there are, per track."""
+    return {kind: {track: sum(test(t) for t in tasks if t["category"] == track)
+                   for track in manifest_mod.TRACKS}
+            for kind, test in TASK_KINDS.items()}
+
+
+def with_fixtures(tasks: list[dict]) -> tuple[list[dict], int]:
+    """The corpus, plus the fixture tasks if it lacks any special kind on any track.
+    Returns ``(tasks, number of fixtures added)``."""
+    if all(n for per in kinds_present(tasks).values() for n in per.values()):
+        return tasks, 0
+    if not FIXTURE_TASKS.is_dir():
+        return tasks, 0
+    fixtures = tasks_mod.load_corpus(FIXTURE_TASKS, repo=REPO)
+    for t in fixtures:
+        t["_fixture"] = True
+    return tasks + fixtures, len(fixtures)
 
 
 def _load_script(name: str):
@@ -1216,12 +1593,14 @@ def _load_script(name: str):
 
 
 def build_site(results_dir: pathlib.Path, archive_dir: pathlib.Path,
-               site_dir: pathlib.Path) -> None:
-    """Derive the leaderboard's data files and pages from a manifest run."""
+               site_dir: pathlib.Path, extra_tasks: pathlib.Path | None = None) -> None:
+    """Derive the leaderboard's data files and pages from a manifest run.
+    ``extra_tasks``: a task directory besides ``tasks/`` (a dry run's fixtures)."""
     site_dir.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(REPO / "docs" / "style.css", site_dir / "style.css")
     _load_script("build_site_data").main(
-        ["--run", str(results_dir), "--runs", str(archive_dir), "--docs", str(site_dir)])
+        ["--run", str(results_dir), "--runs", str(archive_dir), "--docs", str(site_dir)]
+        + (["--extra-tasks", str(extra_tasks)] if extra_tasks else []))
     _load_script("build_leaderboard").build(site_dir / "scorecard.json", out_dir=site_dir)
 
 
@@ -1251,6 +1630,7 @@ def run_meta(manifest: Manifest, corpus_sha: str, mock: bool, archive_dir: pathl
     return {"run_name": manifest.name, "run_id": f"{manifest.name}:{lock['created_at']}",
             "started_at": lock["created_at"], "graded_at": _now(),
             "git_commit": _git_commit(), "manifest": str(manifest.path),
+            "panel_rule": manifest.panel_rule,
             "manifest_sha256": manifest.sha256, "corpus_version": manifest.corpus_version,
             "corpus_sha256": corpus_sha, "mock": mock, "archive": cells_rel,
             "escalate": False, "judge": None}
@@ -1260,12 +1640,18 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
             calib: Calibration, runs_dir: pathlib.Path, results_dir: pathlib.Path,
             seed: int = 0, site: bool = True) -> bool:
     """The whole pipeline at $0 with the mock model: plan, generate (interrupted half
-    way, then resumed), archive, grade, scorecards, site build, and the cost of the real
-    run. Returns whether every check passed."""
+    way, then resumed), archive, grade, scorecards, per-sample records, site build, and
+    the cost of the real run. Returns whether every check passed.
+
+    Follow-up, accept-set, twin, paraphrase and held-back tasks must all pass through
+    it; when the corpus on disk has none of some kind the fixture tasks are added
+    (`with_fixtures`). Fixtures are left out of the cost projection."""
     archive_dir = runs_dir / f"{manifest.name}.dryrun"
     out_dir = results_dir / f"{manifest.name}.dryrun"
     _fresh_dryrun_dir(archive_dir)
     _fresh_dryrun_dir(out_dir)
+    n_corpus = len(tasks)
+    tasks, n_fixtures = with_fixtures(tasks)
     cells = build_plan(manifest, tasks, panel)
     models = _mock_panel(panel, calib, seed)
     archive = RunArchive(archive_dir)
@@ -1273,8 +1659,23 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     checks: list[tuple[str, bool, str]] = []
 
     print(f"DRY RUN  {manifest.name}: {len(panel)} models x {len(manifest.conditions)} "
-          f"conditions, {len(tasks)} tasks, {manifest.samples} sample(s) -> {len(cells):,} "
+          f"conditions, {n_corpus} tasks"
+          + (f" + {n_fixtures} fixture tasks (tests/fixtures/tasks)" if n_fixtures else "")
+          + f", {manifest.samples} sample(s) -> {len(cells):,} "
           "cells, all answered by the mock model ($0)")
+    planned_tasks = list({c.task["id"]: c.task for c in cells}.values())
+    kinds = kinds_present(planned_tasks)
+    checks.append(("the plan has follow-up (one with no change), accept-set, twin, paraphrase "
+                   "and held-back tasks on both tracks",
+                   all(n for per in kinds.values() for n in per.values()),
+                   "; ".join(f"{k}: {per['mvs']} MVS, {per['api_calling']} API"
+                             for k, per in kinds.items())))
+    follow = [c for c in cells if c.task.get("context")]
+    shown = all(json.dumps(start_state(c.task), separators=(",", ":")) in c.user
+                and c.user.rstrip().split("Request: ")[-1].startswith(c.task["prompt"])
+                for c in follow)
+    checks.append(("a follow-up request shows the model the start state, then the request",
+                   bool(follow) and shown, f"{len(follow):,} follow-up cells"))
     half = max(1, len(cells) // 2)
     first = generate(manifest, cells, models, archive, calib, enforce_budget=False,
                      stop_after=half)
@@ -1293,11 +1694,22 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     checks.append(("a finished run makes no further calls",
                    third["called"] == 0 and len(records) == len(cells),
                    f"{len(records):,} cells archived"))
-    need = ("raw", "usage", "finish_reason", "latency_s", "prompt_sha256", "task_sha256")
+    try:
+        with RunArchive(archive_dir).exclusive(), archive.exclusive():
+            refused = False
+    except ManifestError:
+        refused = True
+    checks.append(("a second run on the same archive is refused while one holds it",
+                   refused, str(archive_dir / "LOCK")))
+    need = ("raw", "usage", "finish_reason", "latency_s", "prompt_sha256", "task_sha256",
+            "provider")
     complete = all(all(k in r and r[k] is not None for k in need)
-                   and r["usage"].get("input_tokens") is not None for r in records.values())
+                   and r["usage"].get("input_tokens") is not None
+                   and r["request"].get("max_tokens") and r["request"].get("temperature")
+                   for r in records.values())
     hashes_ok = all(records[c.key]["prompt_sha256"] == c.prompt_sha256 for c in cells)
-    checks.append(("every cell archives raw text, tokens, latency, finish reason, prompt hash",
+    checks.append(("every cell archives raw text, tokens, latency, finish reason, token "
+                   "limit, serving provider, prompt hash",
                    complete and hashes_ok, f"{len(records):,} records checked"))
 
     graded, validated = grade_archive(cells, records, "auto" if manifest.validate != "off" else "off")
@@ -1310,6 +1722,21 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     want = [w for w in want if w[0] in present_tracks]
     checks.append(("grading meets every outcome class", all(seen[w] for w in want),
                    ", ".join(f"{t}:{o}={n}" for (t, o), n in sorted(seen.items()))))
+    api = [s for s in every if s.get("track") == "api_calling"]
+    checks.append(("every API answer that parsed was graded by the final-state grader",
+                   all(s.get("grader") == "state" for s in api
+                       if s.get("outcome") != "invalid_json" and "grader_crash" not in s),
+                   f"{len(api):,} API samples"))
+    alt = [s for s in every if s.get("matched_reference") and is_success(s)]
+    checks.append(("an accepted alternative answer counts as exactly right", bool(alt),
+                   f"{len(alt):,} samples matched an alternative"))
+    cut = [s for s in every if s.get("truncated")]
+    checks.append(("truncated output (finish reason 'length') is counted apart from malformed",
+                   bool(cut) and any(not s.get("truncated") and s.get("outcome") == "invalid_json"
+                                     for s in every),
+                   f"{len(cut):,} truncated, "
+                   f"{sum(s.get('outcome') == 'invalid_json' and not s.get('truncated') for s in every):,}"
+                   " malformed-JSON samples"))
     checks.append(("json-repair counterfactual recorded for invalid JSON",
                    any("repair" in s for s in every),
                    f"{sum('repair' in s for s in every):,} of "
@@ -1320,10 +1747,34 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     checks.append(("a scorecard per model and condition",
                    len(written) == len({(c.condition.name, c.model.id) for c in cells}),
                    f"{len(written)} files"))
+    cards = [next(iter(json.loads(f.read_text(encoding="utf-8"))["models"].values()))
+             for f in written]
+    api_cards = [m["by_category"]["api_calling"] for m in cards
+                 if "api_calling" in m["by_category"]]
+    checks.append(("scorecards carry task success both ways, the split and tier breakdown and "
+                   "the API valid-output rate",
+                   all("success" in m and "success_all" in m and "target_f1" in m for m in cards)
+                   and all({"by_tier", "by_split", "not_valid"} <= set(d)
+                           for m in cards for d in m["by_category"].values())
+                   and bool(api_cards) == ("api_calling" in present_tracks)
+                   and all(d.get("valid_rate") is not None for d in api_cards),
+                   f"{len(cards)} scorecards"))
+    sample_files = write_sample_records(cells, graded, out_dir)
+    n_lines = 0
+    fields_ok = True
+    for f in sample_files:
+        for line in f.read_text(encoding="utf-8").splitlines():
+            n_lines += 1
+            fields_ok = fields_ok and tuple(json.loads(line)) == SAMPLE_RECORD_FIELDS
+    checks.append(("a per-sample record for every cell, with every field",
+                   n_lines == len(cells) and fields_ok,
+                   f"{n_lines:,} records in {len(sample_files)} files"))
+    targets = sum(target_score(s) is not None for s in every)
     print_run_summary(manifest, out_dir, graded)
     if site:
         try:
-            build_site(out_dir, archive_dir, out_dir / "site")
+            build_site(out_dir, archive_dir, out_dir / "site",
+                       FIXTURE_TASKS if n_fixtures else None)
             ok = all((out_dir / "site" / f).exists() for f in
                      ("scorecard.json", "conditions_data.json", "failures_data.json",
                       "index.html", "failures.html"))
@@ -1333,10 +1784,12 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
             checks.append(("site data and leaderboard pages build from the run", False,
                            f"{type(e).__name__}: {e}"))
 
-    totals = print_projection(manifest, project_costs(manifest, cells, calib))
+    real = [c for c in cells if not c.task.get("_fixture")]
+    totals = print_projection(manifest, project_costs(manifest, real, calib))
     core = totals["core"]
     checks.append(("projected cost of the core panel is within the budget cap",
-                   core <= manifest.budget_usd, f"${core:.2f} vs cap ${manifest.budget_usd:.2f}"))
+                   core <= manifest.budget_usd, f"${core:.2f} vs cap ${manifest.budget_usd:.2f}"
+                   + (f"; the {n_fixtures} fixture tasks are not counted" if n_fixtures else "")))
     unpriced = [m.id for m in panel if m.price is None]
     checks.append(("every model has a price", not unpriced, ", ".join(unpriced) or "all priced"))
 
@@ -1344,6 +1797,15 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     for label, ok, detail in checks:
         print(f"  [{'ok' if ok else 'FAIL'}] {label}  ({detail})")
     notes = []
+    if n_fixtures:
+        notes.append(f"{n_fixtures} fixture tasks were added: the corpus on disk has no task of "
+                     "some kind yet (follow-up, accept-set, twin, paraphrase, held-back)")
+    if not targets:
+        notes.append("the grader reports no target score yet (target_f1): the target columns "
+                     "are empty")
+    if not getattr(grader_mod, "GRADES_MVS", False):
+        notes.append("MVS scenes were graded by mvs.grade_mvs (grader.grade_task does not grade "
+                     "the MVS track yet); success there is 'F1 = 1'")
     if not validated and "mvs" in present_tracks:
         notes.append("Mol* validation did not run here: MVS scenes are 'unchecked', not 'valid'")
     if not manifest.corpus_sha256:
@@ -1425,10 +1887,11 @@ def manifest_main(args: argparse.Namespace) -> int:
         problems = preflight(manifest, panel)
         if problems:
             raise ManifestError("cannot start the run: " + "; ".join(problems))
-        lock = archive.open(manifest, corpus_sha, mock=False, argv=sys.argv[1:])
-        models = {m.id: build_model(m.route) for m in panel}
         try:
-            stats = generate(manifest, cells, models, archive, calib)
+            with archive.exclusive():  # refuses a second start on the same archive
+                lock = archive.open(manifest, corpus_sha, mock=False, argv=sys.argv[1:])
+                models = {m.id: build_model(m.route) for m in panel}
+                stats = generate(manifest, cells, models, archive, calib)
         except BudgetExceeded as e:
             print(f"\nBUDGET ABORT: {e}", file=sys.stderr)
             return 3
@@ -1443,6 +1906,7 @@ def manifest_main(args: argparse.Namespace) -> int:
     graded, validated = grade_archive(cells, records, manifest.validate)
     written = write_scorecards(manifest, cells, graded, validated, out_dir,
                                run_meta(manifest, corpus_sha, False, archive_dir, lock))
+    write_sample_records(cells, graded, out_dir)
     print_run_summary(manifest, out_dir, graded)
     missing = len(cells) - sum(c.key in records for c in cells)
     if missing:
@@ -1542,7 +2006,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.manifest:
         try:
             sys.exit(manifest_main(args))
-        except ManifestError as e:
+        except (ManifestError, GradingError, tasks_mod.TaskError) as e:
             sys.exit(f"error: {e}")
     if args.dry_run or args.go or args.grade_only:
         ap.error("--dry-run, --go and --grade-only need --manifest")
