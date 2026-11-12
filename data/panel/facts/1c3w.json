@@ -1,0 +1,502 @@
+{
+ "id": "1c3w",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1c3w.cif",
+ "title": "BACTERIORHODOPSIN/LIPID COMPLEX AT 1.55 A RESOLUTION",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.55,
+ "n_models": 1,
+ "n_atoms": 2073,
+ "n_residues": 260,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "BACTERIORHODOPSIN (GROUND STATE WILD TYPE \"BR\")",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "1-[2,6,10.14-TETRAMETHYL-HEXADECAN-16-YL]-2-[2,10,14-TRIMETHYLHEXADECAN-16-YL]GLYCEROL",
+   "label_asym_ids": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "2,10,23-TRIMETHYL-TETRACOSANE",
+   "label_asym_ids": [
+    "O"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "RETINAL",
+   "label_asym_ids": [
+    "P"
+   ]
+  },
+  {
+   "id": "5",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "Q"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 222,
+   "n_observed": 222,
+   "auth_minus_label": {
+    "4": 152,
+    "9": 70
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "5",
+     "156",
+     1,
+     152
+    ],
+    [
+     "162",
+     "231",
+     153,
+     222
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P02945",
+     "n_residues": 222,
+     "unp_first": 18,
+     "unp_last": 244,
+     "auth_minus_unp": {
+      "-13": 222
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "5",
+       "156",
+       18,
+       169
+      ],
+      [
+       "162",
+       "231",
+       175,
+       244
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "LI1",
+   "name": "1-[2,6,10.14-TETRAMETHYL-HEXADECAN-16-YL]-2-[2,10,14-TRIMETHYLHEXADECAN-16-YL]GLYCEROL",
+   "formula": "C42 H86 O3",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 32,
+   "atoms": [
+    "C1",
+    "C2",
+    "C3",
+    "O1",
+    "O2",
+    "O3",
+    "C41",
+    "C42",
+    "C43",
+    "C45",
+    "C46",
+    "C47",
+    "C48",
+    "C50",
+    "C11",
+    "C12",
+    "C13",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C20",
+    "C21",
+    "C22",
+    "C23",
+    "C25",
+    "C26",
+    "C27",
+    "C28",
+    "C29",
+    "C30"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 601,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 602,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 603,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "D",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 604,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "E",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 605,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "F",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 606,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "G",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 607,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "H",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 608,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "I",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 609,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "J",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 610,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "K",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 611,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "L",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 612,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "M",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 613,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "N",
+     "label_seq_id": 0,
+     "comp_id": "LI1"
+    }
+   ]
+  },
+  {
+   "comp_id": "RET",
+   "name": "RETINAL",
+   "formula": "C20 H28 O",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 20,
+   "atoms": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C20"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 301,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "P",
+     "label_seq_id": 0,
+     "comp_id": "RET"
+    }
+   ]
+  },
+  {
+   "comp_id": "SQU",
+   "name": "2,10,23-TRIMETHYL-TETRACOSANE",
+   "formula": "C27 H56",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 27,
+   "atoms": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C9",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C20",
+    "C21",
+    "C22",
+    "C23",
+    "C25",
+    "C26",
+    "C27",
+    "C28",
+    "C29",
+    "C30"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 701,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "O",
+     "label_seq_id": 0,
+     "comp_id": "SQU"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 216,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 207,
+    "comp_id": "LYS",
+    "atom": "NZ"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 301,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "P",
+    "label_seq_id": 0,
+    "comp_id": "RET",
+    "atom": "C15"
+   },
+   "distance": 1.337,
+   "to_symmetry_copy": false
+  }
+ ],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_and_software_defined_assembly",
+   "method": "PISA,PQS",
+   "oligomeric_details": "trimeric",
+   "oligomeric_count": 3,
+   "polymer_chain_copies": {
+    "A": 3
+   },
+   "n_polymer_chains": 3,
+   "relation_to_deposited": "built by symmetry"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 9,
+   "end_auth_seq_id": 31,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 5,
+   "end_label_seq_id": 27
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 36,
+   "end_auth_seq_id": 63,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 32,
+   "end_label_seq_id": 59
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 80,
+   "end_auth_seq_id": 101,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 76,
+   "end_label_seq_id": 97
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 104,
+   "end_auth_seq_id": 128,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 100,
+   "end_label_seq_id": 124
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 130,
+   "end_auth_seq_id": 155,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 126,
+   "end_label_seq_id": 151
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 164,
+   "end_auth_seq_id": 192,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 155,
+   "end_label_seq_id": 183
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 200,
+   "end_auth_seq_id": 226,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 191,
+   "end_label_seq_id": 217
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 227,
+   "end_auth_seq_id": 230,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 218,
+   "end_label_seq_id": 221
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 66,
+   "end_auth_seq_id": 71,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 62,
+   "end_label_seq_id": 67,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 74,
+   "end_auth_seq_id": 79,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 70,
+   "end_label_seq_id": 75,
+   "sheet_id": "A"
+  }
+ ],
+ "waters": 23,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

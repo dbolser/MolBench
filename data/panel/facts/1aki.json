@@ -1,0 +1,277 @@
+{
+ "id": "1aki",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1aki.cif",
+ "title": "THE STRUCTURE OF THE ORTHORHOMBIC FORM OF HEN EGG-WHITE LYSOZYME AT 1.5 ANGSTROMS RESOLUTION",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.5,
+ "n_models": 1,
+ "n_atoms": 1079,
+ "n_residues": 207,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "LYSOZYME",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "B"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 129,
+   "n_observed": 129,
+   "auth_minus_label": {
+    "0": 129
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "129",
+     1,
+     129
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P00698",
+     "n_residues": 129,
+     "unp_first": 19,
+     "unp_last": 147,
+     "auth_minus_unp": {
+      "-18": 129
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "129",
+       19,
+       147
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [],
+ "disulfides": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 6,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 6,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 127,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 127,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 1.97,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 30,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 30,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 115,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 115,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.001,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 64,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 64,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 80,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 80,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 1.987,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 76,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 94,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 94,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.018,
+   "to_symmetry_copy": false
+  }
+ ],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 5,
+   "end_auth_seq_id": 14,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 5,
+   "end_label_seq_id": 14
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 20,
+   "end_auth_seq_id": 22,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 20,
+   "end_label_seq_id": 22
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 25,
+   "end_auth_seq_id": 36,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 25,
+   "end_label_seq_id": 36
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 80,
+   "end_auth_seq_id": 84,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 80,
+   "end_label_seq_id": 84
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 89,
+   "end_auth_seq_id": 101,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 89,
+   "end_label_seq_id": 101
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 104,
+   "end_auth_seq_id": 107,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 104,
+   "end_label_seq_id": 107
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 109,
+   "end_auth_seq_id": 114,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 109,
+   "end_label_seq_id": 114
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 120,
+   "end_auth_seq_id": 123,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 120,
+   "end_label_seq_id": 123
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 43,
+   "end_auth_seq_id": 45,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 43,
+   "end_label_seq_id": 45,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 51,
+   "end_auth_seq_id": 53,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 51,
+   "end_label_seq_id": 53,
+   "sheet_id": "A"
+  }
+ ],
+ "waters": 78,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

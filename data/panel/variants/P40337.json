@@ -1,0 +1,6493 @@
+{
+ "accession": "P40337",
+ "gene": "VHL",
+ "entry_name": "VHL_HUMAN",
+ "protein": "von Hippel-Lindau disease tumor suppressor",
+ "uniprot_gene": "VHL",
+ "disease": "von Hippel-Lindau disease",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P40337",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 213,
+ "uniprot_sequence_sha256": "9635f5e11bc2e95cb5b4aca19e52963af7b7cacd94b962e99be1d66499686daf",
+ "primary_entry": "9gio",
+ "selection": {
+  "candidates": 143,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 80,
+  "mutations": 0,
+  "polymer_entities": 3,
+  "runner_up": "8p0f",
+  "already_in_panel": false
+ },
+ "entries": {
+  "9gio": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 146
+    },
+    "n_insertion_codes": 0,
+    "offset": false,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "not_observed": 2,
+   "verified": 136
+  }
+ },
+ "variants": [
+  {
+   "variant": "M54I",
+   "position": 54,
+   "wild_type": "M",
+   "mutant": "I",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003801970"
+   ],
+   "dbsnp": [
+    "rs2125124863"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002949244"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "M54R",
+   "position": 54,
+   "wild_type": "M",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002908478"
+   ],
+   "dbsnp": [
+    "rs1575921544"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002043162"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R64P",
+   "position": 64,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002314",
+    "RCV000132356",
+    "RCV000208872",
+    "RCV000475973",
+    "RCV000679019"
+   ],
+   "dbsnp": [
+    "rs104893826"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002226"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 11,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S65L",
+   "position": 65,
+   "wild_type": "S",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000626711",
+    "RCV001389259",
+    "RCV004948200"
+   ],
+   "dbsnp": [
+    "rs5030826"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Cerebellar hemangioblastoma",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000182975"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 65,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 12,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S65P",
+   "position": 65,
+   "wild_type": "S",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000660351"
+   ],
+   "dbsnp": [
+    "rs869025616"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000547829"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 65,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 12,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S65T",
+   "position": 65,
+   "wild_type": "S",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001929631"
+   ],
+   "dbsnp": [
+    "rs869025616"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001426858"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 65,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 12,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S65W",
+   "position": 65,
+   "wild_type": "S",
+   "mutant": "W",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000036539",
+    "RCV000497340",
+    "RCV001219547",
+    "RCV002415465"
+   ],
+   "dbsnp": [
+    "rs5030826"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000043597"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 65,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 12,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S68P",
+   "position": 68,
+   "wild_type": "S",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003780996"
+   ],
+   "dbsnp": [
+    "rs2470158062"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002925342"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 68,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 15,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E70K",
+   "position": 70,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000036540",
+    "RCV000492137",
+    "RCV001379599",
+    "RCV005394221"
+   ],
+   "dbsnp": [
+    "rs5030802"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Nonpapillary renal cell carcinoma",
+    "Pheochromocytoma",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000043598"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 70,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 17,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S72P",
+   "position": 72,
+   "wild_type": "S",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208787",
+    "RCV000492124",
+    "RCV001382227"
+   ],
+   "dbsnp": [
+    "rs869025618"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223163"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 72,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 19,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V74F",
+   "position": 74,
+   "wild_type": "V",
+   "mutant": "F",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003813709"
+   ],
+   "dbsnp": [
+    "rs2125125032"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002954486"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 74,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 21,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I75S",
+   "position": 75,
+   "wild_type": "I",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000479941",
+    "RCV000767237",
+    "RCV001201718",
+    "RCV004678722"
+   ],
+   "dbsnp": [
+    "rs1064794271"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000420073"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 75,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 22,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F76Y",
+   "position": 76,
+   "wild_type": "F",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767239",
+    "RCV004027205",
+    "RCV005213385"
+   ],
+   "dbsnp": [
+    "rs730882033"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625224"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 76,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 23,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N78D",
+   "position": 78,
+   "wild_type": "N",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767241",
+    "RCV001869052",
+    "RCV002260666"
+   ],
+   "dbsnp": [
+    "rs869025621"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625226"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 78,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 25,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N78H",
+   "position": 78,
+   "wild_type": "N",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767240"
+   ],
+   "dbsnp": [
+    "rs869025621"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625225"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 78,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 25,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N78I",
+   "position": 78,
+   "wild_type": "N",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208821",
+    "RCV000803184"
+   ],
+   "dbsnp": [
+    "rs5030804"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223169"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 78,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 25,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N78S",
+   "position": 78,
+   "wild_type": "N",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000079207",
+    "RCV000254892",
+    "RCV000492165",
+    "RCV001034687"
+   ],
+   "dbsnp": [
+    "rs5030804"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000093326"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 78,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 25,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N78T",
+   "position": 78,
+   "wild_type": "N",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208838",
+    "RCV000679024",
+    "RCV000805326"
+   ],
+   "dbsnp": [
+    "rs5030804"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223168"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 78,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 25,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S80G",
+   "position": 80,
+   "wild_type": "S",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000165774",
+    "RCV001388793",
+    "RCV002307423"
+   ],
+   "dbsnp": [
+    "rs786202787"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000186220"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 27,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S80I",
+   "position": 80,
+   "wild_type": "S",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767244",
+    "RCV001220559",
+    "RCV005512813"
+   ],
+   "dbsnp": [
+    "rs5030805"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625229"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 27,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S80N",
+   "position": 80,
+   "wild_type": "S",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001382228",
+    "RCV004590365",
+    "RCV006709545"
+   ],
+   "dbsnp": [
+    "rs5030805"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV001070179"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 27,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S80R",
+   "position": 80,
+   "wild_type": "S",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000590356",
+    "RCV004440400",
+    "RCV004440401",
+    "RCV006556305"
+   ],
+   "dbsnp": [
+    "rs1553619424",
+    "rs786202787"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496052",
+    "VCV003148494"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 27,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P81L",
+   "position": 81,
+   "wild_type": "P",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000030582",
+    "RCV000129974",
+    "RCV001034657",
+    "RCV001547784",
+    "RCV003460493",
+    "RCV005865196"
+   ],
+   "dbsnp": [
+    "rs193922608"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Inherited phaeochromocytoma and paraganglioma excluding NF1",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000036899"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 81,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 28,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R82G",
+   "position": 82,
+   "wild_type": "R",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001724795",
+    "RCV003771867"
+   ],
+   "dbsnp": [
+    "rs1214305423"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001297059"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 82,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 29,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R82L",
+   "position": 82,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000631271",
+    "RCV001553666",
+    "RCV002448934"
+   ],
+   "dbsnp": [
+    "rs794726890"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000526675"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 82,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 29,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R82P",
+   "position": 82,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000173161",
+    "RCV000724457"
+   ],
+   "dbsnp": [
+    "rs794726890"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000193118"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 82,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 29,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V84E",
+   "position": 84,
+   "wild_type": "V",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002433040"
+   ],
+   "dbsnp": [
+    "rs1264207864"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV001792522"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 84,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 31,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V84L",
+   "position": 84,
+   "wild_type": "V",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002324",
+    "RCV000216720",
+    "RCV000588802",
+    "RCV001382229",
+    "RCV001851579",
+    "RCV002433440",
+    "RCV003884333"
+   ],
+   "dbsnp": [
+    "rs5030827"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002236",
+    "VCV000229860"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 84,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 31,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V84M",
+   "position": 84,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492467",
+    "RCV000631269",
+    "RCV000767245",
+    "RCV004721392"
+   ],
+   "dbsnp": [
+    "rs5030827"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428813"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 84,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 31,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P86A",
+   "position": 86,
+   "wild_type": "P",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000079208",
+    "RCV000723702",
+    "RCV001227827",
+    "RCV004686575"
+   ],
+   "dbsnp": [
+    "rs398123481"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000093327"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 86,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 33,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P86L",
+   "position": 86,
+   "wild_type": "P",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208836",
+    "RCV000492524",
+    "RCV001382230"
+   ],
+   "dbsnp": [
+    "rs730882034"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000182977"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 86,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 33,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P86R",
+   "position": 86,
+   "wild_type": "P",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208868",
+    "RCV000631258",
+    "RCV002426981",
+    "RCV003237772"
+   ],
+   "dbsnp": [
+    "rs730882034"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223170"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 86,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 33,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P86S",
+   "position": 86,
+   "wild_type": "P",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000155449",
+    "RCV000413630",
+    "RCV000492763",
+    "RCV001059327",
+    "RCV004813063"
+   ],
+   "dbsnp": [
+    "rs398123481"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000178692"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 86,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 33,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W88C",
+   "position": 88,
+   "wild_type": "W",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208827",
+    "RCV000492552",
+    "RCV000537014",
+    "RCV000704506"
+   ],
+   "dbsnp": [
+    "rs869025622"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223171",
+    "VCV000580847"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter",
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 35,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W88R",
+   "position": 88,
+   "wild_type": "W",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000558602",
+    "RCV000587190",
+    "RCV000589476",
+    "RCV000631292",
+    "RCV000679026",
+    "RCV002431533",
+    "RCV003459186"
+   ],
+   "dbsnp": [
+    "rs1553619431"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000456577",
+    "VCV000496053"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 35,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W88S",
+   "position": 88,
+   "wild_type": "W",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002306"
+   ],
+   "dbsnp": [
+    "rs119103277"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002220"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 35,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L89P",
+   "position": 89,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000161087",
+    "RCV000208869",
+    "RCV000817709"
+   ],
+   "dbsnp": [
+    "rs5030807"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000182979"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 89,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 36,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N90I",
+   "position": 90,
+   "wild_type": "N",
+   "mutant": "I",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208809",
+    "RCV002426982"
+   ],
+   "dbsnp": [
+    "rs143985153"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223172"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 37,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G93C",
+   "position": 93,
+   "wild_type": "G",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208845"
+   ],
+   "dbsnp": [
+    "rs5030808"
+   ],
+   "diseases": [
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223175"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 40,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G93D",
+   "position": 93,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000586256",
+    "RCV001853983",
+    "RCV005000363"
+   ],
+   "dbsnp": [
+    "rs1553619440"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496054"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 40,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G93R",
+   "position": 93,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208861",
+    "RCV001035237",
+    "RCV002433917"
+   ],
+   "dbsnp": [
+    "rs5030808"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223174"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 40,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G93S",
+   "position": 93,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002325",
+    "RCV000208813",
+    "RCV000698471",
+    "RCV002433441",
+    "RCV003460405",
+    "RCV004998072"
+   ],
+   "dbsnp": [
+    "rs5030808"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002237"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 40,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G93V",
+   "position": 93,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000707314",
+    "RCV001016587"
+   ],
+   "dbsnp": [
+    "rs1559426072"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000583075"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 40,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y98C",
+   "position": 98,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208825",
+    "RCV001218807",
+    "RCV001357107",
+    "RCV005771955"
+   ],
+   "dbsnp": [
+    "rs864321643"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223176"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 98,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 45,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y98H",
+   "position": 98,
+   "wild_type": "Y",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002309",
+    "RCV000492094",
+    "RCV000679029",
+    "RCV000684783",
+    "RCV003792213",
+    "RCV003891425"
+   ],
+   "dbsnp": [
+    "rs2470158546",
+    "rs5030809"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma (PCC)",
+    "VHL-related disorder",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002223",
+    "VCV002940951"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 98,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 45,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y98N",
+   "position": 98,
+   "wild_type": "Y",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003388486"
+   ],
+   "dbsnp": [
+    "rs5030809"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002627292"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 98,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 45,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y98S",
+   "position": 98,
+   "wild_type": "Y",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000203508",
+    "RCV000208847",
+    "RCV001064921",
+    "RCV002433899",
+    "RCV004721296"
+   ],
+   "dbsnp": [
+    "rs864321643"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000219160"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 98,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 45,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L101P",
+   "position": 101,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000574983",
+    "RCV001858152"
+   ],
+   "dbsnp": [
+    "rs1553619456"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000480963"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 101,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 48,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L101Q",
+   "position": 101,
+   "wild_type": "L",
+   "mutant": "Q",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002435996"
+   ],
+   "dbsnp": [
+    "rs1553619456"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV001799025"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 101,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 48,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T105P",
+   "position": 105,
+   "wild_type": "T",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000589007"
+   ],
+   "dbsnp": [
+    "rs1553619461"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496055"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 105,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 52,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R107G",
+   "position": 107,
+   "wild_type": "R",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000036542",
+    "RCV000763091",
+    "RCV002321506"
+   ],
+   "dbsnp": [
+    "rs397516440"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Nonpapillary renal cell carcinoma",
+    "Pheochromocytoma",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000043599"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 54,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R107H",
+   "position": 107,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208864",
+    "RCV000492448",
+    "RCV001379601",
+    "RCV003897458"
+   ],
+   "dbsnp": [
+    "rs193922609"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "VHL-related disorder",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223184"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 54,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R107P",
+   "position": 107,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000030583",
+    "RCV000486047",
+    "RCV000492682",
+    "RCV000816283"
+   ],
+   "dbsnp": [
+    "rs193922609"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000036900"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 54,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R107S",
+   "position": 107,
+   "wild_type": "R",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003805279"
+   ],
+   "dbsnp": [
+    "rs397516440"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002942065"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 54,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S111C",
+   "position": 111,
+   "wild_type": "S",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000685144",
+    "RCV002651638"
+   ],
+   "dbsnp": [
+    "rs1559426203",
+    "rs2470158749"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000565557",
+    "VCV002203305"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 58,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S111G",
+   "position": 111,
+   "wild_type": "S",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000780788",
+    "RCV001039507"
+   ],
+   "dbsnp": [
+    "rs1559426203"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Neoplasms, NOS",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000633016"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 58,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S111N",
+   "position": 111,
+   "wild_type": "S",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208834",
+    "RCV000492721",
+    "RCV002517414"
+   ],
+   "dbsnp": [
+    "rs869025631"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223186"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 58,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S111R",
+   "position": 111,
+   "wild_type": "S",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003450556"
+   ],
+   "dbsnp": [
+    "rs1559426203"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002673948"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 111,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 58,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y112C",
+   "position": 112,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208852",
+    "RCV000219736",
+    "RCV000631262",
+    "RCV001289414"
+   ],
+   "dbsnp": [
+    "rs869025633"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223189"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y112H",
+   "position": 112,
+   "wild_type": "Y",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002308",
+    "RCV000698407",
+    "RCV002321468",
+    "RCV003407257"
+   ],
+   "dbsnp": [
+    "rs104893824"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "VHL-related disorder",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002222"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y112N",
+   "position": 112,
+   "wild_type": "Y",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002316",
+    "RCV005222659"
+   ],
+   "dbsnp": [
+    "rs104893824"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002228"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y112S",
+   "position": 112,
+   "wild_type": "Y",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002321045",
+    "RCV005213662"
+   ],
+   "dbsnp": [
+    "rs869025633"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001730577"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G114R",
+   "position": 114,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208843",
+    "RCV003765349",
+    "RCV005512713"
+   ],
+   "dbsnp": [
+    "rs869025636"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223193"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 61,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G114S",
+   "position": 114,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000707336",
+    "RCV003353002",
+    "RCV006554580"
+   ],
+   "dbsnp": [
+    "rs869025636"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000583094"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 61,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G114V",
+   "position": 114,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003781367"
+   ],
+   "dbsnp": [
+    "rs1559428039"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002927177"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 61,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H115P",
+   "position": 115,
+   "wild_type": "H",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000679034",
+    "RCV002458188"
+   ],
+   "dbsnp": [
+    "rs5030812"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000560744"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 62,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H115Q",
+   "position": 115,
+   "wild_type": "H",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000588324",
+    "RCV001044333",
+    "RCV005231141"
+   ],
+   "dbsnp": [
+    "rs864622646"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496057"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 62,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H115R",
+   "position": 115,
+   "wild_type": "H",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000822511",
+    "RCV003169035"
+   ],
+   "dbsnp": [
+    "rs5030812"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000664415"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 62,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H115Y",
+   "position": 115,
+   "wild_type": "H",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003187665"
+   ],
+   "dbsnp": [
+    "rs5030811"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary cancer-predisposing syndrome",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV002451969"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 62,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W117C",
+   "position": 117,
+   "wild_type": "W",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000154124",
+    "RCV000723964",
+    "RCV001020510"
+   ],
+   "dbsnp": [
+    "rs727504215"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000167827"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 64,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W117G",
+   "position": 117,
+   "wild_type": "W",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001069048"
+   ],
+   "dbsnp": [
+    "rs1696261074"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000862346"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 64,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W117R",
+   "position": 117,
+   "wild_type": "W",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003017971"
+   ],
+   "dbsnp": [
+    "rs1696261074"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002087924"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 117,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 64,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L118P",
+   "position": 118,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492175",
+    "RCV000801496",
+    "RCV001702663",
+    "RCV004591439"
+   ],
+   "dbsnp": [
+    "rs5030830"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428807"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 118,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 65,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L118R",
+   "position": 118,
+   "wild_type": "L",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492280",
+    "RCV003233031"
+   ],
+   "dbsnp": [
+    "rs5030830"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428802"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 118,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 65,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F119L",
+   "position": 119,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000588483",
+    "RCV000631289",
+    "RCV002456285"
+   ],
+   "dbsnp": [
+    "rs1553619948"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496059"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 66,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R120G",
+   "position": 120,
+   "wild_type": "R",
+   "mutant": "G",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208800",
+    "RCV001379374",
+    "RCV001701790"
+   ],
+   "dbsnp": [
+    "rs869025642"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223199"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 67,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D121G",
+   "position": 121,
+   "wild_type": "D",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208830",
+    "RCV000679035",
+    "RCV000801501",
+    "RCV004020567"
+   ],
+   "dbsnp": [
+    "rs5030832"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223200"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 121,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 68,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D121N",
+   "position": 121,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002651639"
+   ],
+   "dbsnp": [
+    "rs2125128261"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV002203306"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 121,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 68,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T124I",
+   "position": 124,
+   "wild_type": "T",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000679036",
+    "RCV004678597",
+    "RCV005222710",
+    "RCV005237435",
+    "RCV005394178"
+   ],
+   "dbsnp": [
+    "rs193922610"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Hereditary pheochromocytoma and paraganglioma",
+    "Nonpapillary renal cell carcinoma",
+    "Pheochromocytoma",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000036902"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 71,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H125P",
+   "position": 125,
+   "wild_type": "H",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208860",
+    "RCV004678642"
+   ],
+   "dbsnp": [
+    "rs869025643"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223201"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 72,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D126Y",
+   "position": 126,
+   "wild_type": "D",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002318",
+    "RCV001236092"
+   ],
+   "dbsnp": [
+    "rs104893831"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Erythrocytosis, familial, 2 (ECYT2)",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002230"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 73,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L128F",
+   "position": 128,
+   "wild_type": "L",
+   "mutant": "F",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208832"
+   ],
+   "dbsnp": [
+    "rs1553619956",
+    "rs869025645"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223203"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 75,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L128P",
+   "position": 128,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001577269",
+    "RCV002359188",
+    "RCV003316842",
+    "RCV003771754"
+   ],
+   "dbsnp": [
+    "rs2125128327"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001208816"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 75,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V130F",
+   "position": 130,
+   "wild_type": "V",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000588434",
+    "RCV004024678"
+   ],
+   "dbsnp": [
+    "rs104893830"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496061"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 130,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 77,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V130L",
+   "position": 130,
+   "wild_type": "V",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002317",
+    "RCV000030586",
+    "RCV000492250",
+    "RCV001071915"
+   ],
+   "dbsnp": [
+    "rs104893830"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Erythrocytosis, familial, 2 (ECYT2)",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002229"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 130,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 77,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N131S",
+   "position": 131,
+   "wild_type": "N",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000590750",
+    "RCV002225684",
+    "RCV002530908"
+   ],
+   "dbsnp": [
+    "rs1553619963"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496062"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 78,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N131Y",
+   "position": 131,
+   "wild_type": "N",
+   "mutant": "Y",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002034406",
+    "RCV006554641"
+   ],
+   "dbsnp": [
+    "rs2125128340"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001522394"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 78,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q132P",
+   "position": 132,
+   "wild_type": "Q",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000589183",
+    "RCV002377215",
+    "RCV005223019"
+   ],
+   "dbsnp": [
+    "rs1347416980"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496063"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 79,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T133P",
+   "position": 133,
+   "wild_type": "T",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492347"
+   ],
+   "dbsnp": [
+    "rs1131690961"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000428808"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 80,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F136S",
+   "position": 136,
+   "wild_type": "F",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000587621",
+    "RCV000679038",
+    "RCV003767339"
+   ],
+   "dbsnp": [
+    "rs5030833"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496064"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 83,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A149P",
+   "position": 149,
+   "wild_type": "A",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208855",
+    "RCV001853329"
+   ],
+   "dbsnp": [
+    "rs587780077"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223214"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 96,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A149S",
+   "position": 149,
+   "wild_type": "A",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000115746",
+    "RCV000208783",
+    "RCV000492260",
+    "RCV001854559"
+   ],
+   "dbsnp": [
+    "rs587780077"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000127829"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 96,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A149T",
+   "position": 149,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208822",
+    "RCV002327073"
+   ],
+   "dbsnp": [
+    "rs587780077"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223213"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 96,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A149V",
+   "position": 149,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001317824"
+   ],
+   "dbsnp": [
+    "rs1696266503"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001018515"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 149,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 96,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I151L",
+   "position": 151,
+   "wild_type": "I",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000217917"
+   ],
+   "dbsnp": [
+    "rs876659313"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome"
+   ],
+   "clinvar_vcv": [
+    "VCV000231711"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 151,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 98,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I151S",
+   "position": 151,
+   "wild_type": "I",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208823"
+   ],
+   "dbsnp": [
+    "rs869025655"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223215"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 151,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 98,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I151T",
+   "position": 151,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492569",
+    "RCV000590238",
+    "RCV000705307",
+    "RCV004584391"
+   ],
+   "dbsnp": [
+    "rs869025655"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428803"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 151,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 98,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L153Q",
+   "position": 153,
+   "wild_type": "L",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000030587",
+    "RCV001022748",
+    "RCV006555351"
+   ],
+   "dbsnp": [
+    "rs193922611"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000036903"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 153,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 100,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P154L",
+   "position": 154,
+   "wild_type": "P",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000804483",
+    "RCV002336632"
+   ],
+   "dbsnp": [
+    "rs1399097617"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000649525"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 154,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 101,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V155M",
+   "position": 155,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208799",
+    "RCV002515564",
+    "RCV004596112"
+   ],
+   "dbsnp": [
+    "rs869025659"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223219"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 155,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 102,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y156C",
+   "position": 156,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000036543",
+    "RCV000487045",
+    "RCV000492752",
+    "RCV000631280"
+   ],
+   "dbsnp": [
+    "rs397516441"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000043600"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 156,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 103,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T157I",
+   "position": 157,
+   "wild_type": "T",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208862",
+    "RCV001289415",
+    "RCV004678643",
+    "RCV006253892"
+   ],
+   "dbsnp": [
+    "rs869025660"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223223"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 157,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 104,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L158P",
+   "position": 158,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000161088",
+    "RCV000208846",
+    "RCV000492547",
+    "RCV001072084"
+   ],
+   "dbsnp": [
+    "rs121913346"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000182980"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 158,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 105,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L158V",
+   "position": 158,
+   "wild_type": "L",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000688156",
+    "RCV001575396",
+    "RCV002334267"
+   ],
+   "dbsnp": [
+    "rs1559429613"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000567944"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 158,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 105,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E160V",
+   "position": 160,
+   "wild_type": "E",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000203510"
+   ],
+   "dbsnp": [
+    "rs864321641"
+   ],
+   "diseases": [
+    "Pheochromocytoma"
+   ],
+   "clinvar_vcv": [
+    "VCV000219157"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 160,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 107,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R161G",
+   "position": 161,
+   "wild_type": "R",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000756901",
+    "RCV001855883",
+    "RCV002332535"
+   ],
+   "dbsnp": [
+    "rs5030818"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000618484"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 161,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 108,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R161P",
+   "position": 161,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002338068"
+   ],
+   "dbsnp": [
+    "rs730882035"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma (PCC)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV001743417"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 161,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 108,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R161Q",
+   "position": 161,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000161092",
+    "RCV000208848",
+    "RCV000456958",
+    "RCV000563066",
+    "RCV004742286",
+    "RCV005394565",
+    "RCV005865254"
+   ],
+   "dbsnp": [
+    "rs730882035"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Inherited phaeochromocytoma and paraganglioma excluding NF1",
+    "Nonpapillary renal cell carcinoma",
+    "Paragangliomas and Glomus Tumors",
+    "Pheochromocytoma",
+    "Pheochromocytoma (PCC)",
+    "VHL-related disorder",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000182983"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 161,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 108,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C162F",
+   "position": 162,
+   "wild_type": "C",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000036548",
+    "RCV002513389",
+    "RCV003812589"
+   ],
+   "dbsnp": [
+    "rs2470170739",
+    "rs397516444"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000043604",
+    "VCV002951902"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 162,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C162R",
+   "position": 162,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000587033",
+    "RCV001060967"
+   ],
+   "dbsnp": [
+    "rs1553620313"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000496067"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 162,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C162W",
+   "position": 162,
+   "wild_type": "C",
+   "mutant": "W",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208792",
+    "RCV000226031",
+    "RCV000567560",
+    "RCV000679043"
+   ],
+   "dbsnp": [
+    "rs5030622"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223227"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 162,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C162Y",
+   "position": 162,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208789",
+    "RCV003278699",
+    "RCV006704628"
+   ],
+   "dbsnp": [
+    "rs397516444"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223225"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 162,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L163F",
+   "position": 163,
+   "wild_type": "L",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000561095",
+    "RCV001224534",
+    "RCV005056204"
+   ],
+   "dbsnp": [
+    "rs1553620318"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000480772"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 163,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 110,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L163P",
+   "position": 163,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002319",
+    "RCV001231697",
+    "RCV003298026",
+    "RCV004018540"
+   ],
+   "dbsnp": [
+    "rs28940297"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "RENAL CELL CARCINOMA WITH PARANEOPLASTIC ERYTHROCYTOSIS",
+    "Renal cell carcinoma (RCC)",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002231"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 163,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 110,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L163R",
+   "position": 163,
+   "wild_type": "L",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000474133",
+    "RCV005624214"
+   ],
+   "dbsnp": [
+    "rs28940297"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000411955"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 163,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 110,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q164H",
+   "position": 164,
+   "wild_type": "Q",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000538803",
+    "RCV000756902",
+    "RCV001023281",
+    "RCV001382402",
+    "RCV002508221",
+    "RCV003302779",
+    "RCV003330751",
+    "RCV005870839"
+   ],
+   "dbsnp": [
+    "rs1352275281"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000456566",
+    "VCV000618485"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 164,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 111,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q164R",
+   "position": 164,
+   "wild_type": "Q",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002326",
+    "RCV001023261",
+    "RCV001052383"
+   ],
+   "dbsnp": [
+    "rs267607170"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002238"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 164,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 111,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V166A",
+   "position": 166,
+   "wild_type": "V",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000036549",
+    "RCV001023359",
+    "RCV001701727"
+   ],
+   "dbsnp": [
+    "rs397516445"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000043605"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 166,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 113,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V166D",
+   "position": 166,
+   "wild_type": "V",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767280"
+   ],
+   "dbsnp": [
+    "rs397516445"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625254"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 166,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 113,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V166F",
+   "position": 166,
+   "wild_type": "V",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002310",
+    "RCV000220823",
+    "RCV001851578",
+    "RCV002288459"
+   ],
+   "dbsnp": [
+    "rs104893825"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002224"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 166,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 113,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R167G",
+   "position": 167,
+   "wild_type": "R",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002304",
+    "RCV000466046",
+    "RCV002336073"
+   ],
+   "dbsnp": [
+    "rs5030820"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002219"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 167,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 114,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R167L",
+   "position": 167,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000631284"
+   ],
+   "dbsnp": [
+    "rs5030821"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000526685"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 167,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 114,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R167P",
+   "position": 167,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492510",
+    "RCV000767282",
+    "RCV006556088"
+   ],
+   "dbsnp": [
+    "rs5030821"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428799"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 167,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 114,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R167Q",
+   "position": 167,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002300",
+    "RCV000213850",
+    "RCV000325074",
+    "RCV000627745",
+    "RCV003448242",
+    "RCV004760317"
+   ],
+   "dbsnp": [
+    "rs5030821"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Pheochromocytoma",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002216"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 167,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 114,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R167W",
+   "position": 167,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002302",
+    "RCV000002303",
+    "RCV000132159",
+    "RCV000213079",
+    "RCV000627746",
+    "RCV000763092",
+    "RCV003992144"
+   ],
+   "dbsnp": [
+    "rs5030820"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Nonpapillary renal cell carcinoma",
+    "Pheochromocytoma",
+    "Pheochromocytoma (PCC)",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002218"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 167,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 114,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V170D",
+   "position": 170,
+   "wild_type": "V",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767283",
+    "RCV001701154",
+    "RCV002334429",
+    "RCV002533922"
+   ],
+   "dbsnp": [
+    "rs864321642"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625256"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 117,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V170L",
+   "position": 170,
+   "wild_type": "V",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001028059"
+   ],
+   "dbsnp": [
+    "rs1553620326"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000828174"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 117,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y175C",
+   "position": 175,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000030589",
+    "RCV000492408",
+    "RCV000533687",
+    "RCV004700288"
+   ],
+   "dbsnp": [
+    "rs193922613"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000036905"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 175,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 122,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L178P",
+   "position": 178,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000492520",
+    "RCV000631291",
+    "RCV000767287",
+    "RCV004701555"
+   ],
+   "dbsnp": [
+    "rs5030822"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000428795"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 178,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L178Q",
+   "position": 178,
+   "wild_type": "L",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767288"
+   ],
+   "dbsnp": [
+    "rs5030822"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625260"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 178,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L178R",
+   "position": 178,
+   "wild_type": "L",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767289",
+    "RCV003279047"
+   ],
+   "dbsnp": [
+    "rs5030822"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625261"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 178,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L184P",
+   "position": 184,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000484822",
+    "RCV001258069",
+    "RCV005222956"
+   ],
+   "dbsnp": [
+    "rs1064793878"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000419447"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 184,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 131,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L188P",
+   "position": 188,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000767294",
+    "RCV002536595"
+   ],
+   "dbsnp": [
+    "rs1559429824"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)",
+    "von Hippel-Lindau disease (VHLD)"
+   ],
+   "clinvar_vcv": [
+    "VCV000625266"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 188,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 135,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H191D",
+   "position": 191,
+   "wild_type": "H",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000002323",
+    "RCV001219111"
+   ],
+   "dbsnp": [
+    "rs28940301"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Erythrocytosis, familial, 2 (ECYT2)",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000002235"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 191,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 138,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D197N",
+   "position": 197,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002251697"
+   ],
+   "dbsnp": [
+    "rs1064794951"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001687723"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 197,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 144,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L198P",
+   "position": 198,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000208871",
+    "RCV001024703"
+   ],
+   "dbsnp": [
+    "rs869025667"
+   ],
+   "diseases": [
+    "Hereditary cancer-predisposing syndrome",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000223235"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 198,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 145,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R200L",
+   "position": 200,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001042529"
+   ],
+   "dbsnp": [
+    "rs754016774"
+   ],
+   "diseases": [
+    "Chuvash polycythemia",
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000840517"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 200,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 147,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L201P",
+   "position": 201,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001786527"
+   ],
+   "dbsnp": [
+    "rs2125130793"
+   ],
+   "diseases": [
+    "Von Hippel-Lindau syndrome (VHLS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001326283"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9gio": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 201,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 148,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [
+  {
+   "variant": "T302G",
+   "position": 302,
+   "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "T406G",
+   "position": 406,
+   "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "M54L",
+   "position": 54,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000843990"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L63P",
+   "position": 63,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000002227"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R64S",
+   "position": 64,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001023005"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E70G",
+   "position": 70,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000186316"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V74D",
+   "position": 74,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000625223"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R79G",
+   "position": 79,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000411988"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L89F",
+   "position": 89,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000651694"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P103L",
+   "position": 103,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001488386"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G104V",
+   "position": 104,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000223183"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I109N",
+   "position": 109,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000093328"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A122V",
+   "position": 122,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001027087"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T124A",
+   "position": 124,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000582981"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D126G",
+   "position": 126,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000456585"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D126N",
+   "position": 126,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000141044"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "L129P",
+   "position": 129,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000625242"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V130I",
+   "position": 130,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001735887"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "F136C",
+   "position": 136,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000496065"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P138L",
+   "position": 138,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000816689"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "S139F",
+   "position": 139,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000216478"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I151V",
+   "position": 151,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000857570"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P154S",
+   "position": 154,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000486714"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L163I",
+   "position": 163,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001743762"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L169P",
+   "position": 169,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000428809"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I180S",
+   "position": 180,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000625262"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "L188V",
+   "position": 188,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000002225"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "H191P",
+   "position": 191,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000182984"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P192L",
+   "position": 192,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000526677"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "P192T",
+   "position": 192,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001488572"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V194G",
+   "position": 194,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000428810"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R200W",
+   "position": 200,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000002232"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "R210W",
+   "position": 210,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000220627"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "37": 1,
+  "41": 1,
+  "46": 1,
+  "54": 3,
+  "55": 1,
+  "57": 1,
+  "60": 3,
+  "61": 2,
+  "62": 2,
+  "63": 1,
+  "64": 3,
+  "65": 8,
+  "68": 2,
+  "69": 1,
+  "70": 5,
+  "72": 2,
+  "73": 2,
+  "74": 3,
+  "75": 2,
+  "76": 4,
+  "77": 1,
+  "78": 6,
+  "79": 1,
+  "80": 6,
+  "81": 1,
+  "82": 4,
+  "83": 1,
+  "84": 4,
+  "86": 4,
+  "87": 3,
+  "88": 6,
+  "89": 2,
+  "90": 3,
+  "91": 1,
+  "93": 6,
+  "94": 1,
+  "96": 1,
+  "98": 8,
+  "100": 2,
+  "101": 3,
+  "103": 3,
+  "104": 4,
+  "105": 1,
+  "107": 5,
+  "109": 1,
+  "110": 2,
+  "111": 5,
+  "112": 5,
+  "113": 1,
+  "114": 3,
+  "115": 4,
+  "116": 1,
+  "117": 5,
+  "118": 3,
+  "119": 2,
+  "120": 2,
+  "121": 3,
+  "122": 2,
+  "124": 3,
+  "125": 2,
+  "126": 6,
+  "128": 4,
+  "129": 2,
+  "130": 4,
+  "131": 3,
+  "132": 3,
+  "133": 2,
+  "134": 2,
+  "136": 3,
+  "137": 1,
+  "138": 2,
+  "139": 1,
+  "140": 2,
+  "141": 1,
+  "143": 1,
+  "144": 2,
+  "145": 3,
+  "148": 1,
+  "149": 6,
+  "150": 2,
+  "151": 4,
+  "153": 1,
+  "154": 2,
+  "155": 2,
+  "156": 1,
+  "157": 1,
+  "158": 3,
+  "159": 2,
+  "160": 3,
+  "161": 5,
+  "162": 8,
+  "163": 4,
+  "164": 3,
+  "165": 1,
+  "166": 4,
+  "167": 5,
+  "168": 2,
+  "169": 3,
+  "170": 2,
+  "173": 1,
+  "175": 3,
+  "176": 1,
+  "177": 3,
+  "178": 4,
+  "180": 1,
+  "181": 1,
+  "182": 1,
+  "183": 2,
+  "184": 1,
+  "185": 1,
+  "186": 1,
+  "188": 2,
+  "189": 1,
+  "191": 2,
+  "192": 3,
+  "194": 1,
+  "195": 1,
+  "196": 2,
+  "197": 3,
+  "198": 2,
+  "199": 1,
+  "200": 2,
+  "201": 1,
+  "203": 1,
+  "210": 1,
+  "214": 5,
+  "302": 1,
+  "406": 1
+ }
+}

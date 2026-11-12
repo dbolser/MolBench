@@ -1,0 +1,306 @@
+{
+ "accession": "P07320",
+ "gene": "CRYGD",
+ "entry_name": "CRGD_HUMAN",
+ "protein": "Gamma-crystallin D",
+ "uniprot_gene": "CRYGD",
+ "disease": "congenital cataract",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P07320",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 174,
+ "uniprot_sequence_sha256": "d1b3e2505e53d2a5900867dadc574b42d9de143dfb44aa0420ad7cfc107b7ae0",
+ "primary_entry": "1hk0",
+ "selection": {
+  "candidates": 16,
+  "shortlisted": 14,
+  "eligible": 14,
+  "resolution_limit": 2.5,
+  "positions_covered": 6,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "1h4a",
+  "already_in_panel": false
+ },
+ "entries": {
+  "1hk0": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-1": 85,
+     "0": 88
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": true
+   },
+   "verified": 6
+  }
+ },
+ "variants": [
+  {
+   "variant": "R15C",
+   "position": 15,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000018445",
+    "RCV000803517",
+    "RCV003328551"
+   ],
+   "dbsnp": [
+    "rs121909595"
+   ],
+   "diseases": [
+    "Aculeiform cataract (CTRCT4)",
+    "Cataract 4 multiple types",
+    "Cataract 4, multiple types (CTRCT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV000016937"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hk0": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 14,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 14,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P24S",
+   "position": 24,
+   "wild_type": "P",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000018451"
+   ],
+   "dbsnp": [
+    "rs28931605"
+   ],
+   "diseases": [
+    "Cataract 4 multiple types",
+    "Cataract 4, multiple types (CTRCT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV000016942"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hk0": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 23,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 23,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R37P",
+   "position": 37,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003329934"
+   ],
+   "dbsnp": [
+    "rs1694933681"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV002580739"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hk0": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 36,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 36,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L45P",
+   "position": 45,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000171329",
+    "RCV004730893"
+   ],
+   "dbsnp": [
+    "rs28931605",
+    "rs786205546"
+   ],
+   "diseases": [
+    "Aculeiform cataract (CTRCT4)",
+    "CRYGD-related disorder",
+    "Cataract 4 multiple types",
+    "Cataract 4, multiple types (CTRCT4)",
+    "Developmental cataract"
+   ],
+   "clinvar_vcv": [
+    "VCV000191146"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hk0": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 44,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 44,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S52P",
+   "position": 52,
+   "wild_type": "S",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002819120"
+   ],
+   "dbsnp": [
+    "rs2469111254"
+   ],
+   "diseases": [
+    "Aculeiform cataract (CTRCT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV001994732"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hk0": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 51,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 51,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R59H",
+   "position": 59,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000018446",
+    "RCV002228036",
+    "RCV003894812"
+   ],
+   "dbsnp": [
+    "rs121909596"
+   ],
+   "diseases": [
+    "Aculeiform cataract (CTRCT4)",
+    "Cataract 4 multiple types",
+    "Cataract 4, multiple types (CTRCT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV000016938"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hk0": [
+     {
+      "auth_asym_id": "X",
+      "auth_seq_id": 58,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 58,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "15": 1,
+  "24": 1,
+  "37": 1,
+  "45": 2,
+  "52": 1,
+  "54": 1,
+  "59": 1,
+  "140": 1,
+  "150": 1,
+  "157": 1,
+  "159": 1
+ }
+}

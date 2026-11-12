@@ -1,0 +1,218 @@
+{
+ "accession": "P00918",
+ "gene": "CA2",
+ "entry_name": "CAH2_HUMAN",
+ "protein": "Carbonic anhydrase 2",
+ "uniprot_gene": "CA2",
+ "disease": "osteopetrosis with renal tubular acidosis",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P00918",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 260,
+ "uniprot_sequence_sha256": "e6a24c903c1ef211037c64a6835a8a484f48b17be1cae50d6998913f21acf7d4",
+ "primary_entry": "3k34",
+ "selection": {
+  "candidates": 1263,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 5,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "3ks3",
+  "already_in_panel": false
+ },
+ "entries": {
+  "3k34": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 123,
+     "1": 135
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "not_observed": 1,
+   "verified": 3
+  }
+ },
+ "variants": [
+  {
+   "variant": "M1R",
+   "position": 1,
+   "wild_type": "M",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002274320"
+   ],
+   "dbsnp": [
+    "rs1811576779"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001700071"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "K18E",
+   "position": 18,
+   "wild_type": "K",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000000962"
+   ],
+   "dbsnp": [
+    "rs118203931"
+   ],
+   "diseases": [
+    "CARBONIC ANHYDRASE II VARIANT"
+   ],
+   "clinvar_vcv": [
+    "VCV000000914"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3k34": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 18,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 18,
+      "comp_id": "LYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H107Y",
+   "position": 107,
+   "wild_type": "H",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000000964"
+   ],
+   "dbsnp": [
+    "rs118203933"
+   ],
+   "diseases": [
+    "Osteopetrosis with renal tubular acidosis (OPTB3)",
+    "Osteopetrosis, autosomal recessive 3 (OPTB3)"
+   ],
+   "clinvar_vcv": [
+    "VCV000000916"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3k34": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 107,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P236H",
+   "position": 236,
+   "wild_type": "P",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000000963"
+   ],
+   "dbsnp": [
+    "rs118203932"
+   ],
+   "diseases": [
+    "CARBONIC ANHYDRASE II VARIANT"
+   ],
+   "clinvar_vcv": [
+    "VCV000000915"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3k34": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 237,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 236,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [
+  {
+   "variant": "N252D",
+   "position": 252,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000000913"
+   ],
+   "clinvar_classification": [
+    "Benign/Likely benign"
+   ]
+  }
+ ],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "1": 1,
+  "7": 1,
+  "18": 1,
+  "40": 1,
+  "48": 1,
+  "51": 1,
+  "107": 1,
+  "193": 1,
+  "204": 1,
+  "208": 1,
+  "211": 1,
+  "227": 1,
+  "236": 1,
+  "252": 1
+ }
+}

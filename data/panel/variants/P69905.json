@@ -1,0 +1,3814 @@
+{
+ "accession": "P69905",
+ "gene": "HBA1",
+ "entry_name": "HBA_HUMAN",
+ "protein": "Hemoglobin subunit alpha",
+ "uniprot_gene": "HBA1",
+ "disease": "alpha-thalassaemia; haemoglobin variants",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P69905",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 142,
+ "uniprot_sequence_sha256": "14725a10598943a7aa719eed7d24c7fee599192a6c63c75b051ee6f156341242",
+ "primary_entry": "2hhb",
+ "selection": {
+  "pinned": "already used by tasks"
+ },
+ "entries": {
+  "1hho": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-1": 141
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "outside_construct": 4,
+   "verified": 44
+  },
+  "2hhb": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-1": 282
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "outside_construct": 4,
+   "verified": 44
+  },
+  "5ni1": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-1": 282
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "outside_construct": 4,
+   "verified": 44
+  }
+ },
+ "variants": [
+  {
+   "variant": "M1K",
+   "position": 1,
+   "wild_type": "M",
+   "mutant": "K",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003317778"
+   ],
+   "dbsnp": [
+    "rs1316527998"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV002573442"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "M1R",
+   "position": 1,
+   "wild_type": "M",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001169875",
+    "RCV004018237"
+   ],
+   "dbsnp": [
+    "rs111033603",
+    "rs1316527998"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000915293",
+    "VCV003075919"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "M1T",
+   "position": 1,
+   "wild_type": "M",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016929",
+    "RCV003654177"
+   ],
+   "dbsnp": [
+    "rs111033603"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015643"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "M1V",
+   "position": 1,
+   "wild_type": "M",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016931",
+    "RCV001078242",
+    "RCV001284141",
+    "RCV003120274",
+    "RCV005016274",
+    "RCV005021812",
+    "RCV006641286"
+   ],
+   "dbsnp": [
+    "rs121909803",
+    "rs34220980"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "Hemoglobin H disease, nondeletional",
+    "Methemoglobinemia, alpha type",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015645",
+    "VCV002428673"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "G16C",
+   "position": 16,
+   "wild_type": "G",
+   "mutant": "C",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002243538"
+   ],
+   "dbsnp": [
+    "rs281864811"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV001683493"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 15,
+      "comp_id": "GLY"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 15,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 15,
+      "comp_id": "GLY"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 15,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 15,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y25D",
+   "position": 25,
+   "wild_type": "Y",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003110192",
+    "RCV005230457"
+   ],
+   "dbsnp": [
+    "rs281864821"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV002413187"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 24,
+      "comp_id": "TYR"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 24,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 24,
+      "comp_id": "TYR"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 24,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 24,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L30P",
+   "position": 30,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016937",
+    "RCV000022605",
+    "RCV000759059",
+    "RCV004700242",
+    "RCV006694359"
+   ],
+   "dbsnp": [
+    "rs41341344"
+   ],
+   "diseases": [
+    "HBA2-related alpha thalassemia spectrum",
+    "Hemoglobin H disease, nondeletional",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015651"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 29,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 29,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 29,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 29,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 29,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R32S",
+   "position": 32,
+   "wild_type": "R",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016967"
+   ],
+   "dbsnp": [
+    "rs111033606"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000015678"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 31,
+      "comp_id": "ARG"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 31,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 31,
+      "comp_id": "ARG"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 31,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 31,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 31,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "M33I",
+   "position": 33,
+   "wild_type": "M",
+   "mutant": "I",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001811593",
+    "RCV003413793",
+    "RCV004018219",
+    "RCV005006362",
+    "RCV006644678"
+   ],
+   "dbsnp": [
+    "rs1455943416",
+    "rs41515552"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "HBA2-related disorder",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "Methemoglobinemia, alpha type",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000811488",
+    "VCV003075901"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 32,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 32,
+      "comp_id": "MET"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 32,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 32,
+      "comp_id": "MET"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 32,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 32,
+      "comp_id": "MET"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 32,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 32,
+      "comp_id": "MET"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 32,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 32,
+      "comp_id": "MET"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S36P",
+   "position": 36,
+   "wild_type": "S",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001284140",
+    "RCV001678591"
+   ],
+   "dbsnp": [
+    "rs63750776"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000993102"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 35,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 35,
+      "comp_id": "SER"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 35,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 35,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 35,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 35,
+      "comp_id": "SER"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 35,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 35,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 35,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 35,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "K41M",
+   "position": 41,
+   "wild_type": "K",
+   "mutant": "M",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017189",
+    "RCV000641239"
+   ],
+   "dbsnp": [
+    "rs281864828"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015844"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 40,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 40,
+      "comp_id": "LYS"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 40,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 40,
+      "comp_id": "LYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 40,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 40,
+      "comp_id": "LYS"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 40,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 40,
+      "comp_id": "LYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 40,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 40,
+      "comp_id": "LYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F44L",
+   "position": 44,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017048",
+    "RCV006644340"
+   ],
+   "dbsnp": [
+    "rs41491146"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015743"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F44V",
+   "position": 44,
+   "wild_type": "F",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003120105",
+    "RCV005240695"
+   ],
+   "dbsnp": [
+    "rs281864829"
+   ],
+   "diseases": [
+    "Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV002428504"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 43,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 43,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P45L",
+   "position": 45,
+   "wild_type": "P",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017114",
+    "RCV000641192",
+    "RCV002227039"
+   ],
+   "dbsnp": [
+    "rs33978134"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015783"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 44,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 44,
+      "comp_id": "PRO"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 44,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 44,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 44,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 44,
+      "comp_id": "PRO"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 44,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 44,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 44,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 44,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D48H",
+   "position": 48,
+   "wild_type": "D",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016910",
+    "RCV000016911",
+    "RCV000016912",
+    "RCV000016913",
+    "RCV001275680",
+    "RCV001544589",
+    "RCV005016273"
+   ],
+   "dbsnp": [
+    "rs281864834"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015636"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 47,
+      "comp_id": "ASP"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 47,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 47,
+      "comp_id": "ASP"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 47,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 47,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G60D",
+   "position": 60,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017194",
+    "RCV000022600",
+    "RCV000507118",
+    "RCV000756221",
+    "RCV001376060",
+    "RCV001678588",
+    "RCV001831580",
+    "RCV003323574",
+    "RCV005016276",
+    "RCV006694369"
+   ],
+   "dbsnp": [
+    "rs281864846",
+    "rs28928878"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "HBA2-related alpha thalassemia spectrum",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "Hemoglobin H disease, nondeletional",
+    "Methemoglobinemia, alpha type",
+    "Non-immune hydrops fetalis (NIHF)",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015849",
+    "VCV000439112"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G60R",
+   "position": 60,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016978",
+    "RCV000016979",
+    "RCV001283978",
+    "RCV002051788",
+    "RCV003331101",
+    "RCV003736541"
+   ],
+   "dbsnp": [
+    "rs281864895",
+    "rs41328049"
+   ],
+   "diseases": [
+    "Alpha-thalassemia, Dutch type",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015688",
+    "VCV000993066"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 59,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L67P",
+   "position": 67,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016955",
+    "RCV004767010",
+    "RCV005229808"
+   ],
+   "dbsnp": [
+    "rs41323248"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015669"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 66,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 66,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 66,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 66,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 66,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 66,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 66,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 66,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 66,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 66,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L81R",
+   "position": 81,
+   "wild_type": "L",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001812310"
+   ],
+   "dbsnp": [
+    "rs281864863"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000993412"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 80,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 80,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 80,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 80,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 80,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H88Q",
+   "position": 88,
+   "wild_type": "H",
+   "mutant": "Q",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002481101"
+   ],
+   "dbsnp": [
+    "rs1318210119"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001809522"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H88Y",
+   "position": 88,
+   "wild_type": "H",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017103",
+    "RCV000017104",
+    "RCV000017105",
+    "RCV000017106",
+    "RCV003313924",
+    "RCV005229810"
+   ],
+   "dbsnp": [
+    "rs28928876"
+   ],
+   "diseases": [
+    "Methemoglobinemia, alpha type"
+   ],
+   "clinvar_vcv": [
+    "VCV000015779"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 87,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 87,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A89S",
+   "position": 89,
+   "wild_type": "A",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017096",
+    "RCV000656378"
+   ],
+   "dbsnp": [
+    "rs35239527"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015776"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A89V",
+   "position": 89,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016895",
+    "RCV000641309"
+   ],
+   "dbsnp": [
+    "rs33983416"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015628"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 88,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R93L",
+   "position": 93,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017005",
+    "RCV000641142",
+    "RCV006449934"
+   ],
+   "dbsnp": [
+    "rs33991779"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015711"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R93Q",
+   "position": 93,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017062",
+    "RCV000641166"
+   ],
+   "dbsnp": [
+    "rs33991779"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015752"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 92,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D95N",
+   "position": 95,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001801058"
+   ],
+   "dbsnp": [
+    "rs281864878"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001330041"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D95Y",
+   "position": 95,
+   "wild_type": "D",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002227313",
+    "RCV006644791"
+   ],
+   "dbsnp": [
+    "rs281864878"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV001679434"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 94,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C105R",
+   "position": 105,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000991152",
+    "RCV005021292",
+    "RCV006694378"
+   ],
+   "dbsnp": [
+    "rs1263969213"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "HBA2-related alpha thalassemia spectrum",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000804215"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C105Y",
+   "position": 105,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016942",
+    "RCV000022606",
+    "RCV001811170",
+    "RCV002051787",
+    "RCV004595884",
+    "RCV005007858"
+   ],
+   "dbsnp": [
+    "rs41417548"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "Hemoglobin H disease, nondeletional",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015656"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 104,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L107R",
+   "position": 107,
+   "wild_type": "L",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV004548630"
+   ],
+   "dbsnp": [
+    "rs2505431550"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV002628369"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 106,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 106,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T109N",
+   "position": 109,
+   "wild_type": "T",
+   "mutant": "N",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001811802"
+   ],
+   "dbsnp": [
+    "rs756810015"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001330688"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 108,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 108,
+      "comp_id": "THR"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 108,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 108,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 108,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 108,
+      "comp_id": "THR"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 108,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 108,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 108,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 108,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A111D",
+   "position": 111,
+   "wild_type": "A",
+   "mutant": "D",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017140",
+    "RCV001811179",
+    "RCV002482880",
+    "RCV006638626"
+   ],
+   "dbsnp": [
+    "rs63749948"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "Methemoglobinemia, alpha type",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015800"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 110,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 110,
+      "comp_id": "ALA"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 110,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 110,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 110,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 110,
+      "comp_id": "ALA"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 110,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 110,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 110,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 110,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H113Q",
+   "position": 113,
+   "wild_type": "H",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000417222"
+   ],
+   "dbsnp": [
+    "rs63750404"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000375745"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 112,
+      "comp_id": "HIS"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 112,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 112,
+      "comp_id": "HIS"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 112,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 112,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 112,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P120S",
+   "position": 120,
+   "wild_type": "P",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000985722",
+    "RCV001027960",
+    "RCV001283983",
+    "RCV002489508",
+    "RCV004756152",
+    "RCV005860171"
+   ],
+   "dbsnp": [
+    "rs1262943621",
+    "rs63750751"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "HBA1-related disorder",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "Methemoglobinemia, alpha type",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000801174",
+    "VCV000811900"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 119,
+      "comp_id": "PRO"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 119,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 119,
+      "comp_id": "PRO"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 119,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 119,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 119,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L126P",
+   "position": 126,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016897",
+    "RCV000417220",
+    "RCV001811168",
+    "RCV002476982"
+   ],
+   "dbsnp": [
+    "rs41397847"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015630"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L126Q",
+   "position": 126,
+   "wild_type": "L",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001078247"
+   ],
+   "dbsnp": [
+    "rs41397847"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000869221"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L126R",
+   "position": 126,
+   "wild_type": "L",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016981",
+    "RCV000985724",
+    "RCV001826473",
+    "RCV005007859",
+    "RCV006694360"
+   ],
+   "dbsnp": [
+    "rs41397847"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "HBA2-related alpha thalassemia spectrum",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015690"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 125,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 125,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D127H",
+   "position": 127,
+   "wild_type": "D",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017148",
+    "RCV000641208"
+   ],
+   "dbsnp": [
+    "rs63750950"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015807"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D127Y",
+   "position": 127,
+   "wild_type": "D",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000507294"
+   ],
+   "dbsnp": [
+    "rs33933481"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Ductal and Lobular Neoplasms"
+   ],
+   "clinvar_vcv": [
+    "VCV000439117"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 126,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 126,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F129S",
+   "position": 129,
+   "wild_type": "F",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV005624646"
+   ],
+   "dbsnp": [
+    "rs604131"
+   ],
+   "diseases": [
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV004074262"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 128,
+      "comp_id": "PHE"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 128,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 128,
+      "comp_id": "PHE"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 128,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 128,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L130P",
+   "position": 130,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017211",
+    "RCV000756223",
+    "RCV001276182",
+    "RCV003486522",
+    "RCV005016277"
+   ],
+   "dbsnp": [
+    "rs281864889",
+    "rs35993655"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7",
+    "Heinz body anemia",
+    "Hemoglobin H disease (HBH)",
+    "Methemoglobinemia, alpha type",
+    "alpha Thalassemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015865",
+    "VCV002691625"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 129,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 129,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 129,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 129,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 129,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L137P",
+   "position": 137,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000203221",
+    "RCV000626695"
+   ],
+   "dbsnp": [
+    "rs41469945"
+   ],
+   "diseases": [
+    "Anemia",
+    "Heinz body anemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015655"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L137R",
+   "position": 137,
+   "wild_type": "L",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017171",
+    "RCV000017172"
+   ],
+   "dbsnp": [
+    "rs34635364"
+   ],
+   "diseases": [
+    "Heinz body anemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000015828"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 136,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "K140E",
+   "position": 140,
+   "wild_type": "K",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000016932",
+    "RCV000641316"
+   ],
+   "dbsnp": [
+    "rs41361546"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015646"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 139,
+      "comp_id": "LYS"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 139,
+      "comp_id": "LYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 139,
+      "comp_id": "LYS"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 139,
+      "comp_id": "LYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 139,
+      "comp_id": "LYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y141H",
+   "position": 141,
+   "wild_type": "Y",
+   "mutant": "H",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017201",
+    "RCV000017202",
+    "RCV000641245",
+    "RCV003477259"
+   ],
+   "dbsnp": [
+    "rs35723200",
+    "rs55870409"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015856",
+    "VCV002681967"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter",
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "TYR"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 140,
+      "comp_id": "TYR"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 140,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R142C",
+   "position": 142,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017126",
+    "RCV000641200"
+   ],
+   "dbsnp": [
+    "rs33991910"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015792"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R142H",
+   "position": 142,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017164",
+    "RCV000641216"
+   ],
+   "dbsnp": [
+    "rs33935328"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015821"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R142L",
+   "position": 142,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000017093",
+    "RCV000641177"
+   ],
+   "dbsnp": [
+    "rs33935328"
+   ],
+   "diseases": [
+    "Erythrocytosis, familial, 7"
+   ],
+   "clinvar_vcv": [
+    "VCV000015773"
+   ],
+   "clinvar_classification": [
+    "Pathogenic; other"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "1hho": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ],
+    "2hhb": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ],
+    "5ni1": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 141,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [
+  {
+   "variant": "D7G",
+   "position": 7,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015822"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "W15R",
+   "position": 15,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV003063969"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M33K",
+   "position": 33,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001330794"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "M33R",
+   "position": 33,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000618158"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D75H",
+   "position": 75,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015733"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D86V",
+   "position": 86,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015639"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "H104R",
+   "position": 104,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000993106"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V122M",
+   "position": 122,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015798"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "H123Q",
+   "position": 123,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000439771",
+    "VCV002581562"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "D127N",
+   "position": 127,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015662"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "A131P",
+   "position": 131,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000015640"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "1": 9,
+  "7": 1,
+  "15": 4,
+  "16": 1,
+  "19": 1,
+  "21": 2,
+  "22": 1,
+  "24": 2,
+  "25": 2,
+  "30": 1,
+  "31": 1,
+  "32": 3,
+  "33": 4,
+  "36": 1,
+  "40": 3,
+  "41": 1,
+  "44": 2,
+  "45": 1,
+  "48": 2,
+  "55": 1,
+  "60": 4,
+  "63": 2,
+  "67": 1,
+  "71": 1,
+  "75": 1,
+  "79": 1,
+  "81": 1,
+  "86": 1,
+  "88": 2,
+  "89": 2,
+  "90": 1,
+  "93": 2,
+  "95": 2,
+  "104": 1,
+  "105": 2,
+  "107": 1,
+  "108": 1,
+  "109": 1,
+  "110": 1,
+  "111": 1,
+  "113": 1,
+  "116": 1,
+  "120": 3,
+  "122": 1,
+  "123": 1,
+  "126": 3,
+  "127": 3,
+  "129": 1,
+  "130": 2,
+  "131": 1,
+  "133": 1,
+  "137": 2,
+  "140": 1,
+  "141": 2,
+  "142": 3,
+  "143": 5
+ }
+}

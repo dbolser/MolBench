@@ -1,0 +1,265 @@
+{
+ "id": "1cbs",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1cbs.cif",
+ "title": "CRYSTAL STRUCTURE OF CELLULAR RETINOIC-ACID-BINDING PROTEINS I AND II IN COMPLEX WITH ALL-TRANS-RETINOIC ACID AND A SYNTHETIC RETINOID",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.8,
+ "n_models": 1,
+ "n_atoms": 1213,
+ "n_residues": 238,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "CELLULAR RETINOIC ACID BINDING PROTEIN TYPE II",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "RETINOIC ACID",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "C"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 137,
+   "n_observed": 137,
+   "auth_minus_label": {
+    "0": 137
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "137",
+     1,
+     137
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P29373",
+     "n_residues": 137,
+     "unp_first": 2,
+     "unp_last": 138,
+     "auth_minus_unp": {
+      "-1": 137
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "137",
+       2,
+       138
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "REA",
+   "name": "RETINOIC ACID",
+   "formula": "C20 H28 O2",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 22,
+   "atoms": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C20",
+    "O1",
+    "O2"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 200,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "REA"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 14,
+   "end_auth_seq_id": 22,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 14,
+   "end_label_seq_id": 22
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 25,
+   "end_auth_seq_id": 37,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 25,
+   "end_label_seq_id": 37
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 60,
+   "end_auth_seq_id": 66,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 60,
+   "end_label_seq_id": 66,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 49,
+   "end_auth_seq_id": 55,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 49,
+   "end_label_seq_id": 55,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 40,
+   "end_auth_seq_id": 46,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 40,
+   "end_label_seq_id": 46,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 5,
+   "end_auth_seq_id": 13,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 5,
+   "end_label_seq_id": 13,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 128,
+   "end_auth_seq_id": 136,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 128,
+   "end_label_seq_id": 136,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 119,
+   "end_auth_seq_id": 125,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 119,
+   "end_label_seq_id": 125,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 107,
+   "end_auth_seq_id": 113,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 107,
+   "end_label_seq_id": 113,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 92,
+   "end_auth_seq_id": 99,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 92,
+   "end_label_seq_id": 99,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 80,
+   "end_auth_seq_id": 89,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 80,
+   "end_label_seq_id": 89,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 71,
+   "end_auth_seq_id": 74,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 71,
+   "end_label_seq_id": 74,
+   "sheet_id": "A"
+  }
+ ],
+ "waters": 100,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

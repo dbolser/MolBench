@@ -1,0 +1,1523 @@
+{
+ "accession": "P01308",
+ "gene": "INS",
+ "entry_name": "INS_HUMAN",
+ "protein": "Insulin",
+ "uniprot_gene": "INS",
+ "disease": "permanent neonatal diabetes; MODY10",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P01308",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 110,
+ "uniprot_sequence_sha256": "99603f8fb1e9872e2d24ee1e9f85108c2bddea6b148a0f1099e16ba2715c8263",
+ "primary_entry": "6tc2",
+ "selection": {
+  "candidates": 387,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 22,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "8pi4",
+  "already_in_panel": false
+ },
+ "entries": {
+  "6tc2": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-89": 126,
+     "-24": 170
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "not_observed": 5,
+   "verified": 15
+  }
+ },
+ "variants": [
+  {
+   "variant": "M1V",
+   "position": 1,
+   "wild_type": "M",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001946765",
+    "RCV002492128"
+   ],
+   "dbsnp": [
+    "rs757124361"
+   ],
+   "diseases": [
+    "Diabetes mellitus, permanent neonatal 4",
+    "Hyperproinsulinemia",
+    "Maturity-onset diabetes of the young type 10",
+    "Type 1 diabetes mellitus 2"
+   ],
+   "clinvar_vcv": [
+    "VCV001455986"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "G32S",
+   "position": 32,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000020212",
+    "RCV000030072",
+    "RCV000117279",
+    "RCV001089451",
+    "RCV001775542"
+   ],
+   "dbsnp": [
+    "rs80356664"
+   ],
+   "diseases": [
+    "Diabetes mellitus, permanent neonatal 4",
+    "Diabetes mellitus, permanent neonatal, 4 (PNDM4)",
+    "Neonatal diabetes mellitus (NDM)",
+    "Permanent neonatal diabetes mellitus (PNDM)",
+    "Type 1 diabetes mellitus 2"
+   ],
+   "clinvar_vcv": [
+    "VCV000021122"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G32V",
+   "position": 32,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001817993"
+   ],
+   "dbsnp": [
+    "rs2133676747"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001338622"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 32,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "H34P",
+   "position": 34,
+   "wild_type": "H",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002052032"
+   ],
+   "dbsnp": [
+    "rs1564912274"
+   ],
+   "diseases": [
+    "Neonatal diabetes mellitus (NDM)"
+   ],
+   "clinvar_vcv": [
+    "VCV001526012"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 10,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 34,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 10,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 34,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 10,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 34,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 10,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 34,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 10,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 34,
+      "comp_id": "HIS"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 10,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 34,
+      "comp_id": "HIS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L35M",
+   "position": 35,
+   "wild_type": "L",
+   "mutant": "M",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002052033"
+   ],
+   "dbsnp": [
+    "rs1278232284"
+   ],
+   "diseases": [
+    "Neonatal diabetes mellitus (NDM)"
+   ],
+   "clinvar_vcv": [
+    "VCV001526013"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L35V",
+   "position": 35,
+   "wild_type": "L",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001818011"
+   ],
+   "dbsnp": [
+    "rs1278232284"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001338640"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 11,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 35,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L39F",
+   "position": 39,
+   "wild_type": "L",
+   "mutant": "F",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002466269"
+   ],
+   "dbsnp": [
+    "rs2133676660"
+   ],
+   "diseases": [
+    "Maturity-onset diabetes of the young type 10"
+   ],
+   "clinvar_vcv": [
+    "VCV001162205"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 39,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 39,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 39,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 39,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 39,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 39,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V42A",
+   "position": 42,
+   "wild_type": "V",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000240176",
+    "RCV004719789"
+   ],
+   "dbsnp": [
+    "rs886037863"
+   ],
+   "diseases": [
+    "Maturity-onset diabetes of the young type 10"
+   ],
+   "clinvar_vcv": [
+    "VCV000253331"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 18,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 42,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 18,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 42,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 18,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 42,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 18,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 42,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 18,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 42,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 18,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 42,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F48S",
+   "position": 48,
+   "wild_type": "F",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000014307"
+   ],
+   "dbsnp": [
+    "rs80356668"
+   ],
+   "diseases": [
+    "Hyperproinsulinemia",
+    "Hyperproinsulinemia (HPRI)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013378"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 48,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 48,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 48,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 48,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 48,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 48,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F49L",
+   "position": 49,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000014306"
+   ],
+   "dbsnp": [
+    "rs148685531"
+   ],
+   "diseases": [
+    "Hyperproinsulinemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000013377"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 49,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 49,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 49,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 49,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 49,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 49,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P52L",
+   "position": 52,
+   "wild_type": "P",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001197790"
+   ],
+   "dbsnp": [
+    "rs145038693"
+   ],
+   "diseases": [
+    "Maturity-onset diabetes of the young type 10"
+   ],
+   "clinvar_vcv": [
+    "VCV000931331"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 28,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 52,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 28,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 52,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "F",
+      "auth_seq_id": 28,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "F",
+      "label_seq_id": 52,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 28,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "H",
+      "label_seq_id": 52,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "J",
+      "auth_seq_id": 28,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "J",
+      "label_seq_id": 52,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 28,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "L",
+      "label_seq_id": 52,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R89C",
+   "position": 89,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000020207",
+    "RCV001089453",
+    "RCV002051790",
+    "RCV002513137",
+    "RCV004730851"
+   ],
+   "dbsnp": [
+    "rs80356669"
+   ],
+   "diseases": [
+    "Diabetes mellitus, permanent neonatal 4",
+    "Diabetes mellitus, permanent neonatal, 4 (PNDM4)",
+    "INS-related disorder",
+    "Neonatal diabetes mellitus (NDM)",
+    "Permanent neonatal diabetes mellitus (PNDM)"
+   ],
+   "clinvar_vcv": [
+    "VCV000021117"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R89H",
+   "position": 89,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000014310",
+    "RCV001091846",
+    "RCV003407328",
+    "RCV005042049"
+   ],
+   "dbsnp": [
+    "rs28933985"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Diabetes mellitus, permanent neonatal 4",
+    "Hyperproinsulinemia",
+    "Hyperproinsulinemia (HPRI)",
+    "INS-related disorder",
+    "Maturity-onset diabetes of the young type 10",
+    "Type 1 diabetes mellitus 2"
+   ],
+   "clinvar_vcv": [
+    "VCV000013380"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R89L",
+   "position": 89,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000014313"
+   ],
+   "dbsnp": [
+    "rs28933985"
+   ],
+   "diseases": [
+    "Hyperproinsulinemia",
+    "Hyperproinsulinemia (HPRI)"
+   ],
+   "clinvar_vcv": [
+    "VCV000013382"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R89P",
+   "position": 89,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000014315"
+   ],
+   "dbsnp": [
+    "rs28933985"
+   ],
+   "diseases": [
+    "Hyperproinsulinemia"
+   ],
+   "clinvar_vcv": [
+    "VCV000013383"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "C95Y",
+   "position": 95,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003404625"
+   ],
+   "dbsnp": [
+    "rs2495746594"
+   ],
+   "diseases": [
+    "INS-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV002631502"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 95,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 95,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "E",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "E",
+      "label_seq_id": 95,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "G",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "G",
+      "label_seq_id": 95,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "I",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "I",
+      "label_seq_id": 95,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "K",
+      "auth_seq_id": 6,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "K",
+      "label_seq_id": 95,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T97P",
+   "position": 97,
+   "wild_type": "T",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001817442"
+   ],
+   "dbsnp": [
+    "rs2133672927"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001336487"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 97,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 97,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "E",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "E",
+      "label_seq_id": 97,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "G",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "G",
+      "label_seq_id": 97,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "I",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "I",
+      "label_seq_id": 97,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "K",
+      "auth_seq_id": 8,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "K",
+      "label_seq_id": 97,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S98I",
+   "position": 98,
+   "wild_type": "S",
+   "mutant": "I",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002052029"
+   ],
+   "dbsnp": [
+    "rs2133672883"
+   ],
+   "diseases": [
+    "Neonatal diabetes mellitus (NDM)"
+   ],
+   "clinvar_vcv": [
+    "VCV001526009"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 9,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 98,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 9,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 98,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "E",
+      "auth_seq_id": 9,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "E",
+      "label_seq_id": 98,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "G",
+      "auth_seq_id": 9,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "G",
+      "label_seq_id": 98,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "I",
+      "auth_seq_id": 9,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "I",
+      "label_seq_id": 98,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "K",
+      "auth_seq_id": 9,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "K",
+      "label_seq_id": 98,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y108D",
+   "position": 108,
+   "wild_type": "Y",
+   "mutant": "D",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002052030"
+   ],
+   "dbsnp": [
+    "rs2133672778"
+   ],
+   "diseases": [
+    "Neonatal diabetes mellitus (NDM)"
+   ],
+   "clinvar_vcv": [
+    "VCV001526010"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 19,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 108,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 19,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 108,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "E",
+      "auth_seq_id": 19,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "E",
+      "label_seq_id": 108,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "G",
+      "auth_seq_id": 19,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "G",
+      "label_seq_id": 108,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "I",
+      "auth_seq_id": 19,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "I",
+      "label_seq_id": 108,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "K",
+      "auth_seq_id": 19,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "K",
+      "label_seq_id": 108,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C109F",
+   "position": 109,
+   "wild_type": "C",
+   "mutant": "F",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002052031"
+   ],
+   "dbsnp": [
+    "rs2133672742"
+   ],
+   "diseases": [
+    "Neonatal diabetes mellitus (NDM)"
+   ],
+   "clinvar_vcv": [
+    "VCV001526011"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6tc2": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "E",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "E",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "G",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "G",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "I",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "I",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "K",
+      "auth_seq_id": 20,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "K",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [
+  {
+   "variant": "P9R",
+   "position": 9,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000626220"
+   ],
+   "clinvar_classification": [
+    "Likely risk allele"
+   ]
+  },
+  {
+   "variant": "A24D",
+   "position": 24,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000013388"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely risk allele"
+   ]
+  },
+  {
+   "variant": "C43G",
+   "position": 43,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000021114"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely risk allele"
+   ]
+  },
+  {
+   "variant": "R55C",
+   "position": 55,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000013392"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic/Likely risk allele"
+   ]
+  },
+  {
+   "variant": "V92L",
+   "position": 92,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000013381"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "E93G",
+   "position": 93,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000393455"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C96R",
+   "position": 96,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000918067"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic/Likely risk allele"
+   ]
+  },
+  {
+   "variant": "C96Y",
+   "position": 96,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000013387"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "T97S",
+   "position": 97,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000617648"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "1": 1,
+  "9": 1,
+  "24": 1,
+  "32": 2,
+  "34": 1,
+  "35": 2,
+  "39": 1,
+  "42": 1,
+  "43": 1,
+  "46": 1,
+  "48": 1,
+  "49": 1,
+  "52": 1,
+  "55": 1,
+  "59": 1,
+  "89": 4,
+  "92": 1,
+  "93": 1,
+  "95": 1,
+  "96": 2,
+  "97": 2,
+  "98": 1,
+  "108": 1,
+  "109": 1
+ }
+}

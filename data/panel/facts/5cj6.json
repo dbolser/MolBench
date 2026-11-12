@@ -1,0 +1,350 @@
+{
+ "id": "5cj6",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/5cj6.cif",
+ "title": "Crystal Structure of a Selective Androgen Receptor Modulator Bound to the Ligand Binding Domain of the Human Androgen Receptor",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 2.07,
+ "n_models": 1,
+ "n_atoms": 2233,
+ "n_residues": 390,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "Androgen receptor",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "small peptide",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "2-chloro-4-{[(1R,2R)-2-hydroxy-2-methylcyclopentyl]amino}-3-methylbenzonitrile",
+   "label_asym_ids": [
+    "C"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "D"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 283,
+   "n_observed": 244,
+   "auth_minus_label": {
+    "638": 244
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "671",
+     "844",
+     33,
+     206
+    ],
+    [
+     "849",
+     "918",
+     211,
+     280
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P10275",
+     "n_residues": 244,
+     "unp_first": 672,
+     "unp_last": 919,
+     "auth_minus_unp": {
+      "-1": 244
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "671",
+       "844",
+       672,
+       845
+      ],
+      [
+       "849",
+       "918",
+       850,
+       919
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "auth_asym_id": "B",
+   "label_asym_id": "B",
+   "entity_id": "2",
+   "polymer_type": "protein",
+   "seqres_length": 10,
+   "n_observed": 10,
+   "auth_minus_label": {
+    "20": 10
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "21",
+     "30",
+     1,
+     10
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P10275",
+     "n_residues": 10,
+     "unp_first": 21,
+     "unp_last": 30,
+     "auth_minus_unp": {
+      "0": 10
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "21",
+       "30",
+       21,
+       30
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "51Y",
+   "name": "2-chloro-4-{[(1R,2R)-2-hydroxy-2-methylcyclopentyl]amino}-3-methylbenzonitrile",
+   "formula": "C14 H17 Cl N2 O",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 18,
+   "atoms": [
+    "C7",
+    "C6",
+    "C1",
+    "C5",
+    "C4",
+    "C3",
+    "C2",
+    "N8",
+    "C9",
+    "C10",
+    "O11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "CL1",
+    "C17",
+    "N18"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 1001,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "51Y"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_and_software_defined_assembly",
+   "method": "PISA",
+   "oligomeric_details": "dimeric",
+   "oligomeric_count": 2,
+   "polymer_chain_copies": {
+    "A": 1,
+    "B": 1
+   },
+   "n_polymer_chains": 2,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 671,
+   "end_auth_seq_id": 681,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 33,
+   "end_label_seq_id": 43
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 696,
+   "end_auth_seq_id": 721,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 58,
+   "end_label_seq_id": 83
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 724,
+   "end_auth_seq_id": 728,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 86,
+   "end_label_seq_id": 90
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 729,
+   "end_auth_seq_id": 758,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 91,
+   "end_label_seq_id": 120
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 771,
+   "end_auth_seq_id": 778,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 133,
+   "end_label_seq_id": 140
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 780,
+   "end_auth_seq_id": 797,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 142,
+   "end_label_seq_id": 159
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 800,
+   "end_auth_seq_id": 813,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 162,
+   "end_label_seq_id": 175
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 823,
+   "end_auth_seq_id": 844,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 185,
+   "end_label_seq_id": 206
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 850,
+   "end_auth_seq_id": 884,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 212,
+   "end_label_seq_id": 246
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 892,
+   "end_auth_seq_id": 902,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 254,
+   "end_label_seq_id": 264
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 902,
+   "end_auth_seq_id": 908,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 264,
+   "end_label_seq_id": 270
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 22,
+   "end_auth_seq_id": 30,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 2,
+   "end_label_seq_id": 10
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 762,
+   "end_auth_seq_id": 765,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 124,
+   "end_label_seq_id": 127,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 768,
+   "end_auth_seq_id": 770,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 130,
+   "end_label_seq_id": 132,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 815,
+   "end_auth_seq_id": 817,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 177,
+   "end_label_seq_id": 179,
+   "sheet_id": "AA2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 911,
+   "end_auth_seq_id": 913,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 273,
+   "end_label_seq_id": 275,
+   "sheet_id": "AA2"
+  }
+ ],
+ "waters": 135,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

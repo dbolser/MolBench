@@ -1,0 +1,465 @@
+{
+ "id": "2cpp",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/2cpp.cif",
+ "title": "HIGH-RESOLUTION CRYSTAL STRUCTURE OF CYTOCHROME P450-CAM",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.63,
+ "n_models": 1,
+ "n_atoms": 3462,
+ "n_residues": 611,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "CYTOCHROME P450-CAM",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "PROTOPORPHYRIN IX CONTAINING FE",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "CAMPHOR",
+   "label_asym_ids": [
+    "C"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "D"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 414,
+   "n_observed": 405,
+   "auth_minus_label": {
+    "0": 405
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "10",
+     "414",
+     10,
+     414
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P00183",
+     "n_residues": 405,
+     "unp_first": 11,
+     "unp_last": 415,
+     "auth_minus_unp": {
+      "-1": 405
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "10",
+       "414",
+       11,
+       415
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "CAM",
+   "name": "CAMPHOR",
+   "formula": "C10 H16 O",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 11,
+   "atoms": [
+    "C1",
+    "C2",
+    "O",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "C10"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 422,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "CAM"
+    }
+   ]
+  },
+  {
+   "comp_id": "HEM",
+   "name": "PROTOPORPHYRIN IX CONTAINING FE",
+   "formula": "C34 H32 Fe N4 O4",
+   "kind": "ligand",
+   "metals": [
+    "FE"
+   ],
+   "heme": true,
+   "n_heavy_atoms": 43,
+   "atoms": [
+    "CHA",
+    "CHB",
+    "CHC",
+    "CHD",
+    "C1A",
+    "C2A",
+    "C3A",
+    "C4A",
+    "CMA",
+    "CAA",
+    "CBA",
+    "CGA",
+    "O1A",
+    "O2A",
+    "C1B",
+    "C2B",
+    "C3B",
+    "C4B",
+    "CMB",
+    "CAB",
+    "CBB",
+    "C1C",
+    "C2C",
+    "C3C",
+    "C4C",
+    "CMC",
+    "CAC",
+    "CBC",
+    "C1D",
+    "C2D",
+    "C3D",
+    "C4D",
+    "CMD",
+    "CAD",
+    "CBD",
+    "CGD",
+    "O1D",
+    "O2D",
+    "NA",
+    "NB",
+    "NC",
+    "ND",
+    "FE"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 417,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "HEM"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 357,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 357,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 417,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "HEM",
+    "atom": "FE"
+   },
+   "distance": 2.198,
+   "to_symmetry_copy": false
+  }
+ ],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 37,
+   "end_auth_seq_id": 46,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 37,
+   "end_label_seq_id": 46
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 67,
+   "end_auth_seq_id": 77,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 67,
+   "end_label_seq_id": 77
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 77,
+   "end_auth_seq_id": 81,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 77,
+   "end_label_seq_id": 81
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 89,
+   "end_auth_seq_id": 96,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 89,
+   "end_label_seq_id": 96
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 106,
+   "end_auth_seq_id": 126,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 106,
+   "end_label_seq_id": 126
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 127,
+   "end_auth_seq_id": 145,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 127,
+   "end_label_seq_id": 145
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 149,
+   "end_auth_seq_id": 169,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 149,
+   "end_label_seq_id": 169
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 173,
+   "end_auth_seq_id": 185,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 173,
+   "end_label_seq_id": 185
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 192,
+   "end_auth_seq_id": 214,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 192,
+   "end_label_seq_id": 214
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 218,
+   "end_auth_seq_id": 225,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 218,
+   "end_label_seq_id": 225
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 234,
+   "end_auth_seq_id": 267,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 234,
+   "end_label_seq_id": 267
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 267,
+   "end_auth_seq_id": 276,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 267,
+   "end_label_seq_id": 276
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 280,
+   "end_auth_seq_id": 292,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 280,
+   "end_label_seq_id": 292
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 324,
+   "end_auth_seq_id": 328,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 324,
+   "end_label_seq_id": 328
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 359,
+   "end_auth_seq_id": 378,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 359,
+   "end_label_seq_id": 378
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 52,
+   "end_auth_seq_id": 58,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 52,
+   "end_label_seq_id": 58,
+   "sheet_id": "B1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 60,
+   "end_auth_seq_id": 66,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 60,
+   "end_label_seq_id": 66,
+   "sheet_id": "B1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 146,
+   "end_auth_seq_id": 150,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 146,
+   "end_label_seq_id": 150,
+   "sheet_id": "B5"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 395,
+   "end_auth_seq_id": 405,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 395,
+   "end_label_seq_id": 405,
+   "sheet_id": "B5"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 382,
+   "end_auth_seq_id": 397,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 382,
+   "end_label_seq_id": 397,
+   "sheet_id": "B5"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 226,
+   "end_auth_seq_id": 228,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 226,
+   "end_label_seq_id": 228,
+   "sheet_id": "B2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 230,
+   "end_auth_seq_id": 233,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 230,
+   "end_label_seq_id": 233,
+   "sheet_id": "B2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 295,
+   "end_auth_seq_id": 301,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 295,
+   "end_label_seq_id": 301,
+   "sheet_id": "B3"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 315,
+   "end_auth_seq_id": 323,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 315,
+   "end_label_seq_id": 323,
+   "sheet_id": "B3"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 305,
+   "end_auth_seq_id": 308,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 305,
+   "end_label_seq_id": 308,
+   "sheet_id": "B4"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 310,
+   "end_auth_seq_id": 312,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 310,
+   "end_label_seq_id": 312,
+   "sheet_id": "B4"
+  }
+ ],
+ "waters": 204,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

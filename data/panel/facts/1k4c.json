@@ -1,0 +1,2288 @@
+{
+ "id": "1k4c",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1k4c.cif",
+ "title": "Potassium Channel KcsA-Fab complex in high concentration of K+",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 2.0,
+ "n_models": 1,
+ "n_atoms": 4534,
+ "n_residues": 1012,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "antibody Fab fragment heavy chain",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "antibody Fab fragment light chain",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "potassium channel KcsA",
+   "label_asym_ids": [
+    "C"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "NONAN-1-OL",
+   "label_asym_ids": [
+    "D"
+   ]
+  },
+  {
+   "id": "5",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "POTASSIUM ION",
+   "label_asym_ids": [
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K"
+   ]
+  },
+  {
+   "id": "6",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "DIACYL GLYCEROL",
+   "label_asym_ids": [
+    "L"
+   ]
+  },
+  {
+   "id": "7",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "M",
+    "N",
+    "O"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 219,
+   "n_observed": 219,
+   "auth_minus_label": {
+    "0": 219
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "219",
+     1,
+     219
+    ]
+   ],
+   "uniprot": []
+  },
+  {
+   "auth_asym_id": "B",
+   "label_asym_id": "B",
+   "entity_id": "2",
+   "polymer_type": "protein",
+   "seqres_length": 212,
+   "n_observed": 212,
+   "auth_minus_label": {
+    "0": 212
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "212",
+     1,
+     212
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P01837",
+     "n_residues": 105,
+     "unp_first": 1,
+     "unp_last": 105,
+     "auth_minus_unp": {
+      "107": 105
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "108",
+       "212",
+       1,
+       105
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "auth_asym_id": "C",
+   "label_asym_id": "C",
+   "entity_id": "3",
+   "polymer_type": "protein",
+   "seqres_length": 124,
+   "n_observed": 103,
+   "auth_minus_label": {
+    "0": 103
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "22",
+     "124",
+     22,
+     124
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P0A334",
+     "n_residues": 103,
+     "unp_first": 22,
+     "unp_last": 124,
+     "auth_minus_unp": {
+      "0": 103
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "22",
+       "124",
+       22,
+       124
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "DGA",
+   "name": "DIACYL GLYCEROL",
+   "formula": "C39 H76 O5",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 31,
+   "atoms": [
+    "CA1",
+    "CA2",
+    "CA3",
+    "CA4",
+    "CA5",
+    "CA6",
+    "CA7",
+    "CA8",
+    "CA9",
+    "OA1",
+    "CB1",
+    "CB2",
+    "CB3",
+    "CB4",
+    "CB5",
+    "CB6",
+    "CB7",
+    "CB8",
+    "CB9",
+    "CAB",
+    "CBB",
+    "CCB",
+    "CDB",
+    "CEB",
+    "OB1",
+    "OG1",
+    "CG1",
+    "CG2",
+    "OG2",
+    "CG3",
+    "OXT"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 1001,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "L",
+     "label_seq_id": 0,
+     "comp_id": "DGA"
+    }
+   ]
+  },
+  {
+   "comp_id": "F09",
+   "name": "NONAN-1-OL",
+   "formula": "C9 H20 O",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 10,
+   "atoms": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "OXT"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 2001,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "D",
+     "label_seq_id": 0,
+     "comp_id": "F09"
+    }
+   ]
+  },
+  {
+   "comp_id": "K",
+   "name": "POTASSIUM ION",
+   "formula": "K 1",
+   "kind": "ion",
+   "metals": [
+    "K"
+   ],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "K"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 3001,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "E",
+     "label_seq_id": 0,
+     "comp_id": "K"
+    },
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 3002,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "F",
+     "label_seq_id": 0,
+     "comp_id": "K"
+    },
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 3003,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "G",
+     "label_seq_id": 0,
+     "comp_id": "K"
+    },
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 3004,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "H",
+     "label_seq_id": 0,
+     "comp_id": "K"
+    },
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 3005,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "I",
+     "label_seq_id": 0,
+     "comp_id": "K"
+    },
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 3006,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "J",
+     "label_seq_id": 0,
+     "comp_id": "K"
+    },
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 3007,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "K",
+     "label_seq_id": 0,
+     "comp_id": "K"
+    }
+   ]
+  }
+ ],
+ "disulfides": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 22,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 22,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 96,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 96,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.724,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 23,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 23,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 88,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 88,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.705,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 134,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 134,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 194,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 194,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.71,
+   "to_symmetry_copy": false
+  }
+ ],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.699,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.71,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.688,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.699,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.94,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "OG1"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.875,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "OG1"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.883,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.946,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "OG1"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.877,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.941,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "OG1"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.884,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "THR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.947,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.833,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.831,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.832,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.83,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.854,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.857,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.839,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 76,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 76,
+    "comp_id": "VAL",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.842,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.082,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.07,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.073,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.061,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.723,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.722,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.721,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 77,
+    "comp_id": "GLY",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.721,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 78,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 78,
+    "comp_id": "TYR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.801,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 78,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 78,
+    "comp_id": "TYR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.784,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 78,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 78,
+    "comp_id": "TYR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.8,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 78,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 78,
+    "comp_id": "TYR",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 2.783,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.4,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.4,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.4,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3001,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.4,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.209,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.209,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.209,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3002,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.209,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.343,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.343,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.343,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3003,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "G",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3004,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "H",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.343,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3009,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.317,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3009,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.326,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3009,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.32,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3009,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.322,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3011,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.399,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3011,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.4,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3011,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.407,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3005,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3011,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.406,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3007,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "K",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.042,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3007,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "K",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.042,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3007,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "K",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.042,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3007,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "K",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "distance": 3.042,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3010,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.404,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3010,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.417,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3010,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.406,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3006,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "K",
+    "atom": "K"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3010,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "O",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 3.419,
+   "to_symmetry_copy": true
+  }
+ ],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "dodecameric",
+   "oligomeric_count": 12,
+   "polymer_chain_copies": {
+    "A": 4,
+    "B": 4,
+    "C": 4
+   },
+   "n_polymer_chains": 12,
+   "relation_to_deposited": "built by symmetry"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 87,
+   "end_auth_seq_id": 91,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 87,
+   "end_label_seq_id": 91
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 161,
+   "end_auth_seq_id": 163,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 161,
+   "end_label_seq_id": 163
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 191,
+   "end_auth_seq_id": 193,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 191,
+   "end_label_seq_id": 193
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 205,
+   "end_auth_seq_id": 208,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 205,
+   "end_label_seq_id": 208
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 79,
+   "end_auth_seq_id": 83,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 79,
+   "end_label_seq_id": 83
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 121,
+   "end_auth_seq_id": 126,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 121,
+   "end_label_seq_id": 126
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 183,
+   "end_auth_seq_id": 188,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 183,
+   "end_label_seq_id": 188
+  },
+  {
+   "auth_asym_id": "C",
+   "beg_auth_seq_id": 23,
+   "end_auth_seq_id": 52,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 23,
+   "end_label_seq_id": 52
+  },
+  {
+   "auth_asym_id": "C",
+   "beg_auth_seq_id": 61,
+   "end_auth_seq_id": 74,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 61,
+   "end_label_seq_id": 74
+  },
+  {
+   "auth_asym_id": "C",
+   "beg_auth_seq_id": 85,
+   "end_auth_seq_id": 122,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 85,
+   "end_label_seq_id": 122
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 4,
+   "end_auth_seq_id": 5,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 4,
+   "end_label_seq_id": 5,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 18,
+   "end_auth_seq_id": 24,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 18,
+   "end_label_seq_id": 24,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 78,
+   "end_auth_seq_id": 83,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 78,
+   "end_label_seq_id": 83,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 68,
+   "end_auth_seq_id": 73,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 68,
+   "end_label_seq_id": 73,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 58,
+   "end_auth_seq_id": 60,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 58,
+   "end_label_seq_id": 60,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 46,
+   "end_auth_seq_id": 51,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 46,
+   "end_label_seq_id": 51,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 33,
+   "end_auth_seq_id": 39,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 33,
+   "end_label_seq_id": 39,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 92,
+   "end_auth_seq_id": 99,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 92,
+   "end_label_seq_id": 99,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 105,
+   "end_auth_seq_id": 108,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 105,
+   "end_label_seq_id": 108,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 58,
+   "end_auth_seq_id": 60,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 58,
+   "end_label_seq_id": 60,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 46,
+   "end_auth_seq_id": 51,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 46,
+   "end_label_seq_id": 51,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 33,
+   "end_auth_seq_id": 39,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 33,
+   "end_label_seq_id": 39,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 92,
+   "end_auth_seq_id": 99,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 92,
+   "end_label_seq_id": 99,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 112,
+   "end_auth_seq_id": 116,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 112,
+   "end_label_seq_id": 116,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 9,
+   "end_auth_seq_id": 12,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 9,
+   "end_label_seq_id": 12,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 125,
+   "end_auth_seq_id": 129,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 125,
+   "end_label_seq_id": 129,
+   "sheet_id": "D"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 140,
+   "end_auth_seq_id": 150,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 140,
+   "end_label_seq_id": 150,
+   "sheet_id": "D"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 179,
+   "end_auth_seq_id": 189,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 179,
+   "end_label_seq_id": 189,
+   "sheet_id": "D"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 168,
+   "end_auth_seq_id": 170,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 168,
+   "end_label_seq_id": 170,
+   "sheet_id": "D"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 125,
+   "end_auth_seq_id": 129,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 125,
+   "end_label_seq_id": 129,
+   "sheet_id": "E"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 140,
+   "end_auth_seq_id": 150,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 140,
+   "end_label_seq_id": 150,
+   "sheet_id": "E"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 179,
+   "end_auth_seq_id": 189,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 179,
+   "end_label_seq_id": 189,
+   "sheet_id": "E"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 174,
+   "end_auth_seq_id": 176,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 174,
+   "end_label_seq_id": 176,
+   "sheet_id": "E"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 156,
+   "end_auth_seq_id": 159,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 156,
+   "end_label_seq_id": 159,
+   "sheet_id": "F"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 199,
+   "end_auth_seq_id": 204,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 199,
+   "end_label_seq_id": 204,
+   "sheet_id": "F"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 209,
+   "end_auth_seq_id": 214,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 209,
+   "end_label_seq_id": 214,
+   "sheet_id": "F"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 4,
+   "end_auth_seq_id": 5,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 4,
+   "end_label_seq_id": 5,
+   "sheet_id": "G"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 19,
+   "end_auth_seq_id": 25,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 19,
+   "end_label_seq_id": 25,
+   "sheet_id": "G"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 70,
+   "end_auth_seq_id": 75,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 70,
+   "end_label_seq_id": 75,
+   "sheet_id": "G"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 62,
+   "end_auth_seq_id": 67,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 62,
+   "end_label_seq_id": 67,
+   "sheet_id": "G"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 53,
+   "end_auth_seq_id": 54,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 53,
+   "end_label_seq_id": 54,
+   "sheet_id": "H"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 45,
+   "end_auth_seq_id": 49,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 45,
+   "end_label_seq_id": 49,
+   "sheet_id": "H"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 33,
+   "end_auth_seq_id": 38,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 33,
+   "end_label_seq_id": 38,
+   "sheet_id": "H"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 85,
+   "end_auth_seq_id": 90,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 85,
+   "end_label_seq_id": 90,
+   "sheet_id": "H"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 97,
+   "end_auth_seq_id": 98,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 97,
+   "end_label_seq_id": 98,
+   "sheet_id": "H"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 53,
+   "end_auth_seq_id": 54,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 53,
+   "end_label_seq_id": 54,
+   "sheet_id": "I"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 45,
+   "end_auth_seq_id": 49,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 45,
+   "end_label_seq_id": 49,
+   "sheet_id": "I"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 33,
+   "end_auth_seq_id": 38,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 33,
+   "end_label_seq_id": 38,
+   "sheet_id": "I"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 85,
+   "end_auth_seq_id": 90,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 85,
+   "end_label_seq_id": 90,
+   "sheet_id": "I"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 102,
+   "end_auth_seq_id": 106,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 102,
+   "end_label_seq_id": 106,
+   "sheet_id": "I"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 10,
+   "end_auth_seq_id": 13,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 10,
+   "end_label_seq_id": 13,
+   "sheet_id": "I"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 114,
+   "end_auth_seq_id": 118,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 114,
+   "end_label_seq_id": 118,
+   "sheet_id": "J"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 129,
+   "end_auth_seq_id": 139,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 129,
+   "end_label_seq_id": 139,
+   "sheet_id": "J"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 173,
+   "end_auth_seq_id": 182,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 173,
+   "end_label_seq_id": 182,
+   "sheet_id": "J"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 159,
+   "end_auth_seq_id": 163,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 159,
+   "end_label_seq_id": 163,
+   "sheet_id": "J"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 153,
+   "end_auth_seq_id": 155,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 153,
+   "end_label_seq_id": 155,
+   "sheet_id": "K"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 144,
+   "end_auth_seq_id": 150,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 144,
+   "end_label_seq_id": 150,
+   "sheet_id": "K"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 191,
+   "end_auth_seq_id": 198,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 191,
+   "end_label_seq_id": 198,
+   "sheet_id": "K"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 205,
+   "end_auth_seq_id": 210,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 205,
+   "end_label_seq_id": 210,
+   "sheet_id": "K"
+  }
+ ],
+ "waters": 469,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

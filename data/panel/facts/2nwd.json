@@ -1,0 +1,286 @@
+{
+ "id": "2nwd",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/2nwd.cif",
+ "title": "Structure of chemically synthesized human lysozyme at 1 Angstrom resolution",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.04,
+ "n_models": 1,
+ "n_atoms": 2691,
+ "n_residues": 340,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "Lysozyme C",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "B"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "X",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 130,
+   "n_observed": 130,
+   "auth_minus_label": {
+    "0": 130
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "130",
+     1,
+     130
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P61626",
+     "n_residues": 130,
+     "unp_first": 19,
+     "unp_last": 148,
+     "auth_minus_unp": {
+      "-18": 130
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "130",
+       19,
+       148
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [],
+ "disulfides": [
+  {
+   "a": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 6,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 6,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 128,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 128,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.077,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 30,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 30,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 116,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 116,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.073,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 65,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 65,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 81,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 81,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.059,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 77,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 77,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "X",
+    "auth_seq_id": 95,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 95,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.051,
+   "to_symmetry_copy": false
+  }
+ ],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 4,
+   "end_auth_seq_id": 15,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 4,
+   "end_label_seq_id": 15
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 19,
+   "end_auth_seq_id": 23,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 19,
+   "end_label_seq_id": 23
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 24,
+   "end_auth_seq_id": 37,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 24,
+   "end_label_seq_id": 37
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 80,
+   "end_auth_seq_id": 86,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 80,
+   "end_label_seq_id": 86
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 89,
+   "end_auth_seq_id": 102,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 89,
+   "end_label_seq_id": 102
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 104,
+   "end_auth_seq_id": 108,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 104,
+   "end_label_seq_id": 108
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 109,
+   "end_auth_seq_id": 116,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 109,
+   "end_label_seq_id": 116
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 121,
+   "end_auth_seq_id": 125,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 121,
+   "end_label_seq_id": 125
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 43,
+   "end_auth_seq_id": 45,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 43,
+   "end_label_seq_id": 45,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 52,
+   "end_auth_seq_id": 54,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 52,
+   "end_label_seq_id": 54,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "X",
+   "beg_auth_seq_id": 59,
+   "end_auth_seq_id": 60,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 59,
+   "end_label_seq_id": 60,
+   "sheet_id": "A"
+  }
+ ],
+ "waters": 210,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": true,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

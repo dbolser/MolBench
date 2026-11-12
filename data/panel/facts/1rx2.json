@@ -1,0 +1,549 @@
+{
+ "id": "1rx2",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1rx2.cif",
+ "title": "DIHYDROFOLATE REDUCTASE (E.C.1.5.1.3) COMPLEXED WITH WITH FOLATE AND NICOTINAMIDE ADENINE DINUCLEOTIDE PHOSPHATE (OXIDIZED FORM)",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.8,
+ "n_models": 1,
+ "n_atoms": 1503,
+ "n_residues": 316,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "DIHYDROFOLATE REDUCTASE",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "MANGANESE (II) ION",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "FOLIC ACID",
+   "label_asym_ids": [
+    "C"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "BETA-MERCAPTOETHANOL",
+   "label_asym_ids": [
+    "D"
+   ]
+  },
+  {
+   "id": "5",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "NADP NICOTINAMIDE-ADENINE-DINUCLEOTIDE PHOSPHATE",
+   "label_asym_ids": [
+    "E"
+   ]
+  },
+  {
+   "id": "6",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "F"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 159,
+   "n_observed": 159,
+   "auth_minus_label": {
+    "0": 159
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "159",
+     1,
+     159
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P0ABQ4",
+     "n_residues": 159,
+     "unp_first": 1,
+     "unp_last": 159,
+     "auth_minus_unp": {
+      "0": 159
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "1",
+       "159",
+       1,
+       159
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "BME",
+   "name": "BETA-MERCAPTOETHANOL",
+   "formula": "C2 H6 O S",
+   "kind": "ion",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "S2"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 162,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "D",
+     "label_seq_id": 0,
+     "comp_id": "BME"
+    }
+   ]
+  },
+  {
+   "comp_id": "FOL",
+   "name": "FOLIC ACID",
+   "formula": "C19 H19 N7 O6",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 32,
+   "atoms": [
+    "N1",
+    "C2",
+    "NA2",
+    "N3",
+    "C4",
+    "O4",
+    "C4A",
+    "N5",
+    "C6",
+    "C7",
+    "N8",
+    "C8A",
+    "C9",
+    "N10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C",
+    "O",
+    "N",
+    "CA",
+    "CB",
+    "CG",
+    "CD",
+    "OE1",
+    "OE2",
+    "CT",
+    "O1",
+    "O2"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 161,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "FOL"
+    }
+   ]
+  },
+  {
+   "comp_id": "MN",
+   "name": "MANGANESE (II) ION",
+   "formula": "Mn 2",
+   "kind": "ion",
+   "metals": [
+    "MN"
+   ],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "MN"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 300,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "MN"
+    }
+   ]
+  },
+  {
+   "comp_id": "NAP",
+   "name": "NADP NICOTINAMIDE-ADENINE-DINUCLEOTIDE PHOSPHATE",
+   "formula": "C21 H28 N7 O17 P3",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 48,
+   "atoms": [
+    "PA",
+    "O1A",
+    "O2A",
+    "O5B",
+    "C5B",
+    "C4B",
+    "O4B",
+    "C3B",
+    "O3B",
+    "C2B",
+    "O2B",
+    "C1B",
+    "N9A",
+    "C8A",
+    "N7A",
+    "C5A",
+    "C6A",
+    "N6A",
+    "N1A",
+    "C2A",
+    "N3A",
+    "C4A",
+    "O3",
+    "PN",
+    "O1N",
+    "O2N",
+    "O5D",
+    "C5D",
+    "C4D",
+    "O4D",
+    "C3D",
+    "O3D",
+    "C2D",
+    "O2D",
+    "C1D",
+    "N1N",
+    "C2N",
+    "C3N",
+    "C7N",
+    "O7N",
+    "N7N",
+    "C4N",
+    "C5N",
+    "C6N",
+    "P2B",
+    "O1X",
+    "O2X",
+    "O3X"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 164,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "E",
+     "label_seq_id": 0,
+     "comp_id": "NAP"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 116,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 116,
+    "comp_id": "ASP",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 300,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MN",
+    "atom": "MN"
+   },
+   "distance": 2.455,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 149,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 149,
+    "comp_id": "HIS",
+    "atom": "ND1"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 300,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MN",
+    "atom": "MN"
+   },
+   "distance": 2.316,
+   "to_symmetry_copy": true
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 159,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 159,
+    "comp_id": "ARG",
+    "atom": "O"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 300,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MN",
+    "atom": "MN"
+   },
+   "distance": 2.355,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 300,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MN",
+    "atom": "MN"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 383,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 2.449,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 300,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "MN",
+    "atom": "MN"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 425,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 2.393,
+   "to_symmetry_copy": false
+  }
+ ],
+ "covalent_links": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 152,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 152,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 162,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "BME",
+    "atom": "S2"
+   },
+   "distance": 1.958,
+   "to_symmetry_copy": false
+  }
+ ],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 25,
+   "end_auth_seq_id": 35,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 25,
+   "end_label_seq_id": 35
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 44,
+   "end_auth_seq_id": 50,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 44,
+   "end_label_seq_id": 50
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 78,
+   "end_auth_seq_id": 85,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 78,
+   "end_label_seq_id": 85
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 97,
+   "end_auth_seq_id": 106,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 97,
+   "end_label_seq_id": 106
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 133,
+   "end_auth_seq_id": 135,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 133,
+   "end_label_seq_id": 135,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 151,
+   "end_auth_seq_id": 158,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 151,
+   "end_label_seq_id": 158,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 107,
+   "end_auth_seq_id": 115,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 107,
+   "end_label_seq_id": 115,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 2,
+   "end_auth_seq_id": 5,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 2,
+   "end_label_seq_id": 5,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 91,
+   "end_auth_seq_id": 95,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 91,
+   "end_label_seq_id": 95,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 39,
+   "end_auth_seq_id": 43,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 39,
+   "end_label_seq_id": 43,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 58,
+   "end_auth_seq_id": 62,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 58,
+   "end_label_seq_id": 62,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 73,
+   "end_auth_seq_id": 75,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 73,
+   "end_label_seq_id": 75,
+   "sheet_id": "A"
+  }
+ ],
+ "waters": 153,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": false
+ }
+}

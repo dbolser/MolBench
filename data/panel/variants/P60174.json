@@ -1,0 +1,194 @@
+{
+ "accession": "P60174",
+ "gene": "TPI1",
+ "entry_name": "TPIS_HUMAN",
+ "protein": "Triosephosphate isomerase",
+ "uniprot_gene": "TPI1",
+ "disease": "triosephosphate isomerase deficiency",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P60174",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 249,
+ "uniprot_sequence_sha256": "1b8803dc85035ecd8f315290ba582a78e9c31ddafda53441b1dc67c488337787",
+ "primary_entry": "9f69",
+ "selection": {
+  "candidates": 29,
+  "shortlisted": 23,
+  "eligible": 22,
+  "resolution_limit": 2.5,
+  "positions_covered": 5,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "9ffc",
+  "already_in_panel": false
+ },
+ "entries": {
+  "9f69": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 245
+    },
+    "n_insertion_codes": 0,
+    "offset": false,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "verified": 3
+  }
+ },
+ "variants": [
+  {
+   "variant": "C42Y",
+   "position": 42,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013289"
+   ],
+   "dbsnp": [
+    "rs121964848"
+   ],
+   "diseases": [
+    "Triosephosphate isomerase deficiency (TPID)"
+   ],
+   "clinvar_vcv": [
+    "VCV000012471"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 38,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I171V",
+   "position": 171,
+   "wild_type": "I",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000013290"
+   ],
+   "dbsnp": [
+    "rs121964849"
+   ],
+   "diseases": [
+    "Triosephosphate isomerase deficiency (TPID)"
+   ],
+   "clinvar_vcv": [
+    "VCV000012472"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 171,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 167,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F241S",
+   "position": 241,
+   "wild_type": "F",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000123389"
+   ],
+   "dbsnp": [
+    "rs587777440"
+   ],
+   "diseases": [
+    "Triosephosphate isomerase deficiency (TPID)"
+   ],
+   "clinvar_vcv": [
+    "VCV000136172"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "9f69": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 241,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 237,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [
+  {
+   "variant": "E105D",
+   "position": 105,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000012468"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G123R",
+   "position": 123,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000012469"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  }
+ ],
+ "structure_mismatches": [],
+ "pathogenic_single_residue_variants_per_position": {
+  "11": 1,
+  "12": 1,
+  "42": 1,
+  "105": 1,
+  "123": 2,
+  "146": 1,
+  "171": 1,
+  "241": 1
+ }
+}

@@ -1,0 +1,293 @@
+{
+ "id": "1lmb",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1lmb.cif",
+ "title": "REFINED 1.8 ANGSTROM CRYSTAL STRUCTURE OF THE LAMBDA REPRESSOR-OPERATOR COMPLEX",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.8,
+ "n_models": 1,
+ "n_atoms": 2334,
+ "n_residues": 359,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "DNA",
+   "description": "DNA (5'-D(*AP*AP*TP*AP*CP*CP*AP*CP*TP*GP*GP*CP*GP*GP*TP*GP*A P*TP*AP*T)-3')",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "polymer",
+   "polymer_type": "DNA",
+   "description": "DNA (5'-D(*TP*AP*TP*AP*TP*CP*AP*CP*CP*GP*CP*CP*AP*GP*TP*GP*G P*TP*AP*T)-3')",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "PROTEIN (LAMBDA REPRESSOR)",
+   "label_asym_ids": [
+    "C",
+    "D"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "E",
+    "F",
+    "G",
+    "H"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "1",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "DNA",
+   "seqres_length": 20,
+   "n_observed": 20,
+   "auth_minus_label": {
+    "0": 20
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "20",
+     1,
+     20
+    ]
+   ],
+   "uniprot": []
+  },
+  {
+   "auth_asym_id": "2",
+   "label_asym_id": "B",
+   "entity_id": "2",
+   "polymer_type": "DNA",
+   "seqres_length": 20,
+   "n_observed": 20,
+   "auth_minus_label": {
+    "20": 20
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "21",
+     "40",
+     1,
+     20
+    ]
+   ],
+   "uniprot": []
+  },
+  {
+   "auth_asym_id": "3",
+   "label_asym_id": "C",
+   "entity_id": "3",
+   "polymer_type": "protein",
+   "seqres_length": 92,
+   "n_observed": 87,
+   "auth_minus_label": {
+    "0": 87
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "6",
+     "92",
+     6,
+     92
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P03034",
+     "n_residues": 87,
+     "unp_first": 7,
+     "unp_last": 93,
+     "auth_minus_unp": {
+      "-1": 87
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "6",
+       "92",
+       7,
+       93
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "auth_asym_id": "4",
+   "label_asym_id": "D",
+   "entity_id": "3",
+   "polymer_type": "protein",
+   "seqres_length": 92,
+   "n_observed": 92,
+   "auth_minus_label": {
+    "0": 92
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "92",
+     1,
+     92
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P03034",
+     "n_residues": 92,
+     "unp_first": 2,
+     "unp_last": 93,
+     "auth_minus_unp": {
+      "-1": 92
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "92",
+       2,
+       93
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "tetrameric",
+   "oligomeric_count": 4,
+   "polymer_chain_copies": {
+    "A": 1,
+    "B": 1,
+    "C": 1,
+    "D": 1
+   },
+   "n_polymer_chains": 4,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "3",
+   "beg_auth_seq_id": 9,
+   "end_auth_seq_id": 23,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 9,
+   "end_label_seq_id": 23
+  },
+  {
+   "auth_asym_id": "3",
+   "beg_auth_seq_id": 33,
+   "end_auth_seq_id": 39,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 33,
+   "end_label_seq_id": 39
+  },
+  {
+   "auth_asym_id": "3",
+   "beg_auth_seq_id": 44,
+   "end_auth_seq_id": 51,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 44,
+   "end_label_seq_id": 51
+  },
+  {
+   "auth_asym_id": "3",
+   "beg_auth_seq_id": 61,
+   "end_auth_seq_id": 69,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 61,
+   "end_label_seq_id": 69
+  },
+  {
+   "auth_asym_id": "3",
+   "beg_auth_seq_id": 79,
+   "end_auth_seq_id": 92,
+   "label_asym_id": "C",
+   "beg_label_seq_id": 79,
+   "end_label_seq_id": 92
+  },
+  {
+   "auth_asym_id": "4",
+   "beg_auth_seq_id": 9,
+   "end_auth_seq_id": 23,
+   "label_asym_id": "D",
+   "beg_label_seq_id": 9,
+   "end_label_seq_id": 23
+  },
+  {
+   "auth_asym_id": "4",
+   "beg_auth_seq_id": 33,
+   "end_auth_seq_id": 39,
+   "label_asym_id": "D",
+   "beg_label_seq_id": 33,
+   "end_label_seq_id": 39
+  },
+  {
+   "auth_asym_id": "4",
+   "beg_auth_seq_id": 44,
+   "end_auth_seq_id": 51,
+   "label_asym_id": "D",
+   "beg_label_seq_id": 44,
+   "end_label_seq_id": 51
+  },
+  {
+   "auth_asym_id": "4",
+   "beg_auth_seq_id": 61,
+   "end_auth_seq_id": 69,
+   "label_asym_id": "D",
+   "beg_label_seq_id": 61,
+   "end_label_seq_id": 69
+  },
+  {
+   "auth_asym_id": "4",
+   "beg_auth_seq_id": 79,
+   "end_auth_seq_id": 92,
+   "label_asym_id": "D",
+   "beg_label_seq_id": 79,
+   "end_label_seq_id": 92
+  }
+ ],
+ "strands": [],
+ "waters": 140,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": true,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

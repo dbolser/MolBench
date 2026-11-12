@@ -1,0 +1,1559 @@
+{
+ "id": "8k7f",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/8k7f.cif",
+ "title": "Crystal structure of human lysosomal alpha-galactosidase A in complex with (2R,3S,4R,5R)-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.98,
+ "n_models": 1,
+ "n_atoms": 7126,
+ "n_residues": 1462,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "Alpha-galactosidase A",
+   "label_asym_ids": [
+    "A",
+    "B"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "branched",
+   "polymer_type": null,
+   "description": "alpha-D-mannopyranose-(1-3)-beta-D-mannopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "label_asym_ids": [
+    "C",
+    "E"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "branched",
+   "polymer_type": null,
+   "description": "2-acetamido-2-deoxy-beta-D-glucopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "label_asym_ids": [
+    "D"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "label_asym_ids": [
+    "F",
+    "I",
+    "J"
+   ]
+  },
+  {
+   "id": "5",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "(2~{R},3~{R},4~{S},5~{R})-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol",
+   "label_asym_ids": [
+    "G",
+    "K"
+   ]
+  },
+  {
+   "id": "6",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "SULFATE ION",
+   "label_asym_ids": [
+    "H",
+    "L"
+   ]
+  },
+  {
+   "id": "7",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "M",
+    "N"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 398,
+   "n_observed": 390,
+   "auth_minus_label": {
+    "31": 390
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "32",
+     "421",
+     1,
+     390
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P06280",
+     "n_residues": 390,
+     "unp_first": 32,
+     "unp_last": 421,
+     "auth_minus_unp": {
+      "0": 390
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "32",
+       "421",
+       32,
+       421
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "auth_asym_id": "B",
+   "label_asym_id": "B",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 398,
+   "n_observed": 392,
+   "auth_minus_label": {
+    "31": 392
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "32",
+     "423",
+     1,
+     392
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P06280",
+     "n_residues": 392,
+     "unp_first": 32,
+     "unp_last": 423,
+     "auth_minus_unp": {
+      "0": 392
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "32",
+       "423",
+       32,
+       423
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "NAG",
+   "name": "2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "formula": "C8 H15 N O6",
+   "kind": "sugar",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 14,
+   "atoms": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "N2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 501,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "F",
+     "label_seq_id": 0,
+     "comp_id": "NAG"
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 501,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "I",
+     "label_seq_id": 0,
+     "comp_id": "NAG"
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 502,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "J",
+     "label_seq_id": 0,
+     "comp_id": "NAG"
+    }
+   ]
+  },
+  {
+   "comp_id": "SO4",
+   "name": "SULFATE ION",
+   "formula": "O4 S -2",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 5,
+   "atoms": [
+    "S",
+    "O1",
+    "O2",
+    "O3",
+    "O4"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 503,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "H",
+     "label_seq_id": 0,
+     "comp_id": "SO4"
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 504,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "L",
+     "label_seq_id": 0,
+     "comp_id": "SO4"
+    }
+   ]
+  },
+  {
+   "comp_id": "VMF",
+   "name": "(2~{R},3~{R},4~{S},5~{R})-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol",
+   "formula": "C6 H13 N O4",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 11,
+   "atoms": [
+    "CAA",
+    "CAB",
+    "CAC",
+    "CAD",
+    "CAE",
+    "CAF",
+    "NAG",
+    "OAH",
+    "OAI",
+    "OAJ",
+    "OAK"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 502,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "G",
+     "label_seq_id": 0,
+     "comp_id": "VMF"
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 503,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "K",
+     "label_seq_id": 0,
+     "comp_id": "VMF"
+    }
+   ]
+  }
+ ],
+ "disulfides": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 52,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 21,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 94,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 63,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.044,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 56,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 25,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 63,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 32,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.051,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 142,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 111,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 172,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 141,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.046,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 202,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 171,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 223,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 192,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.065,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 378,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 347,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 382,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 351,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.064,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 52,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 21,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 94,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 63,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.048,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 56,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 25,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 63,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 32,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.051,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 142,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 111,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 172,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 141,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.033,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 202,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 171,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 223,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 192,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.037,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 378,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 347,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 382,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 351,
+    "comp_id": "CYS",
+    "atom": "SG"
+   },
+   "distance": 2.059,
+   "to_symmetry_copy": false
+  }
+ ],
+ "metal_bonds": [],
+ "covalent_links": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 139,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 108,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 501,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.447,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 192,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 161,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.436,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 215,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 184,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "b": {
+    "auth_asym_id": "D",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.448,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 139,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 108,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 501,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.448,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 192,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 161,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "b": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.439,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 215,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 184,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 502,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.452,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "O4"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 2,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.432,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 2,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "O4"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "BMA",
+    "atom": "C1"
+   },
+   "distance": 1.441,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 3,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "BMA",
+    "atom": "O3"
+   },
+   "b": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 4,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "MAN",
+    "atom": "C1"
+   },
+   "distance": 1.45,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "D",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "O4"
+   },
+   "b": {
+    "auth_asym_id": "D",
+    "auth_seq_id": 2,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.439,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "O4"
+   },
+   "b": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 2,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   },
+   "distance": 1.437,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 2,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "O4"
+   },
+   "b": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 3,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "BMA",
+    "atom": "C1"
+   },
+   "distance": 1.436,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 3,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "BMA",
+    "atom": "O3"
+   },
+   "b": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 4,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "MAN",
+    "atom": "C1"
+   },
+   "distance": 1.442,
+   "to_symmetry_copy": false
+  }
+ ],
+ "glycans": [
+  {
+   "label_asym_id": "C",
+   "auth_asym_id": "C",
+   "entity_id": "2",
+   "description": "alpha-D-mannopyranose-(1-3)-beta-D-mannopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "residues": [
+    {
+     "comp_id": "NAG",
+     "auth_seq_id": 1
+    },
+    {
+     "comp_id": "NAG",
+     "auth_seq_id": 2
+    },
+    {
+     "comp_id": "BMA",
+     "auth_seq_id": 3
+    },
+    {
+     "comp_id": "MAN",
+     "auth_seq_id": 4
+    }
+   ],
+   "attached_to": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 192,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 161,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   }
+  },
+  {
+   "label_asym_id": "D",
+   "auth_asym_id": "D",
+   "entity_id": "3",
+   "description": "2-acetamido-2-deoxy-beta-D-glucopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "residues": [
+    {
+     "comp_id": "NAG",
+     "auth_seq_id": 1
+    },
+    {
+     "comp_id": "NAG",
+     "auth_seq_id": 2
+    }
+   ],
+   "attached_to": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 215,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 184,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   }
+  },
+  {
+   "label_asym_id": "E",
+   "auth_asym_id": "E",
+   "entity_id": "2",
+   "description": "alpha-D-mannopyranose-(1-3)-beta-D-mannopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "residues": [
+    {
+     "comp_id": "NAG",
+     "auth_seq_id": 1
+    },
+    {
+     "comp_id": "NAG",
+     "auth_seq_id": 2
+    },
+    {
+     "comp_id": "BMA",
+     "auth_seq_id": 3
+    },
+    {
+     "comp_id": "MAN",
+     "auth_seq_id": 4
+    }
+   ],
+   "attached_to": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 192,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 161,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   }
+  }
+ ],
+ "glycosylation_sites": [
+  {
+   "residue": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 139,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 108,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "sugar": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 501,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "F",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   }
+  },
+  {
+   "residue": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 192,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 161,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "sugar": {
+    "auth_asym_id": "C",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   }
+  },
+  {
+   "residue": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 215,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 184,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "sugar": {
+    "auth_asym_id": "D",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   }
+  },
+  {
+   "residue": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 139,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 108,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "sugar": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 501,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "I",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   }
+  },
+  {
+   "residue": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 192,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 161,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "sugar": {
+    "auth_asym_id": "E",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   }
+  },
+  {
+   "residue": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 215,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 184,
+    "comp_id": "ASN",
+    "atom": "ND2"
+   },
+   "sugar": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 502,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "J",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "C1"
+   }
+  }
+ ],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_and_software_defined_assembly",
+   "method": "PISA",
+   "oligomeric_details": "dimeric",
+   "oligomeric_count": 2,
+   "polymer_chain_copies": {
+    "A": 1,
+    "B": 1
+   },
+   "n_polymer_chains": 2,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 46,
+   "end_auth_seq_id": 51,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 15,
+   "end_label_seq_id": 20
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 65,
+   "end_auth_seq_id": 79,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 34,
+   "end_label_seq_id": 48
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 80,
+   "end_auth_seq_id": 85,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 49,
+   "end_label_seq_id": 54
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 115,
+   "end_auth_seq_id": 127,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 84,
+   "end_label_seq_id": 96
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 151,
+   "end_auth_seq_id": 163,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 120,
+   "end_label_seq_id": 132
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 176,
+   "end_auth_seq_id": 195,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 145,
+   "end_label_seq_id": 164
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 203,
+   "end_auth_seq_id": 209,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 172,
+   "end_label_seq_id": 178
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 215,
+   "end_auth_seq_id": 223,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 184,
+   "end_label_seq_id": 192
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 235,
+   "end_auth_seq_id": 249,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 204,
+   "end_label_seq_id": 218
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 249,
+   "end_auth_seq_id": 254,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 218,
+   "end_label_seq_id": 223
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 276,
+   "end_auth_seq_id": 290,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 245,
+   "end_label_seq_id": 259
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 304,
+   "end_auth_seq_id": 312,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 273,
+   "end_label_seq_id": 281
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 313,
+   "end_auth_seq_id": 321,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 282,
+   "end_label_seq_id": 290
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 370,
+   "end_auth_seq_id": 376,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 339,
+   "end_label_seq_id": 345
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 46,
+   "end_auth_seq_id": 51,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 15,
+   "end_label_seq_id": 20
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 65,
+   "end_auth_seq_id": 79,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 34,
+   "end_label_seq_id": 48
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 80,
+   "end_auth_seq_id": 85,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 49,
+   "end_label_seq_id": 54
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 115,
+   "end_auth_seq_id": 127,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 84,
+   "end_label_seq_id": 96
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 151,
+   "end_auth_seq_id": 163,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 120,
+   "end_label_seq_id": 132
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 176,
+   "end_auth_seq_id": 194,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 145,
+   "end_label_seq_id": 163
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 203,
+   "end_auth_seq_id": 209,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 172,
+   "end_label_seq_id": 178
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 215,
+   "end_auth_seq_id": 223,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 184,
+   "end_label_seq_id": 192
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 235,
+   "end_auth_seq_id": 249,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 204,
+   "end_label_seq_id": 218
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 249,
+   "end_auth_seq_id": 254,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 218,
+   "end_label_seq_id": 223
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 276,
+   "end_auth_seq_id": 290,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 245,
+   "end_label_seq_id": 259
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 304,
+   "end_auth_seq_id": 312,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 273,
+   "end_label_seq_id": 281
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 313,
+   "end_auth_seq_id": 321,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 282,
+   "end_label_seq_id": 290
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 370,
+   "end_auth_seq_id": 376,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 339,
+   "end_label_seq_id": 345
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 262,
+   "end_auth_seq_id": 264,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 231,
+   "end_label_seq_id": 233,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 225,
+   "end_auth_seq_id": 227,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 194,
+   "end_label_seq_id": 196,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 199,
+   "end_auth_seq_id": 202,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 168,
+   "end_label_seq_id": 171,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 166,
+   "end_auth_seq_id": 170,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 135,
+   "end_label_seq_id": 139,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 130,
+   "end_auth_seq_id": 136,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 99,
+   "end_label_seq_id": 105,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 88,
+   "end_auth_seq_id": 90,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 57,
+   "end_label_seq_id": 59,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 42,
+   "end_auth_seq_id": 45,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 11,
+   "end_label_seq_id": 14,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 294,
+   "end_auth_seq_id": 296,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 263,
+   "end_label_seq_id": 265,
+   "sheet_id": "AA1"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 329,
+   "end_auth_seq_id": 334,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 298,
+   "end_label_seq_id": 303,
+   "sheet_id": "AA2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 337,
+   "end_auth_seq_id": 343,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 306,
+   "end_label_seq_id": 312,
+   "sheet_id": "AA2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 348,
+   "end_auth_seq_id": 355,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 317,
+   "end_label_seq_id": 324,
+   "sheet_id": "AA2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 412,
+   "end_auth_seq_id": 419,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 381,
+   "end_label_seq_id": 388,
+   "sheet_id": "AA2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 381,
+   "end_auth_seq_id": 388,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 350,
+   "end_label_seq_id": 357,
+   "sheet_id": "AA2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 392,
+   "end_auth_seq_id": 398,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 361,
+   "end_label_seq_id": 367,
+   "sheet_id": "AA2"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 363,
+   "end_auth_seq_id": 368,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 332,
+   "end_label_seq_id": 337,
+   "sheet_id": "AA3"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 402,
+   "end_auth_seq_id": 407,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 371,
+   "end_label_seq_id": 376,
+   "sheet_id": "AA3"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 262,
+   "end_auth_seq_id": 264,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 231,
+   "end_label_seq_id": 233,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 225,
+   "end_auth_seq_id": 227,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 194,
+   "end_label_seq_id": 196,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 199,
+   "end_auth_seq_id": 202,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 168,
+   "end_label_seq_id": 171,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 166,
+   "end_auth_seq_id": 170,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 135,
+   "end_label_seq_id": 139,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 130,
+   "end_auth_seq_id": 136,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 99,
+   "end_label_seq_id": 105,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 88,
+   "end_auth_seq_id": 90,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 57,
+   "end_label_seq_id": 59,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 42,
+   "end_auth_seq_id": 45,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 11,
+   "end_label_seq_id": 14,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 294,
+   "end_auth_seq_id": 296,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 263,
+   "end_label_seq_id": 265,
+   "sheet_id": "AA4"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 329,
+   "end_auth_seq_id": 334,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 298,
+   "end_label_seq_id": 303,
+   "sheet_id": "AA5"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 337,
+   "end_auth_seq_id": 344,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 306,
+   "end_label_seq_id": 313,
+   "sheet_id": "AA5"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 348,
+   "end_auth_seq_id": 355,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 317,
+   "end_label_seq_id": 324,
+   "sheet_id": "AA5"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 412,
+   "end_auth_seq_id": 420,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 381,
+   "end_label_seq_id": 389,
+   "sheet_id": "AA5"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 381,
+   "end_auth_seq_id": 388,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 350,
+   "end_label_seq_id": 357,
+   "sheet_id": "AA5"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 392,
+   "end_auth_seq_id": 398,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 361,
+   "end_label_seq_id": 367,
+   "sheet_id": "AA5"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 363,
+   "end_auth_seq_id": 368,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 332,
+   "end_label_seq_id": 337,
+   "sheet_id": "AA6"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 402,
+   "end_auth_seq_id": 407,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 371,
+   "end_label_seq_id": 376,
+   "sheet_id": "AA6"
+  }
+ ],
+ "waters": 663,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": false
+ }
+}

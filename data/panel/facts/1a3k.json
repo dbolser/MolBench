@@ -1,0 +1,263 @@
+{
+ "id": "1a3k",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1a3k.cif",
+ "title": "X-RAY CRYSTAL STRUCTURE OF THE HUMAN GALECTIN-3 CARBOHYDRATE RECOGNITION DOMAIN (CRD) AT 2.1 ANGSTROM RESOLUTION",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 2.1,
+ "n_models": 1,
+ "n_atoms": 1253,
+ "n_residues": 259,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "GALECTIN-3",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "branched",
+   "polymer_type": null,
+   "description": "beta-D-galactopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "C"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 137,
+   "n_observed": 137,
+   "auth_minus_label": {
+    "113": 137
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "114",
+     "250",
+     1,
+     137
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P17931",
+     "n_residues": 137,
+     "unp_first": 114,
+     "unp_last": 250,
+     "auth_minus_unp": {
+      "0": 137
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "114",
+       "250",
+       114,
+       250
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [
+  {
+   "a": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 1,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "NAG",
+    "atom": "O4"
+   },
+   "b": {
+    "auth_asym_id": "B",
+    "auth_seq_id": 2,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "B",
+    "label_seq_id": 0,
+    "comp_id": "GAL",
+    "atom": "C1"
+   },
+   "distance": 1.379,
+   "to_symmetry_copy": false
+  }
+ ],
+ "glycans": [
+  {
+   "label_asym_id": "B",
+   "auth_asym_id": "B",
+   "entity_id": "2",
+   "description": "beta-D-galactopyranose-(1-4)-2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "residues": [
+    {
+     "comp_id": "NAG",
+     "auth_seq_id": 1
+    },
+    {
+     "comp_id": "GAL",
+     "auth_seq_id": 2
+    }
+   ],
+   "attached_to": null
+  }
+ ],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 228,
+   "end_auth_seq_id": 230,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 115,
+   "end_label_seq_id": 117
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 118,
+   "end_auth_seq_id": 121,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 5,
+   "end_label_seq_id": 8,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 233,
+   "end_auth_seq_id": 238,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 120,
+   "end_label_seq_id": 125,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 145,
+   "end_auth_seq_id": 151,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 32,
+   "end_label_seq_id": 38,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 154,
+   "end_auth_seq_id": 162,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 41,
+   "end_label_seq_id": 49,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 170,
+   "end_auth_seq_id": 174,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 57,
+   "end_label_seq_id": 61,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 185,
+   "end_auth_seq_id": 187,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 72,
+   "end_label_seq_id": 74,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 216,
+   "end_auth_seq_id": 222,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 103,
+   "end_label_seq_id": 109,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 208,
+   "end_auth_seq_id": 213,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 95,
+   "end_label_seq_id": 100,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 197,
+   "end_auth_seq_id": 204,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 84,
+   "end_label_seq_id": 91,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 130,
+   "end_auth_seq_id": 138,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 17,
+   "end_label_seq_id": 25,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 240,
+   "end_auth_seq_id": 249,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 127,
+   "end_label_seq_id": 136,
+   "sheet_id": "B"
+  }
+ ],
+ "waters": 120,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": false
+ }
+}

@@ -1,0 +1,7948 @@
+{
+ "accession": "P00740",
+ "gene": "F9",
+ "entry_name": "FA9_HUMAN",
+ "protein": "Coagulation factor IX",
+ "uniprot_gene": "F9",
+ "disease": "haemophilia B",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P00740",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 461,
+ "uniprot_sequence_sha256": "32f5d032de97ea22d5e46e0ad5aeeaf19f1b5f3636dc0424cee6bf92e6035a2a",
+ "primary_entry": "8eph",
+ "selection": {
+  "candidates": 64,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 94,
+  "mutations": 1,
+  "polymer_entities": 2,
+  "runner_up": "6x5l",
+  "already_in_panel": false
+ },
+ "entries": {
+  "3kcg": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-216": 55,
+     "-215": 25,
+     "-214": 39,
+     "-213": 35,
+     "-212": 1,
+     "-211": 57,
+     "-210": 23,
+     "-46": 54
+    },
+    "n_insertion_codes": 8,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": true
+   },
+   "outside_construct": 53,
+   "verified": 95,
+   "wild_type_mismatch": 2
+  },
+  "8eph": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-216": 110,
+     "-215": 50,
+     "-214": 78,
+     "-213": 70,
+     "-212": 2,
+     "-211": 114,
+     "-210": 46,
+     "-46": 182
+    },
+    "n_insertion_codes": 16,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "outside_construct": 35,
+   "verified": 113,
+   "wild_type_mismatch": 2
+  }
+ },
+ "variants": [
+  {
+   "variant": "C18R",
+   "position": 18,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011314"
+   ],
+   "dbsnp": [
+    "rs387906474"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010568"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "L23P",
+   "position": 23,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003484572"
+   ],
+   "dbsnp": [
+    "rs1927328297"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV002683971"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "C28R",
+   "position": 28,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011402",
+    "RCV001851793"
+   ],
+   "dbsnp": [
+    "rs387906481"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010657"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "T29I",
+   "position": 29,
+   "wild_type": "T",
+   "mutant": "I",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003050656",
+    "RCV004812464",
+    "RCV005639445"
+   ],
+   "dbsnp": [
+    "rs1927329129"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138734"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "V30I",
+   "position": 30,
+   "wild_type": "V",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000806960",
+    "RCV004577534"
+   ],
+   "dbsnp": [
+    "rs1603263395"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000651569"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "V30L",
+   "position": 30,
+   "wild_type": "V",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000852238",
+    "RCV006692689"
+   ],
+   "dbsnp": [
+    "rs1603263395"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)"
+   ],
+   "clinvar_vcv": [
+    "VCV000627400"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "A37V",
+   "position": 37,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011406"
+   ],
+   "dbsnp": [
+    "rs1327097914"
+   ],
+   "diseases": [
+    "Warfarin sensitivity, X-linked",
+    "Warfarin sensitivity, X-linked (WARFS)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010661"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R43L",
+   "position": 43,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001812346",
+    "RCV004753261"
+   ],
+   "dbsnp": [
+    "rs1275708479"
+   ],
+   "diseases": [
+    "F9-related disorder",
+    "Hemophilia B (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000993549"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R43Q",
+   "position": 43,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001000159",
+    "RCV001815018",
+    "RCV001869416",
+    "RCV002462253"
+   ],
+   "dbsnp": [
+    "rs1275708479"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000810864"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R43W",
+   "position": 43,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001419",
+    "RCV001815019",
+    "RCV001860507",
+    "RCV005633795"
+   ],
+   "dbsnp": [
+    "rs1603264205"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Nevi and Melanomas",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000811505"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R46S",
+   "position": 46,
+   "wild_type": "R",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011311"
+   ],
+   "dbsnp": [
+    "rs2520744315"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010565"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "N48D",
+   "position": 48,
+   "wild_type": "N",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783784"
+   ],
+   "dbsnp": [
+    "rs1927493197"
+   ],
+   "diseases": [
+    "Cystic, Mucinous and Serous Neoplasms",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925690"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "N48Y",
+   "position": 48,
+   "wild_type": "N",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001265098"
+   ],
+   "dbsnp": [
+    "rs1927493197"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000973812"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "G50A",
+   "position": 50,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002032039"
+   ],
+   "dbsnp": [
+    "rs1229048705"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001524877"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "G50S",
+   "position": 50,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000551608"
+   ],
+   "dbsnp": [
+    "rs1556435940"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000454495"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E54V",
+   "position": 54,
+   "wild_type": "E",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000756129"
+   ],
+   "dbsnp": [
+    "rs1569481966"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000618117"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "F55I",
+   "position": 55,
+   "wild_type": "F",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001380937",
+    "RCV005040248",
+    "RCV005614534",
+    "RCV006270510"
+   ],
+   "dbsnp": [
+    "rs759987427"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Warfarin sensitivity, X-linked"
+   ],
+   "clinvar_vcv": [
+    "VCV001069182"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "C64R",
+   "position": 64,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001440",
+    "RCV004587010"
+   ],
+   "dbsnp": [
+    "rs137852224"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000811523"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "C64Y",
+   "position": 64,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001390294"
+   ],
+   "dbsnp": [
+    "rs1330779541"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001076388"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E66K",
+   "position": 66,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000757258",
+    "RCV004702393"
+   ],
+   "dbsnp": [
+    "rs1569481975"
+   ],
+   "diseases": [
+    "Ductal and Lobular Neoplasms",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000618643"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "C69S",
+   "position": 69,
+   "wild_type": "C",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001812550"
+   ],
+   "dbsnp": [
+    "rs2148356172"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV001330991"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "C69Y",
+   "position": 69,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001810624"
+   ],
+   "dbsnp": [
+    "rs1927497998"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000994405"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E73V",
+   "position": 73,
+   "wild_type": "E",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011317"
+   ],
+   "dbsnp": [
+    "rs137852226"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010571"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R75Q",
+   "position": 75,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011319",
+    "RCV000757260",
+    "RCV000852079",
+    "RCV001851790",
+    "RCV002490353"
+   ],
+   "dbsnp": [
+    "rs137852228"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Warfarin sensitivity, X-linked"
+   ],
+   "clinvar_vcv": [
+    "VCV000010573"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E76K",
+   "position": 76,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001434"
+   ],
+   "dbsnp": [
+    "rs1603264236"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000811519"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E79D",
+   "position": 79,
+   "wild_type": "E",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011320"
+   ],
+   "dbsnp": [
+    "rs137852229"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010574"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E79K",
+   "position": 79,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001813024"
+   ],
+   "dbsnp": [
+    "rs1927499978"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000994019"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "E79V",
+   "position": 79,
+   "wild_type": "E",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783785"
+   ],
+   "dbsnp": [
+    "rs1468904853"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925691"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "T84I",
+   "position": 84,
+   "wild_type": "T",
+   "mutant": "I",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783786",
+    "RCV006643229"
+   ],
+   "dbsnp": [
+    "rs1354291965"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925692"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "F87C",
+   "position": 87,
+   "wild_type": "F",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001438"
+   ],
+   "dbsnp": [
+    "rs1603264299"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000811521"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "Y91N",
+   "position": 91,
+   "wild_type": "Y",
+   "mutant": "N",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002245380"
+   ],
+   "dbsnp": [
+    "rs1927507602"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001684374"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "D93G",
+   "position": 93,
+   "wild_type": "D",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011322"
+   ],
+   "dbsnp": [
+    "rs137852230"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010576"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 1,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 1,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D93N",
+   "position": 93,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001810628",
+    "RCV005647382"
+   ],
+   "dbsnp": [
+    "rs1286009187"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000994410"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 1,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 47,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 1,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G94R",
+   "position": 94,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001378470"
+   ],
+   "dbsnp": [
+    "rs1556437035"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000454496"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 48,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 2,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 48,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 2,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D95A",
+   "position": 95,
+   "wild_type": "D",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001265102"
+   ],
+   "dbsnp": [
+    "rs1927589695"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000973816"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 49,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 3,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 49,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 3,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D95V",
+   "position": 95,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002245379"
+   ],
+   "dbsnp": [
+    "rs1927589695"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001684373"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 49,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 3,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 49,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 3,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q96P",
+   "position": 96,
+   "wild_type": "Q",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011323",
+    "RCV004783723"
+   ],
+   "dbsnp": [
+    "rs137852231"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010577"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 50,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 4,
+      "comp_id": "GLN"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 50,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 4,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P101A",
+   "position": 101,
+   "wild_type": "P",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011324",
+    "RCV001810845",
+    "RCV003764550"
+   ],
+   "dbsnp": [
+    "rs137852232"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010578"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 55,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 9,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 55,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 9,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P101Q",
+   "position": 101,
+   "wild_type": "P",
+   "mutant": "Q",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001378578"
+   ],
+   "dbsnp": [
+    "rs2148357901"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001067340"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 55,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 9,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 55,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 9,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C102R",
+   "position": 102,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001439",
+    "RCV005436452"
+   ],
+   "dbsnp": [
+    "rs1603264719"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000811522"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 56,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 10,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 56,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 10,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G105D",
+   "position": 105,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002222139"
+   ],
+   "dbsnp": [
+    "rs1927590546"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001676742"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 13,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 13,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G106S",
+   "position": 106,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011325",
+    "RCV000795416",
+    "RCV001810846",
+    "RCV002247325",
+    "RCV002496325",
+    "RCV003430636"
+   ],
+   "dbsnp": [
+    "rs137852233"
+   ],
+   "diseases": [
+    "F9-related disorder",
+    "Gliomas",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Squamous Cell Neoplasms",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Warfarin sensitivity, X-linked"
+   ],
+   "clinvar_vcv": [
+    "VCV000010579"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 60,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 14,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 60,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 14,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D110G",
+   "position": 110,
+   "wild_type": "D",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011326"
+   ],
+   "dbsnp": [
+    "rs137852234"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010580"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 18,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 18,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D110N",
+   "position": 110,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011389"
+   ],
+   "dbsnp": [
+    "rs137852274"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010643"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 18,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 64,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 18,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y115C",
+   "position": 115,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001000172",
+    "RCV001858905",
+    "RCV005236524"
+   ],
+   "dbsnp": [
+    "rs1603264727"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000810872"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 69,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 23,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 69,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 23,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C119Y",
+   "position": 119,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003050657"
+   ],
+   "dbsnp": [
+    "rs1349887620"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138736"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 73,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 27,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 73,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 27,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G122V",
+   "position": 122,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002245378"
+   ],
+   "dbsnp": [
+    "rs1927592770"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001684372"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 76,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 30,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 76,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 30,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F123S",
+   "position": 123,
+   "wild_type": "F",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002016448"
+   ],
+   "dbsnp": [
+    "rs1927592901"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001508905"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 77,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 31,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 77,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 31,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C128R",
+   "position": 128,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003048142"
+   ],
+   "dbsnp": [
+    "rs2520763530"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002131311"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 82,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 36,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 82,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 36,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C134S",
+   "position": 134,
+   "wild_type": "C",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001265104"
+   ],
+   "dbsnp": [
+    "rs1927764839"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000973818"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 5,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 42,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 88,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 42,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I136T",
+   "position": 136,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000851938",
+    "RCV004812364"
+   ],
+   "dbsnp": [
+    "rs1603265481"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)"
+   ],
+   "clinvar_vcv": [
+    "VCV000627177"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 7,
+      "comp_id": "ILE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 44,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 44,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N138H",
+   "position": 138,
+   "wild_type": "N",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003066386"
+   ],
+   "dbsnp": [
+    "rs2520790255"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138737"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 9,
+      "comp_id": "ASN"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 46,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 92,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 46,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G139D",
+   "position": 139,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001000187",
+    "RCV004689950"
+   ],
+   "dbsnp": [
+    "rs1216516070"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000810876"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 10,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 47,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 47,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C141Y",
+   "position": 141,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001424"
+   ],
+   "dbsnp": [
+    "rs1351675410"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000811510"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 12,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 49,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 49,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V153M",
+   "position": 153,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003404429"
+   ],
+   "dbsnp": [
+    "rs1927766998"
+   ],
+   "diseases": [
+    "F9-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV002631132"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 24,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 61,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 61,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C155S",
+   "position": 155,
+   "wild_type": "C",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003421176"
+   ],
+   "dbsnp": [
+    "rs1330705989"
+   ],
+   "diseases": [
+    "F9-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV002637194"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 109,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 109,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 63,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 109,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 63,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G160A",
+   "position": 160,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011327"
+   ],
+   "dbsnp": [
+    "rs137852235"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010581"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 31,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 68,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 68,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y161C",
+   "position": 161,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001238122"
+   ],
+   "dbsnp": [
+    "rs1927768329"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000963994"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 32,
+      "comp_id": "TYR"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 69,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 115,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 69,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N166Y",
+   "position": 166,
+   "wild_type": "N",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011328"
+   ],
+   "dbsnp": [
+    "rs137852236"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010582"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 37,
+      "comp_id": "ASN"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 74,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 74,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S169P",
+   "position": 169,
+   "wild_type": "S",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002466802"
+   ],
+   "dbsnp": [
+    "rs1197719763"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001803132"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 123,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 40,
+      "comp_id": "SER"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 123,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 77,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 123,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 77,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C170Y",
+   "position": 170,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001432"
+   ],
+   "dbsnp": [
+    "rs1603265500"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000811517"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 41,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 78,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 78,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V174M",
+   "position": 174,
+   "wild_type": "V",
+   "mutant": "M",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001431",
+    "RCV003387953",
+    "RCV006556893"
+   ],
+   "dbsnp": [
+    "rs1603265504"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000811516"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 45,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 82,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 128,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 82,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C178F",
+   "position": 178,
+   "wild_type": "C",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001433"
+   ],
+   "dbsnp": [
+    "rs1603265779"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000811518"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 49,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 86,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 86,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C178R",
+   "position": 178,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001982943"
+   ],
+   "dbsnp": [
+    "rs2148362390"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001459950"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 49,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 86,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 86,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V181F",
+   "position": 181,
+   "wild_type": "V",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011338"
+   ],
+   "dbsnp": [
+    "rs387906477"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010592"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "L",
+      "auth_seq_id": 135,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 52,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 135,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 89,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 135,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "C",
+      "label_seq_id": 89,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R191C",
+   "position": 191,
+   "wild_type": "R",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011330",
+    "RCV001390295",
+    "RCV004700216",
+    "RCV005042030"
+   ],
+   "dbsnp": [
+    "rs137852237"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Warfarin sensitivity, X-linked"
+   ],
+   "clinvar_vcv": [
+    "VCV000010584"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R191H",
+   "position": 191,
+   "wild_type": "R",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011331",
+    "RCV000851602",
+    "RCV001390296",
+    "RCV002247326",
+    "RCV002284168"
+   ],
+   "dbsnp": [
+    "rs137852238"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010585"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R226Q",
+   "position": 226,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011337",
+    "RCV001727513",
+    "RCV004752695",
+    "RCV004814880"
+   ],
+   "dbsnp": [
+    "rs137852241"
+   ],
+   "diseases": [
+    "F9-related disorder",
+    "Hemophilia B (HEMB)",
+    "Hemophilia b(m)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010591"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "R226W",
+   "position": 226,
+   "wild_type": "R",
+   "mutant": "W",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011336",
+    "RCV001810848",
+    "RCV002512970",
+    "RCV003407315"
+   ],
+   "dbsnp": [
+    "rs137852240"
+   ],
+   "diseases": [
+    "F9-related disorder",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010590"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "V228F",
+   "position": 228,
+   "wild_type": "V",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011339"
+   ],
+   "dbsnp": [
+    "rs137852243"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010593"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 17,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 2,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 17,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 2,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 17,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 2,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V228L",
+   "position": 228,
+   "wild_type": "V",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011340"
+   ],
+   "dbsnp": [
+    "rs137852243"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hemophilia b(m)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010594"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 17,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 2,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 17,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 2,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 17,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 2,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A233T",
+   "position": 233,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011347"
+   ],
+   "dbsnp": [
+    "rs387906478"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010601"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 7,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 7,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 22,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 7,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G236L",
+   "position": 236,
+   "wild_type": "G",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003392999"
+   ],
+   "dbsnp": [
+    "rs2520803292"
+   ],
+   "diseases": [
+    "F9-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV002635268"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 10,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 10,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 25,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 10,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q237L",
+   "position": 237,
+   "wild_type": "Q",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011342"
+   ],
+   "dbsnp": [
+    "rs137852245"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010596"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 26,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 11,
+      "comp_id": "GLN"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 26,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 11,
+      "comp_id": "GLN"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 26,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 11,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W240G",
+   "position": 240,
+   "wild_type": "W",
+   "mutant": "G",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002009981"
+   ],
+   "dbsnp": [
+    "rs1390220758"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001491111"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 14,
+      "comp_id": "TRP"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 14,
+      "comp_id": "TRP"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 14,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L244S",
+   "position": 244,
+   "wild_type": "L",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001416",
+    "RCV003117680"
+   ],
+   "dbsnp": [
+    "rs1603267171"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000811504"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 33,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 18,
+      "comp_id": "LEU"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 33,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 18,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 33,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 18,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C252S",
+   "position": 252,
+   "wild_type": "C",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011411"
+   ],
+   "dbsnp": [
+    "rs267606792"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010666"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C252W",
+   "position": 252,
+   "wild_type": "C",
+   "mutant": "W",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000497396"
+   ],
+   "dbsnp": [
+    "rs1556008316"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000375453"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C252Y",
+   "position": 252,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003066387",
+    "RCV005930336"
+   ],
+   "dbsnp": [
+    "rs267606792"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138739"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 42,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 26,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A266T",
+   "position": 266,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003066388"
+   ],
+   "dbsnp": [
+    "rs1162048721"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138740"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 56,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 40,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 56,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 40,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 56,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 40,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C268S",
+   "position": 268,
+   "wild_type": "C",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000851893",
+    "RCV004812363"
+   ],
+   "dbsnp": [
+    "rs1603267194"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)"
+   ],
+   "clinvar_vcv": [
+    "VCV000627143"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 58,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 42,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 58,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 42,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 58,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 42,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A279T",
+   "position": 279,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000197147",
+    "RCV000851896",
+    "RCV000851897",
+    "RCV001378167",
+    "RCV001781582"
+   ],
+   "dbsnp": [
+    "rs137852247"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Gliomas",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000216926"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 68,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 53,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 68,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 53,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 68,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 53,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G280D",
+   "position": 280,
+   "wild_type": "G",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001382694"
+   ],
+   "dbsnp": [
+    "rs1275842849"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001070513"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 69,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 54,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 69,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 54,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 69,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 54,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E291V",
+   "position": 291,
+   "wild_type": "E",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011398"
+   ],
+   "dbsnp": [
+    "rs137852279"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010652"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 65,
+      "comp_id": "GLU"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 65,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 80,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 65,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R294L",
+   "position": 294,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003066389"
+   ],
+   "dbsnp": [
+    "rs137852249"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138741"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 83,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 68,
+      "comp_id": "ARG"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 83,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 68,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 83,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 68,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R294Q",
+   "position": 294,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011348",
+    "RCV000814168",
+    "RCV000851909",
+    "RCV004724733"
+   ],
+   "dbsnp": [
+    "rs137852249"
+   ],
+   "diseases": [
+    "Cystic, Mucinous and Serous Neoplasms",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010602"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 83,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 68,
+      "comp_id": "ARG"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 83,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 68,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 83,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 68,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Y305C",
+   "position": 305,
+   "wild_type": "Y",
+   "mutant": "C",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001003926"
+   ],
+   "dbsnp": [
+    "rs1603267332"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000812973"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 79,
+      "comp_id": "TYR"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 79,
+      "comp_id": "TYR"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 79,
+      "comp_id": "TYR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D315G",
+   "position": 315,
+   "wild_type": "D",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783789"
+   ],
+   "dbsnp": [
+    "rs1928107434"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925695"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 102,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 89,
+      "comp_id": "ASP"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 102,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 89,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 102,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 89,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I316T",
+   "position": 316,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001414",
+    "RCV003769385",
+    "RCV004792605"
+   ],
+   "dbsnp": [
+    "rs1603267344"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000811502"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 103,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 90,
+      "comp_id": "ILE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 103,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 90,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 103,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 90,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A317V",
+   "position": 317,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001814742",
+    "RCV006748315"
+   ],
+   "dbsnp": [
+    "rs2148367725"
+   ],
+   "diseases": [
+    "Bleeding and platelet disorders",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001334561"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 91,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 91,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 91,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E320G",
+   "position": 320,
+   "wild_type": "E",
+   "mutant": "G",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003484576"
+   ],
+   "dbsnp": [
+    "rs2520844151"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV002683975"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 94,
+      "comp_id": "GLU"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 94,
+      "comp_id": "GLU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 107,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 94,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P333L",
+   "position": 333,
+   "wild_type": "P",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011351"
+   ],
+   "dbsnp": [
+    "rs137852252"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010605"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 107,
+      "comp_id": "PRO"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 107,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 120,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 107,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C335F",
+   "position": 335,
+   "wild_type": "C",
+   "mutant": "F",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003486523"
+   ],
+   "dbsnp": [
+    "rs2520844630"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV002691657"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C335W",
+   "position": 335,
+   "wild_type": "C",
+   "mutant": "W",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001265097"
+   ],
+   "dbsnp": [
+    "rs1928110579"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000973811"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C335Y",
+   "position": 335,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003152922"
+   ],
+   "dbsnp": [
+    "rs2520844630"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV002444124"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 122,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 109,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A337T",
+   "position": 337,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000851629",
+    "RCV004577530"
+   ],
+   "dbsnp": [
+    "rs137852253"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)"
+   ],
+   "clinvar_vcv": [
+    "VCV000626950"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 111,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 111,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 111,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A337V",
+   "position": 337,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV004577674"
+   ],
+   "dbsnp": [
+    "rs1928111051"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV003242389"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 111,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 111,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 124,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 111,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "T342M",
+   "position": 342,
+   "wild_type": "T",
+   "mutant": "M",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011353",
+    "RCV000792734",
+    "RCV000851963",
+    "RCV001810849",
+    "RCV004752696",
+    "RCV005042031"
+   ],
+   "dbsnp": [
+    "rs137852254"
+   ],
+   "diseases": [
+    "F9-related disorder",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)",
+    "Lymphoid Leukemias",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Warfarin sensitivity, X-linked"
+   ],
+   "clinvar_vcv": [
+    "VCV000010607"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 116,
+      "comp_id": "THR"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 116,
+      "comp_id": "THR"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 116,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I344T",
+   "position": 344,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011410"
+   ],
+   "dbsnp": [
+    "rs387906482"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010665"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "B",
+      "label_asym_id": "B",
+      "label_seq_id": 118,
+      "comp_id": "ILE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "B",
+      "label_asym_id": "B",
+      "label_seq_id": 118,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "B",
+      "label_asym_id": "D",
+      "label_seq_id": 118,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V353A",
+   "position": 353,
+   "wild_type": "V",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011354",
+    "RCV003764551",
+    "RCV004730842"
+   ],
+   "dbsnp": [
+    "rs137852255"
+   ],
+   "diseases": [
+    "F9-related disorder",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010608"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 138,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 127,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 138,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 127,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 138,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 127,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S354R",
+   "position": 354,
+   "wild_type": "S",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001930794"
+   ],
+   "dbsnp": [
+    "rs2148367882"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001417984"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 128,
+      "comp_id": "SER"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 128,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 128,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G355V",
+   "position": 355,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011355"
+   ],
+   "dbsnp": [
+    "rs137852256"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010609"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 129,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 129,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 129,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G357E",
+   "position": 357,
+   "wild_type": "G",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011393",
+    "RCV001810851"
+   ],
+   "dbsnp": [
+    "rs137852275"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010647"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 142,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 131,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 142,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 131,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 142,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 131,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G357R",
+   "position": 357,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011357",
+    "RCV000851648"
+   ],
+   "dbsnp": [
+    "rs137852257"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010611"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 142,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 131,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 142,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 131,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 142,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 131,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F360S",
+   "position": 360,
+   "wild_type": "F",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783792"
+   ],
+   "dbsnp": [
+    "rs2520845534"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925698"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 134,
+      "comp_id": "PHE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 134,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 134,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L369P",
+   "position": 369,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000851659",
+    "RCV001378168",
+    "RCV005646994"
+   ],
+   "dbsnp": [
+    "rs1603267393"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000626973"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 155,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 143,
+      "comp_id": "LEU"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 155,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 143,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 155,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 143,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L372P",
+   "position": 372,
+   "wild_type": "L",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000622485",
+    "RCV006450283"
+   ],
+   "dbsnp": [
+    "rs1556008584"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Inborn genetic diseases"
+   ],
+   "clinvar_vcv": [
+    "VCV000520832"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 158,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 146,
+      "comp_id": "LEU"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 158,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 146,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 158,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 146,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V374F",
+   "position": 374,
+   "wild_type": "V",
+   "mutant": "F",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011385",
+    "RCV001001418"
+   ],
+   "dbsnp": [
+    "rs137852271"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010639"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 160,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 148,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 160,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 148,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 160,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 148,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R379Q",
+   "position": 379,
+   "wild_type": "R",
+   "mutant": "Q",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011359",
+    "RCV000851995",
+    "RCV001000156",
+    "RCV001851792",
+    "RCV004799740"
+   ],
+   "dbsnp": [
+    "rs137852259"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Hereditary factor VIII deficiency disease (HEMA)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010613"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 165,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 153,
+      "comp_id": "ARG"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 165,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 153,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 165,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 153,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A380T",
+   "position": 380,
+   "wild_type": "A",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002272625"
+   ],
+   "dbsnp": [
+    "rs2148367990"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV001698768"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 166,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 154,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 166,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 154,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 166,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 154,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C382R",
+   "position": 382,
+   "wild_type": "C",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011360",
+    "RCV003764552"
+   ],
+   "dbsnp": [
+    "rs137852260"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010614"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 168,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 156,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 168,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 156,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 168,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 156,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "L383H",
+   "position": 383,
+   "wild_type": "L",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783793"
+   ],
+   "dbsnp": [
+    "rs1387119011"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925699"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 169,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 157,
+      "comp_id": "LEU"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 169,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 157,
+      "comp_id": "LEU"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 169,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 157,
+      "comp_id": "LEU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R384L",
+   "position": 384,
+   "wild_type": "R",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011414",
+    "RCV000119810"
+   ],
+   "dbsnp": [
+    "rs137852283"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Thrombophilia, X-linked, due to factor IX defect (THPH8)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010668"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 158,
+      "comp_id": "ARG"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 158,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 158,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "R384P",
+   "position": 384,
+   "wild_type": "R",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011413"
+   ],
+   "dbsnp": [
+    "rs137852283"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010660"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 158,
+      "comp_id": "ARG"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 158,
+      "comp_id": "ARG"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 170,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 158,
+      "comp_id": "ARG"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N392D",
+   "position": 392,
+   "wild_type": "N",
+   "mutant": "D",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001000169",
+    "RCV003769377",
+    "RCV005047182",
+    "RCV006642708"
+   ],
+   "dbsnp": [
+    "rs1603267412"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Warfarin sensitivity, X-linked"
+   ],
+   "clinvar_vcv": [
+    "VCV000810869"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 178,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 166,
+      "comp_id": "ASN"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 178,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 166,
+      "comp_id": "ASN"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 178,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 166,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "M394I",
+   "position": 394,
+   "wild_type": "M",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003066391"
+   ],
+   "dbsnp": [
+    "rs1388797589"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Not Reported",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138744"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 180,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 168,
+      "comp_id": "MET"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 180,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 168,
+      "comp_id": "MET"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 180,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 168,
+      "comp_id": "MET"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "M394V",
+   "position": 394,
+   "wild_type": "M",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011362"
+   ],
+   "dbsnp": [
+    "rs137852262"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010616"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 180,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 168,
+      "comp_id": "MET"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 180,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 168,
+      "comp_id": "MET"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 180,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 168,
+      "comp_id": "MET"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F395I",
+   "position": 395,
+   "wild_type": "F",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001905309"
+   ],
+   "dbsnp": [
+    "rs1175050951"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV001364269"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 181,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 169,
+      "comp_id": "PHE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 181,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 169,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 181,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 169,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C396S",
+   "position": 396,
+   "wild_type": "C",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011388",
+    "RCV001000171"
+   ],
+   "dbsnp": [
+    "rs137852273",
+    "rs1603267420"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010642",
+    "VCV000810871"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter",
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 182,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 170,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 182,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 170,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 182,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 170,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C396Y",
+   "position": 396,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003050660"
+   ],
+   "dbsnp": [
+    "rs137852273"
+   ],
+   "diseases": [
+    "Adenomas and Adenocarcinomas",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138745"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 182,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 170,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 182,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 170,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 182,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 170,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A397P",
+   "position": 397,
+   "wild_type": "A",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011407"
+   ],
+   "dbsnp": [
+    "rs137852281"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010662"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 183,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 171,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 183,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 171,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 183,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 171,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A397V",
+   "position": 397,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003050661"
+   ],
+   "dbsnp": [
+    "rs758194285"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002138746"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 183,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 171,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 183,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 171,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 183,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 171,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G398V",
+   "position": 398,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003153105"
+   ],
+   "dbsnp": [
+    "rs2520846993"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV002444307"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 184,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 172,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 184,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 172,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 184,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 172,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D405V",
+   "position": 405,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003126941"
+   ],
+   "dbsnp": [
+    "rs1928123737"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV002429487"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 189,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 179,
+      "comp_id": "ASP"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 189,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 179,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 189,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 179,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S406L",
+   "position": 406,
+   "wild_type": "S",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011363"
+   ],
+   "dbsnp": [
+    "rs137852263"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010617"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 190,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 180,
+      "comp_id": "SER"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 190,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 180,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 190,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 180,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D410H",
+   "position": 410,
+   "wild_type": "D",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011397"
+   ],
+   "dbsnp": [
+    "rs137852278"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010651"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 194,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 184,
+      "comp_id": "ASP"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 194,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 184,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 194,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 184,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D410V",
+   "position": 410,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001813028"
+   ],
+   "dbsnp": [
+    "rs1928125452"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000994026"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 194,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 184,
+      "comp_id": "ASP"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 194,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 184,
+      "comp_id": "ASP"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 194,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 184,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S411G",
+   "position": 411,
+   "wild_type": "S",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011396",
+    "RCV002512972"
+   ],
+   "dbsnp": [
+    "rs137852277"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000010650"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "S411I",
+   "position": 411,
+   "wild_type": "S",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011395"
+   ],
+   "dbsnp": [
+    "rs137852276"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010649"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {}
+  },
+  {
+   "variant": "G412E",
+   "position": 412,
+   "wild_type": "G",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003510979"
+   ],
+   "dbsnp": [
+    "rs1233706534"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV002775451"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 196,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 186,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 196,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 186,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 196,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 186,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P414L",
+   "position": 414,
+   "wild_type": "P",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001421"
+   ],
+   "dbsnp": [
+    "rs1603267443"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000811507"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 198,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 188,
+      "comp_id": "PRO"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 198,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 188,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 198,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 188,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "P414T",
+   "position": 414,
+   "wild_type": "P",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011366"
+   ],
+   "dbsnp": [
+    "rs137852265"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010620"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 198,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 188,
+      "comp_id": "PRO"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 198,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 188,
+      "comp_id": "PRO"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 198,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 188,
+      "comp_id": "PRO"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "V419E",
+   "position": 419,
+   "wild_type": "V",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011403"
+   ],
+   "dbsnp": [
+    "rs137852280"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010658"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 203,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 193,
+      "comp_id": "VAL"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 203,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 193,
+      "comp_id": "VAL"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 203,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 193,
+      "comp_id": "VAL"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F424L",
+   "position": 424,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002852374"
+   ],
+   "dbsnp": [
+    "rs2520848016"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002020181"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 208,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 198,
+      "comp_id": "PHE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 208,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 198,
+      "comp_id": "PHE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 208,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 198,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S430N",
+   "position": 430,
+   "wild_type": "S",
+   "mutant": "N",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000757261"
+   ],
+   "dbsnp": [
+    "rs1569333062"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000618644"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 214,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 204,
+      "comp_id": "SER"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 214,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 204,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 214,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 204,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "S430R",
+   "position": 430,
+   "wild_type": "S",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001002616"
+   ],
+   "dbsnp": [
+    "rs762229532"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000812043"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 214,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 204,
+      "comp_id": "SER"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 214,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 204,
+      "comp_id": "SER"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 214,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 204,
+      "comp_id": "SER"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W431C",
+   "position": 431,
+   "wild_type": "W",
+   "mutant": "C",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783795"
+   ],
+   "dbsnp": [
+    "rs1371750567"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925701"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 215,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 205,
+      "comp_id": "TRP"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 215,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 205,
+      "comp_id": "TRP"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 215,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 205,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G432A",
+   "position": 432,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001039346"
+   ],
+   "dbsnp": [
+    "rs1928130497"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV000837906"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 216,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 206,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 216,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 206,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 216,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 206,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G432S",
+   "position": 432,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV003783796"
+   ],
+   "dbsnp": [
+    "rs1170838100"
+   ],
+   "diseases": [
+    "Gliomas",
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect"
+   ],
+   "clinvar_vcv": [
+    "VCV002925702"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 216,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 206,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 216,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 206,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 216,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 206,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C435G",
+   "position": 435,
+   "wild_type": "C",
+   "mutant": "G",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV004577670"
+   ],
+   "dbsnp": [
+    "rs2520848336"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV003242385"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 220,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 209,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 220,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 209,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 220,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 209,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "C435Y",
+   "position": 435,
+   "wild_type": "C",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001426",
+    "RCV004577539",
+    "RCV005232035"
+   ],
+   "dbsnp": [
+    "rs1385141619"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000811512"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 220,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 209,
+      "comp_id": "CYS"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 220,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 209,
+      "comp_id": "CYS"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 220,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 209,
+      "comp_id": "CYS"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A436E",
+   "position": 436,
+   "wild_type": "A",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011368"
+   ],
+   "dbsnp": [
+    "rs137852266"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010622"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 221,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 210,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 221,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 210,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 221,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 210,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "A436V",
+   "position": 436,
+   "wild_type": "A",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011369"
+   ],
+   "dbsnp": [
+    "rs137852266"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010623"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 221,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 210,
+      "comp_id": "ALA"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 221,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 210,
+      "comp_id": "ALA"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 221,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 210,
+      "comp_id": "ALA"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G442A",
+   "position": 442,
+   "wild_type": "G",
+   "mutant": "A",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV004577668"
+   ],
+   "dbsnp": [
+    "rs1603267474"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV003242383"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G442E",
+   "position": 442,
+   "wild_type": "G",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001001427",
+    "RCV004577540"
+   ],
+   "dbsnp": [
+    "rs1603267474"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000811513"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G442R",
+   "position": 442,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011370"
+   ],
+   "dbsnp": [
+    "rs137852267"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Nevi and Melanomas"
+   ],
+   "clinvar_vcv": [
+    "VCV000010624"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G442V",
+   "position": 442,
+   "wild_type": "G",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV004577669"
+   ],
+   "dbsnp": [
+    "rs1603267474"
+   ],
+   "diseases": [
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV003242384"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "reviewed by expert panel"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 226,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 216,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I443T",
+   "position": 443,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011371",
+    "RCV001382695",
+    "RCV001810850",
+    "RCV005042032"
+   ],
+   "dbsnp": [
+    "rs137852268"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)",
+    "Thrombophilia, X-linked, due to factor 9 defect",
+    "Warfarin sensitivity, X-linked"
+   ],
+   "clinvar_vcv": [
+    "VCV000010627"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 227,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 217,
+      "comp_id": "ILE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 227,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 217,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 227,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 217,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "W453R",
+   "position": 453,
+   "wild_type": "W",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000011372"
+   ],
+   "dbsnp": [
+    "rs137852269"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)",
+    "Hereditary factor IX deficiency disease (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000010628"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 237,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 227,
+      "comp_id": "TRP"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 237,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 227,
+      "comp_id": "TRP"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 237,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 227,
+      "comp_id": "TRP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "I454T",
+   "position": 454,
+   "wild_type": "I",
+   "mutant": "T",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001000160"
+   ],
+   "dbsnp": [
+    "rs1603267486"
+   ],
+   "diseases": [
+    "Hemophilia B (HEMB)"
+   ],
+   "clinvar_vcv": [
+    "VCV000810865"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "3kcg": [
+     {
+      "auth_asym_id": "H",
+      "auth_seq_id": 238,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 228,
+      "comp_id": "ILE"
+     }
+    ],
+    "8eph": [
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 238,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "B",
+      "label_seq_id": 228,
+      "comp_id": "ILE"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 238,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "D",
+      "label_seq_id": 228,
+      "comp_id": "ILE"
+     }
+    ]
+   }
+  }
+ ],
+ "rejected": [
+  {
+   "variant": "G478A",
+   "position": 478,
+   "reason": "wild type is not the UniProt canonical residue"
+  },
+  {
+   "variant": "E27K",
+   "position": 27,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000010570"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "A37T",
+   "position": 37,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000804089"
+   ],
+   "clinvar_classification": [
+    "Benign; association"
+   ]
+  },
+  {
+   "variant": "N138S",
+   "position": 138,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001162915"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "I262M",
+   "position": 262,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001331027"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "C268F",
+   "position": 268,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000810877"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "H282R",
+   "position": 282,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000627146"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "E291Q",
+   "position": 291,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001992374"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "V296E",
+   "position": 296,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000973817"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "I297N",
+   "position": 297,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001685802"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  },
+  {
+   "variant": "G363V",
+   "position": 363,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000010618"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "L369F",
+   "position": 369,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001512896"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R449Q",
+   "position": 449,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV001685804"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  },
+  {
+   "variant": "R449W",
+   "position": 449,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000626990"
+   ],
+   "clinvar_classification": [
+    "Uncertain significance"
+   ]
+  }
+ ],
+ "structure_mismatches": [
+  {
+   "variant": "S411G",
+   "entry": "3kcg",
+   "auth_asym_id": "H",
+   "auth_seq_id": 195,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "ALA",
+   "reason": "wild-type residue differs in the structure"
+  },
+  {
+   "variant": "S411I",
+   "entry": "3kcg",
+   "auth_asym_id": "H",
+   "auth_seq_id": 195,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "ALA",
+   "reason": "wild-type residue differs in the structure"
+  },
+  {
+   "variant": "S411G",
+   "entry": "8eph",
+   "auth_asym_id": "B",
+   "auth_seq_id": 195,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "ALA",
+   "reason": "wild-type residue differs in the structure"
+  },
+  {
+   "variant": "S411G",
+   "entry": "8eph",
+   "auth_asym_id": "D",
+   "auth_seq_id": 195,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "ALA",
+   "reason": "wild-type residue differs in the structure"
+  },
+  {
+   "variant": "S411I",
+   "entry": "8eph",
+   "auth_asym_id": "B",
+   "auth_seq_id": 195,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "ALA",
+   "reason": "wild-type residue differs in the structure"
+  },
+  {
+   "variant": "S411I",
+   "entry": "8eph",
+   "auth_asym_id": "D",
+   "auth_seq_id": 195,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "ALA",
+   "reason": "wild-type residue differs in the structure"
+  }
+ ],
+ "pathogenic_single_residue_variants_per_position": {
+  "13": 1,
+  "18": 1,
+  "23": 1,
+  "27": 1,
+  "28": 1,
+  "29": 1,
+  "30": 2,
+  "37": 2,
+  "43": 3,
+  "46": 1,
+  "47": 1,
+  "48": 2,
+  "50": 2,
+  "54": 1,
+  "55": 1,
+  "57": 1,
+  "64": 2,
+  "66": 1,
+  "69": 2,
+  "72": 1,
+  "73": 1,
+  "75": 2,
+  "76": 1,
+  "79": 3,
+  "81": 1,
+  "84": 1,
+  "87": 1,
+  "91": 1,
+  "93": 3,
+  "94": 1,
+  "95": 2,
+  "96": 1,
+  "101": 2,
+  "102": 1,
+  "105": 1,
+  "106": 1,
+  "110": 2,
+  "115": 1,
+  "118": 1,
+  "119": 1,
+  "122": 1,
+  "123": 1,
+  "128": 2,
+  "131": 1,
+  "134": 1,
+  "136": 1,
+  "138": 2,
+  "139": 1,
+  "141": 1,
+  "142": 1,
+  "143": 1,
+  "153": 1,
+  "155": 1,
+  "157": 1,
+  "160": 1,
+  "161": 1,
+  "162": 1,
+  "166": 1,
+  "167": 1,
+  "169": 1,
+  "170": 1,
+  "174": 2,
+  "178": 2,
+  "180": 1,
+  "181": 1,
+  "182": 1,
+  "191": 2,
+  "219": 1,
+  "220": 1,
+  "226": 2,
+  "228": 2,
+  "233": 1,
+  "236": 1,
+  "237": 2,
+  "240": 3,
+  "244": 1,
+  "248": 1,
+  "252": 3,
+  "261": 1,
+  "262": 1,
+  "266": 1,
+  "268": 2,
+  "279": 1,
+  "280": 1,
+  "282": 1,
+  "285": 1,
+  "291": 2,
+  "294": 3,
+  "296": 1,
+  "297": 1,
+  "298": 1,
+  "305": 1,
+  "315": 1,
+  "316": 1,
+  "317": 1,
+  "320": 1,
+  "330": 1,
+  "333": 1,
+  "335": 3,
+  "337": 2,
+  "342": 1,
+  "344": 1,
+  "353": 1,
+  "354": 1,
+  "355": 1,
+  "356": 2,
+  "357": 2,
+  "360": 1,
+  "363": 1,
+  "364": 1,
+  "365": 1,
+  "369": 3,
+  "370": 1,
+  "371": 1,
+  "372": 1,
+  "374": 1,
+  "379": 2,
+  "380": 1,
+  "382": 1,
+  "383": 1,
+  "384": 3,
+  "387": 1,
+  "391": 1,
+  "392": 1,
+  "393": 1,
+  "394": 2,
+  "395": 1,
+  "396": 3,
+  "397": 2,
+  "398": 1,
+  "405": 1,
+  "406": 1,
+  "410": 2,
+  "411": 2,
+  "412": 1,
+  "414": 2,
+  "419": 1,
+  "424": 1,
+  "430": 2,
+  "431": 2,
+  "432": 2,
+  "435": 2,
+  "436": 2,
+  "442": 4,
+  "443": 1,
+  "449": 2,
+  "453": 3,
+  "454": 1,
+  "457": 1,
+  "478": 1
+ }
+}

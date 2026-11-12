@@ -1,0 +1,272 @@
+{
+ "id": "3ert",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/3ert.cif",
+ "title": "HUMAN ESTROGEN RECEPTOR ALPHA LIGAND-BINDING DOMAIN IN COMPLEX WITH 4-HYDROXYTAMOXIFEN",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.9,
+ "n_models": 1,
+ "n_atoms": 2070,
+ "n_residues": 327,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "PROTEIN (ESTROGEN RECEPTOR ALPHA)",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "4-HYDROXYTAMOXIFEN",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "C"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 261,
+   "n_observed": 247,
+   "auth_minus_label": {
+    "293": 247
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "306",
+     "552",
+     13,
+     259
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P03372",
+     "n_residues": 247,
+     "unp_first": 306,
+     "unp_last": 552,
+     "auth_minus_unp": {
+      "0": 247
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": true,
+     "runs_auth_unp": [
+      [
+       "306",
+       "552",
+       306,
+       552
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "OHT",
+   "name": "4-HYDROXYTAMOXIFEN",
+   "formula": "C26 H29 N O2",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 29,
+   "atoms": [
+    "C10",
+    "C9",
+    "C8",
+    "C11",
+    "C16",
+    "C15",
+    "C14",
+    "C13",
+    "C12",
+    "C7",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "O4",
+    "C5",
+    "C6",
+    "C17",
+    "C18",
+    "C19",
+    "C20",
+    "O20",
+    "C23",
+    "C24",
+    "N24",
+    "C25",
+    "C26",
+    "C21",
+    "C22"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 600,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "OHT"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "dimeric",
+   "oligomeric_count": 2,
+   "polymer_chain_copies": {
+    "A": 2
+   },
+   "n_polymer_chains": 2,
+   "relation_to_deposited": "built by symmetry"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 307,
+   "end_auth_seq_id": 309,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 14,
+   "end_label_seq_id": 16
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 312,
+   "end_auth_seq_id": 322,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 19,
+   "end_label_seq_id": 29
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 342,
+   "end_auth_seq_id": 363,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 49,
+   "end_label_seq_id": 70
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 367,
+   "end_auth_seq_id": 369,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 74,
+   "end_label_seq_id": 76
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 372,
+   "end_auth_seq_id": 395,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 79,
+   "end_label_seq_id": 102
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 412,
+   "end_auth_seq_id": 417,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 119,
+   "end_label_seq_id": 124
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 424,
+   "end_auth_seq_id": 438,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 131,
+   "end_label_seq_id": 145
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 442,
+   "end_auth_seq_id": 455,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 149,
+   "end_label_seq_id": 162
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 466,
+   "end_auth_seq_id": 492,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 173,
+   "end_label_seq_id": 199
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 497,
+   "end_auth_seq_id": 528,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 204,
+   "end_label_seq_id": 235
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 536,
+   "end_auth_seq_id": 544,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 243,
+   "end_label_seq_id": 251
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 401,
+   "end_auth_seq_id": 405,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 108,
+   "end_label_seq_id": 112,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 408,
+   "end_auth_seq_id": 411,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 115,
+   "end_label_seq_id": 118,
+   "sheet_id": "A"
+  }
+ ],
+ "waters": 79,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": false
+ }
+}

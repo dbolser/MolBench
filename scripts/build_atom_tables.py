@@ -2,7 +2,8 @@
 """
 Freeze the per-structure atom tables the MVS grader resolves selections against.
 
-For every structure a task's ``reference_mvs`` downloads, write
+For every structure a task's ``reference_mvs`` downloads, and every entry of the
+structure panel (``data/panel/panel.json``, see ``scripts/build_panel.py``), write
 ``molbench/atom_tables/<id>.json.gz``: the ``_atom_site`` columns a ComponentExpression can
 test (model 1, asymmetric unit, file order, read with gemmi), plus the atoms Mol*
 5.9.0 puts in each static selector (``polymer``, ``ligand``, ...). Those depend on
@@ -17,8 +18,16 @@ adds more selectors to that comparison (a JSON list of ``{"pdb", "selector"}``).
 Needs the ``authoring`` and ``execute`` extras, ``scripts/fetch_molstar.py`` and
 ``playwright install chromium``. Grading itself needs none of it.
 
-    python scripts/build_atom_tables.py              # all referenced structures
+Structure files: a panel entry is read from its frozen copy in ``data/panel/cif/``;
+anything else is downloaded once into ``data/cif/`` (RCSB for a PDB id, AlphaFold DB
+for an id like ``af-p04637-f1-model_v6`` — the lower-cased file name, which is also
+what the MVS grader derives from a download URL).
+
+    python scripts/build_atom_tables.py              # referenced structures + the panel
     python scripts/build_atom_tables.py 1tup 4ins    # just these
+    python scripts/build_atom_tables.py --panel      # just the panel
+    python scripts/build_atom_tables.py --verify     # build nothing: compare the frozen
+                                                     # tables with Mol* again
 """
 
 from __future__ import annotations
@@ -44,7 +53,10 @@ from molbench.render import _GL_ARGS, RENDER_HTML, STATIC  # noqa: E402
 from molbench.runner import load_tasks  # noqa: E402
 
 CACHE = REPO / "data" / "cif"
+FROZEN = REPO / "data" / "panel" / "cif"   # the panel's structure files, tracked in git
+PANEL = REPO / "data" / "panel" / "panel.json"
 CIF = "https://files.rcsb.org/download/{}.cif"
+AF_CIF = "https://alphafold.ebi.ac.uk/files/{}.cif"
 MOLSTAR_VERSION = (STATIC / "molstar" / "VERSION").read_text().strip() \
     if (STATIC / "molstar" / "VERSION").exists() else None
 
@@ -56,13 +68,84 @@ _INT_COLUMNS = ("label_seq_id", "auth_seq_id", "id")
 
 # --- the atom table (gemmi) -------------------------------------------------------
 
-def fetch_cif(pdb: str) -> pathlib.Path:
+def source_url(sid: str) -> str:
+    """Where a structure id's mmCIF comes from."""
+    if sid.startswith("af-"):  # af-p04637-f1-model_v6 -> AF-P04637-F1-model_v6
+        _, acc, frag, rest = sid.split("-", 3)
+        return AF_CIF.format(f"AF-{acc.upper()}-{frag.upper()}-{rest}")
+    return CIF.format(sid)
+
+
+def fetch_cif(sid: str) -> pathlib.Path:
+    """The structure file as plain mmCIF in the cache: the frozen copy if there is one
+    (always re-extracted, so a stale cache cannot shadow it), else downloaded once."""
     CACHE.mkdir(parents=True, exist_ok=True)
-    path = CACHE / f"{pdb}.cif"
-    if not path.exists():
-        with urllib.request.urlopen(CIF.format(pdb), timeout=60) as r:
+    path = CACHE / f"{sid}.cif"
+    frozen = FROZEN / f"{sid}.cif.gz"
+    if frozen.exists():
+        data = gzip.decompress(frozen.read_bytes())
+        if not path.exists() or path.read_bytes() != data:
+            path.write_bytes(data)
+    elif not path.exists():
+        req = urllib.request.Request(source_url(sid), headers={"User-Agent": "atom-table-builder"})
+        with urllib.request.urlopen(req, timeout=120) as r:
             path.write_bytes(r.read())
     return path
+
+
+def freeze_cif(sid: str) -> pathlib.Path:
+    """Copy the cached file into the tracked panel directory (reproducible bytes)."""
+    FROZEN.mkdir(parents=True, exist_ok=True)
+    out = FROZEN / f"{sid}.cif.gz"
+    if not out.exists():
+        out.write_bytes(gzip.compress(fetch_cif(sid).read_bytes(), compresslevel=9, mtime=0))
+    return out
+
+
+def write_gz_json(path: pathlib.Path, data: dict, dry_run: bool = False) -> tuple[bool, int]:
+    """Write ``data`` as compact gzip JSON unless the file already holds exactly that
+    (gzip bytes vary with the zlib build, so content is compared, not bytes).
+    Returns (changed, size in bytes)."""
+    text = json.dumps(data, separators=(",", ":")).encode()
+    if path.exists() and gzip.decompress(path.read_bytes()) == text:
+        return False, path.stat().st_size
+    blob = gzip.compress(text, compresslevel=9, mtime=0)
+    if not dry_run:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(blob)
+    return True, len(blob)
+
+
+def task_structures() -> dict[str, list[str]]:
+    """structure id -> ids of the tasks that load it (MVS downloads; ``molecule_id`` in
+    call-list tasks, where an AlphaFold load is keyed ``af-<accession>``)."""
+    out: dict[str, list[str]] = {}
+
+    def walk(x, task_id, alphafold=False):
+        if isinstance(x, dict):
+            if x.get("kind") == "download" and isinstance(x.get("params"), dict):
+                sig = _param_signature("download", x["params"])
+                if sig and sig[0] == "ref":
+                    out.setdefault(sig[1], []).append(task_id)
+            if isinstance(x.get("molecule_id"), str):
+                mid = x["molecule_id"].lower()
+                out.setdefault(f"af-{mid}" if x.get("alphafold") else mid, []).append(task_id)
+            for v in x.values():
+                walk(v, task_id)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v, task_id)
+
+    for path in sorted((REPO / "tasks").rglob("*.json")):
+        task = json.loads(path.read_text())
+        walk({k: v for k, v in task.items() if k != "grounding"}, task.get("id", path.stem))
+    return {k: sorted(set(v)) for k, v in sorted(out.items())}
+
+
+def panel_ids() -> list[str]:
+    if not PANEL.exists():
+        return []
+    return [e["id"] for e in json.loads(PANEL.read_text())["entries"]]
 
 
 def read_atom_site(path: pathlib.Path) -> dict[str, list]:
@@ -213,7 +296,17 @@ def probes(cols: dict[str, list]) -> list:
     """Edge cases whose Mol* semantics we rely on, built from this structure's own atoms."""
     chain, seq, comp = cols["auth_asym_id"][0], cols["auth_seq_id"][0], cols["label_comp_id"][0]
     het = next((i for i, v in enumerate(cols["label_seq_id"]) if v == 0), 0)
-    return [
+    ins = next((i for i, v in enumerate(cols["pdbx_PDB_ins_code"]) if v), None)
+    with_ins = [] if ins is None else [
+        {"auth_asym_id": cols["auth_asym_id"][ins], "auth_seq_id": cols["auth_seq_id"][ins]},
+        {"auth_asym_id": cols["auth_asym_id"][ins], "auth_seq_id": cols["auth_seq_id"][ins],
+         "pdbx_PDB_ins_code": cols["pdbx_PDB_ins_code"][ins]},
+        {"label_asym_id": cols["label_asym_id"][ins], "label_seq_id": cols["label_seq_id"][ins]},
+    ]
+    last = len(cols["atom_id"]) - 1
+    return with_ins + [
+        {"label_asym_id": cols["label_asym_id"][last]},        # the last chain in the file
+        {"auth_asym_id": cols["auth_asym_id"][last], "auth_seq_id": cols["auth_seq_id"][last]},
         {"auth_asym_id": chain, "auth_seq_id": seq},
         {"label_asym_id": cols["label_asym_id"][0], "label_seq_id": cols["label_seq_id"][0]},
         {"label_comp_id": comp},
@@ -239,7 +332,10 @@ def probes(cols: dict[str, list]) -> list:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("ids", nargs="*", help="structure ids (default: every referenced one)")
+    ap.add_argument("ids", nargs="*", help="structure ids (default: referenced + panel)")
+    ap.add_argument("--panel", action="store_true", help="only the panel's entries")
+    ap.add_argument("--verify", action="store_true",
+                    help="write nothing; fail if a rebuilt table differs from the frozen one")
     ap.add_argument("--check", help="JSON list of {pdb, selector} to compare as well")
     args = ap.parse_args()
 
@@ -248,7 +344,7 @@ def main() -> None:
     if args.check:
         for item in json.loads(pathlib.Path(args.check).read_text()):
             extra.setdefault(item["pdb"], []).append(item["selector"])
-    ids = args.ids or sorted(by_pdb)
+    ids = args.ids or (panel_ids() if args.panel else sorted(set(by_pdb) | set(panel_ids())))
     atoms.TABLES.mkdir(parents=True, exist_ok=True)
     bad = 0
     with MolstarOracle() as oracle:
@@ -259,7 +355,7 @@ def main() -> None:
             for name, rows in zip(atoms.STATIC_SELECTORS, static):
                 if rows and rows[-1] >= n:
                     raise SystemExit(f"{pdb}: Mol* selected '{name}' atoms outside model 1")
-            data = {"id": pdb, "source": CIF.format(pdb), "molstar": MOLSTAR_VERSION,
+            data = {"id": pdb, "source": source_url(pdb), "molstar": MOLSTAR_VERSION,
                     "model": 1, "columns": cols,
                     "static": {name: _ranges(rows)
                                for name, rows in zip(atoms.STATIC_SELECTORS, static)}}
@@ -282,13 +378,15 @@ def main() -> None:
                     print(f"  MISMATCH {pdb} {json.dumps(sel)}: Mol* {len(rows)} atoms, "
                           f"ours {mask.bit_count()}")
             out = atoms.TABLES / f"{pdb}.json.gz"
-            text = json.dumps(data, separators=(",", ":")).encode()
-            out.write_bytes(gzip.compress(text, compresslevel=9, mtime=0))  # reproducible bytes
+            changed, size = write_gz_json(out, data, dry_run=args.verify)
+            if args.verify and changed:
+                bad += 1
+                print(f"  STALE {pdb}: the frozen table is not what Mol* gives now")
             sizes = {k: sum(b - a for a, b in v) for k, v in data["static"].items() if v}
             print(f"{pdb}: {n} atoms, {len(uniq)} selectors agree with Mol*, "
-                  f"{out.stat().st_size // 1024} KB  {sizes}")
+                  f"{size // 1024} KB  {sizes}", flush=True)
     if bad:
-        raise SystemExit(f"{bad} selector(s) disagree with Mol* {MOLSTAR_VERSION}")
+        raise SystemExit(f"{bad} problem(s) against Mol* {MOLSTAR_VERSION}")
 
 
 if __name__ == "__main__":

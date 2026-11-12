@@ -1,0 +1,331 @@
+{
+ "id": "7a4m",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/7a4m.cif",
+ "title": "Cryo-EM structure of mouse heavy-chain apoferritin at 1.22 A",
+ "method": "ELECTRON MICROSCOPY",
+ "resolution": 1.22,
+ "n_models": 1,
+ "n_atoms": 3177,
+ "n_residues": 284,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "Ferritin heavy chain",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "FE (III) ION",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "ZINC ION",
+   "label_asym_ids": [
+    "C"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "D"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 172,
+   "n_observed": 172,
+   "auth_minus_label": {
+    "4": 172
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "5",
+     "176",
+     1,
+     172
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P09528",
+     "n_residues": 172,
+     "unp_first": 6,
+     "unp_last": 177,
+     "auth_minus_unp": {
+      "-1": 172
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "5",
+       "176",
+       6,
+       177
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "FE",
+   "name": "FE (III) ION",
+   "formula": "Fe 3",
+   "kind": "ion",
+   "metals": [
+    "FE"
+   ],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "FE"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 201,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "FE"
+    }
+   ]
+  },
+  {
+   "comp_id": "ZN",
+   "name": "ZINC ION",
+   "formula": "Zn 2",
+   "kind": "ion",
+   "metals": [
+    "ZN"
+   ],
+   "heme": false,
+   "n_heavy_atoms": 1,
+   "atoms": [
+    "ZN"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 202,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "ZN"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 27,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 23,
+    "comp_id": "GLU",
+    "atom": "OE2"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 202,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "ZN",
+    "atom": "ZN"
+   },
+   "distance": 1.913,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 62,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 58,
+    "comp_id": "GLU",
+    "atom": "OE1"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 202,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "ZN",
+    "atom": "ZN"
+   },
+   "distance": 2.137,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 65,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 61,
+    "comp_id": "HIS",
+    "atom": "ND1"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 202,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "ZN",
+    "atom": "ZN"
+   },
+   "distance": 2.083,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 202,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "ZN",
+    "atom": "ZN"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 308,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 2.366,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 202,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "C",
+    "label_seq_id": 0,
+    "comp_id": "ZN",
+    "atom": "ZN"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 312,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "HOH",
+    "atom": "O"
+   },
+   "distance": 2.112,
+   "to_symmetry_copy": false
+  }
+ ],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "24-meric",
+   "oligomeric_count": 24,
+   "polymer_chain_copies": {
+    "A": 24
+   },
+   "n_polymer_chains": 24,
+   "relation_to_deposited": "built by symmetry"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 13,
+   "end_auth_seq_id": 42,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 9,
+   "end_label_seq_id": 38
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 48,
+   "end_auth_seq_id": 76,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 44,
+   "end_label_seq_id": 72
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 95,
+   "end_auth_seq_id": 124,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 91,
+   "end_label_seq_id": 120
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 126,
+   "end_auth_seq_id": 137,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 122,
+   "end_label_seq_id": 133
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 137,
+   "end_auth_seq_id": 159,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 133,
+   "end_label_seq_id": 155
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 164,
+   "end_auth_seq_id": 174,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 160,
+   "end_label_seq_id": 170
+  }
+ ],
+ "strands": [],
+ "waters": 110,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": true,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

@@ -1,0 +1,388 @@
+{
+ "id": "1a6m",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1a6m.cif",
+ "title": "OXY-MYOGLOBIN, ATOMIC RESOLUTION",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 1.0,
+ "n_models": 1,
+ "n_atoms": 1584,
+ "n_residues": 341,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "MYOGLOBIN",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "SULFATE ION",
+   "label_asym_ids": [
+    "B",
+    "C"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "PROTOPORPHYRIN IX CONTAINING FE",
+   "label_asym_ids": [
+    "D"
+   ]
+  },
+  {
+   "id": "4",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "OXYGEN MOLECULE",
+   "label_asym_ids": [
+    "E"
+   ]
+  },
+  {
+   "id": "5",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "F"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 151,
+   "n_observed": 151,
+   "auth_minus_label": {
+    "0": 151
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "151",
+     1,
+     151
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P02185",
+     "n_residues": 151,
+     "unp_first": 2,
+     "unp_last": 152,
+     "auth_minus_unp": {
+      "-1": 151
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "151",
+       2,
+       152
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "HEM",
+   "name": "PROTOPORPHYRIN IX CONTAINING FE",
+   "formula": "C34 H32 Fe N4 O4",
+   "kind": "ligand",
+   "metals": [
+    "FE"
+   ],
+   "heme": true,
+   "n_heavy_atoms": 43,
+   "atoms": [
+    "CHA",
+    "CHB",
+    "CHC",
+    "CHD",
+    "C1A",
+    "C2A",
+    "C3A",
+    "C4A",
+    "CMA",
+    "CAA",
+    "CBA",
+    "CGA",
+    "O1A",
+    "O2A",
+    "C1B",
+    "C2B",
+    "C3B",
+    "C4B",
+    "CMB",
+    "CAB",
+    "CBB",
+    "C1C",
+    "C2C",
+    "C3C",
+    "C4C",
+    "CMC",
+    "CAC",
+    "CBC",
+    "C1D",
+    "C2D",
+    "C3D",
+    "C4D",
+    "CMD",
+    "CAD",
+    "CBD",
+    "CGD",
+    "O1D",
+    "O2D",
+    "NA",
+    "NB",
+    "NC",
+    "ND",
+    "FE"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 154,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "D",
+     "label_seq_id": 0,
+     "comp_id": "HEM"
+    }
+   ]
+  },
+  {
+   "comp_id": "OXY",
+   "name": "OXYGEN MOLECULE",
+   "formula": "O2",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 2,
+   "atoms": [
+    "O1",
+    "O2"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 157,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "E",
+     "label_seq_id": 0,
+     "comp_id": "OXY"
+    }
+   ]
+  },
+  {
+   "comp_id": "SO4",
+   "name": "SULFATE ION",
+   "formula": "O4 S -2",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 5,
+   "atoms": [
+    "S",
+    "O1",
+    "O2",
+    "O3",
+    "O4"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 155,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "SO4"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 156,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "SO4"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 93,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "A",
+    "label_seq_id": 93,
+    "comp_id": "HIS",
+    "atom": "NE2"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 154,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "HEM",
+    "atom": "FE"
+   },
+   "distance": 2.064,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 154,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "HEM",
+    "atom": "FE"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 157,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "OXY",
+    "atom": "O1"
+   },
+   "distance": 1.806,
+   "to_symmetry_copy": false
+  },
+  {
+   "a": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 154,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "D",
+    "label_seq_id": 0,
+    "comp_id": "HEM",
+    "atom": "FE"
+   },
+   "b": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 157,
+    "pdbx_PDB_ins_code": "",
+    "label_asym_id": "E",
+    "label_seq_id": 0,
+    "comp_id": "OXY",
+    "atom": "O2"
+   },
+   "distance": 2.681,
+   "to_symmetry_copy": false
+  }
+ ],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_defined_assembly",
+   "method": null,
+   "oligomeric_details": "monomeric",
+   "oligomeric_count": 1,
+   "polymer_chain_copies": {
+    "A": 1
+   },
+   "n_polymer_chains": 1,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 4,
+   "end_auth_seq_id": 35,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 4,
+   "end_label_seq_id": 35
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 37,
+   "end_auth_seq_id": 42,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 37,
+   "end_label_seq_id": 42
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 52,
+   "end_auth_seq_id": 56,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 52,
+   "end_label_seq_id": 56
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 59,
+   "end_auth_seq_id": 78,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 59,
+   "end_label_seq_id": 78
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 83,
+   "end_auth_seq_id": 95,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 83,
+   "end_label_seq_id": 95
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 101,
+   "end_auth_seq_id": 118,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 101,
+   "end_label_seq_id": 118
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 120,
+   "end_auth_seq_id": 122,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 120,
+   "end_label_seq_id": 122
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 125,
+   "end_auth_seq_id": 149,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 125,
+   "end_label_seq_id": 149
+  }
+ ],
+ "strands": [],
+ "waters": 186,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

@@ -1,0 +1,395 @@
+{
+ "id": "1hsg",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1hsg.cif",
+ "title": "CRYSTAL STRUCTURE AT 1.9 ANGSTROMS RESOLUTION OF HUMAN IMMUNODEFICIENCY VIRUS (HIV) II PROTEASE COMPLEXED WITH L-735,524, AN ORALLY BIOAVAILABLE INHIBITOR OF THE HIV PROTEASES",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 2.0,
+ "n_models": 1,
+ "n_atoms": 1686,
+ "n_residues": 326,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "HIV-1 PROTEASE",
+   "label_asym_ids": [
+    "A",
+    "B"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "N-[2(R)-HYDROXY-1(S)-INDANYL]-5-[(2(S)-TERTIARY BUTYLAMINOCARBONYL)-4(3-PYRIDYLMETHYL)PIPERAZINO]-4(S)-HYDROXY-2(R)-PHENYLMETHYLPENTANAMIDE",
+   "label_asym_ids": [
+    "C"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "D",
+    "E"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 99,
+   "n_observed": 99,
+   "auth_minus_label": {
+    "0": 99
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "99",
+     1,
+     99
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P03367",
+     "n_residues": 99,
+     "unp_first": 501,
+     "unp_last": 599,
+     "auth_minus_unp": {
+      "-500": 99
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "99",
+       501,
+       599
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "auth_asym_id": "B",
+   "label_asym_id": "B",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 99,
+   "n_observed": 99,
+   "auth_minus_label": {
+    "0": 99
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "1",
+     "99",
+     1,
+     99
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P03367",
+     "n_residues": 99,
+     "unp_first": 501,
+     "unp_last": 599,
+     "auth_minus_unp": {
+      "-500": 99
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "1",
+       "99",
+       501,
+       599
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "MK1",
+   "name": "N-[2(R)-HYDROXY-1(S)-INDANYL]-5-[(2(S)-TERTIARY BUTYLAMINOCARBONYL)-4(3-PYRIDYLMETHYL)PIPERAZINO]-4(S)-HYDROXY-2(R)-PHENYLMETHYLPENTANAMIDE",
+   "formula": "C36 H47 N5 O4",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 45,
+   "atoms": [
+    "N1",
+    "C1",
+    "C2",
+    "C3",
+    "O1",
+    "N2",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "N3",
+    "C8",
+    "C9",
+    "C10",
+    "C11",
+    "O2",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C20",
+    "C21",
+    "O3",
+    "N4",
+    "C22",
+    "C23",
+    "O4",
+    "C24",
+    "C25",
+    "C26",
+    "C27",
+    "C28",
+    "C29",
+    "C30",
+    "C31",
+    "C32",
+    "C33",
+    "N5",
+    "C34",
+    "C35",
+    "C36"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 902,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "C",
+     "label_seq_id": 0,
+     "comp_id": "MK1"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_and_software_defined_assembly",
+   "method": "PISA",
+   "oligomeric_details": "dimeric",
+   "oligomeric_count": 2,
+   "polymer_chain_copies": {
+    "A": 1,
+    "B": 1
+   },
+   "n_polymer_chains": 2,
+   "relation_to_deposited": "same as deposited"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 87,
+   "end_auth_seq_id": 90,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 87,
+   "end_label_seq_id": 90
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 87,
+   "end_auth_seq_id": 90,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 87,
+   "end_label_seq_id": 90
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 10,
+   "end_auth_seq_id": 15,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 10,
+   "end_label_seq_id": 15,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 18,
+   "end_auth_seq_id": 23,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 18,
+   "end_label_seq_id": 23,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 32,
+   "end_auth_seq_id": 34,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 32,
+   "end_label_seq_id": 34,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 75,
+   "end_auth_seq_id": 78,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 75,
+   "end_label_seq_id": 78,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 52,
+   "end_auth_seq_id": 59,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 52,
+   "end_label_seq_id": 59,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 43,
+   "end_auth_seq_id": 49,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 43,
+   "end_label_seq_id": 49,
+   "sheet_id": "B"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 62,
+   "end_auth_seq_id": 66,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 62,
+   "end_label_seq_id": 66,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 69,
+   "end_auth_seq_id": 73,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 69,
+   "end_label_seq_id": 73,
+   "sheet_id": "C"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 96,
+   "end_auth_seq_id": 98,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 96,
+   "end_label_seq_id": 98,
+   "sheet_id": "D"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 96,
+   "end_auth_seq_id": 98,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 96,
+   "end_label_seq_id": 98,
+   "sheet_id": "D"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 10,
+   "end_auth_seq_id": 15,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 10,
+   "end_label_seq_id": 15,
+   "sheet_id": "E"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 18,
+   "end_auth_seq_id": 23,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 18,
+   "end_label_seq_id": 23,
+   "sheet_id": "E"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 43,
+   "end_auth_seq_id": 48,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 43,
+   "end_label_seq_id": 48,
+   "sheet_id": "F"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 53,
+   "end_auth_seq_id": 59,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 53,
+   "end_label_seq_id": 59,
+   "sheet_id": "F"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 75,
+   "end_auth_seq_id": 77,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 75,
+   "end_label_seq_id": 77,
+   "sheet_id": "F"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 62,
+   "end_auth_seq_id": 66,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 62,
+   "end_label_seq_id": 66,
+   "sheet_id": "G"
+  },
+  {
+   "auth_asym_id": "B",
+   "beg_auth_seq_id": 69,
+   "end_auth_seq_id": 73,
+   "label_asym_id": "B",
+   "beg_label_seq_id": 69,
+   "end_label_seq_id": 73,
+   "sheet_id": "G"
+  }
+ ],
+ "waters": 127,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

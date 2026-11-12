@@ -1,0 +1,250 @@
+{
+ "id": "1stp",
+ "kind": "pdb",
+ "source": "https://files.rcsb.org/download/1stp.cif",
+ "title": "STRUCTURAL ORIGINS OF HIGH-AFFINITY BIOTIN BINDING TO STREPTAVIDIN",
+ "method": "X-RAY DIFFRACTION",
+ "resolution": 2.6,
+ "n_models": 1,
+ "n_atoms": 1001,
+ "n_residues": 206,
+ "entities": [
+  {
+   "id": "1",
+   "type": "polymer",
+   "polymer_type": "protein",
+   "description": "STREPTAVIDIN COMPLEX WITH BIOTIN",
+   "label_asym_ids": [
+    "A"
+   ]
+  },
+  {
+   "id": "2",
+   "type": "non-polymer",
+   "polymer_type": null,
+   "description": "BIOTIN",
+   "label_asym_ids": [
+    "B"
+   ]
+  },
+  {
+   "id": "3",
+   "type": "water",
+   "polymer_type": null,
+   "description": "water",
+   "label_asym_ids": [
+    "C"
+   ]
+  }
+ ],
+ "chains": [
+  {
+   "auth_asym_id": "A",
+   "label_asym_id": "A",
+   "entity_id": "1",
+   "polymer_type": "protein",
+   "seqres_length": 159,
+   "n_observed": 121,
+   "auth_minus_label": {
+    "0": 121
+   },
+   "n_insertion_codes": 0,
+   "runs_auth_label": [
+    [
+     "13",
+     "133",
+     13,
+     133
+    ]
+   ],
+   "uniprot": [
+    {
+     "accession": "P22629",
+     "n_residues": 121,
+     "unp_first": 37,
+     "unp_last": 157,
+     "auth_minus_unp": {
+      "-24": 121
+     },
+     "n_insertion_codes": 0,
+     "same_numbering": false,
+     "runs_auth_unp": [
+      [
+       "13",
+       "133",
+       37,
+       157
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "ligands": [
+  {
+   "comp_id": "BTN",
+   "name": "BIOTIN",
+   "formula": "C10 H16 N2 O3 S",
+   "kind": "ligand",
+   "metals": [],
+   "heme": false,
+   "n_heavy_atoms": 16,
+   "atoms": [
+    "C11",
+    "O11",
+    "O12",
+    "C10",
+    "C9",
+    "C8",
+    "C7",
+    "C2",
+    "S1",
+    "C6",
+    "C5",
+    "N1",
+    "C3",
+    "O3",
+    "N2",
+    "C4"
+   ],
+   "copies": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 300,
+     "pdbx_PDB_ins_code": "",
+     "label_asym_id": "B",
+     "label_seq_id": 0,
+     "comp_id": "BTN"
+    }
+   ]
+  }
+ ],
+ "disulfides": [],
+ "metal_bonds": [],
+ "covalent_links": [],
+ "glycans": [],
+ "glycosylation_sites": [],
+ "modified_residues": [],
+ "assemblies": [
+  {
+   "id": "1",
+   "details": "author_and_software_defined_assembly",
+   "method": "PISA,PQS",
+   "oligomeric_details": "tetrameric",
+   "oligomeric_count": 4,
+   "polymer_chain_copies": {
+    "A": 4
+   },
+   "n_polymer_chains": 4,
+   "relation_to_deposited": "built by symmetry"
+  }
+ ],
+ "helices": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 13,
+   "end_auth_seq_id": 18,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 13,
+   "end_label_seq_id": 18
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 115,
+   "end_auth_seq_id": 121,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 115,
+   "end_label_seq_id": 121
+  }
+ ],
+ "strands": [
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 19,
+   "end_auth_seq_id": 23,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 19,
+   "end_label_seq_id": 23,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 28,
+   "end_auth_seq_id": 33,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 28,
+   "end_label_seq_id": 33,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 38,
+   "end_auth_seq_id": 44,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 38,
+   "end_label_seq_id": 44,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 54,
+   "end_auth_seq_id": 60,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 54,
+   "end_label_seq_id": 60,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 71,
+   "end_auth_seq_id": 80,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 71,
+   "end_label_seq_id": 80,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 85,
+   "end_auth_seq_id": 97,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 85,
+   "end_label_seq_id": 97,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 103,
+   "end_auth_seq_id": 112,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 103,
+   "end_label_seq_id": 112,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 123,
+   "end_auth_seq_id": 131,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 123,
+   "end_label_seq_id": 131,
+   "sheet_id": "A"
+  },
+  {
+   "auth_asym_id": "A",
+   "beg_auth_seq_id": 19,
+   "end_auth_seq_id": 23,
+   "label_asym_id": "A",
+   "beg_label_seq_id": 19,
+   "end_label_seq_id": 23,
+   "sheet_id": "A"
+  }
+ ],
+ "waters": 84,
+ "numbering": {
+  "auth_chain_differs_from_label_chain": false,
+  "auth_number_differs_from_label_number": false,
+  "insertion_codes": false,
+  "auth_number_differs_from_uniprot": true
+ }
+}

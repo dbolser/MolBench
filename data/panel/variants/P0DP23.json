@@ -1,0 +1,1333 @@
+{
+ "accession": "P0DP23",
+ "gene": "CALM1",
+ "entry_name": "CALM1_HUMAN",
+ "protein": "Calmodulin-1",
+ "uniprot_gene": "CALM1",
+ "disease": "long QT syndrome 14; CPVT4",
+ "source": "https://www.ebi.ac.uk/proteins/api/variation/P0DP23",
+ "retrieved": "2026-11-12",
+ "clinvar_source": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar",
+ "clinvar_retrieved": "2026-11-12",
+ "filter": "UniProt Variation API features of type VARIANT, one residue, consequenceType missense, clinical significance Pathogenic or Likely pathogenic with ClinVar as a source, and a ClinVar cross-reference; wild type must equal the UniProt canonical residue; and a ClinVar variant record (VCV) with the same protein change whose aggregate germline classification is Pathogenic, Likely pathogenic or Pathogenic/Likely pathogenic",
+ "uniprot_length": 149,
+ "uniprot_sequence_sha256": "4a9f2f38a0afe61f9cd35d05788764536c1b394551a521687d0e537ad2760ff5",
+ "primary_entry": "6m7h",
+ "selection": {
+  "candidates": 341,
+  "shortlisted": 30,
+  "eligible": 30,
+  "resolution_limit": 2.5,
+  "positions_covered": 17,
+  "mutations": 0,
+  "polymer_entities": 1,
+  "runner_up": "1cll",
+  "already_in_panel": false
+ },
+ "entries": {
+  "6m7h": {
+   "numbering": {
+    "auth_minus_unp": {
+     "-1": 144
+    },
+    "n_insertion_codes": 0,
+    "offset": true,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "verified": 29,
+   "wild_type_mismatch": 1
+  }
+ },
+ "variants": [
+  {
+   "variant": "T30P",
+   "position": 30,
+   "wild_type": "T",
+   "mutant": "P",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000431318"
+   ],
+   "dbsnp": [
+    "rs1057521851"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000384090"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 29,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 29,
+      "comp_id": "THR"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F90L",
+   "position": 90,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003501689"
+   ],
+   "dbsnp": [
+    "rs2465708816"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV002734184"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 89,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 89,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D94A",
+   "position": 94,
+   "wild_type": "D",
+   "mutant": "A",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000475293",
+    "RCV000786284"
+   ],
+   "dbsnp": [
+    "rs1060502608"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000409871"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 93,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 93,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D96H",
+   "position": 96,
+   "wild_type": "D",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002230393",
+    "RCV004594063"
+   ],
+   "dbsnp": [
+    "rs1060502607"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 16"
+   ],
+   "clinvar_vcv": [
+    "VCV000409870"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 95,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D96V",
+   "position": 96,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000162065",
+    "RCV001547926",
+    "RCV001850284"
+   ],
+   "dbsnp": [
+    "rs730882254"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000183233"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 95,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D96Y",
+   "position": 96,
+   "wild_type": "D",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV002234248",
+    "RCV003025983",
+    "RCV005231341"
+   ],
+   "dbsnp": [
+    "rs1573214371",
+    "rs2503459594"
+   ],
+   "diseases": [
+    "Catecholaminergic polymorphic ventricular tachycardia 4",
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 14 (LQT14)",
+    "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000641544",
+    "VCV002100843"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 95,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 95,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N98I",
+   "position": 98,
+   "wild_type": "N",
+   "mutant": "I",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000143837",
+    "RCV000162068"
+   ],
+   "dbsnp": [
+    "rs398124647"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000096721"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 97,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 97,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "N98S",
+   "position": 98,
+   "wild_type": "N",
+   "mutant": "S",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000032977",
+    "RCV000143836",
+    "RCV000162067",
+    "RCV000526484",
+    "RCV000714909",
+    "RCV002433484",
+    "RCV003318349",
+    "RCV004758616",
+    "RCV005532578"
+   ],
+   "dbsnp": [
+    "rs267607277",
+    "rs398124647"
+   ],
+   "diseases": [
+    "CALM1-related disorder",
+    "Catecholaminergic polymorphic ventricular tachycardia (CVPT)",
+    "Catecholaminergic polymorphic ventricular tachycardia 1",
+    "Catecholaminergic polymorphic ventricular tachycardia 4",
+    "Long QT syndrome (LQTS)",
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 14 (LQT14)",
+    "Long QT syndrome 15 (LQT15)",
+    "Ventricular tachycardia, catecholaminergic polymorphic, 4 (CPVT4)"
+   ],
+   "clinvar_vcv": [
+    "VCV000039758",
+    "VCV000096720"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 97,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 97,
+      "comp_id": "ASN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E105K",
+   "position": 105,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000442999"
+   ],
+   "dbsnp": [
+    "rs1057523130"
+   ],
+   "diseases": [],
+   "clinvar_vcv": [
+    "VCV000388500"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E105Q",
+   "position": 105,
+   "wild_type": "E",
+   "mutant": "Q",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV003224832"
+   ],
+   "dbsnp": [
+    "rs2465707237"
+   ],
+   "diseases": [
+    "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV002500174"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 104,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 104,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G114R",
+   "position": 114,
+   "wild_type": "G",
+   "mutant": "R",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001787705"
+   ],
+   "dbsnp": [
+    "rs2103823712"
+   ],
+   "diseases": [
+    "SUDDEN INFANT DEATH SYNDROME (SIDS)"
+   ],
+   "clinvar_vcv": [
+    "VCV001327459"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 113,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 113,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D130E",
+   "position": 130,
+   "wild_type": "D",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001878519"
+   ],
+   "dbsnp": [
+    "rs35617141"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001358003"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 129,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D130G",
+   "position": 130,
+   "wild_type": "D",
+   "mutant": "G",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000162062",
+    "RCV001003482",
+    "RCV001003503",
+    "RCV001781506",
+    "RCV002236070"
+   ],
+   "dbsnp": [
+    "rs1573214163",
+    "rs1599759554",
+    "rs730882252"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 14 (LQT14)",
+    "Long QT syndrome 15 (LQT15)",
+    "Long QT syndrome 16"
+   ],
+   "clinvar_vcv": [
+    "VCV000183230",
+    "VCV000812676",
+    "VCV000812710"
+   ],
+   "clinvar_classification": [
+    "Pathogenic",
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter",
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 129,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D130N",
+   "position": 130,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001922668"
+   ],
+   "dbsnp": [
+    "rs2103823638"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001398892"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 129,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 129,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D132E",
+   "position": 132,
+   "wild_type": "D",
+   "mutant": "E",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000143838",
+    "RCV000162069"
+   ],
+   "dbsnp": [
+    "rs1064796271",
+    "rs398124648"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000096722"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D132G",
+   "position": 132,
+   "wild_type": "D",
+   "mutant": "G",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000422947",
+    "RCV001934687",
+    "RCV002241435"
+   ],
+   "dbsnp": [
+    "rs1057523474",
+    "rs1687164164",
+    "rs1887113791"
+   ],
+   "diseases": [
+    "Catecholaminergic polymorphic ventricular tachycardia 4",
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000389576",
+    "VCV000955533",
+    "VCV001362982"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D132N",
+   "position": 132,
+   "wild_type": "D",
+   "mutant": "N",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000792817"
+   ],
+   "dbsnp": [
+    "rs1595102640"
+   ],
+   "diseases": [
+    "Catecholaminergic polymorphic ventricular tachycardia 4",
+    "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000639902"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D132V",
+   "position": 132,
+   "wild_type": "D",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001219455"
+   ],
+   "dbsnp": [
+    "rs1887113791"
+   ],
+   "diseases": [
+    "Catecholaminergic polymorphic ventricular tachycardia 4",
+    "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000948239"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D132Y",
+   "position": 132,
+   "wild_type": "D",
+   "mutant": "Y",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001972345"
+   ],
+   "dbsnp": [
+    "rs2103823612"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001456260"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 131,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G133E",
+   "position": 133,
+   "wild_type": "G",
+   "mutant": "E",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000652517"
+   ],
+   "dbsnp": [
+    "rs1555366045"
+   ],
+   "diseases": [
+    "Catecholaminergic polymorphic ventricular tachycardia 4",
+    "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000542137"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 132,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "G133S",
+   "position": 133,
+   "wild_type": "G",
+   "mutant": "S",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV002242878"
+   ],
+   "dbsnp": [
+    "rs2103823599"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001067140"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 132,
+      "comp_id": "GLY"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "D134H",
+   "position": 134,
+   "wild_type": "D",
+   "mutant": "H",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000143839",
+    "RCV000162066"
+   ],
+   "dbsnp": [
+    "rs398124650"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000096723"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 133,
+      "comp_id": "ASP"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "Q136P",
+   "position": 136,
+   "wild_type": "Q",
+   "mutant": "P",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000143840",
+    "RCV000162070"
+   ],
+   "dbsnp": [
+    "rs398124649"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 15 (LQT15)"
+   ],
+   "clinvar_vcv": [
+    "VCV000096724"
+   ],
+   "clinvar_classification": [
+    "Pathogenic/Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "no assertion criteria provided"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 135,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 135,
+      "comp_id": "GLN"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E140V",
+   "position": 140,
+   "wild_type": "E",
+   "mutant": "V",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000483471",
+    "RCV006646000"
+   ],
+   "dbsnp": [
+    "rs1064793078"
+   ],
+   "diseases": [
+    "CALM1-related disorder"
+   ],
+   "clinvar_vcv": [
+    "VCV000418107"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 139,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 139,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E141D",
+   "position": 141,
+   "wild_type": "E",
+   "mutant": "D",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV001993477"
+   ],
+   "dbsnp": [
+    "rs2103821507"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV001467722"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E141G",
+   "position": 141,
+   "wild_type": "E",
+   "mutant": "G",
+   "significance": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001250791",
+    "RCV002231029"
+   ],
+   "dbsnp": [
+    "rs1555814427",
+    "rs1887120112"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000458198",
+    "VCV000974612"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic",
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E141K",
+   "position": 141,
+   "wild_type": "E",
+   "mutant": "K",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001003484",
+    "RCV001860538"
+   ],
+   "dbsnp": [
+    "rs1599759598"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 16"
+   ],
+   "clinvar_vcv": [
+    "VCV000812678"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "E141V",
+   "position": 141,
+   "wild_type": "E",
+   "mutant": "V",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV001250792"
+   ],
+   "dbsnp": [
+    "rs1887120112"
+   ],
+   "diseases": [
+    "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000974613"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "GLU"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "F142L",
+   "position": 142,
+   "wild_type": "F",
+   "mutant": "L",
+   "significance": [
+    "Pathogenic"
+   ],
+   "clinvar": [
+    "RCV000162063",
+    "RCV000489543",
+    "RCV001235389",
+    "RCV001856891",
+    "RCV003064591",
+    "RCV005791873"
+   ],
+   "dbsnp": [
+    "rs1085307479",
+    "rs199744595",
+    "rs2513646355"
+   ],
+   "diseases": [
+    "Catecholaminergic polymorphic ventricular tachycardia 4",
+    "Long QT syndrome 1 (LQT1)",
+    "Long QT syndrome 14 (LQT14)"
+   ],
+   "clinvar_vcv": [
+    "VCV000183231",
+    "VCV000426161",
+    "VCV000961658",
+    "VCV002138308"
+   ],
+   "clinvar_classification": [
+    "Pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, multiple submitters, no conflicts",
+    "criteria provided, single submitter"
+   ],
+   "structures": {
+    "6m7h": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "PHE"
+     }
+    ]
+   }
+  },
+  {
+   "variant": "M145R",
+   "position": 145,
+   "wild_type": "M",
+   "mutant": "R",
+   "significance": [
+    "Likely pathogenic"
+   ],
+   "clinvar": [
+    "RCV000698791"
+   ],
+   "dbsnp": [
+    "rs1558693760"
+   ],
+   "diseases": [
+    "Long QT syndrome 1 (LQT1)"
+   ],
+   "clinvar_vcv": [
+    "VCV000576319"
+   ],
+   "clinvar_classification": [
+    "Likely pathogenic"
+   ],
+   "clinvar_review_status": [
+    "criteria provided, single submitter"
+   ],
+   "structures": {}
+  }
+ ],
+ "rejected": [
+  {
+   "variant": "M110L",
+   "position": 110,
+   "reason": "ClinVar's aggregate germline classification is not pathogenic",
+   "clinvar_vcv": [
+    "VCV000458191"
+   ],
+   "clinvar_classification": [
+    "Conflicting classifications of pathogenicity"
+   ]
+  }
+ ],
+ "structure_mismatches": [
+  {
+   "variant": "M145R",
+   "entry": "6m7h",
+   "auth_asym_id": "A",
+   "auth_seq_id": 144,
+   "pdbx_PDB_ins_code": "",
+   "structure_residue": "MSE",
+   "reason": "wild-type residue differs in the structure"
+  }
+ ],
+ "pathogenic_single_residue_variants_per_position": {
+  "30": 1,
+  "90": 1,
+  "94": 1,
+  "96": 4,
+  "98": 3,
+  "105": 2,
+  "110": 1,
+  "114": 1,
+  "130": 5,
+  "132": 8,
+  "133": 2,
+  "134": 1,
+  "136": 1,
+  "140": 1,
+  "141": 5,
+  "142": 3,
+  "145": 1
+ }
+}
