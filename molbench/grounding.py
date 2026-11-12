@@ -10,16 +10,68 @@ gemmi-only facts (no network annotations): ligands, disulfides, residue identity
 The SIFTS UniProt<->auth numbering bridge and ClinVar/functional-site annotations
 layer on top of this (separate modules) for the harder task types.
 
-Requires the ``authoring`` extra (``pip install -e ".[authoring]"``).
+The structure panel (``data/panel/``, built by ``scripts/build_panel.py``) freezes
+all of this, so a generator can run with no network: :func:`panel_entries` lists the
+entries, :func:`facts` returns one entry's extracted facts (chains and numbering
+offsets, ligands, metals, disulfides, glycans, assemblies, ...), :func:`variants`
+the verified ClinVar variants of a disease protein, and :func:`fetch_structure`
+reads a panel entry's frozen mmCIF instead of downloading it. These loaders are
+stdlib-only; only the gemmi helpers need the ``authoring`` extra
+(``pip install -e ".[authoring]"``). The panel lives in the repository, not in the
+wheel: it is authoring data, and grading does not read it.
 """
 
 from __future__ import annotations
 
+import functools
+import json
+import pathlib
 import urllib.request
 from typing import NamedTuple
 
 CIF = "https://files.rcsb.org/download/{}.cif"
 WATER = {"HOH", "DOD"}
+PANEL = pathlib.Path(__file__).resolve().parent.parent / "data" / "panel"
+
+
+# --- the frozen panel (no network, no gemmi) --------------------------------------
+
+@functools.lru_cache(maxsize=None)
+def panel() -> dict:
+    """``data/panel/panel.json``: ``entries`` (one record per structure: id, title,
+    method, atoms, features, families, why, ...) and ``disease_proteins``."""
+    return json.loads((PANEL / "panel.json").read_text())
+
+
+def panel_entries(family: str | None = None) -> list[dict]:
+    """The panel's entries, optionally only those that can serve a task family
+    ('ligand', 'disulfide', 'clinical', 'numbering', 'assembly', 'glycan', ...)."""
+    return [e for e in panel()["entries"] if family is None or family in e["families"]]
+
+
+@functools.lru_cache(maxsize=None)
+def facts(entry: str) -> dict | None:
+    """Frozen facts for a panel entry (see ``data/panel/README.md`` for the fields),
+    or None if the entry is not in the panel."""
+    path = PANEL / "facts" / f"{entry.lower()}.json"
+    return json.loads(path.read_text()) if path.exists() else None
+
+
+@functools.lru_cache(maxsize=None)
+def variants(accession: str) -> dict | None:
+    """Frozen pathogenic ClinVar missense variants for a disease protein, each with
+    the residues it maps to in every panel structure that holds the protein
+    (``variant["structures"][entry]``; only residues whose identity matches the wild
+    type are listed). None if the accession is not a panel disease protein."""
+    path = PANEL / "variants" / f"{accession}.json"
+    return json.loads(path.read_text()) if path.exists() else None
+
+
+def structure_file(entry: str) -> pathlib.Path | None:
+    """The panel's frozen mmCIF (gzip) for an entry, or None."""
+    path = PANEL / "cif" / f"{entry.lower()}.cif.gz"
+    return path if path.exists() else None
+
 
 
 class Residue(NamedTuple):
@@ -28,11 +80,19 @@ class Residue(NamedTuple):
     comp_id: str
 
 
-def fetch_structure(pdb: str):
-    """Download + parse an mmCIF into a gemmi Structure (entities set up)."""
+def fetch_structure(pdb: str, allow_network: bool = True):
+    """Parse an entry's mmCIF into a gemmi Structure (entities set up): the panel's
+    frozen file if there is one, otherwise a download (unless ``allow_network`` is false)."""
     import gemmi
-    data = urllib.request.urlopen(CIF.format(pdb.lower()), timeout=30).read().decode()
-    st = gemmi.make_structure_from_block(gemmi.cif.read_string(data).sole_block())
+    frozen = structure_file(pdb)
+    if frozen is not None:
+        block = gemmi.cif.read(str(frozen)).sole_block()
+    elif allow_network:
+        data = urllib.request.urlopen(CIF.format(pdb.lower()), timeout=30).read().decode()
+        block = gemmi.cif.read_string(data).sole_block()
+    else:
+        raise LookupError(f"{pdb!r} is not in the frozen panel and the network is not allowed")
+    st = gemmi.make_structure_from_block(block)
     st.setup_entities()
     return st
 

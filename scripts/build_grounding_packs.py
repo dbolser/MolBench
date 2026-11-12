@@ -55,10 +55,12 @@ Task-derived facts, only from things **named in the prompt**:
 The pack states facts. It never contains MVS, a scene tree, colours or
 representations, and never says what to draw.
 
-Network is used at build time only (RCSB mmCIF + GraphQL, UniProt REST + Proteins API).
-Every response is cached under ``data/cif/`` and ``data/grounding_cache/``; with a
-warm cache the build is offline and byte-for-byte deterministic (sorted output, no
-timestamps in the pack).
+Sources, in order: the build cache (``data/cif/`` and ``data/grounding_cache/``,
+git-ignored), then the frozen structure panel (``data/panel/`` and
+``molbench/sifts_tables/``, see ``scripts/build_panel.py``), then the network (RCSB
+mmCIF + GraphQL, UniProt REST + Proteins API; the answer is cached). So for a task
+on a panel structure the build needs no network at all, and with a warm cache it is
+byte-for-byte deterministic (sorted output, no timestamps in the pack).
 
     pip install -e ".[authoring]"
     python scripts/build_grounding_packs.py           # write packs into tasks/mvs*/
@@ -79,6 +81,10 @@ from collections import Counter
 import gemmi
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO))
+
+from molbench import grounding, sifts  # noqa: E402
+
 TASKS = REPO / "tasks"
 CIF_DIR = REPO / "data" / "cif"
 CACHE = REPO / "data" / "grounding_cache"
@@ -125,9 +131,42 @@ def _cached_json(name: str, fetch):
 def cif_path(pdb: str) -> pathlib.Path:
     path = CIF_DIR / f"{pdb}.cif"
     if not path.exists():
+        frozen = grounding.structure_file(pdb)
+        if frozen is not None:
+            return frozen  # gemmi reads .cif.gz
         CIF_DIR.mkdir(parents=True, exist_ok=True)
         path.write_bytes(_get(CIF_URL.format(pdb)))
     return path
+
+
+def frozen_alignments(pdb: str) -> list[dict] | None:
+    """The same shape as :func:`sifts_alignments`, from the frozen SIFTS table and
+    panel facts (None if the entry is not in the panel). One entity's regions are
+    read off its first chain: runs where label and UniProt numbers both step by one."""
+    table, facts = sifts.load(pdb), grounding.facts(pdb)
+    if facts is None:
+        return None
+    first_chain = {}
+    for c in facts["chains"]:
+        first_chain.setdefault(c["entity_id"], c["label_asym_id"])
+    out = []
+    for entity, asym in first_chain.items():
+        by_acc: dict[str, list] = {}
+        for r in (table.rows if table else []):
+            if r.label_asym_id == asym:
+                by_acc.setdefault(r.accession, []).append((r.label_seq_id, r.unp_num))
+        for acc, pairs in by_acc.items():
+            regions: list[list[int]] = []
+            for label, unp in sorted(pairs):
+                last = regions[-1] if regions else None
+                if last and label == last[0] + last[2] and unp == last[1] + last[2]:
+                    last[2] += 1
+                else:
+                    regions.append([label, unp, 1])
+            out.append({"entity": entity, "acc": acc,
+                        "name": table.accessions[acc].get("entry_name", ""),
+                        "regions": regions})
+    return sorted(out, key=lambda x: (x["entity"], x["acc"]))
 
 
 def sifts_alignments(pdb: str) -> list[dict]:
@@ -152,6 +191,10 @@ def sifts_alignments(pdb: str) -> list[dict]:
                             "regions": sorted([r["entity_beg_seq_id"], r["ref_beg_seq_id"],
                                                r["length"]] for r in al["aligned_regions"])})
         return sorted(out, key=lambda x: (x["entity"], x["acc"]))
+    if not (CACHE / f"sifts_{pdb}.json").exists():
+        frozen = frozen_alignments(pdb)
+        if frozen is not None:
+            return frozen
     return _cached_json(f"sifts_{pdb}", fetch)
 
 
@@ -181,6 +224,11 @@ def uniprot_name(acc: str) -> tuple[str, str]:
         full = (desc.get("recommendedName") or (desc.get("submissionNames") or [{}])[0]
                 ).get("fullName", {}).get("value", "")
         return {"id": d.get("uniProtkbId", ""), "name": full}
+    if not (CACHE / f"uniprot_{acc}.json").exists():
+        for path in sorted(sifts.TABLES.glob("*.json.gz")):   # frozen names, if we have them
+            info = sifts.load(path.name.split(".")[0]).accessions.get(acc)
+            if info and info.get("entry_name"):
+                return info["entry_name"], info.get("protein", "")
     got = _cached_json(f"uniprot_{acc}", fetch)
     return got["id"], got["name"]
 
@@ -188,6 +236,11 @@ def uniprot_name(acc: str) -> tuple[str, str]:
 def pathogenic_counts(acc: str) -> dict[int, int]:
     """Pathogenic, ClinVar-linked single-residue variants per UniProt position."""
     from molbench import variants
+    frozen = grounding.variants(acc)
+    if frozen is not None and not (CACHE / f"clinvar_{acc}.json").exists():
+        # Frozen with the panel: variants ClinVar itself calls (likely) pathogenic.
+        return {int(p): n for p, n in
+                frozen["pathogenic_single_residue_variants_per_position"].items()}
     got = _cached_json(f"clinvar_{acc}",
                        lambda: [list(v) for v in variants.pathogenic_clinvar(acc)])
     return dict(Counter(int(v[0]) for v in got))
