@@ -1,0 +1,61 @@
+{
+ "id": "fx-ligand-1cbs-api",
+ "track": "api",
+ "tier": "translation",
+ "family": "fx-ligand",
+ "structures": [
+  "1cbs"
+ ],
+ "prompt": "Load 1CBS. Show the protein as a cartoon and the retinoic acid (REA) as red ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1cbs"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "label_comp_id": "REA",
+     "color": "red"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "REA"
+   },
+   "representation": "ball-and-stick",
+   "color": "red"
+  }
+ ],
+ "twin_of": "fx-ligand-1cbs-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "tests/fixtures/build_fixture_tasks.py",
+  "inputs": [
+   "data/panel/facts/1cbs.json",
+   "molbench/atom_tables/1cbs.json.gz"
+  ],
+  "date": "2026-11-12",
+  "checks": [
+   "reference grades as exactly right against the task (runner.grade_parsed)",
+   "target selects 22 atoms on the frozen atom table",
+   "twin selects the same target atoms"
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ],
+ "notes": "Fixture for the dry run and the tests; not a benchmark task."
+}

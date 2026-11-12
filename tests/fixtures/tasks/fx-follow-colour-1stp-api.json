@@ -1,0 +1,70 @@
+{
+ "id": "fx-follow-colour-1stp-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fx-follow",
+ "structures": [
+  "1stp"
+ ],
+ "prompt": "Colour the biotin (BTN) red.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1stp"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "label_comp_id": "BTN",
+     "color": "red"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "1stp"
+   }
+  ],
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "BTN"
+   },
+   "representation": "ball-and-stick",
+   "color": "red"
+  }
+ ],
+ "twin_of": "fx-follow-colour-1stp-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "tests/fixtures/build_fixture_tasks.py",
+  "inputs": [
+   "data/panel/facts/1stp.json",
+   "molbench/atom_tables/1stp.json.gz"
+  ],
+  "date": "2026-11-12",
+  "checks": [
+   "reference grades as exactly right against the task (runner.grade_parsed)",
+   "target selects 16 atoms on the frozen atom table",
+   "twin selects the same target atoms",
+   "start state grades as itself; noop flag agrees with the grader"
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ],
+ "notes": "Fixture for the dry run and the tests; not a benchmark task."
+}

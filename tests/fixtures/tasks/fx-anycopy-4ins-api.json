@@ -1,0 +1,85 @@
+{
+ "id": "fx-anycopy-4ins-api",
+ "track": "api",
+ "tier": "accept_set",
+ "family": "fx-anycopy-focus",
+ "structures": [
+  "4ins"
+ ],
+ "prompt": "Load 4INS and zoom in on one copy of insulin (chain a). There are two copies (label chains A and C); either will do.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "4ins"
+  },
+  {
+   "action": "focus",
+   "data": [
+    {
+     "struct_asym_id": "A"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "4ins"
+   },
+   {
+    "action": "focus",
+    "data": [
+     {
+      "struct_asym_id": "C"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A"
+   },
+   "representation": null,
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "tests/fixtures/build_fixture_tasks.py",
+  "inputs": [
+   "data/panel/facts/4ins.json",
+   "molbench/atom_tables/4ins.json.gz"
+  ],
+  "date": "2026-11-12",
+  "checks": [
+   "reference grades as exactly right against the task (runner.grade_parsed)",
+   "target selects 163 atoms on the frozen atom table",
+   "every accepted alternative grades as itself, is accepted by the task, and is a different final state from the reference"
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "focus"
+ ],
+ "notes": "Fixture for the dry run and the tests; not a benchmark task.",
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "C"
+    },
+    "representation": null,
+    "color": null
+   }
+  ]
+ ]
+}

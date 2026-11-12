@@ -1,0 +1,61 @@
+{
+ "id": "fx-ligand-indirect-1stp-api",
+ "track": "api",
+ "tier": "translation",
+ "family": "fx-ligand",
+ "structures": [
+  "1stp"
+ ],
+ "prompt": "I would like to look at 1STP with the protein drawn as a cartoon and its biotin ligand (BTN) picked out in red ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1stp"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "label_comp_id": "BTN",
+     "color": "red"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "BTN"
+   },
+   "representation": "ball-and-stick",
+   "color": "red"
+  }
+ ],
+ "twin_of": "fx-ligand-indirect-1stp-mvs",
+ "paraphrase_of": "fx-ligand-1stp-api",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "tests/fixtures/build_fixture_tasks.py",
+  "inputs": [
+   "data/panel/facts/1stp.json",
+   "molbench/atom_tables/1stp.json.gz"
+  ],
+  "date": "2026-11-12",
+  "checks": [
+   "reference grades as exactly right against the task (runner.grade_parsed)",
+   "target selects 16 atoms on the frozen atom table",
+   "twin selects the same target atoms"
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ],
+ "notes": "Fixture for the dry run and the tests; not a benchmark task."
+}

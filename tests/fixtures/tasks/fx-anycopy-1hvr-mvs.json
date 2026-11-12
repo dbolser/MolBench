@@ -1,0 +1,151 @@
+{
+ "id": "fx-anycopy-1hvr-mvs",
+ "track": "mvs",
+ "tier": "accept_set",
+ "family": "fx-anycopy",
+ "structures": [
+  "1hvr"
+ ],
+ "prompt": "Load 1HVR and show one copy of hiv-1 protease as a cartoon, nothing else. There are two copies (label chains A and B); either will do.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1hvr.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_asym_id": "A"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1hvr.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_asym_id": "B"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A"
+   },
+   "representation": "cartoon",
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "tests/fixtures/build_fixture_tasks.py",
+  "inputs": [
+   "data/panel/facts/1hvr.json",
+   "molbench/atom_tables/1hvr.json.gz"
+  ],
+  "date": "2026-11-12",
+  "checks": [
+   "reference grades as exactly right against the task (runner.grade_parsed)",
+   "target selects 922 atoms on the frozen atom table",
+   "every accepted alternative grades as itself, is accepted by the task, and is a different final state from the reference"
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation"
+ ],
+ "notes": "Fixture for the dry run and the tests; not a benchmark task.",
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": null
+   }
+  ]
+ ]
+}
