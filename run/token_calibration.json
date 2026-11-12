@@ -1,0 +1,120 @@
+{
+ "what": "Token rates per model, measured on archived runs. chars_per_input_token = prompt characters per billed input token; output_tokens_per_ref_char = billed output tokens (reasoning included) per character of the task's reference answer as compact JSON.",
+ "built_by": "scripts/estimate_cost.py --calibrate",
+ "source": "36 MVS run archives matching run_20261018*.json (spec and bare prompts, with and without grounding packs)",
+ "models": {
+  "claude-haiku-4-5": {
+   "chars_per_input_token": 2.964,
+   "output_tokens_per_ref_char": 0.6674,
+   "output_tokens_per_call": 394.8,
+   "calls": 280,
+   "runs": 4
+  },
+  "deepseek/deepseek-v3.2": {
+   "chars_per_input_token": 3.284,
+   "output_tokens_per_ref_char": 0.5207,
+   "output_tokens_per_call": 308.0,
+   "calls": 280,
+   "runs": 4
+  },
+  "deepseek/deepseek-v4-flash": {
+   "chars_per_input_token": 3.277,
+   "output_tokens_per_ref_char": 1.2441,
+   "output_tokens_per_call": 735.9,
+   "calls": 140,
+   "runs": 2
+  },
+  "google/gemini-3.5-flash": {
+   "chars_per_input_token": 3.134,
+   "output_tokens_per_ref_char": 1.9295,
+   "output_tokens_per_call": 1141.4,
+   "calls": 140,
+   "runs": 2
+  },
+  "google/gemma-3-27b-it": {
+   "chars_per_input_token": 3.122,
+   "output_tokens_per_ref_char": 0.4229,
+   "output_tokens_per_call": 250.1,
+   "calls": 140,
+   "runs": 2
+  },
+  "meta-llama/llama-4-maverick": {
+   "chars_per_input_token": 3.164,
+   "output_tokens_per_ref_char": 0.6143,
+   "output_tokens_per_call": 363.4,
+   "calls": 140,
+   "runs": 2
+  },
+  "minimax/minimax-m3": {
+   "chars_per_input_token": 3.218,
+   "output_tokens_per_ref_char": 0.8486,
+   "output_tokens_per_call": 502.0,
+   "calls": 140,
+   "runs": 2
+  },
+  "moonshotai/kimi-k2.6": {
+   "chars_per_input_token": 3.427,
+   "output_tokens_per_ref_char": 2.2875,
+   "output_tokens_per_call": 1353.2,
+   "calls": 140,
+   "runs": 2
+  },
+  "nvidia/nemotron-3-super-120b-a12b": {
+   "chars_per_input_token": 3.262,
+   "output_tokens_per_ref_char": 1.302,
+   "output_tokens_per_call": 770.2,
+   "calls": 140,
+   "runs": 2
+  },
+  "openai/gpt-5.4-nano": {
+   "chars_per_input_token": 3.383,
+   "output_tokens_per_ref_char": 0.5093,
+   "output_tokens_per_call": 301.3,
+   "calls": 140,
+   "runs": 2
+  },
+  "openai/gpt-oss-120b": {
+   "chars_per_input_token": 3.301,
+   "output_tokens_per_ref_char": 1.0787,
+   "output_tokens_per_call": 638.1,
+   "calls": 140,
+   "runs": 2
+  },
+  "openai/gpt-oss-20b": {
+   "chars_per_input_token": 3.302,
+   "output_tokens_per_ref_char": 1.4524,
+   "output_tokens_per_call": 859.2,
+   "calls": 140,
+   "runs": 2
+  },
+  "qwen/qwen3-30b-a3b-instruct-2507": {
+   "chars_per_input_token": 3.145,
+   "output_tokens_per_ref_char": 0.5216,
+   "output_tokens_per_call": 308.6,
+   "calls": 280,
+   "runs": 4
+  },
+  "qwen/qwen3-next-80b-a3b-instruct": {
+   "chars_per_input_token": 3.31,
+   "output_tokens_per_ref_char": 0.4525,
+   "output_tokens_per_call": 267.7,
+   "calls": 140,
+   "runs": 2
+  },
+  "z-ai/glm-5.2": {
+   "chars_per_input_token": 3.371,
+   "output_tokens_per_ref_char": 0.6101,
+   "output_tokens_per_call": 360.9,
+   "calls": 140,
+   "runs": 2
+  }
+ },
+ "default": {
+  "chars_per_input_token": 3.277,
+  "output_tokens_per_ref_char": 0.6674
+ },
+ "default_reasoning": {
+  "chars_per_input_token": 2.964,
+  "output_tokens_per_ref_char": 2.2875
+ }
+}

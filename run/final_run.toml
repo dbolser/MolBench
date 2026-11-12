@@ -1,0 +1,275 @@
+# MolBench final run - the one file the run depends on.
+#
+#   python -m molbench.runner --manifest run/final_run.toml --dry-run   # rehearse, $0
+#   python -m molbench.runner --manifest run/final_run.toml             # plan + cost only
+#   python -m molbench.runner --manifest run/final_run.toml --go        # the paid run
+#   python scripts/estimate_cost.py --tasks mvs=300 api_calling=150     # cost of a planned corpus
+#
+# The paid run refuses to start until corpus.sha256 is pinned and matches tasks/ on disk.
+
+[run]
+name = "final-v1"                   # archive: runs/final-v1/   scorecards: results/final-v1/
+samples = 3                         # per task, per model, per condition (plan decision 12)
+max_tokens = 8000                   # output limit per call (October used 2000, with no record
+                                    # of how often it truncated; finish reasons are now archived)
+reasoning_max_tokens = 16000        # for models flagged reasoning = true (hidden reasoning is
+                                    # billed as output and counts against the limit)
+temperature = "provider-default"    # no temperature is ever sent (plan decision 12)
+concurrency = 8                     # calls in flight, all models together
+per_model_concurrency = 2           # calls in flight to any one model
+validate = "required"               # Mol* must validate every parsed scene (needs the 'execute'
+                                    # extra + the Mol* bundle); "auto" in a dry run
+
+[run.retry]
+max_attempts = 5                    # per call; 400/401/402/403/404/422 are not retried
+backoff_seconds = 2.0               # 2, 4, 8, 16 s ...
+backoff_max_seconds = 60.0
+timeout_seconds = 300.0
+# A call that fails every attempt is logged to runs/<name>/errors.jsonl and is NOT archived,
+# so the next start of the same command tries it again.
+
+[budget]
+cap_usd = 120.00
+note = """Hard stop. The run aborts before the first call if the plan is projected above \
+the cap, and mid-run as soon as (spent + estimated cost of the calls still to make) passes it. \
+Sized for the 16-model panel on the planned corpus of about 450 tasks: projected $93 on \
+2026-11-12 (scripts/estimate_cost.py --core-only --tasks mvs=300 api_calling=150). The five \
+optional models would add about $255; raise the cap deliberately if they are included."""
+
+[corpus]
+version = "corpus-v1.0-dev"         # becomes "corpus-v1.0" at the freeze
+sha256 = ""                         # pin at the freeze: python -m molbench.manifest
+note = "SHA-256 over every tasks/**/*.json (sorted path + content). Empty = not frozen yet."
+
+# ---------------------------------------------------------------------------------------
+# Conditions (plan decisions 10 and 11). Listed in the order they are run.
+# ---------------------------------------------------------------------------------------
+[[conditions]]
+name = "spec"
+prompt = "spec"
+models = "all"
+tracks = ["mvs", "api_calling"]
+note = "Headline: system prompt with the vendored reference; every model, both tracks."
+
+[[conditions]]
+name = "spec_structured"
+prompt = "spec"
+structured = true
+models = "structured"
+tracks = ["mvs", "api_calling"]
+note = """Same prompt with the provider's JSON mode switched on, for every model whose route \
+supports it. On the API track JSON mode must return an object, so one fixed sentence asks for \
+{"actions": [...]} (runner.API_STRUCTURED_SUFFIX)."""
+
+[[conditions]]
+name = "spec_grounded"
+prompt = "spec"
+grounding = true
+models = "all"
+tracks = ["mvs"]
+where = { source = ["clinvar-variant", "clinvar-hotspots", "sifts-named", "resolve"] }
+note = """Ablation: the task's frozen grounding pack appended to the user message, on the \
+lookup tiers only (tasks whose 'source' is listed and that carry a pack)."""
+
+[[conditions]]
+name = "bare"
+prompt = "bare"
+models = ["claude-haiku-4-5", "deepseek/deepseek-v3.2", "qwen/qwen3-30b-a3b-instruct-2507"]
+tracks = ["mvs"]
+note = "Output contract only, no MVS reference. Three models (the same three as October)."
+
+# ---------------------------------------------------------------------------------------
+# Model panel: the 16 models of the current leaderboard (docs/scorecard.json).
+#
+# price: USD per 1,000,000 tokens. OpenRouter prices were read from its public model list
+# (no key needed) on the date given. OpenRouter bills at the rate of the provider that
+# serves each call, which can differ from the listed rate; the runner asks OpenRouter for
+# the billed cost of every call and uses that for the budget when it is returned.
+# open_weights: the listing names a Hugging Face repository for the model.
+# reasoning: spends hidden reasoning tokens by default (billed as output).
+# structured: how JSON mode is requested; "none" = left out of structured conditions.
+# ---------------------------------------------------------------------------------------
+[[models]]
+id = "claude-haiku-4-5"
+route = "anthropic:claude-haiku-4-5"   # native API, as in every earlier run
+open_weights = false
+reasoning = false
+structured = "none"                    # JSON mode is not wired for the native route
+price = { input = 1.0, output = 5.0, source = "Anthropic price list (platform.claude.com/docs/en/about-claude/pricing), as cached 2026-11-03; same on OpenRouter", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "deepseek/deepseek-v3.2"
+route = "openrouter:deepseek/deepseek-v3.2"
+open_weights = true
+reasoning = false
+structured = "json_object"
+price = { input = 0.26, output = 0.38, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "deepseek/deepseek-v4-flash"
+route = "openrouter:deepseek/deepseek-v4-flash"
+open_weights = true
+reasoning = true
+structured = "json_object"
+price = { input = 0.09, output = 0.18, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "google/gemini-3.5-flash"
+route = "openrouter:google/gemini-3.5-flash"
+open_weights = false
+reasoning = true
+structured = "json_object"
+price = { input = 1.5, output = 9.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "google/gemma-3-27b-it"
+route = "openrouter:google/gemma-3-27b-it"
+open_weights = true
+reasoning = false
+structured = "json_object"
+price = { input = 0.08, output = 0.35, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "openai/gpt-5.4-nano"
+route = "openrouter:openai/gpt-5.4-nano"
+open_weights = false
+reasoning = false
+structured = "json_object"
+price = { input = 0.2, output = 1.25, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "meta-llama/llama-4-maverick"
+route = "openrouter:meta-llama/llama-4-maverick"
+open_weights = true
+reasoning = false
+structured = "json_object"
+price = { input = 0.35, output = 1.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "minimax/minimax-m3"
+route = "openrouter:minimax/minimax-m3"
+open_weights = true
+reasoning = true
+structured = "json_object"
+price = { input = 0.3, output = 1.2, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "mistralai/mistral-small-2603"
+route = "openrouter:mistralai/mistral-small-2603"
+open_weights = true
+reasoning = false
+structured = "json_object"
+max_concurrency = 1
+price = { input = 0.15, output = 0.6, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true, note = "Never completed the MVS track: every attempt on 2026-10-18 hit an upstream rate limit. max_concurrency = 1 for that reason." }
+
+[[models]]
+id = "moonshotai/kimi-k2.6"
+route = "openrouter:moonshotai/kimi-k2.6"
+open_weights = true
+reasoning = true
+structured = "json_object"
+price = { input = 0.65, output = 3.41, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "nvidia/nemotron-3-super-120b-a12b"
+route = "openrouter:nvidia/nemotron-3-super-120b-a12b"
+open_weights = true
+reasoning = true
+structured = "json_object"
+price = { input = 0.075, output = 0.4, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "openai/gpt-oss-120b"
+route = "openrouter:openai/gpt-oss-120b"
+open_weights = true
+reasoning = true
+structured = "json_object"
+price = { input = 0.15, output = 0.6, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "openai/gpt-oss-20b"
+route = "openrouter:openai/gpt-oss-20b"
+open_weights = true
+reasoning = true
+structured = "json_object"
+price = { input = 0.03, output = 0.13, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "qwen/qwen3-30b-a3b-instruct-2507"
+route = "openrouter:qwen/qwen3-30b-a3b-instruct-2507"
+open_weights = true
+reasoning = false
+structured = "json_object"
+price = { input = 0.1, output = 0.3, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "qwen/qwen3-next-80b-a3b-instruct"
+route = "openrouter:qwen/qwen3-next-80b-a3b-instruct"
+open_weights = true
+reasoning = false
+structured = "json_object"
+price = { input = 0.09, output = 1.1, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "z-ai/glm-5.2"
+route = "openrouter:z-ai/glm-5.2"
+open_weights = true
+reasoning = false
+structured = "json_object"
+price = { input = 0.007, output = 6.8, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true, note = "Listed input price is unusually low and output unusually high; re-check before the run." }
+
+# ---------------------------------------------------------------------------------------
+# PROPOSED ADDITIONS - optional = true: left out unless --include-optional is passed.
+# Chosen from OpenRouter's listing on 2026-11-12 by vendor tier and release date; none has
+# been run on MolBench, so their token use is a pooled estimate (the highest output rate
+# seen in October). They are the expensive part of the run: see scripts/estimate_cost.py.
+# ---------------------------------------------------------------------------------------
+[[models]]
+id = "anthropic/claude-opus-5.5"
+route = "openrouter:anthropic/claude-opus-5.5"
+open_weights = false
+reasoning = true
+structured = "json_object"
+optional = true
+reason = "Frontier closed model (Anthropic's current Opus). The 16-model panel has no top-tier closed model, so it cannot show whether the output-validity ceiling holds at the frontier."
+price = { input = 4.0, output = 20.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "openai/gpt-6.1-sol"
+route = "openrouter:openai/gpt-6.1-sol"
+open_weights = false
+reasoning = true
+structured = "json_object"
+optional = true
+reason = "Frontier closed model (OpenAI's upper tier; GPT-6 Astra above it costs 5x). Same reason."
+price = { input = 2.0, output = 10.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "google/gemini-4-argon"
+route = "openrouter:google/gemini-4-argon"
+open_weights = false
+reasoning = true
+structured = "json_object"
+optional = true
+reason = "Frontier closed model (listed as Google's flagship reasoning model). Same reason; pairs with gemini-3.5-flash as a within-vendor size contrast."
+price = { input = 2.0, output = 10.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "x-ai/grok-4.7"
+route = "openrouter:x-ai/grok-4.7"
+open_weights = false
+reasoning = true
+structured = "json_object"
+optional = true
+reason = "Frontier closed model from a fourth vendor, so 'frontier' is not three companies."
+price = { input = 2.0, output = 6.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
+
+[[models]]
+id = "deepseek/deepseek-v4-pro-0813"
+route = "openrouter:deepseek/deepseek-v4-pro-0813"
+open_weights = true
+reasoning = true
+structured = "json_object"
+optional = true
+reason = "Largest model in the listing with public weights; pairs with deepseek-v4-flash and tests whether the best open model still matches the closed frontier."
+price = { input = 0.111, output = 4.44, source = "https://openrouter.ai/api/v1/models", date = "2026-11-12", verified = true }
