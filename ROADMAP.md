@@ -1,13 +1,58 @@
-# MolBench — next-phase plan
+# MolBench — roadmap and history
 
-Status: Component 1 (deterministic scene-spec grading) is implemented across three
+## Status (2026-11-12) — read [`FINAL_PLAN.md`](FINAL_PLAN.md) first
+
+`FINAL_PLAN.md` is the current plan: a publication-ready benchmark and paper draft built at
+$0, then one paid run. This file is kept as the record of how we got there. Where the two
+disagree, `FINAL_PLAN.md` wins. The paper draft lives in [`paper/`](paper/) and every number
+in it is written by `scripts/paper_tables.py`.
+
+Where things stand: Component 1 (deterministic grading of scenes) is implemented over five
+task regimes, with a 15-model MVS leaderboard from the 2026-10-18 run (70 tasks, 14 PDB
+entries, 1 sample) and a 16-model API-track table carried over from July.
+
+What happened to each item below:
+
+| item | disposition (FINAL_PLAN decision) |
+|---|---|
+| R1–R7, R10 | **done** |
+| R8 chat driver v2 | **done** (shipped in molstar-chat-driver) |
+| R9 chat-driver thumbs up/down | **not part of the benchmark**; owned by molstar-chat-driver |
+| Live tool loop / agentic track | **dropped** — the ≥ 10-point grounding trigger was tested and not met (9). Grounding packs stay as an ablation on the lookup tiers |
+| A0 renderer; escalation T0–T2; strict T1 | **done** |
+| A1–A3 Component 2 (rubric judge, wiring, open-ended corpus) | **out of this paper**, future work (8) |
+| A4 human rating study | **in**, as validation of a side column; readout pending (8) |
+| B1 selection-accuracy sub-metric | **replaced** by reporting task success (final state exactly right) next to F1 (1) |
+| B2 interaction tasks | started (R3); scaled with the corpus (5) |
+| B3 corpus scaling, clinical offset proteins | **in** — ≥ 50 PDB entries; clinical tier ≥ 40 tasks on ≥ 12 proteins, ≥ 8 with a UniProt ≠ author offset (4, 5) |
+| B4 entry resolution | started; scaled with the corpus. The `exists` sub-metric is not scheduled |
+| B5 colour schemes | partly done; the remaining equivalence is not scheduled |
+| B6 structured outputs | **in** the final run, for models that support it; plus the offline json-repair counterfactual (11) |
+| API track | **rebuilt**, not enlarged: state-replay grader on pdbe-molstar 3.3.2, references fixed or replaced, ≈ 150 tasks, paired with MVS tasks (2, 3, 14) |
+| Follow-up turns; ambiguous prompts | **in** — ≈ 30 two-turn tasks; ≈ 15 accept-set tasks, no rubric judge (6, 7) |
+| "Benchmark the grader" control set | **not scheduled**; partly covered by reference-vs-structure tests and A4 |
+| C1 human agreement for the tree grader | not scheduled beyond A4 |
+| C2 error taxonomy | **done** from the October archives (`scripts/paper_tables.py`: outcome classes, brace-count errors, where valid scenes lose points) |
+| C3 expanded panel + frozen final results | **the final run**: 3 samples per task, one manifest, one command (12, 13) |
+| C4 write-ups of course corrections | folded into the paper's discussion and limitations |
+| Venue | preprint first, then JCIM or Digital Discovery; see `paper/venues.md` (15) |
+
+Everything below this line is history. Numbers in it are as measured on the stated date;
+some predate the 2026-10-18 re-grade (PR #16). The paper's numbers are in
+`paper/generated/`.
+
+---
+
+## Earlier status line (2026-06)
+
+Component 1 (deterministic scene-spec grading) is implemented across three
 grounded task regimes with an 8-model leaderboard. The next phase makes the
 benchmark *complete and publishable*: implement Component 2 (visual grading),
 sharpen Component 1, and validate the instrument.
 
 ---
 
-## Revised plan (2026-10-04) — read this first
+## Revised plan (2026-10-04)
 
 Three decisions, each backed by a test this round.
 
@@ -21,7 +66,12 @@ model could ever draw an H-bond. A 4-prompt × 2-model A/B: old reference 0/4
 lines drawn and 2 Mol\* crashes on "50% transparent"; new reference 4/4 lines and
 2/2 transparency. Models still pick wrong chains/atoms (see grounding below).
 What MVS truly cannot do: select by distance or property, compute a
-superposition, style the computed interactions. Those stay in the API track.
+superposition, style the computed interactions.
+*(Corrected 2026-11-12: this paragraph used to end "Those stay in the API track." That was
+wrong. The API track targets pdbe-molstar 3.3.2, whose selector has no distance or property
+terms and whose `superposition` switch shows PDBe's precomputed alignment of one entry, not a
+superposition of two arbitrary structures. Neither track tests these operations; a richer
+command layer, such as Mol\* v6, is future work — FINAL_PLAN decision 14.)*
 
 **2. Prompting conditions: a 2×2, no public "tuned" row.**
 
@@ -132,7 +182,9 @@ dossier. A scene Mol* rejects scores 0. Published on the leaderboard
 
 ---
 
-## Phase A — Component 2: render + VLM judge  ← the headline
+## Phase A — Component 2: render + VLM judge
+
+*(2026-11-12: no longer the headline. A1–A3 are out of the paper; A0 and the escalation grader are done; A4 is in. See the table at the top.)*
 
 ### Status (2026-10-18)
 
@@ -324,7 +376,7 @@ Cost-cascading grader so we only pay for expensive grading when needed
   (demonstrated: visual_sim 0.70 → VLM "same" 0.85). Also concentrates human review
   on the genuinely-ambiguous T2 cases only.
 
-## Benchmark the grader (meta-evaluation)  ← TODO
+## Benchmark the grader (meta-evaluation)  ← not scheduled (see the table at the top)
 
 The grader is a system with its own error rate; validate it against ground truth.
 
@@ -355,7 +407,7 @@ The grader is a system with its own error rate; validate it against ground truth
 
 ## Suggested sequence
 
-*Superseded in part by the revised plan at the top: R5 → R6 → R7 come first.*
+*Superseded: the sequence is now phases A–C and the final run in `FINAL_PLAN.md`.*
 
 1. **A0 renderer** (unblocks everything visual) → **A1 judge** → **A2 wire-in**
    → **A3 corpus** → **A4 validation**. This delivers a working Component 2.

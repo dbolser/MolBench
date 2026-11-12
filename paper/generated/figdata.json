@@ -1,0 +1,687 @@
+{
+ "status": "preliminary",
+ "label": "October 2026 panel",
+ "mvs_leaderboard": [
+  {
+   "model": "deepseek-v3.2",
+   "weights": "open",
+   "f1": 0.9034,
+   "f1_ci": [
+    0.8292,
+    0.9579
+   ],
+   "valid": 0.9857,
+   "f1_valid": 0.9165,
+   "f1_valid_ci": [
+    0.8391,
+    0.9647
+   ],
+   "success": 0.6429
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "weights": "open",
+   "f1": 0.8591,
+   "f1_ci": [
+    0.7677,
+    0.9276
+   ],
+   "valid": 0.9286,
+   "f1_valid": 0.9252,
+   "f1_valid_ci": [
+    0.8241,
+    0.9829
+   ],
+   "success": 0.6286
+  },
+  {
+   "model": "claude-haiku-4-5",
+   "weights": "closed",
+   "f1": 0.857,
+   "f1_ci": [
+    0.7311,
+    0.9289
+   ],
+   "valid": 0.9571,
+   "f1_valid": 0.8953,
+   "f1_valid_ci": [
+    0.7992,
+    0.9542
+   ],
+   "success": 0.6
+  },
+  {
+   "model": "gemini-3.5-flash",
+   "weights": "closed",
+   "f1": 0.8486,
+   "f1_ci": [
+    0.7116,
+    0.9375
+   ],
+   "valid": 0.9429,
+   "f1_valid": 0.9,
+   "f1_valid_ci": [
+    0.7904,
+    0.9627
+   ],
+   "success": 0.7
+  },
+  {
+   "model": "minimax-m3",
+   "weights": "open",
+   "f1": 0.8166,
+   "f1_ci": [
+    0.6916,
+    0.8914
+   ],
+   "valid": 0.9,
+   "f1_valid": 0.9073,
+   "f1_valid_ci": [
+    0.8165,
+    0.9585
+   ],
+   "success": 0.6
+  },
+  {
+   "model": "qwen3-next-80b-a3b-instruct",
+   "weights": "open",
+   "f1": 0.8054,
+   "f1_ci": [
+    0.7021,
+    0.8987
+   ],
+   "valid": 0.9143,
+   "f1_valid": 0.8809,
+   "f1_valid_ci": [
+    0.7942,
+    0.9314
+   ],
+   "success": 0.4571
+  },
+  {
+   "model": "glm-5.2",
+   "weights": "open",
+   "f1": 0.8052,
+   "f1_ci": [
+    0.713,
+    0.8672
+   ],
+   "valid": 0.9,
+   "f1_valid": 0.8947,
+   "f1_valid_ci": [
+    0.7974,
+    0.9555
+   ],
+   "success": 0.5714
+  },
+  {
+   "model": "llama-4-maverick",
+   "weights": "open",
+   "f1": 0.792,
+   "f1_ci": [
+    0.6035,
+    0.9153
+   ],
+   "valid": 0.8143,
+   "f1_valid": 0.9727,
+   "f1_valid_ci": [
+    0.9377,
+    0.9923
+   ],
+   "success": 0.7
+  },
+  {
+   "model": "gemma-3-27b-it",
+   "weights": "open",
+   "f1": 0.7133,
+   "f1_ci": [
+    0.5964,
+    0.8137
+   ],
+   "valid": 0.8143,
+   "f1_valid": 0.8759,
+   "f1_valid_ci": [
+    0.7609,
+    0.9464
+   ],
+   "success": 0.4857
+  },
+  {
+   "model": "kimi-k2.6",
+   "weights": "open",
+   "f1": 0.6569,
+   "f1_ci": [
+    0.5231,
+    0.7599
+   ],
+   "valid": 0.7286,
+   "f1_valid": 0.9016,
+   "f1_valid_ci": [
+    0.7994,
+    0.9726
+   ],
+   "success": 0.4714
+  },
+  {
+   "model": "gpt-5.4-nano",
+   "weights": "closed",
+   "f1": 0.6541,
+   "f1_ci": [
+    0.5106,
+    0.7487
+   ],
+   "valid": 0.7571,
+   "f1_valid": 0.8639,
+   "f1_valid_ci": [
+    0.7776,
+    0.9147
+   ],
+   "success": 0.1571
+  },
+  {
+   "model": "gpt-oss-120b",
+   "weights": "open",
+   "f1": 0.5614,
+   "f1_ci": [
+    0.422,
+    0.6573
+   ],
+   "valid": 0.6286,
+   "f1_valid": 0.8931,
+   "f1_valid_ci": [
+    0.7846,
+    0.9482
+   ],
+   "success": 0.3571
+  },
+  {
+   "model": "qwen3-30b-a3b-instruct-2507",
+   "weights": "open",
+   "f1": 0.5194,
+   "f1_ci": [
+    0.3317,
+    0.6653
+   ],
+   "valid": 0.5571,
+   "f1_valid": 0.9322,
+   "f1_valid_ci": [
+    0.8559,
+    0.9688
+   ],
+   "success": 0.3714
+  },
+  {
+   "model": "gpt-oss-20b",
+   "weights": "open",
+   "f1": 0.2524,
+   "f1_ci": [
+    0.1646,
+    0.3333
+   ],
+   "valid": 0.2857,
+   "f1_valid": 0.8833,
+   "f1_valid_ci": [
+    0.7259,
+    0.9807
+   ],
+   "success": 0.2
+  },
+  {
+   "model": "nemotron-3-super-120b-a12b",
+   "weights": "open",
+   "f1": 0.078,
+   "f1_ci": [
+    0.027,
+    0.13
+   ],
+   "valid": 0.0857,
+   "f1_valid": 0.9105,
+   "f1_valid_ci": [
+    0.7,
+    1.0
+   ],
+   "success": 0.0571
+  }
+ ],
+ "mvs_regimes": [
+  {
+   "regime": "Translation",
+   "n_tasks": 41,
+   "n_structures": 7,
+   "n_valid": 491,
+   "n_samples": 615,
+   "f1_valid": 0.9783,
+   "f1": 0.7798,
+   "f1_valid_models": [
+    0.9763,
+    0.9768,
+    0.9886,
+    1.0,
+    0.9767,
+    0.939,
+    0.9914,
+    0.9741,
+    0.9746,
+    1.0,
+    0.9653,
+    1.0,
+    0.966,
+    0.9578,
+    0.9881
+   ],
+   "f1_models": [
+    0.9763,
+    0.9768,
+    0.9403,
+    0.9756,
+    0.7861,
+    0.7787,
+    0.9672,
+    0.9266,
+    0.7607,
+    0.0976,
+    0.6592,
+    0.3171,
+    0.7304,
+    0.8644,
+    0.9399
+   ]
+  },
+  {
+   "regime": "Grounded",
+   "n_tasks": 8,
+   "n_structures": 6,
+   "n_valid": 91,
+   "n_samples": 120,
+   "f1_valid": 0.9722,
+   "f1": 0.7366,
+   "f1_valid_models": [
+    0.9626,
+    0.9734,
+    1.0,
+    1.0,
+    0.9864,
+    0.8552,
+    0.9907,
+    0.9861,
+    0.9952,
+    0.9444,
+    0.9777,
+    1.0,
+    0.9419,
+    0.9969
+   ],
+   "f1_models": [
+    0.9626,
+    0.9734,
+    0.875,
+    1.0,
+    0.8631,
+    0.8552,
+    0.9907,
+    0.9861,
+    0.622,
+    0.1181,
+    0.8555,
+    0.0,
+    0.375,
+    0.8241,
+    0.7477
+   ]
+  },
+  {
+   "regime": "Clinical",
+   "n_tasks": 9,
+   "n_structures": 1,
+   "n_valid": 96,
+   "n_samples": 135,
+   "f1_valid": 0.6725,
+   "f1": 0.4829,
+   "f1_valid_models": [
+    0.6502,
+    0.7309,
+    0.6338,
+    0.7194,
+    0.6667,
+    0.6519,
+    0.8056,
+    0.7084,
+    0.6456,
+    0.5185,
+    0.7,
+    0.6667,
+    0.6667,
+    0.6482,
+    0.6746
+   ],
+   "f1_models": [
+    0.6502,
+    0.7309,
+    0.6338,
+    0.7194,
+    0.5926,
+    0.3621,
+    0.358,
+    0.6297,
+    0.5021,
+    0.0576,
+    0.3111,
+    0.2222,
+    0.2222,
+    0.5762,
+    0.6746
+   ]
+  },
+  {
+   "regime": "Resolution",
+   "n_tasks": 6,
+   "n_structures": 6,
+   "n_valid": 52,
+   "n_samples": 90,
+   "f1_valid": 0.5419,
+   "f1": 0.3259,
+   "f1_valid_models": [
+    0.4753,
+    0.6729,
+    0.8222,
+    0.4259,
+    0.4723,
+    0.3333,
+    0.5509,
+    0.5617,
+    0.358,
+    0.5556,
+    0.7037,
+    0.5704
+   ],
+   "f1_models": [
+    0.2377,
+    0.6729,
+    0.6852,
+    0.4259,
+    0.4723,
+    0.1111,
+    0.0,
+    0.3673,
+    0.2809,
+    0.0,
+    0.179,
+    0.2778,
+    0.0,
+    0.7037,
+    0.4753
+   ]
+  },
+  {
+   "regime": "Interactions",
+   "n_tasks": 6,
+   "n_structures": 3,
+   "n_valid": 54,
+   "n_samples": 90,
+   "f1_valid": 0.8499,
+   "f1": 0.5124,
+   "f1_valid_models": [
+    0.83,
+    0.9571,
+    0.9538,
+    0.7905,
+    0.8753,
+    0.7726,
+    0.9279,
+    0.8528,
+    0.9036,
+    0.7744,
+    1.0,
+    0.7055,
+    0.8231,
+    0.7317
+   ],
+   "f1_models": [
+    0.83,
+    0.7976,
+    0.7948,
+    0.3952,
+    0.4376,
+    0.5151,
+    0.7733,
+    0.5685,
+    0.6024,
+    0.0,
+    0.2581,
+    0.1667,
+    0.2352,
+    0.8231,
+    0.4878
+   ]
+  }
+ ],
+ "mvs_grounding": [
+  {
+   "model": "qwen3-30b-a3b-instruct-2507",
+   "delta": -0.2535,
+   "delta_lookup": 0.042,
+   "valid_spec": 0.5571,
+   "valid_grounded": 0.3143,
+   "delta_valid": -0.2429
+  },
+  {
+   "model": "kimi-k2.6",
+   "delta": -0.0893,
+   "delta_lookup": -0.0272,
+   "valid_spec": 0.7286,
+   "valid_grounded": 0.6429,
+   "delta_valid": -0.0857
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "delta": -0.0813,
+   "delta_lookup": -0.0727,
+   "valid_spec": 0.9286,
+   "valid_grounded": 0.8429,
+   "delta_valid": -0.0857
+  },
+  {
+   "model": "gemma-3-27b-it",
+   "delta": -0.0595,
+   "delta_lookup": -0.1593,
+   "valid_spec": 0.8143,
+   "valid_grounded": 0.7,
+   "delta_valid": -0.1143
+  },
+  {
+   "model": "gpt-5.4-nano",
+   "delta": -0.0492,
+   "delta_lookup": 0.0847,
+   "valid_spec": 0.7571,
+   "valid_grounded": 0.7571,
+   "delta_valid": 0.0
+  },
+  {
+   "model": "gpt-oss-20b",
+   "delta": -0.0458,
+   "delta_lookup": 0.0124,
+   "valid_spec": 0.2857,
+   "valid_grounded": 0.2429,
+   "delta_valid": -0.0429
+  },
+  {
+   "model": "gemini-3.5-flash",
+   "delta": -0.0326,
+   "delta_lookup": -0.1302,
+   "valid_spec": 0.9429,
+   "valid_grounded": 0.9,
+   "delta_valid": -0.0429
+  },
+  {
+   "model": "glm-5.2",
+   "delta": -0.022,
+   "delta_lookup": -0.1237,
+   "valid_spec": 0.9,
+   "valid_grounded": 0.8571,
+   "delta_valid": -0.0429
+  },
+  {
+   "model": "deepseek-v3.2",
+   "delta": -0.0156,
+   "delta_lookup": -0.1521,
+   "valid_spec": 0.9857,
+   "valid_grounded": 0.9714,
+   "delta_valid": -0.0143
+  },
+  {
+   "model": "claude-haiku-4-5",
+   "delta": -0.0152,
+   "delta_lookup": -0.0506,
+   "valid_spec": 0.9571,
+   "valid_grounded": 0.9286,
+   "delta_valid": -0.0286
+  },
+  {
+   "model": "llama-4-maverick",
+   "delta": 0.0007,
+   "delta_lookup": 0.1265,
+   "valid_spec": 0.8143,
+   "valid_grounded": 0.8286,
+   "delta_valid": 0.0143
+  },
+  {
+   "model": "minimax-m3",
+   "delta": 0.0022,
+   "delta_lookup": -0.037,
+   "valid_spec": 0.9,
+   "valid_grounded": 0.9143,
+   "delta_valid": 0.0143
+  },
+  {
+   "model": "nemotron-3-super-120b-a12b",
+   "delta": 0.0029,
+   "delta_lookup": -0.0346,
+   "valid_spec": 0.0857,
+   "valid_grounded": 0.0857,
+   "delta_valid": 0.0
+  },
+  {
+   "model": "gpt-oss-120b",
+   "delta": 0.0204,
+   "delta_lookup": 0.1603,
+   "valid_spec": 0.6286,
+   "valid_grounded": 0.6571,
+   "delta_valid": 0.0286
+  },
+  {
+   "model": "qwen3-next-80b-a3b-instruct",
+   "delta": 0.0249,
+   "delta_lookup": 0.0395,
+   "valid_spec": 0.9143,
+   "valid_grounded": 0.9143,
+   "delta_valid": 0.0
+  }
+ ],
+ "mvs_repair": [
+  {
+   "model": "deepseek-v3.2",
+   "strict": 0.9034,
+   "repaired": 0.9034,
+   "n_invalid_json": 0,
+   "n_raw": 0
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "strict": 0.8591,
+   "repaired": 0.9132,
+   "n_invalid_json": 4,
+   "n_raw": 4
+  },
+  {
+   "model": "claude-haiku-4-5",
+   "strict": 0.857,
+   "repaired": 0.857,
+   "n_invalid_json": 0,
+   "n_raw": 0
+  },
+  {
+   "model": "gemini-3.5-flash",
+   "strict": 0.8486,
+   "repaired": 0.8664,
+   "n_invalid_json": 4,
+   "n_raw": 4
+  },
+  {
+   "model": "minimax-m3",
+   "strict": 0.8166,
+   "repaired": 0.8615,
+   "n_invalid_json": 5,
+   "n_raw": 5
+  },
+  {
+   "model": "qwen3-next-80b-a3b-instruct",
+   "strict": 0.8054,
+   "repaired": 0.8483,
+   "n_invalid_json": 3,
+   "n_raw": 3
+  },
+  {
+   "model": "glm-5.2",
+   "strict": 0.8052,
+   "repaired": 0.8688,
+   "n_invalid_json": 5,
+   "n_raw": 5
+  },
+  {
+   "model": "llama-4-maverick",
+   "strict": 0.792,
+   "repaired": 0.7973,
+   "n_invalid_json": 1,
+   "n_raw": 1
+  },
+  {
+   "model": "gemma-3-27b-it",
+   "strict": 0.7133,
+   "repaired": 0.7575,
+   "n_invalid_json": 4,
+   "n_raw": 4
+  },
+  {
+   "model": "kimi-k2.6",
+   "strict": 0.6569,
+   "repaired": 0.7537,
+   "n_invalid_json": 18,
+   "n_raw": 18
+  },
+  {
+   "model": "gpt-5.4-nano",
+   "strict": 0.6541,
+   "repaired": 0.7985,
+   "n_invalid_json": 15,
+   "n_raw": 15
+  },
+  {
+   "model": "gpt-oss-120b",
+   "strict": 0.5614,
+   "repaired": 0.8743,
+   "n_invalid_json": 26,
+   "n_raw": 26
+  },
+  {
+   "model": "qwen3-30b-a3b-instruct-2507",
+   "strict": 0.5194,
+   "repaired": 0.5194,
+   "n_invalid_json": 28,
+   "n_raw": 0
+  },
+  {
+   "model": "gpt-oss-20b",
+   "strict": 0.2524,
+   "repaired": 0.8681,
+   "n_invalid_json": 50,
+   "n_raw": 50
+  },
+  {
+   "model": "nemotron-3-super-120b-a12b",
+   "strict": 0.078,
+   "repaired": 0.9107,
+   "n_invalid_json": 64,
+   "n_raw": 64
+  }
+ ]
+}
