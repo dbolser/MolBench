@@ -217,6 +217,10 @@ commands inspired planned Tier-2 task types.
 
 ## Roadmap
 
+The current plan is [`FINAL_PLAN.md`](FINAL_PLAN.md); [`ROADMAP.md`](ROADMAP.md) keeps the
+history. The paper draft is in [`paper/`](paper/) (`python paper/build.py`); every number in it
+is written by `scripts/paper_tables.py`.
+
 * Template-based MVS task generator for category-balanced Component-1 volume.
 * Turn the `data/molviewstories/` scenes into real Component-2 VLM-judged tasks
   (the headless renderer, `molbench/render.py`, now exists).

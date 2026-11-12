@@ -23,7 +23,7 @@ against the provider's current terms page before submission⟧
 | Resource | Used for | Licence or terms |
 |:---|:---|:---|
 | Protein Data Bank structures [@wwpdb2019] | atom tables, references | CC0 1.0 (public domain dedication) |
-| SIFTS / PDBe-KB [@dana2019sifts; @pdbekb2022] | UniProt-to-structure residue mapping | EMBL-EBI terms of use (open) |
+| SIFTS / PDBe-KB [@dana2019sifts; @pdbekb2022] | UniProt-to-structure residue mapping | CC BY 4.0 (EMBL-EBI) |
 | UniProt [@uniprot2025] | sequences, variant records | CC BY 4.0 |
 | ClinVar [@landrum2018clinvar] | clinical significance of variants | public domain (NCBI) |
 | AlphaFold DB [@varadi2024afdb] | predicted models, where used | CC BY 4.0 |
