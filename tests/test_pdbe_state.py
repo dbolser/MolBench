@@ -286,6 +286,10 @@ def test_alphafold_model_needs_custom_data():
     july = [{"action": "load", "molecule_id": "P04637", "alphafold": True}, STYLE("cartoon")]
     assert not grader.grade(t["reference"], july)["success"]
     assert grader.grade(t["reference"], july)["f1"] < 0.5
+    # an AlphaFold DB identifier is not a PDB id either: PDBe's model server has no such entry
+    by_af_id = [{"action": "load", "molecule_id": "AF-P04637-F1", "alphafold": True}]
+    assert not grader.grade(t["reference"], by_af_id)["success"]
+    assert ps.canonical_entry("AF-P04637-F1", None) == "id:af-p04637-f1"
     flag_only = [a for a in t["reference"] if a["action"] == "load"]
     assert not grader.grade(t["reference"], flag_only)["success"]     # loaded but not pLDDT-coloured
 
@@ -306,6 +310,7 @@ def test_superposition_is_compared_by_settings():
                                              PROP("bg_color", "#FFFFFF")])["success"]
     assert grader.grade(t["reference"], [PROP("bg_color", "white"), PROP("superposition", True),
                                          L("p69905")])["success"]
+    assert ps.replay(t["reference"]).entry == "id:p69905"
 
 
 # --- scoring ------------------------------------------------------------------------------

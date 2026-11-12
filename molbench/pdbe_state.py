@@ -75,7 +75,11 @@ Known simplifications (stated so nobody has to discover them)
   atoms drawn in those views (surroundings, superposed entries) are not modelled.
 * ``uniprot_*`` selectors need a frozen SIFTS table. ``uniprot_residue_atoms`` below
   is the single hook; until it is replaced it raises ``NotImplementedError`` and the
-  selection is reported as unresolved (it then selects nothing).
+  selection is reported as unresolved (it then selects nothing). In the viewer the
+  mapping comes from the ``_atom_site.pdbx_sifts_xref_db_*`` columns of the file it
+  loaded: PDBe's updated mmCIF has them (checked: P00760 position 63 selects author
+  His57 of 3PTB; P04637 position 248 selects Arg248 of all three chains of 1TUP), an
+  RCSB mmCIF does not, and there the same selectors select nothing.
 * A structure with no atom table (or an unknown id) is compared symbolically: its
   selections are equal only if they are written the same way.
 
@@ -429,14 +433,16 @@ STANDARD_COMPS = frozenset(
     "ALA ARG ASN ASP CYS GLN GLU GLY HIS ILE LEU LYS MET PHE PRO SER THR TRP TYR VAL "
     "SEC PYL ASX GLX UNK A C G U I DA DC DG DT DI DU N DN".split())
 
+_PDB_ID = re.compile(r"(?:pdb_0000)?[0-9][a-z0-9]{3}")
 _AF_URL = re.compile(r"AF-([A-Za-z0-9]+)-F(\d+)")
 _PDB_URL = re.compile(r"/(?:pdb)?([0-9][A-Za-z0-9]{3})(?:_updated|-assembly\d+)?\.(?:b?cif|pdb|ent)(?:\.gz)?(?:[?#].*)?$")
 
 
 def canonical_entry(molecule_id: Any, custom_data: Any) -> str | None:
     """What is loaded, written one way: a lower-case PDB id, ``af-<accession>-f<n>``
-    for an AlphaFold DB file (any model version), else the URL. ``custom_data`` wins,
-    as in ``getMoleculeSrcUrl`` (viewer.ts:297-325)."""
+    for an AlphaFold DB file (any model version), else the URL; ``id:<text>`` for a
+    molecule_id that is not a PDB id. ``custom_data`` wins, as in ``getMoleculeSrcUrl``
+    (viewer.ts:297-325)."""
     if isinstance(custom_data, dict) and custom_data.get("url"):
         url = str(custom_data["url"])
         if not custom_data.get("format"):
@@ -447,7 +453,11 @@ def canonical_entry(molecule_id: Any, custom_data: Any) -> str | None:
         m = _PDB_URL.search(url)
         return m.group(1).lower() if m else url
     if isinstance(molecule_id, str) and molecule_id.strip():
-        return molecule_id.strip().lower()
+        m = molecule_id.strip().lower()
+        # moleculeId is a PDB id (or, in the superposition view, a UniProt accession).
+        # Anything else is asked of PDBe's model server as if it were a PDB id and
+        # fails; the "id:" prefix keeps it apart from a file loaded by URL.
+        return m if _PDB_ID.fullmatch(m) else "id:" + m
     return None
 
 
@@ -656,7 +666,7 @@ def replay(actions: Any, tables: Callable[[str | None], AtomTable | None] = load
 
 def _reload(s: ViewerState, tables) -> None:
     s.paint, s.added, s.focus = [], [], None
-    s.table = tables(s.entry) if s.entry and re.fullmatch(r"[a-z0-9-]+", s.entry) else None
+    s.table = tables(s.entry) if s.entry and re.fullmatch(r"[a-z0-9_-]+", s.entry) else None
 
 
 def _data(act: dict) -> list | None:

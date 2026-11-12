@@ -30,7 +30,7 @@
     "set-background"
   ],
   "provenance": {
-    "structure": "p69905",
+    "structure": "id:p69905",
     "source": "PDBe-KB superposition view; no atom table (compared by settings)",
     "derived": "The July task loaded PDB entry 2HHB with superposition on. In pdbe-molstar 3.3.2 the superposition view takes a UniProt accession as moleculeId (spec.ts:103) and shows the PDBe-KB superposed entries for that protein; it does not align the chains of one entry. Compared by its settings (no atom table: the view's content comes from PDBe-KB at run time).",
     "july_task": "replaced",

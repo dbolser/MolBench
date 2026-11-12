@@ -172,15 +172,18 @@ def check_task(task: dict) -> list[str]:
 
 
 def _colours(act: dict):
-    for k in ("non_selected_color", "highlight", "select", "color"):
-        if k in act and act.get("action") != "color" or k == "non_selected_color" and k in act:
-            yield act[k]
-    if act.get("action") == "set_property" and str(act.get("name", "")).endswith("_color"):
+    """Every colour value an action carries."""
+    name = act.get("action")
+    if name == "color" and act.get("non_selected_color") is not None:
+        yield act["non_selected_color"]
+    if name == "set_color":
+        yield from (act[k] for k in ("highlight", "select") if act.get(k) is not None)
+    if name == "highlight" and act.get("color") is not None:
+        yield act["color"]
+    if name == "set_property" and act.get("name") in ("highlight_color", "select_color"):
         yield act.get("value")
     for p in act.get("data") or []:
-        for k in ("color", "representationColor"):
-            if p.get(k) is not None:
-                yield p[k]
+        yield from (p[k] for k in ("color", "representationColor") if p.get(k) is not None)
 
 
 def check_prompt_example(tasks: list[dict]) -> list[str]:
