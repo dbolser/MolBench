@@ -908,7 +908,18 @@ def test_dry_run_exercises_the_whole_pipeline_for_nothing(tmp_path, monkeypatch,
     card = json.loads((site / "scorecard.json").read_text())
     assert card["meta"]["run"]["mock"] is True and set(card["models"]) == {"plain", "json/mode"}
     assert card["meta"]["api_track"]["same_run"] and card["meta"]["api_track"]["n_tasks"] > 0
-    assert "DRY RUN" in (site / "index.html").read_text()  # the page says it is mock data
+    page = (site / "index.html").read_text()
+    assert "DRY RUN" in page                               # the page says it is mock data
+    # Task success (both ways), the target score and the API valid-output rate reach the
+    # site data, and the leaderboard shows success under the F1.
+    for rec in card["models"].values():
+        assert {"success", "success_all", "target_f1"} <= set(rec)
+        assert rec["by_category"]["api_calling"]["valid_rate"] is not None
+        assert "followup" in rec["by_category"]["mvs"]["by_tier"]      # fixtures were run
+        assert "heldback" in rec["by_category"]["api_calling"]["by_split"]
+    assert "% right</span>" in page and "truncated at the token limit" in page
+    fails = json.loads((site / "failures_data.json").read_text())
+    assert '"truncated": true' in json.dumps(fails)
     # Run it again: a dry run starts from empty and never touches a real archive.
     with pytest.raises(SystemExit) as e:
         runner.main(_argv(tmp_path, "--dry-run", "--no-site"))
