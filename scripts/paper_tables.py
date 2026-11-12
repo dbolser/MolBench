@@ -340,12 +340,18 @@ def r4(x):
     return None if x is None else round(float(x), 4)
 
 
+# Tables are formatted from the same 4-decimal values that go into values.json, so a number
+# in a table and the same number in the text can never round differently.
 def f3(x) -> str:
-    return "n/a" if x is None else f"{x:.3f}"
+    return "n/a" if x is None else f"{round(x, 4):.3f}"
+
+
+def signed(x) -> str:
+    return "n/a" if x is None else f"{round(x, 4):+.3f}"
 
 
 def pct(x) -> str:
-    return "n/a" if x is None else f"{100 * x:.1f}%"
+    return "n/a" if x is None else f"{round(x, 4):.1%}"
 
 
 def ci_str(ci, fmt=f3) -> str:
@@ -764,8 +770,8 @@ class Paper:
             if ci:
                 self.put(f"{k}.{tag}.lo", ci[0])
                 self.put(f"{k}.{tag}.hi", ci[1])
-            rows.append([label, n, "n/a" if d is None else f"{d:+.3f}",
-                         "n/a" if ci is None else f"{ci[0]:+.3f} to {ci[1]:+.3f}"])
+            rows.append([label, n, signed(d),
+                         "n/a" if ci is None else f"{signed(ci[0])} to {signed(ci[1])}"])
         self.put(f"{k}.both_valid.better", sum(x > 0 for x in pairs))
         self.put(f"{k}.both_valid.worse", sum(x < 0 for x in pairs))
         self.put(f"{k}.both_valid.same", sum(x == 0 for x in pairs))
@@ -948,6 +954,10 @@ class Paper:
         self.put(f"{T}.{H}.n_valid_perfect", n_valid - n_imperfect)
         for kd, n in kinds.items():
             self.put(f"{T}.{H}.diff.{kd.replace(' ', '_')}", n)
+        for rg, c in by_regime.items():
+            self.put(f"{T}.{H}.diff_regime.{rg}.n", c["_n"])
+            for kd in kinds:
+                self.put(f"{T}.{H}.diff_regime.{rg}.{kd.replace(' ', '_')}", c[kd])
         regs = [r for r in REGIME_ORDER if r in by_regime] + sorted(set(by_regime) - set(REGIME_ORDER))
         order = [k for k, _ in kinds.most_common()]
         rows = [[kd, kinds[kd], pct(kinds[kd] / n_imperfect)] + [by_regime[r][kd] for r in regs]
@@ -1018,7 +1028,7 @@ class Paper:
             self.put(f"{kk}.n_invalid_json", n_inv)
             self.put(f"{kk}.n_raw", len(f1s))
             rows.append([r["short"], n_inv, len(f1s), n_scene, f3(r["f1"]), f3(new),
-                         f"{new - r['f1']:+.3f}"])
+                         signed(round(new, 4) - round(r["f1"], 4))])
             fig.append({"model": r["short"], "strict": r4(r["f1"]), "repaired": r4(new),
                         "n_invalid_json": n_inv, "n_raw": len(f1s)})
         self.put(f"{k}.n_invalid_json", tot_inv)
@@ -1076,7 +1086,7 @@ class Paper:
             kk = f"{T}.{H}.escalation.model.{key_name(m)}"
             self.put(f"{kk}.tree_f1", tree)
             self.put(f"{kk}.validated_f1", val)
-            rows.append((tree, [short(m), f3(tree), f3(val), f"{val - tree:+.3f}", c["escalated"],
+            rows.append((tree, [short(m), f3(tree), f3(val), signed(val - tree), c["escalated"],
                                 c["rescued_pixel"], c["rescued_judge"], c["different"]]))
         if not rows:
             return

@@ -3,7 +3,7 @@
  "manifest": "paper/inputs.json",
  "label": "October 2026 panel",
  "status": "preliminary",
- "code_commit": "8341e6f6852ff462098b35ce5ac0109c68ec1f52",
+ "code_commit": "95e22983aa7bc9a5dcb3868ad718d53413eee73e",
  "bootstrap": {
   "replicates": 10000,
   "seed": 20261112,

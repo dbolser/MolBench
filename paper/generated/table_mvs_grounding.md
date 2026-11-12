@@ -2,6 +2,6 @@
 
 | Comparison | n | Change in F1 | 95% CI |
 | :--- | ---: | ---: | ---: |
-| All tasks, all outputs (mean over models) | 70 | -0.041 | -0.066 to -0.022 |
+| All tasks, all outputs (mean over models) | 70 | -0.041 | -0.066 to -0.021 |
 | Lookup tasks only, all outputs (mean over models) | 15 | -0.021 | -0.038 to +0.006 |
 | Task × model pairs valid in both conditions (pooled) | 647 | -0.004 | -0.010 to +0.003 |
