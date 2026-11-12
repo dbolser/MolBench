@@ -1,0 +1,39 @@
+{
+ "label": "October 2026 panel",
+ "status": "preliminary",
+ "run_date": "2026-10-18",
+ "tasks_dir": "tasks",
+ "scorecards": [
+  "results/r2x2/*/*.json",
+  "results/r2x2/baseline_spec.json"
+ ],
+ "archives": [
+  "runs/run_*.json"
+ ],
+ "legacy_scorecard": "docs/scorecard.json",
+ "headline_condition": "spec",
+ "grounded_condition": "spec_grounded",
+ "lookup_sources": ["clinvar-variant", "clinvar-hotspots", "sifts-named", "resolve"],
+ "aliases": {
+  "google/gemini-3.5-flash": "gemini-3.5-flash",
+  "openai/gpt-5.4-nano": "gpt-5.4-nano"
+ },
+ "model_info": {
+  "claude-haiku-4-5": {"weights": "closed"},
+  "gemini-3.5-flash": {"weights": "closed"},
+  "gpt-5.4-nano": {"weights": "closed"},
+  "deepseek/deepseek-v3.2": {"weights": "open"},
+  "deepseek/deepseek-v4-flash": {"weights": "open"},
+  "google/gemma-3-27b-it": {"weights": "open"},
+  "meta-llama/llama-4-maverick": {"weights": "open"},
+  "minimax/minimax-m3": {"weights": "open"},
+  "moonshotai/kimi-k2.6": {"weights": "open"},
+  "nvidia/nemotron-3-super-120b-a12b": {"weights": "open"},
+  "openai/gpt-oss-120b": {"weights": "open"},
+  "openai/gpt-oss-20b": {"weights": "open"},
+  "qwen/qwen3-30b-a3b-instruct-2507": {"weights": "open"},
+  "qwen/qwen3-next-80b-a3b-instruct": {"weights": "open"},
+  "z-ai/glm-5.2": {"weights": "open"}
+ },
+ "prices_usd_per_mtok": {}
+}
