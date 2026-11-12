@@ -57,6 +57,32 @@ structure residue mapping.
 15. **Venue:** preprint first, then JCIM or Digital Discovery. Paper lives in `paper/` as Markdown
     with every number injected by `scripts/paper_tables.py`. Numbers awaiting the final run are
     written as `⟦PENDING: what⟧` so they are easy to find.
+17. **A reference holds only what the request states** (found 2026-11-12: clinical references drew
+    an unrequested grey cartoon, and that — not the residue lookup — is where models lost points:
+    85 of 96 valid clinical scenes had the residue exactly right, 2 scored 1). If context is wanted,
+    the request asks for it in words. Every task also reports a **target score**: the requested
+    atoms alone (selection, representation, colour).
+18. **"Exactly right" is defined on what is drawn.** Task success compares, per atom, the set of
+    representations and the colour. Harmless namings are equal (`all` vs `polymer` under a cartoon;
+    a chain-id colour theme vs the same colours per chain). Unrequested extra drawing fails success
+    and costs precision. Each case is pinned by a test, and a **grader control set** (identical
+    pairs, equivalent pairs that must pass, wrong pairs that must fail) gives the grader's own
+    error rate for the paper.
+19. **"No change" is a valid answer.** Follow-up tasks always return the full scene / full call
+    list, so "nothing to do" is the start state returned unchanged. A few such tasks are included.
+20. **Paraphrases.** ~30 tasks get 3 scripted phrasings each (full, terse, indirect) to measure
+    sensitivity to wording. Real user phrasings from the chat site seed the terse forms.
+21. **Contamination.** Tasks have been public since May 2026; the paper says so. Generators are
+    seeded, and a **held-back split** (same generators, different structures, never published
+    before the run) is run alongside and compared with the public split.
+22. **Model panel by rule:** the open and closed models already tracked, plus current frontier
+    models from each major lab as optional entries; the rule is written in the manifest. The
+    keyword baseline is a panel member on both tracks.
+23. **Human rating study v2 validates the headline metric,** not only the image judge: people see
+    reference and answer renders, framed on the target atoms, and say same / different; that is
+    compared with the grader's task success and with the image judge. v1 is reported as a pilot.
+24. **Renders are framed on the target** (same camera for reference and answer), because raters
+    could not see one-residue targets in whole-molecule views.
 16. Vocabulary: "computational intelligence (CI)" not "AI", per Dan. Plain scientific language.
 
 ## Phases
