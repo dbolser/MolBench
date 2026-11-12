@@ -370,3 +370,37 @@ def test_export_only_ever_sends_one_select(monkeypatch):
     assert sent["auth"] == "Bearer not-a-real-token" and sent["url"].endswith("/database/query")
     with pytest.raises(ValueError):
         ex.fetch("a4-v1'; drop table ratings; --")
+
+
+# --------------------------------------------------------------------------- #
+# The power simulation (paper/a4/power.py)
+# --------------------------------------------------------------------------- #
+def _power():
+    spec = importlib.util.spec_from_file_location("a4_power", REPO / "paper" / "a4" / "power.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def test_power_model_pieces():
+    pw = _power()
+    e = pw.flip_rate(0.18)  # two raters split on 18% of pairs <-> each is off 10% of the time
+    assert abs(e - 0.1) < 1e-9
+    # 74% of answers say same with 10% error -> 80% of pairs truly same.
+    assert abs(pw.latent(0.74, 0.1) - 0.8) < 1e-9
+    assert pw.latent(0.05, 0.1) == 0.0
+    assert pw.cohen(5, 0, 0, 5) == 1.0 and pw.cohen(5, 5, 5, 5) == 0.0
+
+
+def test_power_more_pairs_means_a_tighter_interval():
+    import random
+    pw = _power()
+
+    def hw(n):
+        rng = random.Random(1)
+        return pw.half_width([pw.simulate(rng, n, 2, 0.5, 0.8, 0.15, 0.1)[0] for _ in range(300)])
+
+    assert hw(400) < hw(100) * 0.65  # about half, as 1 / sqrt(4)
+    # No rater error and a judge that is always right: perfect agreement on both measures.
+    kappa, fleiss, precision = pw.simulate(random.Random(1), 50, 2, 0.5, 1.0, 0.0, 0.0)
+    assert (kappa, fleiss, precision) == (1.0, 1.0, 1.0)
