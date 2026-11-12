@@ -1,0 +1,56 @@
+{
+  "id": "api-007",
+  "category": "api_calling",
+  "title": "Focus the biotin",
+  "prompt": "Load streptavidin (1STP), hide the waters, and centre the view on the bound biotin.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1stp"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "focus",
+      "data": [
+        {
+          "label_comp_id": "BTN"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "load",
+    "hide-component",
+    "focus-ligand"
+  ],
+  "categories": [
+    "load",
+    "hide-component",
+    "focus-ligand"
+  ],
+  "provenance": {
+    "structure": "1stp",
+    "source": "RCSB mmCIF 1STP -> molbench/atom_tables/1stp.json.gz (scripts/build_atom_tables.py)",
+    "derived": "The July prompt asked for a cartoon and a focus on the biotin; with visual_style cartoon the viewer does not draw ligands, so the camera centred on nothing visible. The cartoon request is dropped (the default view already draws the protein as cartoon and the ligand as ball-and-stick).",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "biotin",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 300,
+          "auth_comp_id": "BTN"
+        },
+        "n_atoms": 16
+      }
+    ]
+  },
+  "notes": "Domain fact: the ligand's component id is BTN."
+}

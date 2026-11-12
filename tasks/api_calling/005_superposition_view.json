@@ -1,0 +1,41 @@
+{
+  "id": "api-005",
+  "category": "api_calling",
+  "title": "PDBe-KB superposition view",
+  "prompt": "Open the PDBe-KB superposition view for human haemoglobin subunit alpha (UniProt P69905) on a white background.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "P69905"
+    },
+    {
+      "action": "set_property",
+      "name": "superposition",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "bg_color",
+      "value": "#FFFFFF"
+    }
+  ],
+  "skills": [
+    "load",
+    "superposition",
+    "set-background"
+  ],
+  "categories": [
+    "load",
+    "superposition",
+    "set-background"
+  ],
+  "provenance": {
+    "structure": "p69905",
+    "source": "PDBe-KB superposition view; no atom table (compared by settings)",
+    "derived": "The July task loaded PDB entry 2HHB with superposition on. In pdbe-molstar 3.3.2 the superposition view takes a UniProt accession as moleculeId (spec.ts:103) and shows the PDBe-KB superposed entries for that protein; it does not align the chains of one entry. Compared by its settings (no atom table: the view's content comes from PDBe-KB at run time).",
+    "july_task": "replaced",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "Tool-control only: no MVS equivalent."
+}

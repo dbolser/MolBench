@@ -1,0 +1,84 @@
+{
+  "id": "api-014",
+  "category": "api_calling",
+  "title": "Colour a residue range, grey out the rest",
+  "prompt": "Load ubiquitin (1UBQ) and colour the C-terminal tail, residues 71 to 76, red and the rest of the structure white.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1ubq"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "start_residue_number": 71,
+          "end_residue_number": 76,
+          "color": "red"
+        }
+      ],
+      "non_selected_color": "white"
+    }
+  ],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "1ubq"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "start_auth_residue_number": 71,
+            "end_auth_residue_number": 76,
+            "color": {
+              "r": 255,
+              "g": 0,
+              "b": 0
+            }
+          }
+        ],
+        "non_selected_color": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        }
+      }
+    ]
+  ],
+  "skills": [
+    "load",
+    "select-by-range",
+    "color",
+    "non-selected-color"
+  ],
+  "categories": [
+    "load",
+    "select-by-range",
+    "color",
+    "non-selected-color"
+  ],
+  "provenance": {
+    "structure": "1ubq",
+    "source": "RCSB mmCIF 1UBQ -> molbench/atom_tables/1ubq.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Replaces the July task, a near-duplicate of api-005 whose prompt described the superposition view wrongly. In 1UBQ label and author numbering agree; the waters are numbered from 77, so the label range and the author range (see `accepted`) select the same 47 atoms.",
+    "july_task": "replaced",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "residues 71-76",
+        "action": 1,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_auth_seq_id": 71,
+          "end_auth_seq_id": 76
+        },
+        "n_atoms": 47
+      }
+    ]
+  },
+  "notes": "Tests residue ranges and non_selected_color, which no July task used."
+}

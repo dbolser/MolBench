@@ -1,0 +1,122 @@
+{
+  "id": "api-009",
+  "category": "api_calling",
+  "title": "Colour insulin by chain, zinc as spacefill",
+  "prompt": "Load insulin (4INS) as a cartoon. Colour the two A chains (author chains A and C) blue and the two B chains (author chains B and D) yellow, and show the zinc ions as magenta spacefill.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "4ins"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "color": "blue"
+        },
+        {
+          "auth_asym_id": "C",
+          "color": "blue"
+        },
+        {
+          "auth_asym_id": "B",
+          "color": "yellow"
+        },
+        {
+          "auth_asym_id": "D",
+          "color": "yellow"
+        },
+        {
+          "label_comp_id": "ZN",
+          "representation": "spacefill",
+          "representationColor": "magenta"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-chain",
+    "select-by-ligand",
+    "per-selection-representation",
+    "color"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "select-by-chain",
+    "select-by-ligand",
+    "per-selection-representation",
+    "color"
+  ],
+  "provenance": {
+    "structure": "4ins",
+    "source": "RCSB mmCIF 4INS -> molbench/atom_tables/4ins.json.gz (scripts/build_atom_tables.py)",
+    "derived": "4INS holds two insulin molecules: A chains are author chains A and C, B chains are B and D. The July prompt said 'the A chain' and its reference coloured only A and B; the prompt now names the four chains. Colours are Mol* colour names.",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "author chain A",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A"
+        },
+        "n_atoms": 194
+      },
+      {
+        "what": "author chain C",
+        "action": 2,
+        "param": 1,
+        "atoms": {
+          "auth_asym_id": "C"
+        },
+        "n_atoms": 170
+      },
+      {
+        "what": "author chain B",
+        "action": 2,
+        "param": 2,
+        "atoms": {
+          "auth_asym_id": "B"
+        },
+        "n_atoms": 306
+      },
+      {
+        "what": "author chain D",
+        "action": 2,
+        "param": 3,
+        "atoms": {
+          "auth_asym_id": "D"
+        },
+        "n_atoms": 512
+      },
+      {
+        "what": "both zinc ions",
+        "action": 2,
+        "param": 4,
+        "atoms": [
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 101,
+            "auth_comp_id": "ZN"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 101,
+            "auth_comp_id": "ZN"
+          }
+        ],
+        "n_atoms": 2
+      }
+    ]
+  },
+  "notes": "An author chain id also covers that chain's waters and ions; under a cartoon style those are not drawn, so selecting the label chains instead ends in the same picture."
+}

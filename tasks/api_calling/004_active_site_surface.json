@@ -1,0 +1,112 @@
+{
+  "id": "api-004",
+  "category": "api_calling",
+  "title": "Catalytic residues as a red surface",
+  "prompt": "Load hen egg-white lysozyme (1LYZ) as a cartoon, colour the two catalytic residues Glu35 and Asp52 red, and also show them as a red molecular surface.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1lyz"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 35,
+          "color": "red",
+          "representation": "molecular-surface",
+          "representationColor": "red"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 52,
+          "color": "red",
+          "representation": "molecular-surface",
+          "representationColor": "red"
+        }
+      ]
+    }
+  ],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "1lyz"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "struct_asym_id": "A",
+            "residue_number": 35,
+            "color": "#ff0000",
+            "representation": "molecular-surface",
+            "representationColor": "#ff0000"
+          },
+          {
+            "struct_asym_id": "A",
+            "residue_number": 52,
+            "color": "#ff0000",
+            "representation": "molecular-surface",
+            "representationColor": "#ff0000"
+          }
+        ]
+      }
+    ]
+  ],
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-residue",
+    "per-selection-representation",
+    "color"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "select-by-residue",
+    "per-selection-representation",
+    "color"
+  ],
+  "provenance": {
+    "structure": "1lyz",
+    "source": "RCSB mmCIF 1LYZ -> molbench/atom_tables/1lyz.json.gz (scripts/build_atom_tables.py)",
+    "derived": "The July prompt gave no colour, so the result depended on whether the answer left `color` out (the viewer then paints the cartoon its default orange) or set it to null. The prompt now names the colour of both the cartoon and the surface. In 1LYZ label and author numbering agree, so either numbering selects the same atoms (see `accepted`).",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "Glu35",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 35,
+          "auth_comp_id": "GLU"
+        },
+        "n_atoms": 9
+      },
+      {
+        "what": "Asp52",
+        "action": 2,
+        "param": 1,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 52,
+          "auth_comp_id": "ASP"
+        },
+        "n_atoms": 8
+      }
+    ]
+  },
+  "notes": "Domain knowledge: lysozyme's catalytic dyad is Glu35/Asp52."
+}

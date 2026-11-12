@@ -1,0 +1,76 @@
+{
+  "id": "api-013",
+  "category": "api_calling",
+  "title": "Colour B-DNA by strand",
+  "prompt": "Load the Drew-Dickerson B-DNA dodecamer (1BNA) as a cartoon, colour strand A blue and strand B red, and hide the waters.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1bna"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "color": "blue"
+        },
+        {
+          "auth_asym_id": "B",
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    }
+  ],
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-chain",
+    "color",
+    "hide-component"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "select-by-chain",
+    "color",
+    "hide-component"
+  ],
+  "provenance": {
+    "structure": "1bna",
+    "source": "RCSB mmCIF 1BNA -> molbench/atom_tables/1bna.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Prompt unchanged. The July reference's hand-picked RGB values are replaced by the Mol* colour names blue and red.",
+    "july_task": "unchanged",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "strand A",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A"
+        },
+        "n_atoms": 280
+      },
+      {
+        "what": "strand B",
+        "action": 2,
+        "param": 1,
+        "atoms": {
+          "auth_asym_id": "B"
+        },
+        "n_atoms": 286
+      }
+    ]
+  },
+  "notes": "Nucleic-acid task."
+}
