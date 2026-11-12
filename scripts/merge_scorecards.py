@@ -5,7 +5,12 @@ Merge model results from several scorecards into one.
 Lets you run new models in a separate pass (e.g. a fresh set of OpenRouter models)
 without re-spending on models you already scored, then combine everything into a
 single leaderboard. Refuses to merge runs over a different corpus or sample count,
-since blending those would make the comparison dishonest.
+since blending those would make the comparison dishonest. Scorecards from a manifest
+run carry the corpus hash, the prompting condition and whether they are mock data;
+those must match too.
+
+A manifest run does not need this script: adding a model to the manifest and running
+the same command again fills in only the missing cells.
 
     python scripts/merge_scorecards.py BASE.json EXTRA1.json [EXTRA2.json ...] [-o OUT.json]
 """
@@ -26,6 +31,10 @@ def merge(base_path: str, extra_paths: list[str], out: str | None = None) -> Non
                 f"refusing to merge {p}: corpus/sample mismatch "
                 f"({d.get('n_tasks')} tasks x{d.get('samples')} vs "
                 f"{base.get('n_tasks')} x{base.get('samples')})")
+        for key in ("corpus_sha256", "condition_name", "mock"):
+            a, b = base.get("meta", {}).get(key), d.get("meta", {}).get(key)
+            if a != b:
+                raise SystemExit(f"refusing to merge {p}: {key} differs ({b!r} vs {a!r})")
         base.setdefault("models", {}).update(d.get("models", {}))
     out = out or base_path
     pathlib.Path(out).write_text(json.dumps(base, indent=2))

@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
 """
-Derive the leaderboard's data files from the 2×2 scorecards and run archives.
+Derive the leaderboard's data files from scorecards and run archives.
 
+    # a manifest run (python -m molbench.runner --manifest ...): both tracks, one run
+    python scripts/build_site_data.py --run results/final-v1 --runs runs/final-v1 --docs OUT
+
+    # the October 2026 layout: MVS re-run, API track carried over from docs/scorecard.json
     python scripts/build_site_data.py --results results/r2x2 --runs runs [--docs docs]
+
     python scripts/build_leaderboard.py      # then render the HTML
+
+Dates, task counts and sample counts are read from the scorecards. The few facts a
+scorecard cannot carry (a model renamed between runs, a model that could not be run)
+live in a small config file, ``--site-config`` (default ``run/site_r2x2.toml``).
 
 Reads, under ``--results``:
 
@@ -31,6 +40,7 @@ Re-running is idempotent: the API track is read back from ``scorecard.json``.
 from __future__ import annotations
 
 import argparse
+import calendar
 import json
 import pathlib
 import re
@@ -43,15 +53,31 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
 from molbench import runner  # noqa: E402
+from molbench.manifest import tomllib  # noqa: E402
 
-# Same model, new route: these ran via OpenRouter on 2026-10-18 instead of the
-# native APIs. Keep the old key so is_open() (slash = open weights) stays right.
-ALIASES = {"google/gemini-3.5-flash": "gemini-3.5-flash",
-           "openai/gpt-5.4-nano": "gpt-5.4-nano"}
-NATIVE = {"gemini-3.5-flash": "gemini:gemini-3.5-flash", "gpt-5.4-nano": "openai:gpt-5.4-nano"}
-# In the July panel but not in the October run (upstream rate limit at Mistral).
-NOT_RUN = {"mistralai/mistral-small-2603":
-           "not re-run: OpenRouter upstream rate limit at Mistral (11 attempts, 2026-10-18)"}
+DEFAULT_SITE_CONFIG = REPO / "run" / "site_r2x2.toml"
+
+# Filled from the site config (see `configure`):
+ALIASES: dict[str, str] = {}   # run name -> leaderboard name (same model, new route)
+NATIVE: dict[str, str] = {}    # leaderboard name -> the route of its older result
+NOT_RUN: dict[str, str] = {}   # in the older panel, absent from this run -> why
+
+
+def configure(path: pathlib.Path | None) -> None:
+    """Load renames and not-run notes; ``None`` clears them (a manifest run has none)."""
+    cfg = tomllib.loads(path.read_text(encoding="utf-8")) if path else {}
+    ALIASES.clear(), NATIVE.clear(), NOT_RUN.clear()
+    for run_name, a in cfg.get("aliases", {}).items():
+        ALIASES[run_name] = a["name"]
+        NATIVE[a["name"]] = a["native"]
+    for name, n in cfg.get("not_run", {}).items():
+        NOT_RUN[name] = n["reason"]
+
+
+configure(DEFAULT_SITE_CONFIG if DEFAULT_SITE_CONFIG.exists() else None)
+
+ROUTE_LABELS = {"openrouter": "OpenRouter", "anthropic": "Anthropic", "openai": "OpenAI",
+                "gemini": "Google", "google": "Google"}
 
 CONDITIONS = ("spec", "spec_grounded", "bare", "bare_grounded")
 RESCUED = {"rendering-equivalent", "vlm:same"}
@@ -107,6 +133,59 @@ def raw_samples_for(entry: dict, archives: dict, cache: dict) -> dict | None:
     return cache[hits[0]][entry["raw_name"]]
 
 
+def cell_samples_for(entry: dict, archive: pathlib.Path, cache: dict) -> dict | None:
+    """Raw samples behind a manifest-run scorecard: ``{task_id: [record by sample]}``
+    from ``<archive>/cells/<model>/<condition>.jsonl``."""
+    f = archive / "cells" / entry["file"].stem / f"{entry['file'].parent.name}.jsonl"
+    if not f.exists():
+        return None
+    if f not in cache:
+        per: dict[str, dict] = {}
+        for line in f.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                r = json.loads(line)
+                per.setdefault(r["task_id"], {})[r["sample"]] = r
+        cache[f] = per
+    return cache[f]
+
+
+def mvs_tasks(m: dict) -> list[dict]:
+    return [t for t in m["tasks"] if t["category"] == "mvs"]
+
+
+def run_date(spec: dict) -> str:
+    """The day(s) the spec scorecards were started: one date, or 'first to last'."""
+    days = sorted({e["card"]["meta"]["started_at"][:10] for e in spec.values()})
+    return days[0] if len(days) == 1 else f"{days[0]} to {days[-1]}"
+
+
+def month_name(date: str | None) -> str:
+    """'2026-10-18...' -> 'October' ('?' when there is no date)."""
+    try:
+        return calendar.month_name[int(date[5:7])]
+    except (TypeError, ValueError, IndexError):
+        return "?"
+
+
+def n_mvs_tasks(spec: dict) -> int:
+    return max(len(mvs_tasks(e["model"])) for e in spec.values())
+
+
+def n_samples(spec: dict) -> int:
+    return next(iter(spec.values()))["card"].get("samples", 1)
+
+
+def task_outcomes(t: dict) -> list[str]:
+    """The outcome of every sample of a task (a single-sample task has one)."""
+    if len(t.get("outcomes") or []) > 1:
+        return t["outcomes"]
+    return [t.get("outcome")]
+
+
+def all_valid(t: dict) -> bool:
+    return all(o == "valid" for o in task_outcomes(t))
+
+
 def load_tasks() -> dict[str, dict]:
     out = {}
     for f in (REPO / "tasks").rglob("*.json"):
@@ -152,14 +231,17 @@ def escalation_summary(tasks: list[dict]) -> dict:
 
 
 def outcome_counts(tasks: list[dict]) -> dict[str, int]:
-    return {o: sum(t.get("outcome") == o for t in tasks) for o in runner.OUTCOMES}
+    """Samples per outcome (every sample of every task)."""
+    seen = Counter(o for t in tasks for o in task_outcomes(t))
+    return {o: seen[o] for o in runner.OUTCOMES}
 
 
 def paired_delta(spec: list[dict], other: list[dict], ids: set[str] | None = None) -> dict:
     """other - spec, overall and on the tasks whose scene is valid in both runs."""
     a = {t["id"]: t for t in spec if ids is None or t["id"] in ids}
     b = {t["id"]: t for t in other if t["id"] in a}
-    both = [i for i in a if a[i].get("outcome") == "valid" and b[i].get("outcome") == "valid"]
+    a = {i: t for i, t in a.items() if i in b}  # a condition may cover only some tasks
+    both = [i for i in a if all_valid(a[i]) and all_valid(b[i])]
     d = [b[i]["f1"] - a[i]["f1"] for i in both]
     return {
         "n": len(a),
@@ -283,27 +365,39 @@ def build_scorecard(conds: dict, baseline: dict | None, old_card: dict,
             m["validated_f1"] = esc_models[name]["validated_f1"]
         if name in NOT_RUN:
             m["mvs_not_run"] = NOT_RUN[name]
-        if name in ALIASES.values():
-            m["route_note"] = (f"ran via OpenRouter ({m['spec']}) on 2026-10-18; "
-                               f"July API-track result via the native API ({NATIVE[name]})")
         models[name] = m
     spec_meta = next(iter(spec.values()))["card"]["meta"]
-    api_note = old_card.get("meta", {}).get("api_track", {}) or {
-        "run": old_card.get("meta", {}).get("api_track_rerun", {}).get("at"),
-        "n_tasks": 20, "samples": old_card.get("samples", 3),
-        "note": "API track not re-run in October; carried over from the July 2026 scorecard "
-                "(grader unchanged).",
+    when = run_date(spec)
+    n_mvs, samples = n_mvs_tasks(spec), n_samples(spec)
+    old_meta = old_card.get("meta", {})
+    api_run = (old_meta.get("api_track") or {}).get("run") \
+        or old_meta.get("api_track_rerun", {}).get("at")
+    api_month, mvs_month = month_name(api_run), month_name(when)
+    api_note = old_meta.get("api_track", {}) or {
+        "run": api_run,
+        "n_tasks": max((sum(t["category"] == "api_calling" for t in m.get("tasks", []))
+                        for m in old_models.values()), default=0),
+        "samples": old_card.get("samples", 3),
+        "note": f"API track not re-run in {mvs_month}; carried over from the {api_month} "
+                f"{(api_run or '?')[:4]} scorecard (grader unchanged).",
     }
+    for name, m in models.items():
+        if name in NATIVE:
+            route = ROUTE_LABELS.get(str(m["spec"]).split(":")[0], str(m["spec"]).split(":")[0])
+            m["route_note"] = (f"ran via {route} ({m['spec']}) on {when}; "
+                               f"{api_month} API-track result via the native API ({NATIVE[name]})")
+    src = "/".join(next(iter(spec.values()))["file"].parent.parts[-3:])  # results/<set>/spec
     return {
-        "n_tasks": 70 + api_note["n_tasks"],
-        "samples": 1,
+        "n_tasks": n_mvs + api_note["n_tasks"],
+        "samples": samples,
         "meta": {
             "built_by": "scripts/build_site_data.py",
             "mvs_track": {
-                "run": "2026-10-18", "n_tasks": 70, "samples": 1, "condition": "spec",
-                "escalate": True, "judge": spec_meta.get("judge"), "validate": True,
+                "run": when, "n_tasks": n_mvs, "samples": samples, "condition": "spec",
+                "escalate": bool(spec_meta.get("escalate")), "judge": spec_meta.get("judge"),
+                "validate": bool(spec_meta.get("validate")),
                 "git_commit": spec_meta.get("git_commit"),
-                "sources": {n: f"results/r2x2/spec/{e['file'].name} "
+                "sources": {n: f"{src}/{e['file'].name} "
                                f"(started {e['card']['meta']['started_at']})"
                             for n, e in sorted(spec.items())},
                 "note": "Atom-set grader (R7), strict T1, Mol*-validated outcomes. "
@@ -312,7 +406,8 @@ def build_scorecard(conds: dict, baseline: dict | None, old_card: dict,
             "api_track": api_note,
             "renamed": {v: k for k, v in ALIASES.items()},
             "not_run": NOT_RUN,
-            "speed_note": "sec_per_call is from the July run (October wall time includes rendering).",
+            "speed_note": f"sec_per_call is from the {api_month} run ({mvs_month} wall time "
+                          "includes rendering).",
         },
         "models": models,
     }
@@ -326,7 +421,7 @@ def build_escalation(spec: dict) -> dict:
                         "confirmed_different", "failed", "mvs")}
     totals["n_models"] = len(models)
     judge = next(iter(spec.values()))["card"]["meta"].get("judge")
-    return {"preliminary": False, "judge": judge, "policy": "rescue-only", "run": "2026-10-18",
+    return {"preliminary": False, "judge": judge, "policy": "rescue-only", "run": run_date(spec),
             "t1_rule": "≤ 2 pixels changing by > 48 in any channel, at 256 px",
             "gallery_url": "gallery.html",
             "tiers": ["tree-match", "visual diff", "VLM judge"],
@@ -363,7 +458,7 @@ def build_gallery(spec: dict, tasks: dict, docs: pathlib.Path) -> dict:
             "vlm:same": "Picked: lowest tree F1 among scenes the VLM judged the same.",
             "vlm:different": "Picked: highest tree F1 among scenes the VLM judged different.",
         }[r["decision"]]
-    return {"meta": {"model": f"{len(spec)} models (spec run, 2026-10-18)",
+    return {"meta": {"model": f"{len(spec)} models (spec run, {run_date(spec)})",
                      "judge": next(iter(spec.values()))["card"]["meta"].get("judge"),
                      "n": len(picks),
                      "rule": f"{GALLERY_PER_CLASS} per verdict, distinct tasks: lowest tree F1 "
@@ -382,26 +477,27 @@ def build_conditions(conds: dict, tasks: dict) -> dict:
     lookup = {i for i, t in tasks.items() if t.get("source") in LOOKUP_SOURCES}
     rows = {}
     for name, e in conds["spec"].items():
-        st = e["model"]["tasks"]
+        st = mvs_tasks(e["model"])
         r = {"spec": _cond_stats(e["model"])}
-        for c in ("spec_grounded", "bare", "bare_grounded"):
-            if name in conds[c]:
+        for c in conds:
+            if c != "spec" and name in conds[c] and "mvs" in conds[c][name]["model"]["by_category"]:
                 r[c] = _cond_stats(conds[c][name]["model"])
         if name in conds["spec_grounded"]:
-            gt = conds["spec_grounded"][name]["model"]["tasks"]
+            gt = mvs_tasks(conds["spec_grounded"][name]["model"])
             r["dossier"] = paired_delta(st, gt)
             r["dossier_lookup"] = paired_delta(st, gt, lookup)
         rows[name] = r
     pooled = []
     for name, e in conds["spec"].items():
         if name in conds["spec_grounded"]:
-            a = {t["id"]: t for t in e["model"]["tasks"]}
-            for t in conds["spec_grounded"][name]["model"]["tasks"]:
-                if t.get("outcome") == "valid" and a[t["id"]].get("outcome") == "valid":
+            a = {t["id"]: t for t in mvs_tasks(e["model"])}
+            for t in mvs_tasks(conds["spec_grounded"][name]["model"]):
+                if all_valid(t) and all_valid(a[t["id"]]):
                     pooled.append(t["f1"] - a[t["id"]]["f1"])
     paired = [r["dossier"] for r in rows.values() if "dossier" in r]
     return {
-        "run": "2026-10-18", "samples": 1, "n_tasks": 70, "n_lookup_tasks": len(lookup),
+        "run": run_date(conds["spec"]), "samples": n_samples(conds["spec"]),
+        "n_tasks": n_mvs_tasks(conds["spec"]), "n_lookup_tasks": len(lookup),
         "lookup_sources": sorted(LOOKUP_SOURCES),
         "models": rows,
         "summary": {
@@ -431,34 +527,68 @@ def _failure(t: dict, raw: dict | None, prompt: str) -> dict:
     return out
 
 
-def build_failures(conds: dict, tasks: dict, archives: dict,
+def _sample_failures(t: dict, raws: dict | None, prompt: str) -> list[dict]:
+    """One entry per failing *sample* of a multi-sample task (manifest runs). The
+    scorecard keeps only the best sample's tree, so the others show their raw text."""
+    out = []
+    for s in t["samples"]:
+        if s.get("outcome") == "valid":
+            continue
+        raw = ((raws or {}).get(t["id"]) or {}).get(s["sample"])
+        f = _failure({**s, "id": t["id"]}, raw, prompt)
+        f["sample"] = s["sample"]
+        if s.get("outcome") in ("invalid_mvs", "load_failed", "unchecked"):
+            f["raw"] = None if raw is None else (raw.get("raw") or "")
+        out.append(f)
+    return out
+
+
+def build_failures(conds: dict, tasks: dict, archives: dict | pathlib.Path,
                    baseline: dict | None = None) -> dict:
+    """``archives``: the index of ``run_*.json`` archives, or a manifest run's archive
+    directory (per-sample failures, raw text from its cell files)."""
     cache: dict = {}
-    out: dict = {"run": "2026-10-18", "outcomes": list(runner.OUTCOMES), "conditions": {}}
+    per_sample = isinstance(archives, pathlib.Path)
+    spec = conds["spec"]
+    out: dict = {"run": run_date(spec), "samples": n_samples(spec),
+                 "n_tasks": n_mvs_tasks(spec), "outcomes": list(runner.OUTCOMES),
+                 "conditions": {}}
     msg: dict[str, dict] = {}
     jerr: dict[str, Counter] = {}
-    for c in CONDITIONS:
+    for c in conds:
         per = {}
         for name, e in sorted(conds[c].items()):
-            mt = e["model"]["tasks"]
-            fails = [t for t in mt if t.get("outcome") != "valid"]
-            rec = {"outcomes": outcome_counts(mt), "n": len(mt),
+            mt = mvs_tasks(e["model"])
+            if not mt:
+                continue
+            fails = [t for t in mt if not all_valid(t)]
+            counts = outcome_counts(mt)
+            rec = {"outcomes": counts, "n": sum(counts.values()),
                    "mvs_f1": e["model"]["by_category"]["mvs"]["mean_f1"]}
             for t in fails:
-                for iss in split_issues(t.get("mvs_issues")):
-                    g = msg.setdefault(normalise_issue(iss), {"counts": Counter(), "examples": Counter(),
-                                                               "models": set()})
-                    g["counts"][c] += 1
-                    g["examples"][issue_text(iss)] += 1
-                    g["models"].add(name)
-                if t.get("outcome") == "invalid_json":
-                    jerr.setdefault(normalise_json_error(t.get("error")), Counter())[c] += 1
+                rows = [s for s in t["samples"] if s.get("outcome") != "valid"] \
+                    if per_sample else [t]
+                for row in rows:
+                    for iss in split_issues(row.get("mvs_issues")):
+                        g = msg.setdefault(normalise_issue(iss),
+                                           {"counts": Counter(), "examples": Counter(),
+                                            "models": set()})
+                        g["counts"][c] += 1
+                        g["examples"][issue_text(iss)] += 1
+                        g["models"].add(name)
+                    if row.get("outcome") == "invalid_json":
+                        jerr.setdefault(normalise_json_error(row.get("error")), Counter())[c] += 1
             if c.startswith("spec"):  # bare: counts only, every scene fails the same way
-                raws = raw_samples_for(e, archives, cache)
+                raws = (cell_samples_for(e, archives, cache) if per_sample
+                        else raw_samples_for(e, archives, cache))
                 if raws is None:
                     rec["raw_missing"] = True
-                rec["failures"] = [_failure(t, ((raws or {}).get(t["id"]) or [None])[0],
-                                            tasks[t["id"]]["prompt"]) for t in fails]
+                if per_sample:
+                    rec["failures"] = [f for t in fails
+                                       for f in _sample_failures(t, raws, tasks[t["id"]]["prompt"])]
+                else:
+                    rec["failures"] = [_failure(t, ((raws or {}).get(t["id"]) or [None])[0],
+                                                tasks[t["id"]]["prompt"]) for t in fails]
             per[name] = rec
         if c == "spec" and baseline:  # the rules floor: counts only, it is not an LLM
             bm = baseline["models"]["baseline-rules"]
@@ -476,29 +606,93 @@ def build_failures(conds: dict, tasks: dict, archives: dict,
     return out
 
 
+def build_run_scorecard(spec: dict) -> dict:
+    """The leaderboard scorecard of a manifest run: both tracks from the same run, so
+    nothing is carried over and nothing is renamed."""
+    first = next(iter(spec.values()))["card"]
+    meta = first["meta"]
+    when = run_date(spec)
+    n_mvs = n_mvs_tasks(spec)
+    n_api = max(sum(t["category"] == "api_calling" for t in e["model"]["tasks"])
+                for e in spec.values())
+    samples = n_samples(spec)
+    track = {"run": when, "samples": samples, "condition": "spec", "same_run": True}
+    return {
+        "n_tasks": n_mvs + n_api,
+        "samples": samples,
+        "meta": {
+            "built_by": "scripts/build_site_data.py",
+            "run": {k: meta.get(k) for k in ("run_name", "manifest", "manifest_sha256",
+                                             "corpus_version", "corpus_sha256", "git_commit",
+                                             "mock", "archive")},
+            "mvs_track": {**track, "n_tasks": n_mvs, "escalate": False, "judge": None,
+                          "validate": bool(meta.get("validate")),
+                          "git_commit": meta.get("git_commit"),
+                          "sources": {n: f"{e['file'].parent.name}/{e['file'].name}"
+                                      for n, e in sorted(spec.items())},
+                          "note": "Strict score: anything but a valid output scores 0."},
+            "api_track": {**track, "n_tasks": n_api,
+                          "note": "Run together with the MVS track (same models, same day)."},
+            "incomplete": sorted(n for n, e in spec.items()
+                                 if not e["card"]["meta"].get("complete", True)),
+        },
+        "models": {n: e["model"] for n, e in sorted(spec.items())},
+    }
+
+
+def build_from_run(run_dir: pathlib.Path, archive: pathlib.Path, docs: pathlib.Path) -> dict:
+    """The data files of a manifest run (no render cascade: no escalation or gallery)."""
+    configure(None)
+    names = [d.name for d in sorted(run_dir.iterdir())
+             if d.is_dir() and any(d.glob("*.json"))]
+    order = [c for c in CONDITIONS if c in names] + [c for c in names if c not in CONDITIONS]
+    conds = {c: load_condition(run_dir, c) for c in order}
+    if not conds.get("spec"):
+        raise SystemExit(f"{run_dir}: no spec/ scorecards; nothing to build")
+    conds.setdefault("spec_grounded", {})
+    tasks = load_tasks()
+    return {
+        "scorecard.json": build_run_scorecard(conds["spec"]),
+        "conditions_data.json": build_conditions(conds, tasks),
+        "failures_data.json": build_failures(conds, tasks, archive),
+    }
+
+
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    ap.add_argument("--run", type=pathlib.Path, default=None,
+                    help="scorecards of a manifest run (results/<run name>); with --runs "
+                         "pointing at its archive (runs/<run name>)")
     ap.add_argument("--results", type=pathlib.Path, default=REPO / "results" / "r2x2")
     ap.add_argument("--runs", type=pathlib.Path, default=REPO / "runs")
     ap.add_argument("--docs", type=pathlib.Path, default=REPO / "docs")
+    ap.add_argument("--site-config", type=pathlib.Path, default=DEFAULT_SITE_CONFIG,
+                    help="renamed / not-run models for the --results layout")
     a = ap.parse_args(argv)
 
-    conds = {c: load_condition(a.results, c) for c in CONDITIONS}
-    tasks = load_tasks()
-    archives = index_archives(a.runs)
-    bpath = a.results / "baseline_spec.json"
-    baseline = json.loads(bpath.read_text(encoding="utf-8")) if bpath.exists() else None
-    old_card = json.loads((a.docs / "scorecard.json").read_text(encoding="utf-8"))
+    if a.run:
+        files = build_from_run(a.run, a.runs, a.docs)
+        for stale in ("escalation_data.json", "gallery_data.json"):
+            (a.docs / stale).unlink(missing_ok=True)  # none in a manifest run
+    else:
+        configure(a.site_config)
+        conds = {c: load_condition(a.results, c) for c in CONDITIONS}
+        tasks = load_tasks()
+        archives = index_archives(a.runs)
+        bpath = a.results / "baseline_spec.json"
+        baseline = json.loads(bpath.read_text(encoding="utf-8")) if bpath.exists() else None
+        old_card = json.loads((a.docs / "scorecard.json").read_text(encoding="utf-8"))
 
-    esc = build_escalation(conds["spec"])
-    card = build_scorecard(conds, baseline, old_card, esc["models"])
-    files = {
-        "scorecard.json": card,
-        "escalation_data.json": esc,
-        "gallery_data.json": build_gallery(conds["spec"], tasks, a.docs),
-        "conditions_data.json": build_conditions(conds, tasks),
-        "failures_data.json": build_failures(conds, tasks, archives, baseline),
-    }
+        esc = build_escalation(conds["spec"])
+        card = build_scorecard(conds, baseline, old_card, esc["models"])
+        files = {
+            "scorecard.json": card,
+            "escalation_data.json": esc,
+            "gallery_data.json": build_gallery(conds["spec"], tasks, a.docs),
+            "conditions_data.json": build_conditions(conds, tasks),
+            "failures_data.json": build_failures(conds, tasks, archives, baseline),
+        }
+    a.docs.mkdir(parents=True, exist_ok=True)
     for fname, data in files.items():
         # scorecard.json in build_leaderboard.py's own format, so a rebuild is a no-op.
         text = (json.dumps(data, indent=2) if fname == "scorecard.json"
