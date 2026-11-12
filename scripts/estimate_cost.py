@@ -3,7 +3,7 @@
 What will a manifest run cost? No model is called; nothing is spent.
 
     python scripts/estimate_cost.py                              # current corpus
-    python scripts/estimate_cost.py --tasks mvs=300 api_calling=150   # a planned corpus
+    python scripts/estimate_cost.py --tasks mvs=450 api_calling=250   # a planned corpus
     python scripts/estimate_cost.py --calibrate /path/to/runs    # re-measure token rates
 
 The table has one row per model and one column per condition. Input tokens come from
@@ -15,7 +15,11 @@ reasoning tokens, since those are billed). Prices come from the manifest.
 ``--tasks`` scales the current corpus to a planned size per track: it assumes the new
 tasks have the same average prompt and answer size as today's, and that the share of
 tasks each restricted condition applies to (e.g. grounding on the lookup tiers) stays
-the same. ``--calibrate`` rebuilds ``run/token_calibration.json`` from archived runs
+the same. Two things the planned corpus has and today's does not are therefore not in
+the number: follow-up tasks send the start state as well (about 30 tasks per track; the
+system prompt, at 8,000-11,000 characters, still dominates the input), and a larger
+clinical tier raises the share of tasks the grounding condition runs on. Re-run without
+``--tasks`` once the corpus exists: that estimate reads the real prompts. ``--calibrate`` rebuilds ``run/token_calibration.json`` from archived runs
 (``run_*.json`` with real token usage).
 """
 
@@ -45,8 +49,10 @@ def calibrate(runs: pathlib.Path, pattern: str = "run_20261018*.json") -> dict:
     tokens per reference character, over every matching MVS run archive.
 
     Uses today's prompts and tasks, so it is only right while they still match what
-    the archives were run on (true for the 2026-10-18 runs: prompt text is unchanged
-    since their commit).
+    the archives were run on. That was true for the 2026-10-18 runs until the MVS system
+    prompt gained its "Follow-up requests" paragraph (about 330 characters in 8,200):
+    recalibrating on those archives now would overstate characters-per-token by about
+    4%. The committed ``run/token_calibration.json`` was measured before that change.
     """
     tasks = {t["id"]: t for t in runner.load_tasks(["mvs"])}
     prompts = {c: runner.build_system_prompts(c)["mvs"] for c in runner.CONDITIONS}
@@ -131,7 +137,7 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--manifest", type=pathlib.Path, default=DEFAULT_MANIFEST)
     ap.add_argument("--calibration", type=pathlib.Path, default=None)
     ap.add_argument("--tasks", nargs="+", default=None, metavar="TRACK=N",
-                    help="hypothetical corpus size, e.g. mvs=300 api_calling=150")
+                    help="hypothetical corpus size, e.g. mvs=450 api_calling=250")
     ap.add_argument("--core-only", action="store_true", help="leave out optional models")
     ap.add_argument("--json", action="store_true", help="print the rows as JSON")
     ap.add_argument("--calibrate", type=pathlib.Path, default=None, metavar="RUNS_DIR",
@@ -154,7 +160,7 @@ def main(argv: list[str] | None = None) -> None:
         try:
             target = {k: int(v) for k, v in (x.split("=", 1) for x in a.tasks)}
         except ValueError:
-            raise SystemExit("--tasks takes TRACK=N pairs, e.g. mvs=300 api_calling=150")
+            raise SystemExit("--tasks takes TRACK=N pairs, e.g. mvs=450 api_calling=250")
     tasks = runner.load_tasks(list(manifest_mod.TRACKS))
     rows, info = estimate(manifest, calib, tasks, not a.core_only, target)
     if a.json:
