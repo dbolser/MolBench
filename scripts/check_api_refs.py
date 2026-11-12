@@ -34,8 +34,16 @@ bundle (fetched from jsDelivr into ``molbench/static/molstar/pdbe-3.3.2`` if mis
 ``--cif`` adds checks that need the mmCIF itself (gemmi): an ``assembly_id`` in a
 reference names an assembly that exists and differs from the deposited model.
 
+``--uniprot`` runs the fidelity check for ``uniprot_*`` selectors. The viewer maps
+those with the SIFTS columns of the file it loaded, which only PDBe's "updated" mmCIF
+carries, so these probes load that file (fetched into ``data/cif``) and compare the
+viewer's atoms with the frozen SIFTS lookup behind
+``pdbe_state.uniprot_residue_atoms``. Skipped, with a message, while that lookup is
+not available.
+
     python scripts/check_api_refs.py            # offline checks
     python scripts/check_api_refs.py --viewer   # + real-viewer fidelity
+    python scripts/check_api_refs.py --uniprot  # + real-viewer fidelity of UniProt selectors
     python scripts/check_api_refs.py --cif      # + assembly checks
 """
 
@@ -211,13 +219,15 @@ def check_prompt_example(tasks: list[dict]) -> list[str]:
 
 # --- mmCIF checks (gemmi) ------------------------------------------------------------
 
-def fetch_cif(entry: str) -> pathlib.Path:
+def fetch_cif(entry: str, updated: bool = False) -> pathlib.Path:
+    """The mmCIF of an entry, cached. ``updated``: PDBe's updated mmCIF (with SIFTS)."""
     CIF_CACHE.mkdir(parents=True, exist_ok=True)
-    path = CIF_CACHE / f"{entry}.cif"
+    path = CIF_CACHE / (f"{entry}_updated.cif" if updated else f"{entry}.cif")
     if not path.exists():
         m = re.fullmatch(r"af-([a-z0-9]+)-f(\d+)", entry)
         url = (f"https://alphafold.ebi.ac.uk/files/AF-{m.group(1).upper()}-F{m.group(2)}-model_v6.cif"
-               if m else f"https://files.rcsb.org/download/{entry}.cif")
+               if m else f"https://www.ebi.ac.uk/pdbe/entry-files/download/{entry}_updated.cif"
+               if updated else f"https://files.rcsb.org/download/{entry}.cif")
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (generic-client)"})
         with urllib.request.urlopen(req, timeout=60) as r:
             path.write_bytes(r.read())
@@ -467,14 +477,14 @@ class Viewer:
         self._pw.stop()
         self._server.shutdown()
 
-    def run(self, actions: list[dict]) -> dict:
-        """Run the actions; returns the viewer's state dump (see _RUN_JS)."""
+    def run(self, actions: list[dict], updated: bool = False) -> dict:
+        """Run the actions; returns the viewer's state dump (see _RUN_JS).
+        ``updated``: load PDBe's updated mmCIF instead of the RCSB file."""
         acts = copy.deepcopy(actions)
         for a in acts:
             if a.get("action") == "load":
                 entry = ps.canonical_entry(a.get("molecule_id"), a.get("custom_data"))
-                fetch_cif(entry)
-                a["_url"] = f"/cif/{entry}.cif"
+                a["_url"] = f"/cif/{fetch_cif(entry, updated).name}"
             if a.get("action") == "set_property" and a.get("name") == "bg_color":
                 r, g, b = ps.css_color(a.get("value")) or (0, 0, 0)
                 a["_rgb"] = {"r": r, "g": g, "b": b}
@@ -684,11 +694,39 @@ def probes() -> list[tuple[str, list[dict]]]:
     return out
 
 
+def uniprot_probes() -> list[tuple[str, list[dict]]]:
+    """UniProt-numbered selections (run only with --uniprot, on PDBe's updated mmCIF)."""
+    L = lambda e: {"action": "load", "molecule_id": e}  # noqa: E731
+    C = lambda data: {"action": "color", "data": data}  # noqa: E731
+    return [
+        ("3ptb: UniProt P00760 63 is author His57 (offset); ranges; chain filter", [L("3ptb"), C([
+            {"uniprot_accession": "P00760", "uniprot_residue_number": 63, "color": "red"},
+            {"uniprot_accession": "P00760", "start_uniprot_residue_number": 100,
+             "end_uniprot_residue_number": 110, "color": "blue"},
+            {"uniprot_accession": "P00760", "uniprot_residue_number": 200, "auth_asym_id": "A",
+             "atoms": ["CA"], "color": "yellow"}])]),
+        ("3ptb: wrong accession, unmapped position, number as a string", [L("3ptb"), C([
+            {"uniprot_accession": "P04637", "uniprot_residue_number": 63, "color": "red"},
+            {"uniprot_accession": "P00760", "uniprot_residue_number": 5, "color": "blue"},
+            {"uniprot_accession": "P00760", "uniprot_residue_number": "63", "color": "cyan"},
+            {"uniprot_accession": "P00760", "uniprot_residue_number": 63, "label_comp_id": "SER",
+             "color": "yellow"}])]),
+        ("1tup: UniProt P04637 248 in three chains; a range; one chain", [L("1tup"), C([
+            {"uniprot_accession": "P04637", "uniprot_residue_number": 248, "color": "red"},
+            {"uniprot_accession": "P04637", "start_uniprot_residue_number": 270,
+             "end_uniprot_residue_number": 282, "color": "blue"},
+            {"uniprot_accession": "P04637", "uniprot_residue_number": 175, "auth_asym_id": "B",
+             "color": "yellow"}])]),
+    ]
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--viewer", action="store_true", help="also compare with real pdbe-molstar")
     ap.add_argument("--cif", action="store_true", help="also run the mmCIF (gemmi) checks")
+    ap.add_argument("--uniprot", action="store_true",
+                    help="also compare UniProt-numbered selections with real pdbe-molstar")
     ap.add_argument("--only", nargs="*", help="task ids (or probe name fragments) to run")
     args = ap.parse_args()
 
@@ -750,6 +788,32 @@ def main() -> None:
                 for b in bad:
                     print(f"    - {b}")
         print(f"viewer: {n_run} action lists run in pdbe-molstar {PDBE_VERSION}, "
+              f"{n_sel} selections compared atom for atom")
+    if args.uniprot:
+        todo = []
+        for name, actions in uniprot_probes():
+            state = ps.replay(copy.deepcopy(actions))
+            if state.unresolved:
+                print(f"uniprot {name}: skipped ({state.unresolved[0].rsplit('}: ', 1)[-1]})")
+            else:
+                todo.append((name, actions))
+        n_sel = 0
+        if todo:
+            with Viewer() as viewer:
+                for name, actions in todo:
+                    try:
+                        dump = viewer.run(actions, updated=True)
+                    except Exception as e:
+                        n_bad += 1
+                        print(f"uniprot {name}: FAILED TO RUN: {str(e).splitlines()[0][:200]}")
+                        continue
+                    bad = compare_with_viewer(actions, dump)
+                    n_bad += len(bad)
+                    n_sel += sum(len(s["params"]) for s in dump.get("selections", []))
+                    print(f"uniprot {name}: {'agrees' if not bad else 'DIFFERS'}")
+                    for b in bad:
+                        print(f"    - {b}")
+        print(f"uniprot: {len(todo)} action lists run on PDBe's updated mmCIF, "
               f"{n_sel} selections compared atom for atom")
     if n_bad:
         raise SystemExit(f"{n_bad} problem(s)")

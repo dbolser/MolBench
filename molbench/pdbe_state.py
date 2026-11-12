@@ -74,8 +74,9 @@ Known simplifications (stated so nobody has to discover them)
 * ``ligand_view`` and ``superposition`` scenes are compared by their settings; the
   atoms drawn in those views (surroundings, superposed entries) are not modelled.
 * ``uniprot_*`` selectors need a frozen SIFTS table. ``uniprot_residue_atoms`` below
-  is the single hook; until it is replaced it raises ``NotImplementedError`` and the
-  selection is reported as unresolved (it then selects nothing). In the viewer the
+  is the single hook: it uses ``molbench.sifts.uniprot_atoms`` when that exists, and
+  otherwise (or for an entry with no frozen table) raises ``NotImplementedError``;
+  the selection is then reported as unresolved and selects nothing. In the viewer the
   mapping comes from the ``_atom_site.pdbx_sifts_xref_db_*`` columns of the file it
   loaded: PDBe's updated mmCIF has them (checked: P00760 position 63 selects author
   His57 of 3PTB; P04637 position 248 selects Arg248 of all three chains of 1TUP), an
@@ -255,17 +256,29 @@ def uniprot_residue_atoms(entry: str, accession: str, uniprot_resnum: int) -> in
     """Atoms of ``entry`` (a bitmask over its atom table rows) that SIFTS maps to
     position ``uniprot_resnum`` of UniProt ``accession``.
 
-    This is the interface for the frozen SIFTS tables. To plug them in::
+    This is the one hook for the frozen SIFTS tables. It forwards to
+    ``molbench.sifts.uniprot_atoms(entry, accession, unp_num)`` as soon as that function
+    exists (it arrives with the frozen tables in ``molbench/sifts_tables``); nothing
+    else has to change. Until then, and for an entry with no frozen table, it raises
+    ``NotImplementedError`` and the selection is reported as unresolved. Another
+    mapping can be plugged in with one assignment::
 
-        pdbe_state.uniprot_residue_atoms = frozen_sifts.residue_atoms
+        pdbe_state.uniprot_residue_atoms = my_mapping
 
     pdbe-molstar tests ``accession === siftMappings.accession[residue]`` and
-    ``resnum === +siftMappings.num[residue]`` (helpers.ts:247-264), so the frozen
-    function must return every atom of every residue (any chain) mapped to that
-    position, and 0 when nothing maps there.
+    ``resnum === +siftMappings.num[residue]`` (helpers.ts:247-264), so the function
+    must return every atom of every residue (any chain) mapped to that position, and
+    0 when nothing maps there.
     """
-    raise NotImplementedError("frozen SIFTS mapping is not wired in yet "
-                              "(replace molbench.pdbe_state.uniprot_residue_atoms)")
+    from . import sifts
+    frozen = getattr(sifts, "uniprot_atoms", None)
+    if frozen is None:
+        raise NotImplementedError("frozen SIFTS mapping is not wired in yet "
+                                  "(molbench.sifts.uniprot_atoms is missing)")
+    atoms = frozen(entry, accession, uniprot_resnum)
+    if atoms is None:
+        raise NotImplementedError(f"no frozen SIFTS table for {entry!r}")
+    return atoms
 
 
 # --- selection resolution (getQueryObject) -------------------------------------------
@@ -772,6 +785,7 @@ def _apply(s: ViewerState, act: dict, tables) -> None:
     if name == "tooltips":
         data = _data(act)
         if data is not None:
+            s.select(data)               # resolve now, so a malformed selection is ignored here
             s.tooltip_params = data
         return
 
@@ -942,18 +956,24 @@ def facts(s: ViewerState) -> dict[str, Any]:
             out["scene"] = scene
         out["_changed"], out["_all"] = changed, whole_scene
     else:
-        # no atoms to draw on: record the calls that would have painted something
+        # no atoms to draw on (no table, or a view whose content is not modelled):
+        # record the calls that would have painted something
         sym: dict[Any, Any] = {}
+        none = 0 if t is not None else frozenset()
+
+        def key_of(m: Any) -> Any:
+            return m if isinstance(m, int) else tuple(sorted(m))
+
         if s.visual_style:
-            sym[("style", s.visual_style)] = frozenset(["*"])
+            sym[("style", s.visual_style)] = s.everything()
         for flag, on in s.hide.items():
             if on:
-                sym[("hidden", flag)] = frozenset(["*"])
+                sym[("hidden", flag)] = s.everything()
         for mask, rgb in s.paint:
-            sym[("paint", rgb)] = sym.get(("paint", rgb), frozenset()) | mask
+            sym[("paint", rgb)] = sym.get(("paint", rgb), none) | mask
         for mask, rep, layers in s.added:
-            key = ("added", rep, tuple(sorted((tuple(sorted(m)), c) for m, c in layers)))
-            sym[key] = sym.get(key, frozenset()) | mask
+            key = ("added", rep, tuple(sorted(((key_of(m), c) for m, c in layers), key=repr)))
+            sym[key] = sym.get(key, none) | mask
         if sym:
             out["display"] = sym
         out["_changed"] = out["_all"] = sym
@@ -1043,7 +1063,8 @@ def compare(reference: ViewerState, predicted: ViewerState) -> dict[str, Any]:
     n_pred_facts = sum(1 for k in pred if not k.startswith("_"))
     same_structure = reference.loaded and reference.entry == predicted.entry
     base = {"same_structure": same_structure, "structure": [reference.entry, predicted.entry],
-            "ignored": list(predicted.log), "unresolved": list(predicted.unresolved)}
+            "ignored": list(predicted.log),
+            "unresolved": sorted(set(predicted.unresolved))}
     if not same_structure:
         # facts are differences from a bare load of *this* structure: on another one
         # (or none) there is nothing to compare them with
@@ -1137,7 +1158,11 @@ def grade_state(reference: list, predicted: Any, accepted: list[list] | None = N
     pred = replay(copy.deepcopy(predicted), tables)
     best = None
     for i, ref in enumerate([reference] + list(accepted or [])):
-        res = compare(replay(copy.deepcopy(ref), tables), pred)
+        try:
+            res = compare(replay(copy.deepcopy(ref), tables), pred)
+        except Exception as e:  # an answer must never be able to crash the grader
+            res = {"precision": 0.0, "recall": 0.0, "f1": 0.0, "success": False,
+                   "error": f"could not compare states ({type(e).__name__}: {e})"}
         res["matched_reference"] = i
         if best is None or (res["success"], res["f1"]) > (best["success"], best["f1"]):
             best = res

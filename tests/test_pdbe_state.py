@@ -109,12 +109,18 @@ def test_atoms_and_atom_id():
 
 def test_uniprot_selectors_wait_for_frozen_sifts(monkeypatch):
     ref = [L("1tup"), C([{"uniprot_accession": "P04637", "uniprot_residue_number": 248, "color": "red"}])]
-    state = ps.replay(ref)
-    assert state.unresolved and "SIFTS" in state.unresolved[0]
-    assert not state.paint                                    # unresolved selects nothing
-    # plugging the mapping in is one assignment
     t = load_table("1tup")
     arg248 = ps.resolve_param(t, {"auth_seq_id": 248, "label_comp_id": None}) & ps.resolve_param(t, {"label_comp_id": "ARG"})
+    assert arg248.bit_count() == 33                           # Arg248 of chains A, B and C
+    state = ps.replay(ref)
+    from molbench import sifts
+    if hasattr(sifts, "uniprot_atoms") and sifts.uniprot_atoms("1tup", "P04637", 248) is not None:
+        # the frozen SIFTS tables are in: the hook resolves by itself
+        assert not state.unresolved and state.paint[0][0] == arg248
+    else:
+        assert state.unresolved and "SIFTS" in state.unresolved[0]
+        assert not state.paint                                # unresolved selects nothing
+    # another mapping can be plugged in with one assignment
     monkeypatch.setattr(ps, "uniprot_residue_atoms",
                         lambda entry, acc, num: arg248 if (entry, acc, num) == ("1tup", "P04637", 248) else 0)
     state = ps.replay(ref)
@@ -394,8 +400,25 @@ def test_grade_dispatch_and_legacy():
     [L("3ptb"), {"action": "set_property"}, {"action": "set_property", "name": [], "value": {}}],
     [L("3ptb"), {"action": "reset"}, {"action": "focus"}, {"action": "tooltips", "data": [{}]}, {"action": "nope"}],
     [L("3ptb"), C([{"uniprot_accession": "P00760", "uniprot_residue_number": 1.5}])],
+    # a view compared by its settings, on an entry that has an atom table
+    [L("3ptb"), PROP("superposition", True), STYLE("cartoon"), PROP("hide_water", True),
+     C([{"auth_seq_id": 57, "color": "red", "representation": "spacefill", "representationColor": "red"}]),
+     {"action": "tooltips", "data": [{"auth_seq_id": 57, "tooltip": "x"}]}],
+    [L("3ptb", ligand_view={"label_comp_id": "BEN"}), C([{"auth_seq_id": 57}])],
+    [L("3ptb", ligand_view="BEN", preset=["x"], assembly_id={"a": 1})],
+    [L("3ptb"), {"action": "tooltips", "data": [{"auth_seq_id": float("inf"), "tooltip": 3}]},
+     {"action": "set_color", "highlight": float("inf"), "select": [1]}, PROP("bg_color", {"r": "x"})],
 ])
 def test_bad_input_never_raises(junk):
     ref = task("019")["reference"]
     res = grader.grade(ref, junk)
     assert res["success"] is False and 0.0 <= res["f1"] < 1.0
+
+
+def test_ligand_view_is_compared_by_the_ligand_it_names():
+    by_name = [L("3ptb", ligand_view={"label_comp_id": "BEN"})]
+    by_number = [L("3ptb", ligand_view={"auth_asym_id": "A", "auth_seq_id": 1})]
+    other = [L("3ptb", ligand_view={"label_comp_id": "CA"})]
+    assert ps.grade_state(by_name, by_number)["success"]
+    assert not ps.grade_state(by_name, other)["success"]
+    assert not ps.grade_state(by_name, [L("3ptb")])["success"]
