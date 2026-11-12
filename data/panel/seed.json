@@ -52,7 +52,7 @@
     {"id": "1lmb", "claims": ["protein-dna"], "why": "Lambda repressor on operator DNA: a helix-turn-helix dimer on DNA."},
     {"id": "1aoi", "claims": ["protein-dna"], "why": "Nucleosome core particle: eight histone chains and 146 bp of DNA, the largest multi-chain entry under the size limit."},
     {"id": "5ni1", "claims": ["cryo-em", "heme"], "why": "Human haemoglobin by cryo-EM: the same protein as 2HHB by another method."},
-    {"id": "7a4m", "claims": ["cryo-em"], "why": "Human apoferritin by cryo-EM at 1.22 A: atomic-resolution cryo-EM."}
+    {"id": "7a4m", "claims": ["cryo-em"], "why": "Mouse apoferritin by cryo-EM at 1.22 A: atomic-resolution cryo-EM; one chain deposited, the 24-mer is the assembly."}
   ],
   "disease_proteins": [
     {"accession": "P04637", "gene": "TP53", "disease": "Li-Fraumeni syndrome; somatic cancers", "entry": "1tup"},
