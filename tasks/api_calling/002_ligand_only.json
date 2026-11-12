@@ -1,0 +1,39 @@
+{
+  "id": "api-002",
+  "category": "api_calling",
+  "title": "Leave only the ligand visible",
+  "prompt": "Load cellular retinoic-acid-binding protein II (1CBS) and hide the protein and the waters so that only the bound retinoic acid is shown.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1cbs"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_polymer",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    }
+  ],
+  "skills": [
+    "load",
+    "hide-component"
+  ],
+  "categories": [
+    "load",
+    "hide-component"
+  ],
+  "provenance": {
+    "structure": "1cbs",
+    "source": "RCSB mmCIF 1CBS -> molbench/atom_tables/1cbs.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Replaces the July task, which was the prompt's worked example word for word. 1CBS has exactly three default components: polymer, ligand (REA) and water.",
+    "july_task": "replaced",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "Tests hide_polymer, which no July task used."
+}

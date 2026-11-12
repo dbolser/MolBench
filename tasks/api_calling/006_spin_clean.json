@@ -4,12 +4,50 @@
   "title": "Presentation view",
   "prompt": "Show insulin (4INS), hide the waters and the heteroatoms, set glossy lighting, and make it slowly spin.",
   "reference": [
-    {"action": "load", "molecule_id": "4ins"},
-    {"action": "set_property", "name": "hide_water", "value": true},
-    {"action": "set_property", "name": "hide_heteroatoms", "value": true},
-    {"action": "set_property", "name": "lighting", "value": "glossy"},
-    {"action": "set_property", "name": "spin", "value": true}
+    {
+      "action": "load",
+      "molecule_id": "4ins"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "hide_heteroatoms",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "lighting",
+      "value": "glossy"
+    },
+    {
+      "action": "set_property",
+      "name": "spin",
+      "value": true
+    }
   ],
-  "skills": ["load", "hide-component", "lighting", "spin"],
-  "notes": "Several independent property toggles; order among them does not matter to the grader."
+  "skills": [
+    "load",
+    "hide-component",
+    "lighting",
+    "spin"
+  ],
+  "categories": [
+    "load",
+    "hide-component",
+    "lighting",
+    "spin"
+  ],
+  "provenance": {
+    "structure": "4ins",
+    "source": "RCSB mmCIF 4INS -> molbench/atom_tables/4ins.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Prompt and reference unchanged. 4INS has a water component and an ion component (two zinc ions), so both toggles hide something.",
+    "july_task": "unchanged",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "Independent property toggles."
 }

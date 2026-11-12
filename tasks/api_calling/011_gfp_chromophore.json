@@ -2,14 +2,61 @@
   "id": "api-011",
   "category": "api_calling",
   "title": "GFP barrel and chromophore",
-  "prompt": "Load green fluorescent protein (1EMA), show the beta-barrel as a cartoon, and render the chromophore as ball-and-stick coloured green.",
+  "prompt": "Load green fluorescent protein (1EMA) as a cartoon, colour the chromophore orange, and also show it as orange ball-and-stick.",
   "reference": [
-    {"action": "load", "molecule_id": "1ema"},
-    {"action": "set_visual_style", "style": "cartoon"},
-    {"action": "color", "data": [
-      {"label_comp_id": "CRO", "representation": "ball-and-stick", "color": {"r": 0, "g": 200, "b": 60}}
-    ]}
+    {
+      "action": "load",
+      "molecule_id": "1ema"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "CRO",
+          "color": "orange",
+          "representation": "ball-and-stick",
+          "representationColor": "orange"
+        }
+      ]
+    }
   ],
-  "skills": ["load", "global-style", "select-by-ligand", "per-selection-representation", "color"],
-  "notes": "Domain fact: the GFP chromophore is the modified tripeptide CRO. Tests selecting a non-standard residue by comp id."
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-ligand",
+    "per-selection-representation",
+    "color"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "select-by-ligand",
+    "per-selection-representation",
+    "color"
+  ],
+  "provenance": {
+    "structure": "1ema",
+    "source": "RCSB mmCIF 1EMA -> molbench/atom_tables/1ema.json.gz (scripts/build_atom_tables.py)",
+    "derived": "The chromophore is the modified residue CRO (author residue 66), part of the polymer chain, so it has a cartoon trace as well as the added ball-and-stick; the prompt names the colour of both. The July colour (green, hand-picked RGB) is replaced by a Mol* colour name.",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "chromophore",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 66,
+          "auth_comp_id": "CRO"
+        },
+        "n_atoms": 22
+      }
+    ]
+  },
+  "notes": "Domain fact: the GFP chromophore is the non-standard residue CRO."
 }

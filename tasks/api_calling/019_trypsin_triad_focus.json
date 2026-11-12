@@ -1,22 +1,194 @@
 {
   "id": "api-019",
   "category": "api_calling",
-  "title": "Trypsin catalytic triad, side chains and focus",
-  "prompt": "Load trypsin (3PTB) as a cartoon, colour the catalytic triad (His57, Asp102 and Ser195 on chain A) magenta with their side chains shown, and centre the camera on them.",
+  "title": "Trypsin catalytic triad",
+  "prompt": "Load trypsin (3PTB) as a cartoon, colour the catalytic triad (His57, Asp102 and Ser195) magenta, also show those three residues as magenta ball-and-stick, and centre the camera on them.",
   "reference": [
-    {"action": "load", "molecule_id": "3ptb"},
-    {"action": "set_visual_style", "style": "cartoon"},
-    {"action": "color", "data": [
-      {"auth_asym_id": "A", "residue_number": 57, "sideChain": true, "color": {"r": 220, "g": 0, "b": 220}},
-      {"auth_asym_id": "A", "residue_number": 102, "sideChain": true, "color": {"r": 220, "g": 0, "b": 220}},
-      {"auth_asym_id": "A", "residue_number": 195, "sideChain": true, "color": {"r": 220, "g": 0, "b": 220}}
-    ]},
-    {"action": "focus", "data": [
-      {"auth_asym_id": "A", "residue_number": 57},
-      {"auth_asym_id": "A", "residue_number": 102},
-      {"auth_asym_id": "A", "residue_number": 195}
-    ]}
+    {
+      "action": "load",
+      "molecule_id": "3ptb"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 57,
+          "color": "magenta",
+          "representation": "ball-and-stick",
+          "representationColor": "magenta"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 102,
+          "color": "magenta",
+          "representation": "ball-and-stick",
+          "representationColor": "magenta"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 195,
+          "color": "magenta",
+          "representation": "ball-and-stick",
+          "representationColor": "magenta"
+        }
+      ]
+    },
+    {
+      "action": "focus",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 57
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 102
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 195
+        }
+      ]
+    }
   ],
-  "skills": ["load", "global-style", "select-by-residue", "sidechain", "color", "focus-selection"],
-  "notes": "Domain fact: the serine-protease catalytic triad is His57/Asp102/Ser195. Tests a multi-residue selection with side chains and a camera focus on the same set."
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "3ptb"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "struct_asym_id": "A",
+            "residue_number": 40,
+            "color": "magenta",
+            "sideChain": true,
+            "representationColor": "magenta",
+            "focus": true
+          },
+          {
+            "struct_asym_id": "A",
+            "residue_number": 84,
+            "color": "magenta",
+            "sideChain": true,
+            "representationColor": "magenta",
+            "focus": true
+          },
+          {
+            "struct_asym_id": "A",
+            "residue_number": 177,
+            "color": "magenta",
+            "sideChain": true,
+            "representationColor": "magenta",
+            "focus": true
+          }
+        ]
+      }
+    ]
+  ],
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-residue",
+    "author-numbering",
+    "per-selection-representation",
+    "color",
+    "focus-selection"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "select-by-residue",
+    "author-numbering",
+    "per-selection-representation",
+    "color",
+    "focus-selection"
+  ],
+  "provenance": {
+    "structure": "3ptb",
+    "source": "RCSB mmCIF 3PTB -> molbench/atom_tables/3ptb.json.gz (scripts/build_atom_tables.py)",
+    "derived": "His57/Asp102/Ser195 are author (chymotrypsinogen) numbers; in 3PTB they are label_seq_id 40/84/177. The July reference used residue_number 57/102/195, which is label numbering and selects author Val75/Ser120/Ser217. The reference now uses auth_seq_id; the label-numbered form, with sideChain and focus inside the colour call, is listed under `accepted` and ends in the same state. A closed-book answer can only know the author numbers, so that is the form the reference takes.",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "His57",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 57,
+          "auth_comp_id": "HIS"
+        },
+        "n_atoms": 10
+      },
+      {
+        "what": "Asp102",
+        "action": 2,
+        "param": 1,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 102,
+          "auth_comp_id": "ASP"
+        },
+        "n_atoms": 8
+      },
+      {
+        "what": "Ser195",
+        "action": 2,
+        "param": 2,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 195,
+          "auth_comp_id": "SER"
+        },
+        "n_atoms": 6
+      },
+      {
+        "what": "His57",
+        "action": 3,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 57,
+          "auth_comp_id": "HIS"
+        },
+        "n_atoms": 10
+      },
+      {
+        "what": "Asp102",
+        "action": 3,
+        "param": 1,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 102,
+          "auth_comp_id": "ASP"
+        },
+        "n_atoms": 8
+      },
+      {
+        "what": "Ser195",
+        "action": 3,
+        "param": 2,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 195,
+          "auth_comp_id": "SER"
+        },
+        "n_atoms": 6
+      }
+    ]
+  },
+  "notes": "Domain fact: the serine-protease catalytic triad."
 }

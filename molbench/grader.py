@@ -1,11 +1,19 @@
 """
-Structured grader for Component 1 (API-calling tasks).
+Grader for the API-calling track.
 
-We compare two ordered lists of canonical actions (reference vs. predicted) and
-produce a precision / recall / F1 in [0, 1] plus a human-readable trace.
+``grade(reference, predicted)`` is what the runner calls. By default it grades by
+**final viewer state** (``molbench/pdbe_state.py``): both action lists are replayed
+with pdbe-molstar 3.3.2's semantics and the states compared, giving precision /
+recall / F1 over state facts and a strict ``success`` flag. Order matters because the
+replay is ordered; two answers that end in the same picture score the same.
 
-Design notes
-------------
+The older **sequence** grader is kept as ``grade_sequence`` (also ``grade(...,
+mode="sequence")``) for comparison with the July 2026 numbers. It is also what
+``grade`` falls back to when the reference loads no structure the state grader can
+resolve atoms on (no atom table); the result's ``grader`` key says which one ran.
+
+Sequence grader — design notes
+------------------------------
 * Grading is **field-aware and tolerant**. Exact-string equality would punish a
   model for harmless phrasing differences (e.g. `auth_asym_id` vs `struct_asym_id`
   pointing at the same chain, or selections listed in a different order). So each
@@ -174,10 +182,38 @@ def _values_eq(a: Any, b: Any) -> bool:
 
 # --- top-level grading ------------------------------------------------------------
 
-def grade(reference: list[dict], predicted: Any) -> dict[str, Any]:
+def grade(reference: list[dict], predicted: Any, accepted: list[list] | None = None,
+          mode: str = "state") -> dict[str, Any]:
     """Grade a predicted action list against the reference.
 
-    Returns a dict with precision, recall, f1, and a per-reference-op trace.
+    ``mode="state"`` (default): by final viewer state; the result has precision,
+    recall, f1, ``success`` and the facts compared. ``accepted`` lists further action
+    lists that are equally right. ``mode="sequence"``: the legacy step-matching grader.
+    A reference the state grader cannot place on a structure is graded by sequence.
+    """
+    if mode not in ("state", "sequence"):
+        raise ValueError(f"unknown grading mode {mode!r}")
+    if mode == "state":
+        from . import pdbe_state
+        if pdbe_state.gradable(reference):
+            return pdbe_state.grade_state(reference, predicted, accepted=accepted)
+    result = grade_sequence(reference, predicted)
+    result["grader"] = "sequence"
+    result["success"] = result["f1"] == 1.0
+    return result
+
+
+def grade_task(task: dict[str, Any], predicted: Any, mode: str = "state") -> dict[str, Any]:
+    """Grade against a task: its ``reference`` plus any ``accepted`` alternatives."""
+    return grade(task["reference"], predicted, accepted=task.get("accepted"), mode=mode)
+
+
+def grade_sequence(reference: list[dict], predicted: Any) -> dict[str, Any]:
+    """Legacy grader: greedy matching of reference and predicted actions.
+
+    Returns a dict with precision, recall, f1, and a per-reference-op trace. Known
+    weaknesses (the reason it is no longer the default): it ignores order, pools label
+    and author numbering and chain ids, and never looks at the structure.
     """
     if not isinstance(predicted, list):
         return {"precision": 0.0, "recall": 0.0, "f1": 0.0,

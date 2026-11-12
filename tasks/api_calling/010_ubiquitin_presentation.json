@@ -4,13 +4,58 @@
   "title": "Presentation view of ubiquitin",
   "prompt": "Load ubiquitin (1UBQ) as a cartoon with glossy lighting on a black background, hide the waters, and set it slowly spinning.",
   "reference": [
-    {"action": "load", "molecule_id": "1ubq"},
-    {"action": "set_visual_style", "style": "cartoon"},
-    {"action": "set_property", "name": "lighting", "value": "glossy"},
-    {"action": "set_property", "name": "bg_color", "value": "#000000"},
-    {"action": "set_property", "name": "hide_water", "value": true},
-    {"action": "set_property", "name": "spin", "value": true}
+    {
+      "action": "load",
+      "molecule_id": "1ubq"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "set_property",
+      "name": "lighting",
+      "value": "glossy"
+    },
+    {
+      "action": "set_property",
+      "name": "bg_color",
+      "value": "#000000"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "spin",
+      "value": true
+    }
   ],
-  "skills": ["load", "global-style", "lighting", "set-background", "hide-component", "spin"],
-  "notes": "Pure tool-control: four independent widget toggles. Order among the set_property calls does not matter to the grader."
+  "skills": [
+    "load",
+    "global-style",
+    "lighting",
+    "set-background",
+    "hide-component",
+    "spin"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "lighting",
+    "set-background",
+    "hide-component",
+    "spin"
+  ],
+  "provenance": {
+    "structure": "1ubq",
+    "source": "RCSB mmCIF 1UBQ -> molbench/atom_tables/1ubq.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Prompt and reference unchanged. With a cartoon style the waters are not drawn anyway, so an answer without hide_water ends in the same state and also succeeds.",
+    "july_task": "unchanged",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "Tool-control toggles."
 }

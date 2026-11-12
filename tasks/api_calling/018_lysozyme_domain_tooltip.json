@@ -4,13 +4,63 @@
   "title": "Domain overlay and a residue tooltip",
   "prompt": "Load hen egg-white lysozyme (1AKI) as a cartoon, overlay the domain annotations, and attach a tooltip reading 'catalytic glutamate' to Glu35 on chain A.",
   "reference": [
-    {"action": "load", "molecule_id": "1aki"},
-    {"action": "set_visual_style", "style": "cartoon"},
-    {"action": "set_property", "name": "domain_annotation", "value": true},
-    {"action": "tooltips", "data": [
-      {"auth_asym_id": "A", "residue_number": 35, "tooltip": "catalytic glutamate"}
-    ]}
+    {
+      "action": "load",
+      "molecule_id": "1aki"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "set_property",
+      "name": "domain_annotation",
+      "value": true
+    },
+    {
+      "action": "tooltips",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 35,
+          "tooltip": "catalytic glutamate"
+        }
+      ]
+    }
   ],
-  "skills": ["load", "global-style", "annotation", "select-by-residue", "tooltip"],
-  "notes": "Domain fact: lysozyme's catalytic dyad is Glu35/Asp52. Tests the tooltips action and the domain_annotation overlay together."
+  "skills": [
+    "load",
+    "global-style",
+    "annotation",
+    "select-by-residue",
+    "tooltip"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "annotation",
+    "select-by-residue",
+    "tooltip"
+  ],
+  "provenance": {
+    "structure": "1aki",
+    "source": "RCSB mmCIF 1AKI -> molbench/atom_tables/1aki.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Prompt unchanged. In 1AKI label and author numbering agree; the reference now uses auth_seq_id, the key that is right for a residue named the way the literature names it.",
+    "july_task": "unchanged",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "Glu35",
+        "action": 3,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 35,
+          "auth_comp_id": "GLU"
+        },
+        "n_atoms": 9
+      }
+    ]
+  },
+  "notes": "Tests the tooltips action."
 }

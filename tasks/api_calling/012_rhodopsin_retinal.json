@@ -2,14 +2,68 @@
   "id": "api-012",
   "category": "api_calling",
   "title": "Rhodopsin and its retinal",
-  "prompt": "Load bovine rhodopsin (1F88) as a cartoon and show the covalently bound retinal as orange ball-and-stick.",
+  "prompt": "Load bovine rhodopsin (1F88), hide the carbohydrates and the waters, and colour the retinal orange.",
   "reference": [
-    {"action": "load", "molecule_id": "1f88"},
-    {"action": "set_visual_style", "style": "cartoon"},
-    {"action": "color", "data": [
-      {"label_comp_id": "RET", "representation": "ball-and-stick", "color": {"r": 255, "g": 165, "b": 0}}
-    ]}
+    {
+      "action": "load",
+      "molecule_id": "1f88"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_carbs",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "RET",
+          "color": "orange"
+        }
+      ]
+    }
   ],
-  "skills": ["load", "global-style", "select-by-ligand", "per-selection-representation", "color"],
-  "notes": "Domain fact: rhodopsin's chromophore is 11-cis retinal (RET), Schiff-base linked to Lys296. Tests ligand selection in a membrane GPCR."
+  "skills": [
+    "load",
+    "hide-component",
+    "select-by-ligand",
+    "color"
+  ],
+  "categories": [
+    "load",
+    "hide-component",
+    "select-by-ligand",
+    "color"
+  ],
+  "provenance": {
+    "structure": "1f88",
+    "source": "RCSB mmCIF 1F88 -> molbench/atom_tables/1f88.json.gz (scripts/build_atom_tables.py)",
+    "derived": "1F88 has a carbohydrate (branched) component and waters, so both toggles hide something. In the default view the retinal is already ball-and-stick, so `color` alone paints it. Tests hide_carbs, which the July task on 6VXX only named.",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "retinal in both copies",
+        "action": 3,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_comp_id": "RET"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_comp_id": "RET"
+          }
+        ],
+        "n_atoms": 40
+      }
+    ]
+  },
+  "notes": "Domain fact: the chromophore is retinal, component id RET."
 }

@@ -1,0 +1,94 @@
+{
+  "id": "api-020",
+  "category": "api_calling",
+  "title": "Set UI colours and highlight the hemes",
+  "prompt": "Load haemoglobin (1HHO), set the hover-highlight colour to yellow and the selection colour to cyan, and highlight the heme groups.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1hho"
+    },
+    {
+      "action": "set_color",
+      "highlight": "yellow",
+      "select": "cyan"
+    },
+    {
+      "action": "highlight",
+      "data": [
+        {
+          "label_comp_id": "HEM"
+        }
+      ]
+    }
+  ],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "1hho"
+      },
+      {
+        "action": "set_property",
+        "name": "highlight_color",
+        "value": "#FFFF00"
+      },
+      {
+        "action": "set_property",
+        "name": "select_color",
+        "value": "#00FFFF"
+      },
+      {
+        "action": "highlight",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "label_comp_id": "HEM"
+          },
+          {
+            "auth_asym_id": "B",
+            "label_comp_id": "HEM"
+          }
+        ]
+      }
+    ]
+  ],
+  "skills": [
+    "load",
+    "set-ui-colors",
+    "highlight"
+  ],
+  "categories": [
+    "load",
+    "set-ui-colors",
+    "highlight"
+  ],
+  "provenance": {
+    "structure": "1hho",
+    "source": "RCSB mmCIF 1HHO -> molbench/atom_tables/1hho.json.gz (scripts/build_atom_tables.py)",
+    "derived": "The July task ended with a camera reset straight after loading, which changes nothing. It now ends with a highlight, an action no July task used. The UI colours can be set with set_color or with the highlight_color/select_color properties, in any colour format the viewer accepts (see `accepted`).",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "both heme groups",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 143,
+            "auth_comp_id": "HEM"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 147,
+            "auth_comp_id": "HEM"
+          }
+        ],
+        "n_atoms": 86
+      }
+    ]
+  },
+  "notes": "Tests set_color and highlight."
+}

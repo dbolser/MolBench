@@ -2,11 +2,52 @@
   "id": "api-016",
   "category": "api_calling",
   "title": "AlphaFold model with confidence colouring",
-  "prompt": "Load the AlphaFold model of human tumour suppressor p53 (UniProt P04637) as a cartoon, coloured by the model's per-residue confidence.",
+  "prompt": "Load the AlphaFold DB model of human p53 (UniProt P04637) and colour it by the model's per-residue confidence (pLDDT).",
   "reference": [
-    {"action": "load", "molecule_id": "P04637", "alphafold": true},
-    {"action": "set_visual_style", "style": "cartoon"}
+    {
+      "action": "load",
+      "custom_data": {
+        "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v6.cif",
+        "format": "cif",
+        "binary": false
+      }
+    },
+    {
+      "action": "set_property",
+      "name": "alphafold_view",
+      "value": true
+    }
   ],
-  "skills": ["load", "alphafold", "global-style"],
-  "notes": "Tests the AlphaFold path: alphafold_view loads the predicted model addressed by UniProt accession and applies pLDDT confidence colouring automatically."
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "alphafold": true,
+        "custom_data": {
+          "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v4.bcif",
+          "format": "bcif",
+          "binary": true
+        }
+      }
+    ]
+  ],
+  "skills": [
+    "load",
+    "custom-data",
+    "alphafold"
+  ],
+  "categories": [
+    "load",
+    "custom-data",
+    "alphafold"
+  ],
+  "provenance": {
+    "structure": "af-p04637-f1",
+    "source": "AlphaFold DB AF-P04637-F1 model v6 -> molbench/atom_tables/af-p04637-f1.json.gz",
+    "derived": "The July reference was `load P04637` with the alphafold flag. In pdbe-molstar 3.3.2 moleculeId is a PDB id (spec.ts:103) and alphafoldView only switches the colouring to pLDDT (spec.ts:115); it does not fetch a model. The model has to come in as customData pointing at the AlphaFold DB file. The entry is compared as AF-P04637-F1 whatever the file version or format.",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "Tool-control: custom data source plus a colouring switch."
 }

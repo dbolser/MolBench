@@ -2,15 +2,111 @@
   "id": "api-008",
   "category": "api_calling",
   "title": "Trypsin inhibitor and catalytic serine",
-  "prompt": "Load bovine trypsin (3PTB) as a cartoon, then show the benzamidine inhibitor as green ball-and-stick and the catalytic Ser195 on chain A as red ball-and-stick.",
+  "prompt": "Load bovine trypsin (3PTB) as a cartoon. Show the benzamidine inhibitor as yellow ball-and-stick, colour the catalytic Ser195 red, and also show Ser195 as red ball-and-stick.",
   "reference": [
-    {"action": "load", "molecule_id": "3ptb"},
-    {"action": "set_visual_style", "style": "cartoon"},
-    {"action": "color", "data": [
-      {"label_comp_id": "BEN", "representation": "ball-and-stick", "color": {"r": 0, "g": 180, "b": 0}},
-      {"auth_asym_id": "A", "residue_number": 195, "representation": "ball-and-stick", "color": {"r": 220, "g": 0, "b": 0}}
-    ]}
+    {
+      "action": "load",
+      "molecule_id": "3ptb"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "BEN",
+          "representation": "ball-and-stick",
+          "representationColor": "yellow"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 195,
+          "color": "red",
+          "representation": "ball-and-stick",
+          "representationColor": "red"
+        }
+      ]
+    }
   ],
-  "skills": ["load", "global-style", "select-by-ligand", "select-by-residue", "per-selection-representation", "color"],
-  "notes": "Domain facts: 3PTB's inhibitor is benzamidine (BEN); trypsin's catalytic triad is His57/Asp102/Ser195. Mixes a ligand selection and a residue selection in one color call."
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "3ptb"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "label_comp_id": "BEN",
+            "representation": "ball-and-stick",
+            "representationColor": "yellow"
+          },
+          {
+            "struct_asym_id": "A",
+            "residue_number": 177,
+            "color": "red",
+            "representation": "ball-and-stick",
+            "representationColor": "red"
+          }
+        ]
+      }
+    ]
+  ],
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-ligand",
+    "select-by-residue",
+    "author-numbering",
+    "per-selection-representation",
+    "color"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "select-by-ligand",
+    "select-by-residue",
+    "author-numbering",
+    "per-selection-representation",
+    "color"
+  ],
+  "provenance": {
+    "structure": "3ptb",
+    "source": "RCSB mmCIF 3PTB -> molbench/atom_tables/3ptb.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Ser195 is the author (chymotrypsinogen) number; in 3PTB that residue is label_seq_id 177. The July reference used residue_number 195, which is label numbering and selects author Ser217. The reference now uses auth_seq_id; the label-numbered form that selects the same atoms is listed under `accepted`. Colours are Mol* colour names.",
+    "july_task": "reworded",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "benzamidine",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 1,
+          "auth_comp_id": "BEN"
+        },
+        "n_atoms": 9
+      },
+      {
+        "what": "Ser195",
+        "action": 2,
+        "param": 1,
+        "atoms": {
+          "auth_asym_id": "A",
+          "auth_seq_id": 195,
+          "auth_comp_id": "SER"
+        },
+        "n_atoms": 6
+      }
+    ]
+  },
+  "notes": "Domain facts: the inhibitor is benzamidine (BEN); the catalytic serine is Ser195 in author numbering."
 }

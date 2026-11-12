@@ -4,10 +4,37 @@
   "title": "Validation overlay on a cartoon",
   "prompt": "Load the A2A adenosine receptor (3EML) as a cartoon and overlay the PDBe geometry-validation colouring.",
   "reference": [
-    {"action": "load", "molecule_id": "3eml"},
-    {"action": "set_visual_style", "style": "cartoon"},
-    {"action": "set_property", "name": "validation_annotation", "value": true}
+    {
+      "action": "load",
+      "molecule_id": "3eml"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "set_property",
+      "name": "validation_annotation",
+      "value": true
+    }
   ],
-  "skills": ["load", "global-style", "annotation"],
-  "notes": "Tests the validation_annotation overlay trait, a PDBe-specific viewer feature with no scene-tree equivalent."
+  "skills": [
+    "load",
+    "global-style",
+    "annotation"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "annotation"
+  ],
+  "provenance": {
+    "structure": "3eml",
+    "source": "RCSB mmCIF 3EML -> molbench/atom_tables/3eml.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Prompt and reference unchanged.",
+    "july_task": "unchanged",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "PDBe-specific overlay with no scene-tree equivalent."
 }
