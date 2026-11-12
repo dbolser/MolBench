@@ -148,7 +148,7 @@ def test_empty_selection_scores_zero():
     # Lower-case names and string numbers match nothing in Mol* either.
     for bad in ({"auth_asym_id": "A", "auth_seq_id": "281"},
                 {"auth_asym_id": "A", "auth_seq_id": 281, "label_comp_id": "asp"}):
-        assert _f1(ref, _with_selector(ref, [bad])) == _f1(ref, wrong), bad
+        assert _f1(ref, _with_selector(ref, [bad])) == _f1(ref, nothing), bad
 
 
 # --- primitive endpoints --------------------------------------------------------------

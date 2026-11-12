@@ -1088,7 +1088,13 @@ def _target_parts(reference: ViewerState, predicted: ViewerState, ref: dict, r_t
     for key in ("focus", "highlight"):
         if key in ref and (whole or key in wanted or (isinstance(ref[key], int)
                                                        and ref[key] & t_atoms)):
-            sc = _jaccard(ref[key], pred[key]) if key in pred else 0.0
+            theirs = pred.get(key)
+            if theirs is None and key == "focus" and not drawn.GRADE_UNREQUESTED_FOCUS \
+                    and predicted.loaded:
+                theirs = predicted.everything()      # no focus: the whole structure is framed
+                if predicted.table is not None:
+                    theirs = residues_of(predicted.table, theirs)
+            sc = _jaccard(ref[key], theirs) if theirs is not None else 0.0
             parts.append({"fact": key, "recall": sc, "precision": sc})
     if isinstance(ref.get("tooltip"), dict):
         theirs = pred.get("tooltip") if isinstance(pred.get("tooltip"), dict) else {}
@@ -1221,8 +1227,20 @@ def compare(reference: ViewerState, predicted: ViewerState, target: Any = None) 
             trace.append({"fact": key, "value": shown, "score": round(sc, 3)})
         return got, total, trace
 
-    r_got, r_total, r_trace = side(ref, pred)
-    p_got, p_total, p_trace = side(pred, ref)
+    # The camera: a focus the reference does not have is not a fact of the answer, and
+    # an answer with no focus frames the whole structure (drawn.GRADE_UNREQUESTED_FOCUS).
+    pred_seen = dict(pred)
+    ref_seen = dict(ref)
+    if not drawn.GRADE_UNREQUESTED_FOCUS:
+        if "focus" in pred and "focus" not in ref:
+            del pred_seen["focus"]
+        if "focus" in ref and "focus" not in pred and predicted.loaded:
+            everything = predicted.everything()
+            pred["focus"] = everything if predicted.table is None else residues_of(
+                predicted.table, everything)
+        n_pred_facts = sum(1 for k in pred_seen if not k.startswith("_"))
+    r_got, r_total, r_trace = side(ref_seen, pred)
+    p_got, p_total, p_trace = side(pred_seen, ref)
     if not n_ref_facts and not n_pred_facts:
         precision = recall = 1.0          # a bare load was asked for and given
     else:

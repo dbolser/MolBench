@@ -1,0 +1,900 @@
+{
+ "what": "Grader control set: (reference, answer) pairs with a known verdict, built by scripts/grader_controls.py from the frozen structure panel. A false pass is a wrong answer graded as a task success; a false fail is an identical or equivalent answer graded as not a success.",
+ "seed": 20261112,
+ "tracks": {
+  "mvs": {
+   "n_controls": 1010,
+   "n_identical": 150,
+   "n_equivalent": 420,
+   "n_wrong": 440,
+   "n_equivalent_kinds": 21,
+   "n_wrong_kinds": 22,
+   "n_entries": 75,
+   "grader": {
+    "false_pass": {
+     "errors": 0,
+     "n": 440,
+     "rate": 0.0
+    },
+    "false_fail": {
+     "errors": 0,
+     "n": 570,
+     "rate": 0.0
+    },
+    "false_fail_equivalent_only": {
+     "errors": 0,
+     "n": 420,
+     "rate": 0.0
+    }
+   },
+   "previous_grader": {
+    "what": "October path grader, F1 = 1 taken as success",
+    "false_pass": {
+     "errors": 0,
+     "n": 440,
+     "rate": 0.0
+    },
+    "false_fail": {
+     "errors": 202,
+     "n": 570,
+     "rate": 0.3544
+    },
+    "false_fail_equivalent_only": {
+     "errors": 202,
+     "n": 420,
+     "rate": 0.481
+    }
+   },
+   "mistakes": [],
+   "kinds": [
+    {
+     "group": "equivalent",
+     "kind": "all_vs_polymer_cartoon",
+     "what": "selector 'all' instead of 'polymer' under a cartoon (a cartoon draws polymer only)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 1,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "chain_by_author_vs_label_id",
+     "what": "a chain's cartoon selected by author chain id, label chain id or entity id",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 2,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "chain_theme_vs_one_colour_per_chain",
+     "what": "reference colours by the chain-id theme; the answer gives each chain its own colour",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "children_reordered",
+     "what": "components, and the keys inside nodes, in another order",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "colour_name_vs_hex",
+     "what": "a colour given as #rrggbb (lower or upper case) instead of its name",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "defaults_written_out",
+     "what": "defaults stated explicitly: opacity 1, colour selector 'all', model_index 0, size_factor 1",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "empty_extra_component",
+     "what": "an extra component that selects no atoms (nothing is drawn for it)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "envelope_and_file_source",
+     "what": "a full state with metadata, and the same entry from another server or as BinaryCIF",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 15,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "focus_on_separate_component",
+     "what": "the focus node on its own component with the same selector",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "gray_vs_grey",
+     "what": "'grey' instead of 'gray'",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "label_range_vs_author_range",
+     "what": "a residue range in label numbering instead of author numbering",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "label_vs_author_residue",
+     "what": "a residue addressed by label chain and number instead of author chain and number",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "ligand_by_name_vs_copies",
+     "what": "a ligand selected by residue name, or each copy by author chain and number",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "nested_colour_vs_flat_components",
+     "what": "one cartoon with a colour child for one chain, or one cartoon component per chain",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "one_component_vs_several",
+     "what": "three residues in one component (a selector list) or in three components",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "overridden_colour",
+     "what": "a colour that a later colour node replaces (the last one wins)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "range_split_in_two",
+     "what": "one residue range written as two adjacent ranges in two components",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "residue_list_vs_range",
+     "what": "six residues listed one by one instead of an author-number range",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "residue_vs_its_atoms",
+     "what": "a residue's ball-and-stick selected atom by atom instead of as a residue",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "ribbon_type_on_non_polymer",
+     "what": "a cartoon asked for on a ligand or ion: Mol* draws ball-and-stick instead",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "trace_atom_under_cartoon",
+     "what": "a cartoon on the C-alpha atoms of a range instead of on the residues",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "identical",
+     "kind": "identical",
+     "what": "the answer is the reference itself",
+     "n": 150,
+     "graded_success": 150,
+     "old_grader_success": 150,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "wrong",
+     "kind": "all_vs_polymer_ball_and_stick",
+     "what": "'all' instead of 'polymer' under ball-and-stick (waters and ligands are drawn too)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.946,
+     "mean_target_f1": 0.946
+    },
+    {
+     "group": "wrong",
+     "kind": "assembly_instead_of_model",
+     "what": "the biological assembly is loaded where the deposited model was asked for",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.6667,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "wrong",
+     "kind": "author_number_as_label_number",
+     "what": "the author residue number written in the label-number field (structures where they differ)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.7813,
+     "mean_target_f1": 0.8571
+    },
+    {
+     "group": "wrong",
+     "kind": "chain_colours_swapped",
+     "what": "two chains' colours the wrong way round",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.5
+    },
+    {
+     "group": "wrong",
+     "kind": "empty_scene",
+     "what": "the structure is loaded and nothing is drawn",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "extra_component",
+     "what": "something that was not asked for is drawn as well",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.3333,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "wrong",
+     "kind": "focus_wrong_or_missing",
+     "what": "the camera focus is on another residue, or absent",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.7533,
+     "mean_target_f1": 0.6667
+    },
+    {
+     "group": "wrong",
+     "kind": "label_number_as_author_number",
+     "what": "the label residue number written in the author-number field (structures where they differ)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.7611,
+     "mean_target_f1": 0.8571
+    },
+    {
+     "group": "wrong",
+     "kind": "label_text_wrong",
+     "what": "the residue label has another text",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.5
+    },
+    {
+     "group": "wrong",
+     "kind": "missing_component",
+     "what": "one requested component is not drawn",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5164,
+     "mean_target_f1": 0.5166
+    },
+    {
+     "group": "wrong",
+     "kind": "near_miss_colour",
+     "what": "a neighbouring shade outside the tolerance (lightgray for gray, darkred for red, ...)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.5
+    },
+    {
+     "group": "wrong",
+     "kind": "one_colour_for_chain_theme",
+     "what": "reference colours by chain; the answer paints every chain the same colour",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.5
+    },
+    {
+     "group": "wrong",
+     "kind": "range_too_short",
+     "what": "a residue range that stops three residues early",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.9477,
+     "mean_target_f1": 0.9497
+    },
+    {
+     "group": "wrong",
+     "kind": "residue_off_by_one",
+     "what": "the neighbouring residue is highlighted",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.749,
+     "mean_target_f1": 0.8571
+    },
+    {
+     "group": "wrong",
+     "kind": "side_chain_atoms_only",
+     "what": "only the side chain is drawn where the whole residue was asked for",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.9359,
+     "mean_target_f1": 0.9361
+    },
+    {
+     "group": "wrong",
+     "kind": "uniprot_number_as_author_number",
+     "what": "the UniProt residue number used as the author number (structures with an offset)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.757,
+     "mean_target_f1": 0.8571
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_chain",
+     "what": "the same residue number in another chain",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.7493,
+     "mean_target_f1": 0.8571
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_colour",
+     "what": "the highlight in another palette colour",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.875,
+     "mean_target_f1": 0.875
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_entry",
+     "what": "the same scene on another structure",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_ligand_copy",
+     "what": "another copy of the ligand than the one asked for",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_opacity",
+     "what": "a transparent surface with another opacity, or opaque",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.5
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_representation",
+     "what": "the highlight in another representation type",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.75,
+     "mean_target_f1": 0.8571
+    }
+   ]
+  },
+  "api": {
+   "n_controls": 850,
+   "n_identical": 150,
+   "n_equivalent": 360,
+   "n_wrong": 340,
+   "n_equivalent_kinds": 18,
+   "n_wrong_kinds": 17,
+   "n_entries": 69,
+   "grader": {
+    "false_pass": {
+     "errors": 0,
+     "n": 340,
+     "rate": 0.0
+    },
+    "false_fail": {
+     "errors": 0,
+     "n": 510,
+     "rate": 0.0
+    },
+    "false_fail_equivalent_only": {
+     "errors": 0,
+     "n": 360,
+     "rate": 0.0
+    }
+   },
+   "previous_grader": {
+    "what": "July sequence grader, F1 = 1 taken as success",
+    "false_pass": {
+     "errors": 75,
+     "n": 340,
+     "rate": 0.2206
+    },
+    "false_fail": {
+     "errors": 247,
+     "n": 510,
+     "rate": 0.4843
+    },
+    "false_fail_equivalent_only": {
+     "errors": 247,
+     "n": 360,
+     "rate": 0.6861
+    }
+   },
+   "mistakes": [],
+   "kinds": [
+    {
+     "group": "equivalent",
+     "kind": "auth_chain_vs_label_chain",
+     "what": "struct_asym_id (label chain) instead of auth_asym_id for the same chain",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 15,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "auth_seq_id_alias",
+     "what": "auth_residue_number instead of auth_seq_id",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "colour_name_hex_or_rgb",
+     "what": "a colour as #rrggbb or as an {r,g,b} object instead of its name",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "entity_vs_chain",
+     "what": "an entity id instead of the entity's only chain",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "entry_id_case_or_url",
+     "what": "the entry id in upper case, or the same entry loaded by URL",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 10,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "focus_flag_vs_focus_action",
+     "what": "focus: true inside the color call, or a separate focus action",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "independent_steps_reordered",
+     "what": "settings that do not interact, in another order",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "label_vs_author_residue",
+     "what": "struct_asym_id + residue_number (label) instead of auth_asym_id + auth_seq_id",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 8,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "ligand_by_name_vs_copies",
+     "what": "a ligand by residue name, or each copy by author chain and number",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "no_op_steps",
+     "what": "steps that change nothing are added",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "one_call_vs_two_kept",
+     "what": "two residues in one color call, or in two calls with keep_colors",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "rebuilt_after_a_wrong_step",
+     "what": "a wrong color call followed by the right one (only the final state counts)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "residue_list_vs_range",
+     "what": "six residues one by one instead of a start/end range (label or author numbers)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "selections_reordered",
+     "what": "the selections of one call in another order",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "side_chain_flag_vs_representation",
+     "what": "sideChain: true instead of representation: ball-and-stick",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "style_action_vs_property",
+     "what": "set_property visual_style instead of set_visual_style",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "tooltip_text_case_and_spaces",
+     "what": "tooltip text differing only in case and repeated spaces",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 20,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "uniprot_vs_author_number",
+     "what": "a residue by UniProt accession and number, or every mapped copy by author numbering",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "identical",
+     "kind": "identical",
+     "what": "the answer is the reference itself",
+     "n": 150,
+     "graded_success": 150,
+     "old_grader_success": 150,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "wrong",
+     "kind": "author_number_as_label_number",
+     "what": "the author residue number given as residue_number, which is label numbering",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 15,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "bare_load",
+     "what": "the structure is loaded and nothing else is done",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "colour_does_not_reach_added_representation",
+     "what": "color given where representationColor was needed: the added sticks stay element-coloured",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 20,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.8333
+    },
+    {
+     "group": "wrong",
+     "kind": "colour_lost_without_keep",
+     "what": "a second color call without keep_colors wipes the first colour",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.6667,
+     "mean_target_f1": 0.5
+    },
+    {
+     "group": "wrong",
+     "kind": "extra_step",
+     "what": "something that was not asked for is done as well",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.4834,
+     "mean_target_f1": 0.6547
+    },
+    {
+     "group": "wrong",
+     "kind": "focus_wrong_or_missing",
+     "what": "the focus is on another residue, or absent",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5417,
+     "mean_target_f1": 0.5
+    },
+    {
+     "group": "wrong",
+     "kind": "label_number_as_author_number",
+     "what": "the label residue number given as auth_seq_id",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "missing_step",
+     "what": "one requested step is left out",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5593,
+     "mean_target_f1": 0.624
+    },
+    {
+     "group": "wrong",
+     "kind": "range_too_short",
+     "what": "a residue range that stops three residues early",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 20,
+     "mean_f1": 0.7605,
+     "mean_target_f1": 0.7541
+    },
+    {
+     "group": "wrong",
+     "kind": "residue_off_by_one",
+     "what": "the neighbouring residue is coloured",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "style_after_colour",
+     "what": "the global style is set after colouring, which wipes it",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 20,
+     "mean_f1": 0.6658,
+     "mean_target_f1": 0.9242
+    },
+    {
+     "group": "wrong",
+     "kind": "uniprot_number_as_author_number",
+     "what": "the UniProt residue number used as the author number (structures with an offset)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_chain",
+     "what": "the same residue number in another chain",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_colour",
+     "what": "another palette colour",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.75
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_entry",
+     "what": "the same calls on another structure",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_ligand_copy",
+     "what": "another copy of the ligand than the one asked for",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "wrong_representation",
+     "what": "another representation type for the residue",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5,
+     "mean_target_f1": 0.8
+    }
+   ]
+  }
+ }
+}

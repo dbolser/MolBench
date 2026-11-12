@@ -25,9 +25,12 @@ from typing import Any, Callable, Iterable
 
 #: Largest per-channel difference (0-255 scale) at which two colours count as the same.
 #: Evidence for the value is in GRADING.md ("Colour") and tests/controls/colour_evidence.json:
-#: every pair of palette colours is at least 55 apart, and of the 2,636 colours models
-#: wrote in October, 2,333 were exactly a reference colour and none of the others was
-#: closer than 50 to one.
+#: every pair of palette colours is at least 55 apart, and of the 2,303 colour values in
+#: valid October scenes that could be compared with a reference colour, 2,227 were
+#: exactly one and none of the other 76 was closer than 58 to one. Any tolerance from
+#: 0 to 54 therefore gives the same verdicts on that evidence; 32 leaves room for a
+#: hand-mixed shade of a named colour without letting one palette colour pass for
+#: another.
 COLOR_TOLERANCE = 32
 
 # Mol*'s ColorNames (mol-util/color/names). The same table is in Mol* 5.9.0 (MVS
@@ -141,6 +144,16 @@ def jaccard(a: Any, b: Any) -> float:
     union = size(a | b)
     return size(a & b) / union if union else 1.0
 
+
+# --- the camera -------------------------------------------------------------------
+
+#: Is a focus the request did not ask for counted against the answer? No: the camera is
+#: where one looks from, not what is drawn, and the rating study frames both renders
+#: alike (decision 24). The focus is graded when the reference has one: then the
+#: answer's focus target (the whole structure, if it has no focus) must be the same
+#: residues. Set to True to make any focus a fact on both sides (the October regrade
+#: reports task success both ways).
+GRADE_UNREQUESTED_FOCUS = False
 
 # --- draws and looks --------------------------------------------------------------
 

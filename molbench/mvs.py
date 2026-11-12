@@ -242,7 +242,10 @@ def _structure_table(params: dict, source: str | None) -> AtomTable | None:
 def _canon(x: Any) -> Any:
     """A deterministic, comparable form of a path (for grouping identical ones)."""
     if isinstance(x, Selection):
-        return ("sel", tuple(sorted(map(repr, x.sigs))), x.atoms)
+        # hex, not the int itself: the caller takes repr(), and Python refuses to print
+        # an int of more than 4300 digits (a structure of more than about 14,000 atoms)
+        return ("sel", tuple(sorted(map(repr, x.sigs))),
+                (x.atoms[0], hex(x.atoms[1])) if x.atoms else None)
     if isinstance(x, tuple):
         return tuple(_canon(v) for v in x)
     return x
@@ -983,9 +986,26 @@ def _share(mine: Any, theirs: Any) -> float:
     return size(mine & theirs) / n if n else 0.0
 
 
+def _focus_score(st: DrawnStructure, other: DrawnStructure | None) -> float:
+    """Overlap of two focus targets, as whole residues. A scene with no focus node
+    frames everything, so (unless every focus is graded) its target is the whole
+    structure."""
+    if other is None:
+        return 0.0
+    theirs = other.focus
+    if theirs is None:
+        if _drawn.GRADE_UNREQUESTED_FOCUS:
+            return 0.0
+        theirs = (_table_extras(other.table)["all"] if other.table is not None
+                  else frozenset(["static:all"]))
+    return jaccard(st.residues(st.focus), other.residues(theirs))
+
+
 def _side(mine: DrawnScene, theirs: DrawnScene, their_classes: dict[str, list],
-          my_classes: dict[str, list]) -> tuple[float, float, list]:
-    """Total credit, number of facts, and the trace, for one direction of a comparison."""
+          my_classes: dict[str, list], is_reference: bool) -> tuple[float, float, list]:
+    """Total credit, number of facts, and the trace, for one direction of a comparison.
+    ``is_reference``: ``mine`` is the reference (a focus the reference lacks is not a
+    fact of the answer; see ``drawn.GRADE_UNREQUESTED_FOCUS``)."""
     got = total = 0.0
     trace: list[dict] = []
 
@@ -1009,11 +1029,9 @@ def _side(mine: DrawnScene, theirs: DrawnScene, their_classes: dict[str, list],
                 theirs_atoms = getattr(other, store).get(key) if other is not None else None
                 fact(name, _share(atoms, theirs_atoms) if theirs_atoms is not None else 0.0,
                      value=key, atoms=size(atoms), structure=entry)
-        if st.focus is not None:
-            sc = 0.0
-            if other is not None and other.focus is not None:
-                sc = jaccard(st.residues(st.focus), other.residues(other.focus))
-            fact("focus", sc, atoms=size(st.focus), structure=entry)
+        if st.focus is not None and (is_reference or _drawn.GRADE_UNREQUESTED_FOCUS
+                                     or (other is not None and other.focus is not None)):
+            fact("focus", _focus_score(st, other), atoms=size(st.focus), structure=entry)
         left = list(other.other) if other is not None else []
         for item in st.other:
             hit = item in left
@@ -1075,8 +1093,8 @@ def compare_scenes(ref: DrawnScene, pred: DrawnScene, target: Any = None) -> dic
                       else st.draws) for e, st in pred.structures.items()}
     pred_classes = {e: partition(d) for e, d in pred_draws.items()}
 
-    r_got, r_total, r_trace = _side(ref, pred, pred_classes, ref_classes)
-    p_got, p_total, p_trace = _side(pred, ref, ref_classes, pred_classes)
+    r_got, r_total, r_trace = _side(ref, pred, pred_classes, ref_classes, True)
+    p_got, p_total, p_trace = _side(pred, ref, ref_classes, pred_classes, False)
     if not r_total and not p_total:
         precision = recall = 1.0             # nothing was asked for and nothing given
     else:
@@ -1103,9 +1121,7 @@ def compare_scenes(ref: DrawnScene, pred: DrawnScene, target: Any = None) -> dic
                     sc = jaccard(atoms, theirs) if theirs is not None else 0.0
                     parts.append({"fact": name, "value": key, "recall": sc, "precision": sc})
         if st.focus is not None and (whole or size(st.focus & t_atoms) or "focus" in wanted):
-            sc = 0.0
-            if other is not None and other.focus is not None:
-                sc = jaccard(st.residues(st.focus), other.residues(other.focus))
+            sc = _focus_score(st, other)
             parts.append({"fact": "focus", "recall": sc, "precision": sc})
     wanted = set(target.get("facts") or []) if isinstance(target, dict) else None
     for row in r_trace:                      # facts that are not about atoms of a class
