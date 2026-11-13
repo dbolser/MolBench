@@ -1,0 +1,412 @@
+{
+ "id": "res-gene-p17931",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-gene",
+ "structures": [
+  "1a3k"
+ ],
+ "prompt": "Find a PDB entry of human LGALS3 and show it as an orange cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1a3k.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1a3k.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "orange"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1a3k.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "orange"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "orange"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1a3k.json",
+   "molbench/atom_tables/1a3k.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1A3K is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P17931 (137 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 1107 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (8Z25) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (13RW) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names LEG3_HUMAN (P17931) by its human gene symbol LGALS3 (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 1A3K, one of the 183 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "gene symbol"
+  },
+  "uniprot": "P17931",
+  "accessions": [
+   "P17931"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 183,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1kjl",
+  "1kjr",
+  "28hs",
+  "28hw",
+  "28hz",
+  "28im",
+  "28rw",
+  "28ry",
+  "28sa",
+  "28sb",
+  "28se",
+  "28vp",
+  "28vw",
+  "2nmn",
+  "2nmo",
+  "2nn8",
+  "2xg3",
+  "34wx",
+  "3aya",
+  "3ayc",
+  "3ayd",
+  "3aye",
+  "3t1l",
+  "3t1m",
+  "3zsj",
+  "3zsk",
+  "3zsl",
+  "3zsm",
+  "4bli",
+  "4blj",
+  "4bm8",
+  "4jc1",
+  "4jck",
+  "4lbj",
+  "4lbk",
+  "4lbl",
+  "4lbm",
+  "4lbn",
+  "4lbo",
+  "4r9a",
+  "4r9b",
+  "4r9c",
+  "4r9d",
+  "4rl7",
+  "4xbn",
+  "5e88",
+  "5e89",
+  "5e8a",
+  "5exo",
+  "5h9p",
+  "5h9r",
+  "5iuq",
+  "5nf7",
+  "5nf9",
+  "5nfa",
+  "5nfb",
+  "5nfc",
+  "5oax",
+  "5ody",
+  "6b8k",
+  "6eog",
+  "6eol",
+  "6exy",
+  "6eym",
+  "6f2q",
+  "6f6y",
+  "6fk2",
+  "6fof",
+  "6g0v",
+  "6h64",
+  "6i74",
+  "6i75",
+  "6i76",
+  "6i77",
+  "6i78",
+  "6kxa",
+  "6kxb",
+  "6q0q",
+  "6q17",
+  "6qge",
+  "6qgf",
+  "6qln",
+  "6qlo",
+  "6qlp",
+  "6qlq",
+  "6qlr",
+  "6qls",
+  "6qlt",
+  "6qlu",
+  "6rhl",
+  "6rhm",
+  "6rzf",
+  "6rzg",
+  "6rzh",
+  "6rzi",
+  "6rzj",
+  "6rzk",
+  "6rzl",
+  "6rzm",
+  "6tf6",
+  "6tf7",
+  "6y4c",
+  "6y78",
+  "7be3",
+  "7cxa",
+  "7df5",
+  "7rdo",
+  "7rdp",
+  "7rgx",
+  "7rgy",
+  "7rgz",
+  "7rh0",
+  "7rh1",
+  "7rh3",
+  "7rh4",
+  "7xfa",
+  "7zqx",
+  "8bz3",
+  "8itx",
+  "8itz",
+  "8oji",
+  "8ojk",
+  "8ojm",
+  "8ojo",
+  "8pbf",
+  "8pf9",
+  "8pff",
+  "8ppn",
+  "8rmt",
+  "8rmu",
+  "8rmv",
+  "8rr7",
+  "8rr8",
+  "8rr9",
+  "8rra",
+  "8rrb",
+  "8rrc",
+  "8rre",
+  "8rrf",
+  "8rrg",
+  "8rxm",
+  "8s67",
+  "8ymd",
+  "8z1s",
+  "8z1t",
+  "8z25",
+  "8zuv",
+  "9d62",
+  "9d63",
+  "9d64",
+  "9fdb",
+  "9fdc",
+  "9gf1",
+  "9i4n",
+  "9i4o",
+  "9nqo",
+  "9ot8",
+  "9ot9",
+  "9rqv",
+  "9rqw",
+  "9rqx",
+  "9rqy",
+  "9rqz",
+  "9rr0",
+  "9rr1",
+  "9rr2",
+  "9rr3",
+  "9rr4",
+  "9rr5",
+  "9rr6",
+  "9rr7",
+  "9rr8",
+  "9rr9",
+  "9rra",
+  "9rrb",
+  "9rrc",
+  "9rrd",
+  "9rre",
+  "9s62",
+  "9u0u",
+  "9u2p",
+  "9ug4"
+ ]
+}

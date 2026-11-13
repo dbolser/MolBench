@@ -1,0 +1,191 @@
+{
+ "id": "res-dna-p04637",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-dna",
+ "structures": [
+  "1tup"
+ ],
+ "prompt": "Show me a structure of human p53 bound to DNA: the protein as a cyan cartoon and the DNA as a lime green cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1tup.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "protein"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": "nucleic"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": "nucleic",
+   "representation": "cartoon",
+   "color": "limegreen"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1tup.json",
+   "molbench/atom_tables/1tup.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1TUP is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P04637 (196 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 855 atoms on the frozen atom table",
+   "the same drawing on another accepted entry (5LGY) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (10EQ) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names P53_HUMAN (P04637) and asks for it on DNA; accepted are the PDB entries of that accession that also hold a DNA entity. The reference draws the protein and the nucleic acid of 1TUP, one of the 47 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name, bound to DNA"
+  },
+  "uniprot": "P04637",
+  "accessions": [
+   "P04637"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 47,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1tsr",
+  "2ac0",
+  "2ady",
+  "2ahi",
+  "2ata",
+  "3d0a",
+  "3igk",
+  "3igl",
+  "3kmd",
+  "3kz8",
+  "3q05",
+  "3q06",
+  "3ts8",
+  "4hje",
+  "4ibu",
+  "4ibv",
+  "4ibw",
+  "4mzr",
+  "5bua",
+  "5lgy",
+  "5mct",
+  "5mcu",
+  "5mcv",
+  "5mcw",
+  "5mf7",
+  "5mg7",
+  "6fj5",
+  "6znc",
+  "7b46",
+  "7b49",
+  "7b4a",
+  "7b4d",
+  "7b4e",
+  "7b4f",
+  "7b4g",
+  "7b4h",
+  "7b4n",
+  "7eds",
+  "7eeu",
+  "7xzx",
+  "7xzz",
+  "9a9w",
+  "9r04",
+  "9r2m",
+  "9r2p",
+  "9r2q"
+ ]
+}

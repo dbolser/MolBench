@@ -1,0 +1,289 @@
+{
+ "id": "res-gene-q8nbp7",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-gene",
+ "structures": [
+  "2p4e"
+ ],
+ "prompt": "I want to see a structure of human PCSK9; a magenta cartoon will do.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2p4e.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2p4e.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2p4e.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/2p4e.json",
+   "molbench/atom_tables/2p4e.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "2P4E is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to Q8NBP7 (494 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 4403 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (5VL7) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (11NM) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names PCSK9_HUMAN (Q8NBP7) by its human gene symbol PCSK9 (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 2P4E, one of the 60 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "gene symbol"
+  },
+  "uniprot": "Q8NBP7",
+  "accessions": [
+   "Q8NBP7"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 60,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "10sb",
+  "2pmw",
+  "2qtw",
+  "2w2m",
+  "2w2n",
+  "2w2o",
+  "2w2p",
+  "2w2q",
+  "2xtj",
+  "37hf",
+  "3bps",
+  "3gcw",
+  "3gcx",
+  "3h42",
+  "3m0c",
+  "3p5b",
+  "3p5c",
+  "3sqo",
+  "4k8r",
+  "4ne9",
+  "4nmx",
+  "4ov6",
+  "5oca",
+  "5vl7",
+  "5vla",
+  "5vlh",
+  "5vlk",
+  "5vll",
+  "5vlp",
+  "6u26",
+  "6u2f",
+  "6u2n",
+  "6u2p",
+  "6u36",
+  "6u38",
+  "6u3i",
+  "6u3x",
+  "6xib",
+  "6xic",
+  "6xid",
+  "6xie",
+  "6xif",
+  "7anq",
+  "7kev",
+  "7kfa",
+  "7s5g",
+  "7s5h",
+  "8fpo",
+  "8fpq",
+  "8fvl",
+  "8fvm",
+  "8fvn",
+  "8fvo",
+  "8fvp",
+  "8fvq",
+  "8vdv",
+  "8wfr",
+  "9hz3",
+  "9szy"
+ ]
+}

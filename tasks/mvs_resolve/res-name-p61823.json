@@ -1,0 +1,571 @@
+{
+ "id": "res-name-p61823",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-name",
+ "structures": [
+  "1fs3"
+ ],
+ "prompt": "I'd like to look at bovine pancreatic ribonuclease (RNase A). Any PDB structure of it will do; draw it as a green cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1fs3.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1fs3.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1fs3.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1fs3.json",
+   "molbench/atom_tables/1fs3.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1FS3 is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P61823 (124 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 951 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (1D5H) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (13XO) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names RNAS1_BOVIN (P61823) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 1FS3, one of the 342 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name"
+  },
+  "uniprot": "P61823",
+  "accessions": [
+   "P61823"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 342,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1a2w",
+  "1a5p",
+  "1a5q",
+  "1afk",
+  "1afl",
+  "1afu",
+  "1aqp",
+  "1b6v",
+  "1bel",
+  "1bzq",
+  "1c0b",
+  "1c0c",
+  "1c8w",
+  "1c9v",
+  "1c9x",
+  "1cjq",
+  "1cjr",
+  "1d5d",
+  "1d5e",
+  "1d5h",
+  "1dfj",
+  "1dy5",
+  "1eic",
+  "1eid",
+  "1eie",
+  "1eos",
+  "1eow",
+  "1f0v",
+  "1fev",
+  "1izp",
+  "1izq",
+  "1izr",
+  "1j7z",
+  "1j80",
+  "1j81",
+  "1j82",
+  "1jn4",
+  "1js0",
+  "1jvt",
+  "1jvu",
+  "1jvv",
+  "1kf2",
+  "1kf3",
+  "1kf4",
+  "1kf5",
+  "1kf7",
+  "1kf8",
+  "1kh8",
+  "1lsq",
+  "1o0f",
+  "1o0h",
+  "1o0m",
+  "1o0n",
+  "1o0o",
+  "1qhc",
+  "1rar",
+  "1ras",
+  "1rat",
+  "1rbb",
+  "1rbc",
+  "1rbd",
+  "1rbe",
+  "1rbf",
+  "1rbg",
+  "1rbh",
+  "1rbi",
+  "1rbj",
+  "1rbn",
+  "1rbw",
+  "1rbx",
+  "1rca",
+  "1rcn",
+  "1rha",
+  "1rhb",
+  "1rnc",
+  "1rnd",
+  "1rnm",
+  "1rnn",
+  "1rno",
+  "1rnq",
+  "1rnu",
+  "1rnv",
+  "1rnw",
+  "1rnx",
+  "1rny",
+  "1rnz",
+  "1rob",
+  "1rpf",
+  "1rpg",
+  "1rph",
+  "1rsm",
+  "1rta",
+  "1rtb",
+  "1ruv",
+  "1srn",
+  "1ssa",
+  "1ssb",
+  "1ssc",
+  "1u1b",
+  "1w4o",
+  "1w4p",
+  "1w4q",
+  "1wbu",
+  "1xps",
+  "1xpt",
+  "1ymn",
+  "1ymr",
+  "1ymw",
+  "1z3l",
+  "1z3m",
+  "1z3p",
+  "1z6d",
+  "1z6s",
+  "2aas",
+  "2apq",
+  "2blp",
+  "2blz",
+  "2e33",
+  "2e3w",
+  "2g4w",
+  "2g4x",
+  "2g8q",
+  "2g8r",
+  "2nui",
+  "2op2",
+  "2oqf",
+  "2p42",
+  "2p43",
+  "2p44",
+  "2p45",
+  "2p46",
+  "2p47",
+  "2p48",
+  "2p49",
+  "2p4a",
+  "2qca",
+  "2rat",
+  "2rln",
+  "2rns",
+  "2w5g",
+  "2w5i",
+  "2w5k",
+  "2w5l",
+  "2w5m",
+  "2xog",
+  "2xoi",
+  "30uf",
+  "30ug",
+  "3a1r",
+  "3d6o",
+  "3d6p",
+  "3d6q",
+  "3d7b",
+  "3d8y",
+  "3d8z",
+  "3dh5",
+  "3dh6",
+  "3di7",
+  "3di8",
+  "3di9",
+  "3dib",
+  "3dic",
+  "3dxg",
+  "3dxh",
+  "3eux",
+  "3euy",
+  "3euz",
+  "3ev0",
+  "3ev1",
+  "3ev2",
+  "3ev3",
+  "3ev4",
+  "3ev5",
+  "3ev6",
+  "3fkz",
+  "3fl0",
+  "3fl1",
+  "3fl3",
+  "3i67",
+  "3i6f",
+  "3i6h",
+  "3i6j",
+  "3i7w",
+  "3i7x",
+  "3i7y",
+  "3jw1",
+  "3lxo",
+  "3mwq",
+  "3mwr",
+  "3mx8",
+  "3mzq",
+  "3mzr",
+  "3oqy",
+  "3oqz",
+  "3or0",
+  "3ql1",
+  "3ql2",
+  "3qsk",
+  "3rat",
+  "3rh1",
+  "3rid",
+  "3rn3",
+  "3rsd",
+  "3rsk",
+  "3rsp",
+  "3srn",
+  "4ao1",
+  "4g8v",
+  "4g8y",
+  "4g90",
+  "4j5z",
+  "4j60",
+  "4j61",
+  "4j62",
+  "4j63",
+  "4j64",
+  "4j65",
+  "4j66",
+  "4j67",
+  "4j68",
+  "4j69",
+  "4j6a",
+  "4k7l",
+  "4k7m",
+  "4l55",
+  "4mxf",
+  "4o36",
+  "4o37",
+  "4okf",
+  "4ooh",
+  "4ot4",
+  "4peq",
+  "4pou",
+  "4qh3",
+  "4rat",
+  "4rsd",
+  "4rsk",
+  "4rte",
+  "4s0q",
+  "4s18",
+  "4srn",
+  "4wyn",
+  "4wyp",
+  "4wyz",
+  "4ygw",
+  "4zz4",
+  "5d6u",
+  "5d97",
+  "5e5e",
+  "5e5f",
+  "5et4",
+  "5jlg",
+  "5jmg",
+  "5jml",
+  "5na9",
+  "5nj7",
+  "5obc",
+  "5obd",
+  "5obe",
+  "5ogh",
+  "5old",
+  "5rat",
+  "5rsa",
+  "6etk",
+  "6etl",
+  "6etm",
+  "6etn",
+  "6eto",
+  "6etp",
+  "6etq",
+  "6etr",
+  "6f60",
+  "6gok",
+  "6pvu",
+  "6pvv",
+  "6pvw",
+  "6pvx",
+  "6qe9",
+  "6rat",
+  "6rsa",
+  "6xhc",
+  "6xhd",
+  "6xhe",
+  "6xhf",
+  "6xvx",
+  "6xw0",
+  "6yo1",
+  "7p4r",
+  "7p8r",
+  "7pni",
+  "7q75",
+  "7q76",
+  "7q77",
+  "7q78",
+  "7q79",
+  "7q7a",
+  "7q7b",
+  "7qhr",
+  "7qpw",
+  "7qpy",
+  "7qpz",
+  "7qq0",
+  "7qwh",
+  "7r1p",
+  "7rat",
+  "7rsa",
+  "7z6d",
+  "7z6g",
+  "8c3b",
+  "8fhm",
+  "8gc9",
+  "8ggg",
+  "8oqc",
+  "8oqd",
+  "8oqe",
+  "8oqf",
+  "8oqg",
+  "8px0",
+  "8r5v",
+  "8rat",
+  "8rsa",
+  "8s96",
+  "8uax",
+  "8uay",
+  "8uaz",
+  "8ub0",
+  "8ub1",
+  "8ub2",
+  "9eo5",
+  "9eo8",
+  "9fyw",
+  "9gf9",
+  "9gys",
+  "9hn6",
+  "9jwd",
+  "9jwh",
+  "9ncs",
+  "9o4v",
+  "9o5b",
+  "9rat",
+  "9rsa"
+ ]
+}

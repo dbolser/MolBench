@@ -1,0 +1,323 @@
+{
+ "id": "res-name-p10275",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-name",
+ "structures": [
+  "5cj6"
+ ],
+ "prompt": "Find a PDB entry of the human androgen receptor and show it as a steel blue cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/5cj6.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/5cj6.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "steelblue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/5cj6.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "steelblue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "steelblue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/5cj6.json",
+   "molbench/atom_tables/5cj6.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "5CJ6 is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P10275 (244 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 2080 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (2PIW) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (15NP) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names ANDR_HUMAN (P10275) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 5CJ6, one of the 94 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name"
+  },
+  "uniprot": "P10275",
+  "accessions": [
+   "P10275"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 94,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1e3g",
+  "1gs4",
+  "1t5z",
+  "1t63",
+  "1t65",
+  "1xj7",
+  "1xow",
+  "1xq3",
+  "1z95",
+  "2am9",
+  "2ama",
+  "2amb",
+  "2ao6",
+  "2ax6",
+  "2ax7",
+  "2ax8",
+  "2ax9",
+  "2axa",
+  "2hvc",
+  "2oz7",
+  "2pio",
+  "2pip",
+  "2piq",
+  "2pir",
+  "2pit",
+  "2piu",
+  "2piv",
+  "2piw",
+  "2pix",
+  "2pkl",
+  "2pnu",
+  "2q7i",
+  "2q7j",
+  "2q7k",
+  "2q7l",
+  "2yhd",
+  "2ylo",
+  "2ylp",
+  "2ylq",
+  "2z4j",
+  "3b5r",
+  "3b65",
+  "3b66",
+  "3b67",
+  "3b68",
+  "3l3x",
+  "3l3z",
+  "3rlj",
+  "3rll",
+  "3v49",
+  "3v4a",
+  "3zqt",
+  "4hlw",
+  "4k7a",
+  "4oea",
+  "4oed",
+  "4oey",
+  "4oez",
+  "4ofr",
+  "4ofu",
+  "4ogh",
+  "4oh5",
+  "4oh6",
+  "4oha",
+  "4oil",
+  "4oiu",
+  "4oj9",
+  "4ojb",
+  "4ok1",
+  "4okb",
+  "4okt",
+  "4okw",
+  "4okx",
+  "4olm",
+  "4ql8",
+  "5jjm",
+  "5t8e",
+  "5t8j",
+  "5v8q",
+  "5vo4",
+  "7ztx",
+  "7ztz",
+  "7zu1",
+  "7zu2",
+  "8e1a",
+  "8fgy",
+  "8fgz",
+  "8fh0",
+  "8fh1",
+  "8fh2",
+  "8rm6",
+  "8rm7",
+  "9gzd"
+ ]
+}

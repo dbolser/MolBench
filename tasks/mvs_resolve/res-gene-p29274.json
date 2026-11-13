@@ -1,0 +1,421 @@
+{
+ "id": "res-gene-p29274",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-gene",
+ "structures": [
+  "3eml"
+ ],
+ "prompt": "I want to see a structure of human ADORA2A; a brown cartoon will do.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3eml.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/3eml.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "brown"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/3eml.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "brown"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "brown"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/3eml.json",
+   "molbench/atom_tables/3eml.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "3EML is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P29274 (288 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 3521 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (8PWN) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (11JC) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names AA2AR_HUMAN (P29274) by its human gene symbol ADORA2A (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 3EML, one of the 192 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "gene symbol"
+  },
+  "uniprot": "P29274",
+  "accessions": [
+   "P29274"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 192,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "10kt",
+  "2ydo",
+  "2ydv",
+  "3pwh",
+  "3qak",
+  "3rey",
+  "3rfm",
+  "3uza",
+  "3uzc",
+  "3vg9",
+  "3vga",
+  "4eiy",
+  "4ug2",
+  "4uhr",
+  "5g53",
+  "5iu4",
+  "5iu7",
+  "5iu8",
+  "5iua",
+  "5iub",
+  "5jtb",
+  "5k2a",
+  "5k2b",
+  "5k2c",
+  "5k2d",
+  "5mzj",
+  "5mzp",
+  "5n2r",
+  "5nlx",
+  "5nm2",
+  "5nm4",
+  "5olg",
+  "5olh",
+  "5olo",
+  "5olv",
+  "5olz",
+  "5om1",
+  "5om4",
+  "5uig",
+  "5uvi",
+  "5vra",
+  "5wf5",
+  "5wf6",
+  "6aqf",
+  "6gdg",
+  "6gt3",
+  "6jzh",
+  "6lpj",
+  "6lpk",
+  "6lpl",
+  "6mh8",
+  "6ps7",
+  "6s0l",
+  "6s0q",
+  "6wqa",
+  "6zdr",
+  "6zdv",
+  "7aro",
+  "7ezc",
+  "7in1",
+  "7in2",
+  "7in3",
+  "7in4",
+  "7in5",
+  "7in6",
+  "7in7",
+  "7in8",
+  "7in9",
+  "7ina",
+  "7inb",
+  "7inc",
+  "7ind",
+  "7ine",
+  "7inf",
+  "7ing",
+  "7inh",
+  "7ini",
+  "7inj",
+  "7ink",
+  "7inl",
+  "7inm",
+  "7inn",
+  "7ino",
+  "7inp",
+  "7inq",
+  "7inr",
+  "7int",
+  "7inu",
+  "7inv",
+  "7inw",
+  "7inx",
+  "7iny",
+  "7inz",
+  "7io0",
+  "7io1",
+  "7io2",
+  "7io3",
+  "7io4",
+  "7io5",
+  "7io6",
+  "7io7",
+  "7io8",
+  "7io9",
+  "7ioa",
+  "7iob",
+  "7ioc",
+  "7iod",
+  "7ioe",
+  "7iof",
+  "7iog",
+  "7ioh",
+  "7ioi",
+  "7ioj",
+  "7iok",
+  "7iol",
+  "7iom",
+  "7ion",
+  "7ioo",
+  "7iop",
+  "7ioq",
+  "7ior",
+  "7ios",
+  "7iot",
+  "7iou",
+  "7iov",
+  "7iow",
+  "7iox",
+  "7ioy",
+  "7ioz",
+  "7ip0",
+  "7ip1",
+  "7ip2",
+  "7ip3",
+  "7ip4",
+  "7ip5",
+  "7ip6",
+  "7ip7",
+  "7ip8",
+  "7ip9",
+  "7ipa",
+  "7ipb",
+  "7ipc",
+  "7ipd",
+  "7ipe",
+  "7ipf",
+  "7ipg",
+  "7px4",
+  "7pyr",
+  "7rm5",
+  "7t32",
+  "8a2o",
+  "8a2p",
+  "8c9w",
+  "8cic",
+  "8cu6",
+  "8cu7",
+  "8du3",
+  "8fyn",
+  "8gne",
+  "8gng",
+  "8jwy",
+  "8jwz",
+  "8pwn",
+  "8rln",
+  "8rqq",
+  "8rvw",
+  "8rw0",
+  "8rw4",
+  "8rw7",
+  "8rwc",
+  "8rwd",
+  "8rwe",
+  "8rwh",
+  "8rwi",
+  "8rwx",
+  "8ugw",
+  "8wdt",
+  "9ee8",
+  "9ee9",
+  "9eea",
+  "9fup",
+  "9h2x",
+  "9h37",
+  "9p1s",
+  "9p1t",
+  "9t9p",
+  "9uhu",
+  "9uhx",
+  "9ui3",
+  "9w41",
+  "9xqb"
+ ]
+}

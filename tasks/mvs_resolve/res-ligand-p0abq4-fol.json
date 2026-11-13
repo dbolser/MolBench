@@ -1,0 +1,391 @@
+{
+ "id": "res-ligand-p0abq4-fol",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-ligand",
+ "structures": [
+  "1rx2"
+ ],
+ "prompt": "Show me a structure of E. coli dihydrofolate reductase with folic acid bound: the protein as a teal cartoon and the folic acid as steel blue ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1rx2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "teal"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "FOL"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1rx2.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "FOL"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "steelblue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1rx2.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "FOL"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "steelblue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "FOL"
+   },
+   "representation": "ball_and_stick",
+   "color": "steelblue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1rx2.json",
+   "molbench/atom_tables/1rx2.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1RX2 is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P0ABQ4 (159 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 32 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (7FPO) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (10SR) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names DYR_ECOLI (P0ABQ4) and the ligand folic acid (component FOL; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer FOL. The reference draws the polymer and every FOL of 1RX2, one of the 86 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name, with a named ligand"
+  },
+  "uniprot": "P0ABQ4",
+  "accessions": [
+   "P0ABQ4"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 86,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1dyi",
+  "1ra2",
+  "1ra8",
+  "1rb2",
+  "1rd7",
+  "1re7",
+  "1rx7",
+  "1rx8",
+  "2d0k",
+  "3ql3",
+  "45pc",
+  "4ej1",
+  "4fhb",
+  "4i13",
+  "4i1n",
+  "4kjj",
+  "4kjk",
+  "4kjl",
+  "4nx6",
+  "4nx7",
+  "4x5f",
+  "4x5g",
+  "4x5h",
+  "4x5i",
+  "4x5j",
+  "5e8q",
+  "5eaj",
+  "5sss",
+  "5sst",
+  "5ssu",
+  "5ssv",
+  "5ssw",
+  "5ujx",
+  "5z6f",
+  "5z6j",
+  "5z6k",
+  "5z6l",
+  "5z6m",
+  "7d3z",
+  "7d49",
+  "7d4l",
+  "7d4x",
+  "7d6g",
+  "7dfr",
+  "7fpl",
+  "7fpm",
+  "7fpn",
+  "7fpo",
+  "7fpp",
+  "7fpq",
+  "7fpr",
+  "7fps",
+  "7fpt",
+  "7fpu",
+  "7fpv",
+  "7fpw",
+  "7fpx",
+  "7fpy",
+  "7fpz",
+  "7fq0",
+  "7fq1",
+  "7fq2",
+  "7fq3",
+  "7fq4",
+  "7fq5",
+  "7fq6",
+  "7fq7",
+  "7fq8",
+  "7fq9",
+  "7fqa",
+  "7fqb",
+  "7fqc",
+  "7fqd",
+  "7fqe",
+  "7fqf",
+  "7fqg",
+  "7lvc",
+  "8g4z",
+  "8g50",
+  "8ucx",
+  "8uw0",
+  "9pwk",
+  "9pwm",
+  "9pxd",
+  "9zhm"
+ ]
+}

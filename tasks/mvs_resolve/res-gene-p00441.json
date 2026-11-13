@@ -1,0 +1,376 @@
+{
+ "id": "res-gene-p00441",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-gene",
+ "structures": [
+  "2c9v"
+ ],
+ "prompt": "I want to see a structure of human SOD1; a green cartoon will do.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2c9v.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2c9v.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2c9v.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/2c9v.json",
+   "molbench/atom_tables/2c9v.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "2C9V is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P00441 (153 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 2408 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (8YAF) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (13RT) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names SODC_HUMAN (P00441) by its human gene symbol SOD1 (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 2C9V, one of the 147 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "gene symbol"
+  },
+  "uniprot": "P00441",
+  "accessions": [
+   "P00441"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 147,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1azv",
+  "1ba9",
+  "1dsw",
+  "1fun",
+  "1hl4",
+  "1hl5",
+  "1kmg",
+  "1l3n",
+  "1mfm",
+  "1n18",
+  "1n19",
+  "1oez",
+  "1ozt",
+  "1ozu",
+  "1p1v",
+  "1ptz",
+  "1pu0",
+  "1rk7",
+  "1sos",
+  "1spd",
+  "1uxl",
+  "1uxm",
+  "23wu",
+  "2af2",
+  "2c9s",
+  "2c9u",
+  "2gbt",
+  "2gbu",
+  "2gbv",
+  "2lu5",
+  "2mp3",
+  "2nam",
+  "2nnx",
+  "2r27",
+  "2v0a",
+  "2vr6",
+  "2vr7",
+  "2vr8",
+  "2wko",
+  "2wyt",
+  "2wyz",
+  "2wz0",
+  "2wz5",
+  "2wz6",
+  "2xjk",
+  "2xjl",
+  "2zkw",
+  "2zkx",
+  "2zky",
+  "3cqp",
+  "3cqq",
+  "3ecu",
+  "3ecv",
+  "3ecw",
+  "3gqf",
+  "3gtv",
+  "3gzo",
+  "3gzp",
+  "3gzq",
+  "3h2p",
+  "3h2q",
+  "3hff",
+  "3k91",
+  "3kh3",
+  "3kh4",
+  "3ltv",
+  "3qqd",
+  "3re0",
+  "3t5w",
+  "4a7g",
+  "4a7q",
+  "4a7s",
+  "4a7t",
+  "4a7u",
+  "4a7v",
+  "4b3e",
+  "4bcy",
+  "4bcz",
+  "4bd4",
+  "4ff9",
+  "4mcm",
+  "4mcn",
+  "4oh2",
+  "4xcr",
+  "5j07",
+  "5j0c",
+  "5j0g",
+  "5k02",
+  "5o3y",
+  "5o40",
+  "5u9m",
+  "5yto",
+  "5ytu",
+  "5yul",
+  "6a9o",
+  "6dtk",
+  "6ffk",
+  "6flh",
+  "6foi",
+  "6fol",
+  "6fon",
+  "6fp6",
+  "6spa",
+  "6sph",
+  "6spi",
+  "6spj",
+  "6spk",
+  "6z3v",
+  "6z4g",
+  "6z4h",
+  "6z4i",
+  "6z4j",
+  "6z4k",
+  "6z4l",
+  "6z4m",
+  "6z4o",
+  "7cjv",
+  "7cjw",
+  "7fb6",
+  "7fb9",
+  "7nxx",
+  "7t8e",
+  "7t8f",
+  "7t8g",
+  "7t8h",
+  "7vzf",
+  "7xx3",
+  "8ccx",
+  "8gsq",
+  "8ihu",
+  "8ihv",
+  "8k33",
+  "8k3a",
+  "8k3l",
+  "8q6m",
+  "8yaf",
+  "8yat",
+  "8yd3",
+  "9iyd",
+  "9iyj",
+  "9iyk",
+  "9jbo",
+  "9jbp",
+  "9li1",
+  "9xj0",
+  "9xji"
+ ]
+}

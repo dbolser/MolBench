@@ -1,0 +1,371 @@
+{
+ "id": "res-complex-p40337-q15369-q15370",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-complex",
+ "structures": [
+  "9gio"
+ ],
+ "prompt": "Find a PDB entry of the human von Hippel-Lindau protein (pVHL) in complex with elongin-C and elongin-B and show it as a steel blue cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9gio.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/9gio.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "steelblue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/9gio.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "steelblue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "steelblue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/9gio.json",
+   "molbench/atom_tables/9gio.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "9GIO is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P40337 (146 observed residues), Q15369 (87 observed residues) and Q15370 (101 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 2645 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (9OIO) grades as exactly right",
+   "the same drawing on a PDB entry outside the list (15BI) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names a complex of VHL_HUMAN (P40337), ELOC_HUMAN (Q15369) and ELOB_HUMAN (Q15370); accepted are the PDB entries that hold all of them. The reference is a cartoon of the polymer of 9GIO, one of the 140 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "complex of named proteins"
+  },
+  "uniprot": "P40337",
+  "accessions": [
+   "P40337",
+   "Q15369",
+   "Q15370"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 140,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1lm8",
+  "1lqb",
+  "1vcb",
+  "29ho",
+  "3zrc",
+  "3zrf",
+  "3ztc",
+  "3ztd",
+  "3zun",
+  "4ajy",
+  "4awj",
+  "4b95",
+  "4b9k",
+  "4bks",
+  "4bkt",
+  "4w9c",
+  "4w9d",
+  "4w9e",
+  "4w9f",
+  "4w9g",
+  "4w9h",
+  "4w9i",
+  "4w9j",
+  "4w9k",
+  "4w9l",
+  "4wqo",
+  "5lli",
+  "5n4w",
+  "5nvv",
+  "5nvw",
+  "5nvx",
+  "5nvy",
+  "5nvz",
+  "5nw0",
+  "5nw1",
+  "5nw2",
+  "5t35",
+  "6bvb",
+  "6fmi",
+  "6fmj",
+  "6fmk",
+  "6gfx",
+  "6gfy",
+  "6gfz",
+  "6gmn",
+  "6gmq",
+  "6gmr",
+  "6gmx",
+  "6hax",
+  "6hay",
+  "6hr2",
+  "6i7r",
+  "6r7f",
+  "6sis",
+  "6zhc",
+  "7cjb",
+  "7jto",
+  "7jtp",
+  "7khh",
+  "7pi4",
+  "7q2j",
+  "7s4e",
+  "7z6l",
+  "7z76",
+  "7z77",
+  "7znt",
+  "8bb2",
+  "8bb3",
+  "8bb4",
+  "8bb5",
+  "8bdi",
+  "8bdj",
+  "8bdl",
+  "8bdm",
+  "8bdn",
+  "8bdo",
+  "8bds",
+  "8bdt",
+  "8bdx",
+  "8beb",
+  "8c13",
+  "8cqe",
+  "8cqk",
+  "8cql",
+  "8ei3",
+  "8ewv",
+  "8fy0",
+  "8fy1",
+  "8fy2",
+  "8g1p",
+  "8g1q",
+  "8p0f",
+  "8pc2",
+  "8qjr",
+  "8qjs",
+  "8qu8",
+  "8qvu",
+  "8qw6",
+  "8qw7",
+  "8r5h",
+  "8rwz",
+  "8rx0",
+  "8vl9",
+  "8vlb",
+  "8wdk",
+  "8ymb",
+  "8zv8",
+  "8zvj",
+  "9bju",
+  "9bol",
+  "9d4b",
+  "9dtx",
+  "9dty",
+  "9eqj",
+  "9eqm",
+  "9h30",
+  "9hyb",
+  "9hyn",
+  "9hyo",
+  "9hyp",
+  "9ipw",
+  "9l6f",
+  "9mr9",
+  "9oim",
+  "9oin",
+  "9oio",
+  "9oiq",
+  "9qe4",
+  "9qe5",
+  "9rk8",
+  "9rkc",
+  "9rke",
+  "9rkj",
+  "9rkn",
+  "9sno",
+  "9snp",
+  "9snq",
+  "9sv3",
+  "9t32"
+ ]
+}
