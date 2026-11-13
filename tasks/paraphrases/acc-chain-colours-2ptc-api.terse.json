@@ -162,6 +162,7 @@
   "structure": "2ptc",
   "derived": "polymer chains from `facts.chains`; exactly 2 or 3; n colours by seed; all n! assignments. Reference = the first accepted state (chain E orange, chain I cyan): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
   "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
    {
     "what": "the protein chain with author id E",

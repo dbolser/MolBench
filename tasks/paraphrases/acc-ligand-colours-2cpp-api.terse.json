@@ -171,6 +171,7 @@
   "structure": "2cpp",
   "derived": "same entries as above; two colours by seed; both assignments. Reference = the first accepted state (CAM yellow, HEM purple): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
   "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
    {
     "what": "CAM A:422",

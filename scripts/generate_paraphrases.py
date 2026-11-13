@@ -65,7 +65,7 @@ DATE = "2026-11-13"                      # fixed, so a rebuild is byte-identical
 OUT = REPO / "tasks" / "paraphrases"
 SELECTION = "SELECTION.txt"
 STYLES = ("terse", "indirect")
-API_CHECK_KEYS = ("structure", "derived", "checked_by", "targets")
+API_CHECK_KEYS = ("structure", "derived", "checked_by", "accepted_differ", "targets")
 
 # --------------------------------------------------------------------------- #
 # Wordings per family. Slots are the task's provenance.slots.

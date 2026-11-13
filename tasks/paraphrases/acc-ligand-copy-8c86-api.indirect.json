@@ -164,6 +164,7 @@
   "structure": "8c86",
   "derived": "a `ligand` component with 2\u20134 copies (\u2265 8 heavy atoms); each copy, and all. Reference = the first accepted state (TQ0 B:201): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
   "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
    {
     "what": "TQ0 B:201",

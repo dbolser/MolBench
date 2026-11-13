@@ -91,5 +91,5 @@ enumerable neighbour: the colours are named, the assignment is not.
 
 - Structures: PDB entries of the panel with one model and at most 15,000 atoms; never 1HSG. At most 6 tasks of the tier (both tracks) on one structure.
 - "Any one, or all": with more than two copies, a several-but-not-all answer is not accepted, because no reading of the request picks it.
-- Held-back structures are a fixed fifth of the panel by hash of the entry id (`heldback_structures()`), not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus. In this tier: 1f88, 1igt, 1udt, 3ave, 8k7f.
+- Held-back structures are not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus: they are the corpus-wide list in `data/panel/heldback.json` when that file exists (or `--heldback-file`), and until then a fixed fifth of the panel by hash of the entry id (`heldback_structures()`). About a fifth of the tier's tasks are on them. In this tier: 1f88, 1igt, 1udt, 3ave, 8k7f.
 - The cartoon is not given a colour by the request, so the reference leaves it at the viewer's default.

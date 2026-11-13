@@ -224,3 +224,13 @@ def test_every_template_has_rule_wordings_and_readme_row(template):
     assert template in gen.RULES and template in gen.OPEN and template in gen.DERIVED
     assert len(gen.WORDINGS[template]) >= 3
     assert any(t["family"] == template for t in TASKS.values())
+
+
+def test_a_shared_heldback_list_replaces_the_hash_rule(tmp_path, capsys):
+    """The corpus-wide list (data/panel/heldback.json, or --heldback-file): the tier
+    still builds and passes its own checks on it; only the files differ."""
+    shared = tmp_path / "heldback.json"
+    shared.write_text(json.dumps(["1RX2", "2ptc", "1lmb", "8k7f", "1igt"]))
+    assert gen.main(["--heldback-file", str(shared), "--check"]) == 1
+    assert "out of date" in capsys.readouterr().out
+    assert not gen.HELDBACK_FILE.exists() or gen.main(["--check"]) == 0

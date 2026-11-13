@@ -163,6 +163,7 @@
   "structure": "2cpp",
   "derived": "`facts.ligands` of kind `ligand`: exactly two components, one copy each, \u2265 8 heavy atoms, entry not a membrane protein (panel feature); states = A, B, A+B (+ Mol*'s static `ligand` on MVS when it differs). Reference = the first accepted state (CAM): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
   "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
    {
     "what": "CAM A:422",

@@ -7,6 +7,7 @@ ENUMERATED BY SCRIPT from the frozen panel.
     uv run python scripts/generate_accept_set_tasks.py           # rewrite the files
     uv run python scripts/generate_accept_set_tasks.py --check   # fail if they would change
     uv run python scripts/generate_accept_set_tasks.py --heldback-file ids.json
+        # the corpus-wide held-back list (default: data/panel/heldback.json if present)
     uv run python scripts/generate_accept_set_tasks.py --viewer  # + every MVS state in Mol*
 
 Writes ``tasks/mvs_accept/`` and ``tasks/api_accept/`` (one JSON file per task, plus a
@@ -63,6 +64,9 @@ OUT = {"mvs": REPO / "tasks" / "mvs_accept", "api": REPO / "tasks" / "api_accept
 # on the tier: it is a fixed fifth of the panel, by hash of the entry id. Any generator
 # can call `heldback_structures()`; `--heldback-file` replaces it with a shared list.
 HELDBACK_SEED = "molbench-heldback-v1"
+# One list for the whole corpus, once the lead freezes it: a JSON list of entry ids.
+# When this file exists it replaces the hash rule below (so does --heldback-file).
+HELDBACK_FILE = REPO / "data" / "panel" / "heldback.json"
 HELDBACK_SHARE = 0.2
 
 MAX_ATOMS = 15000              # the panel's own size rule (two older entries exceed it)
@@ -1001,9 +1005,12 @@ def readme(track: str, tasks: list[dict], held: set[str]) -> str:
               "(both tracks) on one structure.",
               "- \"Any one, or all\": with more than two copies, a several-but-not-all answer is "
               "not accepted, because no reading of the request picks it.",
-              "- Held-back structures are a fixed fifth of the panel by hash of the entry id "
-              "(`heldback_structures()`), not chosen per tier, because the validator refuses a "
-              "structure used by both splits anywhere in the corpus. In this tier: "
+              "- Held-back structures are not chosen per tier, because the validator refuses a "
+              "structure used by both splits anywhere in the corpus: they are the corpus-wide "
+              "list in `data/panel/heldback.json` when that file exists (or `--heldback-file`), "
+              "and until then a fixed fifth of the panel by hash of the entry id "
+              "(`heldback_structures()`). About a fifth of the tier's tasks are on them. "
+              "In this tier: "
               + ", ".join(sorted({t["structures"][0] for t in tasks if t["split"] == "heldback"}))
               + ".",
               "- The cartoon is not given a colour by the request, so the reference leaves it "
@@ -1057,13 +1064,15 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--check", action="store_true", help="fail if the files would change")
     ap.add_argument("--heldback-file", type=pathlib.Path,
-                    help="JSON list of held-back structure ids (replaces the hash rule)")
+                    help="JSON list of held-back structure ids (default: "
+                         "data/panel/heldback.json if it exists, else the hash rule)")
     ap.add_argument("--viewer", action="store_true",
                     help="also load every MVS accepted state in headless Mol* and compare")
     ap.add_argument("--cache", type=pathlib.Path, default=REPO / "data" / "cif",
                     help="with --viewer: where the frozen structure files are unpacked")
     a = ap.parse_args(argv)
-    held = (set(json.loads(a.heldback_file.read_text())) if a.heldback_file
+    shared = a.heldback_file or (HELDBACK_FILE if HELDBACK_FILE.exists() else None)
+    held = ({str(i).lower() for i in json.loads(shared.read_text())} if shared
             else heldback_structures())
     tasks = verify(build(held))
     if a.viewer:
