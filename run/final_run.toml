@@ -3,7 +3,7 @@
 #   python -m molbench.runner --manifest run/final_run.toml --dry-run   # rehearse, $0
 #   python -m molbench.runner --manifest run/final_run.toml             # plan + cost only
 #   python -m molbench.runner --manifest run/final_run.toml --go        # the paid run
-#   python scripts/estimate_cost.py --tasks mvs=300 api_calling=150     # cost of a planned corpus
+#   python scripts/estimate_cost.py --tasks mvs=450 api_calling=250     # cost of a planned corpus
 #
 # The paid run refuses to start until corpus.sha256 is pinned and matches tasks/ on disk.
 
@@ -32,9 +32,12 @@ timeout_seconds = 300.0
 cap_usd = 120.00
 note = """Hard stop. The run aborts before the first call if the plan is projected above \
 the cap, and mid-run as soon as (spent + estimated cost of the calls still to make) passes it. \
-Sized for the 16-model panel on the planned corpus of about 450 tasks: projected $93 on \
-2026-11-12 (scripts/estimate_cost.py --core-only --tasks mvs=300 api_calling=150). The five \
-optional models would add about $255; raise the cap deliberately if they are included."""
+NOT YET SIZED FOR THE FINAL CORPUS: on 2026-11-12 the 17-entry core panel was projected at $19 \
+on today's 90 tasks and at $141 on a corpus of 450 MVS + 250 API tasks (scripts/estimate_cost.py \
+--core-only --tasks mvs=450 api_calling=250), so at that size the run refuses to start until \
+this cap is raised or the plan is trimmed (gemini-3.5-flash is $57 of the $141; the JSON-mode \
+condition is nearly half of every model's cost). The five optional models would add about $388. \
+Set the cap deliberately once the corpus is frozen."""
 
 [corpus]
 version = "corpus-v1.0-dev"         # becomes "corpus-v1.0" at the freeze
@@ -44,6 +47,14 @@ note = "SHA-256 over every tasks/**/*.json (sorted path + content). Empty = not 
 # ---------------------------------------------------------------------------------------
 # Conditions (plan decisions 10 and 11). Listed in the order they are run.
 # ---------------------------------------------------------------------------------------
+# How task tiers map to conditions:
+#   spec             every tier, both tracks, both splits (public and held-back are run
+#                    identically; scorecards report them apart, by_split)
+#   spec_structured  the same tasks, JSON mode on
+#   spec_grounded    tiers resolve and clinical only, MVS track, tasks with a grounding pack
+#   bare             every MVS tier, three models
+# Follow-up, accept-set, twin and paraphrase tasks need no condition of their own: they are
+# ordinary tasks of the spec conditions (a follow-up's start state is part of its request).
 [[conditions]]
 name = "spec"
 prompt = "spec"
@@ -67,9 +78,10 @@ prompt = "spec"
 grounding = true
 models = "all"
 tracks = ["mvs"]
-where = { source = ["clinvar-variant", "clinvar-hotspots", "sifts-named", "resolve"] }
+where = { tier = ["resolve", "clinical"] }
 note = """Ablation: the task's frozen grounding pack appended to the user message, on the \
-lookup tiers only (tasks whose 'source' is listed and that carry a pack)."""
+lookup tiers only (molbench.tasks.LOOKUP_TIERS: tasks whose answer needs a fact from outside \
+the request, and that carry a pack). No other tier is given a pack in any condition."""
 
 [[conditions]]
 name = "bare"
@@ -79,7 +91,28 @@ tracks = ["mvs"]
 note = "Output contract only, no MVS reference. Three models (the same three as October)."
 
 # ---------------------------------------------------------------------------------------
-# Model panel: the 16 models of the current leaderboard (docs/scorecard.json).
+# Model panel (plan decision 22). The rule, then the entries it gives.
+# ---------------------------------------------------------------------------------------
+[panel]
+rule = """(1) Every open-weight and closed model on the published leaderboard \
+(docs/scorecard.json, October 2026) stays, on the route it was run on, so the final numbers \
+can be compared with the earlier ones. (2) The keyword baseline (no model; fixed rules in \
+molbench/models.py) is a panel member on both tracks. (3) Optional entries: the current \
+flagship model of each major lab on OpenRouter's public list on the price date, plus the \
+largest model there with public weights; they run only with --include-optional. No model is \
+added or dropped after results are seen."""
+
+[[models]]
+id = "baseline-rules"
+route = "baseline"                     # molbench.models.BaselineModel: keyword rules, no call
+open_weights = false                   # not a model at all
+reasoning = false
+structured = "none"
+reason = "Score floor on both tracks: what keyword matching alone achieves."
+price = { input = 0.0, output = 0.0, source = "runs locally; no provider is called", date = "2026-11-12", verified = true }
+
+# ---------------------------------------------------------------------------------------
+# The 16 models of the current leaderboard (docs/scorecard.json).
 #
 # price: USD per 1,000,000 tokens. OpenRouter prices were read from its public model list
 # (no key needed) on the date given. OpenRouter bills at the rate of the provider that

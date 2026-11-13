@@ -25,17 +25,32 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
-      - name: Install (locked; 'authoring' so the structure-grounded tests run too)
-        run: uv sync --locked --extra authoring
-      - name: Test suite
-        run: uv run pytest -q
+      - name: Install (locked; every extra and group a test needs, so none is skipped)
+        run: uv sync --locked --extra authoring --extra execute --group paper
+      - name: Mol* bundle and headless browser (the viewer tests skip without them)
+        run: |
+          uv run python scripts/fetch_molstar.py
+          uv run playwright install --with-deps chromium
+      - name: Test suite (all tests; the only skip allowed needs the October archives)
+        run: |
+          set -o pipefail   # without it the step takes tee's exit status and a failing test passes
+          uv run pytest -q -rs | tee "$RUNNER_TEMP/pytest.log"
+          if grep '^SKIPPED' "$RUNNER_TEMP/pytest.log" | grep -v 'October'; then
+            echo "::error::tests were skipped (a dependency is missing from the install step)"
+            exit 1
+          fi
       - name: Manifest is valid
         run: uv run python -m molbench.manifest run/final_run.toml
+      - name: Task corpus matches the task format
+        run: |
+          uv run python scripts/validate_tasks.py
+          uv run python scripts/validate_tasks.py tests/fixtures/tasks
+          uv run python tests/fixtures/build_fixture_tasks.py --check
       - name: Baseline smoke run (rules baseline, both tracks)
         run: uv run python -m molbench.runner --models baseline
       - name: Dry run of the final-run manifest (mock model, $0)
         run: uv run python -m molbench.runner --manifest run/final_run.toml --dry-run
       - name: Cost estimate runs
-        run: uv run python scripts/estimate_cost.py --tasks mvs=300 api_calling=150
+        run: uv run python scripts/estimate_cost.py --tasks mvs=450 api_calling=250
       - name: Leaderboard builder runs
         run: uv run python scripts/build_leaderboard.py --out-dir "$RUNNER_TEMP/site"

@@ -78,32 +78,25 @@ def test_entry_has_atom_table_facts_structure_file_and_sifts(entry):
 
 
 def test_every_structure_a_task_uses_is_in_the_panel():
+    """Every structure a task loads - in its reference, an accepted alternative or a
+    follow-up's start state - is a panel entry. A ``load`` in the PDBe-KB superposition
+    view names a UniProt accession, not a structure (api-005), and loads no entry."""
+    from molbench import tasks as tasks_mod
+
     used: set[str] = set()
-
-    def walk(x):
-        if isinstance(x, dict):
-            if x.get("kind") == "download" and isinstance(x.get("params"), dict):
-                sig = _param_signature("download", x["params"])
-                if sig and sig[0] == "ref":
-                    used.add(sig[1])
-            if isinstance(x.get("molecule_id"), str):
-                mid = x["molecule_id"].lower()
-                used.add(f"af-{mid}" if x.get("alphafold") else mid)
-            for v in x.values():
-                walk(v)
-        elif isinstance(x, list):
-            for v in x:
-                walk(v)
-
-    for path in (REPO / "tasks").rglob("*.json"):
-        task = json.loads(path.read_text())
-        walk({k: v for k, v in task.items() if k != "grounding"})
-    assert used
+    corpus = tasks_mod.load_corpus(REPO / "tasks")
+    for task in corpus:
+        states = [task["reference"], *task["accepted"]]
+        if task["context"]:
+            states += [v for k, v in task["context"].items() if k != "noop"]
+        for state in states:
+            used.update(tasks_mod.loaded_entries(task["track"], state))
+        used.update(task["structures"])
+    assert len(used) >= 20
+    superposed = next(t for t in corpus if t["id"] == "api-005")
+    assert tasks_mod.loaded_entries("api", superposed["reference"]) == []
     for sid in sorted(used):
-        if sid.startswith("af-"):  # loaded by accession: any frozen version of that model
-            assert any(e.startswith(sid + "-") for e in ENTRIES), sid
-        else:
-            assert sid in ENTRIES, sid
+        assert tasks_mod.resolve_entry(sid, ENTRIES) is not None, sid
 
 
 def test_size_limit():

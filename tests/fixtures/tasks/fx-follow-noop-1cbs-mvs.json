@@ -1,0 +1,187 @@
+{
+ "id": "fx-follow-noop-1cbs-mvs",
+ "track": "mvs",
+ "tier": "followup",
+ "family": "fx-follow",
+ "structures": [
+  "1cbs"
+ ],
+ "prompt": "Colour the retinoic acid (REA) red.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1cbs.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             }
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "REA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": {
+  "scene": {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1cbs.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "REA"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "noop": true
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "REA"
+   },
+   "representation": "ball_and_stick",
+   "color": "red"
+  }
+ ],
+ "twin_of": "fx-follow-noop-1cbs-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "tests/fixtures/build_fixture_tasks.py",
+  "inputs": [
+   "data/panel/facts/1cbs.json",
+   "molbench/atom_tables/1cbs.json.gz"
+  ],
+  "date": "2026-11-12",
+  "checks": [
+   "reference grades as exactly right against the task (runner.grade_parsed)",
+   "target selects 22 atoms on the frozen atom table",
+   "twin selects the same target atoms",
+   "start state grades as itself; noop flag agrees with the grader"
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ],
+ "notes": "Fixture for the dry run and the tests; not a benchmark task."
+}

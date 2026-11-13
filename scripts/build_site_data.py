@@ -81,8 +81,11 @@ ROUTE_LABELS = {"openrouter": "OpenRouter", "anthropic": "Anthropic", "openai": 
 
 CONDITIONS = ("spec", "spec_grounded", "bare", "bare_grounded")
 RESCUED = {"rendering-equivalent", "vlm:same"}
-# Lookup-heavy task sources: the ones a grounding pack is meant to help.
+# Lookup-heavy tasks, the ones a grounding pack is meant to help: the tiers
+# `molbench.tasks.LOOKUP_TIERS` (resolve, clinical). These are the old `source` values
+# that map to those tiers; the list is kept in the data file for older readers.
 LOOKUP_SOURCES = {"clinvar-variant", "clinvar-hotspots", "sifts-named", "resolve"}
+LOOKUP_TIERS = ("resolve", "clinical")
 GALLERY_PER_CLASS = 4
 RAW_SHOW = 4000      # chars of raw text shown inline on the failures page
 
@@ -186,11 +189,13 @@ def all_valid(t: dict) -> bool:
     return all(o == "valid" for o in task_outcomes(t))
 
 
-def load_tasks() -> dict[str, dict]:
+def load_tasks(extra: list[pathlib.Path] | None = None) -> dict[str, dict]:
+    """The MVS tasks by id, read through `molbench.tasks` (new and old task files).
+    ``extra``: further task directories (a dry run's fixture tasks)."""
+    from molbench import tasks as tasks_mod
     out = {}
-    for f in (REPO / "tasks").rglob("*.json"):
-        t = json.loads(f.read_text(encoding="utf-8"))
-        if t.get("category") == "mvs":
+    for d in [REPO / "tasks"] + list(extra or []):
+        for t in tasks_mod.load_corpus(d, tracks=["mvs"], repo=REPO):
             out[t["id"]] = t
     return out
 
@@ -474,7 +479,7 @@ def _cond_stats(m: dict) -> dict:
 
 
 def build_conditions(conds: dict, tasks: dict) -> dict:
-    lookup = {i for i, t in tasks.items() if t.get("source") in LOOKUP_SOURCES}
+    lookup = {i for i, t in tasks.items() if t.get("tier") in LOOKUP_TIERS}
     rows = {}
     for name, e in conds["spec"].items():
         st = mvs_tasks(e["model"])
@@ -537,6 +542,9 @@ def _sample_failures(t: dict, raws: dict | None, prompt: str) -> list[dict]:
         raw = ((raws or {}).get(t["id"]) or {}).get(s["sample"])
         f = _failure({**s, "id": t["id"]}, raw, prompt)
         f["sample"] = s["sample"]
+        # Cut off at the token limit, or malformed? (reported apart; plan decision 11)
+        f["finish_reason"] = s.get("finish_reason")
+        f["truncated"] = bool(s.get("truncated"))
         if s.get("outcome") in ("invalid_mvs", "load_failed", "unchecked"):
             f["raw"] = None if raw is None else (raw.get("raw") or "")
         out.append(f)
@@ -640,7 +648,8 @@ def build_run_scorecard(spec: dict) -> dict:
     }
 
 
-def build_from_run(run_dir: pathlib.Path, archive: pathlib.Path, docs: pathlib.Path) -> dict:
+def build_from_run(run_dir: pathlib.Path, archive: pathlib.Path, docs: pathlib.Path,
+                   extra_tasks: list[pathlib.Path] | None = None) -> dict:
     """The data files of a manifest run (no render cascade: no escalation or gallery)."""
     configure(None)
     names = [d.name for d in sorted(run_dir.iterdir())
@@ -650,7 +659,7 @@ def build_from_run(run_dir: pathlib.Path, archive: pathlib.Path, docs: pathlib.P
     if not conds.get("spec"):
         raise SystemExit(f"{run_dir}: no spec/ scorecards; nothing to build")
     conds.setdefault("spec_grounded", {})
-    tasks = load_tasks()
+    tasks = load_tasks(extra_tasks)
     return {
         "scorecard.json": build_run_scorecard(conds["spec"]),
         "conditions_data.json": build_conditions(conds, tasks),
@@ -668,10 +677,12 @@ def main(argv=None) -> None:
     ap.add_argument("--docs", type=pathlib.Path, default=REPO / "docs")
     ap.add_argument("--site-config", type=pathlib.Path, default=DEFAULT_SITE_CONFIG,
                     help="renamed / not-run models for the --results layout")
+    ap.add_argument("--extra-tasks", type=pathlib.Path, action="append", default=[],
+                    help="a further task directory (a dry run's fixture tasks); with --run")
     a = ap.parse_args(argv)
 
     if a.run:
-        files = build_from_run(a.run, a.runs, a.docs)
+        files = build_from_run(a.run, a.runs, a.docs, a.extra_tasks)
         for stale in ("escalation_data.json", "gallery_data.json"):
             (a.docs / stale).unlink(missing_ok=True)  # none in a manifest run
     else:

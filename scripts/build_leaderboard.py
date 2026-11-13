@@ -35,23 +35,33 @@ import sys
 REPO = pathlib.Path(__file__).resolve().parent.parent
 DOCS = REPO / "docs"
 TASKS_DIR = REPO / "tasks"
+sys.path.insert(0, str(REPO))  # molbench.tasks reads the corpus
 
 NL = "\n"
 
-# How a task's `source` maps to a difficulty regime, ordered easy -> hard.
+# How a task's tier maps to a difficulty regime, ordered easy -> hard. Old task files
+# have no tier; `molbench.tasks` derives one from their `source`.
 GRADIENT = ["Translation", "Grounded (ligand/SS)", "Clinical (SIFTS/ClinVar)"]
 # Regimes that test another skill, not a harder step on the gradient: shown below it, unordered.
-OTHER_REGIMES = ["Resolution (by name)", "Interactions (atoms)"]
+OTHER_REGIMES = ["Resolution (by name)", "Interactions (atoms)", "Follow-up turns",
+                 "Accept-set (ambiguous)"]
 REGIMES = GRADIENT + OTHER_REGIMES
-_SOURCE_REGIME = {
-    "generated": "Translation", "curated": "Translation",
+_TIER_REGIME = {
+    "translation": "Translation",
     "grounded": "Grounded (ligand/SS)",
-    "clinvar-variant": "Clinical (SIFTS/ClinVar)", "clinvar-hotspots": "Clinical (SIFTS/ClinVar)",
-    "sifts-named": "Clinical (SIFTS/ClinVar)",
+    "clinical": "Clinical (SIFTS/ClinVar)",
     "resolve": "Resolution (by name)",
     "interactions": "Interactions (atoms)",
+    "followup": "Follow-up turns",
+    "accept_set": "Accept-set (ambiguous)",
 }
 
+# The `source` values of task files written before tiers existed.
+_SOURCE_REGIME = {
+    "generated": "Translation", "curated": "Translation",
+    "clinvar-variant": "Clinical (SIFTS/ClinVar)", "clinvar-hotspots": "Clinical (SIFTS/ClinVar)",
+    "sifts-named": "Clinical (SIFTS/ClinVar)",
+}
 
 OUTCOME_LABELS = {
     "valid": "valid scene", "invalid_json": "invalid JSON", "not_mvs": "not an MVS tree",
@@ -62,25 +72,34 @@ OUTCOME_LABELS = {
 # --------------------------------------------------------------------------- #
 # Data helpers
 # --------------------------------------------------------------------------- #
-def _regime_of(source: str) -> str:
-    # Explicit, so a new task source can't silently land in another regime's numbers.
-    if source not in _SOURCE_REGIME:
-        raise ValueError(f"task source {source!r} has no regime; add it to _SOURCE_REGIME")
-    return _SOURCE_REGIME[source]
+def _regime_of(tier: str) -> str:
+    """The regime of a tier (or of an old task file's `source`, which other scripts
+    still pass)."""
+    # Explicit, so a new tier can't silently land in another regime's numbers.
+    if tier in _SOURCE_REGIME:
+        return _SOURCE_REGIME[tier]
+    if tier not in _TIER_REGIME:
+        raise ValueError(f"task tier {tier!r} has no regime; add it to _TIER_REGIME")
+    return _TIER_REGIME[tier]
 
 
 @functools.lru_cache(maxsize=1)
-def _task_regimes() -> dict[str, str]:
-    # Scans + parses every task file; memoised so the several call sites
-    # (findings, regime_table) share one pass per build.
-    out: dict[str, str] = {}
-    for f in TASKS_DIR.rglob("*.json"):
-        try:
-            t = json.loads(f.read_text())
-        except (ValueError, OSError):
-            continue
-        if t.get("category") == "mvs":
-            out[t["id"]] = _regime_of(t.get("source", "curated"))
+def _corpus_regimes() -> dict[str, str]:
+    # Reads every task file; memoised so the call sites share one pass per build.
+    from molbench import tasks as tasks_mod
+    return {t["id"]: _regime_of(t["tier"])
+            for t in tasks_mod.load_corpus(TASKS_DIR, tracks=["mvs"], repo=REPO)}
+
+
+def _task_regimes(models=()) -> dict[str, str]:
+    """MVS task id -> regime. From the corpus on disk, and from the scorecard's own
+    per-task ``tier`` (a manifest run records it), which wins: a scorecard can then be
+    rendered without the corpus it was run on."""
+    out = dict(_corpus_regimes())
+    for m in models:
+        for t in m.get("tasks", []):
+            if t.get("category") == "mvs" and t.get("tier"):
+                out[t["id"]] = _regime_of(t["tier"])
     return out
 
 
@@ -148,7 +167,20 @@ def track_cell(m: dict, cat: str) -> str:
     std = ""
     if d.get("std"):
         std = f" <span class='pm'>&plusmn;{d['std']:.2f}</span>"
-    return f"{d['mean_f1']:.3f}{std}"
+    if "success_tasks" not in d:  # a scorecard from before task success was recorded
+        return f"{d['mean_f1']:.3f}{std}"
+    # A manifest run: task success under the F1, the rest in the tooltip.
+    nv = d.get("not_valid") or {}
+    tip = [f"task success {fmt_pct(d['success_tasks'])} (mean over samples)",
+           f"all samples right on {fmt_pct(d.get('success_all'))} of tasks"]
+    if d.get("target_f1_tasks") is not None:
+        tip.append(f"target score {d['target_f1_tasks']:.3f}")
+    if d.get("valid_rate") is not None:
+        tip.append(f"valid output {fmt_pct(d['valid_rate'])}")
+    tip.append(f"not valid: {nv.get('truncated', 0)} truncated at the token limit, "
+               f"{nv.get('malformed', 0)} malformed (of {d.get('n_samples', 0)} samples)")
+    return (f"<span title='{html.escape(' · '.join(tip))}'>{d['mean_f1']:.3f}{std}"
+            f"<br><span class='pm'>{fmt_pct(d['success_tasks'])} right</span></span>")
 
 
 # --------------------------------------------------------------------------- #
@@ -493,7 +525,7 @@ def findings(ranked: list, cond: dict | None = None) -> str:
     # Finding 03: is the per-regime model spread actually growing with difficulty?
     # Compute it live — with a wider panel this can flip, because format-unreliable
     # models inject validity-driven spread that swamps the difficulty signal.
-    regimes = _task_regimes()
+    regimes = _task_regimes([m for _, m in ranked])
     reg_order = GRADIENT
     reg_spread: dict[str, float] = {}
     for rg in reg_order:
@@ -785,7 +817,7 @@ def _matrix(rows: list[tuple[str, dict]], cols: list[tuple[str, str]], value) ->
 
 def regime_table(ranked: list) -> str:
     """Mean F1 per difficulty regime — shows the gradient and where models separate."""
-    reg = _task_regimes()
+    reg = _task_regimes([m for _, m in ranked])
     rows = [(n, m) for n, m in ranked if has_mvs(m)]
     if not reg or not rows:
         return ""

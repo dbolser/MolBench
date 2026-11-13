@@ -6,6 +6,7 @@ import pathlib
 import pytest
 
 from molbench import manifest as mf
+from molbench import tasks as tasks_mod
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 FINAL = REPO / "run" / "final_run.toml"
@@ -45,14 +46,19 @@ def _with(extra: str = "", **swap: str) -> str:
 def test_final_manifest_states_the_planned_run():
     m = mf.load_manifest(FINAL)
     core = m.panel()
-    assert len(core) == 16 and not any(x.optional for x in core)
-    assert 3 <= len(m.panel(include_optional=True)) - 16 <= 5
+    assert len(core) == 17 and not any(x.optional for x in core)   # 16 models + the baseline
+    assert 3 <= len(m.panel(include_optional=True)) - 17 <= 5
+    baseline = next(x for x in core if x.route == "baseline")
+    assert baseline.id == "baseline-rules" and baseline.price.cost(10**6, 10**6) == 0
+    assert "baseline" in m.panel_rule and "optional" in m.panel_rule.lower()   # decision 22
     assert m.samples == 3 and m.temperature == "provider-default"
     assert m.budget_usd > 0 and m.validate == "required"
     conds = {c.name: c for c in m.conditions}
     assert m.conditions[0].name == "spec"  # the headline runs first
     assert conds["spec"].models == "all" and set(conds["spec"].tracks) == set(mf.TRACKS)
-    assert conds["spec_grounded"].grounding and conds["spec_grounded"].where["source"]
+    assert conds["spec_grounded"].grounding
+    assert set(conds["spec_grounded"].where["tier"]) == set(tasks_mod.LOOKUP_TIERS)
+    assert not any("split" in c.where for c in m.conditions)   # held-back runs like public
     assert conds["bare"].prompt == "bare" and len(conds["bare"].models) == 3
     assert conds["spec_structured"].structured
 
@@ -69,7 +75,7 @@ def test_every_model_has_a_sourced_price_and_optional_ones_a_reason():
 def test_panel_matches_the_published_leaderboard():
     card = json.loads((REPO / "docs" / "scorecard.json").read_text())
     published = {m["spec"] for m in card["models"].values() if m["spec"] != "baseline"}
-    assert {x.route for x in mf.load_manifest(FINAL).panel()} == published
+    assert {x.route for x in mf.load_manifest(FINAL).panel()} == published | {"baseline"}
 
 
 def test_calibration_covers_the_core_panel_or_falls_back():
@@ -133,11 +139,11 @@ def test_panel_selection():
 
 
 def test_conditions_pick_tasks_and_models():
-    lookup = mf.Condition("g", grounding=True, tracks=("mvs",), where={"source": ("resolve",)})
-    assert lookup.takes_task({"category": "mvs", "source": "resolve", "grounding": {"text": "x"}})
-    assert not lookup.takes_task({"category": "mvs", "source": "resolve"})  # no pack to add
-    assert not lookup.takes_task({"category": "mvs", "source": "generated", "grounding": {"text": "x"}})
-    assert not lookup.takes_task({"category": "api_calling", "source": "resolve", "grounding": {"text": "x"}})
+    lookup = mf.Condition("g", grounding=True, tracks=("mvs",), where={"tier": ("resolve",)})
+    assert lookup.takes_task({"category": "mvs", "tier": "resolve", "grounding": {"text": "x"}})
+    assert not lookup.takes_task({"category": "mvs", "tier": "resolve"})  # no pack to add
+    assert not lookup.takes_task({"category": "mvs", "tier": "translation", "grounding": {"text": "x"}})
+    assert not lookup.takes_task({"category": "api_calling", "tier": "resolve", "grounding": {"text": "x"}})
     plain, json_mode = mf.ModelSpec("a", "mock:a"), mf.ModelSpec("b", "mock:b", structured="json_object")
     structured = mf.Condition("s", structured=True, models="structured")
     assert structured.takes_model(json_mode) and not structured.takes_model(plain)

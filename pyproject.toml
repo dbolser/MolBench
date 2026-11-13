@@ -36,3 +36,11 @@ packages = ["molbench"]
 dev = [
     "pytest>=9.0.3",
 ]
+# What rebuilding the paper's tables and figures needs (scripts/paper_tables.py,
+# scripts/paper_figures.py): `uv sync --group paper`. json-repair is also a core
+# dependency (the runner's repair counterfactual); it is named here so the group is
+# complete by itself.
+paper = [
+    "json-repair>=0.64.9",
+    "matplotlib>=3.8",
+]

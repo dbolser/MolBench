@@ -45,6 +45,7 @@ class Completion:
     response_model: str | None = None    # the model the provider says answered
     response_id: str | None = None
     cost_usd: float | None = None        # only when the provider reports it (OpenRouter)
+    provider: str | None = None          # who served the call (OpenRouter: the upstream host)
 
 
 class ProviderError(RuntimeError):
@@ -94,7 +95,7 @@ class Model:
         started = time.perf_counter()
         text = self.generate(system, user)
         return Completion(text=text, input_tokens=0, output_tokens=0, finish_reason="stop",
-                          latency_s=round(time.perf_counter() - started, 3))
+                          latency_s=round(time.perf_counter() - started, 3), provider="local")
 
 
 # --- keyless baseline -------------------------------------------------------------
@@ -119,18 +120,47 @@ _STYLE_WORDS = {
 }
 
 
+_MVS_STYLE_WORDS = {
+    "cartoon": "cartoon", "surface": "surface", "ball-and-stick": "ball_and_stick",
+    "ball and stick": "ball_and_stick", "spacefill": "spacefill", "space-fill": "spacefill",
+}
+_COLOR_WORDS = ("red", "green", "blue", "yellow", "orange", "purple", "magenta", "cyan",
+                "pink", "white", "grey", "gray", "black")
+# How a follow-up request reaches a model (``runner.FOLLOWUP_TEMPLATE``).
+_FOLLOWUP = re.compile(r"\A(?:Current scene \(MolViewSpec JSON\)|Calls made so far "
+                       r"\(JSON array\)):\n(.*?)\n\nRequest: ", re.S)
+
+
 class BaselineModel(Model):
+    """Keyword rules, no model. A floor on both tracks (FINAL_PLAN decision 22).
+
+    * API track: a ``load`` for the first PDB id (or a known protein name), then one
+      call per keyword it recognises (a style, hide water / ligands, spin, white
+      background).
+    * MVS track (recognised by the system prompt naming MolViewSpec): the same
+      structure with the polymer drawn in the first style word found (cartoon if
+      none), in the first colour word found if any, plus the ligands as
+      ball-and-stick when the request says "ligand".
+    * A follow-up request on either track: the start state, returned unchanged - the
+      score of doing nothing.
+
+    It sees exactly what a model sees (system and user text) and nothing else.
+    """
     name = "baseline-rules"
 
     def generate(self, system: str, user: str) -> str:
+        followup = _FOLLOWUP.match(user)
+        if followup:
+            return followup.group(1)
         text = user.lower()
-        actions: list[dict[str, Any]] = []
-
         # explicit 4-char PDB id wins; otherwise fall back to name hints.
         m = re.search(r"\b([1-9][a-z0-9]{3})\b", text)
         pdb = m.group(1) if m else next(
             (pid for kw, pid in _PDB_HINTS.items() if kw in text), None
         )
+        if "molviewspec" in system.lower():
+            return json.dumps(self._scene(text, pdb))
+        actions: list[dict[str, Any]] = []
         if pdb or "load" in text or "show me the structure" in text:
             actions.append({"action": "load", "molecule_id": pdb or "1hho"})
 
@@ -147,6 +177,25 @@ class BaselineModel(Model):
             actions.append({"action": "set_property", "name": "bg_color", "value": "#FFFFFF"})
 
         return json.dumps(actions)
+
+    @staticmethod
+    def _scene(text: str, pdb: str | None) -> dict[str, Any]:
+        if not pdb:
+            return {"root": {"kind": "root", "children": []}}
+        style = next((v for kw, v in _MVS_STYLE_WORDS.items() if kw in text), "cartoon")
+        color = next((c for c in _COLOR_WORDS if re.search(rf"\b{c}\b", text)), None)
+        rep: dict[str, Any] = {"kind": "representation", "params": {"type": style}}
+        if color:
+            rep["children"] = [{"kind": "color", "params": {"color": color}}]
+        components = [{"kind": "component", "params": {"selector": "polymer"}, "children": [rep]}]
+        if "ligand" in text:
+            components.append({"kind": "component", "params": {"selector": "ligand"}, "children": [
+                {"kind": "representation", "params": {"type": "ball_and_stick"}}]})
+        return {"root": {"kind": "root", "children": [
+            {"kind": "download",
+             "params": {"url": f"https://files.rcsb.org/download/{pdb}.cif"},
+             "children": [{"kind": "parse", "params": {"format": "mmcif"}, "children": [
+                 {"kind": "structure", "params": {"type": "model"}, "children": components}]}]}]}}
 
 
 # --- live model adapters ----------------------------------------------------------
@@ -188,7 +237,7 @@ class AnthropicModel(Model):
                           output_tokens=resp.usage.output_tokens,
                           finish_reason=resp.stop_reason, latency_s=round(latency, 3),
                           response_model=getattr(resp, "model", None),
-                          response_id=getattr(resp, "id", None))
+                          response_id=getattr(resp, "id", None), provider="anthropic")
 
 
 class OpenAIModel(Model):
@@ -267,9 +316,12 @@ class OpenAIModel(Model):
             msg = err.get("message") if isinstance(err, dict) else getattr(err, "message", err)
             raise ProviderError(f"provider error in response body: {msg or 'no choices returned'}",
                                 status_code=code if isinstance(code, int) else None)
+        # OpenRouter adds a top-level "provider": the upstream host that served the call.
+        provider = getattr(resp, "provider", None)
         out = Completion(text="", latency_s=round(latency, 3),
                          response_model=getattr(resp, "model", None),
-                         response_id=getattr(resp, "id", None))
+                         response_id=getattr(resp, "id", None),
+                         provider=provider if isinstance(provider, str) else None)
         usage = resp.usage
         if usage:  # OpenAI-compatible hosts may omit usage; guard for it
             self._record(usage.prompt_tokens, usage.completion_tokens)
@@ -379,8 +431,14 @@ class MockModel(Model):
         ref = task.get("reference_mvs", task.get("reference"))
         is_api = isinstance(ref, list)
         kind = self._choice(key) if ref is not None else "prose"
+        right = ref
+        if task.get("accepted"):
+            # An accept-set task has several right answers: give each of them in turn.
+            options = [ref] + list(task["accepted"])
+            right = options[int(hashlib.sha256(f"alt|{self.name}|{key}".encode()).hexdigest(),
+                                16) % len(options)]
         answer = (perturb_reference(ref) if kind == "perturbed"
-                  else malform_reference(ref) if kind == "malformed" else ref)
+                  else malform_reference(ref) if kind == "malformed" else right)
         if wrap_actions and is_api:
             answer = {"actions": answer}
         good = json.dumps(answer, indent=1)
@@ -407,7 +465,7 @@ class MockModel(Model):
         out = round(len(text) / self.cpt_out)
         self._record(inp, out)
         return Completion(text=text, input_tokens=inp, output_tokens=out, finish_reason=finish,
-                          latency_s=0.0, response_model=f"mock:{self.name}",
+                          latency_s=0.0, response_model=f"mock:{self.name}", provider="mock",
                           response_id="mock-" + hashlib.sha256(
                               f"{self.name}|{key}".encode()).hexdigest()[:12])
 
