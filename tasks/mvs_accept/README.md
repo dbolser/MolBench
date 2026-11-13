@@ -6,20 +6,20 @@ state is enumerated by script from the frozen panel (`data/panel/facts`, the ato
 tables) and listed in the task: `reference` is the first, `accepted` the others,
 `accepted_targets` their targets. `provenance` holds the rule that generated them
 (`rule`), their names in order (`accepted_states`), what is not accepted and why
-(`not_accepted`), and the difficulty facts (`facts`).
+(`not_accepted`), and the difficulty facts (`difficulty`).
 
-27 tasks on 25 structures; 7 tasks on 7 held-back structures; 16 have a twin on the other track.
+26 tasks on 23 structures; 5 tasks on 5 held-back structures; 15 have a twin on the other track.
 
 ## Templates
 
 | family | tasks | accepted states per task | left open | example prompt |
 |---|---:|---|---|---|
 | `acc-ligand-which` | 3 | 4 | which of two different ligands (or both) | Open 1RX2 with the protein as a cartoon and the ligand in cyan ball-and-stick. |
-| `acc-ligand-colours` | 2 | 2 | which ligand gets which colour | Load 2CPP. Show the protein as a cartoon and the two ligands as ball-and-stick, one yellow and the other purple. |
+| `acc-ligand-colours` | 3 | 2 | which ligand gets which colour | Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue. |
 | `acc-metal-which` | 2 | 3 | which of two different metal ions (or both) | Open 1UDT with the protein as a cartoon and the metal ion in red spacefill. |
-| `acc-chain-colours` | 4 | 2 | which chain gets which colour | Open 1BNA in cartoon representation and colour the two chains purple and blue. |
-| `acc-ligand-copy` | 4 | 3 | which copy of the named ligand (or all) | Load 1AKE. Show the protein as a cartoon and the ligand AP5 as blue ball-and-stick. |
-| `acc-metal-copy` | 3 | 4, 5 | which of several ions of the named metal (or all) | Open 1AAY with the protein and DNA as a cartoon and the zinc ion in orange spacefill. |
+| `acc-chain-colours` | 3 | 2 | which chain gets which colour | Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta. |
+| `acc-ligand-copy` | 3 | 3 | which copy of the named ligand (or all) | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
+| `acc-metal-copy` | 3 | 3, 4, 5 | which of several ions of the named metal (or all) | Show 1TUP with the protein and DNA as a cartoon and the zinc ion as a spacefill sphere, coloured magenta. |
 | `acc-residue-copy` | 3 | 3 | which chain's copy of the named residue (or all) | Load 1IGT. Show the protein as a cartoon and Asn76 as magenta ball-and-stick. |
 | `acc-residue-colour` | 3 | 3 | which chain's copy of the named residue (or all) | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
 | `acc-representation-open` | 3 | 4 | which representation | Open 1HRC with the protein as a cartoon, and show the heme in green. |
@@ -42,26 +42,25 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 
 | id | structure | split | states | candidates |
 |---|---|---|---:|---|
-| `acc-chain-colours-1bna-mvs` | 1bna | public | 2 | chain A, chain B |
 | `acc-chain-colours-1f88-mvs` | 1f88 | heldback | 2 | chain A, chain B |
 | `acc-chain-colours-2ptc-mvs` | 2ptc | public | 2 | chain E, chain I |
 | `acc-chain-colours-5uak-mvs` | 5uak | public | 2 | chain A, chain R |
+| `acc-ligand-colours-1rx2-mvs` | 1rx2 | public | 2 | FOL, NAP |
 | `acc-ligand-colours-2cpp-mvs` | 2cpp | public | 2 | CAM, HEM |
 | `acc-ligand-colours-9gio-mvs` | 9gio | public | 2 | 3JF, A1IMD |
-| `acc-ligand-copy-1ake-mvs` | 1ake | public | 3 | AP5 A:215, AP5 B:215 |
 | `acc-ligand-copy-1iep-mvs` | 1iep | public | 3 | STI A:201, STI B:202 |
 | `acc-ligand-copy-8c86-mvs` | 8c86 | public | 3 | TQ0 B:201, TQ0 A:201 |
 | `acc-ligand-copy-8k7f-mvs` | 8k7f | heldback | 3 | VMF A:502, VMF B:503 |
 | `acc-ligand-which-1rx2-mvs` | 1rx2 | public | 4 | FOL, NAP |
 | `acc-ligand-which-2cpp-mvs` | 2cpp | public | 4 | CAM, HEM |
 | `acc-ligand-which-9gio-mvs` | 9gio | public | 4 | 3JF, A1IMD |
-| `acc-metal-copy-1aay-mvs` | 1aay | heldback | 4 | ZN A:201, ZN A:202, ZN A:203 |
 | `acc-metal-copy-1tup-mvs` | 1tup | public | 4 | ZN A:951, ZN B:952, ZN C:953 |
 | `acc-metal-copy-8eph-mvs` | 8eph | public | 5 | CA A:202, CA B:301, CA C:202, CA D:301 |
+| `acc-metal-copy-9fb2-mvs` | 9fb2 | public | 3 | K A:602, K A:603 |
 | `acc-metal-which-1udt-mvs` | 1udt | heldback | 3 | MG, ZN |
 | `acc-metal-which-7a4m-mvs` | 7a4m | public | 3 | FE, ZN |
 | `acc-representation-open-1hrc-mvs` | 1hrc | public | 4 | ball_and_stick, spacefill, line, surface |
-| `acc-representation-open-1mbn-mvs` | 1mbn | heldback | 4 | ball_and_stick, spacefill, line, surface |
+| `acc-representation-open-3ert-mvs` | 3ert | public | 4 | ball_and_stick, spacefill, line, surface |
 | `acc-representation-open-3f9m-mvs` | 3f9m | public | 4 | ball_and_stick, spacefill, line, surface |
 | `acc-residue-colour-1aoi-mvs` | 1aoi | public | 3 | ILE B:66, ILE F:66 |
 | `acc-residue-colour-1lmb-mvs` | 1lmb | public | 3 | ILE 3:84, ILE 4:84 |
@@ -92,5 +91,5 @@ enumerable neighbour: the colours are named, the assignment is not.
 
 - Structures: PDB entries of the panel with one model and at most 15,000 atoms; never 1HSG. At most 6 tasks of the tier (both tracks) on one structure.
 - "Any one, or all": with more than two copies, a several-but-not-all answer is not accepted, because no reading of the request picks it.
-- Held-back structures are a fixed fifth of the panel by hash of the entry id (`heldback_structures()`), not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus. In this tier: 1aay, 1f88, 1igt, 1mbn, 1udt, 3ave, 8k7f.
+- Held-back structures are a fixed fifth of the panel by hash of the entry id (`heldback_structures()`), not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus. In this tier: 1f88, 1igt, 1udt, 3ave, 8k7f.
 - The cartoon is not given a colour by the request, so the reference leaves it at the viewer's default.

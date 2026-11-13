@@ -118,14 +118,32 @@
    "part of a ligand, or protein residues around it (other than through the viewer's built-in selection): not requested",
    "another representation or colour: both are stated"
   ],
-  "facts": {
+  "difficulty": {
    "needs_numbering_offset": false,
-   "author_chain_differs_from_label_chain": false,
+   "author_chain_differs_from_label": false,
    "needs_ligand_identity": true,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
    "n_accepted_states": 3
-  }
+  },
+  "structure": "2cpp",
+  "source": "RCSB mmCIF 2CPP -> molbench/atom_tables/2cpp.json.gz (scripts/build_atom_tables.py); data/panel/facts",
+  "derived": "`facts.ligands` of kind `ligand`: exactly two components, one copy each, \u2265 8 heavy atoms, entry not a membrane protein (panel feature); states = A, B, A+B (+ Mol*'s static `ligand` on MVS when it differs). Reference = the first accepted state (CAM): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
+  "targets": [
+   {
+    "what": "CAM A:422",
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 422,
+     "auth_comp_id": "CAM"
+    },
+    "n_atoms": 11
+   }
+  ]
  },
  "skills": [
   "load",

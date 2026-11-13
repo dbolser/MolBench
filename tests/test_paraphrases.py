@@ -115,9 +115,20 @@ def test_generic_terse_deletes_only_function_words(full, terse):
 
 def test_generic_rewrites_refuse_what_they_cannot_do_safely():
     assert para.generic_terse("Now colour it red.") is None         # nothing to delete
-    assert para.generic_indirect("Now colour it red.") is None      # not an imperative
+    assert para.generic_terse("1TUP, cartoon: DNA salmon, protein blue.") is None
     assert para.generic_indirect("Colour the biotin (BTN) red.") == \
         "Could you colour the biotin (BTN) red?"
+    assert para.generic_indirect("Load 1CBS. Show the protein as a cartoon.") == \
+        "Could you load 1CBS? Then please show the protein as a cartoon."
+    # not a chain of imperatives: the prompt, word for word, in a polite frame
+    for prompt in ("In trypsin (3PTB), show the protein as a grey cartoon.",
+                   "How many chains does this structure have?"):
+        framed = para.generic_indirect(prompt, "k")
+        assert framed.endswith(prompt) and framed != prompt
+        assert framed == para.generic_indirect(prompt, "k")          # seeded
+    # a task is paraphrased only if BOTH forms exist
+    t = {**next(iter(SOURCES.values())), "family": "no-such-family", "prompt": "Now colour it red."}
+    assert para.phrasings(t, t["id"], True)[0] is None
     # a chain called A is not the article "a"
     assert "chains A and B" in para.generic_terse(
         "Load 4INS and show the chains A and B as a cartoon.")
@@ -126,7 +137,10 @@ def test_generic_rewrites_refuse_what_they_cannot_do_safely():
 def test_generic_fallback_runs_on_a_corpus_without_templates(tmp_path):
     fixtures = REPO / "tests" / "fixtures" / "tasks"
     out = tmp_path / "paraphrases"
-    code = para.main(["--tasks-dir", str(fixtures), "--out", str(out), "--generic-fallback",
+    assert para.main(["--tasks-dir", str(fixtures), "--out", str(tmp_path / "none"),
+                      "--templates-only", "--select-seeded", "2"]) == 0
+    assert not list((tmp_path / "none").glob("*.json"))   # no family templates: nothing
+    code = para.main(["--tasks-dir", str(fixtures), "--out", str(out),
                       "--select-seeded", "2", "--tiers", "translation"])
     assert code == 0
     written = sorted(p.name for p in out.glob("*.json"))

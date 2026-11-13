@@ -1,12 +1,12 @@
 {
- "id": "acc-metal-copy-1aay-mvs.terse",
+ "id": "acc-metal-copy-9fb2-mvs.terse",
  "track": "mvs",
  "tier": "accept_set",
  "family": "acc-metal-copy",
  "structures": [
-  "1aay"
+  "9fb2"
  ],
- "prompt": "1aay protein and DNA cartoon, zinc ion orange spacefill",
+ "prompt": "9fb2 protein cartoon, potassium ion orange spacefill",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1aay.cif"
+      "url": "https://files.rcsb.org/download/9fb2.cif"
      },
      "children": [
       {
@@ -47,8 +47,8 @@
            "kind": "component",
            "params": {
             "selector": {
-             "label_asym_id": "D",
-             "auth_seq_id": 201
+             "label_asym_id": "E",
+             "auth_seq_id": 602
             }
            },
            "children": [
@@ -85,77 +85,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1aay.cif"
-      },
-      "children": [
-       {
-        "kind": "parse",
-        "params": {
-         "format": "mmcif"
-        },
-        "children": [
-         {
-          "kind": "structure",
-          "params": {
-           "type": "model"
-          },
-          "children": [
-           {
-            "kind": "component",
-            "params": {
-             "selector": "polymer"
-            },
-            "children": [
-             {
-              "kind": "representation",
-              "params": {
-               "type": "cartoon"
-              }
-             }
-            ]
-           },
-           {
-            "kind": "component",
-            "params": {
-             "selector": {
-              "label_asym_id": "E",
-              "auth_seq_id": 202
-             }
-            },
-            "children": [
-             {
-              "kind": "representation",
-              "params": {
-               "type": "spacefill"
-              },
-              "children": [
-               {
-                "kind": "color",
-                "params": {
-                 "color": "orange"
-                }
-               }
-              ]
-             }
-            ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
-    ]
-   }
-  },
-  {
-   "root": {
-    "kind": "root",
-    "children": [
-     {
-      "kind": "download",
-      "params": {
-       "url": "https://files.rcsb.org/download/1aay.cif"
+       "url": "https://files.rcsb.org/download/9fb2.cif"
       },
       "children": [
        {
@@ -189,7 +119,7 @@
             "params": {
              "selector": {
               "label_asym_id": "F",
-              "auth_seq_id": 203
+              "auth_seq_id": 603
              }
             },
             "children": [
@@ -225,7 +155,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1aay.cif"
+       "url": "https://files.rcsb.org/download/9fb2.cif"
       },
       "children": [
        {
@@ -259,16 +189,12 @@
             "params": {
              "selector": [
               {
-               "label_asym_id": "D",
-               "auth_seq_id": 201
-              },
-              {
                "label_asym_id": "E",
-               "auth_seq_id": 202
+               "auth_seq_id": 602
               },
               {
                "label_asym_id": "F",
-               "auth_seq_id": 203
+               "auth_seq_id": 603
               }
              ]
             },
@@ -303,22 +229,22 @@
  "target": [
   {
    "selector": {
-    "label_asym_id": "D",
-    "auth_seq_id": 201
+    "label_asym_id": "E",
+    "auth_seq_id": 602
    },
    "representation": "spacefill",
    "color": "orange"
   }
  ],
  "twin_of": null,
- "paraphrase_of": "acc-metal-copy-1aay-mvs",
+ "paraphrase_of": "acc-metal-copy-9fb2-mvs",
  "style": "terse",
- "split": "heldback",
+ "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_paraphrases.py",
   "inputs": [
-   "tasks/mvs_accept/acc-metal-copy-1aay-mvs.json"
+   "tasks/mvs_accept/acc-metal-copy-9fb2-mvs.json"
   ],
   "date": "2026-11-13",
   "checks": [
@@ -328,16 +254,16 @@
   ],
   "seed": "molbench-paraphrases-v1",
   "method": "family template (scripts/generate_paraphrases.py TEMPLATES)",
-  "original_prompt": "Open 1AAY with the protein and DNA as a cartoon and the zinc ion in orange spacefill.",
+  "original_prompt": "Load 9FB2. Show the protein as a cartoon and the potassium ion as orange spacefill.",
   "source": {
    "script": "scripts/generate_accept_set_tasks.py",
    "inputs": [
-    "data/panel/facts/1aay.json",
-    "molbench/atom_tables/1aay.json.gz"
+    "data/panel/facts/9fb2.json",
+    "molbench/atom_tables/9fb2.json.gz"
    ],
    "date": "2026-11-13",
    "checks": [
-    "each of the 4 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+    "each of the 3 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
     "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
     "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
     "target selects 1 atoms on the frozen atom table",
@@ -345,39 +271,37 @@
    ],
    "seed": "molbench-accept-set-v1",
    "template": "acc-metal-copy",
-   "wording": 1,
+   "wording": 0,
    "slots": {
-    "ID": "1AAY",
-    "id": "1aay",
-    "poly": "protein and DNA",
-    "thing": "zinc",
+    "ID": "9FB2",
+    "id": "9fb2",
+    "poly": "protein",
+    "thing": "potassium",
     "colour": "orange"
    },
    "open": "which of several ions of the named metal (or all)",
    "rule": "The request asks for \"the <metal> ion\"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them.",
    "candidates": [
-    "ZN A:201",
-    "ZN A:202",
-    "ZN A:203"
+    "K A:602",
+    "K A:603"
    ],
    "accepted_states": [
-    "ZN A:201",
-    "ZN A:202",
-    "ZN A:203",
-    "all 3 copies"
+    "K A:602",
+    "K A:603",
+    "both copies"
    ],
    "not_accepted": [
     "some but not all ions (when there are more than two): no reading of the request",
     "the residues that bind the metal: not requested",
     "another representation or colour: both are stated"
    ],
-   "facts": {
+   "difficulty": {
     "needs_numbering_offset": false,
-    "author_chain_differs_from_label_chain": false,
+    "author_chain_differs_from_label": false,
     "needs_ligand_identity": true,
     "needs_uniprot_mapping": false,
-    "n_candidates": 3,
-    "n_accepted_states": 4
+    "n_candidates": 2,
+    "n_accepted_states": 3
    }
   }
  },
@@ -391,18 +315,8 @@
   [
    {
     "selector": {
-     "label_asym_id": "E",
-     "auth_seq_id": 202
-    },
-    "representation": "spacefill",
-    "color": "orange"
-   }
-  ],
-  [
-   {
-    "selector": {
      "label_asym_id": "F",
-     "auth_seq_id": 203
+     "auth_seq_id": 603
     },
     "representation": "spacefill",
     "color": "orange"
@@ -412,16 +326,12 @@
    {
     "selector": [
      {
-      "label_asym_id": "D",
-      "auth_seq_id": 201
-     },
-     {
       "label_asym_id": "E",
-      "auth_seq_id": 202
+      "auth_seq_id": 602
      },
      {
       "label_asym_id": "F",
-      "auth_seq_id": 203
+      "auth_seq_id": 603
      }
     ],
     "representation": "spacefill",
@@ -429,5 +339,5 @@
    }
   ]
  ],
- "notes": "Left open: which of several ions of the named metal (or all). Reference = accepted state 1 of 4 (ZN A:201); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which of several ions of the named metal (or all). Reference = accepted state 1 of 3 (K A:602); the others are in 'accepted', in the order of provenance.accepted_states."
 }

@@ -27,14 +27,18 @@ free text:
    prompt from). One wording is chosen by seed.
 2. A generator may instead ship the wordings with the task, as
    ``provenance.paraphrases = {"terse": "...", "indirect": "..."}`` (already filled).
-3. ``--generic-fallback`` (off by default) for families with neither: the terse form
-   is the full prompt with function words deleted, the indirect form is the full
-   prompt turned into a question. Mechanical, so it is opt-in and the result should be
-   read before it is frozen.
+3. For families with neither, a generic rewrite of the full prompt: the terse form is
+   the prompt with words from a fixed list of function words deleted (every other word
+   is kept, in order), the indirect form is the prompt turned into a polite question
+   ("Could you ...? Then please ...") or, when it is not a chain of imperatives, the
+   prompt word for word inside a polite frame. Mechanical, so every such phrasing is
+   marked ``generic`` in the README table and should be read before the corpus is
+   frozen. ``--templates-only`` turns this off.
 
 A paraphrase must still determine the reference. Two scripted guards: every slot value
 must appear in every phrasing (a terse form cannot drop the colour or the residue), and
-the generic terse form may only delete words from a fixed list of function words.
+the generic terse form may only delete words from a fixed list of function words
+(a prompt that is already terse cannot be shortened and is not paraphrased).
 The terse forms are modelled on the anonymised real-user request categories in
 LEDGER.md (U1 colour by chain, U6 terse range specs, U13 hide/show, U14 representation
 names): lower-case id first, no verbs or articles, comma-separated.
@@ -61,6 +65,7 @@ DATE = "2026-11-13"                      # fixed, so a rebuild is byte-identical
 OUT = REPO / "tasks" / "paraphrases"
 SELECTION = "SELECTION.txt"
 STYLES = ("terse", "indirect")
+API_CHECK_KEYS = ("structure", "derived", "checked_by", "targets")
 
 # --------------------------------------------------------------------------- #
 # Wordings per family. Slots are the task's provenance.slots.
@@ -232,18 +237,39 @@ def generic_terse(prompt: str) -> str | None:
     return terse
 
 
-def generic_indirect(prompt: str) -> str | None:
-    """The prompt as a polite question: "Could you <first sentence>? Then please
-    <next>." None unless every sentence starts with an imperative verb."""
+# Polite frames for a prompt that is not a chain of imperatives ("In trypsin (3PTB),
+# show ...", "9GIO, cartoon, colour by chain."): the request itself is left word for
+# word, so nothing it states can be lost; only the way of asking changes.
+FRAMES = (
+    "I'd be grateful for your help with a figure, if you have a moment. This is what I need: {body}",
+    "Would you mind setting something up for me? Here is what I'm after: {body}",
+    "If it isn't too much trouble, could you help me with the following? {body}",
+)
+QUESTION_FRAMES = (
+    "I was wondering if you could tell me something. {body}",
+    "Sorry to interrupt, but could I ask: {body}",
+)
+
+
+def generic_indirect(prompt: str, key: str = "") -> str | None:
+    """The prompt as a polite question. If every sentence starts with an imperative
+    verb: "Could you <first sentence>? Then please <next>." Otherwise the prompt, word
+    for word, inside a polite frame chosen by seed (``key``). None for an empty prompt."""
+    text = prompt.strip()
+    if not text:
+        return None
     out = []
-    for i, sentence in enumerate(_SENTENCE.split(prompt.strip())):
+    for i, sentence in enumerate(_SENTENCE.split(text)):
         body = sentence.rstrip(".!?")
         first = body.split(" ", 1)[0]
-        if first.lower() not in IMPERATIVES:
-            return None
+        if first.lower() not in IMPERATIVES or sentence.endswith("?"):
+            break
         body = first.lower() + body[len(first):]
         out.append(f"Could you {body}?" if i == 0 else f"Then please {body}.")
-    return " ".join(out)
+    else:
+        return " ".join(out)
+    frames = QUESTION_FRAMES if text.endswith("?") else FRAMES
+    return frames[int(rank("frame", key or text), 16) % len(frames)].format(body=text)
 
 
 # --------------------------------------------------------------------------- #
@@ -303,11 +329,14 @@ def phrasings(task: dict, key: str, generic: bool) -> tuple[dict[str, str] | Non
                 return None, f"{style} wording of {task['family']!r} drops slot(s) {dropped}"
         return out, "family template (scripts/generate_paraphrases.py TEMPLATES)"
     if generic:
-        terse, indirect = generic_terse(task["prompt"]), generic_indirect(task["prompt"])
+        terse, indirect = generic_terse(task["prompt"]), generic_indirect(task["prompt"], key)
         if terse and indirect:
             return ({"terse": terse, "indirect": indirect},
-                    "generic fallback (function words deleted; prompt turned into a question)")
-        return None, "the generic fallback cannot rewrite this prompt safely"
+                    "generic rewrite of the full prompt (terse: function words deleted, every "
+                    "other word kept; indirect: turned into a polite question, or put word for "
+                    "word inside a polite frame)")
+        return None, ("the generic rewrite cannot shorten this prompt (it is already terse, or a "
+                      "needed word would go)")
     return None, f"no paraphrase templates for family {task['family']!r}"
 
 
@@ -359,6 +388,9 @@ def paraphrase(task: dict, style: str, prompt: str, method: str, twin: str | Non
                "method": method,
                "original_prompt": task["prompt"],
                "source": src["provenance"],
+               # An API original's own check record (scripts/check_api_refs.py reads it at
+               # the top level): the reference is the same, so the record is too.
+               **{k: src["provenance"][k] for k in API_CHECK_KEYS if k in src["provenance"]},
            }}
     return out
 
@@ -428,6 +460,10 @@ def verify(built: list[dict], sources: dict[str, dict]) -> None:
             checks.append("its twin on the other track has the same words and the same style")
 
 
+def cell(text: str) -> str:
+    return text.replace("|", "\\|").replace("\n", " ")
+
+
 def readme(built: list[dict], skipped: list[str], command: str) -> str:
     originals = sorted({t["paraphrase_of"] for t in built})
     requests = {tuple(sorted(filter(None, [t["paraphrase_of"],
@@ -441,8 +477,11 @@ def readme(built: list[dict], skipped: list[str], command: str) -> str:
         "Each task here rewords one original task (`paraphrase_of`): same reference, same",
         "accepted alternatives, same target, another `prompt` and `style`. With the original",
         "(`full`) that gives three phrasings per request: full sentence, terse command, and",
-        "indirect/polite. Wordings are scripted templates per task family, filled from the",
-        "original's `provenance.slots`; see the script's docstring for the rules.",
+        "indirect/polite. Wordings are scripted: `family` = a template of the task's family,",
+        "filled from the original's `provenance.slots`; `shipped` = written by the task's own",
+        "generator; `generic` = a mechanical rewrite of the full prompt (function words",
+        "deleted; polite question or frame), to be read before the corpus is frozen. See the",
+        "script's docstring for the rules.",
         "",
         f"{len(built)} paraphrase tasks of {len(originals)} originals "
         f"({len(requests)} requests; a twin pair is one request). Rebuild with:",
@@ -456,7 +495,7 @@ def readme(built: list[dict], skipped: list[str], command: str) -> str:
     ]
     lines += [f"| `{f}` | {n} |" for f, n in sorted(fam.items())]
     lines += ["", "## The three phrasings", "",
-              "| original | full | terse | indirect |", "|---|---|---|---|"]
+              "| original | wording | full | terse | indirect |", "|---|---|---|---|---|"]
     by = {(t["paraphrase_of"], t["style"]): t for t in built}
     shown = set()
     for tid in originals:
@@ -464,8 +503,9 @@ def readme(built: list[dict], skipped: list[str], command: str) -> str:
         if full in shown:              # the twin on the other track: same words
             continue
         shown.add(full)
-        lines.append(f"| `{tid}` | {full} | {by[(tid, 'terse')]['prompt']} | "
-                     f"{by[(tid, 'indirect')]['prompt']} |")
+        how = by[(tid, "terse")]["provenance"]["method"].split(" ", 1)[0]
+        lines.append(f"| `{tid}` | {how} | {cell(full)} | {cell(by[(tid, 'terse')]['prompt'])} | "
+                     f"{cell(by[(tid, 'indirect')]['prompt'])} |")
     if skipped:
         lines += ["", "## Asked for but not paraphrased", ""] + [f"- {s}" for s in skipped]
     return "\n".join(lines) + "\n"
@@ -477,8 +517,8 @@ def main(argv=None) -> int:
     ap.add_argument("--select-seeded", type=int, metavar="N",
                     help="choose N requests by seed, spread over tiers and families")
     ap.add_argument("--tiers", nargs="+", help="with --select-seeded: only these tiers")
-    ap.add_argument("--generic-fallback", action="store_true",
-                    help="families without templates: mechanical rewrite of the full prompt")
+    ap.add_argument("--templates-only", action="store_true",
+                    help="skip families without templates (no generic rewrite of the prompt)")
     ap.add_argument("--list-families", action="store_true",
                     help="say which families can be paraphrased, and stop")
     ap.add_argument("--check", action="store_true", help="fail if the files would change")
@@ -492,7 +532,7 @@ def main(argv=None) -> int:
     if a.list_families:
         per: dict[tuple, Counter] = {}
         for t in sources.values():
-            ok, why = phrasings(t, request_of(t)[0], a.generic_fallback)
+            ok, why = phrasings(t, request_of(t)[0], not a.templates_only)
             per.setdefault((t["tier"], t["family"]), Counter())[
                 "yes: " + why if ok else "no: " + why] += 1
         for (tier, family), counts in sorted(per.items()):
@@ -501,7 +541,7 @@ def main(argv=None) -> int:
         return 0
 
     record = out / SELECTION
-    generic = a.generic_fallback
+    generic = not a.templates_only
     if a.select_seeded is not None:
         ids = select_seeded(sources, a.select_seeded, generic, a.tiers)
         command = f"--select-seeded {a.select_seeded}" + (
@@ -515,12 +555,12 @@ def main(argv=None) -> int:
         lines = record.read_text(encoding="utf-8").splitlines()
         head = [x[1:].strip() for x in lines if x.startswith("#")]
         command = next((x[len("command:"):].strip() for x in head if x.startswith("command:")), "")
-        generic = generic or "--generic-fallback" in command
+        generic = generic and "--templates-only" not in command
         ids = [x.strip() for x in lines if x.strip() and not x.startswith("#")]
     else:
         ap.error("give task ids or --select-seeded N (no recorded selection yet)")
-    if generic and "--generic-fallback" not in command:
-        command = (command + " --generic-fallback").strip()
+    if not generic and "--templates-only" not in command:
+        command = (command + " --templates-only").strip()
 
     built, skipped = build(sources, ids, generic)
     verify(built, sources)

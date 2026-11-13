@@ -278,9 +278,9 @@
     "ions, water or bonded protein residues shown as ligands: not ligands of the entry",
     "another representation: it is stated"
    ],
-   "facts": {
+   "difficulty": {
     "needs_numbering_offset": false,
-    "author_chain_differs_from_label_chain": false,
+    "author_chain_differs_from_label": false,
     "needs_ligand_identity": true,
     "needs_uniprot_mapping": false,
     "n_candidates": 2,

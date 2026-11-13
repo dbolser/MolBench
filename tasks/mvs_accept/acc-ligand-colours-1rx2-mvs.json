@@ -1,12 +1,12 @@
 {
- "id": "acc-ligand-copy-1ake-mvs",
+ "id": "acc-ligand-colours-1rx2-mvs",
  "track": "mvs",
  "tier": "accept_set",
- "family": "acc-ligand-copy",
+ "family": "acc-ligand-colours",
  "structures": [
-  "1ake"
+  "1rx2"
  ],
- "prompt": "Load 1AKE. Show the protein as a cartoon and the ligand AP5 as blue ball-and-stick.",
+ "prompt": "Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1ake.cif"
+      "url": "https://files.rcsb.org/download/1rx2.cif"
      },
      "children": [
       {
@@ -48,7 +48,32 @@
            "params": {
             "selector": {
              "label_asym_id": "C",
-             "auth_seq_id": 215
+             "auth_seq_id": 161
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_asym_id": "E",
+             "auth_seq_id": 164
             }
            },
            "children": [
@@ -85,7 +110,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1ake.cif"
+       "url": "https://files.rcsb.org/download/1rx2.cif"
       },
       "children": [
        {
@@ -118,8 +143,8 @@
             "kind": "component",
             "params": {
              "selector": {
-              "label_asym_id": "D",
-              "auth_seq_id": 215
+              "label_asym_id": "C",
+              "auth_seq_id": 161
              }
             },
             "children": [
@@ -138,65 +163,14 @@
               ]
              }
             ]
-           }
-          ]
-         }
-        ]
-       }
-      ]
-     }
-    ]
-   }
-  },
-  {
-   "root": {
-    "kind": "root",
-    "children": [
-     {
-      "kind": "download",
-      "params": {
-       "url": "https://files.rcsb.org/download/1ake.cif"
-      },
-      "children": [
-       {
-        "kind": "parse",
-        "params": {
-         "format": "mmcif"
-        },
-        "children": [
-         {
-          "kind": "structure",
-          "params": {
-           "type": "model"
-          },
-          "children": [
-           {
-            "kind": "component",
-            "params": {
-             "selector": "polymer"
-            },
-            "children": [
-             {
-              "kind": "representation",
-              "params": {
-               "type": "cartoon"
-              }
-             }
-            ]
            },
            {
             "kind": "component",
             "params": {
-             "selector": [
-              {
-               "label_asym_id": "C",
-               "auth_seq_id": 215
-              },
-              {
-               "label_asym_id": "D",
-               "auth_seq_id": 215
-              }
-             ]
+             "selector": {
+              "label_asym_id": "E",
+              "auth_seq_id": 164
+             }
             },
             "children": [
              {
@@ -208,7 +182,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "blue"
+                 "color": "cyan"
                 }
                }
               ]
@@ -230,13 +204,21 @@
   {
    "selector": {
     "label_asym_id": "C",
-    "auth_seq_id": 215
+    "auth_seq_id": 161
+   },
+   "representation": "ball_and_stick",
+   "color": "cyan"
+  },
+  {
+   "selector": {
+    "label_asym_id": "E",
+    "auth_seq_id": 164
    },
    "representation": "ball_and_stick",
    "color": "blue"
   }
  ],
- "twin_of": "acc-ligand-copy-1ake-api",
+ "twin_of": "acc-ligand-colours-1rx2-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
@@ -244,51 +226,50 @@
  "provenance": {
   "script": "scripts/generate_accept_set_tasks.py",
   "inputs": [
-   "data/panel/facts/1ake.json",
-   "molbench/atom_tables/1ake.json.gz"
+   "data/panel/facts/1rx2.json",
+   "molbench/atom_tables/1rx2.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
-   "each of the 3 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+   "each of the 2 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
-   "target selects 64 atoms on the frozen atom table",
+   "target selects 80 atoms on the frozen atom table",
    "no accepted state equals another (pairwise, by the grader)",
    "twin selects the same target atoms"
   ],
   "seed": "molbench-accept-set-v1",
-  "template": "acc-ligand-copy",
-  "wording": 0,
+  "template": "acc-ligand-colours",
+  "wording": 2,
   "slots": {
-   "ID": "1AKE",
-   "id": "1ake",
+   "ID": "1RX2",
+   "id": "1rx2",
    "poly": "protein",
-   "thing": "ligand AP5",
-   "colour": "blue"
+   "colour": "cyan",
+   "colour2": "blue"
   },
-  "open": "which copy of the named ligand (or all)",
-  "rule": "The request names one ligand; the entry holds several copies of it. Accepted: any one copy, or every copy. Not an arbitrary several-but-not-all: no reading of the request picks, say, two of four.",
+  "open": "which ligand gets which colour",
+  "rule": "The entry has exactly two different ligands, one copy each; the request gives two colours, \"one ... and the other ...\". Accepted: both assignments.",
   "candidates": [
-   "AP5 A:215",
-   "AP5 B:215"
+   "FOL",
+   "NAP"
   ],
   "accepted_states": [
-   "AP5 A:215",
-   "AP5 B:215",
-   "both copies"
+   "FOL cyan, NAP blue",
+   "FOL blue, NAP cyan"
   ],
   "not_accepted": [
-   "some but not all copies (when there are more than two): no reading of the request",
-   "other components, or the residues bonded to the ligand: not requested",
-   "another representation or colour: both are stated"
+   "both ligands the same colour, or only one ligand shown: the request asks for both, in different colours",
+   "ions, water or bonded protein residues shown as ligands: not ligands of the entry",
+   "another representation: it is stated"
   ],
-  "facts": {
+  "difficulty": {
    "needs_numbering_offset": false,
-   "author_chain_differs_from_label_chain": false,
-   "needs_ligand_identity": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": true,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
-   "n_accepted_states": 3
+   "n_accepted_states": 2
   }
  },
  "skills": [
@@ -301,29 +282,21 @@
   [
    {
     "selector": {
-     "label_asym_id": "D",
-     "auth_seq_id": 215
+     "label_asym_id": "C",
+     "auth_seq_id": 161
     },
     "representation": "ball_and_stick",
     "color": "blue"
-   }
-  ],
-  [
+   },
    {
-    "selector": [
-     {
-      "label_asym_id": "C",
-      "auth_seq_id": 215
-     },
-     {
-      "label_asym_id": "D",
-      "auth_seq_id": 215
-     }
-    ],
+    "selector": {
+     "label_asym_id": "E",
+     "auth_seq_id": 164
+    },
     "representation": "ball_and_stick",
-    "color": "blue"
+    "color": "cyan"
    }
   ]
  ],
- "notes": "Left open: which copy of the named ligand (or all). Reference = accepted state 1 of 3 (AP5 A:215); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which ligand gets which colour. Reference = accepted state 1 of 2 (FOL cyan, NAP blue); the others are in 'accepted', in the order of provenance.accepted_states."
 }

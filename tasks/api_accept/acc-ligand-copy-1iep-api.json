@@ -119,14 +119,32 @@
    "other components, or the residues bonded to the ligand: not requested",
    "another representation or colour: both are stated"
   ],
-  "facts": {
+  "difficulty": {
    "needs_numbering_offset": false,
-   "author_chain_differs_from_label_chain": false,
+   "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
    "n_accepted_states": 3
-  }
+  },
+  "structure": "1iep",
+  "source": "RCSB mmCIF 1IEP -> molbench/atom_tables/1iep.json.gz (scripts/build_atom_tables.py); data/panel/facts",
+  "derived": "a `ligand` component with 2\u20134 copies (\u2265 8 heavy atoms); each copy, and all. Reference = the first accepted state (STI A:201): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
+  "targets": [
+   {
+    "what": "STI A:201",
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 201,
+     "auth_comp_id": "STI"
+    },
+    "n_atoms": 37
+   }
+  ]
  },
  "skills": [
   "load",

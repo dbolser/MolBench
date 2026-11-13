@@ -115,14 +115,43 @@
    "ions, water or bonded protein residues shown as ligands: not ligands of the entry",
    "another representation: it is stated"
   ],
-  "facts": {
+  "difficulty": {
    "needs_numbering_offset": false,
-   "author_chain_differs_from_label_chain": false,
+   "author_chain_differs_from_label": false,
    "needs_ligand_identity": true,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
    "n_accepted_states": 2
-  }
+  },
+  "structure": "9gio",
+  "source": "RCSB mmCIF 9GIO -> molbench/atom_tables/9gio.json.gz (scripts/build_atom_tables.py); data/panel/facts",
+  "derived": "same entries as above; two colours by seed; both assignments. Reference = the first accepted state (3JF red, A1IMD purple): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
+  "targets": [
+   {
+    "what": "3JF C:301",
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "auth_asym_id": "C",
+     "auth_seq_id": 301,
+     "auth_comp_id": "3JF"
+    },
+    "n_atoms": 33
+   },
+   {
+    "what": "A1IMD C:302",
+    "action": 1,
+    "param": 1,
+    "atoms": {
+     "auth_asym_id": "C",
+     "auth_seq_id": 302,
+     "auth_comp_id": "A1IMD"
+    },
+    "n_atoms": 25
+   }
+  ]
  },
  "skills": [
   "load",

@@ -297,9 +297,9 @@
     "other components, or the residues bonded to the ligand: not requested",
     "another representation or colour: both are stated"
    ],
-   "facts": {
+   "difficulty": {
     "needs_numbering_offset": false,
-    "author_chain_differs_from_label_chain": false,
+    "author_chain_differs_from_label": false,
     "needs_ligand_identity": false,
     "needs_uniprot_mapping": false,
     "n_candidates": 2,

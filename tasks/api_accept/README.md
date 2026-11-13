@@ -6,19 +6,36 @@ state is enumerated by script from the frozen panel (`data/panel/facts`, the ato
 tables) and listed in the task: `reference` is the first, `accepted` the others,
 `accepted_targets` their targets. `provenance` holds the rule that generated them
 (`rule`), their names in order (`accepted_states`), what is not accepted and why
-(`not_accepted`), and the difficulty facts (`facts`).
+(`not_accepted`), and the difficulty facts (`difficulty`).
 
-16 tasks on 14 structures; 3 tasks on 3 held-back structures; 16 have a twin on the other track.
+15 tasks on 12 structures; 3 tasks on 3 held-back structures; 15 have a twin on the other track.
 
 ## Templates
 
 | family | tasks | accepted states per task | left open | example prompt |
 |---|---:|---|---|---|
 | `acc-ligand-which` | 3 | 3 | which of two different ligands (or both) | Open 1RX2 with the protein as a cartoon and the ligand in cyan ball-and-stick. |
-| `acc-ligand-colours` | 2 | 2 | which ligand gets which colour | Load 2CPP. Show the protein as a cartoon and the two ligands as ball-and-stick, one yellow and the other purple. |
-| `acc-chain-colours` | 4 | 2 | which chain gets which colour | Open 1BNA in cartoon representation and colour the two chains purple and blue. |
-| `acc-ligand-copy` | 4 | 3 | which copy of the named ligand (or all) | Load 1AKE. Show the protein as a cartoon and the ligand AP5 as blue ball-and-stick. |
+| `acc-ligand-colours` | 3 | 2 | which ligand gets which colour | Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue. |
+| `acc-chain-colours` | 3 | 2 | which chain gets which colour | Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta. |
+| `acc-ligand-copy` | 3 | 3 | which copy of the named ligand (or all) | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
 | `acc-residue-colour` | 3 | 3 | which chain's copy of the named residue (or all) | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
+
+Every task here is the twin of an MVS task (same prompt, same target atoms). A twin is
+built where the requested state is one `color` call on a bare load, because pdbe-molstar
+already draws the polymer as a cartoon and ligands as ball-and-stick. Four MVS templates
+have no twin:
+
+- `acc-residue-copy`, `acc-metal-copy`, `acc-metal-which` need an *added* representation
+  (sticks on a residue, spacefill on an ion). In pdbe-molstar 3.3.2 that request has
+  further end states that differ only in what happens to the default drawing under the
+  added one (ribbon overpainted or not; the ion's default ball-and-stick still there).
+  That is a property of the call format, not of the request, so the accept set would no
+  longer measure "which copy?" alone.
+- `acc-representation-open`: after a bare load the ligand is already drawn, so "show it
+  in <colour>" has one obvious end state (overpaint it); nothing is left open.
+
+With five templates of three tasks each, a template is 20% of this small tier (the
+~12% cap holds on the MVS track: nine templates, at most three tasks each).
 
 ## How each reference is derived
 
@@ -34,13 +51,12 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 
 | id | structure | split | states | candidates |
 |---|---|---|---:|---|
-| `acc-chain-colours-1bna-api` | 1bna | public | 2 | chain A, chain B |
 | `acc-chain-colours-1f88-api` | 1f88 | heldback | 2 | chain A, chain B |
 | `acc-chain-colours-2ptc-api` | 2ptc | public | 2 | chain E, chain I |
 | `acc-chain-colours-5uak-api` | 5uak | public | 2 | chain A, chain R |
+| `acc-ligand-colours-1rx2-api` | 1rx2 | public | 2 | FOL, NAP |
 | `acc-ligand-colours-2cpp-api` | 2cpp | public | 2 | CAM, HEM |
 | `acc-ligand-colours-9gio-api` | 9gio | public | 2 | 3JF, A1IMD |
-| `acc-ligand-copy-1ake-api` | 1ake | public | 3 | AP5 A:215, AP5 B:215 |
 | `acc-ligand-copy-1iep-api` | 1iep | public | 3 | STI A:201, STI B:202 |
 | `acc-ligand-copy-8c86-api` | 8c86 | public | 3 | TQ0 B:201, TQ0 A:201 |
 | `acc-ligand-copy-8k7f-api` | 8k7f | heldback | 3 | VMF A:502, VMF B:503 |
@@ -73,5 +89,5 @@ enumerable neighbour: the colours are named, the assignment is not.
 
 - Structures: PDB entries of the panel with one model and at most 15,000 atoms; never 1HSG. At most 6 tasks of the tier (both tracks) on one structure.
 - "Any one, or all": with more than two copies, a several-but-not-all answer is not accepted, because no reading of the request picks it.
-- Held-back structures are a fixed fifth of the panel by hash of the entry id (`heldback_structures()`), not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus. In this tier: 1aay, 1f88, 1igt, 1mbn, 1udt, 3ave, 8k7f.
+- Held-back structures are a fixed fifth of the panel by hash of the entry id (`heldback_structures()`), not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus. In this tier: 1f88, 1igt, 1udt, 3ave, 8k7f.
 - The cartoon is not given a colour by the request, so the reference leaves it at the viewer's default.

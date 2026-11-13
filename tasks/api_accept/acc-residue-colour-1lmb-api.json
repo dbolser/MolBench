@@ -119,9 +119,9 @@
    "a residue with that number in another protein of the entry, or the residue with that label (sequence) number where it differs: a different residue",
    "an added representation (sticks) for the residue: only a colour is requested"
   ],
-  "facts": {
+  "difficulty": {
    "needs_numbering_offset": false,
-   "author_chain_differs_from_label_chain": true,
+   "author_chain_differs_from_label": true,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
@@ -141,6 +141,24 @@
     "label_asym_id": "D",
     "label_seq_id": 84,
     "comp_id": "ILE"
+   }
+  ],
+  "structure": "1lmb",
+  "source": "RCSB mmCIF 1LMB -> molbench/atom_tables/1lmb.json.gz (scripts/build_atom_tables.py); data/panel/facts",
+  "derived": "as above, coloured on the cartoon instead of added as sticks. Reference = the first accepted state (ILE 3:84): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
+  "targets": [
+   {
+    "what": "Ile84 of author chain 3",
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "auth_asym_id": "3",
+     "auth_seq_id": 84,
+     "auth_comp_id": "ILE"
+    },
+    "n_atoms": 8
    }
   ]
  },

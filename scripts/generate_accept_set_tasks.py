@@ -7,6 +7,7 @@ ENUMERATED BY SCRIPT from the frozen panel.
     uv run python scripts/generate_accept_set_tasks.py           # rewrite the files
     uv run python scripts/generate_accept_set_tasks.py --check   # fail if they would change
     uv run python scripts/generate_accept_set_tasks.py --heldback-file ids.json
+    uv run python scripts/generate_accept_set_tasks.py --viewer  # + every MVS state in Mol*
 
 Writes ``tasks/mvs_accept/`` and ``tasks/api_accept/`` (one JSON file per task, plus a
 generated ``README.md`` in each). No network; inputs are ``data/panel/facts`` and the
@@ -137,7 +138,7 @@ class Entry:
         """The facts the paper analyses difficulty by, for the atoms asked about."""
         return {
             "needs_numbering_offset": any(r["auth_seq_id"] != r["label_seq_id"] for r in residues),
-            "author_chain_differs_from_label_chain":
+            "author_chain_differs_from_label":
                 any(c["auth_asym_id"] != c["label_asym_id"] for c in chains),
             "needs_ligand_identity": ligand_identity,
             "needs_uniprot_mapping": False,
@@ -181,6 +182,13 @@ def copy_api(copy: dict) -> dict:
     return {"struct_asym_id": copy["label_asym_id"], "label_comp_id": copy["comp_id"]}
 
 
+def copy_intent(copy: dict) -> dict:
+    """A component copy as a person would point at it: author chain, author number, name."""
+    return {"what": copy_label(copy),
+            "atoms": {"auth_asym_id": copy["auth_asym_id"], "auth_seq_id": copy["auth_seq_id"],
+                      "auth_comp_id": copy["comp_id"]}}
+
+
 def copy_label(copy: dict) -> str:
     return f"{copy['comp_id']} {copy['auth_asym_id']}:{copy['auth_seq_id']}"
 
@@ -188,11 +196,17 @@ def copy_label(copy: dict) -> str:
 # --------------------------------------------------------------------------- #
 # States. A state is a list of parts; a part is some atoms drawn one way.
 # --------------------------------------------------------------------------- #
-def part(selector, api: list[dict] | None, rep: str, color: str, mask: int) -> dict:
+def part(selector, api: list[dict] | None, rep: str, color: str, mask: int,
+         intent: list[dict] | None = None) -> dict:
     """``selector``: MVS selector (an expression, a list of them, or a static name).
     ``api``: the same atoms as pdbe-molstar selection params (None: MVS only).
-    ``mask``: the atoms, computed from the table columns, for the read-back check."""
-    return {"selector": selector, "api": api, "rep": rep, "color": color, "mask": mask}
+    ``mask``: the atoms, computed from the table columns, for the read-back check.
+    ``intent``: one entry per API param, ``{"what": words, "atoms": selector}``: the
+    atoms that param is meant to select, written a second time in author numbering with
+    the residue name, for ``scripts/check_api_refs.py`` (provenance.targets)."""
+    assert api is None or (intent is not None and len(intent) == len(api))
+    return {"selector": selector, "api": api, "rep": rep, "color": color, "mask": mask,
+            "intent": intent}
 
 
 def one_or_all(labels: list[str]) -> list[tuple[str, list[int]]]:
@@ -216,19 +230,19 @@ def merged(sels: list[dict]):
     return sels[0] if len(sels) == 1 else sels
 
 
-def highlight_states(e: Entry, items: list[tuple[str, dict, list[dict] | None, int]],
-                     groups, rep: str, color: str) -> list[dict]:
+def highlight_states(e: Entry, items: list[tuple], groups, rep: str, color: str) -> list[dict]:
     """One state per group of items; each state draws the group's atoms as one part.
-    ``items``: (label, MVS expression, API params, mask)."""
+    ``items``: (label, MVS expression, API params or None, mask, intent or None)."""
     out = []
     for label, idx in groups:
-        api = None if any(items[i][2] is None for i in idx) else \
-            [p for i in idx for p in items[i][2]]
+        mvs_only = any(items[i][2] is None for i in idx)
+        api = None if mvs_only else [p for i in idx for p in items[i][2]]
+        intent = None if mvs_only else [items[i][4] for i in idx]
         mask = 0
         for i in idx:
             mask |= items[i][3]
-        out.append({"label": label,
-                    "parts": [part(merged([items[i][1] for i in idx]), api, rep, color, mask)]})
+        out.append({"label": label, "parts": [part(merged([items[i][1] for i in idx]), api, rep,
+                                                   color, mask, intent)]})
     return out
 
 
@@ -384,12 +398,25 @@ SKILLS = {
 DEFAULT_SKILLS = ["load", "representation", "selection", "color"]
 
 # (template, MVS tasks, also an API twin?)  Order is the order structures are handed out.
+# Three tasks per template, so that no template is more than ~12% of the MVS tier.
+#
+# An API twin is built where the requested state is one ``color`` call on a bare load
+# (pdbe-molstar already draws the polymer as a cartoon and ligands as ball-and-stick).
+# The other four templates have no twin, for a stated reason each:
+# * acc-residue-copy, acc-metal-copy, acc-metal-which need an ADDED representation
+#   (sticks on a residue, spacefill on an ion). In pdbe-molstar 3.3.2 the same request
+#   then also has several end states that differ only in how the default drawing under
+#   the added one is treated (cartoon overpainted or not, default ball-and-stick of the
+#   ion still there), which is a property of the call format, not of the request. The
+#   accept set would no longer be "which copy?" alone.
+# * acc-representation-open: on a bare load the ligand is already drawn, so "show it in
+#   <colour>" has one obvious state there (overpaint the default drawing); nothing is open.
 PLAN = [
     ("acc-ligand-which", 3, True),
-    ("acc-ligand-colours", 2, True),
-    ("acc-metal-which", 2, False),
-    ("acc-chain-colours", 4, True),
-    ("acc-ligand-copy", 4, True),
+    ("acc-ligand-colours", 3, True),
+    ("acc-metal-which", 2, False),      # the panel has two such entries
+    ("acc-chain-colours", 3, True),
+    ("acc-ligand-copy", 3, True),
     ("acc-metal-copy", 3, False),
     ("acc-residue-copy", 3, False),
     ("acc-residue-colour", 3, True),
@@ -424,7 +451,11 @@ def spec_chain_colours(e: Entry) -> dict | None:
     for perm in itertools.permutations(range(len(chains))):
         parts = [part({"label_asym_id": c["label_asym_id"]},
                       [{"struct_asym_id": c["label_asym_id"]}], "cartoon", cols[perm[i]],
-                      masks[i]) for i, c in enumerate(chains)]
+                      masks[i],
+                      [{"what": f"the {c['polymer_type']} chain with author id {c['auth_asym_id']}",
+                        "atoms": {"auth_asym_id": c["auth_asym_id"],
+                                  "label_entity_id": c["entity_id"]}}])
+                 for i, c in enumerate(chains)]
         states.append({"label": ", ".join(f"chain {c['auth_asym_id']} {cols[perm[i]]}"
                                           for i, c in enumerate(chains)), "parts": parts})
     return {"states": states, "candidates": [f"chain {c['auth_asym_id']}" for c in chains],
@@ -439,7 +470,7 @@ def spec_ligand_which(e: Entry) -> dict | None:
         return None
     colour = colours(1, "acc-ligand-which", e.id)[0]
     items = [(x["comp_id"], copy_selector(x["copies"][0]), [copy_api(x["copies"][0])],
-              e.copy_mask(x["copies"][0])) for x in ligs]
+              e.copy_mask(x["copies"][0]), copy_intent(x["copies"][0])) for x in ligs]
     states = highlight_states(e, items, subsets([x["comp_id"] for x in ligs]),
                               "ball_and_stick", colour)
     both = items[0][3] | items[1][3]
@@ -462,7 +493,8 @@ def spec_ligand_colours(e: Entry) -> dict | None:
     states = []
     for a, b in ((0, 1), (1, 0)):
         parts = [part(copy_selector(x["copies"][0]), [copy_api(x["copies"][0])],
-                      "ball_and_stick", cols[i], e.copy_mask(x["copies"][0]))
+                      "ball_and_stick", cols[i], e.copy_mask(x["copies"][0]),
+                      [copy_intent(x["copies"][0])])
                  for x, i in zip(ligs, (a, b))]
         states.append({"label": ", ".join(f"{x['comp_id']} {cols[i]}"
                                           for x, i in zip(ligs, (a, b))), "parts": parts})
@@ -478,7 +510,7 @@ def spec_ligand_copy(e: Entry) -> dict | None:
         return None
     lig = pick(options, "acc-ligand-copy", e.id, "ligand")
     colour = colours(1, "acc-ligand-copy", e.id)[0]
-    items = [(copy_label(c), copy_selector(c), [copy_api(c)], e.copy_mask(c))
+    items = [(copy_label(c), copy_selector(c), [copy_api(c)], e.copy_mask(c), copy_intent(c))
              for c in lig["copies"]]
     return {"states": highlight_states(e, items, one_or_all([i[0] for i in items]),
                                        "ball_and_stick", colour),
@@ -585,7 +617,10 @@ def residue_spec(e: Entry, template: str, rep: str) -> dict | None:
     colour = colours(1, template, e.id)[0]
     items = [(f"{comp} {r['auth_asym_id']}:{num}",
               {"auth_asym_id": r["auth_asym_id"], "auth_seq_id": num},
-              [{"auth_asym_id": r["auth_asym_id"], "auth_residue_number": num}], r["mask"])
+              [{"auth_asym_id": r["auth_asym_id"], "auth_residue_number": num}], r["mask"],
+              {"what": f"{comp.capitalize()}{num} of author chain {r['auth_asym_id']}",
+               "atoms": {"auth_asym_id": r["auth_asym_id"], "auth_seq_id": num,
+                         "auth_comp_id": comp}})
              for r in residues]
     return {"states": highlight_states(e, items, one_or_all([i[0] for i in items]), rep, colour),
             "candidates": [i[0] for i in items],
@@ -699,15 +734,16 @@ def read_back(track: str, entry: str, state: dict, answer) -> str | None:
 # Choosing structures and building tasks
 # --------------------------------------------------------------------------- #
 def choose(template: str, cands: list[tuple[Entry, dict]], n: int, twin: bool,
-           used: Counter, held: set[str]) -> list[tuple[Entry, dict]]:
-    """``n`` candidates: about a fifth from held-back structures, the rest public; the
-    least-used structures first, then by seed. A structure at the tier cap is skipped."""
+           used: Counter, held: set[str], want_back: int) -> list[tuple[Entry, dict]]:
+    """``n`` candidates, ``want_back`` of them (if the template has that many) from
+    held-back structures, the rest public; the least-used structures first, then by
+    seed. A structure at the tier cap is skipped."""
     cost = 2 if twin else 1
     ok = [c for c in cands if used[c[0].id] + cost <= MAX_PER_STRUCTURE]
     ok.sort(key=lambda c: (used[c[0].id], rank("structure", template, c[0].id)))
     back = [c for c in ok if c[0].id in held]
     public = [c for c in ok if c[0].id not in held]
-    n_back = min(len(back), round(HELDBACK_SHARE * n + 1e-9))
+    n_back = min(len(back), want_back, n)
     chosen = back[:n_back] + public[:n - n_back]
     chosen += back[n_back:n_back + n - len(chosen)]
     for e, _ in chosen:
@@ -744,11 +780,30 @@ def make_task(track: str, template: str, e: Entry, spec: dict, split: str, promp
         "candidates": spec["candidates"],
         "accepted_states": [s["label"] for s in states],
         "not_accepted": not_accepted,
-        "facts": {**spec["facts"], "n_candidates": len(spec["candidates"]),
-                  "n_accepted_states": len(states)},
+        "difficulty": {**spec["facts"], "n_candidates": len(spec["candidates"]),
+                       "n_accepted_states": len(states)},
     }
     if "residues" in spec:
         prov["residues"] = spec["residues"]
+    if track == "api":
+        # What scripts/check_api_refs.py reads: the atoms each selection of the reference
+        # is meant to pick, written a second time in author numbering with the residue
+        # name and resolved there by the atom table (not by the call replay).
+        intents = [i for p in states[0]["parts"] for i in p["intent"]]
+        prov.update({
+            "structure": e.id,
+            "source": f"RCSB mmCIF {e.id.upper()} -> molbench/atom_tables/{e.id}.json.gz "
+                      "(scripts/build_atom_tables.py); data/panel/facts",
+            "derived": f"{DERIVED[template]}. Reference = the first accepted state "
+                       f"({states[0]['label']}): a bare load, which already draws the polymer as "
+                       "a cartoon and ligands as ball-and-stick, plus one colour call.",
+            "checked_by": "scripts/check_api_refs.py",
+            "accepted_differ": "accept-set tier: every alternative is another final state, "
+                               "one of the readings of the request that provenance.rule accepts",
+            "targets": [{"what": i["what"], "action": 1, "param": n, "atoms": i["atoms"],
+                         "n_atoms": bin(e.table.selector(i["atoms"])).count("1")}
+                        for n, i in enumerate(intents)],
+        })
     return {
         "id": f"{template}-{e.id}-{track}", "track": track, "tier": "accept_set",
         "family": template, "structures": [e.id], "prompt": prompt,
@@ -767,9 +822,16 @@ def build(held: set[str]) -> list[dict]:
     pool = entries()
     used: Counter = Counter()
     out: list[dict] = []
+    planned = n_back = 0
     for template, n, twin in PLAN:
         cands = [(e, s) for e in pool for s in [SPEC[template](e)] if s is not None]
-        chosen = choose(template, cands, n, twin, used, held)
+        # A fifth of the tier's requests on held-back structures, kept as a running
+        # total over the templates (a template with no held-back candidate passes its
+        # share on to the next).
+        planned += n
+        chosen = choose(template, cands, n, twin, used, held,
+                        max(0, round(HELDBACK_SHARE * planned) - n_back))
+        n_back += sum(e.id in held for e, _ in chosen)
         if len(chosen) < n:
             raise SystemExit(f"{template}: only {len(chosen)} of {n} structures available")
         for e, spec in chosen:
@@ -870,6 +932,26 @@ enumerable neighbour: the colours are named, the assignment is not.
 """
 
 
+NO_TWIN = """\
+Every task here is the twin of an MVS task (same prompt, same target atoms). A twin is
+built where the requested state is one `color` call on a bare load, because pdbe-molstar
+already draws the polymer as a cartoon and ligands as ball-and-stick. Four MVS templates
+have no twin:
+
+- `acc-residue-copy`, `acc-metal-copy`, `acc-metal-which` need an *added* representation
+  (sticks on a residue, spacefill on an ion). In pdbe-molstar 3.3.2 that request has
+  further end states that differ only in what happens to the default drawing under the
+  added one (ribbon overpainted or not; the ion's default ball-and-stick still there).
+  That is a property of the call format, not of the request, so the accept set would no
+  longer measure "which copy?" alone.
+- `acc-representation-open`: after a bare load the ligand is already drawn, so "show it
+  in <colour>" has one obvious end state (overpaint it); nothing is left open.
+
+With five templates of three tasks each, a template is 20% of this small tier (the
+~12% cap holds on the MVS track: nine templates, at most three tasks each).
+"""
+
+
 def readme(track: str, tasks: list[dict], held: set[str]) -> str:
     mine = [t for t in tasks if t["track"] == track]
     name = {"mvs": "MVS", "api": "API (pdbe-molstar 3.3.2 calls)"}[track]
@@ -882,7 +964,7 @@ def readme(track: str, tasks: list[dict], held: set[str]) -> str:
         "tables) and listed in the task: `reference` is the first, `accepted` the others,",
         "`accepted_targets` their targets. `provenance` holds the rule that generated them",
         "(`rule`), their names in order (`accepted_states`), what is not accepted and why",
-        "(`not_accepted`), and the difficulty facts (`facts`).",
+        "(`not_accepted`), and the difficulty facts (`difficulty`).",
         "",
         f"{len(mine)} tasks on {len({t['structures'][0] for t in mine})} structures; "
         f"{sum(t['split'] == 'heldback' for t in mine)} tasks on "
@@ -901,6 +983,8 @@ def readme(track: str, tasks: list[dict], held: set[str]) -> str:
         n_states = sorted({1 + len(t["accepted"]) for t in ts})
         lines.append(f"| `{template}` | {len(ts)} | {', '.join(map(str, n_states))} | "
                      f"{OPEN[template]} | {ts[0]['prompt']} |")
+    if track == "api":
+        lines += ["", NO_TWIN.rstrip()]
     lines += ["", "## How each reference is derived", "",
               "| family | from the frozen data | accept rule |", "|---|---|---|"]
     for template, _, _ in PLAN:
@@ -928,15 +1012,62 @@ def readme(track: str, tasks: list[dict], held: set[str]) -> str:
     return "\n".join(lines)
 
 
+def viewer_check(tasks: list[dict], cache: pathlib.Path) -> int:
+    """Every accepted state of every MVS task, loaded in headless Mol* (the pinned
+    bundle) from the frozen structure file: what the viewer's own representation
+    objects draw (type, colour, atoms) must equal the grader's resolved state, which
+    ``read_back`` has already tied to the atom-table columns. Returns the number of
+    states that differ. Needs the ``execute`` extra and Playwright's Chromium. The API
+    states are checked by ``scripts/check_api_refs.py --viewer --only <ids>``."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("grader_controls", REPO / "scripts/grader_controls.py")
+    gc = importlib.util.module_from_spec(spec)
+    sys.modules["grader_controls"] = gc
+    spec.loader.exec_module(gc)
+    bad = n = 0
+    with gc.Molstar(cache) as viewer:
+        for t in tasks:
+            if t["track"] != "mvs":
+                continue
+            names = t["provenance"]["accepted_states"]
+            for name, scene in zip(names, [t["reference"]] + t["accepted"]):
+                n += 1
+                seen = viewer.state(scene)
+                ok = not isinstance(seen, str) and gc._grader_vs_viewer(scene, seen)
+                if ok:
+                    # ... and, without the grader in between: each requested part is
+                    # drawn by Mol* in its colour on exactly the atoms it should be.
+                    table = load_table(t["structures"][0])
+                    targets = [t["target"]] + t["accepted_targets"]
+                    for p in targets[names.index(name)]:
+                        want = table.selector(p["selector"])
+                        got = seen.get((p["representation"], drawn.mvs_color(p["color"]), 1.0), 0)
+                        if p["representation"] == "cartoon":
+                            want = pdbe_state.residues_of(table, want) & plain_cartoon(table.id)
+                        ok = ok and got == want
+                bad += not ok
+                print(f"viewer  {t['id']} [{name}]: {'agrees' if ok else 'DIFFERS'}"
+                      + (f" ({seen[:120]})" if isinstance(seen, str) else ""), flush=True)
+    print(f"viewer: {n} MVS states loaded in Mol* {(REPO / 'molbench/static/molstar/VERSION').read_text().strip()}, "
+          f"{bad} differ")
+    return bad
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--check", action="store_true", help="fail if the files would change")
     ap.add_argument("--heldback-file", type=pathlib.Path,
                     help="JSON list of held-back structure ids (replaces the hash rule)")
+    ap.add_argument("--viewer", action="store_true",
+                    help="also load every MVS accepted state in headless Mol* and compare")
+    ap.add_argument("--cache", type=pathlib.Path, default=REPO / "data" / "cif",
+                    help="with --viewer: where the frozen structure files are unpacked")
     a = ap.parse_args(argv)
     held = (set(json.loads(a.heldback_file.read_text())) if a.heldback_file
             else heldback_structures())
     tasks = verify(build(held))
+    if a.viewer:
+        return 1 if viewer_check(tasks, a.cache) else 0
     files = {OUT[t["track"]] / f"{t['id']}.json": json.dumps(t, indent=1) + "\n" for t in tasks}
     for track, folder in OUT.items():
         files[folder / "README.md"] = readme(track, tasks, held)

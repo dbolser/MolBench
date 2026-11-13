@@ -5,6 +5,7 @@ import copy
 import importlib.util
 import json
 import pathlib
+import re
 from collections import Counter
 
 import pytest
@@ -36,16 +37,19 @@ def test_files_are_what_the_generator_writes():
 
 def test_counts_and_shape():
     per = Counter(t["track"] for t in TASKS.values())
-    assert per == {"mvs": 27, "api": 16}
+    assert per == {"mvs": 26, "api": 15}
+    # no template over ~12% of the MVS tier; the API tier has five templates of three
+    assert max(Counter(t["family"] for t in TASKS.values() if t["track"] == "mvs").values()) <= 3
+    assert max(Counter(t["family"] for t in TASKS.values() if t["track"] == "api").values()) <= 3
     for t in TASKS.values():
         assert t["tier"] == "accept_set" and t["accepted"] and t["style"] == "full"
         assert len(t["accepted_targets"]) == len(t["accepted"])
         prov = t["provenance"]
         assert len(prov["accepted_states"]) == 1 + len(t["accepted"])
         assert prov["rule"] and prov["not_accepted"] and prov["slots"]
-        assert set(prov["facts"]) >= {"needs_numbering_offset", "needs_ligand_identity",
-                                      "author_chain_differs_from_label_chain",
-                                      "needs_uniprot_mapping", "n_accepted_states"}
+        assert set(prov["difficulty"]) >= {"needs_numbering_offset", "needs_ligand_identity",
+                                           "author_chain_differs_from_label",
+                                           "needs_uniprot_mapping", "n_accepted_states"}
         assert T.WORKED_EXAMPLE not in json.dumps(t).lower()
         # the prompt names no selector field and no numbering scheme
         for word in ("label_", "auth_", "asym", "seq_id", "struct_asym", "comp_id"):
@@ -62,7 +66,10 @@ def test_caps_and_split():
     assert held and not held & public
     assert held <= gen.heldback_structures()
     share = len(held) / len(held | public)
-    assert 0.1 <= share <= 0.3, share
+    assert 0.15 <= share <= 0.25, share                    # ~20% of the tier's structures
+    for track in ("mvs", "api"):
+        mine = [t for t in TASKS.values() if t["track"] == track]
+        assert 0.15 <= sum(t["split"] == "heldback" for t in mine) / len(mine) <= 0.25
     colours = {p["color"] for t in TASKS.values()
                for tg in [t["target"]] + t["accepted_targets"] for p in tg}
     assert colours <= set(drawn.TASK_PALETTE)
@@ -93,7 +100,7 @@ def test_any_one_copy_or_all_but_not_two_of_four():
 
 
 def test_wrong_colour_and_wrong_representation_fail():
-    tid = "acc-ligand-copy-1ake-mvs"
+    tid = "acc-ligand-copy-1iep-mvs"
     bad = copy.deepcopy(TASKS[tid]["reference"])
     _components(bad)[1]["children"][0]["children"][0]["params"]["color"] = "white"
     assert not grade(tid, bad)["success"]
@@ -169,6 +176,30 @@ def test_api_answer_written_another_way_is_accepted():
     assert by_number
 
 
+def test_api_references_pass_the_api_reference_check():
+    """scripts/check_api_refs.py resolves each selection of an API reference a second
+    time from an author-numbered description with the residue name (provenance.targets).
+    Its one remaining complaint is by design: it expects an `accepted` alternative to be
+    the same state as the reference, and in this tier each one is a different state."""
+    check = _load("check_api_refs")
+    api = [t for t in TASKS.values() if t["track"] == "api"]
+    assert len(api) == 15
+    for t in api:
+        problems = check.check_task(t)
+        assert len(t["provenance"]["targets"]) == len(t["reference"][1]["data"])
+        other = [p for p in problems if not re.fullmatch(
+            r"accepted\[\d+\] does not grade as success \(f1 [\d.]+\)", p)]
+        assert other == [], (t["id"], other)
+        assert len(problems) <= len(t["accepted"])       # (none once the check knows the tier)
+        assert t["provenance"]["accepted_differ"]
+        broken = copy.deepcopy(t)
+        target = broken["provenance"]["targets"][0]["atoms"]
+        if "auth_seq_id" in target:
+            target["auth_seq_id"] += 1                   # the neighbour: must be noticed
+            assert any("intended set" in p or "cannot be resolved" in p
+                       for p in check.check_task(broken)), t["id"]
+
+
 def test_twins_have_the_same_words_and_target_atoms():
     for t in TASKS.values():
         if t["track"] == "mvs" and t["twin_of"]:
@@ -178,14 +209,14 @@ def test_twins_have_the_same_words_and_target_atoms():
 
 
 def test_read_back_notices_a_state_that_draws_other_atoms():
-    e = next(x for x in gen.entries() if x.id == "1ake")
+    e = next(x for x in gen.entries() if x.id == "1iep")
     spec = gen.spec_ligand_copy(e)
     state = spec["states"][0]
-    assert gen.read_back("mvs", "1ake", state, gen.mvs_scene("1ake", state)) is None
-    assert gen.read_back("api", "1ake", state, gen.api_calls("1ake", state)) is None
+    assert gen.read_back("mvs", "1iep", state, gen.mvs_scene("1iep", state)) is None
+    assert gen.read_back("api", "1iep", state, gen.api_calls("1iep", state)) is None
     wrong = spec["states"][1]
-    assert gen.read_back("mvs", "1ake", state, gen.mvs_scene("1ake", wrong))
-    assert gen.read_back("api", "1ake", state, gen.api_calls("1ake", wrong))
+    assert gen.read_back("mvs", "1iep", state, gen.mvs_scene("1iep", wrong))
+    assert gen.read_back("api", "1iep", state, gen.api_calls("1iep", wrong))
 
 
 @pytest.mark.parametrize("template", [p[0] for p in gen.PLAN])
