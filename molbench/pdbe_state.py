@@ -1274,10 +1274,14 @@ def compare(reference: ViewerState, predicted: ViewerState, target: Any = None) 
         precision = p_got / p_total if p_total else 0.0
     f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
     success = bool(precision > 1 - 1e-9 and recall > 1 - 1e-9)
+    tgt = drawn.target_summary(_target_parts(reference, predicted, ref, r_trace, target))
+    if not n_ref_facts and not n_pred_facts:
+        # a bare load was asked for and given: there is no target, and nothing is wrong
+        tgt.update(target_precision=1.0, target_recall=1.0, target_f1=1.0)
     return {
         "precision": round(precision, 4), "recall": round(recall, 4), "f1": round(f1, 4),
         "success": success,
-        **drawn.target_summary(_target_parts(reference, predicted, ref, r_trace, target)),
+        **tgt,
         "n_ref": len(r_trace), "n_pred": len(p_trace),
         "reference_facts": r_trace, "predicted_facts": p_trace, **base,
     }
@@ -1301,19 +1305,27 @@ def gradable(reference: Any, tables: Callable = load_table) -> bool:
 
 
 def grade_state(reference: list, predicted: Any, accepted: list[list] | None = None,
-                tables: Callable = load_table, target: Any = None) -> dict[str, Any]:
+                tables: Callable = load_table, target: Any = None,
+                accepted_targets: list | None = None) -> dict[str, Any]:
     """Grade an answer by the final viewer state. ``accepted`` lists further action
     lists that are also right; the answer is scored against the one it matches best.
-    ``target`` is the task's ``target`` (the atoms the request is about). The result
-    has the same keys as the MVS grader's (``drawn.RESULT_KEYS``)."""
+    ``target`` is the task's ``target`` (the atoms the request is about);
+    ``accepted_targets`` gives one per accepted list (``mvs.alternative_target`` says
+    which target an alternative is scored on). The result has the same keys as the MVS
+    grader's (``drawn.RESULT_KEYS``)."""
     from . import drawn
+    from .mvs import alternative_target
     if not isinstance(predicted, list):
         return drawn.zero(error="prediction is not a list", grader="state")
     pred = replay(copy.deepcopy(predicted), tables)
     best = None
     for i, ref in enumerate([reference] + list(accepted or [])):
         try:
-            res = compare(replay(copy.deepcopy(ref), tables), pred, target)
+            ref_state = replay(copy.deepcopy(ref), tables)
+            tgt = alternative_target(
+                i, target, accepted_targets,
+                lambda t, st=ref_state: compare(st, st, t)["target_f1"] == 1.0)
+            res = compare(ref_state, pred, tgt)
         except Exception as e:  # an answer must never be able to crash the grader
             res = drawn.zero(error=f"could not compare states ({type(e).__name__}: {e})")
         res["matched_reference"] = i

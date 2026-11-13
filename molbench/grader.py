@@ -186,7 +186,8 @@ def _values_eq(a: Any, b: Any) -> bool:
 # --- top-level grading ------------------------------------------------------------
 
 def grade(reference: list[dict], predicted: Any, accepted: list[list] | None = None,
-          mode: str = "state", target: Any = None) -> dict[str, Any]:
+          mode: str = "state", target: Any = None,
+          accepted_targets: list | None = None) -> dict[str, Any]:
     """Grade a predicted action list against the reference.
 
     ``mode="state"`` (default): by final viewer state; the result has precision,
@@ -201,7 +202,8 @@ def grade(reference: list[dict], predicted: Any, accepted: list[list] | None = N
     if mode == "state":
         from . import pdbe_state
         if pdbe_state.gradable(reference):
-            return pdbe_state.grade_state(reference, predicted, accepted=accepted, target=target)
+            return pdbe_state.grade_state(reference, predicted, accepted=accepted, target=target,
+                                          accepted_targets=accepted_targets)
     from . import drawn
     result = {**drawn.zero(), **grade_sequence(reference, predicted)}
     result["grader"] = "sequence"
@@ -242,7 +244,7 @@ def grade_task(task: dict[str, Any], predicted: Any, mode: str = "state") -> dic
         from . import mvs
         return mvs.grade_mvs_task(task, predicted)
     result = grade(task["reference"], predicted, accepted=task.get("accepted"), mode=mode,
-                   target=task.get("target"))
+                   target=task.get("target"), accepted_targets=task.get("accepted_targets"))
     from . import schema
     try:
         schema_errors = schema.validate_actions(predicted)
@@ -280,12 +282,18 @@ def check_task(task: dict[str, Any]) -> list[str]:
             problems.append(f"{name}: unresolved selection(s): {state.unresolved[:3]}")
         if name == "context":
             continue
-        g = grade(actions, actions, target=task.get("target"))
+        tgt = task.get("target")
+        if name != "reference":
+            i = int(name[len("accepted["):-1])
+            given = task.get("accepted_targets")
+            tgt = given[i] if isinstance(given, list) and i < len(given) else None
+        g = grade(actions, actions, target=tgt)
         if not g["success"]:
             problems.append(f"{name}: does not succeed against itself")
-        if name == "reference" and g["target_f1"] != 1.0:
-            problems.append("target: the reference does not score 1 on its own target "
-                            "(does the target name atoms the reference changes?)")
+        if tgt is not None and g["target_f1"] != 1.0:
+            what = "target" if name == "reference" else f"accepted_targets[{i}]"
+            problems.append(f"{what}: the list does not score 1 on its own target "
+                            "(does the target name atoms it changes?)")
     return problems
 
 

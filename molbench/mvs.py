@@ -20,7 +20,7 @@ import itertools
 import json
 import re
 from dataclasses import dataclass
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 from .atoms import AtomTable, load_table
 
@@ -974,6 +974,10 @@ def _reconcile_themes(ref: DrawnStructure, pred: DrawnStructure) -> dict[tuple, 
                 and colour[1] in PARTITION_THEMES):
             continue
         groups = [gm & mask for gm in t.index(PARTITION_THEMES[colour[1]]).values() if gm & mask]
+        if len(groups) < 2:
+            # one chain (entity): "one colour per chain" would be any single colour, even
+            # the white of an uncoloured answer. Only the theme itself matches.
+            continue
         chosen: list[tuple[tuple, int]] = []
         ok = True
         for g in groups:
@@ -1184,9 +1188,37 @@ def _grade_one(reference: Any, predicted: Any, accepted_refs: Iterable[str] | No
     return out
 
 
+def alternative_target(i: int, target: Any, accepted_targets: list | None,
+                       scores_one: Callable[[Any], bool]) -> Any:
+    """The target to use against reference number ``i`` (0 = the reference, 1.. = the
+    ``accepted`` alternatives). An alternative may be about other atoms than the
+    reference (an ambiguous request with several right residues), so the task's
+    ``target`` cannot be assumed to fit it:
+
+    * ``accepted_targets[i - 1]``, when the task gives one, is used;
+    * otherwise the task's ``target``, if the alternative scores 1 on it against itself
+      (``scores_one(target)``): it is about the same atoms;
+    * otherwise the whole alternative (no target).
+
+    So an answer that is exactly an accepted alternative always has target score 1.
+    Shared by both tracks."""
+    if i == 0:
+        return target
+    if isinstance(accepted_targets, list) and i - 1 < len(accepted_targets) \
+            and accepted_targets[i - 1] is not None:
+        return accepted_targets[i - 1]
+    if target is None:
+        return None
+    try:
+        return target if scores_one(target) else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def grade_mvs(reference: Any, predicted: Any,
               accepted_refs: set[str] | list[str] | None = None,
-              accepted: list | None = None, target: Any = None) -> dict[str, Any]:
+              accepted: list | None = None, target: Any = None,
+              accepted_targets: list | None = None) -> dict[str, Any]:
     """Grade a predicted MVS scene against a reference **by what Mol* would draw**.
 
     Returns ``precision``/``recall``/``f1`` over the facts of the drawn state,
@@ -1198,14 +1230,18 @@ def grade_mvs(reference: Any, predicted: Any,
     name a protein instead of an id). ``accepted``: further scenes that are equally
     right; the answer is scored against the one it matches best. ``target``: the
     task's ``target`` (the atoms the request is about); without it the target is
-    everything the reference draws.
+    everything the reference draws. ``accepted_targets``: a target per accepted scene
+    (see ``alternative_target``).
     """
     if extract_root(predicted) is None:
         return _drawn.zero(error="prediction is not an MVS state tree", grader="drawn")
     best: dict[str, Any] | None = None
     for i, ref in enumerate([reference] + list(accepted or [])):
         try:
-            res = _grade_one(ref, predicted, accepted_refs, target)
+            tgt = alternative_target(
+                i, target, accepted_targets,
+                lambda t, ref=ref: _grade_one(ref, ref, None, t)["target_f1"] == 1.0)
+            res = _grade_one(ref, predicted, accepted_refs, tgt)
         except Exception as e:  # noqa: BLE001 - an answer must never crash the grader
             res = _drawn.zero(error=f"could not compare scenes ({type(e).__name__}: {e})")
         res["matched_reference"] = i
@@ -1221,7 +1257,8 @@ def grade_mvs_task(task: dict[str, Any], predicted: Any) -> dict[str, Any]:
     for something that is not a scene tree, else ``unchecked`` (Mol*'s own validation,
     ``render.molstar_issues``, turns that into ``valid`` or ``invalid_mvs``)."""
     res = grade_mvs(task["reference_mvs"], predicted, accepted_refs=task.get("accepted_ids"),
-                    accepted=task.get("accepted"), target=task.get("target"))
+                    accepted=task.get("accepted"), target=task.get("target"),
+                    accepted_targets=task.get("accepted_targets"))
     res["outcome"] = "not_mvs" if extract_root(predicted) is None else "unchecked"
     return res
 
@@ -1257,12 +1294,29 @@ def check_mvs_task(task: dict[str, Any]) -> list[str]:
         if name != "context":
             for bad in _empty_components(tree):
                 problems.append(f"{name}: selector selects no atoms: {bad}")
-            g = grade_mvs(tree, tree, target=task.get("target"))
+            tgt = task.get("target")
+            if name != "reference_mvs":
+                i = int(name[len("accepted["):-1])
+                given = task.get("accepted_targets")
+                tgt = given[i] if isinstance(given, list) and i < len(given) else None
+            g = grade_mvs(tree, tree, target=tgt)
             if not g["success"]:
                 problems.append(f"{name}: does not succeed against itself")
-            if name == "reference_mvs" and g["target_f1"] != 1.0:
-                problems.append("target: the reference does not score 1 on its own target "
+            if tgt is not None and g["target_f1"] != 1.0:
+                what = "target" if name == "reference_mvs" else f"accepted_targets[{i}]"
+                problems.append(f"{what}: the {'reference' if name == 'reference_mvs' else 'scene'} "
+                                "does not score 1 on its own target "
                                 "(does the target name atoms the reference draws?)")
+            for entry, st in scene.structures.items():
+                if st.table is None:
+                    continue
+                for (_, colour, _), mask in st.draws.items():
+                    if isinstance(colour, tuple) and len(colour) == 2 and colour[0] == "theme" \
+                            and colour[1] in PARTITION_THEMES:
+                        column = PARTITION_THEMES[colour[1]]
+                        if sum(1 for gm in st.table.index(column).values() if gm & mask) < 2:
+                            problems.append(f"{name}: the {colour[1]} colour theme is on a single "
+                                            f"group ({column}); only the theme itself can match it")
     return problems
 
 

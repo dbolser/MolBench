@@ -305,7 +305,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.7821,
-     "mean_target_f1": 0.8571
+     "mean_target_f1": 0.8567
     },
     {
      "group": "wrong",
@@ -355,7 +355,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.7618,
-     "mean_target_f1": 0.8571
+     "mean_target_f1": 0.8568
     },
     {
      "group": "wrong",
@@ -415,7 +415,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.75,
-     "mean_target_f1": 0.8571
+     "mean_target_f1": 0.8564
     },
     {
      "group": "wrong",
@@ -435,7 +435,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.7586,
-     "mean_target_f1": 0.8571
+     "mean_target_f1": 0.8564
     },
     {
      "group": "wrong",
@@ -445,7 +445,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.75,
-     "mean_target_f1": 0.8571
+     "mean_target_f1": 0.8566
     },
     {
      "group": "wrong",
@@ -495,7 +495,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.75,
-     "mean_target_f1": 0.8571
+     "mean_target_f1": 0.75
     }
    ]
   },
@@ -812,7 +812,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.5593,
-     "mean_target_f1": 0.5281
+     "mean_target_f1": 0.5169
     },
     {
      "group": "wrong",
@@ -902,7 +902,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.5,
-     "mean_target_f1": 0.6667
+     "mean_target_f1": 0.5
     }
    ]
   }

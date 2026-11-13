@@ -300,11 +300,15 @@ def target_display(ref: dict[tuple, Any], pred: dict[tuple, Any], target: Any
     * ``attempted`` how many of them the answer drew at all (right type);
     * ``spill``    answer items *outside* the target that repeat what the answer drew
                    on this class, where the reference draws no such thing: the answer
-                   did to other atoms what was asked for these.
+                   did to other atoms what was asked for these;
+    * ``extra``    answer items on this class from a draw that is confined to the
+                   target, in a representation type the reference does not draw there:
+                   the answer did to these atoms something that was not asked for.
 
-    ``recall = credit / wanted`` and ``precision = credit / (attempted + spill)``.
-    Anything else the answer draws (context the request did not mention, in another
-    style) is ignored: that is the difference from F1 and task success.
+    ``recall = credit / wanted`` and ``precision = credit / (attempted + spill + extra)``.
+    Anything else the answer draws (context the request did not mention: a draw in
+    another style that is not confined to the target) is ignored: that is the
+    difference from F1 and task success.
     """
     out = []
     # The target's drawing is what the reference draws on the target atoms *only*: a
@@ -348,11 +352,21 @@ def target_display(ref: dict[tuple, Any], pred: dict[tuple, Any], target: Any
                 if draw_eq(pd, rd):
                     outside = minus(outside, rm)
             spill += size(outside)
-        denom = attempted + spill
+        # Unrequested drawing *of the target itself*: an answer draw that lies wholly
+        # inside the target, in a representation type the reference does not draw on
+        # these atoms (red spacefill on top of the red sticks that were asked for).
+        # Context that merely passes through the target (a cartoon of the whole chain)
+        # is not confined to it and stays ignored.
+        types = {d[0] for d in look}
+        extra = 0
+        for pd, pm in pred.items():
+            if pd[0] not in types and size(pm) and not size(minus(pm, target)):
+                extra += size(pm & mask)
+        denom = attempted + spill + extra
         out.append({"fact": "target", "value": _show_look(look), "atoms": size(mask),
                     "recall": credit / wanted if wanted else 0.0,
                     "precision": credit / denom if denom else 0.0,
-                    "spill": spill})
+                    "spill": spill, "extra": extra})
     return out
 
 

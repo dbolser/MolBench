@@ -172,6 +172,17 @@ def test_a_chain_theme_is_matched_by_one_colour_per_chain_and_only_that_way():
     assert not g(themed, scene("1tup", comp("polymer", rep("cartoon", col("white", theme="element-symbol")))))["success"]
 
 
+def test_a_chain_theme_on_one_chain_is_matched_only_by_the_theme():
+    # 1CBS has one chain: "one colour per chain" would be any colour at all, even the
+    # white of an answer that set no colour
+    themed = scene("1cbs", comp("polymer", rep("cartoon", col("white", theme="chain-id"))))
+    assert g(themed, themed)["success"]
+    assert not g(themed, scene("1cbs", comp("polymer", rep("cartoon"))))["success"]
+    assert not g(themed, scene("1cbs", comp("polymer", rep("cartoon", col("red")))))["success"]
+    assert any("single group" in p for p in
+               grader.check_task({"category": "mvs", "reference_mvs": themed}))
+
+
 # --- wrong answers ---------------------------------------------------------------------
 
 @pytest.mark.parametrize("pred", [
@@ -272,6 +283,24 @@ def test_target_score_counts_spill_onto_other_atoms():
     two = [R248, {"auth_asym_id": "A", "auth_seq_id": 249}]
     r = g(ref, highlight(two), target=TARGET)
     assert r["target_recall"] == 1.0 and 0.3 < r["target_precision"] < 0.7
+
+
+def test_target_score_counts_unrequested_drawing_of_the_target_itself():
+    # red sticks were asked for; the answer also wraps the residue in a red surface.
+    # That draw is confined to the target, so it is not context: it costs precision.
+    ref = scene("1tup", comp(R248, rep("ball_and_stick", col("red"))))
+    both = scene("1tup", comp(R248, rep("ball_and_stick", col("red")), rep("surface", col("red"))))
+    r = g(ref, both, target=TARGET)
+    assert r["target_recall"] == 1.0 and r["target_precision"] == 0.5
+    # a cartoon of the whole chain passes through the residue and stays ignored
+    assert g(ref, highlight(), target=TARGET)["target_f1"] == 1.0
+    # the API track has the same rule: sticks added to a residue that was only to be coloured
+    load = API_REF[0]
+    sticks = [load, {"action": "color", "data": [{"auth_asym_id": "A", "auth_seq_id": 248, "color": "red",
+                                                    "representation": "ball-and-stick",
+                                                    "representationColor": "red"}]}]
+    r = grader.grade_task(API_TASK, sticks)
+    assert r["target_recall"] == 1.0 and r["target_precision"] < 1.0 and not r["success"]
 
 
 def test_target_can_be_given_in_either_selection_language():
@@ -463,6 +492,40 @@ def test_accepted_alternatives_take_the_best_match():
     api_alt = [API_REF[0], {"action": "color", "data": [{"auth_asym_id": "B", "auth_seq_id": 248, "color": "red"}]}]
     api_task = {"category": "api_calling", "reference": API_REF, "accepted": [api_alt]}
     assert grader.grade_task(api_task, api_alt)["matched_reference"] == 1
+
+
+def test_an_accepted_alternative_is_scored_on_a_target_that_fits_it():
+    # the task's target names Arg248 of chain A; the accepted alternative is about
+    # chain B. An answer that is exactly the alternative has target score 1.
+    alt = highlight({"auth_asym_id": "B", "auth_seq_id": 248})
+    task = {**MVS_TASK, "accepted": [alt]}
+    assert "target" in task
+    r = grader.grade_task(task, alt)
+    assert r["success"] and r["matched_reference"] == 1 and r["target_f1"] == 1.0
+    # with its own target the alternative is scored on that: context is ignored again
+    task["accepted_targets"] = [{"selector": {"auth_asym_id": "B", "auth_seq_id": 248}}]
+    bare_alt = scene("1tup", comp({"auth_asym_id": "B", "auth_seq_id": 248}, rep("ball_and_stick", col("red"))))
+    r = grader.grade_task(task, bare_alt)
+    assert not r["success"] and r["matched_reference"] == 1 and r["target_f1"] == 1.0
+    assert grader.check_task(task) == []
+    task["accepted_targets"] = [{"selector": {"auth_asym_id": "Q", "auth_seq_id": 248}}]   # no such chain
+    assert any("accepted_targets[0]" in p for p in grader.check_task(task))
+    # an alternative about the same atoms keeps the task's target
+    same_atoms = highlight(colour="blue")
+    r = grader.grade_task({**MVS_TASK, "accepted": [same_atoms]},
+                          scene("1tup", comp(R248, rep("ball_and_stick", col("blue")))))
+    assert r["matched_reference"] == 1 and r["target_f1"] == 1.0 and not r["success"]
+    # API track
+    api_alt = [API_REF[0], {"action": "color", "data": [{"auth_asym_id": "B", "auth_seq_id": 248, "color": "red"}]}]
+    r = grader.grade_task({**API_TASK, "accepted": [api_alt]}, api_alt)
+    assert r["success"] and r["matched_reference"] == 1 and r["target_f1"] == 1.0
+
+
+def test_a_bare_load_asked_for_and_given_is_right_on_every_score():
+    load = [{"action": "load", "molecule_id": "1tup"}]
+    r = grader.grade_task({"category": "api_calling", "reference": load}, load)
+    assert r["success"] and r["f1"] == 1.0 and r["target_f1"] == 1.0
+    assert grader.check_task({"category": "api_calling", "reference": load}) == []
 
 
 def test_a_follow_up_is_graded_on_its_final_state_only():

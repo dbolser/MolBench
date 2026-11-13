@@ -108,9 +108,13 @@ cartoon around the residue) is ignored, in either direction.
   representation with another colour or opacity; `attempted` = how many the answer
   drew at all; `spill` = items *outside* the target on which the answer repeats what it
   drew on the target, where the reference draws no such thing (the answer coloured the
-  whole chain red when one residue was asked for).
+  whole chain red when one residue was asked for); `extra` = items on the target from
+  an answer draw that is confined to the target, in a representation type the
+  reference does not draw there (a surface wrapped around the residue that was to be
+  shown as sticks). A draw that is not confined to the target (a cartoon of the whole
+  chain passing through the residue) is context, and is ignored.
 - **Target recall** = credit / wanted. **Target precision** = credit / (attempted +
-  spill). The target score (`target_f1`) is the harmonic mean of the two, each averaged
+  spill + extra). The target score (`target_f1`) is the harmonic mean of the two, each averaged
   over the target's classes and over the scene facts that touch the target atoms
   (labels, tooltips, focus, interaction request).
 - A task without a `target` field uses everything the reference draws as the target.
@@ -126,7 +130,13 @@ atoms in the target.
 
 - A task may list further right answers under `accepted`. The answer is graded against
   the reference and each of them; the best result counts (a success first, then the
-  highest F1), and `matched_reference` says which one it was.
+  highest F1), and `matched_reference` says which one it was. An alternative may be
+  about other atoms than the reference (an ambiguous request with several right
+  residues), so its target score uses, in this order: its own entry in
+  `accepted_targets` (a list parallel to `accepted`), if the task gives one; the
+  task's `target`, if the alternative scores 1 on it against itself; otherwise
+  everything the alternative draws. An answer that is exactly an accepted alternative
+  therefore has target score 1.
 - An MVS task that names a protein rather than an entry lists the right entries under
   `accepted_ids`. An answer on another accepted entry is graded against the reference's
   drawing re-resolved on that entry.
@@ -173,7 +183,10 @@ each representation object holds, and in which colour), not taken from documenta
   theme: the same theme matches. One further match is allowed, in one direction only:
   when the *reference* uses the `chain-id` or `entity-id` theme ("colour by chain"), an
   answer that gives every chain (entity) one colour of its own, all different, matches
-  it. Explicit colours in the reference are matched only by those colours.
+  it. Explicit colours in the reference are matched only by those colours. The
+  allowance needs at least two chains (entities) under the theme: on a single chain
+  "one colour per chain" would be any colour at all, so there only the theme itself
+  matches, and `grader.check_task` reports a reference that uses the theme that way.
 
 Not graded on the MVS track: the envelope and metadata, the file's host and format
 variant, the order of children, representation size and surface kind
@@ -200,7 +213,8 @@ Because a bare load already draws the structure, the facts of an API end state a
 | assembly, preset, option, canvas | the assembly id, the load preset, each non-default option, each non-default canvas setting |
 
 F1, success and the accepted alternatives work as above. A bare load has no facts and
-scores 0. Two details differ from the MVS track and are stated here so that the two
+scores 0 (unless a bare load is what the reference is: then it is right on every
+score). Two details differ from the MVS track and are stated here so that the two
 are not taken to be identical arithmetic:
 
 - A display class scores the share of its atoms that end up looking *exactly* the same
