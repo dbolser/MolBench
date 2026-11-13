@@ -42,3 +42,58 @@ def test_escalation_rescues_only_identical_renders(tmp_path, name, decision):
 
     g = escalating_grade(scene("gray"), scene("red"), render=render, workdir=tmp_path)
     assert g["decision"] == decision
+
+
+# --- renders framed on the target (decision 24) ----------------------------------------
+
+def test_target_rows_are_the_highlight_not_the_context():
+    import json
+
+    from molbench import render
+    task = json.loads((pathlib.Path(__file__).parent.parent / "tasks" / "mvs_clinical"
+                       / "clinvar-1tup-D281.json").read_text())
+    rows = render.target_rows(task)
+    assert len(rows) == 8                       # Asp281 of chain A, not the 5,441-atom cartoon
+    assert render.target_rows({**task, "target": {"selector": {"auth_asym_id": "B", "auth_seq_id": 175}}}) != rows
+    assert render.rows_of(0b1011) == [0, 1, 3]
+
+
+def test_reference_and_answer_are_rendered_from_the_same_camera(tmp_path):
+    """Needs the Mol* bundle and a headless browser (the ``execute`` extra); skipped
+    without them. The camera is worked out by Mol* on the reference's target atoms and
+    the same snapshot is applied to the answer."""
+    import json
+
+    from molbench import render
+    pytest.importorskip("playwright")
+    gemmi = pytest.importorskip("gemmi")
+    if not (render.STATIC / "molstar" / "molstar.js").exists():
+        pytest.skip("Mol* bundle not fetched")
+    repo = pathlib.Path(__file__).parent.parent
+    task = json.loads((repo / "tasks" / "mvs_clinical" / "clinvar-1tup-D281.json").read_text())
+    ref = task["reference_mvs"]
+    wrong = json.loads(json.dumps(ref).replace('"auth_seq_id": 281', '"auth_seq_id": 282'))
+    try:
+        out = render.render_pair(ref, wrong, tmp_path, render.target_rows(task), width=400, height=300,
+                                 network=False)        # the structure comes from the frozen panel
+    except Exception as e:  # noqa: BLE001 - no browser
+        pytest.skip(f"cannot render here: {str(e).splitlines()[0][:120]}")
+    assert "answer_error" not in out and set(out["files"]) == {
+        "ref_whole", "ref_target", "answer_whole", "answer_target", "panel"}
+    # the camera looks at the centroid of the target atoms (from the frozen mmCIF) ...
+    st = gemmi.read_structure(str(repo / "data" / "panel" / "cif" / "1tup.cif.gz"))
+    pos = [a.pos for ch in st[0] if ch.name == "A" for r in ch if r.seqid.num == 281 for a in r]
+    centroid = [sum(p[i] for p in pos) / len(pos) for i in range(3)]
+    assert out["framed"]["n_atoms"] == len(pos) == 8
+    assert all(abs(a - b) < 0.01 for a, b in zip(out["target_camera"]["target"], centroid))
+    assert out["target_camera"]["radius"] < out["whole_camera"]["radius"] / 3
+    # ... and the wrong residue, hard to see in the whole view, is plain in the target view
+    whole = changed_pixels(out["files"]["ref_whole"], out["files"]["answer_whole"])
+    target = changed_pixels(out["files"]["ref_target"], out["files"]["answer_target"])
+    assert target > 10 * max(whole, 1)
+    # the same scene from the same camera is the same picture
+    again = render.render_framed(ref, tmp_path / "again.png", camera=out["target_camera"],
+                                 width=400, height=300, network=False)
+    assert again["frozen_files"] == ["1tup"]
+    assert changed_pixels(out["files"]["ref_target"], again["png"]) == 0
+    assert again["camera"]["target"] == out["target_camera"]["target"]

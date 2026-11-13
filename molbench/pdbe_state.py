@@ -138,47 +138,9 @@ from .atoms import AtomTable, load_table
 
 # --- colours ----------------------------------------------------------------------
 
-#: Largest per-channel difference at which two colours count as the same.
-COLOR_TOLERANCE = 32
-
-# Mol*'s ColorNames, read out of the pdbe-molstar 3.3.2 bundle (mol-util/color/names).
-_COLOR_NAMES_TEXT = (
-    "aliceblue:f0f8ff antiquewhite:faebd7 aqua:00ffff aquamarine:7fffd4 azure:f0ffff "
-    "beige:f5f5dc bisque:ffe4c4 black:000000 blanchedalmond:ffebcd blue:0000ff blueviolet:8a2be2 "
-    "brown:a52a2a burlywood:deb887 cadetblue:5f9ea0 chartreuse:7fff00 chocolate:d2691e "
-    "coral:ff7f50 cornflower:6495ed cornflowerblue:6495ed cornsilk:fff8dc crimson:dc143c "
-    "cyan:00ffff darkblue:00008b darkcyan:008b8b darkgoldenrod:b8860b darkgray:a9a9a9 "
-    "darkgreen:006400 darkgrey:a9a9a9 darkkhaki:bdb76b darkmagenta:8b008b darkolivegreen:556b2f "
-    "darkorange:ff8c00 darkorchid:9932cc darkred:8b0000 darksalmon:e9967a darkseagreen:8fbc8f "
-    "darkslateblue:483d8b darkslategray:2f4f4f darkslategrey:2f4f4f darkturquoise:00ced1 "
-    "darkviolet:9400d3 deeppink:ff1493 deepskyblue:00bfff dimgray:696969 dimgrey:696969 "
-    "dodgerblue:1e90ff firebrick:b22222 floralwhite:fffaf0 forestgreen:228b22 fuchsia:ff00ff "
-    "gainsboro:dcdcdc ghostwhite:f8f8ff gold:ffd700 goldenrod:daa520 gray:808080 green:008000 "
-    "greenyellow:adff2f grey:808080 honeydew:f0fff0 hotpink:ff69b4 indianred:cd5c5c "
-    "indigo:4b0082 ivory:fffff0 khaki:f0e68c laserlemon:ffff54 lavender:e6e6fa "
-    "lavenderblush:fff0f5 lawngreen:7cfc00 lemonchiffon:fffacd lightblue:add8e6 "
-    "lightcoral:f08080 lightcyan:e0ffff lightgoldenrod:fafad2 lightgoldenrodyellow:fafad2 "
-    "lightgray:d3d3d3 lightgreen:90ee90 lightgrey:d3d3d3 lightpink:ffb6c1 lightsalmon:ffa07a "
-    "lightseagreen:20b2aa lightskyblue:87cefa lightslategray:778899 lightslategrey:778899 "
-    "lightsteelblue:b0c4de lightyellow:ffffe0 lime:00ff00 limegreen:32cd32 linen:faf0e6 "
-    "magenta:ff00ff maroon:800000 mediumaquamarine:66cdaa mediumblue:0000cd mediumorchid:ba55d3 "
-    "mediumpurple:9370db mediumseagreen:3cb371 mediumslateblue:7b68ee mediumspringgreen:00fa9a "
-    "mediumturquoise:48d1cc mediumvioletred:c71585 midnightblue:191970 mintcream:f5fffa "
-    "mistyrose:ffe4e1 moccasin:ffe4b5 navajowhite:ffdead navy:000080 oldlace:fdf5e6 olive:808000 "
-    "olivedrab:6b8e23 orange:ffa500 orangered:ff4500 orchid:da70d6 palegoldenrod:eee8aa "
-    "palegreen:98fb98 paleturquoise:afeeee palevioletred:db7093 papayawhip:ffefd5 "
-    "peachpuff:ffdab9 peru:cd853f pink:ffc0cb plum:dda0dd powderblue:b0e0e6 purple:800080 "
-    "rebeccapurple:663399 red:ff0000 rosybrown:bc8f8f royalblue:4169e1 saddlebrown:8b4513 "
-    "salmon:fa8072 sandybrown:f4a460 seagreen:2e8b57 seashell:fff5ee sienna:a0522d silver:c0c0c0 "
-    "skyblue:87ceeb slateblue:6a5acd slategray:708090 slategrey:708090 snow:fffafa "
-    "springgreen:00ff7f steelblue:4682b4 tan:d2b48c teal:008080 thistle:d8bfd8 tomato:ff6347 "
-    "turquoise:40e0d0 violet:ee82ee wheat:f5deb3 white:ffffff whitesmoke:f5f5f5 yellow:ffff00 "
-    "yellowgreen:9acd32 "
-)
-COLOR_NAMES: dict[str, tuple[int, int, int]] = {}
-for _item in _COLOR_NAMES_TEXT.split():
-    _name, _hex = _item.split(":")
-    COLOR_NAMES[_name] = (int(_hex[0:2], 16), int(_hex[2:4], 16), int(_hex[4:6], 16))
+# The colour-name table and the tolerance are shared with the MVS grader (drawn.py):
+# Mol*'s ColorNames, the same in the pdbe-molstar 3.3.2 bundle and in Mol* 5.9.0.
+from .drawn import COLOR_NAMES, COLOR_TOLERANCE, color_eq  # noqa: E402,F401
 
 RGB = tuple  # (r, g, b)
 GREY = (170, 170, 170)            # normalizeColor's fallback
@@ -257,13 +219,6 @@ def css_color(v: Any) -> RGB | None:
     if m:
         return tuple(min(255, int(g)) for g in m.groups())
     return COLOR_NAMES.get(s)
-
-
-def color_eq(a: Any, b: Any) -> bool:
-    """Two colours (RGB tuples) within tolerance; theme tokens (strings) must be equal."""
-    if isinstance(a, tuple) and isinstance(b, tuple):
-        return all(abs(x - y) <= COLOR_TOLERANCE for x, y in zip(a, b))
-    return a == b
 
 
 # --- UniProt numbering: the one hook the frozen SIFTS data plugs into ---------------
@@ -488,6 +443,18 @@ STANDARD_COMPS = frozenset(
     "ALA ARG ASN ASP CYS GLN GLU GLY HIS ILE LEU LYS MET PHE PRO SER THR TRP TYR VAL "
     "SEC PYL ASX GLX UNK A C G U I DA DC DG DT DI DU N DN".split())
 
+# Capping groups inside a polymer chain that the viewer does not put in its
+# 'non-standard' component (checked in pdbe-molstar: the acetyl cap of 1HRC).
+TERMINAL_CAPS = frozenset(["ACE"])
+
+# Polymer residues that Mol* 5.9.0 (the source of the atom tables' component masks)
+# counts as part of the ligand but pdbe-molstar 3.3.2 does not: entry -> [(author chain,
+# author residue number)]. Measured, not derived: a bare load of every panel entry was
+# compared with the viewer (scripts/grader_controls.py --viewer-api), and this was the
+# one residue whose component differed (Arg167 of 1AKE, two alternate conformations
+# beside the AP5 ligand; 16 atoms).
+NOT_IN_LIGAND_COMPONENT = {"1ake": [("A", 167)]}
+
 _PDB_ID = re.compile(r"(?:pdb_0000)?[0-9][a-z0-9]{3}")
 _AF_URL = re.compile(r"AF-([A-Za-z0-9]+)-F(\d+)")
 _PDB_URL = re.compile(r"/(?:pdb)?([0-9][A-Za-z0-9]{3})(?:_updated|-assembly\d+)?\.(?:b?cif|pdb|ent)(?:\.gz)?(?:[?#].*)?$")
@@ -587,6 +554,10 @@ class ViewerState:
         out = {name: t.static.get(name, 0) for name in ("polymer", "ligand", "ion", "water",
                                                          "branched", "coarse")}
         out["non-standard"] = nonstandard_atoms(t)
+        for chain, number in NOT_IN_LIGAND_COMPONENT.get(str(self.entry or "").lower(), ()):
+            out["ligand"] &= ~(t.index("auth_asym_id").get(chain, 0)
+                               & t.index("auth_seq_id").get(number, 0)
+                               & t.static.get("polymer", 0))
         return {k: v for k, v in out.items() if v}
 
     def _drawn(self, rep: str, atoms: int) -> int:
@@ -682,7 +653,7 @@ def nonstandard_atoms(table: AtomTable) -> int:
     poly = table.static.get("polymer", 0)
     out = 0
     for comp, m in table.index("label_comp_id").items():
-        if comp not in STANDARD_COMPS:
+        if comp not in STANDARD_COMPS and comp not in TERMINAL_CAPS:
             out |= m & poly
     return out
 
@@ -1060,6 +1031,114 @@ def facts(s: ViewerState) -> dict[str, Any]:
     return out
 
 
+def changes(s: ViewerState) -> dict[tuple, int]:
+    """The drawing as it differs from a bare load of the same structure: a draw
+    ``(type, colour)`` -> the atoms that now carry it and would not after a bare load,
+    and ``("-" + type, colour)`` -> the atoms that have lost a draw a bare load gives
+    them (something hidden, restyled or painted over). This is what the target score is
+    computed on (``drawn.target_display``): on the API track a bare load already draws
+    everything, so only the changes say what an answer did. Needs an atom table."""
+    out: dict[tuple, int] = {}
+    if not s.atomistic:
+        return out
+    base, now = _bare(s).display(), s.display()
+    for m, val in now.items():
+        for bm, bval in base.items():
+            hit = m & bm
+            if not hit or val == bval:
+                continue
+            for d in val:
+                if d not in bval:
+                    out[d] = out.get(d, 0) | hit
+            for d in bval:
+                # a draw that is gone altogether (hidden, or another style); one that is
+                # only recoloured is already stated by the new draw above
+                if d not in val and not any(v[0] == d[0] for v in val):
+                    key = ("-" + d[0], d[1])
+                    out[key] = out.get(key, 0) | hit
+    return out
+
+
+def target_atoms(target: Any, s: ViewerState) -> int | None:
+    """The atoms a task's ``target`` names (``{"data": [QueryParam, ...]}`` in this
+    track's selection language and/or ``{"selector": <MVS selector>}``), or None when
+    the task has no usable target or the structure has no atom table."""
+    if not isinstance(target, dict) or s.table is None:
+        return None
+    if target.get("entry") and str(target["entry"]).lower() != s.entry:
+        return 0
+    out = 0
+    for prm in target.get("data") if isinstance(target.get("data"), list) else []:
+        if isinstance(prm, dict):
+            try:
+                out |= resolve_param(s.table, prm, s.entry or "")
+            except NotImplementedError:
+                pass
+    if "selector" in target:
+        out |= s.table.selector(target["selector"]) or 0
+    return out
+
+
+def _default_view(s: ViewerState, its_facts: dict) -> Any:
+    """What the camera frames when nothing was focused: everything that is drawn (as
+    whole residues)."""
+    if s.table is None or not s.atomistic:
+        return s.everything()
+    shown = 0
+    for val, mask in its_facts.get("_all", {}).items():
+        if val:
+            shown |= mask
+    return residues_of(s.table, shown)
+
+
+def _target_parts(reference: ViewerState, predicted: ViewerState, ref: dict, r_trace: list,
+                  target: Any) -> list[dict]:
+    """The facts of the target score (see ``drawn.target_display``). Without a task
+    ``target`` the target is everything the reference changed; with one, it is the
+    reference's drawing of those atoms plus the focus, highlight and tooltips that
+    touch them, plus any fact the target lists under ``facts``."""
+    from . import drawn
+    t_atoms = target_atoms(target, reference)
+    whole = t_atoms is None
+    wanted = set(target.get("facts") or []) if isinstance(target, dict) else set()
+    parts: list[dict] = []
+    atom_facts = ("display", "scene", "focus", "highlight", "tooltip")
+    if reference.atomistic and predicted.atomistic:
+        ref_changes = changes(reference)
+        if whole:
+            t_atoms = 0
+            for m in ref_changes.values():
+                t_atoms |= m
+        parts += drawn.target_display(ref_changes, changes(predicted), t_atoms)
+    else:
+        whole = True                          # nothing to restrict: use the fact scores
+        parts += [{"fact": r["fact"], "recall": r["score"], "precision": r["score"]}
+                  for r in r_trace if r["fact"] in ("display", "scene")]
+    pred = facts(predicted)
+    for key in ("focus", "highlight"):
+        if key in ref and (whole or key in wanted or (isinstance(ref[key], int)
+                                                       and ref[key] & t_atoms)):
+            theirs = pred.get(key)
+            if theirs is None and key == "focus" and not drawn.GRADE_UNREQUESTED_FOCUS \
+                    and predicted.loaded:
+                theirs = _default_view(predicted, pred)
+            sc = _jaccard(ref[key], theirs) if theirs is not None else 0.0
+            parts.append({"fact": key, "recall": sc, "precision": sc})
+    if isinstance(ref.get("tooltip"), dict):
+        theirs = pred.get("tooltip") if isinstance(pred.get("tooltip"), dict) else {}
+        for text, atoms in ref["tooltip"].items():
+            if whole or "tooltip" in wanted or (isinstance(atoms, int) and atoms & t_atoms):
+                sc = _jaccard(atoms, theirs[text]) if text in theirs else 0.0
+                parts.append({"fact": "tooltip", "value": text, "recall": sc, "precision": sc})
+    for r in r_trace:
+        name = r["fact"]
+        if name.split(":")[0] in atom_facts:
+            continue
+        if whole and not wanted or name in wanted or name.split(":")[0] in wanted:
+            parts.append({"fact": name, "recall": r["score"], "precision": r["score"]})
+    return parts
+
+
 # --- comparison ----------------------------------------------------------------------
 
 def _size(m: Any) -> int:
@@ -1116,9 +1195,11 @@ def _value_eq(key: str, a: Any, b: Any) -> bool:
     return a == b
 
 
-def compare(reference: ViewerState, predicted: ViewerState) -> dict[str, Any]:
-    """Score ``predicted`` against ``reference``: precision, recall, f1, success, and a
+def compare(reference: ViewerState, predicted: ViewerState, target: Any = None) -> dict[str, Any]:
+    """Score ``predicted`` against ``reference``: precision, recall, f1, success, the
+    target score (``target`` is the task's ``target``; see ``_target_parts``), and a
     per-fact trace."""
+    from . import drawn
     ref, pred = facts(reference), facts(predicted)
     n_ref_facts = sum(1 for k in ref if not k.startswith("_"))
     n_pred_facts = sum(1 for k in pred if not k.startswith("_"))
@@ -1129,8 +1210,8 @@ def compare(reference: ViewerState, predicted: ViewerState) -> dict[str, Any]:
     if not same_structure:
         # facts are differences from a bare load of *this* structure: on another one
         # (or none) there is nothing to compare them with
-        return {"precision": 0.0, "recall": 0.0, "f1": 0.0, "success": False,
-                "n_ref": 0, "n_pred": 0, "reference_facts": [], "predicted_facts": [], **base}
+        return drawn.zero(**base)
+
     def side(mine: dict, theirs: dict) -> tuple[float, float, list]:
         total = got = 0.0
         trace = []
@@ -1174,8 +1255,18 @@ def compare(reference: ViewerState, predicted: ViewerState) -> dict[str, Any]:
             trace.append({"fact": key, "value": shown, "score": round(sc, 3)})
         return got, total, trace
 
-    r_got, r_total, r_trace = side(ref, pred)
-    p_got, p_total, p_trace = side(pred, ref)
+    # The camera: a focus the reference does not have is not a fact of the answer, and
+    # an answer with no focus frames the whole structure (drawn.GRADE_UNREQUESTED_FOCUS).
+    pred_seen = dict(pred)
+    ref_seen = dict(ref)
+    if not drawn.GRADE_UNREQUESTED_FOCUS:
+        if "focus" in pred and "focus" not in ref:
+            del pred_seen["focus"]
+        if "focus" in ref and "focus" not in pred and predicted.loaded:
+            pred["focus"] = _default_view(predicted, pred)
+        n_pred_facts = sum(1 for k in pred_seen if not k.startswith("_"))
+    r_got, r_total, r_trace = side(ref_seen, pred)
+    p_got, p_total, p_trace = side(pred_seen, ref)
     if not n_ref_facts and not n_pred_facts:
         precision = recall = 1.0          # a bare load was asked for and given
     else:
@@ -1183,9 +1274,15 @@ def compare(reference: ViewerState, predicted: ViewerState) -> dict[str, Any]:
         precision = p_got / p_total if p_total else 0.0
     f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
     success = bool(precision > 1 - 1e-9 and recall > 1 - 1e-9)
+    tgt = drawn.target_summary(_target_parts(reference, predicted, ref, r_trace, target))
+    if not n_ref_facts and not n_pred_facts:
+        # a bare load was asked for and given: there is no target, and nothing is wrong
+        tgt.update(target_precision=1.0, target_recall=1.0, target_f1=1.0)
     return {
         "precision": round(precision, 4), "recall": round(recall, 4), "f1": round(f1, 4),
-        "success": success, "n_ref": len(r_trace), "n_pred": len(p_trace),
+        "success": success,
+        **tgt,
+        "n_ref": len(r_trace), "n_pred": len(p_trace),
         "reference_facts": r_trace, "predicted_facts": p_trace, **base,
     }
 
@@ -1208,20 +1305,29 @@ def gradable(reference: Any, tables: Callable = load_table) -> bool:
 
 
 def grade_state(reference: list, predicted: Any, accepted: list[list] | None = None,
-                tables: Callable = load_table) -> dict[str, Any]:
+                tables: Callable = load_table, target: Any = None,
+                accepted_targets: list | None = None) -> dict[str, Any]:
     """Grade an answer by the final viewer state. ``accepted`` lists further action
-    lists that are also right; the answer is scored against the one it matches best."""
+    lists that are also right; the answer is scored against the one it matches best.
+    ``target`` is the task's ``target`` (the atoms the request is about);
+    ``accepted_targets`` gives one per accepted list (``mvs.alternative_target`` says
+    which target an alternative is scored on). The result has the same keys as the MVS
+    grader's (``drawn.RESULT_KEYS``)."""
+    from . import drawn
+    from .mvs import alternative_target
     if not isinstance(predicted, list):
-        return {"precision": 0.0, "recall": 0.0, "f1": 0.0, "success": False,
-                "error": "prediction is not a list", "grader": "state"}
+        return drawn.zero(error="prediction is not a list", grader="state")
     pred = replay(copy.deepcopy(predicted), tables)
     best = None
     for i, ref in enumerate([reference] + list(accepted or [])):
         try:
-            res = compare(replay(copy.deepcopy(ref), tables), pred)
+            ref_state = replay(copy.deepcopy(ref), tables)
+            tgt = alternative_target(
+                i, target, accepted_targets,
+                lambda t, st=ref_state: compare(st, st, t)["target_f1"] == 1.0)
+            res = compare(ref_state, pred, tgt)
         except Exception as e:  # an answer must never be able to crash the grader
-            res = {"precision": 0.0, "recall": 0.0, "f1": 0.0, "success": False,
-                   "error": f"could not compare states ({type(e).__name__}: {e})"}
+            res = drawn.zero(error=f"could not compare states ({type(e).__name__}: {e})")
         res["matched_reference"] = i
         if best is None or (res["success"], res["f1"]) > (best["success"], best["f1"]):
             best = res

@@ -1,22 +1,17 @@
 """
-MolViewSpec (MVS) support — the v0.2 primary grading target.
+MolViewSpec (MVS) support: the MVS track's grader.
 
-Where the imperative IR (``schema.py``) grades a flat list of PDBeMolstar calls,
-MVS grades a **declarative scene tree**: ``root -> download -> parse -> structure
--> component -> representation -> color`` (+ ``focus``, ``label``, ...). The model
-under test emits an MVS state as JSON; we normalise it and compare tree shape +
-parameters against a reference authored with the official ``molviewspec`` builder.
+The model under test emits an MVS scene tree as JSON (``root -> download -> parse ->
+structure -> component -> representation -> color`` ...). ``grade_mvs`` resolves the
+reference and the answer to their **drawn state** - for every atom, the set of
+(representation type, colour, opacity) Mol* 5.9.0 would draw, plus labels, focus,
+primitives and a few other scene facts - and compares the two states. Two scenes that
+draw the same thing score the same however they are written. GRADING.md defines the
+scores (F1, task success, target score); the second half of this file is the code.
 
-Why trees, and why this grader:
-* The *meaning* of a scene is the set of root-to-leaf **paths** — "the polymer is a
-  grey cartoon", "residue A/35 is red ball-and-stick". Comparing the set of paths
-  is naturally order-independent (children can be emitted in any order) and yields
-  graceful partial credit (a path matching 5 of 6 segments is nearly right).
-* ``metadata.timestamp`` is non-deterministic, so we strip metadata before
-  comparing — otherwise no two builds would ever match.
-
-Grading reuses the precision/recall/F1 + greedy-bipartite shape from
-``grader.py`` so scores are comparable in spirit across both tracks.
+The first half is the October 2026 grader, which compared root-to-leaf *paths* of the
+tree (``grade_mvs_paths``). It is kept for comparison with the October numbers, and
+its helpers for primitives and selector signatures are still used.
 """
 
 from __future__ import annotations
@@ -25,7 +20,7 @@ import itertools
 import json
 import re
 from dataclasses import dataclass
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 from .atoms import AtomTable, load_table
 
@@ -242,7 +237,10 @@ def _structure_table(params: dict, source: str | None) -> AtomTable | None:
 def _canon(x: Any) -> Any:
     """A deterministic, comparable form of a path (for grouping identical ones)."""
     if isinstance(x, Selection):
-        return ("sel", tuple(sorted(map(repr, x.sigs))), x.atoms)
+        # hex, not the int itself: the caller takes repr(), and Python refuses to print
+        # an int of more than 4300 digits (a structure of more than about 14,000 atoms)
+        return ("sel", tuple(sorted(map(repr, x.sigs))),
+                (x.atoms[0], hex(x.atoms[1])) if x.atoms else None)
     if isinstance(x, tuple):
         return tuple(_canon(v) for v in x)
     return x
@@ -392,9 +390,12 @@ def _fold_accepted_refs(ref_paths: list[tuple], pred_paths: list[tuple],
     return [tuple(fold(seg) for seg in path) for path in pred_paths]
 
 
-def grade_mvs(reference: Any, predicted: Any,
-              accepted_refs: set[str] | list[str] | None = None) -> dict[str, Any]:
-    """Grade a predicted MVS scene against a reference. Returns precision/recall/f1.
+def grade_mvs_paths(reference: Any, predicted: Any,
+                    accepted_refs: set[str] | list[str] | None = None) -> dict[str, Any]:
+    """The October 2026 grader ("old F1"): greedy matching of root-to-leaf paths.
+
+    Kept only for comparison with the October numbers (``tests/controls/
+    october_regrade.json``); ``grade_mvs`` below, on the drawn state, replaced it.
 
     ``accepted_refs``: other structure ids that count as the reference's (see
     ``_fold_accepted_refs``); used by tasks that name a protein instead of an id.
@@ -519,3 +520,822 @@ def validate_mvs(obj: Any) -> list[str]:
         return []  # library absent: skip deep validation, tree shape already checked
     except Exception as e:  # noqa: BLE001 - surface validation message to the report
         return [f"MVS validation: {e}"]
+
+
+# ==================================================================================
+# The drawn state: what Mol* would show for a scene, and the grader built on it
+# ==================================================================================
+#
+# Everything below resolves a scene tree to its *drawn state* and compares two drawn
+# states. The rules are those of Mol* 5.9.0's MVS extension, read back from the
+# headless viewer (``scripts/grader_controls.py --viewer`` re-checks them):
+#
+# * A representation draws atoms of its component. ``ball_and_stick``, ``line``,
+#   ``spacefill`` and ``surface`` draw every atom. ``cartoon``, ``backbone`` and
+#   ``putty`` draw **polymer residues whose trace atom is in the component** (CA for
+#   a protein residue, O3' for a nucleotide), and nothing else: under a cartoon,
+#   ``all`` and ``polymer`` are the same drawing, and so are a residue and its CA.
+#   ``carbohydrate`` draws the sugar residues of the component and the polymer
+#   residues they are bonded to.
+# * A type that does not apply to its component is silently replaced: a ribbon type
+#   on a component with no polymer atoms (a ligand, an ion, water) is drawn as
+#   ball-and-stick; ``carbohydrate`` in a structure with no sugars is drawn as a
+#   cartoon (or ball-and-stick). A component that selects nothing draws nothing.
+# * Colour: a representation with no ``color`` child is white. ``color`` children
+#   apply in order, each to its ``selector`` (default: everything), later ones over
+#   earlier ones. A ribbon residue takes the colour of its trace atom. A ``color``
+#   whose ``custom.molstar_color_theme_name`` is set applies that Mol* colour theme
+#   instead of the colour (to its selector).
+# * ``opacity`` (child of a representation) sets the opacity of the whole
+#   representation; the default is 1.
+# * Two representations on overlapping components are both drawn: an atom can carry
+#   several draws.
+# * ``focus`` nodes: the camera frames the union of the components that carry one.
+# * ``color`` names are Mol*'s lower-case names; ``#rrggbb`` and ``#rgb`` in either
+#   case. Anything else makes Mol* reject the whole scene.
+
+from . import drawn as _drawn  # noqa: E402
+from .drawn import (class_score, color_eq, empty_like, jaccard, minus, mvs_color,  # noqa: E402
+                    partition, size)
+
+RIBBON_TYPES = ("cartoon", "backbone", "putty")
+ATOMIC_TYPES = ("ball_and_stick", "line", "spacefill", "surface")
+REPRESENTATION_TYPES = RIBBON_TYPES + ATOMIC_TYPES + ("carbohydrate",)
+#: Colour themes that colour by a category the atom table holds. A reference that uses
+#: one is matched by an answer that gives every group its own single colour.
+PARTITION_THEMES = {"chain-id": "auth_asym_id", "entity-id": "label_entity_id"}
+DEFAULT_BACKGROUND = (255, 255, 255)
+
+# node kinds that are scaffolding or handled explicitly; anything else is a generic fact
+_IGNORED_KINDS = {"camera"}          # explicit camera numbers are not graded
+
+
+def entry_of_url(url: Any) -> str | None:
+    """The structure a download URL names, written one way: a lower-case PDB id, or
+    ``af-<accession>-f<n>`` for an AlphaFold DB file of any model version. The host and
+    the file variant (``1cbs``, ``1cbs_updated``, ``pdb1cbs``, ``.cif``/``.bcif``) do not
+    matter."""
+    if not isinstance(url, str) or not url.strip():
+        return None
+    name = url.strip().lower().split("?")[0].split("#")[0].rsplit("/", 1)[-1]
+    ident = name.split(".")[0]
+    m = re.fullmatch(r"(af-[a-z0-9]+-f\d+)(-model_v\d+)?", ident)
+    if m:
+        return m.group(1)
+    ident = re.sub(r"[_-](updated|full|bcif|cif|assembly\d*|model\d*)$", "", ident)
+    m = re.fullmatch(r"pdb([0-9][a-z0-9]{3})", ident)
+    return m.group(1) if m else ident or None
+
+
+def _entry_table(entry: str | None) -> AtomTable | None:
+    if not entry or not re.fullmatch(r"[a-z0-9_-]+", entry):
+        return None
+    from .pdbe_state import _table_for
+    return _table_for(entry, load_table)
+
+
+def _table_extras(table: AtomTable) -> dict[str, Any]:
+    """Per-table masks the drawing rules need (cached on the table)."""
+    ex = getattr(table, "_drawn_extras", None)
+    if ex is None:
+        poly = table.static.get("polymer", 0)
+        nucleic = table.static.get("nucleic", 0)
+        names = table.index("label_atom_id")
+        residues = list(table.index("residue_index").values())
+        # The trace atom of a polymer residue: CA of an amino acid, O3' of a nucleotide.
+        # A modified residue with no atom of that name falls back to CA1 (the GFP
+        # chromophore CRO in 1EMA; checked in the viewer), then BB.
+        trace = 0
+        for rm in residues:
+            if not rm & poly:
+                continue
+            options = (("O3'", "O3*") if rm & nucleic else ("CA", "CA1", "BB"))
+            for name in options:
+                hit = rm & names.get(name, 0)
+                if hit:
+                    trace |= hit
+                    break
+        branched = table.static.get("branched", 0)
+        elements = table.index("type_symbol")
+        ex = {"polymer": poly, "trace": trace, "sugar": branched & ~poly,
+              "linked": branched & poly,
+              "hydrogen": elements.get("H", 0) | elements.get("D", 0),
+              "residues": residues,
+              "all": (1 << table.n) - 1}
+        table._drawn_extras = ex
+    return ex
+
+
+def _grow(table: AtomTable, mask: int) -> int:
+    """The mask grown to whole residues."""
+    if not mask:
+        return 0
+    out = 0
+    for rm in _table_extras(table)["residues"]:
+        if rm & mask:
+            out |= rm
+    return out
+
+
+def _opacity(v: Any) -> Any:
+    try:
+        return round(float(v), 3)
+    except (TypeError, ValueError):
+        return ("invalid", str(v))
+
+
+class DrawnStructure:
+    """What is drawn of one structure (entry). Atom sets are bitmasks over ``table``
+    rows, or frozensets of selector descriptions when ``table`` is None."""
+
+    def __init__(self, entry: str, table: AtomTable | None):
+        self.entry = entry
+        self.table = table
+        self.draws: dict[tuple, Any] = {}        # (type, colour, opacity) -> atoms
+        self.kinds: set[tuple] = set()           # non-default structure types that draw
+        self.labels: dict[str, Any] = {}         # text -> atoms
+        self.tooltips: dict[str, Any] = {}
+        self.focus: Any = None                   # union of the focused components
+        self.interactions: dict[Any, Any] = {}   # radius -> atoms
+        self.other: list[tuple] = []             # nodes with no special handling
+        self._classes: list | None = None
+
+    @property
+    def none(self) -> Any:
+        return 0 if self.table is not None else frozenset()
+
+    def add(self, store: dict, key: Any, atoms: Any) -> None:
+        if size(atoms):
+            store[key] = store[key] | atoms if key in store else atoms
+            self._classes = None
+
+    def classes(self) -> list[tuple[Any, tuple]]:
+        if self._classes is None:
+            self._classes = partition(self.draws)
+        return self._classes
+
+    def drawn_atoms(self) -> Any:
+        out = self.none
+        for m in self.draws.values():
+            out = out | m
+        return out
+
+    def residues(self, atoms: Any) -> Any:
+        return _grow(self.table, atoms) if self.table is not None else atoms
+
+
+class DrawnScene:
+    def __init__(self) -> None:
+        self.structures: dict[str, DrawnStructure] = {}
+        self.primitives: list[tuple] = []        # (entry, primitive signature)
+        self.background: Any = None
+        self.other: list[tuple] = []
+        self.unresolved: set[str] = set()        # entries with a selector no table can answer
+        self.downloads: set[str] = set()         # entries loaded, drawn or not
+        self.notes: list[str] = []
+
+    def draws_anything(self) -> bool:
+        return any(st.draws for st in self.structures.values())
+
+    def entries(self) -> set[str]:
+        return set(self.structures) | self.downloads
+
+    def shown(self) -> set[str]:
+        """The entries the scene shows something of. A file that is downloaded and
+        never drawn, labelled or focused changes nothing on screen, so it is not part
+        of the drawn state. A scene that shows nothing counts every entry it loads."""
+        out = {e for e, st in self.structures.items()
+               if st.draws or st.labels or st.tooltips or st.interactions or st.other
+               or st.focus is not None}
+        out |= {e for e, _ in self.primitives if e}
+        return out or self.entries()
+
+
+def _structure_kind(params: dict) -> tuple:
+    """The structure node's type, as a comparable fact (``("model", 0)`` is the default)."""
+    t = params.get("type", "model")
+    mi = params.get("model_index") or 0
+    if t == "model":
+        return ("model", mi)
+    if t == "assembly":
+        asm = params.get("assembly_id")
+        return ("assembly", str(asm) if asm is not None else "1", mi)
+    rest = tuple(sorted((k, json.dumps(v, sort_keys=True)) for k, v in params.items()
+                        if k not in ("type", "model_index", "block_header", "block_index")))
+    return (str(t), mi) + rest
+
+
+def _freeze_params(v: Any) -> Any:
+    if isinstance(v, dict):
+        return tuple(sorted((str(k), _freeze_params(x)) for k, x in v.items() if x is not None))
+    if isinstance(v, list):
+        return tuple(_freeze_params(x) for x in v)
+    if isinstance(v, float) and v.is_integer():
+        return int(v)
+    return v
+
+
+def _symbolic(selector: Any) -> frozenset:
+    """A selector as its own description (used when no atom table can resolve it)."""
+    if isinstance(selector, str):
+        return frozenset([f"static:{selector}"])
+    return frozenset(str(_selector_signature(e)) for e in
+                     (selector if isinstance(selector, list) else [selector]))
+
+
+def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
+                  rename: dict[str, str] | None = None) -> DrawnScene | None:
+    """Resolve a scene tree to its drawn state, or None if it is not a scene tree.
+
+    ``symbolic``: entries to resolve without their atom table (both sides of a
+    comparison must be resolved the same way). ``rename``: entry id -> the entry to
+    resolve it on instead (a reference re-pointed at another accepted structure).
+    """
+    root = extract_root(tree)
+    if root is None:
+        return None
+    scene = DrawnScene()
+    rename = rename or {}
+
+    def kids(node: dict) -> list[dict]:
+        c = node.get("children")
+        return [x for x in c if isinstance(x, dict)] if isinstance(c, list) else []
+
+    def params_of(node: dict) -> dict:
+        p = node.get("params")
+        return p if isinstance(p, dict) else {}
+
+    def custom_of(node: dict) -> dict:
+        c = node.get("custom")
+        return c if isinstance(c, dict) else {}
+
+    def structure_for(entry: str | None, usable: bool) -> DrawnStructure:
+        entry = rename.get(entry, entry) if entry else "?"
+        st = scene.structures.get(entry)
+        if st is None:
+            table = None if (entry in symbolic or not usable) else _entry_table(entry)
+            if table is None:
+                scene.unresolved.add(entry)
+            st = scene.structures[entry] = DrawnStructure(entry, table)
+        return st
+
+    def select(st: DrawnStructure, selector: Any) -> Any:
+        if st.table is None:
+            return _symbolic(selector)
+        m = st.table.selector(selector)
+        if m is None:                    # instance_id / operator_name: not answerable
+            scene.unresolved.add(st.entry)
+            return 0
+        return m
+
+    def walk(node: dict, entry: str | None, usable: bool) -> None:
+        kind = node.get("kind")
+        p = params_of(node)
+        if kind == "download":
+            entry = entry_of_url(p.get("url"))
+            if entry:
+                scene.downloads.add(rename.get(entry, entry))
+            name = str(p.get("url", "")).lower().split("?")[0].rsplit("/", 1)[-1]
+            usable = not ("." in name and not re.search(r"\.(cif|mmcif|bcif)(\.gz)?$", name))
+        elif kind == "parse":
+            if p.get("format") not in (None, "mmcif", "bcif"):
+                usable = False           # e.g. PDB format: Mol* derives label_* differently
+        elif kind == "structure":
+            structure(node, structure_for(entry, usable))
+            return
+        elif kind == "canvas":
+            if "background_color" in p:
+                scene.background = mvs_color(p["background_color"])
+        elif kind == "primitives":
+            primitives(node, None)
+            return
+        elif kind not in ("root", None) and kind not in _IGNORED_KINDS:
+            scene.other.append((kind, _freeze_params(p)))
+        for c in kids(node):
+            walk(c, entry, usable)
+
+    def primitives(node: dict, st: DrawnStructure | None) -> None:
+        for c in kids(node):
+            if c.get("kind") == "primitive":
+                sig = _param_signature("primitive", params_of(c), None,
+                                       st.table if st is not None else None)
+                scene.primitives.append((st.entry if st is not None else None, sig))
+            else:
+                scene.other.append((c.get("kind"), _freeze_params(params_of(c))))
+
+    def structure(node: dict, st: DrawnStructure) -> None:
+        kind = _structure_kind(params_of(node))
+        used = False
+        for c in kids(node):
+            ck = c.get("kind")
+            if ck == "component":
+                component(c, st)
+                used = True
+            elif ck == "primitives":
+                primitives(c, st)
+                used = True
+            elif ck not in _IGNORED_KINDS:
+                st.other.append((ck, _freeze_params(params_of(c))))
+                used = True
+        if used and kind != ("model", 0):
+            st.kinds.add(kind)
+
+    def component(node: dict, st: DrawnStructure) -> None:
+        p = params_of(node)
+        atoms = select(st, p.get("selector", "all"))
+        flag = _interactions_flag(custom_of(node))
+        if flag:
+            st.add(st.interactions, flag[1], atoms)
+        for c in kids(node):
+            ck = c.get("kind")
+            cp = params_of(c)
+            if ck == "representation":
+                representation(c, st, atoms)
+            elif ck == "label":
+                st.add(st.labels, " ".join(str(cp.get("text", "")).split()).casefold(), atoms)
+            elif ck == "tooltip":
+                st.add(st.tooltips, " ".join(str(cp.get("text", "")).split()).casefold(), atoms)
+            elif ck == "focus":
+                if size(atoms):
+                    st.focus = atoms if st.focus is None else st.focus | atoms
+            elif ck not in _IGNORED_KINDS:
+                st.other.append((ck, _freeze_params(cp), _canon_atoms(atoms)))
+
+    def representation(node: dict, st: DrawnStructure, atoms: Any) -> None:
+        p = params_of(node)
+        rtype = p.get("type")
+        layers: list[tuple[Any, Any]] = []       # (selector or None, colour token)
+        opacity: Any = 1.0
+        for c in kids(node):
+            ck, cp, cc = c.get("kind"), params_of(c), custom_of(c)
+            if ck == "color":
+                if cc.get("molstar_color_theme_name"):
+                    token: Any = ("theme", str(cc["molstar_color_theme_name"]))
+                elif cc.get("molstar_use_default_coloring"):
+                    token = ("theme", "default")
+                else:
+                    token = mvs_color(cp.get("color"))
+                layers.append((cp.get("selector"), token))
+            elif ck in ("color_from_uri", "color_from_source"):
+                layers.append((None, ("annotation", ck, _freeze_params(cp))))
+            elif ck == "opacity":
+                opacity = _opacity(cp.get("opacity", 1.0))
+            elif ck not in _IGNORED_KINDS:
+                st.other.append((ck, _freeze_params(cp), _canon_atoms(atoms)))
+        if not size(atoms):
+            return
+        if st.table is None:
+            if not isinstance(rtype, str):
+                rtype = f"invalid:{rtype!r}"
+            if any(sel is not None and sel != "all" for sel, _ in layers):
+                colour: Any = ("layers", tuple((_canon_atoms(_symbolic(sel)) if sel is not None
+                                                else "all", tok) for sel, tok in layers))
+            else:
+                colour = layers[-1][1] if layers else _drawn.WHITE
+            st.add(st.draws, (rtype, colour, opacity), atoms)
+            return
+        t = st.table
+        ex = _table_extras(t)
+        actual, level, drawn_atoms = _what_is_drawn(t, rtype, atoms)
+        if p.get("ignore_hydrogens") and level == "atom":
+            drawn_atoms &= ~ex["hydrogen"]
+        if not drawn_atoms:
+            return
+        # the unit a colour is decided on: the atom itself, or the residue's trace atom
+        if level == "trace":
+            units = drawn_atoms & ex["trace"] & atoms
+        elif level == "residue":
+            units = drawn_atoms
+        else:
+            units = drawn_atoms
+        left = units
+        regions: list[tuple[int, Any]] = []
+        for sel, token in reversed(layers):      # the last layer covering a unit wins
+            covered = ex["all"] if sel is None else (select(st, sel) or 0)
+            if level == "residue":
+                covered = _grow(t, covered)
+            hit = left & covered
+            if hit:
+                regions.append((hit, token))
+                left &= ~hit
+        if left:
+            regions.append((left, _drawn.WHITE))
+        for mask, token in regions:
+            if level == "trace":
+                mask = _grow(t, mask) & drawn_atoms
+            st.add(st.draws, (actual, token, opacity), mask)
+
+    walk(root, None, True)
+    return scene
+
+
+def _canon_atoms(atoms: Any) -> Any:
+    return atoms if isinstance(atoms, int) else tuple(sorted(atoms))
+
+
+def _what_is_drawn(table: AtomTable, rtype: Any, atoms: int) -> tuple[str, str, int]:
+    """(type really drawn, colour level, atoms drawn) for a representation type on a
+    component, following Mol* 5.9.0 (see the notes at the top of this section)."""
+    ex = _table_extras(table)
+    if not isinstance(rtype, str) or rtype not in REPRESENTATION_TYPES:
+        return (f"invalid:{rtype!r}", "atom", atoms)   # Mol* rejects the scene
+    if rtype == "carbohydrate":
+        if not ex["sugar"]:                      # no sugars in the model: not applicable
+            rtype = "cartoon"
+        else:
+            sugars = atoms & ex["sugar"]
+            if not sugars:
+                return ("carbohydrate", "residue", 0)
+            return ("carbohydrate", "residue",
+                    _grow(table, sugars) | _grow(table, atoms & ex["linked"]))
+    if rtype in RIBBON_TYPES:
+        if not atoms & ex["polymer"]:            # not applicable: Mol* falls back
+            return ("ball_and_stick", "atom", atoms)
+        return (rtype, "trace", _grow(table, atoms & ex["trace"]) & ex["polymer"])
+    return (rtype, "atom", atoms)
+
+
+# --- comparing two drawn states ---------------------------------------------------
+
+def _reconcile_themes(ref: DrawnStructure, pred: DrawnStructure) -> dict[tuple, Any]:
+    """The answer's draws, with explicit per-group colours rewritten to a categorical
+    theme where the reference used that theme.
+
+    A theme has no fixed colours, so "colour by chain" (the reference's ``chain-id``
+    theme) is matched by an answer that gives every chain one colour of its own. Only
+    this direction: explicit colours in the reference are matched by those colours.
+    """
+    draws = dict(pred.draws)
+    if ref.table is None or pred.table is None:
+        return draws
+    t = ref.table
+    for (rtype, colour, opacity), mask in ref.draws.items():
+        if not (isinstance(colour, tuple) and len(colour) == 2 and colour[0] == "theme"
+                and colour[1] in PARTITION_THEMES):
+            continue
+        groups = [gm & mask for gm in t.index(PARTITION_THEMES[colour[1]]).values() if gm & mask]
+        if len(groups) < 2:
+            # one chain (entity): "one colour per chain" would be any single colour, even
+            # the white of an uncoloured answer. Only the theme itself matches.
+            continue
+        chosen: list[tuple[tuple, int]] = []
+        ok = True
+        for g in groups:
+            hits = [(d, m & g) for d, m in draws.items()
+                    if d[0] == rtype and m & g and _drawn._is_rgb(d[1])
+                    and _drawn.draw_eq((rtype, d[1], opacity), d)]
+            if len(hits) != 1 or hits[0][1] != g:
+                ok = False
+                break
+            chosen.append((hits[0][0], g))
+        if not ok:
+            continue
+        cols = [d[1] for d, _ in chosen]
+        if any(color_eq(a, b) for i, a in enumerate(cols) for b in cols[i + 1:]):
+            continue                              # two groups share a colour: not "by chain"
+        for d, g in chosen:
+            draws[d] = draws[d] & ~g
+            key = (rtype, colour, opacity)
+            draws[key] = draws.get(key, 0) | g
+        draws = {d: m for d, m in draws.items() if m}
+    return draws
+
+
+def _share(mine: Any, theirs: Any) -> float:
+    n = size(mine)
+    return size(mine & theirs) / n if n else 0.0
+
+
+def _focus_score(st: DrawnStructure, other: DrawnStructure | None) -> float:
+    """Overlap of two focus targets, as whole residues. A scene with no focus node
+    frames everything it draws, so (unless every focus is graded) that is its target."""
+    if other is None:
+        return 0.0
+    theirs = other.focus
+    if theirs is None:
+        if _drawn.GRADE_UNREQUESTED_FOCUS:
+            return 0.0
+        theirs = other.drawn_atoms()         # the default camera frames what is drawn
+    return jaccard(st.residues(st.focus), other.residues(theirs))
+
+
+def _side(mine: DrawnScene, theirs: DrawnScene, their_classes: dict[str, list],
+          my_classes: dict[str, list], is_reference: bool) -> tuple[float, float, list]:
+    """Total credit, number of facts, and the trace, for one direction of a comparison.
+    ``is_reference``: ``mine`` is the reference (a focus the reference lacks is not a
+    fact of the answer; see ``drawn.GRADE_UNREQUESTED_FOCUS``)."""
+    got = total = 0.0
+    trace: list[dict] = []
+
+    def fact(name: str, score: float, **more: Any) -> None:
+        nonlocal got, total
+        total += 1
+        got += score
+        trace.append({"fact": name, **more, "score": round(score, 3)})
+
+    for entry, st in mine.structures.items():
+        other = theirs.structures.get(entry)
+        for mask, look in my_classes[entry]:
+            fact("display", class_score(mask, look, their_classes.get(entry, [])),
+                 value=_drawn.show_look(look), atoms=size(mask), structure=entry)
+        for kind in sorted(st.kinds, key=repr):
+            fact("structure", float(other is not None and kind in other.kinds),
+                 value=_drawn.show(kind), structure=entry)
+        for name, store in (("label", "labels"), ("tooltip", "tooltips"),
+                            ("interactions", "interactions")):
+            for key, atoms in getattr(st, store).items():
+                theirs_atoms = getattr(other, store).get(key) if other is not None else None
+                fact(name, _share(atoms, theirs_atoms) if theirs_atoms is not None else 0.0,
+                     value=key, atoms=size(atoms), structure=entry)
+        if st.focus is not None and (is_reference or _drawn.GRADE_UNREQUESTED_FOCUS
+                                     or (other is not None and other.focus is not None)):
+            fact("focus", _focus_score(st, other), atoms=size(st.focus), structure=entry)
+        left = list(other.other) if other is not None else []
+        for item in st.other:
+            hit = item in left
+            if hit:
+                left.remove(item)
+            fact(f"node:{item[0]}", float(hit), structure=entry)
+    left_p = list(theirs.primitives)
+    for entry, sig in mine.primitives:
+        hit = next((x for x in left_p if x[0] == entry and _primitives_match(sig, x[1])), None)
+        if hit is not None:
+            left_p.remove(hit)
+        fact("primitive", float(hit is not None), value=sig[1], structure=entry)
+    if mine.background is not None and not color_eq(mine.background, DEFAULT_BACKGROUND):
+        theirs_bg = theirs.background if theirs.background is not None else DEFAULT_BACKGROUND
+        fact("canvas:background", float(color_eq(mine.background, theirs_bg)))
+    left_o = list(theirs.other)
+    for item in mine.other:
+        hit = item in left_o
+        if hit:
+            left_o.remove(item)
+        fact(f"node:{item[0]}", float(hit))
+    return got, total, trace
+
+
+def _target_atoms(target: Any, st: DrawnStructure) -> Any:
+    """The atoms a task's ``target`` names on one structure (see GRADING.md)."""
+    if not isinstance(target, dict):
+        return None
+    if target.get("entry") and str(target["entry"]).lower() != st.entry:
+        return st.none
+    out = st.none
+    if "selector" in target:
+        out = out | (st.table.selector(target["selector"]) or 0 if st.table is not None
+                     else _symbolic(target["selector"]))
+    if "data" in target and st.table is not None:
+        from .pdbe_state import resolve_param
+        for prm in target["data"] if isinstance(target["data"], list) else []:
+            if isinstance(prm, dict):
+                try:
+                    out |= resolve_param(st.table, prm, st.entry)
+                except NotImplementedError:
+                    pass
+    return out
+
+
+def compare_scenes(ref: DrawnScene, pred: DrawnScene, target: Any = None) -> dict[str, Any]:
+    """Precision, recall, F1, success and the target score of ``pred`` against ``ref``."""
+    structure = [sorted(ref.shown()), sorted(pred.shown())]
+    shared = ref.entries() & pred.entries()
+    base = {"same_structure": bool(ref.shown()) and ref.shown() == pred.shown(),
+            "structure": structure}
+    if not shared:
+        return _drawn.zero(**base, note="the answer loads none of the reference's structures")
+    if ref.draws_anything() and not pred.draws_anything():
+        return _drawn.zero(**base, note="the answer draws nothing")
+
+    ref_classes = {e: st.classes() for e, st in ref.structures.items()}
+    pred_draws = {e: (_reconcile_themes(ref.structures[e], st) if e in ref.structures
+                      else st.draws) for e, st in pred.structures.items()}
+    pred_classes = {e: partition(d) for e, d in pred_draws.items()}
+
+    r_got, r_total, r_trace = _side(ref, pred, pred_classes, ref_classes, True)
+    p_got, p_total, p_trace = _side(pred, ref, ref_classes, pred_classes, False)
+    if not r_total and not p_total:
+        precision = recall = 1.0             # nothing was asked for and nothing given
+    else:
+        recall = r_got / r_total if r_total else 0.0
+        precision = p_got / p_total if p_total else 0.0
+    f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+    success = bool(base["same_structure"] and precision > 1 - 1e-9 and recall > 1 - 1e-9)
+
+    # the target score
+    parts: list[dict] = []
+    for entry, st in ref.structures.items():
+        other = pred.structures.get(entry)
+        t_atoms = _target_atoms(target, st)
+        whole = t_atoms is None
+        if whole:
+            t_atoms = st.drawn_atoms()
+        parts += _drawn.target_display(st.draws, pred_draws.get(entry, {}), t_atoms)
+        wanted = set(target.get("facts") or []) if isinstance(target, dict) else set()
+        for name, store in (("label", "labels"), ("tooltip", "tooltips"),
+                            ("interactions", "interactions")):
+            for key, atoms in getattr(st, store).items():
+                if whole or size(atoms & t_atoms) or name in wanted:
+                    theirs = getattr(other, store).get(key) if other is not None else None
+                    sc = jaccard(atoms, theirs) if theirs is not None else 0.0
+                    parts.append({"fact": name, "value": key, "recall": sc, "precision": sc})
+        if st.focus is not None and (whole or size(st.focus & t_atoms) or "focus" in wanted):
+            sc = _focus_score(st, other)
+            parts.append({"fact": "focus", "recall": sc, "precision": sc})
+    wanted = set(target.get("facts") or []) if isinstance(target, dict) else None
+    for row in r_trace:                      # facts that are not about atoms of a class
+        name = row["fact"]
+        if name in ("display", "label", "tooltip", "interactions", "focus"):
+            continue
+        if wanted is None or name in wanted or name.split(":")[0] in wanted:
+            parts.append({"fact": name, "recall": row["score"], "precision": row["score"]})
+
+    tgt = _drawn.target_summary(parts)
+    if not parts and not r_total and not p_total:
+        tgt.update(target_precision=1.0, target_recall=1.0, target_f1=1.0)
+    return {"precision": round(precision, 4), "recall": round(recall, 4), "f1": round(f1, 4),
+            "success": success, **tgt, **base,
+            "n_ref": len(r_trace), "n_pred": len(p_trace),
+            "reference_facts": r_trace, "predicted_facts": p_trace}
+
+
+def _grade_one(reference: Any, predicted: Any, accepted_refs: Iterable[str] | None,
+               target: Any) -> dict[str, Any]:
+    ref_root = extract_root(reference)
+    if ref_root is None:
+        return _drawn.zero(error="bad reference tree")
+    symbolic: set[str] = set()
+    rename: dict[str, str] = {}
+    ref = pred = None
+    for _ in range(3):                       # settle which entries have to be symbolic
+        pred = resolve_scene(predicted, symbolic)
+        ref = resolve_scene(reference, symbolic, rename)
+        if accepted_refs and not rename and len(ref.entries()) == 1:
+            ok = {a.lower() for a in accepted_refs}
+            (canonical,) = ref.entries()
+            other = sorted(e for e in pred.entries() if e in ok and e != canonical)
+            if other and canonical not in pred.entries():
+                # a prompt that names a protein has many right entries: grade the
+                # reference's drawing on the accepted entry the answer loaded
+                rename = {canonical: other[0]}
+                continue
+        need = (ref.unresolved | pred.unresolved) & (ref.entries() | pred.entries())
+        if need <= symbolic:
+            break
+        symbolic |= need
+    out = compare_scenes(ref, pred, target)
+    if rename:
+        out["accepted_structure"] = next(iter(rename.values()))
+    return out
+
+
+def alternative_target(i: int, target: Any, accepted_targets: list | None,
+                       scores_one: Callable[[Any], bool]) -> Any:
+    """The target to use against reference number ``i`` (0 = the reference, 1.. = the
+    ``accepted`` alternatives). An alternative may be about other atoms than the
+    reference (an ambiguous request with several right residues), so the task's
+    ``target`` cannot be assumed to fit it:
+
+    * ``accepted_targets[i - 1]``, when the task gives one, is used;
+    * otherwise the task's ``target``, if the alternative scores 1 on it against itself
+      (``scores_one(target)``): it is about the same atoms;
+    * otherwise the whole alternative (no target).
+
+    So an answer that is exactly an accepted alternative always has target score 1.
+    Shared by both tracks."""
+    if i == 0:
+        return target
+    if isinstance(accepted_targets, list) and i - 1 < len(accepted_targets) \
+            and accepted_targets[i - 1] is not None:
+        return accepted_targets[i - 1]
+    if target is None:
+        return None
+    try:
+        return target if scores_one(target) else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def grade_mvs(reference: Any, predicted: Any,
+              accepted_refs: set[str] | list[str] | None = None,
+              accepted: list | None = None, target: Any = None,
+              accepted_targets: list | None = None) -> dict[str, Any]:
+    """Grade a predicted MVS scene against a reference **by what Mol* would draw**.
+
+    Returns ``precision``/``recall``/``f1`` over the facts of the drawn state,
+    ``success`` (every fact right and nothing extra), the target score
+    (``target_f1``; see ``drawn.target_display``), and a per-fact trace. GRADING.md
+    defines every number.
+
+    ``accepted_refs``: other structure ids that count as the reference's (tasks that
+    name a protein instead of an id). ``accepted``: further scenes that are equally
+    right; the answer is scored against the one it matches best. ``target``: the
+    task's ``target`` (the atoms the request is about); without it the target is
+    everything the reference draws. ``accepted_targets``: a target per accepted scene
+    (see ``alternative_target``).
+    """
+    if extract_root(predicted) is None:
+        return _drawn.zero(error="prediction is not an MVS state tree", grader="drawn")
+    best: dict[str, Any] | None = None
+    for i, ref in enumerate([reference] + list(accepted or [])):
+        try:
+            tgt = alternative_target(
+                i, target, accepted_targets,
+                lambda t, ref=ref: _grade_one(ref, ref, None, t)["target_f1"] == 1.0)
+            res = _grade_one(ref, predicted, accepted_refs, tgt)
+        except Exception as e:  # noqa: BLE001 - an answer must never crash the grader
+            res = _drawn.zero(error=f"could not compare scenes ({type(e).__name__}: {e})")
+        res["matched_reference"] = i
+        if best is None or (res["success"], res["f1"]) > (best["success"], best["f1"]):
+            best = res
+    best["grader"] = "drawn"
+    return best
+
+
+def grade_mvs_task(task: dict[str, Any], predicted: Any) -> dict[str, Any]:
+    """Grade an answer against an MVS task: ``reference_mvs``, plus ``accepted`` scenes,
+    ``accepted_ids`` and ``target`` when the task has them. ``outcome`` is ``not_mvs``
+    for something that is not a scene tree, else ``unchecked`` (Mol*'s own validation,
+    ``render.molstar_issues``, turns that into ``valid`` or ``invalid_mvs``)."""
+    res = grade_mvs(task["reference_mvs"], predicted, accepted_refs=task.get("accepted_ids"),
+                    accepted=task.get("accepted"), target=task.get("target"),
+                    accepted_targets=task.get("accepted_targets"))
+    res["outcome"] = "not_mvs" if extract_root(predicted) is None else "unchecked"
+    return res
+
+
+def check_mvs_task(task: dict[str, Any]) -> list[str]:
+    """Problems that would make an MVS task ungradable (empty list = fine): the
+    reference, every accepted scene and the follow-up ``context`` must resolve on a
+    frozen atom table, the reference must draw something or state a fact, it must
+    succeed against itself, and a ``target`` must name atoms the reference draws."""
+    problems: list[str] = []
+    scenes = [("reference_mvs", task.get("reference_mvs"))]
+    scenes += [(f"accepted[{i}]", s) for i, s in enumerate(task.get("accepted") or [])]
+    if "context" in task:
+        scenes.append(("context", task["context"]))
+    for name, tree in scenes:
+        scene = resolve_scene(tree)
+        if scene is None:
+            problems.append(f"{name}: not an MVS scene tree")
+            continue
+        if not scene.structures:
+            problems.append(f"{name}: loads no structure")
+        if name == "reference_mvs" and isinstance(task.get("target"), dict):
+            if not any(size(_target_atoms(task["target"], st) or st.none)
+                       for st in scene.structures.values()):
+                problems.append("target: selects no atoms of the reference's structure")
+        for entry, st in scene.structures.items():
+            if st.table is None:
+                problems.append(f"{name}: no frozen atom table for {entry!r}")
+        if scene.unresolved - {e for e, st in scene.structures.items() if st.table is None}:
+            problems.append(f"{name}: a selector cannot be resolved on the atom table")
+        if name != "context" and not scene.draws_anything() and not scene.primitives:
+            problems.append(f"{name}: draws nothing")
+        if name != "context":
+            for bad in _empty_components(tree):
+                problems.append(f"{name}: selector selects no atoms: {bad}")
+            tgt = task.get("target")
+            if name != "reference_mvs":
+                i = int(name[len("accepted["):-1])
+                given = task.get("accepted_targets")
+                tgt = given[i] if isinstance(given, list) and i < len(given) else None
+            g = grade_mvs(tree, tree, target=tgt)
+            if not g["success"]:
+                problems.append(f"{name}: does not succeed against itself")
+            if tgt is not None and g["target_f1"] != 1.0:
+                what = "target" if name == "reference_mvs" else f"accepted_targets[{i}]"
+                problems.append(f"{what}: the {'reference' if name == 'reference_mvs' else 'scene'} "
+                                "does not score 1 on its own target "
+                                "(does the target name atoms the reference draws?)")
+            for entry, st in scene.structures.items():
+                if st.table is None:
+                    continue
+                for (_, colour, _), mask in st.draws.items():
+                    if isinstance(colour, tuple) and len(colour) == 2 and colour[0] == "theme" \
+                            and colour[1] in PARTITION_THEMES:
+                        column = PARTITION_THEMES[colour[1]]
+                        if sum(1 for gm in st.table.index(column).values() if gm & mask) < 2:
+                            problems.append(f"{name}: the {colour[1]} colour theme is on a single "
+                                            f"group ({column}); only the theme itself can match it")
+    return problems
+
+
+def _empty_components(tree: Any) -> list[str]:
+    out: list[str] = []
+
+    def walk(node: dict, entry: str | None) -> None:
+        p = node.get("params") if isinstance(node.get("params"), dict) else {}
+        if node.get("kind") == "download":
+            entry = entry_of_url(p.get("url"))
+        if node.get("kind") in ("component", "color") and "selector" in p:
+            table = _entry_table(entry)
+            if table is not None and table.selector(p["selector"]) == 0:
+                out.append(json.dumps(p["selector"], sort_keys=True))
+        for c in node.get("children") or []:
+            if isinstance(c, dict):
+                walk(c, entry)
+
+    root = extract_root(tree)
+    if root is not None:
+        walk(root, None)
+    return out

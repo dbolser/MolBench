@@ -66,8 +66,10 @@ def test_every_cys_equals_the_enumerated_cysteines():
     for a in (by_name, as_list, one_each):
         for b in (by_name, as_list, one_each):
             assert _f1(a, b) == 1.0
-    # Merged into one component, and the polymer cartoon stays one path.
-    assert mvs.grade_mvs(by_name, one_each)["n_pred_paths"] == 2
+    # However they are written, they are the same two classes of atoms: the cysteines
+    # (cartoon + ball-and-stick) and the rest of the polymer (cartoon only).
+    g = mvs.grade_mvs(by_name, one_each)
+    assert g["success"] and g["n_ref"] == g["n_pred"] == 2
 
 
 def test_missing_one_cysteine_is_partial_credit():
@@ -134,11 +136,19 @@ def test_empty_selection_scores_zero():
     nothing = _with_selector(ref, [{"auth_asym_id": "A", "auth_seq_id": 999}])
     wrong = _with_selector(ref, [{"auth_asym_id": "A", "auth_seq_id": 175}])
     assert mvs._selection_similarity(_selections(ref)[1], _selections(nothing)[1]) == 0.0
-    assert _f1(ref, nothing) == _f1(ref, wrong)
+    # On the drawn state an empty selection is a missing drawing (the cartoon is still
+    # right) and a wrong residue is a missing and an extra one; neither is a success,
+    # and on the target (the residue) both score 0.
+    target = {"selector": {"auth_asym_id": "A", "auth_seq_id": 281}}
+    for pred in (nothing, wrong):
+        g = mvs.grade_mvs(ref, pred, target=target)
+        assert 0 < g["f1"] < 1 and not g["success"] and g["target_f1"] == 0.0
+    assert mvs.grade_mvs(ref, ref, target=target)["target_f1"] == 1.0
+    assert _f1(ref, wrong) < _f1(ref, nothing)
     # Lower-case names and string numbers match nothing in Mol* either.
     for bad in ({"auth_asym_id": "A", "auth_seq_id": "281"},
                 {"auth_asym_id": "A", "auth_seq_id": 281, "label_comp_id": "asp"}):
-        assert _f1(ref, _with_selector(ref, [bad])) == _f1(ref, wrong), bad
+        assert _f1(ref, _with_selector(ref, [bad])) == _f1(ref, nothing), bad
 
 
 # --- primitive endpoints --------------------------------------------------------------
@@ -171,9 +181,13 @@ def test_unknown_structure_falls_back_to_signatures():
     # No table: the old tolerance (auth and label on one axis) still applies...
     assert _f1(_scene("9zzz", auth), _scene("9zzz", label)) == 1.0
     assert _selections(_scene("9zzz", auth))[0].atoms is None
-    # ...and so it does for an assembly of a known structure (tables hold model 1).
+    # An assembly of a known structure is resolved on the table (the atoms of the
+    # asymmetric unit), so there the two namings are different atoms too.
     assembly = {"type": "assembly", "assembly_id": "1"}
-    assert _f1(_scene("1tup", auth, structure=assembly), _scene("1tup", label, structure=assembly)) == 1.0
+    assert _f1(_scene("1tup", auth, structure=assembly), _scene("1tup", label, structure=assembly)) < 1.0
+    assert _f1(_scene("1tup", auth, structure=assembly), _scene("1tup", auth, structure=assembly)) == 1.0
+    # ...and the assembly itself is a fact: the same drawing on the deposited model is not it.
+    assert not mvs.grade_mvs(_scene("1tup", auth, structure=assembly), _scene("1tup", auth))["success"]
     # With the table, the two namings are different atoms.
     assert _f1(_scene("1tup", auth), _scene("1tup", label)) < 1.0
 

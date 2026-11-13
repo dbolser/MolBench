@@ -1,0 +1,120 @@
+{
+ "tolerance": 32,
+ "what": "Evidence for the colour tolerance. Distance = largest per-channel difference (0-255).",
+ "palette": [
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "purple",
+  "magenta",
+  "cyan",
+  "teal",
+  "gray",
+  "white",
+  "black",
+  "salmon",
+  "steelblue",
+  "khaki",
+  "plum",
+  "limegreen",
+  "hotpink",
+  "brown"
+ ],
+ "closest_palette_pairs": [
+  {
+   "distance": 55,
+   "a": "plum",
+   "b": "hotpink"
+  },
+  {
+   "distance": 58,
+   "a": "gray",
+   "b": "steelblue"
+  },
+  {
+   "distance": 66,
+   "a": "salmon",
+   "b": "hotpink"
+  },
+  {
+   "distance": 70,
+   "a": "teal",
+   "b": "steelblue"
+  },
+  {
+   "distance": 77,
+   "a": "green",
+   "b": "limegreen"
+  },
+  {
+   "distance": 78,
+   "a": "gray",
+   "b": "limegreen"
+  },
+  {
+   "distance": 78,
+   "a": "teal",
+   "b": "limegreen"
+  },
+  {
+   "distance": 81,
+   "a": "khaki",
+   "b": "plum"
+  }
+ ],
+ "october_colours": {
+  "n": 2465,
+  "exact": 2227,
+  "invalid": 0,
+  "by_distance": {
+   "over 64": 75,
+   "49-64": 1
+  },
+  "no_reference_colour": 162,
+  "what": "every colour value in a valid October MVS scene, by its distance to the nearest colour of that task's reference",
+  "closest_inexact": [
+   {
+    "distance": 58,
+    "written": "steelblue"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   },
+   {
+    "distance": 83,
+    "written": "lightgray"
+   }
+  ]
+ }
+}

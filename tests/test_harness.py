@@ -108,7 +108,8 @@ def test_mvs_is_metadata_insensitive():
 
 def test_mvs_partial_credit_for_wrong_colour():
     f1 = mvs.grade_mvs(_scene("gray"), _scene("red"))["f1"]
-    assert 0.6 < f1 < 1.0, f"expected partial credit, got {f1}"
+    # right atoms, right representation, wrong colour: half credit (drawn.PARTIAL)
+    assert f1 == 0.5, f"expected partial credit, got {f1}"
 
 
 def test_mvs_grey_gray_fold():
@@ -140,11 +141,12 @@ def test_mvs_download_variant_is_normalised():
     assert mvs.grade_mvs(_scene_pdb("1cbs"), _scene_pdb("1cbs_updated"))["f1"] == 1.0
 
 
-def test_mvs_downstream_credit_survives_upstream_mismatch():
-    # Right representation+colour but a genuinely different structure should still
-    # earn substantial (not ~zero) credit — position-wise, not prefix-only.
-    f1 = mvs.grade_mvs(_scene_pdb("1abc"), _scene_pdb("9zzz"))["f1"]
-    assert 0.5 < f1 < 1.0, f"expected downstream credit, got {f1}"
+def test_mvs_wrong_structure_scores_zero():
+    # A drawing is a statement about the atoms of one structure: on another entry
+    # there is nothing to compare it with (the same rule as on the API track). The
+    # October path grader gave partial credit here; it is kept as grade_mvs_paths.
+    assert mvs.grade_mvs(_scene_pdb("1abc"), _scene_pdb("9zzz"))["f1"] == 0.0
+    assert 0.5 < mvs.grade_mvs_paths(_scene_pdb("1abc"), _scene_pdb("9zzz"))["f1"] < 1.0
 
 
 def test_escalate_tree_tier():

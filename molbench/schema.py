@@ -223,7 +223,7 @@ def validate_actions(actions: Any) -> list[str]:
             errors.append(f"{where}: not an object")
             continue
         name = act.get("action")
-        if name not in ACTION_SPECS:
+        if not isinstance(name, str) or name not in ACTION_SPECS:
             errors.append(f"{where}: unknown action {name!r}")
             continue
         spec = ACTION_SPECS[name]
@@ -236,10 +236,12 @@ def validate_actions(actions: Any) -> list[str]:
             cd = act["custom_data"]
             if not (isinstance(cd, dict) and cd.get("url") and cd.get("format")):
                 errors.append(f"{where} (load): custom_data needs url and format")
-        if name == "set_visual_style" and act.get("style") not in REPRESENTATIONS:
+        style = act.get("style")
+        if name == "set_visual_style" and not (isinstance(style, str) and style in REPRESENTATIONS):
             errors.append(f"{where}: style {act.get('style')!r} not in {REPRESENTATIONS}")
         if name == "set_property":
-            if act.get("name") not in SETTABLE_PROPERTIES:
+            prop = act.get("name")
+            if not isinstance(prop, str) or prop not in SETTABLE_PROPERTIES:
                 errors.append(f"{where}: property {act.get('name')!r} not settable")
         for sel_field in ("data",):
             if sel_field in act and not isinstance(act[sel_field], list):
