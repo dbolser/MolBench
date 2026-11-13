@@ -105,13 +105,6 @@ def test_the_previous_graders_do_make_these_mistakes():
     assert s["api"]["previous_grader"]["false_pass"]["errors"] > 20
 
 
-# pdbe-molstar 3.3.2 disagrees with the replay's bare load on one panel entry: its
-# default ligand component of 1AKE has 121 atoms, the atom table's (filled by Mol*
-# 5.9.0) has 137. Both sides of a comparison start from the same bare load, so no
-# verdict depends on it; GRADING.md lists it under known limits.
-KNOWN_API_DIFFERENCES = {"1ake"}
-
-
 def test_the_viewer_check_on_record_found_no_disagreement():
     """``--viewer`` needs a browser, so it is not run here; its last result is on
     record. It must be clean: every checked MVS verdict is what Mol* draws, every
@@ -131,11 +124,10 @@ def test_the_viewer_check_on_record_found_no_disagreement():
     assert rules["agree"] == rules["draws_compared"] >= 3500
     api = report["api"]
     assert api["lists_run"] >= 100
-    assert {p["id"].rsplit("-", 1)[-1] for p in api["problems"]} <= KNOWN_API_DIFFERENCES
-    assert api["agree"] == api["lists_run"] - len(api["problems"])
+    assert api["problems"] == [] and api["agree"] == api["lists_run"]
     bare = api["bare_loads"]
     assert bare["entries"] >= 70
-    assert {d["entry"] for d in bare["differ"]} <= KNOWN_API_DIFFERENCES
+    assert bare["differ"] == [] and bare["agree"] == bare["entries"]
 
 
 def test_october_regrade_reproduces_the_stored_october_f1():
@@ -151,3 +143,17 @@ def test_october_regrade_reproduces_the_stored_october_f1():
         # ... and success can never exceed the share of valid scenes
         assert m["success"] <= m["valid"] / m["n"] + 1e-9
         assert m["success_if_any_focus_counts"] <= m["success"] + 1e-9
+
+
+def test_grading_md_quotes_the_current_numbers(built):
+    """GRADING.md carries the control-set table that the paper lifts; it must be the
+    one in summary.json."""
+    text = (REPO / "GRADING.md").read_text()
+    for track, s in json.loads((CONTROLS / "summary.json").read_text())["tracks"].items():
+        g, old = s["grader"], s["previous_grader"]
+        n_pass = s["n_identical"] + s["n_equivalent"]
+        row = (f"| {s['n_controls']:,} on {s['n_entries']} entries | {s['n_equivalent_kinds']} / "
+               f"{s['n_wrong_kinds']} | {g['false_pass']['errors']} of {s['n_wrong']} | "
+               f"{g['false_fail']['errors']} of {n_pass} | {old['false_pass']['errors']} of "
+               f"{s['n_wrong']} / {old['false_fail']['errors']} of {n_pass} ")
+        assert row in text, (track, row)

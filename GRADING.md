@@ -53,7 +53,9 @@ The final state is cut into **facts**, each worth the same (weight 1):
 
 The structure itself is the frame the facts are stated in, not a fact. Loading the
 right entry earns nothing by itself; on the wrong entry there is nothing to compare,
-and the score is 0.
+and the score is 0. A file that an answer downloads and never draws, labels or focuses
+changes nothing on screen and is not counted; a second structure that is drawn is
+unrequested drawing.
 
 ### F1
 
@@ -252,6 +254,18 @@ Evidence for 32 (`tests/controls/colour_evidence.json`):
 A lighter or darker named shade (`lightgray` for gray, `darkred` for red, `lime` for
 green) is a different colour.
 
+## Pictures for the human rating study
+
+Pictures are not graded; they are what human raters see. `molbench.render.render_pair`
+makes four pictures of a (reference, answer) pair in headless Mol\* 5.9.0: each scene
+whole, and each scene **framed on the target atoms** (the task's `target`; without
+one, the atoms of the reference's draws that cover less than half of what it draws).
+The camera is worked out once, on the reference: it looks at the centre of the target
+atoms from outside the molecule, with a radius of the target's extent plus 4 Å (at
+least 8 Å). That exact camera is then applied to the answer, so the two pictures of a
+pair are always taken from the same place; a `focus` or `camera` node in either scene
+is overridden. The structure file is read from the frozen panel, not downloaded.
+
 ## Validity outcomes, and the three ways a score is averaged
 
 Every sample has an **outcome**:
@@ -311,6 +325,13 @@ Scores are averaged in three ways, always named:
   annotations, maps, lighting) are compared as declared settings; the atoms those views
   draw are not modelled. Camera focus and highlight are compared by the atoms their
   selections resolve to; they were not read back from the viewer.
+- **Default components on the API track.** Which atoms are polymer, ligand, ion or
+  water comes from the atom tables, which Mol\* 5.9.0 filled; pdbe-molstar 3.3.2
+  carries an older Mol\*. A bare load of 73 panel entries was compared with the viewer.
+  Two differences were found and are now modelled as measured: the acetyl cap of 1HRC
+  is not in the viewer's "non-standard" component, and Arg167 of 1AKE is not in its
+  ligand component. The two AlphaFold models and entries outside the panel were not
+  compared.
 - **UniProt-numbered API selections** resolve through the frozen SIFTS tables, which
   match PDBe's updated mmCIF (the file a `molecule_id` load fetches).
 - **F1 arithmetic differs slightly between the tracks** (see "What the viewer does").
@@ -340,11 +361,28 @@ or equivalent answer graded as not a success. The numbers are in
 `tests/controls/summary.json` (per track and per kind), and `tests/test_controls.py`
 fails if the grader stops agreeing with any control.
 
-The verdicts do not come from the grader. On the MVS track they are checked against
-Mol\* itself: `scripts/grader_controls.py --viewer` loads both scenes of a pair in
-headless Mol\* 5.9.0, reads back which atoms each representation object draws and in
-what colour, and confirms that the viewer draws the same for a must-pass pair and
-something different for a must-fail pair. The same run confirms, scene by scene, that
-the grader's resolved state equals the viewer's, and probes every representation type
-on several kinds of component in every panel entry. The result is
-`tests/controls/viewer_check.json`.
+| track | controls | kinds (equivalent / wrong) | false pass | false fail | graders before this work: false pass / false fail |
+|---|---|---|---|---|---|
+| MVS | 1,030 on 75 entries | 22 / 22 | 0 of 440 | 0 of 590 | 0 of 440 / 222 of 590 (October path grader, F1 = 1 as success) |
+| API | 850 on 69 entries | 18 / 17 | 0 of 340 | 0 of 510 | 75 of 340 / 247 of 510 (July sequence grader, F1 = 1 as success) |
+
+Read these zeros with care: the grader was corrected until it agreed with every
+control, so they show that the rules above are implemented, not how often an unforeseen
+way of writing an answer is misjudged. What keeps them honest is that the verdicts do
+not come from the grader:
+
+- **MVS.** `scripts/grader_controls.py --viewer` loads both scenes of a pair in headless
+  Mol\* 5.9.0, reads back which atoms each representation object draws and in what
+  colour and opacity, and confirms that the viewer draws the same for a must-pass pair
+  and something different for a must-fail pair. The same run confirms, scene by scene,
+  that the grader's resolved state equals the viewer's, and probes every representation
+  type on several kinds of component in every panel entry. Seven kinds cannot be read
+  back this way and are not viewer-checked (camera focus, label text, the chain-id
+  theme, assembly, another entry).
+- **API.** `--viewer-api N` replays a sample of the call lists in real pdbe-molstar
+  3.3.2 and compares the end state with the grader's replay (selections atom for atom,
+  components, representations, colouring), and does the same for a bare load of every
+  panel entry. Focus, highlight and UniProt-numbered selections are not read back, so
+  for those kinds the verdict rests on the construction of the pair alone.
+
+The result of both runs is `tests/controls/viewer_check.json`.

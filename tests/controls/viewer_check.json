@@ -4,164 +4,27 @@
   "controls_checked": 870,
   "verdict_agrees": 870,
   "scenes_checked": 1456,
-  "grader_state_agrees": 1447,
-  "problems": [
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}, {\"children\": [{\"children\": [{\"kind\": \"color\", \"para"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}, {\"children\": [{\"children\": [{\"kind\": \"color\", \"para"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}, {\"children\": [{\"children\": [{\"kind\": \"color\", \"para"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"steelblue\"}}, {\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}, {\"children\": [{\"children\": [{\"kind\": \"color\", \"para"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}, {\"children\": [{\"children\": [{\"kind\": \"color\", \"para"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}], \"kind\": \"structure\", \"params\": {\"type\": \"model\"}}]"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"silver\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}], \"kind\": \"structure\", \"params\": {\"type\": \"model\"}"
-   },
-   {
-    "what": "grader state differs from Mol*",
-    "scene": "{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"children\": [{\"kind\": \"color\", \"params\": {\"color\": \"gray\"}}], \"kind\": \"representation\", \"params\": {\"type\": \"cartoon\"}}], \"kind\": \"component\", \"params\": {\"selector\": \"polymer\"}}, {\"children\": [{\"children\": [{\"kind\": \"color\", \"para"
-   }
-  ],
+  "grader_state_agrees": 1456,
+  "problems": [],
   "skipped": 140,
   "rule_probes": {
    "entries": 75,
    "draws_compared": 3818,
-   "agree": 3810,
-   "differ": [
-    {
-     "entry": "1ema",
-     "draw": [
-      "backbone",
-      [
-       114,
-       142,
-       230
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    },
-    {
-     "entry": "1ema",
-     "draw": [
-      "backbone",
-      [
-       74,
-       182,
-       46
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    },
-    {
-     "entry": "1ema",
-     "draw": [
-      "cartoon",
-      [
-       37,
-       91,
-       151
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    },
-    {
-     "entry": "1ema",
-     "draw": [
-      "cartoon",
-      [
-       40,
-       216,
-       184
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    },
-    {
-     "entry": "1ema",
-     "draw": [
-      "cartoon",
-      [
-       77,
-       51,
-       79
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    },
-    {
-     "entry": "1ema",
-     "draw": [
-      "cartoon",
-      [
-       80,
-       176,
-       112
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    },
-    {
-     "entry": "1ema",
-     "draw": [
-      "putty",
-      [
-       111,
-       17,
-       197
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    },
-    {
-     "entry": "1ema",
-     "draw": [
-      "putty",
-      [
-       151,
-       233,
-       125
-      ],
-      1.0
-     ],
-     "grader_atoms": 1749,
-     "molstar_atoms": 1771
-    }
-   ]
+   "agree": 3818,
+   "differ": []
+  }
+ },
+ "api": {
+  "pdbe_molstar": "3.3.2",
+  "lists_run": 234,
+  "agree": 234,
+  "problems": [],
+  "note": "the replayed end state is compared with the real viewer's (selections atom for atom, components, representations, overpaint); focus, highlight and UniProt selections are not read back",
+  "not_runnable": 3,
+  "bare_loads": {
+   "entries": 73,
+   "agree": 73,
+   "differ": []
   }
  }
 }

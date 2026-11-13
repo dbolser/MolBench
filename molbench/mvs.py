@@ -700,6 +700,16 @@ class DrawnScene:
     def entries(self) -> set[str]:
         return set(self.structures) | self.downloads
 
+    def shown(self) -> set[str]:
+        """The entries the scene shows something of. A file that is downloaded and
+        never drawn, labelled or focused changes nothing on screen, so it is not part
+        of the drawn state. A scene that shows nothing counts every entry it loads."""
+        out = {e for e, st in self.structures.items()
+               if st.draws or st.labels or st.tooltips or st.interactions or st.other
+               or st.focus is not None}
+        out |= {e for e, _ in self.primitives if e}
+        return out or self.entries()
+
 
 def _structure_kind(params: dict) -> tuple:
     """The structure node's type, as a comparable fact (``("model", 0)`` is the default)."""
@@ -1083,9 +1093,9 @@ def _target_atoms(target: Any, st: DrawnStructure) -> Any:
 
 def compare_scenes(ref: DrawnScene, pred: DrawnScene, target: Any = None) -> dict[str, Any]:
     """Precision, recall, F1, success and the target score of ``pred`` against ``ref``."""
-    structure = [sorted(ref.entries()), sorted(pred.entries())]
+    structure = [sorted(ref.shown()), sorted(pred.shown())]
     shared = ref.entries() & pred.entries()
-    base = {"same_structure": bool(ref.entries()) and ref.entries() == pred.entries(),
+    base = {"same_structure": bool(ref.shown()) and ref.shown() == pred.shown(),
             "structure": structure}
     if not shared:
         return _drawn.zero(**base, note="the answer loads none of the reference's structures")

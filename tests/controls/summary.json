@@ -3,11 +3,11 @@
  "seed": 20261112,
  "tracks": {
   "mvs": {
-   "n_controls": 1010,
+   "n_controls": 1030,
    "n_identical": 150,
-   "n_equivalent": 420,
+   "n_equivalent": 440,
    "n_wrong": 440,
-   "n_equivalent_kinds": 21,
+   "n_equivalent_kinds": 22,
    "n_wrong_kinds": 22,
    "n_entries": 75,
    "grader": {
@@ -18,12 +18,12 @@
     },
     "false_fail": {
      "errors": 0,
-     "n": 570,
+     "n": 590,
      "rate": 0.0
     },
     "false_fail_equivalent_only": {
      "errors": 0,
-     "n": 420,
+     "n": 440,
      "rate": 0.0
     }
    },
@@ -35,14 +35,14 @@
      "rate": 0.0
     },
     "false_fail": {
-     "errors": 202,
-     "n": 570,
-     "rate": 0.3544
+     "errors": 222,
+     "n": 590,
+     "rate": 0.3763
     },
     "false_fail_equivalent_only": {
-     "errors": 202,
-     "n": 420,
-     "rate": 0.481
+     "errors": 222,
+     "n": 440,
+     "rate": 0.5045
     }
    },
    "mistakes": [],
@@ -251,6 +251,16 @@
      "group": "equivalent",
      "kind": "trace_atom_under_cartoon",
      "what": "a cartoon on the C-alpha atoms of a range instead of on the residues",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "unused_extra_download",
+     "what": "another entry's file is downloaded and parsed as well, and nothing of it is drawn",
      "n": 20,
      "graded_success": 20,
      "old_grader_success": 0,

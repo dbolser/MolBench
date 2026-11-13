@@ -566,6 +566,20 @@ def _(c: Ctx):
     return mk("ball_and_stick"), mk(c.rng.choice(["cartoon", "backbone", "putty"]))
 
 
+@control(MVS_EQUIVALENT, "unused_extra_download",
+         "another entry's file is downloaded and parsed as well, and nothing of it is drawn")
+def _(c: Ctx):
+    if c.res is None:
+        return None
+    ids = [i for i in panel_ids() if i != c.e.id and not i.startswith("af-")]
+    other = entry(ids[c.rng.randrange(len(ids))])
+    ref = c.highlight()
+    pred = copy.deepcopy(ref)
+    pred["children"].append({"kind": "download", "params": {"url": other.url}, "children": [
+        {"kind": "parse", "params": {"format": "mmcif"}}]})
+    return ref, pred
+
+
 # --- MVS: wrong answers (must fail) ---------------------------------------------------
 
 @control(MVS_WRONG, "residue_off_by_one", "the neighbouring residue is highlighted")

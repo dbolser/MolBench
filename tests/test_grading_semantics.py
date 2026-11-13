@@ -210,6 +210,25 @@ def test_the_wrong_structure_scores_zero():
     assert r["f1"] == 0.0 and not r["success"] and not r["same_structure"]
 
 
+def test_a_file_that_is_loaded_and_never_drawn_changes_nothing():
+    ref = highlight()
+    unused = {"kind": "download", "params": {"url": "https://files.rcsb.org/download/1lyz.cif"},
+              "children": [{"kind": "parse", "params": {"format": "mmcif"}}]}
+    pred = copy.deepcopy(ref)
+    pred["children"].append(unused)
+    assert same(ref, pred)
+    drawn_too = json.loads(json.dumps(scene("1lyz", copy.deepcopy(GREY))))["children"][0]
+    pred = copy.deepcopy(ref)
+    pred["children"].append(drawn_too)
+    r = g(ref, pred)
+    assert not r["success"] and r["recall"] == 1.0 and r["precision"] < 1.0
+    # the right entry loaded but the drawing done on another one: nothing is right
+    pred = json.loads(json.dumps(ref).replace("1tup", "1lyz"))
+    pred["children"].append(json.loads(json.dumps(unused).replace("1lyz", "1tup")))
+    r = g(ref, pred)
+    assert r["f1"] == 0.0 and not r["success"]
+
+
 def test_the_structure_type_is_a_fact():
     model = scene("1tup", copy.deepcopy(GREY))
     assembly = scene("1tup", copy.deepcopy(GREY), structure={"type": "assembly", "assembly_id": "1"})
