@@ -55,7 +55,8 @@ Listed, with the reason, in ``tasks/api_twins/README.md`` (written by this scrip
 distance lines and other primitives, 3D labels, the computed-interactions request,
 transparency, the ``line`` and ``backbone`` representations, colour themes (see
 ``ALLOW_THEMES``), annotation colouring,
-other models of an ensemble, several structures in one scene; a task that already has
+other models of an ensemble, several structures in one scene; a task that names its
+structure by protein and accepts entries outside the panel; a task that already has
 a twin from its own generator (clinical, follow-up, accept-set); and a task in the old
 format, which has no ``twin_of`` field (for those the report says whether a twin
 could be made, and none is written).
@@ -663,6 +664,18 @@ def _numbering(reference: list[dict], table: Any, entry: str) -> dict:
             "auth_label_chain": chain}
 
 
+def other_entries(task: dict, structure: str) -> list[str]:
+    """The other entries a protein-named task accepts. The MVS grader re-resolves the
+    reference on any of them; the API grader needs a call list, and so an atom table,
+    for each: a task that accepts entries outside the panel has no twin."""
+    others = [o for o in task.get("accepted_structures") or [] if o != structure]
+    missing = sum(mvs._entry_table(o) is None for o in others)
+    if missing:
+        raise Untranslatable("the structure is named by protein and entries outside the panel are accepted",
+                             f"{missing} of {len(others)} other accepted entries have no atom table")
+    return others
+
+
 def make_twin(task: dict, twins: dict[str, str]) -> dict:
     """The API twin of an MVS task (new format), checked. Raises `Untranslatable`."""
     if len(task["structures"]) != 1:
@@ -676,9 +689,8 @@ def make_twin(task: dict, twins: dict[str, str]) -> dict:
         accepted.append(calls)
         scenes.append((f"accepted[{i}]", alt, calls, None))
     entry = scene_state(task["reference"]).entry
-    for other in task.get("accepted_structures") or []:
-        if other == structure:
-            continue
+    others = other_entries(task, structure)
+    for other in others:
         rename = {entry: scene_state(task["reference"], {entry: other}).entry}
         calls, _ = translate_scene(task["reference"], other, rename)
         accepted.append(calls)
@@ -786,6 +798,7 @@ def plan(only: list[str] | None = None) -> tuple[list[dict], list[dict], list[di
                 structures = t["structures"]
                 if len(structures) != 1:
                     raise Untranslatable("several structures in one scene", ", ".join(structures))
+                other_entries(t, structures[0])
                 translate_scene(t["reference"], structures[0])
                 row["reason"] = "old task format (no twin_of field); a twin could be made"
                 continue

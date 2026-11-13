@@ -33,6 +33,7 @@
           "representation": "spacefill"
         }
       ],
+      "keep_colors": true,
       "keep_representations": true
     }
   ],
@@ -81,14 +82,14 @@
       "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "changing the colour of a call whose colouring a later call replaces changes nothing and still succeeds",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
       "equivalent answer succeeds: one call with both residues",
+      "equivalent answer succeeds: two calls, the second with keep_representations only",
       "wrong answer fails: two calls without keep_representations (the first representation is removed) (F1 0.6667)",
       "wrong answer fails: no color key (the residues turn the default orange) (F1 0.75)"
     ],
     "structure": "1d5r",
-    "derived": "Two seeded residues as in api-residue-colour, each given an added representation in its own `color` call. A second call removes the representations the first one added unless keep_representations is set.",
+    "derived": "Two seeded residues as in api-residue-colour, each given an added representation in its own `color` call. A second call removes the representations the first one added unless keep_representations is set. (The reference keeps the colouring as well: 'keeping it' is everything the first step did, which here painted nothing.)",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
     "wording": "3 of 3",

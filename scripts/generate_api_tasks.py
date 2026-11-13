@@ -446,17 +446,20 @@ def t_keep_sticks(s: S) -> dict | None:
                     f"Open {s.name}. Step one: {w1} as ball-and-stick. Step two, on top of step one: {w2} as "
                     f"{rep2}. Element colours for both, and no other colour changes."],
         "reference": [L, color_call([by_author(r1, **a1)]),
-                      color_call([by_author(r2, **a2)], keep_representations=True)],
+                      color_call([by_author(r2, **a2)], keep_colors=True, keep_representations=True)],
         "target": [{"selector": [residue_atoms(r1)], "representation": "ball-and-stick", "color": None},
                    {"selector": [residue_atoms(r2)], "representation": rep2, "color": None}],
         "skills": ["load", "selection", "author-numbering", "per-selection-representation", "keep-representations"],
         "difficulty": {**numbering_facts(s, [r1, r2]), "hinges_on": ["default_select_colour"],
                        "order_matters": True, "keep_representations_in_reference": True},
-        "first_colour_is_wiped": True,
         "derived": "Two seeded residues as in api-residue-colour, each given an added representation in "
                    "its own `color` call. A second call removes the representations the first one added "
-                   "unless keep_representations is set.",
-        "alts": [("one call with both residues", [L, color_call([by_label(r1, **a1), by_label(r2, **a2)])])],
+                   "unless keep_representations is set. (The reference keeps the colouring as well: "
+                   "'keeping it' is everything the first step did, which here painted nothing.)",
+        "alts": [("one call with both residues", [L, color_call([by_label(r1, **a1), by_label(r2, **a2)])]),
+                 ("two calls, the second with keep_representations only",
+                  [L, color_call([by_label(r1, **a1)]),
+                   color_call([by_label(r2, **a2)], keep_representations=True)])],
         "traps": [("two calls without keep_representations (the first representation is removed)",
                    [L, color_call([by_label(r1, **a1)]), color_call([by_label(r2, **a2)])]),
                   ("no color key (the residues turn the default orange)",
@@ -1869,12 +1872,6 @@ def verify(task: dict, spec: dict) -> None:
         raise Unfit("a bare load scores above 0")
     done.append("a bare load scores 0")
     near = grade(view, perturb_reference(task["reference"]))
-    if near["success"] and spec.get("first_colour_is_wiped"):
-        # the mock model's near miss recolours a call whose colouring the reference
-        # itself replaces, which changes nothing; the dropped last step is the near miss
-        done.append("changing the colour of a call whose colouring a later call replaces changes nothing "
-                    "and still succeeds")
-        near = grade(view, task["reference"][:-1])
     if near["success"]:
         raise Unfit("the near miss (one colour changed, or the last step dropped) succeeds")
     if near["f1"] > 0:

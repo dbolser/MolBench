@@ -142,7 +142,7 @@ Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%);
 | load option | `ligand_view` | 3 |
 | load option | `alphafold` | 0 |
 | call option | `color.non_selected_color` | 7 |
-| call option | `color.keep_colors` | 5 |
+| call option | `color.keep_colors` | 8 |
 | call option | `color.keep_representations` | 3 |
 | call option | `highlight.color` | 2 |
 | call option | `highlight.focus` | 2 |

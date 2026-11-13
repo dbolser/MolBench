@@ -2,14 +2,15 @@
 
 Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin has the prompt, structures, split, style, tier, family and target atoms of its MVS task, and a call list whose replayed final state is the MVS reference's drawn state (same atoms, representations and colours; nothing else drawn). `twin_of` links the two both ways.
 
-70 MVS tasks read (0 in the task format, 70 in the old format); 0 twins written. The API can express the reference of 64 of the 70 (91%).
+70 MVS tasks read (0 in the task format, 70 in the old format); 0 twins written. The API can express the reference of 58 of the 70 (83%).
 
 
 ## MVS tasks without a twin
 
 | reason | tasks |
 |---|---:|
-| old task format (no twin_of field); a twin could be made | 64 |
+| old task format (no twin_of field); a twin could be made | 58 |
+| the structure is named by protein and entries outside the panel are accepted | 6 |
 | a distance line or another drawn primitive | 3 |
 | the computed non-covalent interactions request | 2 |
 | transparency (the API has no opacity) | 1 |
@@ -80,9 +81,9 @@ Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin 
 | `named-1tup-143` | clinical | old task format (no twin_of field); a twin could be made |  |
 | `named-1tup-175` | clinical | old task format (no twin_of field); a twin could be made |  |
 | `named-1tup-248` | clinical | old task format (no twin_of field); a twin could be made |  |
-| `res-cftr` | resolve | old task format (no twin_of field); a twin could be made |  |
-| `res-gfp` | resolve | old task format (no twin_of field); a twin could be made |  |
-| `res-lysozyme` | resolve | old task format (no twin_of field); a twin could be made |  |
-| `res-myoglobin` | resolve | old task format (no twin_of field); a twin could be made |  |
-| `res-pcsk9` | resolve | old task format (no twin_of field); a twin could be made |  |
-| `res-pde5a` | resolve | old task format (no twin_of field); a twin could be made |  |
+| `res-cftr` | resolve | the structure is named by protein and entries outside the panel are accepted | 23 of 23 other accepted entries have no atom table |
+| `res-gfp` | resolve | the structure is named by protein and entries outside the panel are accepted | 636 of 636 other accepted entries have no atom table |
+| `res-lysozyme` | resolve | the structure is named by protein and entries outside the panel are accepted | 1396 of 1397 other accepted entries have no atom table |
+| `res-myoglobin` | resolve | the structure is named by protein and entries outside the panel are accepted | 355 of 356 other accepted entries have no atom table |
+| `res-pcsk9` | resolve | the structure is named by protein and entries outside the panel are accepted | 65 of 65 other accepted entries have no atom table |
+| `res-pde5a` | resolve | the structure is named by protein and entries outside the panel are accepted | 49 of 49 other accepted entries have no atom table |
