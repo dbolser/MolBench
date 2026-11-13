@@ -6,18 +6,22 @@
  "structures": [
   "1trn"
  ],
- "prompt": "Now the other chain in yellow.",
+ "prompt": "Now the other chain in grey.",
  "reference": [
   {
    "action": "load",
    "molecule_id": "1trn"
   },
   {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
    "action": "color",
    "data": [
     {
      "auth_asym_id": "A",
-     "color": "brown"
+     "color": "yellow"
     }
    ]
   },
@@ -26,7 +30,7 @@
    "data": [
     {
      "auth_asym_id": "B",
-     "color": "yellow"
+     "color": "gray"
     }
    ],
    "keep_colors": true,
@@ -41,11 +45,15 @@
     "molecule_id": "1trn"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
     "action": "color",
     "data": [
      {
       "auth_asym_id": "A",
-      "color": "brown"
+      "color": "yellow"
      }
     ]
    }
@@ -58,7 +66,7 @@
     "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "yellow"
+   "color": "gray"
   }
  ],
  "twin_of": "fu-other-chain-1trn-mvs",
@@ -80,7 +88,7 @@
    "target selects 1851 atoms on the frozen atom table",
    "start state scores 0.0 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
-   "1 other way(s) of writing the final state grade as exactly right",
+   "2 other way(s) of writing the final state grade as exactly right",
    "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
    "twin selects the same target atoms",
    "referent is unambiguous in the start state: \"the other chain\": the structure has exactly two polymer chains and the start state colours only one (author chain A), so the other is author chain B"
@@ -95,7 +103,7 @@
      "auth_asym_id": "A"
     },
     "representation": null,
-    "color": "brown"
+    "color": "yellow"
    }
   ],
   "removed": null,
@@ -111,7 +119,7 @@
   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
   "targets": [
    {
-    "action": 1,
+    "action": 2,
     "param": 0,
     "what": "author chain A (label chains A, C, E)",
     "atoms": [
@@ -128,7 +136,7 @@
     "n_atoms": 1854
    },
    {
-    "action": 2,
+    "action": 3,
     "param": 0,
     "what": "author chain B (label chains B, D, F)",
     "atoms": [

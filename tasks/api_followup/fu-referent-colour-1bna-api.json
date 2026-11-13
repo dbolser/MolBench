@@ -6,22 +6,26 @@
  "structures": [
   "1bna"
  ],
- "prompt": "Change the yellow chain to khaki.",
+ "prompt": "Change the teal chain to brown.",
  "reference": [
   {
    "action": "load",
    "molecule_id": "1bna"
   },
   {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
    "action": "color",
    "data": [
     {
      "auth_asym_id": "A",
-     "color": "khaki"
+     "color": "yellow"
     },
     {
      "auth_asym_id": "B",
-     "color": "blue"
+     "color": "brown"
     }
    ]
   }
@@ -34,6 +38,10 @@
     "molecule_id": "1bna"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
     "action": "color",
     "data": [
      {
@@ -42,7 +50,7 @@
      },
      {
       "auth_asym_id": "B",
-      "color": "blue"
+      "color": "teal"
      }
     ]
    }
@@ -52,10 +60,10 @@
  "target": [
   {
    "selector": {
-    "auth_asym_id": "A"
+    "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "khaki"
+   "color": "brown"
   }
  ],
  "twin_of": "fu-referent-colour-1bna-mvs",
@@ -74,23 +82,25 @@
   "checks": [
    "reference grades as exactly right against the task (success, F1 1, target score 1)",
    "start state grades as itself; it is not the requested final state",
-   "target selects 280 atoms on the frozen atom table",
+   "target selects 286 atoms on the frozen atom table",
    "start state scores 0.5 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
    "twin selects the same target atoms",
-   "referent is unambiguous in the start state: \"the yellow chain\": exactly one chain of the start state is yellow (author chain A)"
+   "referent is unambiguous in the start state: \"the teal chain\": exactly one chain of the start state is teal (author chain B)"
   ],
   "seed": "20261113|fu-referent-colour|2|1bna",
   "edit": "recolour a component named by its current colour",
   "noop_kind": null,
-  "referent": "\"the yellow chain\": exactly one chain of the start state is yellow (author chain A)",
+  "referent": "\"the teal chain\": exactly one chain of the start state is teal (author chain B)",
   "preserved": [
    {
     "selector": {
-     "auth_asym_id": "B"
+     "auth_asym_id": "A"
     },
     "representation": null,
-    "color": "blue"
+    "color": "yellow"
    }
   ],
   "removed": null,
@@ -106,7 +116,7 @@
   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
   "targets": [
    {
-    "action": 1,
+    "action": 2,
     "param": 0,
     "what": "author chain A (label chains A, C)",
     "atoms": [
@@ -120,7 +130,7 @@
     "n_atoms": 280
    },
    {
-    "action": 1,
+    "action": 2,
     "param": 1,
     "what": "author chain B (label chains B, D)",
     "atoms": [

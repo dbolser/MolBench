@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "red"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "orange"
+                 "color": "red"
                 }
                }
               ]
@@ -200,7 +200,7 @@
      "label_comp_id": "RET"
     },
     "representation": "ball_and_stick",
-    "color": "orange"
+    "color": "red"
    }
   ],
   "removed": null,

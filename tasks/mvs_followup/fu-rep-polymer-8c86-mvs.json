@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "gray"
+                "color": "blue"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "gray"
+                 "color": "blue"
                 }
                }
               ]
@@ -203,7 +203,7 @@
      "label_comp_id": "TQ0"
     },
     "representation": "ball_and_stick",
-    "color": "gray"
+    "color": "blue"
    }
   ],
   "removed": null,

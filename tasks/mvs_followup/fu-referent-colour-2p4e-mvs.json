@@ -6,7 +6,7 @@
  "structures": [
   "2p4e"
  ],
- "prompt": "The teal one should be blue instead.",
+ "prompt": "The blue one should be hot pink instead.",
  "reference": {
   "root": {
    "kind": "root",
@@ -46,7 +46,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "brown"
                }
               }
              ]
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "blue"
+                "color": "hotpink"
                }
               }
              ]
@@ -127,7 +127,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "brown"
                 }
                }
               ]
@@ -151,7 +151,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "teal"
+                 "color": "blue"
                 }
                }
               ]
@@ -175,7 +175,7 @@
     "auth_asym_id": "A"
    },
    "representation": null,
-   "color": "blue"
+   "color": "hotpink"
   }
  ],
  "twin_of": "fu-referent-colour-2p4e-api",
@@ -198,19 +198,19 @@
    "start state scores 0.5 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
    "twin selects the same target atoms",
-   "referent is unambiguous in the start state: \"the teal chain\": exactly one chain of the start state is teal (author chain A)"
+   "referent is unambiguous in the start state: \"the blue chain\": exactly one chain of the start state is blue (author chain A)"
   ],
   "seed": "20261113|fu-referent-colour|3|2p4e",
   "edit": "recolour a component named by its current colour",
   "noop_kind": null,
-  "referent": "\"the teal chain\": exactly one chain of the start state is teal (author chain A)",
+  "referent": "\"the blue chain\": exactly one chain of the start state is blue (author chain A)",
   "preserved": [
    {
     "selector": {
      "auth_asym_id": "P"
     },
     "representation": "cartoon",
-    "color": "hotpink"
+    "color": "brown"
    }
   ],
   "removed": null,

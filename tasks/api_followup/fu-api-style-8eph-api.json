@@ -6,7 +6,7 @@
  "structures": [
   "8eph"
  ],
- "prompt": "Change the display style to spacefill, with the same colours on the two chains.",
+ "prompt": "Change the display to the cartoon-only style (no ligands or waters), with the same colours on the two chains.",
  "reference": [
   {
    "action": "load",
@@ -14,7 +14,7 @@
   },
   {
    "action": "set_visual_style",
-   "style": "spacefill"
+   "style": "cartoon"
   },
   {
    "action": "color",
@@ -25,7 +25,7 @@
     },
     {
      "auth_asym_id": "B",
-     "color": "hotpink"
+     "color": "khaki"
     }
    ]
   }
@@ -46,7 +46,7 @@
      },
      {
       "auth_asym_id": "B",
-      "color": "hotpink"
+      "color": "khaki"
      }
     ]
    }
@@ -70,6 +70,7 @@
   "checks": [
    "reference grades as exactly right against the task (success, F1 1; no atom target)",
    "start state grades as itself; it is not the requested final state",
+   "1 other way(s) of writing the final state grade as exactly right",
    "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right"
   ],
   "seed": "20261113|fu-api-style|1|8eph",

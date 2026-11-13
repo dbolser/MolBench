@@ -6,7 +6,7 @@
  "structures": [
   "5cj6"
  ],
- "prompt": "Make the plum chain hotpink.",
+ "prompt": "Make the magenta chain plum.",
  "reference": {
   "root": {
    "kind": "root",
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "plum"
                }
               }
              ]
@@ -151,7 +151,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "plum"
+                 "color": "magenta"
                 }
                }
               ]
@@ -175,7 +175,7 @@
     "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "hotpink"
+   "color": "plum"
   }
  ],
  "twin_of": "fu-referent-colour-5cj6-api",
@@ -198,12 +198,12 @@
    "start state scores 0.5 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
    "twin selects the same target atoms",
-   "referent is unambiguous in the start state: \"the plum chain\": exactly one chain of the start state is plum (author chain B)"
+   "referent is unambiguous in the start state: \"the magenta chain\": exactly one chain of the start state is magenta (author chain B)"
   ],
   "seed": "20261113|fu-referent-colour|1|5cj6",
   "edit": "recolour a component named by its current colour",
   "noop_kind": null,
-  "referent": "\"the plum chain\": exactly one chain of the start state is plum (author chain B)",
+  "referent": "\"the magenta chain\": exactly one chain of the start state is magenta (author chain B)",
   "preserved": [
    {
     "selector": {

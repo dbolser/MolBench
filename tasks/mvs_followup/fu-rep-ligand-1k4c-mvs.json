@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "magenta"
+                "color": "steelblue"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "magenta"
+                 "color": "steelblue"
                 }
                }
               ]

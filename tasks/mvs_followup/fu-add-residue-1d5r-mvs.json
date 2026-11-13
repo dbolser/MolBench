@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "cyan"
                }
               }
              ]
@@ -172,7 +172,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "cyan"
                 }
                }
               ]
@@ -247,7 +247,7 @@
      "label_comp_id": "TLA"
     },
     "representation": "ball_and_stick",
-    "color": "hotpink"
+    "color": "cyan"
    }
   ],
   "removed": null,

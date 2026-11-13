@@ -6,7 +6,7 @@
  "structures": [
   "1y26"
  ],
- "prompt": "Make the adenine (ADE) khaki.",
+ "prompt": "Make the adenine (ADE) magenta.",
  "reference": [
   {
    "action": "load",
@@ -21,7 +21,7 @@
     },
     {
      "label_comp_id": "ADE",
-     "color": "khaki"
+     "color": "magenta"
     }
    ]
   }
@@ -42,7 +42,7 @@
      },
      {
       "label_comp_id": "ADE",
-      "color": "khaki"
+      "color": "magenta"
      }
     ]
    }
@@ -55,7 +55,7 @@
     "label_comp_id": "ADE"
    },
    "representation": null,
-   "color": "khaki"
+   "color": "magenta"
   }
  ],
  "twin_of": "fu-noop-colour-1y26-mvs",
@@ -97,7 +97,7 @@
      "label_comp_id": "ADE"
     },
     "representation": null,
-    "color": "khaki"
+    "color": "magenta"
    }
   ],
   "removed": null,

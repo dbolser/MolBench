@@ -6,7 +6,7 @@
  "structures": [
   "3ave"
  ],
- "prompt": "Add chain B too, as a cartoon in magenta.",
+ "prompt": "Add chain B too, as a cartoon in grey.",
  "reference": {
   "root": {
    "kind": "root",
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "magenta"
+                "color": "gray"
                }
               }
              ]
@@ -151,7 +151,7 @@
     "auth_asym_id": "B"
    },
    "representation": "cartoon",
-   "color": "magenta"
+   "color": "gray"
   }
  ],
  "twin_of": null,

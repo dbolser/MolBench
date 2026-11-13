@@ -6,7 +6,7 @@
  "structures": [
   "1hvr"
  ],
- "prompt": "Could you turn the ligand XK2 green?",
+ "prompt": "Could you turn the ligand XK2 blue?",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "limegreen"
+                "color": "hotpink"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "green"
+                "color": "blue"
                }
               }
              ]
@@ -123,7 +123,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "limegreen"
+                 "color": "hotpink"
                 }
                }
               ]
@@ -171,7 +171,7 @@
     "label_comp_id": "XK2"
    },
    "representation": null,
-   "color": "green"
+   "color": "blue"
   }
  ],
  "twin_of": "fu-recolour-ligand-1hvr-api",
@@ -204,7 +204,7 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "limegreen"
+    "color": "hotpink"
    }
   ],
   "removed": null,

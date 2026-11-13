@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "brown"
+                "color": "gray"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "brown"
+                 "color": "gray"
                 }
                }
               ]
@@ -200,7 +200,7 @@
      "label_comp_id": "HEM"
     },
     "representation": "ball_and_stick",
-    "color": "brown"
+    "color": "gray"
    }
   ],
   "removed": null,

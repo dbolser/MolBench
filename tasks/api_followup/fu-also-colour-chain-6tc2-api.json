@@ -6,11 +6,15 @@
  "structures": [
   "6tc2"
  ],
- "prompt": "Also colour chain B green.",
+ "prompt": "Also colour chain B teal.",
  "reference": [
   {
    "action": "load",
    "molecule_id": "6tc2"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "cartoon"
   },
   {
    "action": "color",
@@ -26,7 +30,7 @@
    "data": [
     {
      "auth_asym_id": "B",
-     "color": "green"
+     "color": "teal"
     }
    ],
    "keep_colors": true,
@@ -39,6 +43,10 @@
    {
     "action": "load",
     "molecule_id": "6tc2"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
    },
    {
     "action": "color",
@@ -58,7 +66,7 @@
     "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "green"
+   "color": "teal"
   }
  ],
  "twin_of": "fu-also-colour-chain-6tc2-mvs",
@@ -80,7 +88,7 @@
    "target selects 491 atoms on the frozen atom table",
    "start state scores 0.0 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
-   "1 other way(s) of writing the final state grade as exactly right",
+   "2 other way(s) of writing the final state grade as exactly right",
    "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
    "twin selects the same target atoms"
   ],
@@ -110,7 +118,7 @@
   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
   "targets": [
    {
-    "action": 1,
+    "action": 2,
     "param": 0,
     "what": "author chain A (label chains A, X)",
     "atoms": [
@@ -124,7 +132,7 @@
     "n_atoms": 328
    },
    {
-    "action": 2,
+    "action": 3,
     "param": 0,
     "what": "author chain B (label chains B, M, N, Y)",
     "atoms": [

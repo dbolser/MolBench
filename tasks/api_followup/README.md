@@ -27,7 +27,7 @@ from the frozen panel only. Only the final state is graded.
 | `fu-noop-shown` | 2 | no change: already true | the polymer already is a cartoon: reference = start state |
 | `fu-noop-hidden` | 2 | no change: already true | no water is drawn (MVS) / hide_water is already set (API): reference = start state |
 | `fu-noop-question` | 2 | no change: a question | a question about the structure: reference = start state |
-| `fu-api-style` | 2 | change the representation (order-sensitive on this track) (API only) | start: two coloured chains; set_visual_style inserted before the colour call (a style reloads and drops colouring) |
+| `fu-api-style` | 2 | change the representation (order-sensitive on this track) (API only) | start: two coloured chains, default view; set_visual_style (putty or cartoon, the polymer-only styles) inserted before the colour call (a style reloads and drops colouring) |
 | `fu-api-uncolour` | 2 | undo one earlier choice (API only) | start: polymer + ligand coloured; the ligand's selection removed from the colour call |
 | `fu-api-show-water` | 2 | undo one earlier choice (a hidden component) (API only) | start: waters hidden, polymer coloured; the hide_water call removed |
 | `fu-api-clear-colours` | 1 | undo earlier choices (all colouring) (API only) | start: waters hidden, polymer + ligand coloured; the colour call removed |
@@ -67,6 +67,14 @@ from the frozen panel only. Only the final state is graded.
   distance-based selection or a superposition the unchanged state is not the only
   defensible answer, so they are not tasks here.
 - **A target for something removed, on the MVS track**: see `removed` above.
+
+## Whole chains on the API track
+
+An author chain id also covers that chain's ligands, ions and waters, which the default
+view draws; "chain B" as the author chain and as the polymer chain alone would then be
+two pictures. Every API start state that colours whole chains therefore sets the
+cartoon style first (polymer only), as the MVS twin draws cartoons, and the generator
+checks that the same answer written with label chain ids grades as exactly right.
 
 Held-back structures are the fifth of the panel with the smallest SHA-256 of
 `"molbench-heldback-v1:<id>"` (a rule on the structure alone), unless the generator was

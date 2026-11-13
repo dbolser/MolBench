@@ -25,7 +25,7 @@
     },
     {
      "label_comp_id": "ATP",
-     "color": "steelblue"
+     "color": "teal"
     }
    ]
   }
@@ -50,7 +50,7 @@
      },
      {
       "label_comp_id": "ATP",
-      "color": "steelblue"
+      "color": "teal"
      }
     ]
    }
@@ -99,7 +99,7 @@
      "label_comp_id": "ATP"
     },
     "representation": null,
-    "color": "steelblue"
+    "color": "teal"
    }
   ],
   "removed": null,

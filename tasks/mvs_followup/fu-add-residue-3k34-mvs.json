@@ -6,7 +6,7 @@
  "structures": [
   "3k34"
  ],
- "prompt": "Now draw Met241 of chain A as ball-and-stick too, in limegreen.",
+ "prompt": "Now draw Met241 of chain A as ball-and-stick too, in cyan.",
  "reference": {
   "root": {
    "kind": "root",
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "khaki"
                }
               }
              ]
@@ -93,7 +93,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "limegreen"
+                "color": "cyan"
                }
               }
              ]
@@ -172,7 +172,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "khaki"
                 }
                }
               ]
@@ -197,7 +197,7 @@
     "auth_seq_id": 241
    },
    "representation": "ball_and_stick",
-   "color": "limegreen"
+   "color": "cyan"
   }
  ],
  "twin_of": "fu-add-residue-3k34-api",
@@ -247,7 +247,7 @@
      "label_comp_id": "SUA"
     },
     "representation": "ball_and_stick",
-    "color": "hotpink"
+    "color": "khaki"
    }
   ],
   "removed": null,

@@ -6,7 +6,7 @@
  "structures": [
   "1lmb"
  ],
- "prompt": "Also show chain 4 as a brown cartoon.",
+ "prompt": "Also show chain 4 as a blue cartoon.",
  "reference": {
   "root": {
    "kind": "root",
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "brown"
+                "color": "blue"
                }
               }
              ]
@@ -151,7 +151,7 @@
     "auth_asym_id": "4"
    },
    "representation": "cartoon",
-   "color": "brown"
+   "color": "blue"
   }
  ],
  "twin_of": null,

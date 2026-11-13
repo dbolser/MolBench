@@ -13,11 +13,15 @@
    "molecule_id": "1iep"
   },
   {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
    "action": "color",
    "data": [
     {
      "auth_asym_id": "A",
-     "color": "yellow"
+     "color": "brown"
     },
     {
      "auth_asym_id": "B",
@@ -34,6 +38,10 @@
     "molecule_id": "1iep"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
     "action": "color",
     "data": [
      {
@@ -42,7 +50,7 @@
      },
      {
       "auth_asym_id": "B",
-      "color": "yellow"
+      "color": "brown"
      }
     ]
    }
@@ -55,7 +63,7 @@
     "auth_asym_id": "A"
    },
    "representation": null,
-   "color": "yellow"
+   "color": "brown"
   },
   {
    "selector": {
@@ -82,14 +90,15 @@
    "reference grades as exactly right against the task (success, F1 1, target score 1)",
    "start state grades as itself; it is not the requested final state",
    "target selects 4710 atoms on the frozen atom table",
-   "start state scores 0.5 on the target (below 1)",
+   "start state scores 0.6667 on the target (below 1)",
+   "1 other way(s) of writing the final state grade as exactly right",
    "twin selects the same target atoms",
-   "referent is unambiguous in the start state: \"the two chains\": the structure has exactly two polymer chains, and the start state colours each (orange, yellow)"
+   "referent is unambiguous in the start state: \"the two chains\": the structure has exactly two polymer chains, and the start state colours each (orange, brown)"
   ],
   "seed": "20261113|fu-swap-colours|1|1iep",
   "edit": "recolour by reference to the scene",
   "noop_kind": null,
-  "referent": "\"the two chains\": the structure has exactly two polymer chains, and the start state colours each (orange, yellow)",
+  "referent": "\"the two chains\": the structure has exactly two polymer chains, and the start state colours each (orange, brown)",
   "preserved": null,
   "removed": null,
   "difficulty": {
@@ -104,7 +113,7 @@
   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
   "targets": [
    {
-    "action": 1,
+    "action": 2,
     "param": 0,
     "what": "author chain A (label chains A, C, D, E, F, G, K)",
     "atoms": [
@@ -133,7 +142,7 @@
     "n_atoms": 2369
    },
    {
-    "action": 1,
+    "action": 2,
     "param": 1,
     "what": "author chain B (label chains B, H, I, J, L)",
     "atoms": [

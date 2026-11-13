@@ -17,7 +17,7 @@
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "hotpink"
+     "color": "brown"
     }
    ]
   }
@@ -39,7 +39,7 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "hotpink"
+      "color": "brown"
      }
     ]
    }
@@ -79,7 +79,7 @@
      }
     ],
     "representation": null,
-    "color": "hotpink"
+    "color": "brown"
    }
   ],
   "removed": null,

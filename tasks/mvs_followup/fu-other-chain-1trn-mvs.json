@@ -6,7 +6,7 @@
  "structures": [
   "1trn"
  ],
- "prompt": "Now the other chain in yellow.",
+ "prompt": "Now the other chain in grey.",
  "reference": {
   "root": {
    "kind": "root",
@@ -46,7 +46,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "brown"
+                "color": "yellow"
                }
               }
              ]
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "yellow"
+                "color": "gray"
                }
               }
              ]
@@ -127,7 +127,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "brown"
+                 "color": "yellow"
                 }
                }
               ]
@@ -167,7 +167,7 @@
     "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "yellow"
+   "color": "gray"
   }
  ],
  "twin_of": "fu-other-chain-1trn-api",
@@ -203,7 +203,7 @@
      "auth_asym_id": "A"
     },
     "representation": "cartoon",
-    "color": "brown"
+    "color": "yellow"
    }
   ],
   "removed": null,

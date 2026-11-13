@@ -21,7 +21,7 @@
     },
     {
      "label_comp_id": "TLA",
-     "color": "hotpink"
+     "color": "cyan"
     }
    ]
   },
@@ -56,7 +56,7 @@
      },
      {
       "label_comp_id": "TLA",
-      "color": "hotpink"
+      "color": "cyan"
      }
     ]
    }
@@ -121,7 +121,7 @@
      "label_comp_id": "TLA"
     },
     "representation": null,
-    "color": "hotpink"
+    "color": "cyan"
    }
   ],
   "removed": null,

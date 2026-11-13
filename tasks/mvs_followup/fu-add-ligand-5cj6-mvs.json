@@ -6,7 +6,7 @@
  "structures": [
   "5cj6"
  ],
- "prompt": "Now bring in the ligand 51Y in salmon ball-and-stick.",
+ "prompt": "Now bring in the ligand 51Y in purple ball-and-stick.",
  "reference": {
   "root": {
    "kind": "root",
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "salmon"
+                "color": "purple"
                }
               }
              ]
@@ -147,7 +147,7 @@
     "label_comp_id": "51Y"
    },
    "representation": "ball_and_stick",
-   "color": "salmon"
+   "color": "purple"
   }
  ],
  "twin_of": null,

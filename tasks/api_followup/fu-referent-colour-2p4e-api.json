@@ -6,22 +6,26 @@
  "structures": [
   "2p4e"
  ],
- "prompt": "The teal one should be blue instead.",
+ "prompt": "The blue one should be hot pink instead.",
  "reference": [
   {
    "action": "load",
    "molecule_id": "2p4e"
   },
   {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
    "action": "color",
    "data": [
     {
      "auth_asym_id": "P",
-     "color": "hotpink"
+     "color": "brown"
     },
     {
      "auth_asym_id": "A",
-     "color": "blue"
+     "color": "hotpink"
     }
    ]
   }
@@ -34,15 +38,19 @@
     "molecule_id": "2p4e"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
     "action": "color",
     "data": [
      {
       "auth_asym_id": "P",
-      "color": "hotpink"
+      "color": "brown"
      },
      {
       "auth_asym_id": "A",
-      "color": "teal"
+      "color": "blue"
      }
     ]
    }
@@ -55,7 +63,7 @@
     "auth_asym_id": "A"
    },
    "representation": null,
-   "color": "blue"
+   "color": "hotpink"
   }
  ],
  "twin_of": "fu-referent-colour-2p4e-mvs",
@@ -77,20 +85,22 @@
    "target selects 3943 atoms on the frozen atom table",
    "start state scores 0.5 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
    "twin selects the same target atoms",
-   "referent is unambiguous in the start state: \"the teal chain\": exactly one chain of the start state is teal (author chain A)"
+   "referent is unambiguous in the start state: \"the blue chain\": exactly one chain of the start state is blue (author chain A)"
   ],
   "seed": "20261113|fu-referent-colour|3|2p4e",
   "edit": "recolour a component named by its current colour",
   "noop_kind": null,
-  "referent": "\"the teal chain\": exactly one chain of the start state is teal (author chain A)",
+  "referent": "\"the blue chain\": exactly one chain of the start state is blue (author chain A)",
   "preserved": [
    {
     "selector": {
      "auth_asym_id": "P"
     },
     "representation": null,
-    "color": "hotpink"
+    "color": "brown"
    }
   ],
   "removed": null,
@@ -106,7 +116,7 @@
   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
   "targets": [
    {
-    "action": 1,
+    "action": 2,
     "param": 0,
     "what": "author chain P (label chains A, C, D, E)",
     "atoms": [
@@ -126,7 +136,7 @@
     "n_atoms": 833
    },
    {
-    "action": 1,
+    "action": 2,
     "param": 1,
     "what": "author chain A (label chains B, F)",
     "atoms": [

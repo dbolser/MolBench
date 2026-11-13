@@ -17,11 +17,11 @@
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "hotpink"
+     "color": "brown"
     },
     {
      "label_comp_id": "P33",
-     "color": "purple"
+     "color": "plum"
     }
    ]
   },
@@ -43,11 +43,11 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "hotpink"
+      "color": "brown"
      },
      {
       "label_comp_id": "P33",
-      "color": "purple"
+      "color": "plum"
      }
     ]
    }
@@ -87,14 +87,14 @@
      }
     ],
     "representation": null,
-    "color": "hotpink"
+    "color": "brown"
    },
    {
     "selector": {
      "label_comp_id": "P33"
     },
     "representation": null,
-    "color": "purple"
+    "color": "plum"
    }
   ],
   "removed": null,

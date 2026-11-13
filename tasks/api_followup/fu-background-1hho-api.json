@@ -17,15 +17,15 @@
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "limegreen"
+     "color": "hotpink"
     },
     {
      "struct_asym_id": "B",
-     "color": "limegreen"
+     "color": "hotpink"
     },
     {
      "label_comp_id": "HEM",
-     "color": "cyan"
+     "color": "plum"
     }
    ]
   },
@@ -47,15 +47,15 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "limegreen"
+      "color": "hotpink"
      },
      {
       "struct_asym_id": "B",
-      "color": "limegreen"
+      "color": "hotpink"
      },
      {
       "label_comp_id": "HEM",
-      "color": "cyan"
+      "color": "plum"
      }
     ]
    }
@@ -98,14 +98,14 @@
      }
     ],
     "representation": null,
-    "color": "limegreen"
+    "color": "hotpink"
    },
    {
     "selector": {
      "label_comp_id": "HEM"
     },
     "representation": null,
-    "color": "cyan"
+    "color": "plum"
    }
   ],
   "removed": null,

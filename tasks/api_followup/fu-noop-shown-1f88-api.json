@@ -25,7 +25,7 @@
     },
     {
      "label_comp_id": "RET",
-     "color": "orange"
+     "color": "red"
     }
    ]
   }
@@ -50,7 +50,7 @@
      },
      {
       "label_comp_id": "RET",
-      "color": "orange"
+      "color": "red"
      }
     ]
    }
@@ -99,7 +99,7 @@
      "label_comp_id": "RET"
     },
     "representation": null,
-    "color": "orange"
+    "color": "red"
    }
   ],
   "removed": null,

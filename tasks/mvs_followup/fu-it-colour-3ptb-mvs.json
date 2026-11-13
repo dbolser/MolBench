@@ -6,7 +6,7 @@
  "structures": [
   "3ptb"
  ],
- "prompt": "Colour it green.",
+ "prompt": "Colour it khaki.",
  "reference": {
   "root": {
    "kind": "root",
@@ -46,7 +46,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "green"
+                "color": "khaki"
                }
               }
              ]
@@ -127,7 +127,7 @@
     "label_comp_id": "BEN"
    },
    "representation": null,
-   "color": "green"
+   "color": "khaki"
   }
  ],
  "twin_of": null,

@@ -6,7 +6,7 @@
  "structures": [
   "1ake"
  ],
- "prompt": "Colour the other chain teal.",
+ "prompt": "Colour the other chain grey.",
  "reference": {
   "root": {
    "kind": "root",
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "teal"
+                "color": "gray"
                }
               }
              ]
@@ -167,7 +167,7 @@
     "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "teal"
+   "color": "gray"
   }
  ],
  "twin_of": "fu-other-chain-1ake-api",

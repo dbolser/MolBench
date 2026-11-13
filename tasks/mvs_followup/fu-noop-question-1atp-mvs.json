@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "steelblue"
+                "color": "teal"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "steelblue"
+                 "color": "teal"
                 }
                }
               ]
@@ -200,7 +200,7 @@
      "label_comp_id": "ATP"
     },
     "representation": "ball_and_stick",
-    "color": "steelblue"
+    "color": "teal"
    }
   ],
   "removed": null,

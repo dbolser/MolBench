@@ -6,7 +6,7 @@
  "structures": [
   "1lmb"
  ],
- "prompt": "Switch the whole structure to a molecular surface and keep the two chain colours.",
+ "prompt": "Switch the whole structure to the putty style and keep the two chain colours.",
  "reference": [
   {
    "action": "load",
@@ -14,7 +14,7 @@
   },
   {
    "action": "set_visual_style",
-   "style": "molecular-surface"
+   "style": "putty"
   },
   {
    "action": "color",
@@ -70,6 +70,7 @@
   "checks": [
    "reference grades as exactly right against the task (success, F1 1; no atom target)",
    "start state grades as itself; it is not the requested final state",
+   "1 other way(s) of writing the final state grade as exactly right",
    "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right"
   ],
   "seed": "20261113|fu-api-style|2|1lmb",

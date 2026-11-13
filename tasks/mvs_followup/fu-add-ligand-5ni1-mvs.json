@@ -6,7 +6,7 @@
  "structures": [
   "5ni1"
  ],
- "prompt": "Also show the HEM ligands, as ball-and-stick in purple.",
+ "prompt": "Also show the HEM ligands, as ball-and-stick in yellow.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "brown"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "purple"
+                "color": "yellow"
                }
               }
              ]
@@ -123,7 +123,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "brown"
                 }
                }
               ]
@@ -147,7 +147,7 @@
     "label_comp_id": "HEM"
    },
    "representation": "ball_and_stick",
-   "color": "purple"
+   "color": "yellow"
   }
  ],
  "twin_of": null,
@@ -179,7 +179,7 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "hotpink"
+    "color": "brown"
    }
   ],
   "removed": null,

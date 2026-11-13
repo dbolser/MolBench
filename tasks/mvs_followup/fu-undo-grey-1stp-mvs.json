@@ -6,7 +6,7 @@
  "structures": [
   "1stp"
  ],
- "prompt": "Undo the plum on the biotin (BTN): grey again, please.",
+ "prompt": "Undo the magenta on the biotin (BTN): grey again, please.",
  "reference": {
   "root": {
    "kind": "root",
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "plum"
+                 "color": "magenta"
                 }
                }
               ]

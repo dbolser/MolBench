@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "brown"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "purple"
+                "color": "plum"
                }
               }
              ]
@@ -129,7 +129,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "brown"
                 }
                }
               ]
@@ -153,7 +153,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "purple"
+                 "color": "plum"
                 }
                }
               ]
@@ -199,14 +199,14 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "hotpink"
+    "color": "brown"
    },
    {
     "selector": {
      "label_comp_id": "P33"
     },
     "representation": "ball_and_stick",
-    "color": "purple"
+    "color": "plum"
    }
   ],
   "removed": null,

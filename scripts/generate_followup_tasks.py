@@ -71,10 +71,12 @@ HELDBACK_SHARE = 0.20
 HELDBACK_SALT = "molbench-heldback-v1"
 
 # Colours a request may name: the task palette, without white (an MVS representation
-# with no colour node is white, so "white" would not be a visible change) and black
-# (kept for the background template).
-COLOURS = tuple(c for c in drawn.TASK_PALETTE if c not in ("white", "black"))
-SAY = {"gray": "grey"}    # how a British-English request spells a palette name
+# with no colour node is white, so "white" would not be a visible change), black (kept
+# for the background template) and limegreen (said aloud it is "lime green", which an
+# answer could as well write "lime", another colour).
+COLOURS = tuple(c for c in drawn.TASK_PALETTE if c not in ("white", "black", "limegreen"))
+# how a British-English request says a palette name
+SAY = {"gray": "grey", "hotpink": "hot pink", "steelblue": "steel blue"}
 AMINO = ("ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "HIS", "ILE", "LEU", "LYS", "MET",
          "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL")   # the 20 without glycine
 
@@ -498,9 +500,35 @@ def chains_mvs(e: Entry, a: dict, b: dict, ca: str | None, cb: str | None) -> di
     return mvs_scene(e.id, [comp(chain_sel(a), "cartoon", ca), comp(chain_sel(b), "cartoon", cb)])
 
 
-def chains_api(e: Entry, a: dict, b: dict, ca: str, cb: str | None) -> list[dict]:
+CARTOON = {"action": "set_visual_style", "style": "cartoon"}
+
+
+def chains_api(e: Entry, a: dict, b: dict, ca: str, cb: str | None, style: bool = True) -> list[dict]:
+    """Two chains coloured on the API track, under the cartoon style. The style matters:
+    an author chain id also covers that chain's ligands, ions and waters, which the
+    default view draws, so there "chain B" as the author chain and "chain B" as the
+    polymer chain alone would be two different pictures. Under the cartoon style only
+    polymer is drawn and the two readings are one final state (the `by_label` control)."""
     data = [{**chain_sel(a), "color": ca}] + ([{**chain_sel(b), "color": cb}] if cb else [])
-    return [load(e.id), paint(data)]
+    return [load(e.id)] + ([CARTOON] if style else []) + [paint(data)]
+
+
+def by_label(e: Entry, calls: list[dict]) -> list[dict]:
+    """The same calls with every whole-chain selection written as the polymer chain's
+    label chain id (``struct_asym_id``) instead of the author chain id."""
+    out = json.loads(json.dumps(calls))
+    for call in out:
+        params = []
+        for param in call.get("data") or []:
+            if "auth_asym_id" in param and "auth_seq_id" not in param:
+                author = param.pop("auth_asym_id")
+                params += [{"struct_asym_id": c["label_asym_id"], **param}
+                           for c in e.chains if c["auth_asym_id"] == author]
+            else:
+                params.append(param)
+        if "data" in call:
+            call["data"] = params
+    return out
 
 
 def recolour_chain(e: Entry, r: random.Random):
@@ -521,8 +549,9 @@ def recolour_chain(e: Entry, r: random.Random):
                 "target": [part(chain_sel(b), None, new)],
                 "preserved": [part(chain_sel(a), None, ca)],
                 "equivalent": [chains_api(e, a, b, ca, cb)
-                               + [paint([{**chain_sel(b), "color": new}], keep=True)]],
-                "wrong": [[load(e.id), paint([{**chain_sel(b), "color": new}])]]},
+                               + [paint([{**chain_sel(b), "color": new}], keep=True)],
+                               by_label(e, chains_api(e, a, b, ca, new))],
+                "wrong": [[load(e.id), CARTOON, paint([{**chain_sel(b), "color": new}])]]},
     }
 
 
@@ -545,7 +574,8 @@ def also_colour(e: Entry, r: random.Random):
                 + [paint([{**chain_sel(b), "color": new}], keep=True)],
                 "target": [part(chain_sel(b), None, new)],
                 "preserved": [part(chain_sel(a), None, ca)],
-                "equivalent": [chains_api(e, a, b, ca, new)],
+                "equivalent": [chains_api(e, a, b, ca, new),
+                               by_label(e, chains_api(e, a, b, ca, new))],
                 # the commonest slip: a second color call without keep_colors
                 "wrong": [chains_api(e, a, b, ca, None) + [paint([{**chain_sel(b), "color": new}])]]},
     }
@@ -592,7 +622,9 @@ def referent_colour(e: Entry, r: random.Random):
                 "preserved": [part(chain_sel(other), "cartoon", cb if first else ca)]},
         "api": {"start": chains_api(e, a, b, ca, cb), "ref": chains_api(e, a, b, na, nb),
                 "target": [part(chain_sel(hit), None, new)],
-                "preserved": [part(chain_sel(other), None, cb if first else ca)]},
+                "preserved": [part(chain_sel(other), None, cb if first else ca)],
+                "equivalent": [by_label(e, chains_api(e, a, b, na, nb))],
+                "wrong": [[load(e.id), CARTOON, paint([{**chain_sel(hit), "color": new}])]]},
     }
 
 
@@ -613,7 +645,8 @@ def swap_colours(e: Entry, r: random.Random):
         "mvs": {"start": chains_mvs(e, a, b, ca, cb), "ref": chains_mvs(e, a, b, cb, ca),
                 "target": target, "preserved": None},
         "api": {"start": chains_api(e, a, b, ca, cb), "ref": chains_api(e, a, b, cb, ca),
-                "target": target, "preserved": None},
+                "target": target, "preserved": None,
+                "equivalent": [by_label(e, chains_api(e, a, b, cb, ca))]},
     }
 
 
@@ -687,15 +720,19 @@ def noop_question(e: Entry, r: random.Random):
 
 
 def noop_spin(e: Entry, r: random.Random):
-    """MVS has no motion. Asked to spin, the only scene that honours everything said so
-    far is the one already there."""
+    """The MVS reference given to the model has no motion (multi-snapshot animation is
+    left out of it). The request itself says what to do then: leave the scene as it is."""
     if not needs_pair(e):
         return None
     c1, c2 = colours(r, 2)
     p = Pair(e, c1, c2)
     return {
-        "prompt": pick(r, ["Spin the molecule.", "Make the structure spin slowly.",
-                           "Start the molecule spinning."]),
+        "prompt": pick(r, ["Can you make it spin? If the scene cannot do that, leave it "
+                           "exactly as it is.",
+                           "Make the structure spin slowly, or leave the scene as it is if "
+                           "spinning is not possible here.",
+                           "Start the molecule spinning; if that cannot be done in the scene, "
+                           "change nothing."]),
         "edit": "no change: the format cannot express the request", "noop": True,
         "noop_kind": "not expressible in the format", "skills": ["edit", "noop"],
         "mvs": {"start": mvs_scene(e.id, p.mvs()), "ref": mvs_scene(e.id, p.mvs()),
@@ -911,19 +948,22 @@ def api_style(e: Entry, r: random.Random):
         return None
     a, b = pair
     ca, cb = colours(r, 2)
-    style, words = r.choice([("spacefill", "spacefill"), ("molecular-surface", "a molecular surface"),
-                             ("ball-and-stick", "ball-and-stick")])
-    start = chains_api(e, a, b, ca, cb)
+    # Only the two polymer-only styles: under any other, the ligands and waters filed
+    # under an author chain id are drawn, and "the chain" has two readings (`chains_api`).
+    style, words = [("putty", "the putty style"),
+                    ("cartoon", "the cartoon-only style (no ligands or waters)")][r.turn % 2]
+    start = chains_api(e, a, b, ca, cb, style=False)
     restyle = {"action": "set_visual_style", "style": style}
     return {
         "prompt": pick(r, ["Switch the whole structure to {words} and keep the two chain colours.",
-                           "Draw everything as {words} instead; chains {a} and {b} keep their colours.",
-                           "Change the display style to {words}, with the same colours on the two "
+                           "Draw everything in {words} instead; chains {a} and {b} keep their colours.",
+                           "Change the display to {words}, with the same colours on the two "
                            "chains."], words=words, a=a["auth_asym_id"], b=b["auth_asym_id"]),
         "edit": "change the representation (order-sensitive on this track)",
         "skills": ["edit", "representation", "color"],
         "api": {"start": start, "ref": [start[0], restyle, start[1]], "target": None,
                 "preserved": None,
+                "equivalent": [by_label(e, [start[0], restyle, start[1]])],
                 "wrong": [start + [restyle], [load(e.id), restyle]]},
     }
 
@@ -1051,7 +1091,7 @@ DERIVED = {
     "fu-noop-shown": "the polymer already is a cartoon: reference = start state",
     "fu-noop-hidden": "no water is drawn (MVS) / hide_water is already set (API): reference = start state",
     "fu-noop-question": "a question about the structure: reference = start state",
-    "fu-noop-spin": "MVS cannot express motion: reference = start state",
+    "fu-noop-spin": "the MVS reference has no motion, and the request says to change nothing in that case: reference = start state",
     "fu-it-colour": "start: the ligand alone (one copy); \"it\" recoloured",
     "fu-it-surface": "start: the polymer alone; \"it\" changed from cartoon to surface, colour kept",
     "fu-rep-ligand": "start: polymer + ligand; the ligand's representation set to spacefill, colour kept",
@@ -1063,7 +1103,7 @@ DERIVED = {
     "fu-add-label": "start: polymer + ligand; a label with the quoted text added to the ligand",
     "fu-remove-label": "start: polymer + labelled ligand; the label dropped",
     "fu-opacity": "start: polymer surface + ligand; an opacity added to the surface",
-    "fu-api-style": "start: two coloured chains; set_visual_style inserted before the colour call (a style reloads and drops colouring)",
+    "fu-api-style": "start: two coloured chains, default view; set_visual_style (putty or cartoon, the polymer-only styles) inserted before the colour call (a style reloads and drops colouring)",
     "fu-api-uncolour": "start: polymer + ligand coloured; the ligand's selection removed from the colour call",
     "fu-api-show-water": "start: waters hidden, polymer coloured; the hide_water call removed",
     "fu-api-clear-colours": "start: waters hidden, polymer + ligand coloured; the colour call removed",
@@ -1340,6 +1380,14 @@ def readme(track: str, built: list[dict]) -> str:
         "  distance-based selection or a superposition the unchanged state is not the only",
         "  defensible answer, so they are not tasks here.",
         "- **A target for something removed, on the MVS track**: see `removed` above.",
+        "",
+        "## Whole chains on the API track",
+        "",
+        "An author chain id also covers that chain's ligands, ions and waters, which the default",
+        "view draws; \"chain B\" as the author chain and as the polymer chain alone would then be",
+        "two pictures. Every API start state that colours whole chains therefore sets the",
+        "cartoon style first (polymer only), as the MVS twin draws cartoons, and the generator",
+        "checks that the same answer written with label chain ids grades as exactly right.",
         "",
         "Held-back structures are the fifth of the panel with the smallest SHA-256 of",
         f"`\"{HELDBACK_SALT}:<id>\"` (a rule on the structure alone), unless the generator was",

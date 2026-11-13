@@ -6,7 +6,7 @@
  "structures": [
   "1c3w"
  ],
- "prompt": "Start the molecule spinning.",
+ "prompt": "Start the molecule spinning; if that cannot be done in the scene, change nothing.",
  "reference": {
   "root": {
    "kind": "root",
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "limegreen"
+                "color": "cyan"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "limegreen"
+                 "color": "cyan"
                 }
                }
               ]
@@ -199,7 +199,7 @@
      "label_comp_id": "LI1"
     },
     "representation": "ball_and_stick",
-    "color": "limegreen"
+    "color": "cyan"
    }
   ],
   "removed": null,

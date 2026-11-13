@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "teal"
+                "color": "blue"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "teal"
+                 "color": "blue"
                 }
                }
               ]
@@ -206,7 +206,7 @@
      "label_comp_id": "MRK"
     },
     "representation": "ball_and_stick",
-    "color": "teal"
+    "color": "blue"
    }
   ],
   "removed": null,

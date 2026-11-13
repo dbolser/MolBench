@@ -6,7 +6,7 @@
  "structures": [
   "1k4c"
  ],
- "prompt": "Undo the limegreen on the diacyl glycerol (DGA) and leave the protein as it is.",
+ "prompt": "Undo the cyan on the diacyl glycerol (DGA) and leave the protein as it is.",
  "reference": [
   {
    "action": "load",
@@ -54,7 +54,7 @@
      },
      {
       "label_comp_id": "DGA",
-      "color": "limegreen"
+      "color": "cyan"
      }
     ]
    }

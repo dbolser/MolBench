@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "cyan"
+                "color": "brown"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "cyan"
+                 "color": "brown"
                 }
                }
               ]
@@ -203,7 +203,7 @@
      "label_comp_id": "P33"
     },
     "representation": "ball_and_stick",
-    "color": "cyan"
+    "color": "brown"
    }
   ],
   "removed": null,

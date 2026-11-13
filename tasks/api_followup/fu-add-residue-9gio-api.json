@@ -6,7 +6,7 @@
  "structures": [
   "9gio"
  ],
- "prompt": "Also show Ile14 of chain A as limegreen ball-and-stick.",
+ "prompt": "Also show Ile14 of chain A as orange ball-and-stick.",
  "reference": [
   {
    "action": "load",
@@ -29,7 +29,7 @@
     },
     {
      "label_comp_id": "3JF",
-     "color": "green"
+     "color": "gray"
     }
    ]
   },
@@ -41,7 +41,7 @@
      "auth_seq_id": 14,
      "color": null,
      "representation": "ball-and-stick",
-     "representationColor": "limegreen"
+     "representationColor": "orange"
     }
    ],
    "keep_colors": true,
@@ -72,7 +72,7 @@
      },
      {
       "label_comp_id": "3JF",
-      "color": "green"
+      "color": "gray"
      }
     ]
    }
@@ -86,7 +86,7 @@
     "auth_seq_id": 14
    },
    "representation": "ball-and-stick",
-   "color": "limegreen"
+   "color": "orange"
   }
  ],
  "twin_of": "fu-add-residue-9gio-mvs",
@@ -143,7 +143,7 @@
      "label_comp_id": "3JF"
     },
     "representation": null,
-    "color": "green"
+    "color": "gray"
    }
   ],
   "removed": null,

@@ -21,7 +21,7 @@
     },
     {
      "label_comp_id": "BEN",
-     "color": "khaki"
+     "color": "gray"
     }
    ]
   }
@@ -47,7 +47,7 @@
      },
      {
       "label_comp_id": "BEN",
-      "color": "khaki"
+      "color": "gray"
      }
     ]
    }
@@ -94,7 +94,7 @@
      "label_comp_id": "BEN"
     },
     "representation": null,
-    "color": "khaki"
+    "color": "gray"
    }
   ],
   "removed": null,

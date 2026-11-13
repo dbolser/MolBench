@@ -21,7 +21,7 @@
     },
     {
      "label_comp_id": "OHT",
-     "color": "teal"
+     "color": "blue"
     }
    ]
   }
@@ -42,7 +42,7 @@
      },
      {
       "label_comp_id": "OHT",
-      "color": "teal"
+      "color": "blue"
      }
     ]
    }
@@ -88,7 +88,7 @@
      "label_comp_id": "OHT"
     },
     "representation": null,
-    "color": "teal"
+    "color": "blue"
    }
   ],
   "removed": null,

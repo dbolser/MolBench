@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "limegreen"
+                "color": "hotpink"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "magenta"
+                "color": "teal"
                }
               }
              ]
@@ -126,7 +126,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "limegreen"
+                 "color": "hotpink"
                 }
                }
               ]
@@ -150,7 +150,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "magenta"
+                 "color": "teal"
                 }
                }
               ]
@@ -207,7 +207,7 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "limegreen"
+    "color": "hotpink"
    }
   ],
   "removed": null,

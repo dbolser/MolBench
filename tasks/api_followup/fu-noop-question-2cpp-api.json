@@ -21,7 +21,7 @@
     },
     {
      "label_comp_id": "HEM",
-     "color": "green"
+     "color": "orange"
     }
    ]
   }
@@ -42,7 +42,7 @@
      },
      {
       "label_comp_id": "HEM",
-      "color": "green"
+      "color": "orange"
      }
     ]
    }
@@ -88,7 +88,7 @@
      "label_comp_id": "HEM"
     },
     "representation": null,
-    "color": "green"
+    "color": "orange"
    }
   ],
   "removed": null,

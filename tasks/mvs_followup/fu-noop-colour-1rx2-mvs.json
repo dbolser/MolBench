@@ -6,7 +6,7 @@
  "structures": [
   "1rx2"
  ],
- "prompt": "Show the ligand NAP in purple.",
+ "prompt": "Show the ligand NAP in yellow.",
  "reference": {
   "root": {
    "kind": "root",
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "purple"
+                "color": "yellow"
                }
               }
              ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "purple"
+                 "color": "yellow"
                 }
                }
               ]
@@ -171,7 +171,7 @@
     "label_comp_id": "NAP"
    },
    "representation": null,
-   "color": "purple"
+   "color": "yellow"
   }
  ],
  "twin_of": "fu-noop-colour-1rx2-api",
@@ -209,7 +209,7 @@
      "label_comp_id": "NAP"
     },
     "representation": "ball_and_stick",
-    "color": "purple"
+    "color": "yellow"
    }
   ],
   "removed": null,

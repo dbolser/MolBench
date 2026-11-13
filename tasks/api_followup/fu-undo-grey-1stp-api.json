@@ -6,7 +6,7 @@
  "structures": [
   "1stp"
  ],
- "prompt": "Undo the plum on the biotin (BTN): grey again, please.",
+ "prompt": "Undo the magenta on the biotin (BTN): grey again, please.",
  "reference": [
   {
    "action": "load",
@@ -42,7 +42,7 @@
      },
      {
       "label_comp_id": "BTN",
-      "color": "plum"
+      "color": "magenta"
      }
     ]
    }

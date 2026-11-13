@@ -6,7 +6,7 @@
  "structures": [
   "9fb2"
  ],
- "prompt": "Show the side chain and backbone of Leu206 in chain A as orange ball-and-stick, on top of what is there.",
+ "prompt": "Show the side chain and backbone of Leu206 in chain A as cyan ball-and-stick, on top of what is there.",
  "reference": {
   "root": {
    "kind": "root",
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "steelblue"
                }
               }
              ]
@@ -93,7 +93,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "cyan"
                }
               }
              ]
@@ -172,7 +172,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "steelblue"
                 }
                }
               ]
@@ -197,7 +197,7 @@
     "auth_seq_id": 206
    },
    "representation": "ball_and_stick",
-   "color": "orange"
+   "color": "cyan"
   }
  ],
  "twin_of": "fu-add-residue-9fb2-api",
@@ -246,7 +246,7 @@
      "label_comp_id": "A1IBO"
     },
     "representation": "ball_and_stick",
-    "color": "hotpink"
+    "color": "steelblue"
    }
   ],
   "removed": null,

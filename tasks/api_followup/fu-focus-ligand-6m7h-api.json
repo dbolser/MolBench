@@ -17,11 +17,11 @@
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "limegreen"
+     "color": "hotpink"
     },
     {
      "label_comp_id": "KN9",
-     "color": "magenta"
+     "color": "teal"
     }
    ]
   },
@@ -46,11 +46,11 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "limegreen"
+      "color": "hotpink"
      },
      {
       "label_comp_id": "KN9",
-      "color": "magenta"
+      "color": "teal"
      }
     ]
    }
@@ -100,7 +100,7 @@
      }
     ],
     "representation": null,
-    "color": "limegreen"
+    "color": "hotpink"
    }
   ],
   "removed": null,

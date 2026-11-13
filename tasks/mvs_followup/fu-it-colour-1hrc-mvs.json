@@ -6,7 +6,7 @@
  "structures": [
   "1hrc"
  ],
- "prompt": "Make it salmon.",
+ "prompt": "Make it purple.",
  "reference": {
   "root": {
    "kind": "root",
@@ -46,7 +46,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "salmon"
+                "color": "purple"
                }
               }
              ]
@@ -103,7 +103,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "brown"
                 }
                }
               ]
@@ -127,7 +127,7 @@
     "label_comp_id": "HEC"
    },
    "representation": null,
-   "color": "salmon"
+   "color": "purple"
   }
  ],
  "twin_of": null,

@@ -6,11 +6,15 @@
  "structures": [
   "5cj6"
  ],
- "prompt": "Make the plum chain hotpink.",
+ "prompt": "Make the magenta chain plum.",
  "reference": [
   {
    "action": "load",
    "molecule_id": "5cj6"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "cartoon"
   },
   {
    "action": "color",
@@ -21,7 +25,7 @@
     },
     {
      "auth_asym_id": "B",
-     "color": "hotpink"
+     "color": "plum"
     }
    ]
   }
@@ -34,6 +38,10 @@
     "molecule_id": "5cj6"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
     "action": "color",
     "data": [
      {
@@ -42,7 +50,7 @@
      },
      {
       "auth_asym_id": "B",
-      "color": "plum"
+      "color": "magenta"
      }
     ]
    }
@@ -55,7 +63,7 @@
     "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "hotpink"
+   "color": "plum"
   }
  ],
  "twin_of": "fu-referent-colour-5cj6-mvs",
@@ -77,13 +85,15 @@
    "target selects 78 atoms on the frozen atom table",
    "start state scores 0.5 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
    "twin selects the same target atoms",
-   "referent is unambiguous in the start state: \"the plum chain\": exactly one chain of the start state is plum (author chain B)"
+   "referent is unambiguous in the start state: \"the magenta chain\": exactly one chain of the start state is magenta (author chain B)"
   ],
   "seed": "20261113|fu-referent-colour|1|5cj6",
   "edit": "recolour a component named by its current colour",
   "noop_kind": null,
-  "referent": "\"the plum chain\": exactly one chain of the start state is plum (author chain B)",
+  "referent": "\"the magenta chain\": exactly one chain of the start state is magenta (author chain B)",
   "preserved": [
    {
     "selector": {
@@ -106,7 +116,7 @@
   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
   "targets": [
    {
-    "action": 1,
+    "action": 2,
     "param": 0,
     "what": "author chain A (label chains A, C, D)",
     "atoms": [
@@ -123,7 +133,7 @@
     "n_atoms": 2155
    },
    {
-    "action": 1,
+    "action": 2,
     "param": 1,
     "what": "author chain B (label chains B)",
     "atoms": [

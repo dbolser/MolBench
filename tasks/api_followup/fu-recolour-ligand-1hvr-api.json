@@ -6,7 +6,7 @@
  "structures": [
   "1hvr"
  ],
- "prompt": "Could you turn the ligand XK2 green?",
+ "prompt": "Could you turn the ligand XK2 blue?",
  "reference": [
   {
    "action": "load",
@@ -17,15 +17,15 @@
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "limegreen"
+     "color": "hotpink"
     },
     {
      "struct_asym_id": "B",
-     "color": "limegreen"
+     "color": "hotpink"
     },
     {
      "label_comp_id": "XK2",
-     "color": "green"
+     "color": "blue"
     }
    ]
   }
@@ -42,11 +42,11 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "limegreen"
+      "color": "hotpink"
      },
      {
       "struct_asym_id": "B",
-      "color": "limegreen"
+      "color": "hotpink"
      },
      {
       "label_comp_id": "XK2",
@@ -63,7 +63,7 @@
     "label_comp_id": "XK2"
    },
    "representation": null,
-   "color": "green"
+   "color": "blue"
   }
  ],
  "twin_of": "fu-recolour-ligand-1hvr-mvs",
@@ -104,7 +104,7 @@
      }
     ],
     "representation": null,
-    "color": "limegreen"
+    "color": "hotpink"
    }
   ],
   "removed": null,

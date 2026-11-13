@@ -6,7 +6,7 @@
  "structures": [
   "4ins"
  ],
- "prompt": "Now make chain B orange as well.",
+ "prompt": "Now make chain B brown as well.",
  "reference": {
   "root": {
    "kind": "root",
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "brown"
                }
               }
              ]
@@ -167,7 +167,7 @@
     "auth_asym_id": "B"
    },
    "representation": null,
-   "color": "orange"
+   "color": "brown"
   }
  ],
  "twin_of": "fu-also-colour-chain-4ins-api",

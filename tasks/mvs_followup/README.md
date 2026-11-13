@@ -27,7 +27,7 @@ from the frozen panel only. Only the final state is graded.
 | `fu-noop-shown` | 2 | no change: already true | the polymer already is a cartoon: reference = start state |
 | `fu-noop-hidden` | 2 | no change: already true | no water is drawn (MVS) / hide_water is already set (API): reference = start state |
 | `fu-noop-question` | 2 | no change: a question | a question about the structure: reference = start state |
-| `fu-noop-spin` | 2 | no change: the format cannot express the request (MVS only) | MVS cannot express motion: reference = start state |
+| `fu-noop-spin` | 2 | no change: the format cannot express the request (MVS only) | the MVS reference has no motion, and the request says to change nothing in that case: reference = start state |
 | `fu-it-colour` | 2 | pronoun: recolour (MVS only) | start: the ligand alone (one copy); "it" recoloured |
 | `fu-it-surface` | 1 | pronoun: change a representation (MVS only) | start: the polymer alone; "it" changed from cartoon to surface, colour kept |
 | `fu-rep-ligand` | 2 | change a representation (MVS only) | start: polymer + ligand; the ligand's representation set to spacefill, colour kept |
@@ -74,6 +74,14 @@ from the frozen panel only. Only the final state is graded.
   distance-based selection or a superposition the unchanged state is not the only
   defensible answer, so they are not tasks here.
 - **A target for something removed, on the MVS track**: see `removed` above.
+
+## Whole chains on the API track
+
+An author chain id also covers that chain's ligands, ions and waters, which the default
+view draws; "chain B" as the author chain and as the polymer chain alone would then be
+two pictures. Every API start state that colours whole chains therefore sets the
+cartoon style first (polymer only), as the MVS twin draws cartoons, and the generator
+checks that the same answer written with label chain ids grades as exactly right.
 
 Held-back structures are the fifth of the panel with the smallest SHA-256 of
 `"molbench-heldback-v1:<id>"` (a rule on the structure alone), unless the generator was

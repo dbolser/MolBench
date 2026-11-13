@@ -46,7 +46,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "brown"
                }
               }
              ]
@@ -103,7 +103,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "brown"
                 }
                }
               ]
@@ -127,7 +127,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "yellow"
+                 "color": "khaki"
                 }
                }
               ]
@@ -175,7 +175,7 @@
      "auth_asym_id": "A"
     },
     "representation": "cartoon",
-    "color": "hotpink"
+    "color": "brown"
    }
   ],
   "removed": {
