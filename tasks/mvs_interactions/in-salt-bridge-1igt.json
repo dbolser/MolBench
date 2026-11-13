@@ -1,0 +1,193 @@
+{
+ "id": "in-salt-bridge-1igt",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-salt-bridge",
+ "structures": [
+  "1igt"
+ ],
+ "prompt": "In 1IGT (grey cartoon), show the salt bridge between Arg66 of chain B and Asp86 of chain B: both residues in magenta ball-and-stick, a dashed line from NH2 of Arg66 of chain B to OD2 of Asp86 of chain B with the distance as its label, and the view centred on the pair.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1igt.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 66
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 86
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 66,
+               "label_atom_id": "NH2"
+              },
+              "end": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 86,
+               "label_atom_id": "OD2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 66
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 86
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1igt.json",
+   "molbench/atom_tables/1igt.json.gz",
+   "data/panel/cif/1igt.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 26 atoms on the frozen atom table"
+  ],
+  "derivation": "a salt bridge found by neighbour search (a Lys or Arg side-chain nitrogen and an Asp or Glu carboxylate oxygen 2.5-3.2 A apart): ARG66 NH2 and ASP86 OD2, 2.81 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 66,
+     "label_atom_id": "NH2"
+    },
+    "end": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 86,
+     "label_atom_id": "OD2"
+    },
+    "distance_A": 2.81
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

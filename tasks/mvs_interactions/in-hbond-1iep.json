@@ -1,0 +1,193 @@
+{
+ "id": "in-hbond-1iep",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-hbond",
+ "structures": [
+  "1iep"
+ ],
+ "prompt": "1IEP: grey cartoon; Asn322 of chain B and Asp325 of chain B as green ball-and-stick; measure the hydrogen bond between ND2 of Asn322 of chain B and OD2 of Asp325 of chain B with a labelled dashed line; focus the camera on these two residues.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1iep.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 322
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 325
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 322,
+               "label_atom_id": "ND2"
+              },
+              "end": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 325,
+               "label_atom_id": "OD2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 322
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 325
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1iep.json",
+   "molbench/atom_tables/1iep.json.gz",
+   "data/panel/cif/1iep.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 16 atoms on the frozen atom table"
+  ],
+  "derivation": "a side-chain hydrogen bond found by neighbour search (a donor and an acceptor atom 2.5-3.0 A apart): ASN322 ND2 and ASP325 OD2, 2.67 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 322,
+     "label_atom_id": "ND2"
+    },
+    "end": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 325,
+     "label_atom_id": "OD2"
+    },
+    "distance_A": 2.67
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

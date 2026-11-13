@@ -1,0 +1,193 @@
+{
+ "id": "in-disulfide-2ptc",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-disulfide",
+ "structures": [
+  "2ptc"
+ ],
+ "prompt": "2PTC: grey cartoon; cysteines Cys5 of chain I and Cys55 of chain I as blue ball-and-stick; a dashed line with the distance between their two SG atoms; camera on the two residues.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2ptc.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 5
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 55
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "blue"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "I",
+               "auth_seq_id": 5,
+               "label_atom_id": "SG"
+              },
+              "end": {
+               "auth_asym_id": "I",
+               "auth_seq_id": 55,
+               "label_atom_id": "SG"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 5
+    },
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 55
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "blue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/2ptc.json",
+   "molbench/atom_tables/2ptc.json.gz",
+   "data/panel/cif/2ptc.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 12 atoms on the frozen atom table"
+  ],
+  "derivation": "a disulfide record of the facts (`_struct_conn`, `disulf`), sulfur to sulfur: CYS5 SG and CYS55 SG, 1.97 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "I",
+     "auth_seq_id": 5,
+     "label_atom_id": "SG"
+    },
+    "end": {
+     "auth_asym_id": "I",
+     "auth_seq_id": 55,
+     "label_atom_id": "SG"
+    },
+    "distance_A": 1.97
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

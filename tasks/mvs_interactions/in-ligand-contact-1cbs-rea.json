@@ -1,0 +1,224 @@
+{
+ "id": "in-ligand-contact-1cbs-rea",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-ligand-contact",
+ "structures": [
+  "1cbs"
+ ],
+ "prompt": "Load 1CBS as a grey cartoon. Show the retinoic acid as red ball-and-stick and Arg132 as cyan ball-and-stick, draw the polar contact between atom O1 of the retinoic acid and the NH2 atom of Arg132 as a dashed line labelled with its length, and zoom in on the two.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1cbs.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "REA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 132
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_comp_id": "REA"
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 132
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "REA",
+               "label_atom_id": "O1"
+              },
+              "end": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 132,
+               "label_atom_id": "NH2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_comp_id": "REA"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 132
+    }
+   ],
+   "representation": null,
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1cbs.json",
+   "molbench/atom_tables/1cbs.json.gz",
+   "data/panel/cif/1cbs.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "the ligand is the only REA in the entry; its name was checked against the frozen component record or the entry title",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 33 atoms on the frozen atom table"
+  ],
+  "derivation": "a polar contact found by neighbour search between the entry's only REA (retinoic acid) and a protein residue: REA O1 and ARG132 NH2, 2.73 A apart in the frozen mmCIF. Ligand and residue as ball-and-stick on a grey cartoon, one labelled dashed line, camera on the two",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "label_comp_id": "REA",
+     "label_atom_id": "O1"
+    },
+    "end": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 132,
+     "label_atom_id": "NH2"
+    },
+    "distance_A": 2.73
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

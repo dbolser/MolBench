@@ -1,0 +1,142 @@
+{
+ "id": "in-transparent-3eml-zma",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-transparent",
+ "structures": [
+  "3eml"
+ ],
+ "prompt": "Show 3EML with a semi-transparent khaki protein surface (opacity 0.3) so that the ZM241385, drawn in salmon ball-and-stick, can be seen through it.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3eml.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "surface"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "khaki"
+               }
+              },
+              {
+               "kind": "opacity",
+               "params": {
+                "opacity": 0.3
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "ZMA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "ZMA"
+   },
+   "representation": "ball_and_stick",
+   "color": "salmon"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/3eml.json",
+   "molbench/atom_tables/3eml.json.gz",
+   "data/panel/cif/3eml.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the ligand is the only ZMA in the entry; its name was checked against the frozen component record or the entry title",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 25 atoms on the frozen atom table"
+  ],
+  "derivation": "the polymer (protein only in this entry) as a surface with opacity 0.3, and the entry's only ZMA (ZM241385) as opaque ball-and-stick",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": []
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "surface",
+  "transparency"
+ ]
+}

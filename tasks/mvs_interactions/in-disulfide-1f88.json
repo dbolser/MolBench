@@ -1,0 +1,193 @@
+{
+ "id": "in-disulfide-1f88",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-disulfide",
+ "structures": [
+  "1f88"
+ ],
+ "prompt": "In 1F88 (grey cartoon), measure the S-S bond of the disulfide between Cys110 of chain B and Cys187 of chain B: the two cysteines in green ball-and-stick, a labelled dashed line between their SG atoms, and the view centred on them.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1f88.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 110
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 187
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 110,
+               "label_atom_id": "SG"
+              },
+              "end": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 187,
+               "label_atom_id": "SG"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 110
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 187
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1f88.json",
+   "molbench/atom_tables/1f88.json.gz",
+   "data/panel/cif/1f88.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 12 atoms on the frozen atom table"
+  ],
+  "derivation": "a disulfide record of the facts (`_struct_conn`, `disulf`), sulfur to sulfur: CYS110 SG and CYS187 SG, 2.03 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 110,
+     "label_atom_id": "SG"
+    },
+    "end": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 187,
+     "label_atom_id": "SG"
+    },
+    "distance_A": 2.03
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

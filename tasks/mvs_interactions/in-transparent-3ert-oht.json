@@ -1,0 +1,142 @@
+{
+ "id": "in-transparent-3ert-oht",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-transparent",
+ "structures": [
+  "3ert"
+ ],
+ "prompt": "Load 3ERT; show the protein as a brown surface at 30% opacity and the 4-hydroxytamoxifen inside it as blue ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ert.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "surface"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              },
+              {
+               "kind": "opacity",
+               "params": {
+                "opacity": 0.3
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "OHT"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "blue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "OHT"
+   },
+   "representation": "ball_and_stick",
+   "color": "blue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/3ert.json",
+   "molbench/atom_tables/3ert.json.gz",
+   "data/panel/cif/3ert.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the ligand is the only OHT in the entry; its name was checked against the frozen component record or the entry title",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 29 atoms on the frozen atom table"
+  ],
+  "derivation": "the polymer (protein only in this entry) as a surface with opacity 0.3, and the entry's only OHT (4-hydroxytamoxifen) as opaque ball-and-stick",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": []
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "surface",
+  "transparency"
+ ]
+}

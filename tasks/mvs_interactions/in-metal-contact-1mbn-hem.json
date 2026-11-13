@@ -1,0 +1,227 @@
+{
+ "id": "in-metal-contact-1mbn-hem",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-metal-contact",
+ "structures": [
+  "1mbn"
+ ],
+ "prompt": "Load 1MBN as a grey cartoon. Show the heme as hot pink ball-and-stick and His93 as lime green ball-and-stick. Draw a dashed line, labelled with its length, from the heme iron to NE2 of His93, and zoom in on the site.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1mbn.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HEM"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "hotpink"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 93
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_comp_id": "HEM"
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 93
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "HEM",
+               "label_atom_id": "FE"
+              },
+              "end": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 93,
+               "label_atom_id": "NE2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_comp_id": "HEM"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 93
+    }
+   ],
+   "representation": null,
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1mbn.json",
+   "molbench/atom_tables/1mbn.json.gz",
+   "data/panel/cif/1mbn.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of every line resolves to exactly one atom of the atom table",
+   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of the metal",
+   "the metal is the only HEM in the entry, so the prompt's name for it is unambiguous",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 53 atoms on the frozen atom table"
+  ],
+  "derivation": "the metal-coordination records (`_struct_conn`, `metalc`) of the facts between the heme iron and polymer atoms: HIS93 NE2 2.19 A. The metal group and the residues are drawn, one labelled dashed line per bond, camera on the site",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "label_comp_id": "HEM",
+     "label_atom_id": "FE"
+    },
+    "end": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 93,
+     "label_atom_id": "NE2"
+    },
+    "distance_A": 2.19
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

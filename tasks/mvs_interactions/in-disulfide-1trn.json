@@ -1,0 +1,193 @@
+{
+ "id": "in-disulfide-1trn",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-disulfide",
+ "structures": [
+  "1trn"
+ ],
+ "prompt": "Load 1TRN as a grey cartoon. Show the disulfide between Cys136 of chain B and Cys201 of chain B: both cysteines as hot pink ball-and-stick, with the sulfur-sulfur distance measured as a dashed line (SG to SG) labelled with its length, and zoom in on the bridge.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1trn.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 136
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 201
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "hotpink"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 136,
+               "label_atom_id": "SG"
+              },
+              "end": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 201,
+               "label_atom_id": "SG"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 136
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 201
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "hotpink"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1trn.json",
+   "molbench/atom_tables/1trn.json.gz",
+   "data/panel/cif/1trn.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 12 atoms on the frozen atom table"
+  ],
+  "derivation": "a disulfide record of the facts (`_struct_conn`, `disulf`), sulfur to sulfur: CYS136 SG and CYS201 SG, 2.03 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 136,
+     "label_atom_id": "SG"
+    },
+    "end": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 201,
+     "label_atom_id": "SG"
+    },
+    "distance_A": 2.03
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}
