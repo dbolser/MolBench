@@ -1,0 +1,114 @@
+{
+ "id": "fu-also-colour-chain-6tc2-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-also-colour-chain",
+ "structures": [
+  "6tc2"
+ ],
+ "prompt": "Now make chain B green as well.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "6tc2"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "color": "plum"
+    }
+   ]
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "B",
+     "color": "green"
+    }
+   ],
+   "keep_colors": true,
+   "keep_representations": true
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "6tc2"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "color": "plum"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "B"
+   },
+   "representation": null,
+   "color": "green"
+  }
+ ],
+ "twin_of": "fu-also-colour-chain-6tc2-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/6tc2.json",
+   "molbench/atom_tables/6tc2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it is not the requested final state",
+   "target selects 491 atoms on the frozen atom table",
+   "start state scores 0.0 on the target (below 1)",
+   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-also-colour-chain|1|6tc2",
+  "edit": "also: colour a second component",
+  "noop_kind": null,
+  "referent": null,
+  "preserved": [
+   {
+    "selector": {
+     "auth_asym_id": "A"
+    },
+    "representation": null,
+    "color": "plum"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  }
+ },
+ "skills": [
+  "edit",
+  "color",
+  "selection"
+ ]
+}

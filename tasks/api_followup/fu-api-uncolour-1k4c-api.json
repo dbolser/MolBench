@@ -1,0 +1,118 @@
+{
+ "id": "fu-api-uncolour-1k4c-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-api-uncolour",
+ "structures": [
+  "1k4c"
+ ],
+ "prompt": "Undo the limegreen on the diacyl glycerol (DGA) and leave the protein as it is.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1k4c"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "steelblue"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "steelblue"
+    },
+    {
+     "struct_asym_id": "C",
+     "color": "steelblue"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "1k4c"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "steelblue"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "steelblue"
+     },
+     {
+      "struct_asym_id": "C",
+      "color": "steelblue"
+     },
+     {
+      "label_comp_id": "DGA",
+      "color": "limegreen"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": null,
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1k4c.json",
+   "molbench/atom_tables/1k4c.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
+   "start state grades as itself; it is not the requested final state",
+   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 2 of them lose a preserved part"
+  ],
+  "seed": "20261113|fu-api-uncolour|2|1k4c",
+  "edit": "undo one earlier choice",
+  "noop_kind": null,
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "C"
+     }
+    ],
+    "representation": null,
+    "color": "steelblue"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  }
+ },
+ "skills": [
+  "edit",
+  "color"
+ ]
+}

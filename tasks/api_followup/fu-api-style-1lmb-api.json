@@ -1,0 +1,94 @@
+{
+ "id": "fu-api-style-1lmb-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-api-style",
+ "structures": [
+  "1lmb"
+ ],
+ "prompt": "Change the display style to a molecular surface, with the same colours on the two chains.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1lmb"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "molecular-surface"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "3",
+     "color": "steelblue"
+    },
+    {
+     "auth_asym_id": "4",
+     "color": "red"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "1lmb"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "3",
+      "color": "steelblue"
+     },
+     {
+      "auth_asym_id": "4",
+      "color": "red"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": null,
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1lmb.json",
+   "molbench/atom_tables/1lmb.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
+   "start state grades as itself; it is not the requested final state",
+   "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right"
+  ],
+  "seed": "20261113|fu-api-style|2|1lmb",
+  "edit": "change the representation (order-sensitive on this track)",
+  "noop_kind": null,
+  "referent": null,
+  "preserved": null,
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": true,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  }
+ },
+ "skills": [
+  "edit",
+  "representation",
+  "color"
+ ]
+}
