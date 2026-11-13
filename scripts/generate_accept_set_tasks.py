@@ -37,6 +37,7 @@ state, targets select atoms, twins select the same atoms).
 from __future__ import annotations
 
 import argparse
+import functools
 import hashlib
 import itertools
 import json
@@ -111,13 +112,11 @@ class Entry:
         self.ligands: list[dict] = self.facts["ligands"]
 
     def rows(self, **eq) -> int:
-        """Atoms whose columns equal ``eq``, straight from the table columns (not
-        through the selector code the grader uses)."""
-        cols = self.table.columns
-        mask = 0
-        for i in range(self.table.n):
-            if all(cols[k][i] == v for k, v in eq.items()):
-                mask |= 1 << i
+        """Atoms whose columns equal ``eq``, straight from the table columns (the
+        column index, not the selector code the grader resolves answers with)."""
+        mask = (1 << self.table.n) - 1
+        for column, value in eq.items():
+            mask &= self.table.index(column).get(value, 0)
         return mask
 
     def polymer_word(self) -> str:
@@ -661,6 +660,17 @@ def target(track: str, state: dict) -> list[dict]:
              "color": p["color"]} for p in state["parts"]]
 
 
+@functools.lru_cache(maxsize=None)
+def plain_cartoon(entry: str) -> int:
+    """The atoms a cartoon of the whole polymer draws (residues with a trace atom)."""
+    out = 0
+    scene = mvs.resolve_scene(mvs_scene(entry, {"parts": []}))
+    for (rep, _, _), m in scene.structures[entry].draws.items():
+        if rep == "cartoon":
+            out |= m
+    return out
+
+
 def read_back(track: str, entry: str, state: dict, answer) -> str | None:
     """Compare what the grader's resolver says ``answer`` draws with the atoms computed
     from the table columns. None = they agree."""
@@ -678,12 +688,7 @@ def read_back(track: str, entry: str, state: dict, answer) -> str | None:
             # whole chain is selected here, or a whole residue, so compare as residues.
             got, want = pdbe_state.residues_of(table, got), pdbe_state.residues_of(table, want)
             want &= pdbe_state.residues_of(table, table.static["polymer"])
-            cartoon_all = 0
-            scene = mvs.resolve_scene(mvs_scene(entry, {"parts": []}))
-            for (rep, _, _), m in scene.structures[entry].draws.items():
-                if rep == "cartoon":
-                    cartoon_all |= m
-            want &= pdbe_state.residues_of(table, cartoon_all)
+            want &= pdbe_state.residues_of(table, plain_cartoon(entry))
         if got != want or not want:
             return (f"{state['label']}: {p['rep']} {p['color']} is drawn on "
                     f"{bin(got).count('1')} atoms, expected {bin(want).count('1')}")
@@ -720,7 +725,11 @@ def make_task(track: str, template: str, e: Entry, spec: dict, split: str, promp
         if problem:
             raise SystemExit(f"{template} {e.id} {track}: {problem}")
     rule, not_accepted = RULES[template]
-    slots = {"ID": e.id.upper(), "id": e.id, "poly": e.polymer_word(), **spec["slots"]}
+    # The slots the full wordings of this template use (plus the id in lower case, for
+    # terse paraphrases): scripts/generate_paraphrases.py fills its wordings from them.
+    wanted = {k for w in WORDINGS[template] for k in re.findall(r"{(\w+)}", w)} | {"id"}
+    slots = {k: v for k, v in {"ID": e.id.upper(), "id": e.id, "poly": e.polymer_word(),
+                               **spec["slots"]}.items() if k in wanted}
     prov = {
         "script": SCRIPT,
         "inputs": [f"data/panel/facts/{e.id}.json", f"molbench/atom_tables/{e.id}.json.gz"],

@@ -1,0 +1,359 @@
+{
+ "id": "acc-residue-copy-1trn-mvs.indirect",
+ "track": "mvs",
+ "tier": "accept_set",
+ "family": "acc-residue-copy",
+ "structures": [
+  "1trn"
+ ],
+ "prompt": "Could you bring up 1TRN with the protein as a cartoon, and let me see Lys236 as purple ball-and-stick?",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1trn.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             }
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 236
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1trn.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "auth_asym_id": "B",
+              "auth_seq_id": 236
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "purple"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1trn.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": [
+              {
+               "auth_asym_id": "A",
+               "auth_seq_id": 236
+              },
+              {
+               "auth_asym_id": "B",
+               "auth_seq_id": 236
+              }
+             ]
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "purple"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 236
+   },
+   "representation": "ball_and_stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "acc-residue-copy-1trn-mvs",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_accept/acc-residue-copy-1trn-mvs.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "every slot value of the original appears in the wording (nothing needed is dropped)"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "family template (scripts/generate_paraphrases.py TEMPLATES)",
+  "original_prompt": "Show 1TRN with the protein as a cartoon and Lys236 as ball-and-stick, coloured purple.",
+  "source": {
+   "script": "scripts/generate_accept_set_tasks.py",
+   "inputs": [
+    "data/panel/facts/1trn.json",
+    "molbench/atom_tables/1trn.json.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "each of the 3 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+    "target selects 9 atoms on the frozen atom table",
+    "no accepted state equals another (pairwise, by the grader)"
+   ],
+   "seed": "molbench-accept-set-v1",
+   "template": "acc-residue-copy",
+   "wording": 2,
+   "slots": {
+    "ID": "1TRN",
+    "id": "1trn",
+    "poly": "protein",
+    "thing": "Lys236",
+    "colour": "purple"
+   },
+   "open": "which chain's copy of the named residue (or all)",
+   "rule": "The request names a residue by type and author number but no chain; the protein is present as several identical chains, each with that residue. Accepted: the residue in any one chain, or in every chain.",
+   "candidates": [
+    "LYS A:236",
+    "LYS B:236"
+   ],
+   "accepted_states": [
+    "LYS A:236",
+    "LYS B:236",
+    "both copies"
+   ],
+   "not_accepted": [
+    "some but not all chains (when there are more than two): no reading of the request",
+    "a residue with that number in another protein of the entry, or the residue with that label (sequence) number where it differs: a different residue",
+    "another representation or colour: both are stated"
+   ],
+   "facts": {
+    "needs_numbering_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "n_candidates": 2,
+    "n_accepted_states": 3
+   },
+   "residues": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 236,
+     "label_asym_id": "A",
+     "label_seq_id": 214,
+     "comp_id": "LYS"
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 236,
+     "label_asym_id": "B",
+     "label_seq_id": 214,
+     "comp_id": "LYS"
+    }
+   ]
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 236
+    },
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 236
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 236
+     }
+    ],
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ]
+ ],
+ "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 3 (LYS A:236); the others are in 'accepted', in the order of provenance.accepted_states."
+}
