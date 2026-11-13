@@ -254,7 +254,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P02945 (BACR_HALSA, Bacteriorhodopsin; Halobacterium salinarum (strain ATCC 700922 / JCM 11081 / NRC-1)), 262 residues\nPDB entries with this protein and RETINAL (chemical code RET) (RCSB, 2026-11-13): 170. The 10 with the best resolution: 5ZIM (X-ray, 1.25 A), 5ZIN (X-ray, 1.27 A), 5ZIL (X-ray, 1.29 A), 7XJC (X-ray, 1.33 A), 7XJD (X-ray, 1.33 A), 7XJE (X-ray, 1.33 A), 1M0K (X-ray, 1.43 A), 1M0M (X-ray, 1.43 A), 9F9G (X-ray, 1.44 A), 1M0L (X-ray, 1.47 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

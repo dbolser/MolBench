@@ -254,7 +254,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P0ABQ4 (DYR_ECOLI, Dihydrofolate reductase; Escherichia coli (strain K12)), 159 residues\nPDB entries with this protein and FOLIC ACID (chemical code FOL) (RCSB, 2026-11-13): 86. The 10 with the best resolution: 45PC (X-ray, 0.85 A), 9PWM (X-ray, 0.89 A), 8UW0 (X-ray, 0.93 A), 7FPP (X-ray, 1.03 A), 7FPQ (X-ray, 1.03 A), 7FPM (X-ray, 1.04 A), 7FPN (X-ray, 1.04 A), 7FPV (X-ray, 1.04 A), 7FPW (X-ray, 1.04 A), 7FPU (X-ray, 1.05 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

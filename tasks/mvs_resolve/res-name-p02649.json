@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P02649 (APOE_HUMAN, Apolipoprotein E; Homo sapiens), 317 residues\nPDB entries with this protein (RCSB, 2026-11-13): 28. The 10 with the best resolution: 7FCR (X-ray, 1.40 A), 8AX9 (X-ray, 1.55 A), 8AX8 (X-ray, 1.55 A), 7FCS (X-ray, 1.60 A), 1GS9 (X-ray, 1.70 A), 6NCO (X-ray, 1.71 A), 1OR3 (X-ray, 1.73 A), 8CE0 (X-ray, 1.75 A), 1NFN (X-ray, 1.80 A), 6NCN (X-ray, 1.82 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

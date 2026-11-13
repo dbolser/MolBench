@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P40337 (VHL_HUMAN, von Hippel-Lindau disease tumor suppressor; Homo sapiens), 213 residues\nProtein named in the request: UniProt Q15369 (ELOC_HUMAN, Elongin-C; Homo sapiens), 112 residues\nProtein named in the request: UniProt Q15370 (ELOB_HUMAN, Elongin-B; Homo sapiens), 118 residues\nPDB entries with all of these proteins together (RCSB, 2026-11-13): 140. The 10 with the best resolution: 7Z76 (X-ray, 1.32 A), 9GIO (X-ray, 1.49 A), 7JTO (X-ray, 1.70 A), 8BDS (X-ray, 1.72 A), 4AJY (X-ray, 1.73 A), 6GMR (X-ray, 1.75 A), 6HR2 (X-ray, 1.76 A), 8BB3 (X-ray, 1.80 A), 6GFX (X-ray, 1.83 A), 1LM8 (X-ray, 1.85 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

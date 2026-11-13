@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P29274 (AA2AR_HUMAN, Adenosine receptor A2a; Homo sapiens), 412 residues\nPDB entries with this protein (RCSB, 2026-11-13): 192. The 10 with the best resolution: 5NM4 (X-ray, 1.70 A), 9H37 (X-ray, 1.72 A), 5IU4 (X-ray, 1.72 A), 9H2X (X-ray, 1.75 A), 4EIY (X-ray, 1.80 A), 6LPJ (X-ray, 1.80 A), 6LPK (X-ray, 1.80 A), 7IO5 (X-ray, 1.84 A), 7IPE (X-ray, 1.84 A), 6PS7 (X-ray, 1.85 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

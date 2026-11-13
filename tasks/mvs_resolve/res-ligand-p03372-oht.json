@@ -479,7 +479,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P03372 (ESR1_HUMAN, Estrogen receptor; Homo sapiens), 595 residues\nPDB entries with this protein and 4-HYDROXYTAMOXIFEN (chemical code OHT) (RCSB, 2026-11-13): 7. They are: 5W9C (X-ray, 1.80 A), 3ERT (X-ray, 1.90 A), 2BJ4 (X-ray, 2.00 A), 2JF9 (X-ray, 2.10 A), 7UJ8 (X-ray, 2.38 A), 6V87 (X-ray, 2.40 A), 4Q50 (X-ray, 3.07 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

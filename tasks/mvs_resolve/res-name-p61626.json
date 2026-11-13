@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P61626 (LYSC_HUMAN, Lysozyme C; Homo sapiens), 148 residues\nPDB entries with this protein (RCSB, 2026-11-13): 214. The 10 with the best resolution: 2NWD (X-ray, 1.04 A), 5LSH (X-ray, 1.06 A), 1JSF (X-ray, 1.15 A), 7AP7 (X-ray, 1.15 A), 7XF6 (X-ray, 1.30 A), 1IWT (X-ray, 1.40 A), 1IWU (X-ray, 1.40 A), 1IWV (X-ray, 1.40 A), 1IWW (X-ray, 1.40 A), 1IWX (X-ray, 1.40 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

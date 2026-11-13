@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P10275 (ANDR_HUMAN, Androgen receptor; Homo sapiens), 920 residues\nPDB entries with this protein (RCSB, 2026-11-13): 94. The 10 with the best resolution: 8E1A (X-ray, 1.20 A), 7ZTZ (X-ray, 1.40 A), 4OHA (X-ray, 1.42 A), 5V8Q (X-ray, 1.44 A), 2AX6 (X-ray, 1.50 A), 3L3X (X-ray, 1.55 A), 8FH0 (X-ray, 1.59 A), 8FH2 (X-ray, 1.59 A), 8FGZ (X-ray, 1.61 A), 2AM9 (X-ray, 1.64 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

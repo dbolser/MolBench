@@ -479,7 +479,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P29373 (RABP2_HUMAN, Cellular retinoic acid-binding protein 2; Homo sapiens), 138 residues\nPDB entries with this protein and RETINOIC ACID (chemical code REA) (RCSB, 2026-11-13): 4. They are: 2FR3 (X-ray, 1.48 A), 3CWK (X-ray, 1.60 A), 2G78 (X-ray, 1.70 A), 1CBS (X-ray, 1.80 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00299 (PLAS1_POPNI, Plastocyanin A, chloroplastic; Populus nigra), 168 residues\nPDB entries with this protein (RCSB, 2026-11-13): 16. The 10 with the best resolution: 4DP9 (X-ray, 1.00 A), 4DPB (X-ray, 1.00 A), 4DPA (X-ray, 1.05 A), 4DPC (X-ray, 1.06 A), 4DP8 (X-ray, 1.07 A), 4DP7 (X-ray, 1.08 A), 1PLC (X-ray, 1.33 A), 1JXG (X-ray, 1.60 A), 1PNC (X-ray, 1.60 A), 1PND (X-ray, 1.60 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

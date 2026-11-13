@@ -479,7 +479,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P22629 (SAV_STRAV, Streptavidin; Streptomyces avidinii), 183 residues\nPDB entries with this protein and BIOTIN (chemical code BTN) (RCSB, 2026-11-13): 52. The 10 with the best resolution: 2F01 (X-ray, 0.85 A), 3RY2 (X-ray, 0.95 A), 9PUB (X-ray, 0.95 A), 1LUQ (X-ray, 0.96 A), 2GH7 (X-ray, 1.00 A), 3WYQ (X-ray, 1.00 A), 4GDA (X-ray, 1.00 A), 3T6F (X-ray, 1.22 A), 2IZJ (X-ray, 1.30 A), 3MG5 (X-ray, 1.30 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

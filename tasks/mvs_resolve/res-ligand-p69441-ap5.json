@@ -254,7 +254,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P69441 (KAD_ECOLI, Adenylate kinase; Escherichia coli (strain K12)), 214 residues\nPDB entries with this protein and BIS(ADENOSINE)-5'-PENTAPHOSPHATE (chemical code AP5) (RCSB, 2026-11-13): 16. The 10 with the best resolution: 9R71 (X-ray, 1.61 A), 4X8L (X-ray, 1.70 A), 8Q2B (X-ray, 1.76 A), 9R6U (X-ray, 1.77 A), 1E4V (X-ray, 1.85 A), 1E4Y (X-ray, 1.85 A), 9L14 (X-ray, 1.86 A), 5EJE (X-ray, 1.90 A), 1AKE (X-ray, 2.00 A), 3HPQ (X-ray, 2.00 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

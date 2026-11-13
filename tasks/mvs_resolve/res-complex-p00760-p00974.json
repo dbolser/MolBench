@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00760 (TRY1_BOVIN, Serine protease 1; Bos taurus), 246 residues\nProtein named in the request: UniProt P00974 (BPT1_BOVIN, Pancreatic trypsin inhibitor; Bos taurus), 100 residues\nPDB entries with all of these proteins together (RCSB, 2026-11-13): 31. The 10 with the best resolution: 7PH1 (X-ray, 1.18 A), 4Y0Y (X-ray, 1.25 A), 4Y11 (X-ray, 1.30 A), 1P2J (X-ray, 1.35 A), 4Y0Z (X-ray, 1.37 A), 4Y10 (X-ray, 1.37 A), 2FI3 (X-ray, 1.58 A), 2FI4 (X-ray, 1.58 A), 2FI5 (X-ray, 1.58 A), 1P2K (X-ray, 1.60 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

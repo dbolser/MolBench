@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00183 (CPXA_PSEPU, Camphor 5-monooxygenase; Pseudomonas putida), 415 residues\nPDB entries with this protein (RCSB, 2026-11-13): 129. The 10 with the best resolution: 4L4E (X-ray, 1.26 A), 4L4F (X-ray, 1.29 A), 2ZWU (X-ray, 1.30 A), 2ZWT (X-ray, 1.35 A), 1YRC (X-ray, 1.40 A), 1RE9 (X-ray, 1.45 A), 2FE6 (X-ray, 1.50 A), 2H7Q (X-ray, 1.50 A), 2ZUI (X-ray, 1.50 A), 3L61 (X-ray, 1.50 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

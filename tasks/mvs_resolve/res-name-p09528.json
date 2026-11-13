@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P09528 (FRIH_MOUSE, Ferritin heavy chain; Mus musculus), 182 residues\nPDB entries with this protein (RCSB, 2026-11-13): 27. The 10 with the best resolution: 8RQB (EM, 1.09 A), 8J5A (EM, 1.19 A), 7A4M (EM, 1.22 A), 22FX (EM, 1.24 A), 9IUY (EM, 1.51 A), 7KOD (EM, 1.66 A), 8EMQ (EM, 1.66 A), 9WAL (EM, 1.67 A), 8EN7 (EM, 1.68 A), 6V21 (EM, 1.75 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

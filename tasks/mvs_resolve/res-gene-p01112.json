@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P01112 (RASH_HUMAN, GTPase HRas; Homo sapiens), 189 residues\nPDB entries with this protein (RCSB, 2026-11-13): 255. The 10 with the best resolution: 2CE2 (X-ray, 1.00 A), 2EVW (X-ray, 1.05 A), 24SQ (X-ray, 1.08 A), 8TBG (X-ray, 1.20 A), 2CLD (X-ray, 1.22 A), 2CL6 (X-ray, 1.24 A), 2CL7 (X-ray, 1.25 A), 5WDQ (X-ray, 1.25 A), 1CTQ (X-ray, 1.26 A), 2CLC (X-ray, 1.30 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

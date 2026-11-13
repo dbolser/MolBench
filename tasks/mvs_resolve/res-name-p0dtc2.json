@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P0DTC2 (SPIKE_SARS2, Spike glycoprotein; Severe acute respiratory syndrome coronavirus 2), 1273 residues\nPDB entries with this protein (RCSB, 2026-11-13): 2172. The 10 with the best resolution: 7Z8O (X-ray, 0.96 A), 9FC2 (X-ray, 1.21 A), 7EK6 (X-ray, 1.24 A), 7EAM (X-ray, 1.40 A), 7ZR2 (X-ray, 1.45 A), 6M1V (X-ray, 1.50 A), 7OAO (X-ray, 1.50 A), 7SD5 (X-ray, 1.53 A), 7OAQ (X-ray, 1.55 A), 7Z1D (X-ray, 1.55 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

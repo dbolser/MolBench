@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P01009 (A1AT_HUMAN, Alpha-1-antitrypsin; Homo sapiens), 418 residues\nPDB entries with this protein (RCSB, 2026-11-13): 47. The 10 with the best resolution: 8PI2 (X-ray, 1.48 A), 3NDD (X-ray, 1.50 A), 6I7U (X-ray, 1.55 A), 5NBU (X-ray, 1.67 A), 8QZ5 (X-ray, 1.69 A), 5NBV (X-ray, 1.73 A), 7AEL (X-ray, 1.76 A), 6I4V (X-ray, 1.78 A), 3NE4 (X-ray, 1.81 A), 7NPL (X-ray, 1.82 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

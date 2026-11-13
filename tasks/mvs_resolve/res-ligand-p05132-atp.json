@@ -254,7 +254,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P05132 (KAPCA_MOUSE, cAMP-dependent protein kinase catalytic subunit alpha; Mus musculus), 351 residues\nPDB entries with this protein and ADENOSINE-5'-TRIPHOSPHATE (chemical code ATP) (RCSB, 2026-11-13): 13. The 10 with the best resolution: 1RDQ (X-ray, 1.26 A), 3FJQ (X-ray, 1.60 A), 3QAL (X-ray, 1.70 A), 3X2W (X-ray, 1.70 A), 3X2V (X-ray, 1.77 A), 3QAM (X-ray, 1.92 A), 4XW5 (X-ray, 1.95 A), 4DH1 (X-ray, 2.00 A), 1ATP (X-ray, 2.20 A), 4DH3 (X-ray, 2.20 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

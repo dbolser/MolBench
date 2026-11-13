@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P69905 (HBA_HUMAN, Hemoglobin subunit alpha; Homo sapiens), 142 residues\nProtein named in the request: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta; Homo sapiens), 147 residues\nPDB entries with all of these proteins together (RCSB, 2026-11-13): 344. The 10 with the best resolution: 2W72 (X-ray, 1.07 A), 1IRD (X-ray, 1.25 A), 2DN1 (X-ray, 1.25 A), 2DN2 (X-ray, 1.25 A), 2DN3 (X-ray, 1.25 A), 7DY4 (X-ray, 1.30 A), 6KA9 (X-ray, 1.40 A), 6KAO (X-ray, 1.40 A), 6LCW (X-ray, 1.40 A), 6LCX (X-ray, 1.40 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

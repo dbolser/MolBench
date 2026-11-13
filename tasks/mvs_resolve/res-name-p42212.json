@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P42212 (GFP_AEQVI, Green fluorescent protein; Aequorea victoria), 238 residues\nPDB entries with this protein (RCSB, 2026-11-13): 644. The 10 with the best resolution: 6L27 (X-ray, 0.77 A), 6JGJ (X-ray, 0.78 A), 6KL0 (X-ray, 0.80 A), 6JGI (X-ray, 0.85 A), 6KL1 (X-ray, 0.85 A), 2WUR (X-ray, 0.90 A), 6KKZ (X-ray, 0.90 A), 6JGH (X-ray, 0.94 A), 4AS8 (X-ray, 1.02 A), 5OXC (X-ray, 1.02 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

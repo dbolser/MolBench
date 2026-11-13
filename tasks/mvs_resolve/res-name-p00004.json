@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00004 (CYC_HORSE, Cytochrome c; Equus caballus), 105 residues\nPDB entries with this protein (RCSB, 2026-11-13): 32. The 10 with the best resolution: 6K9J (X-ray, 0.98 A), 3O1Y (X-ray, 1.75 A), 1WEJ (X-ray, 1.80 A), 3WC8 (X-ray, 1.80 A), 3WUI (X-ray, 1.80 A), 6K9I (X-ray, 1.80 A), 1HRC (X-ray, 1.90 A), 3O20 (X-ray, 1.90 A), 5IY5 (X-ray, 2.00 A), 1CRC (X-ray, 2.08 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

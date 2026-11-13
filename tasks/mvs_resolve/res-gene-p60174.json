@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P60174 (TPIS_HUMAN, Triosephosphate isomerase; Homo sapiens), 249 residues\nPDB entries with this protein (RCSB, 2026-11-13): 24. The 10 with the best resolution: 9F69 (X-ray, 1.17 A), 9FFC (X-ray, 1.25 A), 7RDE (X-ray, 1.31 A), 4UNL (X-ray, 1.50 A), 4POC (X-ray, 1.60 A), 6UPF (X-ray, 1.65 A), 4ZVJ (X-ray, 1.70 A), 2JK2 (X-ray, 1.70 A), 6UP1 (X-ray, 1.83 A), 2VOM (X-ray, 1.85 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

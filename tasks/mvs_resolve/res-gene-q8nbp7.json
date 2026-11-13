@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt Q8NBP7 (PCSK9_HUMAN, Proprotein convertase subtilisin/kexin type 9; Homo sapiens), 692 residues\nPDB entries with this protein (RCSB, 2026-11-13): 60. The 10 with the best resolution: 7S5H (X-ray, 1.27 A), 6XIC (X-ray, 1.38 A), 6XIE (X-ray, 1.43 A), 9HZ3 (X-ray, 1.43 A), 6XID (X-ray, 1.48 A), 6U26 (X-ray, 1.53 A), 6XIB (X-ray, 1.55 A), 9SZY (X-ray, 1.76 A), 6XIF (X-ray, 1.77 A), 10SB (X-ray, 1.83 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

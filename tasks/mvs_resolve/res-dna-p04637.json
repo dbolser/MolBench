@@ -95,7 +95,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P04637 (P53_HUMAN, Cellular tumor antigen p53; Homo sapiens), 393 residues\nPDB entries with this protein and DNA (RCSB, 2026-11-13): 47. The 10 with the best resolution: 7B4N (X-ray, 1.32 A), 7B4H (X-ray, 1.39 A), 7B49 (X-ray, 1.42 A), 5MCT (X-ray, 1.45 A), 5MG7 (X-ray, 1.45 A), 7B4E (X-ray, 1.58 A), 5MF7 (X-ray, 1.59 A), 5MCV (X-ray, 1.60 A), 6ZNC (X-ray, 1.64 A), 3IGK (X-ray, 1.70 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

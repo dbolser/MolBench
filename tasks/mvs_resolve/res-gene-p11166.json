@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P11166 (GTR1_HUMAN, Solute carrier family 2, facilitated glucose transporter member 1; Homo sapiens), 492 residues\nPDB entries with this protein (RCSB, 2026-11-13): 5. They are: 6THA (X-ray, 2.40 A), 5EQG (X-ray, 2.90 A), 5EQH (X-ray, 2.99 A), 5EQI (X-ray, 3.00 A), 4PYP (X-ray, 3.17 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

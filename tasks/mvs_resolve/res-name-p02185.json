@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P02185 (MYG_PHYMC, Myoglobin; Physeter macrocephalus), 154 residues\nPDB entries with this protein (RCSB, 2026-11-13): 358. The 10 with the best resolution: 5YCE (X-ray, 0.77 A), 7VDN (X-ray, 0.93 A), 1A6M (X-ray, 1.00 A), 1NAZ (X-ray, 1.04 A), 8ESU (X-ray, 1.04 A), 1A6K (X-ray, 1.10 A), 2EKT (X-ray, 1.10 A), 3O89 (X-ray, 1.10 A), 6M8F (X-ray, 1.10 A), 9P1F (X-ray, 1.10 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

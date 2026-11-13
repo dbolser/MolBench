@@ -95,7 +95,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P08046 (EGR1_MOUSE, Early growth response protein 1; Mus musculus), 533 residues\nPDB entries with this protein and DNA (RCSB, 2026-11-13): 20. The 10 with the best resolution: 1LLM (X-ray, 1.50 A), 1A1H (X-ray, 1.60 A), 1A1I (X-ray, 1.60 A), 1AAY (X-ray, 1.60 A), 1JK2 (X-ray, 1.65 A), 1A1G (X-ray, 1.90 A), 1A1K (X-ray, 1.90 A), 1JK1 (X-ray, 1.90 A), 1A1J (X-ray, 2.00 A), 1G2F (X-ray, 2.00 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

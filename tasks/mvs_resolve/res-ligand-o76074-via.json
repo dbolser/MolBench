@@ -479,7 +479,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt O76074 (PDE5A_HUMAN, cGMP-specific 3',5'-cyclic phosphodiesterase; Homo sapiens), 875 residues\nPDB entries with this protein and 5-{2-ETHOXY-5-[(4-METHYLPIPERAZIN-1-YL)SULFONYL]PHENYL}-1-METHYL-3-PROPYL-1H,6H,7H-PYRAZOLO[4,3-D]PYRIMIDIN-7-ONE (chemical code VIA) (RCSB, 2026-11-13): 4. They are: 1TBF (X-ray, 1.30 A), 1UDT (X-ray, 2.30 A), 2H42 (X-ray, 2.30 A), 3JWQ (X-ray, 2.87 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

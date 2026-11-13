@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P04062 (GBA1_HUMAN, Lysosomal acid glucosylceramidase; Homo sapiens), 536 residues\nPDB entries with this protein (RCSB, 2026-11-13): 58. The 10 with the best resolution: 6TN1 (X-ray, 0.98 A), 9FB2 (X-ray, 1.14 A), 9FA3 (X-ray, 1.36 A), 9FAL (X-ray, 1.39 A), 9FAY (X-ray, 1.40 A), 6TJQ (X-ray, 1.41 A), 9FDI (X-ray, 1.41 A), 8AWR (X-ray, 1.49 A), 9FA6 (X-ray, 1.49 A), 6TJK (X-ray, 1.56 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

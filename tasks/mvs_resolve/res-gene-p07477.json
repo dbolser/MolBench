@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P07477 (TRY1_HUMAN, Serine protease 1; Homo sapiens), 247 residues\nPDB entries with this protein (RCSB, 2026-11-13): 11. The 10 with the best resolution: 2RA3 (X-ray, 1.46 A), 4WWY (X-ray, 1.70 A), 4WXV (X-ray, 2.10 A), 7QE9 (X-ray, 2.10 A), 1TRN (X-ray, 2.20 A), 8ZIY (EM, 2.64 A), 8ZJ4 (EM, 2.67 A), 7QE8 (X-ray, 2.90 A), 8ZI4 (EM, 2.95 A), 8ZIV (EM, 2.95 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

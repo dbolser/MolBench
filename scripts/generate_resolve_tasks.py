@@ -188,7 +188,8 @@ def refresh() -> None:
     fields = ("rcsb_id entity_poly{rcsb_entity_polymer_type} "
               "rcsb_polymer_entity_align{reference_database_name reference_database_accession "
               "aligned_regions{length}} "
-              "entry{rcsb_entry_info{polymer_entity_count_DNA polymer_entity_count_RNA} "
+              "entry{rcsb_entry_info{polymer_entity_count_DNA polymer_entity_count_RNA "
+              "resolution_combined experimental_method} "
               "nonpolymer_entities{pdbx_entity_nonpoly{comp_id}}}")
     today = datetime.date.today().isoformat()
     proteins = {}
@@ -233,7 +234,9 @@ def refresh() -> None:
                 old = entries.get(entry)
                 entries[entry] = [aligned + (old[0] if old else 0),
                                   int(bool(info["polymer_entity_count_DNA"])),
-                                  int(bool(info["polymer_entity_count_RNA"])), " ".join(comps)]
+                                  int(bool(info["polymer_entity_count_RNA"])), " ".join(comps),
+                                  info.get("experimental_method") or "",
+                                  (info.get("resolution_combined") or [None])[0]]
         proteins[acc] = {
             "uniprot_id": u["uniProtkbId"], "names": names, "genes": genes,
             "organism": u["organism"]["scientificName"],
@@ -248,7 +251,8 @@ def refresh() -> None:
          "retrieved": today,
          "entry_columns": ["residues aligned to the accession (summed over the entry's "
                            "polymer entities, each counted once)", "has DNA",
-                           "has RNA", "non-polymer component codes"],
+                           "has RNA", "non-polymer component codes", "experimental method",
+                           "resolution in A (null if none)"],
          "proteins": proteins}, indent=0, ensure_ascii=False, sort_keys=True)
     C.DATA.mkdir(parents=True, exist_ok=True)
     ENTRIES.write_text(text + "\n", encoding="utf-8")
@@ -301,7 +305,7 @@ def accepted_entries(accessions: list[str], comp: str | None = None, dna: bool =
     entry, each over `COVERAGE_RULE`), with the component and with DNA if asked."""
     out = None
     for acc in accessions:
-        mine = {e for e, (aligned, has_dna, _rna, comps) in protein(acc)["entries"].items()
+        mine = {e for e, (aligned, has_dna, _rna, comps, *_) in protein(acc)["entries"].items()
                 if aligned >= threshold(acc) and (not dna or has_dna)
                 and (comp is None or comp in comps.split())}
         out = mine if out is None else out & mine
@@ -347,11 +351,11 @@ def a_colour(c: str) -> str:
 
 
 def cand(entry, accessions, wordings, children, alternatives, target, accepted, derivation,
-         suffix, named_by, flags=None, **words):
+         suffix, named_by, flags=None, pack_extra="", **words):
     return {"entry": entry, "accessions": accessions, "wordings": wordings, "children": children,
             "alternatives": alternatives, "target": target, "accepted": accepted,
             "derivation": derivation, "suffix": suffix, "named_by": named_by,
-            "flags": flags or {}, "words": words}
+            "flags": flags or {}, "pack_extra": pack_extra, "words": words}
 
 
 def cartoon_namings(entry: str) -> list[str]:
@@ -482,6 +486,7 @@ def t_dna():
             f"accepted are the PDB entries of that accession that also hold a DNA entity. The "
             f"reference draws the protein and the nucleic acid of {entry.upper()}, one of the "
             f"{len(accepted)} accepted entries", acc.lower(), "protein name, bound to DNA",
+            pack_extra=" and DNA",
             P=protein_phrase(acc), c1=a_colour(c1), c2=a_colour(c2)))
     return out
 
@@ -521,6 +526,7 @@ def t_ligand():
                 f"{len(accepted)} accepted entries",
                 f"{acc.lower()}-{comp.lower()}", "protein name, with a named ligand",
                 {"ligand_identity": named[0].upper() != comp},
+                pack_extra=f" and {G.chem()[comp]['name']} (chemical code {comp})",
                 P=protein_phrase(acc), L=named[0], c1=a_colour(c1), c2=C.say_colour(c2)))
     return out
 
@@ -594,14 +600,36 @@ def repoint(scene: dict, entry: str, other: str) -> dict:
     return json.loads(json.dumps(scene).replace(C.url(entry), C.url(other)))
 
 
-def existing_grounding(tid: str) -> dict | None:
-    """The grounding pack already frozen into the task file, if any. Packs are written
-    into the task files by ``scripts/build_grounding_packs.py``; rewriting a task keeps
-    its pack (that script's ``--check`` says when a pack is stale)."""
-    path = OUT / f"{tid}.json"
-    if not path.exists():
-        return None
-    return json.loads(path.read_text(encoding="utf-8")).get("grounding")
+PACK_RULE = "resolve-v1"
+PACK_ENTRIES = 10
+
+
+def pack(accessions: list[str], accepted: list[str], extra: str) -> str:
+    """The grounding pack of a resolve task: what an offline lookup of the names in the
+    request would return. The UniProt record of each protein named, and the number of
+    PDB entries that fit the request with the ``PACK_ENTRIES`` best-resolved of them
+    (ties and entries without a resolution by id). It states facts and never says what
+    to draw; the reference's entry gets no special mention."""
+    lines = []
+    for acc in accessions:
+        rec = protein(acc)
+        lines.append(f"Protein named in the request: UniProt {acc} ({rec['uniprot_id']}, "
+                     f"{rec['names'][0]}; {rec['organism']}), {rec['length']} residues")
+    info = protein(accessions[0])["entries"]
+
+    def key(e: str):
+        res = info[e][5]
+        return (res if res is not None else float("inf"), e)
+
+    best = sorted(accepted, key=key)[:PACK_ENTRIES]
+    listed = ", ".join(
+        f"{e.upper()} ({info[e][4] or 'method not given'}"
+        + (f", {info[e][5]:.2f} A" if info[e][5] is not None else "") + ")" for e in best)
+    what = "this protein" if len(accessions) == 1 else "all of these proteins together"
+    lines.append(f"PDB entries with {what}{extra} (RCSB, {frozen()['retrieved']}): "
+                 f"{len(accepted)}. " + (f"The {len(best)} with the best resolution: "
+                                         if len(accepted) > len(best) else "They are: ") + listed)
+    return "\n".join(lines)
 
 
 def build() -> list[dict]:
@@ -635,7 +663,7 @@ def build() -> list[dict]:
                         "accepted_source": "RCSB search API and GraphQL, frozen in "
                                            "data/mvscore/resolve_entries.json"},
             accepted_structures=others)
-        task["grounding"] = existing_grounding(tid)
+        task["grounding"] = {"rule": PACK_RULE, "text": pack(accessions, accepted, c["pack_extra"])}
         built.append(task)
     return sorted(built, key=lambda t: t["id"])
 

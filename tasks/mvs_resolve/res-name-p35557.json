@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P35557 (HXK4_HUMAN, Hexokinase-4; Homo sapiens), 465 residues\nPDB entries with this protein (RCSB, 2026-11-13): 35. The 10 with the best resolution: 3F9M (X-ray, 1.50 A), 4NO7 (X-ray, 1.70 A), 4ISE (X-ray, 1.78 A), 4DCH (X-ray, 1.79 A), 3VEV (X-ray, 1.80 A), 3VF6 (X-ray, 1.86 A), 6E0I (X-ray, 1.90 A), 3IMX (X-ray, 2.00 A), 4IXC (X-ray, 2.00 A), 5V4X (X-ray, 2.08 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

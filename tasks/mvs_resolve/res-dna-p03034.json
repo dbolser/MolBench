@@ -95,7 +95,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P03034 (RPC1_LAMBD, Repressor protein cI; Escherichia phage lambda), 237 residues\nPDB entries with this protein and DNA (RCSB, 2026-11-13): 6. They are: 1LMB (X-ray, 1.80 A), 1LLI (X-ray, 2.10 A), 1RIO (X-ray, 2.30 A), 8GMU (EM, 2.78 A), 7JVT (X-ray, 3.16 A), 3BDN (X-ray, 3.91 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

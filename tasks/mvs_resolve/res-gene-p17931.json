@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P17931 (LEG3_HUMAN, Galectin-3; Homo sapiens), 250 residues\nPDB entries with this protein (RCSB, 2026-11-13): 183. The 10 with the best resolution: 3ZSJ (X-ray, 0.86 A), 3ZSK (X-ray, 0.90 A), 9RR6 (X-ray, 0.93 A), 6RZH (X-ray, 0.95 A), 6I74 (X-ray, 0.96 A), 4BM8 (X-ray, 0.96 A), 6QLR (X-ray, 0.97 A), 7XFA (X-ray, 0.98 A), 9I4O (X-ray, 0.99 A), 6QLN (X-ray, 1.00 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

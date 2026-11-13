@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P07320 (CRGD_HUMAN, Gamma-crystallin D; Homo sapiens), 174 residues\nPDB entries with this protein (RCSB, 2026-11-13): 16. The 10 with the best resolution: 1H4A (X-ray, 1.15 A), 6W5B (X-ray, 1.15 A), 6ETC (X-ray, 1.20 A), 6WCY (X-ray, 1.20 A), 1HK0 (X-ray, 1.25 A), 7P53 (X-ray, 1.57 A), 4GR7 (X-ray, 1.70 A), 9G3W (X-ray, 1.80 A), 8BD0 (X-ray, 2.00 A), 8BPI (X-ray, 2.00 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

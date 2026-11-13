@@ -254,7 +254,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P02699 (OPSD_BOVIN, Rhodopsin; Bos taurus), 348 residues\nPDB entries with this protein and RETINAL (chemical code RET) (RCSB, 2026-11-13): 36. The 10 with the best resolution: 7ZBC (X-ray, 1.80 A), 7ZBE (X-ray, 1.80 A), 8A6C (X-ray, 1.80 A), 8A6D (X-ray, 1.80 A), 8A6E (X-ray, 1.80 A), 1U19 (X-ray, 2.20 A), 5DYS (X-ray, 2.30 A), 1L9H (X-ray, 2.60 A), 2G87 (X-ray, 2.60 A), 3OAX (X-ray, 2.60 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

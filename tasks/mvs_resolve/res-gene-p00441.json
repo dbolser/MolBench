@@ -180,7 +180,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00441 (SODC_HUMAN, Superoxide dismutase [Cu-Zn]; Homo sapiens), 154 residues\nPDB entries with this protein (RCSB, 2026-11-13): 147. The 10 with the best resolution: 4A7U (X-ray, 0.98 A), 2WYT (X-ray, 1.00 A), 4A7V (X-ray, 1.00 A), 1MFM (X-ray, 1.02 A), 4A7S (X-ray, 1.06 A), 2C9V (X-ray, 1.07 A), 2V0A (X-ray, 1.15 A), 4A7Q (X-ray, 1.22 A), 2C9S (X-ray, 1.24 A), 2C9U (X-ray, 1.24 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [

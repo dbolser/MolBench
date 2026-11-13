@@ -479,7 +479,10 @@
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
- "grounding": null,
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00520 (ABL1_MOUSE, Tyrosine-protein kinase ABL1; Mus musculus), 1123 residues\nPDB entries with this protein and 4-(4-METHYL-PIPERAZIN-1-YLMETHYL)-N-[4-METHYL-3-(4-PYRIDIN-3-YL-PYRIMIDIN-2-YLAMINO)-PHENYL]-BENZAMIDE (chemical code STI) (RCSB, 2026-11-13): 7. They are: 3K5V (X-ray, 1.74 A), 1OPJ (X-ray, 1.75 A), 3MS9 (X-ray, 1.80 A), 3MSS (X-ray, 1.95 A), 6HD4 (X-ray, 2.03 A), 1IEP (X-ray, 2.10 A), 6HD6 (X-ray, 2.30 A)"
+ },
  "provenance": {
   "script": "scripts/generate_resolve_tasks.py",
   "inputs": [
