@@ -1,0 +1,220 @@
+{
+ "id": "gr-metal-site-2c9v-zn",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-metal-site",
+ "structures": [
+  "2c9v"
+ ],
+ "prompt": "Load 2C9V; show the protein as a grey cartoon, the zinc ions as orange spheres, and the residues that coordinate them as steel blue ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2c9v.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "ZN"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 63
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 71
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 80
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 83
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 63
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 71
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 80
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 83
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 63
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 71
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 80
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 83
+    },
+    {
+     "auth_asym_id": "F",
+     "auth_seq_id": 63
+    },
+    {
+     "auth_asym_id": "F",
+     "auth_seq_id": 71
+    },
+    {
+     "auth_asym_id": "F",
+     "auth_seq_id": 80
+    },
+    {
+     "auth_asym_id": "F",
+     "auth_seq_id": 83
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "steelblue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/2c9v.json",
+   "molbench/atom_tables/2c9v.json.gz",
+   "data/panel/cif/2c9v.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "8 metal-residue bonds re-measured in the frozen mmCIF: 1.92 to 2.02 A",
+   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a ZN ion",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 76 atoms on the frozen atom table"
+  ],
+  "derivation": "every ZN ion of the facts (2) as a sphere, and the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: HIS63 (A), HIS71 (A), HIS80 (A), ASP83 (A), HIS63 (F), HIS71 (F), HIS80 (F), ASP83 (F). Water and other non-polymer partners are not residues and are left out",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

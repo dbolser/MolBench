@@ -1,0 +1,1055 @@
+{
+ "components": {
+  "1MA": {
+   "name": "6-HYDRO-1-METHYLADENOSINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "1-methyladenosine 5'-(dihydrogen phosphate)",
+    "6-HYDRO-1-METHYLADENOSINE-5'-MONOPHOSPHATE",
+    "6-Hydro-1-Methyladenosine-5'-Monophosphate",
+    "[(2R,3S,4R,5R)-5-(6-azanylidene-1-methyl-purin-9-yl)-3,4-bis(oxidanyl)oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "2MG": {
+   "name": "2N-METHYLGUANOSINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "2N-METHYLGUANOSINE-5'-MONOPHOSPHATE",
+    "N-methylguanosine 5'-(dihydrogen phosphate)",
+    "[(2R,3S,4R,5R)-3,4-dihydroxy-5-(2-methylamino-6-oxo-1H-purin-9-yl)oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "3JF": {
+   "name": "N-acetyl-3-methyl-L-valyl-(4R)-4-hydroxy-N-[4-(4-methyl-1,3-thiazol-5-yl)benzyl]-L-prolinamide",
+   "synonyms": [
+    "(2S,4R)-1-[(2S)-2-acetamido-3,3-dimethyl-butanoyl]-N-[[4-(4-methyl-1,3-thiazol-5-yl)phenyl]methyl]-4-oxidanyl-pyrrolidine-2-carboxamide",
+    "N-acetyl-3-methyl-L-valyl-(4R)-4-hydroxy-N-[4-(4-methyl-1,3-thiazol-5-yl)benzyl]-L-prolinamide"
+   ]
+  },
+  "51Y": {
+   "name": "2-chloro-4-{[(1R,2R)-2-hydroxy-2-methylcyclopentyl]amino}-3-methylbenzonitrile",
+   "synonyms": [
+    "2-chloranyl-3-methyl-4-[[(1R,2R)-2-methyl-2-oxidanyl-cyclopentyl]amino]benzenecarbonitrile",
+    "2-chloro-4-{[(1R,2R)-2-hydroxy-2-methylcyclopentyl]amino}-3-methylbenzonitrile"
+   ]
+  },
+  "5MC": {
+   "name": "5-METHYLCYTIDINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "5-METHYLCYTIDINE-5'-MONOPHOSPHATE",
+    "5-methyl-CMP",
+    "5-methylcytidine 5'-(dihydrogen phosphate)",
+    "5-methylcytidine 5'-monophosphate",
+    "5-methylcytidine-5'-monophosphate",
+    "5-methylcytidylic acid",
+    "[(2R,3S,4R,5R)-5-(4-amino-5-methyl-2-oxo-pyrimidin-1-yl)-3,4-dihydroxy-oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "5MU": {
+   "name": "5-METHYLURIDINE 5'-MONOPHOSPHATE",
+   "synonyms": [
+    "5-METHYLURIDINE 5'-MONOPHOSPHATE",
+    "5-methyluridine 5'-(dihydrogen phosphate)",
+    "[(2R,3S,4R,5R)-3,4-dihydroxy-5-(5-methyl-2,4-dioxo-pyrimidin-1-yl)oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "7MG": {
+   "name": "7N-METHYL-8-HYDROGUANOSINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "7-Methyl-7,8-dihydroguanosine 5'-(dihydrogen phosphate)",
+    "7-methylguanosine 5'-(dihydrogen phosphate)",
+    "7N-METHYL-8-HYDROGUANOSINE-5'-MONOPHOSPHATE",
+    "[(2R,3S,4R,5R)-5-(2-amino-7-methyl-6-oxo-1,8-dihydropurin-9-yl)-3,4-dihydroxy-oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "A1IBO": {
+   "name": "~{N}-[(2~{R})-2-azanyl-2-(3-prop-1-en-2-ylphenyl)ethyl]-3,5-bis(fluoranyl)-~{N}-methyl-benzenesulfonamide",
+   "synonyms": [
+    "~{N}-[(2~{R})-2-azanyl-2-(3-prop-1-en-2-ylphenyl)ethyl]-3,5-bis(fluoranyl)-~{N}-methyl-benzenesulfonamide"
+   ]
+  },
+  "A1IMD": {
+   "name": "N-[2-(dimethylsulfamoyl)-5-[(1-methylpyrazol-4-yl)methoxy]phenyl]propanamide",
+   "synonyms": [
+    "N-[2-(dimethylsulfamoyl)-5-[(1-methylpyrazol-4-yl)methoxy]phenyl]propanamide",
+    "~{N}-[2-(dimethylsulfamoyl)-5-[(1-methylpyrazol-4-yl)methoxy]phenyl]propanamide"
+   ]
+  },
+  "ACE": {
+   "name": "ACETYL GROUP",
+   "synonyms": [
+    "ACETYL GROUP",
+    "acetaldehyde",
+    "ethanal"
+   ]
+  },
+  "ADE": {
+   "name": "ADENINE",
+   "synonyms": [
+    "6-Aminopurine",
+    "9H-purin-6-amine",
+    "ADENINE",
+    "Adenin",
+    "Adenine",
+    "Adenine hydrochloride",
+    "Adenine sulfate",
+    "Vitamin B4"
+   ]
+  },
+  "AP5": {
+   "name": "BIS(ADENOSINE)-5'-PENTAPHOSPHATE",
+   "synonyms": [
+    "BIS(ADENOSINE)-5'-PENTAPHOSPHATE",
+    "Bis(Adenosine)-5'-Pentaphosphate",
+    "[[[[[(2R,3S,4R,5R)-5-(6-aminopurin-9-yl)-3,4-dihydroxy-oxolan-2-yl]methoxy-hydroxy-phosphoryl]oxy-hydroxy-phosphoryl]oxy-hydroxy-phosphoryl]oxy-hydroxy-phosphoryl] [(2R,3S,4R,5R)-5-(6-aminopurin-9-yl)-3,4-dihydroxy-oxolan-2-yl]methyl hydrogen phosphate"
+   ]
+  },
+  "ATP": {
+   "name": "ADENOSINE-5'-TRIPHOSPHATE",
+   "synonyms": [
+    "ADENOSINE-5'-TRIPHOSPHATE",
+    "ATP",
+    "Adenosine 5'-triphosphate",
+    "Adenosine triphosphate",
+    "Adenosine triphosphate disodium",
+    "Adenosine triphosphate disodium trihydrate",
+    "Adenosine-5'-triphosphate",
+    "[[(2R,3S,4R,5R)-5-(6-aminopurin-9-yl)-3,4-dihydroxy-oxolan-2-yl]methoxy-hydroxy-phosphoryl] phosphono hydrogen phosphate",
+    "adenosine 5'-(tetrahydrogen triphosphate)"
+   ]
+  },
+  "BEN": {
+   "name": "BENZAMIDINE",
+   "synonyms": [
+    "BENZAMIDINE",
+    "benzenecarboximidamide"
+   ]
+  },
+  "BGC": {
+   "name": "beta-D-glucopyranose",
+   "synonyms": [
+    "(2R,3R,4S,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol",
+    "Beta-D-Glucose",
+    "Beta-D-glucose anhydrous",
+    "Beta-D-glucose, anhydrous",
+    "D-glucose",
+    "DGlcpb",
+    "Glc",
+    "Glucoside",
+    "b-D-Glcp",
+    "b-D-glucopyranose",
+    "beta-D-glucopyranose",
+    "beta-D-glucose",
+    "glucose",
+    "β-D-glucose"
+   ]
+  },
+  "BME": {
+   "name": "BETA-MERCAPTOETHANOL",
+   "synonyms": [
+    "2-mercaptoethanol",
+    "2-sulfanylethanol",
+    "BETA-MERCAPTOETHANOL",
+    "Mercaptoethanol",
+    "Thiomonoglycol",
+    "beta-mercaptoethanol"
+   ]
+  },
+  "BNG": {
+   "name": "nonyl beta-D-glucopyranoside",
+   "synonyms": [
+    "(2R,3S,4S,5R,6R)-2-(hydroxymethyl)-6-nonoxy-oxane-3,4,5-triol",
+    "B-nonylglucoside",
+    "Beta-NONYLGLUCOSIDE",
+    "b-nonylglucoside",
+    "nonyl D-glucoside",
+    "nonyl beta-D-glucopyranoside",
+    "nonyl beta-D-glucoside",
+    "nonyl glucoside"
+   ]
+  },
+  "BR": {
+   "name": "BROMIDE ION",
+   "synonyms": [
+    "BROMIDE ION",
+    "bromide"
+   ]
+  },
+  "BTN": {
+   "name": "BIOTIN",
+   "synonyms": [
+    "(+)-cis-Hexahydro-2-oxo-1H-thieno[3,4]imidazole-4-valeric acid",
+    "(3aS,4S,6aR)-Hexahydro-2-oxo-1H-thieno[3,4-d]imidazole-4-valeric acid",
+    "5-(2-oxohexahydro-1H-thieno[3,4-d]imidazol-4-yl)pentanoic acid",
+    "5-[(3aS,4S,6aR)-2-oxidanylidene-1,3,3a,4,6,6a-hexahydrothieno[3,4-d]imidazol-4-yl]pentanoic acid",
+    "5-[(3aS,4S,6aR)-2-oxohexahydro-1H-thieno[3,4-d]imidazol-4-yl]pentanoic acid",
+    "BIOTIN",
+    "Biotin",
+    "Biotina",
+    "Biotine",
+    "Biotinum",
+    "Coenzyme R",
+    "D-(+)-biotin",
+    "D-Biotin",
+    "Vitamin B7",
+    "Vitamin H",
+    "cis-(+)-Tetrahydro-2-oxothieno[3,4]imidazoline-4-valeric acid",
+    "cis-Hexahydro-2-oxo-1H-thieno(3,4)imidazole-4-valeric acid",
+    "cis-Tetrahydro-2-oxothieno(3,4-d)imidazoline-4-valeric acid"
+   ]
+  },
+  "C8E": {
+   "name": "(HYDROXYETHYLOXY)TRI(ETHYLOXY)OCTANE",
+   "synonyms": [
+    "(HYDROXYETHYLOXY)TRI(ETHYLOXY)OCTANE",
+    "(Hydroxyethyloxy)Tri(Ethyloxy)Octane",
+    "2-[2-[2-(2-octoxyethoxy)ethoxy]ethoxy]ethanol",
+    "3,6,9,12-tetraoxaicosan-1-ol"
+   ]
+  },
+  "CA": {
+   "name": "CALCIUM ION",
+   "synonyms": [
+    "CALCIUM ION",
+    "calcium",
+    "calcium(+2) cation"
+   ]
+  },
+  "CAM": {
+   "name": "CAMPHOR",
+   "synonyms": [
+    "(+)-Camphor",
+    "(+)-bornan-2-one",
+    "(1R)-(+)-camphor",
+    "(1R,4R)-1,7,7-trimethylbicyclo[2.2.1]heptan-2-one",
+    "(1R,4R)-1,7,7-trimethylbicyclo[2.2.1]heptan-6-one",
+    "(1R,4R)-camphor",
+    "(R)-(+)-camphor",
+    "(R)-camphor",
+    "CAMPHOR",
+    "Camphor",
+    "Camphor (natural)",
+    "Camphor D-form",
+    "Camphor oil",
+    "Camphor(D)",
+    "Camphora",
+    "D-Camphor",
+    "Dextrocamphor",
+    "Natural camphor"
+   ]
+  },
+  "CGU": {
+   "name": "GAMMA-CARBOXY-GLUTAMIC ACID",
+   "synonyms": [
+    "(3S)-3-amino-1,1,3-propanetricarboxylic acid",
+    "(3S)-3-aminopropane-1,1,3-tricarboxylic acid",
+    "GAMMA-CARBOXY-GLUTAMIC ACID",
+    "gamma-Carboxyglutamic acid",
+    "gamma-carboxy-L-glutamic acid",
+    "gamma-carboxy-glutamic acid",
+    "γ-carboxy-L-glutamic acid"
+   ]
+  },
+  "CL": {
+   "name": "CHLORIDE ION",
+   "synonyms": [
+    "CHLORIDE ION",
+    "Chloride",
+    "Chloride (ion)",
+    "Chloride ion",
+    "Chloride ions",
+    "Chloride(1-)",
+    "Chlorine anion",
+    "chloride"
+   ]
+  },
+  "CRO": {
+   "name": "{2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl}acetic acid",
+   "synonyms": [
+    "2-[(4Z)-2-[(1R,2R)-1-azanyl-2-oxidanyl-propyl]-4-[(4-hydroxyphenyl)methylidene]-5-oxidanylidene-imidazol-1-yl]ethanoic acid",
+    "Chromophore (Gly-Tyr-Gly)",
+    "PEPTIDE DERIVED CHROMOPHORE",
+    "[(4Z)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+    "{2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl}acetic acid"
+   ]
+  },
+  "CSO": {
+   "name": "S-HYDROXYCYSTEINE",
+   "synonyms": [
+    "(2R)-2-amino-3-hydroxysulfanyl-propanoic acid",
+    "S-HYDROXYCYSTEINE",
+    "S-Hydroxycysteine",
+    "S-hydroxy-L-cysteine"
+   ]
+  },
+  "CU": {
+   "name": "COPPER (II) ION",
+   "synonyms": [
+    "COPPER (II) ION",
+    "Copper ion (Cu++)",
+    "Copper ions",
+    "Copper(2+)ions",
+    "Cupric cation",
+    "Cupric ion",
+    "copper(+2) cation",
+    "copper(2+)"
+   ]
+  },
+  "DGA": {
+   "name": "DIACYL GLYCEROL",
+   "synonyms": [
+    "(2S)-3-hydroxypropane-1,2-diyl dioctadecanoate",
+    "DIACYL GLYCEROL",
+    "[(2S)-3-hydroxy-2-octadecanoyloxy-propyl] octadecanoate"
+   ]
+  },
+  "DMS": {
+   "name": "DIMETHYL SULFOXIDE",
+   "synonyms": [
+    "DIMETHYL SULFOXIDE",
+    "DMSO",
+    "Dimethyl sulfoxide",
+    "Dimethyl sulfur oxide",
+    "Dimethyl sulphoxide",
+    "Dimethyli sulfoxidum",
+    "Dimethylsulfoxid",
+    "Dimetil sulfóxido",
+    "Diméthylsulfoxyde",
+    "Methylsulfinylmethane",
+    "S(O)Me2",
+    "Sulfinylbis(methane)",
+    "dimethyl sulfoxide",
+    "methylsulfinylmethane"
+   ]
+  },
+  "DXX": {
+   "name": "METHYLMALONIC ACID",
+   "synonyms": [
+    "2-methylpropanedioic acid",
+    "METHYLMALONIC ACID",
+    "Methylmalonic Acid",
+    "methylpropanedioic acid"
+   ]
+  },
+  "EDO": {
+   "name": "1,2-ETHANEDIOL",
+   "synonyms": [
+    "1,2-ETHANEDIOL",
+    "ETHYLENE GLYCOL",
+    "ethane-1,2-diol"
+   ]
+  },
+  "F09": {
+   "name": "NONAN-1-OL",
+   "synonyms": [
+    "NONAN-1-OL",
+    "Nonan-1-Ol",
+    "nonan-1-ol"
+   ]
+  },
+  "FE": {
+   "name": "FE (III) ION",
+   "synonyms": [
+    "FE (III) ION",
+    "Fe(III)",
+    "Ferric cation",
+    "Ferric ion",
+    "iron(+3) cation",
+    "iron(3+)"
+   ]
+  },
+  "FOL": {
+   "name": "FOLIC ACID",
+   "synonyms": [
+    "(2S)-2-[[4-[(2-amino-4-oxo-1H-pteridin-6-yl)methylamino]phenyl]carbonylamino]pentanedioic acid",
+    "Acide folique",
+    "Acidum folicum",
+    "FOLIC ACID",
+    "Folacin",
+    "Folate",
+    "Folate sodium",
+    "Folic acid",
+    "Folic-acid",
+    "Folsäure",
+    "N-[(4-{[(2-amino-4-oxo-1,4-dihydropteridin-6-yl)methyl]amino}phenyl)carbonyl]-L-glutamic acid",
+    "N-pteroyl-L-glutamic acid",
+    "PteGlu",
+    "Pteroyl-L-glutamate",
+    "Pteroyl-L-glutamic acid",
+    "Pteroyl-L-monoglutamic acid",
+    "Pteroylglutamic acid",
+    "Vitamin B-9",
+    "Vitamin B9",
+    "Vitamin Bc",
+    "Vitamin M",
+    "ácido fólico"
+   ]
+  },
+  "FUC": {
+   "name": "alpha-L-fucopyranose",
+   "synonyms": [
+    "(2R,3S,4R,5S,6S)-6-methyloxane-2,3,4,5-tetrol",
+    "6-deoxy-alpha-L-galactopyranose",
+    "Fuc",
+    "L-fucose",
+    "LFucpa",
+    "a-L-Fucp",
+    "a-L-fucopyranose",
+    "alpha-L-fucopyranose",
+    "alpha-L-fucose",
+    "fucose",
+    "α-L-Fuc",
+    "α-L-Fucp",
+    "α-L-fucose"
+   ]
+  },
+  "GLC": {
+   "name": "alpha-D-glucopyranose",
+   "synonyms": [
+    "(2S,3R,4S,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol",
+    "D-glucose",
+    "DGlcpa",
+    "Glc",
+    "a-D-Glcp",
+    "a-D-glucopyranose",
+    "alpha-D-glucopyranose",
+    "alpha-D-glucose",
+    "glucose"
+   ]
+  },
+  "GLY": {
+   "name": "GLYCINE",
+   "synonyms": [
+    "2-aminoethanoic acid",
+    "Aminoacetic acid",
+    "Aminoessigsäure",
+    "Aminoethanoic acid",
+    "GLYCINE",
+    "Glicina",
+    "Gly",
+    "Glycin",
+    "Glycine",
+    "Glycocoll",
+    "Glykokoll",
+    "Glyzin",
+    "Leimzucker",
+    "glycine"
+   ]
+  },
+  "GNP": {
+   "name": "PHOSPHOAMINOPHOSPHONIC ACID-GUANYLATE ESTER",
+   "synonyms": [
+    "5'-O-[(S)-hydroxy{[(R)-hydroxy(phosphonoamino)phosphoryl]oxy}phosphoryl]guanosine",
+    "5'-guanylylimidodiphosphate",
+    "GMP-PNP",
+    "Gpp(NH)p",
+    "Guanosine 5'-[beta,gamma-imido]triphosphate",
+    "Guanylyl imidodiphosphate",
+    "PHOSPHOAMINOPHOSPHONIC ACID-GUANYLATE ESTER",
+    "Phosphoaminophosphonic acid guanylate ester",
+    "[[[[(2R,3S,4R,5R)-5-(2-amino-6-oxo-1H-purin-9-yl)-3,4-dihydroxy-oxolan-2-yl]methoxy-hydroxy-phosphoryl]oxy-hydroxy-phosphoryl]amino]phosphonic acid"
+   ]
+  },
+  "GOL": {
+   "name": "GLYCEROL",
+   "synonyms": [
+    "1,2,3-propanetriol",
+    "1,2,3-trihydroxypropane",
+    "GLYCERIN",
+    "GLYCEROL",
+    "Glycerin",
+    "Glycerin, anhydrous",
+    "Glycerin,anhydrous",
+    "Glycerine",
+    "Glycerinum",
+    "Glycerol",
+    "Glyzerin",
+    "Monoctanoin component D",
+    "PROPANE-1,2,3-TRIOL",
+    "Propanetriol",
+    "Trihydroxypropane",
+    "glycérine",
+    "glycérol",
+    "propane-1,2,3-triol",
+    "Ölsüß"
+   ]
+  },
+  "H2U": {
+   "name": "5,6-DIHYDROURIDINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "5'-uridylic acid",
+    "5,6-DIHYDROURIDINE-5'-MONOPHOSPHATE",
+    "[(2R,3S,4R,5R)-5-(2,4-dioxo-1,3-diazinan-1-yl)-3,4-dihydroxy-oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "HC4": {
+   "name": "4'-HYDROXYCINNAMIC ACID",
+   "synonyms": [
+    "(2E)-3-(4-hydroxyphenyl)acrylic acid",
+    "(2E)-3-(4-hydroxyphenyl)prop-2-enoic acid",
+    "(E)-3-(4-hydroxyphenyl)-2-propenoic acid",
+    "(E)-p-coumaric acid",
+    "(E)-p-hydroxycinnamic acid",
+    "(~{E})-3-(4-hydroxyphenyl)prop-2-enoic acid",
+    "4'-HYDROXYCINNAMIC ACID",
+    "4'-hydroxycinnamic acid",
+    "4-Hydroxycinnamic acid",
+    "4-coumaric acid",
+    "PARA-COUMARIC ACID",
+    "naringeninic acid",
+    "p-Coumaric acid",
+    "para-Coumaric Acid",
+    "trans-4-coumaric acid",
+    "trans-4-hydroxycinnamic acid",
+    "trans-p-Hydroxycinnamate",
+    "trans-p-coumaric acid",
+    "trans-p-coumarinic acid",
+    "trans-p-hydroxycinnamic acid"
+   ]
+  },
+  "HEC": {
+   "name": "HEME C",
+   "synonyms": [
+    "(SP-4-2)-[(21R,23R)-2,18-bis(2-carboxyethyl)-8,13-diethyl-3,7,12,17-tetramethylporphine-21,23-diido-kappa~4~N~21~,N~22~,N~23~,N~24~]iron",
+    "3-[9,14-diethyl-20-(3-hydroxy-3-oxopropyl)-5,10,15,19-tetramethyl-2$l^{4},22,23$l^{4},25-tetraza-1$l^{4}-ferraoctacyclo[11.9.1.1^{1,8}.1^{3,21}.0^{2,6}.0^{16,23}.0^{18,22}.0^{11,25}]pentacosa-2,4,6,8,10,12,14,16(23),17,19,21(24)-undecaen-4-yl]propanoic acid",
+    "Ferroheme C",
+    "HEME C",
+    "Heme C"
+   ]
+  },
+  "HEM": {
+   "name": "PROTOPORPHYRIN IX CONTAINING FE",
+   "synonyms": [
+    "3-[(5Z,10Z,14Z,19Z)-18-(2-carboxyethyl)-8,13-bis(ethenyl)-3,7,12,17-tetramethyl-21,23-dihydroporphyrin-2-yl]propanoic acid",
+    "Ferroheme",
+    "HEME",
+    "HEME B",
+    "HEME IRON",
+    "Heme",
+    "PROTOHEME",
+    "PROTOHEME IX",
+    "PROTOPORPHYRIN IX CONTAINING FE",
+    "[3,3'-(7,12-diethenyl-3,8,13,17-tetramethylporphyrin-2,18-diyl-kappa~4~N~21~,N~22~,N~23~,N~24~)dipropanoato(2-)]iron"
+   ]
+  },
+  "HG": {
+   "name": "MERCURY (II) ION",
+   "synonyms": [
+    "MERCURY (II) ION",
+    "mercury",
+    "mercury(+2) cation"
+   ]
+  },
+  "HGB": {
+   "name": "4-(HYDROXYMERCURY)BENZOIC ACID",
+   "synonyms": [
+    "(4-carboxyphenyl)(hydroxy)mercury",
+    "(4-carboxyphenyl)-hydroxy-mercury",
+    "(p-carboxyphenyl)hydroxymercury",
+    "4-(HYDROXYMERCURY)BENZOIC ACID",
+    "p-Hydroxymercuribenzoic acid"
+   ]
+  },
+  "ISP": {
+   "name": "PHOSPHORYLISOPROPANE",
+   "synonyms": [
+    "1-methylethyl dihydrogen phosphate",
+    "PHOSPHORYLISOPROPANE",
+    "Phosphorylisopropane",
+    "propan-2-yl dihydrogen phosphate"
+   ]
+  },
+  "K": {
+   "name": "POTASSIUM ION",
+   "synonyms": [
+    "POTASSIUM ION",
+    "Potassium (ion)",
+    "Potassium cation",
+    "Potassium ion",
+    "potassium",
+    "potassium(+1) cation",
+    "potassium(1+)",
+    "potassium(1+) ion",
+    "potassium(I) cation"
+   ]
+  },
+  "KN9": {
+   "name": "N-[2-[[[3-(4'-Chlorophenyl)-2-propenyl]methylamino]methyl]phenyl]-N-(2-hydroxyethyl)-4'-methoxybenzenesulfonamide",
+   "synonyms": [
+    "N-[2-({[(2E)-3-(4-chlorophenyl)prop-2-en-1-yl](methyl)amino}methyl)phenyl]-N-(2-hydroxyethyl)-4-methoxybenzene-1-sulfonamide",
+    "N-[2-[[[3-(4'-Chlorophenyl)-2-propenyl]methylamino]methyl]phenyl]-N-(2-hydroxyethyl)-4'-methoxybenzenesulfonamide",
+    "~{N}-[2-[[[(~{E})-3-(4-chlorophenyl)prop-2-enyl]-methyl-amino]methyl]phenyl]-~{N}-(2-hydroxyethyl)-4-methoxy-benzenesulfonamide"
+   ]
+  },
+  "LI1": {
+   "name": "1-[2,6,10.14-TETRAMETHYL-HEXADECAN-16-YL]-2-[2,10,14-TRIMETHYLHEXADECAN-16-YL]GLYCEROL",
+   "synonyms": [
+    "(2R)-3-[(3S,7R,11S)-3,7,11,15-tetramethylhexadecoxy]-2-[(3R,7R)-3,7,15-trimethylhexadecoxy]propan-1-ol",
+    "(2R)-3-{[(3S,7R,11S)-3,7,11,15-tetramethylhexadecyl]oxy}-2-{[(3R,7R)-3,7,15-trimethylhexadecyl]oxy}propan-1-ol",
+    "1-[2,6,10.14-TETRAMETHYL-HEXADECAN-16-YL]-2-[2,10,14-TRIMETHYLHEXADECAN-16-YL]GLYCEROL",
+    "LIPID FRAGMENT"
+   ]
+  },
+  "M2G": {
+   "name": "N2-DIMETHYLGUANOSINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "N,N-dimethylguanosine 5'-(dihydrogen phosphate)",
+    "N2-DIMETHYLGUANOSINE-5'-MONOPHOSPHATE",
+    "[(2R,3S,4R,5R)-5-(2-dimethylamino-6-oxo-1H-purin-9-yl)-3,4-dihydroxy-oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "MG": {
+   "name": "MAGNESIUM ION",
+   "synonyms": [
+    "MAGNESIUM ION",
+    "Magnesium cation",
+    "Magnesium ion",
+    "Magnesium, ion(Mg2+)",
+    "magnesium",
+    "magnesium(+2) cation"
+   ]
+  },
+  "MK1": {
+   "name": "N-[2(R)-HYDROXY-1(S)-INDANYL]-5-[(2(S)-TERTIARY\nBUTYLAMINOCARBONYL)-4(3-PYRIDYLMETHYL)PIPERAZINO]-4(S)-HYDROXY-2(R)-PHENYLMETHYLPENTANAMIDE",
+   "synonyms": [
+    "(1(1S,2R),5(S))-2,3,5-Trideoxy-N-(2,3-dihydro-2-hydroxy-1H-inden-1-yl)-5-(2-(((1,1-dimethylethyl)amino)carbonyl)-4-(3-pyridinylmethyl)-1-piperazinyl)-2-(phenylmethyl)-D-erythro-pentonamide",
+    "(1S,2S,4R)-N-tert-butyl-1-[(2S,4R)-2-hydroxy-5-[[(1S,2R)-2-hydroxy-2,3-dihydro-1H-inden-1-yl]amino]-5-oxo-4-(phenylmethyl)pentyl]-4-(pyridin-3-ylmethyl)piperazine-2-carboxamide",
+    "(2S)-1-[(2S,4R)-4-benzyl-2-hydroxy-5-{[(1S,2R)-2-hydroxy-2,3-dihydro-1H-inden-1-yl]amino}-5-oxopentyl]-N-tert-butyl-4-(pyridin-3-ylmethyl)piperazine-2-carboxamide (non-preferred name)",
+    "INDINAVIR",
+    "Indinavir",
+    "Indinavir anhydrous",
+    "Indinavir monohydrate",
+    "Indinavir sulfate",
+    "Indinavir sulfate ethanolate",
+    "N-[2(R)-HYDROXY-1(S)-INDANYL]-5-[(2(S)-TERTIARY\nBUTYLAMINOCARBONYL)-4(3-PYRIDYLMETHYL)PIPERAZINO]-4(S)-HYDROXY-2(R)-PHENYLMETHYLPENTANAMIDE"
+   ]
+  },
+  "MN": {
+   "name": "MANGANESE (II) ION",
+   "synonyms": [
+    "MANGANESE (II) ION",
+    "MANGANESE CATION (2+)",
+    "MANGANESE CATION (MN2+)",
+    "MANGANESE DICATION",
+    "MANGANESE ION(2+)",
+    "MANGANESE(2+)",
+    "MANGANESE(II)",
+    "MANGANESE(II) ION",
+    "MANGANESE, ION (MN2+)",
+    "MANGANOUS CATION",
+    "Manganese cation",
+    "Manganese chloride",
+    "Manganese chloride tetrahydrate",
+    "Manganese sulfate",
+    "manganese(+2) cation",
+    "manganese(2+)"
+   ]
+  },
+  "MPD": {
+   "name": "(4S)-2-METHYL-2,4-PENTANEDIOL",
+   "synonyms": [
+    "(4S)-2-METHYL-2,4-PENTANEDIOL",
+    "(4S)-2-methylpentane-2,4-diol",
+    "(4r)-2-Methylpentane-2,4-Diol"
+   ]
+  },
+  "MRK": {
+   "name": "2-AMINO-4-FLUORO-5-[(1-METHYL-1H-IMIDAZOL-2-YL)SULFANYL]-N-(1,3-THIAZOL-2-YL)BENZAMIDE",
+   "synonyms": [
+    "2-AMINO-4-FLUORO-5-[(1-METHYL-1H-IMIDAZOL-2-YL)SULFANYL]-N-(1,3-THIAZOL-2-YL)BENZAMIDE",
+    "2-amino-4-fluoro-5-(1-methylimidazol-2-yl)sulfanyl-N-(1,3-thiazol-2-yl)benzamide",
+    "2-amino-4-fluoro-5-[(1-methyl-1H-imidazol-2-yl)sulfanyl]-N-1,3-thiazol-2-ylbenzamide"
+   ]
+  },
+  "MSE": {
+   "name": "SELENOMETHIONINE",
+   "synonyms": [
+    "(2S)-2-amino-4-(methylselanyl)butanoic acid",
+    "(2S)-2-amino-4-methylselanyl-butanoic acid",
+    "SELENOMETHIONINE",
+    "Selenomethionine"
+   ]
+  },
+  "NA": {
+   "name": "SODIUM ION",
+   "synonyms": [
+    "SODIUM ION",
+    "Sodium (ion)",
+    "Sodium cation",
+    "Sodium ion",
+    "sodium",
+    "sodium(+1) cation",
+    "sodium(1+)"
+   ]
+  },
+  "NAG": {
+   "name": "2-acetamido-2-deoxy-beta-D-glucopyranose",
+   "synonyms": [
+    "2-(acetylamino)-2-deoxy-beta-D-glucopyranose",
+    "2-Acetamido-2-deoxy-D-glucose",
+    "2-acetamido-2-deoxy-D-glucose",
+    "2-acetamido-2-deoxy-beta-D-glucopyranose",
+    "2-acetamido-2-deoxy-beta-D-glucose",
+    "2-acetamido-2-deoxy-glucose",
+    "D-GlcNAc",
+    "DGlcpNAcb",
+    "GlcNAc",
+    "N-ACETYL-D-GLUCOSAMINE",
+    "N-Acetyl-D-glucosamine",
+    "N-Acetylchitosamine",
+    "N-Acetylglucosamine",
+    "N-[(2R,3R,4R,5S,6R)-6-(hydroxymethyl)-2,4,5-tris(oxidanyl)oxan-3-yl]ethanamide",
+    "N-acetyl-b-D-glucopyranosamine",
+    "N-acetyl-beta-D-glucosamine",
+    "aldehydo-N-acetyl-D-glucosamine",
+    "b-D-GlcpNAc"
+   ]
+  },
+  "NAP": {
+   "name": "NADP NICOTINAMIDE-ADENINE-DINUCLEOTIDE PHOSPHATE",
+   "synonyms": [
+    "2'-MONOPHOSPHOADENOSINE 5'-DIPHOSPHORIBOSE",
+    "Codehydrase II",
+    "Codehydrogenase II",
+    "Coenzyme II",
+    "NADP NICOTINAMIDE-ADENINE-DINUCLEOTIDE PHOSPHATE",
+    "Nicotinamide adenine dinucleotide phosphate",
+    "Triphosphopyridine nucleotide",
+    "[(2R,3S,4R,5R)-5-(3-aminocarbonylpyridin-1-ium-1-yl)-3,4-dihydroxy-oxolan-2-yl]methyl [[(2R,3R,4R,5R)-5-(6-aminopurin-9-yl)-3-hydroxy-4-phosphonooxy-oxolan-2-yl]methoxy-hydroxy-phosphoryl] phosphate"
+   ]
+  },
+  "OH": {
+   "name": "HYDROXIDE ION",
+   "synonyms": [
+    "HYDROXIDE ION",
+    "Hydroxide",
+    "Hydroxide ion",
+    "Oxidanide",
+    "hydroxide"
+   ]
+  },
+  "OHT": {
+   "name": "4-HYDROXYTAMOXIFEN",
+   "synonyms": [
+    "4-HYDROXYTAMOXIFEN",
+    "4-OHT",
+    "4-[(1Z)-1-{4-[2-(dimethylamino)ethoxy]phenyl}-2-phenylbut-1-en-1-yl]phenol",
+    "4-[(Z)-1-[4-(2-dimethylaminoethoxy)phenyl]-2-phenyl-but-1-enyl]phenol",
+    "4-hydroxytamoxifen",
+    "4-monohydroxytamoxifen",
+    "Afimoxifene"
+   ]
+  },
+  "OMC": {
+   "name": "O2'-METHYLYCYTIDINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "2'-O-methylcytidine 5'-(dihydrogen phosphate)",
+    "O2'-METHYLYCYTIDINE-5'-MONOPHOSPHATE",
+    "[(2R,3R,4R,5R)-5-(4-amino-2-oxo-pyrimidin-1-yl)-3-hydroxy-4-methoxy-oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "OMG": {
+   "name": "O2'-METHYLGUANOSINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "2'-O-methylguanosine 5'-(dihydrogen phosphate)",
+    "O2'-METHYLGUANOSINE-5'-MONOPHOSPHATE",
+    "[(2R,3R,4R,5R)-5-(2-amino-6-oxo-1H-purin-9-yl)-3-hydroxy-4-methoxy-oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "OXY": {
+   "name": "OXYGEN MOLECULE",
+   "synonyms": [
+    "Dioxygen",
+    "Molecular oxygen",
+    "OXYGEN MOLECULE",
+    "Oxigeno gaseoso",
+    "Oxygen",
+    "Oxygen USP",
+    "Pure oxygen",
+    "molecular oxygen"
+   ]
+  },
+  "P33": {
+   "name": "3,6,9,12,15,18-HEXAOXAICOSANE-1,20-DIOL",
+   "synonyms": [
+    "2-[2-[2-[2-[2-[2-(2-hydroxyethoxy)ethoxy]ethoxy]ethoxy]ethoxy]ethoxy]ethanol",
+    "3,6,9,12,15,18-HEXAOXAICOSANE-1,20-DIOL",
+    "3,6,9,12,15,18-hexaoxaeicosane-1,20-diol",
+    "3,6,9,12,15,18-hexaoxaicosane-1,20-diol",
+    "HEPTAETHYLENE GLYCOL",
+    "Heptaethylene glycol",
+    "Heptaethylene glycol, Peg330",
+    "PEG330"
+   ]
+  },
+  "PEG": {
+   "name": "DI(HYDROXYETHYL)ETHER",
+   "synonyms": [
+    "2,2'-oxydiethanol",
+    "2-(2-hydroxyethyloxy)ethanol",
+    "DI(HYDROXYETHYL)ETHER"
+   ]
+  },
+  "PO4": {
+   "name": "PHOSPHATE ION",
+   "synonyms": [
+    "Orthophosphate",
+    "PHOSPHATE ION",
+    "Phosphate",
+    "Phosphate ion",
+    "phosphate"
+   ]
+  },
+  "PSU": {
+   "name": "PSEUDOURIDINE-5'-MONOPHOSPHATE",
+   "synonyms": [
+    "(1S)-1,4-anhydro-1-(2,4-dioxo-1,2,3,4-tetrahydropyrimidin-5-yl)-5-O-phosphono-D-ribitol",
+    "PSEUDOURIDINE-5'-MONOPHOSPHATE",
+    "Pseudouridine-5'-Monophosphate",
+    "[(2R,3S,4R,5S)-5-(2,4-dioxo-1H-pyrimidin-5-yl)-3,4-dihydroxy-oxolan-2-yl]methyl dihydrogen phosphate"
+   ]
+  },
+  "PTR": {
+   "name": "O-PHOSPHOTYROSINE",
+   "synonyms": [
+    "(2S)-2-amino-3-(4-phosphonooxyphenyl)propanoic acid",
+    "O-PHOSPHOTYROSINE",
+    "O-phosphono-L-tyrosine",
+    "PHOSPHONOTYROSINE",
+    "Phosphonotyrosine"
+   ]
+  },
+  "REA": {
+   "name": "RETINOIC ACID",
+   "synonyms": [
+    "(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenoic acid",
+    "(all-E)-3,7-Dimethyl-9-(2,6,6-trimethyl-1-cyclohexen-1-yl)-2,4,6,8-nonatetraenoic acid",
+    "3,7-Dimethyl-9-(2,6,6-trimethyl-1-cyclohexene-1-yl)-2,4,6,8-nonatetraenoic acid (ECL)",
+    "ATRA",
+    "Acide retinoique",
+    "RETINOIC ACID",
+    "Retinoic acid",
+    "Retionic acid",
+    "Tretin M",
+    "Tretinoin",
+    "Tretinoina",
+    "Tretinoinum",
+    "Trétinoïne",
+    "Vitamin A acid",
+    "all trans Retinoic acid",
+    "all trans-Retinoic acid",
+    "all-(E)-Retinoic acid",
+    "all-trans-Retinoic acid",
+    "all-trans-Tretinoin",
+    "all-trans-Vitamin A acid",
+    "all-trans-Vitamin A1 acid",
+    "all-trans-beta-Retinoic acid",
+    "beta-Retinoic acid",
+    "retinoic acid",
+    "trans-Retinoic acid"
+   ]
+  },
+  "RET": {
+   "name": "RETINAL",
+   "synonyms": [
+    "(2E,4E,6E,8E)-3,7-dimethyl-9-(2,6,6-trimethylcyclohexen-1-yl)nona-2,4,6,8-tetraenal",
+    "RETINAL",
+    "retinal"
+   ]
+  },
+  "SCN": {
+   "name": "THIOCYANATE ION",
+   "synonyms": [
+    "THIOCYANATE ION",
+    "thiocyanate"
+   ]
+  },
+  "SEP": {
+   "name": "PHOSPHOSERINE",
+   "synonyms": [
+    "(2S)-2-amino-3-phosphonooxy-propanoic acid",
+    "Dexfosfoserine",
+    "O-phosphono-L-serine",
+    "PHOSPHONOSERINE",
+    "PHOSPHOSERINE",
+    "Phosphoserine",
+    "Serine phosphate"
+   ]
+  },
+  "SO4": {
+   "name": "SULFATE ION",
+   "synonyms": [
+    "SULFATE ION",
+    "Sulfate",
+    "Sulfate dianion",
+    "Sulfate ion",
+    "Sulfate(2-)",
+    "Sulfuric acid ion(2-)",
+    "sulfate",
+    "sulphate"
+   ]
+  },
+  "SQU": {
+   "name": "2,10,23-TRIMETHYL-TETRACOSANE",
+   "synonyms": [
+    "(10R)-2,10,23-trimethyltetracosane",
+    "2,10,23-TRIMETHYL-TETRACOSANE",
+    "LIPID FRAGMENT"
+   ]
+  },
+  "STE": {
+   "name": "STEARIC ACID",
+   "synonyms": [
+    "Acide octadécanoïque",
+    "Acide stéarique",
+    "C18:0",
+    "Octadecanoic acid",
+    "Octadecansäure",
+    "Octadecoic acid",
+    "Oktadekansäure",
+    "STEARIC ACID",
+    "Stearic acid",
+    "Stearinsäure",
+    "n-octadecanoic acid",
+    "octadecanoic acid"
+   ]
+  },
+  "STI": {
+   "name": "4-(4-METHYL-PIPERAZIN-1-YLMETHYL)-N-[4-METHYL-3-(4-PYRIDIN-3-YL-PYRIMIDIN-2-YLAMINO)-PHENYL]-BENZAMIDE",
+   "synonyms": [
+    "4-(4-METHYL-PIPERAZIN-1-YLMETHYL)-N-[4-METHYL-3-(4-PYRIDIN-3-YL-PYRIMIDIN-2-YLAMINO)-PHENYL]-BENZAMIDE",
+    "4-[(4-methylpiperazin-1-yl)methyl]-N-[4-methyl-3-[(4-pyridin-3-ylpyrimidin-2-yl)amino]phenyl]benzamide",
+    "4-[(4-methylpiperazin-1-yl)methyl]-N-{4-methyl-3-[(4-pyridin-3-ylpyrimidin-2-yl)amino]phenyl}benzamide",
+    "IMATINIB",
+    "Imatinib",
+    "Imatinib mesylate",
+    "Imatinibum",
+    "STI-571",
+    "α-(4-methyl-1-piperazinyl)-3'-((4-(3-pyridyl)-2-pyrimidinyl)amino)-p-toluidide"
+   ]
+  },
+  "SUA": {
+   "name": "(4-SULFAMOYL-PHENYL)-THIOCARBAMIC ACID O-(2-THIOPHEN-3-YL-ETHYL) ESTER",
+   "synonyms": [
+    "(4-SULFAMOYL-PHENYL)-THIOCARBAMIC ACID O-(2-THIOPHEN-3-YL-ETHYL) ESTER",
+    "(4-sulfamoyl-phenyl)-thiocarbamic acid O-(2-thiophen-3-yl-ethyl) ester",
+    "Carbonic Anhydrase II inhibitor 16923",
+    "O-(2-thiophen-3-ylethyl) N-(4-sulfamoylphenyl)carbamothioate",
+    "O-[2-(thiophen-3-yl)ethyl] (4-sulfamoylphenyl)carbamothioate"
+   ]
+  },
+  "TLA": {
+   "name": "L(+)-TARTARIC ACID",
+   "synonyms": [
+    "(+)-(R,R)-tartaric acid",
+    "(+)-L-tartaric acid",
+    "(+)-Tartaric acid",
+    "(+)-Weinsäure",
+    "(2R,3R)-2,3-Dihydroxybernsteinsäure",
+    "(2R,3R)-2,3-dihydroxybutanedioic acid",
+    "(2R,3R)-2,3-dihydroxysuccinic acid",
+    "(2R,3R)-Tartaric acid",
+    "(R,R)-(+)-tartaric acid",
+    "(R,R)-Tartaric acid",
+    "L(+)-TARTARIC ACID",
+    "L-tartaric acid",
+    "L-threaric acid",
+    "Rechtsweinsäure",
+    "Tartaric acid",
+    "Weinsteinsäure",
+    "ácido tartárico"
+   ]
+  },
+  "TPO": {
+   "name": "PHOSPHOTHREONINE",
+   "synonyms": [
+    "(2S,3R)-2-amino-3-phosphonooxy-butanoic acid",
+    "O-phosphono-L-threonine",
+    "PHOSPHONOTHREONINE",
+    "PHOSPHOTHREONINE"
+   ]
+  },
+  "TQ0": {
+   "name": "(2,4-dimethylphenyl)(4-hydroxy-3-methoxy-5-nitrophenyl)methanone",
+   "synonyms": [
+    "(2,4-dimethylphenyl)(4-hydroxy-3-methoxy-5-nitrophenyl)methanone",
+    "(2,4-dimethylphenyl)-(3-methoxy-5-nitro-4-oxidanyl-phenyl)methanone"
+   ]
+  },
+  "TRS": {
+   "name": "2-AMINO-2-HYDROXYMETHYL-PROPANE-1,3-DIOL",
+   "synonyms": [
+    "1,1,1-tris(hydroxymethyl)methanamine",
+    "1,3-dihydroxy-2-(hydroxymethyl)propan-2-aminium",
+    "2-AMINO-2-HYDROXYMETHYL-PROPANE-1,3-DIOL",
+    "2-Amino-2-(hydroxymethyl)-1,3-propanediol",
+    "THAM",
+    "TRIS BUFFER",
+    "Tris",
+    "Tris(hydroxymethyl)aminomethane",
+    "Trometamol",
+    "Tromethamine",
+    "[1,3-dihydroxy-2-(hydroxymethyl)propan-2-yl]azanium",
+    "aminotris(hydroxymethyl)methane"
+   ]
+  },
+  "VIA": {
+   "name": "5-{2-ETHOXY-5-[(4-METHYLPIPERAZIN-1-YL)SULFONYL]PHENYL}-1-METHYL-3-PROPYL-1H,6H,7H-PYRAZOLO[4,3-D]PYRIMIDIN-7-ONE",
+   "synonyms": [
+    "1-((3-(4,7-Dihydro-1-methyl-7-oxo-3-propyl-1H-pyrazolo(4,3-d)pyrimidin-5-yl)-4-ethoxyphenyl)sulfonyl)-4-methylpiperazine",
+    "5-[2-ethoxy-5-(4-methylpiperazin-1-yl)sulfonyl-phenyl]-1-methyl-3-propyl-6H-pyrazolo[5,4-e]pyrimidin-7-one",
+    "5-{2-ETHOXY-5-[(4-METHYLPIPERAZIN-1-YL)SULFONYL]PHENYL}-1-METHYL-3-PROPYL-1H,6H,7H-PYRAZOLO[4,3-D]PYRIMIDIN-7-ONE",
+    "5-{2-ethoxy-5-[(4-methylpiperazin-1-yl)sulfonyl]phenyl}-1-methyl-3-propyl-1,6-dihydro-7H-pyrazolo[4,3-d]pyrimidin-7-one",
+    "SILDENAFIL",
+    "Sildenafil",
+    "Sildenafil citrate",
+    "Sildenafilo",
+    "VIAGRA"
+   ]
+  },
+  "VMF": {
+   "name": "(2~{R},3~{R},4~{S},5~{R})-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol",
+   "synonyms": [
+    "(2~{R},3~{R},4~{S},5~{R})-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol"
+   ]
+  },
+  "XK2": {
+   "name": "[4R-(4ALPHA,5ALPHA,6BETA,7BETA)]-HEXAHYDRO-5,6-DIHYDROXY-1,3-BIS[2-NAPHTHYL-METHYL]-4,7-BIS(PHENYLMETHYL)-2H-1,3-DIAZEPIN-2-ONE",
+   "synonyms": [
+    "(4R,5S,6S,7R)-4,7-dibenzyl-5,6-dihydroxy-1,3-bis(naphthalen-2-ylmethyl)-1,3-diazepan-2-one",
+    "(4R,5S,6S,7R)-5,6-dihydroxy-1,3-bis(naphthalen-2-ylmethyl)-4,7-bis(phenylmethyl)-1,3-diazepan-2-one",
+    "[4R-(4ALPHA,5ALPHA,6BETA,7BETA)]-HEXAHYDRO-5,6-DIHYDROXY-1,3-BIS[2-NAPHTHYL-METHYL]-4,7-BIS(PHENYLMETHYL)-2H-1,3-DIAZEPIN-2-ONE"
+   ]
+  },
+  "YYG": {
+   "name": "4-(3-[5-O-PHOSPHONORIBOFURANOSYL]-4,6-DIMETHYL-8-OXO-4,8-DIHYDRO-3H-1,3,4,5,7A-PENTAAZA-S-INDACEN-YLAMINO-BUTYRIC ACID\nMETHYL ESTER",
+   "synonyms": [
+    "4-(3-[5-O-PHOSPHONORIBOFURANOSYL]-4,6-DIMETHYL-8-OXO-4,8-DIHYDRO-3H-1,3,4,5,7A-PENTAAZA-S-INDACEN-YLAMINO-BUTYRIC ACID\nMETHYL ESTER",
+    "7-{(3S)-4-methoxy-3-[(methoxycarbonyl)amino]-4-oxobutyl}-4,6-dimethyl-3-(5-O-phosphono-beta-D-ribofuranosyl)-3,4-dihydro-9H-imidazo[1,2-a]purin-9-one",
+    "MODIFIED GUANOSINE-5'-PHOSPHATE",
+    "methyl (2S)-4-[3-[(2R,3R,4S,5R)-3,4-dihydroxy-5-(phosphonooxymethyl)oxolan-2-yl]-4,6-dimethyl-9-oxo-imidazo[3,2-a]purin-7-yl]-2-(methoxycarbonylamino)butanoate"
+   ]
+  },
+  "ZMA": {
+   "name": "4-{2-[(7-amino-2-furan-2-yl[1,2,4]triazolo[1,5-a][1,3,5]triazin-5-yl)amino]ethyl}phenol",
+   "synonyms": [
+    "4-[2-[[7-amino-2-(furan-2-yl)-[1,2,4]triazolo[1,5-e][1,3,5]triazin-5-yl]amino]ethyl]phenol",
+    "4-{2-[(7-amino-2-furan-2-yl[1,2,4]triazolo[1,5-a][1,3,5]triazin-5-yl)amino]ethyl}phenol"
+   ]
+  },
+  "ZN": {
+   "name": "ZINC ION",
+   "synonyms": [
+    "ZINC ION",
+    "Zinc cation",
+    "Zinc ion",
+    "Zinc ion(2+)",
+    "Zinc(2+)",
+    "Zinc(II)",
+    "Zinc, ion (Zn2+)",
+    "zinc",
+    "zinc(+2) cation"
+   ]
+  }
+ },
+ "retrieved": "2026-11-13",
+ "source": "https://data.rcsb.org/rest/v1/core/chemcomp/<id> (chem_comp.name, rcsb_chem_comp_synonyms)"
+}

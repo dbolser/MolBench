@@ -1,0 +1,171 @@
+{
+ "id": "gr-attachment-1hrc-hec",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-attachment",
+ "structures": [
+  "1hrc"
+ ],
+ "prompt": "Load 1HRC; show the protein as a grey cartoon, the heme as teal ball-and-stick, and the cysteines it is covalently attached to as brown ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1hrc.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HEC"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "teal"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 14
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 17
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 14
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 17
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "brown"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1hrc.json",
+   "molbench/atom_tables/1hrc.json.gz",
+   "data/panel/cif/1hrc.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each link re-measured in the frozen mmCIF: 1.75 A, 1.86 A",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 12 atoms on the frozen atom table"
+  ],
+  "derivation": "every copy of HEC (HEME C) and the polymer residues with a covalent link record (`_struct_conn`, `covale`) to it in the facts: CYS14 (A), CYS17 (A)",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

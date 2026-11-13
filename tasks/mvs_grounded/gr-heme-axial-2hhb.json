@@ -1,0 +1,188 @@
+{
+ "id": "gr-heme-axial-2hhb",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-heme-axial",
+ "structures": [
+  "2hhb"
+ ],
+ "prompt": "2HHB: grey cartoon; hemes as steel blue ball-and-stick; the residues of the protein that bind the heme irons directly, as teal ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2hhb.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HEM"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 87
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 92
+             },
+             {
+              "auth_asym_id": "C",
+              "auth_seq_id": 87
+             },
+             {
+              "auth_asym_id": "D",
+              "auth_seq_id": 92
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "teal"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 87
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 92
+    },
+    {
+     "auth_asym_id": "C",
+     "auth_seq_id": 87
+    },
+    {
+     "auth_asym_id": "D",
+     "auth_seq_id": 92
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "teal"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/2hhb.json",
+   "molbench/atom_tables/2hhb.json.gz",
+   "data/panel/cif/2hhb.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each bond re-measured in the frozen mmCIF: HIS87 NE2 2.15 A; HIS92 NE2 2.15 A; HIS87 NE2 2.17 A; HIS92 NE2 2.03 A",
+   "a neighbour search finds no other polymer N, O or S atom within 2.6 A of a heme iron",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 40 atoms on the frozen atom table"
+  ],
+  "derivation": "the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to a heme iron in the facts: HIS87 of chain A, HIS92 of chain B, HIS87 of chain C, HIS92 of chain D",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

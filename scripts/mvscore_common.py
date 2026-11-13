@@ -342,6 +342,93 @@ def mask_of(entry: str, selector: Any) -> int:
 
 
 # --------------------------------------------------------------------------- #
+# The frozen mmCIF, read afresh with gemmi (the independent check on the facts)
+# --------------------------------------------------------------------------- #
+def rkey(r: dict) -> tuple:
+    return (r["auth_asym_id"], r["auth_seq_id"], r.get("pdbx_PDB_ins_code") or "")
+
+
+@functools.lru_cache(maxsize=4)
+def cif_structure(entry: str):
+    import gemmi
+    st = gemmi.read_structure(str(grounding.structure_file(entry)))
+    st.setup_entities()
+    return st
+
+
+def cif_atoms(entry: str, r: dict, name: str) -> list:
+    """The atoms (one per alternate conformer) with this name in the residue a facts
+    record names, in model 1 of the frozen mmCIF."""
+    out = []
+    for chain in cif_structure(entry)[0]:
+        if chain.name != r["auth_asym_id"]:
+            continue
+        for res in chain:
+            if res.seqid.num == r["auth_seq_id"] \
+                    and res.seqid.icode.strip() == (r.get("pdbx_PDB_ins_code") or "") \
+                    and r.get("comp_id") in (None, res.name):
+                out += [a for a in res if a.name == name]
+    return out
+
+
+def cif_distance(entry: str, a: dict, a_name: str, b: dict, b_name: str) -> float:
+    """Distance in A between two named atoms (first conformer of each) in the frozen mmCIF."""
+    x, y = cif_atoms(entry, a, a_name), cif_atoms(entry, b, b_name)
+    assert x and y, f"{entry}: atom not found: {a} {a_name} / {b} {b_name}"
+    return x[0].pos.dist(y[0].pos)
+
+
+def _search(entry: str):
+    import gemmi
+    st = cif_structure(entry)
+    return gemmi.NeighborSearch(st[0], st.cell, 6).populate(include_h=False)
+
+
+def cif_neighbours(entry: str, records: list[dict], atom_name: str, radius: float,
+                   elements: tuple = ("N", "O", "S")) -> set[tuple]:
+    """Polymer residues with an N, O or S atom within ``radius`` of the named atom of
+    any of the records, crystal-symmetry copies included."""
+    import gemmi
+    st = cif_structure(entry)
+    ns = _search(entry)
+    out = set()
+    for r in records:
+        for atom in cif_atoms(entry, r, atom_name):
+            for mark in ns.find_atoms(atom.pos, "\0", radius=radius):
+                cra = mark.to_cra(st[0])
+                if cra.residue.entity_type == gemmi.EntityType.Polymer \
+                        and cra.atom.element.name in elements:
+                    out.add((cra.chain.name, cra.residue.seqid.num, cra.residue.seqid.icode.strip()))
+    return out
+
+
+def cif_close_pairs(entry: str, comp: str, atom_name: str, radius: float) -> set[frozenset]:
+    """Pairs of residues of one kind whose named atoms are within ``radius`` of each
+    other in the deposited model (no symmetry copies)."""
+    st = cif_structure(entry)
+    atoms = [((chain.name, res.seqid.num, res.seqid.icode.strip()), a)
+             for chain in st[0] for res in chain if res.name == comp
+             for a in res if a.name == atom_name]
+    out = set()
+    for i, (ka, a) in enumerate(atoms):
+        for kb, b in atoms[i + 1:]:
+            if ka != kb and a.pos.dist(b.pos) <= radius:
+                out.add(frozenset((ka, kb)))
+    return out
+
+
+def cif_secondary(entry: str) -> tuple[list[tuple], list[tuple]]:
+    """Helix and strand ranges (author chain, first and last author number) as the
+    frozen mmCIF records them; a strand in two sheets is listed once."""
+    st = cif_structure(entry)
+    helices = sorted((h.start.chain_name, h.start.res_id.seqid.num, h.end.res_id.seqid.num)
+                     for h in st.helices)
+    strands = sorted({(s.start.chain_name, s.start.res_id.seqid.num, s.end.res_id.seqid.num)
+                      for sheet in st.sheets for s in sheet.strands})
+    return helices, strands
+
+
+# --------------------------------------------------------------------------- #
 # Words
 # --------------------------------------------------------------------------- #
 _ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
@@ -350,6 +437,10 @@ _ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
 
 def number(n: int) -> str:
     return _ONES[n] if 0 <= n < len(_ONES) else str(n)
+
+
+def article(word: str) -> str:
+    return "an " if word[:1].lower() in "aeiou" else "a "
 
 
 def join(words: list[str], last: str = "and") -> str:

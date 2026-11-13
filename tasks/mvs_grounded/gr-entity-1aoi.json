@@ -1,0 +1,206 @@
+{
+ "id": "gr-entity-1aoi",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-entity",
+ "structures": [
+  "1aoi"
+ ],
+ "prompt": "Show 1AOI as a cartoon coloured by molecule: the two H3 histones orange, the two H4 histones brown, the two H2A histones red, the two H2B histones khaki and everything else grey.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1aoi.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange",
+                "selector": [
+                 {
+                  "label_asym_id": "C"
+                 },
+                 {
+                  "label_asym_id": "G"
+                 }
+                ]
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown",
+                "selector": [
+                 {
+                  "label_asym_id": "D"
+                 },
+                 {
+                  "label_asym_id": "H"
+                 }
+                ]
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "red",
+                "selector": [
+                 {
+                  "label_asym_id": "E"
+                 },
+                 {
+                  "label_asym_id": "I"
+                 }
+                ]
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "khaki",
+                "selector": [
+                 {
+                  "label_asym_id": "F"
+                 },
+                 {
+                  "label_asym_id": "J"
+                 }
+                ]
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "C"
+    },
+    {
+     "label_asym_id": "G"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "orange"
+  },
+  {
+   "selector": [
+    {
+     "label_asym_id": "D"
+    },
+    {
+     "label_asym_id": "H"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "brown"
+  },
+  {
+   "selector": [
+    {
+     "label_asym_id": "E"
+    },
+    {
+     "label_asym_id": "I"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "red"
+  },
+  {
+   "selector": [
+    {
+     "label_asym_id": "F"
+    },
+    {
+     "label_asym_id": "J"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "khaki"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1aoi.json",
+   "molbench/atom_tables/1aoi.json.gz",
+   "data/panel/cif/1aoi.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each name in the prompt matches the description of exactly one polymer entity",
+   "the chains of the named entities are disjoint",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 6386 atoms on the frozen atom table"
+  ],
+  "derivation": "one cartoon of the polymer, coloured per entity; which chains belong to which molecule is read from the entity records of the facts: two H3 histones = entity 2 (\"HISTONE H3\"), author chains A, E; two H4 histones = entity 3 (\"HISTONE H4\"), author chains B, F; two H2A histones = entity 4 (\"HISTONE H2A\"), author chains C, G; two H2B histones = entity 5 (\"HISTONE H2B\"), author chains D, H",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

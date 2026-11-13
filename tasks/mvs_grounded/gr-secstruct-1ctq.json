@@ -1,0 +1,306 @@
+{
+ "id": "gr-secstruct-1ctq",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-secstruct",
+ "structures": [
+  "1ctq"
+ ],
+ "prompt": "1CTQ, cartoon: the helices steel blue and the beta strands salmon, the rest grey (secondary structure as annotated in the deposited file).",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1ctq.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 16,
+                 "end_label_seq_id": 25
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 62,
+                 "end_label_seq_id": 67
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 68,
+                 "end_label_seq_id": 74
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 87,
+                 "end_label_seq_id": 103
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 127,
+                 "end_label_seq_id": 137
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 152,
+                 "end_label_seq_id": 165
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 37,
+                 "end_label_seq_id": 46
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 49,
+                 "end_label_seq_id": 58
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 2,
+                 "end_label_seq_id": 10
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 77,
+                 "end_label_seq_id": 83
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 111,
+                 "end_label_seq_id": 116
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 141,
+                 "end_label_seq_id": 143
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 16,
+     "end_label_seq_id": 25
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 62,
+     "end_label_seq_id": 67
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 68,
+     "end_label_seq_id": 74
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 87,
+     "end_label_seq_id": 103
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 127,
+     "end_label_seq_id": 137
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 152,
+     "end_label_seq_id": 165
+    }
+   ],
+   "representation": "cartoon",
+   "color": "steelblue"
+  },
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 37,
+     "end_label_seq_id": 46
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 49,
+     "end_label_seq_id": 58
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 2,
+     "end_label_seq_id": 10
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 77,
+     "end_label_seq_id": 83
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 111,
+     "end_label_seq_id": 116
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 141,
+     "end_label_seq_id": 143
+    }
+   ],
+   "representation": "cartoon",
+   "color": "salmon"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1ctq.json",
+   "molbench/atom_tables/1ctq.json.gz",
+   "data/panel/cif/1ctq.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the helix and strand records were re-read from the frozen mmCIF and agree with the facts",
+   "no residue is in both a helix and a strand",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 952 atoms on the frozen atom table"
+  ],
+  "derivation": "one grey cartoon recoloured on the 6 helix record(s) (`_struct_conf`) and 6 strand record(s) (`_struct_sheet_range`) of the facts; author ranges: helices A 16-25, A 62-67, A 68-74, A 87-103, A 127-137, A 152-165; strands A 37-46, A 49-58, A 2-10, A 77-83, A 111-116, A 141-143",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

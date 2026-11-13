@@ -1,0 +1,172 @@
+{
+ "id": "gr-heme-axial-1hho",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-heme-axial",
+ "structures": [
+  "1hho"
+ ],
+ "prompt": "Show 1HHO as a grey cartoon. Add the hemes in khaki ball-and-stick and, in purple ball-and-stick, the amino-acid residues that coordinate the iron.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1hho.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HEM"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "khaki"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 87
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 92
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 87
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 92
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1hho.json",
+   "molbench/atom_tables/1hho.json.gz",
+   "data/panel/cif/1hho.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each bond re-measured in the frozen mmCIF: HIS87 NE2 1.94 A; HIS92 NE2 2.07 A",
+   "a neighbour search finds no other polymer N, O or S atom within 2.6 A of a heme iron",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 20 atoms on the frozen atom table"
+  ],
+  "derivation": "the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to a heme iron in the facts: HIS87 of chain A, HIS92 of chain B",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

@@ -1,0 +1,171 @@
+{
+ "id": "gr-catalytic-8k7f-p06280",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-catalytic",
+ "structures": [
+  "8k7f"
+ ],
+ "prompt": "Show 8K7F as a grey cartoon and highlight the two catalytic residues in each of the two copies of the enzyme in orange ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/8k7f.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 170
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 170
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 231
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 231
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 170
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 170
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 231
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 231
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "orange"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/8k7f.json",
+   "molbench/atom_tables/8k7f.json.gz",
+   "data/panel/cif/8k7f.cif.gz",
+   "data/mvscore/uniprot_sites.json",
+   "molbench/sifts_tables/8k7f.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "every mapped residue is observed and has the amino acid UniProt has at that position",
+   "all 2 active-site positions of the UniProt entry are present in the structure",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 32 atoms on the frozen atom table"
+  ],
+  "derivation": "the 'Active site' positions of UniProt P06280 (AGAL_HUMAN), mapped to the structure through the frozen SIFTS table: UniProt 170 (D, Nucleophile) = ASP170 (A), ASP170 (B); UniProt 231 (D, Proton donor) = ASP231 (A), ASP231 (B)",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  },
+  "uniprot": "P06280",
+  "uniprot_positions": [
+   170,
+   231
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

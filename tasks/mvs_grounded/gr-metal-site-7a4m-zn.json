@@ -1,0 +1,180 @@
+{
+ "id": "gr-metal-site-7a4m-zn",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-metal-site",
+ "structures": [
+  "7a4m"
+ ],
+ "prompt": "7A4M: grey cartoon; zinc ion as a hot pink sphere; every residue of the protein that coordinates the zinc ion, as red ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/7a4m.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "ZN"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "hotpink"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 27
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 62
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 65
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 27
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 62
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 65
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "red"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/7a4m.json",
+   "molbench/atom_tables/7a4m.json.gz",
+   "data/panel/cif/7a4m.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "3 metal-residue bonds re-measured in the frozen mmCIF: 1.91 to 2.14 A",
+   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a ZN ion",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 66 atoms on the frozen atom table"
+  ],
+  "derivation": "every ZN ion of the facts (1) as a sphere, and the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: GLU27 (A), GLU62 (A), HIS65 (A). Water and other non-polymer partners are not residues and are left out",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

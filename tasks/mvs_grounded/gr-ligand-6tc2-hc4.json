@@ -1,0 +1,135 @@
+{
+ "id": "gr-ligand-6tc2-hc4",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-ligand",
+ "structures": [
+  "6tc2"
+ ],
+ "prompt": "In 6TC2, draw the protein as a grey cartoon and pick out the p-coumaric acid in green ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/6tc2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HC4"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "HC4"
+   },
+   "representation": "ball_and_stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/6tc2.json",
+   "molbench/atom_tables/6tc2.json.gz",
+   "data/panel/cif/6tc2.cif.gz",
+   "data/mvscore/chem_comp.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the name \"p-coumaric acid\" was found in the component's name or synonyms (data/mvscore/chem_comp.json)",
+   "HC4 has 5 copies and 100 atoms in the atom table, as the facts list",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 100 atoms on the frozen atom table"
+  ],
+  "derivation": "the component whose frozen name matches the prompt's \"p-coumaric acid\" is HC4 (4'-HYDROXYCINNAMIC ACID); every copy of it (5) as ball-and-stick on a grey cartoon of the polymer",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

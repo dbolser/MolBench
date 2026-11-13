@@ -1,0 +1,164 @@
+{
+ "id": "gr-catalytic-3ptb-p00760",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-catalytic",
+ "structures": [
+  "3ptb"
+ ],
+ "prompt": "3PTB: grey cartoon, with the catalytic triad drawn as plum ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ptb.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 57
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 102
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 195
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 57
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 102
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 195
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "plum"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/3ptb.json",
+   "molbench/atom_tables/3ptb.json.gz",
+   "data/panel/cif/3ptb.cif.gz",
+   "data/mvscore/uniprot_sites.json",
+   "molbench/sifts_tables/3ptb.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "every mapped residue is observed and has the amino acid UniProt has at that position",
+   "all 3 active-site positions of the UniProt entry are present in the structure",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 24 atoms on the frozen atom table"
+  ],
+  "derivation": "the 'Active site' positions of UniProt P00760 (TRY1_BOVIN), mapped to the structure through the frozen SIFTS table: UniProt 63 (H, Charge relay system) = HIS57 (A); UniProt 107 (D, Charge relay system) = ASP102 (A); UniProt 200 (S, Charge relay system) = SER195 (A)",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  },
+  "uniprot": "P00760",
+  "uniprot_positions": [
+   63,
+   107,
+   200
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

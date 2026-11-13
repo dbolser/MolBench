@@ -1,0 +1,180 @@
+{
+ "id": "gr-metal-site-1plc-cu",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-metal-site",
+ "structures": [
+  "1plc"
+ ],
+ "prompt": "Show 1PLC as a grey cartoon with the copper site: the ion as a salmon sphere and the protein residues bound to it in yellow ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1plc.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "CU"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 37
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 84
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 87
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 37
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 84
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 87
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1plc.json",
+   "molbench/atom_tables/1plc.json.gz",
+   "data/panel/cif/1plc.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "3 metal-residue bonds re-measured in the frozen mmCIF: 1.91 to 2.07 A",
+   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a CU ion",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 44 atoms on the frozen atom table"
+  ],
+  "derivation": "every CU ion of the facts (1) as a sphere, and the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: HIS37 (A), CYS84 (A), HIS87 (A). Water and other non-polymer partners are not residues and are left out",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

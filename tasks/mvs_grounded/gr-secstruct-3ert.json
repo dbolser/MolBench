@@ -1,0 +1,322 @@
+{
+ "id": "gr-secstruct-3ert",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-secstruct",
+ "structures": [
+  "3ert"
+ ],
+ "prompt": "Show 3ERT as a grey cartoon, then colour the helices plum and the beta strands magenta, following the helix and sheet records of the entry.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ert.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 14,
+                 "end_label_seq_id": 16
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 19,
+                 "end_label_seq_id": 29
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 49,
+                 "end_label_seq_id": 70
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 74,
+                 "end_label_seq_id": 76
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 79,
+                 "end_label_seq_id": 102
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 119,
+                 "end_label_seq_id": 124
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 131,
+                 "end_label_seq_id": 145
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 149,
+                 "end_label_seq_id": 162
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 173,
+                 "end_label_seq_id": 199
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 204,
+                 "end_label_seq_id": 235
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 243,
+                 "end_label_seq_id": 251
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 108,
+                 "end_label_seq_id": 112
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 115,
+                 "end_label_seq_id": 118
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 14,
+     "end_label_seq_id": 16
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 19,
+     "end_label_seq_id": 29
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 49,
+     "end_label_seq_id": 70
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 74,
+     "end_label_seq_id": 76
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 79,
+     "end_label_seq_id": 102
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 119,
+     "end_label_seq_id": 124
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 131,
+     "end_label_seq_id": 145
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 149,
+     "end_label_seq_id": 162
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 173,
+     "end_label_seq_id": 199
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 204,
+     "end_label_seq_id": 235
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 243,
+     "end_label_seq_id": 251
+    }
+   ],
+   "representation": "cartoon",
+   "color": "plum"
+  },
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 108,
+     "end_label_seq_id": 112
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 115,
+     "end_label_seq_id": 118
+    }
+   ],
+   "representation": "cartoon",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/3ert.json",
+   "molbench/atom_tables/3ert.json.gz",
+   "data/panel/cif/3ert.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the helix and strand records were re-read from the frozen mmCIF and agree with the facts",
+   "no residue is in both a helix and a strand",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 1447 atoms on the frozen atom table"
+  ],
+  "derivation": "one grey cartoon recoloured on the 11 helix record(s) (`_struct_conf`) and 2 strand record(s) (`_struct_sheet_range`) of the facts; author ranges: helices A 307-309, A 312-322, A 342-363, A 367-369, A 372-395, A 412-417, A 424-438, A 442-455, A 466-492, A 497-528, A 536-544; strands A 401-405, A 408-411",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

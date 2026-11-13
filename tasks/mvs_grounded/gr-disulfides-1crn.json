@@ -1,0 +1,180 @@
+{
+ "id": "gr-disulfides-1crn",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-disulfides",
+ "structures": [
+  "1crn"
+ ],
+ "prompt": "1CRN: grey cartoon, with every disulfide-bonded cysteine drawn in plum ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1crn.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 3
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 40
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 4
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 32
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 16
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 26
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 3
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 40
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 4
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 32
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 16
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 26
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "plum"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1crn.json",
+   "molbench/atom_tables/1crn.json.gz",
+   "data/panel/cif/1crn.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "S-S distances re-measured in the frozen mmCIF: 2.00 to 2.05 A",
+   "no other pair of cysteine SG atoms is within 2.5 A in the deposited model",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 36 atoms on the frozen atom table"
+  ],
+  "derivation": "both cysteines of each of the 3 disulfide records (`_struct_conn`, `disulf`) in the facts: 6 residues; free cysteines are not included",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}
