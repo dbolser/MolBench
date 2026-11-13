@@ -1,0 +1,139 @@
+{
+ "id": "tr-range-rows-1atp",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-range-rows",
+ "structures": [
+  "1atp"
+ ],
+ "prompt": "Load 1ATP as a grey cartoon and colour these segments: chain E 16-30 yellow; chain E 58-69 salmon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1atp.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow",
+                "selector": {
+                 "auth_asym_id": "E",
+                 "beg_auth_seq_id": 16,
+                 "end_auth_seq_id": 30
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon",
+                "selector": {
+                 "auth_asym_id": "E",
+                 "beg_auth_seq_id": 58,
+                 "end_auth_seq_id": 69
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "E",
+    "beg_auth_seq_id": 16,
+    "end_auth_seq_id": 30
+   },
+   "representation": "cartoon",
+   "color": "yellow"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "E",
+    "beg_auth_seq_id": 58,
+    "end_auth_seq_id": 69
+   },
+   "representation": "cartoon",
+   "color": "salmon"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/1atp.json",
+   "molbench/atom_tables/1atp.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 233 atoms on the frozen atom table"
+  ],
+  "derivation": "one grey cartoon of the polymer, recoloured on each listed range (author chain and numbering from the atom table; ranges do not overlap)",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}
