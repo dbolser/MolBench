@@ -1,22 +1,17 @@
 """
-MolViewSpec (MVS) support — the v0.2 primary grading target.
+MolViewSpec (MVS) support: the MVS track's grader.
 
-Where the imperative IR (``schema.py``) grades a flat list of PDBeMolstar calls,
-MVS grades a **declarative scene tree**: ``root -> download -> parse -> structure
--> component -> representation -> color`` (+ ``focus``, ``label``, ...). The model
-under test emits an MVS state as JSON; we normalise it and compare tree shape +
-parameters against a reference authored with the official ``molviewspec`` builder.
+The model under test emits an MVS scene tree as JSON (``root -> download -> parse ->
+structure -> component -> representation -> color`` ...). ``grade_mvs`` resolves the
+reference and the answer to their **drawn state** - for every atom, the set of
+(representation type, colour, opacity) Mol* 5.9.0 would draw, plus labels, focus,
+primitives and a few other scene facts - and compares the two states. Two scenes that
+draw the same thing score the same however they are written. GRADING.md defines the
+scores (F1, task success, target score); the second half of this file is the code.
 
-Why trees, and why this grader:
-* The *meaning* of a scene is the set of root-to-leaf **paths** — "the polymer is a
-  grey cartoon", "residue A/35 is red ball-and-stick". Comparing the set of paths
-  is naturally order-independent (children can be emitted in any order) and yields
-  graceful partial credit (a path matching 5 of 6 segments is nearly right).
-* ``metadata.timestamp`` is non-deterministic, so we strip metadata before
-  comparing — otherwise no two builds would ever match.
-
-Grading reuses the precision/recall/F1 + greedy-bipartite shape from
-``grader.py`` so scores are comparable in spirit across both tracks.
+The first half is the October 2026 grader, which compared root-to-leaf *paths* of the
+tree (``grade_mvs_paths``). It is kept for comparison with the October numbers, and
+its helpers for primitives and selector signatures are still used.
 """
 
 from __future__ import annotations
@@ -606,15 +601,26 @@ def _table_extras(table: AtomTable) -> dict[str, Any]:
         poly = table.static.get("polymer", 0)
         nucleic = table.static.get("nucleic", 0)
         names = table.index("label_atom_id")
-        ca = names.get("CA", 0)
-        o3 = names.get("O3'", 0) | names.get("O3*", 0)
-        trace = poly & ((ca & ~nucleic) | (o3 & nucleic))
+        residues = list(table.index("residue_index").values())
+        # The trace atom of a polymer residue: CA of an amino acid, O3' of a nucleotide.
+        # A modified residue with no atom of that name falls back to CA1 (the GFP
+        # chromophore CRO in 1EMA; checked in the viewer), then BB.
+        trace = 0
+        for rm in residues:
+            if not rm & poly:
+                continue
+            options = (("O3'", "O3*") if rm & nucleic else ("CA", "CA1", "BB"))
+            for name in options:
+                hit = rm & names.get(name, 0)
+                if hit:
+                    trace |= hit
+                    break
         branched = table.static.get("branched", 0)
         elements = table.index("type_symbol")
         ex = {"polymer": poly, "trace": trace, "sugar": branched & ~poly,
               "linked": branched & poly,
               "hydrogen": elements.get("H", 0) | elements.get("D", 0),
-              "residues": list(table.index("residue_index").values()),
+              "residues": residues,
               "all": (1 << table.n) - 1}
         table._drawn_extras = ex
     return ex

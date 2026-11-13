@@ -1753,6 +1753,14 @@ def viewer_check_api(controls: list[dict], n: int) -> dict:
         for kind in sorted(by_kind):
             if i < len(by_kind[kind]) and len(picked) < n:
                 picked.append(by_kind[kind][i])
+    car.CIF_CACHE.mkdir(parents=True, exist_ok=True)
+    for c in picked:                         # the frozen files, so nothing is downloaded
+        for side in ("reference", "prediction"):
+            for act in c[side]:
+                eid = str(act.get("molecule_id") or "").lower()
+                frozen = grounding.structure_file(eid) if eid else None
+                if frozen is not None and not (car.CIF_CACHE / f"{eid}.cif").exists():
+                    (car.CIF_CACHE / f"{eid}.cif").write_bytes(gzip.decompress(frozen.read_bytes()))
     with car.Viewer() as viewer:
         for c in picked:
             for side in ("reference", "prediction"):
@@ -1762,6 +1770,9 @@ def viewer_check_api(controls: list[dict], n: int) -> dict:
                     continue                 # needs PDBe's updated file: checked by check_api_refs --uniprot
                 try:
                     dump = viewer.run(actions)
+                    if dump.get("notes"):    # a step the harness cannot run (e.g. a trait
+                        report["not_runnable"] = report.get("not_runnable", 0) + 1   # set by name)
+                        continue
                     bad = car.compare_with_viewer(actions, dump)
                 except Exception as e:  # noqa: BLE001
                     bad = [f"failed to run: {str(e).splitlines()[0][:200]}"]
@@ -1770,6 +1781,25 @@ def viewer_check_api(controls: list[dict], n: int) -> dict:
                 if bad:
                     report["problems"].append({"id": c["id"], "side": side, "detail": bad[:3]})
             print(f"  api viewer: {c['id']}", flush=True)
+        # a bare load of every panel entry: are the default components the replay assumes
+        # (taken from the atom tables, which Mol* 5.9.0 filled) the ones pdbe-molstar draws?
+        bare = report["bare_loads"] = {"entries": 0, "agree": 0, "differ": []}
+        for eid in panel_ids():
+            if eid.startswith("af-"):
+                continue
+            path = car.CIF_CACHE / f"{eid}.cif"
+            if not path.exists():
+                path.write_bytes(gzip.decompress(grounding.structure_file(eid).read_bytes()))
+            actions = [{"action": "load", "molecule_id": eid}]
+            try:
+                bad = car.compare_with_viewer(actions, viewer.run(actions))
+            except Exception as e:  # noqa: BLE001
+                bad = [f"failed to run: {str(e).splitlines()[0][:200]}"]
+            bare["entries"] += 1
+            bare["agree"] += not bad
+            if bad:
+                bare["differ"].append({"entry": eid, "detail": bad[:2]})
+            print(f"  api bare load: {eid} {'ok' if not bad else 'DIFFERS'}", flush=True)
     return report
 
 

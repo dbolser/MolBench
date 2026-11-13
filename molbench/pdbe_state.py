@@ -443,6 +443,10 @@ STANDARD_COMPS = frozenset(
     "ALA ARG ASN ASP CYS GLN GLU GLY HIS ILE LEU LYS MET PHE PRO SER THR TRP TYR VAL "
     "SEC PYL ASX GLX UNK A C G U I DA DC DG DT DI DU N DN".split())
 
+# Capping groups inside a polymer chain that the viewer does not put in its
+# 'non-standard' component (checked in pdbe-molstar: the acetyl cap of 1HRC).
+TERMINAL_CAPS = frozenset(["ACE"])
+
 _PDB_ID = re.compile(r"(?:pdb_0000)?[0-9][a-z0-9]{3}")
 _AF_URL = re.compile(r"AF-([A-Za-z0-9]+)-F(\d+)")
 _PDB_URL = re.compile(r"/(?:pdb)?([0-9][A-Za-z0-9]{3})(?:_updated|-assembly\d+)?\.(?:b?cif|pdb|ent)(?:\.gz)?(?:[?#].*)?$")
@@ -637,7 +641,7 @@ def nonstandard_atoms(table: AtomTable) -> int:
     poly = table.static.get("polymer", 0)
     out = 0
     for comp, m in table.index("label_comp_id").items():
-        if comp not in STANDARD_COMPS:
+        if comp not in STANDARD_COMPS and comp not in TERMINAL_CAPS:
             out |= m & poly
     return out
 

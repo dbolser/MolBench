@@ -1,16 +1,19 @@
 """
-Grader for the API-calling track.
+Grading: the one entry point, and the API-calling track.
 
-``grade(reference, predicted)`` is what the runner calls. By default it grades by
-**final viewer state** (``molbench/pdbe_state.py``): both action lists are replayed
-with pdbe-molstar 3.3.2's semantics and the states compared, giving precision /
-recall / F1 over state facts and a strict ``success`` flag. Order matters because the
-replay is ordered; two answers that end in the same picture score the same.
+``grade_task(task, answer)`` grades one parsed answer against one task on either
+track and returns the same keys for both (``drawn.RESULT_KEYS``): F1, task success, the
+target score and the outcome class. MVS tasks are graded by ``mvs.grade_mvs`` (the drawn
+state of a scene tree), API tasks by ``pdbe_state.grade_state`` (the final state of the
+viewer after the calls are replayed with pdbe-molstar 3.3.2's semantics). GRADING.md is
+the plain-language definition of every score. ``check_task(task)`` says whether a task
+can be graded at all.
 
-The older **sequence** grader is kept as ``grade_sequence`` (also ``grade(...,
-mode="sequence")``) for comparison with the July 2026 numbers. It is also what
-``grade`` falls back to when the reference loads no structure the state grader can
-resolve atoms on (no atom table); the result's ``grader`` key says which one ran.
+``grade(reference, predicted)`` is the API track's grader on its own. The older
+**sequence** grader is kept as ``grade_sequence`` (also ``grade(..., mode="sequence")``)
+for comparison with the July 2026 numbers. It is also what ``grade`` falls back to when
+the reference loads no structure the state grader can resolve atoms on (no atom table);
+the result's ``grader`` key says which one ran, and ``check_task`` reports such a task.
 
 Sequence grader — design notes
 ------------------------------
