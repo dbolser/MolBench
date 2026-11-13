@@ -491,7 +491,109 @@
    },
    "pair": null,
    "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
-  }
+  },
+  "structure": "6tc2",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": [
+     {
+      "label_asym_id": "B",
+      "label_seq_id": 34
+     },
+     {
+      "label_asym_id": "D",
+      "label_seq_id": 34
+     },
+     {
+      "label_asym_id": "F",
+      "label_seq_id": 34
+     },
+     {
+      "label_asym_id": "H",
+      "label_seq_id": 34
+     },
+     {
+      "label_asym_id": "J",
+      "label_seq_id": 34
+     },
+     {
+      "label_asym_id": "L",
+      "label_seq_id": 34
+     }
+    ],
+    "what": "p.His34Pro residue(s)",
+    "n_atoms": 103
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "atoms": [
+     {
+      "label_asym_id": "B",
+      "label_seq_id": 35
+     },
+     {
+      "label_asym_id": "D",
+      "label_seq_id": 35
+     },
+     {
+      "label_asym_id": "F",
+      "label_seq_id": 35
+     },
+     {
+      "label_asym_id": "H",
+      "label_seq_id": 35
+     },
+     {
+      "label_asym_id": "J",
+      "label_seq_id": 35
+     },
+     {
+      "label_asym_id": "L",
+      "label_seq_id": 35
+     }
+    ],
+    "what": "p.Leu35Met residue(s)",
+    "n_atoms": 114
+   },
+   {
+    "action": 1,
+    "param": 2,
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 109
+     },
+     {
+      "label_asym_id": "C",
+      "label_seq_id": 109
+     },
+     {
+      "label_asym_id": "E",
+      "label_seq_id": 109
+     },
+     {
+      "label_asym_id": "G",
+      "label_seq_id": 109
+     },
+     {
+      "label_asym_id": "I",
+      "label_seq_id": 109
+     },
+     {
+      "label_asym_id": "K",
+      "label_seq_id": 109
+     }
+    ],
+    "what": "p.Cys109Phe residue(s)",
+    "n_atoms": 60
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
  },
  "skills": [
   "load",

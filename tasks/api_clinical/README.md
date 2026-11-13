@@ -47,7 +47,7 @@ Each template has three wordings; the wording, the colours, the representation (
 | in a pair (same variant on two structures) | 14 |
 | split: public / held back | 69 / 10 |
 
-Held-back structures (6): 1CTQ, 1TRN, 3F9M, 3K34, 8PI2, 9FB2. They are in no public task of this tier. They were drawn (seeded) from the structures that no task published before this corpus uses, half from those numbered differently from UniProt.
+Held-back structures (6): 1CTQ, 3F9M, 3K34, 8CE0, 8PI2, 9FB2. They are in no public task of this tier. They were drawn (seeded) from the structures that no task published before this corpus uses, half from those numbered differently from UniProt.
 
 Proteins: APOE, AR, CA2, CALM1, CFTR, CRYGD, F2, F9, GBA1, GCK, GLA, HBA1, HBB, HRAS, INS, LYZ, PAH, PRSS1, PTEN, SERPINA1, SERPINC1, SLC2A1, SOD1, TP53, TPI1, TTR, VHL.
 
@@ -57,7 +57,7 @@ Proteins: APOE, AR, CA2, CALM1, CFTR, CRYGD, F2, F9, GBA1, GCK, GLA, HBA1, HBB, 
 | 1d5r | 1 | public |
 | 1hho | 3 | public |
 | 1hk0 | 3 | public |
-| 1trn | 3 | held back |
+| 1trn | 3 | public |
 | 1tup | 4 | public |
 | 2c9v | 5 | public |
 | 2hhb | 6 | public |
@@ -74,7 +74,7 @@ Proteins: APOE, AR, CA2, CALM1, CFTR, CRYGD, F2, F9, GBA1, GCK, GLA, HBA1, HBB, 
 | 6tc2 | 4 | public |
 | 6tha | 1 | public |
 | 8c86 | 6 | public |
-| 8ce0 | 3 | public |
+| 8ce0 | 3 | held back |
 | 8eph | 5 | public |
 | 8k7f | 1 | public |
 | 8pi2 | 3 | held back |

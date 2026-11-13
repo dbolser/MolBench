@@ -40,6 +40,7 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
 from molbench import drawn, grounding, runner, sifts, tasks as T, variants as V  # noqa: E402
+from molbench import pdbe_state as ps  # noqa: E402
 from molbench.atoms import load_table  # noqa: E402
 
 SCRIPT = "scripts/generate_clinical_tasks.py"
@@ -49,6 +50,10 @@ DATE = "2026-11-13"            # fixed, so a rebuild is byte-identical
 MAX_PER_STRUCTURE = 6          # tasks of this tier on one structure, per track
 MAX_FAMILY_SHARE = 0.12
 HELDBACK_SHARE = 0.20
+# A structure is public or held back for the whole corpus, not per tier
+# (scripts/validate_tasks.py). 8CE0 is already held back by the fixture tasks
+# (tests/fixtures/tasks), so it is held back here too.
+ALSO_HELDBACK = ("8ce0",)
 UNIPROT_URL = ("https://rest.uniprot.org/uniprotkb/{}.json?fields="
                "ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit")
 AF_URL = "https://alphafold.ebi.ac.uk/files/AF-{}-F1-model_v6.cif"
@@ -383,10 +388,25 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
     api_rep = REPS[look["rep"]][0]
     under = {"none": None, "structure": look["backdrop"], "sse": sse and sse["color"]}[context]
 
+    meant: list[dict] = []     # per item of the reference's `color` call: the atoms meant
+
     def calls(ribbon, style: bool) -> list[dict]:
         """``ribbon``: the colour given to the residue's own stretch of cartoon."""
         items = list(api_data)
+        meant.clear()
+        if sse:
+            meant.append({"atoms": {k: sse[k] for k in ("label_asym_id", "beg_label_seq_id",
+                                                         "end_label_seq_id")},
+                          "what": f"the annotated {sse['kind']}"})
         for s in group:
+            mine = [x for x in s.residues
+                    if chain is None or x["label_asym_id"] == chain["label_asym_id"]]
+            if is_af(entry):
+                meant.extend({"atoms": label_selector(x), "what": f"{V.hgvs(s.v)} residue"}
+                             for x in mine)
+            else:
+                meant.append({"atoms": [label_selector(x) for x in mine],
+                              "what": f"{V.hgvs(s.v)} residue(s)"})
             if is_af(entry):
                 # The grader has no UniProt lookup for an AlphaFold model yet (see the
                 # README); the model is numbered as UniProt, so author numbers say the same.
@@ -407,6 +427,9 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
         return head + [call]
 
     api_ref = calls(under, False)
+    api_targets = [{"action": 1, "param": i, "atoms": m["atoms"], "what": m["what"],
+                    "n_atoms": bin(table.selector(m["atoms"])).count("1")}
+                   for i, m in enumerate(meant)]
     # Equally right: the residue's stretch of cartoon also takes the highlight colour
     # (the API's `color` key cannot simply be left out: that paints it orange); and,
     # with a whole-structure cartoon, setting the cartoon style explicitly.
@@ -504,6 +527,18 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
                 "clinical": json.loads(json.dumps(clinical))}
         if track == "api":
             prov["clinical"]["api_note"] = API_NOTE
+            # What scripts/check_api_refs.py reads: the entry the calls load, and for
+            # every selection the atoms it is meant to select, written independently
+            # (label numbering from the frozen variant file and facts).
+            prov["structure"] = ps.replay(json.loads(json.dumps(reference))).entry
+            prov["derived"] = ("UniProt position of each variant from the frozen ClinVar-confirmed "
+                               "list; structure residues from the frozen SIFTS mapping")
+            prov["checked_by"] = f"{SCRIPT} (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py"
+            prov["targets"] = api_targets
+            prov["accepted_differ"] = (
+                "each alternative is another final state that the request equally describes: "
+                "the residue's own stretch of cartoon in the highlight colour, and/or the "
+                "cartoon style set explicitly")
         return {"id": f"{stem}-{track}", "track": track, "tier": "clinical", "family": family,
                 "structures": [entry], "prompt": prompt, "reference": reference,
                 "accepted": accepted, "context": None,
@@ -736,7 +771,13 @@ def assign_split(tasks: list[dict]) -> list[str]:
     without = sorted(s for s in cands if not offset[s])
     r.shuffle(with_off)
     r.shuffle(without)
-    held = sorted(with_off[:(n + 1) // 2] + without[:n // 2])
+    forced = sorted(set(ALSO_HELDBACK) & set(structures))
+    assert all(s in cands for s in forced), forced
+    with_off = [s for s in with_off if s not in forced]
+    without = [s for s in without if s not in forced]
+    n -= len(forced)
+    n_off = max(0, (n + 1) // 2 - sum(bool(offset[s]) for s in forced))
+    held = sorted(forced + with_off[:n_off] + without[:n - n_off])
     for t in tasks:
         if t["structures"][0] in held:
             t["split"] = "heldback"

@@ -170,7 +170,36 @@
    },
    "pair": null,
    "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
-  }
+  },
+  "structure": "6tc2",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "label_asym_id": "I",
+     "beg_label_seq_id": 91,
+     "end_label_seq_id": 96
+    },
+    "what": "the annotated helix",
+    "n_atoms": 98
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "atoms": [
+     {
+      "label_asym_id": "I",
+      "label_seq_id": 95
+     }
+    ],
+    "what": "p.Cys95Tyr residue(s)",
+    "n_atoms": 20
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
  },
  "skills": [
   "load",
