@@ -57,7 +57,8 @@ transparency, the ``line`` and ``backbone`` representations, colour themes (see
 ``ALLOW_THEMES``), annotation colouring,
 other models of an ensemble, several structures in one scene; a task that names its
 structure by protein and accepts entries outside the panel; a task that already has
-a twin from its own generator (clinical, follow-up, accept-set); and a task in the old
+a twin from its own generator (clinical, follow-up, accept-set), or was left without
+one by a generator that writes both tracks; a no-change follow-up; and a task in the old
 format, which has no ``twin_of`` field (for those the report says whether a twin
 could be made, and none is written).
 """
@@ -635,7 +636,10 @@ def translate_scene(tree: Any, structure: str, rename: dict[str, str] | None = N
 # A twin task
 # --------------------------------------------------------------------------- #
 def twin_id(mvs_id: str) -> str:
-    return (mvs_id[:-4] if mvs_id.endswith("-mvs") else mvs_id) + "-api"
+    """``x-mvs`` -> ``x-api`` (also before a paraphrase suffix: ``x-mvs.terse`` ->
+    ``x-api.terse``); any other id gets ``-api`` appended."""
+    new, n = re.subn(r"-mvs(?=$|\.)", "-api", mvs_id, count=1)
+    return new if n else mvs_id + "-api"
 
 
 def _api_target(target: Any) -> Any:
@@ -696,6 +700,8 @@ def make_twin(task: dict, twins: dict[str, str]) -> dict:
         accepted.append(calls)
         scenes.append((f"on {other}", task["reference"], calls, rename))
     context = None
+    if task.get("context") and task["context"].get("noop"):
+        raise Untranslatable("a no-change follow-up (what cannot be done differs between the formats)")
     if task.get("context"):
         calls, _ = translate_scene(task["context"]["scene"], structure)
         context = {"calls": calls, "noop": task["context"]["noop"]}
@@ -779,6 +785,11 @@ def plan(only: list[str] | None = None) -> tuple[list[dict], list[dict], list[di
     by_id = {t["id"]: t for t in corpus}
     todo = [t for t in corpus if t["track"] == "mvs" and (not only or t["id"] in only)]
     todo.sort(key=lambda t: (bool(t.get("paraphrase_of")), t["id"]))    # originals first
+    # generators that write both tracks themselves decide which of their MVS tasks have
+    # an API counterpart (a follow-up "start it spinning" changes nothing in MVS and
+    # sets `spin` in the API: the same final state would be the wrong twin)
+    two_track = {(t.get("provenance") or {}).get("script") for t in corpus
+                 if t["track"] == "api" and not t.get("_legacy")} - {SCRIPT, None}
     twins: list[dict] = []
     made: dict[str, str] = {}
     rows = []
@@ -790,8 +801,13 @@ def plan(only: list[str] | None = None) -> tuple[list[dict], list[dict], list[di
         other = by_id.get(t.get("twin_of") or "")
         if t.get("twin_of") and not (t["twin_of"] == ours and (
                 other is None or (other.get("provenance") or {}).get("script") == SCRIPT)):
-            row["reason"] = "already has a twin from its own generator"
+            row["reason"] = PAIRED
             row["detail"] = t["twin_of"]
+            continue
+        script = (t.get("provenance") or {}).get("script")
+        if not t.get("_legacy") and script in two_track:
+            row["reason"] = TWO_TRACK
+            row["detail"] = script
             continue
         try:
             if t.get("_legacy"):
@@ -800,7 +816,7 @@ def plan(only: list[str] | None = None) -> tuple[list[dict], list[dict], list[di
                     raise Untranslatable("several structures in one scene", ", ".join(structures))
                 other_entries(t, structures[0])
                 translate_scene(t["reference"], structures[0])
-                row["reason"] = "old task format (no twin_of field); a twin could be made"
+                row["reason"] = OLD
                 continue
             twin = make_twin(t, made)
         except Untranslatable as e:
@@ -833,50 +849,80 @@ def coverage(twins: list[dict]) -> list[str]:
     return [f"| {kind} | `{name}` | {n} |" for (kind, name), n in sorted(cov.items())]
 
 
+PAIRED = "already has a twin from its own generator"
+TWO_TRACK = "left without an API counterpart by its own two-track generator"
+OLD = "old task format (no twin_of field); a twin could be made"
+
+
+def shares(rows: list[dict]) -> dict[str, int]:
+    """The counts the report and the README give. ``candidates`` are the MVS tasks this
+    script is the one to pair: in the task format, and not from a generator that writes
+    both tracks itself."""
+    n = Counter(r["reason"] for r in rows)
+    old = sum(r["format"] == "old" for r in rows)
+    candidates = [r for r in rows if r["format"] == "new" and r["reason"] not in (PAIRED, TWO_TRACK)]
+    return {"read": len(rows), "paired_elsewhere": n[PAIRED], "two_track_unpaired": n[TWO_TRACK],
+            "old_format": old, "old_format_expressible": n[OLD], "candidates": len(candidates),
+            "twins": sum(bool(r["twin"]) for r in rows)}
+
+
 def readme(twins: list[dict], rows: list[dict]) -> str:
-    n = len(rows)
-    new = [r for r in rows if r["format"] == "new"]
-    could = [r for r in rows if r["twin"] or (r["reason"] or "").endswith("a twin could be made")]
+    c = shares(rows)
+    pct = lambda a, b: f"{100 * a / b:.0f}%" if b else "n/a"  # noqa: E731
     lines = ["# API twins of MVS tasks", "",
              "Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin has the "
              "prompt, structures, split, style, tier, family and target atoms of its MVS task, and a call "
              "list whose replayed final state is the MVS reference's drawn state (same atoms, "
              "representations and colours; nothing else drawn). `twin_of` links the two both ways.", "",
-             f"{n} MVS tasks read ({len(new)} in the task format, {n - len(new)} in the old format); "
-             f"{len(twins)} twins written. The API can express the reference of {len(could)} of the {n} "
-             f"({100 * len(could) / n:.0f}%)." if n else "No MVS tasks read.", ""]
-    if twins:
-        lines += ["## Twins", "", "| tier | family | MVS tasks | twins |", "|---|---|---:|---:|"]
+             f"- MVS tasks read: {c['read']}",
+             f"- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): "
+             f"{c['paired_elsewhere']}",
+             f"- left without an API counterpart by a generator that writes both tracks: "
+             f"{c['two_track_unpaired']}",
+             f"- in the old task format (no `twin_of` field, so no twin is written): {c['old_format']}, of "
+             f"which the API could express {c['old_format_expressible']}",
+             f"- left for this script: {c['candidates']}; **twins written: {c['twins']} "
+             f"({pct(c['twins'], c['candidates'])})**",
+             f"- MVS tasks with an API twin, all generators together: {c['twins'] + c['paired_elsewhere']} of "
+             f"{c['read']} ({pct(c['twins'] + c['paired_elsewhere'], c['read'])})", ""]
+    mine = [r for r in rows if r["format"] == "new" and r["reason"] not in (PAIRED, TWO_TRACK)]
+    if mine:
+        lines += ["## Twins by template", "", "| tier | family | MVS tasks | twins |", "|---|---|---:|---:|"]
         per: dict[tuple, list[int]] = {}
-        for r in new:
-            c = per.setdefault((r["tier"], r["family"]), [0, 0])
-            c[0] += 1
-            c[1] += bool(r["twin"])
+        for r in mine:
+            k = per.setdefault((r["tier"], r["family"]), [0, 0])
+            k[0] += 1
+            k[1] += bool(r["twin"])
         lines += [f"| {tier} | `{fam}` | {a} | {b} |" for (tier, fam), (a, b) in sorted(per.items())]
+    if twins:
         bases = Counter(t["provenance"]["twin"]["base"] for t in twins)
         off = Counter(f for t in twins for f in t["provenance"]["twin"]["switched_off"])
         hinge = sum(bool(t["provenance"]["difficulty"]["hinges_on"]) for t in twins)
-        none_off = sum(not t["provenance"]["twin"]["switched_off"]
-                       and t["provenance"]["twin"]["base"] == "the default view" for t in twins)
+        plain = sum(not t["provenance"]["twin"]["switched_off"]
+                    and t["provenance"]["twin"]["base"] == "the default view" for t in twins)
         lines += ["", "## How the twins reach the picture", "",
                   "An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin has to "
-                  "take away what the scene does not draw (`provenance.twin.switched_off`, or a global "
-                  "style that draws polymer only), and the request does not say so in those words: it says "
-                  "what to show. The paired analysis should report twins with and without such steps "
-                  "separately; the target score does not depend on them.", "",
+                  "take away what the scene does not draw: with hide toggles (`provenance.twin.switched_off`) "
+                  "or with a global style that draws polymer only (`provenance.twin.base`). The request says "
+                  "what to show, not what to remove, so task success on a twin also asks the model to know "
+                  "what a load draws by default. The paired analysis should report twins with and without "
+                  "such steps separately (`provenance.difficulty.context_switched_off`, `order_matters`); "
+                  "the target score does not depend on them.", "",
                   "- base: " + "; ".join(f"{k} {v}" for k, v in sorted(bases.items())),
                   "- hide toggles: " + ("; ".join(f"`{k}` {v}" for k, v in sorted(off.items())) or "none"),
-                  f"- twins on the default view with nothing switched off: {none_off}",
+                  f"- twins on the default view with nothing switched off: {plain}",
                   f"- twins with an added, coloured representation (`representationColor`): {hinge}", "",
                   "| surface | name | twins |", "|---|---|---:|", *coverage(twins)]
     missing = [r for r in rows if not r["twin"]]
     if missing:
         counts = Counter(r["reason"] for r in missing)
-        lines += ["", "## MVS tasks without a twin", "", "| reason | tasks |", "|---|---:|"]
+        lines += ["", "## MVS tasks without a twin from this script", "", "| reason | tasks |", "|---|---:|"]
         lines += [f"| {reason} | {k} |" for reason, k in sorted(counts.items(), key=lambda x: (-x[1], x[0]))]
-        lines += ["", "| MVS task | tier | reason | detail |", "|---|---|---|---|"]
-        lines += [f"| `{r['id']}` | {r['tier']} | {r['reason']} | {r['detail'][:160].replace('|', '/')} |"
-                  for r in missing]
+        listed = [r for r in missing if r["reason"] != PAIRED]
+        if listed:
+            lines += ["", "| MVS task | tier | reason | detail |", "|---|---|---|---|"]
+            lines += [f"| `{r['id']}` | {r['tier']} | {r['reason']} | {r['detail'][:160].replace('|', '/')} |"
+                      for r in listed]
     return "\n".join(lines) + "\n"
 
 
@@ -896,8 +942,11 @@ def wanted_files(twins: list[dict], rows: list[dict], corpus: list[dict], whole:
         path = REPO / by_id[r["id"]]["_path"]
         text = path.read_text()
         value = json.dumps(r["twin"]) if r["twin"] else None
-        if value is None and by_id[r["id"]].get("twin_of") != twin_id(r["id"]):
-            continue                              # not ours to clear
+        if value is None:
+            # clear the link only if it points at a twin this script wrote earlier
+            old = by_id.get(by_id[r["id"]].get("twin_of") or "")
+            if old is None or (old.get("provenance") or {}).get("script") != SCRIPT:
+                continue
         new, k = re.subn(r'("twin_of":\s*)(null|"[^"]*")', lambda m: m.group(1) + (value or "null"),
                          text, count=1)
         assert k == 1, f"{path}: no twin_of field"
@@ -917,12 +966,14 @@ def main(argv: list[str] | None = None) -> int:
         ap.error("give task ids, or --all")
     twins, rows, corpus = plan(None if a.all else a.ids)
     for r in rows:
-        if a.report or not r["twin"]:
+        if a.report or (not r["twin"] and r["reason"] != PAIRED):
             print(f"{r['id']:44} {r['twin'] or '-':44} {r['reason'] or 'twin'}"
                   + (f" ({r['detail'][:120]})" if r["detail"] else ""))
-    could = sum(bool(r["twin"]) or (r["reason"] or "").endswith("a twin could be made") for r in rows)
-    print(f"{len(rows)} MVS tasks; the API can express {could} ({100 * could / max(1, len(rows)):.0f}%); "
-          f"{len(twins)} twins")
+    c = shares(rows)
+    print(f"{c['read']} MVS tasks: {c['paired_elsewhere']} already paired by their own generator, "
+          f"{c['two_track_unpaired']} left unpaired by a two-track generator, {c['old_format']} in the old "
+          f"format (the API could express {c['old_format_expressible']}); of the other {c['candidates']}, "
+          f"{c['twins']} get a twin ({100 * c['twins'] / max(1, c['candidates']):.0f}%)")
     files = wanted_files(twins, rows, corpus, whole=a.all)
     stale = sorted(p for p in OUT.glob("*.json") if p not in files) if a.all and OUT.is_dir() else []
     changed = [p for p, text in files.items() if not p.exists() or p.read_text() != text]

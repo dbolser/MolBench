@@ -216,3 +216,46 @@ def test_the_readme_on_disk_is_what_the_script_writes():
     for path, text in files.items():
         assert path.read_text() == text, path
     assert {p for p in tr.OUT.glob("*.json")} == {p for p in files if p.suffix == ".json" and p.parent == tr.OUT}
+
+
+def test_twin_ids():
+    assert tr.twin_id("tr-cartoon-1c3w") == "tr-cartoon-1c3w-api"
+    assert tr.twin_id("fx-ligand-1cbs-mvs") == "fx-ligand-1cbs-api"
+    assert tr.twin_id("acc-x-1aay-mvs.terse") == "acc-x-1aay-api.terse"
+
+
+def test_a_no_change_follow_up_gets_no_twin():
+    """'Start it spinning' changes nothing in an MVS scene and sets `spin` in the API:
+    the same final state would be the wrong answer on the other track."""
+    with pytest.raises(tr.Untranslatable) as e:
+        tr.make_twin(_fixture("fx-follow-noop-1cbs-mvs"), {})
+    assert "no-change" in e.value.reason
+
+
+def test_the_corpus_plan_leaves_other_generators_pairs_alone(monkeypatch):
+    """Tasks already paired by their own generator, and the unpaired MVS tasks of a
+    generator that writes both tracks, are not given twins; their files are not touched."""
+    fixtures = T.load_corpus(REPO / "tests" / "fixtures" / "tasks")
+    monkeypatch.setattr(tr.T, "load_corpus", lambda *a, **k: copy.deepcopy(fixtures))
+    twins, rows, corpus = tr.plan()
+    assert twins == []
+    reasons = {r["id"]: r["reason"] for r in rows}
+    assert reasons["fx-ligand-1cbs-mvs"] == tr.PAIRED
+    assert reasons["fx-anycopy-1hvr-mvs"] == tr.TWO_TRACK          # MVS-only by its generator's choice
+    assert not [p for p in tr.wanted_files(twins, rows, corpus, whole=False)]
+    # the same tasks from a generator that writes MVS only: now they are this script's to pair
+    solo = copy.deepcopy(fixtures)
+    for t in solo:
+        if t["track"] == "mvs":
+            t["twin_of"] = None
+            t["provenance"]["script"] = "scripts/some_mvs_only_generator.py"
+    solo = [t for t in solo if t["track"] == "mvs"]
+    monkeypatch.setattr(tr.T, "load_corpus", lambda *a, **k: copy.deepcopy(solo))
+    twins, rows, corpus = tr.plan()
+    made = {t["id"] for t in twins}
+    assert "fx-ligand-1cbs-api" in made and "fx-ligand-terse-1stp-api" in made
+    assert "fx-follow-noop-1cbs-api" not in made
+    files = tr.wanted_files(twins, rows, corpus, whole=False)
+    mvs_file = REPO / "tests" / "fixtures" / "tasks" / "fx-ligand-1cbs-mvs.json"
+    assert json.loads(files[tr.OUT / "fx-ligand-1cbs-api.json"])["twin_of"] == "fx-ligand-1cbs-mvs"
+    assert mvs_file not in files          # its twin_of already names fx-ligand-1cbs-api: no rewrite
