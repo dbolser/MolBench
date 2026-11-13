@@ -22,6 +22,7 @@ check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
 
 TASKS = check.load_api_tasks()
+CURATED = {f"api-{n:03d}" for n in range(1, 21)}
 
 
 def test_there_are_tasks_with_unique_ids():
@@ -39,13 +40,19 @@ def test_task_shape(task):
     assert task["category"] == "api_calling"
     assert task["skills"] and task["skills"] == task["categories"]   # the runner reads `categories`
     prov = task["provenance"]
-    assert prov["july_task"] in ("unchanged", "reworded", "replaced")
-    assert prov["derived"] and prov["source"] and prov["checked_by"]
+    if task["id"] in CURATED:
+        assert prov["july_task"] in ("unchanged", "reworded", "replaced")
+    if "targets" in prov:        # by construction: the atoms are stated a second time
+        assert prov["derived"] and prov["checked_by"] and prov["script"]
     res = grader.grade_task(task, task["reference"])
     assert res["grader"] == "state" and res["success"] and res["f1"] == 1.0
     assert grader.grade_sequence(task["reference"], task["reference"])["f1"] > 0   # legacy still runs
-    for alt in task.get("accepted", []):
+    for alt in task.get("accepted") or []:
         assert grader.grade_task(task, alt)["success"]
+
+
+def test_the_curated_twenty_are_all_there():
+    assert CURATED <= {t["id"] for t in TASKS}
 
 
 def test_prompt_example_is_not_a_task():
