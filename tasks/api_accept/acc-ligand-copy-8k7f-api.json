@@ -1,0 +1,166 @@
+{
+ "id": "acc-ligand-copy-8k7f-api",
+ "track": "api",
+ "tier": "accept_set",
+ "family": "acc-ligand-copy",
+ "structures": [
+  "8k7f"
+ ],
+ "prompt": "Load 8K7F. Show the protein as a cartoon and the ligand VMF as blue ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8k7f"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "G",
+     "label_comp_id": "VMF",
+     "color": "blue"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "8k7f"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "K",
+      "label_comp_id": "VMF",
+      "color": "blue"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8k7f"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "G",
+      "label_comp_id": "VMF",
+      "color": "blue"
+     },
+     {
+      "struct_asym_id": "K",
+      "label_comp_id": "VMF",
+      "color": "blue"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "G",
+    "auth_seq_id": 502
+   },
+   "representation": "ball-and-stick",
+   "color": "blue"
+  }
+ ],
+ "twin_of": "acc-ligand-copy-8k7f-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/8k7f.json",
+   "molbench/atom_tables/8k7f.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 3 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 11 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-ligand-copy",
+  "wording": 0,
+  "slots": {
+   "ID": "8K7F",
+   "id": "8k7f",
+   "poly": "protein",
+   "thing": "ligand VMF",
+   "colour": "blue"
+  },
+  "open": "which copy of the named ligand (or all)",
+  "rule": "The request names one ligand; the entry holds several copies of it. Accepted: any one copy, or every copy. Not an arbitrary several-but-not-all: no reading of the request picks, say, two of four.",
+  "candidates": [
+   "VMF A:502",
+   "VMF B:503"
+  ],
+  "accepted_states": [
+   "VMF A:502",
+   "VMF B:503",
+   "both copies"
+  ],
+  "not_accepted": [
+   "some but not all copies (when there are more than two): no reading of the request",
+   "other components, or the residues bonded to the ligand: not requested",
+   "another representation or colour: both are stated"
+  ],
+  "facts": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label_chain": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 2,
+   "n_accepted_states": 3
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "K",
+     "auth_seq_id": 503
+    },
+    "representation": "ball-and-stick",
+    "color": "blue"
+   }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "G",
+      "auth_seq_id": 502
+     },
+     {
+      "label_asym_id": "K",
+      "auth_seq_id": 503
+     }
+    ],
+    "representation": "ball-and-stick",
+    "color": "blue"
+   }
+  ]
+ ],
+ "notes": "Left open: which copy of the named ligand (or all). Reference = accepted state 1 of 3 (VMF A:502); the others are in 'accepted', in the order of provenance.accepted_states."
+}

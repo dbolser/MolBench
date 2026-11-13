@@ -1,0 +1,508 @@
+{
+ "id": "acc-metal-copy-8eph-mvs",
+ "track": "mvs",
+ "tier": "accept_set",
+ "family": "acc-metal-copy",
+ "structures": [
+  "8eph"
+ ],
+ "prompt": "Load 8EPH. Show the protein as a cartoon and the calcium ion as magenta spacefill.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/8eph.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             }
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_asym_id": "F",
+             "auth_seq_id": 202
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8eph.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_asym_id": "G",
+              "auth_seq_id": 301
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "spacefill"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8eph.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_asym_id": "I",
+              "auth_seq_id": 202
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "spacefill"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8eph.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_asym_id": "J",
+              "auth_seq_id": 301
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "spacefill"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8eph.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": [
+              {
+               "label_asym_id": "F",
+               "auth_seq_id": 202
+              },
+              {
+               "label_asym_id": "G",
+               "auth_seq_id": 301
+              },
+              {
+               "label_asym_id": "I",
+               "auth_seq_id": 202
+              },
+              {
+               "label_asym_id": "J",
+               "auth_seq_id": 301
+              }
+             ]
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "spacefill"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "F",
+    "auth_seq_id": 202
+   },
+   "representation": "spacefill",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/8eph.json",
+   "molbench/atom_tables/8eph.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 5 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 1 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-metal-copy",
+  "wording": 0,
+  "slots": {
+   "ID": "8EPH",
+   "id": "8eph",
+   "poly": "protein",
+   "thing": "calcium",
+   "colour": "magenta"
+  },
+  "open": "which of several ions of the named metal (or all)",
+  "rule": "The request asks for \"the <metal> ion\"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them.",
+  "candidates": [
+   "CA A:202",
+   "CA B:301",
+   "CA C:202",
+   "CA D:301"
+  ],
+  "accepted_states": [
+   "CA A:202",
+   "CA B:301",
+   "CA C:202",
+   "CA D:301",
+   "all 4 copies"
+  ],
+  "not_accepted": [
+   "some but not all ions (when there are more than two): no reading of the request",
+   "the residues that bind the metal: not requested",
+   "another representation or colour: both are stated"
+  ],
+  "facts": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label_chain": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 4,
+   "n_accepted_states": 5
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "G",
+     "auth_seq_id": 301
+    },
+    "representation": "spacefill",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "I",
+     "auth_seq_id": 202
+    },
+    "representation": "spacefill",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "J",
+     "auth_seq_id": 301
+    },
+    "representation": "spacefill",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "F",
+      "auth_seq_id": 202
+     },
+     {
+      "label_asym_id": "G",
+      "auth_seq_id": 301
+     },
+     {
+      "label_asym_id": "I",
+      "auth_seq_id": 202
+     },
+     {
+      "label_asym_id": "J",
+      "auth_seq_id": 301
+     }
+    ],
+    "representation": "spacefill",
+    "color": "magenta"
+   }
+  ]
+ ],
+ "notes": "Left open: which of several ions of the named metal (or all). Reference = accepted state 1 of 5 (CA A:202); the others are in 'accepted', in the order of provenance.accepted_states."
+}

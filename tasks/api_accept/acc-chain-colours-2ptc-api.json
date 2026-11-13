@@ -1,0 +1,146 @@
+{
+ "id": "acc-chain-colours-2ptc-api",
+ "track": "api",
+ "tier": "accept_set",
+ "family": "acc-chain-colours",
+ "structures": [
+  "2ptc"
+ ],
+ "prompt": "Show 2PTC as a cartoon. Colour its two chains orange and cyan.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "2ptc"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "orange"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "cyan"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "2ptc"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "cyan"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "orange"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A"
+   },
+   "representation": "cartoon",
+   "color": "orange"
+  },
+  {
+   "selector": {
+    "label_asym_id": "B"
+   },
+   "representation": "cartoon",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "acc-chain-colours-2ptc-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/2ptc.json",
+   "molbench/atom_tables/2ptc.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 2 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 2083 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-chain-colours",
+  "wording": 1,
+  "slots": {
+   "ID": "2PTC",
+   "id": "2ptc",
+   "poly": "protein",
+   "n": "two",
+   "colours": "orange and cyan"
+  },
+  "open": "which chain gets which colour",
+  "rule": "The request gives one colour per chain but not which chain gets which. Accepted: every one-to-one assignment of the named colours to the polymer chains (n! states), on a cartoon of the whole polymer.",
+  "candidates": [
+   "chain E",
+   "chain I"
+  ],
+  "accepted_states": [
+   "chain E orange, chain I cyan",
+   "chain E cyan, chain I orange"
+  ],
+  "not_accepted": [
+   "a colour used on two chains, or a chain left uncoloured: the request names one colour per chain",
+   "other colours, or a colour-by-chain theme with the viewer's own colours: the request names the colours",
+   "ligands, ions or water drawn or coloured: not requested"
+  ],
+  "facts": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label_chain": true,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 2,
+   "n_accepted_states": 2
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "cyan"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ]
+ ],
+ "notes": "Left open: which chain gets which colour. Reference = accepted state 1 of 2 (chain E orange, chain I cyan); the others are in 'accepted', in the order of provenance.accepted_states."
+}

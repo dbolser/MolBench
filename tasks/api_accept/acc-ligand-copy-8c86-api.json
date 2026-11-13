@@ -1,0 +1,166 @@
+{
+ "id": "acc-ligand-copy-8c86-api",
+ "track": "api",
+ "tier": "accept_set",
+ "family": "acc-ligand-copy",
+ "structures": [
+  "8c86"
+ ],
+ "prompt": "Show 8C86 with the protein as a cartoon and the ligand TQ0 as ball-and-stick, coloured yellow.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8c86"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "C",
+     "label_comp_id": "TQ0",
+     "color": "yellow"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "D",
+      "label_comp_id": "TQ0",
+      "color": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "C",
+      "label_comp_id": "TQ0",
+      "color": "yellow"
+     },
+     {
+      "struct_asym_id": "D",
+      "label_comp_id": "TQ0",
+      "color": "yellow"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "C",
+    "auth_seq_id": 201
+   },
+   "representation": "ball-and-stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": "acc-ligand-copy-8c86-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/8c86.json",
+   "molbench/atom_tables/8c86.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 3 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 37 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-ligand-copy",
+  "wording": 2,
+  "slots": {
+   "ID": "8C86",
+   "id": "8c86",
+   "poly": "protein",
+   "thing": "ligand TQ0",
+   "colour": "yellow"
+  },
+  "open": "which copy of the named ligand (or all)",
+  "rule": "The request names one ligand; the entry holds several copies of it. Accepted: any one copy, or every copy. Not an arbitrary several-but-not-all: no reading of the request picks, say, two of four.",
+  "candidates": [
+   "TQ0 B:201",
+   "TQ0 A:201"
+  ],
+  "accepted_states": [
+   "TQ0 B:201",
+   "TQ0 A:201",
+   "both copies"
+  ],
+  "not_accepted": [
+   "some but not all copies (when there are more than two): no reading of the request",
+   "other components, or the residues bonded to the ligand: not requested",
+   "another representation or colour: both are stated"
+  ],
+  "facts": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label_chain": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 2,
+   "n_accepted_states": 3
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "D",
+     "auth_seq_id": 201
+    },
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "C",
+      "auth_seq_id": 201
+     },
+     {
+      "label_asym_id": "D",
+      "auth_seq_id": 201
+     }
+    ],
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   }
+  ]
+ ],
+ "notes": "Left open: which copy of the named ligand (or all). Reference = accepted state 1 of 3 (TQ0 B:201); the others are in 'accepted', in the order of provenance.accepted_states."
+}

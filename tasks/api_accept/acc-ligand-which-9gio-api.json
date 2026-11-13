@@ -1,0 +1,165 @@
+{
+ "id": "acc-ligand-which-9gio-api",
+ "track": "api",
+ "tier": "accept_set",
+ "family": "acc-ligand-which",
+ "structures": [
+  "9gio"
+ ],
+ "prompt": "Load 9GIO. Show the protein as a cartoon and the ligand as cyan ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "9gio"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "D",
+     "label_comp_id": "3JF",
+     "color": "cyan"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "9gio"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "E",
+      "label_comp_id": "A1IMD",
+      "color": "cyan"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "9gio"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "D",
+      "label_comp_id": "3JF",
+      "color": "cyan"
+     },
+     {
+      "struct_asym_id": "E",
+      "label_comp_id": "A1IMD",
+      "color": "cyan"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "D",
+    "auth_seq_id": 301
+   },
+   "representation": "ball-and-stick",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "acc-ligand-which-9gio-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/9gio.json",
+   "molbench/atom_tables/9gio.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 3 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 33 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-ligand-which",
+  "wording": 0,
+  "slots": {
+   "ID": "9GIO",
+   "id": "9gio",
+   "poly": "protein",
+   "colour": "cyan"
+  },
+  "open": "which of two different ligands (or both)",
+  "rule": "The entry has exactly two different ligands, one copy each, and the request says \"the ligand\". Accepted: either ligand alone, or both. On the MVS track also the viewer's own built-in 'ligand' selection when it is not the same atoms (Mol* adds residues covalently bonded to a ligand), because an answer that uses the viewer's word for exactly what was asked is not wrong.",
+  "candidates": [
+   "3JF",
+   "A1IMD"
+  ],
+  "accepted_states": [
+   "3JF",
+   "A1IMD",
+   "3JF + A1IMD"
+  ],
+  "not_accepted": [
+   "ions, water or buffer components shown as the ligand: not ligands of the entry (data/panel facts: kind 'ion')",
+   "part of a ligand, or protein residues around it (other than through the viewer's built-in selection): not requested",
+   "another representation or colour: both are stated"
+  ],
+  "facts": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label_chain": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 2,
+   "n_accepted_states": 3
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "E",
+     "auth_seq_id": 302
+    },
+    "representation": "ball-and-stick",
+    "color": "cyan"
+   }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "D",
+      "auth_seq_id": 301
+     },
+     {
+      "label_asym_id": "E",
+      "auth_seq_id": 302
+     }
+    ],
+    "representation": "ball-and-stick",
+    "color": "cyan"
+   }
+  ]
+ ],
+ "notes": "Left open: which of two different ligands (or both). Reference = accepted state 1 of 3 (3JF); the others are in 'accepted', in the order of provenance.accepted_states."
+}
