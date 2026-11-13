@@ -26,7 +26,7 @@ table of the entry.
 | `tr-water` | 2 | 1 | 3 | 5% |
 | **all** | 48 | 16 | 64 | 100% |
 
-Structures: 62 (14 held back: 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8K7F). Most tasks on one structure: 2 (cap 6).
+Structures: 63 (15 held back: 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
 
 ## How each reference is derived
 

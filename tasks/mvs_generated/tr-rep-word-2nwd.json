@@ -1,12 +1,12 @@
 {
- "id": "tr-residue-focus-1rx2",
+ "id": "tr-rep-word-2nwd",
  "track": "mvs",
  "tier": "translation",
- "family": "tr-residue-focus",
+ "family": "tr-rep-word",
  "structures": [
-  "1rx2"
+  "2nwd"
  ],
- "prompt": "1RX2: grey cartoon, residue 44 as teal ball-and-stick, camera focused on the residue.",
+ "prompt": "Show the protein of 2NWD as yellow lines (wireframe).",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1rx2.cif"
+      "url": "https://files.rcsb.org/download/2nwd.cif"
      },
      "children": [
       {
@@ -38,45 +38,16 @@
             {
              "kind": "representation",
              "params": {
-              "type": "cartoon"
+              "type": "line"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "gray"
+                "color": "yellow"
                }
               }
              ]
-            }
-           ]
-          },
-          {
-           "kind": "component",
-           "params": {
-            "selector": {
-             "auth_asym_id": "A",
-             "auth_seq_id": 44
-            }
-           },
-           "children": [
-            {
-             "kind": "representation",
-             "params": {
-              "type": "ball_and_stick"
-             },
-             "children": [
-              {
-               "kind": "color",
-               "params": {
-                "color": "teal"
-               }
-              }
-             ]
-            },
-            {
-             "kind": "focus",
-             "params": {}
             }
            ]
           }
@@ -93,31 +64,28 @@
  "context": null,
  "target": [
   {
-   "selector": {
-    "auth_asym_id": "A",
-    "auth_seq_id": 44
-   },
-   "representation": "ball_and_stick",
-   "color": "teal"
+   "selector": "polymer",
+   "representation": "line",
+   "color": "yellow"
   }
  ],
  "twin_of": null,
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_mvs_tasks.py",
   "inputs": [
-   "data/panel/facts/1rx2.json",
-   "molbench/atom_tables/1rx2.json.gz"
+   "data/panel/facts/2nwd.json",
+   "molbench/atom_tables/2nwd.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 11 atoms on the frozen atom table"
+   "target selects 2061 atoms on the frozen atom table"
   ],
-  "derivation": "a grey cartoon of the polymer, the named residue (author numbering, from the atom table) as ball-and-stick, and a camera focus on that residue",
+  "derivation": "the whole polymer in the MVS representation `line`, which is what the prompt's word for it means in Mol* (wireframe = line, space-filling/CPK = spacefill, backbone trace = backbone); the entry's only polymer is protein",
   "difficulty": {
    "author_number_differs_from_label": false,
    "author_chain_differs_from_label": false,
@@ -129,10 +97,7 @@
  },
  "skills": [
   "load",
-  "selection",
   "representation",
-  "color",
-  "camera",
-  "multi-component"
+  "color"
  ]
 }

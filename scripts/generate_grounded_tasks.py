@@ -975,7 +975,7 @@ def build() -> list[dict]:
         if family == "gr-catalytic":
             cands = one_per_protein(cands)
         chosen = picker.choose(family, cands, n, entry_of=lambda c: c["entry"])
-        assert len(chosen) == n, f"{family}: only {len(chosen)} of {n} tasks could be built"
+        C.enough(family, chosen, n)
         for c in chosen:
             entry = c["entry"]
             tid = f"{family}-{entry}" + (f"-{c['suffix']}" if c["suffix"] else "")

@@ -1,12 +1,12 @@
 {
- "id": "tr-residue-focus-8pi2",
+ "id": "tr-surface-1rx2",
  "track": "mvs",
  "tier": "translation",
- "family": "tr-residue-focus",
+ "family": "tr-surface",
  "structures": [
-  "8pi2"
+  "1rx2"
  ],
- "prompt": "Load 8PI2 as a grey cartoon, show residue 115 as salmon ball-and-stick and zoom in on it.",
+ "prompt": "Show the protein of 1RX2 as a surface, coloured blue.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/8pi2.cif"
+      "url": "https://files.rcsb.org/download/1rx2.cif"
      },
      "children": [
       {
@@ -38,45 +38,16 @@
             {
              "kind": "representation",
              "params": {
-              "type": "cartoon"
+              "type": "surface"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "gray"
+                "color": "blue"
                }
               }
              ]
-            }
-           ]
-          },
-          {
-           "kind": "component",
-           "params": {
-            "selector": {
-             "auth_asym_id": "A",
-             "auth_seq_id": 115
-            }
-           },
-           "children": [
-            {
-             "kind": "representation",
-             "params": {
-              "type": "ball_and_stick"
-             },
-             "children": [
-              {
-               "kind": "color",
-               "params": {
-                "color": "salmon"
-               }
-              }
-             ]
-            },
-            {
-             "kind": "focus",
-             "params": {}
             }
            ]
           }
@@ -93,33 +64,30 @@
  "context": null,
  "target": [
   {
-   "selector": {
-    "auth_asym_id": "A",
-    "auth_seq_id": 115
-   },
-   "representation": "ball_and_stick",
-   "color": "salmon"
+   "selector": "polymer",
+   "representation": "surface",
+   "color": "blue"
   }
  ],
  "twin_of": null,
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_mvs_tasks.py",
   "inputs": [
-   "data/panel/facts/8pi2.json",
-   "molbench/atom_tables/8pi2.json.gz"
+   "data/panel/facts/1rx2.json",
+   "molbench/atom_tables/1rx2.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 7 atoms on the frozen atom table"
+   "target selects 1268 atoms on the frozen atom table"
   ],
-  "derivation": "a grey cartoon of the polymer, the named residue (author numbering, from the atom table) as ball-and-stick, and a camera focus on that residue",
+  "derivation": "the whole polymer as a surface; the entry's only polymer is protein, so `polymer` and `protein` are the same atoms",
   "difficulty": {
-   "author_number_differs_from_label": true,
+   "author_number_differs_from_label": false,
    "author_chain_differs_from_label": false,
    "insertion_code": false,
    "needs_ligand_identity": false,
@@ -129,10 +97,8 @@
  },
  "skills": [
   "load",
-  "selection",
   "representation",
   "color",
-  "camera",
-  "multi-component"
+  "surface"
  ]
 }

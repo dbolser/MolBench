@@ -55,8 +55,14 @@ PALETTE = drawn.TASK_PALETTE
 # --------------------------------------------------------------------------- #
 # The held-back split (decision 21)
 # --------------------------------------------------------------------------- #
-HELDBACK_SEED = 2
+HELDBACK_SEED = 2            # the smallest covering seed; a test re-derives it
 HELDBACK_N = 15              # 20% of the 75 usable panel entries
+# The corpus-wide list, when the lead has frozen one: a JSON list of panel ids. It
+# replaces the rule below (the API and accept-set generators read the same file).
+HELDBACK_FILE = REPO / "data" / "panel" / "heldback.json"
+# Held back whatever the hash says: the structure the fixture tasks
+# (tests/fixtures/tasks) hold back, which the dry run mixes with the corpus.
+ALSO_HELDBACK = ("8ce0",)
 # What the held-back set must contain, so that every tier has held-back tasks of most
 # of its templates: feature (as in panel.json) -> at least this many entries.
 HELDBACK_NEEDS = {"ligand": 5, "heme": 1, "disulfide": 2, "metal": 4, "nucleic": 2,
@@ -81,7 +87,10 @@ def heldback_candidates() -> list[dict]:
 def _heldback_for(seed: int) -> list[dict]:
     def key(e: dict) -> str:
         return hashlib.sha256(f"molbench-heldback-{seed}:{e['id']}".encode()).hexdigest()
-    return sorted(heldback_candidates(), key=key)[:HELDBACK_N]
+    forced = [e for e in heldback_candidates() if e["id"] in ALSO_HELDBACK]
+    assert len(forced) == len(ALSO_HELDBACK), "a forced held-back entry is not a candidate"
+    rest = sorted((e for e in heldback_candidates() if e["id"] not in ALSO_HELDBACK), key=key)
+    return forced + rest[:HELDBACK_N - len(forced)]
 
 
 def heldback_covers(chosen: list[dict]) -> bool:
@@ -95,11 +104,17 @@ def heldback_structures() -> frozenset[str]:
     """The held-back structures of the whole corpus: one fixed set, the same in every
     tier, so no structure can be public in one tier and held back in another.
 
-    Rule: order the candidates (`heldback_candidates`) by SHA-256 of
-    ``"molbench-heldback-<seed>:<id>"`` and take the first 15 (20% of the 75 usable
-    entries). The seed is the smallest non-negative integer whose set covers every
-    feature in ``HELDBACK_NEEDS`` and has two disease proteins with a numbering offset;
-    that is seed 2, and a test re-derives it."""
+    If ``data/panel/heldback.json`` exists, it is the set. Otherwise the rule: 8CE0
+    (held back by the fixture tasks), then the candidates (`heldback_candidates`) in
+    order of SHA-256 of ``"molbench-heldback-<seed>:<id>"``, 15 in all (20% of the 75
+    usable entries). The seed is the smallest non-negative integer whose set covers
+    every feature in ``HELDBACK_NEEDS`` and has two disease proteins with a numbering
+    offset; a test re-derives it."""
+    if HELDBACK_FILE.exists():
+        ids = json.loads(HELDBACK_FILE.read_text(encoding="utf-8"))
+        known = {e["id"] for e in grounding.panel()["entries"]}
+        assert set(ids) <= known and T.WORKED_EXAMPLE not in ids, "heldback.json: unknown ids"
+        return frozenset(ids)
     chosen = _heldback_for(HELDBACK_SEED)
     assert heldback_covers(chosen), "the held-back seed no longer covers the panel"
     return frozenset(e["id"] for e in chosen)
@@ -535,6 +550,17 @@ class Picker:
                 mine[entry_of(best)] += 1
                 self.used[entry_of(best)] += 1
         return out
+
+
+def enough(family: str, chosen: list, n: int) -> None:
+    """A template must yield its full count under the built-in held-back rule. Under a
+    held-back list given as a file, the structures on each side of the split are not
+    ours to choose, so a shortfall is reported, not refused."""
+    if len(chosen) == n:
+        return
+    message = f"{family}: only {len(chosen)} of {n} tasks could be built"
+    assert HELDBACK_FILE.exists(), message
+    print(f"note: {message} with the held-back list of {HELDBACK_FILE.name}", file=sys.stderr)
 
 
 def verify(built: list[dict], out_dir: pathlib.Path) -> list[dict]:

@@ -24,7 +24,7 @@ the grader re-reads it on whichever accepted entry the answer loaded.
 | `res-name` | 10 | 2 | 12 | 31% |
 | **all** | 32 | 7 | 39 | 100% |
 
-Structures: 39 (7 held back: 1FS3, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 6THA). Most tasks on one structure: 1 (cap 6).
+Structures: 39 (7 held back: 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 6THA, 8CE0). Most tasks on one structure: 1 (cap 6).
 
 Proteins named: 43. No protein is in both splits. This tier has five
 templates because there are few distinct ways to name a protein, so the largest

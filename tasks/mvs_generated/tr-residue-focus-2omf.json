@@ -1,12 +1,12 @@
 {
- "id": "tr-surface-2omf",
+ "id": "tr-residue-focus-2omf",
  "track": "mvs",
  "tier": "translation",
- "family": "tr-surface",
+ "family": "tr-residue-focus",
  "structures": [
   "2omf"
  ],
- "prompt": "Load 2OMF and show the protein as a cyan molecular surface.",
+ "prompt": "Load 2OMF as a grey cartoon, show residue 254 as steel blue ball-and-stick and zoom in on it.",
  "reference": {
   "root": {
    "kind": "root",
@@ -38,16 +38,45 @@
             {
              "kind": "representation",
              "params": {
-              "type": "surface"
+              "type": "cartoon"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "cyan"
+                "color": "gray"
                }
               }
              ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 254
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
             }
            ]
           }
@@ -64,9 +93,12 @@
  "context": null,
  "target": [
   {
-   "selector": "polymer",
-   "representation": "surface",
-   "color": "cyan"
+   "selector": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 254
+   },
+   "representation": "ball_and_stick",
+   "color": "steelblue"
   }
  ],
  "twin_of": null,
@@ -83,9 +115,9 @@
   "date": "2026-11-13",
   "checks": [
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 2627 atoms on the frozen atom table"
+   "target selects 7 atoms on the frozen atom table"
   ],
-  "derivation": "the whole polymer as a surface; the entry's only polymer is protein, so `polymer` and `protein` are the same atoms",
+  "derivation": "a grey cartoon of the polymer, the named residue (author numbering, from the atom table) as ball-and-stick, and a camera focus on that residue",
   "difficulty": {
    "author_number_differs_from_label": false,
    "author_chain_differs_from_label": false,
@@ -97,8 +129,10 @@
  },
  "skills": [
   "load",
+  "selection",
   "representation",
   "color",
-  "surface"
+  "camera",
+  "multi-component"
  ]
 }

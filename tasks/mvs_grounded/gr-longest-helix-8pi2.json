@@ -1,12 +1,12 @@
 {
- "id": "tr-rep-word-1plc",
+ "id": "gr-longest-helix-8pi2",
  "track": "mvs",
- "tier": "translation",
- "family": "tr-rep-word",
+ "tier": "grounded",
+ "family": "gr-longest-helix",
  "structures": [
-  "1plc"
+  "8pi2"
  ],
- "prompt": "1PLC: protein as salmon spacefill.",
+ "prompt": "Show 8PI2 as a cartoon, grey throughout except the longest alpha helix, which should be steel blue.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1plc.cif"
+      "url": "https://files.rcsb.org/download/8pi2.cif"
      },
      "children": [
       {
@@ -38,13 +38,24 @@
             {
              "kind": "representation",
              "params": {
-              "type": "spacefill"
+              "type": "cartoon"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "salmon"
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 36,
+                 "end_label_seq_id": 55
+                }
                }
               }
              ]
@@ -64,9 +75,13 @@
  "context": null,
  "target": [
   {
-   "selector": "polymer",
-   "representation": "spacefill",
-   "color": "salmon"
+   "selector": {
+    "label_asym_id": "A",
+    "beg_label_seq_id": 36,
+    "end_label_seq_id": 55
+   },
+   "representation": "cartoon",
+   "color": "steelblue"
   }
  ],
  "twin_of": null,
@@ -75,28 +90,32 @@
  "split": "public",
  "grounding": null,
  "provenance": {
-  "script": "scripts/generate_mvs_tasks.py",
+  "script": "scripts/generate_grounded_tasks.py",
   "inputs": [
-   "data/panel/facts/1plc.json",
-   "molbench/atom_tables/1plc.json.gz"
+   "data/panel/facts/8pi2.json",
+   "molbench/atom_tables/8pi2.json.gz",
+   "data/panel/cif/8pi2.cif.gz"
   ],
   "date": "2026-11-13",
   "checks": [
+   "the helix records were re-read from the frozen mmCIF and agree with the facts",
+   "the longest helix is at least 3 residues longer than any other",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 1546 atoms on the frozen atom table"
+   "target selects 320 atoms on the frozen atom table"
   ],
-  "derivation": "the whole polymer in the MVS representation `spacefill`, which is what the prompt's word for it means in Mol* (wireframe = line, space-filling/CPK = spacefill, backbone trace = backbone); the entry's only polymer is protein",
+  "derivation": "the helix record (`_struct_conf`) with the most observed residues: chain A, residues 26-45 (20 residues; the next longest has 17)",
   "difficulty": {
-   "author_number_differs_from_label": false,
+   "author_number_differs_from_label": true,
    "author_chain_differs_from_label": false,
    "insertion_code": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
-   "needs_structure_lookup": false
+   "needs_structure_lookup": true
   }
  },
  "skills": [
   "load",
+  "selection",
   "representation",
   "color"
  ]

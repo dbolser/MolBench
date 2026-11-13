@@ -1,12 +1,12 @@
 {
- "id": "tr-rep-word-1rx2",
+ "id": "tr-ligands-8pi2",
  "track": "mvs",
  "tier": "translation",
- "family": "tr-rep-word",
+ "family": "tr-ligands",
  "structures": [
-  "1rx2"
+  "8pi2"
  ],
- "prompt": "1RX2: protein as a brown wireframe.",
+ "prompt": "Show 8PI2 with the protein as a grey cartoon and the bound ligands in yellow ball-and-stick.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1rx2.cif"
+      "url": "https://files.rcsb.org/download/8pi2.cif"
      },
      "children": [
       {
@@ -38,13 +38,35 @@
             {
              "kind": "representation",
              "params": {
-              "type": "line"
+              "type": "cartoon"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "brown"
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": "ligand"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow"
                }
               }
              ]
@@ -64,28 +86,28 @@
  "context": null,
  "target": [
   {
-   "selector": "polymer",
-   "representation": "line",
-   "color": "brown"
+   "selector": "ligand",
+   "representation": "ball_and_stick",
+   "color": "yellow"
   }
  ],
  "twin_of": null,
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_mvs_tasks.py",
   "inputs": [
-   "data/panel/facts/1rx2.json",
-   "molbench/atom_tables/1rx2.json.gz"
+   "data/panel/facts/8pi2.json",
+   "molbench/atom_tables/8pi2.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 1268 atoms on the frozen atom table"
+   "target selects 27 atoms on the frozen atom table"
   ],
-  "derivation": "the whole polymer in the MVS representation `line`, which is what the prompt's word for it means in Mol* (wireframe = line, space-filling/CPK = spacefill, backbone trace = backbone); the entry's only polymer is protein",
+  "derivation": "a grey cartoon of the polymer plus Mol*'s `ligand` selection as ball-and-stick; used only where that selection is exactly the entry's non-polymer, non-water, non-sugar groups (no ions, no bonded residue)",
   "difficulty": {
    "author_number_differs_from_label": false,
    "author_chain_differs_from_label": false,
@@ -98,6 +120,7 @@
  "skills": [
   "load",
   "representation",
-  "color"
+  "color",
+  "multi-component"
  ]
 }

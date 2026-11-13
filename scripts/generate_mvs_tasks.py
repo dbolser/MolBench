@@ -617,7 +617,7 @@ def build() -> list[dict]:
     built = []
     for family, (fn, n) in TEMPLATES.items():
         chosen = picker.choose(family, fn(), n, entry_of=lambda c: c["entry"])
-        assert len(chosen) == n, f"{family}: only {len(chosen)} of {n} tasks could be built"
+        C.enough(family, chosen, n)
         for c in chosen:
             entry = c["entry"]
             wording = C.pick(c["wordings"], "wording", family, entry)

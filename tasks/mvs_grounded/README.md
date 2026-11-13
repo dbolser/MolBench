@@ -24,7 +24,7 @@ there because the prompt asks for it).
 | `gr-secstruct` | 3 | 1 | 4 | 6% |
 | **all** | 54 | 11 | 65 | 100% |
 
-Structures: 59 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6HPO, 6TC2, 8K7F). Most tasks on one structure: 2 (cap 6).
+Structures: 59 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
 
 ## How each reference is derived
 
