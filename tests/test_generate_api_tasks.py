@@ -139,3 +139,18 @@ def test_a_wrong_reference_is_refused(built):
     task["provenance"]["checks"] = []
     with pytest.raises(gen.Unfit):
         gen.verify(task, {"alts": [], "traps": []})
+
+
+def test_another_heldback_list_changes_only_the_split(built, monkeypatch):
+    """`data/panel/heldback.json` (one list for every generator) may replace the rule:
+    the tasks stay the same, only their `split` follows the list."""
+    cur, generated, info = built
+    curated_structures = {s for t in cur for s in t["structures"]}
+    other = sorted({s for t in generated for s in t["structures"]} - curated_structures)[::5]
+    monkeypatch.setattr(gen, "heldback_structures", lambda: other)
+    _, again, info2 = gen.build_all()
+    assert info2["held"] == other
+    assert [t["id"] for t in again] == [t["id"] for t in generated]
+    for a, b in zip(generated, again):
+        assert {k: v for k, v in a.items() if k != "split"} == {k: v for k, v in b.items() if k != "split"}
+        assert b["split"] == ("heldback" if set(b["structures"]) & set(other) else "public")
