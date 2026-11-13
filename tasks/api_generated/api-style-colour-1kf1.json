@@ -6,7 +6,7 @@
   "structures": [
     "1kf1"
   ],
-  "prompt": "Load 1KF1, switch the whole structure to a molecular surface, and colour residues 9-20 lime green.",
+  "prompt": "Load 1KF1, switch the whole structure to spacefill, and colour residues 9-20 lime green.",
   "reference": [
     {
       "action": "load",
@@ -14,7 +14,7 @@
     },
     {
       "action": "set_visual_style",
-      "style": "molecular-surface"
+      "style": "spacefill"
     },
     {
       "action": "color",
@@ -80,7 +80,7 @@
       ],
       "insertion_codes_in_structure": false,
       "order_matters": true,
-      "style": "molecular-surface"
+      "style": "spacefill"
     },
     "targets": [
       {

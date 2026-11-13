@@ -140,6 +140,7 @@ class S:
         self.residues: list[dict] = list(by_res.values())
         for r in self.residues:
             r["poly"] = bool(r["mask"] & self.poly)
+        self.nth = 0                              # index of the task being made within its family
         self.state = ps.replay([self.load()])
         self.components: dict[str, int] = self.state.components()
 
@@ -1068,8 +1069,9 @@ def t_style_colour(s: S) -> dict | None:
     rg = a_range(s, "style-colour", need_offset=False)
     if rg is None:
         return None
-    st = pick(["spacefill", "ball-and-stick", "molecular-surface", "gaussian-surface", "putty"],
-              "style-colour", s.id)
+    # the k-th task of the family takes the k-th style, so that every style is used
+    styles = ["spacefill", "ball-and-stick", "molecular-surface", "gaussian-surface", "putty"]
+    st = styles[s.nth % len(styles)]
     (c,) = colours(1, "style-colour", s.id)
     L = s.load()
     plain = range_label(rg, color=c)
@@ -1945,6 +1947,7 @@ def build_all() -> tuple[list[dict], list[dict], dict]:
             s = min(pool, key=lambda x: (usage[(tier, x.id)], h("order", family, x.id)))
             tried.add(s.id)
             try:
+                s.nth = made                     # for templates that cycle through options
                 spec = template(s)
                 if spec is None:
                     continue

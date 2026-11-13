@@ -6,7 +6,7 @@
   "structures": [
     "1iro"
   ],
-  "prompt": "Show 1IRO as ball-and-stick and colour residues 14 to 33 yellow.",
+  "prompt": "Show 1IRO as putty and colour residues 14 to 33 yellow.",
   "reference": [
     {
       "action": "load",
@@ -14,7 +14,7 @@
     },
     {
       "action": "set_visual_style",
-      "style": "ball-and-stick"
+      "style": "putty"
     },
     {
       "action": "color",
@@ -81,7 +81,7 @@
       ],
       "insertion_codes_in_structure": false,
       "order_matters": true,
-      "style": "ball-and-stick"
+      "style": "putty"
     },
     "targets": [
       {
