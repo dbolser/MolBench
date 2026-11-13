@@ -6,7 +6,7 @@
  "structures": [
   "2cpp"
  ],
- "prompt": "How many chains does this structure have?",
+ "prompt": "What is the resolution of this structure?",
  "reference": {
   "root": {
    "kind": "root",

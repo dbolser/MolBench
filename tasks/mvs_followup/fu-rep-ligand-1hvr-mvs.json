@@ -1,12 +1,12 @@
 {
- "id": "fu-opacity-1ctq-mvs",
+ "id": "fu-rep-ligand-1hvr-mvs",
  "track": "mvs",
  "tier": "followup",
- "family": "fu-opacity",
+ "family": "fu-rep-ligand",
  "structures": [
-  "1ctq"
+  "1hvr"
  ],
- "prompt": "The protein surface should be 70% transparent.",
+ "prompt": "Switch the ligand XK2 to spacefill.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1ctq.cif"
+      "url": "https://files.rcsb.org/download/1hvr.cif"
      },
      "children": [
       {
@@ -38,19 +38,13 @@
             {
              "kind": "representation",
              "params": {
-              "type": "surface"
+              "type": "cartoon"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "limegreen"
-               }
-              },
-              {
-               "kind": "opacity",
-               "params": {
-                "opacity": 0.3
+                "color": "orange"
                }
               }
              ]
@@ -61,20 +55,20 @@
            "kind": "component",
            "params": {
             "selector": {
-             "label_comp_id": "GNP"
+             "label_comp_id": "XK2"
             }
            },
            "children": [
             {
              "kind": "representation",
              "params": {
-              "type": "ball_and_stick"
+              "type": "spacefill"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "green"
+                "color": "purple"
                }
               }
              ]
@@ -99,7 +93,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1ctq.cif"
+       "url": "https://files.rcsb.org/download/1hvr.cif"
       },
       "children": [
        {
@@ -123,13 +117,13 @@
              {
               "kind": "representation",
               "params": {
-               "type": "surface"
+               "type": "cartoon"
               },
               "children": [
                {
                 "kind": "color",
                 "params": {
-                 "color": "limegreen"
+                 "color": "orange"
                 }
                }
               ]
@@ -140,7 +134,7 @@
             "kind": "component",
             "params": {
              "selector": {
-              "label_comp_id": "GNP"
+              "label_comp_id": "XK2"
              }
             },
             "children": [
@@ -153,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "green"
+                 "color": "purple"
                 }
                }
               ]
@@ -173,8 +167,10 @@
  },
  "target": [
   {
-   "selector": "polymer",
-   "representation": "surface",
+   "selector": {
+    "label_comp_id": "XK2"
+   },
+   "representation": "spacefill",
    "color": null
   }
  ],
@@ -187,28 +183,27 @@
   "script": "scripts/generate_followup_tasks.py",
   "inputs": [
    "data/panel/panel.json",
-   "data/panel/facts/1ctq.json",
-   "molbench/atom_tables/1ctq.json.gz"
+   "data/panel/facts/1hvr.json",
+   "molbench/atom_tables/1hvr.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "reference grades as exactly right against the task (success, F1 1, target score 1)",
    "start state grades as itself; it is not the requested final state",
-   "target selects 1375 atoms on the frozen atom table",
-   "start state scores 0.5 on the target (below 1)",
-   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference"
+   "target selects 46 atoms on the frozen atom table",
+   "start state scores 0.0 on the target (below 1)",
+   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
   ],
-  "seed": "20261113|fu-opacity|2|1ctq",
-  "edit": "change one property of an existing component (opacity)",
+  "seed": "20261113|fu-rep-ligand|2|1hvr",
+  "edit": "change a representation",
   "noop_kind": null,
   "referent": null,
   "preserved": [
    {
-    "selector": {
-     "label_comp_id": "GNP"
-    },
-    "representation": "ball_and_stick",
-    "color": "green"
+    "selector": "polymer",
+    "representation": "cartoon",
+    "color": "orange"
    }
   ],
   "removed": null,
@@ -222,6 +217,6 @@
  },
  "skills": [
   "edit",
-  "opacity"
+  "representation"
  ]
 }

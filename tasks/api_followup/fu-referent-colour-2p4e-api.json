@@ -6,7 +6,7 @@
  "structures": [
   "2p4e"
  ],
- "prompt": "Change the teal chain to blue.",
+ "prompt": "The teal one should be blue instead.",
  "reference": [
   {
    "action": "load",
@@ -96,11 +96,50 @@
   "removed": null,
   "difficulty": {
    "needs_numbering_offset": false,
-   "author_chain_differs_from_label": true,
+   "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": true
-  }
+  },
+  "structure": "2p4e",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "author chain P (label chains A, C, D, E)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "D"
+     },
+     {
+      "label_asym_id": "E"
+     }
+    ],
+    "n_atoms": 833
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "author chain A (label chains B, F)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "F"
+     }
+    ],
+    "n_atoms": 3943
+   }
+  ]
  },
  "skills": [
   "edit",

@@ -1,12 +1,12 @@
 {
- "id": "fu-add-ligand-1hvr-mvs",
+ "id": "fu-remove-label-3f9m-mvs",
  "track": "mvs",
  "tier": "followup",
- "family": "fu-add-ligand",
+ "family": "fu-remove-label",
  "structures": [
-  "1hvr"
+  "3f9m"
  ],
- "prompt": "Add the ligand XK2 as khaki ball-and-stick.",
+ "prompt": "Take the label off.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1hvr.cif"
+      "url": "https://files.rcsb.org/download/3f9m.cif"
      },
      "children": [
       {
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "cyan"
+                "color": "green"
                }
               }
              ]
@@ -55,7 +55,7 @@
            "kind": "component",
            "params": {
             "selector": {
-             "label_comp_id": "XK2"
+             "label_comp_id": "MRK"
             }
            },
            "children": [
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "khaki"
+                "color": "teal"
                }
               }
              ]
@@ -93,7 +93,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1hvr.cif"
+       "url": "https://files.rcsb.org/download/3f9m.cif"
       },
       "children": [
        {
@@ -123,10 +123,40 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "cyan"
+                 "color": "green"
                 }
                }
               ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "MRK"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             },
+             {
+              "kind": "label",
+              "params": {
+               "text": "MRK"
+              }
              }
             ]
            }
@@ -141,15 +171,7 @@
   },
   "noop": false
  },
- "target": [
-  {
-   "selector": {
-    "label_comp_id": "XK2"
-   },
-   "representation": "ball_and_stick",
-   "color": "khaki"
-  }
- ],
+ "target": null,
  "twin_of": null,
  "paraphrase_of": null,
  "style": "full",
@@ -159,27 +181,32 @@
   "script": "scripts/generate_followup_tasks.py",
   "inputs": [
    "data/panel/panel.json",
-   "data/panel/facts/1hvr.json",
-   "molbench/atom_tables/1hvr.json.gz"
+   "data/panel/facts/3f9m.json",
+   "molbench/atom_tables/3f9m.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
-   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
    "start state grades as itself; it is not the requested final state",
-   "target selects 46 atoms on the frozen atom table",
-   "start state scores 0.0 on the target (below 1)",
-   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
-   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "referent is unambiguous in the start state: \"the label\": the start scene has exactly one label (on the ligand)"
   ],
-  "seed": "20261113|fu-add-ligand|2|1hvr",
-  "edit": "add a component (the ligand), keeping the rest",
+  "seed": "20261113|fu-remove-label|1|3f9m",
+  "edit": "remove / hide something",
   "noop_kind": null,
-  "referent": null,
+  "referent": "\"the label\": the start scene has exactly one label (on the ligand)",
   "preserved": [
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "cyan"
+    "color": "green"
+   },
+   {
+    "selector": {
+     "label_comp_id": "MRK"
+    },
+    "representation": "ball_and_stick",
+    "color": "teal"
    }
   ],
   "removed": null,
@@ -188,13 +215,12 @@
    "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
-   "needs_referent_from_context": false
+   "needs_referent_from_context": true
   }
  },
  "skills": [
   "edit",
-  "selection",
-  "representation",
-  "color"
+  "label",
+  "referent"
  ]
 }

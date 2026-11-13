@@ -1,16 +1,16 @@
 {
- "id": "fu-api-clear-colours-1ake-api",
+ "id": "fu-api-clear-colours-1c3w-api",
  "track": "api",
  "tier": "followup",
  "family": "fu-api-clear-colours",
  "structures": [
-  "1ake"
+  "1c3w"
  ],
  "prompt": "Go back to the default colours; the waters stay hidden.",
  "reference": [
   {
    "action": "load",
-   "molecule_id": "1ake"
+   "molecule_id": "1c3w"
   },
   {
    "action": "set_property",
@@ -23,7 +23,7 @@
   "calls": [
    {
     "action": "load",
-    "molecule_id": "1ake"
+    "molecule_id": "1c3w"
    },
    {
     "action": "set_property",
@@ -35,15 +35,11 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "purple"
+      "color": "magenta"
      },
      {
-      "struct_asym_id": "B",
-      "color": "purple"
-     },
-     {
-      "label_comp_id": "AP5",
-      "color": "salmon"
+      "label_comp_id": "LI1",
+      "color": "green"
      }
     ]
    }
@@ -60,8 +56,8 @@
   "script": "scripts/generate_followup_tasks.py",
   "inputs": [
    "data/panel/panel.json",
-   "data/panel/facts/1ake.json",
-   "molbench/atom_tables/1ake.json.gz"
+   "data/panel/facts/1c3w.json",
+   "molbench/atom_tables/1c3w.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
@@ -71,7 +67,7 @@
    "1 other way(s) of writing the final state grade as exactly right",
    "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
   ],
-  "seed": "20261113|fu-api-clear-colours|1|1ake",
+  "seed": "20261113|fu-api-clear-colours|1|1c3w",
   "edit": "undo earlier choices (all colouring)",
   "noop_kind": null,
   "referent": null,
@@ -89,7 +85,11 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "1c3w",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": []
  },
  "skills": [
   "edit",

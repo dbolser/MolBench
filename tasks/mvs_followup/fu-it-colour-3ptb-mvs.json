@@ -6,7 +6,7 @@
  "structures": [
   "3ptb"
  ],
- "prompt": "Turn it green, please.",
+ "prompt": "Colour it green.",
  "reference": {
   "root": {
    "kind": "root",

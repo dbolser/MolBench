@@ -6,7 +6,7 @@
  "structures": [
   "1iep"
  ],
- "prompt": "Switch the colours of the two chains around.",
+ "prompt": "Swap the colours of the two chains.",
  "reference": [
   {
    "action": "load",
@@ -98,7 +98,64 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": true
-  }
+  },
+  "structure": "1iep",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "author chain A (label chains A, C, D, E, F, G, K)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "D"
+     },
+     {
+      "label_asym_id": "E"
+     },
+     {
+      "label_asym_id": "F"
+     },
+     {
+      "label_asym_id": "G"
+     },
+     {
+      "label_asym_id": "K"
+     }
+    ],
+    "n_atoms": 2369
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "author chain B (label chains B, H, I, J, L)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "H"
+     },
+     {
+      "label_asym_id": "I"
+     },
+     {
+      "label_asym_id": "J"
+     },
+     {
+      "label_asym_id": "L"
+     }
+    ],
+    "n_atoms": 2341
+   }
+  ]
  },
  "skills": [
   "edit",

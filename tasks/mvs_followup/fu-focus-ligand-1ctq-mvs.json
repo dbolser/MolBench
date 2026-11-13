@@ -6,7 +6,7 @@
  "structures": [
   "1ctq"
  ],
- "prompt": "Zoom in on the ligand GNP.",
+ "prompt": "Now focus the camera on the ligand GNP.",
  "reference": {
   "root": {
    "kind": "root",

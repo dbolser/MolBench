@@ -6,7 +6,7 @@
  "structures": [
   "2omf"
  ],
- "prompt": "Make the C8E ligands the same colour as the protein.",
+ "prompt": "Give the C8E ligands the same colour as the protein.",
  "reference": [
   {
    "action": "load",
@@ -102,7 +102,90 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": true
-  }
+  },
+  "structure": "2omf",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2627
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of C8E",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 341,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 342,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 343,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 344,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 345,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 346,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 347,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 348,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 349,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 350,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 353,
+      "auth_comp_id": "C8E"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 354,
+      "auth_comp_id": "C8E"
+     }
+    ],
+    "n_atoms": 72
+   }
+  ]
  },
  "skills": [
   "edit",

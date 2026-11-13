@@ -6,7 +6,7 @@
  "structures": [
   "9fb2"
  ],
- "prompt": "Now draw Leu206 of chain A as ball-and-stick too, in orange.",
+ "prompt": "Show the side chain and backbone of Leu206 in chain A as orange ball-and-stick, on top of what is there.",
  "reference": {
   "root": {
    "kind": "root",

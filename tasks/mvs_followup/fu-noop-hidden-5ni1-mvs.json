@@ -6,7 +6,7 @@
  "structures": [
   "5ni1"
  ],
- "prompt": "Make sure no waters are shown.",
+ "prompt": "Hide the waters.",
  "reference": {
   "root": {
    "kind": "root",

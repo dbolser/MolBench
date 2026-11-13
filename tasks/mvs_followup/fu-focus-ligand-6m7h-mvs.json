@@ -6,7 +6,7 @@
  "structures": [
   "6m7h"
  ],
- "prompt": "Now focus the camera on the KN9 ligands.",
+ "prompt": "Centre the view on the KN9 ligands.",
  "reference": {
   "root": {
    "kind": "root",

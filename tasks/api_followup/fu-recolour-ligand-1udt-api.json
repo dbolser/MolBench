@@ -6,7 +6,7 @@
  "structures": [
   "1udt"
  ],
- "prompt": "Make the ligand VIA hotpink instead.",
+ "prompt": "Change the colour of the ligand VIA to hotpink.",
  "reference": [
   {
    "action": "load",
@@ -103,7 +103,35 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "1udt",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2542
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of VIA",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 1000,
+      "auth_comp_id": "VIA"
+     }
+    ],
+    "n_atoms": 33
+   }
+  ]
  },
  "skills": [
   "edit",

@@ -6,7 +6,7 @@
  "structures": [
   "2ptc"
  ],
- "prompt": "Make chain I yellow instead.",
+ "prompt": "Change chain I to yellow.",
  "reference": [
   {
    "action": "load",
@@ -101,7 +101,43 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "2ptc",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "author chain E (label chains A, C, D)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "D"
+     }
+    ],
+    "n_atoms": 1752
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "author chain I (label chains B, E)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "E"
+     }
+    ],
+    "n_atoms": 489
+   }
+  ]
  },
  "skills": [
   "edit",

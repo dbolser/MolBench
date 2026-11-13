@@ -5,15 +5,16 @@ Each task is a start state (the list of calls made so far), an edit request, and
 as the reference. Start state and reference are built from the same component list,
 from the frozen panel only. Only the final state is graded.
 
-- **42 tasks** on 42 structures, at most 3 per structure; 7 held back (structures: 1f88, 1mbn, 1udt, 1y26, 2p4e, 6tha, 8k7f).
+- **44 tasks** on 44 structures, at most 3 per structure; 7 held back (structures: 1f88, 1mbn, 1udt, 1y26, 2p4e, 6tha, 8k7f).
 - **8 need no change** (`context.noop`): the reference is the start state.
-- **34 have a twin** on the MVS track (`twin_of`): same request, same structure, same target atoms.
+- **36 have a twin** on the MVS track (`twin_of`): same request, same structure, same target atoms.
 
 | family | tasks | edit | how the reference is derived |
 |---|---:|---|---|
 | `fu-recolour-ligand` | 3 | recolour one existing component | start: polymer + main ligand, each one colour; the ligand's colour replaced |
 | `fu-recolour-chain` | 2 | recolour one existing component | start: two chains, each one colour; the second chain's colour replaced |
 | `fu-also-colour-chain` | 2 | also: colour a second component | start: first chain coloured, second not; a colour added to the second |
+| `fu-other-chain` | 2 | ellipsis: colour the component not yet coloured | start: first of exactly two chains coloured, second not; a colour added to the second, which the request calls "the other chain" |
 | `fu-referent-colour` | 3 | recolour a component named by its current colour | start: two chains in two colours; the chain that has the named colour is recoloured |
 | `fu-same-colour-as` | 2 | recolour by reference to the scene | start: polymer + ligand; the ligand takes the polymer's colour, read from the start state |
 | `fu-swap-colours` | 2 | recolour by reference to the scene | start: two chains in two colours (entries with exactly two polymer chains); colours exchanged |
@@ -51,6 +52,21 @@ from the frozen panel only. Only the final state is graded.
 - `checks`: what the generator verified before writing the file, with the controls it
   graded (other ways of writing the same final state must succeed; the edit made on an
   empty viewer, and known slips, must not).
+
+## Left out, and why
+
+- **Switch to another structure** ("now show 4HHB instead"): the task format refuses a
+  start state that loads a structure the reference does not (`molbench/tasks.py`), so
+  such a task cannot be written yet.
+- **A component the user named earlier** (issue #5): the vendored MVS reference and the
+  API have no component names to refer back to.
+- **"It" on the API track**: a bare load already draws everything, so no start state
+  has a single thing "it" could mean. The API twins of the pronoun tasks are the ones
+  that name a component by its colour or as "the other chain".
+- **Requests the format cannot express**, other than spinning on the MVS track: for a
+  distance-based selection or a superposition the unchanged state is not the only
+  defensible answer, so they are not tasks here.
+- **A target for something removed, on the MVS track**: see `removed` above.
 
 Held-back structures are the fifth of the panel with the smallest SHA-256 of
 `"molbench-heldback-v1:<id>"` (a rule on the structure alone), unless the generator was

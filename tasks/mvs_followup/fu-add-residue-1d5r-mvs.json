@@ -6,7 +6,7 @@
  "structures": [
   "1d5r"
  ],
- "prompt": "Now draw Thr348 of chain A as ball-and-stick too, in red.",
+ "prompt": "Add Thr348 (chain A) in red ball-and-stick.",
  "reference": {
   "root": {
    "kind": "root",

@@ -6,7 +6,7 @@
  "structures": [
   "1lmb"
  ],
- "prompt": "Also show chain 4 as a orange cartoon.",
+ "prompt": "Also show chain 4 as a brown cartoon.",
  "reference": {
   "root": {
    "kind": "root",
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "brown"
                }
               }
              ]
@@ -151,7 +151,7 @@
     "auth_asym_id": "4"
    },
    "representation": "cartoon",
-   "color": "orange"
+   "color": "brown"
   }
  ],
  "twin_of": null,
@@ -175,7 +175,7 @@
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
    "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
   ],
-  "seed": "20261113|fu-add-chain|2|1lmb",
+  "seed": "20261113|fu-add-chain|1|1lmb",
   "edit": "add a component (a chain), keeping the rest",
   "noop_kind": null,
   "referent": null,

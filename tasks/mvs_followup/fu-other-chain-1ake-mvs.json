@@ -1,12 +1,12 @@
 {
- "id": "fu-add-chain-1trn-mvs",
+ "id": "fu-other-chain-1ake-mvs",
  "track": "mvs",
  "tier": "followup",
- "family": "fu-add-chain",
+ "family": "fu-other-chain",
  "structures": [
-  "1trn"
+  "1ake"
  ],
- "prompt": "Now bring in chain B as a hotpink cartoon.",
+ "prompt": "Colour the other chain teal.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1trn.cif"
+      "url": "https://files.rcsb.org/download/1ake.cif"
      },
      "children": [
       {
@@ -46,7 +46,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "khaki"
+                "color": "purple"
                }
               }
              ]
@@ -70,7 +70,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "teal"
                }
               }
              ]
@@ -95,7 +95,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1trn.cif"
+       "url": "https://files.rcsb.org/download/1ake.cif"
       },
       "children": [
        {
@@ -127,10 +127,26 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "khaki"
+                 "color": "purple"
                 }
                }
               ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "auth_asym_id": "B"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
              }
             ]
            }
@@ -150,11 +166,11 @@
    "selector": {
     "auth_asym_id": "B"
    },
-   "representation": "cartoon",
-   "color": "hotpink"
+   "representation": null,
+   "color": "teal"
   }
  ],
- "twin_of": null,
+ "twin_of": "fu-other-chain-1ake-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
@@ -163,29 +179,31 @@
   "script": "scripts/generate_followup_tasks.py",
   "inputs": [
    "data/panel/panel.json",
-   "data/panel/facts/1trn.json",
-   "molbench/atom_tables/1trn.json.gz"
+   "data/panel/facts/1ake.json",
+   "molbench/atom_tables/1ake.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "reference grades as exactly right against the task (success, F1 1, target score 1)",
    "start state grades as itself; it is not the requested final state",
-   "target selects 1851 atoms on the frozen atom table",
-   "start state scores 0.0 on the target (below 1)",
+   "target selects 1850 atoms on the frozen atom table",
+   "start state scores 0.5 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
-   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
+   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
+   "twin selects the same target atoms",
+   "referent is unambiguous in the start state: \"the other chain\": the structure has exactly two polymer chains and the start state colours only one (author chain A), so the other is author chain B"
   ],
-  "seed": "20261113|fu-add-chain|1|1trn",
-  "edit": "add a component (a chain), keeping the rest",
+  "seed": "20261113|fu-other-chain|2|1ake",
+  "edit": "ellipsis: colour the component not yet coloured",
   "noop_kind": null,
-  "referent": null,
+  "referent": "\"the other chain\": the structure has exactly two polymer chains and the start state colours only one (author chain A), so the other is author chain B",
   "preserved": [
    {
     "selector": {
      "auth_asym_id": "A"
     },
     "representation": "cartoon",
-    "color": "khaki"
+    "color": "purple"
    }
   ],
   "removed": null,
@@ -194,13 +212,12 @@
    "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
-   "needs_referent_from_context": false
+   "needs_referent_from_context": true
   }
  },
  "skills": [
   "edit",
-  "selection",
-  "representation",
-  "color"
+  "color",
+  "referent"
  ]
 }

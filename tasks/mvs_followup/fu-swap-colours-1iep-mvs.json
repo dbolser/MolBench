@@ -6,7 +6,7 @@
  "structures": [
   "1iep"
  ],
- "prompt": "Switch the colours of the two chains around.",
+ "prompt": "Swap the colours of the two chains.",
  "reference": {
   "root": {
    "kind": "root",

@@ -153,7 +153,66 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "9gio",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 787
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "polymer chain B (entity 2)",
+    "atoms": {
+     "auth_asym_id": "B",
+     "label_entity_id": "2"
+    },
+    "n_atoms": 692
+   },
+   {
+    "action": 1,
+    "param": 2,
+    "what": "polymer chain C (entity 3)",
+    "atoms": {
+     "auth_asym_id": "C",
+     "label_entity_id": "3"
+    },
+    "n_atoms": 1166
+   },
+   {
+    "action": 1,
+    "param": 3,
+    "what": "every copy of 3JF",
+    "atoms": [
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 301,
+      "auth_comp_id": "3JF"
+     }
+    ],
+    "n_atoms": 33
+   },
+   {
+    "action": 2,
+    "param": 0,
+    "what": "Ile14 of chain A",
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 14,
+     "auth_comp_id": "ILE"
+    },
+    "n_atoms": 8
+   }
+  ]
  },
  "skills": [
   "edit",

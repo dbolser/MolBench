@@ -6,7 +6,7 @@
  "structures": [
   "1lmb"
  ],
- "prompt": "Change the display style to a molecular surface, with the same colours on the two chains.",
+ "prompt": "Switch the whole structure to a molecular surface and keep the two chain colours.",
  "reference": [
   {
    "action": "load",
@@ -84,7 +84,40 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "1lmb",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 2,
+    "param": 0,
+    "what": "author chain 3 (label chains C, G)",
+    "atoms": [
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "G"
+     }
+    ],
+    "n_atoms": 718
+   },
+   {
+    "action": 2,
+    "param": 1,
+    "what": "author chain 4 (label chains D, H)",
+    "atoms": [
+     {
+      "label_asym_id": "D"
+     },
+     {
+      "label_asym_id": "H"
+     }
+    ],
+    "n_atoms": 739
+   }
+  ]
  },
  "skills": [
   "edit",

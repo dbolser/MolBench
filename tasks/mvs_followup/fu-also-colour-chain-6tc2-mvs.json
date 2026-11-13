@@ -6,7 +6,7 @@
  "structures": [
   "6tc2"
  ],
- "prompt": "Now make chain B green as well.",
+ "prompt": "Also colour chain B green.",
  "reference": {
   "root": {
    "kind": "root",

@@ -6,7 +6,7 @@
  "structures": [
   "8eph"
  ],
- "prompt": "Switch the whole structure to spacefill and keep the two chain colours.",
+ "prompt": "Change the display style to spacefill, with the same colours on the two chains.",
  "reference": [
   {
    "action": "load",
@@ -84,7 +84,49 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "8eph",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 2,
+    "param": 0,
+    "what": "author chain A (label chains A, E, F, K)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "E"
+     },
+     {
+      "label_asym_id": "F"
+     },
+     {
+      "label_asym_id": "K"
+     }
+    ],
+    "n_atoms": 794
+   },
+   {
+    "action": 2,
+    "param": 1,
+    "what": "author chain B (label chains B, G, L)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "G"
+     },
+     {
+      "label_asym_id": "L"
+     }
+    ],
+    "n_atoms": 1999
+   }
+  ]
  },
  "skills": [
   "edit",

@@ -6,7 +6,7 @@
  "structures": [
   "1mbn"
  ],
- "prompt": "Could you turn the ligand HEM red?",
+ "prompt": "Make the ligand HEM red instead.",
  "reference": {
   "root": {
    "kind": "root",

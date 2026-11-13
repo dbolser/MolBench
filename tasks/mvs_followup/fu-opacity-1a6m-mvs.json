@@ -6,7 +6,7 @@
  "structures": [
   "1a6m"
  ],
- "prompt": "Make the protein surface half transparent.",
+ "prompt": "The protein surface should be half transparent.",
  "reference": {
   "root": {
    "kind": "root",

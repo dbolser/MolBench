@@ -1,12 +1,12 @@
 {
- "id": "fu-add-label-1iep-mvs",
+ "id": "fu-add-chain-3ave-mvs",
  "track": "mvs",
  "tier": "followup",
- "family": "fu-add-label",
+ "family": "fu-add-chain",
  "structures": [
-  "1iep"
+  "3ave"
  ],
- "prompt": "Put a \"STI\" label on the STI ligands.",
+ "prompt": "Add chain B too, as a cartoon in magenta.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1iep.cif"
+      "url": "https://files.rcsb.org/download/3ave.cif"
      },
      "children": [
       {
@@ -32,7 +32,9 @@
           {
            "kind": "component",
            "params": {
-            "selector": "polymer"
+            "selector": {
+             "auth_asym_id": "A"
+            }
            },
            "children": [
             {
@@ -44,7 +46,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "purple"
                }
               }
              ]
@@ -55,29 +57,23 @@
            "kind": "component",
            "params": {
             "selector": {
-             "label_comp_id": "STI"
+             "auth_asym_id": "B"
             }
            },
            "children": [
             {
              "kind": "representation",
              "params": {
-              "type": "ball_and_stick"
+              "type": "cartoon"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "red"
+                "color": "magenta"
                }
               }
              ]
-            },
-            {
-             "kind": "label",
-             "params": {
-              "text": "STI"
-             }
             }
            ]
           }
@@ -99,7 +95,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1iep.cif"
+       "url": "https://files.rcsb.org/download/3ave.cif"
       },
       "children": [
        {
@@ -117,7 +113,9 @@
            {
             "kind": "component",
             "params": {
-             "selector": "polymer"
+             "selector": {
+              "auth_asym_id": "A"
+             }
             },
             "children": [
              {
@@ -129,31 +127,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "orange"
-                }
-               }
-              ]
-             }
-            ]
-           },
-           {
-            "kind": "component",
-            "params": {
-             "selector": {
-              "label_comp_id": "STI"
-             }
-            },
-            "children": [
-             {
-              "kind": "representation",
-              "params": {
-               "type": "ball_and_stick"
-              },
-              "children": [
-               {
-                "kind": "color",
-                "params": {
-                 "color": "red"
+                 "color": "purple"
                 }
                }
               ]
@@ -174,42 +148,44 @@
  "target": [
   {
    "selector": {
-    "label_comp_id": "STI"
+    "auth_asym_id": "B"
    },
-   "representation": null,
-   "color": null
+   "representation": "cartoon",
+   "color": "magenta"
   }
  ],
  "twin_of": null,
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_followup_tasks.py",
   "inputs": [
    "data/panel/panel.json",
-   "data/panel/facts/1iep.json",
-   "molbench/atom_tables/1iep.json.gz"
+   "data/panel/facts/3ave.json",
+   "molbench/atom_tables/3ave.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "reference grades as exactly right against the task (success, F1 1, target score 1)",
    "start state grades as itself; it is not the requested final state",
-   "target selects 74 atoms on the frozen atom table",
-   "start state scores 0.5 on the target (below 1)",
+   "target selects 1773 atoms on the frozen atom table",
+   "start state scores 0.0 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
    "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
   ],
-  "seed": "20261113|fu-add-label|2|1iep",
-  "edit": "also: a label",
+  "seed": "20261113|fu-add-chain|2|3ave",
+  "edit": "add a component (a chain), keeping the rest",
   "noop_kind": null,
   "referent": null,
   "preserved": [
    {
-    "selector": "polymer",
+    "selector": {
+     "auth_asym_id": "A"
+    },
     "representation": "cartoon",
-    "color": "orange"
+    "color": "purple"
    }
   ],
   "removed": null,
@@ -223,6 +199,8 @@
  },
  "skills": [
   "edit",
-  "label"
+  "selection",
+  "representation",
+  "color"
  ]
 }

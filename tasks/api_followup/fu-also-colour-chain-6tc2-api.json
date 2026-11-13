@@ -6,7 +6,7 @@
  "structures": [
   "6tc2"
  ],
- "prompt": "Now make chain B green as well.",
+ "prompt": "Also colour chain B green.",
  "reference": [
   {
    "action": "load",
@@ -104,7 +104,46 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "6tc2",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "author chain A (label chains A, X)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "X"
+     }
+    ],
+    "n_atoms": 328
+   },
+   {
+    "action": 2,
+    "param": 0,
+    "what": "author chain B (label chains B, M, N, Y)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "M"
+     },
+     {
+      "label_asym_id": "N"
+     },
+     {
+      "label_asym_id": "Y"
+     }
+    ],
+    "n_atoms": 491
+   }
+  ]
  },
  "skills": [
   "edit",

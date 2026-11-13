@@ -6,7 +6,7 @@
  "structures": [
   "3f9m"
  ],
- "prompt": "Give the ligand MRK the same colour as the protein.",
+ "prompt": "Make the ligand MRK the same colour as the protein.",
  "reference": {
   "root": {
    "kind": "root",

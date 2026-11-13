@@ -6,7 +6,7 @@
  "structures": [
   "3eml"
  ],
- "prompt": "Remove the water molecules from the view.",
+ "prompt": "Hide the waters.",
  "reference": {
   "root": {
    "kind": "root",

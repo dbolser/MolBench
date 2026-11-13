@@ -6,7 +6,7 @@
  "structures": [
   "2omf"
  ],
- "prompt": "Make the C8E ligands the same colour as the protein.",
+ "prompt": "Give the C8E ligands the same colour as the protein.",
  "reference": {
   "root": {
    "kind": "root",

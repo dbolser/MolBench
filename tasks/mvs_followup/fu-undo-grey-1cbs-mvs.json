@@ -6,7 +6,7 @@
  "structures": [
   "1cbs"
  ],
- "prompt": "Put the retinoic acid (REA) back to grey.",
+ "prompt": "Make the retinoic acid (REA) grey again.",
  "reference": {
   "root": {
    "kind": "root",

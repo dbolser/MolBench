@@ -6,7 +6,7 @@
  "structures": [
   "1y26"
  ],
- "prompt": "Show the adenine (ADE) in khaki.",
+ "prompt": "Make the adenine (ADE) khaki.",
  "reference": {
   "root": {
    "kind": "root",

@@ -6,7 +6,7 @@
  "structures": [
   "2c9v"
  ],
- "prompt": "Switch the colours of the two chains around.",
+ "prompt": "Exchange the two chain colours.",
  "reference": {
   "root": {
    "kind": "root",

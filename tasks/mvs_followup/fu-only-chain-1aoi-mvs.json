@@ -6,7 +6,7 @@
  "structures": [
   "1aoi"
  ],
- "prompt": "Show only chain A now.",
+ "prompt": "Only chain A, please.",
  "reference": {
   "root": {
    "kind": "root",

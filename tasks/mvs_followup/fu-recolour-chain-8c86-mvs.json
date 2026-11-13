@@ -6,7 +6,7 @@
  "structures": [
   "8c86"
  ],
- "prompt": "Change chain A to blue.",
+ "prompt": "Colour chain A blue.",
  "reference": {
   "root": {
    "kind": "root",

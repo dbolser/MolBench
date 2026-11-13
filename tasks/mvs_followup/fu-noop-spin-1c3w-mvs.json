@@ -6,7 +6,7 @@
  "structures": [
   "1c3w"
  ],
- "prompt": "Spin the molecule.",
+ "prompt": "Start the molecule spinning.",
  "reference": {
   "root": {
    "kind": "root",

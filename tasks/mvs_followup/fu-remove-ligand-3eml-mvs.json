@@ -6,7 +6,7 @@
  "structures": [
   "3eml"
  ],
- "prompt": "Hide the ligand ZMA.",
+ "prompt": "Remove the ligand ZMA from the view.",
  "reference": {
   "root": {
    "kind": "root",

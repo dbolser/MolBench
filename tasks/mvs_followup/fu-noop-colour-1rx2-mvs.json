@@ -6,7 +6,7 @@
  "structures": [
   "1rx2"
  ],
- "prompt": "Colour the ligand NAP purple.",
+ "prompt": "Show the ligand NAP in purple.",
  "reference": {
   "root": {
    "kind": "root",

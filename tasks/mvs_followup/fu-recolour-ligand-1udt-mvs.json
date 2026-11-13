@@ -6,7 +6,7 @@
  "structures": [
   "1udt"
  ],
- "prompt": "Make the ligand VIA hotpink instead.",
+ "prompt": "Change the colour of the ligand VIA to hotpink.",
  "reference": {
   "root": {
    "kind": "root",

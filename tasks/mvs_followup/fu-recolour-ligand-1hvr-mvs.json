@@ -6,7 +6,7 @@
  "structures": [
   "1hvr"
  ],
- "prompt": "Make the ligand XK2 green instead.",
+ "prompt": "Could you turn the ligand XK2 green?",
  "reference": {
   "root": {
    "kind": "root",

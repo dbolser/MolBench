@@ -6,7 +6,7 @@
  "structures": [
   "1f88"
  ],
- "prompt": "Show the protein as a cartoon.",
+ "prompt": "Cartoon for the protein, please.",
  "reference": {
   "root": {
    "kind": "root",

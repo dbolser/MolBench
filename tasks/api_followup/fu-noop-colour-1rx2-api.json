@@ -6,7 +6,7 @@
  "structures": [
   "1rx2"
  ],
- "prompt": "Colour the ligand NAP purple.",
+ "prompt": "Show the ligand NAP in purple.",
  "reference": [
   {
    "action": "load",
@@ -107,7 +107,35 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "1rx2",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 1268
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of NAP",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 164,
+      "auth_comp_id": "NAP"
+     }
+    ],
+    "n_atoms": 48
+   }
+  ]
  },
  "skills": [
   "edit",

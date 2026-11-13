@@ -6,7 +6,7 @@
  "structures": [
   "8c86"
  ],
- "prompt": "Change chain A to blue.",
+ "prompt": "Colour chain A blue.",
  "reference": [
   {
    "action": "load",
@@ -101,7 +101,46 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "8c86",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "author chain B (label chains A, C, E)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "E"
+     }
+    ],
+    "n_atoms": 2067
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "author chain A (label chains B, D, F)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "D"
+     },
+     {
+      "label_asym_id": "F"
+     }
+    ],
+    "n_atoms": 2083
+   }
+  ]
  },
  "skills": [
   "edit",

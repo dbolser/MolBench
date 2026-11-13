@@ -6,7 +6,7 @@
  "structures": [
   "2ptc"
  ],
- "prompt": "Make chain I yellow instead.",
+ "prompt": "Change chain I to yellow.",
  "reference": {
   "root": {
    "kind": "root",

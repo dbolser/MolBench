@@ -6,7 +6,7 @@
  "structures": [
   "8c86"
  ],
- "prompt": "Show the protein as a surface instead of a cartoon.",
+ "prompt": "Switch the protein from cartoon to surface.",
  "reference": {
   "root": {
    "kind": "root",

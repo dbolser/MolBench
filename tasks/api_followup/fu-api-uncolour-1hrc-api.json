@@ -6,7 +6,7 @@
  "structures": [
   "1hrc"
  ],
- "prompt": "Undo the steelblue on the heme c (HEC) and leave the protein as it is.",
+ "prompt": "Put the heme c (HEC) back to its default colours; the protein stays red.",
  "reference": [
   {
    "action": "load",
@@ -87,7 +87,22 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "1hrc",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 826
+   }
+  ]
  },
  "skills": [
   "edit",

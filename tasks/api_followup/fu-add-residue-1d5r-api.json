@@ -6,7 +6,7 @@
  "structures": [
   "1d5r"
  ],
- "prompt": "Now draw Thr348 of chain A as ball-and-stick too, in red.",
+ "prompt": "Add Thr348 (chain A) in red ball-and-stick.",
  "reference": [
   {
    "action": "load",
@@ -131,7 +131,46 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_referent_from_context": false
-  }
+  },
+  "structure": "1d5r",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2576
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of TLA",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 1352,
+      "auth_comp_id": "TLA"
+     }
+    ],
+    "n_atoms": 10
+   },
+   {
+    "action": 2,
+    "param": 0,
+    "what": "Thr348 of chain A",
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 348,
+     "auth_comp_id": "THR"
+    },
+    "n_atoms": 7
+   }
+  ]
  },
  "skills": [
   "edit",

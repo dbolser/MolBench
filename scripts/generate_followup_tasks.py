@@ -12,6 +12,7 @@ is typed by hand and nothing is fetched.
     uv run python scripts/generate_followup_tasks.py           # rewrite the files
     uv run python scripts/generate_followup_tasks.py --check   # fail if they would change
     uv run python scripts/generate_followup_tasks.py --heldback-file ids.txt
+    uv run python scripts/generate_followup_tasks.py --viewer  # states against the real viewers
 
 Outputs ``tasks/mvs_followup/*.json``, ``tasks/api_followup/*.json`` and a README in
 each directory (templates, counts, how every reference is derived). The run is
@@ -314,7 +315,14 @@ class Pair:
 #   residue    the residue a request names, when it names one
 # A template returns None when the structure cannot carry it.
 def pick(r: random.Random, options: list[str], **words: Any) -> str:
-    return r.choice(options).format(**words)
+    """One of a template's wordings. Within a family the wordings are taken in turn
+    from a seeded starting point (``r.turn``, set in `build`), so two tasks of a family
+    are not worded alike while there are wordings left."""
+    return options[r.turn % len(options)].format(**words)
+
+
+def art(word: str) -> str:
+    return ("an " if word[0] in "aeiou" else "a ") + word
 
 
 def colours(r: random.Random, n: int, without: tuple = ()) -> list[str]:
@@ -418,7 +426,9 @@ def add_residue(e: Entry, r: random.Random):
     return {
         "prompt": pick(r, ["Also show {res} of chain {ch} as {new} ball-and-stick.",
                            "Add {res} (chain {ch}) in {new} ball-and-stick.",
-                           "Now draw {res} of chain {ch} as ball-and-stick too, in {new}."],
+                           "Now draw {res} of chain {ch} as ball-and-stick too, in {new}.",
+                           "Show the side chain and backbone of {res} in chain {ch} as {new} "
+                           "ball-and-stick, on top of what is there."],
                        res=name, ch=res["auth_asym_id"], new=say(new)),
         "edit": "add a component (a residue), keeping the rest",
         "skills": ["edit", "selection", "representation", "color"], "residue": res,
@@ -539,6 +549,25 @@ def also_colour(e: Entry, r: random.Random):
                 # the commonest slip: a second color call without keep_colors
                 "wrong": [chains_api(e, a, b, ca, None) + [paint([{**chain_sel(b), "color": new}])]]},
     }
+
+
+def other_chain(e: Entry, r: random.Random):
+    """Ellipsis: one of exactly two chains is coloured; "the other chain" is the one
+    that is not. The same edit as `also_colour`, with the chain left unnamed."""
+    spec = also_colour(e, r) if len(e.chains) == 2 else None
+    if spec is None:
+        return None
+    a, b = e.chain_pair()
+    new = spec["mvs"]["target"][0]["color"]
+    spec.update(
+        prompt=pick(r, ["Now the other chain in {new}.", "Colour the other chain {new}.",
+                        "And the other chain {new}, please."], new=say(new)),
+        edit="ellipsis: colour the component not yet coloured",
+        skills=["edit", "color", "referent"],
+        referent=f"\"the other chain\": the structure has exactly two polymer chains and the "
+                 f"start state colours only one (author chain {a['auth_asym_id']}), so the other "
+                 f"is author chain {b['auth_asym_id']}")
+    return spec
 
 
 def referent_colour(e: Entry, r: random.Random):
@@ -772,10 +801,10 @@ def add_chain(e: Entry, r: random.Random):
     a, b = pair
     ca, new = colours(r, 2)
     return {
-        "prompt": pick(r, ["Also show chain {b} as a {new} cartoon.",
+        "prompt": pick(r, ["Also show chain {b} as {a_new} cartoon.",
                            "Add chain {b} too, as a cartoon in {new}.",
-                           "Now bring in chain {b} as a {new} cartoon."],
-                       b=b["auth_asym_id"], new=say(new)),
+                           "Now bring in chain {b} as {a_new} cartoon."],
+                       b=b["auth_asym_id"], new=say(new), a_new=art(say(new))),
         "edit": "add a component (a chain), keeping the rest",
         "skills": ["edit", "selection", "representation", "color"],
         "mvs": {"start": mvs_scene(e.id, [comp(chain_sel(a), "cartoon", ca)]),
@@ -821,11 +850,11 @@ def only_chain(e: Entry, r: random.Random):
 
 
 def add_label(e: Entry, r: random.Random):
-    if not needs_pair(e):
+    if not needs_pair(e) or len(e.ligand["copies"]) != 1:
         return None
     c1, c2 = colours(r, 2)
     p = Pair(e, c1, c2)
-    text = e.ligand["comp_id"]
+    text = r.choice([e.ligand["comp_id"], "ligand", "site 1"])
     return {
         "prompt": pick(r, ["Label {lig} with the text \"{text}\".",
                            "Add a label reading \"{text}\" to {lig}.",
@@ -838,7 +867,7 @@ def add_label(e: Entry, r: random.Random):
 
 
 def remove_label(e: Entry, r: random.Random):
-    if not needs_pair(e):
+    if not needs_pair(e) or len(e.ligand["copies"]) != 1:
         return None
     c1, c2 = colours(r, 2)
     p = Pair(e, c1, c2)
@@ -972,6 +1001,7 @@ FAMILIES: list[tuple[str, Callable, int, tuple[str, ...]]] = [
     ("fu-recolour-ligand", recolour_ligand, 3, ("mvs", "api")),
     ("fu-recolour-chain", recolour_chain, 2, ("mvs", "api")),
     ("fu-also-colour-chain", also_colour, 2, ("mvs", "api")),
+    ("fu-other-chain", other_chain, 2, ("mvs", "api")),
     ("fu-referent-colour", referent_colour, 3, ("mvs", "api")),
     ("fu-same-colour-as", same_as, 2, ("mvs", "api")),
     ("fu-swap-colours", swap_colours, 2, ("mvs", "api")),
@@ -1008,6 +1038,7 @@ DERIVED = {
     "fu-recolour-ligand": "start: polymer + main ligand, each one colour; the ligand's colour replaced",
     "fu-recolour-chain": "start: two chains, each one colour; the second chain's colour replaced",
     "fu-also-colour-chain": "start: first chain coloured, second not; a colour added to the second",
+    "fu-other-chain": "start: first of exactly two chains coloured, second not; a colour added to the second, which the request calls \"the other chain\"",
     "fu-referent-colour": "start: two chains in two colours; the chain that has the named colour is recoloured",
     "fu-same-colour-as": "start: polymer + ligand; the ligand takes the polymer's colour, read from the start state",
     "fu-swap-colours": "start: two chains in two colours (entries with exactly two polymer chains); colours exchanged",
@@ -1058,6 +1089,45 @@ def difficulty(e: Entry, spec: dict) -> dict:
     }
 
 
+def intended(e: Entry, param: dict, residue: dict | None) -> tuple[str, Any]:
+    """The atoms one API selection is meant to pick, written a second time from the
+    frozen facts rather than from the selection: in author numbering, with the residue
+    name. ``scripts/check_api_refs.py`` resolves both and fails if they differ, so a
+    residue number that lands on another residue cannot pass."""
+    if "label_comp_id" in param:
+        lig = next(x for x in e.facts["ligands"] if x["comp_id"] == param["label_comp_id"])
+        return (f"every copy of {lig['comp_id']}",
+                [{"auth_asym_id": c["auth_asym_id"], "auth_seq_id": c["auth_seq_id"],
+                  "auth_comp_id": lig["comp_id"],
+                  **({"pdbx_PDB_ins_code": c["pdbx_PDB_ins_code"]} if c["pdbx_PDB_ins_code"] else {})}
+                 for c in lig["copies"]])
+    if "struct_asym_id" in param:
+        c = next(c for c in e.chains if c["label_asym_id"] == param["struct_asym_id"])
+        return (f"polymer chain {c['auth_asym_id']} (entity {c['entity_id']})",
+                {"auth_asym_id": c["auth_asym_id"], "label_entity_id": c["entity_id"]})
+    if "auth_seq_id" in param:
+        assert residue and residue["auth_seq_id"] == param["auth_seq_id"]
+        return (f"{residue['comp'].capitalize()}{residue['auth_seq_id']} of chain "
+                f"{residue['auth_asym_id']}",
+                {"auth_asym_id": param["auth_asym_id"], "auth_seq_id": param["auth_seq_id"],
+                 "auth_comp_id": residue["comp"]})
+    col = e.table.columns       # everything the file files under that author chain id
+    labels = sorted({col["label_asym_id"][i] for i in range(e.table.n)
+                     if col["auth_asym_id"][i] == param["auth_asym_id"]})
+    return (f"author chain {param['auth_asym_id']} (label chains {', '.join(labels)})",
+            [{"label_asym_id": x} for x in labels])
+
+
+def api_targets(e: Entry, calls: list[dict], residue: dict | None) -> list[dict]:
+    out = []
+    for ai, call in enumerate(calls):
+        for pi, param in enumerate(call.get("data") or []):
+            what, atoms = intended(e, param, residue)
+            out.append({"action": ai, "param": pi, "what": what, "atoms": atoms,
+                        "n_atoms": bin(e.table.selector(atoms)).count("1")})
+    return out
+
+
 def build(held: set[str]) -> tuple[list[dict], list[dict]]:
     """Every task (as file content, checks not yet filled in) and, in step, its spec."""
     pool = entries()
@@ -1065,6 +1135,7 @@ def build(held: set[str]) -> tuple[list[dict], list[dict]]:
     built, specs = [], []
     for family, template, count, tracks in FAMILIES:
         order = sorted(pool, key=lambda e: rng(family, "order", e.id).random())
+        first_wording = rng(family, "wording").randrange(60)
         taken: list[str] = []
         for n in range(1, count + 1):
             choice = None
@@ -1072,7 +1143,9 @@ def build(held: set[str]) -> tuple[list[dict], list[dict]]:
             for e in sorted(order, key=lambda e: sum(use[t][e.id] for t in tracks)):
                 if e.id in taken or any(use[t][e.id] >= MAX_PER_TRACK for t in tracks):
                     continue
-                spec = template(e, rng(family, n, e.id))
+                r = rng(family, n, e.id)
+                r.turn = first_wording + n
+                spec = template(e, r)
                 if spec is not None:
                     choice = (e, spec)
                     break
@@ -1094,6 +1167,15 @@ def build(held: set[str]) -> tuple[list[dict], list[dict]]:
                     "preserved": side["preserved"], "removed": spec.get("removed"),
                     "difficulty": difficulty(e, spec),
                 }
+                if t == "api":      # what scripts/check_api_refs.py reads
+                    prov.update(
+                        structure=e.id,
+                        derived="start state and final state written by the generator from "
+                                "one component list; see README.md in this directory",
+                        checked_by="scripts/generate_followup_tasks.py (grader checks listed "
+                                   "under checks) and scripts/check_api_refs.py (each "
+                                   "selection against the intended atoms under targets)",
+                        targets=api_targets(e, side["ref"], spec.get("residue")))
                 built.append({
                     "id": ids[t], "track": t, "tier": "followup", "family": family,
                     "structures": [e.id], "prompt": spec["prompt"], "reference": side["ref"],
@@ -1244,6 +1326,21 @@ def readme(track: str, built: list[dict]) -> str:
         "  graded (other ways of writing the same final state must succeed; the edit made on an",
         "  empty viewer, and known slips, must not).",
         "",
+        "## Left out, and why",
+        "",
+        "- **Switch to another structure** (\"now show 4HHB instead\"): the task format refuses a",
+        "  start state that loads a structure the reference does not (`molbench/tasks.py`), so",
+        "  such a task cannot be written yet.",
+        "- **A component the user named earlier** (issue #5): the vendored MVS reference and the",
+        "  API have no component names to refer back to.",
+        "- **\"It\" on the API track**: a bare load already draws everything, so no start state",
+        "  has a single thing \"it\" could mean. The API twins of the pronoun tasks are the ones",
+        "  that name a component by its colour or as \"the other chain\".",
+        "- **Requests the format cannot express**, other than spinning on the MVS track: for a",
+        "  distance-based selection or a superposition the unchanged state is not the only",
+        "  defensible answer, so they are not tasks here.",
+        "- **A target for something removed, on the MVS track**: see `removed` above.",
+        "",
         "Held-back structures are the fifth of the panel with the smallest SHA-256 of",
         f"`\"{HELDBACK_SALT}:<id>\"` (a rule on the structure alone), unless the generator was",
         "given a list.",
@@ -1252,16 +1349,88 @@ def readme(track: str, built: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def _script(name: str):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, REPO / "scripts" / f"{name}.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def viewer_check(built: list[dict], specs: list[dict]) -> int:
+    """Run the states in the real viewers (needs the ``execute`` extra and Chromium;
+    structure files come from the frozen panel). Returns the number of disagreements.
+
+    MVS: every start scene and reference passes Mol* 5.9.0's own validation, and what
+    Mol* draws (atoms, representation, colour, opacity per representation object) is what
+    the grader resolves the scene to. Labels, focus and background are not drawn state
+    and are not read back. API: every start state and every "equivalent" control is
+    replayed in pdbe-molstar 3.3.2 and compared with the grader's replay
+    (``scripts/check_api_refs.py --viewer`` does the same for the references)."""
+    import copy
+
+    from molbench import pdbe_state, render
+    bad = 0
+    scenes: list[tuple[str, dict]] = []
+    lists: list[tuple[str, list]] = []
+    for t, side in zip(built, specs):
+        states = [("start", side["start"])] + ([] if t["context"]["noop"] else [("reference", side["ref"])])
+        if t["track"] == "mvs":
+            scenes += [(f"{t['id']} {name}", s) for name, s in states]
+        else:
+            lists += [(f"{t['id']} start", side["start"])]
+            lists += [(f"{t['id']} equivalent[{i}]", s) for i, s in enumerate(side.get("equivalent", []))]
+    issues = render.molstar_issues([s for _, s in scenes])
+    for (name, _), found in zip(scenes, issues):
+        if found:
+            bad += 1
+            print(f"mol*  {name}: INVALID: {found[:2]}")
+    print(f"mol*: {len(scenes)} scenes validated by Mol*, {sum(bool(i) for i in issues)} invalid")
+    controls = _script("grader_controls")
+    with controls.Molstar(REPO / "data" / "cif") as molstar:
+        differ = 0
+        for name, tree in scenes:
+            seen = molstar.state(tree)
+            if isinstance(seen, str) or not controls._grader_vs_viewer(tree, seen):
+                differ += 1
+                print(f"mol*  {name}: DIFFERS from the grader's state"
+                      + (f" ({seen[:120]})" if isinstance(seen, str) else ""))
+    bad += differ
+    print(f"mol*: {len(scenes)} scenes drawn in Mol*, {differ} differ from the grader's resolved state")
+    refs = _script("check_api_refs")
+    differ = n_sel = 0
+    with refs.Viewer() as viewer:
+        for name, actions in lists:
+            dump = viewer.run(copy.deepcopy(actions))
+            found = refs.compare_with_viewer(actions, dump)
+            n_sel += sum(len(x["params"]) for x in dump.get("selections", []))
+            if found or pdbe_state.replay(copy.deepcopy(actions)).unresolved:
+                differ += 1
+                print(f"pdbe  {name}: DIFFERS: {found[:2]}")
+    bad += differ
+    print(f"pdbe-molstar: {len(lists)} call lists run, {n_sel} selections compared atom for atom, "
+          f"{differ} differ from the grader's replay")
+    return bad
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--check", action="store_true", help="fail if the files would change")
     ap.add_argument("--heldback-file", type=pathlib.Path,
                     help="structure ids to hold back, one per line (replaces the hash rule)")
+    ap.add_argument("--viewer", action="store_true",
+                    help="also run every state in headless Mol* / pdbe-molstar and compare "
+                         "with the grader (writes nothing)")
     a = ap.parse_args(argv)
     listed = None
     if a.heldback_file:
         listed = {x.strip().lower() for x in a.heldback_file.read_text().split() if x.strip()}
-    built = verify(*build(heldback_ids(listed)))
+    built, specs = build(heldback_ids(listed))
+    built = verify(built, specs)
+    if a.viewer:
+        bad = viewer_check(built, specs)
+        print("viewer check:", "all states agree" if not bad else f"{bad} problem(s)")
+        return 1 if bad else 0
     files = {OUT[t["track"]] / f"{t['id']}.json": json.dumps(t, indent=1) + "\n" for t in built}
     for track, out in OUT.items():
         files[out / "README.md"] = readme(track, built)

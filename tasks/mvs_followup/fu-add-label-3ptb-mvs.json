@@ -6,7 +6,7 @@
  "structures": [
   "3ptb"
  ],
- "prompt": "Add a label reading \"BEN\" to the benzamidine (BEN).",
+ "prompt": "Label the benzamidine (BEN) with the text \"ligand\".",
  "reference": {
   "root": {
    "kind": "root",
@@ -76,7 +76,7 @@
             {
              "kind": "label",
              "params": {
-              "text": "BEN"
+              "text": "ligand"
              }
             }
            ]
