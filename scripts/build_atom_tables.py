@@ -136,8 +136,11 @@ def task_structures() -> dict[str, list[str]]:
             for v in x:
                 walk(v, task_id)
 
+    from molbench import tasks as tasks_mod
     for path in sorted((REPO / "tasks").rglob("*.json")):
-        task = json.loads(path.read_text())
+        # old format or new, through the one loader; a file of an ungraded category
+        # (the visual-tier tasks) is read as it is, so the panel's "used by" list holds
+        task = tasks_mod.load_task(path) or json.loads(path.read_text())
         walk({k: v for k, v in task.items() if k != "grounding"}, task.get("id", path.stem))
     return {k: sorted(set(v)) for k, v in sorted(out.items())}
 

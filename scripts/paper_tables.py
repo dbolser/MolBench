@@ -88,11 +88,10 @@ SUCCESS_EPS = 1e-9
 def default_data_root() -> pathlib.Path:
     """Where the git-ignored run data lives.
 
-    The repo root, unless this is a linked git worktree without ``results/``: then the
-    main checkout (which holds the archives) is used.
+    The main checkout when it holds run data (a linked git worktree gains a
+    ``results/`` of its own from any dry run, and that is not the archive); else the
+    repo root.
     """
-    if (REPO / "results").exists() or (REPO / "runs").exists():
-        return REPO
     try:
         common = subprocess.run(["git", "rev-parse", "--path-format=absolute", "--git-common-dir"],
                                 cwd=REPO, capture_output=True, text=True, check=True).stdout.strip()

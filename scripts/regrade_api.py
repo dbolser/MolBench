@@ -40,13 +40,13 @@ sys.path.insert(0, str(REPO))
 
 from molbench import grader  # noqa: E402
 
-TASKS = REPO / "tasks" / "api_calling"
 DEFAULT_SCORECARD = REPO / "docs" / "scorecard.json"
 GROUPS = ("unchanged", "reworded")
 
 
 def load_tasks() -> dict[str, dict]:
-    return {t["id"]: t for t in (json.loads(p.read_text()) for p in sorted(TASKS.glob("*.json")))}
+    from molbench import tasks as tasks_mod
+    return {t["id"]: t for t in tasks_mod.load_corpus(tracks=["api"])}
 
 
 def regrade(scorecard: dict, tasks: dict[str, dict]) -> dict[str, dict]:

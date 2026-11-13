@@ -3,7 +3,7 @@
 Check every API-track reference against the structure it talks about.
 
 Default mode is offline and stdlib-only (it is what ``tests/test_api_refs.py`` runs).
-For each task in ``tasks/api_calling`` it checks that
+For each API-track task in ``tasks/`` (read through ``molbench.tasks``) it checks that
 
 * the reference is schema-valid and replays with nothing ignored or unresolved;
 * the structure has a frozen atom table (or the task is one of the two views that
@@ -67,7 +67,6 @@ from molbench import pdbe_state as ps  # noqa: E402
 from molbench import schema  # noqa: E402
 from molbench.atoms import load_table  # noqa: E402
 
-TASKS = REPO / "tasks" / "api_calling"
 PROMPT = REPO / "prompts" / "system_api.md"
 CIF_CACHE = REPO / "data" / "cif"
 PDBE_VERSION = "3.3.2"
@@ -78,7 +77,9 @@ SELECTING = ("color", "focus", "highlight", "tooltips")
 
 
 def load_api_tasks() -> list[dict]:
-    return [json.loads(p.read_text()) for p in sorted(TASKS.glob("*.json"))]
+    """Every API-track task in the corpus, old format or new, through the one loader."""
+    from molbench import tasks as tasks_mod
+    return tasks_mod.load_corpus(tracks=["api"])
 
 
 def rows(mask: int) -> list[int]:

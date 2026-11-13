@@ -193,10 +193,12 @@ def task_tiers(key_items: dict) -> dict[str, str]:
     if missing:
         sys.path.insert(0, str(REPO / "scripts"))
         from build_leaderboard import _regime_of  # the one place sources map to regimes
-        for path in (REPO / "tasks").rglob("*.json"):
-            task = json.loads(path.read_text())
-            if task.get("id") in missing:
-                tiers[task["id"]] = _regime_of(task.get("source") or "curated")
+        sys.path.insert(0, str(REPO))
+        from molbench import tasks as tasks_mod
+        for task in tasks_mod.load_corpus():
+            if task["id"] in missing:  # a new-format task states its tier; an old one has a source
+                tiers[task["id"]] = (_regime_of(task.get("source") or "curated")
+                                     if task.get("_legacy") else task["tier"])
     return tiers
 
 
