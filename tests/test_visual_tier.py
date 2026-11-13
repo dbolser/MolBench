@@ -1,6 +1,6 @@
 """Tier-1 (visual diff) must not rescue a scene that differs in a small detail.
 
-Fixtures are 256x256 renders of ``clinvar-1tup-D281`` (red ball-and-stick on p53
+Fixtures are 256x256 renders of ``clinvar-1tup-D281`` (an October task, kept in ``tests/data``) (red ball-and-stick on p53
 A281) and four wrong predictions. Each wrong one scores > 0.99 on the old
 whole-image similarity, which used to rescue it.
 """
@@ -50,7 +50,7 @@ def test_target_rows_are_the_highlight_not_the_context():
     import json
 
     from molbench import render
-    task = json.loads((pathlib.Path(__file__).parent.parent / "tasks" / "mvs_clinical"
+    task = json.loads((pathlib.Path(__file__).parent / "data"
                        / "clinvar-1tup-D281.json").read_text())
     rows = render.target_rows(task)
     assert len(rows) == 8                       # Asp281 of chain A, not the 5,441-atom cartoon
@@ -70,7 +70,7 @@ def test_reference_and_answer_are_rendered_from_the_same_camera(tmp_path):
     if not (render.STATIC / "molstar" / "molstar.js").exists():
         pytest.skip("Mol* bundle not fetched")
     repo = pathlib.Path(__file__).parent.parent
-    task = json.loads((repo / "tasks" / "mvs_clinical" / "clinvar-1tup-D281.json").read_text())
+    task = json.loads((repo / "tests" / "data" / "clinvar-1tup-D281.json").read_text())
     ref = task["reference_mvs"]
     wrong = json.loads(json.dumps(ref).replace('"auth_seq_id": 281', '"auth_seq_id": 282'))
     try:

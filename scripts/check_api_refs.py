@@ -162,7 +162,10 @@ def check_task(task: dict) -> list[str]:
     # grading: reference and alternatives succeed, trivial answers do not
     for i, alt in enumerate([ref] + list(task.get("accepted", []))):
         bad += [f"accepted[{i - 1}] schema: {e}" for e in schema.validate_actions(alt)] if i else []
-        res = ps.grade_state(ref, alt)
+        # An alternative is normally another way to reach the reference's state. A task
+        # whose alternatives are other final states by design says so in its provenance
+        # (`accepted_differ`: why); there each must at least be a state of its own.
+        res = ps.grade_state(alt if i and prov.get("accepted_differ") else ref, alt)
         if not res["success"]:
             bad.append(f"{'reference' if not i else f'accepted[{i - 1}]'} does not grade as "
                        f"success (f1 {res['f1']})")

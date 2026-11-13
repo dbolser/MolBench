@@ -76,13 +76,13 @@ def test_an_entry_without_a_table_raises_instead_of_fetching(no_network):
 
 
 def test_grading_a_clinical_task_is_offline(no_network):
-    from molbench.mvs import grade_mvs
-    paths = sorted((REPO / "tasks" / "mvs_clinical").glob("*.json"))
-    assert paths
-    for path in paths:
-        task = json.loads(path.read_text())
-        result = grade_mvs(task["reference_mvs"], task["reference_mvs"])
-        assert result is not None
+    from molbench import runner
+    from molbench import tasks as tasks_mod
+    tasks = [t for t in tasks_mod.load_corpus() if t["tier"] == "clinical"]
+    assert len(tasks) >= 120 and {t["track"] for t in tasks} == {"mvs", "api"}
+    for task in tasks:       # the API references use the viewer's UniProt selectors
+        result = runner.grade_parsed(task, task["reference"])
+        assert result["success"] and result["target_f1"] == 1.0, task["id"]
     assert no_network == []
 
 

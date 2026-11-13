@@ -110,7 +110,9 @@ def test_protein_and_polymer_differ_only_when_there_is_nucleic_acid():
 # --- negatives ----------------------------------------------------------------------
 
 def _d281() -> dict:
-    return json.loads((TASKS / "mvs_clinical" / "clinvar-1tup-D281.json").read_text())["reference_mvs"]
+    # An October clinical task, kept as test data (the tier itself was regenerated).
+    path = pathlib.Path(__file__).parent / "data" / "clinvar-1tup-D281.json"
+    return json.loads(path.read_text())["reference_mvs"]
 
 
 def _with_selector(scene: dict, selector) -> dict:

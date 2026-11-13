@@ -56,8 +56,11 @@ def test_pack_builder_is_deterministic_on_a_frozen_cif():
 def test_every_mvs_task_has_a_current_pack():
     b = _builder()
     mvs = load_tasks(["mvs"])
-    assert mvs and all(t.get("grounding", {}).get("rule") == b.RULE for t in mvs), \
-        "re-run scripts/build_grounding_packs.py"
+    for t in mvs:
+        want = b.CLINICAL_RULE if "clinical" in (t.get("provenance") or {}) else b.RULE
+        assert (t.get("grounding") or {}).get("rule") == want, \
+            f"{t['id']}: re-run scripts/build_grounding_packs.py"
+    assert mvs
 
 
 def test_no_pack_contains_a_scene_or_an_instruction():
@@ -80,10 +83,11 @@ class _Recorder:
 
     def __init__(self):
         self.usage = {"input_tokens": 0, "output_tokens": 0, "calls": 0}
-        self.sent: dict[str, tuple[str, str]] = {}   # prompt -> (system, user)
+        self.sent: dict[tuple[str, str], str] = {}   # (system, prompt) -> user message
 
     def generate(self, system, user):
-        self.sent[user.split("\n\n", 1)[0]] = (system, user)
+        # Twins put the same prompt to both tracks, so the system prompt is part of the key.
+        self.sent[(system, user.split("\n\n", 1)[0])] = user
         return "{}"
 
 
@@ -97,8 +101,7 @@ def test_runner_sends_the_pack_only_with_grounding(monkeypatch, grounding):
     tasks = load_tasks(["mvs", "api_calling"])
     systems = runner.build_system_prompts("spec")
     for t in tasks:
-        system, sent = rec.sent[t["prompt"]]
-        assert system == systems[t["category"]], "the system prompt must not change"
+        sent = rec.sent[(systems[t["category"]], t["prompt"])]   # the system prompt is unchanged
         if grounding and t.get("grounding"):
             assert sent == runner.GROUNDING_TEMPLATE.format(
                 prompt=t["prompt"], facts=t["grounding"]["text"])
@@ -107,8 +110,8 @@ def test_runner_sends_the_pack_only_with_grounding(monkeypatch, grounding):
     if grounding:
         n_with = sum(1 for t in tasks if t.get("grounding"))
         assert meta["n_tasks_with_pack"] == n_with > 0
-        assert meta["n_tasks_without_pack"] == len(tasks) - n_with > 0  # api_calling
-        assert meta["grounding_rules"] == ["r6-v1"]
+        assert meta["n_tasks_without_pack"] == len(tasks) - n_with > 0  # the old API tasks
+        assert meta["grounding_rules"] == ["clinical-v1", "r6-v1"]
     else:
         assert "n_tasks_with_pack" not in meta
 
