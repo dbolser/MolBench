@@ -123,11 +123,17 @@ their own (`accepted_targets`), each right answer is graded with its own target.
 
 `scripts/validate_tasks.py` exits non-zero unless all of these hold:
 
-1. Every file matches the schema above (all errors of all files are listed).
+1. Every file matches the schema above (all errors of all files are listed). That
+   includes: a reference, alternative or start state loads only what the loader can
+   name (a PDB entry file or id, an AlphaFold DB model; a UniProt accession only in the
+   superposition view), so no structure escapes the checks below; a follow-up's start
+   state loads no structure its reference does not; and a `grounding` pack sits only on
+   a lookup tier, where it is used.
 2. Ids are unique.
 3. Twins and paraphrases are linked as described; twins select the same target atoms.
 4. Every structure is in the panel (`data/panel/panel.json`) and has a frozen atom
-   table; no structure is used by both splits; every target part selects atoms.
+   table, and so is any other structure an accepted alternative loads; no structure
+   is used by both splits; every target part selects atoms.
 5. Every reference grades as exactly right against its own task: success, F1 = 1 and,
    once the grader reports it, target score 1. Every accepted alternative grades as
    itself and is accepted by its task; in the accept-set tier it is a different final
@@ -150,7 +156,8 @@ and reads from its result `f1`, `success`, `target_f1`, `outcome` and `grader` (
 keys are kept and ignored). A task that cannot be graded on atoms stops the run: a
 structure with no atom table is refused when the run is planned, and an API answer
 not graded by the final-state grader raises an error instead of being scored some
-other way. Task success for a model on a task is the mean over its samples; "all
+other way. A paid run (`--go`) makes all of the validator's checks on the corpus
+before its first call and refuses to start if any fails. Task success for a model on a task is the mean over its samples; "all
 samples right" is reported next to it.
 
 ## Old task files

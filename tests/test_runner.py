@@ -1023,6 +1023,32 @@ def test_go_refuses_an_unpinned_corpus_before_building_any_model(tmp_path, monke
     assert not (tmp_path / "runs").exists()
 
 
+def test_go_refuses_a_corpus_with_a_problem_before_any_call(tmp_path, monkeypatch):
+    """A task that cannot be graded as right stops the paid run before its first call,
+    not when the archive is graded."""
+    monkeypatch.setattr(runner, "build_model", lambda spec: pytest.fail("refuse first"))
+    monkeypatch.setattr(runner, "load_dotenv", lambda *a: pytest.fail("no keys are read"))
+    monkeypatch.setattr(runner, "corpus_problems",
+                        lambda tasks: ["api-001: its own reference does not grade as exactly right"])
+    sha = mf.corpus_hash(runner.TASKS_DIR)
+    path = _write_manifest(tmp_path, MANIFEST.replace(
+        'version = "v-test"', f'version = "v-test"\nsha256 = "{sha}"'))
+    with pytest.raises(SystemExit) as e:
+        runner.main(["--manifest", str(path), "--runs-dir", str(tmp_path / "runs"),
+                     "--results-dir", str(tmp_path / "results"), "--go",
+                     "--allow-unverified-prices"])
+    assert "the corpus has 1 problem(s)" in str(e.value.code) and "api-001" in str(e.value.code)
+    assert not (tmp_path / "runs").exists()
+
+
+def test_corpus_problems_finds_a_reference_that_is_not_right(corpus):
+    assert runner.corpus_problems(corpus) == []
+    broken = [dict(t) for t in corpus]
+    api = next(t for t in broken if t["category"] == "api_calling" and t.get("accepted"))
+    api["twin_of"] = "no-such-task"
+    assert any("twin_of 'no-such-task' is not a task" in p for p in runner.corpus_problems(broken))
+
+
 def test_go_refuses_unverified_prices(tmp_path, monkeypatch):
     monkeypatch.setattr(runner, "build_model", lambda spec: pytest.fail("refuse first"))
     monkeypatch.setattr(runner, "load_dotenv", lambda *a: None)

@@ -59,4 +59,7 @@ Where things land (`<name>` is `run.name` in the manifest):
 Before the paid run: freeze the corpus and pin `corpus.sha256`; check the prices are
 current; install the `execute` extra and the Mol* bundle (`run.validate = "required"`).
 The run refuses to start if any of these is missing, and stops itself when projected
-spend passes `budget.cap_usd`.
+spend passes `budget.cap_usd`. It also makes every check of `scripts/validate_tasks.py`
+on the corpus before its first call (each reference graded against itself, links, panel,
+atom tables) and refuses to start if one fails; `--final` (no old-format task, a target
+score for every reference) is run by hand at the freeze.

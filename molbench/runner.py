@@ -1335,6 +1335,18 @@ def validate_all(samples: list[dict], mode: str, log: Callable[[str], None] = pr
     return True
 
 
+def corpus_problems(tasks: list[dict]) -> list[str]:
+    """Everything `tasks.check_corpus` finds wrong with the tasks about to be run, with
+    this module's grader: broken links, a structure outside the panel, a reference or
+    alternative that does not grade as right, a start state at odds with its ``noop``
+    flag, a use of the worked example. Asked before a paid run makes its first call:
+    a task that cannot be graded must stop the run before the money is spent, not when
+    the archive is graded."""
+    errors, _ = tasks_mod.check_corpus(tasks, grade=grade_parsed, check=grader_problems,
+                                       repo=REPO)
+    return errors
+
+
 # Outcomes that score 0 because nothing the viewer could show came back.
 ZERO_OUTCOMES = ("invalid_json", "not_mvs", "invalid_mvs", "load_failed")
 
@@ -1772,6 +1784,10 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
                    all(n for per in kinds.values() for n in per.values()),
                    "; ".join(f"{k}: {per['mvs']} MVS, {per['api_calling']} API"
                              for k, per in kinds.items())))
+    bad = corpus_problems(planned_tasks)
+    checks.append(("every planned task passes the corpus checks a paid run makes before "
+                   "its first call", not bad,
+                   f"{len(planned_tasks)} tasks" if not bad else "; ".join(bad[:3])))
     follow = [c for c in cells if c.task.get("context")]
     shown = all(json.dumps(start_state(c.task), separators=(",", ":")) in c.user
                 and c.user.rstrip().split("Request: ")[-1].startswith(c.task["prompt"])
@@ -1977,6 +1993,11 @@ def manifest_main(args: argparse.Namespace) -> int:
                   "to start the paid run, or --dry-run to rehearse it for $0.")
             return 0
         corpus_sha = manifest_mod.check_corpus(manifest, TASKS_DIR, strict=True)
+        bad = corpus_problems(tasks)
+        if bad:
+            raise ManifestError(
+                f"the corpus has {len(bad)} problem(s) (scripts/validate_tasks.py lists "
+                "them all); no call was made. First: " + "; ".join(bad[:3]))
         unpriced = [m.id for m in panel if m.price is None]
         if unpriced:
             raise ManifestError("no price for: " + ", ".join(unpriced) + ". The budget cap "
