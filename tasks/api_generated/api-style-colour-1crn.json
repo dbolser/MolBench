@@ -1,0 +1,107 @@
+{
+  "id": "api-style-colour-1crn",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-style-colour",
+  "structures": [
+    "1crn"
+  ],
+  "prompt": "Show 1CRN as a molecular surface and colour residues 14 to 20 purple.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1crn"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "molecular-surface"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "start_auth_residue_number": 14,
+          "end_auth_residue_number": 20,
+          "color": "purple"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 14,
+        "end_label_seq_id": 20
+      },
+      "representation": null,
+      "color": "purple"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1crn.json",
+      "molbench/atom_tables/1crn.json.gz",
+      "molbench/sifts_tables/1crn.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: label chain and label range",
+      "wrong answer fails: the style set after the colouring (the reload wipes the colour) (F1 0.628)",
+      "wrong answer fails: no style (F1 0.3333)"
+    ],
+    "structure": "1crn",
+    "derived": "A global style and a seeded author-numbered range. Setting the style reloads the structure, so it has to come before the colouring.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "author_minus_label": [
+        0
+      ],
+      "insertion_codes_in_structure": false,
+      "order_matters": true,
+      "style": "molecular-surface"
+    },
+    "targets": [
+      {
+        "what": "residues 14-20 of chain A",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_label_seq_id": 14,
+          "end_label_seq_id": 20
+        },
+        "n_atoms": 51
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "global-style",
+    "selection",
+    "residue-range",
+    "color"
+  ]
+}

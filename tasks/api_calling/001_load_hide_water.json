@@ -1,7 +1,11 @@
 {
   "id": "api-001",
-  "category": "api_calling",
-  "title": "Load a structure and hide waters",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-hide",
+  "structures": [
+    "1a6m"
+  ],
   "prompt": "Load the myoglobin structure 1A6M and hide all the water molecules.",
   "reference": [
     {
@@ -14,21 +18,46 @@
       "value": true
     }
   ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1a6m.json",
+      "molbench/atom_tables/1a6m.json.gz",
+      "molbench/sifts_tables/1a6m.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0"
+    ],
+    "structure": "1a6m",
+    "derived": "1A6M has waters (the July entry, 1MBN, has none, so hiding them changed nothing).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": []
+    },
+    "targets": [],
+    "july_task": "replaced"
+  },
   "skills": [
     "load",
-    "hide-component"
+    "hide"
   ],
-  "categories": [
-    "load",
-    "hide-component"
-  ],
-  "provenance": {
-    "structure": "1a6m",
-    "source": "RCSB mmCIF 1A6M -> molbench/atom_tables/1a6m.json.gz (scripts/build_atom_tables.py)",
-    "derived": "1MBN (the July entry) has no waters in the deposited model, so the toggle did nothing; 1A6M has a water component.",
-    "july_task": "replaced",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": []
-  },
-  "notes": "Sanity task: explicit PDB id and one boolean toggle."
+  "title": "Load and hide waters"
 }

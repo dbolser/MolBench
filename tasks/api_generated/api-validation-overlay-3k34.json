@@ -1,0 +1,71 @@
+{
+  "id": "api-validation-overlay-3k34",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-validation-overlay",
+  "structures": [
+    "3k34"
+  ],
+  "prompt": "In 3K34, switch off the water molecules and turn on the PDBe geometry-validation annotation.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "3k34"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "validation_annotation",
+      "value": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/3k34.json",
+      "molbench/atom_tables/3k34.json.gz",
+      "molbench/sifts_tables/3k34.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)"
+    ],
+    "structure": "3k34",
+    "derived": "An X-ray entry with waters. The annotation is compared as a declared setting; what it draws comes from PDBe at run time and is not modelled.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "setting_only": [
+        "validation_annotation"
+      ]
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "hide",
+    "validation-annotation"
+  ]
+}

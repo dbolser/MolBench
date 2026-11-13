@@ -1,8 +1,12 @@
 {
   "id": "api-012",
-  "category": "api_calling",
-  "title": "Rhodopsin and its retinal",
-  "prompt": "Load bovine rhodopsin (1F88), hide the carbohydrates and the waters, and colour the retinal orange.",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-hide",
+  "structures": [
+    "1f88"
+  ],
+  "prompt": "Load bovine rhodopsin (1F88), hide the carbohydrates and the waters, and colour the retinal (RET) orange.",
   "reference": [
     {
       "action": "load",
@@ -28,42 +32,88 @@
       ]
     }
   ],
-  "skills": [
-    "load",
-    "hide-component",
-    "select-by-ligand",
-    "color"
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 977,
+          "auth_comp_id": "RET"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 978,
+          "auth_comp_id": "RET"
+        }
+      ],
+      "representation": null,
+      "color": "orange"
+    }
   ],
-  "categories": [
-    "load",
-    "hide-component",
-    "select-by-ligand",
-    "color"
-  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
   "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1f88.json",
+      "molbench/atom_tables/1f88.json.gz",
+      "molbench/sifts_tables/1f88.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)"
+    ],
     "structure": "1f88",
-    "source": "RCSB mmCIF 1F88 -> molbench/atom_tables/1f88.json.gz (scripts/build_atom_tables.py)",
-    "derived": "1F88 has a carbohydrate (branched) component and waters, so both toggles hide something. In the default view the retinal is already ball-and-stick, so `color` alone paints it. Tests hide_carbs, which the July task on 6VXX only named.",
-    "july_task": "reworded",
+    "derived": "1F88 has branched carbohydrates, waters and two retinals (frozen facts).",
     "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true
+    },
     "targets": [
       {
-        "what": "retinal in both copies",
+        "what": "RET",
         "action": 3,
         "param": 0,
         "atoms": [
           {
             "auth_asym_id": "A",
+            "auth_seq_id": 977,
             "auth_comp_id": "RET"
           },
           {
             "auth_asym_id": "B",
+            "auth_seq_id": 978,
             "auth_comp_id": "RET"
           }
         ],
         "n_atoms": 40
       }
-    ]
+    ],
+    "july_task": "reworded",
+    "prompt_change": "the ligand's component code added to the request (it was named in words only)"
   },
-  "notes": "Domain fact: the chromophore is retinal, component id RET."
+  "skills": [
+    "load",
+    "hide",
+    "select-by-ligand",
+    "color"
+  ],
+  "title": "Rhodopsin retinal"
 }

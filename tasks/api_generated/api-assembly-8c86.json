@@ -1,0 +1,104 @@
+{
+  "id": "api-assembly-8c86",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-assembly",
+  "structures": [
+    "8c86"
+  ],
+  "prompt": "Load the biological assembly of 8C86 (assembly 1, the tetramer) and colour the stretch from residue 70 to residue 89 of chain A khaki.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "8c86",
+      "assembly_id": "1"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "start_auth_residue_number": 70,
+          "end_auth_residue_number": 89,
+          "color": "khaki"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "B",
+        "beg_label_seq_id": 70,
+        "end_label_seq_id": 89
+      },
+      "representation": null,
+      "color": "khaki"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/8c86.json",
+      "molbench/atom_tables/8c86.json.gz",
+      "molbench/sifts_tables/8c86.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: assembly_id 'preferred' (the first assembly)",
+      "equivalent answer succeeds: label chain and label range",
+      "wrong answer fails: no assembly (F1 0.6667)",
+      "wrong answer fails: assembly_id set after the load (it is only read when a structure is loaded) (F1 0.6667)"
+    ],
+    "structure": "8c86",
+    "derived": "Assembly 1 is built by symmetry from every deposited polymer chain (frozen facts: tetrameric, 4 chains), so it differs from the deposited model. Atoms are compared on the deposited unit; the assembly is a fact of the state.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "assembly_differs_from_deposited": true,
+      "oligomer": "tetramer",
+      "author_minus_label": [
+        0
+      ],
+      "insertion_codes_in_structure": false
+    },
+    "targets": [
+      {
+        "what": "residues 70-89 of chain A",
+        "action": 1,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "B",
+          "beg_label_seq_id": 70,
+          "end_label_seq_id": 89
+        },
+        "n_atoms": 375
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "assembly",
+    "selection",
+    "color"
+  ]
+}

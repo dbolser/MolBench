@@ -1,0 +1,72 @@
+{
+  "id": "api-ligand-view-9fb2",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-ligand-view",
+  "structures": [
+    "9fb2"
+  ],
+  "prompt": "Load 9FB2 in the ligand-page view centred on the ligand A1IBO, with a black background.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "9fb2",
+      "ligand_view": {
+        "label_comp_id": "A1IBO"
+      }
+    },
+    {
+      "action": "set_property",
+      "name": "bg_color",
+      "value": "#000000"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/9fb2.json",
+      "molbench/atom_tables/9fb2.json.gz",
+      "molbench/sifts_tables/9fb2.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "equivalent answer succeeds: the ligand by author chain and number, a named background",
+      "wrong answer fails: ligand_view set after the load (only read when a structure is loaded) (F1 0.6667)"
+    ],
+    "structure": "9fb2",
+    "derived": "A single-copy ligand from the frozen facts, named by its code. The view is compared by the ligand it names; the surroundings it draws are not modelled.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true,
+      "setting_only": [
+        "ligand_view"
+      ]
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "ligand-view",
+    "set-background"
+  ]
+}

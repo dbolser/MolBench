@@ -1,0 +1,106 @@
+{
+  "id": "api-hide-1hrc",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-hide",
+  "structures": [
+    "1hrc"
+  ],
+  "prompt": "Load 1HRC, hide the waters and colour the heme (HEC) hot pink.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1hrc"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "HEC",
+          "color": "hotpink"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 105,
+          "auth_comp_id": "HEC"
+        }
+      ],
+      "representation": null,
+      "color": "hotpink"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1hrc.json",
+      "molbench/atom_tables/1hrc.json.gz",
+      "molbench/sifts_tables/1hrc.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)"
+    ],
+    "structure": "1hrc",
+    "derived": "The entry has waters (default water component) and the named ligand (frozen facts); the ligand's code is in the request.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "components_present": [
+        "ligand",
+        "polymer",
+        "water"
+      ],
+      "hide_kind": "water+ligand"
+    },
+    "targets": [
+      {
+        "what": "HEC",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 105,
+            "auth_comp_id": "HEC"
+          }
+        ],
+        "n_atoms": 43
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "hide",
+    "select-by-ligand",
+    "color"
+  ]
+}

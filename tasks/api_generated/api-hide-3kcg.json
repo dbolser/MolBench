@@ -1,0 +1,75 @@
+{
+  "id": "api-hide-3kcg",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-hide",
+  "structures": [
+    "3kcg"
+  ],
+  "prompt": "Open 3KCG with neither the carbohydrates nor the waters shown.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "3kcg"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_carbs",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/3kcg.json",
+      "molbench/atom_tables/3kcg.json.gz",
+      "molbench/sifts_tables/3kcg.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.3875)"
+    ],
+    "structure": "3kcg",
+    "derived": "The entry has branched (oligosaccharide) entities and waters, and no sugar that is a single-residue ligand, so 'the carbohydrates' is exactly the viewer's carbohydrate component.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "components_present": [
+        "branched",
+        "ion",
+        "ligand",
+        "polymer",
+        "water"
+      ],
+      "hide_kind": "carbs"
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "hide"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "api-range-colour-1lmb",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-range-colour",
+  "structures": [
+    "1lmb"
+  ],
+  "prompt": "Load 1LMB and colour residues 30 to 39 of chain 2 orange and everything else grey.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1lmb"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "2",
+          "start_auth_residue_number": 30,
+          "end_auth_residue_number": 39,
+          "color": "orange"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "B",
+        "beg_label_seq_id": 10,
+        "end_label_seq_id": 19
+      },
+      "representation": null,
+      "color": "orange"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1lmb.json",
+      "molbench/atom_tables/1lmb.json.gz",
+      "molbench/sifts_tables/1lmb.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8333)",
+      "equivalent answer succeeds: label chain and label range",
+      "wrong answer fails: the author numbers in start/end_residue_number (label numbering) (F1 0.7844)"
+    ],
+    "structure": "1lmb",
+    "derived": "A seeded author-numbered range inside one run of a chain whose author and label numbers differ; kept only if the author range selects exactly the polymer residues of the matching label range (no water, ligand or insertion-coded residue shares the numbers).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "author_minus_label": [
+        20
+      ],
+      "insertion_codes_in_structure": false
+    },
+    "targets": [
+      {
+        "what": "residues 30-39 of chain 2",
+        "action": 1,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "B",
+          "beg_label_seq_id": 10,
+          "end_label_seq_id": 19
+        },
+        "n_atoms": 208
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "residue-range",
+    "author-numbering",
+    "color",
+    "non-selected-color"
+  ]
+}

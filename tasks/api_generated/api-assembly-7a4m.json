@@ -1,0 +1,104 @@
+{
+  "id": "api-assembly-7a4m",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-assembly",
+  "structures": [
+    "7a4m"
+  ],
+  "prompt": "Load the biological assembly of 7A4M (assembly 1, the 24-mer) and colour residues 75 to 79 orange.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "7a4m",
+      "assembly_id": "1"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "start_auth_residue_number": 75,
+          "end_auth_residue_number": 79,
+          "color": "orange"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 71,
+        "end_label_seq_id": 75
+      },
+      "representation": null,
+      "color": "orange"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/7a4m.json",
+      "molbench/atom_tables/7a4m.json.gz",
+      "molbench/sifts_tables/7a4m.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: assembly_id 'preferred' (the first assembly)",
+      "equivalent answer succeeds: label chain and label range",
+      "wrong answer fails: no assembly (F1 0.6667)",
+      "wrong answer fails: assembly_id set after the load (it is only read when a structure is loaded) (F1 0.6667)"
+    ],
+    "structure": "7a4m",
+    "derived": "Assembly 1 is built by symmetry from every deposited polymer chain (frozen facts: 24-meric, 24 chains), so it differs from the deposited model. Atoms are compared on the deposited unit; the assembly is a fact of the state.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "assembly_differs_from_deposited": true,
+      "oligomer": "24-mer",
+      "author_minus_label": [
+        4
+      ],
+      "insertion_codes_in_structure": false
+    },
+    "targets": [
+      {
+        "what": "residues 75-79 of chain A",
+        "action": 1,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_label_seq_id": 71,
+          "end_label_seq_id": 75
+        },
+        "n_atoms": 79
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "assembly",
+    "selection",
+    "color"
+  ]
+}

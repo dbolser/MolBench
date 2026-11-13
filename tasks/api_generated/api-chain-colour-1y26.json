@@ -1,0 +1,122 @@
+{
+  "id": "api-chain-colour-1y26",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-chain-colour",
+  "structures": [
+    "1y26"
+  ],
+  "prompt": "Open 1Y26 in the cartoon style, with chain X lime green.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1y26"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "X",
+          "color": "limegreen"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "label_asym_id": "A"
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1y26.json",
+      "molbench/atom_tables/1y26.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: label chain ids",
+      "wrong answer fails: the author letters in struct_asym_id (the label chain key) (F1 0.6667)"
+    ],
+    "structure": "1y26",
+    "derived": "Chains of an entry whose author chain ids differ from the label chain ids. The request uses the author ids (the letters in the paper). The cartoon style is asked for, so ligands and waters that share the author chain id are not drawn and every reading of 'chain X' agrees.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "chain_ids": {
+        "X": "A"
+      },
+      "cartoon_style_removes_chain_ambiguity": true
+    },
+    "targets": [
+      {
+        "what": "chain X",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          },
+          {
+            "label_asym_id": "B"
+          },
+          {
+            "label_asym_id": "C"
+          },
+          {
+            "label_asym_id": "D"
+          },
+          {
+            "label_asym_id": "E"
+          },
+          {
+            "label_asym_id": "F"
+          },
+          {
+            "label_asym_id": "G"
+          },
+          {
+            "label_asym_id": "H"
+          }
+        ],
+        "n_atoms": 1608
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "select-by-chain",
+    "color",
+    "global-style"
+  ]
+}

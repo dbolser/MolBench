@@ -1,0 +1,71 @@
+{
+  "id": "api-undo-1rx2",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-undo",
+  "structures": [
+    "1rx2"
+  ],
+  "prompt": "Load 1RX2, set the hover-highlight colour to red and the selection colour to lime green; then put the selection colour back to its default.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1rx2"
+    },
+    {
+      "action": "set_color",
+      "highlight": "red",
+      "select": "limegreen"
+    },
+    {
+      "action": "reset",
+      "selectColor": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1rx2.json",
+      "molbench/atom_tables/1rx2.json.gz",
+      "molbench/sifts_tables/1rx2.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "equivalent answer succeeds: only the highlight colour set",
+      "wrong answer fails: the selection colour left set (F1 0.6667)"
+    ],
+    "structure": "1rx2",
+    "derived": "Canvas colours only: the final state has the highlight colour set and the selection colour at its default.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "undo_step": "colours"
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "set-highlight-color",
+    "set-select-color",
+    "reset"
+  ]
+}

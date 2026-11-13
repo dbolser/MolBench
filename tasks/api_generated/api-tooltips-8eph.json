@@ -1,0 +1,131 @@
+{
+  "id": "api-tooltips-8eph",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-tooltips",
+  "structures": [
+    "8eph"
+  ],
+  "prompt": "Load 8EPH, hide the waters and attach tooltips: 'Ser53' on Ser53 of chain C and 'Pro129' on Pro129 of chain C.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "8eph"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "tooltips",
+      "data": [
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 53,
+          "tooltip": "Ser53"
+        },
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 129,
+          "tooltip": "Pro129"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 53,
+          "auth_comp_id": "SER"
+        },
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 129,
+          "auth_comp_id": "PRO"
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/8eph.json",
+      "molbench/atom_tables/8eph.json.gz",
+      "molbench/sifts_tables/8eph.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "equivalent answer succeeds: label numbering",
+      "wrong answer fails: the author number in residue_number (F1 0.4)"
+    ],
+    "structure": "8eph",
+    "derived": "Seeded residues as in api-residue-colour; each tooltip text is the residue's own name and author number, so the request states it in full.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "author_minus_label": [
+        46
+      ],
+      "insertion_codes_in_structure": true
+    },
+    "targets": [
+      {
+        "what": "Ser53",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "C",
+            "auth_seq_id": 53,
+            "auth_comp_id": "SER"
+          }
+        ],
+        "n_atoms": 6
+      },
+      {
+        "what": "Pro129",
+        "action": 2,
+        "param": 1,
+        "atoms": [
+          {
+            "auth_asym_id": "C",
+            "auth_seq_id": 129,
+            "auth_comp_id": "PRO"
+          }
+        ],
+        "n_atoms": 7
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "hide",
+    "selection",
+    "author-numbering",
+    "tooltip"
+  ]
+}

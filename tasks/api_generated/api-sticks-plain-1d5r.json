@@ -1,0 +1,105 @@
+{
+  "id": "api-sticks-plain-1d5r",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-sticks-plain",
+  "structures": [
+    "1d5r"
+  ],
+  "prompt": "Open 1D5R and draw His61 as ball-and-stick on top of the default view; keep every colour at its default.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1d5r"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 61,
+          "color": null,
+          "representation": "ball-and-stick"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 61,
+          "auth_comp_id": "HIS"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1d5r.json",
+      "molbench/atom_tables/1d5r.json.gz",
+      "molbench/sifts_tables/1d5r.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "equivalent answer succeeds: label chain and label number",
+      "wrong answer fails: no color key (the residues turn the default orange) (F1 0.5)"
+    ],
+    "structure": "1d5r",
+    "derived": "An added representation with no recolouring. A selection with no `color` key is painted the viewer's default orange, so the reference gives `color: null`.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "default_select_colour"
+      ],
+      "author_minus_label": [
+        6
+      ],
+      "insertion_codes_in_structure": false
+    },
+    "targets": [
+      {
+        "what": "His61",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 61,
+            "auth_comp_id": "HIS"
+          }
+        ],
+        "n_atoms": 10
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "author-numbering",
+    "per-selection-representation"
+  ]
+}

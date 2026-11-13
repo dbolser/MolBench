@@ -1,0 +1,128 @@
+{
+  "id": "api-layered-colour-2ptc",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-layered-colour",
+  "structures": [
+    "2ptc"
+  ],
+  "prompt": "Open 2PTC. Step one: the stretch from residue 224 to residue 245 of chain E in red. Step two, on top of step one: Ser244 in purple.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "2ptc"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "E",
+          "start_auth_residue_number": 224,
+          "end_auth_residue_number": 245,
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "E",
+          "auth_seq_id": 244,
+          "color": "purple"
+        }
+      ],
+      "keep_colors": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 202,
+        "end_label_seq_id": 223
+      },
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/2ptc.json",
+      "molbench/atom_tables/2ptc.json.gz",
+      "molbench/sifts_tables/2ptc.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: one call, the residue after the range",
+      "wrong answer fails: the residue first, the range over it (F1 0.6589)",
+      "wrong answer fails: two calls without keep_colors (the first colouring is removed) (F1 0.6667)"
+    ],
+    "structure": "2ptc",
+    "derived": "A seeded author-numbered range and one residue inside it. Later colouring lies over earlier colouring, and a second `color` call removes the first unless keep_colors is set.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "author_minus_label": [
+        22
+      ],
+      "insertion_codes_in_structure": true,
+      "order_matters": true,
+      "keep_colors_in_reference": true
+    },
+    "targets": [
+      {
+        "what": "residues 224-245 of chain E",
+        "action": 1,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_label_seq_id": 202,
+          "end_label_seq_id": 223
+        },
+        "n_atoms": 176
+      },
+      {
+        "what": "Ser244",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "E",
+            "auth_seq_id": 244,
+            "auth_comp_id": "SER"
+          }
+        ],
+        "n_atoms": 6
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "residue-range",
+    "author-numbering",
+    "color",
+    "color-order"
+  ]
+}

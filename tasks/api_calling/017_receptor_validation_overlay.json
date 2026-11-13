@@ -1,7 +1,11 @@
 {
   "id": "api-017",
-  "category": "api_calling",
-  "title": "Validation overlay on a cartoon",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-validation-overlay",
+  "structures": [
+    "3eml"
+  ],
   "prompt": "Load the A2A adenosine receptor (3EML) as a cartoon and overlay the PDBe geometry-validation colouring.",
   "reference": [
     {
@@ -18,23 +22,51 @@
       "value": true
     }
   ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/3eml.json",
+      "molbench/atom_tables/3eml.json.gz",
+      "molbench/sifts_tables/3eml.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)"
+    ],
+    "structure": "3eml",
+    "derived": "The annotation is compared as a declared setting.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "setting_only": [
+        "validation_annotation"
+      ]
+    },
+    "targets": [],
+    "july_task": "unchanged"
+  },
   "skills": [
     "load",
     "global-style",
-    "annotation"
+    "validation-annotation"
   ],
-  "categories": [
-    "load",
-    "global-style",
-    "annotation"
-  ],
-  "provenance": {
-    "structure": "3eml",
-    "source": "RCSB mmCIF 3EML -> molbench/atom_tables/3eml.json.gz (scripts/build_atom_tables.py)",
-    "derived": "Prompt and reference unchanged.",
-    "july_task": "unchanged",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": []
-  },
-  "notes": "PDBe-specific overlay with no scene-tree equivalent."
+  "title": "Validation overlay"
 }

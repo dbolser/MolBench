@@ -1,0 +1,136 @@
+{
+  "id": "api-ligand-1ake",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-ligand",
+  "structures": [
+    "1ake"
+  ],
+  "prompt": "Open 1AKE; colour both copies of the ligand AP5 orange, then focus the camera on them.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1ake"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "AP5",
+          "color": "orange"
+        }
+      ]
+    },
+    {
+      "action": "focus",
+      "data": [
+        {
+          "label_comp_id": "AP5"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 215,
+          "auth_comp_id": "AP5"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 215,
+          "auth_comp_id": "AP5"
+        }
+      ],
+      "representation": null,
+      "color": "orange"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1ake.json",
+      "molbench/atom_tables/1ake.json.gz",
+      "molbench/sifts_tables/1ake.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: colour and focus in one call"
+    ],
+    "structure": "1ake",
+    "derived": "A ligand of the entry (more than five heavy atoms, not a crystallisation additive) drawn by seed from the frozen facts. The request names its component code, so nothing has to be recalled; the copies are those the facts list.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true,
+      "ligand_copies": 2,
+      "one_copy_by_chain": false
+    },
+    "targets": [
+      {
+        "what": "AP5",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 215,
+            "auth_comp_id": "AP5"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 215,
+            "auth_comp_id": "AP5"
+          }
+        ],
+        "n_atoms": 121
+      },
+      {
+        "what": "AP5",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 215,
+            "auth_comp_id": "AP5"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 215,
+            "auth_comp_id": "AP5"
+          }
+        ],
+        "n_atoms": 121
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "select-by-ligand",
+    "color",
+    "focus"
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "id": "api-entity-9gio",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-entity",
+  "structures": [
+    "9gio"
+  ],
+  "prompt": "In 9GIO, colour by molecule: entity 1 (protein) red and entity 3 (protein) salmon. Leave the other entities alone.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "9gio"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "entity_id": "1",
+          "color": "red"
+        },
+        {
+          "entity_id": "3",
+          "color": "salmon"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "label_asym_id": "A"
+        },
+        {
+          "label_asym_id": "C"
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/9gio.json",
+      "molbench/atom_tables/9gio.json.gz",
+      "molbench/sifts_tables/9gio.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8333)",
+      "equivalent answer succeeds: the entity's label chains, one by one",
+      "wrong answer fails: entity ids as numbers (the viewer compares with ===, so 2 never equals \"2\") (F1 0.0)"
+    ],
+    "structure": "9gio",
+    "derived": "Two polymer entities drawn by seed from the frozen facts; the intended atoms are the entity's label chains as the facts list them.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "entity_ids": [
+        "1",
+        "3"
+      ]
+    },
+    "targets": [
+      {
+        "what": "entity 1",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          }
+        ],
+        "n_atoms": 787
+      },
+      {
+        "what": "entity 3",
+        "action": 1,
+        "param": 1,
+        "atoms": [
+          {
+            "label_asym_id": "C"
+          }
+        ],
+        "n_atoms": 1166
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "select-by-entity",
+    "color"
+  ]
+}

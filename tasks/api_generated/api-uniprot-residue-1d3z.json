@@ -1,0 +1,105 @@
+{
+  "id": "api-uniprot-residue-1d3z",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-uniprot-residue",
+  "structures": [
+    "1d3z"
+  ],
+  "prompt": "Open 1D3Z. Using the UniProt numbering of P0CG48, colour Ile621 lime green.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1d3z"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "uniprot_accession": "P0CG48",
+          "uniprot_residue_number": 621,
+          "color": "limegreen"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 13,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "ILE"
+        }
+      ],
+      "representation": null,
+      "color": "limegreen"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1d3z.json",
+      "molbench/atom_tables/1d3z.json.gz",
+      "molbench/sifts_tables/1d3z.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "equivalent answer succeeds: author chain and author number, mapped by hand",
+      "wrong answer fails: the UniProt number used as the author number (F1 0.0)"
+    ],
+    "structure": "1d3z",
+    "derived": "Positions drawn by seed from the frozen SIFTS table: observed, the residue is the UniProt residue, and its author number differs from the UniProt number. The viewer maps UniProt numbers itself (uniprot_accession + uniprot_residue_number); the intended atoms are the SIFTS rows written in author numbering with the residue name.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": true,
+      "hinges_on": [],
+      "author_minus_uniprot": [
+        -608
+      ],
+      "label_equals_uniprot": false,
+      "chains_mapped": 1
+    },
+    "targets": [
+      {
+        "what": "UniProt P0CG48 621",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 13,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "ILE"
+          }
+        ],
+        "n_atoms": 19
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "uniprot-numbering",
+    "color"
+  ]
+}

@@ -1,7 +1,11 @@
 {
   "id": "api-010",
-  "category": "api_calling",
-  "title": "Presentation view of ubiquitin",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-canvas",
+  "structures": [
+    "1ubq"
+  ],
   "prompt": "Load ubiquitin (1UBQ) as a cartoon with glossy lighting on a black background, hide the waters, and set it slowly spinning.",
   "reference": [
     {
@@ -33,29 +37,54 @@
       "value": true
     }
   ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1ubq.json",
+      "molbench/atom_tables/1ubq.json.gz",
+      "molbench/sifts_tables/1ubq.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8571)"
+    ],
+    "structure": "1ubq",
+    "derived": "1UBQ has waters. Under the cartoon style they are not drawn anyway, so the hide toggle changes nothing on screen and an answer without it is graded the same.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "setting_only": [
+        "lighting"
+      ]
+    },
+    "targets": [],
+    "july_task": "unchanged"
+  },
   "skills": [
     "load",
     "global-style",
     "lighting",
     "set-background",
-    "hide-component",
+    "hide",
     "spin"
   ],
-  "categories": [
-    "load",
-    "global-style",
-    "lighting",
-    "set-background",
-    "hide-component",
-    "spin"
-  ],
-  "provenance": {
-    "structure": "1ubq",
-    "source": "RCSB mmCIF 1UBQ -> molbench/atom_tables/1ubq.json.gz (scripts/build_atom_tables.py)",
-    "derived": "Prompt and reference unchanged. With a cartoon style the waters are not drawn anyway, so an answer without hide_water ends in the same state and also succeeds.",
-    "july_task": "unchanged",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": []
-  },
-  "notes": "Tool-control toggles."
+  "title": "Presentation view"
 }

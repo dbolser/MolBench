@@ -1,8 +1,12 @@
 {
   "id": "api-009",
-  "category": "api_calling",
-  "title": "Colour insulin by chain, zinc as spacefill",
-  "prompt": "Load insulin (4INS) as a cartoon. Colour the two A chains (author chains A and C) blue and the two B chains (author chains B and D) yellow, and show the zinc ions as magenta spacefill.",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-chain-colour",
+  "structures": [
+    "4ins"
+  ],
+  "prompt": "Load insulin (4INS) as a cartoon. Colour the two A chains (author chains A and C) blue and the two B chains (author chains B and D) yellow, and show the zinc ions (ZN) as magenta spacefill.",
   "reference": [
     {
       "action": "load",
@@ -39,67 +43,108 @@
       ]
     }
   ],
-  "skills": [
-    "load",
-    "global-style",
-    "select-by-chain",
-    "select-by-ligand",
-    "per-selection-representation",
-    "color"
-  ],
-  "categories": [
-    "load",
-    "global-style",
-    "select-by-chain",
-    "select-by-ligand",
-    "per-selection-representation",
-    "color"
-  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
   "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/4ins.json",
+      "molbench/atom_tables/4ins.json.gz",
+      "molbench/sifts_tables/4ins.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 5 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.9184)"
+    ],
     "structure": "4ins",
-    "source": "RCSB mmCIF 4INS -> molbench/atom_tables/4ins.json.gz (scripts/build_atom_tables.py)",
-    "derived": "4INS holds two insulin molecules: A chains are author chains A and C, B chains are B and D. The July prompt said 'the A chain' and its reference coloured only A and B; the prompt now names the four chains. Colours are Mol* colour names.",
-    "july_task": "reworded",
+    "derived": "Chain ids and the zinc ions are those of the frozen facts.",
     "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true
+    },
     "targets": [
       {
-        "what": "author chain A",
+        "what": "chain A",
         "action": 2,
         "param": 0,
-        "atoms": {
-          "auth_asym_id": "A"
-        },
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          },
+          {
+            "label_asym_id": "G"
+          }
+        ],
         "n_atoms": 194
       },
       {
-        "what": "author chain C",
+        "what": "chain C",
         "action": 2,
         "param": 1,
-        "atoms": {
-          "auth_asym_id": "C"
-        },
+        "atoms": [
+          {
+            "label_asym_id": "C"
+          },
+          {
+            "label_asym_id": "I"
+          }
+        ],
         "n_atoms": 170
       },
       {
-        "what": "author chain B",
+        "what": "chain B",
         "action": 2,
         "param": 2,
-        "atoms": {
-          "auth_asym_id": "B"
-        },
+        "atoms": [
+          {
+            "label_asym_id": "B"
+          },
+          {
+            "label_asym_id": "E"
+          },
+          {
+            "label_asym_id": "H"
+          }
+        ],
         "n_atoms": 306
       },
       {
-        "what": "author chain D",
+        "what": "chain D",
         "action": 2,
         "param": 3,
-        "atoms": {
-          "auth_asym_id": "D"
-        },
+        "atoms": [
+          {
+            "label_asym_id": "D"
+          },
+          {
+            "label_asym_id": "F"
+          },
+          {
+            "label_asym_id": "J"
+          }
+        ],
         "n_atoms": 512
       },
       {
-        "what": "both zinc ions",
+        "what": "ZN",
         "action": 2,
         "param": 4,
         "atoms": [
@@ -116,7 +161,17 @@
         ],
         "n_atoms": 2
       }
-    ]
+    ],
+    "july_task": "reworded",
+    "prompt_change": "the ligand's component code added to the request (it was named in words only)"
   },
-  "notes": "An author chain id also covers that chain's waters and ions; under a cartoon style those are not drawn, so selecting the label chains instead ends in the same picture."
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-chain",
+    "color",
+    "select-by-ligand",
+    "per-selection-representation"
+  ],
+  "title": "Insulin chains and zinc"
 }

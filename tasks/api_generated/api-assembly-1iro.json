@@ -1,0 +1,104 @@
+{
+  "id": "api-assembly-1iro",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-assembly",
+  "structures": [
+    "1iro"
+  ],
+  "prompt": "Open 1IRO as its biological assembly 1, the trimer, not the deposited asymmetric unit, and colour residues 1-9 purple.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1iro",
+      "assembly_id": "1"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "start_auth_residue_number": 1,
+          "end_auth_residue_number": 9,
+          "color": "purple"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 1,
+        "end_label_seq_id": 9
+      },
+      "representation": null,
+      "color": "purple"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1iro.json",
+      "molbench/atom_tables/1iro.json.gz",
+      "molbench/sifts_tables/1iro.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: assembly_id 'preferred' (the first assembly)",
+      "equivalent answer succeeds: label chain and label range",
+      "wrong answer fails: no assembly (F1 0.6667)",
+      "wrong answer fails: assembly_id set after the load (it is only read when a structure is loaded) (F1 0.6667)"
+    ],
+    "structure": "1iro",
+    "derived": "Assembly 1 is built by symmetry from every deposited polymer chain (frozen facts: trimeric, 3 chains), so it differs from the deposited model. Atoms are compared on the deposited unit; the assembly is a fact of the state.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "assembly_differs_from_deposited": true,
+      "oligomer": "trimer",
+      "author_minus_label": [
+        0
+      ],
+      "insertion_codes_in_structure": false
+    },
+    "targets": [
+      {
+        "what": "residues 1-9 of chain A",
+        "action": 1,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_label_seq_id": 1,
+          "end_label_seq_id": 9
+        },
+        "n_atoms": 137
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "assembly",
+    "selection",
+    "color"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "api-maps-6tha",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-maps",
+  "structures": [
+    "6tha"
+  ],
+  "prompt": "Load 6THA with its electron-density maps, drawing the positive Fo-Fc difference map as a wireframe at opacity 0.3.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "6tha"
+    },
+    {
+      "action": "set_property",
+      "name": "load_maps",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "map_settings",
+      "value": {
+        "fo-fc(+ve)": {
+          "opacity": 0.3,
+          "wireframe": true
+        }
+      }
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/6tha.json",
+      "molbench/atom_tables/6tha.json.gz",
+      "molbench/sifts_tables/6tha.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "wrong answer fails: the map style without loading the maps (F1 0.6667)"
+    ],
+    "structure": "6tha",
+    "derived": "An X-ray entry. Both options are compared as declared settings (the map itself comes from PDBe at run time and is not modelled).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "setting_only": [
+        "load_maps",
+        "map_settings"
+      ]
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "maps",
+    "map-settings"
+  ]
+}

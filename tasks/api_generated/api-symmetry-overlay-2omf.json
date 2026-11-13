@@ -1,0 +1,69 @@
+{
+  "id": "api-symmetry-overlay-2omf",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-symmetry-overlay",
+  "structures": [
+    "2omf"
+  ],
+  "prompt": "Open 2OMF as assembly 1, the trimer, with the symmetry annotation turned on.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "2omf",
+      "assembly_id": "1"
+    },
+    {
+      "action": "set_property",
+      "name": "symmetry_annotation",
+      "value": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/2omf.json",
+      "molbench/atom_tables/2omf.json.gz",
+      "molbench/sifts_tables/2omf.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "wrong answer fails: no assembly (F1 0.6667)"
+    ],
+    "structure": "2omf",
+    "derived": "Assembly 1 is built by symmetry from every deposited chain (frozen facts). The annotation is compared as a declared setting.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "assembly_differs_from_deposited": true,
+      "setting_only": [
+        "symmetry_annotation"
+      ]
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "assembly",
+    "symmetry-annotation"
+  ]
+}

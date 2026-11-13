@@ -1,0 +1,70 @@
+{
+  "id": "api-superposition-p00740",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-superposition",
+  "structures": [],
+  "prompt": "I want the PDBe-KB superposition of the F9 structures (UniProt P00740), with a black background.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "P00740"
+    },
+    {
+      "action": "set_property",
+      "name": "superposition",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "bg_color",
+      "value": "#000000"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/panel.json"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "equivalent answer succeeds: the settings before the load, a named background",
+      "wrong answer fails: a PDB entry of the protein instead of the accession (F1 0.0)"
+    ],
+    "structure": "id:p00740",
+    "derived": "A disease protein of the panel (data/panel/panel.json). In pdbe-molstar 3.3.2 the superposition view takes a UniProt accession as moleculeId; it is compared by its settings (its content comes from PDBe-KB at run time).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "setting_only": [
+        "superposition"
+      ],
+      "needs_uniprot_accession": false
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "superposition",
+    "set-background"
+  ]
+}

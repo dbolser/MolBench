@@ -1,8 +1,12 @@
 {
   "id": "api-003",
-  "category": "api_calling",
-  "title": "Heme groups as orange ball-and-stick",
-  "prompt": "Open haemoglobin (1HHO) and show the heme groups in ball-and-stick coloured orange, with the rest as cartoon.",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-ligand-sticks",
+  "structures": [
+    "1hho"
+  ],
+  "prompt": "Open haemoglobin (1HHO) and show the heme groups (HEM) in ball-and-stick coloured orange, with the rest as cartoon.",
   "reference": [
     {
       "action": "load",
@@ -54,29 +58,64 @@
       }
     ]
   ],
-  "skills": [
-    "load",
-    "global-style",
-    "select-by-ligand",
-    "per-selection-representation",
-    "color"
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 143,
+          "auth_comp_id": "HEM"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 147,
+          "auth_comp_id": "HEM"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "orange"
+    }
   ],
-  "categories": [
-    "load",
-    "global-style",
-    "select-by-ligand",
-    "per-selection-representation",
-    "color"
-  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
   "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1hho.json",
+      "molbench/atom_tables/1hho.json.gz",
+      "molbench/sifts_tables/1hho.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.552)"
+    ],
     "structure": "1hho",
-    "source": "RCSB mmCIF 1HHO -> molbench/atom_tables/1hho.json.gz (scripts/build_atom_tables.py)",
-    "derived": "Prompt unchanged. The July reference put the colour in `color`, which paints the default components only; under a cartoon style the heme's default representation is not drawn, and the added ball-and-stick takes its colour from `representationColor`. Reference rewritten so the heme really is orange.",
-    "july_task": "unchanged",
+    "derived": "Under a cartoon style the heme's default representation is not drawn; the added ball-and-stick takes its colour from representationColor.",
     "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "ligand_code_in_prompt": true
+    },
     "targets": [
       {
-        "what": "both heme groups",
+        "what": "HEM",
         "action": 2,
         "param": 0,
         "atoms": [
@@ -93,7 +132,17 @@
         ],
         "n_atoms": 86
       }
-    ]
+    ],
+    "july_task": "unchanged",
+    "prompt_change": "the ligand's component code added to the request (it was named in words only)"
   },
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-ligand",
+    "per-selection-representation",
+    "color"
+  ],
+  "title": "Heme groups as orange ball-and-stick",
   "notes": "An added representation is coloured by representationColor, not color."
 }
