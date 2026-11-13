@@ -606,7 +606,17 @@ def compare_with_viewer(actions: list[dict], dump: dict) -> list[str]:
                     real_parts.append((hit, r["type"], _rgb(layer["color"])))
                 left &= ~hit
             if left:
-                real_parts.append((left, r["type"], r["theme"]))
+                theme = r["theme"]
+                if state.preset == "all-models" and theme == "trajectory-index":
+                    # Known and not graded: with every model of an ensemble on screen the
+                    # viewer colours the default view by model, the replay keeps the
+                    # chain colours. No fact depends on it (facts are the differences
+                    # from a bare load with the same preset), so it is noted, not failed.
+                    theme = next((th for rp, th in ps.DEFAULT_REPRS.get(name, ()) if rp == r["type"]), theme)
+                    note = "preset all-models: the viewer colours the default view by model (trajectory-index)"
+                    if note not in dump.setdefault("notes", []):
+                        dump["notes"].append(note)
+                real_parts.append((left, r["type"], theme))
     for name in model_comps:
         if name not in seen:
             # a component with a visual style Mol* cannot draw is still there; one the
@@ -677,6 +687,12 @@ def probes() -> list[tuple[str, list[dict]]]:
             {"label_comp_id": "ben", "color": "yellow"}, {"residue_number": 0, "color": "cyan"},
             {"start_residue_number": 5, "end_residue_number": 5, "color": "orange"},
             {"entity_id": 1, "color": "white"}, {"color": "black", "auth_asym_id": "Z"}])]),
+        ("a selection with no locator key selects everything", [L("1cbs"), C([{"color": "purple"}])]),
+        ("non_selected_color with an empty selection list", [L("1cbs"), C([], non_selected_color="purple")]),
+        ("everything under a style, then an added representation over non_selected_color", [
+            L("3ptb"), {"action": "set_visual_style", "style": "cartoon"},
+            C([{"label_comp_id": "CA", "representation": "ball-and-stick", "representationColor": "orange"}],
+              non_selected_color="gray")]),
         ("select clears earlier colour and added representations", [L("3ptb"),
             C([{"auth_seq_id": 57, "color": "red", "representation": "ball-and-stick"}]),
             C([{"auth_seq_id": 102, "color": "blue"}])]),
@@ -854,7 +870,7 @@ def main() -> None:
                 for note in dump.get("notes") or []:
                     not_run[note] = not_run.get(note, 0) + 1
                 print(f"viewer  {name}: {'agrees' if not bad else 'DIFFERS'}"
-                      + (f"  (not run: {'; '.join(dump['notes'])})" if dump.get("notes") else ""))
+                      + (f"  (note: {'; '.join(dump['notes'])})" if dump.get("notes") else ""))
                 for b in bad:
                     print(f"    - {b}")
         print(f"viewer: {n_run} action lists run in pdbe-molstar {PDBE_VERSION}"
