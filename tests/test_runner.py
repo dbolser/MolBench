@@ -438,12 +438,13 @@ def test_a_provider_error_in_a_200_body_is_raised_not_archived_as_an_answer(resp
 
 @pytest.mark.parametrize("raw", ['[{"action": ["x"]}]', '[{"action": {"a": 1}}]'])
 def test_an_action_name_that_is_not_a_string_is_invalid_api_not_a_crash(raw, corpus):
-    """`schema.validate_actions` raises TypeError on these; the runner reports a schema
-    error instead (outcome invalid_api), and the state grader still scores the answer."""
+    """The schema check reports these as unknown actions (it used to raise TypeError;
+    the runner still guards that): outcome invalid_api, and the state grader still
+    scores the answer."""
     api = next(t for t in corpus if t["category"] == "api_calling")
     s = runner.grade_output(api, raw)
     assert s["f1"] == 0.0 and s["outcome"] == "invalid_api" and "grader_crash" not in s
-    assert s["schema_errors"] == ["action[0]: 'action' is not a string"]
+    assert s["schema_errors"] == [f"action[0]: unknown action {json.loads(raw)[0]['action']!r}"]
     assert s["grader"] == "state" and not runner.is_success(s)
 
 

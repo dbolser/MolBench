@@ -123,7 +123,7 @@ CASES = [
      "reference: not an MVS scene"),
     ("fx-ligand-1cbs-api", {"reference": {"root": {"kind": "root"}}}, "reference: not a JSON array"),
     ("fx-ligand-1cbs-api", {"reference": [{"action": "fly"}]}, "unknown action 'fly'"),
-    ("fx-ligand-1cbs-api", {"accepted": [[{"action": ["x"]}]]}, r"accepted\[0\]: malformed action"),
+    ("fx-ligand-1cbs-api", {"accepted": [[{"action": ["x"]}]]}, r"accepted\[0\]: action\[0\]: unknown action"),
     ("fx-ligand-1cbs-mvs", {"structures": ["1CBS"]}, "structures: a list of distinct lower-case"),
     ("fx-ligand-1cbs-mvs", {"structures": ["1stp"]}, "is not what the reference loads"),
     ("fx-ligand-1cbs-mvs", {"context": {"scene": {"kind": "root"}}}, "context: null, or an object"),
