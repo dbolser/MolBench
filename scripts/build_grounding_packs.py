@@ -55,6 +55,22 @@ Task-derived facts, only from things **named in the prompt**:
 The pack states facts. It never contains MVS, a scene tree, colours or
 representations, and never says what to draw.
 
+The clinical tier (rule ``clinical-v1``, both tracks)
+-----------------------------------------------------
+Tasks of the final format in the clinical tier (``tasks/mvs_clinical``,
+``tasks/api_clinical``) get their pack from :func:`clinical_pack`, which reads frozen
+data only (``data/panel/facts``, ``data/panel/variants``, the frozen UniProt
+processing features) and needs neither gemmi nor the network. For the structure the
+prompt names: title, method and resolution; every polymer chain (author chain, label
+chain, entity, observed residues as runs ``auth a-b = label c-d``); the SIFTS mapping
+of every chain as runs ``UniProt a-b = auth c-d``. From the request: the protein's
+UniProt accession and names; for a variant named in mature-protein numbering, its
+UniProt position; for every variant, the structure residues at its UniProt position
+(author and label chain and number, residue name); for a helix / strand request, the
+annotated element around the residue. ``scripts/generate_clinical_tasks.py`` calls
+the same function, so a generated task already holds its pack; this script re-checks
+it (``--check``).
+
 Sources, in order: the build cache (``data/cif/`` and ``data/grounding_cache/``,
 git-ignored), then the frozen structure panel (``data/panel/`` and
 ``molbench/sifts_tables/``, see ``scripts/build_panel.py``), then the network (RCSB
@@ -78,18 +94,23 @@ import sys
 import urllib.request
 from collections import Counter
 
-import gemmi
+try:
+    import gemmi
+except ImportError:      # the clinical packs need only the frozen facts
+    gemmi = None
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
 
-from molbench import grounding, sifts  # noqa: E402
+from molbench import grounding, sifts, variants as V  # noqa: E402
 
 TASKS = REPO / "tasks"
 CIF_DIR = REPO / "data" / "cif"
 CACHE = REPO / "data" / "grounding_cache"
 
 RULE = "r6-v1"            # bump whenever the generation rule below changes
+CLINICAL_RULE = "clinical-v1"   # the clinical tier of the final format (clinical_pack)
+RULES = (RULE, CLINICAL_RULE)
 MAX_LIGAND_ATOMS = 50     # list atom names only for groups this small (heavy atoms)
 MAX_COPIES = 12           # hetero-group copies listed before "... (+N more)"
 MAX_ENTRIES = 10          # candidate entries listed for a protein named by name
@@ -523,6 +544,106 @@ def build_pack(task: dict) -> str | None:
     return "\n\n".join(parts) or None
 
 
+# --- the clinical tier: frozen facts only --------------------------------------------
+
+def _run_text(runs: list, left: str, right: str, swap: bool = False) -> str:
+    out = []
+    for a0, a1, b0, b1 in runs:
+        x, y = _fmt_range(a0, a1), _fmt_range(b0, b1)
+        out.append(f"{left} {y} = {right} {x}" if swap else f"{left} {x} = {right} {y}")
+    return "; ".join(out) or "none observed"
+
+
+def clinical_structure_facts(entry: str) -> list[str]:
+    """The per-structure part of a clinical pack, from ``data/panel/facts`` alone."""
+    f = grounding.facts(entry)
+    if entry.startswith("af-"):
+        acc = entry.split("-")[1].upper()
+        head = f"AlphaFold DB model AF-{acc}-F1 (model version 6): {f['title']}"
+    else:
+        head = f"PDB {entry.upper()}: {f['title']}"
+    reso = f", {f['resolution']:.2f} Å" if f.get("resolution") else ""
+    lines = [head, f"Method: {f['method']}{reso}"]
+    desc = {e["id"]: e.get("description") or "?" for e in f["entities"]}
+    lines.append("Polymer chains (author chain [label chain]; observed residues as "
+                 "author numbering = label numbering):")
+    for c in f["chains"]:
+        lines.append(
+            f"  {c['auth_asym_id']} [{c['label_asym_id']}]: entity {c['entity_id']} "
+            f"({desc.get(c['entity_id'], '?')}), {c['polymer_type']}, {c['n_observed']} of "
+            f"{c['seqres_length']} residues observed: "
+            + _run_text(c["runs_auth_label"], "auth", "label"))
+    mapped = [(c, u) for c in f["chains"] for u in c.get("uniprot", [])]
+    if mapped:
+        lines.append("UniProt mapping (SIFTS; observed residues as UniProt numbering = "
+                     "author numbering):")
+        table = sifts.load(entry)
+        for c, u in mapped:
+            name = (table.accessions.get(u["accession"], {}) if table else {}).get("entry_name", "")
+            lines.append(f"  {c['auth_asym_id']} [{c['label_asym_id']}]: {u['accession']}"
+                         + (f" ({name})" if name else "") + ": "
+                         + _run_text(u["runs_auth_unp"], "UniProt", "auth", swap=True))
+    else:
+        lines.append("UniProt mapping (SIFTS): none")
+    return lines
+
+
+def clinical_pack(task: dict) -> dict:
+    """The grounding pack of a clinical-tier task of the final format: frozen facts
+    about the structure the prompt names and the variants it names. No network, no
+    gemmi. The variants are read from ``provenance.clinical`` (the generator's record
+    of what the prompt says), never from the reference."""
+    c = task["provenance"]["clinical"]
+    entry, acc = task["structures"][0], c["accession"]
+    data = grounding.variants(acc)
+    lines = [f"{c['gene']}: UniProt {acc} ({data['entry_name']}, {data['protein']})"]
+    where = entry.upper() if not entry.startswith("af-") else "the model"
+    for v in c["variants"]:
+        pos = v["uniprot_position"]
+        if v["mature_numbering"]:
+            m = v["mature_numbering"]
+            lines.append(f"{v['name_in_prompt']} (mature-protein numbering; {m['removed']} "
+                         f"residues precede the mature chain in UniProt) = UniProt position {pos}")
+        hits = [r for r in (sifts.uniprot_residues(entry, acc, pos) or [])]
+        if c["chain"]:
+            hits = [r for r in hits if r.label_asym_id == c["chain"]["label_asym_id"]]
+        hits.sort(key=lambda r: (r.auth_asym_id, r.auth_seq_id))
+        text = "; ".join(f"auth {r.auth_asym_id} {r.auth_seq_id}{r.pdbx_PDB_ins_code} {r.comp_id} "
+                         f"(label {r.label_asym_id} {r.label_seq_id})" for r in hits)
+        chain = f", chain {c['chain']['auth_asym_id']}" if c["chain"] else ""
+        lines.append(f"{v['name_in_prompt']}: UniProt position {pos} "
+                     f"({V.AA3[v['variant'][0]]} in UniProt) -> in {where}{chain}: {text}")
+    e = c.get("secondary_structure")
+    if e:
+        kind = "Helix" if e["kind"] == "helix" else "Beta strand"
+        lines.append(f"{kind} annotated in the entry that contains that residue: auth "
+                     f"{e['auth_asym_id']} {e['beg_auth_seq_id']}-{e['end_auth_seq_id']} (label "
+                     f"{e['label_asym_id']} {e['beg_label_seq_id']}-{e['end_label_seq_id']})")
+    text = ("\n".join(clinical_structure_facts(entry)) + "\n\nFrom the request:\n"
+            + "\n".join(f"  {x}" for x in lines))
+    return {"rule": CLINICAL_RULE, "text": text}
+
+
+def clinical_task_paths() -> list[pathlib.Path]:
+    out = []
+    for path in sorted(TASKS.rglob("*.json")):
+        task = json.loads(path.read_text())
+        if task.get("track") and task.get("tier") == "clinical" \
+                and "clinical" in (task.get("provenance") or {}):
+            out.append(path)
+    return out
+
+
+def write_clinical_pack(path: pathlib.Path, check: bool = False) -> tuple[bool, int]:
+    text = path.read_text()
+    task = json.loads(text)
+    task["grounding"] = clinical_pack(task)
+    out = json.dumps(task, indent=1) + "\n"
+    if out != text and not check:
+        path.write_text(out)
+    return out != text, len(task["grounding"]["text"])
+
+
 # --- writing ------------------------------------------------------------------------
 
 def mvs_task_paths() -> list[pathlib.Path]:
@@ -559,7 +680,15 @@ def main(argv: list[str] | None = None) -> None:
         if changed:
             stale.append(path.relative_to(REPO))
         print(f"{'*' if changed else ' '} {path.relative_to(REPO)}  {n} chars")
-    print(f"{len(sizes)} MVS tasks; {len(stale)} {'stale' if args.check else 'written'}")
+    n_old = len(sizes)
+    for path in clinical_task_paths():
+        changed, n = write_clinical_pack(path, check=args.check)
+        sizes.append(n)
+        if changed:
+            stale.append(path.relative_to(REPO))
+        print(f"{'*' if changed else ' '} {path.relative_to(REPO)}  {n} chars")
+    print(f"{n_old} old-format MVS tasks, {len(sizes) - n_old} clinical tasks; "
+          f"{len(stale)} {'stale' if args.check else 'written'}")
     if args.check and stale:
         sys.exit(1)
 

@@ -1,0 +1,173 @@
+{
+ "id": "clin-short-target-gck-3f9m-r397g-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-short-target",
+ "structures": [
+  "3f9m"
+ ],
+ "prompt": "PDB entry 3F9M: the GCK (Hexokinase-4, UniProt P35557) variant R397G is classified as likely pathogenic in ClinVar. Show the residue it replaces as orange ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3f9m.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 397
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 402
+   },
+   "representation": "ball_and_stick",
+   "color": "orange"
+  }
+ ],
+ "twin_of": "clin-short-target-gck-3f9m-r397g-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 3F9M: Human pancreatic glucokinase in complex with glucose and activator showing a mobile flap\nMethod: X-RAY DIFFRACTION, 1.50 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Glucokinase), protein, 451 of 470 residues observed: auth 4-93 = label 9-98; auth 98-458 = label 103-463\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P35557 (HXK4_HUMAN): UniProt 12-93 = auth 12-93; UniProt 98-458 = auth 98-458\n\nFrom the request:\n  GCK: UniProt P35557 (HXK4_HUMAN, Hexokinase-4)\n  R397G: UniProt position 397 (Arg in UniProt) -> in 3F9M: auth A 397 ARG (label A 402)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P35557.json",
+   "data/panel/facts/3f9m.json",
+   "molbench/sifts_tables/3f9m.json.gz",
+   "molbench/atom_tables/3f9m.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 11 atoms, residue name(s) ARG = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "GCK",
+   "accession": "P35557",
+   "protein": "Hexokinase-4",
+   "naming": "short",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 1,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "orange"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "R397G",
+     "variant": "R397G",
+     "hgvs": "p.Arg397Gly",
+     "uniprot_position": 397,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV002578359"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 397,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 402,
+       "comp_id": "ARG"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

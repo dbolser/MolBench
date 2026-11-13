@@ -1,0 +1,215 @@
+{
+ "id": "clin-sse-helix-calm1-6m7h-d130g-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-sse-helix",
+ "structures": [
+  "6m7h"
+ ],
+ "prompt": "In PDB entry 6M7H, take the residue replaced by the pathogenic or likely pathogenic CALM1 (Calmodulin-1, UniProt P0DP23) variant D130G (ClinVar). Show the helix that contains it (as annotated in the entry) as a salmon cartoon and the residue itself as magenta ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/6m7h.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "beg_auth_seq_id": 117,
+             "end_auth_seq_id": 129
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 129
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 129
+   },
+   "representation": "ball_and_stick",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": "clin-sse-helix-calm1-6m7h-d130g-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 6M7H: Structure of calmodulin with KN93\nMethod: X-RAY DIFFRACTION, 1.60 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Calmodulin-1), protein, 144 of 147 residues observed: auth 4-147 = label 4-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P0DP23 (CALM1_HUMAN): UniProt 5-148 = auth 4-147\n\nFrom the request:\n  CALM1: UniProt P0DP23 (CALM1_HUMAN, Calmodulin-1)\n  D130G: UniProt position 130 (Asp in UniProt) -> in 6M7H: auth A 129 ASP (label A 129)\n  Helix annotated in the entry that contains that residue: auth A 117-129 (label A 117-129)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P0DP23.json",
+   "data/panel/facts/6m7h.json",
+   "molbench/sifts_tables/6m7h.json.gz",
+   "molbench/atom_tables/6m7h.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 8 atoms, residue name(s) ASP = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the helix range is the same atom set in author and in label numbering and contains the target residue",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "CALM1",
+   "accession": "P0DP23",
+   "protein": "Calmodulin-1",
+   "naming": "short",
+   "scope": "all",
+   "context": "sse",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "magenta"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "D130G",
+     "variant": "D130G",
+     "hgvs": "p.Asp130Gly",
+     "uniprot_position": 130,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000183230",
+      "VCV000812676",
+      "VCV000812710"
+     ],
+     "clinvar_classification": [
+      "Pathogenic",
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts",
+      "criteria provided, single submitter",
+      "no assertion criteria provided"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 129,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 129,
+       "comp_id": "ASP"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": {
+    "kind": "helix",
+    "auth_asym_id": "A",
+    "beg_auth_seq_id": 117,
+    "end_auth_seq_id": 129,
+    "label_asym_id": "A",
+    "beg_label_seq_id": 117,
+    "end_label_seq_id": 129,
+    "color": "salmon"
+   },
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -1
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

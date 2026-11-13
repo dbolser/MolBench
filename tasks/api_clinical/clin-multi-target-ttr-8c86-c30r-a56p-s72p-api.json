@@ -1,0 +1,281 @@
+{
+ "id": "clin-multi-target-ttr-8c86-c30r-a56p-s72p-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-multi-target",
+ "structures": [
+  "8c86"
+ ],
+ "prompt": "In PDB entry 8C86, show the residues replaced by the TTR (Transthyretin, UniProt P02766) variants C30R, A56P and S72P (each pathogenic or likely pathogenic in ClinVar) as green spacefill spheres in every chain that has them.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8c86"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P02766",
+     "uniprot_residue_number": 30,
+     "color": null,
+     "representation": "spacefill",
+     "representationColor": "green"
+    },
+    {
+     "uniprot_accession": "P02766",
+     "uniprot_residue_number": 56,
+     "color": null,
+     "representation": "spacefill",
+     "representationColor": "green"
+    },
+    {
+     "uniprot_accession": "P02766",
+     "uniprot_residue_number": 72,
+     "color": null,
+     "representation": "spacefill",
+     "representationColor": "green"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 30,
+      "color": "green",
+      "representation": "spacefill",
+      "representationColor": "green"
+     },
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 56,
+      "color": "green",
+      "representation": "spacefill",
+      "representationColor": "green"
+     },
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 72,
+      "color": "green",
+      "representation": "spacefill",
+      "representationColor": "green"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 10
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 10
+    },
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 36
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 36
+    },
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 52
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 52
+    }
+   ],
+   "representation": "spacefill",
+   "color": "green"
+  }
+ ],
+ "twin_of": "clin-multi-target-ttr-8c86-c30r-a56p-s72p-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 8C86: Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2\nMethod: X-RAY DIFFRACTION, 1.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  B [A]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\n  A [B]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  B [A]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n  A [B]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n\nFrom the request:\n  TTR: UniProt P02766 (TTHY_HUMAN, Transthyretin)\n  C30R: UniProt position 30 (Cys in UniProt) -> in 8C86: auth A 10 CYS (label B 10); auth B 10 CYS (label A 10)\n  A56P: UniProt position 56 (Ala in UniProt) -> in 8C86: auth A 36 ALA (label B 36); auth B 36 ALA (label A 36)\n  S72P: UniProt position 72 (Ser in UniProt) -> in 8C86: auth A 52 SER (label B 52); auth B 52 SER (label A 52)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P02766.json",
+   "data/panel/facts/8c86.json",
+   "molbench/sifts_tables/8c86.json.gz",
+   "molbench/atom_tables/8c86.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (6 residue(s), 64 atoms, residue name(s) ALA/CYS/SER = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "TTR",
+   "accession": "P02766",
+   "protein": "Transthyretin",
+   "naming": "short",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "spacefill",
+    "color": "green"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "C30R",
+     "variant": "C30R",
+     "hgvs": "p.Cys30Arg",
+     "uniprot_position": 30,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000013444"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 10,
+       "comp_id": "CYS"
+      },
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 10,
+       "comp_id": "CYS"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "A56P",
+     "variant": "A56P",
+     "hgvs": "p.Ala56Pro",
+     "uniprot_position": 56,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000013432"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 36,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 36,
+       "comp_id": "ALA"
+      },
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 36,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 36,
+       "comp_id": "ALA"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "S72P",
+     "variant": "S72P",
+     "hgvs": "p.Ser72Pro",
+     "uniprot_position": 72,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001178327"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 52,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 52,
+       "comp_id": "SER"
+      },
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 52,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 52,
+       "comp_id": "SER"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -20
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": true,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 2,
+    "target_residues": 6,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

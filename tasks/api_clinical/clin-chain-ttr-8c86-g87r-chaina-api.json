@@ -1,0 +1,160 @@
+{
+ "id": "clin-chain-ttr-8c86-g87r-chaina-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-chain",
+ "structures": [
+  "8c86"
+ ],
+ "prompt": "In PDB entry 8C86, show the residue replaced by the likely pathogenic TTR (Transthyretin) variant G87R (ClinVar) as green ball-and-stick in chain A only (author chain ID).",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8c86"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "uniprot_accession": "P02766",
+     "uniprot_residue_number": 87,
+     "color": null,
+     "representation": "ball-and-stick",
+     "representationColor": "green"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 87,
+      "color": "green",
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "B",
+    "label_seq_id": 67
+   },
+   "representation": "ball-and-stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": "clin-chain-ttr-8c86-g87r-chaina-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 8C86: Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2\nMethod: X-RAY DIFFRACTION, 1.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  B [A]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\n  A [B]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  B [A]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n  A [B]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n\nFrom the request:\n  TTR: UniProt P02766 (TTHY_HUMAN, Transthyretin)\n  G87R: UniProt position 87 (Gly in UniProt) -> in 8C86, chain A: auth A 67 GLY (label B 67)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P02766.json",
+   "data/panel/facts/8c86.json",
+   "molbench/sifts_tables/8c86.json.gz",
+   "molbench/atom_tables/8c86.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 7 atoms, residue name(s) GLY = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "TTR",
+   "accession": "P02766",
+   "protein": "Transthyretin",
+   "naming": "short",
+   "scope": "chain",
+   "context": "none",
+   "chain": {
+    "auth_asym_id": "A",
+    "label_asym_id": "B"
+   },
+   "wording": 0,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "green"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "G87R",
+     "variant": "G87R",
+     "hgvs": "p.Gly87Arg",
+     "uniprot_position": 87,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001006084"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 67,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 67,
+       "comp_id": "GLY"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -20
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": true,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 2,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

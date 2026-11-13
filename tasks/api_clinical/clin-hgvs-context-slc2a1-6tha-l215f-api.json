@@ -1,0 +1,205 @@
+{
+ "id": "clin-hgvs-context-slc2a1-6tha-l215f-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-hgvs-context",
+ "structures": [
+  "6tha"
+ ],
+ "prompt": "In PDB entry 6THA, show the whole structure as a gray cartoon and the residue replaced by the likely pathogenic SLC2A1 (Solute carrier family 2, facilitated glucose transporter member 1) variant p.Leu215Phe (ClinVar) as yellow spacefill spheres.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "6tha"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P11166",
+     "uniprot_residue_number": 215,
+     "color": "gray",
+     "representation": "spacefill",
+     "representationColor": "yellow"
+    }
+   ],
+   "non_selected_color": "gray"
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "6tha"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P11166",
+      "uniprot_residue_number": 215,
+      "color": "yellow",
+      "representation": "spacefill",
+      "representationColor": "yellow"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "6tha"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P11166",
+      "uniprot_residue_number": 215,
+      "color": "gray",
+      "representation": "spacefill",
+      "representationColor": "yellow"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "6tha"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P11166",
+      "uniprot_residue_number": 215,
+      "color": "yellow",
+      "representation": "spacefill",
+      "representationColor": "yellow"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 215
+   },
+   "representation": "spacefill",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": "clin-hgvs-context-slc2a1-6tha-l215f-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 6THA: Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation\nMethod: X-RAY DIFFRACTION, 2.40 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Solute carrier family 2, facilitated glucose transporter member 1), protein, 448 of 496 residues observed: auth 8-455 = label 8-455\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P11166 (GTR1_HUMAN): UniProt 8-455 = auth 8-455\n\nFrom the request:\n  SLC2A1: UniProt P11166 (GTR1_HUMAN, Solute carrier family 2, facilitated glucose transporter member 1)\n  p.Leu215Phe: UniProt position 215 (Leu in UniProt) -> in 6THA: auth A 215 LEU (label A 215)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P11166.json",
+   "data/panel/facts/6tha.json",
+   "molbench/sifts_tables/6tha.json.gz",
+   "molbench/atom_tables/6tha.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 8 atoms, residue name(s) LEU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "SLC2A1",
+   "accession": "P11166",
+   "protein": "Solute carrier family 2, facilitated glucose transporter member 1",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "spacefill",
+    "color": "yellow",
+    "backdrop": "gray"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Leu215Phe",
+     "variant": "L215F",
+     "hgvs": "p.Leu215Phe",
+     "uniprot_position": 215,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000663633"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 215,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 215,
+       "comp_id": "LEU"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

@@ -1,0 +1,161 @@
+{
+ "id": "clin-legacy-target-apoe-8ce0-r176c-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-legacy-target",
+ "structures": [
+  "8ce0"
+ ],
+ "prompt": "In PDB entry 8CE0, show the residue replaced by the pathogenic APOE (Apolipoprotein E, UniProt P02649) variant R158C (ClinVar) as magenta ball-and-stick. The name R158C is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 18-residue signal peptide.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8ce0"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P02649",
+     "uniprot_residue_number": 176,
+     "color": null,
+     "representation": "ball-and-stick",
+     "representationColor": "magenta"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "8ce0"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P02649",
+      "uniprot_residue_number": 176,
+      "color": "magenta",
+      "representation": "ball-and-stick",
+      "representationColor": "magenta"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 534
+   },
+   "representation": "ball-and-stick",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": "clin-legacy-target-apoe-8ce0-r176c-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  R158C (mature-protein numbering; 18 residues precede the mature chain in UniProt) = UniProt position 176\n  R158C: UniProt position 176 (Arg in UniProt) -> in 8CE0: auth A 158 ARG (label A 534)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P02649.json",
+   "data/panel/facts/8ce0.json",
+   "molbench/sifts_tables/8ce0.json.gz",
+   "molbench/atom_tables/8ce0.json.gz",
+   "data/clinical/uniprot_processing.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 11 atoms, residue name(s) ARG = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "APOE",
+   "accession": "P02649",
+   "protein": "Apolipoprotein E",
+   "naming": "legacy",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "magenta"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "R158C",
+     "variant": "R176C",
+     "hgvs": "p.Arg176Cys",
+     "uniprot_position": 176,
+     "mature_numbering": {
+      "number": 158,
+      "removed": 18,
+      "what": "the 18-residue signal peptide"
+     },
+     "clinvar_vcv": [
+      "VCV000441262",
+      "VCV000441265"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "no assertion criteria provided"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 158,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 534,
+       "comp_id": "ARG"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -18
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": true,
+    "mature_number_equals_author_number": true,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

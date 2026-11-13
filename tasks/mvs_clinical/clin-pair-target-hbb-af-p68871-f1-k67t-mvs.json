@@ -1,0 +1,176 @@
+{
+ "id": "clin-pair-target-hbb-af-p68871-f1-k67t-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-pair-target",
+ "structures": [
+  "af-p68871-f1-model_v6"
+ ],
+ "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), show as yellow ball-and-stick the wild-type residue at the position of the HBB (Hemoglobin subunit beta) missense variant K67T (likely pathogenic in ClinVar).",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 67
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 67
+   },
+   "representation": "ball_and_stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": "clin-pair-target-hbb-af-p68871-f1-k67t-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  K67T: UniProt position 67 (Lys in UniProt) -> in the model: auth A 67 LYS (label A 67)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P68871.json",
+   "data/panel/facts/af-p68871-f1-model_v6.json",
+   "molbench/sifts_tables/af-p68871-f1-model_v6.json.gz",
+   "molbench/atom_tables/af-p68871-f1-model_v6.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 9 atoms, residue name(s) LYS = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "HBB",
+   "accession": "P68871",
+   "protein": "Hemoglobin subunit beta",
+   "naming": "short",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "yellow"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "K67T",
+     "variant": "K67T",
+     "hgvs": "p.Lys67Thr",
+     "uniprot_position": 67,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000015136"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 67,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 67,
+       "comp_id": "LYS"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": true,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": {
+    "with": "clin-pair-target-hbb-1hho-k67t-mvs",
+    "this_structure": "author numbers are UniProt numbers"
+   }
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}
