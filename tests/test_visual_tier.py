@@ -74,8 +74,9 @@ def test_reference_and_answer_are_rendered_from_the_same_camera(tmp_path):
     ref = task["reference_mvs"]
     wrong = json.loads(json.dumps(ref).replace('"auth_seq_id": 281', '"auth_seq_id": 282'))
     try:
-        out = render.render_pair(ref, wrong, tmp_path, render.target_rows(task), width=400, height=300)
-    except Exception as e:  # noqa: BLE001 - no browser, or no network for the structure file
+        out = render.render_pair(ref, wrong, tmp_path, render.target_rows(task), width=400, height=300,
+                                 network=False)        # the structure comes from the frozen panel
+    except Exception as e:  # noqa: BLE001 - no browser
         pytest.skip(f"cannot render here: {str(e).splitlines()[0][:120]}")
     assert "answer_error" not in out and set(out["files"]) == {
         "ref_whole", "ref_target", "answer_whole", "answer_target", "panel"}
@@ -92,6 +93,7 @@ def test_reference_and_answer_are_rendered_from_the_same_camera(tmp_path):
     assert target > 10 * max(whole, 1)
     # the same scene from the same camera is the same picture
     again = render.render_framed(ref, tmp_path / "again.png", camera=out["target_camera"],
-                                 width=400, height=300)
+                                 width=400, height=300, network=False)
+    assert again["frozen_files"] == ["1tup"]
     assert changed_pixels(out["files"]["ref_target"], again["png"]) == 0
     assert again["camera"]["target"] == out["target_camera"]["target"]

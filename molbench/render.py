@@ -165,18 +165,58 @@ async ({ mvs, rows, camera, extraRadius, minRadius }) => {
 """
 
 
+def _serve_frozen(page, network: bool, served: list[str]) -> None:
+    """Answer the page's structure downloads from the frozen panel files.
+
+    A request for a text mmCIF of a panel entry (any host, any of the usual file names)
+    is answered with ``data/panel/cif/<entry>.cif.gz``, unpacked; ``served`` collects the
+    entries answered this way. Anything else (an entry outside the panel, a BinaryCIF
+    or PDB-format file) goes to the network if ``network`` is true and is refused if not.
+    """
+    import gzip
+
+    from . import grounding
+    from .mvs import entry_of_url
+
+    def handle(route):
+        url = route.request.url
+        if url.startswith(("file:", "data:", "blob:", "about:")):
+            return route.continue_()
+        name = url.lower().split("?")[0].split("#")[0].rsplit("/", 1)[-1]
+        entry = entry_of_url(url) if name.endswith((".cif", ".cif.gz", ".mmcif")) else None
+        frozen = grounding.structure_file(entry) if entry else None
+        if frozen is None and entry and entry.startswith("af-"):     # any frozen model version
+            hits = sorted((grounding.PANEL / "cif").glob(f"{entry}-model_v*.cif.gz"))
+            frozen = hits[-1] if hits else None
+        if frozen is not None:
+            body = frozen.read_bytes()
+            if not name.endswith(".gz"):
+                body = gzip.decompress(body)
+            served.append(entry)
+            return route.fulfill(status=200, body=body, content_type="text/plain",
+                                 headers={"Access-Control-Allow-Origin": "*"})
+        return route.continue_() if network else route.abort()
+
+    page.route("**/*", handle)
+
+
 def render_framed(scene: dict, out_png: str | pathlib.Path, *, rows: list[int] | None = None,
                   camera: dict | None = None, width: int = 800, height: int = 600,
                   extra_radius: float = 4.0, min_radius: float = 8.0,
-                  timeout_ms: int = 120000) -> dict:
+                  timeout_ms: int = 120000, network: bool = True) -> dict:
     """Render a scene with a stated camera and return what was used.
 
     ``rows``: atoms to frame on, as ``_atom_site`` row indices (the rows of the frozen
     atom table; ``rows_of`` turns a grader bitmask into them). Mol* works the camera out
     from their coordinates. ``camera``: a camera snapshot returned by an earlier call,
     applied as it is. With neither, the scene's own view is kept. Returns ``{"camera":
-    the snapshot used, "framed": {target, radius, n_atoms} or None}``; pass ``camera``
-    to the next call to take the second picture from the same place.
+    the snapshot used, "framed": {target, radius, n_atoms} or None, "frozen_files": the
+    entries read from the frozen panel}``; pass ``camera`` to the next call to take the
+    second picture from the same place.
+
+    A panel entry's structure file is read from the frozen panel, not downloaded
+    (``_serve_frozen``); ``network=False`` refuses every other download, so a picture
+    made that way depends on nothing outside the repository.
     """
     from playwright.sync_api import sync_playwright
 
@@ -186,6 +226,8 @@ def render_framed(scene: dict, out_png: str | pathlib.Path, *, rows: list[int] |
     with sync_playwright() as p, p.chromium.launch(args=_GL_ARGS) as browser:
         page = browser.new_page(viewport={"width": width, "height": height})
         page.set_default_timeout(timeout_ms)
+        served: list[str] = []
+        _serve_frozen(page, network, served)
         page.goto(RENDER_HTML.as_uri())
         result = page.evaluate(_FRAMED_JS, {"mvs": to_mvs_state(scene), "rows": rows,
                                             "camera": camera, "extraRadius": extra_radius,
@@ -193,7 +235,8 @@ def render_framed(scene: dict, out_png: str | pathlib.Path, *, rows: list[int] |
     if not result or not result.get("ok"):
         raise RuntimeError(f"render failed: {result and result.get('error')}")
     out_png.write_bytes(base64.b64decode(result["png"].split(",", 1)[1]))
-    return {"camera": result["camera"], "framed": result["framed"], "png": out_png}
+    return {"camera": result["camera"], "framed": result["framed"], "png": out_png,
+            "frozen_files": sorted(set(served))}
 
 
 def rows_of(mask: int) -> list[int]:
@@ -233,7 +276,8 @@ def target_rows(task: dict) -> list[int] | None:
 
 
 def render_pair(reference: dict, answer: dict, out_dir: str | pathlib.Path,
-                rows: list[int] | None, width: int = 800, height: int = 600) -> dict:
+                rows: list[int] | None, width: int = 800, height: int = 600,
+                network: bool = True) -> dict:
     """The four pictures of a rating item, reference and answer **from the same
     camera**: ``ref_whole.png`` / ``answer_whole.png`` (the reference's whole-scene
     view) and, when ``rows`` is given, ``ref_target.png`` / ``answer_target.png`` (framed
@@ -246,20 +290,22 @@ def render_pair(reference: dict, answer: dict, out_dir: str | pathlib.Path,
     out = pathlib.Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     report: dict = {"files": {}}
-    whole = render_framed(reference, out / "ref_whole.png", width=width, height=height)
+    whole = render_framed(reference, out / "ref_whole.png", width=width, height=height, network=network)
     report["whole_camera"] = whole["camera"]
     report["files"]["ref_whole"] = str(out / "ref_whole.png")
     target = None
     if rows:
-        target = render_framed(reference, out / "ref_target.png", rows=rows, width=width, height=height)
+        target = render_framed(reference, out / "ref_target.png", rows=rows, width=width, height=height,
+                               network=network)
         report["target_camera"], report["framed"] = target["camera"], target["framed"]
         report["files"]["ref_target"] = str(out / "ref_target.png")
     try:
-        render_framed(answer, out / "answer_whole.png", camera=whole["camera"], width=width, height=height)
+        render_framed(answer, out / "answer_whole.png", camera=whole["camera"], width=width, height=height,
+                      network=network)
         report["files"]["answer_whole"] = str(out / "answer_whole.png")
         if target is not None:
             render_framed(answer, out / "answer_target.png", camera=target["camera"],
-                          width=width, height=height)
+                          width=width, height=height, network=network)
             report["files"]["answer_target"] = str(out / "answer_target.png")
     except Exception as e:  # noqa: BLE001 - the answer is a model's; say why it has no picture
         report["answer_error"] = str(e)

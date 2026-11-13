@@ -447,6 +447,14 @@ STANDARD_COMPS = frozenset(
 # 'non-standard' component (checked in pdbe-molstar: the acetyl cap of 1HRC).
 TERMINAL_CAPS = frozenset(["ACE"])
 
+# Polymer residues that Mol* 5.9.0 (the source of the atom tables' component masks)
+# counts as part of the ligand but pdbe-molstar 3.3.2 does not: entry -> [(author chain,
+# author residue number)]. Measured, not derived: a bare load of every panel entry was
+# compared with the viewer (scripts/grader_controls.py --viewer-api), and this was the
+# one residue whose component differed (Arg167 of 1AKE, two alternate conformations
+# beside the AP5 ligand; 16 atoms).
+NOT_IN_LIGAND_COMPONENT = {"1ake": [("A", 167)]}
+
 _PDB_ID = re.compile(r"(?:pdb_0000)?[0-9][a-z0-9]{3}")
 _AF_URL = re.compile(r"AF-([A-Za-z0-9]+)-F(\d+)")
 _PDB_URL = re.compile(r"/(?:pdb)?([0-9][A-Za-z0-9]{3})(?:_updated|-assembly\d+)?\.(?:b?cif|pdb|ent)(?:\.gz)?(?:[?#].*)?$")
@@ -546,6 +554,10 @@ class ViewerState:
         out = {name: t.static.get(name, 0) for name in ("polymer", "ligand", "ion", "water",
                                                          "branched", "coarse")}
         out["non-standard"] = nonstandard_atoms(t)
+        for chain, number in NOT_IN_LIGAND_COMPONENT.get(str(self.entry or "").lower(), ()):
+            out["ligand"] &= ~(t.index("auth_asym_id").get(chain, 0)
+                               & t.index("auth_seq_id").get(number, 0)
+                               & t.static.get("polymer", 0))
         return {k: v for k, v in out.items() if v}
 
     def _drawn(self, rep: str, atoms: int) -> int:

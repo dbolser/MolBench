@@ -8,7 +8,7 @@
     "valid": 784,
     "old_f1_stored": 0.6748,
     "old_f1": 0.6748,
-    "new_f1": 0.6323,
+    "new_f1": 0.6325,
     "success": 0.499,
     "target_f1": 0.6442,
     "success_if_any_focus_counts": 0.4943,
@@ -18,7 +18,7 @@
     "old_f1_was_1": 0.4667,
     "valid_only": {
      "old_f1": 0.9038,
-     "new_f1": 0.8469,
+     "new_f1": 0.8471,
      "success": 0.6684,
      "target_f1": 0.8628
     }
@@ -89,7 +89,7 @@
      "valid": 66,
      "old_f1_stored": 0.8486,
      "old_f1": 0.8486,
-     "new_f1": 0.8383,
+     "new_f1": 0.8397,
      "success": 0.7143,
      "target_f1": 0.852,
      "success_if_any_focus_counts": 0.7,
@@ -99,7 +99,7 @@
      "old_f1_was_1": 0.7,
      "valid_only": {
       "old_f1": 0.9,
-      "new_f1": 0.8892,
+      "new_f1": 0.8906,
       "success": 0.7576,
       "target_f1": 0.9036
      }
@@ -149,7 +149,7 @@
      "valid": 63,
      "old_f1_stored": 0.8166,
      "old_f1": 0.8166,
-     "new_f1": 0.7675,
+     "new_f1": 0.7689,
      "success": 0.6143,
      "target_f1": 0.7892,
      "success_if_any_focus_counts": 0.6143,
@@ -159,7 +159,7 @@
      "old_f1_was_1": 0.6,
      "valid_only": {
       "old_f1": 0.9073,
-      "new_f1": 0.8528,
+      "new_f1": 0.8543,
       "success": 0.6825,
       "target_f1": 0.8769
      }
@@ -351,7 +351,7 @@
      "valid": 197,
      "old_f1_stored": 0.5461,
      "old_f1": 0.5461,
-     "new_f1": 0.487,
+     "new_f1": 0.4876,
      "success": 0.2967,
      "target_f1": 0.5002,
      "success_if_any_focus_counts": 0.2933,
@@ -361,7 +361,7 @@
      "old_f1_was_1": 0.2867,
      "valid_only": {
       "old_f1": 0.8316,
-      "new_f1": 0.7416,
+      "new_f1": 0.7426,
       "success": 0.4518,
       "target_f1": 0.7617
      }
@@ -600,7 +600,7 @@
       "valid": 17,
       "old_f1_stored": 0.6463,
       "old_f1": 0.6463,
-      "new_f1": 0.63,
+      "new_f1": 0.6348,
       "success": 0.45,
       "target_f1": 0.675,
       "success_if_any_focus_counts": 0.45,
@@ -610,7 +610,7 @@
       "old_f1_was_1": 0.45,
       "valid_only": {
        "old_f1": 0.7604,
-       "new_f1": 0.7412,
+       "new_f1": 0.7468,
        "success": 0.5294,
        "target_f1": 0.7941
       }
@@ -786,7 +786,7 @@
       "valid": 16,
       "old_f1_stored": 0.6752,
       "old_f1": 0.6752,
-      "new_f1": 0.6179,
+      "new_f1": 0.6226,
       "success": 0.45,
       "target_f1": 0.6456,
       "success_if_any_focus_counts": 0.45,
@@ -796,7 +796,7 @@
       "old_f1_was_1": 0.45,
       "valid_only": {
        "old_f1": 0.844,
-       "new_f1": 0.7723,
+       "new_f1": 0.7783,
        "success": 0.5625,
        "target_f1": 0.807
       }
