@@ -1271,8 +1271,10 @@ def check_mvs_task(task: dict[str, Any]) -> list[str]:
     problems: list[str] = []
     scenes = [("reference_mvs", task.get("reference_mvs"))]
     scenes += [(f"accepted[{i}]", s) for i, s in enumerate(task.get("accepted") or [])]
-    if "context" in task:
-        scenes.append(("context", task["context"]))
+    from .grader import start_state
+    context = start_state(task)
+    if context is not None:
+        scenes.append(("context", context))
     for name, tree in scenes:
         scene = resolve_scene(tree)
         if scene is None:

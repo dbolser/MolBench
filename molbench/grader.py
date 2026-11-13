@@ -214,8 +214,13 @@ def grade(reference: list[dict], predicted: Any, accepted: list[list] | None = N
     return result
 
 
+# `grade_task` grades both tracks; the runner reads this and stops using its own MVS shim.
+GRADES_MVS = True
+
+
 def is_mvs_task(task: dict[str, Any]) -> bool:
-    return task.get("category") == "mvs" or "reference_mvs" in task
+    return (task.get("category") == "mvs" or task.get("track") == "mvs"
+            or "reference_mvs" in task)
 
 
 def grade_task(task: dict[str, Any], predicted: Any, mode: str = "state") -> dict[str, Any]:
@@ -255,6 +260,19 @@ def grade_task(task: dict[str, Any], predicted: Any, mode: str = "state") -> dic
     return result
 
 
+def start_state(task: dict[str, Any]) -> Any:
+    """A follow-up task's start state as the bare scene / call list, or None on a
+    single-turn task. Task files (TASK_FORMAT.md) write ``context`` as
+    ``{"scene"|"calls": ..., "noop": bool}`` and loaded single-turn tasks carry
+    ``context: None``; the bare state is taken as it is."""
+    context = task.get("context")
+    if isinstance(context, dict) and "noop" in context:
+        for key in ("scene", "calls"):
+            if key in context:
+                return context[key]
+    return context
+
+
 def check_task(task: dict[str, Any]) -> list[str]:
     """Problems that would make a task ungradable or its scores misleading (empty list
     = fine). Task loaders and generators should call this on every task."""
@@ -265,8 +283,9 @@ def check_task(task: dict[str, Any]) -> list[str]:
     problems: list[str] = []
     lists = [("reference", task.get("reference"))]
     lists += [(f"accepted[{i}]", a) for i, a in enumerate(task.get("accepted") or [])]
-    if "context" in task:
-        lists.append(("context", task["context"]))
+    context = start_state(task)
+    if context is not None:
+        lists.append(("context", context))
     for name, actions in lists:
         if not isinstance(actions, list):
             problems.append(f"{name}: not a list of actions")
