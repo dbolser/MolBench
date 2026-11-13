@@ -1,0 +1,146 @@
+{
+  "id": "api-keep-sticks-1hk0",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-keep-sticks",
+  "structures": [
+    "1hk0"
+  ],
+  "prompt": "Load 1HK0 and add a ball-and-stick representation for Phe116, in element colours. Then, keeping it, add a spacefill representation for Val170 as well. Do not recolour anything.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1hk0"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "X",
+          "auth_seq_id": 116,
+          "color": null,
+          "representation": "ball-and-stick"
+        }
+      ]
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "X",
+          "auth_seq_id": 170,
+          "color": null,
+          "representation": "spacefill"
+        }
+      ],
+      "keep_representations": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "X",
+          "auth_seq_id": 116,
+          "auth_comp_id": "PHE"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": null
+    },
+    {
+      "selector": [
+        {
+          "auth_asym_id": "X",
+          "auth_seq_id": 170,
+          "auth_comp_id": "VAL"
+        }
+      ],
+      "representation": "spacefill",
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1hk0.json",
+      "molbench/atom_tables/1hk0.json.gz",
+      "molbench/sifts_tables/1hk0.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "changing the colour of a call whose colouring a later call replaces changes nothing and still succeeds",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "equivalent answer succeeds: one call with both residues",
+      "wrong answer fails: two calls without keep_representations (the first representation is removed) (F1 0.6667)",
+      "wrong answer fails: no color key (the residues turn the default orange) (F1 0.75)"
+    ],
+    "structure": "1hk0",
+    "derived": "Two seeded residues as in api-residue-colour, each given an added representation in its own `color` call. A second call removes the representations the first one added unless keep_representations is set.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "default_select_colour"
+      ],
+      "author_minus_label": [
+        1
+      ],
+      "insertion_codes_in_structure": false,
+      "order_matters": true,
+      "keep_representations_in_reference": true
+    },
+    "targets": [
+      {
+        "what": "Phe116",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "X",
+            "auth_seq_id": 116,
+            "auth_comp_id": "PHE"
+          }
+        ],
+        "n_atoms": 11
+      },
+      {
+        "what": "Val170",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "X",
+            "auth_seq_id": 170,
+            "auth_comp_id": "VAL"
+          }
+        ],
+        "n_atoms": 7
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "author-numbering",
+    "per-selection-representation",
+    "keep-representations"
+  ]
+}

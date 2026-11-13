@@ -428,6 +428,43 @@ def t_sticks_plain(s: S) -> dict | None:
     }
 
 
+def t_keep_sticks(s: S) -> dict | None:
+    rs = chosen_residues(s, "keep-sticks", 2)
+    if rs is None:
+        return None
+    r1, r2 = rs if h("order", "keep-sticks", s.id) % 2 else rs[::-1]
+    rep2 = pick(["spacefill", "ball-and-stick"], "rep", "keep-sticks", s.id)
+    w1, w2 = res_words(s, [r1]), res_words(s, [r2])
+    L = s.load()
+    a1 = dict(color=None, representation="ball-and-stick")
+    a2 = dict(color=None, representation=rep2)
+    return {
+        "prompts": [f"Load {s.name} and add a ball-and-stick representation for {w1}, in element colours. Then, "
+                    f"keeping it, add a {rep2} representation for {w2} as well. Do not recolour anything.",
+                    f"In {s.name}, show {w1} as ball-and-stick; as a second step, without removing that, show "
+                    f"{w2} as {rep2}. Both in the usual element colours, with the cartoon's colours left alone.",
+                    f"Open {s.name}. Step one: {w1} as ball-and-stick. Step two, on top of step one: {w2} as "
+                    f"{rep2}. Element colours for both, and no other colour changes."],
+        "reference": [L, color_call([by_author(r1, **a1)]),
+                      color_call([by_author(r2, **a2)], keep_representations=True)],
+        "target": [{"selector": [residue_atoms(r1)], "representation": "ball-and-stick", "color": None},
+                   {"selector": [residue_atoms(r2)], "representation": rep2, "color": None}],
+        "skills": ["load", "selection", "author-numbering", "per-selection-representation", "keep-representations"],
+        "difficulty": {**numbering_facts(s, [r1, r2]), "hinges_on": ["default_select_colour"],
+                       "order_matters": True, "keep_representations_in_reference": True},
+        "first_colour_is_wiped": True,
+        "derived": "Two seeded residues as in api-residue-colour, each given an added representation in "
+                   "its own `color` call. A second call removes the representations the first one added "
+                   "unless keep_representations is set.",
+        "alts": [("one call with both residues", [L, color_call([by_label(r1, **a1), by_label(r2, **a2)])])],
+        "traps": [("two calls without keep_representations (the first representation is removed)",
+                   [L, color_call([by_label(r1, **a1)]), color_call([by_label(r2, **a2)])]),
+                  ("no color key (the residues turn the default orange)",
+                   [L, color_call([{**by_label(r1), "representation": "ball-and-stick"}]),
+                    color_call([{**by_label(r2), "representation": rep2}], keep_representations=True)])],
+    }
+
+
 def a_range(s: S, key: str, need_offset: bool = True, max_len: int = 20) -> dict | None:
     """An author-numbered residue range inside one chain that selects exactly those
     polymer residues (no water, ligand or insertion-coded residue shares the numbers)."""
@@ -1260,6 +1297,38 @@ def t_tooltips(s: S) -> dict | None:
     }
 
 
+def t_undo_tooltips(s: S) -> dict | None:
+    rs = chosen_residues(s, "undo-tooltips", 2)
+    if rs is None or s.kind != "pdb" or "water" not in s.components:
+        return None
+    r1, r2 = rs
+    L = s.load()
+    tip = lambda r: {"action": "tooltips", "data": [by_author(r, tooltip=res_word(r))]}  # noqa: E731
+    plain = lambda r: {"action": "tooltips", "data": [by_label(r, tooltip=res_word(r))]}  # noqa: E731
+    w1, w2 = res_words(s, [r1]), res_words(s, [r2])
+    return {
+        "prompts": [f"Load {s.name} and hide the waters. Attach the tooltip '{res_word(r1)}' to {w1}; then remove "
+                    f"all tooltips again and attach '{res_word(r2)}' to {w2} instead.",
+                    f"In {s.name} with the waters hidden: give {w1} a hover tooltip reading '{res_word(r1)}', "
+                    f"clear the tooltips, and leave only a tooltip '{res_word(r2)}' on {w2}.",
+                    f"Open {s.name}, waters off. First a tooltip '{res_word(r1)}' on {w1}. On second thoughts, "
+                    f"clear it: the only tooltip should be '{res_word(r2)}' on {w2}."],
+        "reference": [L, prop("hide_water", True), tip(r1), {"action": "clear_tooltips"}, tip(r2)],
+        "target": [{"selector": [residue_atoms(r2)], "representation": None, "color": None}],
+        "skills": ["load", "hide", "selection", "author-numbering", "tooltip", "clear-tooltips"],
+        "difficulty": {**numbering_facts(s, [r1, r2]), "undo_step": "tooltips"},
+        "derived": "Seeded residues as in api-tooltips. The first tooltip is cleared, so the final state "
+                   "is the waters hidden and one tooltip; a list that never sets the first is right too.",
+        "alts": [("without the tooltip that is cleared", [L, prop("hide_water", True), plain(r2)]),
+                 ("no clear: a new tooltips call replaces the earlier tooltips",
+                  [L, prop("hide_water", True), plain(r1), plain(r2)])],
+        "traps": [("both tooltips left on",
+                   [L, prop("hide_water", True),
+                    {"action": "tooltips", "data": [by_label(r1, tooltip=res_word(r1)),
+                                                    by_label(r2, tooltip=res_word(r2))]}])],
+    }
+
+
 def t_undo(s: S, variant: str) -> dict | None:
     ligs = real_ligands(s)
     if not ligs or s.kind != "pdb" or "water" not in s.components:
@@ -1274,22 +1343,9 @@ def t_undo(s: S, variant: str) -> dict | None:
     plain_lig = {k: v for k, v in ligand_sel(lig).items() if k != "_t"}
     base = {"target": None, "alts": [], "traps": [],
             "difficulty": {"undo_step": variant, "ligand_code_in_prompt": True}}
-    if variant == "camera":
-        return {**base,
-                "prompts": [f"Load {s.name}, colour {what} {cw(c)} and zoom in on {it}; then reset the camera "
-                            "to the whole structure, keeping the colour.",
-                            f"In {s.name}, colour {what} {cw(c)}, take a close look at {it}, and then bring the "
-                            "camera back out to the default view of everything. The colouring stays.",
-                            f"Open {s.name}; {what} in {cw(c)}, zoom to {it}, and afterwards reset the view "
-                            "(camera only)."],
-                "reference": [L, color_call([ligand_sel(lig, color=c, focus=True)]),
-                              {"action": "reset", "camera": True}],
-                "target": [{"selector": ligand_sel(lig)["_t"]["atoms"], "representation": None, "color": c}],
-                "skills": ["load", "select-by-ligand", "color", "focus", "reset"],
-                "derived": "The final state is the colouring with the camera on the whole structure; "
-                           "only the final state is graded, so a list that never zooms is right too.",
-                "alts": [("never zooming in", [L, color_call([{**plain_lig, "color": c}])])],
-                "traps": [("left zoomed in", [L, color_call([{**plain_lig, "color": c, "focus": True}])])]}
+    # No "zoom in, then reset the camera" variant: when the reference has no focus an
+    # answer's focus is not counted (GRADING.md, "The camera"), so leaving the camera
+    # zoomed in would be graded as right and the task would test nothing.
     if variant == "selection":
         return {**base,
                 "prompts": [f"Load {s.name} and hide the waters. Select chain {chain['auth_asym_id']} (default "
@@ -1456,13 +1512,15 @@ FAMILIES: list[tuple[str, str, Callable, int]] = [
     ("api-canvas", "tool_only", t_canvas, 2),
     ("api-highlight", "tool_only", t_highlight, 2),
     ("api-tooltips", "tool_only", t_tooltips, 3),
-    ("api-undo", "tool_only", only(t_undo, "camera"), 1),
     ("api-undo", "tool_only", only(t_undo, "selection"), 1),
     ("api-undo", "tool_only", only(t_undo, "highlight"), 1),
     ("api-undo", "tool_only", only(t_undo, "colours"), 1),
     ("api-maps", "tool_only", t_maps, 2),
     ("api-preset", "tool_only", only(t_preset, "cell"), 1),
     ("api-preset", "tool_only", only(t_preset, "nmr"), 1),
+    # added after the first viewer run; kept last so that the tasks above do not change
+    ("api-keep-sticks", "translation", t_keep_sticks, 3),
+    ("api-undo", "tool_only", t_undo_tooltips, 1),
 ]
 N_SUPERPOSITION = 2
 
@@ -1811,6 +1869,12 @@ def verify(task: dict, spec: dict) -> None:
         raise Unfit("a bare load scores above 0")
     done.append("a bare load scores 0")
     near = grade(view, perturb_reference(task["reference"]))
+    if near["success"] and spec.get("first_colour_is_wiped"):
+        # the mock model's near miss recolours a call whose colouring the reference
+        # itself replaces, which changes nothing; the dropped last step is the near miss
+        done.append("changing the colour of a call whose colouring a later call replaces changes nothing "
+                    "and still succeeds")
+        near = grade(view, task["reference"][:-1])
     if near["success"]:
         raise Unfit("the near miss (one colour changed, or the last step dropped) succeeds")
     if near["f1"] > 0:
@@ -1962,6 +2026,7 @@ DERIVATION = {
     "api-residue-colour": "1-3 seeded residues of a protein chain whose author numbers differ from the label numbers; named as papers do (His57). Checked: author keys select exactly the residue of that name; the label form succeeds; the author number in `residue_number` fails.",
     "api-residue-sticks": "The same, plus an added representation in the same colour (`representationColor`). Hinges on the viewer rule that `color` does not colour an added representation.",
     "api-sticks-plain": "The same, with an added ball-and-stick and no recolouring (`color: null`; without the key the viewer paints its default orange).",
+    "api-keep-sticks": "Two seeded residues, each given an added representation in its own call; the second call has keep_representations. Two calls without it fail; one call with both succeeds.",
     "api-range-colour": "A seeded author-numbered range inside one run of a chain with a numbering offset; kept only if it selects exactly the polymer residues of the matching label range. A third of the tasks also colour everything else.",
     "api-chain-colour": "One or two chains of an entry whose author chain ids differ from the label chain ids, named by author id. The cartoon style is asked for unless the author chain is exactly the polymer chain, so every reading of 'chain X' gives the same picture.",
     "api-uniprot-residue": "1-2 seeded UniProt positions from the frozen SIFTS table (observed, same residue as UniProt, author number != UniProt number), selected with the viewer's UniProt keys. Checked: the SIFTS rows in author numbering give the same atoms; the UniProt number as an author number fails.",
@@ -1983,7 +2048,7 @@ DERIVATION = {
     "api-canvas": "Background, lighting and spin.",
     "api-highlight": "The viewer's highlight on seeded author-numbered residues, with a highlight colour and focus.",
     "api-tooltips": "Tooltips on seeded author-numbered residues (the text is the residue's own name and number), waters hidden.",
-    "api-undo": "A request with a step that is undone again (reset camera, clear selection, clear highlight, reset selection colour). Only the final state is graded.",
+    "api-undo": "A request with a step that is undone again (clear selection, clear highlight, clear tooltips, reset selection colour). Only the final state is graded.",
     "api-maps": "X-ray entries: electron-density maps on, one map styled (declared settings).",
     "api-preset": "A load preset (unit cell or supercell for an X-ray entry, all models for an NMR ensemble) and a background colour.",
 }
