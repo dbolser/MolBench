@@ -480,7 +480,8 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
             any(x["auth_seq_id"] != x["label_seq_id"] or x["pdbx_PDB_ins_code"] for x in residues),
         "insertion_code": any(bool(x["pdbx_PDB_ins_code"]) for x in residues),
         "needs_ligand_identity": False,
-        "accession_in_prompt": with_accession,
+        # An AlphaFold DB model is named by its accession (AF-P68871-F1).
+        "accession_in_prompt": with_accession or is_af(entry),
         "protein_copies_in_structure": len(site.chains),
         "target_residues": len(residues),
         "alphafold_model": is_af(entry),
@@ -892,7 +893,7 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
          "classifies as pathogenic or likely pathogenic (the frozen, ClinVar-confirmed lists "
          "in `data/panel/variants/`), and asks for the residue each variant replaces to be "
          "shown. The structure holds the wild-type residue; the task is to find it. The "
-         "prompt gives the PDB id, never the residue number in the structure.",
+         "prompt names the structure and the variant, never which residue of the structure it is.",
          ""]
     if track == "api":
         L += [API_NOTE + " Half of the prompts give the UniProt accession and half give only "
