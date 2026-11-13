@@ -181,13 +181,17 @@ def test_run_archives_raw_samples_and_meta():
 # --- entry resolution (tasks/mvs_resolve) ------------------------------------------
 
 def _resolve_tasks():
-    return [t for t in load_tasks(["mvs"]) if t.get("source") == "resolve"]
+    return [t for t in load_tasks(["mvs"]) if t["tier"] == "resolve"]
+
+
+PDE5A = "res-ligand-o76074-via"   # "a structure of PDE5A with sildenafil"; reference on 1UDT
 
 
 def _with_pdb(task: dict, pdb: str) -> dict:
     """The task's own reference scene, downloading a different entry."""
     tree = json.loads(json.dumps(task["reference_mvs"]))
-    tree["children"][0]["params"]["url"] = f"https://files.rcsb.org/download/{pdb}.cif"
+    tree.get("root", tree)["children"][0]["params"]["url"] = \
+        f"https://files.rcsb.org/download/{pdb}.cif"
     return tree
 
 
@@ -195,13 +199,15 @@ def test_resolve_tasks_have_a_valid_accepted_set():
     tasks = _resolve_tasks()
     assert tasks, "no resolve tasks found"
     for task in tasks:
-        canonical = task["reference_mvs"]["children"][0]["params"]["url"].rsplit("/", 1)[-1][:4]
-        assert canonical in task["accepted_ids"], f"{task['id']}: canonical id not in accepted_ids"
+        (canonical,) = task["structures"]
+        assert canonical in json.dumps(task["reference_mvs"])
+        # accepted_ids are the *other* right entries; the reference's own is always right
+        assert canonical not in task["accepted_ids"]
         assert len(task["accepted_ids"]) > 1, f"{task['id']}: a one-entry set defeats the point"
 
 
 def test_any_accepted_entry_scores_as_the_reference():
-    task = next(t for t in _resolve_tasks() if t["id"] == "res-pde5a")
+    task = next(t for t in _resolve_tasks() if t["id"] == PDE5A)
     other = next(i for i in task["accepted_ids"] if i != "1udt")  # e.g. 1tbf, PDE5 + tadalafil
     result = mvs.grade_mvs(task["reference_mvs"], _with_pdb(task, other),
                            accepted_refs=task["accepted_ids"])
@@ -210,7 +216,7 @@ def test_any_accepted_entry_scores_as_the_reference():
 
 def test_made_up_entry_is_penalised():
     """The evaluator case: 'a structure of PDE5A' answered with PDB 1UJ7, which does not exist."""
-    task = next(t for t in _resolve_tasks() if t["id"] == "res-pde5a")
+    task = next(t for t in _resolve_tasks() if t["id"] == PDE5A)
     assert "1uj7" not in task["accepted_ids"]
     wrong = mvs.grade_mvs(task["reference_mvs"], _with_pdb(task, "1uj7"),
                           accepted_refs=task["accepted_ids"])
@@ -237,7 +243,7 @@ def test_accepted_fold_ignores_multi_structure_references():
 
 def test_accepted_fold_survives_download_without_params():
     """A model may emit a download node with no params; the fold must not crash on it."""
-    task = next(t for t in _resolve_tasks() if t["id"] == "res-pde5a")
+    task = next(t for t in _resolve_tasks() if t["id"] == PDE5A)
     pred = {"kind": "root", "children": [{"kind": "download", "children": [
         {"kind": "parse", "params": {"format": "mmcif"}}]}]}
     result = mvs.grade_mvs(task["reference_mvs"], pred, accepted_refs=task["accepted_ids"])
