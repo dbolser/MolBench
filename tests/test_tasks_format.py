@@ -300,3 +300,59 @@ def test_the_graders_own_task_check_is_reported_and_the_grounding_pack_is_search
     tasks[0]["grounding"] = {"rule": "r", "text": "as in 1HSG"}
     errors, _ = T.check_corpus(tasks)
     assert any("worked example" in e for e in errors)
+
+
+# --- what a task may load -------------------------------------------------------------
+
+def _swap(obj, old: str, new: str):
+    return json.loads(json.dumps(obj).replace(old, new))
+
+
+def test_a_pdb_file_named_by_its_extended_id_is_recognised():
+    scene = _swap(_raw("fx-ligand-1stp-mvs")["reference"], "1stp.cif", "pdb_00001stp.cif")
+    assert T.loaded_entries("mvs", scene) == ["1stp"]
+    assert T.unidentified_loads("mvs", scene) == []
+
+
+@pytest.mark.parametrize("tid, old, new", [
+    ("fx-ligand-1stp-mvs", "https://files.rcsb.org/download/1stp.cif", "https://example.org/mine.cif"),
+    ("fx-ligand-1stp-api", '"molecule_id": "1stp"', '"molecule_id": "streptavidin"'),
+])
+def test_a_reference_that_loads_something_unnamed_is_refused(tid, old, new):
+    """Such a structure would have an empty `structures` list and so escape the panel,
+    atom-table, split and worked-example checks."""
+    task = _raw(tid)
+    task["reference"] = _swap(task["reference"], old, new)
+    task.update(structures=[], target=None)
+    errors = T.validate_task(task)
+    assert any("neither a PDB entry nor an AlphaFold DB model" in e for e in errors), errors
+
+
+def test_the_superposition_view_may_load_an_accession():
+    calls = [{"action": "load", "molecule_id": "P04637"},
+             {"action": "set_property", "name": "superposition", "value": True}]
+    assert T.unidentified_loads("api", calls) == []
+    assert T.unidentified_loads("api", calls[:1]) == ["P04637"]
+
+
+@pytest.mark.parametrize("tid", ["fx-follow-colour-1stp-api", "fx-follow-colour-1stp-mvs"])
+def test_a_start_state_on_another_structure_is_refused(tid):
+    task = _raw(tid)
+    task["context"] = _swap(task["context"], "1stp", "1cbs")
+    errors = T.validate_task(task)
+    assert any("the start state loads ['1cbs']" in e for e in errors), errors
+
+
+def test_a_grounding_pack_outside_the_lookup_tiers_is_refused():
+    task = _raw("fx-ligand-1stp-mvs")
+    task["grounding"] = {"rule": "r", "text": "BTN is in chain B."}
+    assert any("would never be used" in e for e in T.validate_task(task))
+    task["tier"] = "clinical"
+    assert T.validate_task(task) == []
+
+
+def test_an_alternative_on_a_structure_outside_the_panel_is_refused(fixtures):
+    task = next(t for t in fixtures if t["id"] == "fx-anycopy-4ins-api")
+    alt = _swap(task["accepted"], "4ins", "9zzz")
+    errors = T.check_corpus(_edited(fixtures, task["id"], accepted=alt))[0]
+    assert any("accepted[0] loads '9zzz', which is not in the panel" in e for e in errors), errors

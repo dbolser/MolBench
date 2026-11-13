@@ -69,7 +69,8 @@ _DATE = re.compile(r"\d{4}-\d\d-\d\d")
 _PDB_ID = re.compile(r"(?:pdb_0000)?([0-9][a-z0-9]{3})")
 _AF_URL = re.compile(r"AF-([A-Za-z0-9]+)-F(\d+)", re.I)
 _PDB_URL = re.compile(
-    r"/(?:pdb)?([0-9][A-Za-z0-9]{3})(?:_updated|-assembly\d+)?\.(?:b?cif|pdb|ent)(?:\.gz)?(?:[?#].*)?$")
+    r"/(?:pdb_0000|pdb)?([0-9][A-Za-z0-9]{3})(?:_updated|-assembly\d+)?\.(?:b?cif|pdb|ent)(?:\.gz)?(?:[?#].*)?$",
+    re.I)
 
 
 class TaskError(ValueError):
@@ -134,6 +135,49 @@ def loaded_entries(track: str, state: Any) -> list[str]:
         elif isinstance(act.get("molecule_id"), str) and not superposed:
             m = _PDB_ID.fullmatch(act["molecule_id"].strip().lower())
             add(m.group(1) if m else None)
+    return out
+
+
+def unidentified_loads(track: str, state: Any) -> list[str]:
+    """What a scene or call list loads that `loaded_entries` cannot name: a download
+    URL that is neither a PDB entry file nor an AlphaFold DB model, or a ``load`` whose
+    id is not a PDB id. Such a structure would escape every check made per structure
+    (panel, atom table, split, worked example), so a new-format task may not have one.
+    A ``load`` in the superposition view names a UniProt accession and is left alone."""
+    out: list[str] = []
+
+    def walk(node: Any) -> None:
+        if isinstance(node, dict):
+            params = node.get("params")
+            if node.get("kind") == "download":
+                url = params.get("url") if isinstance(params, dict) else None
+                if not isinstance(url, str) or _entry_of_url(url) is None:
+                    out.append(str(url))
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    if track == "mvs":
+        walk(state)
+        return out
+    if not isinstance(state, list):
+        return out
+    superposed = any(isinstance(a, dict) and a.get("action") == "set_property"
+                     and a.get("name") == "superposition" and a.get("value")
+                     for a in state)
+    for act in state:
+        if not isinstance(act, dict) or act.get("action") != "load":
+            continue
+        custom = act.get("custom_data")
+        if isinstance(custom, dict) and custom.get("url"):
+            if _entry_of_url(str(custom["url"])) is None:
+                out.append(str(custom["url"]))
+        elif not superposed:
+            mid = act.get("molecule_id")
+            if not (isinstance(mid, str) and _PDB_ID.fullmatch(mid.strip().lower())):
+                out.append(str(mid))
     return out
 
 
@@ -286,6 +330,23 @@ def validate_task(task: dict) -> list[str]:
             errors += _state_errors(track, context[state_key], f"context.{state_key}")
             if not isinstance(context["noop"], bool):
                 errors.append("context.noop: true or false")
+    if not legacy and not errors:
+        states = [("reference", task["reference"])]
+        states += [(f"accepted[{i}]", alt) for i, alt in enumerate(accepted)]
+        if context is not None:
+            states.append((f"context.{state_key}", context[state_key]))
+        for what, state in states:
+            unknown_loads = unidentified_loads(track, state)
+            if unknown_loads:
+                errors.append(f"{what}: loads {unknown_loads}, which is neither a PDB entry "
+                              "nor an AlphaFold DB model")
+        if context is not None:
+            extra = [e for e in loaded_entries(track, context[state_key])
+                     if (resolve_entry(e, structures) or e) not in structures]
+            if extra:
+                errors.append(f"context.{state_key}: the start state loads {extra}, which "
+                              "the reference does not (structures lists what the reference "
+                              "loads; a follow-up edits the scene it is given)")
     if not legacy:
         if (task["tier"] == "followup") != (context is not None):
             errors.append("tier 'followup' is exactly the tasks with a context")
@@ -318,6 +379,9 @@ def validate_task(task: dict) -> list[str]:
     if pack is not None and not (isinstance(pack, dict) and isinstance(pack.get("rule"), str)
                                  and isinstance(pack.get("text"), str) and pack["text"].strip()):
         errors.append("grounding: null, or an object with 'rule' and a non-empty 'text'")
+    elif pack is not None and not legacy and task["tier"] not in LOOKUP_TIERS:
+        errors.append(f"grounding: a pack on tier {task['tier']!r} would never be used; only "
+                      f"the lookup tiers {LOOKUP_TIERS} are run with one (null elsewhere)")
     skills = task["skills"]
     if not (isinstance(skills, list) and all(isinstance(s, str) and s for s in skills)):
         errors.append("skills: a list of strings")
@@ -513,6 +577,14 @@ def check_corpus(tasks: list[dict], grade: Callable[[dict, Any], dict] | None = 
                 errors.append(f"{tid}: structure {entry!r} is not in the panel")
             elif table_for(entry) is None:
                 errors.append(f"{tid}: structure {entry!r} has no atom table")
+        for i, alt in enumerate(t["accepted"]):
+            for entry in loaded_entries(t["track"], alt):
+                if entry in t["structures"]:
+                    continue
+                if resolve_entry(entry, known) is None:
+                    errors.append(f"{tid}: accepted[{i}] loads {entry!r}, which is not in the panel")
+                elif table_for(entry) is None:
+                    errors.append(f"{tid}: accepted[{i}] loads {entry!r}, which has no atom table")
         script = (t.get("provenance") or {}).get("script") if not t.get("_legacy") else None
         if script and not (repo / script).is_file():
             errors.append(f"{tid}: provenance.script {script!r} is not a file in the repo")
