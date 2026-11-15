@@ -41,7 +41,7 @@ Structures: 66 (15 held back: 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3K
 | `tr-glycans` | All sugar atoms (`branched` minus polymer), by label chain; Mol*'s `branched` (sugars plus the residues they are bonded to) is accepted too. |
 | `tr-het-code` | Every residue with the component code named in the prompt (facts). |
 | `tr-ions` | Mol*'s `ion` selection, only where it equals the entry's single-atom ions (this is what excludes 1HHO, whose only "ion" is a phosphate). |
-| `tr-ligands` | Mol*'s `ligand` selection, only where it equals the entry's non-polymer, non-water, non-sugar atoms. |
+| `tr-ligands` | Mol*'s `ligand` selection, only where it equals the entry's non-polymer, non-water, non-sugar atoms. Where those are only crystallisation additives (glycerol, DMSO) the prompt says "small molecule"; an entry with a ligand and additives is not used. |
 | `tr-range-labels` | Two such runs, each recoloured on one grey cartoon and carrying a text label; the label text is in the prompt (neutral names from a fixed list). |
 | `tr-range-rows` | Two or three such runs, each recoloured on one grey cartoon. |
 | `tr-range-sticks` | A run of 5 to 12 consecutive author-numbered residues from the atom table (no insertion code; polymer atoms only). |

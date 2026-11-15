@@ -6,7 +6,7 @@
  "structures": [
   "8ce0"
  ],
- "prompt": "8CE0: grey cartoon for the protein, cyan ball-and-stick for the ligand.",
+ "prompt": "8CE0: grey cartoon for the protein, cyan ball-and-stick for the small molecule.",
  "reference": {
   "root": {
    "kind": "root",
@@ -107,7 +107,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 6 atoms on the frozen atom table"
   ],
-  "derivation": "a grey cartoon of the polymer plus Mol*'s `ligand` selection as ball-and-stick; used only where that selection is exactly the entry's non-polymer, non-water, non-sugar groups (no ions, no bonded residue)",
+  "derivation": "a grey cartoon of the polymer plus Mol*'s `ligand` selection as ball-and-stick; used only where that selection is exactly the entry's non-polymer, non-water, non-sugar groups (no ions, no bonded residue); they are crystallisation additives (GOL), so the prompt says \"small molecule\", not \"ligand\"",
   "difficulty": {
    "author_number_differs_from_label": false,
    "author_chain_differs_from_label": false,

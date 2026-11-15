@@ -112,6 +112,13 @@ def ligands_unambiguous(entry: str) -> bool:
             and all(g["kind"] == "ligand" for g in groups))
 
 
+# Crystallisation and buffer additives. An entry whose only non-polymer groups are
+# these has no "ligand" in a structural biologist's sense, so its prompt says "small
+# molecule" (same atoms: Mol*'s `ligand` selection).
+ADDITIVES = frozenset({"GOL", "EDO", "DMS", "GLY", "TLA", "C8E", "PEG", "PGE", "PG4", "MPD",
+                       "ACT", "FMT", "IPA", "EOH", "BME", "TRS", "MES", "EPE", "CIT"})
+
+
 def sugar_chains(entry: str) -> list[str]:
     """Label chain ids whose atoms are all sugar (glycan chains and single sugars)."""
     t = C.table(entry)
@@ -351,6 +358,10 @@ def t_ligands():
         entry = e["id"]
         if not ligands_unambiguous(entry):
             continue
+        comps = {g["comp_id"] for g in C.facts(entry)["ligands"]}
+        if comps & ADDITIVES and comps - ADDITIVES:
+            continue                     # a ligand plus additives: "the ligand" would be one of them
+        word = "small molecule" if comps <= ADDITIVES else "ligand"
         col = C.colours(1, "ligands", entry)[0]
         one = C.n_atoms(C.table(entry).static["ligand"]) and sum(
             len(g["copies"]) for g in C.facts(entry)["ligands"]) == 1
@@ -364,8 +375,11 @@ def t_ligands():
             [C.part("ligand", "ball_and_stick", col)],
             "a grey cartoon of the polymer plus Mol*'s `ligand` selection as "
             "ball-and-stick; used only where that selection is exactly the entry's "
-            "non-polymer, non-water, non-sugar groups (no ions, no bonded residue)",
-            what=what(entry), lig="ligand" if one else "ligands", c=C.say_colour(col)))
+            "non-polymer, non-water, non-sugar groups (no ions, no bonded residue)"
+            + ("; they are crystallisation additives (" + ", ".join(sorted(comps))
+               + "), so the prompt says \"small molecule\", not \"ligand\""
+               if word != "ligand" else ""),
+            what=what(entry), lig=word if one else word + "s", c=C.say_colour(col)))
     return out
 
 
@@ -659,7 +673,9 @@ DERIVED = {
     "tr-residue-focus": "One author-numbered residue from the atom table, as ball-and-stick, "
                         "with a camera focus on it.",
     "tr-ligands": "Mol*'s `ligand` selection, only where it equals the entry's non-polymer, "
-                  "non-water, non-sugar atoms.",
+                  "non-water, non-sugar atoms. Where those are only crystallisation additives "
+                  "(glycerol, DMSO) the prompt says \"small molecule\"; an entry with a ligand "
+                  "and additives is not used.",
     "tr-het-code": "Every residue with the component code named in the prompt (facts).",
     "tr-ions": "Mol*'s `ion` selection, only where it equals the entry's single-atom ions "
                "(this is what excludes 1HHO, whose only \"ion\" is a phosphate).",
