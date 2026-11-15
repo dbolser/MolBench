@@ -6,7 +6,7 @@
  "structures": [
   "8k7f"
  ],
- "prompt": "8K7F, yellow cartoon; how far apart are the C-alpha atoms of Phe50 of chain A and Lys130 of chain A? Draw the distance as a labelled dashed line.",
+ "prompt": "8K7F, yellow cartoon; how far apart are the C-alpha atoms of Phe50 and Lys130? Draw the distance as a labelled dashed line. Both residues are in chain A.",
  "reference": {
   "root": {
    "kind": "root",

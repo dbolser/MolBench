@@ -6,7 +6,7 @@
  "structures": [
   "6vxx"
  ],
- "prompt": "6VXX: grey cartoon; cysteines Cys538 of chain C and Cys590 of chain C as cyan ball-and-stick; a dashed line with the distance between their two SG atoms; camera on the two residues.",
+ "prompt": "6VXX: grey cartoon; cysteines Cys538 and Cys590 as cyan ball-and-stick; a dashed line with the distance between their two SG atoms; camera on the two residues. Both residues are in chain C.",
  "reference": {
   "root": {
    "kind": "root",

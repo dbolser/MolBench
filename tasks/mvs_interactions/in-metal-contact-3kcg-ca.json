@@ -6,7 +6,7 @@
  "structures": [
   "3kcg"
  ],
- "prompt": "In 3KCG (grey cartoon), show the calcium ion site: the calcium ion as a brown sphere, Glu70 of chain H, Asn72 of chain H, Glu75 of chain H, Glu77 of chain H and Glu80 of chain H in magenta ball-and-stick, and the metal-ligand distances from the calcium ion to OE2 of Glu70 of chain H, O of Asn72 of chain H, O of Glu75 of chain H, OE1 of Glu77 of chain H and OE2 of Glu80 of chain H as labelled dashed lines. Centre the view on the site.",
+ "prompt": "In 3KCG (grey cartoon), show the calcium ion site: the calcium ion as a brown sphere, Glu70, Asn72, Glu75, Glu77 and Glu80 in magenta ball-and-stick, and the metal-ligand distances from the calcium ion to OE2 of Glu70, O of Asn72, O of Glu75, OE1 of Glu77 and OE2 of Glu80 as labelled dashed lines. Centre the view on the site. All five residues are in chain H.",
  "reference": {
   "root": {
    "kind": "root",

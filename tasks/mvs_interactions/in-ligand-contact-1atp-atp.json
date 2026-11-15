@@ -6,7 +6,7 @@
  "structures": [
   "1atp"
  ],
- "prompt": "1ATP: grey cartoon; ATP as teal ball-and-stick; Phe54 of chain E as cyan ball-and-stick; measure the contact between ATP atom O2B and N of Phe54 of chain E with a labelled dashed line; focus the camera on the ligand and the residue.",
+ "prompt": "1ATP: grey cartoon; ATP as teal ball-and-stick; Phe54 as cyan ball-and-stick; measure the contact between ATP atom O2B and N of Phe54 with a labelled dashed line; focus the camera on the ligand and the residue. The residue is in chain E.",
  "reference": {
   "root": {
    "kind": "root",

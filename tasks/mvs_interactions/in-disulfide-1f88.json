@@ -6,7 +6,7 @@
  "structures": [
   "1f88"
  ],
- "prompt": "In 1F88 (grey cartoon), measure the S-S bond of the disulfide between Cys110 of chain B and Cys187 of chain B: the two cysteines in green ball-and-stick, a labelled dashed line between their SG atoms, and the view centred on them.",
+ "prompt": "In 1F88 (grey cartoon), measure the S-S bond of the disulfide between Cys110 and Cys187: the two cysteines in green ball-and-stick, a labelled dashed line between their SG atoms, and the view centred on them. Both residues are in chain B.",
  "reference": {
   "root": {
    "kind": "root",

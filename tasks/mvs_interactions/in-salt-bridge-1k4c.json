@@ -6,7 +6,7 @@
  "structures": [
   "1k4c"
  ],
- "prompt": "Load 1K4C as a grey cartoon. Show Asp110 of chain B and Lys199 of chain B as hot pink ball-and-stick, draw the salt bridge between the OD2 atom of Asp110 of chain B and the NZ atom of Lys199 of chain B as a dashed line labelled with its length, and zoom in on the two residues.",
+ "prompt": "Load 1K4C as a grey cartoon. Show Asp110 and Lys199 as hot pink ball-and-stick, draw the salt bridge between the OD2 atom of Asp110 and the NZ atom of Lys199 as a dashed line labelled with its length, and zoom in on the two residues. Both residues are in chain B.",
  "reference": {
   "root": {
    "kind": "root",

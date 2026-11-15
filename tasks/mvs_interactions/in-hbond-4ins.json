@@ -6,7 +6,7 @@
  "structures": [
   "4ins"
  ],
- "prompt": "Load 4INS as a grey cartoon. Show Gln5 of chain C and Tyr19 of chain C as hot pink ball-and-stick, draw the hydrogen bond between the NE2 atom of Gln5 of chain C and the OH atom of Tyr19 of chain C as a dashed line labelled with its length, and zoom in on the two residues.",
+ "prompt": "Load 4INS as a grey cartoon. Show Gln5 and Tyr19 as hot pink ball-and-stick, draw the hydrogen bond between the NE2 atom of Gln5 and the OH atom of Tyr19 as a dashed line labelled with its length, and zoom in on the two residues. Both residues are in chain C.",
  "reference": {
   "root": {
    "kind": "root",

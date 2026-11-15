@@ -6,7 +6,7 @@
  "structures": [
   "8c86"
  ],
- "prompt": "Show 8C86 as a blue cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Val16 of chain A to the CA atom of Val122 of chain A.",
+ "prompt": "Show 8C86 as a blue cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Val16 to the CA atom of Val122. Both residues are in chain A.",
  "reference": {
   "root": {
    "kind": "root",

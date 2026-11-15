@@ -6,7 +6,7 @@
  "structures": [
   "2ptc"
  ],
- "prompt": "2PTC: grey cartoon; cysteines Cys5 of chain I and Cys55 of chain I as blue ball-and-stick; a dashed line with the distance between their two SG atoms; camera on the two residues.",
+ "prompt": "2PTC: grey cartoon; cysteines Cys5 and Cys55 as blue ball-and-stick; a dashed line with the distance between their two SG atoms; camera on the two residues. Both residues are in chain I.",
  "reference": {
   "root": {
    "kind": "root",

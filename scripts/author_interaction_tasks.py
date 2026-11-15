@@ -22,6 +22,7 @@ No network. Templates, counts and derivations: ``tasks/mvs_interactions/README.m
 from __future__ import annotations
 
 import pathlib
+import re
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -641,6 +642,23 @@ DERIVED = {
 }
 
 
+_IN_CHAIN = re.compile(r"\b([A-Z][a-z]{2}\d+[A-Z]?) of chain (\w+)\b")
+
+
+def say_chain_once(prompt: str) -> str:
+    """When every residue a prompt names is in the same chain, name the chain once, in
+    a closing sentence, instead of after every mention of every residue."""
+    hits = _IN_CHAIN.findall(prompt)
+    if len(hits) < 2 or len({chain for _, chain in hits}) != 1:
+        return prompt
+    chain = hits[0][1]
+    assert prompt.count(f" of chain {chain}") == len(hits) and prompt.rstrip()[-1] in ".?"
+    n = len({res for res, _ in hits})
+    who = "The residue is" if n == 1 else "Both residues are" if n == 2 \
+        else f"All {C.number(n)} residues are"
+    return _IN_CHAIN.sub(r"\1", prompt) + f" {who} in chain {chain}."
+
+
 def build() -> list[dict]:
     picker = C.Picker(TIER)
     built = []
@@ -651,7 +669,7 @@ def build() -> list[dict]:
             entry = c["entry"]
             tid = f"{family}-{entry}" + (f"-{c['suffix']}" if c["suffix"] else "")
             wording = C.pick(c["wordings"], "wording", family, tid)
-            prompt = wording.format(ID=entry.upper(), **c["words"])
+            prompt = say_chain_once(wording.format(ID=entry.upper(), **c["words"]))
             built.append(C.make_task(
                 tid, TIER, family, entry, prompt, C.scene(entry, c["children"]), c["target"],
                 script=SCRIPT, input_files=C.inputs(entry, C.cif_input(entry)),

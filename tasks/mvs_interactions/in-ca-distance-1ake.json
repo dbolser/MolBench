@@ -6,7 +6,7 @@
  "structures": [
   "1ake"
  ],
- "prompt": "Show 1AKE as a yellow cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Ser183 of chain B to the CA atom of Lys200 of chain B.",
+ "prompt": "Show 1AKE as a yellow cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Ser183 to the CA atom of Lys200. Both residues are in chain B.",
  "reference": {
   "root": {
    "kind": "root",

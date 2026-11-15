@@ -6,7 +6,7 @@
  "structures": [
   "2p4e"
  ],
- "prompt": "2P4E: grey cartoon; Glu181 of chain A and Arg248 of chain A as purple ball-and-stick; measure the salt bridge between OE2 of Glu181 of chain A and NH2 of Arg248 of chain A with a labelled dashed line; focus the camera on these two residues.",
+ "prompt": "2P4E: grey cartoon; Glu181 and Arg248 as purple ball-and-stick; measure the salt bridge between OE2 of Glu181 and NH2 of Arg248 with a labelled dashed line; focus the camera on these two residues. Both residues are in chain A.",
  "reference": {
   "root": {
    "kind": "root",

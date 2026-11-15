@@ -6,7 +6,7 @@
  "structures": [
   "1hho"
  ],
- "prompt": "Show 1HHO as a purple cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Gly56 of chain B to the CA atom of Cys112 of chain B.",
+ "prompt": "Show 1HHO as a purple cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Gly56 to the CA atom of Cys112. Both residues are in chain B.",
  "reference": {
   "root": {
    "kind": "root",

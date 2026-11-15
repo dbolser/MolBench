@@ -6,7 +6,7 @@
  "structures": [
   "1trn"
  ],
- "prompt": "Load 1TRN as a grey cartoon. Show the disulfide between Cys136 of chain B and Cys201 of chain B: both cysteines as hot pink ball-and-stick, with the sulfur-sulfur distance measured as a dashed line (SG to SG) labelled with its length, and zoom in on the bridge.",
+ "prompt": "Load 1TRN as a grey cartoon. Show the disulfide between Cys136 and Cys201: both cysteines as hot pink ball-and-stick, with the sulfur-sulfur distance measured as a dashed line (SG to SG) labelled with its length, and zoom in on the bridge. Both residues are in chain B.",
  "reference": {
   "root": {
    "kind": "root",

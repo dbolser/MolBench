@@ -6,7 +6,7 @@
  "structures": [
   "1lmb"
  ],
- "prompt": "In 1LMB (grey cartoon), show the side-chain hydrogen bond from OD2 of Asp14 of chain 3 to OG of Ser77 of chain 3: both residues in blue ball-and-stick, a dashed line between the two atoms with the distance as its label, and the view centred on the pair.",
+ "prompt": "In 1LMB (grey cartoon), show the side-chain hydrogen bond from OD2 of Asp14 to OG of Ser77: both residues in blue ball-and-stick, a dashed line between the two atoms with the distance as its label, and the view centred on the pair. Both residues are in chain 3.",
  "reference": {
   "root": {
    "kind": "root",

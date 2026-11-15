@@ -6,7 +6,7 @@
  "structures": [
   "1igt"
  ],
- "prompt": "In 1IGT (grey cartoon), show the salt bridge between Arg66 of chain B and Asp86 of chain B: both residues in magenta ball-and-stick, a dashed line from NH2 of Arg66 of chain B to OD2 of Asp86 of chain B with the distance as its label, and the view centred on the pair.",
+ "prompt": "In 1IGT (grey cartoon), show the salt bridge between Arg66 and Asp86: both residues in magenta ball-and-stick, a dashed line from NH2 of Arg66 to OD2 of Asp86 with the distance as its label, and the view centred on the pair. Both residues are in chain B.",
  "reference": {
   "root": {
    "kind": "root",

@@ -6,7 +6,7 @@
  "structures": [
   "1iep"
  ],
- "prompt": "1IEP: grey cartoon; Asn322 of chain B and Asp325 of chain B as green ball-and-stick; measure the hydrogen bond between ND2 of Asn322 of chain B and OD2 of Asp325 of chain B with a labelled dashed line; focus the camera on these two residues.",
+ "prompt": "1IEP: grey cartoon; Asn322 and Asp325 as green ball-and-stick; measure the hydrogen bond between ND2 of Asn322 and OD2 of Asp325 with a labelled dashed line; focus the camera on these two residues. Both residues are in chain B.",
  "reference": {
   "root": {
    "kind": "root",
