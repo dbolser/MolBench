@@ -98,6 +98,17 @@ def test_a_scene_becomes_calls_with_the_same_final_state(name):
     assert notes["base"] and isinstance(notes["switched_off"], list)
 
 
+def test_the_call_list_with_the_fewest_hide_toggles_is_chosen():
+    """A grey cartoon of an entry with waters: the cartoon style alone gives the picture,
+    so the twin must not be the default view with an unrequested hide_water."""
+    tree = scene("1aki", [GREY])
+    calls, notes = tr.translate_scene(tree, "1aki")
+    assert notes["switched_off"] == []
+    assert not [a for a in calls if a["action"] == "set_property"]
+    assert {"action": "set_visual_style", "style": "cartoon"} in calls
+    assert tr.state_differences(tree, calls) == []
+
+
 def test_the_equivalence_check_is_not_vacuous():
     entry, tree = SCENES["author-numbered residues as sticks (numbering offset)"]
     calls, _ = tr.translate_scene(tree, entry)

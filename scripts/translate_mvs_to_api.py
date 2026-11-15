@@ -24,9 +24,9 @@ ends (an MVS scene draws only what it lists, a ``load`` already draws everything
 MVS reference is resolved to its drawn state (``molbench.mvs.resolve_scene``, the MVS
 grader's own resolver), and a call list is assembled that reaches that state:
 
-1. the base: the default view, or one global style, whichever keeps most of what the
-   scene draws; every default component the scene does not draw as the base draws it
-   is switched off with its hide toggle;
+1. the base: the default view, or one global style, whichever needs the fewest hide
+   toggles and then the shortest call list; every default component the scene does
+   not draw as the base draws it is switched off with its hide toggle;
 2. one ``color`` call: the colours of what the base draws (the largest colour class as
    ``non_selected_color``, the others as selections over it), and an added
    representation with ``representationColor`` for everything the scene draws that
@@ -615,8 +615,9 @@ def translate_scene(tree: Any, structure: str, rename: dict[str, str] | None = N
                     ) -> tuple[list[dict], dict]:
     """The call list for one MVS scene and the notes on how it was made. Tries the
     default view and each global style the scene could be drawn under, keeps those
-    whose final state equals the scene's, and returns the shortest (the default view
-    on a tie). Raises `Untranslatable`."""
+    whose final state equals the scene's, and returns the one with the fewest hide
+    toggles (steps the request does not state), then the shortest (the default view on
+    a tie). Raises `Untranslatable`."""
     w = scene_state(tree, rename)
     found: list[tuple[tuple, list[dict], dict]] = []
     why: list[str] = []
@@ -632,7 +633,7 @@ def translate_scene(tree: Any, structure: str, rename: dict[str, str] | None = N
             why.append(f"{style or 'default view'}: {diff[0]}")
             continue
         size = len(calls) + sum(len(a.get("data") or []) for a in calls)
-        found.append(((size, n), calls, notes))
+        found.append(((len(notes["switched_off"]), size, n), calls, notes))
     if not found:
         raise Untranslatable("no call list gives this drawing", "; ".join(why))
     return min(found, key=lambda f: f[0])[1:]
