@@ -1031,7 +1031,7 @@ def main() -> int:
     if args.refresh:
         refresh()
     built = C.verify(build(), OUT)
-    return C.write_all(built, OUT, args.check, readme(built))
+    return C.finish(built, OUT, args, readme(built))
 
 
 if __name__ == "__main__":

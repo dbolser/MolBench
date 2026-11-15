@@ -772,7 +772,7 @@ def main() -> int:
         pdb_ids.cache_clear()
     built = C.verify(build(), OUT)
     check_answers(built)
-    return C.write_all(built, OUT, args.check, readme(built))
+    return C.finish(built, OUT, args, readme(built))
 
 
 if __name__ == "__main__":

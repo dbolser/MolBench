@@ -700,7 +700,7 @@ requests are now templates, with atoms found and checked by script.
 def main() -> int:
     args = C.cli(__doc__)
     built = C.verify(build(), OUT)
-    return C.write_all(built, OUT, args.check, readme(built))
+    return C.finish(built, OUT, args, readme(built))
 
 
 if __name__ == "__main__":

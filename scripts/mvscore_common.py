@@ -666,10 +666,71 @@ def summary_tables(built: list[dict]) -> str:
     return "\n".join(lines)
 
 
+INTERACTIONS_FLAG = "molstar_show_non_covalent_interactions"
+
+
+def viewer_check(built: list[dict], cache: pathlib.Path | None = None) -> int:
+    """Load the reference and every accepted alternative of every task in headless Mol*
+    (the pinned bundle, the frozen structure file) and compare what the viewer's own
+    representation objects draw (type, colour, opacity, atoms) with the grader's
+    resolved state of the same scene. Returns the number of scenes that differ or do
+    not load. A scene with Mol*'s computed-interactions display switched on is held to
+    less: every draw of the grader must be in the viewer's state. Lines, labels and the camera are not read back: for a measured line the
+    check is the atom-table one in ``provenance.checks``. Needs the ``execute`` extra
+    and Playwright's Chromium; nothing is written to the tasks."""
+    import importlib.util
+    import tempfile
+    spec = importlib.util.spec_from_file_location("grader_controls",
+                                                  REPO / "scripts" / "grader_controls.py")
+    gc = importlib.util.module_from_spec(spec)
+    sys.modules["grader_controls"] = gc
+    spec.loader.exec_module(gc)
+    cache = cache or pathlib.Path(tempfile.mkdtemp(prefix="mvscore-viewer-"))
+    bad = n = 0
+    with gc.Molstar(cache) as viewer:
+        for t in built:
+            for i, tree in enumerate([t["reference"]] + t["accepted"]):
+                n += 1
+                try:
+                    seen = viewer.state(tree)
+                except Exception as e:  # noqa: BLE001
+                    seen = f"{type(e).__name__}: {str(e).splitlines()[0][:200]}"
+                if isinstance(seen, str):
+                    ok = False
+                elif INTERACTIONS_FLAG in json.dumps(tree):
+                    # With the flag Mol* also draws the surroundings of the component
+                    # (its own computation, which the grader does not model): every
+                    # draw of the grader must be there, on at least its atoms.
+                    mine = gc.grader_state(tree)
+                    ok = bool(mine) and all(seen.get(d, 0) & m == m for d, m in mine.items())
+                else:
+                    ok = gc._grader_vs_viewer(tree, seen)
+                bad += not ok
+                name = "reference" if i == 0 else f"accepted {i}"
+                print(f"viewer  {t['id']} [{name}]: {'agrees' if ok else 'DIFFERS'}"
+                      + (f" ({seen[:160]})" if isinstance(seen, str) else ""), flush=True)
+    version = (REPO / "molbench" / "static" / "molstar" / "VERSION").read_text().strip()
+    print(f"viewer: {n} scenes of {len(built)} tasks loaded in Mol* {version}; {bad} differ")
+    return bad
+
+
+def finish(built: list[dict], out_dir: pathlib.Path, args: argparse.Namespace,
+           readme: str | None = None) -> int:
+    """Write (or, with --check, compare) the task files; with --viewer also run the
+    Mol* read-back, which fails the command if any scene differs."""
+    status = write_all(built, out_dir, args.check, readme)
+    if args.viewer:
+        status = status or (1 if viewer_check(built) else 0)
+    return status
+
+
 def cli(doc: str) -> argparse.Namespace:
     ap = argparse.ArgumentParser(description=doc.strip().split("\n\n")[0])
     ap.add_argument("--check", action="store_true",
                     help="write nothing; fail if the task files would change")
+    ap.add_argument("--viewer", action="store_true",
+                    help="also load every reference in headless Mol* and compare what it "
+                         "draws with the grader's resolved state")
     ap.add_argument("--refresh", action="store_true",
                     help="re-download the frozen inputs this generator owns (network)")
     return ap.parse_args()

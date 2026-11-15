@@ -663,7 +663,7 @@ Replaces the 36 tasks of the old 7 x 6 grid and the five hand-written tasks of
 def main() -> int:
     args = C.cli(__doc__)
     built = C.verify(build(), OUT)
-    return C.write_all(built, OUT, args.check, readme(built))
+    return C.finish(built, OUT, args, readme(built))
 
 
 if __name__ == "__main__":
