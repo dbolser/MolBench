@@ -17,6 +17,7 @@ import pytest
 
 from molbench import runner
 from molbench.runner import load_tasks
+from molbench.tasks import LOOKUP_TIERS
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 FIXTURE = pathlib.Path(__file__).resolve().parent / "data" / "3ptb.cif.gz"
@@ -56,8 +57,15 @@ def test_pack_builder_is_deterministic_on_a_frozen_cif():
 def test_every_mvs_task_has_a_current_pack():
     b = _builder()
     mvs = load_tasks(["mvs"])
-    assert mvs and all(t.get("grounding", {}).get("rule") == b.RULE for t in mvs), \
-        "re-run scripts/build_grounding_packs.py"
+    assert mvs
+    for t in mvs:
+        rule = (t.get("grounding") or {}).get("rule")
+        if t.get("_legacy"):        # an old-format file: its pack comes from the builder
+            assert rule == b.RULE, f"{t['id']}: re-run scripts/build_grounding_packs.py"
+        elif t["tier"] in LOOKUP_TIERS:   # written by the task's own generator
+            assert rule, f"{t['id']}: a lookup-tier task without a grounding pack"
+        else:                       # TASK_FORMAT: a pack sits only on a lookup tier
+            assert rule is None, f"{t['id']}: a grounding pack outside the lookup tiers"
 
 
 def test_no_pack_contains_a_scene_or_an_instruction():
@@ -108,7 +116,8 @@ def test_runner_sends_the_pack_only_with_grounding(monkeypatch, grounding):
         n_with = sum(1 for t in tasks if t.get("grounding"))
         assert meta["n_tasks_with_pack"] == n_with > 0
         assert meta["n_tasks_without_pack"] == len(tasks) - n_with > 0  # api_calling
-        assert meta["grounding_rules"] == ["r6-v1"]
+        assert meta["grounding_rules"] == sorted({t["grounding"]["rule"] for t in tasks
+                                                  if t.get("grounding")})
     else:
         assert "n_tasks_with_pack" not in meta
 

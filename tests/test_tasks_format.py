@@ -86,7 +86,9 @@ def test_old_task_files_load_through_the_adapter():
     assert all(t["tier"] == T.LEGACY_API_TIER for t in old if t["track"] == "api")
     # The ungraded visual_rubric files are not tasks of either track.
     assert not any("vis-" in t["id"] for t in corpus)
-    assert {t["id"] for t in runner.load_tasks(None)} > {t["id"] for t in corpus}
+    # (They were moved to tasks_future/, which nothing loads; were any left under tasks/,
+    # the legacy loader would still return them and the corpus would not.)
+    assert {t["id"] for t in runner.load_tasks(None)} >= {t["id"] for t in corpus}
 
 
 def test_tracks_filter_takes_either_name():
