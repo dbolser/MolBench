@@ -1,12 +1,12 @@
 {
- "id": "acc-residue-colour-3ave-mvs",
+ "id": "acc-residue-colour-4ins-mvs",
  "track": "mvs",
  "tier": "accept_set",
  "family": "acc-residue-colour",
  "structures": [
-  "3ave"
+  "4ins"
  ],
- "prompt": "Show 3AVE with the protein as a cartoon. Colour Leu358 orange.",
+ "prompt": "Show 4INS with the protein as a cartoon. Colour Lys29 yellow.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/3ave.cif"
+      "url": "https://files.rcsb.org/download/4ins.cif"
      },
      "children": [
       {
@@ -44,10 +44,10 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange",
+                "color": "yellow",
                 "selector": {
-                 "auth_asym_id": "A",
-                 "auth_seq_id": 358
+                 "auth_asym_id": "B",
+                 "auth_seq_id": 29
                 }
                }
               }
@@ -72,7 +72,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/3ave.cif"
+       "url": "https://files.rcsb.org/download/4ins.cif"
       },
       "children": [
        {
@@ -102,10 +102,10 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "orange",
+                 "color": "yellow",
                  "selector": {
-                  "auth_asym_id": "B",
-                  "auth_seq_id": 358
+                  "auth_asym_id": "D",
+                  "auth_seq_id": 29
                  }
                 }
                }
@@ -129,7 +129,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/3ave.cif"
+       "url": "https://files.rcsb.org/download/4ins.cif"
       },
       "children": [
        {
@@ -159,15 +159,15 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "orange",
+                 "color": "yellow",
                  "selector": [
                   {
-                   "auth_asym_id": "A",
-                   "auth_seq_id": 358
+                   "auth_asym_id": "B",
+                   "auth_seq_id": 29
                   },
                   {
-                   "auth_asym_id": "B",
-                   "auth_seq_id": 358
+                   "auth_asym_id": "D",
+                   "auth_seq_id": 29
                   }
                  ]
                 }
@@ -190,30 +190,30 @@
  "target": [
   {
    "selector": {
-    "auth_asym_id": "A",
-    "auth_seq_id": 358
+    "auth_asym_id": "B",
+    "auth_seq_id": 29
    },
    "representation": "cartoon",
-   "color": "orange"
+   "color": "yellow"
   }
  ],
- "twin_of": "acc-residue-colour-3ave-api",
+ "twin_of": "acc-residue-colour-4ins-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_accept_set_tasks.py",
   "inputs": [
-   "data/panel/facts/3ave.json",
-   "molbench/atom_tables/3ave.json.gz"
+   "data/panel/facts/4ins.json",
+   "molbench/atom_tables/4ins.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "each of the 3 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
-   "target selects 8 atoms on the frozen atom table",
+   "target selects 9 atoms on the frozen atom table",
    "no accepted state equals another (pairwise, by the grader)",
    "twin selects the same target atoms"
   ],
@@ -221,21 +221,21 @@
   "template": "acc-residue-colour",
   "wording": 1,
   "slots": {
-   "ID": "3AVE",
-   "id": "3ave",
+   "ID": "4INS",
+   "id": "4ins",
    "poly": "protein",
-   "thing": "Leu358",
-   "colour": "orange"
+   "thing": "Lys29",
+   "colour": "yellow"
   },
   "open": "which chain's copy of the named residue (or all)",
   "rule": "The request asks to colour a residue, named by type and author number but with no chain; the protein is present as several identical chains. Accepted: the residue coloured in any one chain, or in every chain.",
   "candidates": [
-   "LEU A:358",
-   "LEU B:358"
+   "LYS B:29",
+   "LYS D:29"
   ],
   "accepted_states": [
-   "LEU A:358",
-   "LEU B:358",
+   "LYS B:29",
+   "LYS D:29",
    "both copies"
   ],
   "not_accepted": [
@@ -244,7 +244,7 @@
    "an added representation (sticks) for the residue: only a colour is requested"
   ],
   "difficulty": {
-   "needs_numbering_offset": true,
+   "needs_numbering_offset": false,
    "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
@@ -255,18 +255,18 @@
   },
   "residues": [
    {
-    "auth_asym_id": "A",
-    "auth_seq_id": 358,
-    "label_asym_id": "A",
-    "label_seq_id": 134,
-    "comp_id": "LEU"
+    "auth_asym_id": "B",
+    "auth_seq_id": 29,
+    "label_asym_id": "B",
+    "label_seq_id": 29,
+    "comp_id": "LYS"
    },
    {
-    "auth_asym_id": "B",
-    "auth_seq_id": 358,
-    "label_asym_id": "B",
-    "label_seq_id": 134,
-    "comp_id": "LEU"
+    "auth_asym_id": "D",
+    "auth_seq_id": 29,
+    "label_asym_id": "D",
+    "label_seq_id": 29,
+    "comp_id": "LYS"
    }
   ]
  },
@@ -280,29 +280,29 @@
   [
    {
     "selector": {
-     "auth_asym_id": "B",
-     "auth_seq_id": 358
+     "auth_asym_id": "D",
+     "auth_seq_id": 29
     },
     "representation": "cartoon",
-    "color": "orange"
+    "color": "yellow"
    }
   ],
   [
    {
     "selector": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 358
+      "auth_asym_id": "B",
+      "auth_seq_id": 29
      },
      {
-      "auth_asym_id": "B",
-      "auth_seq_id": 358
+      "auth_asym_id": "D",
+      "auth_seq_id": 29
      }
     ],
     "representation": "cartoon",
-    "color": "orange"
+    "color": "yellow"
    }
   ]
  ],
- "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 3 (LEU A:358); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 3 (LYS B:29); the others are in 'accepted', in the order of provenance.accepted_states."
 }

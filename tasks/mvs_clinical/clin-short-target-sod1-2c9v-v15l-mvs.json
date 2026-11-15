@@ -90,7 +90,7 @@
  "twin_of": "clin-short-target-sod1-2c9v-v15l-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": {
   "rule": "clinical-v1",
   "text": "PDB 2C9V: Atomic resolution structure of Cu-Zn Human Superoxide dismutase\nMethod: X-RAY DIFFRACTION, 1.07 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (SUPEROXIDE DISMUTASE [CU-ZN]), protein, 153 of 153 residues observed: auth 1-153 = label 1-153\n  F [B]: entity 1 (SUPEROXIDE DISMUTASE [CU-ZN]), protein, 153 of 153 residues observed: auth 1-153 = label 1-153\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00441 (SODC_HUMAN): UniProt 2-154 = auth 1-153\n  F [B]: P00441 (SODC_HUMAN): UniProt 2-154 = auth 1-153\n\nFrom the request:\n  SOD1: UniProt P00441 (SODC_HUMAN, Superoxide dismutase [Cu-Zn])\n  V15L: UniProt position 15 (Val in UniProt) -> in 2C9V: auth A 14 VAL (label A 14); auth F 14 VAL (label B 14)"

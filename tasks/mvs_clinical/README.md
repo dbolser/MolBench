@@ -45,41 +45,41 @@ Each template has three wordings; the wording, the colours, the representation (
 | UniProt accession given in the prompt | 43 |
 | on an AlphaFold DB model | 7 |
 | in a pair (same variant on two structures) | 14 |
-| split: public / held back | 69 / 10 |
+| split: public / held back | 59 / 20 |
 
-Held-back structures (6): 1CTQ, 3F9M, 3K34, 8CE0, 8PI2, 9FB2. They are in no public task of this tier. They were drawn (seeded) from the structures that no task published before this corpus uses, half from those numbered differently from UniProt.
+Held-back structures (8): 2C9V, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F. They are in no public task of this tier. They were drawn (seeded) from the structures that no task published before this corpus uses, half from those numbered differently from UniProt.
 
 Proteins: APOE, AR, CA2, CALM1, CFTR, CRYGD, F2, F9, GBA1, GCK, GLA, HBA1, HBB, HRAS, INS, LYZ, PAH, PRSS1, PTEN, SERPINA1, SERPINC1, SLC2A1, SOD1, TP53, TPI1, TTR, VHL.
 
 | structure | tasks | split |
 |---|---:|---|
-| 1ctq | 1 | held back |
+| 1ctq | 1 | public |
 | 1d5r | 1 | public |
 | 1hho | 3 | public |
 | 1hk0 | 3 | public |
 | 1trn | 3 | public |
 | 1tup | 4 | public |
-| 2c9v | 5 | public |
+| 2c9v | 5 | held back |
 | 2hhb | 6 | public |
 | 2nwd | 2 | public |
-| 3f9m | 1 | held back |
-| 3k34 | 1 | held back |
-| 3kcg | 3 | public |
+| 3f9m | 1 | public |
+| 3k34 | 1 | public |
+| 3kcg | 3 | held back |
 | 5cj6 | 1 | public |
 | 5edm | 4 | public |
-| 5ni1 | 2 | public |
+| 5ni1 | 2 | held back |
 | 5uak | 1 | public |
-| 6hpo | 1 | public |
+| 6hpo | 1 | held back |
 | 6m7h | 4 | public |
-| 6tc2 | 4 | public |
-| 6tha | 1 | public |
+| 6tc2 | 4 | held back |
+| 6tha | 1 | held back |
 | 8c86 | 6 | public |
 | 8ce0 | 3 | held back |
 | 8eph | 5 | public |
-| 8k7f | 1 | public |
-| 8pi2 | 3 | held back |
+| 8k7f | 1 | held back |
+| 8pi2 | 3 | public |
 | 9f69 | 1 | public |
-| 9fb2 | 1 | held back |
+| 9fb2 | 1 | public |
 | 9gio | 1 | public |
 | af-p04637-f1-model_v6 | 2 | public |
 | af-p68871-f1-model_v6 | 5 | public |

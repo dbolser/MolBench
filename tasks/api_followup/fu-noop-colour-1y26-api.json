@@ -61,7 +61,7 @@
  "twin_of": "fu-noop-colour-1y26-mvs",
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_followup_tasks.py",

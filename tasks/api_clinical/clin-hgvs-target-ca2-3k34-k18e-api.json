@@ -59,7 +59,7 @@
  "twin_of": "clin-hgvs-target-ca2-3k34-k18e-mvs",
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": {
   "rule": "clinical-v1",
   "text": "PDB 3K34: Human carbonic anhydrase II with a sulfonamide inhibitor\nMethod: X-RAY DIFFRACTION, 0.90 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Carbonic anhydrase 2), protein, 258 of 260 residues observed: auth 3-125 = label 3-125; auth 127-261 = label 126-260\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00918 (CAH2_HUMAN): UniProt 3-125 = auth 3-125; UniProt 126-260 = auth 127-261\n\nFrom the request:\n  CA2: UniProt P00918 (CAH2_HUMAN, Carbonic anhydrase 2)\n  p.Lys18Glu: UniProt position 18 (Lys in UniProt) -> in 3K34: auth A 18 LYS (label A 18)"

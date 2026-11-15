@@ -1,0 +1,663 @@
+{
+ "id": "acc-chain-colours-1aay-mvs",
+ "track": "mvs",
+ "tier": "accept_set",
+ "family": "acc-chain-colours",
+ "structures": [
+  "1aay"
+ ],
+ "prompt": "Load 1AAY and show it as a cartoon, with the three chains coloured green, magenta and cyan.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1aay.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green",
+                "selector": {
+                 "label_asym_id": "A"
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta",
+                "selector": {
+                 "label_asym_id": "B"
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan",
+                "selector": {
+                 "label_asym_id": "C"
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1aay.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green",
+                 "selector": {
+                  "label_asym_id": "A"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan",
+                 "selector": {
+                  "label_asym_id": "B"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta",
+                 "selector": {
+                  "label_asym_id": "C"
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1aay.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta",
+                 "selector": {
+                  "label_asym_id": "A"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green",
+                 "selector": {
+                  "label_asym_id": "B"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan",
+                 "selector": {
+                  "label_asym_id": "C"
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1aay.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta",
+                 "selector": {
+                  "label_asym_id": "A"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan",
+                 "selector": {
+                  "label_asym_id": "B"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green",
+                 "selector": {
+                  "label_asym_id": "C"
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1aay.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan",
+                 "selector": {
+                  "label_asym_id": "A"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green",
+                 "selector": {
+                  "label_asym_id": "B"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta",
+                 "selector": {
+                  "label_asym_id": "C"
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1aay.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan",
+                 "selector": {
+                  "label_asym_id": "A"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta",
+                 "selector": {
+                  "label_asym_id": "B"
+                 }
+                }
+               },
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green",
+                 "selector": {
+                  "label_asym_id": "C"
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A"
+   },
+   "representation": "cartoon",
+   "color": "green"
+  },
+  {
+   "selector": {
+    "label_asym_id": "B"
+   },
+   "representation": "cartoon",
+   "color": "magenta"
+  },
+  {
+   "selector": {
+    "label_asym_id": "C"
+   },
+   "representation": "cartoon",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "acc-chain-colours-1aay-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/1aay.json",
+   "molbench/atom_tables/1aay.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 6 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 1179 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-chain-colours",
+  "wording": 0,
+  "slots": {
+   "ID": "1AAY",
+   "id": "1aay",
+   "n": "three",
+   "colours": "green, magenta and cyan"
+  },
+  "open": "which chain gets which colour",
+  "rule": "The request gives one colour per chain but not which chain gets which. Accepted: every one-to-one assignment of the named colours to the polymer chains (n! states), on a cartoon of the whole polymer.",
+  "candidates": [
+   "chain B",
+   "chain C",
+   "chain A"
+  ],
+  "accepted_states": [
+   "chain B green, chain C magenta, chain A cyan",
+   "chain B green, chain C cyan, chain A magenta",
+   "chain B magenta, chain C green, chain A cyan",
+   "chain B magenta, chain C cyan, chain A green",
+   "chain B cyan, chain C green, chain A magenta",
+   "chain B cyan, chain C magenta, chain A green"
+  ],
+  "not_accepted": [
+   "a colour used on two chains, or a chain left uncoloured: the request names one colour per chain",
+   "other colours, or a colour-by-chain theme with the viewer's own colours: the request names the colours",
+   "ligands, ions or water drawn or coloured: not requested"
+  ],
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": true,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 3,
+   "n_readings": 6,
+   "n_accepted_states": 6
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "green"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "cyan"
+   },
+   {
+    "selector": {
+     "label_asym_id": "C"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "green"
+   },
+   {
+    "selector": {
+     "label_asym_id": "C"
+    },
+    "representation": "cartoon",
+    "color": "cyan"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "cyan"
+   },
+   {
+    "selector": {
+     "label_asym_id": "C"
+    },
+    "representation": "cartoon",
+    "color": "green"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "cyan"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "green"
+   },
+   {
+    "selector": {
+     "label_asym_id": "C"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "cyan"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   },
+   {
+    "selector": {
+     "label_asym_id": "C"
+    },
+    "representation": "cartoon",
+    "color": "green"
+   }
+  ]
+ ],
+ "notes": "Left open: which chain gets which colour. Reference = accepted state 1 of 6 (chain B green, chain C magenta, chain A cyan); the others are in 'accepted', in the order of provenance.accepted_states."
+}

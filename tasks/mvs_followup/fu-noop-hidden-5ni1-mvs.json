@@ -169,7 +169,7 @@
  "twin_of": "fu-noop-hidden-5ni1-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_followup_tasks.py",

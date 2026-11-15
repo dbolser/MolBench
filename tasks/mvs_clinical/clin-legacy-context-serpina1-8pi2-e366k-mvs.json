@@ -100,7 +100,7 @@
  "twin_of": "clin-legacy-context-serpina1-8pi2-e366k-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": {
   "rule": "clinical-v1",
   "text": "PDB 8PI2: Native alpha-1-antitrypsin at 1.5 Angstrom (Cys232Ser)\nMethod: X-RAY DIFFRACTION, 1.48 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Alpha-1-antitrypsin), protein, 371 of 404 residues observed: auth 24-394 = label 34-404\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P01009 (A1AT_HUMAN): UniProt 48-418 = auth 24-394\n\nFrom the request:\n  SERPINA1: UniProt P01009 (A1AT_HUMAN, Alpha-1-antitrypsin)\n  E342K (mature-protein numbering; 24 residues precede the mature chain in UniProt) = UniProt position 366\n  E342K: UniProt position 366 (Glu in UniProt) -> in 8PI2: auth A 342 GLU (label A 352)"

@@ -8,7 +8,7 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 (`rule`), their names in order (`accepted_states`), what is not accepted and why
 (`not_accepted`), and the difficulty facts (`difficulty`).
 
-15 tasks on 12 structures; 3 tasks on 3 held-back structures; 15 have a twin on the other track.
+15 tasks on 12 structures; 4 tasks on 3 held-back structures; 15 have a twin on the other track.
 
 ## Templates
 
@@ -16,7 +16,7 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 |---|---:|---|---|---|
 | `acc-ligand-which` | 3 | 6 | which of two different ligands (or both) | Open 1RX2 with the protein as a cartoon and the ligand in cyan ball-and-stick. |
 | `acc-ligand-colours` | 3 | 4 | which ligand gets which colour | Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue. |
-| `acc-chain-colours` | 3 | 2, 6 | which chain gets which colour | Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta. |
+| `acc-chain-colours` | 3 | 2, 6, 18 | which chain gets which colour | Load 1AAY and show it as a cartoon, with the three chains coloured green, magenta and cyan. |
 | `acc-ligand-copy` | 3 | 6 | which copy of the named ligand (or all) | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
 | `acc-residue-colour` | 3 | 6 | which chain's copy of the named residue (or all) | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
 
@@ -66,21 +66,21 @@ With five templates of three tasks each, a template is 20% of this small tier (t
 
 | id | structure | split | states | candidates |
 |---|---|---|---:|---|
-| `acc-chain-colours-1f88-api` | 1f88 | heldback | 6 | chain A, chain B |
-| `acc-chain-colours-2ptc-api` | 2ptc | public | 6 | chain E, chain I |
+| `acc-chain-colours-1aay-api` | 1aay | public | 18 | chain B, chain C, chain A |
+| `acc-chain-colours-1f88-api` | 1f88 | public | 6 | chain A, chain B |
 | `acc-chain-colours-5uak-api` | 5uak | public | 2 | chain A, chain R |
-| `acc-ligand-colours-1rx2-api` | 1rx2 | public | 4 | FOL, NAP |
+| `acc-ligand-colours-1rx2-api` | 1rx2 | heldback | 4 | FOL, NAP |
 | `acc-ligand-colours-2cpp-api` | 2cpp | public | 4 | CAM, HEM |
 | `acc-ligand-colours-9gio-api` | 9gio | public | 4 | 3JF, A1IMD |
 | `acc-ligand-copy-1iep-api` | 1iep | public | 6 | STI A:201, STI B:202 |
 | `acc-ligand-copy-8c86-api` | 8c86 | public | 6 | TQ0 B:201, TQ0 A:201 |
 | `acc-ligand-copy-8k7f-api` | 8k7f | heldback | 6 | VMF A:502, VMF B:503 |
-| `acc-ligand-which-1rx2-api` | 1rx2 | public | 6 | FOL, NAP |
+| `acc-ligand-which-1rx2-api` | 1rx2 | heldback | 6 | FOL, NAP |
 | `acc-ligand-which-2cpp-api` | 2cpp | public | 6 | CAM, HEM |
 | `acc-ligand-which-9gio-api` | 9gio | public | 6 | 3JF, A1IMD |
 | `acc-residue-colour-1aoi-api` | 1aoi | public | 6 | ILE B:66, ILE F:66 |
-| `acc-residue-colour-1lmb-api` | 1lmb | public | 6 | ILE 3:84, ILE 4:84 |
-| `acc-residue-colour-3ave-api` | 3ave | heldback | 6 | LEU A:358, LEU B:358 |
+| `acc-residue-colour-1igt-api` | 1igt | heldback | 6 | ASP B:101, ASP D:101 |
+| `acc-residue-colour-4ins-api` | 4ins | public | 6 | LYS B:29, LYS D:29 |
 
 ## The seven seed prompts of issue #4
 
@@ -104,5 +104,5 @@ enumerable neighbour: the colours are named, the assignment is not.
 
 - Structures: PDB entries of the panel with one model and at most 15,000 atoms; never 1HSG. At most 6 tasks of the tier (both tracks) on one structure.
 - "Any one, or all": with more than two copies, a several-but-not-all answer is not accepted, because no reading of the request picks it.
-- Held-back structures are not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus: they are the corpus-wide list in `data/panel/heldback.json` when that file exists (or `--heldback-file`), and until then a fixed fifth of the panel by hash of the entry id (`heldback_structures()`). About a fifth of the tier's tasks are on them. In this tier: 1f88, 1igt, 1udt, 3ave, 8k7f.
+- Held-back structures are not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus: they are the corpus-wide list in `data/panel/heldback.json` when that file exists (or `--heldback-file`), and until then a fixed fifth of the panel by hash of the entry id (`heldback_structures()`). About a fifth of the tier's tasks are on them. In this tier: 1igt, 1rx2, 5ni1, 8k7f.
 - The cartoon is not given a colour by the request, so the reference leaves it at the viewer's default.

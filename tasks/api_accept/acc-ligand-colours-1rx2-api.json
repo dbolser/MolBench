@@ -127,7 +127,7 @@
  "twin_of": "acc-ligand-colours-1rx2-mvs",
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_accept_set_tasks.py",

@@ -59,7 +59,7 @@
  "twin_of": "clin-hgvs-target-gba1-9fb2-n409s-mvs",
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": {
   "rule": "clinical-v1",
   "text": "PDB 9FB2: Gcase in complex with small molecule inhibitor 1\nMethod: X-RAY DIFFRACTION, 1.14 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Lysosomal acid glucosylceramidase), protein, 499 of 546 residues observed: auth 40-538 = label 40-538\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P04062 (GBA1_HUMAN): UniProt 40-536 = auth 40-536\n\nFrom the request:\n  GBA1: UniProt P04062 (GBA1_HUMAN, Lysosomal acid glucosylceramidase)\n  p.Asn409Ser: UniProt position 409 (Asn in UniProt) -> in 9FB2: auth A 409 ASN (label A 409)"

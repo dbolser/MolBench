@@ -306,7 +306,7 @@
  "twin_of": "acc-ligand-which-1rx2-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_accept_set_tasks.py",

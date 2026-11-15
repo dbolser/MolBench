@@ -107,7 +107,7 @@
  "twin_of": "clin-hgvs-context-slc2a1-6tha-l215f-mvs",
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": {
   "rule": "clinical-v1",
   "text": "PDB 6THA: Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation\nMethod: X-RAY DIFFRACTION, 2.40 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Solute carrier family 2, facilitated glucose transporter member 1), protein, 448 of 496 residues observed: auth 8-455 = label 8-455\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P11166 (GTR1_HUMAN): UniProt 8-455 = auth 8-455\n\nFrom the request:\n  SLC2A1: UniProt P11166 (GTR1_HUMAN, Solute carrier family 2, facilitated glucose transporter member 1)\n  p.Leu215Phe: UniProt position 215 (Leu in UniProt) -> in 6THA: auth A 215 LEU (label A 215)"

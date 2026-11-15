@@ -2,7 +2,7 @@
 
 Written by `scripts/generate_api_tasks.py` (seed 20261113); do not edit by hand. Re-running the script reproduces every file byte for byte (`--check`). The 20 curated tasks are in `tasks/api_calling/`.
 
-120 tasks on 68 structures; 28 held back.
+120 tasks on 68 structures; 26 held back.
 
 | tier | template (family) | tasks | share of the tier (both directories) | how the reference is derived |
 |---|---|---:|---:|---|
@@ -44,12 +44,12 @@ Written by `scripts/generate_api_tasks.py` (seed 20261113); do not edit by hand.
 
 ## Held-back split
 
-Held-back structures (15): 1hrc 1iep 1plc 1rx2 2c9v 3ert 3k34 3kcg 5edm 7a4m 8c86 8ce0 9fb2 9gio af-p68871-f1-model_v6. Rule: of the panel entries that no task used before this corpus, ranked by SHA-256 of `molbench-heldback-v1|<id>`, the first fifth of the panel, 8CE0 (held back by the fixture tasks) always among them; `data/panel/heldback.json` overrides it. No public task of this script uses one of them.
+Held-back structures (15): 1ehz 1fs3 1igt 1lmb 1rx2 2c9v 2omf 2ptc 3kcg 5ni1 6hpo 6tc2 6tha 8ce0 8k7f. Rule: of the panel entries that no task used before this corpus, ranked by SHA-256 of `molbench-heldback-v1|<id>`, the first fifth of the panel, 8CE0 (held back by the fixture tasks) always among them; `data/panel/heldback.json` overrides it. No public task of this script uses one of them.
 
 | tier | structures | held-back structures | tasks | held-back tasks |
 |---|---:|---:|---:|---:|
-| tool_only | 30 | 7 (23%) | 34 | 7 |
-| translation | 73 | 14 (19%) | 106 | 21 |
+| tool_only | 30 | 5 (17%) | 34 | 5 |
+| translation | 73 | 15 (21%) | 106 | 21 |
 
 ## Viewer rules that tasks turn on
 

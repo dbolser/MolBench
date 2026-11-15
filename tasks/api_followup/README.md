@@ -5,7 +5,7 @@ Each task is a start state (the list of calls made so far), an edit request, and
 as the reference. Start state and reference are built from the same component list,
 from the frozen panel only. Only the final state is graded.
 
-- **44 tasks** on 44 structures, at most 3 per structure; 7 held back (structures: 1f88, 1mbn, 1udt, 1y26, 2p4e, 6tha, 8k7f).
+- **44 tasks** on 44 structures, at most 3 per structure; 10 held back (structures: 1lmb, 1rx2, 2c9v, 2omf, 2ptc, 5ni1, 6hpo, 6tc2, 6tha, 8k7f).
 - **8 need no change** (`context.noop`): the reference is the start state.
 - **36 have a twin** on the MVS track (`twin_of`): same request, same structure, same target atoms.
 

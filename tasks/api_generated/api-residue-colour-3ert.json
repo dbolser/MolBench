@@ -61,7 +61,7 @@
   "twin_of": null,
   "paraphrase_of": null,
   "style": "full",
-  "split": "heldback",
+  "split": "public",
   "grounding": null,
   "provenance": {
     "script": "scripts/generate_api_tasks.py",

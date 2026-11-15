@@ -159,7 +159,7 @@
  "twin_of": "acc-chain-colours-1f88-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_accept_set_tasks.py",

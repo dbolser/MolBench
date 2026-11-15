@@ -177,7 +177,7 @@
  "twin_of": "fu-recolour-ligand-1udt-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "heldback",
+ "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_followup_tasks.py",

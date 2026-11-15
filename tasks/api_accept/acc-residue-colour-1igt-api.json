@@ -1,24 +1,24 @@
 {
- "id": "acc-residue-colour-1lmb-api",
+ "id": "acc-residue-colour-1igt-api",
  "track": "api",
  "tier": "accept_set",
  "family": "acc-residue-colour",
  "structures": [
-  "1lmb"
+  "1igt"
  ],
- "prompt": "Open 1LMB with the protein and DNA as a cartoon, with Ile84 coloured red.",
+ "prompt": "Show 1IGT with the protein as a cartoon. Colour Asp101 yellow.",
  "reference": [
   {
    "action": "load",
-   "molecule_id": "1lmb"
+   "molecule_id": "1igt"
   },
   {
    "action": "color",
    "data": [
     {
-     "auth_asym_id": "3",
-     "auth_residue_number": 84,
-     "color": "red"
+     "auth_asym_id": "B",
+     "auth_residue_number": 101,
+     "color": "yellow"
     }
    ]
   }
@@ -27,7 +27,7 @@
   [
    {
     "action": "load",
-    "molecule_id": "1lmb"
+    "molecule_id": "1igt"
    },
    {
     "action": "set_visual_style",
@@ -37,9 +37,9 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "3",
-      "auth_residue_number": 84,
-      "color": "red"
+      "auth_asym_id": "B",
+      "auth_residue_number": 101,
+      "color": "yellow"
      }
     ]
    }
@@ -47,15 +47,15 @@
   [
    {
     "action": "load",
-    "molecule_id": "1lmb"
+    "molecule_id": "1igt"
    },
    {
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "4",
-      "auth_residue_number": 84,
-      "color": "red"
+      "auth_asym_id": "D",
+      "auth_residue_number": 101,
+      "color": "yellow"
      }
     ]
    }
@@ -63,7 +63,7 @@
   [
    {
     "action": "load",
-    "molecule_id": "1lmb"
+    "molecule_id": "1igt"
    },
    {
     "action": "set_visual_style",
@@ -73,9 +73,9 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "4",
-      "auth_residue_number": 84,
-      "color": "red"
+      "auth_asym_id": "D",
+      "auth_residue_number": 101,
+      "color": "yellow"
      }
     ]
    }
@@ -83,20 +83,20 @@
   [
    {
     "action": "load",
-    "molecule_id": "1lmb"
+    "molecule_id": "1igt"
    },
    {
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "3",
-      "auth_residue_number": 84,
-      "color": "red"
+      "auth_asym_id": "B",
+      "auth_residue_number": 101,
+      "color": "yellow"
      },
      {
-      "auth_asym_id": "4",
-      "auth_residue_number": 84,
-      "color": "red"
+      "auth_asym_id": "D",
+      "auth_residue_number": 101,
+      "color": "yellow"
      }
     ]
    }
@@ -104,7 +104,7 @@
   [
    {
     "action": "load",
-    "molecule_id": "1lmb"
+    "molecule_id": "1igt"
    },
    {
     "action": "set_visual_style",
@@ -114,14 +114,14 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "3",
-      "auth_residue_number": 84,
-      "color": "red"
+      "auth_asym_id": "B",
+      "auth_residue_number": 101,
+      "color": "yellow"
      },
      {
-      "auth_asym_id": "4",
-      "auth_residue_number": 84,
-      "color": "red"
+      "auth_asym_id": "D",
+      "auth_residue_number": 101,
+      "color": "yellow"
      }
     ]
    }
@@ -131,54 +131,54 @@
  "target": [
   {
    "selector": {
-    "auth_asym_id": "3",
-    "auth_seq_id": 84
+    "auth_asym_id": "B",
+    "auth_seq_id": 101
    },
    "representation": "cartoon",
-   "color": "red"
+   "color": "yellow"
   }
  ],
- "twin_of": "acc-residue-colour-1lmb-mvs",
+ "twin_of": "acc-residue-colour-1igt-mvs",
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_accept_set_tasks.py",
   "inputs": [
-   "data/panel/facts/1lmb.json",
-   "molbench/atom_tables/1lmb.json.gz"
+   "data/panel/facts/1igt.json",
+   "molbench/atom_tables/1igt.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
    "each of the 6 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
-   "target selects 8 atoms on the frozen atom table",
+   "target selects 9 atoms on the frozen atom table",
    "no accepted state equals another (pairwise, by the grader)",
    "twin selects the same target atoms"
   ],
   "seed": "molbench-accept-set-v1",
   "template": "acc-residue-colour",
-  "wording": 2,
+  "wording": 1,
   "slots": {
-   "ID": "1LMB",
-   "id": "1lmb",
-   "poly": "protein and DNA",
-   "thing": "Ile84",
-   "colour": "red"
+   "ID": "1IGT",
+   "id": "1igt",
+   "poly": "protein",
+   "thing": "Asp101",
+   "colour": "yellow"
   },
   "open": "which chain's copy of the named residue (or all)",
   "rule": "The request asks to colour a residue, named by type and author number but with no chain; the protein is present as several identical chains. Accepted: the residue coloured in any one chain, or in every chain. On the API track each reading is accepted in every call form that ends in a state of its own: (default) one colour call on a bare load, which leaves everything else as the viewer draws it; (style) the cartoon style set first, so that only the polymer is drawn and a ligand asked for as ball-and-stick is an added representation, which is the state the MVS twin draws; (author, chain colours only) each chain named by its author id on a bare load, which also paints the ligands, ions and water deposited under that author chain. The request says nothing about what it does not name, so none of these is wrong.",
   "candidates": [
-   "ILE 3:84",
-   "ILE 4:84"
+   "ASP B:101",
+   "ASP D:101"
   ],
   "accepted_states": [
-   "ILE 3:84",
-   "ILE 3:84; the cartoon style set first",
-   "ILE 4:84",
-   "ILE 4:84; the cartoon style set first",
+   "ASP B:101",
+   "ASP B:101; the cartoon style set first",
+   "ASP D:101",
+   "ASP D:101; the cartoon style set first",
    "both copies",
    "both copies; the cartoon style set first"
   ],
@@ -190,11 +190,11 @@
    "another global style, or hidden components: not requested"
   ],
   "difficulty": {
-   "needs_numbering_offset": false,
-   "author_chain_differs_from_label": true,
+   "needs_numbering_offset": true,
+   "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
-   "number_also_in_another_chain": false,
+   "number_also_in_another_chain": true,
    "n_candidates": 2,
    "n_readings": 3,
    "n_accepted_states": 6
@@ -205,36 +205,36 @@
   ],
   "residues": [
    {
-    "auth_asym_id": "3",
-    "auth_seq_id": 84,
-    "label_asym_id": "C",
-    "label_seq_id": 84,
-    "comp_id": "ILE"
+    "auth_asym_id": "B",
+    "auth_seq_id": 101,
+    "label_asym_id": "B",
+    "label_seq_id": 106,
+    "comp_id": "ASP"
    },
    {
-    "auth_asym_id": "4",
-    "auth_seq_id": 84,
+    "auth_asym_id": "D",
+    "auth_seq_id": 101,
     "label_asym_id": "D",
-    "label_seq_id": 84,
-    "comp_id": "ILE"
+    "label_seq_id": 106,
+    "comp_id": "ASP"
    }
   ],
-  "structure": "1lmb",
-  "source": "RCSB mmCIF 1LMB -> molbench/atom_tables/1lmb.json.gz (scripts/build_atom_tables.py); data/panel/facts",
-  "derived": "as above, coloured on the cartoon instead of added as sticks. Reference = the first accepted state (ILE 3:84): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
+  "structure": "1igt",
+  "source": "RCSB mmCIF 1IGT -> molbench/atom_tables/1igt.json.gz (scripts/build_atom_tables.py); data/panel/facts",
+  "derived": "as above, coloured on the cartoon instead of added as sticks. Reference = the first accepted state (ASP B:101): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
   "checked_by": "scripts/check_api_refs.py",
   "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
    {
-    "what": "Ile84 of author chain 3",
+    "what": "Asp101 of author chain B",
     "action": 1,
     "param": 0,
     "atoms": {
-     "auth_asym_id": "3",
-     "auth_seq_id": 84,
-     "auth_comp_id": "ILE"
+     "auth_asym_id": "B",
+     "auth_seq_id": 101,
+     "auth_comp_id": "ASP"
     },
-    "n_atoms": 8
+    "n_atoms": 9
    }
   ]
  },
@@ -248,65 +248,65 @@
   [
    {
     "selector": {
-     "auth_asym_id": "3",
-     "auth_seq_id": 84
+     "auth_asym_id": "B",
+     "auth_seq_id": 101
     },
     "representation": "cartoon",
-    "color": "red"
+    "color": "yellow"
    }
   ],
   [
    {
     "selector": {
-     "auth_asym_id": "4",
-     "auth_seq_id": 84
+     "auth_asym_id": "D",
+     "auth_seq_id": 101
     },
     "representation": "cartoon",
-    "color": "red"
+    "color": "yellow"
    }
   ],
   [
    {
     "selector": {
-     "auth_asym_id": "4",
-     "auth_seq_id": 84
+     "auth_asym_id": "D",
+     "auth_seq_id": 101
     },
     "representation": "cartoon",
-    "color": "red"
+    "color": "yellow"
    }
   ],
   [
    {
     "selector": [
      {
-      "auth_asym_id": "3",
-      "auth_seq_id": 84
+      "auth_asym_id": "B",
+      "auth_seq_id": 101
      },
      {
-      "auth_asym_id": "4",
-      "auth_seq_id": 84
+      "auth_asym_id": "D",
+      "auth_seq_id": 101
      }
     ],
     "representation": "cartoon",
-    "color": "red"
+    "color": "yellow"
    }
   ],
   [
    {
     "selector": [
      {
-      "auth_asym_id": "3",
-      "auth_seq_id": 84
+      "auth_asym_id": "B",
+      "auth_seq_id": 101
      },
      {
-      "auth_asym_id": "4",
-      "auth_seq_id": 84
+      "auth_asym_id": "D",
+      "auth_seq_id": 101
      }
     ],
     "representation": "cartoon",
-    "color": "red"
+    "color": "yellow"
    }
   ]
  ],
- "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 6 (ILE 3:84); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 6 (ASP B:101); the others are in 'accepted', in the order of provenance.accepted_states."
 }

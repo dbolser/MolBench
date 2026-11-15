@@ -1,12 +1,12 @@
 {
- "id": "acc-residue-colour-1lmb-mvs",
+ "id": "acc-residue-copy-5ni1-mvs",
  "track": "mvs",
  "tier": "accept_set",
- "family": "acc-residue-colour",
+ "family": "acc-residue-copy",
  "structures": [
-  "1lmb"
+  "5ni1"
  ],
- "prompt": "Open 1LMB with the protein and DNA as a cartoon, with Ile84 coloured red.",
+ "prompt": "Open 5NI1 with the protein as a cartoon and Asp75 in blue ball-and-stick.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1lmb.cif"
+      "url": "https://files.rcsb.org/download/5ni1.cif"
      },
      "children": [
       {
@@ -39,16 +39,29 @@
              "kind": "representation",
              "params": {
               "type": "cartoon"
+             }
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 75
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "red",
-                "selector": {
-                 "auth_asym_id": "3",
-                 "auth_seq_id": 84
-                }
+                "color": "blue"
                }
               }
              ]
@@ -72,7 +85,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1lmb.cif"
+       "url": "https://files.rcsb.org/download/5ni1.cif"
       },
       "children": [
        {
@@ -97,16 +110,29 @@
               "kind": "representation",
               "params": {
                "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "auth_asym_id": "C",
+              "auth_seq_id": 75
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
               },
               "children": [
                {
                 "kind": "color",
                 "params": {
-                 "color": "red",
-                 "selector": {
-                  "auth_asym_id": "4",
-                  "auth_seq_id": 84
-                 }
+                 "color": "blue"
                 }
                }
               ]
@@ -129,7 +155,7 @@
      {
       "kind": "download",
       "params": {
-       "url": "https://files.rcsb.org/download/1lmb.cif"
+       "url": "https://files.rcsb.org/download/5ni1.cif"
       },
       "children": [
        {
@@ -154,22 +180,35 @@
               "kind": "representation",
               "params": {
                "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": [
+              {
+               "auth_asym_id": "A",
+               "auth_seq_id": 75
+              },
+              {
+               "auth_asym_id": "C",
+               "auth_seq_id": 75
+              }
+             ]
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
               },
               "children": [
                {
                 "kind": "color",
                 "params": {
-                 "color": "red",
-                 "selector": [
-                  {
-                   "auth_asym_id": "3",
-                   "auth_seq_id": 84
-                  },
-                  {
-                   "auth_asym_id": "4",
-                   "auth_seq_id": 84
-                  }
-                 ]
+                 "color": "blue"
                 }
                }
               ]
@@ -190,23 +229,23 @@
  "target": [
   {
    "selector": {
-    "auth_asym_id": "3",
-    "auth_seq_id": 84
+    "auth_asym_id": "A",
+    "auth_seq_id": 75
    },
-   "representation": "cartoon",
-   "color": "red"
+   "representation": "ball_and_stick",
+   "color": "blue"
   }
  ],
- "twin_of": "acc-residue-colour-1lmb-api",
+ "twin_of": null,
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_accept_set_tasks.py",
   "inputs": [
-   "data/panel/facts/1lmb.json",
-   "molbench/atom_tables/1lmb.json.gz"
+   "data/panel/facts/5ni1.json",
+   "molbench/atom_tables/5ni1.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
@@ -214,59 +253,58 @@
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
    "target selects 8 atoms on the frozen atom table",
-   "no accepted state equals another (pairwise, by the grader)",
-   "twin selects the same target atoms"
+   "no accepted state equals another (pairwise, by the grader)"
   ],
   "seed": "molbench-accept-set-v1",
-  "template": "acc-residue-colour",
-  "wording": 2,
+  "template": "acc-residue-copy",
+  "wording": 1,
   "slots": {
-   "ID": "1LMB",
-   "id": "1lmb",
-   "poly": "protein and DNA",
-   "thing": "Ile84",
-   "colour": "red"
+   "ID": "5NI1",
+   "id": "5ni1",
+   "poly": "protein",
+   "thing": "Asp75",
+   "colour": "blue"
   },
   "open": "which chain's copy of the named residue (or all)",
-  "rule": "The request asks to colour a residue, named by type and author number but with no chain; the protein is present as several identical chains. Accepted: the residue coloured in any one chain, or in every chain.",
+  "rule": "The request names a residue by type and author number but no chain; the protein is present as several identical chains, each with that residue. Accepted: the residue in any one chain, or in every chain.",
   "candidates": [
-   "ILE 3:84",
-   "ILE 4:84"
+   "ASP A:75",
+   "ASP C:75"
   ],
   "accepted_states": [
-   "ILE 3:84",
-   "ILE 4:84",
+   "ASP A:75",
+   "ASP C:75",
    "both copies"
   ],
   "not_accepted": [
    "some but not all chains (when there are more than two): no reading of the request",
    "a residue with that number in another protein of the entry, or the residue with that label (sequence) number where it differs: a different residue",
-   "an added representation (sticks) for the residue: only a colour is requested"
+   "another representation or colour: both are stated"
   ],
   "difficulty": {
    "needs_numbering_offset": false,
-   "author_chain_differs_from_label": true,
+   "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
-   "number_also_in_another_chain": false,
+   "number_also_in_another_chain": true,
    "n_candidates": 2,
    "n_readings": 3,
    "n_accepted_states": 3
   },
   "residues": [
    {
-    "auth_asym_id": "3",
-    "auth_seq_id": 84,
-    "label_asym_id": "C",
-    "label_seq_id": 84,
-    "comp_id": "ILE"
+    "auth_asym_id": "A",
+    "auth_seq_id": 75,
+    "label_asym_id": "A",
+    "label_seq_id": 75,
+    "comp_id": "ASP"
    },
    {
-    "auth_asym_id": "4",
-    "auth_seq_id": 84,
-    "label_asym_id": "D",
-    "label_seq_id": 84,
-    "comp_id": "ILE"
+    "auth_asym_id": "C",
+    "auth_seq_id": 75,
+    "label_asym_id": "C",
+    "label_seq_id": 75,
+    "comp_id": "ASP"
    }
   ]
  },
@@ -280,29 +318,29 @@
   [
    {
     "selector": {
-     "auth_asym_id": "4",
-     "auth_seq_id": 84
+     "auth_asym_id": "C",
+     "auth_seq_id": 75
     },
-    "representation": "cartoon",
-    "color": "red"
+    "representation": "ball_and_stick",
+    "color": "blue"
    }
   ],
   [
    {
     "selector": [
      {
-      "auth_asym_id": "3",
-      "auth_seq_id": 84
+      "auth_asym_id": "A",
+      "auth_seq_id": 75
      },
      {
-      "auth_asym_id": "4",
-      "auth_seq_id": 84
+      "auth_asym_id": "C",
+      "auth_seq_id": 75
      }
     ],
-    "representation": "cartoon",
-    "color": "red"
+    "representation": "ball_and_stick",
+    "color": "blue"
    }
   ]
  ],
- "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 3 (ILE 3:84); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 3 (ASP A:75); the others are in 'accepted', in the order of provenance.accepted_states."
 }

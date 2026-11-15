@@ -8,7 +8,7 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 (`rule`), their names in order (`accepted_states`), what is not accepted and why
 (`not_accepted`), and the difficulty facts (`difficulty`).
 
-26 tasks on 23 structures; 5 tasks on 5 held-back structures; 15 have a twin on the other track.
+26 tasks on 23 structures; 5 tasks on 4 held-back structures; 15 have a twin on the other track.
 
 ## Templates
 
@@ -17,10 +17,10 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 | `acc-ligand-which` | 3 | 4 | which of two different ligands (or both) | Open 1RX2 with the protein as a cartoon and the ligand in cyan ball-and-stick. |
 | `acc-ligand-colours` | 3 | 2 | which ligand gets which colour | Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue. |
 | `acc-metal-which` | 2 | 3 | which of two different metal ions (or both) | Open 1UDT with the protein as a cartoon and the metal ion in red spacefill. |
-| `acc-chain-colours` | 3 | 2 | which chain gets which colour | Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta. |
+| `acc-chain-colours` | 3 | 2, 6 | which chain gets which colour | Load 1AAY and show it as a cartoon, with the three chains coloured green, magenta and cyan. |
 | `acc-ligand-copy` | 3 | 3 | which copy of the named ligand (or all) | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
 | `acc-metal-copy` | 3 | 3, 4, 5 | which of several ions of the named metal (or all) | Show 1TUP with the protein and DNA as a cartoon and the zinc ion as a spacefill sphere, coloured magenta. |
-| `acc-residue-copy` | 3 | 3 | which chain's copy of the named residue (or all) | Load 1IGT. Show the protein as a cartoon and Asn76 as magenta ball-and-stick. |
+| `acc-residue-copy` | 3 | 3 | which chain's copy of the named residue (or all) | Show 1TRN with the protein as a cartoon and Lys236 as ball-and-stick, coloured purple. |
 | `acc-residue-colour` | 3 | 3 | which chain's copy of the named residue (or all) | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
 | `acc-representation-open` | 3 | 4 | which representation | Open 1HRC with the protein as a cartoon, and show the heme in green. |
 
@@ -42,32 +42,32 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 
 | id | structure | split | states | candidates |
 |---|---|---|---:|---|
-| `acc-chain-colours-1f88-mvs` | 1f88 | heldback | 2 | chain A, chain B |
-| `acc-chain-colours-2ptc-mvs` | 2ptc | public | 2 | chain E, chain I |
+| `acc-chain-colours-1aay-mvs` | 1aay | public | 6 | chain B, chain C, chain A |
+| `acc-chain-colours-1f88-mvs` | 1f88 | public | 2 | chain A, chain B |
 | `acc-chain-colours-5uak-mvs` | 5uak | public | 2 | chain A, chain R |
-| `acc-ligand-colours-1rx2-mvs` | 1rx2 | public | 2 | FOL, NAP |
+| `acc-ligand-colours-1rx2-mvs` | 1rx2 | heldback | 2 | FOL, NAP |
 | `acc-ligand-colours-2cpp-mvs` | 2cpp | public | 2 | CAM, HEM |
 | `acc-ligand-colours-9gio-mvs` | 9gio | public | 2 | 3JF, A1IMD |
 | `acc-ligand-copy-1iep-mvs` | 1iep | public | 3 | STI A:201, STI B:202 |
 | `acc-ligand-copy-8c86-mvs` | 8c86 | public | 3 | TQ0 B:201, TQ0 A:201 |
 | `acc-ligand-copy-8k7f-mvs` | 8k7f | heldback | 3 | VMF A:502, VMF B:503 |
-| `acc-ligand-which-1rx2-mvs` | 1rx2 | public | 4 | FOL, NAP |
+| `acc-ligand-which-1rx2-mvs` | 1rx2 | heldback | 4 | FOL, NAP |
 | `acc-ligand-which-2cpp-mvs` | 2cpp | public | 4 | CAM, HEM |
 | `acc-ligand-which-9gio-mvs` | 9gio | public | 4 | 3JF, A1IMD |
 | `acc-metal-copy-1tup-mvs` | 1tup | public | 4 | ZN A:951, ZN B:952, ZN C:953 |
 | `acc-metal-copy-8eph-mvs` | 8eph | public | 5 | CA A:202, CA B:301, CA C:202, CA D:301 |
 | `acc-metal-copy-9fb2-mvs` | 9fb2 | public | 3 | K A:602, K A:603 |
-| `acc-metal-which-1udt-mvs` | 1udt | heldback | 3 | MG, ZN |
+| `acc-metal-which-1udt-mvs` | 1udt | public | 3 | MG, ZN |
 | `acc-metal-which-7a4m-mvs` | 7a4m | public | 3 | FE, ZN |
 | `acc-representation-open-1hrc-mvs` | 1hrc | public | 4 | ball_and_stick, spacefill, line, surface |
-| `acc-representation-open-3ert-mvs` | 3ert | public | 4 | ball_and_stick, spacefill, line, surface |
+| `acc-representation-open-1mbn-mvs` | 1mbn | public | 4 | ball_and_stick, spacefill, line, surface |
 | `acc-representation-open-3f9m-mvs` | 3f9m | public | 4 | ball_and_stick, spacefill, line, surface |
 | `acc-residue-colour-1aoi-mvs` | 1aoi | public | 3 | ILE B:66, ILE F:66 |
-| `acc-residue-colour-1lmb-mvs` | 1lmb | public | 3 | ILE 3:84, ILE 4:84 |
-| `acc-residue-colour-3ave-mvs` | 3ave | heldback | 3 | LEU A:358, LEU B:358 |
-| `acc-residue-copy-1igt-mvs` | 1igt | heldback | 3 | ASN B:76, ASN D:76 |
+| `acc-residue-colour-1igt-mvs` | 1igt | heldback | 3 | ASP B:101, ASP D:101 |
+| `acc-residue-colour-4ins-mvs` | 4ins | public | 3 | LYS B:29, LYS D:29 |
 | `acc-residue-copy-1trn-mvs` | 1trn | public | 3 | LYS A:236, LYS B:236 |
 | `acc-residue-copy-2hhb-mvs` | 2hhb | public | 3 | ALA A:21, ALA C:21 |
+| `acc-residue-copy-5ni1-mvs` | 5ni1 | heldback | 3 | ASP A:75, ASP C:75 |
 
 ## The seven seed prompts of issue #4
 
@@ -91,5 +91,5 @@ enumerable neighbour: the colours are named, the assignment is not.
 
 - Structures: PDB entries of the panel with one model and at most 15,000 atoms; never 1HSG. At most 6 tasks of the tier (both tracks) on one structure.
 - "Any one, or all": with more than two copies, a several-but-not-all answer is not accepted, because no reading of the request picks it.
-- Held-back structures are not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus: they are the corpus-wide list in `data/panel/heldback.json` when that file exists (or `--heldback-file`), and until then a fixed fifth of the panel by hash of the entry id (`heldback_structures()`). About a fifth of the tier's tasks are on them. In this tier: 1f88, 1igt, 1udt, 3ave, 8k7f.
+- Held-back structures are not chosen per tier, because the validator refuses a structure used by both splits anywhere in the corpus: they are the corpus-wide list in `data/panel/heldback.json` when that file exists (or `--heldback-file`), and until then a fixed fifth of the panel by hash of the entry id (`heldback_structures()`). About a fifth of the tier's tasks are on them. In this tier: 1igt, 1rx2, 5ni1, 8k7f.
 - The cartoon is not given a colour by the request, so the reference leaves it at the viewer's default.
