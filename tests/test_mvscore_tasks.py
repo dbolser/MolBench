@@ -284,6 +284,79 @@ def test_a_wrong_atom_or_a_missing_line_is_not_exactly_right(corpus, loaded):
         assert not runner.grade_parsed(task, no_line)["success"], t["id"]
 
 
+def test_a_prompt_names_the_chain_once_when_all_residues_share_it():
+    say = interactions.say_chain_once
+    assert say("Show Asn322 of chain B and Asp325 of chain B; line from ND2 of Asn322 of "
+               "chain B to OD2 of Asp325 of chain B.") == (
+        "Show Asn322 and Asp325; line from ND2 of Asn322 to OD2 of Asp325. "
+        "Both residues are in chain B.")
+    mixed = "Show Tyr407 of chain A and Thr366 of chain B."
+    assert say(mixed) == mixed                       # two chains: every residue keeps its own
+    once = "Show the ATP and Phe54 of chain E."
+    assert say(once) == once                         # said once already
+
+
+def test_interaction_prompts_still_name_the_chain_of_every_residue(corpus):
+    """In an entry of several chains, each residue the reference selects is in a chain
+    the prompt names."""
+    for t in corpus["interactions"]:
+        if len(C.facts(t["structures"][0])["chains"]) < 2:
+            continue
+        chains = {x["auth_asym_id"] for part in t["target"]
+                  for x in (part["selector"] if isinstance(part["selector"], list) else [part["selector"]])
+                  if isinstance(x, dict) and "auth_seq_id" in x}
+        for chain in chains:
+            assert f"chain {chain}" in t["prompt"], t["id"]
+
+
+# --------------------------------------------------------------------------- #
+# Labels, and everything but one chain
+# --------------------------------------------------------------------------- #
+def _structure_children(scene: dict) -> list:
+    return scene["root"]["children"][0]["children"][0]["children"][0]["children"]
+
+
+def test_a_range_label_is_graded_by_its_text_and_its_residues(corpus, loaded):
+    tasks = [t for t in corpus["translation"] if t["family"] == "tr-range-labels"]
+    assert tasks
+    for t in tasks:
+        task = loaded[t["id"]]
+        labels = [k for k in _structure_children(t["reference"])
+                  if k["children"][0]["kind"] == "label"]
+        assert len(labels) == 2
+        for k in labels:                              # the text is in the prompt, quoted
+            assert f'"{k["children"][0]["params"]["text"]}"' in t["prompt"]
+        none = json.loads(json.dumps(t["reference"]))
+        kids = _structure_children(none)
+        kids[:] = [k for k in kids if k["children"][0]["kind"] != "label"]
+        assert not runner.grade_parsed(task, none)["success"], t["id"]
+        wrong = json.loads(json.dumps(t["reference"]))
+        _structure_children(wrong)[1]["children"][0]["params"]["text"] = "something else"
+        assert not runner.grade_parsed(task, wrong)["success"], t["id"]
+        upper = json.loads(json.dumps(t["reference"]))
+        node = _structure_children(upper)[1]["children"][0]["params"]
+        node["text"] = node["text"].upper()
+        assert runner.grade_parsed(task, upper)["success"], t["id"]
+
+
+def test_all_but_one_chain_draws_every_other_polymer_chain(corpus, loaded):
+    tasks = [t for t in corpus["grounded"] if t["family"] == "gr-all-but-chain"]
+    assert tasks
+    for t in tasks:
+        entry = t["structures"][0]
+        table = C.table(entry)
+        kept = table.selector(t["target"][0]["selector"])
+        chains = C.facts(entry)["chains"]
+        left_out = [c for c in chains if f"chain {c['auth_asym_id']}" in t["prompt"]]
+        assert len(left_out) == 1 and len(chains) >= 3
+        gone = table.selector({"label_asym_id": left_out[0]["label_asym_id"]})
+        assert gone and not kept & gone and kept | gone == table.static["polymer"]
+        # the whole polymer, or the chain that was to be left out, is not the answer
+        everything = json.loads(json.dumps(t["reference"]))
+        _structure_children(everything)[0]["params"]["selector"] = "polymer"
+        assert not runner.grade_parsed(loaded[t["id"]], everything)["success"], t["id"]
+
+
 # --------------------------------------------------------------------------- #
 # Resolve
 # --------------------------------------------------------------------------- #
