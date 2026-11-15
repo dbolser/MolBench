@@ -1,0 +1,99 @@
+{
+  "id": "api-003",
+  "category": "api_calling",
+  "title": "Heme groups as orange ball-and-stick",
+  "prompt": "Open haemoglobin (1HHO) and show the heme groups in ball-and-stick coloured orange, with the rest as cartoon.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1hho"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "HEM",
+          "representation": "ball-and-stick",
+          "representationColor": "orange"
+        }
+      ]
+    }
+  ],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "1hho"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "label_comp_id": "HEM",
+            "color": {
+              "r": 255,
+              "g": 165,
+              "b": 0
+            },
+            "representation": "ball-and-stick",
+            "representationColor": {
+              "r": 255,
+              "g": 165,
+              "b": 0
+            }
+          }
+        ]
+      }
+    ]
+  ],
+  "skills": [
+    "load",
+    "global-style",
+    "select-by-ligand",
+    "per-selection-representation",
+    "color"
+  ],
+  "categories": [
+    "load",
+    "global-style",
+    "select-by-ligand",
+    "per-selection-representation",
+    "color"
+  ],
+  "provenance": {
+    "structure": "1hho",
+    "source": "RCSB mmCIF 1HHO -> molbench/atom_tables/1hho.json.gz (scripts/build_atom_tables.py)",
+    "derived": "Prompt unchanged. The July reference put the colour in `color`, which paints the default components only; under a cartoon style the heme's default representation is not drawn, and the added ball-and-stick takes its colour from `representationColor`. Reference rewritten so the heme really is orange.",
+    "july_task": "unchanged",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": [
+      {
+        "what": "both heme groups",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 143,
+            "auth_comp_id": "HEM"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 147,
+            "auth_comp_id": "HEM"
+          }
+        ],
+        "n_atoms": 86
+      }
+    ]
+  },
+  "notes": "An added representation is coloured by representationColor, not color."
+}

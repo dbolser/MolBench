@@ -2,7 +2,7 @@
  "label": "October 2026 panel",
  "status": "preliminary",
  "run_date": "2026-10-18",
- "tasks_dir": "tasks",
+ "tasks_dir": "data/october/tasks",
  "scorecards": [
   "results/r2x2/*/*.json",
   "results/r2x2/baseline_spec.json"

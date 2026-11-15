@@ -189,12 +189,18 @@ def all_valid(t: dict) -> bool:
     return all(o == "valid" for o in task_outcomes(t))
 
 
-def load_tasks(extra: list[pathlib.Path] | None = None) -> dict[str, dict]:
+# The corpus the October 2026 run used, frozen when the final corpus replaced it.
+OCTOBER_TASKS = REPO / "data" / "october" / "tasks"
+
+
+def load_tasks(extra: list[pathlib.Path] | None = None,
+               tasks_dir: pathlib.Path | None = None) -> dict[str, dict]:
     """The MVS tasks by id, read through `molbench.tasks` (new and old task files).
-    ``extra``: further task directories (a dry run's fixture tasks)."""
+    ``extra``: further task directories (a dry run's fixture tasks). ``tasks_dir``:
+    another corpus than ``tasks/`` (the October one, for the October scorecards)."""
     from molbench import tasks as tasks_mod
     out = {}
-    for d in [REPO / "tasks"] + list(extra or []):
+    for d in [tasks_dir or REPO / "tasks"] + list(extra or []):
         for t in tasks_mod.load_corpus(d, tracks=["mvs"], repo=REPO):
             out[t["id"]] = t
     return out
@@ -688,7 +694,7 @@ def main(argv=None) -> None:
     else:
         configure(a.site_config)
         conds = {c: load_condition(a.results, c) for c in CONDITIONS}
-        tasks = load_tasks()
+        tasks = load_tasks(tasks_dir=OCTOBER_TASKS)
         archives = index_archives(a.runs)
         bpath = a.results / "baseline_spec.json"
         baseline = json.loads(bpath.read_text(encoding="utf-8")) if bpath.exists() else None

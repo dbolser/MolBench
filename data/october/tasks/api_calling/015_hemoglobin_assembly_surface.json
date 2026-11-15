@@ -1,0 +1,38 @@
+{
+  "id": "api-015",
+  "category": "api_calling",
+  "title": "Biological assembly as a surface",
+  "prompt": "Load oxyhaemoglobin (1HHO) as its biological assembly (the tetramer, assembly 1) and show it as a molecular surface.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1hho",
+      "assembly_id": "1"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "molecular-surface"
+    }
+  ],
+  "skills": [
+    "load",
+    "assembly",
+    "global-style",
+    "surface"
+  ],
+  "categories": [
+    "load",
+    "assembly",
+    "global-style",
+    "surface"
+  ],
+  "provenance": {
+    "structure": "1hho",
+    "source": "RCSB mmCIF 1HHO -> molbench/atom_tables/1hho.json.gz (scripts/build_atom_tables.py)",
+    "derived": "The July task asked for assembly 1 of 6VXX, which is identical to the deposited model, so the request tested nothing. 1HHO deposits one alpha-beta dimer; assembly 1 applies two symmetry operators to make the tetramer (checked with `scripts/check_api_refs.py --cif`).",
+    "july_task": "replaced",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "An answer that loads the deposited model shows half the molecule."
+}

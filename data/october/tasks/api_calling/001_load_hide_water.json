@@ -1,0 +1,34 @@
+{
+  "id": "api-001",
+  "category": "api_calling",
+  "title": "Load a structure and hide waters",
+  "prompt": "Load the myoglobin structure 1A6M and hide all the water molecules.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1a6m"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    }
+  ],
+  "skills": [
+    "load",
+    "hide-component"
+  ],
+  "categories": [
+    "load",
+    "hide-component"
+  ],
+  "provenance": {
+    "structure": "1a6m",
+    "source": "RCSB mmCIF 1A6M -> molbench/atom_tables/1a6m.json.gz (scripts/build_atom_tables.py)",
+    "derived": "1MBN (the July entry) has no waters in the deposited model, so the toggle did nothing; 1A6M has a water component.",
+    "july_task": "replaced",
+    "checked_by": "scripts/check_api_refs.py",
+    "targets": []
+  },
+  "notes": "Sanity task: explicit PDB id and one boolean toggle."
+}
