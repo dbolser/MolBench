@@ -1010,9 +1010,13 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
           f"| split: public / held back | {sum(t['split'] == 'public' for t in mine)} / {sum(t['split'] == 'heldback' for t in mine)} |",
           "",
           f"Held-back structures ({len(held)}): {', '.join(s.upper() for s in held)}. They are "
-          "in no public task of this tier. They were drawn (seeded) from the structures that "
-          "no task published before this corpus uses, half from those numbered differently "
-          "from UniProt.",
+          "in no public task of this tier. "
+          + ("They are the structures of this tier on the corpus-wide held-back list "
+             "(`data/panel/heldback.json`); a pair of tasks (same variant, two structures) "
+             "is split between public and held back when only one of its structures is on "
+             "the list." if HELDBACK_FILE.exists() else
+             "They were drawn (seeded) from the structures that no task published before "
+             "this corpus uses, half from those numbered differently from UniProt."),
           "",
           "Proteins: " + ", ".join(genes) + ".",
           "",

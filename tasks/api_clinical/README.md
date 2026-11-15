@@ -49,7 +49,7 @@ Each template has three wordings; the wording, the colours, the representation (
 | in a pair (same variant on two structures) | 14 |
 | split: public / held back | 59 / 20 |
 
-Held-back structures (8): 2C9V, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F. They are in no public task of this tier. They were drawn (seeded) from the structures that no task published before this corpus uses, half from those numbered differently from UniProt.
+Held-back structures (8): 2C9V, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F. They are in no public task of this tier. They are the structures of this tier on the corpus-wide held-back list (`data/panel/heldback.json`); a pair of tasks (same variant, two structures) is split between public and held back when only one of its structures is on the list.
 
 Proteins: APOE, AR, CA2, CALM1, CFTR, CRYGD, F2, F9, GBA1, GCK, GLA, HBA1, HBB, HRAS, INS, LYZ, PAH, PRSS1, PTEN, SERPINA1, SERPINC1, SLC2A1, SOD1, TP53, TPI1, TTR, VHL.
 
