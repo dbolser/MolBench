@@ -196,7 +196,7 @@
   "date": "2026-11-13",
   "checks": [
    "8 metal-residue bonds re-measured in the frozen mmCIF: 1.92 to 2.02 A",
-   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a ZN ion",
+   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a ZN ion; none is added out to 3.2 A, so no weak ligand is left to argue over",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 76 atoms on the frozen atom table"
   ],

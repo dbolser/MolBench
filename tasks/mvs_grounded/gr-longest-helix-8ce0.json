@@ -6,7 +6,7 @@
  "structures": [
   "8ce0"
  ],
- "prompt": "Load 8CE0 as a grey cartoon and colour its longest helix orange.",
+ "prompt": "Load 8CE0 as a grey cartoon and colour its longest helix orange, going by the helix records of the entry.",
  "reference": {
   "root": {
    "kind": "root",

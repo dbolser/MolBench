@@ -65,6 +65,10 @@ MODRES_NAMES = {
 }
 METAL_WORDS = {"ZN": "zinc", "FE": "iron", "CU": "copper", "MN": "manganese", "CA": "calcium",
                "MG": "magnesium"}
+# A metal site is asked only when nothing else sits between the annotated bonds (checked
+# to 2.6 A) and this distance: a polymer N, O or S atom there is a weak ligand that the
+# entry does not annotate and an expert may count.
+AMBIGUOUS_REACH = 3.2
 RESIDUE_WORDS = {"HIS": "histidine", "CYS": "cysteine", "MET": "methionine", "LYS": "lysine",
                  "ASN": "asparagine", "SER": "serine", "THR": "threonine"}
 # What a prompt calls each polymer entity of a complex: entry -> [(pattern on the
@@ -428,6 +432,10 @@ def t_metal_site():
             near = C.cif_neighbours(entry, g["copies"], comp, 2.6)
             if near != {C.rkey(p) for p in partners}:
                 continue                 # geometry and annotation disagree: not used
+            if C.cif_neighbours(entry, g["copies"], comp, AMBIGUOUS_REACH) != near:
+                continue                 # a long bond the entry does not annotate (the
+                                         # Met92 SD of plastocyanin 1PLC, 2.82 A from the
+                                         # copper): experts count it, so the site is not asked
             msel = {"label_comp_id": comp}
             rsel = [C.residue(p) for p in partners]
             c1, c2 = C.colours(2, "g-metal-site", entry, comp)
@@ -453,7 +461,8 @@ def t_metal_site():
                 [f"{len(dists)} metal-residue bonds re-measured in the frozen mmCIF: "
                  f"{min(dists):.2f} to {max(dists):.2f} A",
                  f"a neighbour search (with crystal symmetry) finds exactly these residues, "
-                 f"and no other polymer N, O or S atom, within 2.6 A of a {comp} ion"],
+                 f"and no other polymer N, O or S atom, within 2.6 A of a {comp} ion; none "
+                 f"is added out to {AMBIGUOUS_REACH} A, so no weak ligand is left to argue over"],
                 numbering=rsel, suffix=comp.lower(), flags={"structure_lookup": True},
                 what=tr_what(entry), what_adj="protein" if tr_what(entry) == "protein" else "polymer",
                 metal=word, ions="ion" if n == 1 else "ions",
@@ -652,10 +661,11 @@ def t_longest_helix():
         col = C.colours(1, "g-longest-helix", entry)[0]
         out.append(cand(
             entry,
-            ["Load {ID} as a grey cartoon and colour its longest helix {c}.",
-             "Show {ID} as a cartoon, grey throughout except the longest alpha helix, which "
-             "should be {c}.",
-             "{ID}: grey cartoon, longest helix in {c}."],
+            ["Load {ID} as a grey cartoon and colour its longest helix {c}, going by the "
+             "helix records of the entry.",
+             "Show {ID} as a cartoon, grey throughout except the longest helix annotated in "
+             "the deposited file, which should be {c}.",
+             "{ID}: grey cartoon, longest helix (as annotated in the entry) in {c}."],
             [C.comp("polymer", C.rep("cartoon", C.colour(GREY), C.colour(col, sel)))],
             [C.part(sel, "cartoon", col)],
             f"the helix record (`_struct_conf`) with the most observed residues: chain "
@@ -975,7 +985,9 @@ DERIVED = {
     "gr-metal-site": ("a metal and its coordinating residues", "Every copy of one metal ion, "
                       "plus the polymer residues with a `metalc` record to it (3 or more per "
                       "site, none to a symmetry copy); used only if a neighbour search "
-                      "within 2.6 A, with symmetry, finds exactly those residues."),
+                      "within 2.6 A, with symmetry, finds exactly those residues and none is "
+                      "added out to 3.2 A (a weak ligand the entry does not annotate, such as "
+                      "Met92 of plastocyanin 1PLC, would make the answer arguable)."),
     "gr-modres": ("modified residues", "Non-standard residues inside polymer chains (facts), "
                   "by component; the name is checked against the component record."),
     "gr-glyco-sites": ("glycosylation sites", "Polymer residues covalently bonded to a sugar "
@@ -984,7 +996,8 @@ DERIVED = {
     "gr-secstruct": ("helices and strands", "`_struct_conf` and `_struct_sheet_range` ranges, "
                      "re-read from the mmCIF; single-chain proteins with 2 to 16 elements."),
     "gr-longest-helix": ("the longest helix", "The helix record with the most observed "
-                         "residues, when it leads by 3 or more."),
+                         "residues, when it leads by 3 or more; the prompt says the "
+                         "entry's own helix annotation is meant."),
     "gr-nucleic": ("the DNA / the RNA", "Mol*'s `nucleic` selection, checked to be exactly the "
                    "DNA or RNA chains of the facts."),
     "gr-entity": ("named subunits", "Chains of each polymer entity; the prompt's name for an "

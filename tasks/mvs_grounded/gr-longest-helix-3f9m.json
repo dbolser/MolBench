@@ -6,7 +6,7 @@
  "structures": [
   "3f9m"
  ],
- "prompt": "3F9M: grey cartoon, longest helix in yellow.",
+ "prompt": "3F9M: grey cartoon, longest helix (as annotated in the entry) in yellow.",
  "reference": {
   "root": {
    "kind": "root",

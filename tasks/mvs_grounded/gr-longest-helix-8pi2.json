@@ -6,7 +6,7 @@
  "structures": [
   "8pi2"
  ],
- "prompt": "Show 8PI2 as a cartoon, grey throughout except the longest alpha helix, which should be steel blue.",
+ "prompt": "Show 8PI2 as a cartoon, grey throughout except the longest helix annotated in the deposited file, which should be steel blue.",
  "reference": {
   "root": {
    "kind": "root",

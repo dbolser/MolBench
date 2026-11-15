@@ -25,7 +25,7 @@ there because the prompt asks for it).
 | `gr-secstruct` | 3 | 1 | 4 | 6% |
 | **all** | 56 | 12 | 68 | 100% |
 
-Structures: 60 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
+Structures: 59 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
 
 ## How each reference is derived
 
@@ -40,8 +40,8 @@ Structures: 60 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8C
 | `gr-heme` | heme | Components the facts flag as heme (an iron porphyrin), every copy; one FE atom per copy confirmed in the mmCIF. |
 | `gr-heme-axial` | residues on the heme iron | Polymer residues with a `metalc` record to a heme FE; bond re-measured; neighbour search within 2.6 A agrees. |
 | `gr-ligand` | named ligand | The component whose frozen name or synonym (RCSB chemical component record), or the entry title, contains the prompt's name; every copy. |
-| `gr-longest-helix` | the longest helix | The helix record with the most observed residues, when it leads by 3 or more. |
-| `gr-metal-site` | a metal and its coordinating residues | Every copy of one metal ion, plus the polymer residues with a `metalc` record to it (3 or more per site, none to a symmetry copy); used only if a neighbour search within 2.6 A, with symmetry, finds exactly those residues. |
+| `gr-longest-helix` | the longest helix | The helix record with the most observed residues, when it leads by 3 or more; the prompt says the entry's own helix annotation is meant. |
+| `gr-metal-site` | a metal and its coordinating residues | Every copy of one metal ion, plus the polymer residues with a `metalc` record to it (3 or more per site, none to a symmetry copy); used only if a neighbour search within 2.6 A, with symmetry, finds exactly those residues and none is added out to 3.2 A (a weak ligand the entry does not annotate, such as Met92 of plastocyanin 1PLC, would make the answer arguable). |
 | `gr-modres` | modified residues | Non-standard residues inside polymer chains (facts), by component; the name is checked against the component record. |
 | `gr-nucleic` | the DNA / the RNA | Mol*'s `nucleic` selection, checked to be exactly the DNA or RNA chains of the facts. |
 | `gr-secstruct` | helices and strands | `_struct_conf` and `_struct_sheet_range` ranges, re-read from the mmCIF; single-chain proteins with 2 to 16 elements. |

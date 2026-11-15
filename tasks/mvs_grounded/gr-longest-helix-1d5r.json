@@ -6,7 +6,7 @@
  "structures": [
   "1d5r"
  ],
- "prompt": "Load 1D5R as a grey cartoon and colour its longest helix lime green.",
+ "prompt": "Load 1D5R as a grey cartoon and colour its longest helix lime green, going by the helix records of the entry.",
  "reference": {
   "root": {
    "kind": "root",
