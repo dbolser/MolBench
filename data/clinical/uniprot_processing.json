@@ -1,0 +1,570 @@
+{
+ "proteins": {
+  "P00439": {
+   "features": [
+    {
+     "description": "Phenylalanine-4-hydroxylase",
+     "end": 452,
+     "start": 1,
+     "type": "Chain"
+    }
+   ],
+   "gene": "PAH",
+   "source": "https://rest.uniprot.org/uniprotkb/P00439.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P00441": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Superoxide dismutase [Cu-Zn]",
+     "end": 154,
+     "start": 2,
+     "type": "Chain"
+    }
+   ],
+   "gene": "SOD1",
+   "source": "https://rest.uniprot.org/uniprotkb/P00441.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P00734": {
+   "features": [
+    {
+     "description": "",
+     "end": 24,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "",
+     "end": 43,
+     "start": 25,
+     "type": "Propeptide"
+    },
+    {
+     "description": "Prothrombin",
+     "end": 622,
+     "start": 44,
+     "type": "Chain"
+    },
+    {
+     "description": "Activation peptide fragment 1",
+     "end": 198,
+     "start": 44,
+     "type": "Peptide"
+    },
+    {
+     "description": "Activation peptide fragment 2",
+     "end": 327,
+     "start": 199,
+     "type": "Peptide"
+    },
+    {
+     "description": "Thrombin light chain",
+     "end": 363,
+     "start": 315,
+     "type": "Chain"
+    },
+    {
+     "description": "Thrombin heavy chain",
+     "end": 622,
+     "start": 364,
+     "type": "Chain"
+    }
+   ],
+   "gene": "F2",
+   "source": "https://rest.uniprot.org/uniprotkb/P00734.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P00740": {
+   "features": [
+    {
+     "description": "",
+     "end": 28,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "",
+     "end": 46,
+     "start": 29,
+     "type": "Propeptide"
+    },
+    {
+     "description": "Coagulation factor IX",
+     "end": 461,
+     "start": 47,
+     "type": "Chain"
+    },
+    {
+     "description": "Coagulation factor IXa light chain",
+     "end": 191,
+     "start": 47,
+     "type": "Chain"
+    },
+    {
+     "description": "Activation peptide",
+     "end": 226,
+     "start": 192,
+     "type": "Propeptide"
+    },
+    {
+     "description": "Coagulation factor IXa heavy chain",
+     "end": 461,
+     "start": 227,
+     "type": "Chain"
+    }
+   ],
+   "gene": "F9",
+   "source": "https://rest.uniprot.org/uniprotkb/P00740.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P00918": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Carbonic anhydrase 2",
+     "end": 260,
+     "start": 2,
+     "type": "Chain"
+    }
+   ],
+   "gene": "CA2",
+   "source": "https://rest.uniprot.org/uniprotkb/P00918.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P01008": {
+   "features": [
+    {
+     "description": "",
+     "end": 32,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Antithrombin-III",
+     "end": 464,
+     "start": 33,
+     "type": "Chain"
+    }
+   ],
+   "gene": "SERPINC1",
+   "source": "https://rest.uniprot.org/uniprotkb/P01008.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P01009": {
+   "features": [
+    {
+     "description": "",
+     "end": 24,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Alpha-1-antitrypsin",
+     "end": 418,
+     "start": 25,
+     "type": "Chain"
+    },
+    {
+     "description": "Short peptide from AAT",
+     "end": 418,
+     "start": 375,
+     "type": "Peptide"
+    }
+   ],
+   "gene": "SERPINA1",
+   "source": "https://rest.uniprot.org/uniprotkb/P01009.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P01112": {
+   "features": [
+    {
+     "description": "GTPase HRas",
+     "end": 186,
+     "start": 1,
+     "type": "Chain"
+    },
+    {
+     "description": "Removed; alternate",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "GTPase HRas, N-terminally processed",
+     "end": 186,
+     "start": 2,
+     "type": "Chain"
+    },
+    {
+     "description": "Removed in mature form",
+     "end": 189,
+     "start": 187,
+     "type": "Propeptide"
+    }
+   ],
+   "gene": "HRAS",
+   "source": "https://rest.uniprot.org/uniprotkb/P01112.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P01308": {
+   "features": [
+    {
+     "description": "",
+     "end": 24,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Insulin B chain",
+     "end": 54,
+     "start": 25,
+     "type": "Peptide"
+    },
+    {
+     "description": "C peptide",
+     "end": 87,
+     "start": 57,
+     "type": "Propeptide"
+    },
+    {
+     "description": "Insulin A chain",
+     "end": 110,
+     "start": 90,
+     "type": "Peptide"
+    }
+   ],
+   "gene": "INS",
+   "source": "https://rest.uniprot.org/uniprotkb/P01308.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P02649": {
+   "features": [
+    {
+     "description": "",
+     "end": 18,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Apolipoprotein E",
+     "end": 317,
+     "start": 19,
+     "type": "Chain"
+    }
+   ],
+   "gene": "APOE",
+   "source": "https://rest.uniprot.org/uniprotkb/P02649.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P02766": {
+   "features": [
+    {
+     "description": "",
+     "end": 20,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Transthyretin",
+     "end": 147,
+     "start": 21,
+     "type": "Chain"
+    }
+   ],
+   "gene": "TTR",
+   "source": "https://rest.uniprot.org/uniprotkb/P02766.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P04062": {
+   "features": [
+    {
+     "description": "",
+     "end": 39,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Lysosomal acid glucosylceramidase",
+     "end": 536,
+     "start": 40,
+     "type": "Chain"
+    }
+   ],
+   "gene": "GBA1",
+   "source": "https://rest.uniprot.org/uniprotkb/P04062.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P04637": {
+   "features": [
+    {
+     "description": "Cellular tumor antigen p53",
+     "end": 393,
+     "start": 1,
+     "type": "Chain"
+    }
+   ],
+   "gene": "TP53",
+   "source": "https://rest.uniprot.org/uniprotkb/P04637.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P06280": {
+   "features": [
+    {
+     "description": "",
+     "end": 31,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Alpha-galactosidase A",
+     "end": 429,
+     "start": 32,
+     "type": "Chain"
+    }
+   ],
+   "gene": "GLA",
+   "source": "https://rest.uniprot.org/uniprotkb/P06280.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P07320": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Gamma-crystallin D",
+     "end": 174,
+     "start": 2,
+     "type": "Chain"
+    }
+   ],
+   "gene": "CRYGD",
+   "source": "https://rest.uniprot.org/uniprotkb/P07320.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P07477": {
+   "features": [
+    {
+     "description": "",
+     "end": 15,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Activation peptide",
+     "end": 23,
+     "start": 16,
+     "type": "Propeptide"
+    },
+    {
+     "description": "Serine protease 1",
+     "end": 247,
+     "start": 24,
+     "type": "Chain"
+    },
+    {
+     "description": "Alpha-trypsin chain 1",
+     "end": 122,
+     "start": 24,
+     "type": "Chain"
+    },
+    {
+     "description": "Alpha-trypsin chain 2",
+     "end": 247,
+     "start": 123,
+     "type": "Chain"
+    }
+   ],
+   "gene": "PRSS1",
+   "source": "https://rest.uniprot.org/uniprotkb/P07477.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P0DP23": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Calmodulin-1",
+     "end": 149,
+     "start": 2,
+     "type": "Chain"
+    }
+   ],
+   "gene": "CALM1",
+   "source": "https://rest.uniprot.org/uniprotkb/P0DP23.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P10275": {
+   "features": [
+    {
+     "description": "Androgen receptor",
+     "end": 920,
+     "start": 1,
+     "type": "Chain"
+    }
+   ],
+   "gene": "AR",
+   "source": "https://rest.uniprot.org/uniprotkb/P10275.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P11166": {
+   "features": [
+    {
+     "description": "Solute carrier family 2, facilitated glucose transporter member 1",
+     "end": 492,
+     "start": 1,
+     "type": "Chain"
+    }
+   ],
+   "gene": "SLC2A1",
+   "source": "https://rest.uniprot.org/uniprotkb/P11166.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P13569": {
+   "features": [
+    {
+     "description": "Cystic fibrosis transmembrane conductance regulator",
+     "end": 1480,
+     "start": 1,
+     "type": "Chain"
+    }
+   ],
+   "gene": "CFTR",
+   "source": "https://rest.uniprot.org/uniprotkb/P13569.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P35557": {
+   "features": [
+    {
+     "description": "Hexokinase-4",
+     "end": 465,
+     "start": 1,
+     "type": "Chain"
+    }
+   ],
+   "gene": "GCK",
+   "source": "https://rest.uniprot.org/uniprotkb/P35557.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P40337": {
+   "features": [
+    {
+     "description": "von Hippel-Lindau disease tumor suppressor",
+     "end": 213,
+     "start": 1,
+     "type": "Chain"
+    }
+   ],
+   "gene": "VHL",
+   "source": "https://rest.uniprot.org/uniprotkb/P40337.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P60174": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Triosephosphate isomerase",
+     "end": 249,
+     "start": 2,
+     "type": "Chain"
+    }
+   ],
+   "gene": "TPI1",
+   "source": "https://rest.uniprot.org/uniprotkb/P60174.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P60484": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Phosphatidylinositol 3,4,5-trisphosphate 3-phosphatase and dual-specificity protein phosphatase PTEN",
+     "end": 403,
+     "start": 2,
+     "type": "Chain"
+    }
+   ],
+   "gene": "PTEN",
+   "source": "https://rest.uniprot.org/uniprotkb/P60484.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P61626": {
+   "features": [
+    {
+     "description": "",
+     "end": 18,
+     "start": 1,
+     "type": "Signal"
+    },
+    {
+     "description": "Lysozyme C",
+     "end": 148,
+     "start": 19,
+     "type": "Chain"
+    }
+   ],
+   "gene": "LYZ",
+   "source": "https://rest.uniprot.org/uniprotkb/P61626.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P68871": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Hemoglobin subunit beta",
+     "end": 147,
+     "start": 2,
+     "type": "Chain"
+    },
+    {
+     "description": "LVV-hemorphin-7",
+     "end": 42,
+     "start": 33,
+     "type": "Peptide"
+    },
+    {
+     "description": "Spinorphin",
+     "end": 39,
+     "start": 33,
+     "type": "Peptide"
+    }
+   ],
+   "gene": "HBB",
+   "source": "https://rest.uniprot.org/uniprotkb/P68871.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  },
+  "P69905": {
+   "features": [
+    {
+     "description": "Removed",
+     "end": 1,
+     "start": 1,
+     "type": "Initiator methionine"
+    },
+    {
+     "description": "Hemoglobin subunit alpha",
+     "end": 142,
+     "start": 2,
+     "type": "Chain"
+    },
+    {
+     "description": "Hemopressin",
+     "end": 104,
+     "start": 96,
+     "type": "Peptide"
+    }
+   ],
+   "gene": "HBA1",
+   "source": "https://rest.uniprot.org/uniprotkb/P69905.json?fields=ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit"
+  }
+ },
+ "retrieved": "2026-11-13",
+ "what": "UniProt processing features (signal peptide, propeptide, initiator methionine, transit peptide, chain, peptide) of the panel's disease proteins. A position without an exact value is null."
+}

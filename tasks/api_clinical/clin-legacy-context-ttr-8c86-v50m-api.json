@@ -1,0 +1,248 @@
+{
+ "id": "clin-legacy-context-ttr-8c86-v50m-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-legacy-context",
+ "structures": [
+  "8c86"
+ ],
+ "prompt": "In PDB entry 8C86, show the whole structure as a gray cartoon and the residue replaced by the pathogenic TTR (Transthyretin) variant V30M (ClinVar) as cyan spacefill spheres in every chain that has it. The name V30M is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 20-residue signal peptide.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8c86"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P02766",
+     "uniprot_residue_number": 50,
+     "color": "gray",
+     "representation": "spacefill",
+     "representationColor": "cyan"
+    }
+   ],
+   "non_selected_color": "gray"
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 50,
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 50,
+      "color": "gray",
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 50,
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 30
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 30
+    }
+   ],
+   "representation": "spacefill",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "clin-legacy-context-ttr-8c86-v50m-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 8C86: Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2\nMethod: X-RAY DIFFRACTION, 1.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  B [A]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\n  A [B]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  B [A]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n  A [B]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n\nFrom the request:\n  TTR: UniProt P02766 (TTHY_HUMAN, Transthyretin)\n  V30M (mature-protein numbering; 20 residues precede the mature chain in UniProt) = UniProt position 50\n  V30M: UniProt position 50 (Val in UniProt) -> in 8C86: auth A 30 VAL (label B 30); auth B 30 VAL (label A 30)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P02766.json",
+   "data/panel/facts/8c86.json",
+   "molbench/sifts_tables/8c86.json.gz",
+   "molbench/atom_tables/8c86.json.gz",
+   "data/clinical/uniprot_processing.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (2 residue(s), 32 atoms, residue name(s) VAL = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "TTR",
+   "accession": "P02766",
+   "protein": "Transthyretin",
+   "naming": "legacy",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "spacefill",
+    "color": "cyan",
+    "backdrop": "gray"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "V30M",
+     "variant": "V50M",
+     "hgvs": "p.Val50Met",
+     "uniprot_position": 50,
+     "mature_numbering": {
+      "number": 30,
+      "removed": 20,
+      "what": "the 20-residue signal peptide"
+     },
+     "clinvar_vcv": [
+      "VCV000013417"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 30,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 30,
+       "comp_id": "VAL"
+      },
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 30,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 30,
+       "comp_id": "VAL"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -20
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": true,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 2,
+    "target_residues": 2,
+    "alphafold_model": false,
+    "name_in_mature_numbering": true,
+    "mature_number_equals_author_number": true,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": null,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "8c86",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": [
+     {
+      "label_asym_id": "B",
+      "label_seq_id": 30
+     },
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 30
+     }
+    ],
+    "what": "p.Val50Met residue(s)",
+    "n_atoms": 32
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

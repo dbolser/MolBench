@@ -1,0 +1,305 @@
+{
+ "id": "clin-multi-context-serpinc1-3kcg-y95h-l131f-a416p-s426l-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-multi-context",
+ "structures": [
+  "3kcg"
+ ],
+ "prompt": "In PDB entry 3KCG, show the whole structure as a white cartoon and the residues replaced by the SERPINC1 (Antithrombin-III) variants p.Tyr95His, p.Leu131Phe, p.Ala416Pro and p.Ser426Leu (each pathogenic or likely pathogenic in ClinVar) as purple spacefill spheres.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3kcg.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "all"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "white"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 63
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 99
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 384
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 394
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "C",
+     "label_seq_id": 63
+    },
+    {
+     "label_asym_id": "C",
+     "label_seq_id": 99
+    },
+    {
+     "label_asym_id": "C",
+     "label_seq_id": 384
+    },
+    {
+     "label_asym_id": "C",
+     "label_seq_id": 394
+    }
+   ],
+   "representation": "spacefill",
+   "color": "purple"
+  }
+ ],
+ "twin_of": "clin-multi-context-serpinc1-3kcg-y95h-l131f-a416p-s426l-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 3KCG: Crystal structure of the antithrombin-factor IXa-pentasaccharide complex\nMethod: X-RAY DIFFRACTION, 1.70 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  L [A]: entity 1 (Coagulation factor IXa light chain), protein, 54 of 59 residues observed: auth 84-137 = label 1-54\n  H [B]: entity 2 (Coagulation factor IXa heavy chain), protein, 235 of 235 residues observed: auth 16-36 = label 1-21; auth 38-60 = label 22-44; auth 60A = label 45; auth 61-95 = label 46-80; auth 95A = label 81; auth 95B = label 82; auth 96-129 = label 83-116; auth 129A = label 117; auth 129B = label 118; auth 130-145 = label 119-134; auth 147-184 = label 135-172; auth 184A = label 173; auth 185-188 = label 174-177; auth 188A = label 178; auth 189-217 = label 179-207; auth 219-221 = label 208-210; auth 221A = label 211; auth 222-245 = label 212-235\n  I [C]: entity 3 (Antithrombin-III), protein, 419 of 432 residues observed: auth 3-27 = label 3-27; auth 38-431 = label 38-431\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  L [A]: P00740 (FA9_HUMAN): UniProt 130-183 = auth 84-137\n  H [B]: P00740 (FA9_HUMAN): UniProt 227-247 = auth 16-36; UniProt 248-270 = auth 38-60; UniProt 271 = auth 60A; UniProt 272-306 = auth 61-95; UniProt 307 = auth 95A; UniProt 308 = auth 95B; UniProt 309-342 = auth 96-129; UniProt 343 = auth 129A; UniProt 344 = auth 129B; UniProt 345-360 = auth 130-145; UniProt 361-398 = auth 147-184; UniProt 399 = auth 184A; UniProt 400-403 = auth 185-188; UniProt 404 = auth 188A; UniProt 405-433 = auth 189-217; UniProt 434-436 = auth 219-221; UniProt 437 = auth 221A; UniProt 438-461 = auth 222-245\n  I [C]: P01008 (ANT3_HUMAN): UniProt 35-59 = auth 3-27; UniProt 70-463 = auth 38-431\n\nFrom the request:\n  SERPINC1: UniProt P01008 (ANT3_HUMAN, Antithrombin-III)\n  p.Tyr95His: UniProt position 95 (Tyr in UniProt) -> in 3KCG: auth I 63 TYR (label C 63)\n  p.Leu131Phe: UniProt position 131 (Leu in UniProt) -> in 3KCG: auth I 99 LEU (label C 99)\n  p.Ala416Pro: UniProt position 416 (Ala in UniProt) -> in 3KCG: auth I 384 ALA (label C 384)\n  p.Ser426Leu: UniProt position 426 (Ser in UniProt) -> in 3KCG: auth I 394 SER (label C 394)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P01008.json",
+   "data/panel/facts/3kcg.json",
+   "molbench/sifts_tables/3kcg.json.gz",
+   "molbench/atom_tables/3kcg.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (4 residue(s), 37 atoms, residue name(s) ALA/LEU/SER/TYR = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "SERPINC1",
+   "accession": "P01008",
+   "protein": "Antithrombin-III",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "spacefill",
+    "color": "purple",
+    "backdrop": "white"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Tyr95His",
+     "variant": "Y95H",
+     "hgvs": "p.Tyr95His",
+     "uniprot_position": 95,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001001692"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "I",
+       "auth_seq_id": 63,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "C",
+       "label_seq_id": 63,
+       "comp_id": "TYR"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "p.Leu131Phe",
+     "variant": "L131F",
+     "hgvs": "p.Leu131Phe",
+     "uniprot_position": 131,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000018034"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "I",
+       "auth_seq_id": 99,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "C",
+       "label_seq_id": 99,
+       "comp_id": "LEU"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "p.Ala416Pro",
+     "variant": "A416P",
+     "hgvs": "p.Ala416Pro",
+     "uniprot_position": 416,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000018007"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "I",
+       "auth_seq_id": 384,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "C",
+       "label_seq_id": 384,
+       "comp_id": "ALA"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "p.Ser426Leu",
+     "variant": "S426L",
+     "hgvs": "p.Ser426Leu",
+     "uniprot_position": 426,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000018010"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "I",
+       "auth_seq_id": 394,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "C",
+       "label_seq_id": 394,
+       "comp_id": "SER"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -32
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": true,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 4,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

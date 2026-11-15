@@ -1,0 +1,187 @@
+{
+ "id": "clin-pair-target-hbb-af-p68871-f1-h98q-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-pair-target",
+ "structures": [
+  "af-p68871-f1-model_v6"
+ ],
+ "prompt": "In the AlphaFold DB model AF-P68871-F1 (model version 6), show the residue replaced by the pathogenic or likely pathogenic HBB (Hemoglobin subunit beta, UniProt P68871) variant p.His98Gln (ClinVar) as green ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "custom_data": {
+    "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+    "format": "cif",
+    "binary": false
+   }
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 98,
+     "color": null,
+     "representation": "ball-and-stick",
+     "representationColor": "green"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 98,
+      "color": "green",
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 98
+   },
+   "representation": "ball-and-stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": "clin-pair-target-hbb-af-p68871-f1-h98q-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  p.His98Gln: UniProt position 98 (His in UniProt) -> in the model: auth A 98 HIS (label A 98)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P68871.json",
+   "data/panel/facts/af-p68871-f1-model_v6.json",
+   "molbench/sifts_tables/af-p68871-f1-model_v6.json.gz",
+   "molbench/atom_tables/af-p68871-f1-model_v6.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 10 atoms, residue name(s) HIS = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "HBB",
+   "accession": "P68871",
+   "protein": "Hemoglobin subunit beta",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "green"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.His98Gln",
+     "variant": "H98Q",
+     "hgvs": "p.His98Gln",
+     "uniprot_position": 98,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000015259",
+      "VCV000801186"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic",
+      "Pathogenic; other"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts",
+      "no assertion criteria provided"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 98,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 98,
+       "comp_id": "HIS"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": true,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": {
+    "with": "clin-pair-target-hbb-2hhb-h98q-api",
+    "this_structure": "author numbers are UniProt numbers"
+   },
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "af-p68871-f1",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "label_asym_id": "A",
+     "label_seq_id": 98
+    },
+    "what": "p.His98Gln residue",
+    "n_atoms": 10
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

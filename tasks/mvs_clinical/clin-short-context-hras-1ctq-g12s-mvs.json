@@ -1,0 +1,199 @@
+{
+ "id": "clin-short-context-hras-1ctq-g12s-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-short-context",
+ "structures": [
+  "1ctq"
+ ],
+ "prompt": "PDB entry 1CTQ: the HRAS (GTPase HRas, UniProt P01112) variant G12S is classified as pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as cyan ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1ctq.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "all"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "white"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 12
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 12
+   },
+   "representation": "ball_and_stick",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "clin-short-context-hras-1ctq-g12s-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 1CTQ: STRUCTURE OF P21RAS IN COMPLEX WITH GPPNHP AT 100 K\nMethod: X-RAY DIFFRACTION, 1.26 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (PROTEIN (TRANSFORMING PROTEIN P21/H-RAS-1)), protein, 166 of 166 residues observed: auth 1-166 = label 1-166\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P01112 (RASH_HUMAN): UniProt 1-166 = auth 1-166\n\nFrom the request:\n  HRAS: UniProt P01112 (RASH_HUMAN, GTPase HRas)\n  G12S: UniProt position 12 (Gly in UniProt) -> in 1CTQ: auth A 12 GLY (label A 12)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P01112.json",
+   "data/panel/facts/1ctq.json",
+   "molbench/sifts_tables/1ctq.json.gz",
+   "molbench/atom_tables/1ctq.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 4 atoms, residue name(s) GLY = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "HRAS",
+   "accession": "P01112",
+   "protein": "GTPase HRas",
+   "naming": "short",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 1,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "cyan",
+    "backdrop": "white"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "G12S",
+     "variant": "G12S",
+     "hgvs": "p.Gly12Ser",
+     "uniprot_position": 12,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000012602"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 12,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 12,
+       "comp_id": "GLY"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

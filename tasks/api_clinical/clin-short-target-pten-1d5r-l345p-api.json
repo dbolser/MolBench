@@ -1,0 +1,175 @@
+{
+ "id": "clin-short-target-pten-1d5r-l345p-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-short-target",
+ "structures": [
+  "1d5r"
+ ],
+ "prompt": "Using PDB entry 1D5R, show as magenta ball-and-stick the wild-type residue at the position of the PTEN (Phosphatidylinositol 3,4,5-trisphosphate 3-phosphatase and dual-specificity protein phosphatase PTEN) missense variant L345P (pathogenic in ClinVar).",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1d5r"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P60484",
+     "uniprot_residue_number": 345,
+     "color": null,
+     "representation": "ball-and-stick",
+     "representationColor": "magenta"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "1d5r"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P60484",
+      "uniprot_residue_number": 345,
+      "color": "magenta",
+      "representation": "ball-and-stick",
+      "representationColor": "magenta"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 316
+   },
+   "representation": "ball-and-stick",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": "clin-short-target-pten-1d5r-l345p-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 1D5R: Crystal Structure of the PTEN Tumor Suppressor\nMethod: X-RAY DIFFRACTION, 2.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (PHOSPHOINOSITIDE PHOSPHATASE PTEN), protein, 307 of 324 residues observed: auth 14-281 = label 8-275; auth 313-351 = label 284-322\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P60484 (PTEN_HUMAN): UniProt 14-281 = auth 14-281; UniProt 313-351 = auth 313-351\n\nFrom the request:\n  PTEN: UniProt P60484 (PTEN_HUMAN, Phosphatidylinositol 3,4,5-trisphosphate 3-phosphatase and dual-specificity protein phosphatase PTEN)\n  L345P: UniProt position 345 (Leu in UniProt) -> in 1D5R: auth A 345 LEU (label A 316)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P60484.json",
+   "data/panel/facts/1d5r.json",
+   "molbench/sifts_tables/1d5r.json.gz",
+   "molbench/atom_tables/1d5r.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 8 atoms, residue name(s) LEU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "PTEN",
+   "accession": "P60484",
+   "protein": "Phosphatidylinositol 3,4,5-trisphosphate 3-phosphatase and dual-specificity protein phosphatase PTEN",
+   "naming": "short",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "magenta"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "L345P",
+     "variant": "L345P",
+     "hgvs": "p.Leu345Pro",
+     "uniprot_position": 345,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000484605"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 345,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 316,
+       "comp_id": "LEU"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "1d5r",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 316
+     }
+    ],
+    "what": "p.Leu345Pro residue(s)",
+    "n_atoms": 8
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

@@ -1,0 +1,214 @@
+{
+ "id": "clin-sse-helix-ins-6tc2-c95y-chaini-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-sse-helix",
+ "structures": [
+  "6tc2"
+ ],
+ "prompt": "In PDB entry 6TC2, take the residue replaced by the likely pathogenic INS (Insulin, UniProt P01308) variant C95Y (ClinVar) in chain I only. Show the helix that contains it (as annotated in the entry) as a salmon cartoon and the residue itself as green ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "6tc2"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "I",
+     "start_auth_residue_number": 2,
+     "end_auth_residue_number": 7,
+     "color": "salmon"
+    },
+    {
+     "auth_asym_id": "I",
+     "uniprot_accession": "P01308",
+     "uniprot_residue_number": 95,
+     "color": "salmon",
+     "representation": "ball-and-stick",
+     "representationColor": "green"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "6tc2"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "I",
+      "start_auth_residue_number": 2,
+      "end_auth_residue_number": 7,
+      "color": "salmon"
+     },
+     {
+      "auth_asym_id": "I",
+      "uniprot_accession": "P01308",
+      "uniprot_residue_number": 95,
+      "color": "green",
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "I",
+    "label_seq_id": 95
+   },
+   "representation": "ball-and-stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": "clin-sse-helix-ins-6tc2-c95y-chaini-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 6TC2: Monoclinic human insulin in complex with p-coumaric acid\nMethod: X-RAY DIFFRACTION, 1.36 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  B [B]: entity 1 (Insulin), protein, 29 of 110 residues observed: auth 2-30 = label 26-54\n  C [C]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  D [D]: entity 1 (Insulin), protein, 28 of 110 residues observed: auth 2-29 = label 26-53\n  E [E]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  F [F]: entity 1 (Insulin), protein, 26 of 110 residues observed: auth 4-29 = label 28-53\n  G [G]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  H [H]: entity 1 (Insulin), protein, 29 of 110 residues observed: auth 1-29 = label 25-53\n  I [I]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  J [J]: entity 1 (Insulin), protein, 30 of 110 residues observed: auth 1-30 = label 25-54\n  K [K]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  L [L]: entity 1 (Insulin), protein, 28 of 110 residues observed: auth 1-28 = label 25-52\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  B [B]: P01308 (INS_HUMAN): UniProt 26-54 = auth 2-30\n  C [C]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  D [D]: P01308 (INS_HUMAN): UniProt 26-53 = auth 2-29\n  E [E]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  F [F]: P01308 (INS_HUMAN): UniProt 28-53 = auth 4-29\n  G [G]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  H [H]: P01308 (INS_HUMAN): UniProt 25-53 = auth 1-29\n  I [I]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  J [J]: P01308 (INS_HUMAN): UniProt 25-54 = auth 1-30\n  K [K]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  L [L]: P01308 (INS_HUMAN): UniProt 25-52 = auth 1-28\n\nFrom the request:\n  INS: UniProt P01308 (INS_HUMAN, Insulin)\n  C95Y: UniProt position 95 (Cys in UniProt) -> in 6TC2, chain I: auth I 6 CYS (label I 95)\n  Helix annotated in the entry that contains that residue: auth I 2-7 (label I 91-96)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P01308.json",
+   "data/panel/facts/6tc2.json",
+   "molbench/sifts_tables/6tc2.json.gz",
+   "molbench/atom_tables/6tc2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 20 atoms, residue name(s) CYS = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the helix range is the same atom set in author and in label numbering and contains the target residue",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "INS",
+   "accession": "P01308",
+   "protein": "Insulin",
+   "naming": "short",
+   "scope": "chain",
+   "context": "sse",
+   "chain": {
+    "auth_asym_id": "I",
+    "label_asym_id": "I"
+   },
+   "wording": 0,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "green"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "C95Y",
+     "variant": "C95Y",
+     "hgvs": "p.Cys95Tyr",
+     "uniprot_position": 95,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV002631502"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, single submitter"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "I",
+       "auth_seq_id": 6,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "I",
+       "label_seq_id": 95,
+       "comp_id": "CYS"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": {
+    "kind": "helix",
+    "auth_asym_id": "I",
+    "beg_auth_seq_id": 2,
+    "end_auth_seq_id": 7,
+    "label_asym_id": "I",
+    "beg_label_seq_id": 91,
+    "end_label_seq_id": 96,
+    "color": "salmon"
+   },
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -89
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 6,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "6tc2",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "label_asym_id": "I",
+     "beg_label_seq_id": 91,
+     "end_label_seq_id": 96
+    },
+    "what": "the annotated helix",
+    "n_atoms": 98
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "atoms": [
+     {
+      "label_asym_id": "I",
+      "label_seq_id": 95
+     }
+    ],
+    "what": "p.Cys95Tyr residue(s)",
+    "n_atoms": 20
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

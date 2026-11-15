@@ -1,0 +1,219 @@
+{
+ "id": "clin-short-context-hba1-2hhb-f44v-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-short-context",
+ "structures": [
+  "2hhb"
+ ],
+ "prompt": "Using PDB entry 2HHB, draw a gray cartoon of the whole structure and show, as yellow ball-and-stick, the wild-type residue at the position of the HBA1 (Hemoglobin subunit alpha, UniProt P69905) missense variant F44V (pathogenic in ClinVar) in every chain that has it.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2hhb.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "all"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 43
+             },
+             {
+              "auth_asym_id": "C",
+              "auth_seq_id": 43
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 43
+    },
+    {
+     "label_asym_id": "C",
+     "label_seq_id": 43
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": "clin-short-context-hba1-2hhb-f44v-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 2HHB: THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION\nMethod: X-RAY DIFFRACTION, 1.74 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (HEMOGLOBIN (DEOXY) (ALPHA CHAIN)), protein, 141 of 141 residues observed: auth 1-141 = label 1-141\n  B [B]: entity 2 (HEMOGLOBIN (DEOXY) (BETA CHAIN)), protein, 146 of 146 residues observed: auth 1-146 = label 1-146\n  C [C]: entity 1 (HEMOGLOBIN (DEOXY) (ALPHA CHAIN)), protein, 141 of 141 residues observed: auth 1-141 = label 1-141\n  D [D]: entity 2 (HEMOGLOBIN (DEOXY) (BETA CHAIN)), protein, 146 of 146 residues observed: auth 1-146 = label 1-146\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P69905 (HBA_HUMAN): UniProt 2-142 = auth 1-141\n  B [B]: P68871 (HBB_HUMAN): UniProt 2-147 = auth 1-146\n  C [C]: P69905 (HBA_HUMAN): UniProt 2-142 = auth 1-141\n  D [D]: P68871 (HBB_HUMAN): UniProt 2-147 = auth 1-146\n\nFrom the request:\n  HBA1: UniProt P69905 (HBA_HUMAN, Hemoglobin subunit alpha)\n  F44V: UniProt position 44 (Phe in UniProt) -> in 2HHB: auth A 43 PHE (label A 43); auth C 43 PHE (label C 43)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P69905.json",
+   "data/panel/facts/2hhb.json",
+   "molbench/sifts_tables/2hhb.json.gz",
+   "molbench/atom_tables/2hhb.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (2 residue(s), 22 atoms, residue name(s) PHE = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "HBA1",
+   "accession": "P69905",
+   "protein": "Hemoglobin subunit alpha",
+   "naming": "short",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "yellow",
+    "backdrop": "gray"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "F44V",
+     "variant": "F44V",
+     "hgvs": "p.Phe44Val",
+     "uniprot_position": 44,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV002428504"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 43,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 43,
+       "comp_id": "PHE"
+      },
+      {
+       "auth_asym_id": "C",
+       "auth_seq_id": 43,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "C",
+       "label_seq_id": 43,
+       "comp_id": "PHE"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -1
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 2,
+    "target_residues": 2,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

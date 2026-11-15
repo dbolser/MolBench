@@ -1,0 +1,242 @@
+{
+ "id": "clin-pair-context-hbb-af-p68871-f1-f43s-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-pair-context",
+ "structures": [
+  "af-p68871-f1-model_v6"
+ ],
+ "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), draw a white cartoon of the whole structure and show, as cyan ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant p.Phe43Ser (pathogenic in ClinVar).",
+ "reference": [
+  {
+   "action": "load",
+   "custom_data": {
+    "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+    "format": "cif",
+    "binary": false
+   }
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 43,
+     "color": "white",
+     "representation": "ball-and-stick",
+     "representationColor": "cyan"
+    }
+   ],
+   "non_selected_color": "white"
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "color": "cyan",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
+     }
+    ],
+    "non_selected_color": "white"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "color": "white",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
+     }
+    ],
+    "non_selected_color": "white"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 43,
+      "color": "cyan",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
+     }
+    ],
+    "non_selected_color": "white"
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 43
+   },
+   "representation": "ball-and-stick",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "clin-pair-context-hbb-af-p68871-f1-f43s-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  p.Phe43Ser: UniProt position 43 (Phe in UniProt) -> in the model: auth A 43 PHE (label A 43)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P68871.json",
+   "data/panel/facts/af-p68871-f1-model_v6.json",
+   "molbench/sifts_tables/af-p68871-f1-model_v6.json.gz",
+   "molbench/atom_tables/af-p68871-f1-model_v6.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 11 atoms, residue name(s) PHE = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "HBB",
+   "accession": "P68871",
+   "protein": "Hemoglobin subunit beta",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "cyan",
+    "backdrop": "white"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Phe43Ser",
+     "variant": "F43S",
+     "hgvs": "p.Phe43Ser",
+     "uniprot_position": 43,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000015190"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 43,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 43,
+       "comp_id": "PHE"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": true,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": {
+    "with": "clin-pair-context-hbb-5ni1-f43s-api",
+    "this_structure": "author numbers are UniProt numbers"
+   },
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "af-p68871-f1",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "label_asym_id": "A",
+     "label_seq_id": 43
+    },
+    "what": "p.Phe43Ser residue",
+    "n_atoms": 11
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

@@ -1,0 +1,199 @@
+{
+ "id": "clin-hgvs-context-apoe-8ce0-r43c-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-hgvs-context",
+ "structures": [
+  "8ce0"
+ ],
+ "prompt": "PDB entry 8CE0: the APOE (Apolipoprotein E) variant p.Arg43Cys is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as green ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/8ce0.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "all"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "white"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 25
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 401
+   },
+   "representation": "ball_and_stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": "clin-hgvs-context-apoe-8ce0-r43c-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  p.Arg43Cys: UniProt position 43 (Arg in UniProt) -> in 8CE0: auth A 25 ARG (label A 401)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P02649.json",
+   "data/panel/facts/8ce0.json",
+   "molbench/sifts_tables/8ce0.json.gz",
+   "molbench/atom_tables/8ce0.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 11 atoms, residue name(s) ARG = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "APOE",
+   "accession": "P02649",
+   "protein": "Apolipoprotein E",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 1,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "green",
+    "backdrop": "white"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Arg43Cys",
+     "variant": "R43C",
+     "hgvs": "p.Arg43Cys",
+     "uniprot_position": 43,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000017880"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 25,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 401,
+       "comp_id": "ARG"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -18
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

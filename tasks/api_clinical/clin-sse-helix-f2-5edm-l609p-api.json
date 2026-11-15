@@ -1,0 +1,209 @@
+{
+ "id": "clin-sse-helix-f2-5edm-l609p-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-sse-helix",
+ "structures": [
+  "5edm"
+ ],
+ "prompt": "Using PDB entry 5EDM, show the annotated helix that carries the wild-type residue at the position of the F2 (Prothrombin) missense variant L609P (likely pathogenic in ClinVar) as a teal cartoon, with that residue as cyan ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "5edm"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "start_auth_residue_number": 552,
+     "end_auth_residue_number": 567,
+     "color": "teal"
+    },
+    {
+     "uniprot_accession": "P00734",
+     "uniprot_residue_number": 609,
+     "color": "teal",
+     "representation": "ball-and-stick",
+     "representationColor": "cyan"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "5edm"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "start_auth_residue_number": 552,
+      "end_auth_residue_number": 567,
+      "color": "teal"
+     },
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 609,
+      "color": "cyan",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 552
+   },
+   "representation": "ball-and-stick",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "clin-sse-helix-f2-5edm-l609p-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 5EDM: Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I )\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Prothrombin), protein, 550 of 568 residues observed: auth 1-242 = label 1-242; auth 261-568 = label 261-568\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00734 (THRB_HUMAN): UniProt 44-196 = auth 1-153; UniProt 211-299 = auth 154-242; UniProt 318-622 = auth 261-565\n\nFrom the request:\n  F2: UniProt P00734 (THRB_HUMAN, Prothrombin)\n  L609P: UniProt position 609 (Leu in UniProt) -> in 5EDM: auth A 552 LEU (label A 552)\n  Helix annotated in the entry that contains that residue: auth A 552-567 (label A 552-567)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P00734.json",
+   "data/panel/facts/5edm.json",
+   "molbench/sifts_tables/5edm.json.gz",
+   "molbench/atom_tables/5edm.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 8 atoms, residue name(s) LEU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the helix range is the same atom set in author and in label numbering and contains the target residue",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "F2",
+   "accession": "P00734",
+   "protein": "Prothrombin",
+   "naming": "short",
+   "scope": "all",
+   "context": "sse",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "cyan"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "L609P",
+     "variant": "L609P",
+     "hgvs": "p.Leu609Pro",
+     "uniprot_position": 609,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000627173"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, single submitter"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 552,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 552,
+       "comp_id": "LEU"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": {
+    "kind": "helix",
+    "auth_asym_id": "A",
+    "beg_auth_seq_id": 552,
+    "end_auth_seq_id": 567,
+    "label_asym_id": "A",
+    "beg_label_seq_id": 552,
+    "end_label_seq_id": 567,
+    "color": "teal"
+   },
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -57
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "5edm",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 552,
+     "end_label_seq_id": 567
+    },
+    "what": "the annotated helix",
+    "n_atoms": 142
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 552
+     }
+    ],
+    "what": "p.Leu609Pro residue(s)",
+    "n_atoms": 8
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

@@ -39,8 +39,10 @@ def test_task_shape(task):
     assert task["category"] == "api_calling"
     assert task["skills"] and task["skills"] == task["categories"]   # the runner reads `categories`
     prov = task["provenance"]
-    assert prov["july_task"] in ("unchanged", "reworded", "replaced")
-    assert prov["derived"] and prov["source"] and prov["checked_by"]
+    if task.get("_legacy"):      # the hand-written tasks say what became of the July task
+        assert prov["july_task"] in ("unchanged", "reworded", "replaced")
+        assert prov["source"]
+    assert prov["derived"] and prov["checked_by"]
     res = grader.grade_task(task, task["reference"])
     assert res["grader"] == "state" and res["success"] and res["f1"] == 1.0
     assert grader.grade_sequence(task["reference"], task["reference"])["f1"] > 0   # legacy still runs

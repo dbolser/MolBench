@@ -1,0 +1,246 @@
+{
+ "id": "clin-pair-context-hbb-2hhb-y146c-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-pair-context",
+ "structures": [
+  "2hhb"
+ ],
+ "prompt": "Using PDB entry 2HHB, draw a khaki cartoon of the whole structure and show, as purple ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant Y146C (pathogenic in ClinVar) in every chain that has it.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "2hhb"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P68871",
+     "uniprot_residue_number": 146,
+     "color": "khaki",
+     "representation": "ball-and-stick",
+     "representationColor": "purple"
+    }
+   ],
+   "non_selected_color": "khaki"
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "2hhb"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 146,
+      "color": "purple",
+      "representation": "ball-and-stick",
+      "representationColor": "purple"
+     }
+    ],
+    "non_selected_color": "khaki"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2hhb"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 146,
+      "color": "khaki",
+      "representation": "ball-and-stick",
+      "representationColor": "purple"
+     }
+    ],
+    "non_selected_color": "khaki"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2hhb"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 146,
+      "color": "purple",
+      "representation": "ball-and-stick",
+      "representationColor": "purple"
+     }
+    ],
+    "non_selected_color": "khaki"
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 145
+    },
+    {
+     "label_asym_id": "D",
+     "label_seq_id": 145
+    }
+   ],
+   "representation": "ball-and-stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": "clin-pair-context-hbb-2hhb-y146c-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 2HHB: THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION\nMethod: X-RAY DIFFRACTION, 1.74 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (HEMOGLOBIN (DEOXY) (ALPHA CHAIN)), protein, 141 of 141 residues observed: auth 1-141 = label 1-141\n  B [B]: entity 2 (HEMOGLOBIN (DEOXY) (BETA CHAIN)), protein, 146 of 146 residues observed: auth 1-146 = label 1-146\n  C [C]: entity 1 (HEMOGLOBIN (DEOXY) (ALPHA CHAIN)), protein, 141 of 141 residues observed: auth 1-141 = label 1-141\n  D [D]: entity 2 (HEMOGLOBIN (DEOXY) (BETA CHAIN)), protein, 146 of 146 residues observed: auth 1-146 = label 1-146\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P69905 (HBA_HUMAN): UniProt 2-142 = auth 1-141\n  B [B]: P68871 (HBB_HUMAN): UniProt 2-147 = auth 1-146\n  C [C]: P69905 (HBA_HUMAN): UniProt 2-142 = auth 1-141\n  D [D]: P68871 (HBB_HUMAN): UniProt 2-147 = auth 1-146\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  Y146C: UniProt position 146 (Tyr in UniProt) -> in 2HHB: auth B 145 TYR (label B 145); auth D 145 TYR (label D 145)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P68871.json",
+   "data/panel/facts/2hhb.json",
+   "molbench/sifts_tables/2hhb.json.gz",
+   "molbench/atom_tables/2hhb.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (2 residue(s), 24 atoms, residue name(s) TYR = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "HBB",
+   "accession": "P68871",
+   "protein": "Hemoglobin subunit beta",
+   "naming": "short",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "purple",
+    "backdrop": "khaki"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "Y146C",
+     "variant": "Y146C",
+     "hgvs": "p.Tyr146Cys",
+     "uniprot_position": 146,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000015322"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 145,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 145,
+       "comp_id": "TYR"
+      },
+      {
+       "auth_asym_id": "D",
+       "auth_seq_id": 145,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "D",
+       "label_seq_id": 145,
+       "comp_id": "TYR"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -1
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 2,
+    "target_residues": 2,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": {
+    "with": "clin-pair-context-hbb-af-p68871-f1-y146c-api",
+    "this_structure": "author numbers differ from UniProt numbers"
+   },
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "2hhb",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": [
+     {
+      "label_asym_id": "B",
+      "label_seq_id": 145
+     },
+     {
+      "label_asym_id": "D",
+      "label_seq_id": 145
+     }
+    ],
+    "what": "p.Tyr146Cys residue(s)",
+    "n_atoms": 24
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

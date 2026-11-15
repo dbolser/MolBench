@@ -1,0 +1,259 @@
+{
+ "id": "clin-short-target-ins-6tc2-v42a-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-short-target",
+ "structures": [
+  "6tc2"
+ ],
+ "prompt": "Using PDB entry 6TC2, show as purple ball-and-stick the wild-type residue at the position of the INS (Insulin) missense variant V42A (pathogenic/likely pathogenic in ClinVar) in every chain that has it.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/6tc2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 18
+             },
+             {
+              "auth_asym_id": "D",
+              "auth_seq_id": 18
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 18
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 18
+             },
+             {
+              "auth_asym_id": "J",
+              "auth_seq_id": 18
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 18
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 42
+    },
+    {
+     "label_asym_id": "D",
+     "label_seq_id": 42
+    },
+    {
+     "label_asym_id": "F",
+     "label_seq_id": 42
+    },
+    {
+     "label_asym_id": "H",
+     "label_seq_id": 42
+    },
+    {
+     "label_asym_id": "J",
+     "label_seq_id": 42
+    },
+    {
+     "label_asym_id": "L",
+     "label_seq_id": 42
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": "clin-short-target-ins-6tc2-v42a-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 6TC2: Monoclinic human insulin in complex with p-coumaric acid\nMethod: X-RAY DIFFRACTION, 1.36 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  B [B]: entity 1 (Insulin), protein, 29 of 110 residues observed: auth 2-30 = label 26-54\n  C [C]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  D [D]: entity 1 (Insulin), protein, 28 of 110 residues observed: auth 2-29 = label 26-53\n  E [E]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  F [F]: entity 1 (Insulin), protein, 26 of 110 residues observed: auth 4-29 = label 28-53\n  G [G]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  H [H]: entity 1 (Insulin), protein, 29 of 110 residues observed: auth 1-29 = label 25-53\n  I [I]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  J [J]: entity 1 (Insulin), protein, 30 of 110 residues observed: auth 1-30 = label 25-54\n  K [K]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  L [L]: entity 1 (Insulin), protein, 28 of 110 residues observed: auth 1-28 = label 25-52\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  B [B]: P01308 (INS_HUMAN): UniProt 26-54 = auth 2-30\n  C [C]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  D [D]: P01308 (INS_HUMAN): UniProt 26-53 = auth 2-29\n  E [E]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  F [F]: P01308 (INS_HUMAN): UniProt 28-53 = auth 4-29\n  G [G]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  H [H]: P01308 (INS_HUMAN): UniProt 25-53 = auth 1-29\n  I [I]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  J [J]: P01308 (INS_HUMAN): UniProt 25-54 = auth 1-30\n  K [K]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  L [L]: P01308 (INS_HUMAN): UniProt 25-52 = auth 1-28\n\nFrom the request:\n  INS: UniProt P01308 (INS_HUMAN, Insulin)\n  V42A: UniProt position 42 (Val in UniProt) -> in 6TC2: auth B 18 VAL (label B 42); auth D 18 VAL (label D 42); auth F 18 VAL (label F 42); auth H 18 VAL (label H 42); auth J 18 VAL (label J 42); auth L 18 VAL (label L 42)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P01308.json",
+   "data/panel/facts/6tc2.json",
+   "molbench/sifts_tables/6tc2.json.gz",
+   "molbench/atom_tables/6tc2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (6 residue(s), 112 atoms, residue name(s) VAL = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "INS",
+   "accession": "P01308",
+   "protein": "Insulin",
+   "naming": "short",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "purple"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "V42A",
+     "variant": "V42A",
+     "hgvs": "p.Val42Ala",
+     "uniprot_position": 42,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000253331"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 18,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 42,
+       "comp_id": "VAL"
+      },
+      {
+       "auth_asym_id": "D",
+       "auth_seq_id": 18,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "D",
+       "label_seq_id": 42,
+       "comp_id": "VAL"
+      },
+      {
+       "auth_asym_id": "F",
+       "auth_seq_id": 18,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "F",
+       "label_seq_id": 42,
+       "comp_id": "VAL"
+      },
+      {
+       "auth_asym_id": "H",
+       "auth_seq_id": 18,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "H",
+       "label_seq_id": 42,
+       "comp_id": "VAL"
+      },
+      {
+       "auth_asym_id": "J",
+       "auth_seq_id": 18,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "J",
+       "label_seq_id": 42,
+       "comp_id": "VAL"
+      },
+      {
+       "auth_asym_id": "L",
+       "auth_seq_id": 18,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "L",
+       "label_seq_id": 42,
+       "comp_id": "VAL"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -24
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 6,
+    "target_residues": 6,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

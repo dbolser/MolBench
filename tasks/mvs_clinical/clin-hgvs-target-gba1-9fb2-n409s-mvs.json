@@ -1,0 +1,175 @@
+{
+ "id": "clin-hgvs-target-gba1-9fb2-n409s-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-hgvs-target",
+ "structures": [
+  "9fb2"
+ ],
+ "prompt": "In PDB entry 9FB2, show the residue replaced by the pathogenic/likely pathogenic GBA1 (Lysosomal acid glucosylceramidase) variant p.Asn409Ser (ClinVar) as magenta spacefill spheres.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9fb2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 409
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 409
+   },
+   "representation": "spacefill",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": "clin-hgvs-target-gba1-9fb2-n409s-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 9FB2: Gcase in complex with small molecule inhibitor 1\nMethod: X-RAY DIFFRACTION, 1.14 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Lysosomal acid glucosylceramidase), protein, 499 of 546 residues observed: auth 40-538 = label 40-538\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P04062 (GBA1_HUMAN): UniProt 40-536 = auth 40-536\n\nFrom the request:\n  GBA1: UniProt P04062 (GBA1_HUMAN, Lysosomal acid glucosylceramidase)\n  p.Asn409Ser: UniProt position 409 (Asn in UniProt) -> in 9FB2: auth A 409 ASN (label A 409)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P04062.json",
+   "data/panel/facts/9fb2.json",
+   "molbench/sifts_tables/9fb2.json.gz",
+   "molbench/atom_tables/9fb2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 8 atoms, residue name(s) ASN = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "GBA1",
+   "accession": "P04062",
+   "protein": "Lysosomal acid glucosylceramidase",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "spacefill",
+    "color": "magenta"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Asn409Ser",
+     "variant": "N409S",
+     "hgvs": "p.Asn409Ser",
+     "uniprot_position": 409,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000004290"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic; risk factor"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 409,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 409,
+       "comp_id": "ASN"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

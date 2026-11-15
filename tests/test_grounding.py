@@ -88,10 +88,11 @@ class _Recorder:
 
     def __init__(self):
         self.usage = {"input_tokens": 0, "output_tokens": 0, "calls": 0}
-        self.sent: dict[str, tuple[str, str]] = {}   # prompt -> (system, user)
+        self.sent: dict[tuple[str, str], str] = {}   # (system, prompt) -> user message
 
     def generate(self, system, user):
-        self.sent[user.split("\n\n", 1)[0]] = (system, user)
+        # Twins put the same prompt to both tracks, so the system prompt is part of the key.
+        self.sent[(system, user.split("\n\n", 1)[0])] = user
         return "{}"
 
 
@@ -105,8 +106,7 @@ def test_runner_sends_the_pack_only_with_grounding(monkeypatch, grounding):
     tasks = load_tasks(["mvs", "api_calling"])
     systems = runner.build_system_prompts("spec")
     for t in tasks:
-        system, sent = rec.sent[t["prompt"]]
-        assert system == systems[t["category"]], "the system prompt must not change"
+        sent = rec.sent[(systems[t["category"]], t["prompt"])]   # the system prompt is unchanged
         if grounding and t.get("grounding"):
             assert sent == runner.GROUNDING_TEMPLATE.format(
                 prompt=t["prompt"], facts=t["grounding"]["text"])

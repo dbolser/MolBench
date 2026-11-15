@@ -1,0 +1,199 @@
+{
+ "id": "clin-hgvs-context-serpina1-8pi2-m409t-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-hgvs-context",
+ "structures": [
+  "8pi2"
+ ],
+ "prompt": "PDB entry 8PI2: the SERPINA1 (Alpha-1-antitrypsin) variant p.Met409Thr is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as orange ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/8pi2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "all"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "white"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 385
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 395
+   },
+   "representation": "ball_and_stick",
+   "color": "orange"
+  }
+ ],
+ "twin_of": "clin-hgvs-context-serpina1-8pi2-m409t-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 8PI2: Native alpha-1-antitrypsin at 1.5 Angstrom (Cys232Ser)\nMethod: X-RAY DIFFRACTION, 1.48 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Alpha-1-antitrypsin), protein, 371 of 404 residues observed: auth 24-394 = label 34-404\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P01009 (A1AT_HUMAN): UniProt 48-418 = auth 24-394\n\nFrom the request:\n  SERPINA1: UniProt P01009 (A1AT_HUMAN, Alpha-1-antitrypsin)\n  p.Met409Thr: UniProt position 409 (Met in UniProt) -> in 8PI2: auth A 385 MET (label A 395)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P01009.json",
+   "data/panel/facts/8pi2.json",
+   "molbench/sifts_tables/8pi2.json.gz",
+   "molbench/atom_tables/8pi2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 17 atoms, residue name(s) MET = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "SERPINA1",
+   "accession": "P01009",
+   "protein": "Alpha-1-antitrypsin",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 1,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "orange",
+    "backdrop": "white"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Met409Thr",
+     "variant": "M409T",
+     "hgvs": "p.Met409Thr",
+     "uniprot_position": 409,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000440487"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 385,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 395,
+       "comp_id": "MET"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -24
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

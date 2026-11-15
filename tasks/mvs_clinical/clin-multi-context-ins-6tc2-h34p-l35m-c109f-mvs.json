@@ -1,0 +1,512 @@
+{
+ "id": "clin-multi-context-ins-6tc2-h34p-l35m-c109f-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-multi-context",
+ "structures": [
+  "6tc2"
+ ],
+ "prompt": "Using PDB entry 6TC2, draw a white cartoon of the whole structure and show, as orange ball-and-stick, the wild-type residues at the positions of the INS (Insulin) missense variants H34P, L35M and C109F (each likely pathogenic in ClinVar) in every chain that has them.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/6tc2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "all"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "white"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 10
+             },
+             {
+              "auth_asym_id": "D",
+              "auth_seq_id": 10
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 10
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 10
+             },
+             {
+              "auth_asym_id": "J",
+              "auth_seq_id": 10
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 10
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 11
+             },
+             {
+              "auth_asym_id": "D",
+              "auth_seq_id": 11
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 11
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 11
+             },
+             {
+              "auth_asym_id": "J",
+              "auth_seq_id": 11
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 11
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 20
+             },
+             {
+              "auth_asym_id": "C",
+              "auth_seq_id": 20
+             },
+             {
+              "auth_asym_id": "E",
+              "auth_seq_id": 20
+             },
+             {
+              "auth_asym_id": "G",
+              "auth_seq_id": 20
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 20
+             },
+             {
+              "auth_asym_id": "K",
+              "auth_seq_id": 20
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 34
+    },
+    {
+     "label_asym_id": "D",
+     "label_seq_id": 34
+    },
+    {
+     "label_asym_id": "F",
+     "label_seq_id": 34
+    },
+    {
+     "label_asym_id": "H",
+     "label_seq_id": 34
+    },
+    {
+     "label_asym_id": "J",
+     "label_seq_id": 34
+    },
+    {
+     "label_asym_id": "L",
+     "label_seq_id": 34
+    },
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 35
+    },
+    {
+     "label_asym_id": "D",
+     "label_seq_id": 35
+    },
+    {
+     "label_asym_id": "F",
+     "label_seq_id": 35
+    },
+    {
+     "label_asym_id": "H",
+     "label_seq_id": 35
+    },
+    {
+     "label_asym_id": "J",
+     "label_seq_id": 35
+    },
+    {
+     "label_asym_id": "L",
+     "label_seq_id": 35
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 109
+    },
+    {
+     "label_asym_id": "C",
+     "label_seq_id": 109
+    },
+    {
+     "label_asym_id": "E",
+     "label_seq_id": 109
+    },
+    {
+     "label_asym_id": "G",
+     "label_seq_id": 109
+    },
+    {
+     "label_asym_id": "I",
+     "label_seq_id": 109
+    },
+    {
+     "label_asym_id": "K",
+     "label_seq_id": 109
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "orange"
+  }
+ ],
+ "twin_of": "clin-multi-context-ins-6tc2-h34p-l35m-c109f-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 6TC2: Monoclinic human insulin in complex with p-coumaric acid\nMethod: X-RAY DIFFRACTION, 1.36 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  B [B]: entity 1 (Insulin), protein, 29 of 110 residues observed: auth 2-30 = label 26-54\n  C [C]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  D [D]: entity 1 (Insulin), protein, 28 of 110 residues observed: auth 2-29 = label 26-53\n  E [E]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  F [F]: entity 1 (Insulin), protein, 26 of 110 residues observed: auth 4-29 = label 28-53\n  G [G]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  H [H]: entity 1 (Insulin), protein, 29 of 110 residues observed: auth 1-29 = label 25-53\n  I [I]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  J [J]: entity 1 (Insulin), protein, 30 of 110 residues observed: auth 1-30 = label 25-54\n  K [K]: entity 1 (Insulin), protein, 21 of 110 residues observed: auth 1-21 = label 90-110\n  L [L]: entity 1 (Insulin), protein, 28 of 110 residues observed: auth 1-28 = label 25-52\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  B [B]: P01308 (INS_HUMAN): UniProt 26-54 = auth 2-30\n  C [C]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  D [D]: P01308 (INS_HUMAN): UniProt 26-53 = auth 2-29\n  E [E]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  F [F]: P01308 (INS_HUMAN): UniProt 28-53 = auth 4-29\n  G [G]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  H [H]: P01308 (INS_HUMAN): UniProt 25-53 = auth 1-29\n  I [I]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  J [J]: P01308 (INS_HUMAN): UniProt 25-54 = auth 1-30\n  K [K]: P01308 (INS_HUMAN): UniProt 90-110 = auth 1-21\n  L [L]: P01308 (INS_HUMAN): UniProt 25-52 = auth 1-28\n\nFrom the request:\n  INS: UniProt P01308 (INS_HUMAN, Insulin)\n  H34P: UniProt position 34 (His in UniProt) -> in 6TC2: auth B 10 HIS (label B 34); auth D 10 HIS (label D 34); auth F 10 HIS (label F 34); auth H 10 HIS (label H 34); auth J 10 HIS (label J 34); auth L 10 HIS (label L 34)\n  L35M: UniProt position 35 (Leu in UniProt) -> in 6TC2: auth B 11 LEU (label B 35); auth D 11 LEU (label D 35); auth F 11 LEU (label F 35); auth H 11 LEU (label H 35); auth J 11 LEU (label J 35); auth L 11 LEU (label L 35)\n  C109F: UniProt position 109 (Cys in UniProt) -> in 6TC2: auth A 20 CYS (label A 109); auth C 20 CYS (label C 109); auth E 20 CYS (label E 109); auth G 20 CYS (label G 109); auth I 20 CYS (label I 109); auth K 20 CYS (label K 109)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P01308.json",
+   "data/panel/facts/6tc2.json",
+   "molbench/sifts_tables/6tc2.json.gz",
+   "molbench/atom_tables/6tc2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (18 residue(s), 277 atoms, residue name(s) CYS/HIS/LEU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "INS",
+   "accession": "P01308",
+   "protein": "Insulin",
+   "naming": "short",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "orange",
+    "backdrop": "white"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "H34P",
+     "variant": "H34P",
+     "hgvs": "p.His34Pro",
+     "uniprot_position": 34,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001526012"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, single submitter"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 34,
+       "comp_id": "HIS"
+      },
+      {
+       "auth_asym_id": "D",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "D",
+       "label_seq_id": 34,
+       "comp_id": "HIS"
+      },
+      {
+       "auth_asym_id": "F",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "F",
+       "label_seq_id": 34,
+       "comp_id": "HIS"
+      },
+      {
+       "auth_asym_id": "H",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "H",
+       "label_seq_id": 34,
+       "comp_id": "HIS"
+      },
+      {
+       "auth_asym_id": "J",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "J",
+       "label_seq_id": 34,
+       "comp_id": "HIS"
+      },
+      {
+       "auth_asym_id": "L",
+       "auth_seq_id": 10,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "L",
+       "label_seq_id": 34,
+       "comp_id": "HIS"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "L35M",
+     "variant": "L35M",
+     "hgvs": "p.Leu35Met",
+     "uniprot_position": 35,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001526013"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, single submitter"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "B",
+       "auth_seq_id": 11,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 35,
+       "comp_id": "LEU"
+      },
+      {
+       "auth_asym_id": "D",
+       "auth_seq_id": 11,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "D",
+       "label_seq_id": 35,
+       "comp_id": "LEU"
+      },
+      {
+       "auth_asym_id": "F",
+       "auth_seq_id": 11,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "F",
+       "label_seq_id": 35,
+       "comp_id": "LEU"
+      },
+      {
+       "auth_asym_id": "H",
+       "auth_seq_id": 11,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "H",
+       "label_seq_id": 35,
+       "comp_id": "LEU"
+      },
+      {
+       "auth_asym_id": "J",
+       "auth_seq_id": 11,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "J",
+       "label_seq_id": 35,
+       "comp_id": "LEU"
+      },
+      {
+       "auth_asym_id": "L",
+       "auth_seq_id": 11,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "L",
+       "label_seq_id": 35,
+       "comp_id": "LEU"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "C109F",
+     "variant": "C109F",
+     "hgvs": "p.Cys109Phe",
+     "uniprot_position": 109,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001526011"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, single submitter"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 20,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 109,
+       "comp_id": "CYS"
+      },
+      {
+       "auth_asym_id": "C",
+       "auth_seq_id": 20,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "C",
+       "label_seq_id": 109,
+       "comp_id": "CYS"
+      },
+      {
+       "auth_asym_id": "E",
+       "auth_seq_id": 20,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "E",
+       "label_seq_id": 109,
+       "comp_id": "CYS"
+      },
+      {
+       "auth_asym_id": "G",
+       "auth_seq_id": 20,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "G",
+       "label_seq_id": 109,
+       "comp_id": "CYS"
+      },
+      {
+       "auth_asym_id": "I",
+       "auth_seq_id": 20,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "I",
+       "label_seq_id": 109,
+       "comp_id": "CYS"
+      },
+      {
+       "auth_asym_id": "K",
+       "auth_seq_id": 20,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "K",
+       "label_seq_id": 109,
+       "comp_id": "CYS"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -89,
+     -24
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": true,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 6,
+    "target_residues": 18,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}
