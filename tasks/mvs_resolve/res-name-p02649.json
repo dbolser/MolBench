@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 1195 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (8AX8) grades as exactly right",
+   "the same drawing on another accepted entry (8AX8) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (12YZ) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names APOE_HUMAN (P02649) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 8CE0, one of the 28 accepted entries",
@@ -256,5 +256,21 @@
   "8grx",
   "9sa3",
   "9sa6"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ]
  ]
 }

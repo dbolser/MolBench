@@ -498,7 +498,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 16 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (1SWT) grades as exactly right",
+   "the same drawing on another accepted entry (1SWT) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (10TC) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names SAV_STRAV (P22629) and the ligand biotin (component BTN; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer BTN. The reference draws the polymer and every BTN of 1STP, one of the 52 accepted entries",
@@ -581,5 +581,46 @@
   "7efc",
   "7efd",
   "9pub"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "red"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "BTN"
+    },
+    "representation": "ball_and_stick",
+    "color": "red"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "red"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "BTN"
+    },
+    "representation": "ball_and_stick",
+    "color": "red"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "red"
+   }
+  ]
  ]
 }

@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 826 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (2N3B) grades as exactly right",
+   "the same drawing on another accepted entry (2N3B) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (11FU) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names CYC_HORSE (P00004) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 1HRC, one of the 32 accepted entries",
@@ -260,5 +260,21 @@
   "6k9i",
   "6k9j",
   "6suv"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "yellow"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "yellow"
+   }
+  ]
  ]
 }

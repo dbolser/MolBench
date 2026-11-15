@@ -55,7 +55,8 @@ and on an id that does not exist (both fail).
   namings still pass there, each task lists them under `accepted` (the cartoon on
   `polymer`, `all` or, where the reference entry is all protein, `protein`; the ligand by
   component code or, where equal on the reference entry, `ligand`). A selection by chain
-  id on a non-panel entry cannot be credited.
+  id on a non-panel entry cannot be credited. Each accepted naming has its own
+  target (`accepted_targets`), so a right answer there also has target score 1.
 - **The lists follow UniProt accessions.** An entry of the right protein that RCSB maps
   to no accession, or to another one (an orthologue the prompt's organism word
   excludes), is not accepted. Proteins carried by several genes, and ligands deposited

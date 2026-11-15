@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 3478 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (5EQI) grades as exactly right",
+   "the same drawing on another accepted entry (5EQI) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (14UW) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names GTR1_HUMAN (P11166) by its human gene symbol SLC2A1 (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 6THA, one of the 5 accepted entries",
@@ -233,5 +233,21 @@
   "5eqg",
   "5eqh",
   "5eqi"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "teal"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "teal"
+   }
+  ]
  ]
 }

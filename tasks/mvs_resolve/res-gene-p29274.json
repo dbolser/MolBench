@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 3521 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (8PWN) grades as exactly right",
+   "the same drawing on another accepted entry (8PWN) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (11JC) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names AA2AR_HUMAN (P29274) by its human gene symbol ADORA2A (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 3EML, one of the 192 accepted entries",
@@ -420,5 +420,21 @@
   "9ui3",
   "9w41",
   "9xqb"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ]
  ]
 }

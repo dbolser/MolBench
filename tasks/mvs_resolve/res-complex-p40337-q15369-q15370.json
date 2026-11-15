@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 2645 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (9OIO) grades as exactly right",
+   "the same drawing on another accepted entry (9OIO) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (15BI) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names a complex of VHL_HUMAN (P40337), ELOC_HUMAN (Q15369) and ELOB_HUMAN (Q15370); accepted are the PDB entries that hold all of them. The reference is a cartoon of the polymer of 9GIO, one of the 140 accepted entries",
@@ -370,5 +370,21 @@
   "9snq",
   "9sv3",
   "9t32"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "steelblue"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "steelblue"
+   }
+  ]
  ]
 }

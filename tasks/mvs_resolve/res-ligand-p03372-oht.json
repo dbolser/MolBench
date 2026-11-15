@@ -498,7 +498,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 29 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (4Q50) grades as exactly right",
+   "the same drawing on another accepted entry (4Q50) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (13JK) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names ESR1_HUMAN (P03372) and the ligand 4-hydroxytamoxifen (component OHT; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer OHT. The reference draws the polymer and every OHT of 3ERT, one of the 7 accepted entries",
@@ -536,5 +536,46 @@
   "5w9c",
   "6v87",
   "7uj8"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "steelblue"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "OHT"
+    },
+    "representation": "ball_and_stick",
+    "color": "steelblue"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "steelblue"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "OHT"
+    },
+    "representation": "ball_and_stick",
+    "color": "steelblue"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "steelblue"
+   }
+  ]
  ]
 }

@@ -351,9 +351,16 @@ def a_colour(c: str) -> str:
 
 
 def cand(entry, accessions, wordings, children, alternatives, target, accepted, derivation,
-         suffix, named_by, flags=None, pack_extra="", **words):
+         suffix, named_by, flags=None, pack_extra="", alt_targets=None, **words):
+    """``alt_targets``: one target per alternative, written with the alternative's own
+    selection. On an accepted entry outside the panel there is no atom table, so the
+    grader compares a target by how it is written; with the reference's target alone, a
+    right answer that says ``protein`` where the reference says ``polymer`` would be a
+    success with target score 0."""
+    assert len(alt_targets or []) == len(alternatives), suffix
     return {"entry": entry, "accessions": accessions, "wordings": wordings, "children": children,
-            "alternatives": alternatives, "target": target, "accepted": accepted,
+            "alternatives": alternatives, "alt_targets": alt_targets or [],
+            "target": target, "accepted": accepted,
             "derivation": derivation, "suffix": suffix, "named_by": named_by,
             "flags": flags or {}, "pack_extra": pack_extra, "words": words}
 
@@ -372,11 +379,13 @@ def cartoon_namings(entry: str) -> list[str]:
 def whole_cartoon(entry, accessions, phrase, wordings, family, key, accepted, how, named_by,
                   **flags):
     col = C.colours(1, family, key)[0]
-    scenes = [[C.drawn_comp(sel, "cartoon", col)] for sel in cartoon_namings(entry)]
+    namings = cartoon_namings(entry)
+    scenes = [[C.drawn_comp(sel, "cartoon", col)] for sel in namings]
     return cand(entry, accessions, wordings, scenes[0], scenes[1:],
                 [C.part("polymer", "cartoon", col)], accepted,
                 f"{how}. The reference is a cartoon of the polymer of {entry.upper()}, one of "
                 f"the {len(accepted)} accepted entries", key, named_by, flags,
+                alt_targets=[[C.part(sel, "cartoon", col)] for sel in namings[1:]],
                 P=phrase, c=a_colour(col))
 
 
@@ -508,8 +517,9 @@ def t_ligand():
             sel = {"label_comp_id": comp}
             ligand_namings = [sel] + (["ligand"] if t.static.get("ligand") == C.mask_of(entry, sel)
                                       else [])
+            pairs = [(p, l) for p in cartoon_namings(entry) for l in ligand_namings]
             scenes = [[C.drawn_comp(p, "cartoon", c1), C.drawn_comp(l, "ball_and_stick", c2)]
-                      for p in cartoon_namings(entry) for l in ligand_namings]
+                      for p, l in pairs]
             out.append(cand(
                 entry, [acc],
                 ["Show me a structure of {P} with {L} bound: the protein as {c1} cartoon and "
@@ -527,6 +537,7 @@ def t_ligand():
                 f"{acc.lower()}-{comp.lower()}", "protein name, with a named ligand",
                 {"ligand_identity": named[0].upper() != comp},
                 pack_extra=f" and {G.chem()[comp]['name']} (chemical code {comp})",
+                alt_targets=[[C.part(l, "ball_and_stick", c2)] for _, l in pairs[1:]],
                 P=protein_phrase(acc), L=named[0], c1=a_colour(c1), c2=C.say_colour(c2)))
     return out
 
@@ -662,7 +673,8 @@ def build() -> list[dict]:
                         "accepted_retrieved": retrieved,
                         "accepted_source": "RCSB search API and GraphQL, frozen in "
                                            "data/mvscore/resolve_entries.json"},
-            accepted_structures=others)
+            accepted_structures=others,
+            **({"accepted_targets": c["alt_targets"]} if c["alt_targets"] else {}))
         task["grounding"] = {"rule": PACK_RULE, "text": pack(accessions, accepted, c["pack_extra"])}
         built.append(task)
     return sorted(built, key=lambda t: t["id"])
@@ -685,8 +697,13 @@ def check_answers(built: list[dict]) -> None:
             res = C.runner.grade_parsed(loaded, repoint(t["reference"], entry, other))
             assert res["success"] and res["f1"] == 1.0, (t["id"], other, res)
             assert answer_outcome(t, other) == "accepted"
+            for alt in t["accepted"]:
+                res = C.runner.grade_parsed(loaded, repoint(alt, entry, other))
+                assert res["success"] and res["target_f1"] == 1.0, (t["id"], other, res)
             said.append(f"the same drawing on another accepted entry ({other.upper()}) grades as "
-                        "exactly right")
+                        "exactly right"
+                        + (", and so does every accepted naming of it (success and target "
+                           "score 1)" if t["accepted"] else ""))
         for bad, kind in ((wrong, "wrong_entry"), (missing, "no_such_entry")):
             res = C.runner.grade_parsed(loaded, repoint(t["reference"], entry, bad))
             assert not res["success"] and res["f1"] < 1.0, (t["id"], bad, res)
@@ -745,7 +762,8 @@ and on an id that does not exist (both fail).
   namings still pass there, each task lists them under `accepted` (the cartoon on
   `polymer`, `all` or, where the reference entry is all protein, `protein`; the ligand by
   component code or, where equal on the reference entry, `ligand`). A selection by chain
-  id on a non-panel entry cannot be credited.
+  id on a non-panel entry cannot be credited. Each accepted naming has its own
+  target (`accepted_targets`), so a right answer there also has target score 1.
 - **The lists follow UniProt accessions.** An entry of the right protein that RCSB maps
   to no accession, or to another one (an orthologue the prompt's organism word
   excludes), is not accepted. Proteins carried by several genes, and ligands deposited

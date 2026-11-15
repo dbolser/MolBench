@@ -498,7 +498,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 74 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (3MSS) grades as exactly right",
+   "the same drawing on another accepted entry (3MSS) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (13RT) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names ABL1_MOUSE (P00520) and the ligand imatinib (component STI; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer STI. The reference draws the polymer and every STI of 1IEP, one of the 7 accepted entries",
@@ -536,5 +536,46 @@
   "3mss",
   "6hd4",
   "6hd6"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "blue"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "STI"
+    },
+    "representation": "ball_and_stick",
+    "color": "blue"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "blue"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "STI"
+    },
+    "representation": "ball_and_stick",
+    "color": "blue"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "blue"
+   }
+  ]
  ]
 }

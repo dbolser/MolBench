@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 1490 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (6W5B) grades as exactly right",
+   "the same drawing on another accepted entry (6W5B) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (148L) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names CRGD_HUMAN (P07320) by its human gene symbol CRYGD (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 1HK0, one of the 16 accepted entries",
@@ -244,5 +244,21 @@
   "8bpi",
   "8q3l",
   "9g3w"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "hotpink"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "hotpink"
+   }
+  ]
  ]
 }

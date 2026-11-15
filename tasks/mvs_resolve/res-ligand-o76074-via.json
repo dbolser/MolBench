@@ -498,7 +498,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 33 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (2H42) grades as exactly right",
+   "the same drawing on another accepted entry (2H42) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (15FS) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names PDE5A_HUMAN (O76074) and the ligand sildenafil (component VIA; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer VIA. The reference draws the polymer and every VIA of 1UDT, one of the 4 accepted entries",
@@ -533,5 +533,46 @@
   "1tbf",
   "2h42",
   "3jwq"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "VIA"
+    },
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "VIA"
+    },
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ]
  ]
 }

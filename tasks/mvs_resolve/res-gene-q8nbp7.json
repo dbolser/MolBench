@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 4403 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (5VL7) grades as exactly right",
+   "the same drawing on another accepted entry (5VL7) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (11NM) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names PCSK9_HUMAN (Q8NBP7) by its human gene symbol PCSK9 (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 2P4E, one of the 60 accepted entries",
@@ -288,5 +288,21 @@
   "8wfr",
   "9hz3",
   "9szy"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "magenta"
+   }
+  ]
  ]
 }

@@ -199,7 +199,7 @@
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
    "target selects 1336 atoms on the frozen atom table",
    "every accepted alternative grades as itself and is accepted by the task",
-   "the same drawing on another accepted entry (1VXE) grades as exactly right",
+   "the same drawing on another accepted entry (1VXE) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
    "the same drawing on a PDB entry outside the list (15LF) and on an id that does not exist (2ZZZ) both fail"
   ],
   "derivation": "the prompt names MYG_PHYMC (P02185) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 1A6M, one of the 358 accepted entries",
@@ -586,5 +586,21 @@
   "9p1e",
   "9p1f",
   "9x5e"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "plum"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "plum"
+   }
+  ]
  ]
 }
