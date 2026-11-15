@@ -54,6 +54,9 @@ HELDBACK_SHARE = 0.20
 # (scripts/validate_tasks.py). 8CE0 is already held back by the fixture tasks
 # (tests/fixtures/tasks), so it is held back here too.
 ALSO_HELDBACK = ("8ce0",)
+# Structures another tier publishes, which this tier must therefore not hold back.
+# Empty until the tiers' held-back sets are reconciled at integration.
+NEVER_HELDBACK: tuple[str, ...] = ()
 UNIPROT_URL = ("https://rest.uniprot.org/uniprotkb/{}.json?fields="
                "ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit")
 AF_URL = "https://alphafold.ebi.ac.uk/files/AF-{}-F1-model_v6.cif"
@@ -778,7 +781,8 @@ def assign_split(tasks: list[dict]) -> list[str]:
     structures = sorted({t["structures"][0] for t in tasks})
     entries = {e["id"]: e for e in grounding.panel()["entries"]}
     paired = {t["structures"][0] for t in tasks if t["provenance"]["clinical"]["pair"]}
-    cands = [s for s in structures if not entries[s]["used_by_tasks"] and s not in paired]
+    cands = [s for s in structures if not entries[s]["used_by_tasks"] and s not in paired
+             and s not in NEVER_HELDBACK]
     n = round(HELDBACK_SHARE * len(structures))
     offset = {s: entries[s].get("offset") for s in cands}
     r = rng("heldback")
