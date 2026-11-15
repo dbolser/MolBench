@@ -30,12 +30,54 @@
     "molecule_id": "8c86"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "C",
+      "label_comp_id": "TQ0",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
     "action": "color",
     "data": [
      {
       "struct_asym_id": "D",
       "label_comp_id": "TQ0",
       "color": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "D",
+      "label_comp_id": "TQ0",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
      }
     ]
    }
@@ -57,6 +99,33 @@
       "struct_asym_id": "D",
       "label_comp_id": "TQ0",
       "color": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "C",
+      "label_comp_id": "TQ0",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     },
+     {
+      "struct_asym_id": "D",
+      "label_comp_id": "TQ0",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
      }
     ]
    }
@@ -86,7 +155,7 @@
   ],
   "date": "2026-11-13",
   "checks": [
-   "each of the 3 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "each of the 6 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
    "target selects 37 atoms on the frozen atom table",
@@ -104,20 +173,25 @@
    "colour": "yellow"
   },
   "open": "which copy of the named ligand (or all)",
-  "rule": "The request names one ligand; the entry holds several copies of it. Accepted: any one copy, or every copy. Not an arbitrary several-but-not-all: no reading of the request picks, say, two of four.",
+  "rule": "The request names one ligand; the entry holds several copies of it. Accepted: any one copy, or every copy. Not an arbitrary several-but-not-all: no reading of the request picks, say, two of four. On the API track each reading is accepted in every call form that ends in a state of its own: (default) one colour call on a bare load, which leaves everything else as the viewer draws it; (style) the cartoon style set first, so that only the polymer is drawn and a ligand asked for as ball-and-stick is an added representation, which is the state the MVS twin draws; (author, chain colours only) each chain named by its author id on a bare load, which also paints the ligands, ions and water deposited under that author chain. The request says nothing about what it does not name, so none of these is wrong.",
   "candidates": [
    "TQ0 B:201",
    "TQ0 A:201"
   ],
   "accepted_states": [
    "TQ0 B:201",
+   "TQ0 B:201; the cartoon style set first",
    "TQ0 A:201",
-   "both copies"
+   "TQ0 A:201; the cartoon style set first",
+   "both copies",
+   "both copies; the cartoon style set first"
   ],
   "not_accepted": [
    "some but not all copies (when there are more than two): no reading of the request",
    "other components, or the residues bonded to the ligand: not requested",
-   "another representation or colour: both are stated"
+   "another representation or colour: both are stated",
+   "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
+   "another global style, or hidden components: not requested"
   ],
   "difficulty": {
    "needs_numbering_offset": false,
@@ -125,11 +199,16 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
-   "n_accepted_states": 3
+   "n_readings": 3,
+   "n_accepted_states": 6
   },
+  "call_forms": [
+   "default",
+   "style"
+  ],
   "structure": "8c86",
   "source": "RCSB mmCIF 8C86 -> molbench/atom_tables/8c86.json.gz (scripts/build_atom_tables.py); data/panel/facts",
-  "derived": "a `ligand` component with 2\u20134 copies (\u2265 8 heavy atoms); each copy, and all. Reference = the first accepted state (TQ0 B:201): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "derived": "a `ligand` component with 2\u20134 copies (\u2265 8 heavy atoms); each copy, and all. Reference = the first accepted state (TQ0 B:201): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
   "checked_by": "scripts/check_api_refs.py",
   "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
@@ -156,6 +235,26 @@
   [
    {
     "selector": {
+     "label_asym_id": "C",
+     "auth_seq_id": 201
+    },
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "D",
+     "auth_seq_id": 201
+    },
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   }
+  ],
+  [
+   {
+    "selector": {
      "label_asym_id": "D",
      "auth_seq_id": 201
     },
@@ -178,7 +277,23 @@
     "representation": "ball-and-stick",
     "color": "yellow"
    }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "C",
+      "auth_seq_id": 201
+     },
+     {
+      "label_asym_id": "D",
+      "auth_seq_id": 201
+     }
+    ],
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   }
   ]
  ],
- "notes": "Left open: which copy of the named ligand (or all). Reference = accepted state 1 of 3 (TQ0 B:201); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which copy of the named ligand (or all). Reference = accepted state 1 of 6 (TQ0 B:201); the others are in 'accepted', in the order of provenance.accepted_states."
 }

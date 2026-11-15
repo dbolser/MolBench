@@ -327,6 +327,23 @@ RULES = {
          "another representation: it is stated"]),
 }
 
+# API track: what else is accepted and what is not, whatever the template.
+API_RULE = (
+    "On the API track each reading is accepted in every call form that ends in a state of "
+    "its own: (default) one colour call on a bare load, which leaves everything else as "
+    "the viewer draws it; (style) the cartoon style set first, so that only the polymer "
+    "is drawn and a ligand asked for as ball-and-stick is an added representation, which "
+    "is the state the MVS twin draws; (author, chain colours only) each chain named by "
+    "its author id on a bare load, which also paints the ligands, ions and water "
+    "deposited under that author chain. The request says nothing about what it does not "
+    "name, so none of these is wrong.")
+API_NOT_ACCEPTED = [
+    "an added representation in the requested colour on top of a default drawing that was "
+    "given another colour or none (bare load, 'representation' + 'representationColor' "
+    "with no matching 'color'): the ligand is then drawn twice, in two colours",
+    "another global style, or hidden components: not requested",
+]
+
 WORDINGS = {
     "acc-chain-colours": [
         "Load {ID} and show it as a cartoon, with the {n} chains coloured {colours}.",
@@ -460,6 +477,11 @@ def spec_chain_colours(e: Entry) -> dict | None:
                         "atoms": {"auth_asym_id": c["auth_asym_id"],
                                   "label_entity_id": c["entity_id"]}}])
                  for i, c in enumerate(chains)]
+        for p, c in zip(parts, chains):
+            # API only: the same chain named by its author id, which in pdbe-molstar also
+            # selects the ligands, ions and water deposited under that author chain.
+            p["api_author"] = [{"auth_asym_id": c["auth_asym_id"]}]
+            p["author_mask"] = e.rows(auth_asym_id=c["auth_asym_id"])
         states.append({"label": ", ".join(f"chain {c['auth_asym_id']} {cols[perm[i]]}"
                                           for i, c in enumerate(chains)), "parts": parts})
     return {"states": states, "candidates": [f"chain {c['auth_asym_id']}" for c in chains],
@@ -619,6 +641,9 @@ def residue_spec(e: Entry, template: str, rep: str) -> dict | None:
     chains, shared = pick(groups, template, e.id, "entity")
     num, comp, residues = pick(shared, template, e.id, "residue")
     colour = colours(1, template, e.id)[0]
+    mine = 0
+    for r in residues:
+        mine |= r["mask"]
     items = [(f"{comp} {r['auth_asym_id']}:{num}",
               {"auth_asym_id": r["auth_asym_id"], "auth_seq_id": num},
               [{"auth_asym_id": r["auth_asym_id"], "auth_residue_number": num}], r["mask"],
@@ -630,7 +655,12 @@ def residue_spec(e: Entry, template: str, rep: str) -> dict | None:
             "candidates": [i[0] for i in items],
             "slots": {"thing": f"{comp.capitalize()}{num}", "colour": colour},
             "residues": [{k: v for k, v in r.items() if k != "mask"} for r in residues],
-            "facts": e.difficulty(chains=chains, residues=residues)}
+            # True when another polymer chain has a residue with this author number (of
+            # another type): an answer that gives the number and no chain then colours
+            # that residue too, and is wrong. The residue name settles which protein.
+            "facts": {**e.difficulty(chains=chains, residues=residues),
+                      "number_also_in_another_chain": bool(
+                          e.rows(auth_seq_id=num) & e.table.static["polymer"] & ~mine)}}
 
 
 def spec_residue_copy(e: Entry) -> dict | None:
@@ -686,17 +716,63 @@ def mvs_scene(entry: str, state: dict) -> dict:
              {"kind": "structure", "params": {"type": "model"}, "children": components}]}]}]}}
 
 
-def api_calls(entry: str, state: dict) -> list[dict]:
-    """A bare load already draws the polymer as a cartoon and ligands as ball-and-stick,
-    so the requested state is one ``color`` call."""
-    data = [{**loc, "color": p["color"]} for p in state["parts"] for loc in p["api"]]
-    return [{"action": "load", "molecule_id": entry}, {"action": "color", "data": data}]
+# The call forms an API answer can take for one requested state (FORMS[0] is the
+# reference's). They end in different viewer states, because the request says nothing
+# about what is not asked for:
+# * default - a bare load already draws the polymer as a cartoon and ligands as
+#   ball-and-stick, so the requested state is one ``color`` call; everything else stays
+#   as the viewer draws it (other ligands, ions, water).
+# * style   - "as a cartoon" taken as the viewer's cartoon style (the reading the other
+#   API tiers use for these words): only the polymer is drawn, so a ligand asked for as
+#   ball-and-stick is an added representation. This is the state the MVS twin draws.
+# * author  - chain colours only: each chain named by its author id on a bare load, which
+#   also paints the ligands, ions and water deposited under that author chain.
+FORMS = ("default", "style", "author")
+FORM_LABEL = {"default": "", "style": "; the cartoon style set first",
+              "author": "; whole author chains (with their ligands, ions and water)"}
+
+
+def api_calls(entry: str, state: dict, form: str = "default") -> list[dict]:
+    load = {"action": "load", "molecule_id": entry}
+    if form == "style":
+        data = [{**loc, "color": p["color"]} if p["rep"] == "cartoon" else
+                {**loc, "representation": API_REP[p["rep"]], "representationColor": p["color"]}
+                for p in state["parts"] for loc in p["api"]]
+        return [load, {"action": "set_visual_style", "style": "cartoon"},
+                {"action": "color", "data": data}]
+    key = "api_author" if form == "author" else "api"
+    data = [{**loc, "color": p["color"]} for p in state["parts"] for loc in p[key]]
+    return [load, {"action": "color", "data": data}]
+
+
+def api_forms(entry: str, state: dict) -> list[tuple[str, list[dict]]]:
+    """(form, call list) for every call form that applies to ``state`` and ends in a
+    state of its own (a form that changes nothing on this entry, such as the author
+    chain where it is exactly the polymer chain, is left out)."""
+    out: list[tuple[str, list[dict]]] = []
+    for form in FORMS:
+        if form == "author" and not all("api_author" in p for p in state["parts"]):
+            continue
+        calls = api_calls(entry, state, form)
+        if not any(pdbe_state.grade_state(seen, calls)["success"] for _, seen in out):
+            out.append((form, calls))
+    return out
 
 
 def target(track: str, state: dict) -> list[dict]:
     return [{"selector": p["selector"],
              "representation": p["rep"] if track == "mvs" else API_REP[p["rep"]],
              "color": p["color"]} for p in state["parts"]]
+
+
+@functools.lru_cache(maxsize=None)
+def _bare_drawn(entry: str) -> int:
+    """The atoms pdbe-molstar draws after a bare load (by the grader's replay)."""
+    out = 0
+    for m, val in pdbe_state.replay([{"action": "load", "molecule_id": entry}]).display().items():
+        if val:
+            out |= m
+    return out
 
 
 @functools.lru_cache(maxsize=None)
@@ -710,10 +786,39 @@ def plain_cartoon(entry: str) -> int:
     return out
 
 
-def read_back(track: str, entry: str, state: dict, answer) -> str | None:
+def read_back(track: str, entry: str, state: dict, answer, form: str = "default") -> str | None:
     """Compare what the grader's resolver says ``answer`` draws with the atoms computed
     from the table columns. None = they agree."""
     table = load_table(entry)
+    if track == "api":
+        changed = pdbe_state.changes(pdbe_state.replay(answer))
+        polymer = table.static["polymer"]
+        # Everything that got a colour, whatever it is drawn as; and everything that is
+        # no longer drawn (the cartoon style takes the non-polymer drawings away).
+        painted: dict[tuple, int] = {}
+        gone = 0
+        for (kind, rgb), m in changed.items():
+            if kind.startswith("-"):
+                gone |= m
+            else:
+                painted[rgb] = painted.get(rgb, 0) | m
+        want_painted: dict[tuple, int] = {}
+        for p in state["parts"]:
+            rgb = pdbe_state.normalize_color(p["color"])
+            m = p["author_mask"] if form == "author" else p["mask"]
+            want_painted[rgb] = want_painted.get(rgb, 0) | m
+        for rgb in set(painted) | set(want_painted):
+            got, want = painted.get(rgb, 0), want_painted.get(rgb, 0)
+            if pdbe_state.residues_of(table, got) != pdbe_state.residues_of(table, want):
+                return (f"{state['label']} [{form}]: colour {rgb} is on "
+                        f"{bin(got).count('1')} atoms, expected {bin(want).count('1')}")
+        shown = 0
+        for p in state["parts"]:
+            shown |= p["mask"]
+        want_gone = ((1 << table.n) - 1) & ~polymer & ~shown if form == "style" else 0
+        if gone & ~polymer != want_gone & _bare_drawn(entry):
+            return (f"{state['label']} [{form}]: {bin(gone & ~polymer).count('1')} non-polymer "
+                    f"atoms are no longer drawn, expected {bin(want_gone & _bare_drawn(entry)).count('1')}")
     for p in state["parts"]:
         rgb = drawn.mvs_color(p["color"]) if track == "mvs" else pdbe_state.normalize_color(p["color"])
         if track == "mvs":
@@ -757,14 +862,28 @@ def choose(template: str, cands: list[tuple[Entry, dict]], n: int, twin: bool,
 
 def make_task(track: str, template: str, e: Entry, spec: dict, split: str, prompt: str,
               wording: int) -> dict:
-    states = [s for s in spec["states"] if track == "mvs" or not s.get("mvs_only")]
-    build = (lambda s: mvs_scene(e.id, s)) if track == "mvs" else (lambda s: api_calls(e.id, s))
-    answers = [build(s) for s in states]
-    for s, a in zip(states, answers):
-        problem = read_back(track, e.id, s, a)
-        if problem:
-            raise SystemExit(f"{template} {e.id} {track}: {problem}")
+    # One answer per accepted state: on the MVS track one scene per reading of the
+    # request; on the API track one call list per reading and call form (FORMS).
+    states, answers, labels, forms = [], [], [], []
+    for s in spec["states"]:
+        if track == "mvs":
+            made = [("", mvs_scene(e.id, s))]
+        elif s.get("mvs_only"):
+            continue
+        else:
+            made = api_forms(e.id, s)
+        for form, a in made:
+            problem = read_back(track, e.id, s, a, form or "default")
+            if problem:
+                raise SystemExit(f"{template} {e.id} {track}: {problem}")
+            states.append(s)
+            answers.append(a)
+            forms.append(form)
+            labels.append(s["label"] + FORM_LABEL.get(form, ""))
     rule, not_accepted = RULES[template]
+    if track == "api":
+        rule += " " + API_RULE
+        not_accepted = not_accepted + API_NOT_ACCEPTED
     # The slots the full wordings of this template use (plus the id in lower case, for
     # terse paraphrases): scripts/generate_paraphrases.py fills its wordings from them.
     wanted = {k for w in WORDINGS[template] for k in re.findall(r"{(\w+)}", w)} | {"id"}
@@ -782,11 +901,16 @@ def make_task(track: str, template: str, e: Entry, spec: dict, split: str, promp
         "open": OPEN[template],
         "rule": rule,
         "candidates": spec["candidates"],
-        "accepted_states": [s["label"] for s in states],
+        "accepted_states": labels,
         "not_accepted": not_accepted,
         "difficulty": {**spec["facts"], "n_candidates": len(spec["candidates"]),
+                       # readings of the request; on the API track each can be accepted
+                       # in several call forms, so there are more states than readings
+                       "n_readings": len({id(s) for s in states}),
                        "n_accepted_states": len(states)},
     }
+    if track == "api":
+        prov["call_forms"] = sorted(set(forms), key=FORMS.index)
     if "residues" in spec:
         prov["residues"] = spec["residues"]
     if track == "api":
@@ -800,7 +924,9 @@ def make_task(track: str, template: str, e: Entry, spec: dict, split: str, promp
                       "(scripts/build_atom_tables.py); data/panel/facts",
             "derived": f"{DERIVED[template]}. Reference = the first accepted state "
                        f"({states[0]['label']}): a bare load, which already draws the polymer as "
-                       "a cartoon and ligands as ball-and-stick, plus one colour call.",
+                       "a cartoon and ligands as ball-and-stick, plus one colour call. The "
+                       "alternatives are the other readings, each in every call form that "
+                       "ends in a state of its own (provenance.call_forms).",
             "checked_by": "scripts/check_api_refs.py",
             "accepted_differ": "accept-set tier: every alternative is another final state, "
                                "one of the readings of the request that provenance.rule accepts",
@@ -817,7 +943,7 @@ def make_task(track: str, template: str, e: Entry, spec: dict, split: str, promp
         "skills": SKILLS.get(template, DEFAULT_SKILLS),
         "accepted_targets": [target(track, s) for s in states[1:]],
         "notes": f"Left open: {OPEN[template]}. Reference = accepted state 1 of "
-                 f"{len(states)} ({states[0]['label']}); the others are in 'accepted', in the "
+                 f"{len(states)} ({labels[0]}); the others are in 'accepted', in the "
                  "order of provenance.accepted_states.",
     }
 
@@ -939,8 +1065,23 @@ enumerable neighbour: the colours are named, the assignment is not.
 NO_TWIN = """\
 Every task here is the twin of an MVS task (same prompt, same target atoms). A twin is
 built where the requested state is one `color` call on a bare load, because pdbe-molstar
-already draws the polymer as a cartoon and ligands as ball-and-stick. Four MVS templates
-have no twin:
+already draws the polymer as a cartoon and ligands as ball-and-stick.
+
+**Call forms.** The same words can be answered in call forms that end in different
+viewer states, because the request says nothing about what it does not name. Each
+reading is therefore accepted in every form that ends in a state of its own
+(`provenance.call_forms`; the reference is the first reading in the `default` form):
+
+| form | calls | what else is on screen |
+|---|---|---|
+| `default` | `load`, one `color` call | everything a bare load draws (other ligands, ions, water) |
+| `style` | `load`, `set_visual_style` cartoon, `color` (a ligand as an added representation with `representationColor`) | the polymer only: the state the MVS twin draws, and the reading the other API tiers use for "as a cartoon" |
+| `author` | `load`, one `color` call naming each chain by author id (`acc-chain-colours` only) | as `default`, with the ligands, ions and water of each author chain in its colour |
+
+A form that changes nothing on an entry is left out (5UAK has nothing but its two
+chains, so `author` is the `default` state there).
+
+Four MVS templates have no twin:
 
 - `acc-residue-copy`, `acc-metal-copy`, `acc-metal-which` need an *added* representation
   (sticks on a residue, spacefill on an ion). In pdbe-molstar 3.3.2 that request has

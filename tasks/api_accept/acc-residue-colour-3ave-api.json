@@ -30,6 +30,26 @@
     "molecule_id": "3ave"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_residue_number": 358,
+      "color": "orange"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "3ave"
+   },
+   {
     "action": "color",
     "data": [
      {
@@ -44,6 +64,51 @@
    {
     "action": "load",
     "molecule_id": "3ave"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "B",
+      "auth_residue_number": 358,
+      "color": "orange"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "3ave"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_residue_number": 358,
+      "color": "orange"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_residue_number": 358,
+      "color": "orange"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "3ave"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
    },
    {
     "action": "color",
@@ -86,7 +151,7 @@
   ],
   "date": "2026-11-13",
   "checks": [
-   "each of the 3 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "each of the 6 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
    "target selects 8 atoms on the frozen atom table",
@@ -104,29 +169,40 @@
    "colour": "orange"
   },
   "open": "which chain's copy of the named residue (or all)",
-  "rule": "The request asks to colour a residue, named by type and author number but with no chain; the protein is present as several identical chains. Accepted: the residue coloured in any one chain, or in every chain.",
+  "rule": "The request asks to colour a residue, named by type and author number but with no chain; the protein is present as several identical chains. Accepted: the residue coloured in any one chain, or in every chain. On the API track each reading is accepted in every call form that ends in a state of its own: (default) one colour call on a bare load, which leaves everything else as the viewer draws it; (style) the cartoon style set first, so that only the polymer is drawn and a ligand asked for as ball-and-stick is an added representation, which is the state the MVS twin draws; (author, chain colours only) each chain named by its author id on a bare load, which also paints the ligands, ions and water deposited under that author chain. The request says nothing about what it does not name, so none of these is wrong.",
   "candidates": [
    "LEU A:358",
    "LEU B:358"
   ],
   "accepted_states": [
    "LEU A:358",
+   "LEU A:358; the cartoon style set first",
    "LEU B:358",
-   "both copies"
+   "LEU B:358; the cartoon style set first",
+   "both copies",
+   "both copies; the cartoon style set first"
   ],
   "not_accepted": [
    "some but not all chains (when there are more than two): no reading of the request",
    "a residue with that number in another protein of the entry, or the residue with that label (sequence) number where it differs: a different residue",
-   "an added representation (sticks) for the residue: only a colour is requested"
+   "an added representation (sticks) for the residue: only a colour is requested",
+   "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
+   "another global style, or hidden components: not requested"
   ],
   "difficulty": {
    "needs_numbering_offset": true,
    "author_chain_differs_from_label": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
+   "number_also_in_another_chain": false,
    "n_candidates": 2,
-   "n_accepted_states": 3
+   "n_readings": 3,
+   "n_accepted_states": 6
   },
+  "call_forms": [
+   "default",
+   "style"
+  ],
   "residues": [
    {
     "auth_asym_id": "A",
@@ -145,7 +221,7 @@
   ],
   "structure": "3ave",
   "source": "RCSB mmCIF 3AVE -> molbench/atom_tables/3ave.json.gz (scripts/build_atom_tables.py); data/panel/facts",
-  "derived": "as above, coloured on the cartoon instead of added as sticks. Reference = the first accepted state (LEU A:358): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "derived": "as above, coloured on the cartoon instead of added as sticks. Reference = the first accepted state (LEU A:358): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
   "checked_by": "scripts/check_api_refs.py",
   "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
@@ -172,6 +248,26 @@
   [
    {
     "selector": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 358
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 358
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ],
+  [
+   {
+    "selector": {
      "auth_asym_id": "B",
      "auth_seq_id": 358
     },
@@ -194,7 +290,23 @@
     "representation": "cartoon",
     "color": "orange"
    }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 358
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 358
+     }
+    ],
+    "representation": "cartoon",
+    "color": "orange"
+   }
   ]
  ],
- "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 3 (LEU A:358); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 6 (LEU A:358); the others are in 'accepted', in the order of provenance.accepted_states."
 }

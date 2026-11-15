@@ -94,7 +94,7 @@
    "colours": "magenta and blue"
   },
   "open": "which chain gets which colour",
-  "rule": "The request gives one colour per chain but not which chain gets which. Accepted: every one-to-one assignment of the named colours to the polymer chains (n! states), on a cartoon of the whole polymer.",
+  "rule": "The request gives one colour per chain but not which chain gets which. Accepted: every one-to-one assignment of the named colours to the polymer chains (n! states), on a cartoon of the whole polymer. On the API track each reading is accepted in every call form that ends in a state of its own: (default) one colour call on a bare load, which leaves everything else as the viewer draws it; (style) the cartoon style set first, so that only the polymer is drawn and a ligand asked for as ball-and-stick is an added representation, which is the state the MVS twin draws; (author, chain colours only) each chain named by its author id on a bare load, which also paints the ligands, ions and water deposited under that author chain. The request says nothing about what it does not name, so none of these is wrong.",
   "candidates": [
    "chain A",
    "chain R"
@@ -106,7 +106,9 @@
   "not_accepted": [
    "a colour used on two chains, or a chain left uncoloured: the request names one colour per chain",
    "other colours, or a colour-by-chain theme with the viewer's own colours: the request names the colours",
-   "ligands, ions or water drawn or coloured: not requested"
+   "ligands, ions or water drawn or coloured: not requested",
+   "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
+   "another global style, or hidden components: not requested"
   ],
   "difficulty": {
    "needs_numbering_offset": false,
@@ -114,11 +116,15 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
+   "n_readings": 2,
    "n_accepted_states": 2
   },
+  "call_forms": [
+   "default"
+  ],
   "structure": "5uak",
   "source": "RCSB mmCIF 5UAK -> molbench/atom_tables/5uak.json.gz (scripts/build_atom_tables.py); data/panel/facts",
-  "derived": "polymer chains from `facts.chains`; exactly 2 or 3; n colours by seed; all n! assignments. Reference = the first accepted state (chain A magenta, chain R blue): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "derived": "polymer chains from `facts.chains`; exactly 2 or 3; n colours by seed; all n! assignments. Reference = the first accepted state (chain A magenta, chain R blue): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
   "checked_by": "scripts/check_api_refs.py",
   "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [

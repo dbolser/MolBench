@@ -234,3 +234,62 @@ def test_a_shared_heldback_list_replaces_the_hash_rule(tmp_path, capsys):
     assert gen.main(["--heldback-file", str(shared), "--check"]) == 1
     assert "out of date" in capsys.readouterr().out
     assert not gen.HELDBACK_FILE.exists() or gen.main(["--check"]) == 0
+
+
+def test_api_accepts_each_reading_in_every_call_form():
+    """The same words, answered the way the other API tiers read "as a cartoon" (the
+    cartoon style, a ligand as an added representation), end in the state the MVS twin
+    draws; and a chain named by its author id also paints what is deposited under it.
+    Neither is wrong, so both are accepted states."""
+    load = lambda e: {"action": "load", "molecule_id": e}                    # noqa: E731
+    style = {"action": "set_visual_style", "style": "cartoon"}
+    tid = "acc-ligand-copy-1iep-api"
+    assert TASKS[tid]["provenance"]["call_forms"] == ["default", "style"]
+    added = {"label_comp_id": "STI", "representation": "ball-and-stick",
+             "representationColor": "purple"}
+    assert grade(tid, [load("1iep"), style, {"action": "color", "data": [added]}])["success"]
+    res = grade(tid, [load("1iep"), style, {"action": "color", "data": [
+        {**added, "auth_asym_id": "A"}]}])
+    assert res["success"] and res["target_f1"] == 1.0
+    # ... but not in another colour, and not drawn twice in two colours on a bare load
+    assert not grade(tid, [load("1iep"), style, {"action": "color", "data": [
+        {**added, "representationColor": "red"}]}])["success"]
+    assert not grade(tid, [load("1iep"), {"action": "color", "data": [added]}])["success"]
+    # the cartoon style alone takes the ligand off the screen
+    assert not grade(tid, [load("1iep"), style, {"action": "color", "data": [
+        {"label_comp_id": "STI", "color": "purple"}]}])["success"]
+
+    tid = "acc-residue-colour-1aoi-api"
+    paint = {"action": "color", "data": [
+        {"auth_asym_id": "F", "auth_residue_number": 66, "color": "blue"}]}
+    assert grade(tid, [load("1aoi"), style, paint])["success"]
+    assert not grade(tid, [load("1aoi"), {"action": "set_visual_style", "style": "spacefill"},
+                           paint])["success"]
+
+    tid = "acc-chain-colours-2ptc-api"                     # author chain E holds a Ca2+ and water
+    assert TASKS[tid]["provenance"]["call_forms"] == ["default", "style", "author"]
+    by_author = lambda a, b: [load("2ptc"), {"action": "color", "data": [   # noqa: E731
+        {"auth_asym_id": "E", "color": a}, {"auth_asym_id": "I", "color": b}]}]
+    assert grade(tid, by_author("orange", "cyan"))["success"]
+    assert grade(tid, by_author("cyan", "orange"))["success"]
+    assert not grade(tid, by_author("cyan", "cyan"))["success"]
+    assert grade(tid, [load("2ptc"), style] + by_author("cyan", "orange")[1:])["success"]
+    # 5UAK is two chains and nothing else: every form is the same state there
+    assert TASKS["acc-chain-colours-5uak-api"]["provenance"]["call_forms"] == ["default"]
+    assert len(TASKS["acc-chain-colours-5uak-api"]["accepted"]) == 1
+
+
+def test_a_bare_residue_number_is_wrong_where_another_chain_has_it():
+    """Ala21 of 2HHB is in the alpha chains; residue 21 of the beta chains is Asp. The
+    difficulty fact says so, and an answer by number alone fails."""
+    tid = "acc-residue-copy-2hhb-mvs"
+    t = TASKS[tid]
+    assert t["provenance"]["difficulty"]["number_also_in_another_chain"] is True
+    assert TASKS["acc-residue-copy-1trn-mvs"]["provenance"]["difficulty"][
+        "number_also_in_another_chain"] is False
+    answer = copy.deepcopy(t["reference"])
+    _components(answer)[1]["params"]["selector"] = {"auth_seq_id": 21}
+    res = grade(tid, answer)
+    assert not res["success"] and 0 < res["target_f1"] < 1
+    _components(answer)[1]["params"]["selector"] = {"auth_seq_id": 21, "label_comp_id": "ALA"}
+    assert grade(tid, answer)["success"]

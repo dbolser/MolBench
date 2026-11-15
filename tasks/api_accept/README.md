@@ -14,16 +14,31 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 
 | family | tasks | accepted states per task | left open | example prompt |
 |---|---:|---|---|---|
-| `acc-ligand-which` | 3 | 3 | which of two different ligands (or both) | Open 1RX2 with the protein as a cartoon and the ligand in cyan ball-and-stick. |
-| `acc-ligand-colours` | 3 | 2 | which ligand gets which colour | Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue. |
-| `acc-chain-colours` | 3 | 2 | which chain gets which colour | Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta. |
-| `acc-ligand-copy` | 3 | 3 | which copy of the named ligand (or all) | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
-| `acc-residue-colour` | 3 | 3 | which chain's copy of the named residue (or all) | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
+| `acc-ligand-which` | 3 | 6 | which of two different ligands (or both) | Open 1RX2 with the protein as a cartoon and the ligand in cyan ball-and-stick. |
+| `acc-ligand-colours` | 3 | 4 | which ligand gets which colour | Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue. |
+| `acc-chain-colours` | 3 | 2, 6 | which chain gets which colour | Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta. |
+| `acc-ligand-copy` | 3 | 6 | which copy of the named ligand (or all) | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
+| `acc-residue-colour` | 3 | 6 | which chain's copy of the named residue (or all) | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
 
 Every task here is the twin of an MVS task (same prompt, same target atoms). A twin is
 built where the requested state is one `color` call on a bare load, because pdbe-molstar
-already draws the polymer as a cartoon and ligands as ball-and-stick. Four MVS templates
-have no twin:
+already draws the polymer as a cartoon and ligands as ball-and-stick.
+
+**Call forms.** The same words can be answered in call forms that end in different
+viewer states, because the request says nothing about what it does not name. Each
+reading is therefore accepted in every form that ends in a state of its own
+(`provenance.call_forms`; the reference is the first reading in the `default` form):
+
+| form | calls | what else is on screen |
+|---|---|---|
+| `default` | `load`, one `color` call | everything a bare load draws (other ligands, ions, water) |
+| `style` | `load`, `set_visual_style` cartoon, `color` (a ligand as an added representation with `representationColor`) | the polymer only: the state the MVS twin draws, and the reading the other API tiers use for "as a cartoon" |
+| `author` | `load`, one `color` call naming each chain by author id (`acc-chain-colours` only) | as `default`, with the ligands, ions and water of each author chain in its colour |
+
+A form that changes nothing on an entry is left out (5UAK has nothing but its two
+chains, so `author` is the `default` state there).
+
+Four MVS templates have no twin:
 
 - `acc-residue-copy`, `acc-metal-copy`, `acc-metal-which` need an *added* representation
   (sticks on a residue, spacefill on an ion). In pdbe-molstar 3.3.2 that request has
@@ -51,21 +66,21 @@ With five templates of three tasks each, a template is 20% of this small tier (t
 
 | id | structure | split | states | candidates |
 |---|---|---|---:|---|
-| `acc-chain-colours-1f88-api` | 1f88 | heldback | 2 | chain A, chain B |
-| `acc-chain-colours-2ptc-api` | 2ptc | public | 2 | chain E, chain I |
+| `acc-chain-colours-1f88-api` | 1f88 | heldback | 6 | chain A, chain B |
+| `acc-chain-colours-2ptc-api` | 2ptc | public | 6 | chain E, chain I |
 | `acc-chain-colours-5uak-api` | 5uak | public | 2 | chain A, chain R |
-| `acc-ligand-colours-1rx2-api` | 1rx2 | public | 2 | FOL, NAP |
-| `acc-ligand-colours-2cpp-api` | 2cpp | public | 2 | CAM, HEM |
-| `acc-ligand-colours-9gio-api` | 9gio | public | 2 | 3JF, A1IMD |
-| `acc-ligand-copy-1iep-api` | 1iep | public | 3 | STI A:201, STI B:202 |
-| `acc-ligand-copy-8c86-api` | 8c86 | public | 3 | TQ0 B:201, TQ0 A:201 |
-| `acc-ligand-copy-8k7f-api` | 8k7f | heldback | 3 | VMF A:502, VMF B:503 |
-| `acc-ligand-which-1rx2-api` | 1rx2 | public | 3 | FOL, NAP |
-| `acc-ligand-which-2cpp-api` | 2cpp | public | 3 | CAM, HEM |
-| `acc-ligand-which-9gio-api` | 9gio | public | 3 | 3JF, A1IMD |
-| `acc-residue-colour-1aoi-api` | 1aoi | public | 3 | ILE B:66, ILE F:66 |
-| `acc-residue-colour-1lmb-api` | 1lmb | public | 3 | ILE 3:84, ILE 4:84 |
-| `acc-residue-colour-3ave-api` | 3ave | heldback | 3 | LEU A:358, LEU B:358 |
+| `acc-ligand-colours-1rx2-api` | 1rx2 | public | 4 | FOL, NAP |
+| `acc-ligand-colours-2cpp-api` | 2cpp | public | 4 | CAM, HEM |
+| `acc-ligand-colours-9gio-api` | 9gio | public | 4 | 3JF, A1IMD |
+| `acc-ligand-copy-1iep-api` | 1iep | public | 6 | STI A:201, STI B:202 |
+| `acc-ligand-copy-8c86-api` | 8c86 | public | 6 | TQ0 B:201, TQ0 A:201 |
+| `acc-ligand-copy-8k7f-api` | 8k7f | heldback | 6 | VMF A:502, VMF B:503 |
+| `acc-ligand-which-1rx2-api` | 1rx2 | public | 6 | FOL, NAP |
+| `acc-ligand-which-2cpp-api` | 2cpp | public | 6 | CAM, HEM |
+| `acc-ligand-which-9gio-api` | 9gio | public | 6 | 3JF, A1IMD |
+| `acc-residue-colour-1aoi-api` | 1aoi | public | 6 | ILE B:66, ILE F:66 |
+| `acc-residue-colour-1lmb-api` | 1lmb | public | 6 | ILE 3:84, ILE 4:84 |
+| `acc-residue-colour-3ave-api` | 3ave | heldback | 6 | LEU A:358, LEU B:358 |
 
 ## The seven seed prompts of issue #4
 

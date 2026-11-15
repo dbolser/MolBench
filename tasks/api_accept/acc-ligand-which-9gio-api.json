@@ -30,12 +30,54 @@
     "molecule_id": "9gio"
    },
    {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "D",
+      "label_comp_id": "3JF",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "9gio"
+   },
+   {
     "action": "color",
     "data": [
      {
       "struct_asym_id": "E",
       "label_comp_id": "A1IMD",
       "color": "cyan"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "9gio"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "E",
+      "label_comp_id": "A1IMD",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
      }
     ]
    }
@@ -57,6 +99,33 @@
       "struct_asym_id": "E",
       "label_comp_id": "A1IMD",
       "color": "cyan"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "9gio"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "D",
+      "label_comp_id": "3JF",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
+     },
+     {
+      "struct_asym_id": "E",
+      "label_comp_id": "A1IMD",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
      }
     ]
    }
@@ -86,7 +155,7 @@
   ],
   "date": "2026-11-13",
   "checks": [
-   "each of the 3 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "each of the 6 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
    "target selects 33 atoms on the frozen atom table",
@@ -103,20 +172,25 @@
    "colour": "cyan"
   },
   "open": "which of two different ligands (or both)",
-  "rule": "The entry has exactly two different ligands, one copy each, and the request says \"the ligand\". Accepted: either ligand alone, or both. On the MVS track also the viewer's own built-in 'ligand' selection when it is not the same atoms (Mol* adds residues covalently bonded to a ligand), because an answer that uses the viewer's word for exactly what was asked is not wrong.",
+  "rule": "The entry has exactly two different ligands, one copy each, and the request says \"the ligand\". Accepted: either ligand alone, or both. On the MVS track also the viewer's own built-in 'ligand' selection when it is not the same atoms (Mol* adds residues covalently bonded to a ligand), because an answer that uses the viewer's word for exactly what was asked is not wrong. On the API track each reading is accepted in every call form that ends in a state of its own: (default) one colour call on a bare load, which leaves everything else as the viewer draws it; (style) the cartoon style set first, so that only the polymer is drawn and a ligand asked for as ball-and-stick is an added representation, which is the state the MVS twin draws; (author, chain colours only) each chain named by its author id on a bare load, which also paints the ligands, ions and water deposited under that author chain. The request says nothing about what it does not name, so none of these is wrong.",
   "candidates": [
    "3JF",
    "A1IMD"
   ],
   "accepted_states": [
    "3JF",
+   "3JF; the cartoon style set first",
    "A1IMD",
-   "3JF + A1IMD"
+   "A1IMD; the cartoon style set first",
+   "3JF + A1IMD",
+   "3JF + A1IMD; the cartoon style set first"
   ],
   "not_accepted": [
    "ions, water or buffer components shown as the ligand: not ligands of the entry (data/panel facts: kind 'ion')",
    "part of a ligand, or protein residues around it (other than through the viewer's built-in selection): not requested",
-   "another representation or colour: both are stated"
+   "another representation or colour: both are stated",
+   "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
+   "another global style, or hidden components: not requested"
   ],
   "difficulty": {
    "needs_numbering_offset": false,
@@ -124,11 +198,16 @@
    "needs_ligand_identity": true,
    "needs_uniprot_mapping": false,
    "n_candidates": 2,
-   "n_accepted_states": 3
+   "n_readings": 3,
+   "n_accepted_states": 6
   },
+  "call_forms": [
+   "default",
+   "style"
+  ],
   "structure": "9gio",
   "source": "RCSB mmCIF 9GIO -> molbench/atom_tables/9gio.json.gz (scripts/build_atom_tables.py); data/panel/facts",
-  "derived": "`facts.ligands` of kind `ligand`: exactly two components, one copy each, \u2265 8 heavy atoms, entry not a membrane protein (panel feature); states = A, B, A+B (+ Mol*'s static `ligand` on MVS when it differs). Reference = the first accepted state (3JF): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call.",
+  "derived": "`facts.ligands` of kind `ligand`: exactly two components, one copy each, \u2265 8 heavy atoms, entry not a membrane protein (panel feature); states = A, B, A+B (+ Mol*'s static `ligand` on MVS when it differs). Reference = the first accepted state (3JF): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
   "checked_by": "scripts/check_api_refs.py",
   "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
   "targets": [
@@ -155,6 +234,26 @@
   [
    {
     "selector": {
+     "label_asym_id": "D",
+     "auth_seq_id": 301
+    },
+    "representation": "ball-and-stick",
+    "color": "cyan"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "E",
+     "auth_seq_id": 302
+    },
+    "representation": "ball-and-stick",
+    "color": "cyan"
+   }
+  ],
+  [
+   {
+    "selector": {
      "label_asym_id": "E",
      "auth_seq_id": 302
     },
@@ -177,7 +276,23 @@
     "representation": "ball-and-stick",
     "color": "cyan"
    }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "D",
+      "auth_seq_id": 301
+     },
+     {
+      "label_asym_id": "E",
+      "auth_seq_id": 302
+     }
+    ],
+    "representation": "ball-and-stick",
+    "color": "cyan"
+   }
   ]
  ],
- "notes": "Left open: which of two different ligands (or both). Reference = accepted state 1 of 3 (3JF); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which of two different ligands (or both). Reference = accepted state 1 of 6 (3JF); the others are in 'accepted', in the order of provenance.accepted_states."
 }

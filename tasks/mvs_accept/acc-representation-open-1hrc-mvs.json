@@ -354,6 +354,7 @@
    "needs_ligand_identity": true,
    "needs_uniprot_mapping": false,
    "n_candidates": 4,
+   "n_readings": 4,
    "n_accepted_states": 4
   }
  },
