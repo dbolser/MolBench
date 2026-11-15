@@ -73,7 +73,7 @@
    "color": "magenta"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-chain-only-8c86-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

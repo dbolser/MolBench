@@ -133,7 +133,7 @@
    "color": "purple"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-attachment-1f88-ret-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

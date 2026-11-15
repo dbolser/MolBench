@@ -84,7 +84,7 @@
    "color": "steelblue"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-longest-helix-8pi2-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

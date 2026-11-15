@@ -1,0 +1,95 @@
+{
+  "id": "gr-longest-helix-8ce0-api",
+  "track": "api",
+  "tier": "grounded",
+  "family": "gr-longest-helix",
+  "structures": [
+    "8ce0"
+  ],
+  "prompt": "Load 8CE0 as a grey cartoon and colour its longest helix orange, going by the helix records of the entry.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "8ce0"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "struct_asym_id": "A",
+          "start_residue_number": 462,
+          "end_residue_number": 500,
+          "color": "orange"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 462,
+        "end_label_seq_id": 500
+      },
+      "representation": "cartoon",
+      "color": "orange"
+    }
+  ],
+  "twin_of": "gr-longest-helix-8ce0",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_grounded/gr-longest-helix-8ce0.json",
+      "molbench/atom_tables/8ce0.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "gr-longest-helix-8ce0",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 0,
+      "colour_classes": 2
+    },
+    "difficulty": {
+      "author_number_differs_from_label": true,
+      "author_chain_differs_from_label": false,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": true,
+      "selector_keys": {
+        "end_residue_number": 1,
+        "start_residue_number": 1,
+        "struct_asym_id": 1
+      },
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "hinges_on": [],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color"
+  ]
+}

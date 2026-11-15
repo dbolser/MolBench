@@ -101,7 +101,7 @@
    "color": "orange"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-residue-focus-1ema-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

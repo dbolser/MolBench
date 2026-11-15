@@ -95,7 +95,7 @@
    "color": "blue"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-ligand-1y26-ade-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

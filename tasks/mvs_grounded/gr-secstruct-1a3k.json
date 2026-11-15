@@ -268,7 +268,7 @@
    "color": "limegreen"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-secstruct-1a3k-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

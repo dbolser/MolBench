@@ -268,7 +268,7 @@
    "color": "plum"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-secstruct-1rx2-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",

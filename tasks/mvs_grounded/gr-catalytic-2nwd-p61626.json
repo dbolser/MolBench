@@ -109,7 +109,7 @@
    "color": "cyan"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-catalytic-2nwd-p61626-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

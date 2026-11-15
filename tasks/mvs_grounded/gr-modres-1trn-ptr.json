@@ -109,7 +109,7 @@
    "color": "salmon"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-modres-1trn-ptr-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

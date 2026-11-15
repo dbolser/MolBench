@@ -1,0 +1,308 @@
+{
+  "id": "gr-disulfides-3kcg-api",
+  "track": "api",
+  "tier": "grounded",
+  "family": "gr-disulfides",
+  "structures": [
+    "3kcg"
+  ],
+  "prompt": "3KCG: grey cartoon, with every disulfide-bonded cysteine drawn in salmon ball-and-stick.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "3kcg"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 182,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 95,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 88,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 99,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 95,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 109,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 111,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 124,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 132,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 122,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 42,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 58,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 168,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 191,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 220,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 8,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 128,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 21,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 247,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 430,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "salmon"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 88
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 99
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 95
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 109
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 111
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 124
+        },
+        {
+          "auth_asym_id": "L",
+          "auth_seq_id": 132
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 122
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 42
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 58
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 168
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 182
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 191
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 220
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 8
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 128
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 21
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 95
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 247
+        },
+        {
+          "auth_asym_id": "I",
+          "auth_seq_id": 430
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "salmon"
+    }
+  ],
+  "twin_of": "gr-disulfides-3kcg",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_grounded/gr-disulfides-3kcg.json",
+      "molbench/atom_tables/3kcg.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "gr-disulfides-3kcg",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 1,
+      "colour_classes": 1
+    },
+    "difficulty": {
+      "author_number_differs_from_label": true,
+      "author_chain_differs_from_label": true,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": true,
+      "selector_keys": {
+        "auth_asym_id": 20,
+        "auth_seq_id": 20
+      },
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}

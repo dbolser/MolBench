@@ -166,7 +166,7 @@
    "color": "red"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-chains-named-4ins-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

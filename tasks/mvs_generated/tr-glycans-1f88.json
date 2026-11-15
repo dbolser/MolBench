@@ -193,7 +193,7 @@
    "color": "magenta"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-glycans-1f88-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

@@ -166,7 +166,7 @@
    "color": "purple"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-chains-named-8eph-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

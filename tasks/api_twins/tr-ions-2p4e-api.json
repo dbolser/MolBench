@@ -1,0 +1,90 @@
+{
+  "id": "tr-ions-2p4e-api",
+  "track": "api",
+  "tier": "translation",
+  "family": "tr-ions",
+  "structures": [
+    "2p4e"
+  ],
+  "prompt": "Show 2P4E as a grey cartoon with the metal ions drawn as hot pink spheres.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "2p4e"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "entity_id": "2",
+          "representation": "spacefill",
+          "representationColor": "hotpink"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": "ion",
+      "representation": "spacefill",
+      "color": "hotpink"
+    }
+  ],
+  "twin_of": "tr-ions-2p4e",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_generated/tr-ions-2p4e.json",
+      "molbench/atom_tables/2p4e.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "tr-ions-2p4e",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 1,
+      "colour_classes": 1
+    },
+    "difficulty": {
+      "author_number_differs_from_label": false,
+      "author_chain_differs_from_label": false,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": false,
+      "selector_keys": {
+        "entity_id": 1
+      },
+      "numbering_offset": false,
+      "auth_label_chain": true,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}

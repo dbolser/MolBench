@@ -95,7 +95,7 @@
    "color": "teal"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-heme-1mbn-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

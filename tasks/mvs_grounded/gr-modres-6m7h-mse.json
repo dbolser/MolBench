@@ -157,7 +157,7 @@
    "color": "limegreen"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-modres-6m7h-mse-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

@@ -117,7 +117,7 @@
    "color": "brown"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-glyco-sites-9fb2-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

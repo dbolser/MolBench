@@ -109,7 +109,7 @@
    "color": "limegreen"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-modres-1atp-sep-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

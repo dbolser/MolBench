@@ -69,7 +69,7 @@
    "color": "limegreen"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-nucleic-1bna-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

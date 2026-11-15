@@ -268,7 +268,7 @@
    "color": "salmon"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-secstruct-1ctq-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

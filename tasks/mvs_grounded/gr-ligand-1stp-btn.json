@@ -95,7 +95,7 @@
    "color": "green"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-ligand-1stp-btn-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

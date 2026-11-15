@@ -1,0 +1,110 @@
+{
+  "id": "tr-range-rows-1atp-api",
+  "track": "api",
+  "tier": "translation",
+  "family": "tr-range-rows",
+  "structures": [
+    "1atp"
+  ],
+  "prompt": "Load 1ATP as a grey cartoon and colour these segments: chain E 16-30 yellow; chain E 58-69 salmon.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1atp"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "E",
+          "start_auth_residue_number": 16,
+          "end_auth_residue_number": 30,
+          "color": "yellow"
+        },
+        {
+          "auth_asym_id": "E",
+          "start_auth_residue_number": 58,
+          "end_auth_residue_number": 69,
+          "color": "salmon"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "auth_asym_id": "E",
+        "beg_auth_seq_id": 16,
+        "end_auth_seq_id": 30
+      },
+      "representation": "cartoon",
+      "color": "yellow"
+    },
+    {
+      "selector": {
+        "auth_asym_id": "E",
+        "beg_auth_seq_id": 58,
+        "end_auth_seq_id": 69
+      },
+      "representation": "cartoon",
+      "color": "salmon"
+    }
+  ],
+  "twin_of": "tr-range-rows-1atp",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_generated/tr-range-rows-1atp.json",
+      "molbench/atom_tables/1atp.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "tr-range-rows-1atp",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 0,
+      "colour_classes": 3
+    },
+    "difficulty": {
+      "author_number_differs_from_label": false,
+      "author_chain_differs_from_label": true,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": false,
+      "selector_keys": {
+        "auth_asym_id": 2,
+        "end_auth_residue_number": 2,
+        "start_auth_residue_number": 2
+      },
+      "numbering_offset": false,
+      "auth_label_chain": true,
+      "hinges_on": [],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color"
+  ]
+}

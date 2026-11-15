@@ -91,7 +91,7 @@
    "color": "cyan"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-ligands-8ce0-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",

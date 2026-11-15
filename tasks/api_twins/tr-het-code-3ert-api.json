@@ -1,0 +1,243 @@
+{
+  "id": "tr-het-code-3ert-api",
+  "track": "api",
+  "tier": "translation",
+  "family": "tr-het-code",
+  "structures": [
+    "3ert"
+  ],
+  "prompt": "3ERT: grey cartoon, and the het group OHT as lime green ball-and-stick.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "3ert"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_polymer",
+      "value": true
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "OHT",
+          "representation": "ball-and-stick",
+          "representationColor": "limegreen"
+        },
+        {
+          "label_comp_id": "LEU",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ALA",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "SER",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "THR",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ASP",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "GLN",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "MET",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "VAL",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "GLU",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ILE",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "TYR",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ARG",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "PHE",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "GLY",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ASN",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "HIS",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "TRP",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "LYS",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "CYS",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "start_auth_residue_number": 324,
+          "end_auth_residue_number": 325,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 333,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 336,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 365,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 399,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 406,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 535,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_comp_id": "OHT"
+      },
+      "representation": "ball-and-stick",
+      "color": "limegreen"
+    }
+  ],
+  "twin_of": "tr-het-code-3ert",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_generated/tr-het-code-3ert.json",
+      "molbench/atom_tables/3ert.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "tr-het-code-3ert",
+      "base": "the cartoon style",
+      "switched_off": [
+        "hide_polymer"
+      ],
+      "added_representations": 2,
+      "colour_classes": 0
+    },
+    "difficulty": {
+      "author_number_differs_from_label": false,
+      "author_chain_differs_from_label": false,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": false,
+      "selector_keys": {
+        "auth_asym_id": 7,
+        "auth_seq_id": 6,
+        "end_auth_residue_number": 1,
+        "label_comp_id": 20,
+        "start_auth_residue_number": 1
+      },
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "order_matters": true,
+      "context_switched_off": [
+        "hide_polymer"
+      ]
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}

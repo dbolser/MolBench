@@ -91,7 +91,7 @@
    "color": "khaki"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-nucleic-1aay-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

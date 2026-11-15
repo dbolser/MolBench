@@ -109,7 +109,7 @@
    "color": "orange"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-modres-1hvr-cso-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

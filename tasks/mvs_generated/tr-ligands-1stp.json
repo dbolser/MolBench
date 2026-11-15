@@ -91,7 +91,7 @@
    "color": "limegreen"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-ligands-1stp-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

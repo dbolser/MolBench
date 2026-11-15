@@ -89,7 +89,7 @@
    "color": "green"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-all-but-chain-4ins-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

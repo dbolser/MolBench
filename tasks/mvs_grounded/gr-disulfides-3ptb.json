@@ -189,7 +189,7 @@
    "color": "salmon"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-disulfides-3ptb-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

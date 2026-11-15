@@ -109,7 +109,7 @@
    "color": "salmon"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-glyco-sites-8eph-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

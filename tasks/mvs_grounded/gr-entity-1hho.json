@@ -90,7 +90,7 @@
    "color": "brown"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-entity-1hho-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

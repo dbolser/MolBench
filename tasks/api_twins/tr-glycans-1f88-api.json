@@ -1,0 +1,174 @@
+{
+  "id": "tr-glycans-1f88-api",
+  "track": "api",
+  "tier": "translation",
+  "family": "tr-glycans",
+  "structures": [
+    "1f88"
+  ],
+  "prompt": "Load 1F88; show the protein as a grey cartoon and the glycans as magenta ball-and-stick.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1f88"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "struct_asym_id": "E",
+          "representation": "ball-and-stick",
+          "representationColor": "magenta"
+        },
+        {
+          "struct_asym_id": "C",
+          "representation": "ball-and-stick",
+          "representationColor": "magenta"
+        },
+        {
+          "struct_asym_id": "D",
+          "representation": "ball-and-stick",
+          "representationColor": "magenta"
+        },
+        {
+          "struct_asym_id": "F",
+          "representation": "ball-and-stick",
+          "representationColor": "magenta"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "1f88"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "entity_id": "2",
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
+          },
+          {
+            "entity_id": "3",
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 2,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 15,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 2,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 15,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
+          }
+        ],
+        "non_selected_color": "gray"
+      }
+    ]
+  ],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "label_asym_id": "C"
+        },
+        {
+          "label_asym_id": "D"
+        },
+        {
+          "label_asym_id": "E"
+        },
+        {
+          "label_asym_id": "F"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "magenta"
+    }
+  ],
+  "twin_of": "tr-glycans-1f88",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_generated/tr-glycans-1f88.json",
+      "molbench/atom_tables/1f88.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences); also for accepted[0]",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "tr-glycans-1f88",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 1,
+      "colour_classes": 1
+    },
+    "difficulty": {
+      "author_number_differs_from_label": false,
+      "author_chain_differs_from_label": false,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": false,
+      "selector_keys": {
+        "struct_asym_id": 4
+      },
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}

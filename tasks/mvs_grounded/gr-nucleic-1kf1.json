@@ -69,7 +69,7 @@
    "color": "steelblue"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-nucleic-1kf1-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

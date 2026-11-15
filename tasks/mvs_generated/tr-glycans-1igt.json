@@ -181,7 +181,7 @@
    "color": "orange"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-glycans-1igt-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",

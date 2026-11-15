@@ -106,7 +106,7 @@
    "color": "yellow"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-entity-1k4c-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

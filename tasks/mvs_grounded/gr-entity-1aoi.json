@@ -168,7 +168,7 @@
    "color": "khaki"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-entity-1aoi-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

@@ -95,7 +95,7 @@
    "color": "limegreen"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-ligand-1ake-ap5-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

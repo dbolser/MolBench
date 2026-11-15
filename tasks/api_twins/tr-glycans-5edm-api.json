@@ -1,0 +1,159 @@
+{
+  "id": "tr-glycans-5edm-api",
+  "track": "api",
+  "tier": "translation",
+  "family": "tr-glycans",
+  "structures": [
+    "5edm"
+  ],
+  "prompt": "Load 5EDM; show the protein as a grey cartoon and the glycans as cyan ball-and-stick.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "5edm"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "struct_asym_id": "B",
+          "representation": "ball-and-stick",
+          "representationColor": "cyan"
+        },
+        {
+          "struct_asym_id": "C",
+          "representation": "ball-and-stick",
+          "representationColor": "cyan"
+        },
+        {
+          "struct_asym_id": "J",
+          "representation": "ball-and-stick",
+          "representationColor": "cyan"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "5edm"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "entity_id": "2",
+            "representation": "ball-and-stick",
+            "representationColor": "cyan"
+          },
+          {
+            "entity_id": "4",
+            "representation": "ball-and-stick",
+            "representationColor": "cyan"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 78,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "cyan"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 100,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "cyan"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 359,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "cyan"
+          }
+        ],
+        "non_selected_color": "gray"
+      }
+    ]
+  ],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "label_asym_id": "B"
+        },
+        {
+          "label_asym_id": "C"
+        },
+        {
+          "label_asym_id": "J"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "cyan"
+    }
+  ],
+  "twin_of": "tr-glycans-5edm",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_generated/tr-glycans-5edm.json",
+      "molbench/atom_tables/5edm.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences); also for accepted[0]",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "tr-glycans-5edm",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 1,
+      "colour_classes": 1
+    },
+    "difficulty": {
+      "author_number_differs_from_label": false,
+      "author_chain_differs_from_label": false,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": false,
+      "selector_keys": {
+        "struct_asym_id": 3
+      },
+      "numbering_offset": false,
+      "auth_label_chain": true,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}

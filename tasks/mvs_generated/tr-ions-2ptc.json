@@ -91,7 +91,7 @@
    "color": "green"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-ions-2ptc-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",

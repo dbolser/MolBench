@@ -187,7 +187,7 @@
    "color": "cyan"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-glycans-5edm-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

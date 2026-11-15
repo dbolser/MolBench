@@ -1,0 +1,158 @@
+{
+  "id": "gr-entity-1aoi-api",
+  "track": "api",
+  "tier": "grounded",
+  "family": "gr-entity",
+  "structures": [
+    "1aoi"
+  ],
+  "prompt": "Show 1AOI as a cartoon coloured by molecule: the two H3 histones orange, the two H4 histones brown, the two H2A histones red, the two H2B histones khaki and everything else grey.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1aoi"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "struct_asym_id": "G",
+          "color": "orange"
+        },
+        {
+          "struct_asym_id": "C",
+          "color": "orange"
+        },
+        {
+          "struct_asym_id": "E",
+          "color": "red"
+        },
+        {
+          "struct_asym_id": "I",
+          "color": "red"
+        },
+        {
+          "struct_asym_id": "F",
+          "color": "khaki"
+        },
+        {
+          "struct_asym_id": "J",
+          "color": "khaki"
+        },
+        {
+          "struct_asym_id": "H",
+          "color": "brown"
+        },
+        {
+          "struct_asym_id": "D",
+          "color": "brown"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "label_asym_id": "C"
+        },
+        {
+          "label_asym_id": "G"
+        }
+      ],
+      "representation": "cartoon",
+      "color": "orange"
+    },
+    {
+      "selector": [
+        {
+          "label_asym_id": "D"
+        },
+        {
+          "label_asym_id": "H"
+        }
+      ],
+      "representation": "cartoon",
+      "color": "brown"
+    },
+    {
+      "selector": [
+        {
+          "label_asym_id": "E"
+        },
+        {
+          "label_asym_id": "I"
+        }
+      ],
+      "representation": "cartoon",
+      "color": "red"
+    },
+    {
+      "selector": [
+        {
+          "label_asym_id": "F"
+        },
+        {
+          "label_asym_id": "J"
+        }
+      ],
+      "representation": "cartoon",
+      "color": "khaki"
+    }
+  ],
+  "twin_of": "gr-entity-1aoi",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_grounded/gr-entity-1aoi.json",
+      "molbench/atom_tables/1aoi.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "gr-entity-1aoi",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 0,
+      "colour_classes": 5
+    },
+    "difficulty": {
+      "author_number_differs_from_label": true,
+      "author_chain_differs_from_label": true,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": true,
+      "selector_keys": {
+        "struct_asym_id": 8
+      },
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "hinges_on": [],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color"
+  ]
+}

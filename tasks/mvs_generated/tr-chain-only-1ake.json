@@ -73,7 +73,7 @@
    "color": "teal"
   }
  ],
- "twin_of": null,
+ "twin_of": "tr-chain-only-1ake-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

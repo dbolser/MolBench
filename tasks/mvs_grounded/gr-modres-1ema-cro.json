@@ -101,7 +101,7 @@
    "color": "khaki"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-modres-1ema-cro-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

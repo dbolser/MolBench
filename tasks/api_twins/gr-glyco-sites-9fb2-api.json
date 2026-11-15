@@ -1,0 +1,121 @@
+{
+  "id": "gr-glyco-sites-9fb2-api",
+  "track": "api",
+  "tier": "grounded",
+  "family": "gr-glyco-sites",
+  "structures": [
+    "9fb2"
+  ],
+  "prompt": "Load 9FB2; show the protein as a grey cartoon and the glycosylated asparagines as brown ball-and-stick (the amino acids, not the sugars).",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "9fb2"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 58,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "brown"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 98,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "brown"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 309,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "brown"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 58
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 98
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 309
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "brown"
+    }
+  ],
+  "twin_of": "gr-glyco-sites-9fb2",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_grounded/gr-glyco-sites-9fb2.json",
+      "molbench/atom_tables/9fb2.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "gr-glyco-sites-9fb2",
+      "base": "the cartoon style",
+      "switched_off": [],
+      "added_representations": 1,
+      "colour_classes": 1
+    },
+    "difficulty": {
+      "author_number_differs_from_label": false,
+      "author_chain_differs_from_label": false,
+      "insertion_code": false,
+      "needs_ligand_identity": false,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": true,
+      "selector_keys": {
+        "auth_asym_id": 3,
+        "auth_seq_id": 3
+      },
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "order_matters": true,
+      "context_switched_off": []
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}

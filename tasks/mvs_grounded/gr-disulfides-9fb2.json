@@ -125,7 +125,7 @@
    "color": "teal"
   }
  ],
- "twin_of": null,
+ "twin_of": "gr-disulfides-9fb2-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",

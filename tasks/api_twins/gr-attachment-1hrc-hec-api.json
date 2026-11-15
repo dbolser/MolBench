@@ -1,0 +1,223 @@
+{
+  "id": "gr-attachment-1hrc-hec-api",
+  "track": "api",
+  "tier": "grounded",
+  "family": "gr-attachment",
+  "structures": [
+    "1hrc"
+  ],
+  "prompt": "Load 1HRC; show the protein as a grey cartoon, the heme as teal ball-and-stick, and the cysteines it is covalently attached to as brown ball-and-stick.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1hrc"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_polymer",
+      "value": true
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "HEC",
+          "representation": "ball-and-stick",
+          "representationColor": "teal"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 14,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "brown"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 17,
+          "color": "gray",
+          "representation": "ball-and-stick",
+          "representationColor": "brown"
+        },
+        {
+          "label_comp_id": "GLY",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ASP",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "VAL",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "GLU",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "LYS",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ILE",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "PHE",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "GLN",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ALA",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "THR",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "PRO",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ASN",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "LEU",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "ARG",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "TYR",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "label_comp_id": "TRP",
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 26,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 33,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 65,
+          "representation": "cartoon",
+          "representationColor": "gray"
+        }
+      ],
+      "non_selected_color": "gray"
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 14
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 17
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "brown"
+    }
+  ],
+  "twin_of": "gr-attachment-1hrc-hec",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/translate_mvs_to_api.py",
+    "inputs": [
+      "tasks/mvs_grounded/gr-attachment-1hrc-hec.json",
+      "molbench/atom_tables/1hrc.json.gz"
+    ],
+    "date": "2026-11-13",
+    "checks": [
+      "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+      "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    ],
+    "twin": {
+      "of": "gr-attachment-1hrc-hec",
+      "base": "the cartoon style",
+      "switched_off": [
+        "hide_polymer"
+      ],
+      "added_representations": 3,
+      "colour_classes": 1
+    },
+    "difficulty": {
+      "author_number_differs_from_label": true,
+      "author_chain_differs_from_label": false,
+      "insertion_code": false,
+      "needs_ligand_identity": true,
+      "needs_uniprot_mapping": false,
+      "needs_structure_lookup": true,
+      "selector_keys": {
+        "auth_asym_id": 5,
+        "auth_seq_id": 5,
+        "label_comp_id": 17
+      },
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "order_matters": true,
+      "context_switched_off": [
+        "hide_polymer"
+      ]
+    }
+  },
+  "skills": [
+    "load",
+    "selection",
+    "representation",
+    "color",
+    "multi-component"
+  ]
+}
