@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 400" width="980" height="400" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="The eight tiers of the benchmark, each with one request from the corpus">
+<title>The eight tiers of the benchmark, each with one request from the corpus</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
+<rect width="980" height="400" fill="#ffffff"/>
+<text x="12" y="28" font-size="15" font-weight="bold" fill="#1a1a1a" text-anchor="start">Eight tiers, one example request each</text>
+<text x="12" y="44" font-size="11" font-weight="normal" fill="#555555" text-anchor="start">Counts are tasks on the scene track / the call-list track. Requests are quoted from the corpus.</text>
+<rect x="12" y="60" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="22" y="82" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Translation</text>
+<text x="232" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">68 / 163</text>
+<text x="22" y="102" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Everything is in the request.</text>
+<text x="22" y="124" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“3ERT: grey cartoon, and the het group</text>
+<text x="22" y="138" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">OHT as lime green ball-and-stick.”</text>
+<rect x="254" y="60" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="264" y="82" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Structure-grounded</text>
+<text x="474" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">68 / 68</text>
+<text x="264" y="102" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">A named feature must be found in the</text>
+<text x="264" y="116" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">structure.</text>
+<text x="264" y="138" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“In 1STP, draw the protein as a grey</text>
+<text x="264" y="152" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">cartoon and pick out the biotin in</text>
+<text x="264" y="166" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">green ball-and-stick.”</text>
+<rect x="496" y="60" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="506" y="82" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Interactions</text>
+<text x="716" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">40 / –</text>
+<text x="506" y="102" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Named atoms and a measurement.</text>
+<text x="506" y="124" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“9FB2, hot pink cartoon; how far apart</text>
+<text x="506" y="138" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">are the C-alpha atoms of Pro189 and</text>
+<text x="506" y="152" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">Phe436? Draw the distance as a</text>
+<text x="506" y="166" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">labelled dashed line.”</text>
+<rect x="738" y="60" width="230" height="152" rx="6" fill="#e8f1f8" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="748" y="82" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Name resolution</text>
+<text x="958" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">39 / –</text>
+<text x="748" y="102" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The protein is named; the entry is</text>
+<text x="748" y="116" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">not.</text>
+<text x="748" y="138" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“Show me a structure of the protein</text>
+<text x="748" y="152" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">encoded by the human gene HRAS, as a</text>
+<text x="748" y="166" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">blue cartoon.”</text>
+<rect x="12" y="224" width="230" height="152" rx="6" fill="#e8f1f8" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="22" y="246" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Clinical variant</text>
+<text x="232" y="246" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">79 / 79</text>
+<text x="22" y="266" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">UniProt numbering must be mapped to</text>
+<text x="22" y="280" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">the structure.</text>
+<text x="22" y="302" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“PDB entry 2NWD: the LYZ (Lysozyme C)</text>
+<text x="22" y="316" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">variant F75I is classified as</text>
+<text x="22" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">pathogenic in ClinVar. Show the</text>
+<text x="22" y="344" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">residue it replaces as green ball-and-</text>
+<text x="22" y="358" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">stick.”</text>
+<rect x="254" y="224" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="264" y="246" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Follow-up turn</text>
+<text x="474" y="246" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">58 / 44</text>
+<text x="264" y="266" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">A start state plus an edit.</text>
+<text x="264" y="288" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“[start: a scene with one magenta</text>
+<text x="264" y="302" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">chain] Make the magenta chain plum.”</text>
+<rect x="496" y="224" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="506" y="246" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Several right answers</text>
+<text x="716" y="246" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">26 / 15</text>
+<text x="506" y="266" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">One countable thing is left open.</text>
+<text x="506" y="288" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“Show 4INS with the protein as a</text>
+<text x="506" y="302" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">cartoon. Colour Lys29 yellow.”</text>
+<rect x="738" y="224" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="748" y="246" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Viewer settings</text>
+<text x="958" y="246" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">– / 34</text>
+<text x="748" y="266" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Call-list track only.</text>
+<text x="748" y="288" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“Load 1UDT on a black background with</text>
+<text x="748" y="302" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">glossy lighting and set it spinning.”</text>
+<text x="12" y="394" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Shaded: lookup tiers, where the answer needs a fact that is not in the request and cannot be read off the format.</text>
+</svg>

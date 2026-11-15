@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 500" width="980" height="500" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="The paired design: one request, two output formats, the same target atoms">
+<title>The paired design: one request, two output formats, the same target atoms</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
+<rect width="980" height="500" fill="#ffffff"/>
+<text x="12" y="28" font-size="15" font-weight="bold" fill="#1a1a1a" text-anchor="start">One request, two formats, the same target atoms</text>
+<rect x="190" y="44" width="600" height="56" rx="6" fill="#e8f1f8" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="490" y="62" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="middle">Request (identical on both tracks)</text>
+<text x="490" y="78" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle" font-style="italic">“PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the</text>
+<text x="490" y="92" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle" font-style="italic">residue it replaces as green ball-and-stick.”</text>
+<line x1="380" y1="102" x2="260" y2="130" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<line x1="600" y1="102" x2="720" y2="130" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="12" y="132" width="466" height="170" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="24" y="154" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">Scene track: a MolViewSpec scene (declarative)</text>
+<text x="26" y="178" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">download  https://files.rcsb.org/download/2nwd.cif</text>
+<text x="26" y="194" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">  parse  mmcif</text>
+<text x="26" y="210" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">    structure  model</text>
+<text x="26" y="226" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">      component  auth_asym_id = X, auth_seq_id = 57</text>
+<text x="26" y="242" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">        representation  ball_and_stick</text>
+<text x="26" y="258" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">          color  green</text>
+<text x="24" y="290" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The model must turn UniProt 75 into author residue 57 itself.</text>
+<rect x="502" y="132" width="466" height="170" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="514" y="154" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">Call-list track: PDBe Mol* viewer calls (imperative)</text>
+<text x="516" y="178" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">load   molecule_id = &quot;2nwd&quot;</text>
+<text x="516" y="194" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">color  uniprot_accession = &quot;P61626&quot;,</text>
+<text x="516" y="210" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       uniprot_residue_number = 75,</text>
+<text x="516" y="226" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representation = &quot;ball-and-stick&quot;,</text>
+<text x="516" y="242" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representationColor = &quot;green&quot;</text>
+<text x="514" y="290" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The viewer can do the mapping; the model must know the accession and the call.</text>
+<line x1="245.0" y1="304" x2="400" y2="334" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<line x1="735.0" y1="304" x2="580" y2="334" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="290" y="336" width="400" height="44" rx="6" fill="#e6f4ef" stroke="#009E73" stroke-width="1.5"/>
+<text x="490" y="355" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="middle">Both references resolve to the same target atoms</text>
+<text x="490" y="371" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">Phe57, chain X of 2NWD: 20 atoms (checked when the task is built)</text>
+<line x1="490" y1="382" x2="490" y2="406" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="318" y="424" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="end">Per model, over the 255 pairs:</text>
+<text x="318" y="440" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">task success on each side</text>
+<text x="405.0" y="404" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">call list right</text>
+<text x="555.0" y="404" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">call list wrong</text>
+<rect x="330" y="410" width="150" height="34" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="405.0" y="431" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">both right</text>
+<rect x="480" y="410" width="150" height="34" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="555.0" y="431" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">format error (call list)</text>
+<rect x="330" y="444" width="150" height="34" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="405.0" y="465" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">format error (scene)</text>
+<rect x="480" y="444" width="150" height="34" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="555.0" y="465" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">both wrong: content</text>
+<text x="640" y="431" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">scene right</text>
+<text x="640" y="465" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">scene wrong</text>
+<text x="480" y="498" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">McNemar&#x27;s test compares the two shaded (discordant) cells.</text>
+</svg>
