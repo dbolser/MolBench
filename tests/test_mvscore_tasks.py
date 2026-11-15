@@ -170,6 +170,19 @@ def test_references_draw_only_palette_colours_and_every_representation_is_colour
 # --------------------------------------------------------------------------- #
 # Translation
 # --------------------------------------------------------------------------- #
+def test_additives_are_not_called_ligands(corpus):
+    """Glycerol, DMSO and the like are not "the ligand" to a structural biologist: an
+    entry with nothing else is asked for its "small molecule(s)", and an entry with a
+    ligand and additives is not asked at all."""
+    tasks = [t for t in corpus["translation"] if t["family"] == "tr-ligands"]
+    assert tasks
+    for t in tasks:
+        comps = {g["comp_id"] for g in C.facts(t["structures"][0])["ligands"]}
+        assert comps <= translation.ADDITIVES or not comps & translation.ADDITIVES, t["id"]
+        assert ("small molecule" in t["prompt"]) == (comps <= translation.ADDITIVES), t["id"]
+        assert ("ligand" in t["prompt"]) != (comps <= translation.ADDITIVES), t["id"]
+
+
 def test_ions_are_asked_for_only_where_the_ion_selection_is_single_atom_ions(corpus):
     ions = [t for t in corpus["translation"] if t["family"] == "tr-ions"]
     assert ions and all(t["structures"][0] != "1hho" for t in ions)   # its "ion" is a phosphate
@@ -357,6 +370,27 @@ def test_all_but_one_chain_draws_every_other_polymer_chain(corpus, loaded):
         assert not runner.grade_parsed(loaded[t["id"]], everything)["success"], t["id"]
 
 
+def test_a_metal_site_has_no_unannotated_weak_ligand(corpus):
+    """1PLC's copper has Met92 SD at 2.82 A with no bond record; the reference left it
+    out and an expert's answer with it failed. Such sites are not asked."""
+    sites = [t for t in corpus["grounded"] if t["family"] == "gr-metal-site"]
+    assert sites and all(t["structures"][0] != "1plc" for t in sites)
+    for t in sites:
+        entry = t["structures"][0]
+        metal, residues = (c["params"]["selector"] for c in _structure_children(t["reference"])[1:3])
+        comp = metal["label_comp_id"]
+        copies = next(g["copies"] for g in C.facts(entry)["ligands"] if g["comp_id"] == comp)
+        drawn = {(r["auth_asym_id"], r["auth_seq_id"], r.get("pdbx_PDB_ins_code", ""))
+                 for r in residues}
+        assert C.cif_neighbours(entry, copies, comp, grounded.AMBIGUOUS_REACH) == drawn, t["id"]
+
+
+def test_the_longest_helix_is_asked_as_annotated(corpus):
+    for t in corpus["grounded"]:
+        if t["family"] == "gr-longest-helix":
+            assert any(w in t["prompt"] for w in ("annotated", "helix records")), t["id"]
+
+
 # --------------------------------------------------------------------------- #
 # Resolve
 # --------------------------------------------------------------------------- #
@@ -419,6 +453,24 @@ def test_harmless_namings_pass_on_an_entry_without_an_atom_table(corpus, loaded)
     wrong_colour = C.scene(other, [C.drawn_comp("polymer", "cartoon",
                                                 "red" if colour != "red" else "blue")])
     assert not runner.grade_parsed(loaded[t["id"]], wrong_colour)["success"]
+
+
+def test_a_right_answer_on_an_entry_without_an_atom_table_has_target_score_one(corpus, loaded):
+    """Off the panel a target is compared by how it is written. Every accepted naming
+    carries its own target (``accepted_targets``), or a right answer that says
+    ``protein`` where the reference says ``polymer`` is a success with target score 0."""
+    seen = 0
+    for t in corpus["resolve"]:
+        entry = t["structures"][0]
+        assert len(t.get("accepted_targets", [])) == len(t["accepted"]), t["id"]
+        other = next((e for e in t["accepted_structures"] if T.table_for(e) is None), None)
+        if other is None:
+            continue
+        for scene in [t["reference"], *t["accepted"]]:
+            res = runner.grade_parsed(loaded[t["id"]], resolve.repoint(scene, entry, other))
+            assert res["success"] and res["target_f1"] == 1.0, (t["id"], other, res["target_f1"])
+            seen += 1
+    assert seen > 100
 
 
 def test_resolve_packs_state_facts_only(corpus):
