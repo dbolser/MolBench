@@ -121,3 +121,21 @@ structure residue mapping.
 - CI runs 2 of the test files and installs with pip.
 - `scripts/build_site_data.py` has hard-coded dates and task counts.
 - Raw runs and the rating-study key exist only on one machine (now also in `~/Backups`).
+
+## Rulings after the corpus merge (2026-11-15)
+
+- **Unstated attributes are free.** If the request does not state a colour or a representation,
+  any is accepted (via the accepted list or the grader); if it states one, it must match. Final
+  drawn state decides: an API answer that reaches the state by the viewer's default is right.
+- Tier sizes stay as built. Accept-set counts in the paper exclude name-resolution tasks that
+  merely list accepted namings, and count readings, not call forms.
+- Tasks that need no lookup (e.g. "the DNA") belong to the translation tier.
+- Question-style prompts are not used as no-change tasks. "Main ligand" means a biological
+  ligand, not a crystallisation additive. Undo tasks must not pass on the last step alone.
+- Clinical: helix/strand-context tasks are reported apart; the offset-vs-no-offset comparison
+  should rest on more than one protein where the frozen data allow; contested examples
+  (APOE R158C) are not featured.
+- Paired analysis uses all twins and reports a sensitivity check without twins that need an
+  unstated hide toggle.
+- Paraphrases are never of accept-set tasks, and every phrasing must read as natural English.
+- Budget: structured-output condition runs 1 sample; everything else 3. Cap set after the freeze.
