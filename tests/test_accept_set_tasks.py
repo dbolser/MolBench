@@ -64,12 +64,15 @@ def test_caps_and_split():
     held = {t["structures"][0] for t in TASKS.values() if t["split"] == "heldback"}
     public = {t["structures"][0] for t in TASKS.values() if t["split"] == "public"}
     assert held and not held & public
-    assert held <= gen.heldback_structures()
+    shared = (set(json.loads(gen.HELDBACK_FILE.read_text())) if gen.HELDBACK_FILE.exists()
+              else gen.heldback_structures())      # the corpus-wide list replaces the rule
+    assert held <= shared
     share = len(held) / len(held | public)
     assert 0.15 <= share <= 0.25, share                    # ~20% of the tier's structures
     for track in ("mvs", "api"):
         mine = [t for t in TASKS.values() if t["track"] == track]
-        assert 0.15 <= sum(t["split"] == "heldback" for t in mine) / len(mine) <= 0.25
+        # (the shared list puts 4 of the 15 API tasks on held-back structures)
+        assert 0.15 <= sum(t["split"] == "heldback" for t in mine) / len(mine) <= 0.30
     colours = {p["color"] for t in TASKS.values()
                for tg in [t["target"]] + t["accepted_targets"] for p in tg}
     assert colours <= set(drawn.TASK_PALETTE)
@@ -110,7 +113,7 @@ def test_wrong_colour_and_wrong_representation_fail():
 
 
 def test_chain_colours_accept_both_assignments_only():
-    tid = "acc-chain-colours-2ptc-mvs"
+    tid = "acc-chain-colours-1f88-mvs"
     t = TASKS[tid]
     assert len(t["accepted"]) == 1
     assert grade(tid, t["accepted"][0])["matched_reference"] == 1
@@ -154,11 +157,10 @@ def test_representation_open_accepts_what_the_viewer_draws_for_a_cartoon_on_a_li
 
 
 def test_api_answer_written_another_way_is_accepted():
-    tid = "acc-residue-colour-1lmb-api"
+    tid = "acc-residue-colour-4ins-api"
     t = TASKS[tid]
     colour = t["reference"][1]["data"][0]["color"]
     number = t["reference"][1]["data"][0]["auth_residue_number"]
-    name = t["provenance"]["residues"][0]["comp_id"]
     # no chain given: the residue in every chain that has it (the "both copies" state)
     answer = [t["reference"][0], {"action": "color", "data": [
         {"auth_residue_number": number, "color": colour}]}]
@@ -169,10 +171,14 @@ def test_api_answer_written_another_way_is_accepted():
         {"auth_residue_number": number + 1, "color": colour}]}]
     assert not grade(tid, answer)["success"]
     # label_comp_id overrides the number in pdbe-molstar: every residue of that type
-    answer = [t["reference"][0], {"action": "color", "data": [
-        {"label_comp_id": name, "auth_residue_number": number, "color": colour}]}]
-    assert not grade(tid, answer)["success"]
-    # 1LMB has DNA chains with their own numbering; residue 84 exists only in the protein
+    # (shown on 1AOI, which has many isoleucines; 4INS has no lysine but Lys29)
+    other = TASKS["acc-residue-colour-1aoi-api"]
+    first = other["reference"][1]["data"][0]
+    answer = [other["reference"][0], {"action": "color", "data": [
+        {"label_comp_id": other["provenance"]["residues"][0]["comp_id"],
+         "auth_residue_number": first["auth_residue_number"], "color": first["color"]}]}]
+    assert not grade(other["id"], answer)["success"]
+    # 4INS: chains A and C have 21 residues, so residue 29 exists only in chains B and D
     assert by_number
 
 
@@ -266,14 +272,14 @@ def test_api_accepts_each_reading_in_every_call_form():
     assert not grade(tid, [load("1aoi"), {"action": "set_visual_style", "style": "spacefill"},
                            paint])["success"]
 
-    tid = "acc-chain-colours-2ptc-api"                     # author chain E holds a Ca2+ and water
+    tid = "acc-chain-colours-1f88-api"          # the author chains also hold non-polymer atoms
     assert TASKS[tid]["provenance"]["call_forms"] == ["default", "style", "author"]
-    by_author = lambda a, b: [load("2ptc"), {"action": "color", "data": [   # noqa: E731
-        {"auth_asym_id": "E", "color": a}, {"auth_asym_id": "I", "color": b}]}]
-    assert grade(tid, by_author("orange", "cyan"))["success"]
-    assert grade(tid, by_author("cyan", "orange"))["success"]
-    assert not grade(tid, by_author("cyan", "cyan"))["success"]
-    assert grade(tid, [load("2ptc"), style] + by_author("cyan", "orange")[1:])["success"]
+    by_author = lambda a, b: [load("1f88"), {"action": "color", "data": [   # noqa: E731
+        {"auth_asym_id": "A", "color": a}, {"auth_asym_id": "B", "color": b}]}]
+    assert grade(tid, by_author("orange", "magenta"))["success"]
+    assert grade(tid, by_author("magenta", "orange"))["success"]
+    assert not grade(tid, by_author("magenta", "magenta"))["success"]
+    assert grade(tid, [load("1f88"), style] + by_author("magenta", "orange")[1:])["success"]
     # 5UAK is two chains and nothing else: every form is the same state there
     assert TASKS["acc-chain-colours-5uak-api"]["provenance"]["call_forms"] == ["default"]
     assert len(TASKS["acc-chain-colours-5uak-api"]["accepted"]) == 1
