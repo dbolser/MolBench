@@ -39,6 +39,7 @@ Each template has three wordings; the wording, the colours, the representation (
 | target residue has an insertion code | 1 |
 | the number in the name, used as the author residue number, is the right residue | 34 |
 | the number in the name, used as the label residue number, is the right residue | 26 |
+| the number in the name, used as the author residue number, is a different residue of the same amino acid | 3 |
 | name in mature-protein numbering | 14 |
 | UniProt accession given in the prompt | 41 |
 | on an AlphaFold DB model | 7 |
@@ -97,7 +98,7 @@ Every task also carries a grounding pack (`grounding`, rule `clinical-v1`, built
 
 ## What is recorded for analysis
 
-`provenance.clinical` holds the gene, accession, the variant(s) with their ClinVar records, the residues, the template choices, a `pair` link, and `difficulty`: whether the residue's author number differs from the UniProt number (`needs_numbering_offset`, `author_minus_uniprot`), whether author and label chain ids or numbers differ, insertion codes, whether the accession is in the prompt, the number of copies, and two graded facts: whether an answer that uses the number in the variant's name as the author residue number, or as the label residue number, is right.
+`provenance.clinical` holds the gene, accession, the variant(s) with their ClinVar records, the residues, the template choices, a `pair` link, and `difficulty`: whether the residue's author number differs from the UniProt number (`needs_numbering_offset`, `author_minus_uniprot`), whether author and label chain ids or numbers differ, insertion codes, whether the accession is in the prompt, the number of copies, and two graded facts: whether an answer that uses the number in the variant's name as the author residue number, or as the label residue number, is right. `number_in_name_as_author_number_is_same_amino_acid` marks the tasks where that face-value residue is a different residue of the same amino acid, so checking the wild type does not expose the mistake; this happens only under an HGVS name, never under a bare one-letter name (the generator refuses it).
 
 ## Left out, and why
 

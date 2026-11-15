@@ -205,6 +205,7 @@
     "alphafold_model": false,
     "name_in_mature_numbering": true,
     "mature_number_equals_author_number": true,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": false
    },

@@ -491,6 +491,21 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
                            for x in s.residues) for s, m in zip(group, mature))
              if naming == "legacy" else None),
     }
+    # A decoy: the residue that carries the name's number as its author number is a
+    # different residue of the same amino acid, so checking the wild type does not
+    # expose the face-value reading. An HGVS name (p.) and a name whose numbering the
+    # prompt states leave no doubt; a bare one-letter name must not have a decoy.
+    decoy = False
+    for s, name in zip(group, variant_names(naming, group)[0]):
+        number = int(re.search(r"\d+", name).group())
+        for x in s.residues:
+            if (chain is None or x["label_asym_id"] == chain["label_asym_id"]) and \
+                    (x["auth_seq_id"] != number or x["pdbx_PDB_ins_code"]):
+                decoy = decoy or bool(table.selector({
+                    "auth_asym_id": x["auth_asym_id"], "auth_seq_id": number,
+                    "label_comp_id": V.AA3[s.v.wild_type].upper()}))
+    assert not (decoy and naming == "short"), (entry, [V.short(s.v) for s in group])
+    difficulty["number_in_name_as_author_number_is_same_amino_acid"] = decoy
     clinical = {
         "gene": protein["gene"], "accession": acc,
         "protein": grounding.variants(acc)["protein"],
@@ -921,6 +936,7 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
           f"| target residue has an insertion code | {sum(x['insertion_code'] for x in d)} |",
           f"| the number in the name, used as the author residue number, is the right residue | {sum(x['number_in_name_as_author_number_is_right'] for x in d)} |",
           f"| the number in the name, used as the label residue number, is the right residue | {sum(x['number_in_name_as_label_number_is_right'] for x in d)} |",
+          f"| the number in the name, used as the author residue number, is a different residue of the same amino acid | {sum(x['number_in_name_as_author_number_is_same_amino_acid'] for x in d)} |",
           f"| name in mature-protein numbering | {sum(x['name_in_mature_numbering'] for x in d)} |",
           f"| UniProt accession given in the prompt | {sum(x['accession_in_prompt'] for x in d)} |",
           f"| on an AlphaFold DB model | {sum(x['alphafold_model'] for x in d)} |",
@@ -992,7 +1008,10 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
           "ids or numbers differ, insertion codes, whether the accession is in the prompt, the "
           "number of copies, and two graded facts: whether an answer that uses the number in "
           "the variant's name as the author residue number, or as the label residue number, "
-          "is right.",
+          "is right. `number_in_name_as_author_number_is_same_amino_acid` marks the tasks "
+          "where that face-value residue is a different residue of the same amino acid, so "
+          "checking the wild type does not expose the mistake; this happens only under an "
+          "HGVS name, never under a bare one-letter name (the generator refuses it).",
           "",
           "## Left out, and why", "",
           "- **A variant whose position is not modelled in the structure.** The right answer "

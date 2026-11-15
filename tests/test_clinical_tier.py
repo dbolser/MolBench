@@ -288,6 +288,28 @@ def test_recorded_difficulty_is_true_of_the_structure(task):
 
 
 @pytest.mark.parametrize("task", MVS, ids=lambda t: t["id"])
+def test_a_bare_one_letter_name_has_no_same_amino_acid_decoy(task):
+    """Read straight off the atom table's columns: is the residue whose author number is
+    the number in the name a different residue of the wild-type amino acid? If so the
+    prompt must say which numbering it means (an HGVS name, or a stated mature one)."""
+    c = _clin(task)
+    cols = load_table(task["structures"][0]).columns
+    rows = set(zip(cols["auth_asym_id"], cols["auth_seq_id"], cols["pdbx_PDB_ins_code"],
+                   cols["label_comp_id"]))
+    decoy = False
+    for v in c["variants"]:
+        number = int(re.search(r"\d+", v["name_in_prompt"]).group())
+        for r in v["residues"]:
+            if r["auth_seq_id"] == number and not r["pdbx_PDB_ins_code"]:
+                continue
+            decoy = decoy or any(ch == r["auth_asym_id"] and n == number and comp == r["comp_id"]
+                                 for ch, n, _ins, comp in rows)
+    assert c["difficulty"]["number_in_name_as_author_number_is_same_amino_acid"] == decoy
+    if decoy:
+        assert c["naming"] in ("hgvs", "legacy"), task["id"]
+
+
+@pytest.mark.parametrize("task", MVS, ids=lambda t: t["id"])
 def test_reference_holds_only_what_is_requested(task):
     """Decision 17: one component for the residue(s), plus one for the context the
     prompt asks for in words, and nothing else."""
