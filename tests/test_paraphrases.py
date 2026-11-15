@@ -47,16 +47,23 @@ def test_a_paraphrase_changes_only_the_words():
 def test_terse_is_shorter_and_keeps_every_slot():
     for t in TASKS:
         src = SOURCES[t["paraphrase_of"]]
-        slots = src["provenance"]["slots"]
-        for key, value in slots.items():
-            if key.lower() != "id":
-                assert str(value).lower() in t["prompt"].lower(), (t["id"], key)
-        assert slots["id"] in t["prompt"].lower()
+        slots = src["provenance"].get("slots")
+        if slots is not None:      # a family template; a generic rewrite has no slots
+            for key, value in slots.items():
+                if key.lower() != "id":
+                    assert str(value).lower() in t["prompt"].lower(), (t["id"], key)
+            assert slots["id"] in t["prompt"].lower()
+        else:                      # ... and must keep every word that carries the request
+            kept = t["prompt"].lower()
+            assert all(tok.lower() in kept for tok in para.critical_tokens(src["prompt"])), t["id"]
         if t["style"] == "terse":
             assert len(t["prompt"]) < len(src["prompt"])
-            assert not t["prompt"].endswith(".") and t["prompt"].startswith(slots["id"])
-        else:
+            if slots is not None:
+                assert not t["prompt"].endswith(".") and t["prompt"].startswith(slots["id"])
+        elif slots is not None:
             assert "?" in t["prompt"] or "would" in t["prompt"].lower()
+        else:                      # a polite question, or the request inside a polite frame
+            assert "?" in t["prompt"] or t["prompt"].endswith(src["prompt"])
 
 
 def test_every_family_template_fills_and_is_checked():

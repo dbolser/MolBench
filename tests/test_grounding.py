@@ -88,11 +88,11 @@ class _Recorder:
 
     def __init__(self):
         self.usage = {"input_tokens": 0, "output_tokens": 0, "calls": 0}
-        self.sent: dict[tuple[str, str], str] = {}   # (system, prompt) -> user message
+        self.sent: set[tuple[str, str]] = set()      # (system, user message)
 
     def generate(self, system, user):
         # Twins put the same prompt to both tracks, so the system prompt is part of the key.
-        self.sent[(system, user.split("\n\n", 1)[0])] = user
+        self.sent.add((system, user))
         return "{}"
 
 
@@ -106,12 +106,18 @@ def test_runner_sends_the_pack_only_with_grounding(monkeypatch, grounding):
     tasks = load_tasks(["mvs", "api_calling"])
     systems = runner.build_system_prompts("spec")
     for t in tasks:
-        sent = rec.sent[(systems[t["category"]], t["prompt"])]   # the system prompt is unchanged
+        # The request as sent without a pack: the prompt, or on a follow-up the current
+        # state and then the request. The system prompt is unchanged either way.
+        plain = runner.user_message(t, grounding=False)
+        assert t.get("context") or plain == t["prompt"]
         if grounding and t.get("grounding"):
-            assert sent == runner.GROUNDING_TEMPLATE.format(
-                prompt=t["prompt"], facts=t["grounding"]["text"])
+            want = runner.GROUNDING_TEMPLATE.format(prompt=plain, facts=t["grounding"]["text"])
+            assert want != plain
         else:
-            assert sent == t["prompt"]
+            want = plain
+        assert (systems[t["category"]], want) in rec.sent, t["id"]
+        if t.get("grounding") and not grounding:
+            assert not any(t["grounding"]["text"] in user for _, user in rec.sent)
     if grounding:
         n_with = sum(1 for t in tasks if t.get("grounding"))
         assert meta["n_tasks_with_pack"] == n_with > 0

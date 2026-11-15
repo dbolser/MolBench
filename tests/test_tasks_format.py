@@ -210,8 +210,13 @@ def test_the_fixture_corpus_and_the_real_corpus_pass(fixtures):
 
 
 def test_final_refuses_old_format_tasks():
-    errors, _ = T.check_corpus(T.load_corpus(), grade=None, final=True)
+    # The corpus holds none any more; an October task kept as test data stands in.
+    old = T.load_task(REPO / "tests" / "data" / "clinvar-1tup-D281.json")
+    assert old["_legacy"]
+    errors, _ = T.check_corpus(T.load_corpus() + [old], grade=None, final=True)
     assert any("old format" in e for e in errors)
+    errors, _ = T.check_corpus(T.load_corpus(), grade=None, final=True)
+    assert not any("old format" in e for e in errors)
 
 
 BROKEN = [

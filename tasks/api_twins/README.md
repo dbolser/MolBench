@@ -2,14 +2,14 @@
 
 Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin has the prompt, structures, split, style, tier, family and target atoms of its MVS task, and a call list whose replayed final state is the MVS reference's drawn state (same atoms, representations and colours; nothing else drawn). `twin_of` links the two both ways.
 
-Run this script last, after every MVS generator: it writes `twin_of` into the MVS task files, so re-running an MVS generator afterwards removes those links (run this script again), and an MVS generator's own byte-for-byte rebuild check has to leave `twin_of` out of its comparison.
+Run this script after every MVS generator, then `scripts/generate_paraphrases.py`, then this script once more (the counts below include the paraphrases). It writes `twin_of` into the MVS task files; the generators of the translation and grounded tiers keep a link that is already in the file when they rebuild.
 
-- MVS tasks read: 378
-- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 130
-- left without an API counterpart by a generator that writes both tracks: 33
+- MVS tasks read: 426
+- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 158
+- left without an API counterpart by a generator that writes both tracks: 53
 - in the old task format (no `twin_of` field, so no twin is written): 0, of which the API could express 0
 - left for this script: 215; **twins written: 125 (58%)**
-- MVS tasks with an API twin, all generators together: 255 of 378 (67%)
+- MVS tasks with an API twin, all generators together: 283 of 426 (66%)
 
 ## Twins by template
 
@@ -101,9 +101,9 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 
 | reason | tasks |
 |---|---:|
-| already has a twin from its own generator | 130 |
+| already has a twin from its own generator | 158 |
+| left without an API counterpart by its own two-track generator | 53 |
 | the structure is named by protein and entries outside the panel are accepted | 39 |
-| left without an API counterpart by its own two-track generator | 33 |
 | a distance line or another drawn primitive | 30 |
 | a colour theme (colour by chain) | 5 |
 | the computed non-covalent interactions request | 5 |
@@ -126,8 +126,12 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 | `acc-residue-copy-5ni1-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `fu-add-chain-1lmb-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-add-chain-3ave-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-add-chain-3ave-mvs.indirect` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `fu-add-chain-3ave-mvs.terse` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `fu-add-label-1stp-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-add-label-3ptb-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-add-label-3ptb-mvs.indirect` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `fu-add-label-3ptb-mvs.terse` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `fu-add-ligand-5cj6-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-add-ligand-5ni1-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-it-colour-1hrc-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
@@ -151,17 +155,25 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 | `in-ca-distance-8c86` | interactions | a distance line or another drawn primitive |  |
 | `in-ca-distance-8k7f` | interactions | a distance line or another drawn primitive |  |
 | `in-ca-distance-9fb2` | interactions | a distance line or another drawn primitive |  |
+| `in-ca-distance-9fb2.indirect` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `in-ca-distance-9fb2.terse` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `in-computed-1a6m-hem` | interactions | the computed non-covalent interactions request |  |
 | `in-computed-1c3w-ret` | interactions | the computed non-covalent interactions request |  |
 | `in-computed-1rx2-nap` | interactions | the computed non-covalent interactions request |  |
 | `in-computed-3ptb-ben` | interactions | the computed non-covalent interactions request |  |
+| `in-computed-3ptb-ben.indirect` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `in-computed-3ptb-ben.terse` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `in-computed-9f69-dxx` | interactions | the computed non-covalent interactions request |  |
 | `in-disulfide-1f88` | interactions | a distance line or another drawn primitive |  |
 | `in-disulfide-1trn` | interactions | a distance line or another drawn primitive |  |
+| `in-disulfide-1trn.indirect` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `in-disulfide-1trn.terse` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `in-disulfide-2nwd` | interactions | a distance line or another drawn primitive |  |
 | `in-disulfide-2ptc` | interactions | a distance line or another drawn primitive |  |
 | `in-disulfide-6vxx` | interactions | a distance line or another drawn primitive |  |
 | `in-hbond-1a3k` | interactions | a distance line or another drawn primitive |  |
+| `in-hbond-1a3k.indirect` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `in-hbond-1a3k.terse` | interactions | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `in-hbond-1iep` | interactions | a distance line or another drawn primitive |  |
 | `in-hbond-1lmb` | interactions | a distance line or another drawn primitive |  |
 | `in-hbond-3ave` | interactions | a distance line or another drawn primitive |  |
@@ -189,11 +201,17 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 | `res-complex-p00760-p00974` | resolve | the structure is named by protein and entries outside the panel are accepted | 30 of 30 other accepted entries have no atom table |
 | `res-complex-p40337-q15369-q15370` | resolve | the structure is named by protein and entries outside the panel are accepted | 139 of 139 other accepted entries have no atom table |
 | `res-complex-p69905-p68871` | resolve | the structure is named by protein and entries outside the panel are accepted | 341 of 343 other accepted entries have no atom table |
+| `res-complex-p69905-p68871.indirect` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `res-complex-p69905-p68871.terse` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `res-dna-p03034` | resolve | the structure is named by protein and entries outside the panel are accepted | 5 of 5 other accepted entries have no atom table |
 | `res-dna-p04637` | resolve | the structure is named by protein and entries outside the panel are accepted | 46 of 46 other accepted entries have no atom table |
 | `res-dna-p08046` | resolve | the structure is named by protein and entries outside the panel are accepted | 19 of 19 other accepted entries have no atom table |
+| `res-dna-p08046.indirect` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `res-dna-p08046.terse` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `res-gene-p00441` | resolve | the structure is named by protein and entries outside the panel are accepted | 146 of 146 other accepted entries have no atom table |
 | `res-gene-p01009` | resolve | the structure is named by protein and entries outside the panel are accepted | 46 of 46 other accepted entries have no atom table |
+| `res-gene-p01009.indirect` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `res-gene-p01009.terse` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `res-gene-p01112` | resolve | the structure is named by protein and entries outside the panel are accepted | 254 of 254 other accepted entries have no atom table |
 | `res-gene-p04062` | resolve | the structure is named by protein and entries outside the panel are accepted | 57 of 57 other accepted entries have no atom table |
 | `res-gene-p07320` | resolve | the structure is named by protein and entries outside the panel are accepted | 15 of 15 other accepted entries have no atom table |
@@ -212,6 +230,8 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 | `res-ligand-p0abq4-fol` | resolve | the structure is named by protein and entries outside the panel are accepted | 85 of 85 other accepted entries have no atom table |
 | `res-ligand-p22629-btn` | resolve | the structure is named by protein and entries outside the panel are accepted | 51 of 51 other accepted entries have no atom table |
 | `res-ligand-p29373-rea` | resolve | the structure is named by protein and entries outside the panel are accepted | 3 of 3 other accepted entries have no atom table |
+| `res-ligand-p29373-rea.indirect` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `res-ligand-p29373-rea.terse` | resolve | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `res-ligand-p69441-ap5` | resolve | the structure is named by protein and entries outside the panel are accepted | 15 of 15 other accepted entries have no atom table |
 | `res-name-p00004` | resolve | the structure is named by protein and entries outside the panel are accepted | 31 of 31 other accepted entries have no atom table |
 | `res-name-p00183` | resolve | the structure is named by protein and entries outside the panel are accepted | 128 of 128 other accepted entries have no atom table |

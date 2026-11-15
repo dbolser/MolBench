@@ -625,6 +625,12 @@ def write_all(built: list[dict], out_dir: pathlib.Path, check: bool, readme: str
               keep: Iterable[str] = ()) -> int:
     """Write one file per task (and the README); remove task files that are no longer
     built. With ``check``, write nothing and return 1 if anything would change."""
+    # A link to an API twin is written into the task file afterwards, by
+    # scripts/translate_mvs_to_api.py; a rebuild keeps the link the file already has.
+    for t in built:
+        path = out_dir / f"{t['id']}.json"
+        if t.get("twin_of") is None and path.exists():
+            t["twin_of"] = json.loads(path.read_text(encoding="utf-8")).get("twin_of")
     files = {out_dir / f"{t['id']}.json": dump(t) for t in built}
     if readme is not None:
         files[out_dir / "README.md"] = readme

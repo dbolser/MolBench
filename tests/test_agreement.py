@@ -335,13 +335,14 @@ def test_markdown_has_no_item_ids_and_names_every_group():
 
 
 def test_tiers_fall_back_to_the_task_files():
-    # Without a `tier` in the key, the tier is the regime of the task's source.
+    # Without a `tier` in the key, the tier is the one the task file states (the corpus
+    # no longer holds an old-format task, whose tier was the regime of its source).
     import json
     task = next(t for t in (json.loads(p.read_text()) for p in sorted((REPO / "tasks").rglob("*.json")))
-                if t.get("source"))
+                if t.get("tier"))
     tiers = ag.task_tiers({"a": {"kind": "vlm", "task": task["id"]}, "b": {"kind": "vlm", "task": "x", "tier": "T"}})
     assert tiers["x"] == "T"
-    assert tiers[task["id"]] == _load("build_leaderboard")._regime_of(task["source"])
+    assert tiers[task["id"]] == task["tier"]
 
 
 # --------------------------------------------------------------------------- #

@@ -881,9 +881,10 @@ def readme(twins: list[dict], rows: list[dict]) -> str:
              "prompt, structures, split, style, tier, family and target atoms of its MVS task, and a call "
              "list whose replayed final state is the MVS reference's drawn state (same atoms, "
              "representations and colours; nothing else drawn). `twin_of` links the two both ways.", "",
-             "Run this script last, after every MVS generator: it writes `twin_of` into the MVS task files, "
-             "so re-running an MVS generator afterwards removes those links (run this script again), and an "
-             "MVS generator's own byte-for-byte rebuild check has to leave `twin_of` out of its comparison.", "",
+             "Run this script after every MVS generator, then `scripts/generate_paraphrases.py`, then this "
+             "script once more (the counts below include the paraphrases). It writes `twin_of` into the MVS "
+             "task files; the generators of the translation and grounded tiers keep a link that is already "
+             "in the file when they rebuild.", "",
              f"- MVS tasks read: {c['read']}",
              f"- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): "
              f"{c['paired_elsewhere']}",
