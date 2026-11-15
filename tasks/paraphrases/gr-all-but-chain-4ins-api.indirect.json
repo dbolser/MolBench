@@ -1,0 +1,134 @@
+{
+ "id": "gr-all-but-chain-4ins-api.indirect",
+ "track": "api",
+ "tier": "grounded",
+ "family": "gr-all-but-chain",
+ "structures": [
+  "4ins"
+ ],
+ "prompt": "Would you mind setting something up for me? Here is what I'm after: 4INS as a green cartoon without chain C: hide that chain and keep all the others.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "4ins"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
+   "action": "set_property",
+   "name": "hide_polymer",
+   "value": true
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "B",
+     "representation": "cartoon",
+     "representationColor": "green"
+    },
+    {
+     "struct_asym_id": "D",
+     "representation": "cartoon",
+     "representationColor": "green"
+    },
+    {
+     "struct_asym_id": "A",
+     "representation": "cartoon",
+     "representationColor": "green"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A"
+    },
+    {
+     "label_asym_id": "B"
+    },
+    {
+     "label_asym_id": "D"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "green"
+  }
+ ],
+ "twin_of": "gr-all-but-chain-4ins.indirect",
+ "paraphrase_of": "gr-all-but-chain-4ins-api",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/api_twins/gr-all-but-chain-4ins-api.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')",
+   "its twin on the other track has the same words and the same style"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "4INS as a green cartoon without chain C: hide that chain and keep all the others.",
+  "source": {
+   "script": "scripts/translate_mvs_to_api.py",
+   "inputs": [
+    "tasks/mvs_grounded/gr-all-but-chain-4ins.json",
+    "molbench/atom_tables/4ins.json.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
+    "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
+    "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+    "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+   ],
+   "twin": {
+    "of": "gr-all-but-chain-4ins",
+    "base": "the cartoon style",
+    "switched_off": [
+     "hide_polymer"
+    ],
+    "added_representations": 1,
+    "colour_classes": 0
+   },
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": true,
+    "selector_keys": {
+     "struct_asym_id": 3
+    },
+    "numbering_offset": false,
+    "auth_label_chain": false,
+    "hinges_on": [
+     "added_representation_colour"
+    ],
+    "order_matters": true,
+    "context_switched_off": [
+     "hide_polymer"
+    ]
+   }
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

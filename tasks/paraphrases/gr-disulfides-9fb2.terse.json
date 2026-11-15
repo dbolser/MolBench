@@ -1,0 +1,180 @@
+{
+ "id": "gr-disulfides-9fb2.terse",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-disulfides",
+ "structures": [
+  "9fb2"
+ ],
+ "prompt": "9fb2; protein grey cartoon and cysteines that form disulfide bonds teal ball-and-stick",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9fb2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 43
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 55
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 57
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 62
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "teal"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 43
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 55
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 57
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 62
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "teal"
+  }
+ ],
+ "twin_of": "gr-disulfides-9fb2-api.terse",
+ "paraphrase_of": "gr-disulfides-9fb2",
+ "style": "terse",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_grounded/gr-disulfides-9fb2.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')",
+   "its twin on the other track has the same words and the same style"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "Load 9FB2; show the protein as a grey cartoon and the cysteines that form disulfide bonds as teal ball-and-stick.",
+  "source": {
+   "script": "scripts/generate_grounded_tasks.py",
+   "inputs": [
+    "data/panel/facts/9fb2.json",
+    "molbench/atom_tables/9fb2.json.gz",
+    "data/panel/cif/9fb2.cif.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "S-S distances re-measured in the frozen mmCIF: 2.07 to 2.09 A",
+    "no other pair of cysteine SG atoms is within 2.5 A in the deposited model",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 24 atoms on the frozen atom table"
+   ],
+   "derivation": "both cysteines of each of the 2 disulfide records (`_struct_conn`, `disulf`) in the facts: 4 residues; free cysteines are not included",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": true
+   }
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

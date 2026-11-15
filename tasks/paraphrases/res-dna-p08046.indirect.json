@@ -1,0 +1,182 @@
+{
+ "id": "res-dna-p08046.indirect",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-dna",
+ "structures": [
+  "1aay"
+ ],
+ "prompt": "I'd be grateful for your help with a figure, if you have a moment. This is what I need: I want to see how the mouse transcription factor Zif268 sits on DNA. Any PDB structure of the complex will do: protein as a red cartoon, DNA as a magenta cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1aay.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "protein"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": "nucleic"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": "nucleic",
+   "representation": "cartoon",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "res-dna-p08046",
+ "style": "indirect",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P08046 (EGR1_MOUSE, Early growth response protein 1; Mus musculus), 533 residues\nPDB entries with this protein and DNA (RCSB, 2026-11-13): 20. The 10 with the best resolution: 1LLM (X-ray, 1.50 A), 1A1H (X-ray, 1.60 A), 1A1I (X-ray, 1.60 A), 1AAY (X-ray, 1.60 A), 1JK2 (X-ray, 1.65 A), 1A1G (X-ray, 1.90 A), 1A1K (X-ray, 1.90 A), 1JK1 (X-ray, 1.90 A), 1A1J (X-ray, 2.00 A), 1G2F (X-ray, 2.00 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_resolve/res-dna-p08046.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "I want to see how the mouse transcription factor Zif268 sits on DNA. Any PDB structure of the complex will do: protein as a red cartoon, DNA as a magenta cartoon.",
+  "source": {
+   "script": "scripts/generate_resolve_tasks.py",
+   "inputs": [
+    "data/panel/facts/1aay.json",
+    "molbench/atom_tables/1aay.json.gz",
+    "data/mvscore/resolve_entries.json",
+    "data/mvscore/pdb_ids.txt.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "1AAY is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P08046 (85 observed residues)",
+    "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 445 atoms on the frozen atom table",
+    "the same drawing on another accepted entry (1A1J) grades as exactly right",
+    "the same drawing on a PDB entry outside the list (134D) and on an id that does not exist (2ZZZ) both fail"
+   ],
+   "derivation": "the prompt names EGR1_MOUSE (P08046) and asks for it on DNA; accepted are the PDB entries of that accession that also hold a DNA entity. The reference draws the protein and the nucleic acid of 1AAY, one of the 20 accepted entries",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": false,
+    "needs_entry_lookup": true,
+    "named_by": "protein name, bound to DNA"
+   },
+   "uniprot": "P08046",
+   "accessions": [
+    "P08046"
+   ],
+   "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+   "n_accepted": 20,
+   "accepted_retrieved": "2026-11-13",
+   "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1a1f",
+  "1a1g",
+  "1a1h",
+  "1a1i",
+  "1a1j",
+  "1a1k",
+  "1a1l",
+  "1f2i",
+  "1g2d",
+  "1g2f",
+  "1jk1",
+  "1jk2",
+  "1llm",
+  "1p47",
+  "1zaa",
+  "9lqp",
+  "9lqq",
+  "9lqv",
+  "9lr0"
+ ]
+}

@@ -10,11 +10,11 @@ generator; `generic` = a mechanical rewrite of the full prompt (function words
 deleted; polite question or frame), to be read before the corpus is frozen. See the
 script's docstring for the rules.
 
-28 paraphrase tasks of 14 originals (9 requests; a twin pair is one request). Rebuild with:
+88 paraphrase tasks of 44 originals (30 requests; a twin pair is one request). Rebuild with:
 
 ```bash
 uv run python scripts/generate_paraphrases.py            # the recorded selection
-uv run python scripts/generate_paraphrases.py --select-seeded 9
+uv run python scripts/generate_paraphrases.py --select-seeded 30 --public-only
 ```
 
 | family | originals paraphrased |
@@ -23,22 +23,64 @@ uv run python scripts/generate_paraphrases.py --select-seeded 9
 | `acc-ligand-colours` | 2 |
 | `acc-ligand-copy` | 2 |
 | `acc-ligand-which` | 2 |
-| `acc-metal-copy` | 1 |
-| `acc-metal-which` | 1 |
-| `acc-representation-open` | 1 |
-| `acc-residue-colour` | 2 |
-| `acc-residue-copy` | 1 |
+| `api-alphafold` | 1 |
+| `api-assembly` | 1 |
+| `api-canvas` | 1 |
+| `api-domain-overlay` | 1 |
+| `clin-chain` | 2 |
+| `clin-hgvs-context` | 2 |
+| `clin-hgvs-target` | 2 |
+| `clin-legacy-context` | 2 |
+| `fu-add-chain` | 1 |
+| `fu-add-label` | 1 |
+| `fu-api-clear-colours` | 1 |
+| `fu-api-stop-spin` | 1 |
+| `gr-all-but-chain` | 2 |
+| `gr-attachment` | 2 |
+| `gr-catalytic` | 2 |
+| `gr-disulfides` | 2 |
+| `in-ca-distance` | 1 |
+| `in-computed` | 1 |
+| `in-disulfide` | 1 |
+| `in-hbond` | 1 |
+| `res-complex` | 1 |
+| `res-dna` | 1 |
+| `res-gene` | 1 |
+| `res-ligand` | 1 |
+| `tr-cartoon` | 2 |
+| `tr-chain-colour` | 2 |
 
 ## The three phrasings
 
 | original | wording | full | terse | indirect |
 |---|---|---|---|---|
-| `acc-chain-colours-2ptc-api` | family | Show 2PTC as a cartoon. Colour its two chains orange and cyan. | 2ptc cartoon, two chains orange and cyan | Would it be possible to see 2PTC as a cartoon, with its two chains in orange and cyan? |
+| `acc-chain-colours-1f88-api` | family | Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta. | 1f88 cartoon, two chains orange and magenta | Would it be possible to see 1F88 as a cartoon, with its two chains in orange and magenta? |
 | `acc-ligand-colours-2cpp-api` | family | Load 2CPP. Show the protein as a cartoon and the two ligands as ball-and-stick, one yellow and the other purple. | 2cpp protein cartoon, two ligands ball-and-stick, one yellow one purple | I'd like to tell the two ligands of 2CPP apart: would you draw the protein as a cartoon and the ligands as ball-and-stick, one yellow and one purple? |
 | `acc-ligand-copy-8c86-api` | family | Show 8C86 with the protein as a cartoon and the ligand TQ0 as ball-and-stick, coloured yellow. | 8c86: protein cartoon + ligand TQ0 yellow ball-and-stick | Could you bring up 8C86 with the protein as a cartoon, and let me see the ligand TQ0 as yellow ball-and-stick? |
 | `acc-ligand-which-2cpp-api` | family | Open 2CPP with the protein as a cartoon and the ligand in orange ball-and-stick. | 2cpp protein cartoon, ligand orange ball-and-stick | I'm curious what is bound in 2CPP. Could you draw the protein as a cartoon and pick out the ligand in orange ball-and-stick? |
-| `acc-metal-copy-9fb2-mvs` | family | Load 9FB2. Show the protein as a cartoon and the potassium ion as orange spacefill. | 9fb2 protein cartoon, potassium ion orange spacefill | Would it be possible to see 9FB2 with the protein as a cartoon and the potassium ion as orange spacefill? |
-| `acc-metal-which-7a4m-mvs` | family | Load 7A4M. Show the protein as a cartoon and the metal ion as orange spacefill. | 7a4m protein cartoon, metal ion orange spacefill | Would it be possible to see 7A4M with the protein as a cartoon and the metal ion as orange spacefill? |
-| `acc-representation-open-3ert-mvs` | family | Load 3ERT. Draw the protein as a cartoon and show the 4-hydroxytamoxifen (OHT) in magenta. | 3ert: protein cartoon, 4-hydroxytamoxifen (OHT) shown magenta | Would you bring up 3ERT with the protein as a cartoon and show me the 4-hydroxytamoxifen (OHT) in magenta? |
-| `acc-residue-colour-1lmb-api` | family | Open 1LMB with the protein and DNA as a cartoon, with Ile84 coloured red. | 1lmb protein and DNA cartoon, Ile84 red | I'd like to see where Ile84 is in 1LMB. Would you draw the protein and DNA as a cartoon and colour Ile84 red? |
-| `acc-residue-copy-1trn-mvs` | family | Show 1TRN with the protein as a cartoon and Lys236 as ball-and-stick, coloured purple. | 1trn protein cartoon, Lys236 purple ball-and-stick | Could you bring up 1TRN with the protein as a cartoon, and let me see Lys236 as purple ball-and-stick? |
+| `api-010` | generic | Load ubiquitin (1UBQ) as a cartoon with glossy lighting on a black background, hide the waters, and set it slowly spinning. | Load ubiquitin (1ubq) cartoon glossy lighting black background, hide waters, and set it slowly spinning | Could you load ubiquitin (1UBQ) as a cartoon with glossy lighting on a black background, hide the waters, and set it slowly spinning? |
+| `api-016` | generic | Load the AlphaFold DB model of human p53 (UniProt P04637) and colour it by the model's per-residue confidence (pLDDT). | AlphaFold DB model human p53 (UniProt P04637) and colour it by model's per-residue confidence (pLDDT) | Could you load the AlphaFold DB model of human p53 (UniProt P04637) and colour it by the model's per-residue confidence (pLDDT)? |
+| `api-assembly-7a4m` | generic | Load the biological assembly of 7A4M (assembly 1, the 24-mer) and colour residues 75 to 79 orange. | biological assembly 7a4m (assembly 1, 24-mer) and colour residues 75 to 79 orange | Could you load the biological assembly of 7A4M (assembly 1, the 24-mer) and colour residues 75 to 79 orange? |
+| `api-domain-overlay-5cj6` | generic | Open 5CJ6 with the sequence panel visible and the domain annotations switched on. | 5cj6 sequence panel visible and domain annotations switched on | Could you open 5CJ6 with the sequence panel visible and the domain annotations switched on? |
+| `clin-chain-hbb-2hhb-v68m-chainb-api` | generic | In PDB entry 2HHB, show the residue replaced by the pathogenic HBB (Hemoglobin subunit beta) variant p.Val68Met (ClinVar) as red spacefill spheres in chain B only. | PDB entry 2hhb, show residue replaced by pathogenic HBB (Hemoglobin subunit beta) variant p.Val68Met (ClinVar) red spacefill spheres chain B only | If it isn't too much trouble, could you help me with the following? In PDB entry 2HHB, show the residue replaced by the pathogenic HBB (Hemoglobin subunit beta) variant p.Val68Met (ClinVar) as red spacefill spheres in chain B only. |
+| `clin-hgvs-context-serpina1-8pi2-m409t-api` | generic | PDB entry 8PI2: the SERPINA1 (Alpha-1-antitrypsin) variant p.Met409Thr is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as orange ball-and-stick. | PDB entry 8pi2: SERPINA1 (Alpha-1-antitrypsin) variant p.Met409Thr classified pathogenic/likely pathogenic ClinVar; whole structure white cartoon, residue it replaces orange ball-and-stick | If it isn't too much trouble, could you help me with the following? PDB entry 8PI2: the SERPINA1 (Alpha-1-antitrypsin) variant p.Met409Thr is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as orange ball-and-stick. |
+| `clin-hgvs-target-f9-8eph-i344t-api` | generic | PDB entry 8EPH: the F9 (Coagulation factor IX, UniProt P00740) variant p.Ile344Thr is classified as pathogenic in ClinVar. Show the residue it replaces as blue spacefill spheres in every chain that has it. | PDB entry 8eph: F9 (Coagulation factor IX, UniProt P00740) variant p.Ile344Thr classified pathogenic ClinVar; residue it replaces blue spacefill spheres every chain that has it | Would you mind setting something up for me? Here is what I'm after: PDB entry 8EPH: the F9 (Coagulation factor IX, UniProt P00740) variant p.Ile344Thr is classified as pathogenic in ClinVar. Show the residue it replaces as blue spacefill spheres in every chain that has it. |
+| `clin-legacy-context-f9-8eph-p101a-api` | generic | Using PDB entry 8EPH, draw a gray cartoon of the whole structure and show, as orange ball-and-stick, the wild-type residue at the position of the F9 (Coagulation factor IX) missense variant P55A (pathogenic in ClinVar) in every chain that has it. The name P55A is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 46-residue signal peptide and propeptide. | Using PDB entry 8eph, gray cartoon whole structure, orange ball-and-stick, wild-type residue position F9 (Coagulation factor IX) missense variant P55A (pathogenic ClinVar) every chain that has it; name P55A mature-protein numbering: residues counted from first residue mature protein, that, after 46-residue signal peptide and propeptide | I'd be grateful for your help with a figure, if you have a moment. This is what I need: Using PDB entry 8EPH, draw a gray cartoon of the whole structure and show, as orange ball-and-stick, the wild-type residue at the position of the F9 (Coagulation factor IX) missense variant P55A (pathogenic in ClinVar) in every chain that has it. The name P55A is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 46-residue signal peptide and propeptide. |
+| `fu-add-chain-3ave-mvs` | generic | Add chain B too, as a cartoon in grey. | Add chain B too, cartoon grey | Could you add chain B too, as a cartoon in grey? |
+| `fu-add-label-3ptb-mvs` | generic | Label the benzamidine (BEN) with the text "ligand". | Label benzamidine (BEN) text "ligand" | Could you label the benzamidine (BEN) with the text "ligand"? |
+| `fu-api-clear-colours-1c3w-api` | generic | Go back to the default colours; the waters stay hidden. | Go back to default colours; waters stay hidden | If it isn't too much trouble, could you help me with the following? Go back to the default colours; the waters stay hidden. |
+| `fu-api-stop-spin-3ptb-api` | generic | Stop the spinning. | Stop spinning | Would you mind setting something up for me? Here is what I'm after: Stop the spinning. |
+| `gr-all-but-chain-4ins` | generic | 4INS as a green cartoon without chain C: hide that chain and keep all the others. | 4ins green cartoon without chain C: hide that chain and keep all others | Would you mind setting something up for me? Here is what I'm after: 4INS as a green cartoon without chain C: hide that chain and keep all the others. |
+| `gr-attachment-1c3w-ret` | generic | Show 1C3W as a grey cartoon with the retinal in steel blue ball-and-stick and the lysine that holds it covalently in lime green ball-and-stick. | 1c3w grey cartoon retinal steel blue ball-and-stick and lysine that holds it covalently lime green ball-and-stick | Could you show 1C3W as a grey cartoon with the retinal in steel blue ball-and-stick and the lysine that holds it covalently in lime green ball-and-stick? |
+| `gr-catalytic-1aki-p00698` | generic | 1AKI: grey cartoon, with the two catalytic residues drawn as green ball-and-stick. | 1aki: grey cartoon, two catalytic residues drawn green ball-and-stick | Would you mind setting something up for me? Here is what I'm after: 1AKI: grey cartoon, with the two catalytic residues drawn as green ball-and-stick. |
+| `gr-disulfides-9fb2` | generic | Load 9FB2; show the protein as a grey cartoon and the cysteines that form disulfide bonds as teal ball-and-stick. | 9fb2; protein grey cartoon and cysteines that form disulfide bonds teal ball-and-stick | Could you load 9FB2; show the protein as a grey cartoon and the cysteines that form disulfide bonds as teal ball-and-stick? |
+| `in-ca-distance-9fb2` | generic | 9FB2, hot pink cartoon; how far apart are the C-alpha atoms of Pro189 and Phe436? Draw the distance as a labelled dashed line. | 9fb2, hot pink cartoon; how far apart C-alpha atoms Pro189 and Phe436; distance labelled dashed line | I'd be grateful for your help with a figure, if you have a moment. This is what I need: 9FB2, hot pink cartoon; how far apart are the C-alpha atoms of Pro189 and Phe436? Draw the distance as a labelled dashed line. |
+| `in-computed-3ptb-ben` | generic | Load 3PTB as a grey cartoon, show the benzamidine as steel blue ball-and-stick, turn on the viewer's non-covalent interaction display for the benzamidine (hydrogen bonds and other contacts with its surroundings), and zoom in on the benzamidine. | 3ptb grey cartoon, benzamidine steel blue ball-and-stick, turn on viewer's non-covalent interaction benzamidine (hydrogen bonds and other contacts surroundings), and zoom on benzamidine | Could you load 3PTB as a grey cartoon, show the benzamidine as steel blue ball-and-stick, turn on the viewer's non-covalent interaction display for the benzamidine (hydrogen bonds and other contacts with its surroundings), and zoom in on the benzamidine? |
+| `in-disulfide-1trn` | generic | Load 1TRN as a grey cartoon. Show the disulfide between Cys136 and Cys201: both cysteines as hot pink ball-and-stick, with the sulfur-sulfur distance measured as a dashed line (SG to SG) labelled with its length, and zoom in on the bridge. Both residues are in chain B. | 1trn grey cartoon; disulfide between Cys136 and Cys201: both cysteines hot pink ball-and-stick, sulfur-sulfur distance measured dashed line (SG to SG) labelled length, and zoom bridge; Both residues chain B | I'd be grateful for your help with a figure, if you have a moment. This is what I need: Load 1TRN as a grey cartoon. Show the disulfide between Cys136 and Cys201: both cysteines as hot pink ball-and-stick, with the sulfur-sulfur distance measured as a dashed line (SG to SG) labelled with its length, and zoom in on the bridge. Both residues are in chain B. |
+| `in-hbond-1a3k` | generic | 1A3K: grey cartoon; Asn174 and Arg224 as magenta ball-and-stick; measure the hydrogen bond between OD1 of Asn174 and NH1 of Arg224 with a labelled dashed line; focus the camera on these two residues. | 1a3k: grey cartoon; Asn174 and Arg224 magenta ball-and-stick; measure hydrogen bond between OD1 Asn174 and NH1 Arg224 labelled dashed line; focus camera these two residues | If it isn't too much trouble, could you help me with the following? 1A3K: grey cartoon; Asn174 and Arg224 as magenta ball-and-stick; measure the hydrogen bond between OD1 of Asn174 and NH1 of Arg224 with a labelled dashed line; focus the camera on these two residues. |
+| `res-complex-p69905-p68871` | generic | Show me a structure of human hemoglobin (alpha and beta chains together) as a plum cartoon. | structure human hemoglobin (alpha and beta chains together) plum cartoon | Could you show me a structure of human hemoglobin (alpha and beta chains together) as a plum cartoon? |
+| `res-dna-p08046` | generic | I want to see how the mouse transcription factor Zif268 sits on DNA. Any PDB structure of the complex will do: protein as a red cartoon, DNA as a magenta cartoon. | how mouse transcription factor Zif268 sits DNA; Any PDB structure complex will do: protein red cartoon, DNA magenta cartoon | I'd be grateful for your help with a figure, if you have a moment. This is what I need: I want to see how the mouse transcription factor Zif268 sits on DNA. Any PDB structure of the complex will do: protein as a red cartoon, DNA as a magenta cartoon. |
+| `res-gene-p01009` | generic | Find a PDB entry of human SERPINA1 and show it as a brown cartoon. | Find PDB entry human SERPINA1, it brown cartoon | I'd be grateful for your help with a figure, if you have a moment. This is what I need: Find a PDB entry of human SERPINA1 and show it as a brown cartoon. |
+| `res-ligand-p29373-rea` | generic | Find a PDB entry of human cellular retinoic acid-binding protein 2 (CRABP-II) in complex with retinoic acid; draw the protein as a teal cartoon and the retinoic acid in khaki ball-and-stick. | Find PDB entry human cellular retinoic acid-binding protein 2 (CRABP-II) complex retinoic acid; protein teal cartoon and retinoic acid khaki ball-and-stick | I'd be grateful for your help with a figure, if you have a moment. This is what I need: Find a PDB entry of human cellular retinoic acid-binding protein 2 (CRABP-II) in complex with retinoic acid; draw the protein as a teal cartoon and the retinoic acid in khaki ball-and-stick. |
+| `tr-cartoon-9f69` | generic | Open PDB entry 9F69; draw the whole protein as a cartoon, coloured hot pink. | PDB entry 9f69; whole protein cartoon, coloured hot pink | Could you open PDB entry 9F69; draw the whole protein as a cartoon, coloured hot pink? |
+| `tr-chain-colour-1trn` | generic | Show 1TRN as a cartoon: chain B in orange, everything else grey. | 1trn cartoon: chain B orange, everything else grey | Could you show 1TRN as a cartoon: chain B in orange, everything else grey? |

@@ -1,0 +1,374 @@
+{
+ "id": "acc-chain-colours-1f88-api.indirect",
+ "track": "api",
+ "tier": "accept_set",
+ "family": "acc-chain-colours",
+ "structures": [
+  "1f88"
+ ],
+ "prompt": "Would it be possible to see 1F88 as a cartoon, with its two chains in orange and magenta?",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1f88"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "orange"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "magenta"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "1f88"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "orange"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "magenta"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1f88"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "color": "orange"
+     },
+     {
+      "auth_asym_id": "B",
+      "color": "magenta"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1f88"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "magenta"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "orange"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1f88"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "magenta"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "orange"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1f88"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "color": "magenta"
+     },
+     {
+      "auth_asym_id": "B",
+      "color": "orange"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A"
+   },
+   "representation": "cartoon",
+   "color": "orange"
+  },
+  {
+   "selector": {
+    "label_asym_id": "B"
+   },
+   "representation": "cartoon",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": "acc-chain-colours-1f88-mvs.indirect",
+ "paraphrase_of": "acc-chain-colours-1f88-api",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/api_accept/acc-chain-colours-1f88-api.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "every slot value of the original appears in the wording (nothing needed is dropped)",
+   "its twin on the other track has the same words and the same style"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "family template (scripts/generate_paraphrases.py TEMPLATES)",
+  "original_prompt": "Load 1F88 and show it as a cartoon, with the two chains coloured orange and magenta.",
+  "source": {
+   "script": "scripts/generate_accept_set_tasks.py",
+   "inputs": [
+    "data/panel/facts/1f88.json",
+    "molbench/atom_tables/1f88.json.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "each of the 6 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+    "target selects 5067 atoms on the frozen atom table",
+    "no accepted state equals another (pairwise, by the grader)",
+    "twin selects the same target atoms"
+   ],
+   "seed": "molbench-accept-set-v1",
+   "template": "acc-chain-colours",
+   "wording": 0,
+   "slots": {
+    "ID": "1F88",
+    "id": "1f88",
+    "n": "two",
+    "colours": "orange and magenta"
+   },
+   "open": "which chain gets which colour",
+   "rule": "The request gives one colour per chain but not which chain gets which. Accepted: every one-to-one assignment of the named colours to the polymer chains (n! states), on a cartoon of the whole polymer. On the API track each reading is accepted in every call form that ends in a state of its own: (default) one colour call on a bare load, which leaves everything else as the viewer draws it; (style) the cartoon style set first, so that only the polymer is drawn and a ligand asked for as ball-and-stick is an added representation, which is the state the MVS twin draws; (author, chain colours only) each chain named by its author id on a bare load, which also paints the ligands, ions and water deposited under that author chain. The request says nothing about what it does not name, so none of these is wrong.",
+   "candidates": [
+    "chain A",
+    "chain B"
+   ],
+   "accepted_states": [
+    "chain A orange, chain B magenta",
+    "chain A orange, chain B magenta; the cartoon style set first",
+    "chain A orange, chain B magenta; whole author chains (with their ligands, ions and water)",
+    "chain A magenta, chain B orange",
+    "chain A magenta, chain B orange; the cartoon style set first",
+    "chain A magenta, chain B orange; whole author chains (with their ligands, ions and water)"
+   ],
+   "not_accepted": [
+    "a colour used on two chains, or a chain left uncoloured: the request names one colour per chain",
+    "other colours, or a colour-by-chain theme with the viewer's own colours: the request names the colours",
+    "ligands, ions or water drawn or coloured: not requested",
+    "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
+    "another global style, or hidden components: not requested"
+   ],
+   "difficulty": {
+    "needs_numbering_offset": false,
+    "author_chain_differs_from_label": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "n_candidates": 2,
+    "n_readings": 2,
+    "n_accepted_states": 6
+   },
+   "call_forms": [
+    "default",
+    "style",
+    "author"
+   ],
+   "structure": "1f88",
+   "source": "RCSB mmCIF 1F88 -> molbench/atom_tables/1f88.json.gz (scripts/build_atom_tables.py); data/panel/facts",
+   "derived": "polymer chains from `facts.chains`; exactly 2 or 3; n colours by seed; all n! assignments. Reference = the first accepted state (chain A orange, chain B magenta): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
+   "checked_by": "scripts/check_api_refs.py",
+   "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
+   "targets": [
+    {
+     "what": "the protein chain with author id A",
+     "action": 1,
+     "param": 0,
+     "atoms": {
+      "auth_asym_id": "A",
+      "label_entity_id": "1"
+     },
+     "n_atoms": 2638
+    },
+    {
+     "what": "the protein chain with author id B",
+     "action": 1,
+     "param": 1,
+     "atoms": {
+      "auth_asym_id": "B",
+      "label_entity_id": "1"
+     },
+     "n_atoms": 2429
+    }
+   ]
+  },
+  "structure": "1f88",
+  "derived": "polymer chains from `facts.chains`; exactly 2 or 3; n colours by seed; all n! assignments. Reference = the first accepted state (chain A orange, chain B magenta): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
+  "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
+  "targets": [
+   {
+    "what": "the protein chain with author id A",
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2638
+   },
+   {
+    "what": "the protein chain with author id B",
+    "action": 1,
+    "param": 1,
+    "atoms": {
+     "auth_asym_id": "B",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2429
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "A"
+    },
+    "representation": "cartoon",
+    "color": "magenta"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B"
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ]
+ ],
+ "notes": "Left open: which chain gets which colour. Reference = accepted state 1 of 6 (chain A orange, chain B magenta); the others are in 'accepted', in the order of provenance.accepted_states."
+}

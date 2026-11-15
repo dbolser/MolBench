@@ -1,0 +1,593 @@
+{
+ "id": "res-ligand-p29373-rea.terse",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-ligand",
+ "structures": [
+  "1cbs"
+ ],
+ "prompt": "Find PDB entry human cellular retinoic acid-binding protein 2 (CRABP-II) complex retinoic acid; protein teal cartoon and retinoic acid khaki ball-and-stick",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1cbs.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "teal"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "REA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "khaki"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1cbs.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": "ligand"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "khaki"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1cbs.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "REA"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "khaki"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1cbs.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": "ligand"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "khaki"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1cbs.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "REA"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "khaki"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1cbs.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": "ligand"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "khaki"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "REA"
+   },
+   "representation": "ball_and_stick",
+   "color": "khaki"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "res-ligand-p29373-rea",
+ "style": "terse",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P29373 (RABP2_HUMAN, Cellular retinoic acid-binding protein 2; Homo sapiens), 138 residues\nPDB entries with this protein and RETINOIC ACID (chemical code REA) (RCSB, 2026-11-13): 4. They are: 2FR3 (X-ray, 1.48 A), 3CWK (X-ray, 1.60 A), 2G78 (X-ray, 1.70 A), 1CBS (X-ray, 1.80 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_resolve/res-ligand-p29373-rea.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "Find a PDB entry of human cellular retinoic acid-binding protein 2 (CRABP-II) in complex with retinoic acid; draw the protein as a teal cartoon and the retinoic acid in khaki ball-and-stick.",
+  "source": {
+   "script": "scripts/generate_resolve_tasks.py",
+   "inputs": [
+    "data/panel/facts/1cbs.json",
+    "molbench/atom_tables/1cbs.json.gz",
+    "data/mvscore/resolve_entries.json",
+    "data/mvscore/pdb_ids.txt.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "1CBS is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P29373 (137 observed residues)",
+    "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 22 atoms on the frozen atom table",
+    "every accepted alternative grades as itself and is accepted by the task",
+    "the same drawing on another accepted entry (3CWK) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+    "the same drawing on a PDB entry outside the list (11LZ) and on an id that does not exist (2ZZZ) both fail"
+   ],
+   "derivation": "the prompt names RABP2_HUMAN (P29373) and the ligand retinoic acid (component REA; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer REA. The reference draws the polymer and every REA of 1CBS, one of the 4 accepted entries",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": true,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": false,
+    "needs_entry_lookup": true,
+    "named_by": "protein name, with a named ligand"
+   },
+   "uniprot": "P29373",
+   "accessions": [
+    "P29373"
+   ],
+   "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+   "n_accepted": 4,
+   "accepted_retrieved": "2026-11-13",
+   "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "2fr3",
+  "2g78",
+  "3cwk"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "khaki"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "REA"
+    },
+    "representation": "ball_and_stick",
+    "color": "khaki"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "khaki"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "REA"
+    },
+    "representation": "ball_and_stick",
+    "color": "khaki"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "khaki"
+   }
+  ]
+ ]
+}

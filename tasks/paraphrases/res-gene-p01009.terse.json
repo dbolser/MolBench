@@ -1,0 +1,310 @@
+{
+ "id": "res-gene-p01009.terse",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-gene",
+ "structures": [
+  "8pi2"
+ ],
+ "prompt": "Find PDB entry human SERPINA1, it brown cartoon",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/8pi2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8pi2.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "brown"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8pi2.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "brown"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "brown"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "res-gene-p01009",
+ "style": "terse",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P01009 (A1AT_HUMAN, Alpha-1-antitrypsin; Homo sapiens), 418 residues\nPDB entries with this protein (RCSB, 2026-11-13): 47. The 10 with the best resolution: 8PI2 (X-ray, 1.48 A), 3NDD (X-ray, 1.50 A), 6I7U (X-ray, 1.55 A), 5NBU (X-ray, 1.67 A), 8QZ5 (X-ray, 1.69 A), 5NBV (X-ray, 1.73 A), 7AEL (X-ray, 1.76 A), 6I4V (X-ray, 1.78 A), 3NE4 (X-ray, 1.81 A), 7NPL (X-ray, 1.82 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_resolve/res-gene-p01009.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "Find a PDB entry of human SERPINA1 and show it as a brown cartoon.",
+  "source": {
+   "script": "scripts/generate_resolve_tasks.py",
+   "inputs": [
+    "data/panel/facts/8pi2.json",
+    "molbench/atom_tables/8pi2.json.gz",
+    "data/mvscore/resolve_entries.json",
+    "data/mvscore/pdb_ids.txt.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "8PI2 is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P01009 (371 observed residues)",
+    "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 5800 atoms on the frozen atom table",
+    "every accepted alternative grades as itself and is accepted by the task",
+    "the same drawing on another accepted entry (5NBU) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+    "the same drawing on a PDB entry outside the list (13OF) and on an id that does not exist (2ZZZ) both fail"
+   ],
+   "derivation": "the prompt names A1AT_HUMAN (P01009) by its human gene symbol SERPINA1 (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 8PI2, one of the 47 accepted entries",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": false,
+    "needs_entry_lookup": true,
+    "named_by": "gene symbol"
+   },
+   "uniprot": "P01009",
+   "accessions": [
+    "P01009"
+   ],
+   "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+   "n_accepted": 47,
+   "accepted_retrieved": "2026-11-13",
+   "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1atu",
+  "1d5s",
+  "1ezx",
+  "1hp7",
+  "1iz2",
+  "1kct",
+  "1oo8",
+  "1oph",
+  "1psi",
+  "1qlp",
+  "1qmb",
+  "2d26",
+  "2qug",
+  "3cwl",
+  "3cwm",
+  "3drm",
+  "3dru",
+  "3ndd",
+  "3ndf",
+  "3ne4",
+  "3t1p",
+  "4pyw",
+  "5io1",
+  "5nbu",
+  "5nbv",
+  "6hx4",
+  "6i3z",
+  "6i4v",
+  "6i7u",
+  "6iay",
+  "6rod",
+  "7ael",
+  "7api",
+  "7npk",
+  "7npl",
+  "8api",
+  "8p4j",
+  "8p4u",
+  "8qz5",
+  "8r13",
+  "8r21",
+  "9api",
+  "9ggp",
+  "9hud",
+  "9vdi",
+  "9zrw"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ]
+ ]
+}

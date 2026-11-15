@@ -1,0 +1,608 @@
+{
+ "id": "res-complex-p69905-p68871.indirect",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-complex",
+ "structures": [
+  "2hhb"
+ ],
+ "prompt": "Could you show me a structure of human hemoglobin (alpha and beta chains together) as a plum cartoon?",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2hhb.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2hhb.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "plum"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2hhb.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "plum"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "plum"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "res-complex-p69905-p68871",
+ "style": "indirect",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P69905 (HBA_HUMAN, Hemoglobin subunit alpha; Homo sapiens), 142 residues\nProtein named in the request: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta; Homo sapiens), 147 residues\nPDB entries with all of these proteins together (RCSB, 2026-11-13): 344. The 10 with the best resolution: 2W72 (X-ray, 1.07 A), 1IRD (X-ray, 1.25 A), 2DN1 (X-ray, 1.25 A), 2DN2 (X-ray, 1.25 A), 2DN3 (X-ray, 1.25 A), 7DY4 (X-ray, 1.30 A), 6KA9 (X-ray, 1.40 A), 6KAO (X-ray, 1.40 A), 6LCW (X-ray, 1.40 A), 6LCX (X-ray, 1.40 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_resolve/res-complex-p69905-p68871.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "Show me a structure of human hemoglobin (alpha and beta chains together) as a plum cartoon.",
+  "source": {
+   "script": "scripts/generate_resolve_tasks.py",
+   "inputs": [
+    "data/panel/facts/2hhb.json",
+    "molbench/atom_tables/2hhb.json.gz",
+    "data/mvscore/resolve_entries.json",
+    "data/mvscore/pdb_ids.txt.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "2HHB is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P69905 (141 observed residues) and P68871 (146 observed residues)",
+    "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 4384 atoms on the frozen atom table",
+    "every accepted alternative grades as itself and is accepted by the task",
+    "the same drawing on another accepted entry (1XXT) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+    "the same drawing on a PDB entry outside the list (11NS) and on an id that does not exist (2ZZZ) both fail"
+   ],
+   "derivation": "the prompt names a complex of HBA_HUMAN (P69905) and HBB_HUMAN (P68871); accepted are the PDB entries that hold all of them. The reference is a cartoon of the polymer of 2HHB, one of the 344 accepted entries",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": false,
+    "needs_entry_lookup": true,
+    "named_by": "complex of named proteins"
+   },
+   "uniprot": "P69905",
+   "accessions": [
+    "P69905",
+    "P68871"
+   ],
+   "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+   "n_accepted": 344,
+   "accepted_retrieved": "2026-11-13",
+   "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1a00",
+  "1a01",
+  "1a0u",
+  "1a0z",
+  "1a3n",
+  "1a3o",
+  "1abw",
+  "1aby",
+  "1aj9",
+  "1b86",
+  "1bab",
+  "1bbb",
+  "1bij",
+  "1buw",
+  "1bz0",
+  "1bz1",
+  "1bzz",
+  "1c7b",
+  "1c7c",
+  "1c7d",
+  "1cls",
+  "1cmy",
+  "1coh",
+  "1dke",
+  "1dxt",
+  "1dxu",
+  "1dxv",
+  "1fn3",
+  "1g9v",
+  "1gbu",
+  "1gbv",
+  "1gli",
+  "1gzx",
+  "1hab",
+  "1hac",
+  "1hba",
+  "1hbb",
+  "1hbs",
+  "1hco",
+  "1hdb",
+  "1hga",
+  "1hgb",
+  "1hgc",
+  "1hho",
+  "1ird",
+  "1j3y",
+  "1j3z",
+  "1j40",
+  "1j41",
+  "1j7s",
+  "1j7w",
+  "1j7y",
+  "1jy7",
+  "1k0y",
+  "1k1k",
+  "1kd2",
+  "1lfl",
+  "1lfq",
+  "1lft",
+  "1lfv",
+  "1lfy",
+  "1lfz",
+  "1ljw",
+  "1m9p",
+  "1mko",
+  "1nej",
+  "1nih",
+  "1nqp",
+  "1o1i",
+  "1o1j",
+  "1o1k",
+  "1o1l",
+  "1o1m",
+  "1o1n",
+  "1o1o",
+  "1o1p",
+  "1qi8",
+  "1qsh",
+  "1qsi",
+  "1qxd",
+  "1qxe",
+  "1r1x",
+  "1r1y",
+  "1rps",
+  "1rq3",
+  "1rq4",
+  "1rqa",
+  "1rvw",
+  "1sdk",
+  "1sdl",
+  "1thb",
+  "1uiw",
+  "1vwt",
+  "1xxt",
+  "1xy0",
+  "1xye",
+  "1xz2",
+  "1xz4",
+  "1xz5",
+  "1xz7",
+  "1xzu",
+  "1xzv",
+  "1y09",
+  "1y0a",
+  "1y0c",
+  "1y0d",
+  "1y0t",
+  "1y0w",
+  "1y22",
+  "1y2z",
+  "1y31",
+  "1y35",
+  "1y45",
+  "1y46",
+  "1y4b",
+  "1y4f",
+  "1y4g",
+  "1y4p",
+  "1y4q",
+  "1y4r",
+  "1y4v",
+  "1y5f",
+  "1y5j",
+  "1y5k",
+  "1y7c",
+  "1y7d",
+  "1y7g",
+  "1y7z",
+  "1y83",
+  "1y85",
+  "1y8w",
+  "1ydz",
+  "1ye0",
+  "1ye1",
+  "1ye2",
+  "1yen",
+  "1yeo",
+  "1yeq",
+  "1yeu",
+  "1yev",
+  "1yff",
+  "1yg5",
+  "1ygd",
+  "1ygf",
+  "1yh9",
+  "1yhe",
+  "1yhr",
+  "1yie",
+  "1yih",
+  "1yvq",
+  "1yvt",
+  "1yzi",
+  "28od",
+  "2d5z",
+  "2d60",
+  "2dn1",
+  "2dn2",
+  "2dn3",
+  "2dxm",
+  "2h35",
+  "2hbc",
+  "2hbd",
+  "2hbe",
+  "2hbf",
+  "2hbs",
+  "2hco",
+  "2hhd",
+  "2hhe",
+  "2m6z",
+  "2w6v",
+  "2w72",
+  "2yrs",
+  "37rr",
+  "3b75",
+  "3d17",
+  "3d7o",
+  "3dut",
+  "3hhb",
+  "3hxn",
+  "3ic0",
+  "3ic2",
+  "3kmf",
+  "3nl7",
+  "3nmm",
+  "3odq",
+  "3onz",
+  "3oo4",
+  "3oo5",
+  "3p5q",
+  "3qjb",
+  "3qjc",
+  "3qjd",
+  "3qje",
+  "3r5i",
+  "3s65",
+  "3s66",
+  "3szk",
+  "3wcp",
+  "3whm",
+  "4fc3",
+  "4hhb",
+  "4ij2",
+  "4l7y",
+  "4m4a",
+  "4m4b",
+  "4mqc",
+  "4mqg",
+  "4mqh",
+  "4mqi",
+  "4n7n",
+  "4n7o",
+  "4n7p",
+  "4n8t",
+  "4ni0",
+  "4ni1",
+  "4rol",
+  "4rom",
+  "4wjg",
+  "4x0l",
+  "4xs0",
+  "5e29",
+  "5e6e",
+  "5e83",
+  "5ee4",
+  "5hu6",
+  "5hy8",
+  "5jdo",
+  "5kdq",
+  "5ksi",
+  "5ksj",
+  "5ni1",
+  "5sw7",
+  "5u3i",
+  "5ucu",
+  "5ufj",
+  "5urc",
+  "5vmm",
+  "5wog",
+  "5woh",
+  "5x2r",
+  "5x2s",
+  "5x2t",
+  "5x2u",
+  "6bb5",
+  "6bnr",
+  "6bwp",
+  "6bwu",
+  "6di4",
+  "6hal",
+  "6hbw",
+  "6hk2",
+  "6ka9",
+  "6kae",
+  "6kah",
+  "6kai",
+  "6kao",
+  "6kap",
+  "6kaq",
+  "6kar",
+  "6kas",
+  "6kat",
+  "6kau",
+  "6kav",
+  "6kye",
+  "6l5v",
+  "6l5w",
+  "6l5x",
+  "6l5y",
+  "6lcw",
+  "6lcx",
+  "6nbc",
+  "6nbd",
+  "6nq5",
+  "6tb2",
+  "6xd9",
+  "6xdt",
+  "6xe7",
+  "7aet",
+  "7aeu",
+  "7aev",
+  "7cue",
+  "7dy3",
+  "7dy4",
+  "7jjq",
+  "7jxz",
+  "7jy0",
+  "7jy1",
+  "7jy3",
+  "7k4m",
+  "7pcf",
+  "7pch",
+  "7pcq",
+  "7ud7",
+  "7ud8",
+  "7uf6",
+  "7uf7",
+  "7uvb",
+  "7vde",
+  "7xgy",
+  "8dov",
+  "8egi",
+  "8fdk",
+  "8fdl",
+  "8fdm",
+  "8fdn",
+  "8vyl",
+  "8wj0",
+  "8wj1",
+  "8wj2",
+  "8xmp",
+  "8xmq",
+  "8xmw",
+  "9av9",
+  "9ayz",
+  "9bcj",
+  "9cqm",
+  "9cqn",
+  "9cqo",
+  "9cqp",
+  "9cqq",
+  "9cqr",
+  "9cqs",
+  "9cqt",
+  "9cqu",
+  "9cqv",
+  "9cqw",
+  "9fhb",
+  "9fmu",
+  "9fno",
+  "9hba",
+  "9hej",
+  "9hek",
+  "9nb6",
+  "9nb8",
+  "9s3p",
+  "9s4f",
+  "9s4i",
+  "9s4j",
+  "9s4k",
+  "9szw",
+  "9tqd",
+  "9vib",
+  "9vic"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "plum"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "plum"
+   }
+  ]
+ ]
+}

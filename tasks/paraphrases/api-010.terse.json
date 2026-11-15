@@ -1,0 +1,109 @@
+{
+ "id": "api-010.terse",
+ "track": "api",
+ "tier": "tool_only",
+ "family": "api-canvas",
+ "structures": [
+  "1ubq"
+ ],
+ "prompt": "Load ubiquitin (1ubq) cartoon glossy lighting black background, hide waters, and set it slowly spinning",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1ubq"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
+   "action": "set_property",
+   "name": "lighting",
+   "value": "glossy"
+  },
+  {
+   "action": "set_property",
+   "name": "bg_color",
+   "value": "#000000"
+  },
+  {
+   "action": "set_property",
+   "name": "hide_water",
+   "value": true
+  },
+  {
+   "action": "set_property",
+   "name": "spin",
+   "value": true
+  }
+ ],
+ "accepted": [],
+ "context": null,
+ "target": null,
+ "twin_of": null,
+ "paraphrase_of": "api-010",
+ "style": "terse",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/api_calling/010_ubiquitin_presentation.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "Load ubiquitin (1UBQ) as a cartoon with glossy lighting on a black background, hide the waters, and set it slowly spinning.",
+  "source": {
+   "script": "scripts/generate_api_tasks.py",
+   "inputs": [
+    "data/panel/facts/1ubq.json",
+    "molbench/atom_tables/1ubq.json.gz",
+    "molbench/sifts_tables/1ubq.json.gz"
+   ],
+   "date": "2026-11-12",
+   "checks": [
+    "matches the task format (molbench.tasks.validate_task)",
+    "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+    "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+    "a bare load scores 0",
+    "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8571)"
+   ],
+   "structure": "1ubq",
+   "derived": "1UBQ has waters. Under the cartoon style they are not drawn anyway, so the hide toggle changes nothing on screen and an answer without it is graded the same.",
+   "checked_by": "scripts/check_api_refs.py",
+   "seed": 20261113,
+   "wording": "1 of 1",
+   "difficulty": {
+    "numbering_offset": false,
+    "auth_label_chain": false,
+    "ligand_identity_needed": false,
+    "uniprot_mapping": false,
+    "hinges_on": [],
+    "setting_only": [
+     "lighting"
+    ]
+   },
+   "targets": [],
+   "july_task": "unchanged"
+  },
+  "structure": "1ubq",
+  "derived": "1UBQ has waters. Under the cartoon style they are not drawn anyway, so the hide toggle changes nothing on screen and an answer without it is graded the same.",
+  "checked_by": "scripts/check_api_refs.py",
+  "targets": []
+ },
+ "skills": [
+  "load",
+  "global-style",
+  "lighting",
+  "set-background",
+  "hide",
+  "spin"
+ ],
+ "title": "Presentation view"
+}

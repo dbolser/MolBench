@@ -1,11 +1,32 @@
-# command: --select-seeded 9
+# command: --select-seeded 30 --public-only
 # one request per line (its first task id); a twin is paraphrased with it
-acc-chain-colours-2ptc-api
+acc-chain-colours-1f88-api
 acc-ligand-colours-2cpp-api
 acc-ligand-copy-8c86-api
 acc-ligand-which-2cpp-api
-acc-metal-copy-9fb2-mvs
-acc-metal-which-7a4m-mvs
-acc-representation-open-3ert-mvs
-acc-residue-colour-1lmb-api
-acc-residue-copy-1trn-mvs
+api-010
+api-016
+api-assembly-7a4m
+api-domain-overlay-5cj6
+clin-chain-hbb-2hhb-v68m-chainb-api
+clin-hgvs-context-serpina1-8pi2-m409t-api
+clin-hgvs-target-f9-8eph-i344t-api
+clin-legacy-context-f9-8eph-p101a-api
+fu-add-chain-3ave-mvs
+fu-add-label-3ptb-mvs
+fu-api-clear-colours-1c3w-api
+fu-api-stop-spin-3ptb-api
+gr-all-but-chain-4ins
+gr-attachment-1c3w-ret
+gr-catalytic-1aki-p00698
+gr-disulfides-9fb2
+in-ca-distance-9fb2
+in-computed-3ptb-ben
+in-disulfide-1trn
+in-hbond-1a3k
+res-complex-p69905-p68871
+res-dna-p08046
+res-gene-p01009
+res-ligand-p29373-rea
+tr-cartoon-9f69
+tr-chain-colour-1trn

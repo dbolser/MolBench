@@ -1,0 +1,143 @@
+{
+ "id": "gr-all-but-chain-4ins.indirect",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-all-but-chain",
+ "structures": [
+  "4ins"
+ ],
+ "prompt": "Would you mind setting something up for me? Here is what I'm after: 4INS as a green cartoon without chain C: hide that chain and keep all the others.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/4ins.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_asym_id": "A"
+             },
+             {
+              "label_asym_id": "B"
+             },
+             {
+              "label_asym_id": "D"
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A"
+    },
+    {
+     "label_asym_id": "B"
+    },
+    {
+     "label_asym_id": "D"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "green"
+  }
+ ],
+ "twin_of": "gr-all-but-chain-4ins-api.indirect",
+ "paraphrase_of": "gr-all-but-chain-4ins",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_grounded/gr-all-but-chain-4ins.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')",
+   "its twin on the other track has the same words and the same style"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "4INS as a green cartoon without chain C: hide that chain and keep all the others.",
+  "source": {
+   "script": "scripts/generate_grounded_tasks.py",
+   "inputs": [
+    "data/panel/facts/4ins.json",
+    "molbench/atom_tables/4ins.json.gz",
+    "data/panel/cif/4ins.cif.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "every polymer chain has its own author chain id",
+    "the chains drawn and the chain left out are disjoint and together are the whole polymer (atom table)",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 667 atoms on the frozen atom table"
+   ],
+   "derivation": "a cartoon of every polymer chain of the facts except author chain C: author chains A, B, D",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": true
+   }
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

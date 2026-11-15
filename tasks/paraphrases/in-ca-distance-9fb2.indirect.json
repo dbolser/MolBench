@@ -1,0 +1,171 @@
+{
+ "id": "in-ca-distance-9fb2.indirect",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-ca-distance",
+ "structures": [
+  "9fb2"
+ ],
+ "prompt": "I'd be grateful for your help with a figure, if you have a moment. This is what I need: 9FB2, hot pink cartoon; how far apart are the C-alpha atoms of Pro189 and Phe436? Draw the distance as a labelled dashed line.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9fb2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "hotpink"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 189,
+               "label_atom_id": "CA"
+              },
+              "end": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 436,
+               "label_atom_id": "CA"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 189,
+     "label_atom_id": "CA"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 436,
+     "label_atom_id": "CA"
+    }
+   ],
+   "representation": null,
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "in-ca-distance-9fb2",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_interactions/in-ca-distance-9fb2.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "9FB2, hot pink cartoon; how far apart are the C-alpha atoms of Pro189 and Phe436? Draw the distance as a labelled dashed line.",
+  "source": {
+   "script": "scripts/author_interaction_tasks.py",
+   "inputs": [
+    "data/panel/facts/9fb2.json",
+    "molbench/atom_tables/9fb2.json.gz",
+    "data/panel/cif/9fb2.cif.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "each end of the line resolves to exactly one atom of the atom table",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 2 atoms on the frozen atom table"
+   ],
+   "derivation": "two residues of chain A chosen by seed (at least 10 apart in sequence, CA atoms 6-30 A apart): PRO189 and PHE436, 24.02 A in the frozen mmCIF. A cartoon of the polymer and one labelled dashed line between the two CA atoms",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": false
+   },
+   "measured": [
+    {
+     "start": {
+      "auth_asym_id": "A",
+      "auth_seq_id": 189,
+      "label_atom_id": "CA"
+     },
+     "end": {
+      "auth_asym_id": "A",
+      "auth_seq_id": 436,
+      "label_atom_id": "CA"
+     },
+     "distance_A": 24.02
+    }
+   ]
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "measurement"
+ ]
+}

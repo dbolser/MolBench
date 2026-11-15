@@ -48,6 +48,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import itertools
 import json
 import pathlib
 import re
@@ -386,15 +387,19 @@ def phrasings(task: dict, key: str, generic: bool) -> tuple[dict[str, str] | Non
 
 
 def select_seeded(sources: dict[str, dict], n: int, generic: bool,
-                  tiers: list[str] | None) -> list[str]:
+                  tiers: list[str] | None, public_only: bool = False) -> list[str]:
     """``n`` requests, spread over tiers and then families: round-robin over the tiers,
-    inside a tier round-robin over its families, inside a family by seed. Only requests
-    that can be paraphrased are eligible. Returns one id per request (its first)."""
+    inside a tier round-robin over its families (those with an MVS task and the API-only
+    ones in turn), inside a family by seed. Only requests
+    that can be paraphrased are eligible; with ``public_only``, only requests of the
+    public split. Returns one id per request (its first)."""
     by_tier: dict[str, dict[str, list[tuple[str, ...]]]] = {}
     seen = set()
     for task in sources.values():
         req = request_of(task)
         if req in seen or (tiers and task["tier"] not in tiers):
+            continue
+        if public_only and task["split"] != "public":
             continue
         seen.add(req)
         if any(i not in sources or phrasings(sources[i], req[0], generic)[0] is None for i in req):
@@ -405,9 +410,15 @@ def select_seeded(sources: dict[str, dict], n: int, generic: bool,
         fams = by_tier[tier]
         for reqs in fams.values():
             reqs.sort(key=lambda r: rank("select", r[0]))
+        # Families whose requests include an MVS task, and API-only families, taken in
+        # turn, so that a tier with both kinds is paraphrased on both tracks.
+        with_mvs = [f for f in sorted(fams)
+                    if any(sources[i]["track"] == "mvs" for i in fams[f][0])]
+        api_only = [f for f in sorted(fams) if f not in with_mvs]
+        names = [f for pair in itertools.zip_longest(with_mvs, api_only) for f in pair if f]
         order = []
         for depth in range(max(map(len, fams.values()))):
-            order += [fams[f][depth] for f in sorted(fams) if depth < len(fams[f])]
+            order += [fams[f][depth] for f in names if depth < len(fams[f])]
         queues.append(order)
     chosen: list[str] = []
     depth = 0
@@ -562,6 +573,8 @@ def main(argv=None) -> int:
     ap.add_argument("--select-seeded", type=int, metavar="N",
                     help="choose N requests by seed, spread over tiers and families")
     ap.add_argument("--tiers", nargs="+", help="with --select-seeded: only these tiers")
+    ap.add_argument("--public-only", action="store_true",
+                    help="with --select-seeded: only requests of the public split")
     ap.add_argument("--templates-only", action="store_true",
                     help="skip families without templates (no generic rewrite of the prompt)")
     ap.add_argument("--list-families", action="store_true",
@@ -588,9 +601,10 @@ def main(argv=None) -> int:
     record = out / SELECTION
     generic = not a.templates_only
     if a.select_seeded is not None:
-        ids = select_seeded(sources, a.select_seeded, generic, a.tiers)
+        ids = select_seeded(sources, a.select_seeded, generic, a.tiers, a.public_only)
         command = f"--select-seeded {a.select_seeded}" + (
-            " --tiers " + " ".join(a.tiers) if a.tiers else "")
+            " --tiers " + " ".join(a.tiers) if a.tiers else "") + (
+            " --public-only" if a.public_only else "")
         if len(ids) < a.select_seeded:
             print(f"note: only {len(ids)} of {a.select_seeded} requests can be paraphrased "
                   "(see --list-families)")

@@ -1,0 +1,158 @@
+{
+ "id": "in-computed-3ptb-ben.terse",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-computed",
+ "structures": [
+  "3ptb"
+ ],
+ "prompt": "3ptb grey cartoon, benzamidine steel blue ball-and-stick, turn on viewer's non-covalent interaction benzamidine (hydrogen bonds and other contacts surroundings), and zoom on benzamidine",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ptb.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "BEN"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ],
+           "custom": {
+            "molstar_show_non_covalent_interactions": true
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "BEN"
+   },
+   "representation": "ball_and_stick",
+   "color": "steelblue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "in-computed-3ptb-ben",
+ "style": "terse",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_interactions/in-computed-3ptb-ben.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "Load 3PTB as a grey cartoon, show the benzamidine as steel blue ball-and-stick, turn on the viewer's non-covalent interaction display for the benzamidine (hydrogen bonds and other contacts with its surroundings), and zoom in on the benzamidine.",
+  "source": {
+   "script": "scripts/author_interaction_tasks.py",
+   "inputs": [
+    "data/panel/facts/3ptb.json",
+    "molbench/atom_tables/3ptb.json.gz",
+    "data/panel/cif/3ptb.cif.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "the ligand is the only BEN in the entry; its name was checked against the frozen component record or the entry title",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 9 atoms on the frozen atom table"
+   ],
+   "derivation": "the entry's only BEN (benzamidine) as ball-and-stick on a grey cartoon, with Mol*'s computed non-covalent interactions switched on for that component (`molstar_show_non_covalent_interactions`, default radius) and the camera on it. Which contacts Mol* then draws is the viewer's computation, not part of the reference",
+   "difficulty": {
+    "author_number_differs_from_label": false,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": true,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": false
+   },
+   "measured": []
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "interactions"
+ ]
+}

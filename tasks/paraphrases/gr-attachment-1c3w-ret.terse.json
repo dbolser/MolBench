@@ -1,0 +1,179 @@
+{
+ "id": "gr-attachment-1c3w-ret.terse",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-attachment",
+ "structures": [
+  "1c3w"
+ ],
+ "prompt": "1c3w grey cartoon retinal steel blue ball-and-stick and lysine that holds it covalently lime green ball-and-stick",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1c3w.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "RET"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 216
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 216
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "limegreen"
+  }
+ ],
+ "twin_of": "gr-attachment-1c3w-ret-api.terse",
+ "paraphrase_of": "gr-attachment-1c3w-ret",
+ "style": "terse",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_grounded/gr-attachment-1c3w-ret.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "wording checked by the rule of its method (see 'method')",
+   "its twin on the other track has the same words and the same style"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "original_prompt": "Show 1C3W as a grey cartoon with the retinal in steel blue ball-and-stick and the lysine that holds it covalently in lime green ball-and-stick.",
+  "source": {
+   "script": "scripts/generate_grounded_tasks.py",
+   "inputs": [
+    "data/panel/facts/1c3w.json",
+    "molbench/atom_tables/1c3w.json.gz",
+    "data/panel/cif/1c3w.cif.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "each link re-measured in the frozen mmCIF: 1.34 A",
+    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+    "target selects 9 atoms on the frozen atom table"
+   ],
+   "derivation": "every copy of RET (RETINAL) and the polymer residues with a covalent link record (`_struct_conn`, `covale`) to it in the facts: LYS216 (A)",
+   "difficulty": {
+    "author_number_differs_from_label": true,
+    "author_chain_differs_from_label": false,
+    "insertion_code": false,
+    "needs_ligand_identity": true,
+    "needs_uniprot_mapping": false,
+    "needs_structure_lookup": true
+   }
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}
