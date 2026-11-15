@@ -263,7 +263,9 @@
     "author_chain_differs_from_label": true,
     "needs_ligand_identity": false,
     "needs_uniprot_mapping": false,
+    "number_also_in_another_chain": false,
     "n_candidates": 2,
+    "n_readings": 3,
     "n_accepted_states": 3
    },
    "residues": [

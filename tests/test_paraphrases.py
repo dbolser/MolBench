@@ -146,3 +146,30 @@ def test_generic_fallback_runs_on_a_corpus_without_templates(tmp_path):
     written = sorted(p.name for p in out.glob("*.json"))
     assert len(written) == 8                    # 2 requests x 2 twins x 2 styles
     assert para.main(["--tasks-dir", str(fixtures), "--out", str(out), "--check"]) == 0
+
+
+@pytest.mark.parametrize("full, terse", [
+    # "on" is a state after a toggle verb, not an empty word
+    ("In 9GIO, switch off the water molecules and turn on the validation annotation.",
+     "9gio, switch off water molecules and turn on validation annotation"),
+    ("Open 2OMF as assembly 1, with the symmetry annotation turned on.",
+     "2omf assembly 1, symmetry annotation turned on"),
+    ("Load 1UDT on a black background and set it spinning.",
+     "1udt black background and set it spinning"),
+    # phrases that fall apart without their first word
+    ("In 3NGB, colour His191 purple; leave everything else as it is.",
+     "3ngb, colour His191 purple; leave everything else as it is"),
+    ("Open 9F69. Make Lys142 blue, and draw it as blue ball-and-stick as well.",
+     "9f69; Make Lys142 blue, it blue ball-and-stick"),
+    ("Load 1CBS and hide the protein so that only the retinoic acid is shown.",
+     "Load 1cbs and hide protein so that only retinoic acid shown"),
+    # an opener that carries nothing, and the "and" between two display verbs
+    ("I want the ligand view for the ligand XK2 of 1HVR, white background.",
+     "ligand view ligand XK2 1hvr, white background"),
+    ("Open 8K7F; I want residues 50 to 61 of chain A in yellow.",
+     "8k7f; residues 50 to 61 chain A yellow"),
+    ("Load 1AKI and show the protein as a steel blue molecular surface.",
+     "1aki, protein steel blue molecular surface"),
+])
+def test_generic_terse_keeps_words_that_only_look_empty(full, terse):
+    assert para.generic_terse(full) == terse

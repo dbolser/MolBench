@@ -161,19 +161,57 @@ TEMPLATES: dict[str, dict[str, list[str]]] = {
 # --------------------------------------------------------------------------- #
 # Words whose deletion cannot change what is asked for. Deliberately short: negations,
 # quantifiers ("only", "all", "both", "each", "other", "except"), referents ("it",
-# "that") and prepositions that carry a relation ("between", "within", "by", "to",
-# "from", "near", "around") are NOT here.
+# "that"), prepositions that carry a relation ("between", "within", "by", "to",
+# "from", "near", "around") and "also" / "too" (on a follow-up turn they say "add to
+# what is there") are NOT here.
 FUNCTION_WORDS = frozenset(
-    "the a an please as in of with its is are be on at for then also me us we "
+    "the a an please as in of with its is are be on at for then me us we "
     "would like want could can you so".split())
 DISPLAY_VERBS = frozenset("load open fetch show display draw render".split())
 KEEP_VERBS_NEAR = frozenset("not no without except hide remove only nothing".split())
 IMPERATIVES = frozenset(
     "load open fetch show display draw render colour color hide highlight label zoom focus "
     "make set add remove select turn spin keep give mark measure put use change switch".split())
+# Words that are only sometimes empty. "on" is a state after a toggle verb ("turn on
+# the annotation", "switched on"); "as" and "so" head phrases that fall apart without
+# them ("as it is", "so that only ..."); "as well" goes as a pair.
+TOGGLES = frozenset("turn turns turned turning switch switches switched switching "
+                    "toggle toggled".split())
+KEEP_AS_BEFORE = frozenset("it is they are before deposited".split())
+# A request opener that carries nothing ("I want the ligand view ..." -> "ligand view ...").
+_OPENER = re.compile(r"^(?:I want|I need|I would like|I'd like)(?: to (?:see|have|look at))?\s+")
 _PDB_WORD = re.compile(r"[0-9][A-Za-z0-9]{3}")
 _SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9])")
 _WORD = re.compile(r"[^\s,;:]+|[,;:]")
+
+
+def _words(sentence: str) -> list[str]:
+    return _WORD.findall(_OPENER.sub("", sentence.rstrip(".!?"), count=1))
+
+
+def _deletions(words: list[str], drop_verbs: bool) -> list[bool]:
+    """For each word of one sentence: may it be deleted? ``_droppable`` plus the words
+    that are empty only in some places (see TOGGLES, KEEP_AS_BEFORE)."""
+    low = [w.lower() for w in words]
+    toggled = bool(TOGGLES & set(low))
+    out = []
+    for n, w in enumerate(words):
+        nxt = low[n + 1] if n + 1 < len(words) else ""
+        ok = _droppable(w, n == 0, drop_verbs)
+        if low[n] == "on" and toggled:
+            ok = False
+        elif low[n] == "as" and nxt in KEEP_AS_BEFORE:
+            ok = False
+        elif low[n] == "so" and nxt == "that":
+            ok = False
+        elif low[n] in ("is", "are") and n > 1 and low[n - 2] == "as":
+            ok = False                    # "as it is", "as they are"
+        elif low[n] == "well" and n and low[n - 1] == "as":
+            ok = True
+        elif w == "I" and nxt in ("want", "would"):
+            ok = True                     # "...; I want the stretch ..." -> "...; stretch ..."
+        out.append(ok)
+    return out
 
 
 def _droppable(word: str, first: bool, drop_verbs: bool) -> bool:
@@ -194,8 +232,9 @@ def critical_tokens(text: str) -> list[str]:
     ids, which terse users type in lower case."""
     out = []
     for sentence in _SENTENCE.split(text.strip()):
-        for n, w in enumerate(_WORD.findall(sentence.rstrip(".!?"))):
-            if w in ",;:" or _droppable(w, n == 0, True):
+        words = _words(sentence)
+        for n, (w, gone) in enumerate(zip(words, _deletions(words, True))):
+            if w in ",;:" or gone or w.lower() == "and":
                 continue
             w = w.strip("()\"'")
             out.append(w.lower() if _PDB_WORD.fullmatch(w) or n == 0 and w.istitle() else w)
@@ -208,12 +247,18 @@ def generic_terse(prompt: str) -> str | None:
     would be shortened."""
     pieces = []
     for sentence in _SENTENCE.split(prompt.strip()):
-        words = _WORD.findall(sentence.rstrip(".!?"))
+        words = _words(sentence)
         lowered = {w.lower().strip("()\"'") for w in words}
         drop_verbs = not (lowered & KEEP_VERBS_NEAR)
         kept = []
-        for n, w in enumerate(words):
-            if _droppable(w, n == 0, drop_verbs):
+        for n, (w, gone) in enumerate(zip(words, _deletions(words, drop_verbs))):
+            if gone:
+                # "Load X and show the protein ..." -> "X, protein ...": the "and" that
+                # joined two display verbs joins nothing once they are gone.
+                if w.lower() in DISPLAY_VERBS and kept and kept[-1].lower() == "and":
+                    kept.pop()
+                    if kept and kept[-1] not in ",;:":
+                        kept.append(",")
                 continue
             if w in ",;:":
                 if kept and kept[-1] not in ",;:":
