@@ -1,0 +1,106 @@
+{
+ "id": "tr-colour-by-chain-9gio",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-colour-by-chain",
+ "structures": [
+  "9gio"
+ ],
+ "prompt": "9GIO, cartoon, colour by chain.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9gio.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "white"
+               },
+               "custom": {
+                "molstar_color_theme_name": "chain-id"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/9gio.json",
+   "molbench/atom_tables/9gio.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 2645 atoms on the frozen atom table"
+  ],
+  "derivation": "one cartoon of the polymer with Mol*'s chain-id colour theme (3 polymer chains). The grader also accepts any answer that gives every chain one colour of its own, all different",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color"
+ ]
+}

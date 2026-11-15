@@ -1,0 +1,344 @@
+{
+ "id": "res-ligand-p69441-ap5",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-ligand",
+ "structures": [
+  "1ake"
+ ],
+ "prompt": "Show me a structure of E. coli adenylate kinase with AP5A bound: the protein as a blue cartoon and the AP5A as green ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1ake.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "blue"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "AP5"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1ake.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "blue"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "AP5"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1ake.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "blue"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "AP5"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "AP5"
+   },
+   "representation": "ball_and_stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P69441 (KAD_ECOLI, Adenylate kinase; Escherichia coli (strain K12)), 214 residues\nPDB entries with this protein and BIS(ADENOSINE)-5'-PENTAPHOSPHATE (chemical code AP5) (RCSB, 2026-11-13): 16. The 10 with the best resolution: 9R71 (X-ray, 1.61 A), 4X8L (X-ray, 1.70 A), 8Q2B (X-ray, 1.76 A), 9R6U (X-ray, 1.77 A), 1E4V (X-ray, 1.85 A), 1E4Y (X-ray, 1.85 A), 9L14 (X-ray, 1.86 A), 5EJE (X-ray, 1.90 A), 1AKE (X-ray, 2.00 A), 3HPQ (X-ray, 2.00 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1ake.json",
+   "molbench/atom_tables/1ake.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1AKE is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P69441 (214 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 121 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (1E4V) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (12BP) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names KAD_ECOLI (P69441) and the ligand AP5A (component AP5; name checked against the title of 1AKE); accepted are the PDB entries of that accession that hold a non-polymer AP5. The reference draws the polymer and every AP5 of 1AKE, one of the 16 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name, with a named ligand"
+  },
+  "uniprot": "P69441",
+  "accessions": [
+   "P69441"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 16,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1e4v",
+  "1e4y",
+  "3hpq",
+  "3hpr",
+  "4x8l",
+  "4x8o",
+  "5eje",
+  "6ham",
+  "6hap",
+  "8bqf",
+  "8pvw",
+  "8q2b",
+  "9l14",
+  "9r6u",
+  "9r71"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_comp_id": "AP5"
+    },
+    "representation": "ball_and_stick",
+    "color": "green"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "AP5"
+    },
+    "representation": "ball_and_stick",
+    "color": "green"
+   }
+  ]
+ ]
+}

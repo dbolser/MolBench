@@ -1,0 +1,122 @@
+{
+ "id": "gr-longest-helix-8ce0",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-longest-helix",
+ "structures": [
+  "8ce0"
+ ],
+ "prompt": "Load 8CE0 as a grey cartoon and colour its longest helix orange, going by the helix records of the entry.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/8ce0.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 462,
+                 "end_label_seq_id": 500
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "beg_label_seq_id": 462,
+    "end_label_seq_id": 500
+   },
+   "representation": "cartoon",
+   "color": "orange"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/8ce0.json",
+   "molbench/atom_tables/8ce0.json.gz",
+   "data/panel/cif/8ce0.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the helix records were re-read from the frozen mmCIF and agree with the facts",
+   "the longest helix is at least 3 residues longer than any other",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 305 atoms on the frozen atom table"
+  ],
+  "derivation": "the helix record (`_struct_conf`) with the most observed residues: chain A, residues 86-124 (39 residues; the next longest has 34)",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

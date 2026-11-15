@@ -1,0 +1,316 @@
+{
+ "id": "gr-metal-site-6m7h-ca",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-metal-site",
+ "structures": [
+  "6m7h"
+ ],
+ "prompt": "Load 6M7H; show the protein as a grey cartoon, the calcium ions as green spheres, and the residues that coordinate them as yellow ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/6m7h.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "CA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 20
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 22
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 24
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 26
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 31
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 56
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 58
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 60
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 62
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 67
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 93
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 95
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 97
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 99
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 104
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 129
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 131
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 133
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 135
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 140
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 20
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 22
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 24
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 26
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 31
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 56
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 58
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 60
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 62
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 67
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 93
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 95
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 97
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 99
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 104
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 129
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 131
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 133
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 135
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 140
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/6m7h.json",
+   "molbench/atom_tables/6m7h.json.gz",
+   "data/panel/cif/6m7h.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "24 metal-residue bonds re-measured in the frozen mmCIF: 2.19 to 2.56 A",
+   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a CA ion; none is added out to 3.2 A, so no weak ligand is left to argue over",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 167 atoms on the frozen atom table"
+  ],
+  "derivation": "every CA ion of the facts (4) as a sphere, and the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: ASP20 (A), ASP22 (A), ASP24 (A), THR26 (A), GLU31 (A), ASP56 (A), ASP58 (A), ASN60 (A), THR62 (A), GLU67 (A), ASP93 (A), ASP95 (A), ASN97 (A), TYR99 (A), GLU104 (A), ASP129 (A), ASP131 (A), ASP133 (A), GLN135 (A), GLU140 (A). Water and other non-polymer partners are not residues and are left out",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

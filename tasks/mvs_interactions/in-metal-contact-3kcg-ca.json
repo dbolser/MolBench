@@ -1,0 +1,391 @@
+{
+ "id": "in-metal-contact-3kcg-ca",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-metal-contact",
+ "structures": [
+  "3kcg"
+ ],
+ "prompt": "In 3KCG (grey cartoon), show the calcium ion site: the calcium ion as a brown sphere, Glu70, Asn72, Glu75, Glu77 and Glu80 in magenta ball-and-stick, and the metal-ligand distances from the calcium ion to OE2 of Glu70, O of Asn72, O of Glu75, OE1 of Glu77 and OE2 of Glu80 as labelled dashed lines. Centre the view on the site. All five residues are in chain H.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3kcg.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "CA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 70
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 72
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 75
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 77
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 80
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_comp_id": "CA"
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 70
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 72
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 75
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 77
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 80
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "CA",
+               "label_atom_id": "CA"
+              },
+              "end": {
+               "auth_asym_id": "H",
+               "auth_seq_id": 70,
+               "label_atom_id": "OE2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            },
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "CA",
+               "label_atom_id": "CA"
+              },
+              "end": {
+               "auth_asym_id": "H",
+               "auth_seq_id": 72,
+               "label_atom_id": "O"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            },
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "CA",
+               "label_atom_id": "CA"
+              },
+              "end": {
+               "auth_asym_id": "H",
+               "auth_seq_id": 75,
+               "label_atom_id": "O"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            },
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "CA",
+               "label_atom_id": "CA"
+              },
+              "end": {
+               "auth_asym_id": "H",
+               "auth_seq_id": 77,
+               "label_atom_id": "OE1"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            },
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "CA",
+               "label_atom_id": "CA"
+              },
+              "end": {
+               "auth_asym_id": "H",
+               "auth_seq_id": 80,
+               "label_atom_id": "OE2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_comp_id": "CA"
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 70
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 72
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 75
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 77
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 80
+    }
+   ],
+   "representation": null,
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/3kcg.json",
+   "molbench/atom_tables/3kcg.json.gz",
+   "data/panel/cif/3kcg.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of every line resolves to exactly one atom of the atom table",
+   "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of the metal",
+   "the metal is the only CA in the entry, so the prompt's name for it is unambiguous",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 45 atoms on the frozen atom table"
+  ],
+  "derivation": "the metal-coordination records (`_struct_conn`, `metalc`) of the facts between the calcium ion and polymer atoms: GLU70 OE2 2.26 A; ASN72 O 2.36 A; GLU75 O 2.20 A; GLU77 OE1 2.45 A; GLU80 OE2 2.33 A. The metal group and the residues are drawn, one labelled dashed line per bond, camera on the site",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "label_comp_id": "CA",
+     "label_atom_id": "CA"
+    },
+    "end": {
+     "auth_asym_id": "H",
+     "auth_seq_id": 70,
+     "label_atom_id": "OE2"
+    },
+    "distance_A": 2.26
+   },
+   {
+    "start": {
+     "label_comp_id": "CA",
+     "label_atom_id": "CA"
+    },
+    "end": {
+     "auth_asym_id": "H",
+     "auth_seq_id": 72,
+     "label_atom_id": "O"
+    },
+    "distance_A": 2.36
+   },
+   {
+    "start": {
+     "label_comp_id": "CA",
+     "label_atom_id": "CA"
+    },
+    "end": {
+     "auth_asym_id": "H",
+     "auth_seq_id": 75,
+     "label_atom_id": "O"
+    },
+    "distance_A": 2.2
+   },
+   {
+    "start": {
+     "label_comp_id": "CA",
+     "label_atom_id": "CA"
+    },
+    "end": {
+     "auth_asym_id": "H",
+     "auth_seq_id": 77,
+     "label_atom_id": "OE1"
+    },
+    "distance_A": 2.45
+   },
+   {
+    "start": {
+     "label_comp_id": "CA",
+     "label_atom_id": "CA"
+    },
+    "end": {
+     "auth_asym_id": "H",
+     "auth_seq_id": 80,
+     "label_atom_id": "OE2"
+    },
+    "distance_A": 2.33
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

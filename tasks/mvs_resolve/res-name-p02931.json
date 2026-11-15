@@ -1,0 +1,296 @@
+{
+ "id": "res-name-p02931",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-name",
+ "structures": [
+  "2omf"
+ ],
+ "prompt": "I'd like to look at the E. coli porin OmpF. Any PDB structure of it will do; draw it as a red cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2omf.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2omf.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2omf.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "red"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P02931 (OMPF_ECOLI, Outer membrane porin F; Escherichia coli (strain K12)), 362 residues\nPDB entries with this protein (RCSB, 2026-11-13): 48. The 10 with the best resolution: 2ZFG (X-ray, 1.59 A), 4GCS (X-ray, 1.87 A), 3POQ (X-ray, 1.90 A), 4LSF (X-ray, 1.90 A), 6ZHV (X-ray, 1.95 A), 4GCP (X-ray, 1.98 A), 3POX (X-ray, 2.00 A), 6ZHP (X-ray, 2.05 A), 4LSI (X-ray, 2.09 A), 4LSE (X-ray, 2.10 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/2omf.json",
+   "molbench/atom_tables/2omf.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "2OMF is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P02931 (340 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 2627 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (4JFB) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (11DC) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names OMPF_ECOLI (P02931) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 2OMF, one of the 48 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name"
+  },
+  "uniprot": "P02931",
+  "accessions": [
+   "P02931"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 48,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1bt9",
+  "1gfm",
+  "1gfn",
+  "1gfo",
+  "1gfp",
+  "1gfq",
+  "1hxt",
+  "1hxu",
+  "1hxx",
+  "1mpf",
+  "1opf",
+  "2zfg",
+  "2zld",
+  "3fyx",
+  "3hw9",
+  "3hwb",
+  "3k19",
+  "3k1b",
+  "3o0e",
+  "3poq",
+  "3pou",
+  "3pox",
+  "4d5u",
+  "4gcp",
+  "4gcq",
+  "4gcs",
+  "4jfb",
+  "4lse",
+  "4lsf",
+  "4lsh",
+  "4lsi",
+  "5nuo",
+  "5nuq",
+  "5nur",
+  "6wtz",
+  "6zhp",
+  "6zhv",
+  "7fdy",
+  "7nst",
+  "7nsu",
+  "8c7l",
+  "9a2y",
+  "9j9l",
+  "9j9m",
+  "9j9n",
+  "9j9o",
+  "9j9p"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "red"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "red"
+   }
+  ]
+ ]
+}

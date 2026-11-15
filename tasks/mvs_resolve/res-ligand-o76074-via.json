@@ -1,0 +1,578 @@
+{
+ "id": "res-ligand-o76074-via",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-ligand",
+ "structures": [
+  "1udt"
+ ],
+ "prompt": "Find a PDB entry of human phosphodiesterase 5A (PDE5A) in complex with sildenafil; draw the protein as a lime green cartoon and the sildenafil in purple ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1udt.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "VIA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1udt.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "limegreen"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": "ligand"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "purple"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1udt.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "limegreen"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "VIA"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "purple"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1udt.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "limegreen"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": "ligand"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "purple"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1udt.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "limegreen"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "VIA"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "purple"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1udt.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "limegreen"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": "ligand"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "purple"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "VIA"
+   },
+   "representation": "ball_and_stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt O76074 (PDE5A_HUMAN, cGMP-specific 3',5'-cyclic phosphodiesterase; Homo sapiens), 875 residues\nPDB entries with this protein and 5-{2-ETHOXY-5-[(4-METHYLPIPERAZIN-1-YL)SULFONYL]PHENYL}-1-METHYL-3-PROPYL-1H,6H,7H-PYRAZOLO[4,3-D]PYRIMIDIN-7-ONE (chemical code VIA) (RCSB, 2026-11-13): 4. They are: 1TBF (X-ray, 1.30 A), 1UDT (X-ray, 2.30 A), 2H42 (X-ray, 2.30 A), 3JWQ (X-ray, 2.87 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1udt.json",
+   "molbench/atom_tables/1udt.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1UDT is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to O76074 (313 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 33 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (2H42) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (15FS) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names PDE5A_HUMAN (O76074) and the ligand sildenafil (component VIA; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer VIA. The reference draws the polymer and every VIA of 1UDT, one of the 4 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name, with a named ligand"
+  },
+  "uniprot": "O76074",
+  "accessions": [
+   "O76074"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 4,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1tbf",
+  "2h42",
+  "3jwq"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "VIA"
+    },
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "VIA"
+    },
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": "ligand",
+    "representation": "ball_and_stick",
+    "color": "purple"
+   }
+  ]
+ ]
+}

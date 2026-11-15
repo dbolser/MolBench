@@ -1,0 +1,193 @@
+{
+ "id": "in-salt-bridge-1k4c",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-salt-bridge",
+ "structures": [
+  "1k4c"
+ ],
+ "prompt": "Load 1K4C as a grey cartoon. Show Asp110 and Lys199 as hot pink ball-and-stick, draw the salt bridge between the OD2 atom of Asp110 and the NZ atom of Lys199 as a dashed line labelled with its length, and zoom in on the two residues. Both residues are in chain B.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1k4c.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 110
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 199
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "hotpink"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 110,
+               "label_atom_id": "OD2"
+              },
+              "end": {
+               "auth_asym_id": "B",
+               "auth_seq_id": 199,
+               "label_atom_id": "NZ"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 110
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 199
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "hotpink"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1k4c.json",
+   "molbench/atom_tables/1k4c.json.gz",
+   "data/panel/cif/1k4c.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 17 atoms on the frozen atom table"
+  ],
+  "derivation": "a salt bridge found by neighbour search (a Lys or Arg side-chain nitrogen and an Asp or Glu carboxylate oxygen 2.5-3.2 A apart): ASP110 OD2 and LYS199 NZ, 2.94 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 110,
+     "label_atom_id": "OD2"
+    },
+    "end": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 199,
+     "label_atom_id": "NZ"
+    },
+    "distance_A": 2.94
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

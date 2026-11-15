@@ -1,0 +1,155 @@
+{
+ "id": "gr-catalytic-2nwd-p61626",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-catalytic",
+ "structures": [
+  "2nwd"
+ ],
+ "prompt": "Load 2NWD; show the protein as a grey cartoon and the two catalytic residues as cyan ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2nwd.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "X",
+              "auth_seq_id": 35
+             },
+             {
+              "auth_asym_id": "X",
+              "auth_seq_id": 53
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "X",
+     "auth_seq_id": 35
+    },
+    {
+     "auth_asym_id": "X",
+     "auth_seq_id": 53
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/2nwd.json",
+   "molbench/atom_tables/2nwd.json.gz",
+   "data/panel/cif/2nwd.cif.gz",
+   "data/mvscore/uniprot_sites.json",
+   "molbench/sifts_tables/2nwd.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "every mapped residue is observed and has the amino acid UniProt has at that position",
+   "all 2 active-site positions of the UniProt entry are present in the structure",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 27 atoms on the frozen atom table"
+  ],
+  "derivation": "the 'Active site' positions of UniProt P61626 (LYSC_HUMAN), mapped to the structure through the frozen SIFTS table: UniProt 53 (E) = GLU35 (X); UniProt 71 (D) = ASP53 (X)",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  },
+  "uniprot": "P61626",
+  "uniprot_positions": [
+   53,
+   71
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

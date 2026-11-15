@@ -1,0 +1,461 @@
+{
+ "accessions": {
+  "O76074": {
+   "active_sites": [
+    {
+     "description": "Proton donor",
+     "position": 613
+    }
+   ],
+   "id": "PDE5A_HUMAN"
+  },
+  "P00004": {
+   "active_sites": [],
+   "id": "CYC_HORSE"
+  },
+  "P00183": {
+   "active_sites": [],
+   "id": "CPXA_PSEPU"
+  },
+  "P00268": {
+   "active_sites": [],
+   "id": "RUBR_CLOPA"
+  },
+  "P00299": {
+   "active_sites": [],
+   "id": "PLAS1_POPNI"
+  },
+  "P00439": {
+   "active_sites": [],
+   "id": "PH4H_HUMAN"
+  },
+  "P00441": {
+   "active_sites": [],
+   "id": "SODC_HUMAN"
+  },
+  "P00520": {
+   "active_sites": [
+    {
+     "description": "Proton acceptor",
+     "position": 363
+    }
+   ],
+   "id": "ABL1_MOUSE"
+  },
+  "P00698": {
+   "active_sites": [
+    {
+     "description": "",
+     "position": 53
+    },
+    {
+     "description": "",
+     "position": 70
+    }
+   ],
+   "id": "LYSC_CHICK"
+  },
+  "P00720": {
+   "active_sites": [
+    {
+     "description": "Proton donor/acceptor",
+     "position": 11
+    },
+    {
+     "description": "Proton donor/acceptor",
+     "position": 20
+    }
+   ],
+   "id": "ENLYS_BPT4"
+  },
+  "P00734": {
+   "active_sites": [
+    {
+     "description": "Charge relay system",
+     "position": 406
+    },
+    {
+     "description": "Charge relay system",
+     "position": 462
+    },
+    {
+     "description": "Charge relay system",
+     "position": 568
+    }
+   ],
+   "id": "THRB_HUMAN"
+  },
+  "P00740": {
+   "active_sites": [
+    {
+     "description": "Charge relay system",
+     "position": 267
+    },
+    {
+     "description": "Charge relay system",
+     "position": 315
+    },
+    {
+     "description": "Charge relay system",
+     "position": 411
+    }
+   ],
+   "id": "FA9_HUMAN"
+  },
+  "P00760": {
+   "active_sites": [
+    {
+     "description": "Charge relay system",
+     "position": 63
+    },
+    {
+     "description": "Charge relay system",
+     "position": 107
+    },
+    {
+     "description": "Charge relay system",
+     "position": 200
+    }
+   ],
+   "id": "TRY1_BOVIN"
+  },
+  "P00918": {
+   "active_sites": [
+    {
+     "description": "Proton donor/acceptor",
+     "position": 64
+    }
+   ],
+   "id": "CAH2_HUMAN"
+  },
+  "P00974": {
+   "active_sites": [],
+   "id": "BPT1_BOVIN"
+  },
+  "P01008": {
+   "active_sites": [],
+   "id": "ANT3_HUMAN"
+  },
+  "P01009": {
+   "active_sites": [],
+   "id": "A1AT_HUMAN"
+  },
+  "P01112": {
+   "active_sites": [],
+   "id": "RASH_HUMAN"
+  },
+  "P01308": {
+   "active_sites": [],
+   "id": "INS_HUMAN"
+  },
+  "P01315": {
+   "active_sites": [],
+   "id": "INS_PIG"
+  },
+  "P01542": {
+   "active_sites": [],
+   "id": "CRAM_CRAAB"
+  },
+  "P01837": {
+   "active_sites": [],
+   "id": "IGKC_MOUSE"
+  },
+  "P01857": {
+   "active_sites": [],
+   "id": "IGHG1_HUMAN"
+  },
+  "P01863": {
+   "active_sites": [],
+   "id": "GCAA_MOUSE"
+  },
+  "P02185": {
+   "active_sites": [],
+   "id": "MYG_PHYMC"
+  },
+  "P02281": {
+   "active_sites": [],
+   "id": "H2B11_XENLA"
+  },
+  "P02302": {
+   "active_sites": [],
+   "id": "H3C_XENLA"
+  },
+  "P02649": {
+   "active_sites": [],
+   "id": "APOE_HUMAN"
+  },
+  "P02699": {
+   "active_sites": [],
+   "id": "OPSD_BOVIN"
+  },
+  "P02766": {
+   "active_sites": [],
+   "id": "TTHY_HUMAN"
+  },
+  "P02931": {
+   "active_sites": [],
+   "id": "OMPF_ECOLI"
+  },
+  "P02945": {
+   "active_sites": [],
+   "id": "BACR_HALSA"
+  },
+  "P03034": {
+   "active_sites": [],
+   "id": "RPC1_LAMBD"
+  },
+  "P03367": {
+   "active_sites": [
+    {
+     "description": "For protease activity; shared with dimeric partner",
+     "position": 525
+    }
+   ],
+   "id": "POL_HV1BR"
+  },
+  "P03372": {
+   "active_sites": [],
+   "id": "ESR1_HUMAN"
+  },
+  "P04062": {
+   "active_sites": [
+    {
+     "description": "Proton donor",
+     "position": 274
+    },
+    {
+     "description": "Nucleophile",
+     "position": 379
+    }
+   ],
+   "id": "GBA1_HUMAN"
+  },
+  "P04585": {
+   "active_sites": [
+    {
+     "description": "For protease activity; shared with dimeric partner",
+     "position": 513
+    }
+   ],
+   "id": "POL_HV1H2"
+  },
+  "P04637": {
+   "active_sites": [],
+   "id": "P53_HUMAN"
+  },
+  "P05132": {
+   "active_sites": [
+    {
+     "description": "Proton acceptor",
+     "position": 167
+    }
+   ],
+   "id": "KAPCA_MOUSE"
+  },
+  "P06280": {
+   "active_sites": [
+    {
+     "description": "Nucleophile",
+     "position": 170
+    },
+    {
+     "description": "Proton donor",
+     "position": 231
+    }
+   ],
+   "id": "AGAL_HUMAN"
+  },
+  "P06897": {
+   "active_sites": [],
+   "id": "H2A1_XENLA"
+  },
+  "P07320": {
+   "active_sites": [],
+   "id": "CRGD_HUMAN"
+  },
+  "P07477": {
+   "active_sites": [
+    {
+     "description": "Charge relay system",
+     "position": 63
+    },
+    {
+     "description": "Charge relay system",
+     "position": 107
+    },
+    {
+     "description": "Charge relay system",
+     "position": 200
+    }
+   ],
+   "id": "TRY1_HUMAN"
+  },
+  "P08046": {
+   "active_sites": [],
+   "id": "EGR1_MOUSE"
+  },
+  "P09528": {
+   "active_sites": [],
+   "id": "FRIH_MOUSE"
+  },
+  "P0A334": {
+   "active_sites": [],
+   "id": "KCSA_STRLI"
+  },
+  "P0ABQ4": {
+   "active_sites": [],
+   "id": "DYR_ECOLI"
+  },
+  "P0CG48": {
+   "active_sites": [],
+   "id": "UBC_HUMAN"
+  },
+  "P0DP23": {
+   "active_sites": [],
+   "id": "CALM1_HUMAN"
+  },
+  "P0DTC2": {
+   "active_sites": [],
+   "id": "SPIKE_SARS2"
+  },
+  "P10275": {
+   "active_sites": [],
+   "id": "ANDR_HUMAN"
+  },
+  "P11166": {
+   "active_sites": [],
+   "id": "GTR1_HUMAN"
+  },
+  "P13569": {
+   "active_sites": [],
+   "id": "CFTR_HUMAN"
+  },
+  "P17931": {
+   "active_sites": [],
+   "id": "LEG3_HUMAN"
+  },
+  "P22629": {
+   "active_sites": [],
+   "id": "SAV_STRAV"
+  },
+  "P29274": {
+   "active_sites": [],
+   "id": "AA2AR_HUMAN"
+  },
+  "P29373": {
+   "active_sites": [],
+   "id": "RABP2_HUMAN"
+  },
+  "P35557": {
+   "active_sites": [],
+   "id": "HXK4_HUMAN"
+  },
+  "P40337": {
+   "active_sites": [],
+   "id": "VHL_HUMAN"
+  },
+  "P42212": {
+   "active_sites": [],
+   "id": "GFP_AEQVI"
+  },
+  "P60174": {
+   "active_sites": [
+    {
+     "description": "Electrophile",
+     "position": 96
+    },
+    {
+     "description": "Proton acceptor",
+     "position": 166
+    }
+   ],
+   "id": "TPIS_HUMAN"
+  },
+  "P60484": {
+   "active_sites": [
+    {
+     "description": "Phosphocysteine intermediate",
+     "position": 124
+    }
+   ],
+   "id": "PTEN_HUMAN"
+  },
+  "P61626": {
+   "active_sites": [
+    {
+     "description": "",
+     "position": 53
+    },
+    {
+     "description": "",
+     "position": 71
+    }
+   ],
+   "id": "LYSC_HUMAN"
+  },
+  "P61823": {
+   "active_sites": [
+    {
+     "description": "Proton acceptor",
+     "position": 38
+    },
+    {
+     "description": "Proton donor",
+     "position": 145
+    }
+   ],
+   "id": "RNAS1_BOVIN"
+  },
+  "P62799": {
+   "active_sites": [],
+   "id": "H4_XENLA"
+  },
+  "P63248": {
+   "active_sites": [],
+   "id": "IPKA_MOUSE"
+  },
+  "P68871": {
+   "active_sites": [],
+   "id": "HBB_HUMAN"
+  },
+  "P69441": {
+   "active_sites": [],
+   "id": "KAD_ECOLI"
+  },
+  "P69905": {
+   "active_sites": [],
+   "id": "HBA_HUMAN"
+  },
+  "Q0ED31": {
+   "active_sites": [],
+   "id": "Q0ED31_HV1"
+  },
+  "Q15369": {
+   "active_sites": [],
+   "id": "ELOC_HUMAN"
+  },
+  "Q15370": {
+   "active_sites": [],
+   "id": "ELOB_HUMAN"
+  },
+  "Q8NBP7": {
+   "active_sites": [
+    {
+     "description": "Charge relay system",
+     "position": 186
+    },
+    {
+     "description": "Charge relay system",
+     "position": 226
+    },
+    {
+     "description": "Charge relay system",
+     "position": 386
+    }
+   ],
+   "id": "PCSK9_HUMAN"
+  }
+ },
+ "retrieved": "2026-11-13",
+ "source": "https://rest.uniprot.org/uniprotkb/<accession>.json?fields=ft_act_site (features of type 'Active site')"
+}

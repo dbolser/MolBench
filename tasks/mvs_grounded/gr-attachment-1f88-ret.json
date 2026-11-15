@@ -1,0 +1,171 @@
+{
+ "id": "gr-attachment-1f88-ret",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-attachment",
+ "structures": [
+  "1f88"
+ ],
+ "prompt": "1F88: grey cartoon; retinal as plum ball-and-stick; the lysines covalently linked to it as purple ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1f88.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "RET"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 296
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 296
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 296
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 296
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1f88.json",
+   "molbench/atom_tables/1f88.json.gz",
+   "data/panel/cif/1f88.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each link re-measured in the frozen mmCIF: 1.46 A, 1.46 A",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 18 atoms on the frozen atom table"
+  ],
+  "derivation": "every copy of RET (RETINAL) and the polymer residues with a covalent link record (`_struct_conn`, `covale`) to it in the facts: LYS296 (A), LYS296 (B)",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

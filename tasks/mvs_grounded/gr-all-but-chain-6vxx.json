@@ -1,0 +1,121 @@
+{
+ "id": "gr-all-but-chain-6vxx",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-all-but-chain",
+ "structures": [
+  "6vxx"
+ ],
+ "prompt": "6VXX as a teal cartoon without chain B: hide that chain and keep all the others.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/6vxx.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_asym_id": "A"
+             },
+             {
+              "label_asym_id": "C"
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "teal"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A"
+    },
+    {
+     "label_asym_id": "C"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "teal"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/6vxx.json",
+   "molbench/atom_tables/6vxx.json.gz",
+   "data/panel/cif/6vxx.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "every polymer chain has its own author chain id",
+   "the chains drawn and the chain left out are disjoint and together are the whole polymer (atom table)",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 15208 atoms on the frozen atom table"
+  ],
+  "derivation": "a cartoon of every polymer chain of the facts except author chain B: author chains A, C",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

@@ -1,0 +1,135 @@
+{
+ "id": "gr-ligand-1cbs-rea",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-ligand",
+ "structures": [
+  "1cbs"
+ ],
+ "prompt": "Load 1CBS; show the protein as a grey cartoon and the bound retinoic acid as orange ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1cbs.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "REA"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "REA"
+   },
+   "representation": "ball_and_stick",
+   "color": "orange"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1cbs.json",
+   "molbench/atom_tables/1cbs.json.gz",
+   "data/panel/cif/1cbs.cif.gz",
+   "data/mvscore/chem_comp.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the name \"retinoic acid\" was found in the component's name or synonyms (data/mvscore/chem_comp.json)",
+   "REA has 1 copy and 22 atoms in the atom table, as the facts list",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 22 atoms on the frozen atom table"
+  ],
+  "derivation": "the component whose frozen name matches the prompt's \"retinoic acid\" is REA (RETINOIC ACID); every copy of it (1) as ball-and-stick on a grey cartoon of the polymer",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

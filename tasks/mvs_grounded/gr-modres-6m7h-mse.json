@@ -1,0 +1,197 @@
+{
+ "id": "gr-modres-6m7h-mse",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-modres",
+ "structures": [
+  "6m7h"
+ ],
+ "prompt": "6M7H: grey cartoon, with the selenomethionine residues drawn in lime green ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/6m7h.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 36
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 51
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 71
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 72
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 109
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 124
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 144
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 145
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 36
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 51
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 71
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 72
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 109
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 124
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 144
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 145
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "limegreen"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/6m7h.json",
+   "molbench/atom_tables/6m7h.json.gz",
+   "data/panel/cif/6m7h.cif.gz",
+   "data/mvscore/chem_comp.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the name \"selenomethionine\" was found in the component's name or synonyms (data/mvscore/chem_comp.json)",
+   "the 8 residues are exactly the polymer residues with that component in the atom table",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 69 atoms on the frozen atom table"
+  ],
+  "derivation": "the modified residues of the facts with component MSE: MSE36 (A), MSE51 (A), MSE71 (A), MSE72 (A), MSE109 (A), MSE124 (A), MSE144 (A), MSE145 (A)",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

@@ -1,0 +1,341 @@
+{
+ "id": "res-ligand-p05132-atp",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-ligand",
+ "structures": [
+  "1atp"
+ ],
+ "prompt": "Show me a structure of the catalytic subunit of mouse protein kinase A (PKA C-alpha) with ATP bound: the protein as a red cartoon and the ATP as orange ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1atp.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "ATP"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1atp.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "ATP"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "orange"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1atp.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "ATP"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "orange"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "ATP"
+   },
+   "representation": "ball_and_stick",
+   "color": "orange"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P05132 (KAPCA_MOUSE, cAMP-dependent protein kinase catalytic subunit alpha; Mus musculus), 351 residues\nPDB entries with this protein and ADENOSINE-5'-TRIPHOSPHATE (chemical code ATP) (RCSB, 2026-11-13): 13. The 10 with the best resolution: 1RDQ (X-ray, 1.26 A), 3FJQ (X-ray, 1.60 A), 3QAL (X-ray, 1.70 A), 3X2W (X-ray, 1.70 A), 3X2V (X-ray, 1.77 A), 3QAM (X-ray, 1.92 A), 4XW5 (X-ray, 1.95 A), 4DH1 (X-ray, 2.00 A), 1ATP (X-ray, 2.20 A), 4DH3 (X-ray, 2.20 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1atp.json",
+   "molbench/atom_tables/1atp.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1ATP is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P05132 (336 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 31 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (3X2W) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (15DV) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names KAPCA_MOUSE (P05132) and the ligand ATP (component ATP; name checked against the component code itself); accepted are the PDB entries of that accession that hold a non-polymer ATP. The reference draws the polymer and every ATP of 1ATP, one of the 13 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name, with a named ligand"
+  },
+  "uniprot": "P05132",
+  "accessions": [
+   "P05132"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 13,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1rdq",
+  "3fjq",
+  "3qal",
+  "3qam",
+  "3x2u",
+  "3x2v",
+  "3x2w",
+  "4dh1",
+  "4dh3",
+  "4din",
+  "4x6r",
+  "4xw5"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_comp_id": "ATP"
+    },
+    "representation": "ball_and_stick",
+    "color": "orange"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "ATP"
+    },
+    "representation": "ball_and_stick",
+    "color": "orange"
+   }
+  ]
+ ]
+}

@@ -1,0 +1,462 @@
+{
+ "id": "res-name-p61626",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-name",
+ "structures": [
+  "2nwd"
+ ],
+ "prompt": "Show me a structure of human lysozyme as a teal cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2nwd.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "teal"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2nwd.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2nwd.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "teal"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "teal"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P61626 (LYSC_HUMAN, Lysozyme C; Homo sapiens), 148 residues\nPDB entries with this protein (RCSB, 2026-11-13): 214. The 10 with the best resolution: 2NWD (X-ray, 1.04 A), 5LSH (X-ray, 1.06 A), 1JSF (X-ray, 1.15 A), 7AP7 (X-ray, 1.15 A), 7XF6 (X-ray, 1.30 A), 1IWT (X-ray, 1.40 A), 1IWU (X-ray, 1.40 A), 1IWV (X-ray, 1.40 A), 1IWW (X-ray, 1.40 A), 1IWX (X-ray, 1.40 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/2nwd.json",
+   "molbench/atom_tables/2nwd.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "2NWD is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P61626 (130 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 2061 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (1BB3) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (15MS) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names LYSC_HUMAN (P61626) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 2NWD, one of the 214 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name"
+  },
+  "uniprot": "P61626",
+  "accessions": [
+   "P61626"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 214,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "133l",
+  "134l",
+  "1b5u",
+  "1b5v",
+  "1b5w",
+  "1b5x",
+  "1b5y",
+  "1b5z",
+  "1b7l",
+  "1b7m",
+  "1b7n",
+  "1b7o",
+  "1b7p",
+  "1b7q",
+  "1b7r",
+  "1b7s",
+  "1bb3",
+  "1bb4",
+  "1bb5",
+  "1c43",
+  "1c45",
+  "1c46",
+  "1c7p",
+  "1cj6",
+  "1cj7",
+  "1cj8",
+  "1cj9",
+  "1ckc",
+  "1ckd",
+  "1ckf",
+  "1ckg",
+  "1ckh",
+  "1d6p",
+  "1d6q",
+  "1di3",
+  "1di4",
+  "1di5",
+  "1eq4",
+  "1eq5",
+  "1eqe",
+  "1gay",
+  "1gaz",
+  "1gb0",
+  "1gb2",
+  "1gb3",
+  "1gb5",
+  "1gb6",
+  "1gb7",
+  "1gb8",
+  "1gb9",
+  "1gbo",
+  "1gbw",
+  "1gbx",
+  "1gby",
+  "1gbz",
+  "1gdw",
+  "1gdx",
+  "1ge0",
+  "1ge1",
+  "1ge2",
+  "1ge3",
+  "1ge4",
+  "1gev",
+  "1gez",
+  "1gf0",
+  "1gf3",
+  "1gf4",
+  "1gf5",
+  "1gf6",
+  "1gf7",
+  "1gf8",
+  "1gf9",
+  "1gfa",
+  "1gfe",
+  "1gfg",
+  "1gfh",
+  "1gfj",
+  "1gfk",
+  "1gfr",
+  "1gft",
+  "1gfu",
+  "1gfv",
+  "1hnl",
+  "1i1z",
+  "1i20",
+  "1i22",
+  "1inu",
+  "1ioc",
+  "1ip1",
+  "1ip2",
+  "1ip3",
+  "1ip4",
+  "1ip5",
+  "1ip6",
+  "1ip7",
+  "1iwt",
+  "1iwu",
+  "1iwv",
+  "1iww",
+  "1iwx",
+  "1iwy",
+  "1iwz",
+  "1ix0",
+  "1iy3",
+  "1iy4",
+  "1jka",
+  "1jkb",
+  "1jkc",
+  "1jkd",
+  "1jsf",
+  "1jwr",
+  "1laa",
+  "1lhh",
+  "1lhi",
+  "1lhj",
+  "1lhk",
+  "1lhl",
+  "1lhm",
+  "1lmt",
+  "1loz",
+  "1lyy",
+  "1lz1",
+  "1lz4",
+  "1lz5",
+  "1lz6",
+  "1lzr",
+  "1lzs",
+  "1op9",
+  "1oua",
+  "1oub",
+  "1ouc",
+  "1oud",
+  "1oue",
+  "1ouf",
+  "1oug",
+  "1ouh",
+  "1oui",
+  "1ouj",
+  "1qsw",
+  "1re2",
+  "1rem",
+  "1rex",
+  "1rey",
+  "1rez",
+  "1tay",
+  "1tby",
+  "1tcy",
+  "1tdy",
+  "1ubz",
+  "1w08",
+  "1wqm",
+  "1wqn",
+  "1wqo",
+  "1wqp",
+  "1wqq",
+  "1wqr",
+  "1yam",
+  "1yan",
+  "1yao",
+  "1yap",
+  "1yaq",
+  "207l",
+  "208l",
+  "2bqa",
+  "2bqb",
+  "2bqc",
+  "2bqd",
+  "2bqe",
+  "2bqf",
+  "2bqg",
+  "2bqh",
+  "2bqi",
+  "2bqj",
+  "2bqk",
+  "2bql",
+  "2bqm",
+  "2bqn",
+  "2bqo",
+  "2hea",
+  "2heb",
+  "2hec",
+  "2hed",
+  "2hee",
+  "2hef",
+  "2lhm",
+  "2mea",
+  "2meb",
+  "2mec",
+  "2med",
+  "2mee",
+  "2mef",
+  "2meg",
+  "2meh",
+  "2mei",
+  "2zij",
+  "2zik",
+  "2zil",
+  "2zwb",
+  "3eba",
+  "3fe0",
+  "3lhm",
+  "3ln2",
+  "4i0c",
+  "4ml7",
+  "5lsh",
+  "5lvk",
+  "6lfh",
+  "7ap7",
+  "7xf6",
+  "7xf7",
+  "7xf8",
+  "8qut",
+  "8r4a"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "teal"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "teal"
+   }
+  ]
+ ]
+}

@@ -1,0 +1,202 @@
+{
+ "id": "tr-chains-named-5ni1",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-chains-named",
+ "structures": [
+  "5ni1"
+ ],
+ "prompt": "Load 5NI1 as a cartoon and colour chain A brown, chain B steel blue, chain C lime green and chain D salmon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/5ni1.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "B"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "C"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "D"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A"
+   },
+   "representation": "cartoon",
+   "color": "brown"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "B"
+   },
+   "representation": "cartoon",
+   "color": "steelblue"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "C"
+   },
+   "representation": "cartoon",
+   "color": "limegreen"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "D"
+   },
+   "representation": "cartoon",
+   "color": "salmon"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/5ni1.json",
+   "molbench/atom_tables/5ni1.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 4579 atoms on the frozen atom table"
+  ],
+  "derivation": "one cartoon per polymer chain (author chain ids from the facts), each in the colour the prompt gives it",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

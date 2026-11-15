@@ -1,0 +1,306 @@
+{
+ "id": "res-gene-p04062",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-gene",
+ "structures": [
+  "9fb2"
+ ],
+ "prompt": "Find a PDB entry of human GBA1 and show it as a red cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9fb2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/9fb2.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/9fb2.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "red"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P04062 (GBA1_HUMAN, Lysosomal acid glucosylceramidase; Homo sapiens), 536 residues\nPDB entries with this protein (RCSB, 2026-11-13): 58. The 10 with the best resolution: 6TN1 (X-ray, 0.98 A), 9FB2 (X-ray, 1.14 A), 9FA3 (X-ray, 1.36 A), 9FAL (X-ray, 1.39 A), 9FAY (X-ray, 1.40 A), 6TJQ (X-ray, 1.41 A), 9FDI (X-ray, 1.41 A), 8AWR (X-ray, 1.49 A), 9FA6 (X-ray, 1.49 A), 6TJK (X-ray, 1.56 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/9fb2.json",
+   "molbench/atom_tables/9fb2.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "9FB2 is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P04062 (497 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 4016 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (2V3F) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (130D) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names GBA1_HUMAN (P04062) by its human gene symbol GBA1 (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 9FB2, one of the 58 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "gene symbol"
+  },
+  "uniprot": "P04062",
+  "accessions": [
+   "P04062"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 58,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1ogs",
+  "1y7v",
+  "2f61",
+  "2j25",
+  "2nsx",
+  "2nt0",
+  "2nt1",
+  "2v3d",
+  "2v3e",
+  "2v3f",
+  "2vt0",
+  "2wcg",
+  "2wkl",
+  "2xwd",
+  "2xwe",
+  "3gxd",
+  "3gxf",
+  "3gxi",
+  "3gxm",
+  "3ke0",
+  "3keh",
+  "3rik",
+  "3ril",
+  "5lvx",
+  "6moz",
+  "6q1n",
+  "6q1p",
+  "6q6k",
+  "6q6l",
+  "6q6n",
+  "6t13",
+  "6tjj",
+  "6tjk",
+  "6tjq",
+  "6tn1",
+  "6ytp",
+  "6ytr",
+  "6yut",
+  "6yv3",
+  "6z39",
+  "6z3i",
+  "7nwv",
+  "8awk",
+  "8awr",
+  "8ax3",
+  "8p3e",
+  "8p41",
+  "9ena",
+  "9f9z",
+  "9fa3",
+  "9fa6",
+  "9fad",
+  "9fal",
+  "9fay",
+  "9faz",
+  "9fdi",
+  "9fjf"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "red"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "red"
+   }
+  ]
+ ]
+}

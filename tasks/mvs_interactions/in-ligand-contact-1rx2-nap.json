@@ -1,0 +1,224 @@
+{
+ "id": "in-ligand-contact-1rx2-nap",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-ligand-contact",
+ "structures": [
+  "1rx2"
+ ],
+ "prompt": "In 1RX2 (grey cartoon), show how the NADP contacts His45: the NADP in magenta ball-and-stick, His45 in salmon ball-and-stick, a dashed line from NADP atom O2N to ND1 of His45 with the distance as its label, and the view centred on the two.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1rx2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "NAP"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 45
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_comp_id": "NAP"
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 45
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "label_comp_id": "NAP",
+               "label_atom_id": "O2N"
+              },
+              "end": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 45,
+               "label_atom_id": "ND1"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_comp_id": "NAP"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 45
+    }
+   ],
+   "representation": null,
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/1rx2.json",
+   "molbench/atom_tables/1rx2.json.gz",
+   "data/panel/cif/1rx2.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "the ligand is the only NAP in the entry; its name was checked against the frozen component record or the entry title",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 58 atoms on the frozen atom table"
+  ],
+  "derivation": "a polar contact found by neighbour search between the entry's only NAP (NADP) and a protein residue: NAP O2N and HIS45 ND1, 3.13 A apart in the frozen mmCIF. Ligand and residue as ball-and-stick on a grey cartoon, one labelled dashed line, camera on the two",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "label_comp_id": "NAP",
+     "label_atom_id": "O2N"
+    },
+    "end": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 45,
+     "label_atom_id": "ND1"
+    },
+    "distance_A": 3.13
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

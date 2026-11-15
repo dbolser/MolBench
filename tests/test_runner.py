@@ -82,10 +82,10 @@ def _manifest(text: str = MANIFEST, **swap: str) -> mf.Manifest:
 @pytest.fixture(scope="module")
 def corpus():
     """A slice of the real corpus: a few tasks of each kind the conditions select on."""
-    tasks = runner.load_tasks(list(mf.TRACKS))
+    tasks = [t for t in runner.load_tasks(list(mf.TRACKS)) if t["split"] == "public"]
     pick = ([t for t in tasks if t["category"] == "api_calling"][:3]
-            + [t for t in tasks if t.get("source") == "resolve"][:2]
-            + [t for t in tasks if t.get("source") == "generated"][:3])
+            + [t for t in tasks if t["tier"] == "resolve"][:2]
+            + [t for t in tasks if t["track"] == "mvs" and t["tier"] == "translation"][:3])
     assert len(pick) == 8
     return pick
 
@@ -125,7 +125,7 @@ def test_conditions_change_the_prompt_and_its_hash(corpus):
     m = _manifest()
     cells = runner.build_plan(m, corpus, m.panel())
     by = {(c.condition.name, c.task["id"], c.model.id, c.sample): c for c in cells}
-    mvs = next(t["id"] for t in corpus if t.get("source") == "resolve")
+    mvs = next(t["id"] for t in corpus if t["tier"] == "resolve")
     api = next(t["id"] for t in corpus if t["category"] == "api_calling")
     spec, bare, grounded = (by[(c, mvs, "plain", 0)] for c in ("spec", "bare", "spec_grounded"))
     assert "MVS reference" in spec.system and "MVS reference" not in bare.system

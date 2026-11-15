@@ -212,11 +212,13 @@ def test_every_reference_selection_resolves():
 def test_a_colour_on_part_of_a_representation_is_graded_by_where_it_lands():
     """Recolouring one chain of a cartoon: the chain is content, not styling."""
     import copy
-    ref = json.loads((TASKS / "mvs_generated" / "gen-chain-1hho.json").read_text())["reference_mvs"]
+    # template tr-chain-colour: one grey cartoon with one chain recoloured
+    ref = json.loads((TASKS / "mvs_generated" / "tr-chain-colour-1k4c.json").read_text())["reference"]["root"]
     rep = ref["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]
-    assert rep["children"][1]["params"]["selector"] == {"auth_asym_id": "A"}
+    chain = rep["children"][1]["params"]["selector"]["auth_asym_id"]
+    other = next(c for c in "ABC" if c != chain)       # 1K4C has author chains A, B and C
     wrong = copy.deepcopy(ref)
-    wrong["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]["children"][1]["params"]["selector"] = {"auth_asym_id": "B"}
+    wrong["children"][0]["children"][0]["children"][0]["children"][0]["children"][0]["children"][1]["params"]["selector"] = {"auth_asym_id": other}
     assert mvs.grade_mvs(ref, ref)["f1"] == 1.0
     assert mvs.grade_mvs(ref, wrong)["f1"] < 0.9
     assert "selection" in mvs.categorize(ref)

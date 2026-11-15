@@ -1,0 +1,196 @@
+{
+ "id": "gr-disulfides-3ave",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-disulfides",
+ "structures": [
+  "3ave"
+ ],
+ "prompt": "Load 3AVE; show the protein as a grey cartoon and the cysteines that form disulfide bonds as brown ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ave.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 261
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 321
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 367
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 425
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 261
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 321
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 367
+             },
+             {
+              "auth_asym_id": "B",
+              "auth_seq_id": 425
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 261
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 321
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 367
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 425
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 261
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 321
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 367
+    },
+    {
+     "auth_asym_id": "B",
+     "auth_seq_id": 425
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "brown"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/3ave.json",
+   "molbench/atom_tables/3ave.json.gz",
+   "data/panel/cif/3ave.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "S-S distances re-measured in the frozen mmCIF: 2.02 to 2.08 A",
+   "no other pair of cysteine SG atoms is within 2.5 A in the deposited model",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 48 atoms on the frozen atom table"
+  ],
+  "derivation": "both cysteines of each of the 4 disulfide records (`_struct_conn`, `disulf`) in the facts: 8 residues; free cysteines are not included",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

@@ -1,0 +1,193 @@
+{
+ "id": "in-salt-bridge-5uak",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-salt-bridge",
+ "structures": [
+  "5uak"
+ ],
+ "prompt": "In 5UAK (grey cartoon), show the salt bridge between Arg1325 and Glu1329: both residues in green ball-and-stick, a dashed line from NH1 of Arg1325 to OE2 of Glu1329 with the distance as its label, and the view centred on the pair. Both residues are in chain A.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/5uak.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 1325
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 1329
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 1325,
+               "label_atom_id": "NH1"
+              },
+              "end": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 1329,
+               "label_atom_id": "OE2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 1325
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 1329
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/5uak.json",
+   "molbench/atom_tables/5uak.json.gz",
+   "data/panel/cif/5uak.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 20 atoms on the frozen atom table"
+  ],
+  "derivation": "a salt bridge found by neighbour search (a Lys or Arg side-chain nitrogen and an Asp or Glu carboxylate oxygen 2.5-3.2 A apart): ARG1325 NH1 and GLU1329 OE2, 3.08 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 1325,
+     "label_atom_id": "NH1"
+    },
+    "end": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 1329,
+     "label_atom_id": "OE2"
+    },
+    "distance_A": 3.08
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}

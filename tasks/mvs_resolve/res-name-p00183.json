@@ -1,0 +1,377 @@
+{
+ "id": "res-name-p00183",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-name",
+ "structures": [
+  "2cpp"
+ ],
+ "prompt": "Show me a structure of cytochrome P450cam from Pseudomonas putida as a brown cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2cpp.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2cpp.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "brown"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2cpp.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "brown"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "brown"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00183 (CPXA_PSEPU, Camphor 5-monooxygenase; Pseudomonas putida), 415 residues\nPDB entries with this protein (RCSB, 2026-11-13): 129. The 10 with the best resolution: 4L4E (X-ray, 1.26 A), 4L4F (X-ray, 1.29 A), 2ZWU (X-ray, 1.30 A), 2ZWT (X-ray, 1.35 A), 1YRC (X-ray, 1.40 A), 1RE9 (X-ray, 1.45 A), 2FE6 (X-ray, 1.50 A), 2H7Q (X-ray, 1.50 A), 2ZUI (X-ray, 1.50 A), 3L61 (X-ray, 1.50 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/2cpp.json",
+   "molbench/atom_tables/2cpp.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "2CPP is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P00183 (405 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 3204 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (1K2O) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (12RT) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names CPXA_PSEPU (P00183) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 2CPP, one of the 129 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name"
+  },
+  "uniprot": "P00183",
+  "accessions": [
+   "P00183"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 129,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1akd",
+  "1c8j",
+  "1cp4",
+  "1dz4",
+  "1dz6",
+  "1dz8",
+  "1dz9",
+  "1geb",
+  "1gek",
+  "1gem",
+  "1gjm",
+  "1iwi",
+  "1iwj",
+  "1iwk",
+  "1j51",
+  "1k2o",
+  "1lwl",
+  "1mpw",
+  "1noo",
+  "1o76",
+  "1p2y",
+  "1p7r",
+  "1pha",
+  "1phb",
+  "1phc",
+  "1phd",
+  "1phe",
+  "1phf",
+  "1phg",
+  "1qmq",
+  "1re9",
+  "1rf9",
+  "1t85",
+  "1t86",
+  "1t87",
+  "1t88",
+  "1uyu",
+  "1yrc",
+  "1yrd",
+  "25bv",
+  "2a1m",
+  "2a1n",
+  "2a1o",
+  "2cp4",
+  "2fe6",
+  "2fer",
+  "2feu",
+  "2frz",
+  "2gqx",
+  "2gr6",
+  "2h7q",
+  "2h7r",
+  "2h7s",
+  "2l8m",
+  "2lqd",
+  "2m56",
+  "2qbl",
+  "2qbm",
+  "2qbn",
+  "2qbo",
+  "2z97",
+  "2zaw",
+  "2zax",
+  "2zuh",
+  "2zui",
+  "2zuj",
+  "2zwt",
+  "2zwu",
+  "3cp4",
+  "3cpp",
+  "3fwf",
+  "3fwg",
+  "3fwi",
+  "3fwj",
+  "3l61",
+  "3l62",
+  "3l63",
+  "3oia",
+  "3ol5",
+  "3p6m",
+  "3p6n",
+  "3p6o",
+  "3p6p",
+  "3p6q",
+  "3p6r",
+  "3p6s",
+  "3p6t",
+  "3p6u",
+  "3p6v",
+  "3p6w",
+  "3p6x",
+  "3w9c",
+  "3wrh",
+  "3wri",
+  "3wrj",
+  "3wrk",
+  "3wrl",
+  "3wrm",
+  "4cp4",
+  "4cpp",
+  "4ek1",
+  "4g3r",
+  "4jws",
+  "4jwu",
+  "4jx1",
+  "4kky",
+  "4l49",
+  "4l4a",
+  "4l4b",
+  "4l4c",
+  "4l4d",
+  "4l4e",
+  "4l4f",
+  "4l4g",
+  "5cp4",
+  "5cpp",
+  "5gxg",
+  "5ik1",
+  "5wk7",
+  "5wk9",
+  "6cp4",
+  "6cpp",
+  "6nbl",
+  "6we6",
+  "6wfl",
+  "7cpp",
+  "8cpp",
+  "9l7r"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "brown"
+   }
+  ]
+ ]
+}

@@ -1,0 +1,228 @@
+{
+ "id": "gr-disulfides-3ptb",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-disulfides",
+ "structures": [
+  "3ptb"
+ ],
+ "prompt": "Show 3PTB as a grey cartoon and highlight its disulfide bridges: the bonded cysteines in salmon ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ptb.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 22
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 157
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 42
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 58
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 128
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 232
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 136
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 201
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 168
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 182
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 191
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 220
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 22
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 157
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 42
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 58
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 128
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 232
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 136
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 201
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 168
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 182
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 191
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 220
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "salmon"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/3ptb.json",
+   "molbench/atom_tables/3ptb.json.gz",
+   "data/panel/cif/3ptb.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "S-S distances re-measured in the frozen mmCIF: 2.04 to 2.09 A",
+   "no other pair of cysteine SG atoms is within 2.5 A in the deposited model",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 72 atoms on the frozen atom table"
+  ],
+  "derivation": "both cysteines of each of the 6 disulfide records (`_struct_conn`, `disulf`) in the facts: 12 residues; free cysteines are not included",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

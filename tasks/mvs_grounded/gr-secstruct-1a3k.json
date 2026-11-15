@@ -1,0 +1,306 @@
+{
+ "id": "gr-secstruct-1a3k",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-secstruct",
+ "structures": [
+  "1a3k"
+ ],
+ "prompt": "Show 1A3K as a grey cartoon, then colour the helices blue and the beta strands lime green, following the helix and sheet records of the entry.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1a3k.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "blue",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 115,
+                 "end_label_seq_id": 117
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 5,
+                 "end_label_seq_id": 8
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 120,
+                 "end_label_seq_id": 125
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 32,
+                 "end_label_seq_id": 38
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 41,
+                 "end_label_seq_id": 49
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 57,
+                 "end_label_seq_id": 61
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 72,
+                 "end_label_seq_id": 74
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 103,
+                 "end_label_seq_id": 109
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 95,
+                 "end_label_seq_id": 100
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 84,
+                 "end_label_seq_id": 91
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 17,
+                 "end_label_seq_id": 25
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "label_asym_id": "A",
+                 "beg_label_seq_id": 127,
+                 "end_label_seq_id": 136
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 115,
+     "end_label_seq_id": 117
+    }
+   ],
+   "representation": "cartoon",
+   "color": "blue"
+  },
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 5,
+     "end_label_seq_id": 8
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 120,
+     "end_label_seq_id": 125
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 32,
+     "end_label_seq_id": 38
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 41,
+     "end_label_seq_id": 49
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 57,
+     "end_label_seq_id": 61
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 72,
+     "end_label_seq_id": 74
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 103,
+     "end_label_seq_id": 109
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 95,
+     "end_label_seq_id": 100
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 84,
+     "end_label_seq_id": 91
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 17,
+     "end_label_seq_id": 25
+    },
+    {
+     "label_asym_id": "A",
+     "beg_label_seq_id": 127,
+     "end_label_seq_id": 136
+    }
+   ],
+   "representation": "cartoon",
+   "color": "limegreen"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1a3k.json",
+   "molbench/atom_tables/1a3k.json.gz",
+   "data/panel/cif/1a3k.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the helix and strand records were re-read from the frozen mmCIF and agree with the facts",
+   "no residue is in both a helix and a strand",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 623 atoms on the frozen atom table"
+  ],
+  "derivation": "one grey cartoon recoloured on the 1 helix record(s) (`_struct_conf`) and 11 strand record(s) (`_struct_sheet_range`) of the facts; author ranges: helices A 228-230; strands A 118-121, A 233-238, A 145-151, A 154-162, A 170-174, A 185-187, A 216-222, A 208-213, A 197-204, A 130-138, A 240-249",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

@@ -1,0 +1,503 @@
+{
+ "id": "res-gene-p01112",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-gene",
+ "structures": [
+  "1ctq"
+ ],
+ "prompt": "Show me a structure of the protein encoded by the human gene HRAS, as a blue cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1ctq.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "blue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1ctq.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "blue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1ctq.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "blue"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "blue"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P01112 (RASH_HUMAN, GTPase HRas; Homo sapiens), 189 residues\nPDB entries with this protein (RCSB, 2026-11-13): 255. The 10 with the best resolution: 2CE2 (X-ray, 1.00 A), 2EVW (X-ray, 1.05 A), 24SQ (X-ray, 1.08 A), 8TBG (X-ray, 1.20 A), 2CLD (X-ray, 1.22 A), 2CL6 (X-ray, 1.24 A), 2CL7 (X-ray, 1.25 A), 5WDQ (X-ray, 1.25 A), 1CTQ (X-ray, 1.26 A), 2CLC (X-ray, 1.30 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1ctq.json",
+   "molbench/atom_tables/1ctq.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1CTQ is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P01112 (166 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 1375 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (5WDQ) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (12AS) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names RASH_HUMAN (P01112) by its human gene symbol HRAS (UniProt primary gene name); accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 1CTQ, one of the 255 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "gene symbol"
+  },
+  "uniprot": "P01112",
+  "accessions": [
+   "P01112"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 255,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "10dc",
+  "121p",
+  "1aa9",
+  "1agp",
+  "1bkd",
+  "1clu",
+  "1crp",
+  "1crq",
+  "1crr",
+  "1gnp",
+  "1gnq",
+  "1gnr",
+  "1he8",
+  "1iaq",
+  "1ioz",
+  "1jah",
+  "1jai",
+  "1k8r",
+  "1lf0",
+  "1lf5",
+  "1lfd",
+  "1nvu",
+  "1nvv",
+  "1nvw",
+  "1nvx",
+  "1p2s",
+  "1p2t",
+  "1p2u",
+  "1p2v",
+  "1plj",
+  "1plk",
+  "1pll",
+  "1q21",
+  "1qra",
+  "1rvd",
+  "1wq1",
+  "1xcm",
+  "1xd2",
+  "1xj0",
+  "1zvq",
+  "1zw6",
+  "221p",
+  "24sq",
+  "2c5l",
+  "2ce2",
+  "2cl0",
+  "2cl6",
+  "2cl7",
+  "2clc",
+  "2cld",
+  "2evw",
+  "2lcf",
+  "2lwi",
+  "2n42",
+  "2n46",
+  "2q21",
+  "2quz",
+  "2rga",
+  "2rgb",
+  "2rgc",
+  "2rgd",
+  "2rge",
+  "2rgg",
+  "2uzi",
+  "2vh5",
+  "2x1v",
+  "36or",
+  "3ddc",
+  "3i3s",
+  "3k8y",
+  "3k9l",
+  "3k9n",
+  "3kkm",
+  "3kkn",
+  "3kud",
+  "3l8y",
+  "3l8z",
+  "3lbh",
+  "3lbi",
+  "3lbn",
+  "3lo5",
+  "3oiu",
+  "3oiv",
+  "3oiw",
+  "3rry",
+  "3rrz",
+  "3rs0",
+  "3rs2",
+  "3rs3",
+  "3rs4",
+  "3rs5",
+  "3rs7",
+  "3rsl",
+  "3rso",
+  "3tgp",
+  "421p",
+  "4dlr",
+  "4dls",
+  "4dlt",
+  "4dlu",
+  "4dlv",
+  "4dlw",
+  "4dlx",
+  "4dly",
+  "4dlz",
+  "4efl",
+  "4efm",
+  "4efn",
+  "4g0n",
+  "4g3x",
+  "4k81",
+  "4l9s",
+  "4l9w",
+  "4nyi",
+  "4nyj",
+  "4nym",
+  "4q21",
+  "4rsg",
+  "4uru",
+  "4urv",
+  "4urw",
+  "4urx",
+  "4ury",
+  "4urz",
+  "4us0",
+  "4us1",
+  "4us2",
+  "4xvq",
+  "4xvr",
+  "521p",
+  "5b2z",
+  "5b30",
+  "5e95",
+  "5p21",
+  "5vbe",
+  "5vbz",
+  "5wdo",
+  "5wdp",
+  "5wdq",
+  "5wfo",
+  "5wfp",
+  "5wfq",
+  "5wfr",
+  "5wpl",
+  "5x9s",
+  "5zc6",
+  "621p",
+  "6amb",
+  "6axg",
+  "6bvi",
+  "6bvj",
+  "6bvk",
+  "6bvl",
+  "6bvm",
+  "6cuo",
+  "6cup",
+  "6cur",
+  "6d55",
+  "6d56",
+  "6d59",
+  "6d5e",
+  "6d5g",
+  "6d5h",
+  "6d5j",
+  "6d5l",
+  "6d5m",
+  "6d5v",
+  "6d5w",
+  "6dzh",
+  "6e6c",
+  "6e6p",
+  "6mqt",
+  "6ntc",
+  "6ntd",
+  "6q21",
+  "6v94",
+  "6v9f",
+  "6v9j",
+  "6v9l",
+  "6v9m",
+  "6v9n",
+  "6v9o",
+  "6zj0",
+  "6zl3",
+  "721p",
+  "7dph",
+  "7dpj",
+  "7jhp",
+  "7jif",
+  "7jig",
+  "7jih",
+  "7jii",
+  "7l0f",
+  "7l0g",
+  "7og9",
+  "7oga",
+  "7ogb",
+  "7ogc",
+  "7ogd",
+  "7oge",
+  "7ogf",
+  "7tam",
+  "7vv8",
+  "7vv9",
+  "7vvg",
+  "821p",
+  "8be6",
+  "8be7",
+  "8be8",
+  "8be9",
+  "8bea",
+  "8bos",
+  "8bwg",
+  "8cnj",
+  "8cnn",
+  "8elk",
+  "8elr",
+  "8els",
+  "8elt",
+  "8elu",
+  "8elv",
+  "8elw",
+  "8elx",
+  "8ely",
+  "8elz",
+  "8em0",
+  "8fg3",
+  "8fg4",
+  "8osm",
+  "8osn",
+  "8oso",
+  "8tbg",
+  "8tlr",
+  "8wwc",
+  "9p46",
+  "9pu1",
+  "9pu3",
+  "9pu8",
+  "9pul",
+  "9pun",
+  "9puq",
+  "9put",
+  "9puz",
+  "9pve",
+  "9wrp",
+  "9wrq",
+  "9wrr",
+  "9wrs",
+  "9wrt",
+  "9wru",
+  "9wrv",
+  "9wrw",
+  "9ws9",
+  "9z5w"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "blue"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "blue"
+   }
+  ]
+ ]
+}

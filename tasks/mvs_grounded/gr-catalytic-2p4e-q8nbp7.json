@@ -1,0 +1,164 @@
+{
+ "id": "gr-catalytic-2p4e-q8nbp7",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-catalytic",
+ "structures": [
+  "2p4e"
+ ],
+ "prompt": "Load 2P4E; show the protein as a grey cartoon and the catalytic triad of the enzyme as purple ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2p4e.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 186
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 226
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 386
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 186
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 226
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 386
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/2p4e.json",
+   "molbench/atom_tables/2p4e.json.gz",
+   "data/panel/cif/2p4e.cif.gz",
+   "data/mvscore/uniprot_sites.json",
+   "molbench/sifts_tables/2p4e.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "every mapped residue is observed and has the amino acid UniProt has at that position",
+   "all 3 active-site positions of the UniProt entry are present in the structure",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 24 atoms on the frozen atom table"
+  ],
+  "derivation": "the 'Active site' positions of UniProt Q8NBP7 (PCSK9_HUMAN), mapped to the structure through the frozen SIFTS table: UniProt 186 (D, Charge relay system) = ASP186 (A); UniProt 226 (H, Charge relay system) = HIS226 (A); UniProt 386 (S, Charge relay system) = SER386 (A)",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  },
+  "uniprot": "Q8NBP7",
+  "uniprot_positions": [
+   186,
+   226,
+   386
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

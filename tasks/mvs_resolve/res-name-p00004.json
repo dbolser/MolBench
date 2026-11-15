@@ -1,0 +1,280 @@
+{
+ "id": "res-name-p00004",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-name",
+ "structures": [
+  "1hrc"
+ ],
+ "prompt": "Find a PDB entry of horse heart cytochrome c and show it as a yellow cartoon.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1hrc.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1hrc.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "yellow"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1hrc.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "yellow"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P00004 (CYC_HORSE, Cytochrome c; Equus caballus), 105 residues\nPDB entries with this protein (RCSB, 2026-11-13): 32. The 10 with the best resolution: 6K9J (X-ray, 0.98 A), 3O1Y (X-ray, 1.75 A), 1WEJ (X-ray, 1.80 A), 3WC8 (X-ray, 1.80 A), 3WUI (X-ray, 1.80 A), 6K9I (X-ray, 1.80 A), 1HRC (X-ray, 1.90 A), 3O20 (X-ray, 1.90 A), 5IY5 (X-ray, 2.00 A), 1CRC (X-ray, 2.08 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1hrc.json",
+   "molbench/atom_tables/1hrc.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1HRC is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P00004 (104 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 826 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (2N3B) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (11FU) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names CYC_HORSE (P00004) by protein name; accepted are the PDB entries of that accession. The reference is a cartoon of the polymer of 1HRC, one of the 32 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name"
+  },
+  "uniprot": "P00004",
+  "accessions": [
+   "P00004"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 32,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1akk",
+  "1crc",
+  "1fi7",
+  "1fi9",
+  "1giw",
+  "1i5t",
+  "1lc1",
+  "1lc2",
+  "1m60",
+  "1ocd",
+  "1u75",
+  "1wej",
+  "2frc",
+  "2giw",
+  "2n3b",
+  "2pcb",
+  "3jbt",
+  "3nbs",
+  "3nbt",
+  "3o1y",
+  "3o20",
+  "3wc8",
+  "3wui",
+  "4nfg",
+  "4rsz",
+  "5iy5",
+  "5wve",
+  "5zkv",
+  "6k9i",
+  "6k9j",
+  "6suv"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": "all",
+    "representation": "cartoon",
+    "color": "yellow"
+   }
+  ],
+  [
+   {
+    "selector": "protein",
+    "representation": "cartoon",
+    "color": "yellow"
+   }
+  ]
+ ]
+}

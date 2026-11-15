@@ -1,0 +1,138 @@
+{
+ "id": "tr-residue-focus-1iep",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-residue-focus",
+ "structures": [
+  "1iep"
+ ],
+ "prompt": "Load 1IEP as a grey cartoon, show residue 483 of chain A as salmon ball-and-stick and zoom in on it.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1iep.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 483
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 483
+   },
+   "representation": "ball_and_stick",
+   "color": "salmon"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/1iep.json",
+   "molbench/atom_tables/1iep.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 11 atoms on the frozen atom table"
+  ],
+  "derivation": "a grey cartoon of the polymer, the named residue (author numbering, from the atom table) as ball-and-stick, and a camera focus on that residue",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component"
+ ]
+}

@@ -1,0 +1,103 @@
+{
+ "id": "tr-cartoon-9f69",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-cartoon",
+ "structures": [
+  "9f69"
+ ],
+ "prompt": "Open PDB entry 9F69; draw the whole protein as a cartoon, coloured hot pink.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9f69.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "hotpink"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": "polymer",
+   "representation": "cartoon",
+   "color": "hotpink"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/9f69.json",
+   "molbench/atom_tables/9f69.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 3725 atoms on the frozen atom table"
+  ],
+  "derivation": "the whole polymer (Mol*'s `polymer` selection) as one cartoon",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color"
+ ]
+}

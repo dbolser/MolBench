@@ -1,0 +1,143 @@
+{
+ "id": "in-computed-9f69-dxx",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-computed",
+ "structures": [
+  "9f69"
+ ],
+ "prompt": "9F69: grey cartoon; methylmalonic acid as yellow ball-and-stick with its computed non-covalent interactions shown; camera on the methylmalonic acid.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/9f69.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "DXX"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "yellow"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ],
+           "custom": {
+            "molstar_show_non_covalent_interactions": true
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "DXX"
+   },
+   "representation": "ball_and_stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/9f69.json",
+   "molbench/atom_tables/9f69.json.gz",
+   "data/panel/cif/9f69.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "the ligand is the only DXX in the entry; its name was checked against the frozen component record or the entry title",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 12 atoms on the frozen atom table"
+  ],
+  "derivation": "the entry's only DXX (methylmalonic acid) as ball-and-stick on a grey cartoon, with Mol*'s computed non-covalent interactions switched on for that component (`molstar_show_non_covalent_interactions`, default radius) and the camera on it. Which contacts Mol* then draws is the viewer's computation, not part of the reference",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": []
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "interactions"
+ ]
+}

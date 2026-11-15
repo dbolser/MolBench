@@ -1,0 +1,148 @@
+{
+ "id": "gr-entity-4ins",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-entity",
+ "structures": [
+  "4ins"
+ ],
+ "prompt": "4INS, cartoon: the insulin A chains plum and the insulin B chains green.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/4ins.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum",
+                "selector": [
+                 {
+                  "label_asym_id": "A"
+                 },
+                 {
+                  "label_asym_id": "C"
+                 }
+                ]
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "green",
+                "selector": [
+                 {
+                  "label_asym_id": "B"
+                 },
+                 {
+                  "label_asym_id": "D"
+                 }
+                ]
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A"
+    },
+    {
+     "label_asym_id": "C"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "plum"
+  },
+  {
+   "selector": [
+    {
+     "label_asym_id": "B"
+    },
+    {
+     "label_asym_id": "D"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "green"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/4ins.json",
+   "molbench/atom_tables/4ins.json.gz",
+   "data/panel/cif/4ins.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each name in the prompt matches the description of exactly one polymer entity",
+   "the chains of the named entities are disjoint and together are the whole polymer",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 830 atoms on the frozen atom table"
+  ],
+  "derivation": "one cartoon of the polymer, coloured per entity; which chains belong to which molecule is read from the entity records of the facts: insulin A chains = entity 1 (\"INSULIN (CHAIN A)\"), author chains A, C; insulin B chains = entity 2 (\"INSULIN (CHAIN B)\"), author chains B, D",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

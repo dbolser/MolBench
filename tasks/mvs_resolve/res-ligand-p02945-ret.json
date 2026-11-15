@@ -1,0 +1,498 @@
+{
+ "id": "res-ligand-p02945-ret",
+ "track": "mvs",
+ "tier": "resolve",
+ "family": "res-ligand",
+ "structures": [
+  "1c3w"
+ ],
+ "prompt": "Show me a structure of bacteriorhodopsin from Halobacterium salinarum with retinal bound: the protein as a plum cartoon and the retinal as lime green ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1c3w.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "RET"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1c3w.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "all"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "plum"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "RET"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "limegreen"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1c3w.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "protein"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "plum"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "RET"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "limegreen"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "RET"
+   },
+   "representation": "ball_and_stick",
+   "color": "limegreen"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "resolve-v1",
+  "text": "Protein named in the request: UniProt P02945 (BACR_HALSA, Bacteriorhodopsin; Halobacterium salinarum (strain ATCC 700922 / JCM 11081 / NRC-1)), 262 residues\nPDB entries with this protein and RETINAL (chemical code RET) (RCSB, 2026-11-13): 170. The 10 with the best resolution: 5ZIM (X-ray, 1.25 A), 5ZIN (X-ray, 1.27 A), 5ZIL (X-ray, 1.29 A), 7XJC (X-ray, 1.33 A), 7XJD (X-ray, 1.33 A), 7XJE (X-ray, 1.33 A), 1M0K (X-ray, 1.43 A), 1M0M (X-ray, 1.43 A), 9F9G (X-ray, 1.44 A), 1M0L (X-ray, 1.47 A)"
+ },
+ "provenance": {
+  "script": "scripts/generate_resolve_tasks.py",
+  "inputs": [
+   "data/panel/facts/1c3w.json",
+   "molbench/atom_tables/1c3w.json.gz",
+   "data/mvscore/resolve_entries.json",
+   "data/mvscore/pdb_ids.txt.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "1C3W is in the accepted list, and the frozen PDBe SIFTS mapping of the panel (a second source) maps it to P02945 (222 observed residues)",
+   "every accepted id is a current PDB entry in the id list frozen on 2026-11-13",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 20 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task",
+   "the same drawing on another accepted entry (2ZZL) grades as exactly right, and so does every accepted naming of it (success and target score 1)",
+   "the same drawing on a PDB entry outside the list (13FN) and on an id that does not exist (2ZZZ) both fail"
+  ],
+  "derivation": "the prompt names BACR_HALSA (P02945) and the ligand retinal (component RET; name checked against the component's name or synonyms (data/mvscore/chem_comp.json)); accepted are the PDB entries of that accession that hold a non-polymer RET. The reference draws the polymer and every RET of 1C3W, one of the 170 accepted entries",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false,
+   "needs_entry_lookup": true,
+   "named_by": "protein name, with a named ligand"
+  },
+  "uniprot": "P02945",
+  "accessions": [
+   "P02945"
+  ],
+  "accepted_rule": "RCSB aligns the entry's polymer entities to the UniProt accession over at least 50 residues in total (each entity counted once), or over at least half of the UniProt sequence if that is shorter",
+  "n_accepted": 170,
+  "accepted_retrieved": "2026-11-13",
+  "accepted_source": "RCSB search API and GraphQL, frozen in data/mvscore/resolve_entries.json"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component",
+  "resolve"
+ ],
+ "accepted_structures": [
+  "1ap9",
+  "1at9",
+  "1bm1",
+  "1brd",
+  "1brr",
+  "1brx",
+  "1c8r",
+  "1c8s",
+  "1cwq",
+  "1dze",
+  "1e0p",
+  "1f4z",
+  "1f50",
+  "1fbb",
+  "1fbk",
+  "1iw6",
+  "1iw9",
+  "1ixf",
+  "1jv6",
+  "1jv7",
+  "1kg8",
+  "1kg9",
+  "1kgb",
+  "1kme",
+  "1m0k",
+  "1m0l",
+  "1m0m",
+  "1mgy",
+  "1o0a",
+  "1p8h",
+  "1p8i",
+  "1p8u",
+  "1pxr",
+  "1pxs",
+  "1py6",
+  "1q5i",
+  "1q5j",
+  "1qhj",
+  "1qko",
+  "1qkp",
+  "1qm8",
+  "1r2n",
+  "1r84",
+  "1s51",
+  "1s52",
+  "1s53",
+  "1s54",
+  "1s8j",
+  "1s8l",
+  "1tn0",
+  "1tn5",
+  "1ucq",
+  "1vjm",
+  "1x0i",
+  "1x0k",
+  "1x0s",
+  "1xji",
+  "2at9",
+  "2brd",
+  "2i1x",
+  "2i20",
+  "2i21",
+  "2ntu",
+  "2ntw",
+  "2wjk",
+  "2wjl",
+  "2zfe",
+  "2zzl",
+  "3coc",
+  "3cod",
+  "3han",
+  "3hao",
+  "3hap",
+  "3haq",
+  "3har",
+  "3has",
+  "3mbv",
+  "3ns0",
+  "3nsb",
+  "3t45",
+  "3utv",
+  "3utw",
+  "3utx",
+  "3uty",
+  "3vhz",
+  "3vi0",
+  "4fpd",
+  "4hwl",
+  "4hyx",
+  "4md1",
+  "4md2",
+  "4ov0",
+  "4x31",
+  "4x32",
+  "5a44",
+  "5a45",
+  "5b34",
+  "5b35",
+  "5b6v",
+  "5b6w",
+  "5b6x",
+  "5b6y",
+  "5b6z",
+  "5br2",
+  "5br5",
+  "5h2h",
+  "5h2i",
+  "5h2j",
+  "5h2k",
+  "5h2l",
+  "5h2m",
+  "5h2n",
+  "5h2o",
+  "5h2p",
+  "5j7a",
+  "5zil",
+  "5zim",
+  "5zin",
+  "6g7h",
+  "6g7i",
+  "6g7j",
+  "6g7k",
+  "6g7l",
+  "6ga1",
+  "6ga2",
+  "6ga3",
+  "6ga4",
+  "6ga5",
+  "6ga6",
+  "6ga7",
+  "6ga8",
+  "6ga9",
+  "6gaa",
+  "6gab",
+  "6gac",
+  "6gad",
+  "6gae",
+  "6gaf",
+  "6gag",
+  "6gah",
+  "6gai",
+  "6rmk",
+  "6rnj",
+  "6rph",
+  "6rqo",
+  "6rqp",
+  "7q35",
+  "7q38",
+  "7vso",
+  "7xjc",
+  "7xjd",
+  "7xje",
+  "9a1z",
+  "9a21",
+  "9a22",
+  "9a23",
+  "9a26",
+  "9a27",
+  "9a28",
+  "9a29",
+  "9f9b",
+  "9f9c",
+  "9f9d",
+  "9f9e",
+  "9f9f",
+  "9f9g",
+  "9f9h",
+  "9f9i",
+  "9f9j"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_comp_id": "RET"
+    },
+    "representation": "ball_and_stick",
+    "color": "limegreen"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_comp_id": "RET"
+    },
+    "representation": "ball_and_stick",
+    "color": "limegreen"
+   }
+  ]
+ ]
+}

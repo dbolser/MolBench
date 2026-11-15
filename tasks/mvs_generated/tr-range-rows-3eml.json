@@ -1,0 +1,159 @@
+{
+ "id": "tr-range-rows-3eml",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-range-rows",
+ "structures": [
+  "3eml"
+ ],
+ "prompt": "Show 3EML as a cartoon in grey with the following residue ranges recoloured: chain A 43-48 red; chain A 170-177 lime green; chain A 1082-1087 brown.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3eml.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "red",
+                "selector": {
+                 "auth_asym_id": "A",
+                 "beg_auth_seq_id": 43,
+                 "end_auth_seq_id": 48
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "limegreen",
+                "selector": {
+                 "auth_asym_id": "A",
+                 "beg_auth_seq_id": 170,
+                 "end_auth_seq_id": 177
+                }
+               }
+              },
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown",
+                "selector": {
+                 "auth_asym_id": "A",
+                 "beg_auth_seq_id": 1082,
+                 "end_auth_seq_id": 1087
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "beg_auth_seq_id": 43,
+    "end_auth_seq_id": 48
+   },
+   "representation": "cartoon",
+   "color": "red"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "beg_auth_seq_id": 170,
+    "end_auth_seq_id": 177
+   },
+   "representation": "cartoon",
+   "color": "limegreen"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "beg_auth_seq_id": 1082,
+    "end_auth_seq_id": 1087
+   },
+   "representation": "cartoon",
+   "color": "brown"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/3eml.json",
+   "molbench/atom_tables/3eml.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 161 atoms on the frozen atom table"
+  ],
+  "derivation": "one grey cartoon of the polymer, recoloured on each listed range (author chain and numbering from the atom table; ranges do not overlap)",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

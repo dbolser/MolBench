@@ -1,0 +1,292 @@
+{
+ "id": "gr-disulfides-3kcg",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-disulfides",
+ "structures": [
+  "3kcg"
+ ],
+ "prompt": "3KCG: grey cartoon, with every disulfide-bonded cysteine drawn in salmon ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3kcg.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 88
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 99
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 95
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 109
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 111
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 124
+             },
+             {
+              "auth_asym_id": "L",
+              "auth_seq_id": 132
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 122
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 42
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 58
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 168
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 182
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 191
+             },
+             {
+              "auth_asym_id": "H",
+              "auth_seq_id": 220
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 8
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 128
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 21
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 95
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 247
+             },
+             {
+              "auth_asym_id": "I",
+              "auth_seq_id": 430
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "L",
+     "auth_seq_id": 88
+    },
+    {
+     "auth_asym_id": "L",
+     "auth_seq_id": 99
+    },
+    {
+     "auth_asym_id": "L",
+     "auth_seq_id": 95
+    },
+    {
+     "auth_asym_id": "L",
+     "auth_seq_id": 109
+    },
+    {
+     "auth_asym_id": "L",
+     "auth_seq_id": 111
+    },
+    {
+     "auth_asym_id": "L",
+     "auth_seq_id": 124
+    },
+    {
+     "auth_asym_id": "L",
+     "auth_seq_id": 132
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 122
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 42
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 58
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 168
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 182
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 191
+    },
+    {
+     "auth_asym_id": "H",
+     "auth_seq_id": 220
+    },
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 8
+    },
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 128
+    },
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 21
+    },
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 95
+    },
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 247
+    },
+    {
+     "auth_asym_id": "I",
+     "auth_seq_id": 430
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "salmon"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/3kcg.json",
+   "molbench/atom_tables/3kcg.json.gz",
+   "data/panel/cif/3kcg.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "S-S distances re-measured in the frozen mmCIF: 2.02 to 2.04 A",
+   "no other pair of cysteine SG atoms is within 2.5 A in the deposited model",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 132 atoms on the frozen atom table"
+  ],
+  "derivation": "both cysteines of each of the 12 disulfide records (`_struct_conn`, `disulf`) in the facts: 20 residues; free cysteines are not included",
+  "difficulty": {
+   "author_number_differs_from_label": true,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

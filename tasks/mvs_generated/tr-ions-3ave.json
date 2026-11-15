@@ -1,0 +1,126 @@
+{
+ "id": "tr-ions-3ave",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-ions",
+ "structures": [
+  "3ave"
+ ],
+ "prompt": "Load 3AVE; show the protein as a grey cartoon and the metal ion as a purple sphere.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ave.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": "ion"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": "ion",
+   "representation": "spacefill",
+   "color": "purple"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/3ave.json",
+   "molbench/atom_tables/3ave.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 1 atoms on the frozen atom table"
+  ],
+  "derivation": "a grey cartoon of the polymer plus Mol*'s `ion` selection as spheres; used only where that selection is exactly the entry's single-atom ions (1 ZN)",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

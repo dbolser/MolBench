@@ -1,0 +1,218 @@
+{
+ "id": "tr-glycans-1igt",
+ "track": "mvs",
+ "tier": "translation",
+ "family": "tr-glycans",
+ "structures": [
+  "1igt"
+ ],
+ "prompt": "Show 1IGT as a grey cartoon with the glycans in orange ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1igt.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_asym_id": "E"
+             },
+             {
+              "label_asym_id": "F"
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1igt.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "gray"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": "branched"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "orange"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "E"
+    },
+    {
+     "label_asym_id": "F"
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "orange"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_mvs_tasks.py",
+  "inputs": [
+   "data/panel/facts/1igt.json",
+   "molbench/atom_tables/1igt.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 426 atoms on the frozen atom table",
+   "every accepted alternative grades as itself and is accepted by the task"
+  ],
+  "derivation": "a grey cartoon of the polymer plus every sugar residue (2 sugar chains, by label chain id from the atom table: all atoms of Mol*'s `branched` selection that are not polymer) as ball-and-stick. Accepted alternative: Mol*'s own `branched` selection, which also holds the protein residues the sugars are bonded to.",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": false,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "multi-component"
+ ]
+}

@@ -1,0 +1,193 @@
+{
+ "id": "in-salt-bridge-2p4e",
+ "track": "mvs",
+ "tier": "interactions",
+ "family": "in-salt-bridge",
+ "structures": [
+  "2p4e"
+ ],
+ "prompt": "2P4E: grey cartoon; Glu181 and Arg248 as purple ball-and-stick; measure the salt bridge between OE2 of Glu181 and NH2 of Arg248 with a labelled dashed line; focus the camera on these two residues. Both residues are in chain A.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2p4e.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 181
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 248
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            },
+            {
+             "kind": "focus",
+             "params": {}
+            }
+           ]
+          },
+          {
+           "kind": "primitives",
+           "params": {},
+           "children": [
+            {
+             "kind": "primitive",
+             "params": {
+              "kind": "distance_measurement",
+              "start": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 181,
+               "label_atom_id": "OE2"
+              },
+              "end": {
+               "auth_asym_id": "A",
+               "auth_seq_id": 248,
+               "label_atom_id": "NH2"
+              },
+              "dash_length": 0.15,
+              "label_template": "{{distance}}"
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 181
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 248
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/author_interaction_tasks.py",
+  "inputs": [
+   "data/panel/facts/2p4e.json",
+   "molbench/atom_tables/2p4e.json.gz",
+   "data/panel/cif/2p4e.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each end of the line resolves to exactly one atom of the atom table",
+   "both residues are standard amino acids with no alternate conformer and full occupancy",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 20 atoms on the frozen atom table"
+  ],
+  "derivation": "a salt bridge found by neighbour search (a Lys or Arg side-chain nitrogen and an Asp or Glu carboxylate oxygen 2.5-3.2 A apart): GLU181 OE2 and ARG248 NH2, 2.75 A apart in the frozen mmCIF. Both residues as ball-and-stick on a grey cartoon, a dashed line between the two atoms labelled with its length, camera on the two residues",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": false
+  },
+  "measured": [
+   {
+    "start": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 181,
+     "label_atom_id": "OE2"
+    },
+    "end": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 248,
+     "label_atom_id": "NH2"
+    },
+    "distance_A": 2.75
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color",
+  "camera",
+  "multi-component",
+  "measurement"
+ ]
+}
