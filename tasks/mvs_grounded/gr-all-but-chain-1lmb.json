@@ -1,0 +1,127 @@
+{
+ "id": "gr-all-but-chain-1lmb",
+ "track": "mvs",
+ "tier": "grounded",
+ "family": "gr-all-but-chain",
+ "structures": [
+  "1lmb"
+ ],
+ "prompt": "1LMB as an orange cartoon without chain 2: hide that chain and keep all the others.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1lmb.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "label_asym_id": "A"
+             },
+             {
+              "label_asym_id": "C"
+             },
+             {
+              "label_asym_id": "D"
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A"
+    },
+    {
+     "label_asym_id": "C"
+    },
+    {
+     "label_asym_id": "D"
+    }
+   ],
+   "representation": "cartoon",
+   "color": "orange"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_grounded_tasks.py",
+  "inputs": [
+   "data/panel/facts/1lmb.json",
+   "molbench/atom_tables/1lmb.json.gz",
+   "data/panel/cif/1lmb.cif.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "every polymer chain has its own author chain id",
+   "the chains drawn and the chain left out are disjoint and together are the whole polymer (atom table)",
+   "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
+   "target selects 1789 atoms on the frozen atom table"
+  ],
+  "derivation": "a cartoon of every polymer chain of the facts except author chain 2: author chains 1, 3, 4",
+  "difficulty": {
+   "author_number_differs_from_label": false,
+   "author_chain_differs_from_label": true,
+   "insertion_code": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_structure_lookup": true
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

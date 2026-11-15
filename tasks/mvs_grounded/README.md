@@ -9,27 +9,29 @@ there because the prompt asks for it).
 
 | template | public | held back | total | share |
 |---|---:|---:|---:|---:|
+| `gr-all-but-chain` | 2 | 1 | 3 | 4% |
 | `gr-attachment` | 4 | 0 | 4 | 6% |
 | `gr-catalytic` | 5 | 1 | 6 | 9% |
 | `gr-disulfides` | 5 | 1 | 6 | 9% |
 | `gr-entity` | 5 | 1 | 6 | 9% |
-| `gr-glyco-sites` | 4 | 1 | 5 | 8% |
+| `gr-glyco-sites` | 4 | 1 | 5 | 7% |
 | `gr-heme` | 3 | 1 | 4 | 6% |
 | `gr-heme-axial` | 3 | 1 | 4 | 6% |
 | `gr-ligand` | 5 | 1 | 6 | 9% |
 | `gr-longest-helix` | 3 | 1 | 4 | 6% |
 | `gr-metal-site` | 5 | 1 | 6 | 9% |
-| `gr-modres` | 5 | 0 | 5 | 8% |
-| `gr-nucleic` | 4 | 1 | 5 | 8% |
+| `gr-modres` | 5 | 0 | 5 | 7% |
+| `gr-nucleic` | 4 | 1 | 5 | 7% |
 | `gr-secstruct` | 3 | 1 | 4 | 6% |
-| **all** | 54 | 11 | 65 | 100% |
+| **all** | 56 | 12 | 68 | 100% |
 
-Structures: 59 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
+Structures: 60 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
 
 ## How each reference is derived
 
 | template | the request names | reference |
 |---|---|---|
+| `gr-all-but-chain` | one chain to leave out | Every other polymer chain of the facts; drawn and left-out chains together are the whole polymer. |
 | `gr-attachment` | ligand and the residue it is bonded to | Polymer residues with a `covale` record to the named ligand; link re-measured (< 2.0 A). |
 | `gr-catalytic` | catalytic residues | UniProt 'Active site' features (frozen), mapped through the frozen SIFTS table; residue identity must match UniProt. |
 | `gr-disulfides` | disulfide-bonded cysteines | Both ends of every `disulf` record; S-S re-measured (1.9-2.3 A); no unannotated SG-SG pair within 2.5 A. |

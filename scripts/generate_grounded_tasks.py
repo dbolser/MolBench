@@ -908,6 +908,44 @@ def t_attachment():
     return out
 
 
+def t_all_but_chain():
+    """Everything except one chain (LEDGER S12, U13). MVS has no "all but": the answer
+    must list the other chains, so it needs the chain ids of the entry."""
+    out = []
+    for e in C.pdb_entries():
+        entry = e["id"]
+        chains = [c for c in C.facts(entry)["chains"]]
+        auth = [c["auth_asym_id"] for c in chains]
+        if not 3 <= len(chains) <= 8 or len(set(auth)) != len(auth):
+            continue
+        t = C.table(entry)
+        drop = C.pick(chains, "g-all-but", entry)
+        kept = [c for c in chains if c is not drop]
+        sel = [{"label_asym_id": c["label_asym_id"]} for c in kept]
+        gone = t.selector({"label_asym_id": drop["label_asym_id"]})
+        mask = t.selector(sel)
+        if not gone or mask & gone or (mask | gone) != t.static["polymer"]:
+            continue
+        col = C.colours(1, "g-all-but", entry)[0]
+        out.append(cand(
+            entry,
+            ["Show {ID} as {a_c} cartoon, but leave out chain {X}.",
+             "Load {ID} and draw every chain except chain {X} as {a_c} cartoon.",
+             "{ID} as {a_c} cartoon without chain {X}: hide that chain and keep all the "
+             "others."],
+            [C.drawn_comp(sel, "cartoon", col)],
+            [C.part(sel, "cartoon", col)],
+            f"a cartoon of every polymer chain of the facts except author chain "
+            f"{drop['auth_asym_id']}: author chains "
+            f"{', '.join(c['auth_asym_id'] for c in kept)}",
+            ["every polymer chain has its own author chain id",
+             "the chains drawn and the chain left out are disjoint and together are the "
+             "whole polymer (atom table)"],
+            numbering=sel, flags={"structure_lookup": True},
+            X=drop["auth_asym_id"], a_c=C.article(C.say_colour(col)) + C.say_colour(col)))
+    return out
+
+
 TEMPLATES = {
     "gr-attachment": (t_attachment, 4),
     "gr-heme-axial": (t_heme_axial, 4),
@@ -922,6 +960,7 @@ TEMPLATES = {
     "gr-ligand": (t_ligand, 6),
     "gr-secstruct": (t_secstruct, 4),
     "gr-longest-helix": (t_longest_helix, 4),
+    "gr-all-but-chain": (t_all_but_chain, 3),    # added last: earlier choices are unchanged
 }
 
 DERIVED = {
@@ -952,6 +991,8 @@ DERIVED = {
                   "entity must match exactly one entity description."),
     "gr-catalytic": ("catalytic residues", "UniProt 'Active site' features (frozen), mapped "
                      "through the frozen SIFTS table; residue identity must match UniProt."),
+    "gr-all-but-chain": ("one chain to leave out", "Every other polymer chain of the facts; "
+                         "drawn and left-out chains together are the whole polymer."),
     "gr-attachment": ("ligand and the residue it is bonded to", "Polymer residues with a "
                       "`covale` record to the named ligand; link re-measured (< 2.0 A)."),
 }
