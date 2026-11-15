@@ -6,7 +6,7 @@
  "structures": [
   "9gio"
  ],
- "prompt": "Also show Ile14 of chain A as orange ball-and-stick.",
+ "prompt": "Also show Ile14 of chain A as orange ball-and-stick; leave the cartoon as it is.",
  "reference": {
   "root": {
    "kind": "root",

@@ -6,7 +6,7 @@
  "structures": [
   "9fb2"
  ],
- "prompt": "Show the side chain and backbone of Leu206 in chain A as cyan ball-and-stick, on top of what is there.",
+ "prompt": "Show the side chain and backbone of Leu206 in chain A as cyan ball-and-stick, on top of the cartoon, which stays as it is.",
  "reference": {
   "root": {
    "kind": "root",

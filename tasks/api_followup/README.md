@@ -15,10 +15,10 @@ from the frozen panel only. Only the final state is graded.
 | `fu-recolour-chain` | 2 | recolour one existing component | start: two chains, each one colour; the second chain's colour replaced |
 | `fu-also-colour-chain` | 2 | also: colour a second component | start: first chain coloured, second not; a colour added to the second |
 | `fu-other-chain` | 2 | ellipsis: colour the component not yet coloured | start: first of exactly two chains coloured, second not; a colour added to the second, which the request calls "the other chain" |
-| `fu-referent-colour` | 3 | recolour a component named by its current colour | start: two chains in two colours; the chain that has the named colour is recoloured |
+| `fu-referent-colour` | 3 | recolour a component named by its current colour | start: two chains in two colours (entries with exactly two polymer chains); the chain that has the named colour is recoloured |
 | `fu-same-colour-as` | 2 | recolour by reference to the scene | start: polymer + ligand; the ligand takes the polymer's colour, read from the start state |
 | `fu-swap-colours` | 2 | recolour by reference to the scene | start: two chains in two colours (entries with exactly two polymer chains); colours exchanged |
-| `fu-add-residue` | 4 | add a component (a residue), keeping the rest | start: polymer + ligand; one residue (author chain + number, checked to select exactly that residue) added as coloured ball-and-stick |
+| `fu-add-residue` | 4 | add a component (a residue), keeping the rest | start: polymer + ligand; one residue (author chain + number, checked to select exactly that residue) added as coloured ball-and-stick; the request says the cartoon keeps its colour (on the API track painting the residue's cartoon too is another final state, and is not right) |
 | `fu-hide-water` | 2 | remove / hide something | start: polymer (+ waters drawn, MVS); MVS drops the water component, API sets hide_water |
 | `fu-undo-grey` | 2 | undo-like recolour | start: grey polymer, coloured ligand; the ligand set to grey |
 | `fu-focus-ligand` | 2 | also: camera focus | start: polymer + ligand; a camera focus on the ligand added |

@@ -224,3 +224,52 @@ def test_the_generator_refuses_a_bad_task(built):
     specs[i]["wrong"] = [specs[i]["ref"]]            # a "wrong" control that is right
     with pytest.raises(SystemExit):
         gen.verify(tasks, specs)
+
+
+def test_a_residue_is_added_without_repainting_its_cartoon(on_disk):
+    """API track, "add Thr348 in red ball-and-stick": the vendored API reference's own
+    example also paints the residue's cartoon (``"color": "red"``), which is another
+    final state than leaving it (``"color": null``). The request therefore says the
+    cartoon keeps its colour, and only the answer that leaves it is right."""
+    seen = 0
+    for t in on_disk.values():
+        if t["family"] != "fu-add-residue":
+            continue
+        assert "cartoon" in t["prompt"], t["id"]
+        if t["track"] != "api":
+            continue
+        full = _loaded(t)
+        ref = t["reference"]
+        new = ref[-1]["data"][0]["representationColor"]
+        assert ref[-1]["data"][0]["color"] is None and t["accepted"] == []
+        painted = copy.deepcopy(ref)
+        painted[-1]["data"][0]["color"] = new
+        no_stick_colour = copy.deepcopy(painted)
+        del no_stick_colour[-1]["data"][0]["representationColor"]
+        default_orange = copy.deepcopy(ref)
+        del default_orange[-1]["data"][0]["color"]
+        for wrong in (painted, no_stick_colour, default_orange):
+            assert not runner.grade_parsed(full, wrong)["success"], t["id"]
+        seen += 1
+    assert seen == 4
+
+
+def test_a_chain_named_by_its_colour_is_one_of_exactly_two(on_disk):
+    for t in on_disk.values():
+        if t["family"] in ("fu-referent-colour", "fu-swap-colours", "fu-other-chain"):
+            assert len(gen.grounding.facts(t["structures"][0])["chains"]) == 2, t["id"]
+
+
+def test_the_chain_difficulty_flag_follows_the_answer_not_the_wording(on_disk):
+    """``author_chain_differs_from_label`` is set when the final state picks a chain by
+    its author id on an entry whose author and label chain ids differ: "the blue one"
+    (2P4E) picks a chain without the word, "how many chains?" (1ATP) picks none."""
+    flag = lambda tid: on_disk[tid]["provenance"]["difficulty"]["author_chain_differs_from_label"]
+    for track in T.TRACKS:
+        assert flag(f"fu-referent-colour-2p4e-{track}")
+        assert not flag(f"fu-noop-question-1atp-{track}")
+    for t in on_disk.values():
+        differs = gen.grounding.facts(t["structures"][0])["numbering"]["auth_chain_differs_from_label_chain"]
+        picks = '"auth_asym_id"' in json.dumps(t["reference"]) or (
+            t["twin_of"] and '"auth_asym_id"' in json.dumps(on_disk[t["twin_of"]]["reference"]))
+        assert t["provenance"]["difficulty"]["author_chain_differs_from_label"] == bool(differs and picks), t["id"]

@@ -425,12 +425,20 @@ def add_residue(e: Entry, r: random.Random):
     sel = {"auth_asym_id": res["auth_asym_id"], "auth_seq_id": res["auth_seq_id"]}
     name = f"{res['comp'].capitalize()}{res['auth_seq_id']}"
     added = {**sel, "color": None, "representation": "ball-and-stick", "representationColor": new}
+    # The API reference's own worked example writes a residue "in red ball-and-stick" with
+    # "color": "red" as well, which also paints the residue's stretch of cartoon: another
+    # final state. So every wording says that the cartoon keeps its colour, and that
+    # answer is a "wrong" control.
+    painted = {**added, "color": new}
     return {
-        "prompt": pick(r, ["Also show {res} of chain {ch} as {new} ball-and-stick.",
-                           "Add {res} (chain {ch}) in {new} ball-and-stick.",
-                           "Now draw {res} of chain {ch} as ball-and-stick too, in {new}.",
+        "prompt": pick(r, ["Also show {res} of chain {ch} as {new} ball-and-stick; leave the "
+                           "cartoon as it is.",
+                           "Add {res} (chain {ch}) in {new} ball-and-stick, without recolouring "
+                           "the cartoon.",
+                           "Now draw {res} of chain {ch} as ball-and-stick too, in {new}; the "
+                           "cartoon keeps its colour.",
                            "Show the side chain and backbone of {res} in chain {ch} as {new} "
-                           "ball-and-stick, on top of what is there."],
+                           "ball-and-stick, on top of the cartoon, which stays as it is."],
                        res=name, ch=res["auth_asym_id"], new=say(new)),
         "edit": "add a component (a residue), keeping the rest",
         "skills": ["edit", "selection", "representation", "color"], "residue": res,
@@ -447,7 +455,12 @@ def add_residue(e: Entry, r: random.Random):
                 "equivalent": [[load(e.id), paint(p.api()[1]["data"] + [added])]],
                 "wrong": [p.api() + [paint([{k: v for k, v in added.items() if k != "color"}],
                                            keep=True)],
-                          p.api() + [paint([added])]]},
+                          p.api() + [paint([added])],
+                          # the residue's cartoon painted too (the API example's way)
+                          p.api() + [paint([painted], keep=True)],
+                          # ... and the sticks in element colours, not the colour asked for
+                          p.api() + [paint([{k: v for k, v in painted.items()
+                                             if k != "representationColor"}], keep=True)]]},
     }
 
 
@@ -562,7 +575,7 @@ def also_colour(e: Entry, r: random.Random):
     a, b = pair
     ca, new = colours(r, 2)
     return {
-        "prompt": pick(r, ["Also colour chain {b} {new}.", "Now make chain {b} {new} as well.",
+        "prompt": pick(r, ["Also colour chain {b} {new}.", "Now colour chain {b} as well, in {new}.",
                            "And chain {b} in {new}, please."], b=b["auth_asym_id"], new=say(new)),
         "edit": "also: colour a second component", "skills": ["edit", "color", "selection"],
         "mvs": {"start": chains_mvs(e, a, b, ca, None), "ref": chains_mvs(e, a, b, ca, new),
@@ -601,7 +614,9 @@ def other_chain(e: Entry, r: random.Random):
 
 
 def referent_colour(e: Entry, r: random.Random):
-    pair = two_chains(e)
+    # exactly two chains: on the API track every other chain would be drawn in a viewer
+    # default colour, and one of those could look like the colour the request names
+    pair = two_chains(e, exactly_two=True)
     if pair is None:
         return None
     a, b = pair
@@ -707,7 +722,9 @@ def noop_question(e: Entry, r: random.Random):
     c1, c2 = colours(r, 2)
     p = Pair(e, c1, c2)
     return {
-        "prompt": pick(r, ["Which ligand is bound in this structure?",
+        # only questions no change to the scene could answer ("which ligand is bound?"
+        # could fairly be answered by labelling it, so it is not asked)
+        "prompt": pick(r, ["How many residues does this structure have?",
                            "How many chains does this structure have?",
                            "What is the resolution of this structure?",
                            "Which organism is this {noun} from?"], noun=e.noun),
@@ -1079,10 +1096,10 @@ DERIVED = {
     "fu-recolour-chain": "start: two chains, each one colour; the second chain's colour replaced",
     "fu-also-colour-chain": "start: first chain coloured, second not; a colour added to the second",
     "fu-other-chain": "start: first of exactly two chains coloured, second not; a colour added to the second, which the request calls \"the other chain\"",
-    "fu-referent-colour": "start: two chains in two colours; the chain that has the named colour is recoloured",
+    "fu-referent-colour": "start: two chains in two colours (entries with exactly two polymer chains); the chain that has the named colour is recoloured",
     "fu-same-colour-as": "start: polymer + ligand; the ligand takes the polymer's colour, read from the start state",
     "fu-swap-colours": "start: two chains in two colours (entries with exactly two polymer chains); colours exchanged",
-    "fu-add-residue": "start: polymer + ligand; one residue (author chain + number, checked to select exactly that residue) added as coloured ball-and-stick",
+    "fu-add-residue": "start: polymer + ligand; one residue (author chain + number, checked to select exactly that residue) added as coloured ball-and-stick; the request says the cartoon keeps its colour (on the API track painting the residue's cartoon too is another final state, and is not right)",
     "fu-hide-water": "start: polymer (+ waters drawn, MVS); MVS drops the water component, API sets hide_water",
     "fu-undo-grey": "start: grey polymer, coloured ligand; the ligand set to grey",
     "fu-focus-ligand": "start: polymer + ligand; a camera focus on the ligand added",
@@ -1119,10 +1136,15 @@ def difficulty(e: Entry, spec: dict) -> dict:
     the request: a follow-up names residues and chains as the paper does (author
     numbering) and gives the ligand's code, so nothing has to be looked up."""
     res = spec.get("residue")
+    # The answer has to pick a chain when a final state selects one by its author chain
+    # id (the chain and residue families). Read from the states, not from the wording:
+    # "the blue one" picks a chain without saying "chain", and "how many chains?" says
+    # it without picking one.
+    picks_chain = any('"auth_asym_id"' in json.dumps(spec[t]["ref"]) for t in T.TRACKS if t in spec)
     return {
         "needs_numbering_offset": bool(res and res["auth_seq_id"] != res["label_seq_id"]),
         "author_chain_differs_from_label": bool(
-            ("chain" in spec["prompt"] or res) and e.numbering["auth_chain_differs_from_label_chain"]),
+            picks_chain and e.numbering["auth_chain_differs_from_label_chain"]),
         "needs_ligand_identity": False,
         "needs_uniprot_mapping": False,
         "needs_referent_from_context": spec.get("referent") is not None,
@@ -1219,7 +1241,7 @@ def build(held: set[str]) -> tuple[list[dict], list[dict]]:
                 built.append({
                     "id": ids[t], "track": t, "tier": "followup", "family": family,
                     "structures": [e.id], "prompt": spec["prompt"], "reference": side["ref"],
-                    "accepted": [],
+                    "accepted": side.get("accepted", []),
                     "context": {T.CONTEXT_STATE[t]: side["start"], "noop": bool(spec.get("noop"))},
                     "target": side["target"],
                     "twin_of": ids[next(o for o in tracks if o != t)] if len(tracks) == 2 else None,
@@ -1271,6 +1293,9 @@ def verify(built: list[dict], specs: list[dict]) -> list[dict]:
         for state in side.get("equivalent", []):
             if not runner.grade_parsed(full, state)["success"]:
                 problems.append(f"{tid}: an equivalent final state does not succeed")
+        if t["accepted"]:
+            checks.append(f"{len(t['accepted'])} accepted alternative final state(s): each "
+                          "grades as itself and is accepted by the task (corpus check)")
         if side.get("equivalent"):
             checks.append(f"{len(side['equivalent'])} other way(s) of writing the final state "
                           "grade as exactly right")
@@ -1428,6 +1453,7 @@ def viewer_check(built: list[dict], specs: list[dict]) -> int:
         else:
             lists += [(f"{t['id']} start", side["start"])]
             lists += [(f"{t['id']} equivalent[{i}]", s) for i, s in enumerate(side.get("equivalent", []))]
+            lists += [(f"{t['id']} accepted[{i}]", s) for i, s in enumerate(side.get("accepted", []))]
     issues = render.molstar_issues([s for _, s in scenes])
     for (name, _), found in zip(scenes, issues):
         if found:

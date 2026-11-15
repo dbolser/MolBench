@@ -6,7 +6,7 @@
  "structures": [
   "9gio"
  ],
- "prompt": "Also show Ile14 of chain A as orange ball-and-stick.",
+ "prompt": "Also show Ile14 of chain A as orange ball-and-stick; leave the cartoon as it is.",
  "reference": [
   {
    "action": "load",
@@ -109,7 +109,7 @@
    "start state scores 0.0 on the target (below 1)",
    "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
    "1 other way(s) of writing the final state grade as exactly right",
-   "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 2 of them lose a preserved part",
+   "4 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 4 of them lose a preserved part",
    "twin selects the same target atoms",
    "the residue's author number differs from its label number; author chain + number select exactly that residue's atoms"
   ],

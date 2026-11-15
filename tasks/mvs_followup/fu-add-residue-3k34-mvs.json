@@ -6,7 +6,7 @@
  "structures": [
   "3k34"
  ],
- "prompt": "Now draw Met241 of chain A as ball-and-stick too, in cyan.",
+ "prompt": "Now draw Met241 of chain A as ball-and-stick too, in cyan; the cartoon keeps its colour.",
  "reference": {
   "root": {
    "kind": "root",

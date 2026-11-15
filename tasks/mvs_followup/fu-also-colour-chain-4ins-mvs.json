@@ -6,7 +6,7 @@
  "structures": [
   "4ins"
  ],
- "prompt": "Now make chain B brown as well.",
+ "prompt": "Now colour chain B as well, in brown.",
  "reference": {
   "root": {
    "kind": "root",

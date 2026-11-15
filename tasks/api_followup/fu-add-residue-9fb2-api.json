@@ -6,7 +6,7 @@
  "structures": [
   "9fb2"
  ],
- "prompt": "Show the side chain and backbone of Leu206 in chain A as cyan ball-and-stick, on top of what is there.",
+ "prompt": "Show the side chain and backbone of Leu206 in chain A as cyan ball-and-stick, on top of the cartoon, which stays as it is.",
  "reference": [
   {
    "action": "load",
@@ -93,7 +93,7 @@
    "start state scores 0.0 on the target (below 1)",
    "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
    "1 other way(s) of writing the final state grade as exactly right",
-   "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 2 of them lose a preserved part",
+   "4 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 4 of them lose a preserved part",
    "twin selects the same target atoms"
   ],
   "seed": "20261113|fu-add-residue|1|9fb2",
