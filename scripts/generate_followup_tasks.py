@@ -69,6 +69,7 @@ MAX_PER_TRACK = 3         # tasks of one track on one structure (so at most 6 in
 MAX_FAMILY_SHARE = 0.12
 HELDBACK_SHARE = 0.20
 HELDBACK_SALT = "molbench-heldback-v1"
+HELDBACK_FILE = REPO / "data" / "panel" / "heldback.json"   # a JSON list; replaces the rule
 
 # Colours a request may name: the task palette, without white (an MVS representation
 # with no colour node is white, so "white" would not be a visible change), black (kept
@@ -179,6 +180,8 @@ def heldback_ids(listed: set[str] | None = None) -> set[str]:
     docstring), or the list given with ``--heldback-file``."""
     if listed is not None:
         return listed
+    if HELDBACK_FILE.exists():      # the corpus-wide list, frozen at integration
+        return {str(i).lower() for i in json.loads(HELDBACK_FILE.read_text(encoding="utf-8"))}
     ids = sorted(rec["id"] for rec in grounding.panel()["entries"]
                  if rec["kind"] == "pdb" and rec["id"] != T.WORKED_EXAMPLE)
     ranked = sorted(ids, key=lambda i: hashlib.sha256(f"{HELDBACK_SALT}:{i}".encode()).hexdigest())

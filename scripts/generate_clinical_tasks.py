@@ -57,6 +57,9 @@ ALSO_HELDBACK = ("8ce0",)
 # Structures another tier publishes, which this tier must therefore not hold back.
 # Empty until the tiers' held-back sets are reconciled at integration.
 NEVER_HELDBACK: tuple[str, ...] = ()
+# The corpus-wide held-back list (a JSON list of panel ids). When it exists it is the
+# set, and the tier's own seeded choice below is not used.
+HELDBACK_FILE = REPO / "data" / "panel" / "heldback.json"
 UNIPROT_URL = ("https://rest.uniprot.org/uniprotkb/{}.json?fields="
                "ft_signal,ft_propep,ft_init_met,ft_chain,ft_peptide,ft_transit")
 AF_URL = "https://alphafold.ebi.ac.uk/files/AF-{}-F1-model_v6.cif"
@@ -830,6 +833,13 @@ def assign_split(tasks: list[dict]) -> list[str]:
     task published before this corpus uses (the panel records those) and that are not
     one side of a pair, so both sides of every pair stay in one split."""
     structures = sorted({t["structures"][0] for t in tasks})
+    if HELDBACK_FILE.exists():      # the corpus-wide list, frozen at integration
+        held = sorted(set(json.loads(HELDBACK_FILE.read_text(encoding="utf-8")))
+                      & set(structures))
+        for t in tasks:
+            if t["structures"][0] in held:
+                t["split"] = "heldback"
+        return held
     entries = {e["id"]: e for e in grounding.panel()["entries"]}
     paired = {t["structures"][0] for t in tasks if t["provenance"]["clinical"]["pair"]}
     cands = [s for s in structures if not entries[s]["used_by_tasks"] and s not in paired
