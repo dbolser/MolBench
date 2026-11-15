@@ -6,7 +6,7 @@
  "structures": [
   "1tup"
  ],
- "prompt": "PDB entry 1TUP: the TP53 (Cellular tumor antigen p53) variant p.Arg248Gln is classified as pathogenic in ClinVar. Show the residue it replaces as green spacefill spheres in every chain that has it.",
+ "prompt": "In PDB entry 1TUP, show the residue replaced by the pathogenic TP53 (Cellular tumor antigen p53, UniProt P04637) variant p.Arg248Gln (ClinVar) as purple ball-and-stick in every chain that has it.",
  "reference": [
   {
    "action": "load",
@@ -19,8 +19,8 @@
      "uniprot_accession": "P04637",
      "uniprot_residue_number": 248,
      "color": null,
-     "representation": "spacefill",
-     "representationColor": "green"
+     "representation": "ball-and-stick",
+     "representationColor": "purple"
     }
    ]
   }
@@ -37,9 +37,9 @@
      {
       "uniprot_accession": "P04637",
       "uniprot_residue_number": 248,
-      "color": "green",
-      "representation": "spacefill",
-      "representationColor": "green"
+      "color": "purple",
+      "representation": "ball-and-stick",
+      "representationColor": "purple"
      }
     ]
    }
@@ -62,8 +62,8 @@
      "label_seq_id": 155
     }
    ],
-   "representation": "spacefill",
-   "color": "green"
+   "representation": "ball-and-stick",
+   "color": "purple"
   }
  ],
  "twin_of": "clin-pair-target-tp53-1tup-r248q-mvs",
@@ -97,10 +97,10 @@
    "scope": "all",
    "context": "none",
    "chain": null,
-   "wording": 1,
+   "wording": 0,
    "look": {
-    "rep": "spacefill",
-    "color": "green"
+    "rep": "ball_and_stick",
+    "color": "purple"
    },
    "variants": [
     {
@@ -158,13 +158,14 @@
     "author_number_differs_from_label_number": true,
     "insertion_code": false,
     "needs_ligand_identity": false,
-    "accession_in_prompt": false,
+    "accession_in_prompt": true,
     "protein_copies_in_structure": 3,
     "target_residues": 3,
     "alphafold_model": false,
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": false
    },

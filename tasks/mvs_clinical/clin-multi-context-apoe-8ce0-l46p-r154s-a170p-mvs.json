@@ -6,7 +6,7 @@
  "structures": [
   "8ce0"
  ],
- "prompt": "In PDB entry 8CE0, show the whole structure as a white cartoon and the residues replaced by the APOE (Apolipoprotein E, UniProt P02649) variants L46P, R154S and A170P (each pathogenic or likely pathogenic in ClinVar) as red spacefill spheres.",
+ "prompt": "In PDB entry 8CE0, show the whole structure as a white cartoon and the residues replaced by the APOE (Apolipoprotein E, UniProt P02649) variants p.Leu46Pro, p.Arg154Ser and p.Ala170Pro (each pathogenic or likely pathogenic in ClinVar) as red spacefill spheres.",
  "reference": {
   "root": {
    "kind": "root",
@@ -123,7 +123,7 @@
  "split": "heldback",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  L46P: UniProt position 46 (Leu in UniProt) -> in 8CE0: auth A 28 LEU (label A 404)\n  R154S: UniProt position 154 (Arg in UniProt) -> in 8CE0: auth A 136 ARG (label A 512)\n  A170P: UniProt position 170 (Ala in UniProt) -> in 8CE0: auth A 152 ALA (label A 528)"
+  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  p.Leu46Pro: UniProt position 46 (Leu in UniProt) -> in 8CE0: auth A 28 LEU (label A 404)\n  p.Arg154Ser: UniProt position 154 (Arg in UniProt) -> in 8CE0: auth A 136 ARG (label A 512)\n  p.Ala170Pro: UniProt position 170 (Ala in UniProt) -> in 8CE0: auth A 152 ALA (label A 528)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -144,7 +144,7 @@
    "gene": "APOE",
    "accession": "P02649",
    "protein": "Apolipoprotein E",
-   "naming": "short",
+   "naming": "hgvs",
    "scope": "all",
    "context": "structure",
    "chain": null,
@@ -156,7 +156,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "L46P",
+     "name_in_prompt": "p.Leu46Pro",
      "variant": "L46P",
      "hgvs": "p.Leu46Pro",
      "uniprot_position": 46,
@@ -182,7 +182,7 @@
      ]
     },
     {
-     "name_in_prompt": "R154S",
+     "name_in_prompt": "p.Arg154Ser",
      "variant": "R154S",
      "hgvs": "p.Arg154Ser",
      "uniprot_position": 154,
@@ -208,7 +208,7 @@
      ]
     },
     {
-     "name_in_prompt": "A170P",
+     "name_in_prompt": "p.Ala170Pro",
      "variant": "A170P",
      "hgvs": "p.Ala170Pro",
      "uniprot_position": 170,
@@ -253,6 +253,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": null,
     "number_in_name_as_author_number_is_right": false,
     "number_in_name_as_label_number_is_right": false
    },

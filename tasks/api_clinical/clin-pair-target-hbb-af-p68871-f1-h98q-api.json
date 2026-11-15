@@ -6,7 +6,7 @@
  "structures": [
   "af-p68871-f1-model_v6"
  ],
- "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), show as blue ball-and-stick the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant p.His98Gln (pathogenic or likely pathogenic in ClinVar).",
+ "prompt": "In the AlphaFold DB model AF-P68871-F1 (model version 6), show the residue replaced by the pathogenic or likely pathogenic HBB (Hemoglobin subunit beta, UniProt P68871) variant p.His98Gln (ClinVar) as green ball-and-stick.",
  "reference": [
   {
    "action": "load",
@@ -24,7 +24,7 @@
      "auth_seq_id": 98,
      "color": null,
      "representation": "ball-and-stick",
-     "representationColor": "blue"
+     "representationColor": "green"
     }
    ]
   }
@@ -45,9 +45,9 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 98,
-      "color": "blue",
+      "color": "green",
       "representation": "ball-and-stick",
-      "representationColor": "blue"
+      "representationColor": "green"
      }
     ]
    }
@@ -61,7 +61,7 @@
     "label_seq_id": 98
    },
    "representation": "ball-and-stick",
-   "color": "blue"
+   "color": "green"
   }
  ],
  "twin_of": "clin-pair-target-hbb-af-p68871-f1-h98q-mvs",
@@ -95,10 +95,10 @@
    "scope": "all",
    "context": "none",
    "chain": null,
-   "wording": 2,
+   "wording": 0,
    "look": {
     "rep": "ball_and_stick",
-    "color": "blue"
+    "color": "green"
    },
    "variants": [
     {
@@ -150,6 +150,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": true
    },

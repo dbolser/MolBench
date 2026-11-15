@@ -6,7 +6,7 @@
  "structures": [
   "5edm"
  ],
- "prompt": "In PDB entry 5EDM, show the residues replaced by the F2 (Prothrombin) variants R431H, R500Q and R596Q (each pathogenic or likely pathogenic in ClinVar) as magenta spacefill spheres.",
+ "prompt": "In PDB entry 5EDM, show the residues replaced by the F2 (Prothrombin) variants p.Arg431His, p.Arg500Gln and p.Arg596Gln (each pathogenic or likely pathogenic in ClinVar) as magenta spacefill spheres.",
  "reference": {
   "root": {
    "kind": "root",
@@ -101,7 +101,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 5EDM: Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I )\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Prothrombin), protein, 550 of 568 residues observed: auth 1-242 = label 1-242; auth 261-568 = label 261-568\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00734 (THRB_HUMAN): UniProt 44-196 = auth 1-153; UniProt 211-299 = auth 154-242; UniProt 318-622 = auth 261-565\n\nFrom the request:\n  F2: UniProt P00734 (THRB_HUMAN, Prothrombin)\n  R431H: UniProt position 431 (Arg in UniProt) -> in 5EDM: auth A 374 ARG (label A 374)\n  R500Q: UniProt position 500 (Arg in UniProt) -> in 5EDM: auth A 443 ARG (label A 443)\n  R596Q: UniProt position 596 (Arg in UniProt) -> in 5EDM: auth A 539 ARG (label A 539)"
+  "text": "PDB 5EDM: Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I )\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Prothrombin), protein, 550 of 568 residues observed: auth 1-242 = label 1-242; auth 261-568 = label 261-568\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00734 (THRB_HUMAN): UniProt 44-196 = auth 1-153; UniProt 211-299 = auth 154-242; UniProt 318-622 = auth 261-565\n\nFrom the request:\n  F2: UniProt P00734 (THRB_HUMAN, Prothrombin)\n  p.Arg431His: UniProt position 431 (Arg in UniProt) -> in 5EDM: auth A 374 ARG (label A 374)\n  p.Arg500Gln: UniProt position 500 (Arg in UniProt) -> in 5EDM: auth A 443 ARG (label A 443)\n  p.Arg596Gln: UniProt position 596 (Arg in UniProt) -> in 5EDM: auth A 539 ARG (label A 539)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -122,7 +122,7 @@
    "gene": "F2",
    "accession": "P00734",
    "protein": "Prothrombin",
-   "naming": "short",
+   "naming": "hgvs",
    "scope": "all",
    "context": "none",
    "chain": null,
@@ -133,7 +133,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "R431H",
+     "name_in_prompt": "p.Arg431His",
      "variant": "R431H",
      "hgvs": "p.Arg431His",
      "uniprot_position": 431,
@@ -159,7 +159,7 @@
      ]
     },
     {
-     "name_in_prompt": "R500Q",
+     "name_in_prompt": "p.Arg500Gln",
      "variant": "R500Q",
      "hgvs": "p.Arg500Gln",
      "uniprot_position": 500,
@@ -185,7 +185,7 @@
      ]
     },
     {
-     "name_in_prompt": "R596Q",
+     "name_in_prompt": "p.Arg596Gln",
      "variant": "R596Q",
      "hgvs": "p.Arg596Gln",
      "uniprot_position": 596,
@@ -230,6 +230,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": true,
     "number_in_name_as_author_number_is_right": false,
     "number_in_name_as_label_number_is_right": false
    },

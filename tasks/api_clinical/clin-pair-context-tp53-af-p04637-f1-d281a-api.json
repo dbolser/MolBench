@@ -6,7 +6,7 @@
  "structures": [
   "af-p04637-f1-model_v6"
  ],
- "prompt": "The AlphaFold DB model AF-P04637-F1 (model version 6): the TP53 (Cellular tumor antigen p53) variant D281A is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a khaki cartoon, with the residue it replaces as magenta spacefill spheres.",
+ "prompt": "The AlphaFold DB model AF-P04637-F1 (model version 6): the TP53 (Cellular tumor antigen p53, UniProt P04637) variant D281A is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as yellow ball-and-stick.",
  "reference": [
   {
    "action": "load",
@@ -22,12 +22,12 @@
     {
      "auth_asym_id": "A",
      "auth_seq_id": 281,
-     "color": "khaki",
-     "representation": "spacefill",
-     "representationColor": "magenta"
+     "color": "white",
+     "representation": "ball-and-stick",
+     "representationColor": "yellow"
     }
    ],
-   "non_selected_color": "khaki"
+   "non_selected_color": "white"
   }
  ],
  "accepted": [
@@ -46,12 +46,12 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 281,
-      "color": "magenta",
-      "representation": "spacefill",
-      "representationColor": "magenta"
+      "color": "yellow",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ],
   [
@@ -73,12 +73,12 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 281,
-      "color": "khaki",
-      "representation": "spacefill",
-      "representationColor": "magenta"
+      "color": "white",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ],
   [
@@ -100,12 +100,12 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 281,
-      "color": "magenta",
-      "representation": "spacefill",
-      "representationColor": "magenta"
+      "color": "yellow",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ]
  ],
@@ -116,8 +116,8 @@
     "label_asym_id": "A",
     "label_seq_id": 281
    },
-   "representation": "spacefill",
-   "color": "magenta"
+   "representation": "ball-and-stick",
+   "color": "yellow"
   }
  ],
  "twin_of": "clin-pair-context-tp53-af-p04637-f1-d281a-mvs",
@@ -153,9 +153,9 @@
    "chain": null,
    "wording": 1,
    "look": {
-    "rep": "spacefill",
-    "color": "magenta",
-    "backdrop": "khaki"
+    "rep": "ball_and_stick",
+    "color": "yellow",
+    "backdrop": "white"
    },
    "variants": [
     {
@@ -204,6 +204,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": true
    },

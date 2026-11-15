@@ -187,6 +187,17 @@ def test_pairs_point_at_each_other_and_ask_the_same_variant():
     assert (True, False) in kinds       # the offset effect: same variant, with and without
 
 
+def test_the_two_tasks_of_a_pair_differ_only_in_the_structure():
+    """Same wording, colours, representation and naming, and the accession in both
+    prompts: otherwise the offset comparison is confounded by the phrasing."""
+    for t in [t for t in TIER if _clin(t)["pair"]]:
+        a, b = _clin(t), _clin(BY_ID[_clin(t)["pair"]["with"]])
+        for key in ("naming", "wording", "look", "context"):
+            assert a[key] == b[key], (t["id"], key)
+        assert a["difficulty"]["accession_in_prompt"] and b["difficulty"]["accession_in_prompt"]
+        assert f"UniProt {a['accession']}" in t["prompt"]
+
+
 # --- every task ----------------------------------------------------------------------
 
 @pytest.mark.parametrize("task", MVS, ids=lambda t: t["id"])
@@ -307,6 +318,38 @@ def test_a_bare_one_letter_name_has_no_same_amino_acid_decoy(task):
     assert c["difficulty"]["number_in_name_as_author_number_is_same_amino_acid"] == decoy
     if decoy:
         assert c["naming"] in ("hgvs", "legacy"), task["id"]
+
+
+@pytest.mark.parametrize("task", MVS, ids=lambda t: t["id"])
+def test_a_bare_one_letter_name_cannot_be_read_as_a_mature_protein_number(task):
+    """A name in UniProt numbering (prothrombin R500Q) read as a mature-protein number
+    lands ``removed`` residues further along. Under a bare one-letter name the residue
+    there must be known to be a different amino acid (or past the end of the protein),
+    so that the wild-type letter settles which numbering is meant. Recomputed here from
+    the frozen SIFTS tables and variant lists."""
+    c = _clin(task)
+    if c["naming"] == "legacy":
+        assert c["difficulty"]["name_read_as_mature_number_is_same_amino_acid"] is None
+        return
+    acc = c["accession"]
+    protein = next(p for p in V.proteins() if p["accession"] == acc)
+    length = grounding.variants(acc)["uniprot_length"]
+    seen = []
+    for v in c["variants"]:
+        m = V.mature_numbering(acc, v["uniprot_position"])
+        if not m:
+            seen.append(False)
+            continue
+        other = v["uniprot_position"] + m["removed"]
+        names = {V.AA3[x.wild_type].upper() for x in V.confirmed(acc) if x.position == other}
+        for entry in protein["entries"]:
+            names |= {r.comp_id for r in sifts.uniprot_residues(entry, acc, other) or []}
+        wild = V.AA3[v["variant"][0]].upper()
+        seen.append(False if other > length else None if not names else wild in names)
+    expect = True if True in seen else None if None in seen else False
+    assert c["difficulty"]["name_read_as_mature_number_is_same_amino_acid"] is expect
+    if c["naming"] == "short":
+        assert expect is False, task["id"]
 
 
 @pytest.mark.parametrize("task", MVS, ids=lambda t: t["id"])

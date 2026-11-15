@@ -6,7 +6,7 @@
  "structures": [
   "2hhb"
  ],
- "prompt": "Using PDB entry 2HHB, draw a white cartoon of the whole structure and show, as red spacefill spheres, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant Y146C (pathogenic in ClinVar) in every chain that has it.",
+ "prompt": "Using PDB entry 2HHB, draw a khaki cartoon of the whole structure and show, as purple ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant Y146C (pathogenic in ClinVar) in every chain that has it.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "white"
+                "color": "khaki"
                }
               }
              ]
@@ -69,13 +69,13 @@
             {
              "kind": "representation",
              "params": {
-              "type": "spacefill"
+              "type": "ball_and_stick"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "red"
+                "color": "purple"
                }
               }
              ]
@@ -105,8 +105,8 @@
      "label_seq_id": 145
     }
    ],
-   "representation": "spacefill",
-   "color": "red"
+   "representation": "ball_and_stick",
+   "color": "purple"
   }
  ],
  "twin_of": "clin-pair-context-hbb-2hhb-y146c-api",
@@ -142,9 +142,9 @@
    "chain": null,
    "wording": 2,
    "look": {
-    "rep": "spacefill",
-    "color": "red",
-    "backdrop": "white"
+    "rep": "ball_and_stick",
+    "color": "purple",
+    "backdrop": "khaki"
    },
    "variants": [
     {
@@ -201,6 +201,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": false,
     "number_in_name_as_label_number_is_right": false
    },

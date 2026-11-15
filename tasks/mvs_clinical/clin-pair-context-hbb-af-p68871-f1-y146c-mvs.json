@@ -6,7 +6,7 @@
  "structures": [
   "af-p68871-f1-model_v6"
  ],
- "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), draw a white cartoon of the whole structure and show, as blue ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta) missense variant Y146C (pathogenic in ClinVar).",
+ "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), draw a khaki cartoon of the whole structure and show, as purple ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant Y146C (pathogenic in ClinVar).",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "white"
+                "color": "khaki"
                }
               }
              ]
@@ -69,7 +69,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "blue"
+                "color": "purple"
                }
               }
              ]
@@ -94,7 +94,7 @@
     "label_seq_id": 146
    },
    "representation": "ball_and_stick",
-   "color": "blue"
+   "color": "purple"
   }
  ],
  "twin_of": "clin-pair-context-hbb-af-p68871-f1-y146c-api",
@@ -131,8 +131,8 @@
    "wording": 2,
    "look": {
     "rep": "ball_and_stick",
-    "color": "blue",
-    "backdrop": "white"
+    "color": "purple",
+    "backdrop": "khaki"
    },
    "variants": [
     {
@@ -181,6 +181,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": true
    },

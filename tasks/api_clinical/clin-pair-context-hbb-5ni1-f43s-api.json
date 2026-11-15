@@ -6,7 +6,7 @@
  "structures": [
   "5ni1"
  ],
- "prompt": "PDB entry 5NI1: the HBB (Hemoglobin subunit beta, UniProt P68871) variant p.Phe43Ser is classified as pathogenic in ClinVar. Show the whole structure as a khaki cartoon, with the residue it replaces as yellow ball-and-stick in every chain that has it.",
+ "prompt": "Using PDB entry 5NI1, draw a white cartoon of the whole structure and show, as cyan ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant p.Phe43Ser (pathogenic in ClinVar) in every chain that has it.",
  "reference": [
   {
    "action": "load",
@@ -18,12 +18,12 @@
     {
      "uniprot_accession": "P68871",
      "uniprot_residue_number": 43,
-     "color": "khaki",
+     "color": "white",
      "representation": "ball-and-stick",
-     "representationColor": "yellow"
+     "representationColor": "cyan"
     }
    ],
-   "non_selected_color": "khaki"
+   "non_selected_color": "white"
   }
  ],
  "accepted": [
@@ -38,12 +38,12 @@
      {
       "uniprot_accession": "P68871",
       "uniprot_residue_number": 43,
-      "color": "yellow",
+      "color": "cyan",
       "representation": "ball-and-stick",
-      "representationColor": "yellow"
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ],
   [
@@ -61,12 +61,12 @@
      {
       "uniprot_accession": "P68871",
       "uniprot_residue_number": 43,
-      "color": "khaki",
+      "color": "white",
       "representation": "ball-and-stick",
-      "representationColor": "yellow"
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ],
   [
@@ -84,12 +84,12 @@
      {
       "uniprot_accession": "P68871",
       "uniprot_residue_number": 43,
-      "color": "yellow",
+      "color": "cyan",
       "representation": "ball-and-stick",
-      "representationColor": "yellow"
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ]
  ],
@@ -107,7 +107,7 @@
     }
    ],
    "representation": "ball-and-stick",
-   "color": "yellow"
+   "color": "cyan"
   }
  ],
  "twin_of": "clin-pair-context-hbb-5ni1-f43s-mvs",
@@ -141,11 +141,11 @@
    "scope": "all",
    "context": "structure",
    "chain": null,
-   "wording": 1,
+   "wording": 2,
    "look": {
     "rep": "ball_and_stick",
-    "color": "yellow",
-    "backdrop": "khaki"
+    "color": "cyan",
+    "backdrop": "white"
    },
    "variants": [
     {
@@ -202,6 +202,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": false,
     "number_in_name_as_label_number_is_right": false
    },

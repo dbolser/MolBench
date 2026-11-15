@@ -6,7 +6,7 @@
  "structures": [
   "2hhb"
  ],
- "prompt": "In PDB entry 2HHB, show the residue replaced by the pathogenic or likely pathogenic HBB (Hemoglobin subunit beta, UniProt P68871) variant p.His98Gln (ClinVar) as yellow spacefill spheres in every chain that has it.",
+ "prompt": "In PDB entry 2HHB, show the residue replaced by the pathogenic or likely pathogenic HBB (Hemoglobin subunit beta, UniProt P68871) variant p.His98Gln (ClinVar) as green ball-and-stick in every chain that has it.",
  "reference": {
   "root": {
    "kind": "root",
@@ -47,13 +47,13 @@
             {
              "kind": "representation",
              "params": {
-              "type": "spacefill"
+              "type": "ball_and_stick"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "yellow"
+                "color": "green"
                }
               }
              ]
@@ -83,8 +83,8 @@
      "label_seq_id": 97
     }
    ],
-   "representation": "spacefill",
-   "color": "yellow"
+   "representation": "ball_and_stick",
+   "color": "green"
   }
  ],
  "twin_of": "clin-pair-target-hbb-2hhb-h98q-api",
@@ -120,8 +120,8 @@
    "chain": null,
    "wording": 0,
    "look": {
-    "rep": "spacefill",
-    "color": "yellow"
+    "rep": "ball_and_stick",
+    "color": "green"
    },
    "variants": [
     {
@@ -181,6 +181,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": false,
     "number_in_name_as_label_number_is_right": false
    },

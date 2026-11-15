@@ -6,7 +6,7 @@
  "structures": [
   "1tup"
  ],
- "prompt": "PDB entry 1TUP: the TP53 (Cellular tumor antigen p53) variant D281A is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a gray cartoon, with the residue it replaces as orange spacefill spheres in every chain that has it.",
+ "prompt": "PDB entry 1TUP: the TP53 (Cellular tumor antigen p53, UniProt P04637) variant D281A is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as yellow ball-and-stick in every chain that has it.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "gray"
+                "color": "white"
                }
               }
              ]
@@ -73,13 +73,13 @@
             {
              "kind": "representation",
              "params": {
-              "type": "spacefill"
+              "type": "ball_and_stick"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "yellow"
                }
               }
              ]
@@ -113,8 +113,8 @@
      "label_seq_id": 188
     }
    ],
-   "representation": "spacefill",
-   "color": "orange"
+   "representation": "ball_and_stick",
+   "color": "yellow"
   }
  ],
  "twin_of": "clin-pair-context-tp53-1tup-d281a-api",
@@ -150,9 +150,9 @@
    "chain": null,
    "wording": 1,
    "look": {
-    "rep": "spacefill",
-    "color": "orange",
-    "backdrop": "gray"
+    "rep": "ball_and_stick",
+    "color": "yellow",
+    "backdrop": "white"
    },
    "variants": [
     {
@@ -210,13 +210,14 @@
     "author_number_differs_from_label_number": true,
     "insertion_code": false,
     "needs_ligand_identity": false,
-    "accession_in_prompt": false,
+    "accession_in_prompt": true,
     "protein_copies_in_structure": 3,
     "target_residues": 3,
     "alphafold_model": false,
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": false
    },

@@ -225,6 +225,38 @@ def sites(protein: dict, entry: str) -> list[Site]:
             if s.complete]
 
 
+def uniprot_residue_name(protein: dict, position: int) -> str | None:
+    """The residue UniProt has at ``position``, as far as the frozen data says: its
+    three-letter name, ``""`` when the position is past the end of the sequence, or
+    None when no frozen file shows it (not modelled in any panel structure of the
+    protein and not the site of a frozen variant)."""
+    acc = protein["accession"]
+    data = grounding.variants(acc)
+    if position < 1 or position > data["uniprot_length"]:
+        return ""
+    for v in V.confirmed(acc):
+        if v.position == position:
+            return V.AA3[v.wild_type].upper()
+    for entry in protein["entries"]:
+        hits = {r.comp_id for r in sifts.uniprot_residues(entry, acc, position) or []}
+        if len(hits) == 1:
+            return hits.pop()
+    return None
+
+
+def mature_reading(protein: dict, v: V.Variant) -> bool | None:
+    """Could a name written in UniProt numbering (R500Q) be taken for a name in
+    mature-protein numbering? That reading puts it ``removed`` residues further along.
+    False: the protein has no mature numbering there, or that other residue is a
+    different amino acid (or past the end), so the wild-type letter settles it.
+    True: it is the same amino acid. None: the frozen data does not show it."""
+    m = V.mature_numbering(v.accession, v.position)
+    if not m:
+        return False
+    other = uniprot_residue_name(protein, v.position + m["removed"])
+    return None if other is None else other == V.AA3[v.wild_type].upper()
+
+
 def pick(pool: list[Site], used: set, key: tuple, n: int = 1, featured: bool = False,
          want=None) -> list[Site]:
     """Choose ``n`` sites at positions not yet used on the structure: a featured variant
@@ -353,13 +385,24 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
     (the helix or strand that contains the residue too)."""
     site = group[0]
     entry, protein, acc = site.entry, site.protein, site.v.accession
-    r = rng("look", family, entry, *[V.short(s.v) for s in group], *key)
+    # A bare one-letter name must not also make sense in mature-protein numbering
+    # (prothrombin R500Q: 43 residues further along there is another arginine). Such
+    # a variant is asked by its HGVS name, which says which numbering it is in.
+    as_mature = [mature_reading(protein, s.v) for s in group]
+    if naming == "short" and any(x is not False for x in as_mature):
+        assert not family.startswith("clin-short"), (entry, [V.short(s.v) for s in group])
+        naming = "hgvs"
+    # The two structures of a pair get the same wording, colours and representation,
+    # and both name the accession (an AlphaFold model's name holds it anyway), so that
+    # the structure is the only thing that differs between them.
+    paired = bool(key)
+    r = rng("look", family, *([] if paired else [entry]), *[V.short(s.v) for s in group], *key)
     look = {"rep": r.choice(sorted(REPS)), "color": r.choice(HIGHLIGHT),
             "backdrop": r.choice(BACKDROP) if context == "structure" else None}
     if sse:
         sse = {**sse, "color": r.choice(SSE_COLOURS)}
         look["rep"] = "ball_and_stick"
-    with_accession = r.random() < 0.5
+    with_accession = r.random() < 0.5 or paired
     wording = r.randrange(3)
     prompt = make_prompt(naming, group, entry, protein, with_accession, scope, chain,
                          look, wording, sse)
@@ -509,6 +552,14 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
                     "label_comp_id": V.AA3[s.v.wild_type].upper()}))
     assert not (decoy and naming == "short"), (entry, [V.short(s.v) for s in group])
     difficulty["number_in_name_as_author_number_is_same_amino_acid"] = decoy
+    # The other trap of a name in UniProt numbering: read as a mature-protein number it
+    # lands on the same amino acid (None: the frozen data does not show that residue).
+    # A bare one-letter name is used only where this is False (see above), so True and
+    # None occur only under an HGVS name.
+    difficulty["name_read_as_mature_number_is_same_amino_acid"] = (
+        None if naming == "legacy" else
+        True if any(x is True for x in as_mature) else
+        None if any(x is None for x in as_mature) else False)
     clinical = {
         "gene": protein["gene"], "accession": acc,
         "protein": grounding.variants(acc)["protein"],
@@ -941,6 +992,7 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
           f"| the number in the name, used as the author residue number, is the right residue | {sum(x['number_in_name_as_author_number_is_right'] for x in d)} |",
           f"| the number in the name, used as the label residue number, is the right residue | {sum(x['number_in_name_as_label_number_is_right'] for x in d)} |",
           f"| the number in the name, used as the author residue number, is a different residue of the same amino acid | {sum(x['number_in_name_as_author_number_is_same_amino_acid'] for x in d)} |",
+          f"| the name, read as a mature-protein number, lands on the same amino acid (HGVS names only) | {sum(x['name_read_as_mature_number_is_same_amino_acid'] is True for x in d)} |",
           f"| name in mature-protein numbering | {sum(x['name_in_mature_numbering'] for x in d)} |",
           f"| UniProt accession given in the prompt | {sum(x['accession_in_prompt'] for x in d)} |",
           f"| on an AlphaFold DB model | {sum(x['alphafold_model'] for x in d)} |",
@@ -1015,7 +1067,13 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
           "is right. `number_in_name_as_author_number_is_same_amino_acid` marks the tasks "
           "where that face-value residue is a different residue of the same amino acid, so "
           "checking the wild type does not expose the mistake; this happens only under an "
-          "HGVS name, never under a bare one-letter name (the generator refuses it).",
+          "HGVS name, never under a bare one-letter name (the generator refuses it). "
+          "`name_read_as_mature_number_is_same_amino_acid` is the same question for the other "
+          "misreading: a name in UniProt numbering taken for a mature-protein number (true, "
+          "false, or null when the frozen data does not show that residue). A bare one-letter "
+          "name is used only where it is false; otherwise the variant is asked by its HGVS "
+          "name. The two tasks of a pair share the wording, the colours, the representation "
+          "and the accession in the prompt, so only the structure differs.",
           "",
           "## Left out, and why", "",
           "- **A variant whose position is not modelled in the structure.** The right answer "

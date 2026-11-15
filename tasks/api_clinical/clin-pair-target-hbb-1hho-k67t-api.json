@@ -6,7 +6,7 @@
  "structures": [
   "1hho"
  ],
- "prompt": "PDB entry 1HHO: the HBB (Hemoglobin subunit beta, UniProt P68871) variant K67T is classified as likely pathogenic in ClinVar. Show the residue it replaces as orange ball-and-stick.",
+ "prompt": "Using PDB entry 1HHO, show as cyan spacefill spheres the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant K67T (likely pathogenic in ClinVar).",
  "reference": [
   {
    "action": "load",
@@ -19,8 +19,8 @@
      "uniprot_accession": "P68871",
      "uniprot_residue_number": 67,
      "color": null,
-     "representation": "ball-and-stick",
-     "representationColor": "orange"
+     "representation": "spacefill",
+     "representationColor": "cyan"
     }
    ]
   }
@@ -37,9 +37,9 @@
      {
       "uniprot_accession": "P68871",
       "uniprot_residue_number": 67,
-      "color": "orange",
-      "representation": "ball-and-stick",
-      "representationColor": "orange"
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
      }
     ]
    }
@@ -52,8 +52,8 @@
     "label_asym_id": "B",
     "label_seq_id": 66
    },
-   "representation": "ball-and-stick",
-   "color": "orange"
+   "representation": "spacefill",
+   "color": "cyan"
   }
  ],
  "twin_of": "clin-pair-target-hbb-1hho-k67t-mvs",
@@ -87,10 +87,10 @@
    "scope": "all",
    "context": "none",
    "chain": null,
-   "wording": 1,
+   "wording": 2,
    "look": {
-    "rep": "ball_and_stick",
-    "color": "orange"
+    "rep": "spacefill",
+    "color": "cyan"
    },
    "variants": [
     {
@@ -139,6 +139,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": false,
     "number_in_name_as_label_number_is_right": false
    },

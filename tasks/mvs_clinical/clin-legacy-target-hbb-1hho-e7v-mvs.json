@@ -6,7 +6,7 @@
  "structures": [
   "1hho"
  ],
- "prompt": "PDB entry 1HHO: the HBB (Hemoglobin subunit beta, UniProt P68871) variant E6V is classified as pathogenic in ClinVar. Show the residue it replaces as orange ball-and-stick. The name E6V is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the initiator methionine.",
+ "prompt": "Using PDB entry 1HHO, show as purple spacefill spheres the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant E6V (pathogenic in ClinVar). The name E6V is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the initiator methionine.",
  "reference": {
   "root": {
    "kind": "root",
@@ -41,13 +41,13 @@
             {
              "kind": "representation",
              "params": {
-              "type": "ball_and_stick"
+              "type": "spacefill"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "purple"
                }
               }
              ]
@@ -71,8 +71,8 @@
     "label_asym_id": "B",
     "label_seq_id": 6
    },
-   "representation": "ball_and_stick",
-   "color": "orange"
+   "representation": "spacefill",
+   "color": "purple"
   }
  ],
  "twin_of": "clin-legacy-target-hbb-1hho-e7v-api",
@@ -107,10 +107,10 @@
    "scope": "all",
    "context": "none",
    "chain": null,
-   "wording": 1,
+   "wording": 2,
    "look": {
-    "rep": "ball_and_stick",
-    "color": "orange"
+    "rep": "spacefill",
+    "color": "purple"
    },
    "variants": [
     {
@@ -169,6 +169,7 @@
     "name_in_mature_numbering": true,
     "mature_number_equals_author_number": true,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": null,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": true
    },

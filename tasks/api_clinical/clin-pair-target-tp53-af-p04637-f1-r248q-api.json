@@ -6,7 +6,7 @@
  "structures": [
   "af-p04637-f1-model_v6"
  ],
- "prompt": "In the AlphaFold DB model AF-P04637-F1 (model version 6), show the residue replaced by the pathogenic TP53 (Cellular tumor antigen p53, UniProt P04637) variant p.Arg248Gln (ClinVar) as red spacefill spheres.",
+ "prompt": "In the AlphaFold DB model AF-P04637-F1 (model version 6), show the residue replaced by the pathogenic TP53 (Cellular tumor antigen p53, UniProt P04637) variant p.Arg248Gln (ClinVar) as purple ball-and-stick.",
  "reference": [
   {
    "action": "load",
@@ -23,8 +23,8 @@
      "auth_asym_id": "A",
      "auth_seq_id": 248,
      "color": null,
-     "representation": "spacefill",
-     "representationColor": "red"
+     "representation": "ball-and-stick",
+     "representationColor": "purple"
     }
    ]
   }
@@ -45,9 +45,9 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 248,
-      "color": "red",
-      "representation": "spacefill",
-      "representationColor": "red"
+      "color": "purple",
+      "representation": "ball-and-stick",
+      "representationColor": "purple"
      }
     ]
    }
@@ -60,8 +60,8 @@
     "label_asym_id": "A",
     "label_seq_id": 248
    },
-   "representation": "spacefill",
-   "color": "red"
+   "representation": "ball-and-stick",
+   "color": "purple"
   }
  ],
  "twin_of": "clin-pair-target-tp53-af-p04637-f1-r248q-mvs",
@@ -97,8 +97,8 @@
    "chain": null,
    "wording": 0,
    "look": {
-    "rep": "spacefill",
-    "color": "red"
+    "rep": "ball_and_stick",
+    "color": "purple"
    },
    "variants": [
     {
@@ -147,6 +147,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": true
    },

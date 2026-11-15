@@ -6,7 +6,7 @@
  "structures": [
   "af-p68871-f1-model_v6"
  ],
- "prompt": "In the AlphaFold DB model AF-P68871-F1 (model version 6), show the whole structure as a khaki cartoon and the residue replaced by the pathogenic HBB (Hemoglobin subunit beta) variant p.Phe43Ser (ClinVar) as orange spacefill spheres.",
+ "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), draw a white cartoon of the whole structure and show, as cyan ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant p.Phe43Ser (pathogenic in ClinVar).",
  "reference": [
   {
    "action": "load",
@@ -22,12 +22,12 @@
     {
      "auth_asym_id": "A",
      "auth_seq_id": 43,
-     "color": "khaki",
-     "representation": "spacefill",
-     "representationColor": "orange"
+     "color": "white",
+     "representation": "ball-and-stick",
+     "representationColor": "cyan"
     }
    ],
-   "non_selected_color": "khaki"
+   "non_selected_color": "white"
   }
  ],
  "accepted": [
@@ -46,12 +46,12 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 43,
-      "color": "orange",
-      "representation": "spacefill",
-      "representationColor": "orange"
+      "color": "cyan",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ],
   [
@@ -73,12 +73,12 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 43,
-      "color": "khaki",
-      "representation": "spacefill",
-      "representationColor": "orange"
+      "color": "white",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ],
   [
@@ -100,12 +100,12 @@
      {
       "auth_asym_id": "A",
       "auth_seq_id": 43,
-      "color": "orange",
-      "representation": "spacefill",
-      "representationColor": "orange"
+      "color": "cyan",
+      "representation": "ball-and-stick",
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "khaki"
+    "non_selected_color": "white"
    }
   ]
  ],
@@ -116,8 +116,8 @@
     "label_asym_id": "A",
     "label_seq_id": 43
    },
-   "representation": "spacefill",
-   "color": "orange"
+   "representation": "ball-and-stick",
+   "color": "cyan"
   }
  ],
  "twin_of": "clin-pair-context-hbb-af-p68871-f1-f43s-mvs",
@@ -151,11 +151,11 @@
    "scope": "all",
    "context": "structure",
    "chain": null,
-   "wording": 0,
+   "wording": 2,
    "look": {
-    "rep": "spacefill",
-    "color": "orange",
-    "backdrop": "khaki"
+    "rep": "ball_and_stick",
+    "color": "cyan",
+    "backdrop": "white"
    },
    "variants": [
     {
@@ -204,6 +204,7 @@
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
     "number_in_name_as_author_number_is_right": true,
     "number_in_name_as_label_number_is_right": true
    },
