@@ -2,6 +2,8 @@
 
 Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin has the prompt, structures, split, style, tier, family and target atoms of its MVS task, and a call list whose replayed final state is the MVS reference's drawn state (same atoms, representations and colours; nothing else drawn). `twin_of` links the two both ways.
 
+Run this script last, after every MVS generator: it writes `twin_of` into the MVS task files, so re-running an MVS generator afterwards removes those links (run this script again), and an MVS generator's own byte-for-byte rebuild check has to leave `twin_of` out of its comparison.
+
 - MVS tasks read: 70
 - already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 0
 - left without an API counterpart by a generator that writes both tracks: 0

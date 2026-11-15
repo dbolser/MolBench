@@ -61,6 +61,12 @@ a twin from its own generator (clinical, follow-up, accept-set), or was left wit
 one by a generator that writes both tracks; a no-change follow-up; and a task in the old
 format, which has no ``twin_of`` field (for those the report says whether a twin
 could be made, and none is written).
+
+Order
+-----
+Run it after every MVS generator. Because ``twin_of`` is written into the MVS files, an
+MVS generator re-run afterwards drops the links (run this script again), and a
+generator's byte-for-byte rebuild check must ignore ``twin_of``.
 """
 
 from __future__ import annotations
@@ -874,6 +880,9 @@ def readme(twins: list[dict], rows: list[dict]) -> str:
              "prompt, structures, split, style, tier, family and target atoms of its MVS task, and a call "
              "list whose replayed final state is the MVS reference's drawn state (same atoms, "
              "representations and colours; nothing else drawn). `twin_of` links the two both ways.", "",
+             "Run this script last, after every MVS generator: it writes `twin_of` into the MVS task files, "
+             "so re-running an MVS generator afterwards removes those links (run this script again), and an "
+             "MVS generator's own byte-for-byte rebuild check has to leave `twin_of` out of its comparison.", "",
              f"- MVS tasks read: {c['read']}",
              f"- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): "
              f"{c['paired_elsewhere']}",
