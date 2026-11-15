@@ -1,0 +1,11 @@
+# command: --select-seeded 9
+# one request per line (its first task id); a twin is paraphrased with it
+acc-chain-colours-2ptc-api
+acc-ligand-colours-2cpp-api
+acc-ligand-copy-8c86-api
+acc-ligand-which-2cpp-api
+acc-metal-copy-9fb2-mvs
+acc-metal-which-7a4m-mvs
+acc-representation-open-3ert-mvs
+acc-residue-colour-1lmb-api
+acc-residue-copy-1trn-mvs

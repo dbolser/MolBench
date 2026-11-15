@@ -1,0 +1,308 @@
+{
+ "id": "acc-residue-colour-3ave-mvs",
+ "track": "mvs",
+ "tier": "accept_set",
+ "family": "acc-residue-colour",
+ "structures": [
+  "3ave"
+ ],
+ "prompt": "Show 3AVE with the protein as a cartoon. Colour Leu358 orange.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/3ave.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "orange",
+                "selector": {
+                 "auth_asym_id": "A",
+                 "auth_seq_id": 358
+                }
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/3ave.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "orange",
+                 "selector": {
+                  "auth_asym_id": "B",
+                  "auth_seq_id": 358
+                 }
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/3ave.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "orange",
+                 "selector": [
+                  {
+                   "auth_asym_id": "A",
+                   "auth_seq_id": 358
+                  },
+                  {
+                   "auth_asym_id": "B",
+                   "auth_seq_id": 358
+                  }
+                 ]
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 358
+   },
+   "representation": "cartoon",
+   "color": "orange"
+  }
+ ],
+ "twin_of": "acc-residue-colour-3ave-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/3ave.json",
+   "molbench/atom_tables/3ave.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 3 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 8 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-residue-colour",
+  "wording": 1,
+  "slots": {
+   "ID": "3AVE",
+   "id": "3ave",
+   "poly": "protein",
+   "thing": "Leu358",
+   "colour": "orange"
+  },
+  "open": "which chain's copy of the named residue (or all)",
+  "rule": "The request asks to colour a residue, named by type and author number but with no chain; the protein is present as several identical chains. Accepted: the residue coloured in any one chain, or in every chain.",
+  "candidates": [
+   "LEU A:358",
+   "LEU B:358"
+  ],
+  "accepted_states": [
+   "LEU A:358",
+   "LEU B:358",
+   "both copies"
+  ],
+  "not_accepted": [
+   "some but not all chains (when there are more than two): no reading of the request",
+   "a residue with that number in another protein of the entry, or the residue with that label (sequence) number where it differs: a different residue",
+   "an added representation (sticks) for the residue: only a colour is requested"
+  ],
+  "difficulty": {
+   "needs_numbering_offset": true,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "number_also_in_another_chain": false,
+   "n_candidates": 2,
+   "n_readings": 3,
+   "n_accepted_states": 3
+  },
+  "residues": [
+   {
+    "auth_asym_id": "A",
+    "auth_seq_id": 358,
+    "label_asym_id": "A",
+    "label_seq_id": 134,
+    "comp_id": "LEU"
+   },
+   {
+    "auth_asym_id": "B",
+    "auth_seq_id": 358,
+    "label_asym_id": "B",
+    "label_seq_id": 134,
+    "comp_id": "LEU"
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "auth_asym_id": "B",
+     "auth_seq_id": 358
+    },
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 358
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 358
+     }
+    ],
+    "representation": "cartoon",
+    "color": "orange"
+   }
+  ]
+ ],
+ "notes": "Left open: which chain's copy of the named residue (or all). Reference = accepted state 1 of 3 (LEU A:358); the others are in 'accepted', in the order of provenance.accepted_states."
+}

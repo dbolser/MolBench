@@ -1,0 +1,282 @@
+{
+ "id": "acc-ligand-colours-2cpp-api",
+ "track": "api",
+ "tier": "accept_set",
+ "family": "acc-ligand-colours",
+ "structures": [
+  "2cpp"
+ ],
+ "prompt": "Load 2CPP. Show the protein as a cartoon and the two ligands as ball-and-stick, one yellow and the other purple.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "2cpp"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "C",
+     "label_comp_id": "CAM",
+     "color": "yellow"
+    },
+    {
+     "struct_asym_id": "B",
+     "label_comp_id": "HEM",
+     "color": "purple"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "2cpp"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "C",
+      "label_comp_id": "CAM",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     },
+     {
+      "struct_asym_id": "B",
+      "label_comp_id": "HEM",
+      "representation": "ball-and-stick",
+      "representationColor": "purple"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2cpp"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "C",
+      "label_comp_id": "CAM",
+      "color": "purple"
+     },
+     {
+      "struct_asym_id": "B",
+      "label_comp_id": "HEM",
+      "color": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2cpp"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "C",
+      "label_comp_id": "CAM",
+      "representation": "ball-and-stick",
+      "representationColor": "purple"
+     },
+     {
+      "struct_asym_id": "B",
+      "label_comp_id": "HEM",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "C",
+    "auth_seq_id": 422
+   },
+   "representation": "ball-and-stick",
+   "color": "yellow"
+  },
+  {
+   "selector": {
+    "label_asym_id": "B",
+    "auth_seq_id": 417
+   },
+   "representation": "ball-and-stick",
+   "color": "purple"
+  }
+ ],
+ "twin_of": "acc-ligand-colours-2cpp-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/2cpp.json",
+   "molbench/atom_tables/2cpp.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 4 accepted states: the atoms it draws, read back from pdbe_state.replay, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 54 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-ligand-colours",
+  "wording": 0,
+  "slots": {
+   "ID": "2CPP",
+   "id": "2cpp",
+   "poly": "protein",
+   "colour": "yellow",
+   "colour2": "purple"
+  },
+  "open": "which ligand gets which colour",
+  "rule": "The entry has exactly two different ligands, one copy each; the request gives two colours, \"one ... and the other ...\". Accepted: both assignments. On the API track each reading is accepted in every call form that ends in a state of its own: (default) one colour call on a bare load, which leaves everything else as the viewer draws it; (style) the cartoon style set first, so that only the polymer is drawn and a ligand asked for as ball-and-stick is an added representation, which is the state the MVS twin draws; (author, chain colours only) each chain named by its author id on a bare load, which also paints the ligands, ions and water deposited under that author chain. The request says nothing about what it does not name, so none of these is wrong.",
+  "candidates": [
+   "CAM",
+   "HEM"
+  ],
+  "accepted_states": [
+   "CAM yellow, HEM purple",
+   "CAM yellow, HEM purple; the cartoon style set first",
+   "CAM purple, HEM yellow",
+   "CAM purple, HEM yellow; the cartoon style set first"
+  ],
+  "not_accepted": [
+   "both ligands the same colour, or only one ligand shown: the request asks for both, in different colours",
+   "ions, water or bonded protein residues shown as ligands: not ligands of the entry",
+   "another representation: it is stated",
+   "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
+   "another global style, or hidden components: not requested"
+  ],
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 2,
+   "n_readings": 2,
+   "n_accepted_states": 4
+  },
+  "call_forms": [
+   "default",
+   "style"
+  ],
+  "structure": "2cpp",
+  "source": "RCSB mmCIF 2CPP -> molbench/atom_tables/2cpp.json.gz (scripts/build_atom_tables.py); data/panel/facts",
+  "derived": "same entries as above; two colours by seed; both assignments. Reference = the first accepted state (CAM yellow, HEM purple): a bare load, which already draws the polymer as a cartoon and ligands as ball-and-stick, plus one colour call. The alternatives are the other readings, each in every call form that ends in a state of its own (provenance.call_forms).",
+  "checked_by": "scripts/check_api_refs.py",
+  "accepted_differ": "accept-set tier: every alternative is another final state, one of the readings of the request that provenance.rule accepts",
+  "targets": [
+   {
+    "what": "CAM A:422",
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 422,
+     "auth_comp_id": "CAM"
+    },
+    "n_atoms": 11
+   },
+   {
+    "what": "HEM A:417",
+    "action": 1,
+    "param": 1,
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 417,
+     "auth_comp_id": "HEM"
+    },
+    "n_atoms": 43
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "C",
+     "auth_seq_id": 422
+    },
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B",
+     "auth_seq_id": 417
+    },
+    "representation": "ball-and-stick",
+    "color": "purple"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "C",
+     "auth_seq_id": 422
+    },
+    "representation": "ball-and-stick",
+    "color": "purple"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B",
+     "auth_seq_id": 417
+    },
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   }
+  ],
+  [
+   {
+    "selector": {
+     "label_asym_id": "C",
+     "auth_seq_id": 422
+    },
+    "representation": "ball-and-stick",
+    "color": "purple"
+   },
+   {
+    "selector": {
+     "label_asym_id": "B",
+     "auth_seq_id": 417
+    },
+    "representation": "ball-and-stick",
+    "color": "yellow"
+   }
+  ]
+ ],
+ "notes": "Left open: which ligand gets which colour. Reference = accepted state 1 of 4 (CAM yellow, HEM purple); the others are in 'accepted', in the order of provenance.accepted_states."
+}

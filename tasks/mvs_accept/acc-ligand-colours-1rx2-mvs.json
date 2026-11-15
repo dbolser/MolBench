@@ -1,0 +1,303 @@
+{
+ "id": "acc-ligand-colours-1rx2-mvs",
+ "track": "mvs",
+ "tier": "accept_set",
+ "family": "acc-ligand-colours",
+ "structures": [
+  "1rx2"
+ ],
+ "prompt": "Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1rx2.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             }
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_asym_id": "C",
+             "auth_seq_id": 161
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_asym_id": "E",
+             "auth_seq_id": 164
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "blue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1rx2.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_asym_id": "C",
+              "auth_seq_id": 161
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "blue"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_asym_id": "E",
+              "auth_seq_id": 164
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "C",
+    "auth_seq_id": 161
+   },
+   "representation": "ball_and_stick",
+   "color": "cyan"
+  },
+  {
+   "selector": {
+    "label_asym_id": "E",
+    "auth_seq_id": 164
+   },
+   "representation": "ball_and_stick",
+   "color": "blue"
+  }
+ ],
+ "twin_of": "acc-ligand-colours-1rx2-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_accept_set_tasks.py",
+  "inputs": [
+   "data/panel/facts/1rx2.json",
+   "molbench/atom_tables/1rx2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "each of the 2 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+   "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
+   "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
+   "target selects 80 atoms on the frozen atom table",
+   "no accepted state equals another (pairwise, by the grader)",
+   "twin selects the same target atoms"
+  ],
+  "seed": "molbench-accept-set-v1",
+  "template": "acc-ligand-colours",
+  "wording": 2,
+  "slots": {
+   "ID": "1RX2",
+   "id": "1rx2",
+   "poly": "protein",
+   "colour": "cyan",
+   "colour2": "blue"
+  },
+  "open": "which ligand gets which colour",
+  "rule": "The entry has exactly two different ligands, one copy each; the request gives two colours, \"one ... and the other ...\". Accepted: both assignments.",
+  "candidates": [
+   "FOL",
+   "NAP"
+  ],
+  "accepted_states": [
+   "FOL cyan, NAP blue",
+   "FOL blue, NAP cyan"
+  ],
+  "not_accepted": [
+   "both ligands the same colour, or only one ligand shown: the request asks for both, in different colours",
+   "ions, water or bonded protein residues shown as ligands: not ligands of the entry",
+   "another representation: it is stated"
+  ],
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": true,
+   "needs_uniprot_mapping": false,
+   "n_candidates": 2,
+   "n_readings": 2,
+   "n_accepted_states": 2
+  }
+ },
+ "skills": [
+  "load",
+  "representation",
+  "selection",
+  "color"
+ ],
+ "accepted_targets": [
+  [
+   {
+    "selector": {
+     "label_asym_id": "C",
+     "auth_seq_id": 161
+    },
+    "representation": "ball_and_stick",
+    "color": "blue"
+   },
+   {
+    "selector": {
+     "label_asym_id": "E",
+     "auth_seq_id": 164
+    },
+    "representation": "ball_and_stick",
+    "color": "cyan"
+   }
+  ]
+ ],
+ "notes": "Left open: which ligand gets which colour. Reference = accepted state 1 of 2 (FOL cyan, NAP blue); the others are in 'accepted', in the order of provenance.accepted_states."
+}
