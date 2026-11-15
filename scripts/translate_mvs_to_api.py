@@ -975,6 +975,9 @@ def main(argv: list[str] | None = None) -> int:
     if not a.all and not a.ids:
         ap.error("give task ids, or --all")
     twins, rows, corpus = plan(None if a.all else a.ids)
+    unknown = sorted(set(a.ids) - {r["id"] for r in rows}) if not a.all else []
+    if unknown:
+        ap.error(f"not an MVS task id: {', '.join(unknown)}")
     for r in rows:
         if a.report or (not r["twin"] and r["reason"] != PAIRED):
             print(f"{r['id']:44} {r['twin'] or '-':44} {r['reason'] or 'twin'}"

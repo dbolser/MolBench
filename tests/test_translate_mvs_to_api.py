@@ -270,3 +270,9 @@ def test_the_corpus_plan_leaves_other_generators_pairs_alone(monkeypatch):
     mvs_file = REPO / "tests" / "fixtures" / "tasks" / "fx-ligand-1cbs-mvs.json"
     assert json.loads(files[tr.OUT / "fx-ligand-1cbs-api.json"])["twin_of"] == "fx-ligand-1cbs-mvs"
     assert mvs_file not in files          # its twin_of already names fx-ligand-1cbs-api: no rewrite
+
+
+def test_an_unknown_task_id_is_an_error():
+    with pytest.raises(SystemExit) as e:
+        tr.main(["no-such-task", "--report"])
+    assert e.value.code == 2
