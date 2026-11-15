@@ -1,0 +1,833 @@
+{
+ "scene_task": {
+  "id": "clin-short-target-lyz-2nwd-f75i-mvs",
+  "track": "mvs",
+  "tier": "clinical",
+  "family": "clin-short-target",
+  "structures": [
+   "2nwd"
+  ],
+  "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the residue it replaces as green ball-and-stick.",
+  "reference": {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2nwd.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "auth_asym_id": "X",
+              "auth_seq_id": 57
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "accepted": [],
+  "context": null,
+  "target": [
+   {
+    "selector": {
+     "label_asym_id": "A",
+     "label_seq_id": 57
+    },
+    "representation": "ball_and_stick",
+    "color": "green"
+   }
+  ],
+  "twin_of": "clin-short-target-lyz-2nwd-f75i-api",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": {
+   "rule": "clinical-v1",
+   "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 Å\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  F75I: UniProt position 75 (Phe in UniProt) -> in 2NWD: auth X 57 PHE (label A 57)"
+  },
+  "provenance": {
+   "script": "scripts/generate_clinical_tasks.py",
+   "inputs": [
+    "data/panel/variants/P61626.json",
+    "data/panel/facts/2nwd.json",
+    "molbench/sifts_tables/2nwd.json.gz",
+    "molbench/atom_tables/2nwd.json.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "target (1 residue(s), 20 atoms, residue name(s) PHE = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+    "the twin on the other track selects the same target atoms",
+    "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+   ],
+   "clinical": {
+    "gene": "LYZ",
+    "accession": "P61626",
+    "protein": "Lysozyme C",
+    "naming": "short",
+    "scope": "all",
+    "context": "none",
+    "chain": null,
+    "wording": 1,
+    "look": {
+     "rep": "ball_and_stick",
+     "color": "green"
+    },
+    "variants": [
+     {
+      "name_in_prompt": "F75I",
+      "variant": "F75I",
+      "hgvs": "p.Phe75Ile",
+      "uniprot_position": 75,
+      "mature_numbering": null,
+      "clinvar_vcv": [
+       "VCV000014377"
+      ],
+      "clinvar_classification": [
+       "Pathogenic"
+      ],
+      "clinvar_review_status": [
+       "no assertion criteria provided"
+      ],
+      "residues": [
+       {
+        "auth_asym_id": "X",
+        "auth_seq_id": 57,
+        "pdbx_PDB_ins_code": "",
+        "label_asym_id": "A",
+        "label_seq_id": 57,
+        "comp_id": "PHE"
+       }
+      ]
+     }
+    ],
+    "secondary_structure": null,
+    "difficulty": {
+     "needs_uniprot_mapping": true,
+     "needs_numbering_offset": true,
+     "author_minus_uniprot": [
+      -18
+     ],
+     "structure_has_offset": true,
+     "author_chain_differs_from_label_chain": true,
+     "author_number_differs_from_label_number": false,
+     "insertion_code": false,
+     "needs_ligand_identity": false,
+     "accession_in_prompt": false,
+     "protein_copies_in_structure": 1,
+     "target_residues": 1,
+     "alphafold_model": false,
+     "name_in_mature_numbering": false,
+     "mature_number_equals_author_number": null,
+     "number_in_name_as_author_number_is_same_amino_acid": false,
+     "name_read_as_mature_number_is_same_amino_acid": false,
+     "number_in_name_as_author_number_is_right": false,
+     "number_in_name_as_label_number_is_right": false
+    },
+    "pair": null
+   }
+  },
+  "skills": [
+   "load",
+   "selection",
+   "clinical-variant",
+   "representation",
+   "color"
+  ]
+ },
+ "call_list_task": {
+  "id": "clin-short-target-lyz-2nwd-f75i-api",
+  "track": "api",
+  "tier": "clinical",
+  "family": "clin-short-target",
+  "structures": [
+   "2nwd"
+  ],
+  "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the residue it replaces as green ball-and-stick.",
+  "reference": [
+   {
+    "action": "load",
+    "molecule_id": "2nwd"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P61626",
+      "uniprot_residue_number": 75,
+      "color": null,
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ]
+   }
+  ],
+  "accepted": [
+   [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "uniprot_accession": "P61626",
+       "uniprot_residue_number": 75,
+       "color": "green",
+       "representation": "ball-and-stick",
+       "representationColor": "green"
+      }
+     ]
+    }
+   ]
+  ],
+  "context": null,
+  "target": [
+   {
+    "selector": {
+     "label_asym_id": "A",
+     "label_seq_id": 57
+    },
+    "representation": "ball-and-stick",
+    "color": "green"
+   }
+  ],
+  "twin_of": "clin-short-target-lyz-2nwd-f75i-mvs",
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": {
+   "rule": "clinical-v1",
+   "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 Å\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  F75I: UniProt position 75 (Phe in UniProt) -> in 2NWD: auth X 57 PHE (label A 57)"
+  },
+  "provenance": {
+   "script": "scripts/generate_clinical_tasks.py",
+   "inputs": [
+    "data/panel/variants/P61626.json",
+    "data/panel/facts/2nwd.json",
+    "molbench/sifts_tables/2nwd.json.gz",
+    "molbench/atom_tables/2nwd.json.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "target (1 residue(s), 20 atoms, residue name(s) PHE = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+    "the twin on the other track selects the same target atoms",
+    "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+   ],
+   "clinical": {
+    "gene": "LYZ",
+    "accession": "P61626",
+    "protein": "Lysozyme C",
+    "naming": "short",
+    "scope": "all",
+    "context": "none",
+    "chain": null,
+    "wording": 1,
+    "look": {
+     "rep": "ball_and_stick",
+     "color": "green"
+    },
+    "variants": [
+     {
+      "name_in_prompt": "F75I",
+      "variant": "F75I",
+      "hgvs": "p.Phe75Ile",
+      "uniprot_position": 75,
+      "mature_numbering": null,
+      "clinvar_vcv": [
+       "VCV000014377"
+      ],
+      "clinvar_classification": [
+       "Pathogenic"
+      ],
+      "clinvar_review_status": [
+       "no assertion criteria provided"
+      ],
+      "residues": [
+       {
+        "auth_asym_id": "X",
+        "auth_seq_id": 57,
+        "pdbx_PDB_ins_code": "",
+        "label_asym_id": "A",
+        "label_seq_id": 57,
+        "comp_id": "PHE"
+       }
+      ]
+     }
+    ],
+    "secondary_structure": null,
+    "difficulty": {
+     "needs_uniprot_mapping": true,
+     "needs_numbering_offset": true,
+     "author_minus_uniprot": [
+      -18
+     ],
+     "structure_has_offset": true,
+     "author_chain_differs_from_label_chain": true,
+     "author_number_differs_from_label_number": false,
+     "insertion_code": false,
+     "needs_ligand_identity": false,
+     "accession_in_prompt": false,
+     "protein_copies_in_structure": 1,
+     "target_residues": 1,
+     "alphafold_model": false,
+     "name_in_mature_numbering": false,
+     "mature_number_equals_author_number": null,
+     "number_in_name_as_author_number_is_same_amino_acid": false,
+     "name_read_as_mature_number_is_same_amino_acid": false,
+     "number_in_name_as_author_number_is_right": false,
+     "number_in_name_as_label_number_is_right": false
+    },
+    "pair": null,
+    "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+   },
+   "structure": "2nwd",
+   "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+   "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+   "targets": [
+    {
+     "action": 1,
+     "param": 0,
+     "atoms": [
+      {
+       "label_asym_id": "A",
+       "label_seq_id": 57
+      }
+     ],
+     "what": "p.Phe75Ile residue(s)",
+     "n_atoms": 20
+    }
+   ],
+   "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+  },
+  "skills": [
+   "load",
+   "selection",
+   "clinical-variant",
+   "representation",
+   "color"
+  ]
+ },
+ "graded_answers": {
+  "mvs": {
+   "right": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 57
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "green"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "label": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "label_asym_id": "A",
+               "label_seq_id": 57
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "green"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "face": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 75
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "green"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "context": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": "polymer"
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "cartoon"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "gray"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 57
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "green"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "colour": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 57
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "red"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "face_context": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": "polymer"
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "cartoon"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "gray"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 75
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "green"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "api": {
+   "right": [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "uniprot_accession": "P61626",
+       "uniprot_residue_number": 75,
+       "color": null,
+       "representation": "ball-and-stick",
+       "representationColor": "green"
+      }
+     ]
+    }
+   ],
+   "author": [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "auth_asym_id": "X",
+       "auth_seq_id": 57,
+       "color": null,
+       "representation": "ball-and-stick",
+       "representationColor": "green"
+      }
+     ]
+    }
+   ],
+   "face": [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "auth_asym_id": "X",
+       "auth_seq_id": 75,
+       "color": null,
+       "representation": "ball-and-stick",
+       "representationColor": "green"
+      }
+     ]
+    }
+   ],
+   "colour": [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "uniprot_accession": "P61626",
+       "uniprot_residue_number": 75,
+       "color": null,
+       "representation": "ball-and-stick",
+       "representationColor": "red"
+      }
+     ]
+    }
+   ],
+   "default_colour": [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "uniprot_accession": "P61626",
+       "uniprot_residue_number": 75,
+       "representation": "ball-and-stick",
+       "representationColor": "green"
+      }
+     ]
+    }
+   ],
+   "bare": [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    }
+   ]
+  }
+ }
+}
