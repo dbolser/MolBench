@@ -12,21 +12,22 @@ table of the entry.
 | `tr-chain-colour` | 3 | 1 | 4 | 6% |
 | `tr-chain-only` | 3 | 1 | 4 | 6% |
 | `tr-chains-named` | 3 | 1 | 4 | 6% |
-| `tr-colour-by-chain` | 4 | 1 | 5 | 8% |
+| `tr-colour-by-chain` | 4 | 1 | 5 | 7% |
 | `tr-glycans` | 3 | 1 | 4 | 6% |
 | `tr-het-code` | 3 | 1 | 4 | 6% |
 | `tr-ions` | 3 | 1 | 4 | 6% |
 | `tr-ligands` | 3 | 1 | 4 | 6% |
+| `tr-range-labels` | 3 | 1 | 4 | 6% |
 | `tr-range-rows` | 3 | 1 | 4 | 6% |
-| `tr-range-sticks` | 4 | 1 | 5 | 8% |
+| `tr-range-sticks` | 4 | 1 | 5 | 7% |
 | `tr-rep-word` | 3 | 1 | 4 | 6% |
 | `tr-residue-focus` | 3 | 1 | 4 | 6% |
-| `tr-strands` | 2 | 1 | 3 | 5% |
+| `tr-strands` | 2 | 1 | 3 | 4% |
 | `tr-surface` | 3 | 1 | 4 | 6% |
-| `tr-water` | 2 | 1 | 3 | 5% |
-| **all** | 48 | 16 | 64 | 100% |
+| `tr-water` | 2 | 1 | 3 | 4% |
+| **all** | 51 | 17 | 68 | 100% |
 
-Structures: 63 (15 held back: 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
+Structures: 66 (15 held back: 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
 
 ## How each reference is derived
 
@@ -41,6 +42,7 @@ Structures: 63 (15 held back: 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3K
 | `tr-het-code` | Every residue with the component code named in the prompt (facts). |
 | `tr-ions` | Mol*'s `ion` selection, only where it equals the entry's single-atom ions (this is what excludes 1HHO, whose only "ion" is a phosphate). |
 | `tr-ligands` | Mol*'s `ligand` selection, only where it equals the entry's non-polymer, non-water, non-sugar atoms. |
+| `tr-range-labels` | Two such runs, each recoloured on one grey cartoon and carrying a text label; the label text is in the prompt (neutral names from a fixed list). |
 | `tr-range-rows` | Two or three such runs, each recoloured on one grey cartoon. |
 | `tr-range-sticks` | A run of 5 to 12 consecutive author-numbered residues from the atom table (no insertion code; polymer atoms only). |
 | `tr-rep-word` | `polymer` in the representation the prompt's word means (wireframe = `line`, space-filling / CPK = `spacefill`, backbone trace = `backbone`). |

@@ -291,6 +291,60 @@ def t_range_rows():
     return out
 
 
+LABEL_TEXTS = ["region 1", "region 2", "region 3", "site A", "site B", "segment 1",
+               "segment 2", "patch A", "patch B"]
+
+
+def t_range_labels():
+    """The most common request of the chat site's users: rows of chain, residue range,
+    colour and a text label (LEDGER U6 and U17). The label texts are neutral names from
+    a fixed list, so the prompt claims nothing about the structure."""
+    out = []
+    for e in C.pdb_entries():
+        entry = e["id"]
+        chains = [c for c in polymer_chains(entry, "protein") if c["n_observed"] >= 40]
+        if not chains:
+            continue
+        r = C.rng("range-labels", entry)
+        cols = C.colours(2, "range-labels", entry)
+        texts = r.sample(LABEL_TEXTS, 2)
+        rows, taken = [], []
+        for i in range(2):
+            chain = r.choice(chains)
+            ranges = [(a, b) for a, b in plain_ranges(entry, chain, r.choice([5, 6, 8, 10, 12]))
+                      if not any(ch is chain and a <= y + 3 and x - 3 <= b for ch, x, y in taken)]
+            if not ranges:
+                break
+            a, b = r.choice(ranges)
+            taken.append((chain, a, b))
+            rows.append((chain, a, b, cols[i], texts[i]))
+        if len(rows) != 2:
+            continue
+        rows.sort(key=lambda x: (x[0]["auth_asym_id"], x[1]))
+        sels = [range_selector(ch, a, b) for ch, a, b, _, _ in rows]
+        spec = "; ".join(f"chain {ch['auth_asym_id']}, residues {a}-{b}, {C.say_colour(col)}, "
+                         f"label \"{text}\"" for ch, a, b, col, text in rows)
+        long = " and ".join(f"colour residues {a}-{b} of chain {ch['auth_asym_id']} "
+                            f"{C.say_colour(col)} with the text label \"{text}\""
+                            for ch, a, b, col, text in rows)
+        out.append(cand(
+            entry,
+            ["{ID}, grey cartoon. {spec}.",
+             "Load {ID} as a grey cartoon, then {long}.",
+             "Show {ID} as a cartoon in grey and mark these segments, each recoloured and "
+             "with its own text label: {spec}."],
+            [C.comp("polymer", C.rep("cartoon", C.colour(GREY),
+                                     *[C.colour(row[3], s) for row, s in zip(rows, sels)])),
+             *[C.comp(s, {"kind": "label", "params": {"text": row[4]}})
+               for row, s in zip(rows, sels)]],
+            [C.part(s, "cartoon", row[3]) for row, s in zip(rows, sels)],
+            "one grey cartoon of the polymer, recoloured on each listed range (author "
+            "chain and numbering from the atom table; ranges do not overlap), and one "
+            "text label on each range with the text the prompt gives",
+            numbering=sels, spec=spec, long=long))
+    return out
+
+
 def t_ligands():
     out = []
     for e in C.pdb_entries():
@@ -582,6 +636,7 @@ TEMPLATES = {
     "tr-surface": (t_surface, 4),
     "tr-rep-word": (t_rep_word, 4),
     "tr-cartoon": (t_cartoon, 4),
+    "tr-range-labels": (t_range_labels, 4),      # added last: earlier choices are unchanged
 }
 
 DERIVED = {
@@ -598,6 +653,9 @@ DERIVED = {
     "tr-range-sticks": "A run of 5 to 12 consecutive author-numbered residues from the atom "
                        "table (no insertion code; polymer atoms only).",
     "tr-range-rows": "Two or three such runs, each recoloured on one grey cartoon.",
+    "tr-range-labels": "Two such runs, each recoloured on one grey cartoon and carrying a "
+                       "text label; the label text is in the prompt (neutral names from a "
+                       "fixed list).",
     "tr-residue-focus": "One author-numbered residue from the atom table, as ball-and-stick, "
                         "with a camera focus on it.",
     "tr-ligands": "Mol*'s `ligand` selection, only where it equals the entry's non-polymer, "
