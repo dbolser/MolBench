@@ -1,0 +1,183 @@
+{
+ "id": "fu-swap-colours-2c9v-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-swap-colours",
+ "structures": [
+  "2c9v"
+ ],
+ "prompt": "Exchange the two chain colours.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "2c9v"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "color": "khaki"
+    },
+    {
+     "auth_asym_id": "F",
+     "color": "steelblue"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "2c9v"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "color": "steelblue"
+     },
+     {
+      "auth_asym_id": "F",
+      "color": "khaki"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A"
+   },
+   "representation": null,
+   "color": "khaki"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "F"
+   },
+   "representation": null,
+   "color": "steelblue"
+  }
+ ],
+ "twin_of": "fu-swap-colours-2c9v-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/2c9v.json",
+   "molbench/atom_tables/2c9v.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it is not the requested final state",
+   "target selects 3043 atoms on the frozen atom table",
+   "start state scores 0.6667 on the target (below 1)",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "twin selects the same target atoms",
+   "referent is unambiguous in the start state: \"the two chains\": the structure has exactly two polymer chains, and the start state colours each (steelblue, khaki)"
+  ],
+  "seed": "20261113|fu-swap-colours|2|2c9v",
+  "edit": "recolour by reference to the scene",
+  "noop_kind": null,
+  "referent": "\"the two chains\": the structure has exactly two polymer chains, and the start state colours each (steelblue, khaki)",
+  "preserved": null,
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": true,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": true
+  },
+  "structure": "2c9v",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 2,
+    "param": 0,
+    "what": "author chain A (label chains A, C, D, E, F, G, N)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "D"
+     },
+     {
+      "label_asym_id": "E"
+     },
+     {
+      "label_asym_id": "F"
+     },
+     {
+      "label_asym_id": "G"
+     },
+     {
+      "label_asym_id": "N"
+     }
+    ],
+    "n_atoms": 1485
+   },
+   {
+    "action": 2,
+    "param": 1,
+    "what": "author chain F (label chains B, H, I, J, K, L, M, O)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "H"
+     },
+     {
+      "label_asym_id": "I"
+     },
+     {
+      "label_asym_id": "J"
+     },
+     {
+      "label_asym_id": "K"
+     },
+     {
+      "label_asym_id": "L"
+     },
+     {
+      "label_asym_id": "M"
+     },
+     {
+      "label_asym_id": "O"
+     }
+    ],
+    "n_atoms": 1558
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "color",
+  "referent"
+ ]
+}

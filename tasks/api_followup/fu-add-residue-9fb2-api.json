@@ -1,0 +1,180 @@
+{
+ "id": "fu-add-residue-9fb2-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-add-residue",
+ "structures": [
+  "9fb2"
+ ],
+ "prompt": "Show the side chain and backbone of Leu206 in chain A as cyan ball-and-stick, on top of the cartoon, which stays as it is.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "9fb2"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "plum"
+    },
+    {
+     "label_comp_id": "A1IBO",
+     "color": "steelblue"
+    }
+   ]
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 206,
+     "color": null,
+     "representation": "ball-and-stick",
+     "representationColor": "cyan"
+    }
+   ],
+   "keep_colors": true,
+   "keep_representations": true
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "9fb2"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "plum"
+     },
+     {
+      "label_comp_id": "A1IBO",
+      "color": "steelblue"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 206
+   },
+   "representation": "ball-and-stick",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "fu-add-residue-9fb2-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/9fb2.json",
+   "molbench/atom_tables/9fb2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it is not the requested final state",
+   "target selects 8 atoms on the frozen atom table",
+   "start state scores 0.0 on the target (below 1)",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "4 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 4 of them lose a preserved part",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-add-residue|1|9fb2",
+  "edit": "add a component (a residue), keeping the rest",
+  "noop_kind": null,
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A",
+      "end_label_seq_id": 205
+     },
+     {
+      "label_asym_id": "A",
+      "beg_label_seq_id": 207
+     }
+    ],
+    "representation": null,
+    "color": "plum"
+   },
+   {
+    "selector": {
+     "label_comp_id": "A1IBO"
+    },
+    "representation": null,
+    "color": "steelblue"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "9fb2",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 4016
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of A1IBO",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 612,
+      "auth_comp_id": "A1IBO"
+     }
+    ],
+    "n_atoms": 46
+   },
+   {
+    "action": 2,
+    "param": 0,
+    "what": "Leu206 of chain A",
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 206,
+     "auth_comp_id": "LEU"
+    },
+    "n_atoms": 8
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

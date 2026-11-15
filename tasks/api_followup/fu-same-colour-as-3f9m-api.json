@@ -1,0 +1,140 @@
+{
+ "id": "fu-same-colour-as-3f9m-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-same-colour-as",
+ "structures": [
+  "3f9m"
+ ],
+ "prompt": "Make the ligand MRK the same colour as the protein.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "3f9m"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "khaki"
+    },
+    {
+     "label_comp_id": "MRK",
+     "color": "khaki"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "3f9m"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "khaki"
+     },
+     {
+      "label_comp_id": "MRK",
+      "color": "orange"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "MRK"
+   },
+   "representation": null,
+   "color": "khaki"
+  }
+ ],
+ "twin_of": "fu-same-colour-as-3f9m-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/3f9m.json",
+   "molbench/atom_tables/3f9m.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it is not the requested final state",
+   "target selects 23 atoms on the frozen atom table",
+   "start state scores 0.5 on the target (below 1)",
+   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms",
+   "referent is unambiguous in the start state: \"the same colour as the protein\": the start state gives the whole protein exactly one colour (khaki)"
+  ],
+  "seed": "20261113|fu-same-colour-as|1|3f9m",
+  "edit": "recolour by reference to the scene",
+  "noop_kind": null,
+  "referent": "\"the same colour as the protein\": the start state gives the whole protein exactly one colour (khaki)",
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     }
+    ],
+    "representation": null,
+    "color": "khaki"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": true
+  },
+  "structure": "3f9m",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 3590
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of MRK",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 501,
+      "auth_comp_id": "MRK"
+     }
+    ],
+    "n_atoms": 23
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "color",
+  "referent"
+ ]
+}

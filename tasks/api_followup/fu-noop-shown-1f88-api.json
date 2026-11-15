@@ -1,0 +1,162 @@
+{
+ "id": "fu-noop-shown-1f88-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-noop-shown",
+ "structures": [
+  "1f88"
+ ],
+ "prompt": "Cartoon for the protein, please.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1f88"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "magenta"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "magenta"
+    },
+    {
+     "label_comp_id": "RET",
+     "color": "red"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "1f88"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "magenta"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "magenta"
+     },
+     {
+      "label_comp_id": "RET",
+      "color": "red"
+     }
+    ]
+   }
+  ],
+  "noop": true
+ },
+ "target": null,
+ "twin_of": "fu-noop-shown-1f88-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1f88.json",
+   "molbench/atom_tables/1f88.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
+   "start state grades as itself; it already is the requested final state (no change needed)",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-noop-shown|1|1f88",
+  "edit": "no change: already true",
+  "noop_kind": "already true",
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "B"
+     }
+    ],
+    "representation": null,
+    "color": "magenta"
+   },
+   {
+    "selector": {
+     "label_comp_id": "RET"
+    },
+    "representation": null,
+    "color": "red"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "1f88",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2638
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "polymer chain B (entity 1)",
+    "atoms": {
+     "auth_asym_id": "B",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2429
+   },
+   {
+    "action": 1,
+    "param": 2,
+    "what": "every copy of RET",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 977,
+      "auth_comp_id": "RET"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 978,
+      "auth_comp_id": "RET"
+     }
+    ],
+    "n_atoms": 40
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "representation",
+  "noop"
+ ]
+}

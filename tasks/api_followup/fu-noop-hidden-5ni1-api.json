@@ -1,0 +1,224 @@
+{
+ "id": "fu-noop-hidden-5ni1-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-noop-hidden",
+ "structures": [
+  "5ni1"
+ ],
+ "prompt": "Hide the waters.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "5ni1"
+  },
+  {
+   "action": "set_property",
+   "name": "hide_water",
+   "value": true
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "purple"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "purple"
+    },
+    {
+     "struct_asym_id": "C",
+     "color": "purple"
+    },
+    {
+     "struct_asym_id": "D",
+     "color": "purple"
+    },
+    {
+     "label_comp_id": "HEM",
+     "color": "gray"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "5ni1"
+   },
+   {
+    "action": "set_property",
+    "name": "hide_water",
+    "value": true
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "purple"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "purple"
+     },
+     {
+      "struct_asym_id": "C",
+      "color": "purple"
+     },
+     {
+      "struct_asym_id": "D",
+      "color": "purple"
+     },
+     {
+      "label_comp_id": "HEM",
+      "color": "gray"
+     }
+    ]
+   }
+  ],
+  "noop": true
+ },
+ "target": null,
+ "twin_of": "fu-noop-hidden-5ni1-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/5ni1.json",
+   "molbench/atom_tables/5ni1.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
+   "start state grades as itself; it already is the requested final state (no change needed)",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-noop-hidden|1|5ni1",
+  "edit": "no change: already true",
+  "noop_kind": "already true",
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "D"
+     }
+    ],
+    "representation": null,
+    "color": "purple"
+   },
+   {
+    "selector": {
+     "label_comp_id": "HEM"
+    },
+    "representation": null,
+    "color": "gray"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "5ni1",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 2,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 1069
+   },
+   {
+    "action": 2,
+    "param": 1,
+    "what": "polymer chain B (entity 2)",
+    "atoms": {
+     "auth_asym_id": "B",
+     "label_entity_id": "2"
+    },
+    "n_atoms": 1123
+   },
+   {
+    "action": 2,
+    "param": 2,
+    "what": "polymer chain C (entity 1)",
+    "atoms": {
+     "auth_asym_id": "C",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 1068
+   },
+   {
+    "action": 2,
+    "param": 3,
+    "what": "polymer chain D (entity 2)",
+    "atoms": {
+     "auth_asym_id": "D",
+     "label_entity_id": "2"
+    },
+    "n_atoms": 1123
+   },
+   {
+    "action": 2,
+    "param": 4,
+    "what": "every copy of HEM",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 201,
+      "auth_comp_id": "HEM"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 201,
+      "auth_comp_id": "HEM"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 201,
+      "auth_comp_id": "HEM"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 201,
+      "auth_comp_id": "HEM"
+     }
+    ],
+    "n_atoms": 172
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "visibility",
+  "noop"
+ ]
+}

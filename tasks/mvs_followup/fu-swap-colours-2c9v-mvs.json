@@ -1,0 +1,228 @@
+{
+ "id": "fu-swap-colours-2c9v-mvs",
+ "track": "mvs",
+ "tier": "followup",
+ "family": "fu-swap-colours",
+ "structures": [
+  "2c9v"
+ ],
+ "prompt": "Exchange the two chain colours.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2c9v.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "khaki"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "F"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "steelblue"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": {
+  "scene": {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2c9v.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "auth_asym_id": "A"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "steelblue"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "auth_asym_id": "F"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "khaki"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A"
+   },
+   "representation": null,
+   "color": "khaki"
+  },
+  {
+   "selector": {
+    "auth_asym_id": "F"
+   },
+   "representation": null,
+   "color": "steelblue"
+  }
+ ],
+ "twin_of": "fu-swap-colours-2c9v-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/2c9v.json",
+   "molbench/atom_tables/2c9v.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it is not the requested final state",
+   "target selects 3043 atoms on the frozen atom table",
+   "start state scores 0.5 on the target (below 1)",
+   "twin selects the same target atoms",
+   "referent is unambiguous in the start state: \"the two chains\": the structure has exactly two polymer chains, and the start state colours each (steelblue, khaki)"
+  ],
+  "seed": "20261113|fu-swap-colours|2|2c9v",
+  "edit": "recolour by reference to the scene",
+  "noop_kind": null,
+  "referent": "\"the two chains\": the structure has exactly two polymer chains, and the start state colours each (steelblue, khaki)",
+  "preserved": null,
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": true,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": true
+  }
+ },
+ "skills": [
+  "edit",
+  "color",
+  "referent"
+ ]
+}

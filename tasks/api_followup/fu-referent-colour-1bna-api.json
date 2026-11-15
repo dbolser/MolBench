@@ -1,0 +1,153 @@
+{
+ "id": "fu-referent-colour-1bna-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-referent-colour",
+ "structures": [
+  "1bna"
+ ],
+ "prompt": "Change the teal chain to brown.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1bna"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "color": "yellow"
+    },
+    {
+     "auth_asym_id": "B",
+     "color": "brown"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "1bna"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "color": "yellow"
+     },
+     {
+      "auth_asym_id": "B",
+      "color": "teal"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "B"
+   },
+   "representation": null,
+   "color": "brown"
+  }
+ ],
+ "twin_of": "fu-referent-colour-1bna-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1bna.json",
+   "molbench/atom_tables/1bna.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it is not the requested final state",
+   "target selects 286 atoms on the frozen atom table",
+   "start state scores 0.5 on the target (below 1)",
+   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part",
+   "twin selects the same target atoms",
+   "referent is unambiguous in the start state: \"the teal chain\": exactly one chain of the start state is teal (author chain B)"
+  ],
+  "seed": "20261113|fu-referent-colour|2|1bna",
+  "edit": "recolour a component named by its current colour",
+  "noop_kind": null,
+  "referent": "\"the teal chain\": exactly one chain of the start state is teal (author chain B)",
+  "preserved": [
+   {
+    "selector": {
+     "auth_asym_id": "A"
+    },
+    "representation": null,
+    "color": "yellow"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": true
+  },
+  "structure": "1bna",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 2,
+    "param": 0,
+    "what": "author chain A (label chains A, C)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "C"
+     }
+    ],
+    "n_atoms": 280
+   },
+   {
+    "action": 2,
+    "param": 1,
+    "what": "author chain B (label chains B, D)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "D"
+     }
+    ],
+    "n_atoms": 286
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "color",
+  "referent"
+ ]
+}

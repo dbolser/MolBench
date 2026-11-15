@@ -1,0 +1,145 @@
+{
+ "id": "fu-noop-colour-1rx2-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-noop-colour",
+ "structures": [
+  "1rx2"
+ ],
+ "prompt": "Show the ligand NAP in yellow.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1rx2"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "blue"
+    },
+    {
+     "label_comp_id": "NAP",
+     "color": "yellow"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "1rx2"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "blue"
+     },
+     {
+      "label_comp_id": "NAP",
+      "color": "yellow"
+     }
+    ]
+   }
+  ],
+  "noop": true
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "NAP"
+   },
+   "representation": null,
+   "color": "yellow"
+  }
+ ],
+ "twin_of": "fu-noop-colour-1rx2-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1rx2.json",
+   "molbench/atom_tables/1rx2.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it already is the requested final state (no change needed)",
+   "target selects 48 atoms on the frozen atom table",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-noop-colour|2|1rx2",
+  "edit": "no change: already true",
+  "noop_kind": "already true",
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     }
+    ],
+    "representation": null,
+    "color": "blue"
+   },
+   {
+    "selector": {
+     "label_comp_id": "NAP"
+    },
+    "representation": null,
+    "color": "yellow"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "1rx2",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 1268
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of NAP",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 164,
+      "auth_comp_id": "NAP"
+     }
+    ],
+    "n_atoms": 48
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "color",
+  "noop"
+ ]
+}

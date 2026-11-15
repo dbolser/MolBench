@@ -1,0 +1,134 @@
+{
+ "id": "fu-api-show-water-8k7f-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-api-show-water",
+ "structures": [
+  "8k7f"
+ ],
+ "prompt": "Bring the water molecules back.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8k7f"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "teal"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "teal"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "8k7f"
+   },
+   {
+    "action": "set_property",
+    "name": "hide_water",
+    "value": true
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "teal"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "teal"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": null,
+ "twin_of": null,
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/8k7f.json",
+   "molbench/atom_tables/8k7f.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
+   "start state grades as itself; it is not the requested final state",
+   "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
+  ],
+  "seed": "20261113|fu-api-show-water|2|8k7f",
+  "edit": "undo one earlier choice (a hidden component)",
+  "noop_kind": null,
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "B"
+     }
+    ],
+    "representation": null,
+    "color": "teal"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "8k7f",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 3122
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "polymer chain B (entity 1)",
+    "atoms": {
+     "auth_asym_id": "B",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 3139
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "visibility"
+ ]
+}
