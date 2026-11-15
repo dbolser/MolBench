@@ -1,0 +1,121 @@
+{
+  "id": "api-ligand-1rx2",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-ligand",
+  "structures": [
+    "1rx2"
+  ],
+  "prompt": "Load 1RX2, colour the ligand NAP red and centre the view on it.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1rx2"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "NAP",
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "action": "focus",
+      "data": [
+        {
+          "label_comp_id": "NAP"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 164,
+          "auth_comp_id": "NAP"
+        }
+      ],
+      "representation": null,
+      "color": "red"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1rx2.json",
+      "molbench/atom_tables/1rx2.json.gz",
+      "molbench/sifts_tables/1rx2.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: colour and focus in one call"
+    ],
+    "structure": "1rx2",
+    "derived": "A ligand of the entry (more than five heavy atoms, not a crystallisation additive) drawn by seed from the frozen facts. The request names its component code, so nothing has to be recalled; the copies are those the facts list.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true,
+      "ligand_copies": 1,
+      "one_copy_by_chain": false
+    },
+    "targets": [
+      {
+        "what": "NAP",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 164,
+            "auth_comp_id": "NAP"
+          }
+        ],
+        "n_atoms": 48
+      },
+      {
+        "what": "NAP",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 164,
+            "auth_comp_id": "NAP"
+          }
+        ],
+        "n_atoms": 48
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "select-by-ligand",
+    "color",
+    "focus"
+  ]
+}

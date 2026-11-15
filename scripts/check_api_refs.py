@@ -9,7 +9,8 @@ For each API-track task in ``tasks/`` (read through ``molbench.tasks``) it check
 * the structure has a frozen atom table (or the task is one of the two views that
   are compared by their settings: superposition, ligand view);
 * every selection in the reference selects at least one atom;
-* every selection listed under ``provenance.targets`` picks exactly the intended
+* (tasks that carry ``provenance.targets``: the curated and the generated ones)
+  every selection listed under ``provenance.targets`` picks exactly the intended
   atoms. The intended atoms are written a second time, in author numbering *with the
   residue name* (``{"auth_asym_id": "A", "auth_seq_id": 57, "auth_comp_id": "HIS"}``),
   and resolved by ``molbench.atoms`` (the MVS resolver, itself checked against Mol*).
@@ -20,6 +21,10 @@ For each API-track task in ``tasks/`` (read through ``molbench.tasks``) it check
 * the reference and every ``accepted`` alternative grade as success, while a bare
   load and load + global style do not (unless the task has nothing else to do);
 * the worked example in the prompt is not a benchmark task.
+
+A task without ``provenance.targets`` (a twin made by ``scripts/translate_mvs_to_api.py``,
+a follow-up) gets the checks that need no second statement of the atoms: schema, a
+clean replay, non-empty selections, real hide toggles, colour names, self-grading.
 
 ``--viewer`` adds the fidelity check: each reference (and each accepted alternative,
 and the extra probes below) is run in the real pdbe-molstar 3.3.2 in headless
@@ -46,12 +51,19 @@ not available.
     python scripts/check_api_refs.py --viewer --updated   # the same on PDBe's updated mmCIF
     python scripts/check_api_refs.py --uniprot  # + real-viewer fidelity of UniProt selectors
     python scripts/check_api_refs.py --cif      # + assembly checks
+    python scripts/check_api_refs.py --viewer --sample 60 --seed 7   # a seeded sample of tasks
+
+In ``--viewer`` mode a list with a ``uniprot_*`` selection is run on PDBe's updated
+mmCIF whatever ``--updated`` says (the RCSB file has no SIFTS columns). Structure
+files come from the frozen panel (``data/panel/cif``) when the entry is in it.
 """
 
 from __future__ import annotations
 
 import argparse
 import copy
+import gzip
+import hashlib
 import http.server
 import json
 import pathlib
@@ -74,6 +86,7 @@ PDBE_DIR = REPO / "molbench" / "static" / "molstar" / f"pdbe-{PDBE_VERSION}"
 PDBE_CDN = f"https://cdn.jsdelivr.net/npm/pdbe-molstar@{PDBE_VERSION}/build/"
 PDBE_FILES = ("pdbe-molstar-plugin.js", "pdbe-molstar-light.css")
 SELECTING = ("color", "focus", "highlight", "tooltips")
+PANEL_CIF = REPO / "data" / "panel" / "cif"
 
 
 def load_api_tasks() -> list[dict]:
@@ -99,9 +112,12 @@ def check_task(task: dict) -> list[str]:
     bad: list[str] = []
     ref = task.get("reference")
     prov = task.get("provenance") or {}
-    for key in ("derived", "checked_by", "structure"):
-        if not prov.get(key):
-            bad.append(f"provenance.{key} is missing")
+    # by-construction tasks say a second time which atoms each selection means
+    strict = "targets" in prov or bool(task.get("_legacy"))
+    if strict:
+        for key in ("derived", "checked_by", "structure"):
+            if not prov.get(key):
+                bad.append(f"provenance.{key} is missing")
     bad += [f"schema: {e}" for e in schema.validate_actions(ref)]
     if bad:
         return bad
@@ -110,25 +126,30 @@ def check_task(task: dict) -> list[str]:
     bad += [f"unresolved: {m}" for m in state.unresolved]
     if not state.loaded:
         return bad + ["reference loads nothing"]
-    if state.entry != prov.get("structure"):
+    if strict and state.entry != prov.get("structure"):
         bad.append(f"provenance.structure {prov.get('structure')!r} != loaded {state.entry!r}")
     settings_only = state.options["superposition"] or state.ligand_view is not None
     if state.table is None and not settings_only:
         return bad + [f"no atom table for {state.entry}"]
 
-    # selections: non-empty, and equal to the independently written intended atoms
+    # selections: non-empty, and equal to the independently written intended atoms.
+    # A reload (a second load, a style change) can make one list address two tables,
+    # so each selection is resolved on the state the list has reached at that action.
     targets = {(t["action"], t["param"]): t for t in prov.get("targets", [])}
-    table = state.table
     for ai, act in enumerate(ref):
         if act.get("action") not in SELECTING:
             continue
+        here = ps.replay(copy.deepcopy(ref[:ai]))
+        table = here.table
         for pi, param in enumerate(act["data"]):
             where = f"action[{ai}].data[{pi}]"
             if table is None:
                 continue
-            got = ps.resolve_param(table, param, state.entry)
+            got = ps.resolve_param(table, param, here.entry)
             if not got:
                 bad.append(f"{where}: selects no atoms")
+            if not strict:
+                continue
             t = targets.pop((ai, pi), None)
             if t is None:
                 bad.append(f"{where}: no provenance target says which atoms were meant")
@@ -143,6 +164,7 @@ def check_task(task: dict) -> list[str]:
             if t.get("n_atoms") != got.bit_count():
                 bad.append(f"{where}: {got.bit_count()} atoms, provenance says {t.get('n_atoms')}")
     bad += [f"provenance target for missing selection action[{a}].data[{p}]" for a, p in targets]
+    table = state.table
 
     # hide toggles: the component must exist
     if table is not None and not settings_only:
@@ -160,15 +182,15 @@ def check_task(task: dict) -> list[str]:
                 bad.append(f"colour {v!r} is not a Mol* colour name")
 
     # grading: reference and alternatives succeed, trivial answers do not
-    for i, alt in enumerate([ref] + list(task.get("accepted", []))):
+    for i, alt in enumerate([ref] + list(task.get("accepted") or [])):
         bad += [f"accepted[{i - 1}] schema: {e}" for e in schema.validate_actions(alt)] if i else []
-        # An alternative is normally another way to reach the reference's state. A task
-        # whose alternatives are other final states by design says so in its provenance
-        # (`accepted_differ`: why); there each must at least be a state of its own.
-        res = ps.grade_state(alt if i and prov.get("accepted_differ") else ref, alt)
+        res = ps.grade_state(ref, alt, accepted=task.get("accepted") or [])
         if not res["success"]:
             bad.append(f"{'reference' if not i else f'accepted[{i - 1}]'} does not grade as "
                        f"success (f1 {res['f1']})")
+    if not strict or task.get("context") or task.get("twin_of"):
+        # a twin or a follow-up may reduce to a bare load, or to its start state
+        return bad
     n_facts = len(ps.grade_state(ref, ref)["reference_facts"])
     load = [a for a in ref if a.get("action") == "load"][:1]
     style = [a for a in ref if a.get("action") == "set_visual_style"][:1]
@@ -225,18 +247,33 @@ def check_prompt_example(tasks: list[dict]) -> list[str]:
 # --- mmCIF checks (gemmi) ------------------------------------------------------------
 
 def fetch_cif(entry: str, updated: bool = False) -> pathlib.Path:
-    """The mmCIF of an entry, cached. ``updated``: PDBe's updated mmCIF (with SIFTS)."""
+    """The mmCIF of an entry, cached in ``data/cif``. The deposited file comes from the
+    frozen panel when the entry is in it (no network); otherwise, and for PDBe's
+    updated mmCIF (``updated``: the file with the SIFTS columns), it is downloaded."""
     CIF_CACHE.mkdir(parents=True, exist_ok=True)
     path = CIF_CACHE / (f"{entry}_updated.cif" if updated else f"{entry}.cif")
-    if not path.exists():
-        m = re.fullmatch(r"af-([a-z0-9]+)-f(\d+)", entry)
-        url = (f"https://alphafold.ebi.ac.uk/files/AF-{m.group(1).upper()}-F{m.group(2)}-model_v6.cif"
-               if m else f"https://www.ebi.ac.uk/pdbe/entry-files/download/{entry}_updated.cif"
-               if updated else f"https://files.rcsb.org/download/{entry}.cif")
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (generic-client)"})
-        with urllib.request.urlopen(req, timeout=60) as r:
-            path.write_bytes(r.read())
+    if path.exists():
+        return path
+    if not updated or entry.startswith("af-"):
+        frozen = sorted(PANEL_CIF.glob(f"{entry}.cif.gz")) or sorted(PANEL_CIF.glob(f"{entry}-model_v*.cif.gz"))
+        if frozen:
+            path.write_bytes(gzip.decompress(frozen[-1].read_bytes()))
+            return path
+    m = re.fullmatch(r"af-([a-z0-9]+)-f(\d+)", entry)
+    url = (f"https://alphafold.ebi.ac.uk/files/AF-{m.group(1).upper()}-F{m.group(2)}-model_v6.cif"
+           if m else f"https://www.ebi.ac.uk/pdbe/entry-files/download/{entry}_updated.cif"
+           if updated else f"https://files.rcsb.org/download/{entry}.cif")
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (generic-client)"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        path.write_bytes(r.read())
     return path
+
+
+def needs_updated(actions: list[dict]) -> bool:
+    """True if a list has a UniProt-numbered selection: the viewer resolves those with
+    the SIFTS columns, which only PDBe's updated mmCIF carries."""
+    return any("uniprot_accession" in p for a in actions if isinstance(a, dict)
+               for p in (a.get("data") or []) if isinstance(p, dict))
 
 
 def check_assemblies(tasks: list[dict]) -> list[str]:
@@ -569,7 +606,17 @@ def compare_with_viewer(actions: list[dict], dump: dict) -> list[str]:
                     real_parts.append((hit, r["type"], _rgb(layer["color"])))
                 left &= ~hit
             if left:
-                real_parts.append((left, r["type"], r["theme"]))
+                theme = r["theme"]
+                if state.preset == "all-models" and theme == "trajectory-index":
+                    # Known and not graded: with every model of an ensemble on screen the
+                    # viewer colours the default view by model, the replay keeps the
+                    # chain colours. No fact depends on it (facts are the differences
+                    # from a bare load with the same preset), so it is noted, not failed.
+                    theme = next((th for rp, th in ps.DEFAULT_REPRS.get(name, ()) if rp == r["type"]), theme)
+                    note = "preset all-models: the viewer colours the default view by model (trajectory-index)"
+                    if note not in dump.setdefault("notes", []):
+                        dump["notes"].append(note)
+                real_parts.append((left, r["type"], theme))
     for name in model_comps:
         if name not in seen:
             # a component with a visual style Mol* cannot draw is still there; one the
@@ -640,6 +687,12 @@ def probes() -> list[tuple[str, list[dict]]]:
             {"label_comp_id": "ben", "color": "yellow"}, {"residue_number": 0, "color": "cyan"},
             {"start_residue_number": 5, "end_residue_number": 5, "color": "orange"},
             {"entity_id": 1, "color": "white"}, {"color": "black", "auth_asym_id": "Z"}])]),
+        ("a selection with no locator key selects everything", [L("1cbs"), C([{"color": "purple"}])]),
+        ("non_selected_color with an empty selection list", [L("1cbs"), C([], non_selected_color="purple")]),
+        ("everything under a style, then an added representation over non_selected_color", [
+            L("3ptb"), {"action": "set_visual_style", "style": "cartoon"},
+            C([{"label_comp_id": "CA", "representation": "ball-and-stick", "representationColor": "orange"}],
+              non_selected_color="gray")]),
         ("select clears earlier colour and added representations", [L("3ptb"),
             C([{"auth_seq_id": 57, "color": "red", "representation": "ball-and-stick"}]),
             C([{"auth_seq_id": 102, "color": "blue"}])]),
@@ -740,6 +793,13 @@ def main() -> None:
                     help="with --viewer: load PDBe's updated mmCIF (the file a molecule_id "
                          "load really fetches) instead of the RCSB file the tables were built from")
     ap.add_argument("--only", nargs="*", help="task ids (or probe name fragments) to run")
+    ap.add_argument("--sample", type=int, metavar="N",
+                    help="with --viewer: run a seeded sample of N tasks in the viewer "
+                         "(the offline checks still cover every task)")
+    ap.add_argument("--seed", type=int, default=0, help="seed of --sample")
+    ap.add_argument("--always", nargs="*", default=[], metavar="TIER",
+                    help="with --sample: tiers whose tasks are all run in the viewer as well")
+    ap.add_argument("--no-probes", action="store_true", help="with --viewer: tasks only")
     args = ap.parse_args()
 
     tasks = load_api_tasks()
@@ -772,21 +832,33 @@ def main() -> None:
 
     if args.viewer:
         runs: list[tuple[str, list[dict]]] = []
-        for task in picked:
-            for i, alt in enumerate([task["reference"]] + list(task.get("accepted", []))):
+        in_viewer = picked
+        if args.sample is not None:
+            ranked = sorted(picked, key=lambda t: hashlib.sha256(
+                f"{args.seed}|{t['id']}".encode()).hexdigest())
+            chosen = {t["id"] for t in ranked[:args.sample]}
+            chosen |= {t["id"] for t in picked if t.get("tier") in args.always}
+            in_viewer = [t for t in picked if t["id"] in chosen]
+            print(f"viewer sample (seed {args.seed}): {len(in_viewer)} of {len(picked)} tasks: "
+                  + " ".join(t["id"] for t in in_viewer))
+        for task in in_viewer:
+            for i, alt in enumerate([task["reference"]] + list(task.get("accepted") or [])):
                 runs.append((task["id"] + (f" accepted[{i - 1}]" if i else ""), alt))
-        runs += [(n, a) for n, a in probes()
-                 if not args.only or any(o in n for o in args.only)]
-        n_sel = n_run = 0
+        if not args.no_probes:
+            runs += [(n, a) for n, a in probes()
+                     if not args.only or any(o in n for o in args.only)]
+        n_sel = n_run = n_skipped = 0
+        not_run: dict[str, int] = {}
         with Viewer() as viewer:
             for name, actions in runs:
                 state = ps.replay(copy.deepcopy(actions))
-                if state.table is None:
-                    print(f"viewer  {name}: skipped (no atom table for {state.entry}; "
-                          "this view is compared by its settings)")
+                if state.table is None or not state.atomistic:
+                    n_skipped += 1
+                    print(f"viewer  {name}: skipped (this view is compared by its settings: "
+                          f"{'superposition' if state.options['superposition'] else 'ligand view' if state.ligand_view is not None else 'no atom table for ' + str(state.entry)})")
                     continue
                 try:
-                    dump = viewer.run(actions, updated=args.updated)
+                    dump = viewer.run(actions, updated=args.updated or needs_updated(actions))
                 except Exception as e:  # report and carry on with the rest
                     n_bad += 1
                     print(f"viewer  {name}: FAILED TO RUN: {str(e).splitlines()[0][:200]}")
@@ -795,13 +867,18 @@ def main() -> None:
                 n_bad += len(bad)
                 n_run += 1
                 n_sel += sum(len(s["params"]) for s in dump.get("selections", []))
+                for note in dump.get("notes") or []:
+                    not_run[note] = not_run.get(note, 0) + 1
                 print(f"viewer  {name}: {'agrees' if not bad else 'DIFFERS'}"
-                      + (f"  (not run: {'; '.join(dump['notes'])})" if dump.get("notes") else ""))
+                      + (f"  (note: {'; '.join(dump['notes'])})" if dump.get("notes") else ""))
                 for b in bad:
                     print(f"    - {b}")
         print(f"viewer: {n_run} action lists run in pdbe-molstar {PDBE_VERSION}"
               f"{' on PDBe updated mmCIF' if args.updated else ''}, "
-              f"{n_sel} selections compared atom for atom")
+              f"{n_sel} selections compared atom for atom; {n_skipped} lists skipped "
+              "(settings-only views)")
+        for note, n in sorted(not_run.items()):
+            print(f"viewer: {note} in {n} list(s)")
     if args.uniprot:
         todo = []
         for name, actions in uniprot_probes():

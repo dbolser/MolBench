@@ -1,8 +1,12 @@
 {
   "id": "api-007",
-  "category": "api_calling",
-  "title": "Focus the biotin",
-  "prompt": "Load streptavidin (1STP), hide the waters, and centre the view on the bound biotin.",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-ligand",
+  "structures": [
+    "1stp"
+  ],
+  "prompt": "Load streptavidin (1STP), hide the waters, and centre the view on the bound biotin (BTN).",
   "reference": [
     {
       "action": "load",
@@ -22,35 +26,78 @@
       ]
     }
   ],
-  "skills": [
-    "load",
-    "hide-component",
-    "focus-ligand"
-  ],
-  "categories": [
-    "load",
-    "hide-component",
-    "focus-ligand"
-  ],
-  "provenance": {
-    "structure": "1stp",
-    "source": "RCSB mmCIF 1STP -> molbench/atom_tables/1stp.json.gz (scripts/build_atom_tables.py)",
-    "derived": "The July prompt asked for a cartoon and a focus on the biotin; with visual_style cartoon the viewer does not draw ligands, so the camera centred on nothing visible. The cartoon request is dropped (the default view already draws the protein as cartoon and the ligand as ball-and-stick).",
-    "july_task": "reworded",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": [
-      {
-        "what": "biotin",
-        "action": 2,
-        "param": 0,
-        "atoms": {
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
           "auth_asym_id": "A",
           "auth_seq_id": 300,
           "auth_comp_id": "BTN"
-        },
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1stp.json",
+      "molbench/atom_tables/1stp.json.gz",
+      "molbench/sifts_tables/1stp.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6744)"
+    ],
+    "structure": "1stp",
+    "derived": "1STP has waters and one biotin (frozen facts).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true
+    },
+    "targets": [
+      {
+        "what": "BTN",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 300,
+            "auth_comp_id": "BTN"
+          }
+        ],
         "n_atoms": 16
       }
-    ]
+    ],
+    "july_task": "reworded",
+    "prompt_change": "the ligand's component code added to the request (it was named in words only)"
   },
-  "notes": "Domain fact: the ligand's component id is BTN."
+  "skills": [
+    "load",
+    "hide",
+    "select-by-ligand",
+    "focus"
+  ],
+  "title": "Centre on the biotin"
 }

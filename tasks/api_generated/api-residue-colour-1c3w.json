@@ -1,0 +1,102 @@
+{
+  "id": "api-residue-colour-1c3w",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-residue-colour",
+  "structures": [
+    "1c3w"
+  ],
+  "prompt": "In 1C3W, colour Pro50 steel blue; leave everything else as it is.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1c3w"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 50,
+          "color": "steelblue"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 50,
+          "auth_comp_id": "PRO"
+        }
+      ],
+      "representation": null,
+      "color": "steelblue"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1c3w.json",
+      "molbench/atom_tables/1c3w.json.gz",
+      "molbench/sifts_tables/1c3w.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "equivalent answer succeeds: label chain and label number",
+      "wrong answer fails: the author number in residue_number (label numbering) (F1 0.0)"
+    ],
+    "structure": "1c3w",
+    "derived": "Residues drawn by seed from a protein chain whose author numbers differ from its label numbers; each is the only thing with its author chain and number. The request names them as papers do (residue name + author number).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "author_minus_label": [
+        4
+      ],
+      "insertion_codes_in_structure": false
+    },
+    "targets": [
+      {
+        "what": "Pro50",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 50,
+            "auth_comp_id": "PRO"
+          }
+        ],
+        "n_atoms": 7
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "author-numbering",
+    "color"
+  ]
+}

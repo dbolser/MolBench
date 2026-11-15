@@ -1,7 +1,11 @@
 {
   "id": "api-018",
-  "category": "api_calling",
-  "title": "Domain overlay and a residue tooltip",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-domain-overlay",
+  "structures": [
+    "1aki"
+  ],
   "prompt": "Load hen egg-white lysozyme (1AKI) as a cartoon, overlay the domain annotations, and attach a tooltip reading 'catalytic glutamate' to Glu35 on chain A.",
   "reference": [
     {
@@ -28,39 +32,85 @@
       ]
     }
   ],
-  "skills": [
-    "load",
-    "global-style",
-    "annotation",
-    "select-by-residue",
-    "tooltip"
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 35,
+          "auth_comp_id": "GLU"
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
   ],
-  "categories": [
-    "load",
-    "global-style",
-    "annotation",
-    "select-by-residue",
-    "tooltip"
-  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
   "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1aki.json",
+      "molbench/atom_tables/1aki.json.gz",
+      "molbench/sifts_tables/1aki.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8)"
+    ],
     "structure": "1aki",
-    "source": "RCSB mmCIF 1AKI -> molbench/atom_tables/1aki.json.gz (scripts/build_atom_tables.py)",
-    "derived": "Prompt unchanged. In 1AKI label and author numbering agree; the reference now uses auth_seq_id, the key that is right for a residue named the way the literature names it.",
-    "july_task": "unchanged",
+    "derived": "Author residue 35 of chain A is a glutamate (atom table).",
     "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "author_minus_label": [
+        0
+      ],
+      "insertion_codes_in_structure": false,
+      "setting_only": [
+        "domain_annotation"
+      ]
+    },
     "targets": [
       {
         "what": "Glu35",
         "action": 3,
         "param": 0,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 35,
-          "auth_comp_id": "GLU"
-        },
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 35,
+            "auth_comp_id": "GLU"
+          }
+        ],
         "n_atoms": 9
       }
-    ]
+    ],
+    "july_task": "unchanged"
   },
-  "notes": "Tests the tooltips action."
+  "skills": [
+    "load",
+    "global-style",
+    "domain-annotation",
+    "selection",
+    "author-numbering",
+    "tooltip"
+  ],
+  "title": "Domains and a tooltip"
 }

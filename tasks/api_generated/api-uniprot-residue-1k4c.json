@@ -1,0 +1,130 @@
+{
+  "id": "api-uniprot-residue-1k4c",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-uniprot-residue",
+  "structures": [
+    "1k4c"
+  ],
+  "prompt": "In 1K4C, colour UniProt P01837 residues Phe28 and Glu47 blue.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1k4c"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "uniprot_accession": "P01837",
+          "uniprot_residue_number": 28,
+          "color": "blue"
+        },
+        {
+          "uniprot_accession": "P01837",
+          "uniprot_residue_number": 47,
+          "color": "blue"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 135,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PHE"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 154,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "GLU"
+        }
+      ],
+      "representation": null,
+      "color": "blue"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1k4c.json",
+      "molbench/atom_tables/1k4c.json.gz",
+      "molbench/sifts_tables/1k4c.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.7373)",
+      "equivalent answer succeeds: author chain and author number, mapped by hand",
+      "wrong answer fails: the UniProt number used as the author number (F1 0.0)"
+    ],
+    "structure": "1k4c",
+    "derived": "Positions drawn by seed from the frozen SIFTS table: observed, the residue is the UniProt residue, and its author number differs from the UniProt number. The viewer maps UniProt numbers itself (uniprot_accession + uniprot_residue_number); the intended atoms are the SIFTS rows written in author numbering with the residue name.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": true,
+      "hinges_on": [],
+      "author_minus_uniprot": [
+        107
+      ],
+      "label_equals_uniprot": false,
+      "chains_mapped": 1
+    },
+    "targets": [
+      {
+        "what": "UniProt P01837 28",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 135,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PHE"
+          }
+        ],
+        "n_atoms": 11
+      },
+      {
+        "what": "UniProt P01837 47",
+        "action": 1,
+        "param": 1,
+        "atoms": [
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 154,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "GLU"
+          }
+        ],
+        "n_atoms": 9
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "uniprot-numbering",
+    "color"
+  ]
+}

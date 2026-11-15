@@ -1,0 +1,157 @@
+{
+  "id": "api-undo-1f88",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-undo",
+  "structures": [
+    "1f88"
+  ],
+  "prompt": "Load 1F88 and hide the waters. Highlight chain A, then clear that highlight and highlight both copies of the retinal (RET) instead.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1f88"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "highlight",
+      "data": [
+        {
+          "auth_asym_id": "A"
+        }
+      ]
+    },
+    {
+      "action": "clear_highlight"
+    },
+    {
+      "action": "highlight",
+      "data": [
+        {
+          "label_comp_id": "RET"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 977,
+          "auth_comp_id": "RET"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 978,
+          "auth_comp_id": "RET"
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1f88.json",
+      "molbench/atom_tables/1f88.json.gz",
+      "molbench/sifts_tables/1f88.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "equivalent answer succeeds: without the highlight that is cleared",
+      "wrong answer fails: the highlight left on the chain (F1 0.5037)"
+    ],
+    "structure": "1f88",
+    "derived": "The first highlight is cleared, so the final state is the waters hidden and the ligand highlighted.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "undo_step": "highlight",
+      "ligand_code_in_prompt": true
+    },
+    "targets": [
+      {
+        "what": "chain A",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          },
+          {
+            "label_asym_id": "G"
+          },
+          {
+            "label_asym_id": "H"
+          },
+          {
+            "label_asym_id": "I"
+          },
+          {
+            "label_asym_id": "J"
+          },
+          {
+            "label_asym_id": "K"
+          },
+          {
+            "label_asym_id": "L"
+          },
+          {
+            "label_asym_id": "S"
+          }
+        ],
+        "n_atoms": 2679
+      },
+      {
+        "what": "RET",
+        "action": 4,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 977,
+            "auth_comp_id": "RET"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 978,
+            "auth_comp_id": "RET"
+          }
+        ],
+        "n_atoms": 40
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "hide",
+    "highlight",
+    "clear-highlight",
+    "select-by-ligand"
+  ]
+}

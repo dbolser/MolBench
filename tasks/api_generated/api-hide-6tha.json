@@ -1,0 +1,112 @@
+{
+  "id": "api-hide-6tha",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-hide",
+  "structures": [
+    "6tha"
+  ],
+  "prompt": "Open 6THA with its ligands and ions hidden and the stretch from residue 54 to residue 66 in hot pink.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "6tha"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_heteroatoms",
+      "value": true
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "start_auth_residue_number": 54,
+          "end_auth_residue_number": 66,
+          "color": "hotpink"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 54,
+        "end_label_seq_id": 66
+      },
+      "representation": null,
+      "color": "hotpink"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/6tha.json",
+      "molbench/atom_tables/6tha.json.gz",
+      "molbench/sifts_tables/6tha.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: label chain and label range"
+    ],
+    "structure": "6tha",
+    "derived": "The entry has a ligand or ion component; the range is a seeded author-numbered range that selects exactly those polymer residues.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "components_present": [
+        "branched",
+        "ion",
+        "ligand",
+        "polymer",
+        "water"
+      ],
+      "hide_kind": "het",
+      "author_minus_label": [
+        0
+      ],
+      "insertion_codes_in_structure": false
+    },
+    "targets": [
+      {
+        "what": "residues 54-66 of chain A",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_label_seq_id": 54,
+          "end_label_seq_id": 66
+        },
+        "n_atoms": 102
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "hide",
+    "selection",
+    "residue-range",
+    "color"
+  ]
+}

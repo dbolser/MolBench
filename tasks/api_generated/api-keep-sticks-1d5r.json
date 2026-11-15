@@ -1,0 +1,147 @@
+{
+  "id": "api-keep-sticks-1d5r",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-keep-sticks",
+  "structures": [
+    "1d5r"
+  ],
+  "prompt": "Open 1D5R. Step one: Asp268 as ball-and-stick. Step two, on top of step one: Thr26 as spacefill. Element colours for both, and no other colour changes.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1d5r"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 268,
+          "color": null,
+          "representation": "ball-and-stick"
+        }
+      ]
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 26,
+          "color": null,
+          "representation": "spacefill"
+        }
+      ],
+      "keep_colors": true,
+      "keep_representations": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 268,
+          "auth_comp_id": "ASP"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": null
+    },
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 26,
+          "auth_comp_id": "THR"
+        }
+      ],
+      "representation": "spacefill",
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1d5r.json",
+      "molbench/atom_tables/1d5r.json.gz",
+      "molbench/sifts_tables/1d5r.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: one call with both residues",
+      "equivalent answer succeeds: two calls, the second with keep_representations only",
+      "wrong answer fails: two calls without keep_representations (the first representation is removed) (F1 0.6667)",
+      "wrong answer fails: no color key (the residues turn the default orange) (F1 0.75)"
+    ],
+    "structure": "1d5r",
+    "derived": "Two seeded residues as in api-residue-colour, each given an added representation in its own `color` call. A second call removes the representations the first one added unless keep_representations is set. (The reference keeps the colouring as well: 'keeping it' is everything the first step did, which here painted nothing.)",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "default_select_colour"
+      ],
+      "author_minus_label": [
+        6
+      ],
+      "insertion_codes_in_structure": false,
+      "order_matters": true,
+      "keep_representations_in_reference": true
+    },
+    "targets": [
+      {
+        "what": "Asp268",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 268,
+            "auth_comp_id": "ASP"
+          }
+        ],
+        "n_atoms": 8
+      },
+      {
+        "what": "Thr26",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 26,
+            "auth_comp_id": "THR"
+          }
+        ],
+        "n_atoms": 7
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "author-numbering",
+    "per-selection-representation",
+    "keep-representations"
+  ]
+}

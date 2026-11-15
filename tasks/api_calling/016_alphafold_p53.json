@@ -1,7 +1,11 @@
 {
   "id": "api-016",
-  "category": "api_calling",
-  "title": "AlphaFold model with confidence colouring",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-alphafold",
+  "structures": [
+    "af-p04637-f1-model_v6"
+  ],
   "prompt": "Load the AlphaFold DB model of human p53 (UniProt P04637) and colour it by the model's per-residue confidence (pLDDT).",
   "reference": [
     {
@@ -31,23 +35,51 @@
       }
     ]
   ],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/af-p04637-f1-model_v6.json",
+      "molbench/atom_tables/af-p04637-f1-model_v6.json.gz",
+      "molbench/sifts_tables/af-p04637-f1-model_v6.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0"
+    ],
+    "structure": "af-p04637-f1",
+    "derived": "alphafold_view only switches the colouring; the model comes in as custom_data from the AlphaFold DB file. The entry is compared as AF-P04637-F1 whatever the file version or format.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "needs_alphafold_url": true,
+      "setting_only": [
+        "alphafold_view"
+      ]
+    },
+    "targets": [],
+    "july_task": "reworded"
+  },
   "skills": [
     "load",
     "custom-data",
     "alphafold"
   ],
-  "categories": [
-    "load",
-    "custom-data",
-    "alphafold"
-  ],
-  "provenance": {
-    "structure": "af-p04637-f1",
-    "source": "AlphaFold DB AF-P04637-F1 model v6 -> molbench/atom_tables/af-p04637-f1.json.gz",
-    "derived": "The July reference was `load P04637` with the alphafold flag. In pdbe-molstar 3.3.2 moleculeId is a PDB id (spec.ts:103) and alphafoldView only switches the colouring to pLDDT (spec.ts:115); it does not fetch a model. The model has to come in as customData pointing at the AlphaFold DB file. The entry is compared as AF-P04637-F1 whatever the file version or format.",
-    "july_task": "reworded",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": []
-  },
+  "title": "AlphaFold model with confidence colouring",
   "notes": "Tool-control: custom data source plus a colouring switch."
 }

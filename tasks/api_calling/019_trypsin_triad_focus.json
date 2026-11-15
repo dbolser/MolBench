@@ -1,7 +1,11 @@
 {
   "id": "api-019",
-  "category": "api_calling",
-  "title": "Trypsin catalytic triad",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-residue-sticks",
+  "structures": [
+    "3ptb"
+  ],
   "prompt": "Load trypsin (3PTB) as a cartoon, colour the catalytic triad (His57, Asp102 and Ser195) magenta, also show those three residues as magenta ball-and-stick, and centre the camera on them.",
   "reference": [
     {
@@ -73,122 +77,198 @@
             "struct_asym_id": "A",
             "residue_number": 40,
             "color": "magenta",
-            "sideChain": true,
-            "representationColor": "magenta",
-            "focus": true
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
           },
           {
             "struct_asym_id": "A",
             "residue_number": 84,
             "color": "magenta",
-            "sideChain": true,
-            "representationColor": "magenta",
-            "focus": true
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
           },
           {
             "struct_asym_id": "A",
             "residue_number": 177,
             "color": "magenta",
-            "sideChain": true,
-            "representationColor": "magenta",
-            "focus": true
+            "representation": "ball-and-stick",
+            "representationColor": "magenta"
+          }
+        ]
+      },
+      {
+        "action": "focus",
+        "data": [
+          {
+            "struct_asym_id": "A",
+            "residue_number": 40
+          },
+          {
+            "struct_asym_id": "A",
+            "residue_number": 84
+          },
+          {
+            "struct_asym_id": "A",
+            "residue_number": 177
           }
         ]
       }
     ]
   ],
-  "skills": [
-    "load",
-    "global-style",
-    "select-by-residue",
-    "author-numbering",
-    "per-selection-representation",
-    "color",
-    "focus-selection"
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 57,
+          "auth_comp_id": "HIS"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 102,
+          "auth_comp_id": "ASP"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 195,
+          "auth_comp_id": "SER"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "magenta"
+    }
   ],
-  "categories": [
-    "load",
-    "global-style",
-    "select-by-residue",
-    "author-numbering",
-    "per-selection-representation",
-    "color",
-    "focus-selection"
-  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
   "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/3ptb.json",
+      "molbench/atom_tables/3ptb.json.gz",
+      "molbench/sifts_tables/3ptb.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 6 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8017)"
+    ],
     "structure": "3ptb",
-    "source": "RCSB mmCIF 3PTB -> molbench/atom_tables/3ptb.json.gz (scripts/build_atom_tables.py)",
-    "derived": "His57/Asp102/Ser195 are author (chymotrypsinogen) numbers; in 3PTB they are label_seq_id 40/84/177. The July reference used residue_number 57/102/195, which is label numbering and selects author Val75/Ser120/Ser217. The reference now uses auth_seq_id; the label-numbered form, with sideChain and focus inside the colour call, is listed under `accepted` and ends in the same state. A closed-book answer can only know the author numbers, so that is the form the reference takes.",
-    "july_task": "reworded",
+    "derived": "His57, Asp102 and Ser195 are author numbers (chymotrypsinogen numbering); their label numbers are 40, 84 and 177. The July reference put the author numbers in the label key.",
     "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "author_minus_label": [
+        17,
+        18
+      ],
+      "insertion_codes_in_structure": true
+    },
     "targets": [
       {
         "what": "His57",
         "action": 2,
         "param": 0,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 57,
-          "auth_comp_id": "HIS"
-        },
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 57,
+            "auth_comp_id": "HIS"
+          }
+        ],
         "n_atoms": 10
       },
       {
         "what": "Asp102",
         "action": 2,
         "param": 1,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 102,
-          "auth_comp_id": "ASP"
-        },
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 102,
+            "auth_comp_id": "ASP"
+          }
+        ],
         "n_atoms": 8
       },
       {
         "what": "Ser195",
         "action": 2,
         "param": 2,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 195,
-          "auth_comp_id": "SER"
-        },
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 195,
+            "auth_comp_id": "SER"
+          }
+        ],
         "n_atoms": 6
       },
       {
         "what": "His57",
         "action": 3,
         "param": 0,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 57,
-          "auth_comp_id": "HIS"
-        },
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 57,
+            "auth_comp_id": "HIS"
+          }
+        ],
         "n_atoms": 10
       },
       {
         "what": "Asp102",
         "action": 3,
         "param": 1,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 102,
-          "auth_comp_id": "ASP"
-        },
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 102,
+            "auth_comp_id": "ASP"
+          }
+        ],
         "n_atoms": 8
       },
       {
         "what": "Ser195",
         "action": 3,
         "param": 2,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 195,
-          "auth_comp_id": "SER"
-        },
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 195,
+            "auth_comp_id": "SER"
+          }
+        ],
         "n_atoms": 6
       }
-    ]
+    ],
+    "july_task": "reworded"
   },
-  "notes": "Domain fact: the serine-protease catalytic triad."
+  "skills": [
+    "load",
+    "global-style",
+    "selection",
+    "author-numbering",
+    "color",
+    "per-selection-representation",
+    "focus"
+  ],
+  "title": "Catalytic triad"
 }

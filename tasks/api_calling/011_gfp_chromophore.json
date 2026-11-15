@@ -1,8 +1,12 @@
 {
   "id": "api-011",
-  "category": "api_calling",
-  "title": "GFP barrel and chromophore",
-  "prompt": "Load green fluorescent protein (1EMA) as a cartoon, colour the chromophore orange, and also show it as orange ball-and-stick.",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-ligand-sticks",
+  "structures": [
+    "1ema"
+  ],
+  "prompt": "Load green fluorescent protein (1EMA) as a cartoon, colour the chromophore (CRO) orange, and also show it as orange ball-and-stick.",
   "reference": [
     {
       "action": "load",
@@ -24,39 +28,82 @@
       ]
     }
   ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 66,
+          "auth_comp_id": "CRO"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "orange"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1ema.json",
+      "molbench/atom_tables/1ema.json.gz",
+      "molbench/sifts_tables/1ema.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)"
+    ],
+    "structure": "1ema",
+    "derived": "The chromophore is a modified residue inside the chain (CRO 66, frozen facts), not a ligand.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "ligand_code_in_prompt": true,
+      "modified_residue": true
+    },
+    "targets": [
+      {
+        "what": "chromophore CRO66",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 66,
+            "auth_comp_id": "CRO"
+          }
+        ],
+        "n_atoms": 22
+      }
+    ],
+    "july_task": "reworded",
+    "prompt_change": "the ligand's component code added to the request (it was named in words only)"
+  },
   "skills": [
     "load",
     "global-style",
     "select-by-ligand",
-    "per-selection-representation",
-    "color"
+    "color",
+    "per-selection-representation"
   ],
-  "categories": [
-    "load",
-    "global-style",
-    "select-by-ligand",
-    "per-selection-representation",
-    "color"
-  ],
-  "provenance": {
-    "structure": "1ema",
-    "source": "RCSB mmCIF 1EMA -> molbench/atom_tables/1ema.json.gz (scripts/build_atom_tables.py)",
-    "derived": "The chromophore is the modified residue CRO (author residue 66), part of the polymer chain, so it has a cartoon trace as well as the added ball-and-stick; the prompt names the colour of both. The July colour (green, hand-picked RGB) is replaced by a Mol* colour name.",
-    "july_task": "reworded",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": [
-      {
-        "what": "chromophore",
-        "action": 2,
-        "param": 0,
-        "atoms": {
-          "auth_asym_id": "A",
-          "auth_seq_id": 66,
-          "auth_comp_id": "CRO"
-        },
-        "n_atoms": 22
-      }
-    ]
-  },
-  "notes": "Domain fact: the GFP chromophore is the non-standard residue CRO."
+  "title": "GFP chromophore"
 }

@@ -1,7 +1,11 @@
 {
   "id": "api-002",
-  "category": "api_calling",
-  "title": "Leave only the ligand visible",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-hide",
+  "structures": [
+    "1cbs"
+  ],
   "prompt": "Load cellular retinoic-acid-binding protein II (1CBS) and hide the protein and the waters so that only the bound retinoic acid is shown.",
   "reference": [
     {
@@ -19,21 +23,47 @@
       "value": true
     }
   ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1cbs.json",
+      "molbench/atom_tables/1cbs.json.gz",
+      "molbench/sifts_tables/1cbs.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.9562)"
+    ],
+    "structure": "1cbs",
+    "derived": "1CBS has polymer, waters and one ligand; hiding the first two leaves the retinoic acid. (The July task was the prompt's worked example; that is now 1HSG.)",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": []
+    },
+    "targets": [],
+    "july_task": "replaced"
+  },
   "skills": [
     "load",
-    "hide-component"
+    "hide"
   ],
-  "categories": [
-    "load",
-    "hide-component"
-  ],
-  "provenance": {
-    "structure": "1cbs",
-    "source": "RCSB mmCIF 1CBS -> molbench/atom_tables/1cbs.json.gz (scripts/build_atom_tables.py)",
-    "derived": "Replaces the July task, which was the prompt's worked example word for word. 1CBS has exactly three default components: polymer, ligand (REA) and water.",
-    "july_task": "replaced",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": []
-  },
-  "notes": "Tests hide_polymer, which no July task used."
+  "title": "Only the ligand"
 }

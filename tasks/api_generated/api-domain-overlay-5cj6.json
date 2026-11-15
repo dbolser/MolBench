@@ -1,0 +1,72 @@
+{
+  "id": "api-domain-overlay-5cj6",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-domain-overlay",
+  "structures": [
+    "5cj6"
+  ],
+  "prompt": "Open 5CJ6 with the sequence panel visible and the domain annotations switched on.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "5cj6"
+    },
+    {
+      "action": "set_property",
+      "name": "domain_annotation",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "sequence_panel",
+      "value": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/5cj6.json",
+      "molbench/atom_tables/5cj6.json.gz",
+      "molbench/sifts_tables/5cj6.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)"
+    ],
+    "structure": "5cj6",
+    "derived": "A PDB entry with a UniProt mapping. Both options are compared as declared settings.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "setting_only": [
+        "domain_annotation",
+        "sequence_panel"
+      ]
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "domain-annotation",
+    "sequence-panel"
+  ]
+}

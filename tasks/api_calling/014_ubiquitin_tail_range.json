@@ -1,7 +1,11 @@
 {
   "id": "api-014",
-  "category": "api_calling",
-  "title": "Colour a residue range, grey out the rest",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-range-colour",
+  "structures": [
+    "1ubq"
+  ],
   "prompt": "Load ubiquitin (1UBQ) and colour the C-terminal tail, residues 71 to 76, red and the rest of the structure white.",
   "reference": [
     {
@@ -33,39 +37,58 @@
             "auth_asym_id": "A",
             "start_auth_residue_number": 71,
             "end_auth_residue_number": 76,
-            "color": {
-              "r": 255,
-              "g": 0,
-              "b": 0
-            }
+            "color": "red"
           }
         ],
-        "non_selected_color": {
-          "r": 255,
-          "g": 255,
-          "b": 255
-        }
+        "non_selected_color": "white"
       }
     ]
   ],
-  "skills": [
-    "load",
-    "select-by-range",
-    "color",
-    "non-selected-color"
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 71,
+        "end_label_seq_id": 76
+      },
+      "representation": null,
+      "color": "red"
+    }
   ],
-  "categories": [
-    "load",
-    "select-by-range",
-    "color",
-    "non-selected-color"
-  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
   "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1ubq.json",
+      "molbench/atom_tables/1ubq.json.gz",
+      "molbench/sifts_tables/1ubq.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8333)"
+    ],
     "structure": "1ubq",
-    "source": "RCSB mmCIF 1UBQ -> molbench/atom_tables/1ubq.json.gz (scripts/build_atom_tables.py)",
-    "derived": "Replaces the July task, a near-duplicate of api-005 whose prompt described the superposition view wrongly. In 1UBQ label and author numbering agree; the waters are numbered from 77, so the label range and the author range (see `accepted`) select the same 47 atoms.",
-    "july_task": "replaced",
+    "derived": "In 1UBQ author and label numbers agree, so either range key selects residues 71-76.",
     "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": []
+    },
     "targets": [
       {
         "what": "residues 71-76",
@@ -73,12 +96,20 @@
         "param": 0,
         "atoms": {
           "label_asym_id": "A",
-          "beg_auth_seq_id": 71,
-          "end_auth_seq_id": 76
+          "beg_label_seq_id": 71,
+          "end_label_seq_id": 76
         },
         "n_atoms": 47
       }
-    ]
+    ],
+    "july_task": "replaced"
   },
-  "notes": "Tests residue ranges and non_selected_color, which no July task used."
+  "skills": [
+    "load",
+    "selection",
+    "residue-range",
+    "color",
+    "non-selected-color"
+  ],
+  "title": "Ubiquitin tail"
 }

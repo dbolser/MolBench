@@ -1,0 +1,94 @@
+{
+  "id": "api-alphafold-af-p04637-f1",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-alphafold",
+  "structures": [
+    "af-p04637-f1-model_v6"
+  ],
+  "prompt": "Open the AlphaFold prediction for UniProt P04637 (Cellular tumor antigen p53) coloured by pLDDT, with a tooltip reading 'residues 168-189' on residues 168-189.",
+  "reference": [
+    {
+      "action": "load",
+      "custom_data": {
+        "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v6.cif",
+        "format": "cif",
+        "binary": false
+      }
+    },
+    {
+      "action": "set_property",
+      "name": "alphafold_view",
+      "value": true
+    },
+    {
+      "action": "tooltips",
+      "data": [
+        {
+          "start_auth_residue_number": 168,
+          "end_auth_residue_number": 189,
+          "tooltip": "residues 168-189"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/af-p04637-f1-model_v6.json",
+      "molbench/atom_tables/af-p04637-f1-model_v6.json.gz",
+      "molbench/sifts_tables/af-p04637-f1-model_v6.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "equivalent answer succeeds: the binary file of another model version, the flag in the load action, label numbers",
+      "wrong answer fails: the accession as molecule_id (not a PDB id: nothing loads) (F1 0.0)"
+    ],
+    "structure": "af-p04637-f1",
+    "derived": "The panel's frozen AlphaFold DB model. In pdbe-molstar 3.3.2 alphafold_view only switches the colouring to pLDDT; the model is loaded with custom_data from the AlphaFold DB URL pattern the API reference gives. An AlphaFold model is numbered as UniProt, so author and label numbers agree.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "needs_alphafold_url": true
+    },
+    "targets": [
+      {
+        "what": "residues 168-189",
+        "action": 2,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_label_seq_id": 168,
+          "end_label_seq_id": 189
+        },
+        "n_atoms": 174
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "custom-data",
+    "alphafold",
+    "tooltip"
+  ]
+}

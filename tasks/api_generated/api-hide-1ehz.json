@@ -1,0 +1,73 @@
+{
+  "id": "api-hide-1ehz",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-hide",
+  "structures": [
+    "1ehz"
+  ],
+  "prompt": "Load 1EHZ and hide the non-standard residues and the waters.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1ehz"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_non_standard",
+      "value": true
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1ehz.json",
+      "molbench/atom_tables/1ehz.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8015)"
+    ],
+    "structure": "1ehz",
+    "derived": "The entry has non-standard residues inside a polymer chain (the viewer's non-standard component) and waters.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "components_present": [
+        "ion",
+        "non-standard",
+        "polymer",
+        "water"
+      ],
+      "hide_kind": "non-standard"
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "hide"
+  ]
+}

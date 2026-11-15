@@ -1,0 +1,137 @@
+{
+  "id": "api-undo-9f69",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-undo",
+  "structures": [
+    "9f69"
+  ],
+  "prompt": "Load 9F69 and hide the waters. Select chain A (default selection colouring) to see where it is, then clear that selection again and colour only the methylmalonic acid (DXX) teal.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "9f69"
+    },
+    {
+      "action": "set_property",
+      "name": "hide_water",
+      "value": true
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A"
+        }
+      ]
+    },
+    {
+      "action": "clear_selection"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "DXX",
+          "color": "teal"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 301,
+          "auth_comp_id": "DXX"
+        }
+      ],
+      "representation": null,
+      "color": "teal"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/9f69.json",
+      "molbench/atom_tables/9f69.json.gz",
+      "molbench/sifts_tables/9f69.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: without the selection that is cleared",
+      "wrong answer fails: the chain left selected (F1 0.6667)"
+    ],
+    "structure": "9f69",
+    "derived": "The chain selection is cleared again, so the final state is the waters hidden and the ligand coloured; a list that skips the selection is right too.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "undo_step": "selection",
+      "ligand_code_in_prompt": true
+    },
+    "targets": [
+      {
+        "what": "chain A",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          },
+          {
+            "label_asym_id": "B"
+          },
+          {
+            "label_asym_id": "C"
+          },
+          {
+            "label_asym_id": "D"
+          }
+        ],
+        "n_atoms": 4040
+      },
+      {
+        "what": "DXX",
+        "action": 4,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 301,
+            "auth_comp_id": "DXX"
+          }
+        ],
+        "n_atoms": 12
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "hide",
+    "select-by-chain",
+    "clear-selection",
+    "select-by-ligand",
+    "color"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "api-layered-colour-1a3k",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-layered-colour",
+  "structures": [
+    "1a3k"
+  ],
+  "prompt": "Open 1A3K; residues 197 to 204 in plum, but Val202 in hot pink.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1a3k"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "start_auth_residue_number": 197,
+          "end_auth_residue_number": 204,
+          "color": "plum"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 202,
+          "color": "hotpink"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A",
+        "beg_label_seq_id": 84,
+        "end_label_seq_id": 91
+      },
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1a3k.json",
+      "molbench/atom_tables/1a3k.json.gz",
+      "molbench/sifts_tables/1a3k.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: two calls, the second with keep_colors",
+      "wrong answer fails: the residue first, the range over it (F1 0.6413)",
+      "wrong answer fails: two calls without keep_colors (the first colouring is removed) (F1 0.6667)"
+    ],
+    "structure": "1a3k",
+    "derived": "A seeded author-numbered range and one residue inside it. Later colouring lies over earlier colouring, and a second `color` call removes the first unless keep_colors is set.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "author_minus_label": [
+        113
+      ],
+      "insertion_codes_in_structure": false,
+      "order_matters": true,
+      "keep_colors_in_reference": false
+    },
+    "targets": [
+      {
+        "what": "residues 197-204 of chain A",
+        "action": 1,
+        "param": 0,
+        "atoms": {
+          "label_asym_id": "A",
+          "beg_label_seq_id": 84,
+          "end_label_seq_id": 91
+        },
+        "n_atoms": 66
+      },
+      {
+        "what": "Val202",
+        "action": 1,
+        "param": 1,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 202,
+            "auth_comp_id": "VAL"
+          }
+        ],
+        "n_atoms": 7
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "residue-range",
+    "author-numbering",
+    "color",
+    "color-order"
+  ]
+}

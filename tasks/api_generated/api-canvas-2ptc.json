@@ -1,0 +1,78 @@
+{
+  "id": "api-canvas-2ptc",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-canvas",
+  "structures": [
+    "2ptc"
+  ],
+  "prompt": "Open 2PTC for a slide: white background, plastic lighting, and let it spin.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "2ptc"
+    },
+    {
+      "action": "set_property",
+      "name": "bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "action": "set_property",
+      "name": "lighting",
+      "value": "plastic"
+    },
+    {
+      "action": "set_property",
+      "name": "spin",
+      "value": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/2ptc.json",
+      "molbench/atom_tables/2ptc.json.gz",
+      "molbench/sifts_tables/2ptc.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8)",
+      "equivalent answer succeeds: the settings before the load, a named background"
+    ],
+    "structure": "2ptc",
+    "derived": "Canvas settings only. Background and spin were read back from the viewer; lighting is compared as a declared setting.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "3 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "setting_only": [
+        "lighting"
+      ]
+    },
+    "targets": []
+  },
+  "skills": [
+    "load",
+    "set-background",
+    "lighting",
+    "spin"
+  ]
+}

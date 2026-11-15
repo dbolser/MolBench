@@ -1,0 +1,148 @@
+{
+  "id": "api-keep-sticks-3ngb",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-keep-sticks",
+  "structures": [
+    "3ngb"
+  ],
+  "prompt": "In 3NGB, show Tyr86 of chain C as ball-and-stick; as a second step, without removing that, show Ser123 of chain C as spacefill. Both in the usual element colours, with the cartoon's colours left alone.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "3ngb"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 86,
+          "color": null,
+          "representation": "ball-and-stick"
+        }
+      ]
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 123,
+          "color": null,
+          "representation": "spacefill"
+        }
+      ],
+      "keep_colors": true,
+      "keep_representations": true
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 86,
+          "auth_comp_id": "TYR"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": null
+    },
+    {
+      "selector": [
+        {
+          "auth_asym_id": "C",
+          "auth_seq_id": 123,
+          "auth_comp_id": "SER"
+        }
+      ],
+      "representation": "spacefill",
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/3ngb.json",
+      "molbench/atom_tables/3ngb.json.gz",
+      "molbench/sifts_tables/3ngb.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: one call with both residues",
+      "equivalent answer succeeds: two calls, the second with keep_representations only",
+      "wrong answer fails: two calls without keep_representations (the first representation is removed) (F1 0.6667)",
+      "wrong answer fails: no color key (the residues turn the default orange) (F1 0.75)"
+    ],
+    "structure": "3ngb",
+    "derived": "Two seeded residues as in api-residue-colour, each given an added representation in its own `color` call. A second call removes the representations the first one added unless keep_representations is set. (The reference keeps the colouring as well: 'keeping it' is everything the first step did, which here painted nothing.)",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "default_select_colour"
+      ],
+      "author_minus_label": [
+        2,
+        6
+      ],
+      "insertion_codes_in_structure": true,
+      "order_matters": true,
+      "keep_representations_in_reference": true
+    },
+    "targets": [
+      {
+        "what": "Tyr86",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "C",
+            "auth_seq_id": 86,
+            "auth_comp_id": "TYR"
+          }
+        ],
+        "n_atoms": 12
+      },
+      {
+        "what": "Ser123",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "C",
+            "auth_seq_id": 123,
+            "auth_comp_id": "SER"
+          }
+        ],
+        "n_atoms": 6
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "author-numbering",
+    "per-selection-representation",
+    "keep-representations"
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "api-ligand-5ni1",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-ligand",
+  "structures": [
+    "5ni1"
+  ],
+  "prompt": "In 5NI1, make the heme (HEM) bound to chain D brown and zoom in on it.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "5ni1"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "HEM",
+          "auth_asym_id": "D",
+          "color": "brown"
+        }
+      ]
+    },
+    {
+      "action": "focus",
+      "data": [
+        {
+          "label_comp_id": "HEM",
+          "auth_asym_id": "D"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 201,
+          "auth_comp_id": "HEM"
+        }
+      ],
+      "representation": null,
+      "color": "brown"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/5ni1.json",
+      "molbench/atom_tables/5ni1.json.gz",
+      "molbench/sifts_tables/5ni1.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
+      "equivalent answer succeeds: colour and focus in one call"
+    ],
+    "structure": "5ni1",
+    "derived": "A ligand of the entry (more than five heavy atoms, not a crystallisation additive) drawn by seed from the frozen facts. The request names its component code, so nothing has to be recalled; the copies are those the facts list.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true,
+      "ligand_copies": 4,
+      "one_copy_by_chain": true
+    },
+    "targets": [
+      {
+        "what": "HEM on chain D",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 201,
+            "auth_comp_id": "HEM"
+          }
+        ],
+        "n_atoms": 43
+      },
+      {
+        "what": "HEM on chain D",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 201,
+            "auth_comp_id": "HEM"
+          }
+        ],
+        "n_atoms": 43
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "select-by-ligand",
+    "color",
+    "focus"
+  ]
+}

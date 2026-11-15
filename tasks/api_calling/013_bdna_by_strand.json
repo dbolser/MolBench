@@ -1,7 +1,11 @@
 {
   "id": "api-013",
-  "category": "api_calling",
-  "title": "Colour B-DNA by strand",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-chain-colour",
+  "structures": [
+    "1bna"
+  ],
   "prompt": "Load the Drew-Dickerson B-DNA dodecamer (1BNA) as a cartoon, colour strand A blue and strand B red, and hide the waters.",
   "reference": [
     {
@@ -31,46 +35,79 @@
       "value": true
     }
   ],
+  "accepted": [],
+  "context": null,
+  "target": null,
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1bna.json",
+      "molbench/atom_tables/1bna.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8333)"
+    ],
+    "structure": "1bna",
+    "derived": "Two DNA chains, A and B (frozen facts).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": []
+    },
+    "targets": [
+      {
+        "what": "chain A",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          },
+          {
+            "label_asym_id": "C"
+          }
+        ],
+        "n_atoms": 280
+      },
+      {
+        "what": "chain B",
+        "action": 2,
+        "param": 1,
+        "atoms": [
+          {
+            "label_asym_id": "B"
+          },
+          {
+            "label_asym_id": "D"
+          }
+        ],
+        "n_atoms": 286
+      }
+    ],
+    "july_task": "unchanged"
+  },
   "skills": [
     "load",
     "global-style",
     "select-by-chain",
     "color",
-    "hide-component"
+    "hide"
   ],
-  "categories": [
-    "load",
-    "global-style",
-    "select-by-chain",
-    "color",
-    "hide-component"
-  ],
-  "provenance": {
-    "structure": "1bna",
-    "source": "RCSB mmCIF 1BNA -> molbench/atom_tables/1bna.json.gz (scripts/build_atom_tables.py)",
-    "derived": "Prompt unchanged. The July reference's hand-picked RGB values are replaced by the Mol* colour names blue and red.",
-    "july_task": "unchanged",
-    "checked_by": "scripts/check_api_refs.py",
-    "targets": [
-      {
-        "what": "strand A",
-        "action": 2,
-        "param": 0,
-        "atoms": {
-          "auth_asym_id": "A"
-        },
-        "n_atoms": 280
-      },
-      {
-        "what": "strand B",
-        "action": 2,
-        "param": 1,
-        "atoms": {
-          "auth_asym_id": "B"
-        },
-        "n_atoms": 286
-      }
-    ]
-  },
-  "notes": "Nucleic-acid task."
+  "title": "B-DNA by strand"
 }

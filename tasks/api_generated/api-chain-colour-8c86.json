@@ -1,0 +1,133 @@
+{
+  "id": "api-chain-colour-8c86",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-chain-colour",
+  "structures": [
+    "8c86"
+  ],
+  "prompt": "Load 8C86, switch the whole structure to the cartoon style, and colour chain A hot pink and chain B teal.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "8c86"
+    },
+    {
+      "action": "set_visual_style",
+      "style": "cartoon"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "A",
+          "color": "hotpink"
+        },
+        {
+          "auth_asym_id": "B",
+          "color": "teal"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "label_asym_id": "B"
+        },
+        {
+          "label_asym_id": "A"
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/8c86.json",
+      "molbench/atom_tables/8c86.json.gz",
+      "molbench/sifts_tables/8c86.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8333)",
+      "equivalent answer succeeds: label chain ids",
+      "wrong answer fails: the author letters in struct_asym_id (the label chain key) (F1 0.6667)"
+    ],
+    "structure": "8c86",
+    "derived": "Chains of an entry whose author chain ids differ from the label chain ids. The request uses the author ids (the letters in the paper). The cartoon style is asked for, so ligands and waters that share the author chain id are not drawn and every reading of 'chain X' agrees.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "chain_ids": {
+        "A": "B",
+        "B": "A"
+      },
+      "cartoon_style_removes_chain_ambiguity": true
+    },
+    "targets": [
+      {
+        "what": "chain A",
+        "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "label_asym_id": "B"
+          },
+          {
+            "label_asym_id": "D"
+          },
+          {
+            "label_asym_id": "F"
+          }
+        ],
+        "n_atoms": 2083
+      },
+      {
+        "what": "chain B",
+        "action": 2,
+        "param": 1,
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          },
+          {
+            "label_asym_id": "C"
+          },
+          {
+            "label_asym_id": "E"
+          }
+        ],
+        "n_atoms": 2067
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "select-by-chain",
+    "color",
+    "global-style"
+  ]
+}

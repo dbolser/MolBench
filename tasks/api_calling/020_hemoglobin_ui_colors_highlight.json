@@ -1,8 +1,12 @@
 {
   "id": "api-020",
-  "category": "api_calling",
-  "title": "Set UI colours and highlight the hemes",
-  "prompt": "Load haemoglobin (1HHO), set the hover-highlight colour to yellow and the selection colour to cyan, and highlight the heme groups.",
+  "track": "api",
+  "tier": "tool_only",
+  "family": "api-highlight",
+  "structures": [
+    "1hho"
+  ],
+  "prompt": "Load haemoglobin (1HHO), set the hover-highlight colour to yellow and the selection colour to cyan, and highlight the heme groups (HEM).",
   "reference": [
     {
       "action": "load",
@@ -42,36 +46,68 @@
         "action": "highlight",
         "data": [
           {
-            "auth_asym_id": "A",
-            "label_comp_id": "HEM"
-          },
-          {
-            "auth_asym_id": "B",
             "label_comp_id": "HEM"
           }
         ]
       }
     ]
   ],
-  "skills": [
-    "load",
-    "set-ui-colors",
-    "highlight"
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 143,
+          "auth_comp_id": "HEM"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 147,
+          "auth_comp_id": "HEM"
+        }
+      ],
+      "representation": null,
+      "color": null
+    }
   ],
-  "categories": [
-    "load",
-    "set-ui-colors",
-    "highlight"
-  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
   "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1hho.json",
+      "molbench/atom_tables/1hho.json.gz",
+      "molbench/sifts_tables/1hho.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8)"
+    ],
     "structure": "1hho",
-    "source": "RCSB mmCIF 1HHO -> molbench/atom_tables/1hho.json.gz (scripts/build_atom_tables.py)",
-    "derived": "The July task ended with a camera reset straight after loading, which changes nothing. It now ends with a highlight, an action no July task used. The UI colours can be set with set_color or with the highlight_color/select_color properties, in any colour format the viewer accepts (see `accepted`).",
-    "july_task": "reworded",
+    "derived": "Both heme groups, by component code (frozen facts).",
     "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 1",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true
+    },
     "targets": [
       {
-        "what": "both heme groups",
+        "what": "HEM",
         "action": 2,
         "param": 0,
         "atoms": [
@@ -88,7 +124,16 @@
         ],
         "n_atoms": 86
       }
-    ]
+    ],
+    "july_task": "reworded",
+    "prompt_change": "the ligand's component code added to the request (it was named in words only)"
   },
-  "notes": "Tests set_color and highlight."
+  "skills": [
+    "load",
+    "set-highlight-color",
+    "set-select-color",
+    "select-by-ligand",
+    "highlight"
+  ],
+  "title": "Highlight colours and a highlight"
 }

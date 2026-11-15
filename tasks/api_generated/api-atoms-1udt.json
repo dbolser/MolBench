@@ -1,0 +1,118 @@
+{
+  "id": "api-atoms-1udt",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-atoms",
+  "structures": [
+    "1udt"
+  ],
+  "prompt": "In 1UDT, colour just atoms N14 and N29 of the ligand VIA orange, not the rest of the ligand.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1udt"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "VIA",
+          "atoms": [
+            "N14",
+            "N29"
+          ],
+          "color": "orange"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 1000,
+          "auth_comp_id": "VIA",
+          "label_atom_id": "N14"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 1000,
+          "auth_comp_id": "VIA",
+          "label_atom_id": "N29"
+        }
+      ],
+      "representation": null,
+      "color": "orange"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1udt.json",
+      "molbench/atom_tables/1udt.json.gz",
+      "molbench/sifts_tables/1udt.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "equivalent answer succeeds: the ligand by author chain and number",
+      "wrong answer fails: the whole ligand (F1 0.1143)"
+    ],
+    "structure": "1udt",
+    "derived": "Atom names drawn by seed from the heavy atoms the facts list for a single-copy ligand (its metal, when it has one).",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [],
+      "ligand_code_in_prompt": true,
+      "atom_names_in_prompt": true
+    },
+    "targets": [
+      {
+        "what": "atoms N14 and N29 of the ligand VIA",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 1000,
+            "auth_comp_id": "VIA",
+            "label_atom_id": "N14"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 1000,
+            "auth_comp_id": "VIA",
+            "label_atom_id": "N29"
+          }
+        ],
+        "n_atoms": 2
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "select-by-ligand",
+    "select-atoms",
+    "color"
+  ]
+}

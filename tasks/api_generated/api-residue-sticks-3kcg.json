@@ -1,0 +1,159 @@
+{
+  "id": "api-residue-sticks-3kcg",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-residue-sticks",
+  "structures": [
+    "3kcg"
+  ],
+  "prompt": "In 3KCG, colour Leu105, Ala195 and Gly226 of chain H hot pink on the cartoon and add a hot pink ball-and-stick representation for them.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "3kcg"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 105,
+          "color": "hotpink",
+          "representation": "ball-and-stick",
+          "representationColor": "hotpink"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 195,
+          "color": "hotpink",
+          "representation": "ball-and-stick",
+          "representationColor": "hotpink"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 226,
+          "color": "hotpink",
+          "representation": "ball-and-stick",
+          "representationColor": "hotpink"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 105,
+          "auth_comp_id": "LEU"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 195,
+          "auth_comp_id": "ALA"
+        },
+        {
+          "auth_asym_id": "H",
+          "auth_seq_id": 226,
+          "auth_comp_id": "GLY"
+        }
+      ],
+      "representation": "ball-and-stick",
+      "color": "hotpink"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/3kcg.json",
+      "molbench/atom_tables/3kcg.json.gz",
+      "molbench/sifts_tables/3kcg.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 3 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5143)",
+      "equivalent answer succeeds: label chain and label number",
+      "wrong answer fails: no representationColor (the added representation stays element-coloured) (F1 0.5)",
+      "wrong answer fails: the author number in residue_number (F1 0.0)"
+    ],
+    "structure": "3kcg",
+    "derived": "As api-residue-colour, plus an added representation in the same colour. In pdbe-molstar 3.3.2 `color` paints only the representations the structure already has; the added one takes its colour from `representationColor`.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "2 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "added_representation_colour"
+      ],
+      "author_minus_label": [
+        10,
+        13
+      ],
+      "insertion_codes_in_structure": true
+    },
+    "targets": [
+      {
+        "what": "Leu105",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 105,
+            "auth_comp_id": "LEU"
+          }
+        ],
+        "n_atoms": 8
+      },
+      {
+        "what": "Ala195",
+        "action": 1,
+        "param": 1,
+        "atoms": [
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 195,
+            "auth_comp_id": "ALA"
+          }
+        ],
+        "n_atoms": 5
+      },
+      {
+        "what": "Gly226",
+        "action": 1,
+        "param": 2,
+        "atoms": [
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 226,
+            "auth_comp_id": "GLY"
+          }
+        ],
+        "n_atoms": 4
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "author-numbering",
+    "color",
+    "per-selection-representation"
+  ]
+}
