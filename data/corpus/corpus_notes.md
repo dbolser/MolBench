@@ -59,13 +59,13 @@
 | `scripts/validate_tasks.py --final` | OK: every check passed (885 tasks, 0 old-format) |
 | `scripts/check_api_refs.py --cif` (offline, all 458 API task files) | all checks passed |
 | `check_api_refs.py --viewer --sample 60 --seed 20261116 --no-probes` | 153 call lists (references and accepted forms) run in pdbe-molstar 3.3.2, 396 selections compared atom for atom, all agree; 1 list skipped (settings only) |
-| `check_api_refs.py --viewer --no-probes --only` every API task file changed or added since the merge (VIEWER_CHANGED_N) | VIEWER_CHANGED_RESULT |
+| `check_api_refs.py --viewer --no-probes --only` every API task file changed or added since the merge (277 files) | 705 call lists run in pdbe-molstar 3.3.2, 1,645 selections compared atom for atom, all agree; 0 lists skipped (settings only) |
 | `generate_mvs_tasks.py --check --viewer` (translation tier, with `tr-nucleic`) | 76 scenes of 73 tasks loaded in Mol\* 5.9.0; 0 differ |
 | `generate_followup_tasks.py --check --viewer` | 106 scenes drawn in Mol\*, 0 differ; 76 call lists in pdbe-molstar, 181 selections, 0 differ |
 | `generate_accept_set_tasks.py --check --viewer` | 87 MVS states loaded in Mol\* 5.9.0, 0 differ |
 | `build_atom_tables.py --verify --check` on the 15 component selectors of the 10 new clinical MVS references (9 structures, four of them AlphaFold models) | exit 0, every selector agrees with Mol\*; the rebuilt tables are byte-identical |
 | `scripts/grader_controls.py --check` | up to date; MVS 1,090 controls on 78 entries, API 910 on 69: 0 false passes, 0 false fails |
-| `uv run pytest -q` | PYTEST_RESULT |
+| `uv run pytest -q` | 2,696 passed |
 
 Not re-run in this pass: the manifest dry run and its cost projection (the runner is
 being changed in another worktree; the corpus is 16 task files larger than at the merge,

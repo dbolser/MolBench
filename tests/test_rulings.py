@@ -150,3 +150,8 @@ def test_no_uniprot_task_on_a_tandem_repeat_entry():
     for t in ORIGINALS:
         if t["family"].startswith("api-uniprot"):
             assert "P0CG48" not in json.dumps(t["reference"]) and "P0CG48" not in t["prompt"], t["id"]
+
+
+def test_corpus_md_is_what_the_report_script_writes():
+    import corpus_report
+    assert corpus_report.main(["--check"]) == 0
