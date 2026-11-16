@@ -64,7 +64,7 @@
 | `generate_followup_tasks.py --check --viewer` | 106 scenes drawn in Mol\*, 0 differ; 76 call lists in pdbe-molstar, 181 selections, 0 differ |
 | `generate_accept_set_tasks.py --check --viewer` | 87 MVS states loaded in Mol\* 5.9.0, 0 differ |
 | `build_atom_tables.py --verify --check` on the 15 component selectors of the 10 new clinical MVS references (9 structures, four of them AlphaFold models) | exit 0, every selector agrees with Mol\*; the rebuilt tables are byte-identical |
-| `scripts/grader_controls.py --check` | up to date; MVS 1,090 controls on 78 entries, API 850: 0 false passes, 0 false fails |
+| `scripts/grader_controls.py --check` | up to date; MVS 1,090 controls on 78 entries, API 910 on 69: 0 false passes, 0 false fails |
 | `uv run pytest -q` | PYTEST_RESULT |
 
 Not re-run in this pass: the manifest dry run and its cost projection (the runner is

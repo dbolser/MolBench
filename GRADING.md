@@ -420,6 +420,14 @@ and an answer whose verdict is known from how the pair was made.
   colour; a nearby shade; another representation; a missing or an extra component;
   another copy of the ligand; another entry; …). Must fail.
 
+Five kinds are about unstated attributes: on the MVS track a reference with no colour
+node answered in a palette colour (must pass) and answered with the stated colour all
+over (must fail); on the API track "a grey cartoon and the ligand in a colour" answered
+on the viewer's default view (must pass; these controls carry the task's accepted call
+forms), with another ligand colour, and without the grey (must fail). The viewer shows
+two different pictures for the must-pass pairs by construction, so their verdict is the
+ruling's, not the viewer's.
+
 A **false pass** is a wrong answer graded as a success; a **false fail** is an identical
 or equivalent answer graded as not a success. The numbers are in
 `tests/controls/summary.json` (per track and per kind), and `tests/test_controls.py`
@@ -428,7 +436,7 @@ fails if the grader stops agreeing with any control.
 | track | controls | kinds (equivalent / wrong) | false pass | false fail | graders before this work: false pass / false fail |
 |---|---|---|---|---|---|
 | MVS | 1,090 on 78 entries | 24 / 23 | 0 of 460 | 0 of 630 | 0 of 460 / 264 of 630 (October path grader, F1 = 1 as success) |
-| API | 850 on 69 entries | 18 / 17 | 0 of 340 | 0 of 510 | 75 of 340 / 246 of 510 (July sequence grader, F1 = 1 as success) |
+| API | 910 on 69 entries | 19 / 19 | 0 of 380 | 0 of 530 | 75 of 380 / 266 of 530 (July sequence grader, F1 = 1 as success) |
 
 Read these zeros with care: the grader was corrected until it agreed with every
 control, so they show that the rules above are implemented, not how often an unforeseen

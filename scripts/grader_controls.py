@@ -49,9 +49,11 @@ from typing import Any, Callable
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(REPO / "scripts"))
 
 from molbench import atoms, drawn, grader, grounding, mvs, sifts  # noqa: E402
 from molbench import pdbe_state as ps  # noqa: E402
+import api_forms  # noqa: E402
 
 OUT = REPO / "tests" / "controls"
 SEED = 20261112
@@ -1143,7 +1145,66 @@ def _(c: Ctx):
     return mk(representation="ball-and-stick"), mk(sideChain=True)
 
 
+def _default_view_task(c: Ctx):
+    """'<entry> as a grey cartoon with the ligand <code> in <colour> ball-and-stick', as
+    an API task: the reference sets the cartoon style, and the call forms that reach the
+    cartoon by the viewer's default are accepted (scripts/api_forms.py; GRADING.md,
+    "Unstated attributes are free"). Returns (reference, accepted, component code)."""
+    lig = c.ligand()
+    if lig is None:
+        return None
+    comp = lig["comp_id"]
+    ref = [load(c.e), {"action": "set_visual_style", "style": "cartoon"},
+           {"action": "color", "non_selected_color": "gray", "data": [
+               {"label_comp_id": comp, "representation": "ball-and-stick", "representationColor": c.c1}]}]
+    kept = api_forms.accepted_forms(ref, api_forms.cartoon_forms(ref), {"selector": {"label_comp_id": comp}})
+    if not kept or kept[0][0] != api_forms.BACKDROP:
+        return None
+    return ref, [calls for _, calls in kept], comp
+
+
+@control(API_EQUIVALENT, "unstated_default_view",
+         "a grey cartoon and a coloured ligand are asked for: the answer leaves the cartoon to the "
+         "viewer's default view and paints the ligand (water and other components stay on screen, "
+         "which the request does not mention)", viewer=False)
+@_api
+def _(c: Ctx):
+    made = _default_view_task(c)
+    if made is None:
+        return None
+    ref, accepted, comp = made
+    pred = [load(c.e), {"action": "color", "non_selected_color": rgb("gray"),
+                        "data": [{"label_comp_id": comp, "color": hexcolor(c.c1)}]}]
+    return ref, pred, accepted
+
+
 # --- API: wrong answers ---------------------------------------------------------------
+
+@control(API_WRONG, "unstated_default_view_wrong_colour",
+         "the default-view answer to 'grey cartoon, ligand in <colour>' with the ligand in another "
+         "palette colour: what the request states still has to match", viewer=False)
+@_api
+def _(c: Ctx):
+    made = _default_view_task(c)
+    if made is None:
+        return None
+    ref, accepted, comp = made
+    pred = [load(c.e), {"action": "color", "non_selected_color": "gray",
+                        "data": [{"label_comp_id": comp, "color": c.c2}]}]
+    return ref, pred, accepted
+
+
+@control(API_WRONG, "unstated_default_view_no_backdrop",
+         "the default-view answer to 'grey cartoon, ligand in <colour>' without the grey: the "
+         "cartoon keeps the viewer's chain colours, and grey was stated", viewer=False)
+@_api
+def _(c: Ctx):
+    made = _default_view_task(c)
+    if made is None:
+        return None
+    ref, accepted, comp = made
+    return ref, [load(c.e), {"action": "color", "data": [{"label_comp_id": comp, "color": c.c1}]}], accepted
+
 
 @control(API_WRONG, "residue_off_by_one", "the neighbouring residue is coloured")
 @_api
@@ -1365,13 +1426,15 @@ def build(seed: int = SEED, per_kind: int = PER_KIND) -> dict[str, list[dict]]:
                     made = fn(c)
                     if made is None:
                         continue
-                    ref, pred = made
+                    ref, pred, *more = made
                     n += 1
                     out[track].append({
                         "id": f"{track}-{group}-{kind}-{eid}", "track": track, "group": group,
                         "kind": kind, "what": what, "entry": eid,
                         "expect": "pass" if group == "equivalent" else "fail",
-                        "viewer": viewer, "reference": ref, "prediction": pred})
+                        "viewer": viewer, "reference": ref, "prediction": pred,
+                        # a task's accepted alternatives, for the kinds that are about them
+                        **({"accepted": more[0]} if more else {})})
                     identical.setdefault(json.dumps(ref, sort_keys=True), (kind, eid, ref))
         every = sorted(identical.values(), key=lambda x: (x[1], x[0], json.dumps(x[2], sort_keys=True)))
         random.Random(f"{seed}:{track}:identical").shuffle(every)
@@ -1386,7 +1449,8 @@ def build(seed: int = SEED, per_kind: int = PER_KIND) -> dict[str, list[dict]]:
 def as_task(ctl: dict) -> dict:
     if ctl["track"] == "mvs":
         return {"id": ctl["id"], "category": "mvs", "reference_mvs": ctl["reference"]}
-    return {"id": ctl["id"], "category": "api_calling", "reference": ctl["reference"]}
+    return {"id": ctl["id"], "category": "api_calling", "reference": ctl["reference"],
+            **({"accepted": ctl["accepted"]} if ctl.get("accepted") else {})}
 
 
 def old_success(ctl: dict) -> bool:

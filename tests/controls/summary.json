@@ -530,27 +530,27 @@
    ]
   },
   "api": {
-   "n_controls": 850,
+   "n_controls": 910,
    "n_identical": 150,
-   "n_equivalent": 360,
-   "n_wrong": 340,
-   "n_equivalent_kinds": 18,
-   "n_wrong_kinds": 17,
+   "n_equivalent": 380,
+   "n_wrong": 380,
+   "n_equivalent_kinds": 19,
+   "n_wrong_kinds": 19,
    "n_entries": 69,
    "grader": {
     "false_pass": {
      "errors": 0,
-     "n": 340,
+     "n": 380,
      "rate": 0.0
     },
     "false_fail": {
      "errors": 0,
-     "n": 510,
+     "n": 530,
      "rate": 0.0
     },
     "false_fail_equivalent_only": {
      "errors": 0,
-     "n": 360,
+     "n": 380,
      "rate": 0.0
     }
    },
@@ -558,18 +558,18 @@
     "what": "July sequence grader, F1 = 1 taken as success",
     "false_pass": {
      "errors": 75,
-     "n": 340,
-     "rate": 0.2206
+     "n": 380,
+     "rate": 0.1974
     },
     "false_fail": {
-     "errors": 246,
-     "n": 510,
-     "rate": 0.4824
+     "errors": 266,
+     "n": 530,
+     "rate": 0.5019
     },
     "false_fail_equivalent_only": {
-     "errors": 246,
-     "n": 360,
-     "rate": 0.6833
+     "errors": 266,
+     "n": 380,
+     "rate": 0.7
     }
    },
    "mistakes": [],
@@ -755,6 +755,16 @@
      "mean_target_f1": 1.0
     },
     {
+     "group": "equivalent",
+     "kind": "unstated_default_view",
+     "what": "a grey cartoon and a coloured ligand are asked for: the answer leaves the cartoon to the viewer's default view and paints the ligand (water and other components stay on screen, which the request does not mention)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
      "group": "identical",
      "kind": "identical",
      "what": "the answer is the reference itself",
@@ -883,6 +893,26 @@
      "old_grader_success": 0,
      "mean_f1": 0.0,
      "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "unstated_default_view_no_backdrop",
+     "what": "the default-view answer to 'grey cartoon, ligand in <colour>' without the grey: the cartoon keeps the viewer's chain colours, and grey was stated",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5667,
+     "mean_target_f1": 0.3425
+    },
+    {
+     "group": "wrong",
+     "kind": "unstated_default_view_wrong_colour",
+     "what": "the default-view answer to 'grey cartoon, ligand in <colour>' with the ligand in another palette colour: what the request states still has to match",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.8621,
+     "mean_target_f1": 0.8621
     },
     {
      "group": "wrong",
