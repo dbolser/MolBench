@@ -1,16 +1,16 @@
 {
-  "id": "gr-nucleic-1aay-api",
+  "id": "tr-nucleic-1lmb-api",
   "track": "api",
-  "tier": "grounded",
-  "family": "gr-nucleic",
+  "tier": "translation",
+  "family": "tr-nucleic",
   "structures": [
-    "1aay"
+    "1lmb"
   ],
-  "prompt": "1AAY, cartoon: DNA khaki, protein salmon.",
+  "prompt": "1LMB, cartoon: DNA steel blue, protein cyan.",
   "reference": [
     {
       "action": "load",
-      "molecule_id": "1aay"
+      "molecule_id": "1lmb"
     },
     {
       "action": "set_visual_style",
@@ -21,15 +21,15 @@
       "data": [
         {
           "entity_id": "3",
-          "color": "salmon"
+          "color": "cyan"
         },
         {
           "entity_id": "1",
-          "color": "khaki"
+          "color": "steelblue"
         },
         {
           "entity_id": "2",
-          "color": "khaki"
+          "color": "steelblue"
         }
       ]
     }
@@ -40,19 +40,19 @@
     {
       "selector": "nucleic",
       "representation": "cartoon",
-      "color": "khaki"
+      "color": "steelblue"
     }
   ],
-  "twin_of": "gr-nucleic-1aay",
+  "twin_of": "tr-nucleic-1lmb",
   "paraphrase_of": null,
   "style": "full",
-  "split": "public",
+  "split": "heldback",
   "grounding": null,
   "provenance": {
     "script": "scripts/translate_mvs_to_api.py",
     "inputs": [
-      "tasks/mvs_grounded/gr-nucleic-1aay.json",
-      "molbench/atom_tables/1aay.json.gz"
+      "tasks/mvs_generated/tr-nucleic-1lmb.json",
+      "molbench/atom_tables/1lmb.json.gz"
     ],
     "date": "2026-11-13",
     "checks": [
@@ -62,7 +62,7 @@
       "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
     ],
     "twin": {
-      "of": "gr-nucleic-1aay",
+      "of": "tr-nucleic-1lmb",
       "base": "the cartoon style",
       "switched_off": [],
       "added_representations": 0,
@@ -74,7 +74,7 @@
       "insertion_code": false,
       "needs_ligand_identity": false,
       "needs_uniprot_mapping": false,
-      "needs_structure_lookup": true,
+      "needs_structure_lookup": false,
       "selector_keys": {
         "entity_id": 3
       },

@@ -27,7 +27,6 @@ Run this script after every MVS generator, then `scripts/generate_paraphrases.py
 | grounded | `gr-longest-helix` | 4 | 4 |
 | grounded | `gr-metal-site` | 6 | 6 |
 | grounded | `gr-modres` | 5 | 5 |
-| grounded | `gr-nucleic` | 5 | 5 |
 | grounded | `gr-secstruct` | 4 | 4 |
 | interactions | `in-ca-distance` | 5 | 0 |
 | interactions | `in-computed` | 5 | 0 |
@@ -51,6 +50,7 @@ Run this script after every MVS generator, then `scripts/generate_paraphrases.py
 | translation | `tr-het-code` | 4 | 4 |
 | translation | `tr-ions` | 4 | 4 |
 | translation | `tr-ligands` | 4 | 4 |
+| translation | `tr-nucleic` | 5 | 5 |
 | translation | `tr-range-labels` | 4 | 0 |
 | translation | `tr-range-rows` | 4 | 4 |
 | translation | `tr-range-sticks` | 5 | 5 |

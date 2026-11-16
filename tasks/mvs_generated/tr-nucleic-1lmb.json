@@ -1,12 +1,12 @@
 {
- "id": "gr-nucleic-1tup",
+ "id": "tr-nucleic-1lmb",
  "track": "mvs",
- "tier": "grounded",
- "family": "gr-nucleic",
+ "tier": "translation",
+ "family": "tr-nucleic",
  "structures": [
-  "1tup"
+  "1lmb"
  ],
- "prompt": "1TUP, cartoon: DNA salmon, protein blue.",
+ "prompt": "1LMB, cartoon: DNA steel blue, protein cyan.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1tup.cif"
+      "url": "https://files.rcsb.org/download/1lmb.cif"
      },
      "children": [
       {
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "salmon"
+                "color": "steelblue"
                }
               }
              ]
@@ -66,7 +66,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "blue"
+                "color": "cyan"
                }
               }
              ]
@@ -88,26 +88,26 @@
   {
    "selector": "nucleic",
    "representation": "cartoon",
-   "color": "salmon"
+   "color": "steelblue"
   }
  ],
- "twin_of": "gr-nucleic-1tup-api",
+ "twin_of": "tr-nucleic-1lmb-api",
  "paraphrase_of": null,
  "style": "full",
- "split": "public",
+ "split": "heldback",
  "grounding": null,
  "provenance": {
-  "script": "scripts/generate_grounded_tasks.py",
+  "script": "scripts/generate_mvs_tasks.py",
   "inputs": [
-   "data/panel/facts/1tup.json",
-   "molbench/atom_tables/1tup.json.gz",
-   "data/panel/cif/1tup.cif.gz"
+   "data/panel/facts/1lmb.json",
+   "molbench/atom_tables/1lmb.json.gz",
+   "data/panel/cif/1lmb.cif.gz"
   ],
   "date": "2026-11-13",
   "checks": [
-   "Mol*'s `nucleic` selection is exactly the DNA chains of the facts (E, F)",
+   "Mol*'s `nucleic` selection is exactly the DNA chains of the facts (1, 2)",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 855 atoms on the frozen atom table"
+   "target selects 814 atoms on the frozen atom table"
   ],
   "derivation": "Mol*'s `nucleic` and `protein` selections, one cartoon each",
   "difficulty": {
@@ -116,7 +116,7 @@
    "insertion_code": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
-   "needs_structure_lookup": true
+   "needs_structure_lookup": false
   }
  },
  "skills": [

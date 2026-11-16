@@ -1,8 +1,8 @@
 {
-  "id": "gr-nucleic-1kf1-api",
+  "id": "tr-nucleic-1kf1-api",
   "track": "api",
-  "tier": "grounded",
-  "family": "gr-nucleic",
+  "tier": "translation",
+  "family": "tr-nucleic",
   "structures": [
     "1kf1"
   ],
@@ -34,7 +34,7 @@
       "color": "steelblue"
     }
   ],
-  "twin_of": "gr-nucleic-1kf1",
+  "twin_of": "tr-nucleic-1kf1",
   "paraphrase_of": null,
   "style": "full",
   "split": "public",
@@ -42,7 +42,7 @@
   "provenance": {
     "script": "scripts/translate_mvs_to_api.py",
     "inputs": [
-      "tasks/mvs_grounded/gr-nucleic-1kf1.json",
+      "tasks/mvs_generated/tr-nucleic-1kf1.json",
       "molbench/atom_tables/1kf1.json.gz"
     ],
     "date": "2026-11-13",
@@ -53,7 +53,7 @@
       "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
     ],
     "twin": {
-      "of": "gr-nucleic-1kf1",
+      "of": "tr-nucleic-1kf1",
       "base": "the cartoon style",
       "switched_off": [],
       "added_representations": 0,
@@ -65,7 +65,7 @@
       "insertion_code": false,
       "needs_ligand_identity": false,
       "needs_uniprot_mapping": false,
-      "needs_structure_lookup": true,
+      "needs_structure_lookup": false,
       "selector_keys": {},
       "numbering_offset": false,
       "auth_label_chain": false,

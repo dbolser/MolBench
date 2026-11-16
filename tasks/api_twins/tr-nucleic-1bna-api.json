@@ -1,16 +1,16 @@
 {
-  "id": "gr-nucleic-1lmb-api",
+  "id": "tr-nucleic-1bna-api",
   "track": "api",
-  "tier": "grounded",
-  "family": "gr-nucleic",
+  "tier": "translation",
+  "family": "tr-nucleic",
   "structures": [
-    "1lmb"
+    "1bna"
   ],
-  "prompt": "1LMB, cartoon: DNA steel blue, protein cyan.",
+  "prompt": "Load 1BNA and show only the DNA, as a lime green cartoon. No water, no ions.",
   "reference": [
     {
       "action": "load",
-      "molecule_id": "1lmb"
+      "molecule_id": "1bna"
     },
     {
       "action": "set_visual_style",
@@ -20,16 +20,7 @@
       "action": "color",
       "data": [
         {
-          "entity_id": "3",
-          "color": "cyan"
-        },
-        {
-          "entity_id": "1",
-          "color": "steelblue"
-        },
-        {
-          "entity_id": "2",
-          "color": "steelblue"
+          "color": "limegreen"
         }
       ]
     }
@@ -40,19 +31,19 @@
     {
       "selector": "nucleic",
       "representation": "cartoon",
-      "color": "steelblue"
+      "color": "limegreen"
     }
   ],
-  "twin_of": "gr-nucleic-1lmb",
+  "twin_of": "tr-nucleic-1bna",
   "paraphrase_of": null,
   "style": "full",
-  "split": "heldback",
+  "split": "public",
   "grounding": null,
   "provenance": {
     "script": "scripts/translate_mvs_to_api.py",
     "inputs": [
-      "tasks/mvs_grounded/gr-nucleic-1lmb.json",
-      "molbench/atom_tables/1lmb.json.gz"
+      "tasks/mvs_generated/tr-nucleic-1bna.json",
+      "molbench/atom_tables/1bna.json.gz"
     ],
     "date": "2026-11-13",
     "checks": [
@@ -62,11 +53,11 @@
       "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
     ],
     "twin": {
-      "of": "gr-nucleic-1lmb",
+      "of": "tr-nucleic-1bna",
       "base": "the cartoon style",
       "switched_off": [],
       "added_representations": 0,
-      "colour_classes": 2
+      "colour_classes": 1
     },
     "difficulty": {
       "author_number_differs_from_label": false,
@@ -74,12 +65,10 @@
       "insertion_code": false,
       "needs_ligand_identity": false,
       "needs_uniprot_mapping": false,
-      "needs_structure_lookup": true,
-      "selector_keys": {
-        "entity_id": 3
-      },
-      "numbering_offset": true,
-      "auth_label_chain": true,
+      "needs_structure_lookup": false,
+      "selector_keys": {},
+      "numbering_offset": false,
+      "auth_label_chain": false,
       "hinges_on": [],
       "order_matters": true,
       "context_switched_off": []
@@ -88,7 +77,6 @@
   "skills": [
     "load",
     "representation",
-    "color",
-    "multi-component"
+    "color"
   ]
 }

@@ -24,6 +24,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import mvscore_common as C  # noqa: E402
+import generate_grounded_tasks as grounded  # noqa: E402
 
 OUT = C.REPO / "tasks" / "mvs_generated"
 SCRIPT = "scripts/generate_mvs_tasks.py"
@@ -654,6 +655,9 @@ TEMPLATES = {
 }
 
 DERIVED = {
+    "tr-nucleic": "Mol*'s `nucleic` (and `protein`) selection, checked to be exactly the DNA "
+                  "or RNA chains of the facts. Built by the grounded generator's template "
+                  "on that tier's choice of structures; it needs no lookup, so it is here.",
     "tr-cartoon": "Mol*'s `polymer` selection (frozen atom table).",
     "tr-surface": "`polymer`, on entries whose only polymer is protein.",
     "tr-rep-word": "`polymer` in the representation the prompt's word means (wireframe = "
@@ -703,6 +707,8 @@ def build() -> list[dict]:
                 derivation=c["derivation"],
                 difficulty=C.difficulty(entry, c["numbering"]),
                 accepted=c["accepted"]))
+    # templates built with the grounded tier's machinery that need no lookup
+    built += grounded.moved_to_translation()
     return sorted(built, key=lambda t: t["id"])
 
 

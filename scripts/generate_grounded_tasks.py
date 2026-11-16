@@ -998,8 +998,6 @@ DERIVED = {
     "gr-longest-helix": ("the longest helix", "The helix record with the most observed "
                          "residues, when it leads by 3 or more; the prompt says the "
                          "entry's own helix annotation is meant."),
-    "gr-nucleic": ("the DNA / the RNA", "Mol*'s `nucleic` selection, checked to be exactly the "
-                   "DNA or RNA chains of the facts."),
     "gr-entity": ("named subunits", "Chains of each polymer entity; the prompt's name for an "
                   "entity must match exactly one entity description."),
     "gr-catalytic": ("catalytic residues", "UniProt 'Active site' features (frozen), mapped "
@@ -1021,7 +1019,15 @@ def one_per_protein(cands: list[dict]) -> list[dict]:
             for acc, v in sorted(by_acc.items())]
 
 
-def build() -> list[dict]:
+#: Templates that need no lookup and so belong to the translation tier (ruling of
+#: 2026-11-15: "the DNA" is Mol*'s own `nucleic` selection, nothing has to be found in
+#: the entry). template here -> template id there. The template keeps its place in the
+#: order above, so the structures of every other grounded template stay as they were;
+#: its tasks are written by ``scripts/generate_mvs_tasks.py`` (``moved_to_translation``).
+MOVED_TO_TRANSLATION = {"gr-nucleic": "tr-nucleic"}
+
+
+def _build(moved: bool) -> list[dict]:
     picker = C.Picker(TIER)
     built = []
     for family, (fn, n) in TEMPLATES.items():
@@ -1030,11 +1036,23 @@ def build() -> list[dict]:
             cands = one_per_protein(cands)
         chosen = picker.choose(family, cands, n, entry_of=lambda c: c["entry"])
         C.enough(family, chosen, n)
+        if (family in MOVED_TO_TRANSLATION) != moved:
+            continue
         for c in chosen:
             entry = c["entry"]
             tid = f"{family}-{entry}" + (f"-{c['suffix']}" if c["suffix"] else "")
             wording = C.pick(c["wordings"], "wording", family, tid)
             prompt = wording.format(ID=entry.upper(), **c["words"])
+            if moved:
+                new_family = MOVED_TO_TRANSLATION[family]
+                built.append(C.make_task(
+                    new_family + tid[len(family):], "translation", new_family, entry, prompt,
+                    C.scene(entry, c["children"]), c["target"],
+                    script="scripts/generate_mvs_tasks.py",
+                    input_files=C.inputs(entry, *c["extra_inputs"]),
+                    derivation=c["derivation"], checks=c["checks"],
+                    difficulty=C.difficulty(entry, c["numbering"]), provenance=c["more"]))
+                continue
             built.append(C.make_task(
                 tid, TIER, family, entry, prompt, C.scene(entry, c["children"]), c["target"],
                 script=SCRIPT, input_files=C.inputs(entry, *c["extra_inputs"]),
@@ -1042,6 +1060,15 @@ def build() -> list[dict]:
                 difficulty=C.difficulty(entry, c["numbering"], **c["flags"]),
                 provenance=c["more"]))
     return sorted(built, key=lambda t: t["id"])
+
+
+def build() -> list[dict]:
+    return _build(moved=False)
+
+
+def moved_to_translation() -> list[dict]:
+    """The tasks of the templates in ``MOVED_TO_TRANSLATION``, as translation-tier tasks."""
+    return _build(moved=True)
 
 
 def readme(built: list[dict]) -> str:
@@ -1056,6 +1083,10 @@ frozen mmCIF with gemmi; the check and its numbers are in each task's
 there because the prompt asks for it).
 
 {C.summary_tables(built)}
+
+A request that needs no lookup is not in this tier: "the DNA" is Mol*'s own `nucleic`
+selection, so that template (`tr-nucleic`, built in this script with this tier's choice
+of structures) is written to the translation tier by `scripts/generate_mvs_tasks.py`.
 
 ## How each reference is derived
 

@@ -1,12 +1,12 @@
 {
- "id": "gr-nucleic-1kf1",
+ "id": "tr-nucleic-1aay",
  "track": "mvs",
- "tier": "grounded",
- "family": "gr-nucleic",
+ "tier": "translation",
+ "family": "tr-nucleic",
  "structures": [
-  "1kf1"
+  "1aay"
  ],
- "prompt": "1KF1: the DNA alone, as a steel blue cartoon.",
+ "prompt": "1AAY, cartoon: DNA khaki, protein salmon.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://files.rcsb.org/download/1kf1.cif"
+      "url": "https://files.rcsb.org/download/1aay.cif"
      },
      "children": [
       {
@@ -44,7 +44,29 @@
               {
                "kind": "color",
                "params": {
-                "color": "steelblue"
+                "color": "khaki"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": "protein"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "salmon"
                }
               }
              ]
@@ -66,40 +88,41 @@
   {
    "selector": "nucleic",
    "representation": "cartoon",
-   "color": "steelblue"
+   "color": "khaki"
   }
  ],
- "twin_of": "gr-nucleic-1kf1-api",
+ "twin_of": "tr-nucleic-1aay-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
  "grounding": null,
  "provenance": {
-  "script": "scripts/generate_grounded_tasks.py",
+  "script": "scripts/generate_mvs_tasks.py",
   "inputs": [
-   "data/panel/facts/1kf1.json",
-   "molbench/atom_tables/1kf1.json.gz",
-   "data/panel/cif/1kf1.cif.gz"
+   "data/panel/facts/1aay.json",
+   "molbench/atom_tables/1aay.json.gz",
+   "data/panel/cif/1aay.cif.gz"
   ],
   "date": "2026-11-13",
   "checks": [
-   "Mol*'s `nucleic` selection is exactly the DNA chains of the facts (A)",
+   "Mol*'s `nucleic` selection is exactly the DNA chains of the facts (B, C)",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 465 atoms on the frozen atom table"
+   "target selects 445 atoms on the frozen atom table"
   ],
-  "derivation": "Mol*'s `nucleic` selection in one representation; nothing else is drawn",
+  "derivation": "Mol*'s `nucleic` and `protein` selections, one cartoon each",
   "difficulty": {
    "author_number_differs_from_label": false,
    "author_chain_differs_from_label": false,
    "insertion_code": false,
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
-   "needs_structure_lookup": true
+   "needs_structure_lookup": false
   }
  },
  "skills": [
   "load",
   "representation",
-  "color"
+  "color",
+  "multi-component"
  ]
 }

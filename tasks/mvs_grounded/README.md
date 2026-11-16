@@ -9,23 +9,26 @@ there because the prompt asks for it).
 
 | template | public | held back | total | share |
 |---|---:|---:|---:|---:|
-| `gr-all-but-chain` | 2 | 1 | 3 | 4% |
+| `gr-all-but-chain` | 2 | 1 | 3 | 5% |
 | `gr-attachment` | 4 | 0 | 4 | 6% |
-| `gr-catalytic` | 5 | 1 | 6 | 9% |
-| `gr-disulfides` | 5 | 1 | 6 | 9% |
-| `gr-entity` | 5 | 1 | 6 | 9% |
-| `gr-glyco-sites` | 4 | 1 | 5 | 7% |
+| `gr-catalytic` | 5 | 1 | 6 | 10% |
+| `gr-disulfides` | 5 | 1 | 6 | 10% |
+| `gr-entity` | 5 | 1 | 6 | 10% |
+| `gr-glyco-sites` | 4 | 1 | 5 | 8% |
 | `gr-heme` | 3 | 1 | 4 | 6% |
 | `gr-heme-axial` | 3 | 1 | 4 | 6% |
-| `gr-ligand` | 5 | 1 | 6 | 9% |
+| `gr-ligand` | 5 | 1 | 6 | 10% |
 | `gr-longest-helix` | 3 | 1 | 4 | 6% |
-| `gr-metal-site` | 5 | 1 | 6 | 9% |
-| `gr-modres` | 5 | 0 | 5 | 7% |
-| `gr-nucleic` | 4 | 1 | 5 | 7% |
+| `gr-metal-site` | 5 | 1 | 6 | 10% |
+| `gr-modres` | 5 | 0 | 5 | 8% |
 | `gr-secstruct` | 3 | 1 | 4 | 6% |
-| **all** | 56 | 12 | 68 | 100% |
+| **all** | 52 | 11 | 63 | 100% |
 
-Structures: 59 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
+Structures: 55 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8CE0, 8K7F). Most tasks on one structure: 2 (cap 6).
+
+A request that needs no lookup is not in this tier: "the DNA" is Mol*'s own `nucleic`
+selection, so that template (`tr-nucleic`, built in this script with this tier's choice
+of structures) is written to the translation tier by `scripts/generate_mvs_tasks.py`.
 
 ## How each reference is derived
 
@@ -43,7 +46,6 @@ Structures: 59 (10 held back: 1IGT, 1LMB, 1RX2, 2C9V, 2PTC, 3KCG, 5NI1, 6TC2, 8C
 | `gr-longest-helix` | the longest helix | The helix record with the most observed residues, when it leads by 3 or more; the prompt says the entry's own helix annotation is meant. |
 | `gr-metal-site` | a metal and its coordinating residues | Every copy of one metal ion, plus the polymer residues with a `metalc` record to it (3 or more per site, none to a symmetry copy); used only if a neighbour search within 2.6 A, with symmetry, finds exactly those residues and none is added out to 3.2 A (a weak ligand the entry does not annotate, such as Met92 of plastocyanin 1PLC, would make the answer arguable). |
 | `gr-modres` | modified residues | Non-standard residues inside polymer chains (facts), by component; the name is checked against the component record. |
-| `gr-nucleic` | the DNA / the RNA | Mol*'s `nucleic` selection, checked to be exactly the DNA or RNA chains of the facts. |
 | `gr-secstruct` | helices and strands | `_struct_conf` and `_struct_sheet_range` ranges, re-read from the mmCIF; single-chain proteins with 2 to 16 elements. |
 
 Frozen inputs beyond the panel: `data/mvscore/chem_comp.json` (component names and
