@@ -7,6 +7,20 @@
 
     uv run scripts/paper_tables.py                      # paper/inputs.json, the October panel
     uv run scripts/paper_tables.py --manifest FINAL.json --data-root /path/to/data
+    uv run python scripts/paper_tables.py --from-dry-run        # MOCK tables -> paper/generated_mock/
+    uv run python scripts/paper_tables.py --from-run results/final-v1   # -> paper/generated_final/
+
+Three sets of tables, in three directories, never mixed:
+
+* ``paper/generated/`` -- the **October 2026 preliminary** panel (the default command;
+  everything below this paragraph describes it). Labelled PRELIMINARY.
+* ``paper/generated_mock/`` -- every table of the final paper in its final shape, built
+  from the dry-run scorecards (mock model). Every file says MOCK on its first line.
+* ``paper/generated_final/`` -- the same tables from the one paid run.
+
+The last two are built by ``molbench/analysis.py`` from the manifest run's scorecards
+(``results/<run>/<condition>/<model>.json``); ``--from-dry-run`` refuses a real run and
+``--from-run`` refuses a mock one.
 
 Reads (all named by the manifest, nothing is hard-coded to the October file names):
 
@@ -58,7 +72,10 @@ sys.path.insert(0, str(REPO))
 from molbench import mvs  # noqa: E402  (stdlib-only grader)
 
 DEFAULT_MANIFEST = REPO / "paper" / "inputs.json"
-DEFAULT_OUT = REPO / "paper" / "generated"
+DEFAULT_OUT = REPO / "paper" / "generated"          # October 2026, preliminary
+MOCK_OUT = REPO / "paper" / "generated_mock"        # dry run: final shapes, fake numbers
+FINAL_OUT = REPO / "paper" / "generated_final"      # the paid run
+DEFAULT_DRY_RUN = REPO / "results" / "final-v1.dryrun"
 
 # How a task's ``source`` maps to a regime when the task file names no ``regime`` itself.
 # A source that is not listed becomes its own regime (and is reported on stderr), so a new
@@ -1486,10 +1503,43 @@ def main(argv=None) -> int:
     ap.add_argument("--data-root", type=pathlib.Path, default=None,
                     help="where relative input paths are looked up after the repo itself "
                          "(default: the main git checkout, which holds results/ and runs/)")
-    ap.add_argument("--out", type=pathlib.Path, default=DEFAULT_OUT)
-    ap.add_argument("--bootstrap", type=int, default=10000, help="bootstrap replicates")
+    ap.add_argument("--out", type=pathlib.Path, default=None)
+    ap.add_argument("--bootstrap", type=int, default=None,
+                    help="bootstrap replicates (default 10000; 2000 for --from-dry-run)")
     ap.add_argument("--seed", type=int, default=20261112)
+    ap.add_argument("--from-dry-run", nargs="?", const=DEFAULT_DRY_RUN, default=None,
+                    type=pathlib.Path, metavar="RESULTS_DIR",
+                    help="build every final table from a dry run's scorecards (mock model) "
+                         f"into {MOCK_OUT.relative_to(REPO)}; default "
+                         f"{DEFAULT_DRY_RUN.relative_to(REPO)}")
+    ap.add_argument("--from-run", type=pathlib.Path, default=None, metavar="RESULTS_DIR",
+                    help="build every final table from a real manifest run's scorecards into "
+                         f"{FINAL_OUT.relative_to(REPO)}")
+    ap.add_argument("--extra-tasks", type=pathlib.Path, default=None,
+                    help="a task directory besides tasks/ (a dry run that added fixtures)")
     args = ap.parse_args(argv)
+    if args.from_dry_run and args.from_run:
+        ap.error("--from-dry-run and --from-run are two different sets of tables")
+    if args.from_dry_run or args.from_run:
+        from molbench import analysis
+        mock = bool(args.from_dry_run)
+        source = args.from_dry_run or args.from_run
+        if not source.is_dir():
+            raise SystemExit(f"{source} does not exist" + (
+                "; run the dry run first: python -m molbench.runner --manifest "
+                "run/final_run.toml --dry-run" if mock else ""))
+        out = args.out or (MOCK_OUT if mock else FINAL_OUT)
+        tables = analysis.build(
+            source, out, replicates=args.bootstrap or (2000 if mock else 10000),
+            seed=args.seed, extra_tasks=args.extra_tasks, require_mock=mock,
+            flag="--from-dry-run" if mock else f"--from-run {source}")
+        for n in tables.notes:
+            print(f"note: {n}", file=sys.stderr)
+        print(f"wrote {len(tables.values)} values and {len(tables.tables)} tables to {out}"
+              + ("  (MOCK: fake numbers)" if mock else ""))
+        return 0
+    args.out = args.out or DEFAULT_OUT
+    args.bootstrap = args.bootstrap or 10000
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     data_root = args.data_root or default_data_root()
     p = build(manifest, data_root, args.bootstrap, args.seed)

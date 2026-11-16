@@ -157,7 +157,8 @@ def test_every_call_is_archived_with_what_a_rerun_or_audit_needs(tmp_path, corpu
         assert r["usage"]["input_tokens"] > 0 and r["usage"]["output_tokens"] >= 0
         assert r["finish_reason"] in ("stop", "length") and r["latency_s"] is not None
         assert r["request"] == {"max_tokens": 4000, "structured": c.structured,
-                                "temperature": "provider-default"}  # none is ever sent
+                                "temperature": "provider-default",
+                                "reasoning_effort": "provider-default"}  # none is ever sent
         assert r["provider"] == "mock" and r["v"] == runner.ARCHIVE_VERSION
         assert r["cost_usd"] == pytest.approx(c.model.price.cost(
             r["usage"]["input_tokens"], r["usage"]["output_tokens"]))
@@ -1135,3 +1136,289 @@ def test_october_site_data_still_reproduces(tmp_path):
     new = json.loads((docs / "failures_data.json").read_text())
     assert (new.pop("samples"), new.pop("n_tasks")) == (1, 70)
     assert new == json.loads((REPO / "docs" / "failures_data.json").read_text())
+
+
+# --- per-condition samples, reasoning effort ---------------------------------------
+
+def test_a_condition_with_its_own_samples_gets_that_many_cells(corpus):
+    m = _manifest(**{'structured = true': 'structured = true\nsamples = 1'})
+    cells = runner.build_plan(m, corpus, m.panel())
+    per = {}
+    for c in cells:
+        per[(c.condition.name, c.model.id)] = per.get((c.condition.name, c.model.id), 0) + 1
+    assert per[("spec_structured", "json/mode")] == 8 and per[("spec", "json/mode")] == 16
+    assert {c.sample for c in cells if c.condition.name == "spec_structured"} == {0}
+
+
+def test_scorecards_and_cost_follow_the_per_condition_samples(tmp_path, corpus):
+    m = _manifest(**{'structured = true': 'structured = true\nsamples = 1'})
+    m, cells, archive, _ = _run(tmp_path, corpus, m=m)
+    graded, validated = runner.grade_archive(cells, archive.load(), "off")
+    files = runner.write_scorecards(m, cells, graded, validated, tmp_path / "res",
+                                    runner.run_meta(m, "sha", True, tmp_path / "arch",
+                                                    {"created_at": "now"}))
+    by_cond = {json.loads(f.read_text())["meta"]["condition_name"]: json.loads(f.read_text())
+               for f in files}
+    assert by_cond["spec_structured"]["samples"] == 1 and by_cond["spec"]["samples"] == 2
+    row = next(iter(by_cond["spec_structured"]["models"].values()))["tasks"][0]
+    assert len(row["samples"]) == 1
+    rows = {(r["model"], r["condition"]): r for r in runner.project_costs(m, cells, CALIB)}
+    assert rows[("json/mode", "spec_structured")]["calls"] * 2 == rows[("json/mode", "spec")]["calls"]
+
+
+class _Records(MockModel):
+    def __init__(self, name):
+        super().__init__(name)
+        self.efforts = []
+
+    def complete(self, system, user, **kw):
+        self.efforts.append(kw.get("reasoning_effort"))
+        return super().complete(system, user, **kw)
+
+
+def test_the_reasoning_effort_goes_to_reasoning_models_only_and_is_archived(tmp_path, corpus):
+    text = MANIFEST.replace('validate = "off"', 'validate = "off"\nreasoning_effort = "low"')
+    text = text.replace('structured = "json_object"', 'structured = "json_object"\nreasoning = true')
+    m = _manifest(text)
+    models = {x.id: _Records(x.id) for x in m.models}
+    m, cells, archive, _ = _run(tmp_path, corpus, m=m, models=models)
+    assert set(models["plain"].efforts) == {None} and set(models["json/mode"].efforts) == {"low"}
+    sent = {(r["model"], r["request"]["reasoning_effort"]) for r in archive.load().values()}
+    assert sent == {("plain", "provider-default"), ("json/mode", "low")}
+    graded, validated = runner.grade_archive(cells, archive.load(), "off")
+    files = runner.write_sample_records(cells, graded, tmp_path / "res")
+    lines = [json.loads(line) for f in files for line in f.read_text().splitlines()]
+    assert {(r["model"], r["reasoning_effort"]) for r in lines} == sent
+
+
+def test_under_provider_default_no_effort_is_sent(tmp_path, corpus):
+    m = _manifest(MANIFEST.replace('structured = "json_object"',
+                                   'structured = "json_object"\nreasoning = true'))
+    models = {x.id: _Records(x.id) for x in m.models}
+    _run(tmp_path, corpus, m=m, models=models)
+    assert set(models["json/mode"].efforts) == {None}
+
+
+def test_openrouter_gets_the_unified_reasoning_switch_and_anthropic_refuses_one():
+    from molbench.models import AnthropicModel, OpenAIModel
+    usage = _Obj(prompt_tokens=1, completion_tokens=1, cost=0.0, completion_tokens_details=None)
+    resp = _Obj(id="r", model="m", usage=usage, choices=[
+        _Obj(finish_reason="stop", message=_Obj(content="[]"))])
+    calls = []
+    client = _Obj(chat=_Obj(completions=_Obj(create=lambda **kw: calls.append(kw) or resp)))
+    router = OpenAIModel("vendor/x", report_cost=True, openrouter=True)
+    router._client = lambda timeout: client
+    router.complete("s", "u", reasoning_effort="low")
+    router.complete("s", "u")
+    assert calls[0]["extra_body"] == {"usage": {"include": True}, "reasoning": {"effort": "low"}}
+    assert calls[1]["extra_body"] == {"usage": {"include": True}}       # nothing unless asked
+    direct = OpenAIModel("x")
+    direct._client = lambda timeout: client
+    direct.complete("s", "u", reasoning_effort="low")
+    assert calls[2]["reasoning_effort"] == "low" and "extra_body" not in calls[2]
+    assert build_model("openrouter:google/gemma-4-31b-it:free").model_id == "google/gemma-4-31b-it:free"
+    with pytest.raises(ValueError, match="not wired for the anthropic"):
+        AnthropicModel.complete(object.__new__(AnthropicModel), "s", "u", reasoning_effort="low")
+
+
+# --- follow-ups: what had to stay ---------------------------------------------------
+
+@pytest.fixture(scope="module")
+def whole_corpus():
+    return runner.load_tasks(list(mf.TRACKS))
+
+
+def test_every_follow_up_reference_keeps_what_it_must(whole_corpus):
+    follow = [t for t in whole_corpus if t.get("context")]
+    kept = [t for t in follow if runner.preserved_parts(t)]
+    assert len(kept) > 90 and {t["category"] for t in kept} == set(mf.TRACKS)
+    for t in kept:
+        got = runner.preserved_score(t, t["reference"])
+        assert got["preserved_ok"] and got["preserved_f1"] == 1.0, t["id"]
+        assert len(got["preserved_parts"]) == len(runner.preserved_parts(t))
+    assert runner.preserved_score(next(t for t in whole_corpus if not t.get("context")),
+                                  {}) is None
+
+
+def test_the_edit_alone_on_an_empty_viewer_scores_its_target_and_loses_the_rest(whole_corpus):
+    """An answer that draws only what the edit asks for: the target is right, the part
+    of the start state that had to stay is gone."""
+    task = next(t for t in whole_corpus if t["id"] == "fu-add-chain-1lmb-mvs")
+    assert task["prompt"].startswith("Also show chain 4")
+    alone = {"root": {"kind": "root", "children": [{
+        "kind": "download", "params": {"url": "https://files.wwpdb.org/download/1lmb.cif"},
+        "children": [{"kind": "parse", "params": {"format": "mmcif"}, "children": [{
+            "kind": "structure", "params": {"type": "model"}, "children": [{
+                "kind": "component", "params": {"selector": {"auth_asym_id": "4"}},
+                "children": [{"kind": "representation", "params": {"type": "cartoon"},
+                              "children": [{"kind": "color", "params": {"color": "blue"}}]}]}]}]}]}]}}
+    sample = runner.grade_parsed(task, alone)
+    sample["outcome"] = "valid"
+    sample["predicted"] = alone
+    extra = runner.analysis_fields(task, sample)
+    assert runner.target_score(sample) == 1.0 and not runner.is_success(sample)
+    assert extra["preserved_f1"] == 0.0 and extra["preserved_ok"] is False
+    assert extra["entry_outcome"] is None                      # not a resolve task
+    unread = runner.analysis_fields(task, {"outcome": "invalid_json", "predicted": None})
+    assert unread["preserved_f1"] == 0.0 and unread["preserved_ok"] is False
+
+
+def test_preserved_score_reaches_rows_groups_and_track_stats(tmp_path, whole_corpus):
+    follow = [t for t in whole_corpus if t.get("context") and t["split"] == "public"
+              and not t.get("twin_of") and not t.get("paraphrase_of")][:6]
+    assert follow
+    m = _manifest()
+    cells = [c for c in runner.build_plan(m, follow, m.panel()) if c.condition.name == "spec"]
+    archive = runner.RunArchive(tmp_path / "arch")
+    archive.open(m, "sha", mock=True)
+    runner.generate(m, cells, _mocks(m), archive, CALIB, log=lambda s: None, sleep=lambda s: None)
+    graded, validated = runner.grade_archive(cells, archive.load(), "off")
+    per_task = graded[("spec", "plain")]
+    rec = runner.model_record(m.panel()[0], follow, per_task, validated)
+    rows = [t for t in rec["tasks"] if runner.preserved_parts(next(x for x in follow if x["id"] == t["id"]))]
+    assert rows and all(0.0 <= t["preserved_f1"] <= 1.0 and t["preserved_ok"] is not None for t in rows)
+    assert all("preserved_f1" in s for t in rows for s in t["samples"])
+    track = rec["by_category"][follow[0]["category"]]
+    assert track["preserved"]["n_samples"] == sum(len(t["samples"]) for t in rows
+                                                   if t["category"] == follow[0]["category"])
+    assert track["by_tier"]["followup"]["preserved_f1"] is not None
+
+
+# --- resolve: which entry the answer loads ------------------------------------------
+
+def test_a_resolve_answer_is_sorted_by_the_entry_it_loads(whole_corpus):
+    from molbench import resolve
+    task = next(t for t in whole_corpus if t["tier"] == "resolve")
+    ref = task["reference"]
+    assert resolve.entry_outcome(task, ref) == "accepted"
+    other = [i for i in task["accepted_structures"] if i != task["structures"][0]]
+    if other:   # another accepted entry is as right as the reference's
+        assert resolve.entry_outcome(task, resolve.repoint(ref, task, other[0])) == "accepted"
+    real, made_up = resolve.other_real_id(task), resolve.missing_id()
+    assert resolve.entry_outcome(task, resolve.repoint(ref, task, real)) == "wrong_entry"
+    assert resolve.entry_outcome(task, resolve.repoint(ref, task, made_up)) == "no_such_entry"
+    assert resolve.entry_outcome(task, None) == "no_entry"
+    assert resolve.entry_outcome(task, {"root": {"kind": "root", "children": []}}) == "no_entry"
+    assert resolve.entry_outcome(next(t for t in whole_corpus if t["tier"] != "resolve"), ref) is None
+    # the library function is the generator's own, not a copy
+    assert resolve.generator().__file__.endswith("scripts/generate_resolve_tasks.py")
+    assert resolve.answer_outcome(task, made_up) == resolve.generator().answer_outcome(task, made_up)
+    assert set(resolve.ENTRY_OUTCOME_LABEL) == set(resolve.ENTRY_OUTCOMES)
+
+
+def test_every_resolve_reference_loads_an_accepted_entry(whole_corpus):
+    from molbench import resolve
+    tasks = [t for t in whole_corpus if t["tier"] == "resolve"]
+    assert len(tasks) > 40
+    assert {resolve.entry_outcome(t, t["reference"]) for t in tasks} == {"accepted"}
+
+
+def test_entry_outcomes_are_counted_per_track(whole_corpus):
+    from molbench import resolve
+    task = next(t for t in whole_corpus if t["tier"] == "resolve")
+    answers = [task["reference"], resolve.repoint(task["reference"], task, resolve.missing_id()), None]
+    samples = []
+    for a in answers:
+        s = {"f1": 0.0, "outcome": "valid" if a else "invalid_json", "predicted": a, "usage": {}}
+        s.update(runner.analysis_fields(task, s))
+        samples.append(s)
+    stats = runner._track_stats(samples, "mvs", validated=False)
+    assert stats["entry_outcomes"] == {"accepted": 1, "wrong_entry": 0, "no_such_entry": 1,
+                                       "other_source": 0, "no_entry": 1}
+
+
+# --- difficulty vocabulary ----------------------------------------------------------
+
+def test_one_difficulty_vocabulary_covers_every_generator(whole_corpus):
+    from molbench import difficulty
+    wanted = {"needs_offset", "chain_mismatch", "needs_ligand_identity", "needs_uniprot_mapping",
+              "number_in_name_as_author_number_is_right"}
+    assert wanted <= set(difficulty.KEYS) and set(difficulty.CLINICAL_STRATA) <= set(difficulty.KEYS)
+    scripts = {difficulty.source_provenance(t).get("script") for t in whole_corpus
+               if difficulty.raw(t)}
+    assert scripts <= set(difficulty.SOURCES)                # no generator is left unmapped
+    for t in whole_corpus:
+        got = difficulty.normalised(t)                        # never raises on the corpus
+        assert set(got) == set(difficulty.KEYS)
+        assert all(v in (True, False, None) for v in got.values())
+    # every raw key a generator writes is either mapped or deliberately not a difficulty key
+    clinical = [t for t in whole_corpus if t["tier"] == "clinical" and not t.get("paraphrase_of")
+                and t["category"] == "mvs"]
+    n = lambda key: sum(bool(difficulty.normalised(t)[key]) for t in clinical)  # noqa: E731
+    assert len(clinical) == 79
+    assert (n("needs_offset"), n("chain_mismatch"),
+            n("number_in_name_as_author_number_is_right")) == (57, 23, 34)   # CORPUS.md
+    # a paraphrase carries its original's facts
+    para = next(t for t in whole_corpus if t.get("paraphrase_of") and t["tier"] == "clinical")
+    original = next(t for t in whole_corpus if t["id"] == para["paraphrase_of"])
+    assert difficulty.normalised(para) == difficulty.normalised(original)
+
+
+def test_the_same_fact_has_one_name_whatever_the_generator_called_it():
+    from molbench import difficulty
+
+    def task(script, facts, clinical=False):
+        prov = {"script": script}
+        prov.update({"clinical": {"difficulty": facts}} if clinical else {"difficulty": facts})
+        return {"id": "x", "provenance": prov}
+    api = difficulty.normalised(task("scripts/generate_api_tasks.py",
+                                     {"auth_label_chain": True, "numbering_offset": True,
+                                      "ligand_identity_needed": True, "uniprot_mapping": False}))
+    assert (api["chain_mismatch"], api["author_label_numbers_differ"],
+            api["needs_ligand_identity"], api["needs_uniprot_mapping"]) == (True, True, True, False)
+    # "needs_numbering_offset" means UniProt != author in the clinical generator, and
+    # author != label in the follow-up generator: two different normalised keys
+    clin = difficulty.normalised(task("scripts/generate_clinical_tasks.py",
+                                      {"needs_numbering_offset": True}, clinical=True))
+    follow = difficulty.normalised(task("scripts/generate_followup_tasks.py",
+                                        {"needs_numbering_offset": True}))
+    assert clin["needs_offset"] is True and clin["author_label_numbers_differ"] is None
+    assert follow["needs_offset"] is False and follow["author_label_numbers_differ"] is True
+    twin = difficulty.normalised(task("scripts/translate_mvs_to_api.py",
+                                      {"context_switched_off": ["ligand"]}))
+    assert twin["hide_toggle"] is True
+    with pytest.raises(difficulty.UnknownGenerator):
+        difficulty.normalised(task("scripts/some_new_generator.py", {"x": True}))
+    assert difficulty.normalised({"id": "old"}) == dict.fromkeys(difficulty.KEYS)
+
+
+def test_scorecard_rows_carry_difficulty_and_the_clinical_breakdown(tmp_path, whole_corpus):
+    clinical = [t for t in whole_corpus if t["tier"] == "clinical" and t["category"] == "mvs"
+                and t["split"] == "public" and not t.get("paraphrase_of")][:12]
+    m = _manifest()
+    cells = [c for c in runner.build_plan(m, clinical, m.panel())
+             if c.condition.name == "spec" and c.model.id == "plain"]
+    archive = runner.RunArchive(tmp_path / "arch")
+    archive.open(m, "sha", mock=True)
+    runner.generate(m, cells, _mocks(m), archive, CALIB, log=lambda s: None, sleep=lambda s: None)
+    graded, validated = runner.grade_archive(cells, archive.load(), "off")
+    rec = runner.model_record(m.panel()[0], clinical, graded[("spec", "plain")], validated)
+    assert all("needs_offset" in t["difficulty"] for t in rec["tasks"])
+    by = rec["by_category"]["mvs"]["clinical_by_difficulty"]
+    yes, no = by["needs_offset"]["yes"], by["needs_offset"]["no"]
+    assert (yes["n_tasks"] if yes else 0) + (no["n_tasks"] if no else 0) == len(clinical)
+    assert "full" in rec["by_category"]["mvs"]["by_style"]
+
+
+# --- a pilot --------------------------------------------------------------------------
+
+def test_a_pilot_dry_run_checks_links_against_the_whole_corpus(tmp_path, capsys):
+    """A pilot runs a hand-picked subset; a twin outside the subset is not a broken link."""
+    tasks = runner.load_tasks(list(mf.TRACKS))
+    kinds = {}
+    for t in tasks:   # the first task of every kind and track
+        for kind, test in runner.TASK_KINDS.items():
+            if test(t):
+                kinds.setdefault((kind, t["category"]), t["id"])
+    ids = sorted(set(kinds.values()))
+    text = MANIFEST.replace('samples = 2', 'samples = 1\npilot = true\ntasks = '
+                            + json.dumps(ids)).replace("cap_usd = 1000.0", "cap_usd = 2.0")
+    path = _write_manifest(tmp_path, text)
+    with pytest.raises(SystemExit) as e:
+        runner.main(["--manifest", str(path), "--runs-dir", str(tmp_path / "runs"),
+                     "--results-dir", str(tmp_path / "results"), "--dry-run", "--no-site"])
+    out = capsys.readouterr().out
+    assert e.value.code == 0, out
+    assert f"{len(ids)} tasks" in out and "the corpus passes the corpus checks" in out
+    assert json.loads((tmp_path / "results" / "t.dryrun" / "spec" / "mock_plain.json"
+                       ).read_text())["meta"]["pilot"] is True

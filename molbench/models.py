@@ -218,7 +218,13 @@ class AnthropicModel(Model):
 
     def complete(self, system: str, user: str, *, max_tokens: int | None = None,
                  structured: str | None = None, timeout: float | None = None,
-                 context: dict | None = None) -> Completion:
+                 context: dict | None = None, reasoning_effort: str | None = None) -> Completion:
+        if reasoning_effort:
+            # Extended thinking is off unless asked for on this route, and the runner
+            # only sends an effort to models flagged reasoning = true.
+            raise ValueError("a reasoning effort is not wired for the anthropic: route; mark "
+                             "the model reasoning = false or leave run.reasoning_effort at "
+                             "'provider-default'")
         if structured:
             # Not wired for the native route (it would need output_config.format with a
             # full JSON schema). Mark the model structured = "none" in the manifest.
@@ -253,10 +259,12 @@ class OpenAIModel(Model):
                  api_key_env: str = "OPENAI_API_KEY",
                  base_url: str | None = None,
                  base_url_env: str = "OPENAI_BASE_URL",
-                 max_tokens: int = 2000, report_cost: bool = False):
+                 max_tokens: int = 2000, report_cost: bool = False,
+                 openrouter: bool = False):
         super().__init__()
         self._clients: dict = {}
         self.report_cost = report_cost
+        self.openrouter = openrouter
         self.name = model_id
         self.model_id = model_id
         self.max_tokens = max_tokens
@@ -275,7 +283,7 @@ class OpenAIModel(Model):
 
     def complete(self, system: str, user: str, *, max_tokens: int | None = None,
                  structured: str | None = None, timeout: float | None = None,
-                 context: dict | None = None) -> Completion:
+                 context: dict | None = None, reasoning_effort: str | None = None) -> Completion:
         client = self._client(timeout)
         max_tokens = max_tokens or self.max_tokens
         base: dict[str, Any] = dict(
@@ -289,9 +297,17 @@ class OpenAIModel(Model):
             base["response_format"] = {"type": "json_object"}
         elif structured:
             raise ValueError(f"unknown structured-output mode {structured!r}")
+        extra_body: dict[str, Any] = {}
         if self.report_cost:
             # OpenRouter usage accounting: adds the billed cost to resp.usage.
-            base["extra_body"] = {"usage": {"include": True}}
+            extra_body["usage"] = {"include": True}
+        if reasoning_effort and self.openrouter:
+            # OpenRouter's one switch for every vendor's reasoning control.
+            extra_body["reasoning"] = {"effort": reasoning_effort}
+        elif reasoning_effort:
+            base["reasoning_effort"] = reasoning_effort  # the OpenAI spelling
+        if extra_body:
+            base["extra_body"] = extra_body
         # gpt-5 / o-series reject `max_tokens` and require `max_completion_tokens`;
         # older models and most OpenAI-compatible hosts want `max_tokens`. Try the
         # common one, fall back on the newer spelling — one adapter, both worlds.
@@ -439,6 +455,14 @@ class MockModel(Model):
                                 16) % len(options)]
         answer = (perturb_reference(ref) if kind == "perturbed"
                   else malform_reference(ref) if kind == "malformed" else right)
+        if kind == "perturbed" and task.get("tier") == "resolve" and not is_api:
+            # A resolve task's typical failure is the entry itself: answer on a real
+            # entry of something else, or on an id that does not exist, in turn.
+            from . import resolve
+            odd = int(hashlib.sha256(f"entry|{self.name}|{key}".encode()).hexdigest(), 16) % 3
+            if odd:
+                answer = resolve.repoint(ref, task, resolve.other_real_id(task) if odd == 1
+                                         else resolve.missing_id())
         if wrap_actions and is_api:
             answer = {"actions": answer}
         good = json.dumps(answer, indent=1)
@@ -456,7 +480,7 @@ class MockModel(Model):
 
     def complete(self, system: str, user: str, *, max_tokens: int | None = None,
                  structured: str | None = None, timeout: float | None = None,
-                 context: dict | None = None) -> Completion:
+                 context: dict | None = None, reasoning_effort: str | None = None) -> Completion:
         context = context or {}
         task = context.get("task") or {}
         key = "|".join(str(context.get(k)) for k in ("condition", "task_id", "sample"))
@@ -498,7 +522,8 @@ def build_model(spec: str) -> Model:
             return OpenAIModel(model_id)
         if provider == "openrouter":
             return OpenAIModel(model_id, api_key_env="OPENROUTER_API_KEY",
-                               base_url="https://openrouter.ai/api/v1", report_cost=True)
+                               base_url="https://openrouter.ai/api/v1", report_cost=True,
+                               openrouter=True)
         if provider in ("gemini", "google"):
             # Google's OpenAI-compatibility layer — same OpenAIModel, different host.
             return OpenAIModel(model_id, api_key_env="GEMINI_API_KEY",

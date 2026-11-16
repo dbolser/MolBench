@@ -305,3 +305,170 @@ def test_target_check_separates_wrong_atoms_from_missing_context():
                                         (res(176), "ball_and_stick", "red")]))
     assert not wrong["target_exact"] and not wrong["target_atoms"]
     assert pt.target_check(ref, {"nonsense": 1}) is None
+
+
+# --- tables of a manifest run (molbench/analysis.py) --------------------------------
+
+from molbench import analysis  # noqa: E402
+
+FINAL_TABLES = {
+    "table_corpus", "table_corpus_kinds", "table_corpus_difficulty", "table_panel",
+    "table_controls", "table_mvs_leaderboard", "table_api_leaderboard", "table_mvs_validity",
+    "table_api_validity", "table_mvs_tiers", "table_api_tiers", "table_tier_track",
+    "table_mvs_split", "table_api_split", "table_mvs_paraphrase", "table_api_paraphrase",
+    "table_paired", "table_followup", "table_followup_edits", "table_accept_readings",
+    "table_accept_tasks", "table_clinical_strata", "table_clinical_models",
+    "table_clinical_pairs", "table_difficulty", "table_resolve_entries", "table_structured",
+    "table_grounding", "table_cost"}
+# plus table_tracks and table_bare, which need three models and the bare condition
+
+
+@pytest.fixture(scope="module")
+def mock_run(tmp_path_factory):
+    """A dry run of the pilot manifest (mock model, about 110 calls): the scorecards a
+    real run writes, small."""
+    from molbench import runner
+    tmp = tmp_path_factory.mktemp("mockrun")
+    with pytest.raises(SystemExit) as e:
+        runner.main(["--manifest", str(REPO / "run" / "pilot.toml"), "--dry-run", "--no-site",
+                     "--runs-dir", str(tmp / "runs"), "--results-dir", str(tmp / "results")])
+    assert e.value.code == 0
+    return tmp / "results" / "pilot-v1.dryrun"
+
+
+def test_every_final_table_is_built_from_a_dry_run_and_says_it_is_mock(mock_run, tmp_path):
+    out = tmp_path / "generated_mock"
+    t = analysis.build(mock_run, out, replicates=100, require_mock=True, flag="--from-dry-run")
+    assert FINAL_TABLES <= set(t.tables), FINAL_TABLES - set(t.tables)
+    for name in t.tables:
+        text = (out / f"{name}.md").read_text()
+        if name in analysis.NOT_RUN_RESULTS:      # counted or measured, not answered
+            assert "MOCK" not in text.splitlines()[0], name
+        else:
+            assert text.startswith(analysis.MOCK_BANNER), name
+    values = json.loads((out / "values.json").read_text())
+    assert values["status"] == "MOCK" and values["run.name"] == "pilot-v1"
+    assert "MOCK" in (out / "README.md").read_text().splitlines()[0]
+    # the corpus numbers come from the task files, whatever was run (CORPUS.md)
+    assert (values["corpus.n_original"], values["corpus.n_paraphrases"]) == (781, 88)
+    assert (values["corpus.mvs.n"], values["corpus.api.n"]) == (378, 403)
+    assert (values["corpus.n_twin_pairs"], values["corpus.n_twin_pairs_hide_toggle"]) == (255, 18)
+    assert values["corpus.n_paraphrase_requests"] == 30
+    assert (values["corpus.mvs.followup.n_noop"], values["corpus.api.followup.n_noop"]) == (10, 8)
+    # twins: all outside the clinical tier, the same without unstated hide toggles, clinical apart
+    assert (values["paired.all.n_pairs"], values["paired.no_hide_toggle.n_pairs"],
+            values["paired.clinical.n_pairs"]) == (176, 158, 79)
+    assert values["controls.mvs.false_pass_rate"] == 0 and values["controls.api.n"] > 0
+    assert values["clinical.needs_offset.yes.n_proteins"] > 1      # not one protein's story
+
+
+def test_mock_and_real_tables_are_never_mixed(mock_run, tmp_path):
+    with pytest.raises(SystemExit, match="is a dry run"):
+        analysis.build(mock_run, tmp_path / "final", replicates=10, require_mock=False)
+    assert not (tmp_path / "final").exists()
+    real = tmp_path / "real"
+    real.mkdir()
+    (real / "values.json").write_text('{"status": "final"}')
+    with pytest.raises(SystemExit, match="refusing to overwrite"):
+        analysis.build(mock_run, real, replicates=10)
+    with pytest.raises(SystemExit, match="another kind"):      # the October tables
+        analysis.build(mock_run, REPO / "paper" / "generated", replicates=10)
+    # a scorecard that does not say mock is a real run: it stays out of the mock directory
+    copy = tmp_path / "copy"
+    import shutil
+    shutil.copytree(mock_run, copy, ignore=shutil.ignore_patterns("paper", "samples", "site"))
+    for f in copy.glob("*/*.json"):
+        card = json.loads(f.read_text())
+        card["meta"]["mock"] = False
+        f.write_text(json.dumps(card))
+    with pytest.raises(SystemExit, match="is a real run"):
+        analysis.build(copy, tmp_path / "mock", replicates=10, require_mock=True)
+    one = next(copy.glob("spec/*.json"))
+    card = json.loads(one.read_text())
+    card["meta"]["mock"] = True
+    one.write_text(json.dumps(card))
+    with pytest.raises(SystemExit, match="mixes mock and real"):
+        analysis.build(copy, tmp_path / "mixed", replicates=10)
+
+
+def test_from_dry_run_flag_writes_the_mock_directory(mock_run, tmp_path, capsys):
+    out = tmp_path / "generated_mock"
+    assert pt.main(["--from-dry-run", str(mock_run), "--out", str(out),
+                              "--bootstrap", "50"]) == 0
+    assert "MOCK" in capsys.readouterr().out
+    assert json.loads((out / "values.json").read_text())["status"] == "MOCK"
+    with pytest.raises(SystemExit):
+        pt.main(["--from-run", str(mock_run), "--out", str(tmp_path / "final")])
+    assert pt.MOCK_OUT.name == "generated_mock" != pt.DEFAULT_OUT.name
+
+
+def test_committed_mock_tables_are_flagged_and_october_tables_stay_labelled():
+    mock = REPO / "paper" / "generated_mock"
+    values = json.loads((mock / "values.json").read_text())
+    assert values["status"] == "MOCK"
+    tables = sorted(mock.glob("table_*.md"))
+    assert FINAL_TABLES | {"table_bare", "table_tracks"} <= {f.stem for f in tables}
+    assert -1.0 <= values["tracks.r_success"] <= 1.0
+    for f in tables:
+        first = f.read_text().splitlines()[0]
+        assert first.startswith("> **MOCK DATA.**") or f.stem in analysis.NOT_RUN_RESULTS, f.name
+    # corpus numbers in the mock directory are the real ones, and are current
+    from molbench import runner
+    corpus = runner.load_tasks(["mvs", "api_calling"])
+    assert values["corpus.n_task_files"] == len(corpus)
+    # the October preliminary tables are still there, labelled, in their own directory
+    october = REPO / "paper" / "generated"
+    assert "PRELIMINARY" in (october / "table_mvs_leaderboard.md").read_text()
+    assert "status" not in json.loads((october / "values.json").read_text())
+    assert not list(october.glob("table_paired.md"))
+
+
+def test_mcnemar_exact():
+    assert analysis.mcnemar_exact(0, 0) is None            # no discordant pair, no test
+    assert analysis.mcnemar_exact(5, 5) == 1.0
+    assert analysis.mcnemar_exact(0, 5) == pytest.approx(2 / 32)
+    assert analysis.mcnemar_exact(9, 1) == pytest.approx(2 * 11 / 1024)
+    assert analysis.mcnemar_exact(1, 9) == analysis.mcnemar_exact(9, 1)
+
+
+def test_task_is_solved_when_most_samples_are_right():
+    assert analysis.solved({"success": 2 / 3}) and analysis.solved({"success": 1.0})
+    assert not analysis.solved({"success": 1 / 3}) and not analysis.solved({"success": 0.5})
+
+
+def test_run_bootstrap_resamples_structures_not_tasks():
+    boot = analysis.Bootstrap(replicates=400, seed=1)
+    assert boot.ci([("a", 1.0), ("a", 0.0)]) is None       # one structure: no interval
+    # ten tasks on two structures: all of a structure's tasks move together
+    clustered = [("a", 1.0)] * 5 + [("b", 0.0)] * 5
+    spread = [(f"s{i}", v) for i, (_, v) in enumerate(clustered)]
+    lo, hi = boot.ci(clustered, "x")
+    lo2, hi2 = boot.ci(spread, "x")
+    assert (lo, hi) == (0.0, 1.0) and hi2 - lo2 < 1.0
+    assert boot.ci(clustered, "x") == (lo, hi)              # seeded: the same every time
+    d = boot.diff_ci([("a", 1.0), ("b", 1.0)], [("c", 0.0), ("d", 0.0)], "y")
+    assert d == (1.0, 1.0)
+    assert boot.diff_ci([("a", 1.0)], [("c", 0.0), ("d", 0.0)]) is None
+
+
+def test_accept_set_readings_are_counted_not_call_forms():
+    from molbench import runner
+    tasks = [t for t in runner.load_tasks(["mvs", "api_calling"])
+             if t["tier"] == "accept_set" and not t.get("paraphrase_of")]
+    assert len(tasks) == 41
+    for t in tasks:
+        states = analysis.readings_by_state(t)
+        assert len(states) == 1 + len(t["accepted"]), t["id"]   # the reference, then each alternative
+        assert analysis.readings(t)[0] == states[0] and len(analysis.readings(t)) >= 2, t["id"]
+    api = [t for t in tasks if t["category"] == "api_calling"]
+    # on the API track one reading can be written in several call forms
+    assert any(len(analysis.readings(t)) < len(analysis.readings_by_state(t)) for t in api)
+
+
+def test_paraphrase_groups_have_three_phrasings(mock_run):
+    run = analysis.Run(mock_run)
+    t = analysis.Tables(run, replicates=10)
+    groups = {track: t.paraphrase_groups(track) for track in analysis.TRACKS}
+    assert (len(groups["mvs"]), len(groups["api_calling"])) == (24, 20)
+    assert all(set(g) == {"full", "terse", "indirect"} for gs in groups.values() for g in gs.values())
+    assert run.mock and run.samples == {"spec": 1, "spec_structured": 1, "spec_grounded": 1}

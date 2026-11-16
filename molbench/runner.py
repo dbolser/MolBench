@@ -44,9 +44,11 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Callable
 
+from . import difficulty as difficulty_mod
 from . import grader as grader_mod
 from . import manifest as manifest_mod
 from . import mvs as mvs_mod
+from . import resolve as resolve_mod
 from . import schema
 from . import tasks as tasks_mod
 from .manifest import Budget, BudgetExceeded, Calibration, Manifest, ManifestError, ModelSpec
@@ -616,6 +618,8 @@ def _invalidate(sample: dict, outcome: str, detail: list[str] | str) -> None:
         sample["success"] = False
     if sample.get("target_f1") is not None:
         sample["target_f1"] = 0.0
+    if sample.get("preserved_f1") is not None:
+        sample.update(preserved_f1=0.0, preserved_ok=False)
     sample["mvs_issues" if outcome == "invalid_mvs" else "load_error"] = detail
 
 
@@ -635,6 +639,45 @@ def target_score(sample: dict) -> float | None:
     colour - decision 17), or None when the grader reports none for this task."""
     v = sample.get("target_f1")
     return float(v) if isinstance(v, (int, float)) and not isinstance(v, bool) else None
+
+
+def preserved_parts(task: dict) -> list[dict]:
+    """The parts of a follow-up's start state that the edit must leave alone
+    (``provenance.preserved``, in ``target`` form; a paraphrase carries its original's).
+    Empty on a single turn, and on an edit that touches everything that was set."""
+    parts = difficulty_mod.source_provenance(task).get("preserved")
+    return [p for p in parts if isinstance(p, dict)] if isinstance(parts, list) else []
+
+
+def preserved_score(task: dict, prediction: Any) -> dict[str, Any] | None:
+    """How much of what a follow-up must leave alone a parsed answer kept.
+
+    Each preserved part is handed to the grader as the task's target, which scores
+    those atoms alone (selected, drawn and coloured as in the reference). Returns
+    ``{"preserved_f1": mean over the parts, "preserved_ok": every part scored 1,
+    "preserved_parts": [score, ...]}``, or None when the task has no preserved part.
+    An answer that makes the requested edit on an empty viewer scores its target and
+    loses here; the strict score and task success already count that loss, this says
+    where it came from."""
+    parts = preserved_parts(task)
+    if not parts:
+        return None
+    reference = task["reference"] if "reference" in task else task["reference_mvs"]
+    accepted = list(task.get("accepted") or [])
+    scores = []
+    for part in parts:
+        view = _grader_view(task, reference, [part], accepted)
+        try:
+            res = grader_mod.grade_task(view, prediction)
+        except GradingError:
+            raise
+        except Exception:  # noqa: BLE001 - arbitrary model output; see _grader_crash
+            res = {}
+        v = res.get("target_f1")
+        scores.append(float(v) if isinstance(v, (int, float)) and not isinstance(v, bool) else 0.0)
+    return {"preserved_f1": round(statistics.fmean(scores), 4),
+            "preserved_ok": all(x >= 1.0 for x in scores),
+            "preserved_parts": [round(x, 4) for x in scores]}
 
 
 def _mean_or_none(values: list) -> float | None:
@@ -672,6 +715,10 @@ def _aggregate(samples: list[dict]) -> dict[str, Any]:
         "success": round(statistics.fmean(wins), 4),
         "success_all": all(wins),
         "target_f1": _mean_or_none(targets),
+        # Follow-ups: what the edit had to leave alone (None on any other task).
+        "preserved_f1": _mean_or_none([s.get("preserved_f1") for s in samples]),
+        "preserved_ok": (round(statistics.fmean(bool(s.get("preserved_ok")) for s in samples), 4)
+                         if all(s.get("preserved_f1") is not None for s in samples) else None),
         "n_truncated": sum(is_truncated(s) for s in samples),
         "predicted": rep.get("predicted"),
         "error": rep.get("error"),
@@ -892,7 +939,8 @@ API_STRUCTURED_SUFFIX = (
     '\n\n## JSON mode\n\nReturn one JSON object of the form {"actions": [...]}, where '
     '"actions" is the JSON array described above.\n')
 
-ARCHIVE_VERSION = 2   # 2: adds 'provider' and request.temperature = "provider-default"
+ARCHIVE_VERSION = 3   # 2: adds 'provider' and request.temperature = "provider-default"
+                      # 3: adds request.reasoning_effort
 # HTTP statuses that will fail the same way on a retry: bad request, bad key, no
 # credit, unknown model. Everything else (rate limits, timeouts, 5xx) is retried.
 NO_RETRY_STATUS = (400, 401, 402, 403, 404, 422)
@@ -970,7 +1018,7 @@ def build_plan(manifest: Manifest, tasks: list[dict], panel: list[ModelSpec]) ->
             if cond.structured and cat == "api_calling":
                 system += API_STRUCTURED_SUFFIX
             user = user_message(task, cond.grounding)
-            for sample in range(manifest.samples):
+            for sample in range(manifest.samples_for(cond)):
                 cells.extend(Cell(m, cond, task, sample, system, user) for m in models)
     return cells
 
@@ -1142,8 +1190,9 @@ def print_projection(manifest: Manifest, rows: list[dict], out=None) -> dict[str
     for r in rows:
         by_model.setdefault(r["model"], {})[r["condition"]] = r
     w = max([len(m) for m in by_model] + [5])
-    print(f"\nProjected cost of the real run ({manifest.name}, {manifest.samples} sample(s) "
-          f"per task; tokens estimated from real prompt lengths)", file=out)
+    per_cond = ", ".join(f"{c} x{manifest.samples_for(c)}" for c in conds)
+    print(f"\nProjected cost of the real run ({manifest.name}; samples per task: {per_cond}; "
+          f"tokens estimated from real prompt lengths)", file=out)
     print(f"{'model':<{w}}  {'calls':>6} {'input tok':>11} {'output tok':>10}  "
           + "  ".join(f"{c:>15}" for c in conds) + f"  {'total $':>9} {'worst $':>9}", file=out)
     totals = {"core": 0.0, "optional": 0.0, "core_worst": 0.0, "optional_worst": 0.0}
@@ -1198,13 +1247,19 @@ def call_cell(manifest: Manifest, cell: Cell, model: Model,
     started_at = _now()
     context = {"task": cell.task, "task_id": cell.task["id"], "sample": cell.sample,
                "condition": cell.condition.name}
+    # One reasoning-effort policy for the whole run (manifest run.reasoning_effort).
+    # Under "provider-default" nothing is sent; otherwise the same value goes to every
+    # model flagged as reasoning, and what was sent is archived with the call.
+    effort = manifest.reasoning_effort_for(cell.model)
+    extra = {} if effort is None else {"reasoning_effort": effort}
     attempt = 0
     while True:
         attempt += 1
         try:
             done = model.complete(cell.system, cell.user, max_tokens=max_tokens,
                                   structured=cell.structured,
-                                  timeout=manifest.retry.timeout_seconds, context=context)
+                                  timeout=manifest.retry.timeout_seconds, context=context,
+                                  **extra)
             break
         except Exception as e:  # noqa: BLE001 - provider errors come in every shape
             if attempt >= manifest.retry.max_attempts or not _retryable(e):
@@ -1226,7 +1281,8 @@ def call_cell(manifest: Manifest, cell: Cell, model: Model,
         "task_sha256": task_hash(cell.task),
         # No temperature is ever sent (decision 12): the provider's default applies.
         "request": {"max_tokens": max_tokens, "structured": cell.structured,
-                    "temperature": "provider-default"},
+                    "temperature": "provider-default",
+                    "reasoning_effort": effort or "provider-default"},
         "raw": done.text, "finish_reason": done.finish_reason,
         "usage": {"input_tokens": done.input_tokens, "output_tokens": done.output_tokens,
                   "reasoning_tokens": done.reasoning_tokens},
@@ -1406,7 +1462,34 @@ def check_reference(task: dict) -> bool:
     target = target_score(own)
     if target is not None and target != 1.0:
         raise GradingError(f"task {task['id']}: its own reference has target score {target}")
+    kept = preserved_score(task, task["reference"])
+    if kept is not None and not kept["preserved_ok"]:
+        raise GradingError(f"task {task['id']}: its own reference does not keep what "
+                           f"provenance.preserved says it must (scores {kept['preserved_parts']})")
+    if resolve_mod.entry_outcome(task, task["reference"]) not in (None, "accepted"):
+        raise GradingError(f"task {task['id']}: its own reference loads an entry that is not "
+                           "one of its accepted entries")
     return target is not None
+
+
+def analysis_fields(task: dict, sample: dict) -> dict[str, Any]:
+    """What the paper's breakdowns need from one graded sample beyond its scores:
+
+    * ``preserved_f1`` / ``preserved_ok`` - a follow-up with preserved parts: how much
+      of what the edit had to leave alone the answer kept (0 when nothing parsed);
+    * ``entry_outcome`` - a resolve task: which kind of entry the answer loads
+      (`resolve.ENTRY_OUTCOMES`: accepted, a real entry of something else, an id that
+      does not exist, not a PDB entry, none).
+
+    Both are None on every other task. Neither changes a score."""
+    out: dict[str, Any] = {"preserved_f1": None, "preserved_ok": None, "entry_outcome": None}
+    parsed = sample.get("predicted") if sample.get("outcome") != "invalid_json" else None
+    if preserved_parts(task):
+        kept = preserved_score(task, parsed) if parsed is not None else None
+        out.update(kept or {"preserved_f1": 0.0, "preserved_ok": False})
+    if task.get("tier") == "resolve":
+        out["entry_outcome"] = resolve_mod.entry_outcome(task, parsed)
+    return out
 
 
 def grade_archive(cells: list[Cell], records: dict[tuple, dict], validate: str = "auto",
@@ -1433,6 +1516,7 @@ def grade_archive(cells: list[Cell], records: dict[tuple, dict], validate: str =
             # The grader never saw it (unparseable) or could not place it: strict 0,
             # like the score itself. Left None when the grader reports no targets.
             s["target_f1"] = 0.0
+        s.update(analysis_fields(c.task, s))
         s["sample"] = c.sample
         s["finish_reason"] = r.get("finish_reason")
         s["truncated"] = is_truncated(r)
@@ -1485,6 +1569,17 @@ def _track_stats(samples: list[dict], track: str, validated: bool) -> dict[str, 
         "n_grader_crashes": sum("grader_crash" in s for s in samples),
         "finish_reasons": dict(Counter(str(s.get("finish_reason")) for s in samples)),
     }
+    kept = [s for s in samples if s.get("preserved_f1") is not None]
+    if kept:  # follow-ups with something to leave alone
+        out["preserved"] = {"n_samples": len(kept),
+                            "preserved_f1": round(statistics.fmean(s["preserved_f1"] for s in kept), 4),
+                            "preserved_ok": round(statistics.fmean(bool(s["preserved_ok"]) for s in kept), 4),
+                            "target_f1": (lambda v: round(statistics.fmean(v), 4) if v else None)(
+                                [t for t in map(target_score, kept) if t is not None])}
+    named = [s for s in samples if s.get("entry_outcome")]
+    if named:  # resolve tasks: accepted entry / real entry of something else / made-up id
+        out["entry_outcomes"] = {o: sum(s["entry_outcome"] == o for s in named)
+                                 for o in resolve_mod.ENTRY_OUTCOMES}
     if track == "api_calling" or validated:  # only claim validity that was checked
         valid = [s for s in samples if s.get("outcome") == "valid"]
         out["valid_rate"] = round(len(valid) / len(samples), 4)
@@ -1498,6 +1593,9 @@ def _sample_summary(s: dict) -> dict[str, Any]:
            "finish_reason": s.get("finish_reason"), "truncated": bool(s.get("truncated"))}
     for k in ("error", "mvs_issues", "load_error", "grader_crash", "matched_reference"):
         if s.get(k):
+            out[k] = s[k]
+    for k in ("preserved_f1", "preserved_ok", "entry_outcome"):
+        if s.get(k) is not None:
             out[k] = s[k]
     if "repair" in s:
         out["repair"] = {k: s["repair"].get(k) for k in ("f1", "outcome")}
@@ -1516,7 +1614,23 @@ def _group_stats(rows: list[dict]) -> dict[str, Any]:
             "success": round(statistics.fmean(t["success"] for t in rows), 4),
             "success_all": round(statistics.fmean(t["success_all"] for t in rows), 4),
             "target_f1": (lambda v: round(statistics.fmean(v), 4) if v else None)(
-                [t["target_f1"] for t in rows if t["target_f1"] is not None])}
+                [t["target_f1"] for t in rows if t["target_f1"] is not None]),
+            "preserved_f1": (lambda v: round(statistics.fmean(v), 4) if v else None)(
+                [t["preserved_f1"] for t in rows if t.get("preserved_f1") is not None])}
+
+
+def _difficulty_breakdown(rows: list[dict]) -> dict[str, dict]:
+    """Per normalised difficulty key (`molbench.difficulty`): the group stats of the
+    tasks where it holds and of those where it does not. Keys no task records are
+    left out."""
+    out: dict[str, dict] = {}
+    for key in difficulty_mod.KEYS:
+        yes = [t for t in rows if (t.get("difficulty") or {}).get(key) is True]
+        no = [t for t in rows if (t.get("difficulty") or {}).get(key) is False]
+        if yes or no:
+            out[key] = {"yes": _group_stats(yes) if yes else None,
+                        "no": _group_stats(no) if no else None}
+    return out
 
 
 def _breakdown(rows: list[dict], key: str) -> dict[str, dict]:
@@ -1545,6 +1659,7 @@ def model_record(spec: ModelSpec, tasks: list[dict], per_task_samples: dict[str,
                          "categories": task_skills(task),
                          **{k: task.get(k) for k in TASK_META},
                          "cluster": tasks_mod.cluster_key(task),
+                         "difficulty": difficulty_mod.normalised(task),
                          **_aggregate(got),
                          "samples": [_sample_summary(s) for s in got]})
     samples = [s for got in per_task_samples.values() for s in got]
@@ -1559,6 +1674,9 @@ def model_record(spec: ModelSpec, tasks: list[dict], per_task_samples: dict[str,
         d["target_f1_tasks"] = group["target_f1"]
         d["by_tier"] = _breakdown(rows, "tier")
         d["by_split"] = _breakdown(rows, "split")
+        d["by_style"] = _breakdown(rows, "style")
+        d["clinical_by_difficulty"] = _difficulty_breakdown(
+            [t for t in rows if t.get("tier") == "clinical"])
     usage = {"input_tokens": sum(s["usage"].get("input_tokens") or 0 for s in samples),
              "output_tokens": sum(s["usage"].get("output_tokens") or 0 for s in samples),
              "reasoning_tokens": sum(s["usage"].get("reasoning_tokens") or 0 for s in samples),
@@ -1608,7 +1726,7 @@ def write_scorecards(manifest: Manifest, cells: list[Cell], graded: dict, valida
         n_plan = len(planned[(cond_name, model_id)])
         card = {
             "n_tasks": len(task_order[cond_name]),
-            "samples": manifest.samples,
+            "samples": manifest.samples_for(cond),
             "meta": {**meta, "condition": cond.prompt, "condition_name": cond_name,
                      "grounding": cond.grounding, "structured": cond.structured,
                      "models": [spec.route], "validate": validated,
@@ -1627,9 +1745,11 @@ def write_scorecards(manifest: Manifest, cells: list[Cell], graded: dict, valida
 SAMPLE_RECORD_FIELDS = (
     "run", "model", "route", "condition", "task_id", "sample", "track", "tier", "split",
     "structures", "raw", "predicted", "f1", "precision", "recall", "success", "target_f1",
-    "outcome", "error", "grader", "matched_reference", "finish_reason", "truncated",
+    "outcome", "error", "grader", "matched_reference", "preserved_f1", "preserved_ok",
+    "entry_outcome", "finish_reason", "truncated",
     "input_tokens", "output_tokens", "reasoning_tokens", "cost_usd", "cost_source",
-    "latency_s", "temperature", "max_tokens", "structured", "provider", "response_model",
+    "latency_s", "temperature", "reasoning_effort", "max_tokens", "structured", "provider",
+    "response_model",
     "prompt_sha256", "task_sha256", "repair")
 
 
@@ -1650,13 +1770,16 @@ def sample_record(cell: Cell, s: dict) -> dict[str, Any]:
         "outcome": s.get("outcome"),
         "error": s.get("error") or s.get("mvs_issues") or s.get("load_error"),
         "grader": s.get("grader"), "matched_reference": s.get("matched_reference"),
+        "preserved_f1": s.get("preserved_f1"), "preserved_ok": s.get("preserved_ok"),
+        "entry_outcome": s.get("entry_outcome"),
         "finish_reason": r.get("finish_reason"), "truncated": is_truncated(r),
         "input_tokens": usage.get("input_tokens"), "output_tokens": usage.get("output_tokens"),
         "reasoning_tokens": usage.get("reasoning_tokens"),
         "cost_usd": r.get("cost_usd"), "cost_source": r.get("cost_source"),
         "latency_s": r.get("latency_s"),
-        "temperature": request.get("temperature"), "max_tokens": request.get("max_tokens"),
-        "structured": request.get("structured"),
+        "temperature": request.get("temperature"),
+        "reasoning_effort": request.get("reasoning_effort"),
+        "max_tokens": request.get("max_tokens"), "structured": request.get("structured"),
         "provider": r.get("provider"), "response_model": r.get("response_model"),
         "prompt_sha256": r.get("prompt_sha256"), "task_sha256": r.get("task_sha256"),
         "repair": ({k: s["repair"].get(k) for k in ("f1", "outcome")} if "repair" in s else None),
@@ -1786,7 +1909,8 @@ def run_meta(manifest: Manifest, corpus_sha: str, mock: bool, archive_dir: pathl
     return {"run_name": manifest.name, "run_id": f"{manifest.name}:{lock['created_at']}",
             "started_at": lock["created_at"], "graded_at": _now(),
             "git_commit": _git_commit(), "manifest": str(manifest.path),
-            "panel_rule": manifest.panel_rule,
+            "panel_rule": manifest.panel_rule, "pilot": manifest.pilot,
+            "reasoning_effort": manifest.reasoning_effort,
             "manifest_sha256": manifest.sha256, "corpus_version": manifest.corpus_version,
             "corpus_sha256": corpus_sha, "mock": mock, "archive": cells_rel,
             "escalate": False, "judge": None}
@@ -1794,14 +1918,17 @@ def run_meta(manifest: Manifest, corpus_sha: str, mock: bool, archive_dir: pathl
 
 def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpus_sha: str,
             calib: Calibration, runs_dir: pathlib.Path, results_dir: pathlib.Path,
-            seed: int = 0, site: bool = True) -> bool:
+            seed: int = 0, site: bool = True, corpus: list[dict] | None = None) -> bool:
     """The whole pipeline at $0 with the mock model: plan, generate (interrupted half
     way, then resumed), archive, grade, scorecards, per-sample records, site build, and
     the cost of the real run. Returns whether every check passed.
 
     Follow-up, accept-set, twin, paraphrase and held-back tasks must all pass through
     it; when the corpus on disk has none of some kind the fixture tasks are added
-    (`with_fixtures`). Fixtures are left out of the cost projection."""
+    (`with_fixtures`). Fixtures are left out of the cost projection.
+
+    ``corpus``: every task on disk, when ``tasks`` is a manifest's own selection (a
+    pilot): links between tasks are checked against it, as a paid start does."""
     archive_dir = runs_dir / f"{manifest.name}.dryrun"
     out_dir = results_dir / f"{manifest.name}.dryrun"
     _fresh_dryrun_dir(archive_dir)
@@ -1817,8 +1944,9 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     print(f"DRY RUN  {manifest.name}: {len(panel)} models x {len(manifest.conditions)} "
           f"conditions, {n_corpus} tasks"
           + (f" + {n_fixtures} fixture tasks (tests/fixtures/tasks)" if n_fixtures else "")
-          + f", {manifest.samples} sample(s) -> {len(cells):,} "
-          "cells, all answered by the mock model ($0)")
+          + ", samples per task "
+          + ", ".join(f"{c.name} {manifest.samples_for(c)}" for c in manifest.conditions)
+          + f" -> {len(cells):,} cells, all answered by the mock model ($0)")
     planned_tasks = list({c.task["id"]: c.task for c in cells}.values())
     kinds = kinds_present(planned_tasks)
     checks.append(("the plan has follow-up (one with no change), accept-set, twin, paraphrase "
@@ -1826,10 +1954,16 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
                    all(n for per in kinds.values() for n in per.values()),
                    "; ".join(f"{k}: {per['mvs']} MVS, {per['api_calling']} API"
                              for k, per in kinds.items())))
-    bad = corpus_problems(planned_tasks)
-    checks.append(("every planned task passes the corpus checks a paid run makes before "
-                   "its first call", not bad,
-                   f"{len(planned_tasks)} tasks" if not bad else "; ".join(bad[:3])))
+    subset = bool(manifest.task_ids)
+    checked = corpus if subset and corpus is not None else planned_tasks
+    bad = corpus_problems(checked)
+    checks.append((("the corpus" if subset else "every planned task") + " passes the corpus "
+                   "checks a paid run makes before its first call", not bad,
+                   f"{len(checked)} tasks" if not bad else "; ".join(bad[:3])))
+    per_cell = Counter((c.condition.name, c.model.id, c.task["id"]) for c in cells)
+    checks.append(("every task has the number of samples its condition asks for",
+                   all(n == manifest.samples_for(cond) for (cond, _, _), n in per_cell.items()),
+                   ", ".join(f"{c.name} {manifest.samples_for(c)}" for c in manifest.conditions)))
     follow = [c for c in cells if c.task.get("context")]
     shown = all(json.dumps(start_state(c.task), separators=(",", ":")) in c.user
                 and c.user.rstrip().split("Request: ")[-1].startswith(c.task["prompt"])
@@ -1880,7 +2014,15 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     want += [("mvs", "valid"), ("mvs", "invalid_mvs")] if validated else [("mvs", "unchecked")]
     present_tracks = {c.task["category"] for c in cells}
     want = [w for w in want if w[0] in present_tracks]
-    checks.append(("grading meets every outcome class", all(seen[w] for w in want),
+    if subset:  # a few dozen cells cannot be expected to meet every class
+        ok_class = "valid" if validated else "unchecked"
+        met = all(seen[(t, "valid" if t == "api_calling" else ok_class)]
+                  and any(n for (tr, o), n in seen.items() if tr == t and o not in ("valid", "unchecked"))
+                  for t in present_tracks)
+    else:
+        met = all(seen[w] for w in want)
+    checks.append(("grading meets " + ("a right and a not-valid answer on each track" if subset
+                                       else "every outcome class"), met,
                    ", ".join(f"{t}:{o}={n}" for (t, o), n in sorted(seen.items()))))
     api = [s for s in every if s.get("track") == "api_calling"]
     checks.append(("every API answer that parsed was graded by the final-state grader",
@@ -1890,6 +2032,21 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     alt = [s for s in every if s.get("matched_reference") and is_success(s)]
     checks.append(("an accepted alternative answer counts as exactly right", bool(alt),
                    f"{len(alt):,} samples matched an alternative"))
+    kept = [s for s in every if s.get("preserved_f1") is not None]
+    kept_tracks = {s.get("track", "mvs") for s in kept}
+    lost = [s for s in kept if not s["preserved_ok"] and (target_score(s) or 0.0) >= 1.0]
+    checks.append(("follow-ups carry a preserved score next to the target score, on both tracks",
+                   kept_tracks >= present_tracks and any(s["preserved_ok"] for s in kept)
+                   and any(not s["preserved_ok"] for s in kept),
+                   f"{len(kept):,} samples; {len(lost):,} made the edit and lost something that "
+                   "had to stay"))
+    entries = Counter(s["entry_outcome"] for s in every if s.get("entry_outcome"))
+    if any(c.task.get("tier") == "resolve" for c in cells):
+        need_entries = ("accepted",) if subset else ("accepted", "wrong_entry", "no_such_entry")
+        checks.append(("resolve answers are sorted by the entry they load (accepted, a real "
+                       "entry of something else, an id that does not exist)",
+                       all(entries[o] for o in need_entries),
+                       ", ".join(f"{o}={entries[o]}" for o in resolve_mod.ENTRY_OUTCOMES)))
     cut = [s for s in every if s.get("truncated")]
     checks.append(("truncated output (finish reason 'length') is counted apart from malformed",
                    bool(cut) and any(not s.get("truncated") and s.get("outcome") == "invalid_json"
@@ -1919,6 +2076,20 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
                    and bool(api_cards) == ("api_calling" in present_tracks)
                    and all(d.get("valid_rate") is not None for d in api_cards),
                    f"{len(cards)} scorecards"))
+    try:
+        from . import analysis
+        built = analysis.build(out_dir, out_dir / "paper", replicates=200,
+                               extra_tasks=FIXTURE_TASKS if n_fixtures else None,
+                               flag="--from-dry-run", require_mock=True)
+        checks.append(("every paper table builds from the run's scorecards (mock numbers)",
+                       bool(built.tables) and all(
+                           analysis.MOCK_BANNER in t or n in analysis.NOT_RUN_RESULTS
+                           for n, t in built.tables.items()),
+                       f"{len(built.tables)} tables, {len(built.values)} values -> "
+                       f"{out_dir / 'paper'}"))
+    except Exception as e:  # noqa: BLE001 - a dry run reports every broken stage
+        checks.append(("every paper table builds from the run's scorecards (mock numbers)",
+                       False, f"{type(e).__name__}: {e}"))
     sample_files = write_sample_records(cells, graded, out_dir)
     n_lines = 0
     fields_ok = True
@@ -2007,13 +2178,14 @@ def manifest_main(args: argparse.Namespace) -> int:
     calib = Calibration.load(args.calibration)
     runs_dir = pathlib.Path(args.runs_dir) if args.runs_dir else RUNS_DIR
     results_dir = pathlib.Path(args.results_dir) if args.results_dir else RESULTS_DIR
-    tasks = [t for t in load_tasks(list(manifest_mod.TRACKS))]
+    corpus = load_tasks(list(manifest_mod.TRACKS))
+    tasks = manifest.select_tasks(corpus)  # the whole corpus, or a pilot's own list
 
     if args.dry_run:
         corpus_sha = manifest_mod.check_corpus(manifest, TASKS_DIR, strict=False)
         panel = manifest.panel(include_optional=not args.core_only, only=args.only_models)
         ok = dry_run(manifest, panel, tasks, corpus_sha, calib, runs_dir, results_dir,
-                     seed=args.seed, site=not args.no_site)
+                     seed=args.seed, site=not args.no_site, corpus=corpus)
         print("\nDRY RUN " + ("PASSED" if ok else "FAILED"))
         return 0 if ok else 1
 
@@ -2035,7 +2207,7 @@ def manifest_main(args: argparse.Namespace) -> int:
                   "to start the paid run, or --dry-run to rehearse it for $0.")
             return 0
         corpus_sha = manifest_mod.check_corpus(manifest, TASKS_DIR, strict=True)
-        bad = corpus_problems(tasks)
+        bad = corpus_problems(corpus)  # links are checked against every task on disk
         if bad:
             raise ManifestError(
                 f"the corpus has {len(bad)} problem(s) (scripts/validate_tasks.py lists "
