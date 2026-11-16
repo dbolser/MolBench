@@ -238,3 +238,127 @@ def test_budget_aborts_when_real_cost_outruns_the_estimate():
     with pytest.raises(mf.BudgetExceeded):
         b.charge(actual=4.5, estimate=2.0)        # 9.5 spent + 2 to go
     assert b.exceeded and b.spent == pytest.approx(9.5)
+
+
+# --- per-condition samples, reasoning effort, pilot ----------------------------------
+
+def test_the_structured_condition_runs_one_sample_and_the_rest_three():
+    m = mf.load_manifest(FINAL)   # ruling 2026-11-15
+    assert {c.name: m.samples_for(c) for c in m.conditions} == {
+        "spec": 3, "spec_structured": 1, "spec_grounded": 3, "bare": 3}
+    assert m.samples_for("spec_structured") == 1
+
+
+def test_a_condition_can_set_its_own_samples():
+    m = mf.parse_manifest(_with('\n[[conditions]]\nname = "x"\nsamples = 5\n'))
+    assert (m.samples_for("spec"), m.samples_for("x")) == (2, 5)
+    with pytest.raises(mf.ManifestError, match="'samples' must be >= 1"):
+        mf.parse_manifest(_with('\n[[conditions]]\nname = "x"\nsamples = 0\n'))
+    with pytest.raises(mf.ManifestError, match="whole number"):
+        mf.parse_manifest(_with('\n[[conditions]]\nname = "x"\nsamples = 1.5\n'))
+
+
+def test_one_reasoning_effort_for_the_whole_run():
+    assert mf.load_manifest(FINAL).reasoning_effort == "provider-default"
+    thinker, plain = mf.ModelSpec("a", "x:a", reasoning=True), mf.ModelSpec("b", "x:b")
+    default = mf.parse_manifest(MINIMAL)
+    assert default.reasoning_effort_for(thinker) is None      # nothing is sent
+    low = mf.parse_manifest(_with(**{"samples = 2": 'samples = 2\nreasoning_effort = "low"'}))
+    assert low.reasoning_effort_for(thinker) == "low" and low.reasoning_effort_for(plain) is None
+    with pytest.raises(mf.ManifestError, match="reasoning_effort must be one of"):
+        mf.parse_manifest(_with(**{"samples = 2": 'samples = 2\nreasoning_effort = "none"'}))
+
+
+def test_a_task_subset_is_a_pilot_and_a_pilot_is_small(tmp_path):
+    listed = 'samples = 2\ntasks = ["a", "b"]'
+    with pytest.raises(mf.ManifestError, match="needs run.pilot = true"):
+        mf.parse_manifest(_with(**{"samples = 2": listed}))
+    with pytest.raises(mf.ManifestError, match="more than once"):
+        mf.parse_manifest(_with(**{"samples = 2": 'samples = 2\npilot = true\ntasks = ["a", "a"]'}))
+    with pytest.raises(mf.ManifestError, match="capped at"):
+        mf.parse_manifest(_with(**{"samples = 2": listed + "\npilot = true",
+                                   "cap_usd = 1.0": "cap_usd = 50.0"}))
+    m = mf.parse_manifest(_with(**{"samples = 2": listed + "\npilot = true"}))
+    tasks = [{"id": "b"}, {"id": "c"}, {"id": "a"}]
+    assert [t["id"] for t in m.select_tasks(tasks)] == ["a", "b"]   # the manifest's order
+    with pytest.raises(mf.ManifestError, match="not in the corpus"):
+        m.select_tasks(tasks[:2])
+    assert mf.parse_manifest(MINIMAL).select_tasks(tasks) == tasks
+    # A pilot may run before the freeze; the final run may not.
+    (tmp_path / "t.json").write_text("{}")
+    assert mf.check_corpus(m, tmp_path, strict=True) == mf.corpus_hash(tmp_path)
+
+
+# --- run/pilot.toml ------------------------------------------------------------------
+
+PILOT = REPO / "run" / "pilot.toml"
+
+
+def _pilot():
+    import importlib.util
+    from molbench import runner
+    spec = importlib.util.spec_from_file_location("select_pilot", REPO / "run" / "select_pilot.py")
+    select_pilot = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(select_pilot)
+    m = mf.load_manifest(PILOT)
+    corpus = runner.load_tasks(list(mf.TRACKS))
+    return m, corpus, select_pilot, runner
+
+
+def test_pilot_manifest_is_one_cheap_model_per_route():
+    m, corpus, select_pilot, runner = _pilot()
+    assert m.pilot and m.budget_usd == 2.0 and m.reasoning_effort == "provider-default"
+    assert all(m.samples_for(c) == 1 for c in m.conditions)
+    assert [x.route for x in m.panel()] == ["anthropic:claude-haiku-4-5"]   # the default start
+    free = [x for x in m.models if x.optional]
+    assert len(free) == 1 and free[0].route.startswith("openrouter:")
+    assert free[0].route.endswith(":free") and free[0].price.cost(10**6, 10**6) == 0
+    assert free[0].structured == "json_object"
+    # the Anthropic model is the final panel's own entry, at the same price
+    final = {x.id: x for x in mf.load_manifest(FINAL).models}
+    mine = m.panel()[0]
+    assert (mine.route, mine.price.input, mine.price.output) == (
+        final[mine.id].route, final[mine.id].price.input, final[mine.id].price.output)
+    calib = mf.Calibration.load()
+    for panel in (m.panel(), m.panel(only=[free[0].id])):
+        cells = runner.build_plan(m, m.select_tasks(corpus), panel)
+        rows = runner.project_costs(m, cells, calib)
+        assert sum(r["cost_usd"] for r in rows) < 1.0
+        assert sum(r["worst_cost_usd"] for r in rows) <= m.budget_usd   # even at every token limit
+        assert {c.condition.name for c in cells} >= {"spec", "spec_grounded"}
+    assert any(c.structured for c in cells)        # JSON mode is proved on the OpenRouter route
+
+
+def test_pilot_tasks_cover_every_tier_track_and_kind():
+    m, corpus, select_pilot, runner = _pilot()
+    assert select_pilot.main(["--check"]) == 0      # the list in the file is the rule's
+    tasks = m.select_tasks(corpus)
+    assert 35 <= len(tasks) <= 45
+    cells = {(t["category"], t["tier"]) for t in corpus}
+    for split in ("public", "heldback"):
+        assert {(t["category"], t["tier"]) for t in tasks if t["split"] == split} == cells, split
+    kinds = runner.kinds_present(tasks)
+    assert all(n for per in kinds.values() for n in per.values()), kinds
+    ids = {t["id"] for t in tasks}
+    assert sum(t["twin_of"] in ids for t in tasks if t.get("twin_of")) >= 10   # whole pairs
+    for track in mf.TRACKS:
+        mine = [t for t in tasks if t["category"] == track]
+        full = {t["paraphrase_of"] for t in mine if t.get("paraphrase_of")}
+        assert full and all({t["style"] for t in mine if t.get("paraphrase_of") == i}
+                            == {"terse", "indirect"} and i in ids for i in full)
+        follow = [t for t in mine if t.get("context")]
+        assert any(runner.preserved_parts(t) and not t["context"]["noop"] for t in follow)
+    grounded, structured = m.condition("spec_grounded"), m.condition("spec_structured")
+    assert {t["tier"] for t in tasks if grounded.takes_task(t)} == set(tasks_mod.LOOKUP_TIERS)
+    assert {t["category"] for t in tasks if structured.takes_task(t)} == set(mf.TRACKS)
+    assert any(t.get("context") for t in tasks if structured.takes_task(t))
+
+
+def test_final_budget_cap_fits_the_recommended_run():
+    from molbench import runner
+    m, calib = mf.load_manifest(FINAL), mf.Calibration.load()
+    cells = runner.build_plan(m, runner.load_tasks(list(mf.TRACKS)), m.panel())
+    expected = sum(r["cost_usd"] for r in runner.project_costs(m, cells, calib))
+    # The cap is the projected cost of the core panel plus about a quarter. If the corpus
+    # or a price changes, re-project and set the cap again (run/README.md).
+    assert expected <= m.budget_usd <= 1.5 * expected, expected
