@@ -157,7 +157,8 @@ def test_every_call_is_archived_with_what_a_rerun_or_audit_needs(tmp_path, corpu
         assert r["usage"]["input_tokens"] > 0 and r["usage"]["output_tokens"] >= 0
         assert r["finish_reason"] in ("stop", "length") and r["latency_s"] is not None
         assert r["request"] == {"max_tokens": 4000, "structured": c.structured,
-                                "temperature": "provider-default"}  # none is ever sent
+                                "temperature": "provider-default",
+                                "reasoning_effort": "provider-default"}  # none is ever sent
         assert r["provider"] == "mock" and r["v"] == runner.ARCHIVE_VERSION
         assert r["cost_usd"] == pytest.approx(c.model.price.cost(
             r["usage"]["input_tokens"], r["usage"]["output_tokens"]))

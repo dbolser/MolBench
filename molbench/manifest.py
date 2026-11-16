@@ -38,6 +38,15 @@ PROMPTS = ("spec", "bare")
 # such switch (or we have not wired it), so it is left out of structured conditions.
 STRUCTURED_MODES = ("none", "json_object")
 VALIDATE_MODES = ("auto", "required", "off")
+# How much hidden reasoning a model is asked for. "provider-default" sends nothing, so
+# every model runs as its provider ships it (the policy of every run so far). Any other
+# value is sent, unchanged, to every model the manifest flags ``reasoning = true`` on a
+# route that has the switch (OpenRouter's unified ``reasoning.effort``); it is one
+# setting for the whole run, never per model, and it is archived with every call.
+REASONING_EFFORTS = ("provider-default", "minimal", "low", "medium", "high")
+# A pilot manifest (``run.pilot = true``) proves the provider path on a handful of
+# tasks. It may run on a corpus that is not frozen yet, so it is kept small by rule.
+PILOT_MAX_BUDGET_USD = 5.0
 
 
 class ManifestError(ValueError):
@@ -93,6 +102,7 @@ class Condition:
     models: Any = "all"                  # "all" | "structured" | [model ids]
     where: dict[str, tuple] = field(default_factory=dict)  # task field -> allowed values
     note: str = ""
+    samples: int | None = None           # samples per task here; None = run.samples
 
     def takes_task(self, task: dict) -> bool:
         if task.get("category") not in self.tracks:
@@ -140,6 +150,33 @@ class Manifest:
     models: tuple[ModelSpec, ...]
     sha256: str  # of the manifest file itself
     panel_rule: str = ""  # how the model panel was chosen, in words (plan decision 22)
+    reasoning_effort: str = "provider-default"   # one of REASONING_EFFORTS
+    pilot: bool = False          # a provider-path pilot: small, may run before the freeze
+    task_ids: tuple[str, ...] = ()   # run only these tasks (a pilot); empty = the corpus
+
+    def samples_for(self, condition: "Condition | str") -> int:
+        """Samples per task in one condition: its own ``samples``, else ``run.samples``."""
+        cond = self.condition(condition) if isinstance(condition, str) else condition
+        return cond.samples or self.samples
+
+    def reasoning_effort_for(self, model: ModelSpec) -> str | None:
+        """The reasoning effort to send with a call to ``model``: None (send nothing)
+        under "provider-default" and for a model that does not reason."""
+        if self.reasoning_effort == "provider-default" or not model.reasoning:
+            return None
+        return self.reasoning_effort
+
+    def select_tasks(self, tasks: list[dict]) -> list[dict]:
+        """The tasks this manifest runs: all of them, or the ``run.tasks`` it lists (in
+        the manifest's order). A listed id that is not in the corpus is an error."""
+        if not self.task_ids:
+            return tasks
+        by_id = {t["id"]: t for t in tasks}
+        missing = [i for i in self.task_ids if i not in by_id]
+        if missing:
+            raise ManifestError(f"run.tasks names task(s) not in the corpus: {missing[:5]}"
+                                + (f" and {len(missing) - 5} more" if len(missing) > 5 else ""))
+        return [by_id[i] for i in self.task_ids]
 
     def panel(self, include_optional: bool = False,
               only: Iterable[str] | None = None) -> list[ModelSpec]:
@@ -230,7 +267,10 @@ def _model(d: dict, i: int) -> ModelSpec:
 def _condition(d: dict, i: int, model_ids: set[str]) -> Condition:
     where = f"conditions[{i}] ({d.get('name', '?')})"
     _known(d, {"name", "prompt", "grounding", "structured", "tracks", "models", "where",
-               "note"}, where)
+               "note", "samples"}, where)
+    samples = _int(d, "samples", where)
+    if samples is not None and samples < 1:
+        raise ManifestError(f"{where}: 'samples' must be >= 1")
     prompt = d.get("prompt", "spec")
     if prompt not in PROMPTS:
         raise ManifestError(f"{where}: prompt must be one of {PROMPTS}")
@@ -258,7 +298,7 @@ def _condition(d: dict, i: int, model_ids: set[str]) -> Condition:
     return Condition(name=_need(d, "name", where), prompt=prompt,
                      grounding=bool(d.get("grounding", False)),
                      structured=bool(d.get("structured", False)), tracks=tracks,
-                     models=models, where=wh, note=d.get("note", ""))
+                     models=models, where=wh, note=d.get("note", ""), samples=samples)
 
 
 def parse_manifest(text: str, path: pathlib.Path | str = "<string>") -> Manifest:
@@ -273,7 +313,16 @@ def parse_manifest(text: str, path: pathlib.Path | str = "<string>") -> Manifest
         raise ManifestError("panel: rule is text")
     run = _need(raw, "run", str(path))
     _known(run, {"name", "samples", "max_tokens", "reasoning_max_tokens", "temperature",
-                 "concurrency", "per_model_concurrency", "validate", "retry"}, "run")
+                 "concurrency", "per_model_concurrency", "validate", "retry",
+                 "reasoning_effort", "pilot", "tasks"}, "run")
+    task_ids = run.get("tasks", [])
+    if not isinstance(task_ids, list) or not all(isinstance(i, str) for i in task_ids):
+        raise ManifestError("run: tasks is a list of task ids")
+    dup_tasks = sorted({i for i in task_ids if task_ids.count(i) > 1})
+    if dup_tasks:
+        raise ManifestError(f"run: tasks lists {dup_tasks} more than once")
+    if type(run.get("pilot", False)) is not bool:
+        raise ManifestError("run: pilot is true or false")
     retry = run.get("retry", {})
     _known(retry, {"max_attempts", "backoff_seconds", "backoff_max_seconds",
                    "timeout_seconds"}, "run.retry")
@@ -315,7 +364,17 @@ def parse_manifest(text: str, path: pathlib.Path | str = "<string>") -> Manifest
         corpus_sha256=corpus.get("sha256", ""),
         conditions=conditions, models=models,
         sha256=hashlib.sha256(text.encode("utf-8")).hexdigest(),
-        panel_rule=" ".join(panel.get("rule", "").split()))
+        panel_rule=" ".join(panel.get("rule", "").split()),
+        reasoning_effort=run.get("reasoning_effort", "provider-default"),
+        pilot=run.get("pilot", False), task_ids=tuple(task_ids))
+    if m.reasoning_effort not in REASONING_EFFORTS:
+        raise ManifestError(f"run: reasoning_effort must be one of {REASONING_EFFORTS}")
+    if m.pilot and m.budget_usd > PILOT_MAX_BUDGET_USD:
+        raise ManifestError(f"budget: a pilot (run.pilot = true) is capped at "
+                            f"${PILOT_MAX_BUDGET_USD:.2f}; this one says ${m.budget_usd:.2f}")
+    if m.task_ids and not m.pilot:
+        # The final run is the whole frozen corpus. A hand-picked subset is a pilot.
+        raise ManifestError("run: tasks (a subset of the corpus) needs run.pilot = true")
     if min(m.samples, m.max_tokens, m.reasoning_max_tokens, m.concurrency,
            m.per_model_concurrency) < 1:
         raise ManifestError("run: samples, max_tokens and concurrency must be >= 1")
@@ -360,6 +419,8 @@ def corpus_hash(tasks_dir: pathlib.Path) -> str:
 def check_corpus(manifest: Manifest, tasks_dir: pathlib.Path, strict: bool) -> str:
     """The corpus hash on disk. With ``strict`` (a real run) it must equal the manifest's."""
     actual = corpus_hash(tasks_dir)
+    if strict and manifest.pilot and not manifest.corpus_sha256:
+        return actual  # a pilot may run before the freeze; its archive records this hash
     if strict and not manifest.corpus_sha256:
         raise ManifestError(
             "corpus.sha256 is empty: freeze the corpus first, then pin its hash in the "
@@ -484,7 +545,11 @@ def main(argv: list[str] | None = None) -> None:
     pinned = ("not pinned" if not m.corpus_sha256
               else "matches" if m.corpus_sha256 == actual else "DOES NOT MATCH the manifest")
     core = [x for x in m.models if not x.optional]
-    print(f"{path}: ok  run={m.name}  samples={m.samples}  budget=${m.budget_usd:.2f}")
+    per_cond = ", ".join(f"{c.name} {m.samples_for(c)}" for c in m.conditions)
+    print(f"{path}: ok  run={m.name}  samples per task: {per_cond}  "
+          f"budget=${m.budget_usd:.2f}" + ("  PILOT" if m.pilot else ""))
+    print(f"  reasoning effort: {m.reasoning_effort}"
+          + (f"   tasks: {len(m.task_ids)} listed" if m.task_ids else ""))
     print(f"  models: {len(core)} + {len(m.models) - len(core)} optional   "
           f"conditions: {', '.join(c.name for c in m.conditions)}")
     print(f"  corpus {m.corpus_version}: sha256 on disk {actual} ({pinned})")
