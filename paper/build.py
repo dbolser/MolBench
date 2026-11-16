@@ -1,28 +1,35 @@
 #!/usr/bin/env python3
 """Assemble the paper: sections + generated numbers -> ``paper/molbench.md`` (+ HTML, PDF).
 
-    python paper/build.py            # stdlib only; writes molbench.md and PENDING.md
+    python paper/build.py            # stdlib only; writes molbench.md, si.md and PENDING.md
     python paper/build.py --check    # same checks, writes nothing; exit 1 on any problem
     python paper/build.py --pdf      # also HTML and PDF, if pandoc (+ Chromium) are installed
 
 No result is typed by hand in ``paper/sections/*.md``. The text uses four markers:
 
 ``{{key}}`` / ``{{key:.3f}}`` / ``{{key:.1%}}``
-    A value from ``generated/values.json`` (written by ``scripts/paper_tables.py``),
-    with an optional Python format spec. An unknown key is an error.
+    A value from ``generated/values.json`` (written by ``scripts/paper_tables.py``: numbers
+    of a model run) or ``generated/corpus_values.json`` (written by
+    ``paper/corpus_values.py``: everything else), with an optional Python format spec. An
+    unknown key is an error, and so is a key that both files define.
 ``{{key|PENDING: what}}``
     The same, but if the key is absent (or null) the visible tag ``⟦PENDING: what⟧`` is
     written instead. Used for numbers only the final run can supply: they fill
     themselves in when the key appears in ``values.json``.
 ``{{include:generated/table_x.md}}`` / ``{{include:generated/table_y.md|PENDING: what}}``
     A generated table (or any file under ``paper/``); the second form tolerates a file
-    that does not exist yet.
+    that does not exist yet. ``{{include:generated/table_y.md|else:generated/shape_y.md}}``
+    shows the second file until the first exists: the table in its final shape, with
+    pending cells, until the final run writes the real one.
 ``[@key]`` / ``[@a; @b]``
     A citation; every key must exist in ``references.bib``. References are numbered in
     order of first use and listed at the end.
 
-A literal ``⟦PENDING: …⟧`` in the text marks design not yet built or a decision still
-open. Every PENDING tag in the built paper is listed in ``paper/PENDING.md``.
+A literal ``⟦PENDING: …⟧`` in the text marks something only the final run, the corpus
+freeze or an author decision can supply. The first words of a tag say which (see
+``FILLED_BY``); ``paper/PENDING.md`` lists every tag of the paper and of the Supporting
+Information with what fills it. The Supporting Information is built the same way from
+``paper/si/*.md`` into ``paper/si.md``.
 """
 
 from __future__ import annotations
@@ -39,6 +46,9 @@ import unicodedata
 PAPER = pathlib.Path(__file__).resolve().parent
 SECTIONS = PAPER / "sections"
 VALUES = PAPER / "generated" / "values.json"
+CORPUS_VALUES = PAPER / "generated" / "corpus_values.json"
+SI_SECTIONS = PAPER / "si"
+OUT_SI = PAPER / "si.md"
 BIB = PAPER / "references.bib"
 OUT_MD = PAPER / "molbench.md"
 OUT_PENDING = PAPER / "PENDING.md"
@@ -51,6 +61,43 @@ IMAGE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)\)")
 
 class BuildError(Exception):
     pass
+
+
+# What fills a PENDING tag, by how the tag starts. A tag that starts in no listed way is
+# reported by ``build.py --check`` so that no tag is left without an owner.
+FILLED_BY = [
+    ("final run", "The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then "
+                  "`scripts/paper_tables.py` on its archives. Tables shown in their final shape are "
+                  "replaced when the script writes the file named in the section source."),
+    ("corpus freeze", "The freeze of the corpus (version tag and hash pinned in `run/final_run.toml`), "
+                      "then `paper/corpus_values.py`."),
+    ("rating study", "The second rating study (`paper/a4/FINAL_CALL.md`), run on the final run's scenes; "
+                     "`scripts/agreement.py` writes the numbers."),
+    ("deposit", "Depositing the frozen corpus, the run archives and the ratings in a public repository "
+                "that issues a DOI."),
+    ("Dan", "An author decision or author-supplied text."),
+]
+
+
+def filled_by(what: str) -> str | None:
+    for start, how in FILLED_BY:
+        if what.startswith(start):
+            return how
+    return None
+
+
+def load_values() -> dict:
+    """``values.json`` and ``corpus_values.json`` as one dictionary; no key may be in both."""
+    if not VALUES.exists():
+        raise BuildError(f"{VALUES} not found: run scripts/paper_tables.py first")
+    values = json.loads(VALUES.read_text(encoding="utf-8"))
+    if CORPUS_VALUES.exists():
+        more = json.loads(CORPUS_VALUES.read_text(encoding="utf-8"))
+        both = sorted(set(values) & set(more))
+        if both:
+            raise BuildError(f"keys defined in both value files: {both[:5]}")
+        values.update(more)
+    return values
 
 
 # --------------------------------------------------------------------------- #
@@ -74,6 +121,15 @@ def substitute(text: str, values: dict, where: str, problems: list[str], depth: 
         fallback = None
         if "|" in body:
             body, fallback = (s.strip() for s in body.split("|", 1))
+            if body.startswith("include:") and fallback.startswith("else:"):
+                first = (PAPER / body[len("include:"):].strip())
+                rel = body[len("include:"):].strip() if first.exists() else fallback[len("else:"):].strip()
+                f = (PAPER / rel).resolve()
+                if PAPER not in f.parents or not f.exists():
+                    problems.append(f"{where}: missing include {rel}")
+                    return m.group(0)
+                return substitute(f.read_text(encoding="utf-8").rstrip(), values, rel, problems,
+                                  depth + 1)
             if not fallback.startswith("PENDING:"):
                 problems.append(f"{where}: fallback must start with 'PENDING:' in {{{{{m.group(1)}}}}}")
                 return m.group(0)
@@ -236,22 +292,24 @@ def resolve_citations(text: str, bib: dict, problems: list[str]) -> tuple[str, l
 # --------------------------------------------------------------------------- #
 # Build
 # --------------------------------------------------------------------------- #
-def build(values: dict | None = None) -> tuple[str, list[dict], list[str]]:
-    """Return (markdown, pending tags, problems). Nothing is written."""
+def build(values: dict | None = None, sections: pathlib.Path | None = None
+          ) -> tuple[str, list[dict], list[str]]:
+    """Return (markdown, pending tags, problems). Nothing is written. ``sections`` is the
+    directory to assemble (default: the paper; ``SI_SECTIONS`` for the Supporting Information)."""
     problems: list[str] = []
     if values is None:
-        if not VALUES.exists():
-            raise BuildError(f"{VALUES} not found: run scripts/paper_tables.py first")
-        values = json.loads(VALUES.read_text(encoding="utf-8"))
+        values = load_values()
+    sections = sections or SECTIONS
     bib = parse_bib(BIB.read_text(encoding="utf-8")) if BIB.exists() else {}
-    files = sorted(SECTIONS.glob("*.md"))
+    files = sorted(sections.glob("*.md"))
     if not files:
-        raise BuildError(f"no sections in {SECTIONS}")
+        raise BuildError(f"no sections in {sections}")
     chunks, pending = [], []
     for f in files:
-        text = substitute(f.read_text(encoding="utf-8"), values, f"sections/{f.name}", problems)
+        text = substitute(f.read_text(encoding="utf-8"), values, f"{sections.name}/{f.name}", problems)
         for m in PENDING.finditer(text):  # a tag may run over several lines
-            pending.append({"section": f.name, "line": text.count("\n", 0, m.start()) + 1,
+            pending.append({"section": f"{sections.name}/{f.name}",
+                            "line": text.count("\n", 0, m.start()) + 1,
                             "what": " ".join(m.group(1).split())})
         chunks.append(text.strip())
     body = "\n\n".join(chunks)
@@ -266,43 +324,61 @@ def build(values: dict | None = None) -> tuple[str, list[dict], list[str]]:
     if MARK.search(body):
         problems += [f"marker left unresolved: {m.group(0)}" for m in MARK.finditer(body)]
     status = values.get("run.status_tag", "")
-    header = (f"<!-- Built by paper/build.py from paper/sections/ and paper/generated/values.json "
-              f"({values.get('run.label', '?')}, {status}). Do not edit: edit the sections. -->\n\n")
+    header = (f"<!-- Built by paper/build.py from paper/{sections.name}/ and paper/generated/*.json "
+              f"(run numbers: {values.get('run.label', '?')}, {status}). Do not edit: edit the sources. -->\n\n")
     build.unused_refs = unused  # type: ignore[attr-defined]
     return header + body + "\n", pending, problems
 
 
 def pending_report(pending: list[dict], values: dict) -> str:
+    """PENDING.md: every tag of the paper (``pending``) and of the Supporting Information,
+    grouped where one tag repeats (the cells of a table), each with what fills it."""
+    rows = list(pending)
+    if SI_SECTIONS.exists() and any(SI_SECTIONS.glob("*.md")) and not any(
+            p["section"].startswith(SI_SECTIONS.name + "/") for p in pending):
+        try:
+            rows += build(sections=SI_SECTIONS)[1]
+        except BuildError:
+            pass
+    groups: dict[tuple, dict] = {}
+    for p in rows:
+        g = groups.setdefault((p["section"], p["what"]), {"n": 0, "line": p["line"]})
+        g["n"] += 1
     lines = [
         "# PENDING — what the paper still waits for",
         "",
         "Generated by `paper/build.py`. Do not edit by hand.",
         "",
-        f"Numbers currently come from: **{values.get('run.label', '?')}** "
-        f"({values.get('run.status_tag', '?')}).",
+        f"Run numbers currently come from: **{values.get('run.label', '?')}** "
+        f"({values.get('run.status_tag', '?')}). They appear only in the boxed "
+        "\"Preliminary evidence\" subsection.",
         "",
-        f"{len(pending)} tag(s) in the built paper. A tag written as `{{{{key|PENDING: …}}}}` in a "
-        "section disappears by itself once `scripts/paper_tables.py` writes that key; a literal "
-        "`⟦PENDING: …⟧` needs an edit.",
+        f"{len(rows)} tag(s) in the built paper and Supporting Information, in {len(groups)} "
+        "distinct places. The first words of a tag say what fills it.",
         "",
-        "| # | Section | Line | Waiting for |",
-        "|---:|:---|---:|:---|",
+        "| # | Source file | First line | Times | Waiting for | Filled by |",
+        "|---:|:---|---:|---:|:---|:---|",
     ]
-    for i, p in enumerate(pending, 1):
-        lines.append(f"| {i} | `{p['section']}` | {p['line']} | {p['what'].replace('|', '/')} |")
-    # Keys the sections ask for with a fallback: the contract the final run has to fill.
+    for i, ((section, what), g) in enumerate(groups.items(), 1):
+        how = filled_by(what) or "**not classified: start the tag with one of the words in `FILLED_BY`**"
+        lines.append(f"| {i} | `{section}` | {g['line']} | {g['n']} | {what.replace('|', '/')} | {how} |")
+    # Files the sections ask for with a fallback: the contract the final run has to fill.
     keys = []
-    for f in sorted(SECTIONS.glob("*.md")):
-        for m in MARK.finditer(f.read_text(encoding="utf-8")):
-            body = m.group(1)
-            if "|" in body:
-                k = body.split("|", 1)[0].strip()
-                name = k if k.startswith("include:") else k.partition(":")[0].strip()
-                present = ((PAPER / name[len("include:"):]).exists() if name.startswith("include:")
-                           else values.get(name) is not None)
-                keys.append((name, f.name, present))
+    for d in (SECTIONS, SI_SECTIONS):
+        for f in sorted(d.glob("*.md")) if d.exists() else []:
+            for m in MARK.finditer(f.read_text(encoding="utf-8")):
+                body = m.group(1)
+                if "|" in body:
+                    k = body.split("|", 1)[0].strip()
+                    name = k if k.startswith("include:") else k.partition(":")[0].strip()
+                    present = ((PAPER / name[len("include:"):]).exists() if name.startswith("include:")
+                               else values.get(name) is not None)
+                    keys.append((name, f"{d.name}/{f.name}", present))
     if keys:
         lines += ["", "## Keys and files the final run must supply", "",
+                  "`scripts/paper_tables.py` is expected to write these from the final archives. Until a "
+                  "file exists, the paper shows the same table in its final shape with pending cells "
+                  "(`generated/shape_*.md`, written by `paper/corpus_values.py`).", "",
                   "| Key or file | Used in | Present now |", "|:---|:---|:---|"]
         seen = set()
         for name, sec, present in keys:
@@ -319,7 +395,9 @@ h1,h2,h3{font-family:Helvetica,Arial,sans-serif;line-height:1.25}
 table{border-collapse:collapse;font:8.5pt Helvetica,Arial,sans-serif;margin:1em 0;width:100%}
 th,td{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left}
 th{border-bottom:2px solid #444} img{max-width:100%}
-code{font-size:90%} blockquote{color:#444;border-left:3px solid #ccc;margin-left:0;padding-left:1em}
+code{font-size:90%} pre{font-size:8.5pt;background:#f6f6f6;padding:8px;overflow-x:auto;white-space:pre-wrap}
+blockquote{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.4em 1em;background:#fafafa}
+blockquote table{background:#fff} figure{margin:1.2em 0} figcaption{font-size:9.5pt;color:#222}
 @page{size:A4;margin:18mm}
 """
 
@@ -350,8 +428,9 @@ def render(md_path: pathlib.Path) -> list[str]:
     html = md_path.with_suffix(".html")
     css = PAPER / "generated" / "_paper.css"
     css.write_text(CSS, encoding="utf-8")
-    subprocess.run([pandoc, str(md_path), "-f", "markdown+pipe_tables-citations", "-t", "html5",
-                    "--standalone", "--embed-resources", "--metadata", "pagetitle=MolBench",
+    subprocess.run([pandoc, str(md_path), "-f", "markdown+pipe_tables+implicit_figures-citations", "-t", "html5",
+                    "--standalone", "--embed-resources", "--metadata",
+                    "pagetitle=MolBench" + (" — Supporting Information" if md_path == OUT_SI else ""),
                     "--metadata", "lang=en", "--css", str(css), "--resource-path", str(PAPER),
                     "-o", str(html)], check=True, cwd=PAPER)
     css.unlink()
@@ -371,33 +450,61 @@ def render(md_path: pathlib.Path) -> list[str]:
     return made
 
 
+def words(md: str) -> int:
+    """Words outside tables, code blocks, figure captions, HTML comments and the reference list."""
+    md = md.split("\n## References")[0]
+    md = re.sub(r"<!--.*?-->", "", md, flags=re.S)
+    md = re.sub(r"```.*?```", "", md, flags=re.S)
+    md = re.sub(r"^\|.*\|\s*$", "", md, flags=re.M)
+    md = re.sub(r"^!\[.*$", "", md, flags=re.M)
+    return len(re.findall(r"[A-Za-z0-9][A-Za-z0-9'’\-]*", md))
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--check", action="store_true", help="check only; write nothing")
-    ap.add_argument("--pdf", action="store_true", help="also write molbench.html and molbench.pdf")
+    ap.add_argument("--pdf", action="store_true", help="also write HTML and PDF of both documents")
     args = ap.parse_args(argv)
+    docs = [(SECTIONS, OUT_MD)] + ([(SI_SECTIONS, OUT_SI)] if SI_SECTIONS.exists() else [])
     try:
-        md, pending, problems = build()
+        values = load_values()
+        built = [(out, *build(values, sec)) for sec, out in docs]
     except BuildError as e:
         print(f"error: {e}", file=sys.stderr)
         return 1
+    problems = [p for _, _, _, probs in built for p in probs]
+    for _, _, pending, _ in built:
+        problems += [f"{p['section']}:{p['line']}: PENDING tag with no owner: {p['what']!r}"
+                     for p in pending if not filled_by(p["what"])]
     for p in problems:
         print(f"error: {p}", file=sys.stderr)
     if problems:
         return 1
-    values = json.loads(VALUES.read_text(encoding="utf-8"))
-    words = len(re.findall(r"\w+", re.sub(r"\|.*\|", "", md)))
-    if not args.check:
-        OUT_MD.write_text(md, encoding="utf-8")
-        OUT_PENDING.write_text(pending_report(pending, values), encoding="utf-8")
-    unused = getattr(build, "unused_refs", [])
-    print(f"{'checked' if args.check else 'wrote'} {OUT_MD.name}: ~{words} words outside tables, "
-          f"{len(pending)} PENDING tag(s), {len(unused)} uncited reference(s)"
-          + (f" ({', '.join(unused)})" if unused else ""))
-    if args.pdf and not args.check:
-        made = render(OUT_MD)
-        if made:
-            print("also wrote " + ", ".join(made))
+    report = pending_report(built[0][2], values)
+    stale = []
+    for out, md, pending, _ in built:
+        if args.check:
+            if not out.exists() or out.read_text(encoding="utf-8") != md:
+                stale.append(out.name)
+        else:
+            out.write_text(md, encoding="utf-8")
+        print(f"{'checked' if args.check else 'wrote'} {out.name}: ~{words(md)} words of text, "
+              f"{len(pending)} PENDING tag(s)")
+    if args.check:
+        if not OUT_PENDING.exists() or OUT_PENDING.read_text(encoding="utf-8") != report:
+            stale.append(OUT_PENDING.name)
+        for name in stale:
+            print(f"error: {name} is stale: run python paper/build.py", file=sys.stderr)
+        return 1 if stale else 0
+    OUT_PENDING.write_text(report, encoding="utf-8")
+    abstract = re.search(r"## Abstract\n(.*?)\n## ", built[0][1], flags=re.S)
+    if abstract:
+        print(f"abstract: {words(abstract.group(1))} words")
+    if args.pdf:
+        for out, _, _, _ in built:
+            made = render(out)
+            if made:
+                print("also wrote " + ", ".join(made))
     return 0
 
 
