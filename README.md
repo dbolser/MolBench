@@ -35,21 +35,21 @@ picks the wrong surface flavour still earns partial credit. Tasks also probe
 domain knowledge; here, the lysozyme catalytic dyad is Glu35/Asp52. The primary
 **MVS track** works the same way, but the reference answer is a
 [MolViewSpec](https://molstar.org/mol-view-spec/) scene tree
-(see [`tasks/mvs/mvs_001.json`](tasks/mvs/mvs_001.json)).
+(see [`tasks/mvs_generated/`](tasks/mvs_generated/)).
 
 ## Tracks
 
 | Track | Tasks | What the model emits | How it's graded |
 |---|---|---|---|
-| **MVS scene tree** (primary) | `tasks/mvs/*.json` | A [MolViewSpec](https://molstar.org/mol-view-spec/) state tree as JSON | **Deterministic, no browser.** Tree-matching: precision/recall/F1 over root-to-leaf paths, tolerant of child order, default params, and equivalent selectors (`molbench/mvs.py`). Engine-agnostic — tests *visualization* competence, not one viewer's quirks. |
-| **API calling** (secondary) | `tasks/api_calling/*.json` | A list of imperative `PDBeMolstar` *canonical actions* | Field-aware list matching (`molbench/grader.py`). Tests whether a model can drive *this specific widget*. |
-| **Visual rubric** (Component 2) | `tasks/visual_rubric/*.json` | A scene plan (scored later from a render) | **VLM-judged.** Rendered to PNG, then a vision model scores it against a rubric. Not yet: the rubric judge (`vlm_grader.py`) is a sketch and the runner uses a stub. The renderer and an image-pair judge are live, but only inside the MVS escalation grader. |
+| **MVS scene tree** (primary) | `tasks/mvs_*/*.json` | A [MolViewSpec](https://molstar.org/mol-view-spec/) state tree as JSON | **Deterministic, no browser.** The scene is resolved to what Mol\* would draw (which atoms, in which representation and colour) and compared with the reference's drawn state: F1, task success (exactly right) and a target score ([`GRADING.md`](GRADING.md)). |
+| **API calling** (secondary) | `tasks/api_*/*.json` | A list of imperative `PDBeMolstar` *canonical actions* | The calls are replayed with pdbe-molstar 3.3.2 semantics and the end state is compared with the reference's (`molbench/pdbe_state.py`). Tests whether a model can drive *this specific widget*. |
+| **Visual rubric** (Component 2, not in the paper) | `tasks_future/visual_rubric/*.json` | A scene plan (scored later from a render) | **VLM-judged.** Rendered to PNG, then a vision model scores it against a rubric. Not yet: the rubric judge (`vlm_grader.py`) is a sketch and the runner uses a stub. The renderer and an image-pair judge are live, but only inside the MVS escalation grader. |
 
 The **MVS track is the primary target** (v0.2). MVS separates *what the scene is*
 from *which engine draws it*, so the same answer key works for Mol\*, ipymolstar,
 or any MVS-aware viewer — and curated MVS corpora (MolViewStories, Proteopedia)
 become a path to scaling the benchmark to hundreds of tasks. Reference scenes are
-authored with the official `molviewspec` builder (`scripts/author_mvs_tasks.py`),
+built by generator scripts from frozen structure data ([`CORPUS.md`](CORPUS.md)),
 so ground truth is correct by construction.
 
 ## Quick start (zero credentials)
@@ -154,8 +154,9 @@ prompts/ ──────┘            │
 * **Vendored, frozen API reference** (`molbench/api_reference.md`) is both the
   context shown to the model and the grading authority. Pin a new snapshot rather
   than editing it, so scores stay comparable over time.
-* **Tolerant grading** (`molbench/grader.py`): Jaccard over residue/chain locators
-  with partial credit for styling, so "right residues, wrong colour" still scores.
+* **Grading on drawn state** (`molbench/grader.py`, [`GRADING.md`](GRADING.md)): answers are
+  compared by the atoms they draw, with partial credit for styling, so "right residues,
+  wrong colour" still scores.
 
 ## Layout
 
@@ -175,9 +176,9 @@ results/                scorecards (generated)
 
 ## Corpus & data
 
-* **Graded Component-1 tasks** live in `tasks/` (`mvs/` curated scene trees,
-  `api_calling/` imperative). Reference MVS scenes are authored with the real
-  `molviewspec` builder (`scripts/author_mvs_tasks.py`).
+* **Graded Component-1 tasks** live in `tasks/` (`mvs_*/` scene trees,
+  `api_*/` imperative; 781 tasks on 75 structures, see [`CORPUS.md`](CORPUS.md)).
+  Every reference is written by a generator script in `scripts/`.
 * **`data/molviewstories/`** holds curated MolViewStories scenes (caption + tree).
   These are **Component-2 (VLM-judged) material**, not C1 tasks: experiment showed
   their educational captions are under-determined for exact-tree matching
@@ -201,11 +202,11 @@ sources and frozen into task JSON. With gratitude:
   **[PDB-101 Molecule of the Month](https://pdb101.rcsb.org/motm/motm-about)**
   (David S. Goodsell, CC-BY-4.0), which is acknowledged but not redistributed here.
 * **[RCSB PDB](https://www.rcsb.org/)** (CC0) — macromolecular structures (mmCIF).
-* **[PDBe SIFTS](https://www.ebi.ac.uk/pdbe/docs/sifts/)** (EMBL-EBI, CC-BY-4.0) —
+* **[PDBe SIFTS](https://www.ebi.ac.uk/pdbe/docs/sifts/)** (EMBL-EBI terms of use) —
   UniProt↔PDB residue-numbering mappings.
 * **[UniProt](https://www.uniprot.org/)** (CC-BY-4.0) — the Variation API for
   clinical variants.
-* **[ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/)** (NCBI, public domain) —
+* **[ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/)** (NCBI: no restrictions on use) —
   pathogenic variant classifications.
 * **[gemmi](https://gemmi.readthedocs.io/)** (MPL-2.0) — mmCIF parsing for Tier-2
   grounding.
@@ -217,13 +218,7 @@ commands inspired planned Tier-2 task types.
 
 ## Roadmap
 
-The current plan is [`FINAL_PLAN.md`](FINAL_PLAN.md); [`ROADMAP.md`](ROADMAP.md) keeps the
-history. The paper draft is in [`paper/`](paper/) (`python paper/build.py`); every number in it
-is written by `scripts/paper_tables.py`.
-
-* Template-based MVS task generator for category-balanced Component-1 volume.
-* Turn the `data/molviewstories/` scenes into real Component-2 VLM-judged tasks
-  (the headless renderer, `molbench/render.py`, now exists).
-* Selection-equivalence via a structure-aware checker (resolve label vs author
-  numbering against the actual mmCIF) instead of string-level tolerance.
-```
+The current plan is [`FINAL_PLAN.md`](FINAL_PLAN.md); [`ROADMAP.md`](ROADMAP.md) points to
+everything else. The corpus is described in [`CORPUS.md`](CORPUS.md), grading in
+[`GRADING.md`](GRADING.md), and a run in [`run/README.md`](run/README.md). The paper draft is in
+[`paper/`](paper/) (`python paper/build.py`); every number in it is written by script.

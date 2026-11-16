@@ -77,8 +77,10 @@ Section 6.6 shows why this rule exists. SI Section S1 gives both tasks in full.
 Tasks are grouped into eight tiers by what a model must know beyond the request (Figure 2,
 Table 1). Each tier has several *templates*: a template fixes what is asked, and a seeded
 generator fills in the structure, the residues, the colours and the wording.
-The corpus has {{corpus.n_templates}} templates; outside two small tiers no template supplies
-more than {{corpus.max_template_share_other:.0%}} of a tier's tasks. SI Section S2 lists every
+The corpus has {{corpus.n_templates}} templates. No template supplies more than
+{{corpus.max_template_share_other:.0%}} of a tier's tasks, except in the name-resolution tier
+(there are only five ways to name a protein) and in the small call-list tier of requests with
+several right answers. SI Section S2 lists every
 template with an example.
 
 ![**Figure 2. The eight tiers, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the format cannot express the tier. Requests are quoted from the corpus.](generated/fig_tiers.svg)

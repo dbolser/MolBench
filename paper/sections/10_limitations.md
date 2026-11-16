@@ -29,7 +29,10 @@
   the classification. No task asks for a judgement about disease.
 - **The format gap in the clinical pairs.** On the call-list track the viewer can map a UniProt
   position itself; on the scene track the model must. The paired comparison is therefore
-  reported with and without clinical pairs.
+  reported with and without clinical pairs. The two system prompts also differ in length,
+  because the two format references do, and in the pilot run a longer prompt lowered the share
+  of valid answers. A difference between the tracks can therefore come from the prompt as well
+  as from the format.
 - **Offset comparison on few proteins.** Pairs of tasks that ask the same variant on a
   structure with and without an offset exist for one protein only.
 - **Generated requests.** Requests come from templates. They are cleaner than what people

@@ -109,7 +109,7 @@ JSON, and {{mvs.spec.json_shape.brace_count_share:.0%}} of the {{mvs.spec.json_s
 whose text was archived opened and closed a different number of braces. A scene is a deeply
 nested tree, and one brace too many or too few loses the whole answer. An offline repair of
 the JSON turned {{mvs.spec.repair.n_scene}} of those {{mvs.spec.repair.n_raw}} answers into
-scenes. This is why the final run reports strict and valid-only scores side by side and adds a
+scene trees (these were not checked by the viewer). This is why the final run reports strict and valid-only scores side by side and adds a
 JSON-mode condition.
 
 **Table P1. Pilot run, per model (preliminary).** {{mvs.n_tasks}} tasks, one sample each,
@@ -165,8 +165,9 @@ to add: the residue was already right without it. Whether a pack helps when it h
 that the model cannot guess is a question for the rebuilt clinical tier (Table 9).
 
 **Finding 4: without the format reference, no answer was valid.**
-{{mvs.bare.n_models}} models were run with the instruction and the output rule only. None of
-their {{mvs.bare.n_samples}} answers was a valid scene. For these models, knowledge of the
+The condition with the instruction and the output rule only was run on {{mvs.bare.n_models}}
+models, with and without grounding packs. None of their {{mvs.bare.n_samples}} answers was a
+valid scene. For these models, knowledge of the
 MolViewSpec format came from the prompt and not from training.
 
 **Finding 5: our first call-list track did not separate models from a keyword script.** That
@@ -187,8 +188,8 @@ pairs), people agreed with the judge on {{pilot.all.agreement:.0%}} of answers (
 ({{pilot.all.rescue_lo:.0%}} to {{pilot.all.rescue_hi:.0%}}) of its "same" calls;
 {{pilot.indep.rescue:.0%}} ({{pilot.indep.rescue_lo:.0%}} to {{pilot.indep.rescue_hi:.0%}})
 without the author. Cohen's kappa is agreement beyond what chance would give: 0 is chance and
-1 is perfect. The judge's rescues changed no model's mean F1 by more than
-{{mvs.spec.escalation.lift_max:.3f}}, so no result above depends on it. Only
+1 is perfect. Under the earlier grader, the judge's rescues changed no model's mean F1 by more than
+{{mvs.spec.escalation.lift_max:.3f}}, and no result above uses them. Only
 {{pilot.n_raters_passing_checks}} of the {{pilot.n_raters}} raters passes the attention-check
 rule as it was written before the data were seen (at least {{pilot.check_rule:.0%}} right on
 each kind of check item): the author was never shown a check item, and one volunteer answered
