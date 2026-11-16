@@ -147,6 +147,49 @@ atoms in the target.
   right answer is "change nothing", the reference is the start scene. The context is not
   graded, but it must load (`grader.check_task`).
 
+## Unstated attributes are free
+
+A request that states no colour, or no representation, for something leaves that
+attribute open: any value is right. What it does state must match. (Ruling of
+2026-11-15, `FINAL_PLAN.md`.)
+
+- **MVS track, colour: a grader rule.** A single-turn reference holds only what the
+  request states, so where it draws something with **no colour node**, no colour was
+  asked for. The answer may give those atoms any colour, a colour theme included. One
+  limit: not a colour the reference *states* for other atoms in the same representation
+  type. "Show the protein as a cartoon and colour Ile66 blue" is not answered by a
+  cartoon that is blue all over, because Ile66 has to stand out; it is answered by a
+  white, grey or chain-coloured cartoon with Ile66 blue. A blue cartoon with blue
+  sticks on a residue is fine: the sticks are another representation type.
+  The rule applies to single-turn tasks only. In a follow-up the start scene is on
+  screen, an uncoloured drawing there *is* white, and the edit must keep it.
+  Code: `drawn.unstated_colour`, `mvs.resolve_scene(unstated_colour_free=True)`, set by
+  `mvs.grade_mvs_task`. A plain scene comparison (`mvs.grade_mvs`) keeps Mol\*'s own
+  rule, no colour node is white.
+- **MVS track, representation: the accepted list.** A scene cannot leave a
+  representation out, so a request that states none ("show the heme in green") lists
+  each representation type as an accepted scene (`acc-representation-open`).
+- **API track: the accepted list.** A bare load already draws everything, so the same
+  words can be answered by call lists that end in different states. Each API task
+  lists, under `accepted`, the end states that differ from the reference only in
+  something the request does not state. The forms are built by one module
+  (`scripts/api_forms.py`) and each is checked to draw the requested atoms exactly as
+  the reference does (target score 1 against the reference):
+  - *cartoon by default.* Where the request asks for a cartoon and the reference sets
+    the cartoon style, the same colouring on the default view is accepted, and the
+    other way round: the viewer already draws the polymer as a cartoon. What the
+    request does not name (other ligands, ions, water) may then be absent (cartoon
+    style), drawn as the viewer draws it, or painted in the backdrop colour.
+  - *the drawing under an added representation.* "Show Arg248 as magenta
+    ball-and-stick" does not say what colour the residue's own stretch of cartoon
+    should be. It may stay as it was (`"color": null`), take the highlight colour, or
+    take the viewer's select colour (no `color` key). If the request states a colour
+    for the cartoon ("a grey cartoon, with ..."), the stretch is grey or the highlight
+    colour.
+  A call list that changes something the request does not mention in any other way
+  (another global style, hidden components, a second colour) is still wrong, as an
+  unrequested extra component is on the MVS track.
+
 ## What the viewer draws (MVS track)
 
 The MVS grader resolves a scene tree to its final state with the rules of Mol\* 5.9.0's
@@ -166,7 +209,9 @@ each representation object holds, and in which colour), not taken from documenta
   cartoon (or ball-and-stick). These answers are graded as what is drawn.
 - **Nothing selected, nothing drawn.** A component whose selector matches no atom is
   not created.
-- **Colour.** A representation with no colour node is white. Colour nodes apply in
+- **Colour.** A representation with no colour node is white (in an answer; in a
+  single-turn reference it means no colour was stated, see "Unstated attributes are
+  free"). Colour nodes apply in
   order, each to its selector (default: everything), later ones over earlier ones. A
   ribbon residue takes the colour of its trace atom. Colour names are Mol\*'s lower-case
   names; `#rrggbb` and `#rgb` are read in either case; anything else (`"RED"`,
@@ -377,7 +422,7 @@ fails if the grader stops agreeing with any control.
 
 | track | controls | kinds (equivalent / wrong) | false pass | false fail | graders before this work: false pass / false fail |
 |---|---|---|---|---|---|
-| MVS | 1,030 on 75 entries | 22 / 22 | 0 of 440 | 0 of 590 | 0 of 440 / 222 of 590 (October path grader, F1 = 1 as success) |
+| MVS | 1,090 on 75 entries | 24 / 23 | 0 of 460 | 0 of 630 | 0 of 460 / 262 of 630 (October path grader, F1 = 1 as success) |
 | API | 850 on 69 entries | 18 / 17 | 0 of 340 | 0 of 510 | 75 of 340 / 247 of 510 (July sequence grader, F1 = 1 as success) |
 
 Read these zeros with care: the grader was corrected until it agreed with every

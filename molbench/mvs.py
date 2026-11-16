@@ -744,13 +744,21 @@ def _symbolic(selector: Any) -> frozenset:
 
 
 def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
-                  rename: dict[str, str] | None = None) -> DrawnScene | None:
+                  rename: dict[str, str] | None = None,
+                  unstated_colour_free: bool = False) -> DrawnScene | None:
     """Resolve a scene tree to its drawn state, or None if it is not a scene tree.
 
     ``symbolic``: entries to resolve without their atom table (both sides of a
     comparison must be resolved the same way). ``rename``: entry id -> the entry to
     resolve it on instead (a reference re-pointed at another accepted structure).
+    ``unstated_colour_free``: how atoms that no colour node covers are coloured. Mol*
+    draws them white, which is the default and how an answer is resolved. A single-turn
+    task's *reference* is resolved with ``True``: a reference holds only what the
+    request states, so no colour node means no colour was asked for, and those atoms
+    get ``drawn.unstated_colour`` (any colour but the ones the scene states for other
+    atoms in the same representation type).
     """
+    uncoloured: Any = _drawn.unstated_colour() if unstated_colour_free else _drawn.WHITE
     root = extract_root(tree)
     if root is None:
         return None
@@ -891,7 +899,7 @@ def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
                 colour: Any = ("layers", tuple((_canon_atoms(_symbolic(sel)) if sel is not None
                                                 else "all", tok) for sel, tok in layers))
             else:
-                colour = layers[-1][1] if layers else _drawn.WHITE
+                colour = layers[-1][1] if layers else uncoloured
             st.add(st.draws, (rtype, colour, opacity), atoms)
             return
         t = st.table
@@ -919,13 +927,22 @@ def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
                 regions.append((hit, token))
                 left &= ~hit
         if left:
-            regions.append((left, _drawn.WHITE))
+            regions.append((left, uncoloured))
         for mask, token in regions:
             if level == "trace":
                 mask = _grow(t, mask) & drawn_atoms
             st.add(st.draws, (actual, token, opacity), mask)
 
     walk(root, None, True)
+    if unstated_colour_free:
+        for st in scene.structures.values():
+            stated: dict[Any, set] = {}
+            for rtype, colour, _ in st.draws:
+                if not _drawn.is_unstated(colour):
+                    stated.setdefault(rtype, set()).add(colour)
+            st.draws = {((d[0], _drawn.unstated_colour(stated.get(d[0], ())), d[2])
+                         if _drawn.is_unstated(d[1]) else d): m for d, m in st.draws.items()}
+            st._classes = None
     return scene
 
 
@@ -1159,7 +1176,7 @@ def compare_scenes(ref: DrawnScene, pred: DrawnScene, target: Any = None) -> dic
 
 
 def _grade_one(reference: Any, predicted: Any, accepted_refs: Iterable[str] | None,
-               target: Any) -> dict[str, Any]:
+               target: Any, unstated_colour_free: bool = False) -> dict[str, Any]:
     ref_root = extract_root(reference)
     if ref_root is None:
         return _drawn.zero(error="bad reference tree")
@@ -1168,7 +1185,7 @@ def _grade_one(reference: Any, predicted: Any, accepted_refs: Iterable[str] | No
     ref = pred = None
     for _ in range(3):                       # settle which entries have to be symbolic
         pred = resolve_scene(predicted, symbolic)
-        ref = resolve_scene(reference, symbolic, rename)
+        ref = resolve_scene(reference, symbolic, rename, unstated_colour_free)
         if accepted_refs and not rename and len(ref.entries()) == 1:
             ok = {a.lower() for a in accepted_refs}
             (canonical,) = ref.entries()
@@ -1218,7 +1235,8 @@ def alternative_target(i: int, target: Any, accepted_targets: list | None,
 def grade_mvs(reference: Any, predicted: Any,
               accepted_refs: set[str] | list[str] | None = None,
               accepted: list | None = None, target: Any = None,
-              accepted_targets: list | None = None) -> dict[str, Any]:
+              accepted_targets: list | None = None,
+              unstated_colour_free: bool = False) -> dict[str, Any]:
     """Grade a predicted MVS scene against a reference **by what Mol* would draw**.
 
     Returns ``precision``/``recall``/``f1`` over the facts of the drawn state,
@@ -1231,7 +1249,11 @@ def grade_mvs(reference: Any, predicted: Any,
     right; the answer is scored against the one it matches best. ``target``: the
     task's ``target`` (the atoms the request is about); without it the target is
     everything the reference draws. ``accepted_targets``: a target per accepted scene
-    (see ``alternative_target``).
+    (see ``alternative_target``). ``unstated_colour_free``: atoms the reference (or an
+    accepted scene) draws with no colour node take any colour in the answer (but not
+    one the reference states for other atoms in the same representation type); without
+    it they must be white, as Mol* draws them. ``grade_mvs_task`` sets it on every
+    single-turn task.
     """
     if extract_root(predicted) is None:
         return _drawn.zero(error="prediction is not an MVS state tree", grader="drawn")
@@ -1241,7 +1263,7 @@ def grade_mvs(reference: Any, predicted: Any,
             tgt = alternative_target(
                 i, target, accepted_targets,
                 lambda t, ref=ref: _grade_one(ref, ref, None, t)["target_f1"] == 1.0)
-            res = _grade_one(ref, predicted, accepted_refs, tgt)
+            res = _grade_one(ref, predicted, accepted_refs, tgt, unstated_colour_free)
         except Exception as e:  # noqa: BLE001 - an answer must never crash the grader
             res = _drawn.zero(error=f"could not compare scenes ({type(e).__name__}: {e})")
         res["matched_reference"] = i
@@ -1255,10 +1277,17 @@ def grade_mvs_task(task: dict[str, Any], predicted: Any) -> dict[str, Any]:
     """Grade an answer against an MVS task: ``reference_mvs``, plus ``accepted`` scenes,
     ``accepted_ids`` and ``target`` when the task has them. ``outcome`` is ``not_mvs``
     for something that is not a scene tree, else ``unchecked`` (Mol*'s own validation,
-    ``render.molstar_issues``, turns that into ``valid`` or ``invalid_mvs``)."""
+    ``render.molstar_issues``, turns that into ``valid`` or ``invalid_mvs``).
+
+    **Unstated colours are free** on a single-turn task: where the reference draws
+    something with no colour node, the request named no colour, and the answer may use
+    any (``drawn.unstated_colour``). A follow-up's start scene states every colour (an
+    uncoloured drawing there *is* white), so on a follow-up nothing is free."""
+    from .grader import start_state
     res = grade_mvs(task["reference_mvs"], predicted, accepted_refs=task.get("accepted_ids"),
                     accepted=task.get("accepted"), target=task.get("target"),
-                    accepted_targets=task.get("accepted_targets"))
+                    accepted_targets=task.get("accepted_targets"),
+                    unstated_colour_free=start_state(task) is None)
     res["outcome"] = "not_mvs" if extract_root(predicted) is None else "unchecked"
     return res
 

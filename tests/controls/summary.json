@@ -3,27 +3,27 @@
  "seed": 20261112,
  "tracks": {
   "mvs": {
-   "n_controls": 1030,
+   "n_controls": 1090,
    "n_identical": 150,
-   "n_equivalent": 440,
-   "n_wrong": 440,
-   "n_equivalent_kinds": 22,
-   "n_wrong_kinds": 22,
+   "n_equivalent": 480,
+   "n_wrong": 460,
+   "n_equivalent_kinds": 24,
+   "n_wrong_kinds": 23,
    "n_entries": 75,
    "grader": {
     "false_pass": {
      "errors": 0,
-     "n": 440,
+     "n": 460,
      "rate": 0.0
     },
     "false_fail": {
      "errors": 0,
-     "n": 590,
+     "n": 630,
      "rate": 0.0
     },
     "false_fail_equivalent_only": {
      "errors": 0,
-     "n": 440,
+     "n": 480,
      "rate": 0.0
     }
    },
@@ -31,18 +31,18 @@
     "what": "October path grader, F1 = 1 taken as success",
     "false_pass": {
      "errors": 0,
-     "n": 440,
+     "n": 460,
      "rate": 0.0
     },
     "false_fail": {
-     "errors": 222,
-     "n": 590,
-     "rate": 0.3763
+     "errors": 262,
+     "n": 630,
+     "rate": 0.4159
     },
     "false_fail_equivalent_only": {
-     "errors": 222,
-     "n": 440,
-     "rate": 0.5045
+     "errors": 262,
+     "n": 480,
+     "rate": 0.5458
     }
    },
    "mistakes": [],
@@ -259,6 +259,26 @@
     },
     {
      "group": "equivalent",
+     "kind": "unstated_colour_any",
+     "what": "the request states no colour for the cartoon (the reference has no colour node there): the answer gives it a palette colour",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "unstated_colour_backdrop",
+     "what": "a stretch of the cartoon is to be coloured and the rest has no stated colour: the answer colours the rest in another palette colour",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
      "kind": "unused_extra_download",
      "what": "another entry's file is downloaded and parsed as well, and nothing of it is drawn",
      "n": 20,
@@ -436,6 +456,16 @@
      "old_grader_success": 0,
      "mean_f1": 0.7586,
      "mean_target_f1": 0.8564
+    },
+    {
+     "group": "wrong",
+     "kind": "unstated_colour_takes_stated",
+     "what": "a stretch of the cartoon is to be coloured and the rest has no stated colour: the answer colours the whole cartoon in the stated colour, so nothing stands out",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.6079,
+     "mean_target_f1": 0.75
     },
     {
      "group": "wrong",

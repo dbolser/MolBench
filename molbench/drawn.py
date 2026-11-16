@@ -85,6 +85,25 @@ TASK_PALETTE = ("red", "orange", "yellow", "green", "blue", "purple", "magenta",
 
 RGB = tuple  # (r, g, b)
 WHITE = (255, 255, 255)
+#: Marks the colour of a drawing whose colour the request did not state ("show the
+#: protein as a cartoon"). An unstated colour stands in a *reference* only, as the
+#: token ``(UNSTATED, excluded)``: it equals every colour except the ``excluded`` ones,
+#: which are the colours the same reference states for other atoms in the same
+#: representation type. So an unstated attribute is free (FINAL_PLAN.md, rulings of
+#: 2026-11-15; GRADING.md, "Unstated colours"), and a stated one still has to stand
+#: out: "cartoon, with Ile66 blue" is not answered by a cartoon that is blue all over.
+#: The MVS grader puts the token where a single-turn task's reference draws something
+#: with no colour node.
+UNSTATED = "unstated"
+
+
+def unstated_colour(excluded: Iterable = ()) -> tuple:
+    """The colour token of a drawing whose colour the request did not state."""
+    return (UNSTATED, frozenset(excluded))
+
+
+def is_unstated(c: Any) -> bool:
+    return isinstance(c, tuple) and len(c) == 2 and c[0] == UNSTATED
 
 
 def color_distance(a: RGB, b: RGB) -> int:
@@ -95,7 +114,11 @@ def color_distance(a: RGB, b: RGB) -> int:
 def color_eq(a: Any, b: Any) -> bool:
     """Two colours are the same if every channel is within ``COLOR_TOLERANCE``. A colour
     that is not an RGB triple (a colour-theme token such as ``("theme", "chain-id")``)
-    equals only itself."""
+    equals only itself. An unstated colour (``unstated_colour``, in a reference only)
+    equals every colour but the ones it excludes."""
+    for x, y in ((a, b), (b, a)):
+        if is_unstated(x):
+            return is_unstated(y) or not any(color_eq(y, ex) for ex in x[1])
     if _is_rgb(a) and _is_rgb(b):
         return color_distance(a, b) <= COLOR_TOLERANCE
     return a == b

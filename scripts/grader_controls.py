@@ -580,7 +580,47 @@ def _(c: Ctx):
     return ref, pred
 
 
+@control(MVS_EQUIVALENT, "unstated_colour_any",
+         "the request states no colour for the cartoon (the reference has no colour node "
+         "there): the answer gives it a palette colour", viewer=False)
+def _(c: Ctx):
+    if c.res is None:
+        return None
+    ref = scene(c.e, [comp("polymer", rep("cartoon")),
+                      comp(c.e.auth(c.res), rep("ball_and_stick", col(c.c1)))])
+    pred = scene(c.e, [comp("polymer", rep("cartoon", col(c.c2))),
+                       comp(c.e.auth(c.res), rep("ball_and_stick", col(c.c1)))])
+    return ref, pred
+
+
+@control(MVS_EQUIVALENT, "unstated_colour_backdrop",
+         "a stretch of the cartoon is to be coloured and the rest has no stated colour: "
+         "the answer colours the rest in another palette colour", viewer=False)
+def _(c: Ctx):
+    run = c.run()
+    if not run:
+        return None
+    sel = {"auth_asym_id": run[0]["auth_asym_id"], "beg_auth_seq_id": run[0]["auth_seq_id"],
+           "end_auth_seq_id": run[-1]["auth_seq_id"]}
+    return (scene(c.e, [comp("polymer", rep("cartoon", col(c.c1, sel)))]),
+            scene(c.e, [comp("polymer", rep("cartoon", col(c.c2), col(c.c1, sel)))]))
+
+
 # --- MVS: wrong answers (must fail) ---------------------------------------------------
+
+@control(MVS_WRONG, "unstated_colour_takes_stated",
+         "a stretch of the cartoon is to be coloured and the rest has no stated colour: "
+         "the answer colours the whole cartoon in the stated colour, so nothing stands out")
+def _(c: Ctx):
+    run = c.run()
+    if not run:
+        return None
+    sel = {"auth_asym_id": run[0]["auth_asym_id"], "beg_auth_seq_id": run[0]["auth_seq_id"],
+           "end_auth_seq_id": run[-1]["auth_seq_id"]}
+    return (scene(c.e, [comp("polymer", rep("cartoon", col(c.c1, sel)))]),
+            scene(c.e, [comp("polymer", rep("cartoon", col(c.c1)))]))
+
+
 
 @control(MVS_WRONG, "residue_off_by_one", "the neighbouring residue is highlighted")
 def _(c: Ctx):

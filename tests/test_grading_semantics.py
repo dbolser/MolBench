@@ -128,6 +128,56 @@ def test_nested_colour_and_flat_components_are_the_same_drawing():
     assert not g(nested, undone)["success"]
 
 
+def test_unstated_colour_is_free_on_a_single_turn_task():
+    """Rulings of 2026-11-15: an attribute the request does not state is free. A
+    single-turn reference holds only what the request states, so a drawing with no
+    colour node there takes any colour in the answer - except a colour the reference
+    states for other atoms in the same representation type."""
+    i66 = {"auth_asym_id": "B", "auth_seq_id": 66}
+    ref = scene("1aoi", comp("polymer", rep("cartoon", col("blue", i66))))       # "cartoon; Ile66 blue"
+    task = {"id": "t", "category": "mvs", "reference_mvs": ref}
+    ok = lambda pred: grader.grade_task(task, pred)                              # noqa: E731
+    for backdrop in ("white", "gray", "salmon", "#123456"):
+        r = ok(scene("1aoi", comp("polymer", rep("cartoon", col(backdrop), col("blue", i66)))))
+        assert r["success"] and r["f1"] == 1.0 and r["target_f1"] == 1.0, backdrop
+    assert ok(ref)["success"]                                                    # no colour node: white
+    # a chain-id theme on the unstated part is a colour like any other
+    assert ok(scene("1aoi", comp("polymer", rep("cartoon", col("white", theme="chain-id"),
+                                                 col("blue", i66)))))["success"]
+    # the stated colour all over does not answer "Ile66 blue": the residue must stand out
+    all_blue = ok(scene("1aoi", comp("polymer", rep("cartoon", col("blue")))))
+    assert not all_blue["success"] and all_blue["f1"] < 1.0
+    # the stated colour still has to match, and so does the representation
+    assert not ok(scene("1aoi", comp("polymer", rep("cartoon", col("gray"), col("red", i66)))))["success"]
+    assert not ok(scene("1aoi", comp("polymer", rep("surface", col("gray"), col("blue", i66)))))["success"]
+    # unrequested extra drawing is still unrequested
+    assert not ok(scene("1aoi", comp("polymer", rep("cartoon", col("gray"), col("blue", i66))),
+                        comp("water", rep("spacefill", col("gray")))))["success"]
+    # a stated colour in another representation type does not restrict the unstated one:
+    # "protein as a cartoon, the residue as blue sticks" is right with a blue cartoon too
+    ref2 = scene("1aoi", comp("polymer", rep("cartoon")), comp(i66, rep("ball_and_stick", col("blue"))))
+    task2 = {"id": "t2", "category": "mvs", "reference_mvs": ref2}
+    assert grader.grade_task(task2, scene("1aoi", comp("polymer", rep("cartoon", col("blue"))),
+                                          comp(i66, rep("ball_and_stick", col("blue")))))["success"]
+    # the plain scene comparison (no task) keeps Mol*'s own rule: no colour node is white
+    assert not g(ref, scene("1aoi", comp("polymer", rep("cartoon", col("gray"), col("blue", i66)))))["success"]
+
+
+def test_nothing_is_free_on_a_follow_up():
+    """A follow-up's start scene states every colour (an uncoloured drawing there *is*
+    white on screen), so the final state must keep it."""
+    start = scene("4ins", comp({"auth_asym_id": "A"}, rep("cartoon", col("red"))),
+                  comp({"auth_asym_id": "B"}, rep("cartoon")))
+    ref = scene("4ins", comp({"auth_asym_id": "A"}, rep("cartoon", col("red"))),
+                comp({"auth_asym_id": "B"}, rep("cartoon")),
+                comp({"auth_asym_id": "C"}, rep("cartoon", col("blue"))))
+    task = {"id": "t", "category": "mvs", "reference_mvs": ref, "context": {"scene": start, "noop": False}}
+    assert grader.grade_task(task, ref)["success"]
+    greyed = copy.deepcopy(ref)
+    greyed["children"][0]["children"][0]["children"][0]["children"][1]["children"][0]["children"].append(col("gray"))
+    assert not grader.grade_task(task, greyed)["success"]
+
+
 def test_no_colour_node_is_white_and_no_opacity_node_is_opaque():
     bare = scene("1tup", comp("polymer", rep("cartoon")))
     assert same(bare, scene("1tup", comp("polymer", rep("cartoon", col("white"),
