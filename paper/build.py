@@ -465,6 +465,31 @@ def render(md_path: pathlib.Path) -> list[str]:
     return made
 
 
+REPRESENTATION_WORDS = ("ball-and-stick", "ball_and_stick", "spacefill", "cartoon", "surface", "line", "putty")
+
+
+def example_problems(values: dict) -> list[str]:
+    """The running example must look the same wherever it is shown: the generated table and
+    the two figures of it must state the colour and the representation of the request, and
+    no other representation for the requested residue."""
+    problems = []
+    colour, rep = values.get("ex.color"), values.get("ex.rep_short")
+    if not colour or not rep:
+        return ["generated values lack ex.color / ex.rep_short: run paper/corpus_values.py"]
+    if f"{colour} {values['ex.rep']}" not in values.get("ex.prompt", ""):
+        problems.append("the request of the running example does not state its colour and representation")
+    for name in ("table_example.md", "fig_grading.svg", "fig_twins.svg"):
+        f = PAPER / "generated" / name
+        text = f.read_text(encoding="utf-8") if f.exists() else ""
+        if colour not in text or (rep not in text and values["ex.rep_scene"] not in text):
+            problems.append(f"generated/{name} does not show the running example as {colour} {rep}")
+        other = [w for w in REPRESENTATION_WORDS
+                 if w not in (rep, values["ex.rep_scene"], "cartoon", "line") and w in text]
+        if other:
+            problems.append(f"generated/{name} names a representation the request does not ask for: {other}")
+    return problems
+
+
 def words(md: str) -> int:
     """Words outside tables, code blocks, figure captions, HTML comments and the reference list."""
     md = md.split("\n## References")[0]
@@ -489,6 +514,7 @@ def main(argv=None) -> int:
         print(f"error: {e}", file=sys.stderr)
         return 1
     problems = [p for _, _, _, probs in built for p in probs]
+    problems += example_problems(values)
     for _, _, pending, _ in built:
         problems += [f"{p['section']}:{p['line']}: PENDING tag with no owner: {p['what']!r}"
                      for p in pending if not filled_by(p["what"])]

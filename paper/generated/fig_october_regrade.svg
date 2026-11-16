@@ -121,7 +121,7 @@ L 507.6 13.839063
      </g>
     </g>
     <g id="text_10">
-     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="18.9575" y="111.90373" transform="rotate(-90 18.9575 111.90373)">Mean over all outputs (invalid output = 0)</text>
+     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle" x="18.9575" y="111.90373" transform="rotate(-90 18.9575 111.90373)">Mean over all answers (invalid answer = 0)</text>
     </g>
    </g>
    <g id="patch_3">
@@ -230,37 +230,37 @@ L 507.6 209.968398
    </g>
    <g id="legend_1">
     <g id="patch_13">
-     <path d="M 313.885 27.947734 
-L 330.885 27.947734 
-L 330.885 21.997734 
-L 313.885 21.997734 
+     <path d="M 305.758203 27.947734 
+L 322.758203 27.947734 
+L 322.758203 21.997734 
+L 305.758203 21.997734 
 z
 " style="fill: #0072b2; stroke: #ffffff; stroke-linejoin: miter"/>
     </g>
     <g id="text_20">
-     <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start" x="337.685" y="27.947734" transform="rotate(-0 337.685 27.947734)">F1 (whole final state)</text>
+     <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start" x="329.558203" y="27.947734" transform="rotate(-0 329.558203 27.947734)">F1 (whole drawn state)</text>
     </g>
     <g id="patch_14">
-     <path d="M 313.885 40.698398 
-L 330.885 40.698398 
-L 330.885 34.748398 
-L 313.885 34.748398 
+     <path d="M 305.758203 40.698398 
+L 322.758203 40.698398 
+L 322.758203 34.748398 
+L 305.758203 34.748398 
 z
 " style="fill: url(#ha669160542); stroke: #ffffff; stroke-linejoin: miter"/>
     </g>
     <g id="text_21">
-     <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start" x="337.685" y="40.698398" transform="rotate(-0 337.685 40.698398)">Task success (final state exactly right)</text>
+     <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start" x="329.558203" y="40.698398" transform="rotate(-0 329.558203 40.698398)">Task success (drawn state exactly right)</text>
     </g>
     <g id="patch_15">
-     <path d="M 313.885 53.449063 
-L 330.885 53.449063 
-L 330.885 47.499063 
-L 313.885 47.499063 
+     <path d="M 305.758203 53.449063 
+L 322.758203 53.449063 
+L 322.758203 47.499063 
+L 305.758203 47.499063 
 z
 " style="fill: url(#h5bfaa93e3b); stroke: #ffffff; stroke-linejoin: miter"/>
     </g>
     <g id="text_22">
-     <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start" x="337.685" y="53.449063" transform="rotate(-0 337.685 53.449063)">Requested part exactly right</text>
+     <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start" x="329.558203" y="53.449063" transform="rotate(-0 329.558203 53.449063)">Requested part exactly right</text>
     </g>
    </g>
   </g>

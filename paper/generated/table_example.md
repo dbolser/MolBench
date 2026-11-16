@@ -1,7 +1,7 @@
 | Answer | F1 | Task success | Target score |
 |:---|---:|:---|---:|
 | **Scene track** | | | |
-| Reference: author chain X, author residue 64, green ball-and-stick | 1.00 | yes | 1.00 |
+| Reference: author chain X, author residue 64, yellow spacefill spheres | 1.00 | yes | 1.00 |
 | The same residue named by label numbering (label chain A, residue 64) | 1.00 | yes | 1.00 |
 | Number in the variant name used as the author number (Ser82) | 0.00 | no | 0.00 |
 | Right residue, drawn red | 0.50 | no | 0.50 |

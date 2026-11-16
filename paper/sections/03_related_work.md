@@ -1,8 +1,10 @@
 ## 2. Related work
 
-We checked every work below against its source (the record of each check is in the
-repository). Where we say that a benchmark lacks something, we mean that we did not find it in
-the paper. We do not claim to be first or only.
+Existing benchmarks that involve molecular viewers test agents that operate a desktop through
+screenshots (ScienceBoard, OSWorld-Science), or score pictures with a judge model
+(SciVisAgentBench). We found none that grades the atoms a viewer would draw against references
+computed from the structure, and none that tests the mapping of residue numbers. Assistants
+for molecular viewers exist, but their papers report no accuracy for viewer control.
 
 ### 2.1 Benchmarks that score control of scientific software
 
@@ -12,8 +14,8 @@ biochemistry domain uses UCSF ChimeraX [@goddard2018chimerax], and a task is che
 the state of the application after the agent has finished. MolBench shares the idea of checking
 the resulting state. It differs in four ways. It tests the step from request to commands
 directly, with no desktop in between. Its references are computed by script and record their
-origin. Its difficulty rises in defined steps, up to clinical variants. And it poses requests
-in two answer formats.
+origin. Its tiers are defined by what the model must know, up to clinical variants. And it
+poses requests in two answer formats.
 
 **SciVisAgentBench** [@ai2026scivisagentbench] has 108 expert-written cases of scientific
 visualization; its molecular cases use GROMACS and VMD. Outcomes are scored by a language-model
@@ -56,8 +58,8 @@ detect.
 MolViewSpec describes a molecular scene as a tree of typed nodes and is implemented as an
 extension of the Mol\* viewer [@midlik2025mvs; @bittrich2024mvs; @sehnal2021molstar]. The
 call-list track targets the PDBe build of Mol\* [@pdbemolstar], which a notebook widget exposes
-to Python [@ipymolstar]. Structures come from the Protein Data Bank [@wwpdb2019] and, for two
-predicted models, from the AlphaFold Protein Structure Database [@varadi2024afdb;
+to Python [@ipymolstar]. Structures come from the Protein Data Bank [@wwpdb2019] and, for
+{{panel.n_alphafold}} predicted models, from the AlphaFold Protein Structure Database [@varadi2024afdb;
 @jumper2021alphafold]. The mapping between UniProt residues and the residues of a structure
 comes from SIFTS [@dana2019sifts], as distributed by PDBe [@pdbekb2020; @pdbekb2022]. Variants
 and their clinical classification come from ClinVar [@landrum2018clinvar], found through UniProt
@@ -69,3 +71,7 @@ structures through SIFTS [@vollmar2026residues]. Their system reads papers; ours
 model can do the same mapping when it draws a scene. MiSI-Bench [@li2025misibench] asks
 vision-language models questions about rendered images of molecules and finds them well below
 human level, which is one reason our scores do not rest on a model that looks at pictures.
+
+Statements in this section about what other work contains were checked against the cited
+sources, and the notes of each check are in the repository. Where we say that a benchmark
+lacks something, we mean that we did not find it in its paper.

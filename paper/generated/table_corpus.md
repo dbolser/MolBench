@@ -6,6 +6,6 @@
 | Name resolution | The structure is named by protein, not by identifier. | 39 (32 + 7) | – | – |
 | Clinical variant | A variant in UniProt numbering must be mapped to the residues of the structure. | 82 (63 + 19) | 82 (63 + 19) | 82 |
 | Follow-up turn | A start state plus an edit request; the full new state is returned. | 58 (50 + 8) | 44 (34 + 10) | 36 |
-| Several right answers | The request leaves one countable thing open; several final states are right. | 26 (21 + 5) | 15 (11 + 4) | 15 |
+| Several right answers | The request leaves one countable thing open; several drawn states are right. | 26 (21 + 5) | 15 (11 + 4) | 15 |
 | Viewer settings | A viewer setting that only the call-list format can express. | – | 34 (29 + 5) | – |
 | **All** | | **381** (305 + 76) | **416** (327 + 89) | **258** |

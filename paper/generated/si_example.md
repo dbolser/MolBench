@@ -84,7 +84,7 @@
 ]
 ```
 
-**Call-list track: accepted alternative** (the residue's own cartoon stretch is painted green as well).
+**Call-list track: accepted answers** (2; the residue's own stretch of cartoon is painted as well, in the residue's colour or in the viewer's selection colour).
 
 ```json
 [
@@ -99,6 +99,26 @@
     "uniprot_accession": "P61626",
     "uniprot_residue_number": 82,
     "color": "yellow",
+    "representation": "spacefill",
+    "representationColor": "yellow"
+   }
+  ]
+ }
+]
+```
+
+```json
+[
+ {
+  "action": "load",
+  "molecule_id": "2nwd"
+ },
+ {
+  "action": "color",
+  "data": [
+   {
+    "uniprot_accession": "P61626",
+    "uniprot_residue_number": 82,
     "representation": "spacefill",
     "representationColor": "yellow"
    }

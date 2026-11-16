@@ -1,4 +1,4 @@
-| Model | Weights | Valid outputs | F1 (strict) | Task success (strict) | F1, valid outputs only | Task success, valid outputs only |
+| Model | Weights | Valid answers | F1 (strict) | Task success (strict) | F1, valid-only | Task success, valid-only |
 |:---|:---|---:|---:|---:|---:|---:|
 | gemini-3.5-flash | closed | 66 of 70 | 0.840 | 71.4% | 0.891 | 75.8% |
 | llama-4-maverick | open | 57 of 70 | 0.773 | 70.0% | 0.949 | 86.0% |

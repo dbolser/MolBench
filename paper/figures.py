@@ -97,16 +97,16 @@ def fig_pipeline(v: dict) -> str:
     boxes = [
         ("1  Frozen public data", [
             f"{v['panel.n']} structures (PDB and",
-            "AlphaFold DB)",
+            f"AlphaFold DB), {v['corpus.n_structures']} in tasks",
             "residue mapping (SIFTS)",
-            f"{v['variants.n_confirmed']:,} pathogenic variants",
-            "confirmed in ClinVar"]),
+            f"{v['variants.n_usable']:,} variants classified",
+            "(likely) pathogenic in ClinVar"]),
         ("2  Generator scripts", [
             f"{v['corpus.n_templates']} templates",
             "request",
             "reference answer",
             "target atoms",
-            "provenance record"]),
+            "record of how it was made"]),
         ("3  Task corpus", [
             f"{v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} tiers",
             f"scene track: {v['corpus.mvs.n']}",
@@ -117,7 +117,7 @@ def fig_pipeline(v: dict) -> str:
             "system prompt with the",
             "format reference",
             "+ the request",
-            "one answer:",
+            f"{v['plan.samples']} answers per request:",
             "scene or call list"]),
         ("5  Grader", [
             "resolve reference and",
@@ -126,11 +126,11 @@ def fig_pipeline(v: dict) -> str:
             "drawn and coloured",
             "(frozen atom tables)"]),
         ("6  Scores", [
-            "F1 (graded)",
-            "task success (exact)",
+            "F1 (partial credit)",
+            "task success (yes or no)",
             "target score",
-            "validity outcome",
-            "strict / valid-only"]),
+            "valid or invalid output",
+            "strict / valid-only means"]),
     ]
     w, h, gap, x0, y0 = 146, 150, 16, 12, 56
     s.text(x0, 28, "From public data to a score", size=15, weight="bold")
@@ -151,15 +151,15 @@ def fig_pipeline(v: dict) -> str:
     s.text(x0, yb - 12, "Checks that do not depend on any model", size=12, weight="bold")
     checks = [
         ("Reference against structure (step 2)",
-         "Each reference must select atoms, name the wild-type residue, and grade as exactly right against itself."),
+         "Each reference must select atoms, name the residue the generator intended, and grade as exactly right against itself."),
         ("Atom tables against the viewer (step 5)",
-         "Selections were read back from the real viewers (Mol* 5.9.0, pdbe-molstar 3.3.2) and agree atom for atom."),
+         "Selections were read back from the running viewers (Mol* 5.9.0, PDBe Mol* 3.3.2) and agree atom for atom."),
         ("Grader against a control set (step 5)",
-         f"{v['controls.n']:,} answer pairs with a verdict known from construction: "
+         f"{v['controls.n']:,} control answers with a verdict known from how they were made: "
          f"{v['controls.mvs.new.false_pass'] + v['controls.api.new.false_pass']} wrong answers passed, "
          f"{v['controls.mvs.new.false_fail'] + v['controls.api.new.false_fail']} right answers failed."),
         ("Held-back split (step 3)",
-         f"{v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} structures that no public task uses."),
+         f"{v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} structures that no public task and no earlier release uses. Not secret."),
     ]
     cw = (980 - 2 * x0 - 3 * gap) / 4
     for i, (title, body) in enumerate(checks):
@@ -212,7 +212,7 @@ def fig_tiers(v: dict) -> str:
             prompt = prompt[:202].rsplit(" ", 1)[0] + " …"
         s.para(x + 10, yy + 8, "“" + prompt + "”", width=38, size=10.5, italic=True)
     s.text(12, 60 + 2 * ch + gap + 18,
-           "Shaded: lookup tiers, where the answer needs a fact that is not in the request and cannot be read off the format.",
+           "Shaded: the two lookup tiers (name resolution, clinical variant), where one fact must be looked up in a database: an entry, or a residue number.",
            size=10.5, fill=MUTED)
     return s.done()
 
@@ -223,10 +223,12 @@ def fig_tiers(v: dict) -> str:
 def fig_grading(v: dict) -> str:
     s = Svg(980, 520, "Drawn-state grading of the running example")
     right, wrong = v["ex.auth_number"], v["ex.uniprot_position"]
+    look = f"{v['ex.color']} {v['ex.rep_short']}"          # the look the request states
+    mark = {"yellow": "#F0E442", "green": GREEN, "orange": ORANGE, "blue": BLUE}.get(v["ex.color"], GREEN)
     s.text(12, 28, "Grading on drawn state: three answers to the running example", size=15, weight="bold")
     s.para(12, 46, "Request: “" + v["ex.prompt"] + "”", width=150, size=11, fill=MUTED, italic=True)
     panels = [
-        ("Reference", f"{v['ex.wild_type']}{right} of chain {v['ex.auth_chain']} as green ball-and-stick. Nothing else.",
+        ("Reference", f"{v['ex.wild_type']}{right} of chain {v['ex.auth_chain']} as {look}. Nothing else.",
          right, False, "ex.mvs.right"),
         ("Answer A: number taken at face value",
          f"Author residue {wrong} drawn. It is {v['ex.face_value_residue']}{wrong}, another residue.",
@@ -262,33 +264,33 @@ def fig_grading(v: dict) -> str:
             s.text(x + 292, ys + 50, "grey cartoon, all residues", size=10, fill=MUTED, anchor="end")
         for r, cx in cells:
             if r == drawn:
-                s.line(cx, ys - 14, cx, ys - 30, stroke=GREEN, sw=3)
-                s.circle(cx, ys - 34, 7, GREEN)
+                s.line(cx, ys - 14, cx, ys - 30, stroke=INK, sw=1.5)
+                s.circle(cx, ys - 36, 8, mark, stroke=INK, sw=1.2)
                 far = cx > x + pw - 130
-                s.text(cx - 12 if far else cx + 12, ys - 31, "green ball-and-stick", size=10, fill=INK,
+                s.text(cx - 13 if far else cx + 13, ys - 32, look, size=10, fill=INK,
                        anchor="end" if far else "start")
         # facts
         yf = ys + 76
-        s.text(x + 12, yf, "Facts of the final state", size=11, weight="bold")
+        s.text(x + 12, yf, "Facts of the drawn state", size=11, weight="bold")
         if key == "ex.mvs.right":
-            facts = [f"1 display class: {v['ex.n_target_atoms']} atoms of {v['ex.wild_type']}{right},",
-                     "   green ball-and-stick"]
+            facts = [f"1 fact: {v['ex.n_target_atoms']} atoms of {v['ex.wild_type']}{right},",
+                     f"   {look}"]
         elif key == "ex.mvs.face":
-            facts = [f"1 display class: {v['ex.face_value_n_atoms']} atoms of {v['ex.face_value_residue']}{wrong},",
-                     "   green ball-and-stick (no atom shared",
+            facts = [f"1 fact: {v['ex.face_value_n_atoms']} atoms of {v['ex.face_value_residue']}{wrong},",
+                     f"   {look} (no atom shared",
                      "   with the reference)"]
         else:
-            facts = [f"class 1: {v['ex.wild_type']}{right}, grey cartoon and",
-                     "   green ball-and-stick (half unrequested)",
-                     "class 2: all other residues, grey cartoon",
-                     "   (unrequested)"]
+            facts = [f"fact 1: {v['ex.wild_type']}{right}, grey cartoon and {look}:",
+                     "   one of its two draws is in the reference",
+                     "fact 2: all other residues, grey cartoon:",
+                     "   none of it is in the reference"]
         for j, ln in enumerate(facts):
             s.text(x + 12, yf + 18 + j * 15, ln, size=10.5)
         # scores
         ysc = y0 + ph - 96
         s.line(x + 12, ysc - 14, x + pw - 12, ysc - 14)
-        rows = [("Recall (reference facts present)", f"{v[key + '.recall']:.2f}"),
-                ("Precision (answer facts requested)", f"{v[key + '.precision']:.2f}"),
+        rows = [("Recall (share of the reference the answer has)", f"{v[key + '.recall']:.2f}"),
+                ("Precision (share of the answer the reference has)", f"{v[key + '.precision']:.2f}"),
                 ("F1", f"{v[key + '.f1']:.2f}"),
                 ("Task success", "yes" if v[key + ".success"] else "no"),
                 ("Target score", f"{v[key + '.target']:.2f}")]
@@ -321,7 +323,7 @@ def fig_twins(v: dict) -> str:
              "  parse  mmcif",
              "    structure  model",
              f"      component  auth_asym_id = {v['ex.auth_chain']}, auth_seq_id = {v['ex.auth_number']}",
-             "        representation  ball_and_stick",
+             f"        representation  {v['ex.rep_scene']}",
              f"          color  {v['ex.color']}"]
     for j, ln in enumerate(scene):
         s.text(lx + 14, y + 46 + j * 16, ln, size=10.5, mono=True)
@@ -332,11 +334,11 @@ def fig_twins(v: dict) -> str:
     calls = ['load   molecule_id = "2nwd"',
              f'color  uniprot_accession = "{v["ex.accession"]}",',
              f'       uniprot_residue_number = {v["ex.uniprot_position"]},',
-             '       representation = "ball-and-stick",',
+             f'       representation = "{v["ex.rep_short"]}",',
              f'       representationColor = "{v["ex.color"]}"']
     for j, ln in enumerate(calls):
         s.text(rx + 14, y + 46 + j * 16, ln, size=10.5, mono=True)
-    s.text(rx + 12, y + h - 12, "The viewer can do the mapping; the model must know the accession and the call.",
+    s.text(rx + 12, y + h - 12, "The viewer does the mapping; the model passes on the accession and position from the request.",
            size=10.5, fill=MUTED)
     # same atoms
     ty = y + h + 34
@@ -351,18 +353,19 @@ def fig_twins(v: dict) -> str:
     s.arrow(490, ty + 46, 490, gy - 4)
     gx, cw, chh = 330, 150, 34
     s.text(gx - 12, gy + 14, f"Per model, over the {v['corpus.n_twin_pairs']} pairs:", size=11, anchor="end", weight="bold")
-    s.text(gx - 12, gy + 30, "task success on each side", size=10.5, anchor="end", fill=MUTED)
+    s.text(gx - 12, gy + 30, "is each side right? (target score = 1;", size=10.5, anchor="end", fill=MUTED)
+    s.text(gx - 12, gy + 44, "repeated with task success)", size=10.5, anchor="end", fill=MUTED)
     s.text(gx + cw / 2, gy - 6, "call list right", size=10.5, anchor="middle", fill=MUTED)
     s.text(gx + cw * 1.5, gy - 6, "call list wrong", size=10.5, anchor="middle", fill=MUTED)
-    cells = [("both right", PALE, INK), ("format error (call list)", "#fdf0d5", INK),
-             ("format error (scene)", "#fdf0d5", INK), ("both wrong: content", PALE, INK)]
+    cells = [("both right", PALE, INK), ("right in scene only", "#fdf0d5", INK),
+             ("right in call list only", "#fdf0d5", INK), ("both wrong", PALE, INK)]
     for k, (label, fill, ink) in enumerate(cells):
         cx, cy = gx + (k % 2) * cw, gy + (k // 2) * chh
         s.rect(cx, cy, cw, chh, fill=fill, r=0)
         s.text(cx + cw / 2, cy + 21, label, size=10.5, anchor="middle", fill=ink)
     s.text(gx + 2 * cw + 10, gy + 21, "scene right", size=10.5, fill=MUTED)
     s.text(gx + 2 * cw + 10, gy + chh + 21, "scene wrong", size=10.5, fill=MUTED)
-    s.text(gx + cw, gy + 2 * chh + 20, "McNemar's test compares the two shaded (discordant) cells.",
+    s.text(gx + cw, gy + 2 * chh + 20, "McNemar's test compares the two shaded cells (right in one format only).",
            size=10.5, anchor="middle", fill=MUTED)
     return s.done()
 
@@ -380,8 +383,8 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
 
     tiers = [("translation", "Translation"), ("grounded", "Structure-grounded,\nname resolution,\ninteractions"),
              ("clinical", "Clinical variant")]
-    series = [("f1", "F1 (whole final state)", BLUE, ""),
-              ("success", "Task success (final state exactly right)", ORANGE, "//"),
+    series = [("f1", "F1 (whole drawn state)", BLUE, ""),
+              ("success", "Task success (drawn state exactly right)", ORANGE, "//"),
               ("highlight_exact", "Requested part exactly right", GREEN, "..")]
     fig, ax = plt.subplots(figsize=(7.2, 3.6))
     bw = 0.25
@@ -394,7 +397,7 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
     ax.set_xticks(range(len(tiers)))
     ax.set_xticklabels([n for _, n in tiers], fontsize=9)
     ax.set_ylim(0, 1.0)
-    ax.set_ylabel("Mean over all outputs (invalid output = 0)", fontsize=9)
+    ax.set_ylabel("Mean over all answers (invalid answer = 0)", fontsize=9)
     ax.tick_params(axis="y", labelsize=8, length=0)
     ax.tick_params(axis="x", length=0)
     ax.yaxis.grid(True, color="#e3e3e3", linewidth=0.8)
@@ -421,7 +424,6 @@ def fig_result_shapes(v: dict) -> str:
     s.text(12, 42, "Axes and marks are final. The grey row in each panel is an example of a mark, not a result.",
            size=11, fill=MUTED)
     pw, ph, top = 300, 268, 62
-    n_models = v["plan.n_core_models"] + 1
 
     def frame(i, title, sub, xlabel, ticks):
         x0 = 12 + i * (pw + 18)
@@ -441,7 +443,7 @@ def fig_result_shapes(v: dict) -> str:
 
     # A: leaderboard
     x0, ax, ay, aw = frame(0, "A  Task success by model and track",
-                           f"One row per model ({n_models} rows, keyword script included), best first.",
+                           f"One row per model, best first: {v['plan.n_core_models']} panel models, up to {v['plan.n_optional_models']} optional ones (†) and the keyword script.",
                            "Task success, strict",
                            ["0", "0.25", "0.5", "0.75", "1"])
     ry = top + 92
@@ -460,7 +462,7 @@ def fig_result_shapes(v: dict) -> str:
 
     # B: pairs
     x0, ax, ay, aw = frame(1, "B  The same request in both formats",
-                           f"One bar per model: its {v['corpus.n_twin_pairs']} pairs, split four ways.",
+                           f"One bar per model: its {v['corpus.n_twin_pairs']} pairs, split by which side is right (target score of 1).",
                            "Share of pairs", ["0", "0.25", "0.5", "0.75", "1"])
     ry = top + 86
     s.text(ax - 6, ry + 10, "model", size=9.5, anchor="end", fill=MUTED)
@@ -483,7 +485,7 @@ def fig_result_shapes(v: dict) -> str:
     # C: tiers
     x0, ax, ay, aw = frame(2, "C  Where points are lost, by tier",
                            "One row per tier and track, models averaged. A gap between the marks is unrequested extra drawing.",
-                           "Score, valid outputs only", ["0", "0.25", "0.5", "0.75", "1"])
+                           "Score, valid answers only", ["0", "0.25", "0.5", "0.75", "1"])
     ry = top + 92
     s.text(ax - 6, ry + 4, "tier", size=9.5, anchor="end", fill=MUTED)
     s.line(ax + aw * 0.38, ry, ax + aw * 0.80, ry, stroke=GREY, sw=1.5)

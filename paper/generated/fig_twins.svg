@@ -15,7 +15,7 @@
 <text x="26" y="194" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">  parse  mmcif</text>
 <text x="26" y="210" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">    structure  model</text>
 <text x="26" y="226" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">      component  auth_asym_id = X, auth_seq_id = 64</text>
-<text x="26" y="242" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">        representation  ball_and_stick</text>
+<text x="26" y="242" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">        representation  spacefill</text>
 <text x="26" y="258" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">          color  yellow</text>
 <text x="24" y="290" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The model must turn UniProt 82 into author residue 64 itself.</text>
 <rect x="502" y="132" width="466" height="170" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
@@ -23,9 +23,9 @@
 <text x="516" y="178" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">load   molecule_id = &quot;2nwd&quot;</text>
 <text x="516" y="194" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">color  uniprot_accession = &quot;P61626&quot;,</text>
 <text x="516" y="210" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       uniprot_residue_number = 82,</text>
-<text x="516" y="226" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representation = &quot;ball-and-stick&quot;,</text>
+<text x="516" y="226" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representation = &quot;spacefill&quot;,</text>
 <text x="516" y="242" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representationColor = &quot;yellow&quot;</text>
-<text x="514" y="290" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The viewer can do the mapping; the model must know the accession and the call.</text>
+<text x="514" y="290" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The viewer does the mapping; the model passes on the accession and position from the request.</text>
 <line x1="245.0" y1="304" x2="400" y2="334" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
 <line x1="735.0" y1="304" x2="580" y2="334" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
 <rect x="290" y="336" width="400" height="44" rx="6" fill="#e6f4ef" stroke="#009E73" stroke-width="1.5"/>
@@ -33,18 +33,19 @@
 <text x="490" y="371" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">Trp64, chain X of 2NWD: 24 atoms (checked when the task is built)</text>
 <line x1="490" y1="382" x2="490" y2="406" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
 <text x="318" y="424" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="end">Per model, over the 258 pairs:</text>
-<text x="318" y="440" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">task success on each side</text>
+<text x="318" y="440" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">is each side right? (target score = 1;</text>
+<text x="318" y="454" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">repeated with task success)</text>
 <text x="405.0" y="404" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">call list right</text>
 <text x="555.0" y="404" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">call list wrong</text>
 <rect x="330" y="410" width="150" height="34" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="405.0" y="431" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">both right</text>
 <rect x="480" y="410" width="150" height="34" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="555.0" y="431" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">format error (call list)</text>
+<text x="555.0" y="431" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right in scene only</text>
 <rect x="330" y="444" width="150" height="34" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="405.0" y="465" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">format error (scene)</text>
+<text x="405.0" y="465" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right in call list only</text>
 <rect x="480" y="444" width="150" height="34" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="555.0" y="465" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">both wrong: content</text>
+<text x="555.0" y="465" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">both wrong</text>
 <text x="640" y="431" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">scene right</text>
 <text x="640" y="465" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">scene wrong</text>
-<text x="480" y="498" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">McNemar&#x27;s test compares the two shaded (discordant) cells.</text>
+<text x="480" y="498" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">McNemar&#x27;s test compares the two shaded cells (right in one format only).</text>
 </svg>

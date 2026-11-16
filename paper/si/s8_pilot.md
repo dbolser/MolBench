@@ -1,14 +1,21 @@
 ## S8. Further tables of the pilot run (October 2026)
 
 **These tables are preliminary and use the vocabulary and the grader of October 2026.** They
-were written by `scripts/paper_tables.py` from the archived pilot run and are kept here as the
-record behind Section 6.6 of the paper. They differ from the paper in three ways. (i) Scores
-are those of the *earlier* scene grader, which compared scene trees path by path; the paper's
-Section 6.6 regrades the same answers on drawn state, so its numbers are somewhat lower.
-(ii) "MVS track" is the scene track; "regime" is a tier; the condition called `spec` is the
-headline condition (format reference), `spec_grounded` adds the grounding pack, and `bare` has
-no format reference. (iii) "Success" is a score of exactly 1 under the earlier grader.
-"Resolution" is the name-resolution tier.
+were written by script from the archived pilot run and are kept unchanged, as the record
+behind Section 6.6 of the paper. Two things differ from the paper. First, the scores are those
+of the *earlier* scene grader, which compared scene trees path by path; Section 6.6 of the
+paper regrades the same answers on drawn state, so its numbers are somewhat lower. "Success"
+here is a score of exactly 1 under the earlier grader. Second, the words differ:
+
+| In these tables | In the paper |
+|:---|:---|
+| MVS track | scene track |
+| regime | tier |
+| Resolution | name-resolution tier |
+| `spec` | main condition (format reference) |
+| `spec_grounded` | format reference + grounding pack |
+| `bare` | no format reference |
+| output | answer |
 
 {{include:generated/table_mvs_corpus.md}}
 

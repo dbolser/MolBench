@@ -2,13 +2,14 @@
 
 # Supporting Information
 
-**MolBench: grading language models on what a molecular viewer would show**
+**MolBench: Grading Language Models on What a Molecular Viewer Would Show**
 
 This file accompanies the paper. Every table in it is written by script from the task files,
 the frozen data or archived model outputs. Terms are used as defined in Box 1 of the paper:
 *scene track* (answers are MolViewSpec scenes), *call-list track* (answers are ordered calls to
-the PDBe Mol\* viewer), *drawn state*, *F1*, *task success*, *target score*, *strict* and
-*valid-only*.
+the PDBe Mol\* viewer), *drawn state*, *fact*, *F1*, *task success*, *target score*, *strict*
+and *valid-only*. Task identifiers are those of the task files; in them the endings `-mvs` and
+`-api` mark the scene track and the call-list track.
 
 Contents: S1, the running example in full · S2, all task templates · S3, the structure panel ·
 S4, grading rules and known limits · S5, the control set by kind · S6, the run manifest, models
@@ -16,16 +17,18 @@ and prices · S7, the system prompts · S8, further tables of the pilot run.
 
 ## S1. The running example in full
 
-The request, the two reference answers, the accepted alternative on the call-list track, the
-stored target and the grounding pack, exactly as they are in the task files
-`clin-pair-target-lyz-2nwd-w82r-mvs` and `clin-pair-target-lyz-2nwd-w82r-api`. The variant is LYZ W82R
-(p.Trp82Arg; UniProt P61626; ClinVar VCV000014376, "Familial visceral amyloidosis, Ostertag type (AMYLD2)",
+The request, the two reference answers, the further accepted answers on the call-list track,
+the stored target and the grounding pack, exactly as they are in the task files
+`clin-pair-target-lyz-2nwd-w82r-mvs` (scene track) and `clin-pair-target-lyz-2nwd-w82r-api` (call-list track). The variant is
+LYZ W82R (p.Trp82Arg; UniProt P61626; "Familial visceral amyloidosis, Ostertag type (AMYLD2)";
 classified pathogenic, review status "criteria provided, single submitter").
+ClinVar records of this protein change: VCV000014376, NM_000239.3(LYZ):c.244T>C (p.Trp82Arg); VCV000014378, NM_000239.3(LYZ):c.244T>A (p.Trp82Arg).
 
-On the call-list track the reference sets `"color": null` on the residue. Without it, the
-viewer also paints that stretch of the cartoon in its selection colour, which the request does
-not ask for. An answer that paints the stretch green, as the residue is, is the accepted
-alternative.
+On the call-list track the reference sets `"color": null` on the residue, which leaves the
+cartoon as it was. Without that field the viewer also paints the residue's stretch of the
+cartoon in its selection colour. The request says nothing about that stretch, so an answer
+that paints it, in the selection colour or in yellow as the residue is, is accepted as
+well.
 
 **Request (both tracks).** PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.
 
@@ -113,7 +116,7 @@ alternative.
 ]
 ```
 
-**Call-list track: accepted alternative** (the residue's own cartoon stretch is painted green as well).
+**Call-list track: accepted answers** (2; the residue's own stretch of cartoon is painted as well, in the residue's colour or in the viewer's selection colour).
 
 ```json
 [
@@ -128,6 +131,26 @@ alternative.
     "uniprot_accession": "P61626",
     "uniprot_residue_number": 82,
     "color": "yellow",
+    "representation": "spacefill",
+    "representationColor": "yellow"
+   }
+  ]
+ }
+]
+```
+
+```json
+[
+ {
+  "action": "load",
+  "molecule_id": "2nwd"
+ },
+ {
+  "action": "color",
+  "data": [
+   {
+    "uniprot_accession": "P61626",
+    "uniprot_residue_number": 82,
     "representation": "spacefill",
     "representationColor": "yellow"
    }
@@ -173,7 +196,7 @@ score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1)
 | Answer | F1 | Task success | Target score |
 |:---|---:|:---|---:|
 | **Scene track** | | | |
-| Reference: author chain X, author residue 64, green ball-and-stick | 1.00 | yes | 1.00 |
+| Reference: author chain X, author residue 64, yellow spacefill spheres | 1.00 | yes | 1.00 |
 | The same residue named by label numbering (label chain A, residue 64) | 1.00 | yes | 1.00 |
 | Number in the variant name used as the author number (Ser82) | 0.00 | no | 0.00 |
 | Right residue, drawn red | 0.50 | no | 0.50 |
@@ -347,10 +370,12 @@ file by the build script, or the build fails.
    (failing that, X-ray or cryo-electron microscopy entries at 3.5 Å or better), drops entries
    above the size limit or with several models, and then chooses by, in order: most variant
    positions covered, fewest engineered mutations, fewest polymer entities, best resolution.
-   Whether the author numbering differs from UniProt was not a criterion.
-4. *Two AlphaFold models*, numbered as UniProt is by construction: one of p53 and one of
-   haemoglobin β, the latter as a partner to a crystal structure of the same protein that is
-   numbered differently.
+   Whether the author numbering differs from UniProt was not a criterion. A variant may also
+   be asked on any other panel structure of the same protein.
+4. *5 AlphaFold models*, numbered as UniProt is by construction: of
+   p53, gamma-crystallin D, calmodulin-1, lysozyme and haemoglobin beta. The model of p53 was used by earlier tasks. Each of the
+   others is a partner to an experimental structure of the same protein that is numbered
+   differently, so that the same variant can be asked with and without an offset.
 
 Counts of verified features in the panel: ligand 44, metal
 36, disulfide 24, assembly differs
@@ -455,9 +480,9 @@ rephrasings.
 
 The drawn state is cut into facts, each of weight 1.
 
-- **Display facts.** An atom's drawing is the set of its draws (representation type, colour,
-  opacity). All atoms with the same set form one fact.
-- **Scene facts**, when present: each label text with the atoms it is attached to; each
+- **Facts about atoms.** An atom's drawing is the set of its draws (representation type,
+  colour, opacity). All atoms with the same set form one fact.
+- **Facts about the scene**, when present: each label text with the atoms it is attached to; each
   tooltip text with its atoms; the camera target (the atoms it frames); each distance line or
   other drawn primitive; a request that the viewer compute and draw non-covalent interactions
   around some atoms; the structure type when it is not the deposited model (an assembly,
@@ -473,7 +498,7 @@ Recall is the mean, over the reference's facts, of how much of each the answer h
 is the mean, over the answer's facts, of how much of each the reference has. F1 is their
 harmonic mean. How much of a fact the other side has:
 
-- *Display fact*: the mean over its atoms of the share of the atom's draws that the other side
+- *Fact about atoms*: the mean over its atoms of the share of the atom's draws that the other side
   also has. A draw that the other side has with the same representation type and another
   colour or opacity counts half. An atom that the other side does not draw counts 0. Draws that
   the other side has in addition do not lower this number; they lower the number computed in
@@ -489,7 +514,8 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 ### S4.3 Target score
 
 The *target's drawing* is the set of the reference's draws that lie wholly inside the target
-atoms (the green ball-and-stick of the residue, not a cartoon that passes through it). It is
+atoms (in the running example the yellow spacefill spheres of the residue; a cartoon of the
+whole chain that passes through the residue is not part of it). It is
 cut into facts as above. For each fact, counting (atom, draw) items:
 
 - *wanted*: the reference's items;
@@ -503,18 +529,19 @@ cut into facts as above. For each fact, counting (atom, draw) items:
 
 Target recall = credit / wanted. Target precision = credit / (attempted + spill + extra). The
 target score is the harmonic mean of the two, each averaged over the target's facts and over
-the scene facts that touch the target atoms. A draw of the answer that is not confined to the
-target (a cartoon of the whole chain) is context and is ignored. A task without a stored target
+the facts about the scene that touch the target atoms. A draw of the answer that is not
+confined to the target (a cartoon or a surface of the whole chain) is unrequested context and
+is ignored, even if it would hide the target in a picture; F1 and task success count it. A task without a stored target
 uses everything the reference draws.
 
-### S4.4 Accepted alternatives and follow-up turns
+### S4.4 Accepted answers and follow-up turns
 
 A task may list further right answers. An answer is graded against the reference and each of
 them, and the best result counts (a success first, then the highest F1). A name-resolution
 task lists the entries that match the named protein; an answer on another listed entry is
 graded against the reference's drawing resolved on that entry. A follow-up task gives a start
-state and an edit request; the answer is the complete new scene or call list, and only its
-final state is graded. If the right answer is to change nothing, the reference is the start
+state and an edit request; the answer is the complete new scene or call list, and only the
+drawn state it results in is graded. If the right answer is to change nothing, the reference is the start
 state.
 
 ### S4.5 What the viewer draws (scene track, Mol\* 5.9.0)
@@ -541,32 +568,34 @@ numbers.
 ### S4.6 What the viewer does (call-list track, PDBe Mol\* 3.3.2)
 
 The grader replays the calls in order with a port of the viewer's own code paths (selection,
-colouring, representation, visibility, reset). The facts of an end state are its differences
-from a bare load of the same structure:
+colouring, representation, visibility, reset). The facts of the drawn state that a call list
+ends in are its differences from a bare load of the same structure (a load with no further
+call):
 
 | Fact | One per |
 |:---|:---|
-| display | each group of atoms whose drawing a colouring call changed, now drawn the same way |
+| atoms | each group of atoms whose drawing a colouring call changed, now drawn the same way |
 | scene | the effect of the global style and the hide switches on all other atoms |
 | focus, highlight, tooltip | the residues framed, the residues highlighted, each tooltip text with its atoms |
 | assembly, preset, option, canvas | the assembly identifier, the load preset, each non-default option, each non-default canvas setting |
 
 A bare load has no facts and scores 0, unless a bare load is the reference. Two details differ
-from the scene track. A display fact scores the share of its atoms that end up looking exactly
+from the scene track. A fact about atoms scores the share of its atoms that end up looking exactly
 the same on the other side; atoms that both sides changed but that look different count half.
 The target score is computed on the changes from a bare load on the target atoms. Selections in
 UniProt numbering are resolved through the frozen SIFTS tables.
 
 ### S4.7 Outcomes
 
-**Table S4. The outcome of a sampled answer and how it is scored.** *As graded*: the answer
-receives the scores that the grader computes. Strict averages count every answer; valid-only
-averages count the answers with outcome "valid". An answer that was cut off at the token limit
+**Table S4. The outcome of an answer and how it is scored.** *As graded*: the answer receives
+the scores that the grader computes. Strict averages count every answer with the score in the
+last column; valid-only averages count the answers with outcome "valid". An answer with one of
+the first three outcomes *cannot be shown*. An answer that was cut off at the token limit
 is counted apart from a malformed one in the outcome tables.
 
 | Track | Outcome | Meaning | Score |
 |:---|:---|:---|:---|
-| both | invalid JSON | the reply contains no parseable JSON of the right outer shape | 0 |
+| both | invalid JSON | the answer contains no parseable JSON of the right outer shape | 0 |
 | scene | not a scene | JSON, but not a scene tree | 0 |
 | scene | rejected by the viewer | a scene tree that the validation of Mol\* 5.9.0 rejects | 0 |
 | scene | valid | Mol\* accepts the scene | as graded |
@@ -588,6 +617,10 @@ is counted apart from a malformed one in the outcome tables.
 - **Distance lines.** The target score does not notice a missing distance line. Lines, labels
   and the camera target were not read back from Mol\*; they are compared as declared.
 - **Lone ions.** An answer that draws a lone ion as ball-and-stick receives a target score of 0.
+- **Call-list actions that one host ignores.** The call-list track grades what each call does
+  in PDBe Mol\* 3.3.2. The notebook widget that hosts this viewer for Python users (ipymolstar
+  0.1.0) has no handler for four of the actions (camera focus, setting the highlight colour,
+  clearing the highlight and clearing the selection); there they do nothing.
 - **Call-list track.** Options that need live services (superposition, ligand view,
   annotations, density maps, lighting) are compared as declared settings. Camera focus,
   highlight and UniProt-numbered selections were not read back from the viewer. Which atoms
@@ -599,31 +632,35 @@ is counted apart from a malformed one in the outcome tables.
 
 ## S5. The control set by kind
 
-The control set has 2,105 pairs of a reference and an answer on the structures of the
-panel: 1,110 on the scene track (150
+The control set has 2,105 controls on the structures of the panel, each a reference
+and one answer: 1,110 on the scene track (150
 identical, 480 equivalent, 480 wrong) and
 995 on the call-list track (150 identical,
 425 equivalent, 420 wrong). The verdict of each
-pair is known from how it was made.
+control is known from how its answer was made.
 
-Read-back from the viewers. Scene track: 890 pairs were loaded in
-Mol\* 5.9.0 and the drawing of both scenes read back; in all of them the
-viewer agreed with the verdict. 140 pairs are of kinds that cannot
-be read back (camera target, label text, colouring by chain, assembly, another entry). In the
-same run the grader's resolved state equalled the viewer's for all
+Read-back from the viewers. Scene track: the read-back was run on the control set as it then
+stood, 1,030 scene controls. For
+890 of them both scenes were loaded in Mol\*
+5.9.0 and their drawing read back; in all of them the viewer agreed with
+the verdict. The other 140 are of kinds that cannot be read back
+(camera target, label text, colouring by chain, assembly, another entry).
+80 scene controls were added afterwards and have not been
+read back in the viewer. In the same run the grader's resolved state equalled the viewer's for all
 1498 scenes, and 3,818 single
 representations probed across the panel were drawn as the grader predicts. Call-list track:
-234 call lists were replayed in PDBe Mol\*
-3.3.2, all with the end state that the grader computes.
+the call lists of a sample of controls (234 lists; those that select
+by UniProt number were left out) were replayed in PDBe Mol\*
+3.3.2, and every one ended in the state that the grader computes.
 
-**Table S5. Every kind of control pair.** *Pairs*: number of pairs of this kind. *Graded as
-success*: pairs that the grader counts as task success; this must equal *Pairs* for kinds that
-must pass and 0 for kinds that must fail. *Earlier grader*: the same count for the grader that
+**Table S5. Every kind of control.** *Controls*: number of controls of this kind. *Graded as
+success*: controls that the grader counts as task success; this must equal *Controls* for
+kinds that must pass and 0 for kinds that must fail. *Earlier grader*: the same count for the grader that
 this work replaces on that track, with a score of exactly 1 read as success.
 
 **Scene track.**
 
-| Verdict known from construction | Kind of pair | Pairs | Graded as success | Graded as success by the earlier grader |
+| Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
 |:---|:---|---:|---:|---:|
 | must pass (equivalent) | selector 'all' instead of 'polymer' under a cartoon (a cartoon draws polymer only) | 20 | 20 | 1 |
 | must pass (equivalent) | a chain's cartoon selected by author chain id, label chain id or entity id | 20 | 20 | 2 |
@@ -677,7 +714,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 
 **Call-list track.**
 
-| Verdict known from construction | Kind of pair | Pairs | Graded as success | Graded as success by the earlier grader |
+| Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
 |:---|:---|---:|---:|---:|
 | must pass (equivalent) | struct_asym_id (label chain) instead of auth_asym_id for the same chain | 20 | 20 | 17 |
 | must pass (equivalent) | auth_residue_number instead of auth_seq_id | 20 | 20 | 20 |
@@ -726,7 +763,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 
 ## S6. The run manifest
 
-The final run is defined by one file, `run/final_run.toml`. Its contents, in words:
+The final run is defined by one manifest file in the repository. Its contents, in words:
 
 - **Corpus.** Version `corpus-v1.0-dev` ⟦PENDING: corpus freeze — final version tag and hash⟧.
 - **Samples.** 3 per task, model and condition (1 in the JSON-mode condition);
@@ -737,7 +774,7 @@ The final run is defined by one file, `run/final_run.toml`. Its contents, in wor
   as it stands.
 - **Conditions.** 4, as in Section 5.2 of the paper.
 - **Budget.** A cap in US dollars; the run refuses to start if the projected cost is above it
-  and stops if spending would pass it.
+  and stops if spending would pass it. Costs are list prices on the day of the run.
 - **Validation.** Every parsed scene is validated by Mol\* 5.9.0.
 
 **Table S6. The model panel.** *Panel*: core, or optional (run only if the budget allows;
@@ -774,21 +811,21 @@ price*: US dollars per million input / output tokens, read on the date given.
 
 ## S7. System prompts
 
-The two system prompts as sent in the headline condition. A name in double angle brackets
-marks a slot that is filled with a longer frozen text from the repository: the MolViewSpec
-reference (`molbench/mvs_reference.md`), the list of call-list actions with their fields, and
-the reference of the viewer's calls (`molbench/api_reference.md`). In the condition without a
-format reference, the section "MVS reference" is removed. The worked example in each
+The two system prompts as sent in the main condition. A name in double angle brackets, such
+as `<<MVS_REFERENCE>>`, marks a slot that is filled with a longer frozen text from the
+repository: the MolViewSpec reference, the list of call-list actions with their fields, and
+the reference of the viewer's calls. Everything else is printed as sent. In the condition
+without a format reference, the section "MVS reference" is removed. The worked example in each
 prompt uses entry 1HSG, which no task uses.
 
-**Scene track: system prompt** (`prompts/system_mvs.md`).
+**Scene track: system prompt.**
 
 ````text
 You are a molecular-visualization agent. The user gives a natural-language
 instruction; you translate it into a **MolViewSpec (MVS) scene tree**.
 
 You do NOT write Python. You output a single JSON object: the MVS state, of the
-form `{"root": {"kind": "root", "children": [ ... ]>>`.
+form `{"root": {"kind": "root", "children": [ ... ]}}`.
 
 ## Output contract
 
@@ -818,7 +855,7 @@ scene unchanged.
 <<MVS_REFERENCE>>
 ````
 
-**Call-list track: system prompt** (`prompts/system_api.md`).
+**Call-list track: system prompt.**
 
 ````text
 You are a molecular-visualization agent. The user gives a natural-language
@@ -881,14 +918,21 @@ scene (scene track) or the calls made so far (call-list track), followed by `Req
 ## S8. Further tables of the pilot run (October 2026)
 
 **These tables are preliminary and use the vocabulary and the grader of October 2026.** They
-were written by `scripts/paper_tables.py` from the archived pilot run and are kept here as the
-record behind Section 6.6 of the paper. They differ from the paper in three ways. (i) Scores
-are those of the *earlier* scene grader, which compared scene trees path by path; the paper's
-Section 6.6 regrades the same answers on drawn state, so its numbers are somewhat lower.
-(ii) "MVS track" is the scene track; "regime" is a tier; the condition called `spec` is the
-headline condition (format reference), `spec_grounded` adds the grounding pack, and `bare` has
-no format reference. (iii) "Success" is a score of exactly 1 under the earlier grader.
-"Resolution" is the name-resolution tier.
+were written by script from the archived pilot run and are kept unchanged, as the record
+behind Section 6.6 of the paper. Two things differ from the paper. First, the scores are those
+of the *earlier* scene grader, which compared scene trees path by path; Section 6.6 of the
+paper regrades the same answers on drawn state, so its numbers are somewhat lower. "Success"
+here is a score of exactly 1 under the earlier grader. Second, the words differ:
+
+| In these tables | In the paper |
+|:---|:---|
+| MVS track | scene track |
+| regime | tier |
+| Resolution | name-resolution tier |
+| `spec` | main condition (format reference) |
+| `spec_grounded` | format reference + grounding pack |
+| `bare` | no format reference |
+| output | answer |
 
 **Corpus used for the October 2026 panel (PRELIMINARY).** Tasks and distinct structures (PDB entries) per regime. A regime is a group of tasks that need the same kind of knowledge.
 

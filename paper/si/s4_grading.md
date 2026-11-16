@@ -4,9 +4,9 @@
 
 The drawn state is cut into facts, each of weight 1.
 
-- **Display facts.** An atom's drawing is the set of its draws (representation type, colour,
-  opacity). All atoms with the same set form one fact.
-- **Scene facts**, when present: each label text with the atoms it is attached to; each
+- **Facts about atoms.** An atom's drawing is the set of its draws (representation type,
+  colour, opacity). All atoms with the same set form one fact.
+- **Facts about the scene**, when present: each label text with the atoms it is attached to; each
   tooltip text with its atoms; the camera target (the atoms it frames); each distance line or
   other drawn primitive; a request that the viewer compute and draw non-covalent interactions
   around some atoms; the structure type when it is not the deposited model (an assembly,
@@ -22,7 +22,7 @@ Recall is the mean, over the reference's facts, of how much of each the answer h
 is the mean, over the answer's facts, of how much of each the reference has. F1 is their
 harmonic mean. How much of a fact the other side has:
 
-- *Display fact*: the mean over its atoms of the share of the atom's draws that the other side
+- *Fact about atoms*: the mean over its atoms of the share of the atom's draws that the other side
   also has. A draw that the other side has with the same representation type and another
   colour or opacity counts half. An atom that the other side does not draw counts 0. Draws that
   the other side has in addition do not lower this number; they lower the number computed in
@@ -38,7 +38,8 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 ### S4.3 Target score
 
 The *target's drawing* is the set of the reference's draws that lie wholly inside the target
-atoms (the green ball-and-stick of the residue, not a cartoon that passes through it). It is
+atoms (in the running example the {{ex.color}} {{ex.rep}} of the residue; a cartoon of the
+whole chain that passes through the residue is not part of it). It is
 cut into facts as above. For each fact, counting (atom, draw) items:
 
 - *wanted*: the reference's items;
@@ -52,18 +53,19 @@ cut into facts as above. For each fact, counting (atom, draw) items:
 
 Target recall = credit / wanted. Target precision = credit / (attempted + spill + extra). The
 target score is the harmonic mean of the two, each averaged over the target's facts and over
-the scene facts that touch the target atoms. A draw of the answer that is not confined to the
-target (a cartoon of the whole chain) is context and is ignored. A task without a stored target
+the facts about the scene that touch the target atoms. A draw of the answer that is not
+confined to the target (a cartoon or a surface of the whole chain) is unrequested context and
+is ignored, even if it would hide the target in a picture; F1 and task success count it. A task without a stored target
 uses everything the reference draws.
 
-### S4.4 Accepted alternatives and follow-up turns
+### S4.4 Accepted answers and follow-up turns
 
 A task may list further right answers. An answer is graded against the reference and each of
 them, and the best result counts (a success first, then the highest F1). A name-resolution
 task lists the entries that match the named protein; an answer on another listed entry is
 graded against the reference's drawing resolved on that entry. A follow-up task gives a start
-state and an edit request; the answer is the complete new scene or call list, and only its
-final state is graded. If the right answer is to change nothing, the reference is the start
+state and an edit request; the answer is the complete new scene or call list, and only the
+drawn state it results in is graded. If the right answer is to change nothing, the reference is the start
 state.
 
 ### S4.5 What the viewer draws (scene track, Mol\* 5.9.0)
@@ -90,32 +92,34 @@ numbers.
 ### S4.6 What the viewer does (call-list track, PDBe Mol\* 3.3.2)
 
 The grader replays the calls in order with a port of the viewer's own code paths (selection,
-colouring, representation, visibility, reset). The facts of an end state are its differences
-from a bare load of the same structure:
+colouring, representation, visibility, reset). The facts of the drawn state that a call list
+ends in are its differences from a bare load of the same structure (a load with no further
+call):
 
 | Fact | One per |
 |:---|:---|
-| display | each group of atoms whose drawing a colouring call changed, now drawn the same way |
+| atoms | each group of atoms whose drawing a colouring call changed, now drawn the same way |
 | scene | the effect of the global style and the hide switches on all other atoms |
 | focus, highlight, tooltip | the residues framed, the residues highlighted, each tooltip text with its atoms |
 | assembly, preset, option, canvas | the assembly identifier, the load preset, each non-default option, each non-default canvas setting |
 
 A bare load has no facts and scores 0, unless a bare load is the reference. Two details differ
-from the scene track. A display fact scores the share of its atoms that end up looking exactly
+from the scene track. A fact about atoms scores the share of its atoms that end up looking exactly
 the same on the other side; atoms that both sides changed but that look different count half.
 The target score is computed on the changes from a bare load on the target atoms. Selections in
 UniProt numbering are resolved through the frozen SIFTS tables.
 
 ### S4.7 Outcomes
 
-**Table S4. The outcome of a sampled answer and how it is scored.** *As graded*: the answer
-receives the scores that the grader computes. Strict averages count every answer; valid-only
-averages count the answers with outcome "valid". An answer that was cut off at the token limit
+**Table S4. The outcome of an answer and how it is scored.** *As graded*: the answer receives
+the scores that the grader computes. Strict averages count every answer with the score in the
+last column; valid-only averages count the answers with outcome "valid". An answer with one of
+the first three outcomes *cannot be shown*. An answer that was cut off at the token limit
 is counted apart from a malformed one in the outcome tables.
 
 | Track | Outcome | Meaning | Score |
 |:---|:---|:---|:---|
-| both | invalid JSON | the reply contains no parseable JSON of the right outer shape | 0 |
+| both | invalid JSON | the answer contains no parseable JSON of the right outer shape | 0 |
 | scene | not a scene | JSON, but not a scene tree | 0 |
 | scene | rejected by the viewer | a scene tree that the validation of Mol\* 5.9.0 rejects | 0 |
 | scene | valid | Mol\* accepts the scene | as graded |
@@ -137,6 +141,10 @@ is counted apart from a malformed one in the outcome tables.
 - **Distance lines.** The target score does not notice a missing distance line. Lines, labels
   and the camera target were not read back from Mol\*; they are compared as declared.
 - **Lone ions.** An answer that draws a lone ion as ball-and-stick receives a target score of 0.
+- **Call-list actions that one host ignores.** The call-list track grades what each call does
+  in PDBe Mol\* 3.3.2. The notebook widget that hosts this viewer for Python users (ipymolstar
+  0.1.0) has no handler for four of the actions (camera focus, setting the highlight colour,
+  clearing the highlight and clearing the selection); there they do nothing.
 - **Call-list track.** Options that need live services (superposition, ligand view,
   annotations, density maps, lighting) are compared as declared settings. Camera focus,
   highlight and UniProt-numbered selections were not read back from the viewer. Which atoms

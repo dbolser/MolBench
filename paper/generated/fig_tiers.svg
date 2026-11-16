@@ -62,5 +62,5 @@
 <text x="748" y="266" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Call-list track only.</text>
 <text x="748" y="288" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“Load 1UDT on a black background with</text>
 <text x="748" y="302" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">glossy lighting and set it spinning.”</text>
-<text x="12" y="394" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Shaded: lookup tiers, where the answer needs a fact that is not in the request and cannot be read off the format.</text>
+<text x="12" y="394" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Shaded: the two lookup tiers (name resolution, clinical variant), where one fact must be looked up in a database: an entry, or a residue number.</text>
 </svg>

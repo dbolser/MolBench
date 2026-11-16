@@ -6,8 +6,8 @@
 <text x="12" y="42" font-size="11" font-weight="normal" fill="#555555" text-anchor="start">Axes and marks are final. The grey row in each panel is an example of a mark, not a result.</text>
 <rect x="12" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="22" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">A  Task success by model and track</text>
-<text x="22" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per model (17 rows, keyword script</text>
-<text x="22" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">included), best first.</text>
+<text x="22" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per model, best first: 16 panel models, up</text>
+<text x="22" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">to 5 optional ones (†) and the keyword script.</text>
 <line x1="86" y1="238" x2="294" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="86.0" y1="238" x2="86.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="86.0" y1="136" x2="86.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
@@ -39,7 +39,8 @@
 <text x="234" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">95% interval</text>
 <rect x="330" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="340" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">B  The same request in both formats</text>
-<text x="340" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 258 pairs, split four ways.</text>
+<text x="340" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 258 pairs, split by which</text>
+<text x="340" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">side is right (target score of 1).</text>
 <line x1="404" y1="238" x2="612" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="404.0" y1="238" x2="404.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="404.0" y1="136" x2="404.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
@@ -92,7 +93,7 @@
 <line x1="930.0" y1="238" x2="930.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="930.0" y1="136" x2="930.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
 <text x="930.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">1</text>
-<text x="798.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Score, valid outputs only</text>
+<text x="798.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Score, valid answers only</text>
 <text x="826.0" y="202" font-size="12" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
 <text x="716" y="158" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">tier</text>
 <line x1="801.04" y1="154" x2="888.4" y2="154" stroke="#b8b8b8" stroke-width="1.5"/>

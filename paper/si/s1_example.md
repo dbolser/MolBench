@@ -1,15 +1,17 @@
 ## S1. The running example in full
 
-The request, the two reference answers, the accepted alternative on the call-list track, the
-stored target and the grounding pack, exactly as they are in the task files
-`{{ex.id_mvs}}` and `{{ex.id_api}}`. The variant is {{ex.gene}} {{ex.variant}}
-({{ex.hgvs}}; UniProt {{ex.accession}}; ClinVar {{ex.clinvar_vcv}}, "{{ex.disease}}",
+The request, the two reference answers, the further accepted answers on the call-list track,
+the stored target and the grounding pack, exactly as they are in the task files
+`{{ex.id_mvs}}` (scene track) and `{{ex.id_api}}` (call-list track). The variant is
+{{ex.gene}} {{ex.variant}} ({{ex.hgvs}}; UniProt {{ex.accession}}; "{{ex.disease}}";
 classified {{ex.clinvar_classification}}, review status "{{ex.clinvar_review_status}}").
+ClinVar records of this protein change: {{ex.clinvar_records}}.
 
-On the call-list track the reference sets `"color": null` on the residue. Without it, the
-viewer also paints that stretch of the cartoon in its selection colour, which the request does
-not ask for. An answer that paints the stretch green, as the residue is, is the accepted
-alternative.
+On the call-list track the reference sets `"color": null` on the residue, which leaves the
+cartoon as it was. Without that field the viewer also paints the residue's stretch of the
+cartoon in its selection colour. The request says nothing about that stretch, so an answer
+that paints it, in the selection colour or in {{ex.color}} as the residue is, is accepted as
+well.
 
 {{include:generated/si_example.md}}
 

@@ -18,10 +18,12 @@ file by the build script, or the build fails.
    (failing that, X-ray or cryo-electron microscopy entries at 3.5 Å or better), drops entries
    above the size limit or with several models, and then chooses by, in order: most variant
    positions covered, fewest engineered mutations, fewest polymer entities, best resolution.
-   Whether the author numbering differs from UniProt was not a criterion.
-4. *Two AlphaFold models*, numbered as UniProt is by construction: one of p53 and one of
-   haemoglobin β, the latter as a partner to a crystal structure of the same protein that is
-   numbered differently.
+   Whether the author numbering differs from UniProt was not a criterion. A variant may also
+   be asked on any other panel structure of the same protein.
+4. *{{panel.n_alphafold}} AlphaFold models*, numbered as UniProt is by construction: of
+   {{panel.alphafold_proteins}}. The model of p53 was used by earlier tasks. Each of the
+   others is a partner to an experimental structure of the same protein that is numbered
+   differently, so that the same variant can be asked with and without an offset.
 
 Counts of verified features in the panel: ligand {{panel.feature.ligand}}, metal
 {{panel.feature.metal}}, disulfide {{panel.feature.disulfide}}, assembly differs
