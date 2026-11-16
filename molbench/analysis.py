@@ -58,7 +58,14 @@ MOCK_BANNER = ("> **MOCK DATA.** Dry run answered by the mock model: the table h
 CLINICAL_SSE = ("clin-sse-helix", "clin-sse-strand")
 # Tables that are not results of the run (counted from the task files, or measured on
 # the grader's control set): real whatever answered the run, so they carry no mock banner.
-NOT_RUN_RESULTS = ("table_controls",)
+NOT_RUN_RESULTS = ("table_corpus", "table_corpus_kinds", "table_corpus_difficulty",
+                   "table_controls")
+REAL_NOTE = ("*Not a run result: counted from the task files, so these numbers are real "
+             "whatever answered the run.*")
+
+
+def n_samples(n) -> str:
+    return f"{n} sample per task" if n == 1 else f"{n} samples per task"
 
 
 # --------------------------------------------------------------------------- #
@@ -286,8 +293,11 @@ class Tables:
         self.values[key] = value
 
     def add(self, name: str, title: str, body: str, caption: str = "") -> None:
-        parts = [MOCK_BANNER, ""] if self.run.mock else []
+        real = name in NOT_RUN_RESULTS
+        parts = [MOCK_BANNER, ""] if self.run.mock and not real else []
         parts += [f"**{title}**", "", body]
+        if real and self.run.mock:
+            caption = (caption + " " if caption else "") + REAL_NOTE
         if caption:
             parts += ["", caption]
         self.tables[name] = "\n".join(parts)
@@ -404,7 +414,6 @@ class Tables:
         # special kinds
         def count(test) -> list:
             return [sum(test(t) for t in orig if t["track"] == tr) for tr in ("mvs", "api")]
-        prov = difficulty_mod.source_provenance
         para_requests = {(t["track"], t["paraphrase_of"]) for t in para}
         acc = [t for t in orig if t["tier"] == "accept_set"]
         kinds = [
@@ -440,8 +449,9 @@ class Tables:
         self.put("corpus.n_twin_pairs_hide_toggle",
                  sum(bool(difficulty_mod.normalised(t)["hide_toggle"]) for t in orig))
         self.put("corpus.n_paraphrase_requests",
-                 len({(prov(t).get("script"), min(t["paraphrase_of"], self.run.tasks.get(
-                     t["paraphrase_of"], {}).get("twin_of") or t["paraphrase_of"])) for t in para}))
+                 # a twin pair asked in three phrasings is one request, not two
+                 len({min(t["paraphrase_of"], self.run.tasks.get(
+                     t["paraphrase_of"], {}).get("twin_of") or t["paraphrase_of"]) for t in para}))
         for track in ("mvs", "api"):
             mine = [t for t in orig if t["track"] == track]
             self.put(f"corpus.{track}.followup.n_noop",
@@ -550,7 +560,7 @@ class Tables:
             self.put(f"{T}.panel_mean_f1", mean(e["f1"] for e in models))
         self.add(f"table_{T}_leaderboard",
                  f"{TRACK_NAME[track]} track: leaderboard ({n} original tasks, headline condition, "
-                 f"{r.samples.get(HEADLINE)} samples per task)",
+                 f"{n_samples(r.samples.get(HEADLINE))})",
                  md_table(["model", "weights", "strict F1 [95% CI]", "task success [95% CI]",
                            "success, all samples", "target score", "valid output",
                            "F1 over valid outputs", "F1 after JSON repair"], rows, "llrrrrrrr"),
@@ -721,11 +731,14 @@ class Tables:
                     continue
                 spread = mean(max(p) - min(p) for p in per)
                 flips = sum(len({x > 0.5 for x in p}) > 1 for p in per)
+                # the noise floor: phrasings whose own samples disagree with each other
+                mixed = mean(0.0 < x < 1.0 for p in per for x in p)
                 by_style = [mean(p[i] for p in per) for i in range(3)]
                 rows.append([self.name(m), len(per), *map(f3, by_style), f3(spread),
-                             f"{flips} of {len(per)}"])
+                             f"{flips} of {len(per)}", pct(mixed)])
                 self.put(f"{T}.{HEADLINE}.{m}.paraphrase_spread", spread)
                 if m != BASELINE:
+                    pooled["mixed"].append(mixed)
                     pooled["spread"].append(spread)
                     pooled["flips"].append(flips / len(per))
                     for i, s in enumerate(styles):
@@ -733,7 +746,9 @@ class Tables:
             if not rows:
                 continue
             rows.append(["**panel mean**", len(groups), *[f3(mean(pooled[s])) for s in styles],
-                         f3(mean(pooled["spread"])), pct(mean(pooled["flips"]))])
+                         f3(mean(pooled["spread"])), pct(mean(pooled["flips"])),
+                         pct(mean(pooled["mixed"]))])
+            self.put(f"{T}.panel.paraphrase_samples_disagree", mean(pooled["mixed"]))
             self.put(f"{T}.paraphrase.n_requests", len(groups))
             self.put(f"{T}.panel.paraphrase_spread", mean(pooled["spread"]))
             self.put(f"{T}.panel.paraphrase_flip_rate", mean(pooled["flips"]))
@@ -743,12 +758,14 @@ class Tables:
                      f"{TRACK_NAME[track]} track: sensitivity to wording ({len(groups)} requests, "
                      "three phrasings each)",
                      md_table(["model", "requests", "full", "terse", "indirect",
-                               "mean spread per request", "requests where the outcome flips"], rows),
+                               "mean spread per request", "requests where the outcome flips",
+                               "phrasings whose own samples disagree"], rows),
                      "Task success per phrasing. Spread: for each request, the highest minus the "
                      "lowest task success among its three phrasings, then the mean over requests. "
                      "A request flips when it is solved (more than half the samples right) in "
                      "one phrasing and not in another. Sampling noise alone gives a spread above "
-                     "0; compare with the spread between samples of one phrasing.")
+                     "0: the last column is the share of single phrasings whose own samples do "
+                     "not all agree, the noise the spread has to be read against.")
 
     # -- twins ---------------------------------------------------------------------------
     def twin_pairs(self) -> list[tuple[str, str, dict]]:
@@ -1036,6 +1053,15 @@ class Tables:
                 self.put(f"clinical.{TRACK_KEY[track]}.{cond}.{slug}.success", s)
                 self.put(f"clinical.{TRACK_KEY[track]}.{cond}.{slug}.n", len(su))
             rows.append(row)
+        genes: dict[bool, set] = {True: set(), False: set()}
+        for i, t in r.tasks.items():
+            if (t["tier"] == "clinical" and t["track"] == "mvs" and not t.get("paraphrase_of")
+                    and t["family"] not in CLINICAL_SSE and norm[i]["needs_offset"] is not None):
+                clin = difficulty_mod.source_provenance(t).get("clinical") or {}
+                genes[bool(norm[i]["needs_offset"])].add(clin.get("gene") or t["structures"][0])
+        self.put("clinical.needs_offset.yes.n_proteins", len(genes[True]))
+        self.put("clinical.needs_offset.no.n_proteins", len(genes[False]))
+        self.put("clinical.needs_offset.both.n_proteins", len(genes[True] & genes[False]))
         head = ["stratum"]
         for cond, track in conds:
             name = TRACK_NAME[track] + (", with grounding pack" if cond != HEADLINE else "")
@@ -1045,7 +1071,8 @@ class Tables:
                  "The helix / strand context tasks need the entry's own secondary-structure "
                  "annotation, which only the grounding pack states, and are reported apart; the "
                  "strata below them leave those tasks out. `needs_offset`: the residue's author "
-                 "number differs from its UniProt number. "
+                 f"number differs from its UniProt number (yes: {len(genes[True])} proteins, no: "
+                 f"{len(genes[False])}, {len(genes[True] & genes[False])} of them on both sides). "
                  "`number_in_name_as_author_number_is_right`: using the number in the variant "
                  "name as the author residue number already gives the right residue, so such a "
                  "task can be solved without any mapping. On the API track the viewer maps "
@@ -1186,8 +1213,9 @@ class Tables:
                            "strict F1, plain", "strict F1, with", "task success, plain",
                            "task success, with", "Δ task success [95% CI]", "Δ target score"],
                           rows, "llrrrrrrrrr"),
-                 caption + f" \"Plain\" is the headline condition ({r.samples.get(HEADLINE)} "
-                 f"samples per task); \"with\" has {r.samples.get(cond)} sample(s) per task. Each "
+                 caption + f" \"Plain\" is the headline condition "
+                 f"({n_samples(r.samples.get(HEADLINE))}); \"with\" has "
+                 f"{n_samples(r.samples.get(cond))}. Each "
                  "task's score is its mean over its samples, the same tasks on both sides; "
                  "intervals: bootstrap over structures of the per-task difference.")
 

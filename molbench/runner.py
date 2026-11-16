@@ -1999,7 +1999,7 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
                    f"{len(kept):,} samples; {len(lost):,} made the edit and lost something that "
                    "had to stay"))
     entries = Counter(s["entry_outcome"] for s in every if s.get("entry_outcome"))
-    if entries or "mvs" in present_tracks:
+    if any(c.task.get("tier") == "resolve" for c in cells):
         need_entries = ("accepted",) if subset else ("accepted", "wrong_entry", "no_such_entry")
         checks.append(("resolve answers are sorted by the entry they load (accepted, a real "
                        "entry of something else, an id that does not exist)",
