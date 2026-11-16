@@ -2,8 +2,9 @@
 """
 A4: export the human ratings to a local file, read-only, with pseudonyms.
 
-Runs ONE select against the rating site's database (Supabase Management API) and
-writes two files next to the private answer key, both git-ignored:
+Sends SELECTs only to the rating site's database (Supabase Management API): the
+ratings of one set and, for a4-v2, the repeat answers (a rater's second answer to a
+pair they rated earlier). Writes two files next to the private answer key, both git-ignored:
 
   ratings.json   what scripts/agreement.py reads offline: one row per rating, the
                  rater named only by a pseudonym (R1, R2, ...), plus each
@@ -18,7 +19,8 @@ Roles are set here and nowhere else:
                  agreement.py reports every result with and without it.
   --test NAME    a testing-only token; agreement.py drops its ratings.
 
-    python scripts/export_ratings.py --author "<name>" --test "<name>"
+    python scripts/export_ratings.py --author "<name>" --test "<name>"                  # a4-v1
+    python scripts/export_ratings.py --set a4-v2 --author "<name>" --test "<name>"
 
 The access token is read from $SUPABASE_ACCESS_TOKEN or ~/.supabase/access-token.
 Only a SELECT is ever sent.
@@ -37,15 +39,25 @@ import urllib.request
 REPO = pathlib.Path(__file__).resolve().parent.parent
 PROJECT = "dfdybtixipdgovagihfn"  # the molstar-chat-driver evaluator project
 API = "https://api.supabase.com/v1/projects/{project}/database/query"
+# `to_jsonb(r) ->> 'target_label'`: null on a database from before the a4-v2 migration
+# (no such column), the value after it. So one query reads both.
 QUERY = """
-select r.evaluator_token, e.name, r.item, r.label, r.ref_wrong, r.model_better,
-       r.note, r.ms, r.client, r.created_at
+select r.evaluator_token, e.name, r.item, r.label, to_jsonb(r) ->> 'target_label' as target_label,
+       r.ref_wrong, r.model_better, r.note, r.ms, r.client, r.created_at
 from ratings r left join evaluators e on e.token = r.evaluator_token
 where r.set_id = '{set_id}'
 order by r.created_at, r.item
 """
+# a4-v2: a rater's second answer to a pair they rated earlier (test-retest).
+HAS_REPEATS = "select to_regclass('public.rating_repeats') is not null as ok"
+REPEATS = """
+select evaluator_token, item, label, target_label, ms, created_at
+from rating_repeats where set_id = '{set_id}'
+order by created_at, item
+"""
 ROLES = ("rater", "author", "test")
-ROW_FIELDS = ("item", "label", "ref_wrong", "model_better", "note", "ms", "client", "created_at")
+ROW_FIELDS = ("item", "label", "target_label", "ref_wrong", "model_better", "note", "ms", "client", "created_at")
+REPEAT_FIELDS = ("item", "label", "target_label", "ms", "created_at")
 
 
 def access_token() -> str:
@@ -55,18 +67,41 @@ def access_token() -> str:
     return tok.strip()
 
 
-def fetch(set_id: str, project: str = PROJECT) -> list[dict]:
-    """Every rating of one set, oldest first, joined to the evaluator's name."""
-    if not re.fullmatch(r"[A-Za-z0-9._-]+", set_id):
-        raise ValueError(f"unsafe set id: {set_id!r}")
-    query = QUERY.format(set_id=set_id)
-    assert query.lstrip().lower().startswith("select") and ";" not in query
+def select(query: str, project: str = PROJECT) -> list[dict]:
+    """Send one SELECT; anything else is refused before it leaves this machine."""
+    if not query.lstrip().lower().startswith("select") or ";" in query:
+        raise ValueError("only a single SELECT is ever sent")
     req = urllib.request.Request(
         API.format(project=project), data=json.dumps({"query": query}).encode(),
         headers={"Authorization": f"Bearer {access_token()}", "Content-Type": "application/json",
                  "User-Agent": "molbench-export/1"})
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)
+
+
+def _safe(set_id: str) -> str:
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", set_id):
+        raise ValueError(f"unsafe set id: {set_id!r}")
+    return set_id
+
+
+def fetch(set_id: str, project: str = PROJECT) -> list[dict]:
+    """Every rating of one set, oldest first, joined to the evaluator's name."""
+    return select(QUERY.format(set_id=_safe(set_id)), project)
+
+
+def fetch_repeats(set_id: str, project: str = PROJECT) -> list[dict]:
+    """Every repeat answer of one set, oldest first; none on a database without the table."""
+    if not select(HAS_REPEATS, project)[0]["ok"]:
+        return []
+    return select(REPEATS.format(set_id=_safe(set_id)), project)
+
+
+def pseudonymise_repeats(rows: list[dict], names: dict) -> list[dict]:
+    """Repeat answers under the pseudonyms of the name map. A repeat by a token with no
+    first rating cannot happen on the site, so it is an error here."""
+    by_token = {v["token"]: p for p, v in names.items()}
+    return [{"rater": by_token[r["evaluator_token"]], **{f: r.get(f) for f in REPEAT_FIELDS}} for r in rows]
 
 
 def pseudonymise(rows: list[dict], known: dict, author: set[str] = frozenset(),
@@ -119,10 +154,11 @@ def main(argv: list[str] | None = None) -> None:
         "exported_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
         "raters": {p: {"role": v["role"]} for p, v in sorted(names.items(), key=lambda kv: int(kv[0][1:]))},
         "rows": rows,
+        "repeats": pseudonymise_repeats(fetch_repeats(a.set_id), names),
     }
     (out / "ratings.json").write_text(json.dumps(export, indent=1) + "\n")
     per = {p: sum(r["rater"] == p for r in rows) for p in export["raters"]}
-    print(f"{len(rows)} ratings -> {out / 'ratings.json'}")
+    print(f"{len(rows)} ratings, {len(export['repeats'])} repeat answers -> {out / 'ratings.json'}")
     for p, v in export["raters"].items():
         print(f"  {p}  {v['role']:6}  {per[p]} ratings")
     if missing:  # a name with no ratings in this set has no pseudonym; say so without failing

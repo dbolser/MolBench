@@ -1,6 +1,28 @@
 #!/usr/bin/env python3
 """
-A4: do human raters agree with the VLM judge?
+A4: do human raters agree with the benchmark's grader (set a4-v2) and with the VLM
+judge (the pilot, set a4-v1)?
+
+Two designs, told apart by the answer key (`design`), never analysed together: a key
+and ratings of different sets, or a key that holds items of both designs, are refused.
+
+Design v2 (FINAL_PLAN.md decision 23; plan in paper/a4/FINAL_CALL.md). Raters see the
+reference and a model's answer, each whole and zoomed on the target atoms, and give
+two answers. Reported:
+
+  * PRIMARY, the grader against people: task success against the whole-scene answer,
+    and target score = 1 against the zoomed-view answer. Per rating: raw agreement,
+    Cohen's kappa, Gwet's AC1. Per pair (majority of people): sensitivity,
+    specificity, and how often people confirm the grader's passes and its fails.
+    Unweighted (the set as built) and weighted back to the run. Intervals resample
+    tasks; a second interval resamples tasks and raters together.
+  * for three groups: independent raters who pass the attention checks (primary),
+    everyone but the author, and all raters with the author.
+  * what people said for each of the grader's verdicts (right / close / wrong), by tier.
+  * people against people (two or more answers per pair) and test-retest (repeats).
+  * SECONDARY: the image-pair judge against people, if the key carries its verdicts.
+
+Design v1 (the pilot), as before:
 
 Raters see a reference render and a model's render and answer same / different /
 can't tell. This joins their ratings (scripts/export_ratings.py) with the private
@@ -38,6 +60,8 @@ Results are given for three groups of raters:
     python scripts/agreement.py results/a4/a4-v1/key.json results/a4/a4-v1/ratings.json \\
         --population results/a4/a4-v1/population.json \\
         --json paper/a4/tables/agreement.json --markdown paper/a4/tables/agreement.md
+    python scripts/agreement.py results/a4/a4-v2/key.json results/a4/a4-v2/ratings.json \\
+        --json paper/a4/tables/agreement_v2.json --markdown paper/a4/tables/agreement_v2.md
 
 Never prints the key: output holds counts, task ids and model names, no item ids.
 """
@@ -389,6 +413,11 @@ def flags(rows: list[dict], items: dict) -> dict:
 
 def analyse(key: dict, ratings, min_checks: float = 0.8, population: dict | None = None,
             reps: int = 2000, seed: int = 4) -> dict:
+    if design_of(key) == "v2":   # a different instrument: its own analysis, never pooled with v1
+        return analyse_v2(key, ratings, population, reps, seed)
+    if isinstance(ratings, dict) and ratings.get("set") not in (None, key["set"]):
+        raise ValueError(f"the key is of set {key['set']} but the ratings are of set {ratings['set']}: "
+                         "ratings of different sets or designs are never analysed together")
     items = key["items"]
     rows, roles, exported_at = load_ratings(ratings)
     seen = collections.Counter((r["rater"], r["item"]) for r in rows)
@@ -551,6 +580,431 @@ def markdown(res: dict) -> str:
     return "\n".join(L) + "\n"
 
 
+# --------------------------------------------------------------------------- #
+# Design v2: the grader against people (FINAL_PLAN.md decision 23)
+# --------------------------------------------------------------------------- #
+# A v2 item is a pair (reference vs a model's answer, each shown whole and framed on
+# the target atoms) or one of three kinds of attention check. Each rating holds two
+# answers: `label` on the whole scene and `target_label` on the zoomed target view.
+#
+#   whole scene  vs  the grader's TASK SUCCESS            (machine "same" = success)
+#   zoomed view  vs  the grader's TARGET SCORE            (machine "same" = target score 1)
+#
+# People are the yardstick: sensitivity is the share of pairs people call same that
+# the grader also passes (1 - sensitivity = the grader failing a right answer),
+# specificity the share people call different that the grader fails, and "grader
+# right, confirmed" the share of the grader's passes that people call same.
+CHECKS_V2 = ("check-same", "check-different", "check-calibrated")
+V1_KINDS = {"vlm", *CHECKS}
+V2_KINDS = {"pair", *CHECKS_V2}
+COHORTS_V2 = ("primary", "no_author", "all")
+VIEWS = {"whole": ("label", "task success"), "target": ("target_label", "target score = 1")}
+CLASSES = ("right", "close", "wrong")
+PER_RATING = ("agreement", "cohen_kappa", "gwet_ac1", "rescue_precision", "npv")
+
+
+def design_of(key: dict) -> str:
+    """ "v1" (the pilot: judged pairs, one answer each) or "v2". A key that holds items
+    of both designs is refused: their answers do not mean the same thing."""
+    kinds = {v.get("kind") for v in key["items"].values()}
+    design = key.get("design") or "v1"
+    if design not in ("v1", "v2"):
+        raise ValueError(f"unknown rating-set design {design!r}")
+    wrong = kinds & (V2_KINDS if design == "v1" else V1_KINDS)
+    if wrong or kinds - V1_KINDS - V2_KINDS:
+        raise ValueError(f"the key of {key.get('set')} is design {design} but holds items of kind "
+                         f"{sorted(wrong or kinds - V1_KINDS - V2_KINDS)}: v1 and v2 are never analysed together")
+    return design
+
+
+def machine_label(item: dict, view: str) -> str | None:
+    """What the grader says about a pair, in the raters' words. None: no verdict for
+    this view (a task without a target has no target score)."""
+    if view == "whole":
+        return "same" if item["success"] else "different"
+    if not item.get("has_target") or item.get("target_f1") is None:
+        return None
+    return "same" if item["target_f1"] == 1.0 else "different"
+
+
+def check_right(item: dict, row: dict) -> bool:
+    """Did a rater get an attention check right? Known-same: the whole scene called
+    same and the zoomed view not called different. Known-different: either view called
+    different (a calibrated change can be invisible in the whole view). "Can't tell"
+    on both is a miss."""
+    if item["expected"] == "same":
+        return row["label"] == "same" and row.get("target_label") != "different"
+    return "different" in (row["label"], row.get("target_label"))
+
+
+def rater_summary_v2(rows: list[dict], repeats: list[dict], items: dict) -> dict:
+    """One rater: counts, attention checks and the fixed pass rule, test-retest.
+
+    Pass rule (paper/a4/FINAL_CALL.md, fixed before any v2 rating): at least 4 checks
+    answered, at most one miss over them, and no miss on an easy known-different check.
+    """
+    rows = sorted(rows, key=lambda r: r.get("created_at") or "")
+    checks, misses, easy_miss = {}, 0, 0
+    for kind in CHECKS_V2:
+        rs = [r for r in rows if items[r["item"]]["kind"] == kind]
+        right = sum(check_right(items[r["item"]], r) for r in rs)
+        checks[kind] = {"n": len(rs), "right": right}
+        misses += len(rs) - right
+        easy_miss += (len(rs) - right) if kind == "check-different" else 0
+    answered = sum(c["n"] for c in checks.values())
+    first = {items[r["item"]]["kind"] for r in rows[:8]} & set(CHECKS_V2)
+    mine = {r["item"]: r for r in rows}
+    retest = {}
+    for view, (field, _) in VIEWS.items():
+        both = [(mine[r["item"]].get(field), r.get(field)) for r in repeats if r["item"] in mine]
+        both = [(a, b) for a, b in both if a in LABELS and b in LABELS]
+        retest[view] = {"n": len(both), "same_answer": sum(a == b for a, b in both)}
+    pairs = [r for r in rows if items[r["item"]]["kind"] == "pair"]
+    ms = [r["ms"] for r in rows if r.get("ms")]
+    return {
+        "rated": len(rows), "pairs": len(pairs),
+        "cant_tell": {view: sum(r.get(field) == "unsure" for r in pairs) for view, (field, _) in VIEWS.items()},
+        "checks": checks, "checks_answered": answered, "check_misses": misses,
+        "check_kinds_in_first_8": len(first),
+        "passed_checks": answered >= 4 and misses <= 1 and easy_miss == 0,
+        "repeats": len(repeats), "retest": retest,
+        "median_seconds": round(statistics.median(ms) / 1000, 1) if ms else None,
+    }
+
+
+def weights_v2(rated: dict[str, dict], population: dict | None) -> dict[str, float] | None:
+    """Weight per rated pair so the rated pairs stand for every answer of the run's
+    frame: N/n within its (tier, grader class) cell, then scaled so each class adds up
+    to its total in the run (which covers cells of the run with no rated pair)."""
+    if not population:
+        return None
+    big = collections.Counter({(t, c): n for t, c, n in population["cells"]})
+    small = collections.Counter((it["tier"], it["grader_class"]) for it in rated.values())
+    w = {i: big.get((it["tier"], it["grader_class"]), small[it["tier"], it["grader_class"]])
+            / small[it["tier"], it["grader_class"]] for i, it in rated.items()}
+    for cls in CLASSES:
+        ids = [i for i, it in rated.items() if it["grader_class"] == cls]
+        total = sum(n for (_, c), n in big.items() if c == cls)
+        if ids and total:
+            scale = total / sum(w[i] for i in ids)
+            for i in ids:
+                w[i] *= scale
+    return w
+
+
+def bootstrap_tasks_and_raters(recs: list[tuple], reps: int, seed: int) -> dict:
+    """95% intervals of the per-rating measures when BOTH tasks and raters are resampled
+    (a rating counts once for every time its task and its rater were drawn together).
+    `recs`: (task, rater, human label, machine label). Raters differ, and an interval
+    that resamples tasks alone treats the panel of raters as fixed."""
+    tasks, raters = sorted({r[0] for r in recs}), sorted({r[1] for r in recs})
+    rng = random.Random(seed)
+    draws = collections.defaultdict(list)
+    for _ in range(reps if tasks and len(raters) > 1 else 0):
+        ct = collections.Counter(rng.choices(tasks, k=len(tasks)))
+        cr = collections.Counter(rng.choices(raters, k=len(raters)))
+        m = judge_measures([(h, j, ct[t] * cr[p]) for t, p, h, j in recs if ct[t] * cr[p]])
+        for k in PER_RATING:
+            if m[k] is not None:
+                draws[k].append(m[k])
+    out = {}
+    for k in PER_RATING:
+        xs = sorted(draws[k])
+        ok = len(xs) >= max(2, reps / 2)
+        out[k] = {"lo": xs[int(0.025 * (len(xs) - 1))] if ok else None,
+                  "hi": xs[round(0.975 * (len(xs) - 1))] if ok else None}
+    return out
+
+
+def _share_same(recs: list[tuple[str, str, float]]) -> dict:
+    n = sum(w for _, _, w in recs)
+    return {"same_share": _div(sum(w for h, _, w in recs if h == "same"), n)}
+
+
+def view_block(rows: list[dict], items: dict, view: str, machine, population: dict | None,
+               reps: int, seed: int, breakdowns: bool = True) -> dict:
+    """One cohort's answers on one view against one machine verdict (`machine(item)` ->
+    "same" / "different" / None). Clustered by task (a paraphrase with its original)."""
+    field = VIEWS[view][0]
+    votes = collections.defaultdict(collections.Counter)     # item -> labelled answers
+    who = collections.defaultdict(dict)                      # item -> rater -> label
+    cant_tell = 0
+    for r in rows:
+        it = items[r["item"]]
+        if it["kind"] != "pair" or machine(it) is None:
+            continue
+        if r.get(field) in LABELS:
+            votes[r["item"]][r[field]] += 1
+            who[r["item"]][r["rater"]] = r[field]
+        elif r.get(field) == "unsure":
+            cant_tell += 1
+    cluster = lambda i: items[i].get("base_task") or items[i]["task"]
+
+    def records(ids, weight: dict | None):
+        per_rating, per_pair = collections.defaultdict(list), collections.defaultdict(list)
+        for i in ids:
+            c, m, w = votes[i], machine(items[i]), (weight[i] if weight is not None else 1.0)
+            k = sum(c.values())
+            per_rating[cluster(i)] += [(lab, m, w / k if weight is not None else 1.0) for lab in c.elements()]
+            if c["same"] != c["different"]:   # a tied pair has no majority
+                per_pair[cluster(i)].append((max(c, key=c.get), m, w))
+        return per_rating, per_pair
+
+    weights = weights_v2({i: items[i] for i in votes}, population)
+    out = {
+        "raters": sorted({p for v in who.values() for p in v}),
+        "ratings": sum(sum(c.values()) for c in votes.values()), "cant_tell": cant_tell,
+        "pairs": len(votes), "tasks": len({cluster(i) for i in votes}),
+        "pairs_by_n_raters": dict(sorted(collections.Counter(sum(c.values()) for c in votes.values()).items())),
+        "pairs_tied": sum(c["same"] == c["different"] for c in votes.values()),
+        "unweighted": _judge_block(*records(votes, None), reps, seed),
+        "weighted": _judge_block(*records(votes, weights), reps, seed) if weights is not None else None,
+    }
+    out["unweighted"]["per_rating_tasks_and_raters"] = bootstrap_tasks_and_raters(
+        [(cluster(i), p, lab, machine(items[i])) for i, v in who.items() for p, lab in v.items()], reps, seed)
+    if not breakdowns:
+        return out
+    multi = collections.defaultdict(list)
+    for i, c in votes.items():
+        if sum(c.values()) >= 2:
+            multi[cluster(i)].append(c)
+    out["human_vs_human"] = {"pairs": sum(len(v) for v in multi.values()), "tasks": len(multi),
+                             "pairs_split": sum(len(c) > 1 for v in multi.values() for c in v),
+                             **bootstrap(multi, human_measures, reps, seed)}
+
+    def by(group_of, stat, keys) -> dict:
+        groups = collections.defaultdict(list)
+        for i in votes:
+            groups[group_of(items[i])].append(i)
+        res = {}
+        for g, ids in sorted(groups.items(), key=lambda kv: str(kv[0])):
+            per_rating, _ = records(ids, None)
+            b = bootstrap(per_rating, stat, reps, seed)
+            res[g] = {"pairs": len(ids), "ratings": sum(len(v) for v in per_rating.values()),
+                      **{k: b[k] for k in keys}}
+        return res
+
+    order = {c: n for n, c in enumerate(CLASSES)}
+    by_class = by(lambda it: it["grader_class"], _share_same, ("same_share",))
+    out["by_class"] = dict(sorted(by_class.items(), key=lambda kv: order.get(kv[0], 9)))
+    out["by_tier"] = by(lambda it: it.get("tier", "unknown"), judge_measures,
+                        ("agreement", "cohen_kappa", "rescue_precision", "npv"))
+    return out
+
+
+def analyse_v2(key: dict, ratings, population: dict | None = None, reps: int = 2000, seed: int = 4) -> dict:
+    if not isinstance(ratings, dict) or ratings.get("set") != key["set"]:
+        raise ValueError(f"the key is of set {key['set']} (design v2) but the ratings are of set "
+                         f"{ratings.get('set') if isinstance(ratings, dict) else 'an old bare export'}: "
+                         "ratings of different sets or designs are never analysed together")
+    items = key["items"]
+    rows, roles, exported_at = load_ratings(ratings)
+    repeats = ratings.get("repeats") or []
+    seen = collections.Counter((r["rater"], r["item"]) for r in rows)
+    if dup := [p for p, n in seen.items() if n > 1]:
+        raise ValueError(f"{len(dup)} rater-item pairs rated more than once, e.g. by {dup[0][0]}")
+    for r in (*rows, *repeats):
+        if r["item"] not in items:
+            raise ValueError("a rating is on an item that is not in the key: this export is not of "
+                             f"set {key['set']} as built (v1 and v2 are never analysed together)")
+        if r["label"] not in (*LABELS, "unsure") or r.get("target_label") not in (*LABELS, "unsure", None):
+            raise ValueError(f"labels must be same, different or unsure, got {r['label']!r} / {r.get('target_label')!r}")
+        for f in ("ref_wrong", "model_better"):
+            if r.get(f) not in (None, True, False):
+                raise ValueError(f"{f} must be a boolean, got {r[f]!r}")
+    test = [r for r in rows if roles.get(r["rater"]) == "test"]
+    real = [r for r in rows if roles.get(r["rater"]) != "test"]
+    by_rater = collections.defaultdict(list)
+    for r in real:
+        by_rater[r["rater"]].append(r)
+    raters = {p: {"role": roles.get(p, "rater"),
+                  **rater_summary_v2(rs, [x for x in repeats if x["rater"] == p], items)}
+              for p, rs in sorted(by_rater.items(), key=lambda kv: (len(kv[0]), kv[0]))}
+    members = {
+        "primary": {p for p, v in raters.items() if v["role"] != "author" and v["passed_checks"]},
+        "no_author": {p for p, v in raters.items() if v["role"] != "author"},
+        "all": set(raters),
+    }
+    pairs = {i: v for i, v in items.items() if v["kind"] == "pair"}
+    judged = any(v.get("judge_label") for v in pairs.values())
+    cohorts = {}
+    for name in COHORTS_V2:
+        mine = [r for r in real if r["rater"] in members[name]]
+        cohorts[name] = {
+            "raters": sorted(members[name], key=lambda p: (len(p), p)),
+            **{view: view_block(mine, items, view, lambda it, v=view: machine_label(it, v), population, reps, seed)
+               for view in VIEWS},
+            # Secondary: the image-pair judge against people, where it was run.
+            "judge": view_block(mine, items, "whole", lambda it: it.get("judge_label"), None, reps, seed,
+                                breakdowns=False) if judged else None,
+        }
+    retest = {view: {"n": sum(v["retest"][view]["n"] for p, v in raters.items() if p in members["no_author"]),
+                     "same_answer": sum(v["retest"][view]["same_answer"] for p, v in raters.items()
+                                        if p in members["no_author"])} for view in VIEWS}
+    return {
+        "set": key["set"], "design": "v2", "exported_at": exported_at,
+        "bootstrap": {"reps": reps, "seed": seed, "unit": "task (a paraphrase with its original)"},
+        "ratings": {"exported": len(rows), "from_test_tokens": len(test), "analysed": len(real),
+                    "repeat_answers": len(repeats)},
+        "rating_set": {
+            "items": len(items), "pairs": len(pairs),
+            "tasks": len({v.get("base_task") or v["task"] for v in pairs.values()}),
+            "models": len({v["model"] for v in pairs.values()}),
+            "by_class": {c: sum(v["grader_class"] == c for v in pairs.values()) for c in CLASSES},
+            "with_target_view": sum(machine_label(v, "target") is not None for v in pairs.values()),
+            "with_judge_verdict": sum(bool(v.get("judge_label")) for v in pairs.values()),
+            "checks": {k: sum(v["kind"] == k for v in items.values()) for k in CHECKS_V2},
+            "labelled_ratings_per_pair": dict(sorted(collections.Counter(
+                sum(r["item"] == i and r["label"] in LABELS for r in real) for i in pairs).items())),
+        },
+        "population": None if not population else {
+            "frame": population.get("frame"),
+            **{c: sum(n for _, cls, n in population["cells"] if cls == c) for c in CLASSES}},
+        "raters": raters, "cohorts": cohorts, "retest_no_author": retest,
+        "flags": flags(real, items),
+    }
+
+
+def markdown_v2(res: dict) -> str:
+    c = res["cohorts"]
+    names = {"primary": "independent raters who pass the checks (primary)",
+             "no_author": "without the author", "all": "all raters, author included"}
+    head = "| measure | " + " | ".join(names[k] for k in COHORTS_V2) + " |"
+    rule = "|---|" + "---|" * len(COHORTS_V2)
+    rs, n = res["rating_set"], res["ratings"]
+    L = [f"<!-- generated by scripts/agreement.py from the {res['set']} export of {res['exported_at']}; do not edit -->",
+         "", f"# Rating study {res['set']}: the grader against people", "",
+         "Each pair was shown as four pictures: reference and model answer, whole and zoomed on the "
+         "atoms the request is about, the answer always from the reference's camera. Each rating holds "
+         "two answers: on the whole scene, and on the zoomed view. Every interval is a 95% bootstrap "
+         f"interval that resamples tasks ({res['bootstrap']['reps']} replicates; a paraphrase counts with "
+         "its original). \"No interval\" means too few ratings to give one. Raters are pseudonyms.", "",
+         "## The data", "",
+         f"- Rating set: {rs['pairs']} pairs ({rs['tasks']} tasks, {rs['models']} models): "
+         + ", ".join(f"{rs['by_class'][k]} the grader calls {k}" for k in CLASSES)
+         + f" (right = task success; close = not a success, target score 1; wrong = the rest). "
+         f"{rs['with_target_view']} pairs have a zoomed view. Checks in the pool: "
+         + ", ".join(f"{v} {k.removeprefix('check-')}" for k, v in rs["checks"].items()) + ".",
+         f"- Ratings exported: {n['exported']} (from testing-only tokens: {n['from_test_tokens']}; "
+         f"analysed: {n['analysed']}), plus {n['repeat_answers']} repeat answers.",
+         "- Pairs by number of labelled whole-scene answers: "
+         + ", ".join(f"{k}: {v}" for k, v in rs["labelled_ratings_per_pair"].items()) + "."]
+    if res["population"]:
+        p = res["population"]
+        L.append(f"- Weighted results stand for the run's {sum(p[k] for k in CLASSES)} answers in the frame "
+                 f"({', '.join(f'{p[k]} {k}' for k in CLASSES)}): {p['frame']}.")
+    L += ["", "## Raters and attention checks", "",
+          "Pass rule, fixed before the first rating: at least 4 checks answered, at most one miss, no miss "
+          "on an easy known-different check.", "",
+          "| rater | role | rated | pairs | known-same right | known-different right | calibrated right | "
+          "check kinds in first 8 | passes | repeats: same answer (whole) | median s/item |",
+          "|---|---|---|---|---|---|---|---|---|---|---|"]
+    for p, v in res["raters"].items():
+        ck = v["checks"]
+        cell = lambda k: f"{ck[k]['right']}/{ck[k]['n']}"
+        rt = v["retest"]["whole"]
+        L.append(f"| {p} | {v['role']} | {v['rated']} | {v['pairs']} | {cell('check-same')} | {cell('check-different')} | "
+                 f"{cell('check-calibrated')} | {v['check_kinds_in_first_8']} | {'yes' if v['passed_checks'] else 'no'} | "
+                 f"{rt['same_answer']}/{rt['n']} | {v['median_seconds']} |")
+
+    rows = [("per_rating", "agreement", "raw agreement, per rating"), ("per_rating", "cohen_kappa", "Cohen's kappa"),
+            ("per_rating", "gwet_ac1", "Gwet's AC1"),
+            ("per_pair", "sensitivity", "sensitivity: people say same -> grader passes"),
+            ("per_pair", "specificity", "specificity: people say different -> grader fails"),
+            ("per_pair", "rescue_precision", "grader passes -> people say same"),
+            ("per_pair", "npv", "grader fails -> people say different"),
+            ("per_pair", "balanced_accuracy", "balanced accuracy")]
+
+    def table(block: str, what: str) -> list[str]:
+        out = [head, rule,
+               "| raters | " + " | ".join(str(len(c[k][block]["raters"])) for k in COHORTS_V2) + " |",
+               "| labelled answers / pairs / tasks | " + " | ".join(
+                   f"{c[k][block]['ratings']} / {c[k][block]['pairs']} / {c[k][block]['tasks']}" for k in COHORTS_V2) + " |",
+               "| can't tell | " + " | ".join(str(c[k][block]["cant_tell"]) for k in COHORTS_V2) + " |"]
+        for w in ("unweighted", "weighted"):
+            if c["all"][block][w] is None:
+                continue
+            out.append(f"| **{w}{' (to the run)' if w == 'weighted' else ' (the set as built)'}** |" + " |" * len(COHORTS_V2))
+            for level, m, label in rows:
+                out.append(f"| {label.replace('grader', what)} | "
+                           + " | ".join(_ci(c[k][block][w][level][m]) for k in COHORTS_V2) + " |")
+        out.append("| **unweighted, tasks and raters both resampled** |" + " |" * len(COHORTS_V2))
+        for m, label in (("agreement", "raw agreement"), ("cohen_kappa", "Cohen's kappa")):
+            cells = []
+            for k in COHORTS_V2:
+                est = c[k][block]["unweighted"]["per_rating"][m]["est"]
+                two = c[k][block]["unweighted"]["per_rating_tasks_and_raters"][m]
+                cells.append(_ci({"est": est, **two}))
+            out.append(f"| {label} | " + " | ".join(cells) + " |")
+        out += ["", "Counts behind the unweighted per-rating numbers:", "",
+                "| | " + " | ".join(names[k] for k in COHORTS_V2) + " |", rule]
+        for cell in c["all"][block]["unweighted"]["table"]:
+            out.append(f"| {cell.replace('judge', what)} | "
+                       + " | ".join(f"{c[k][block]['unweighted']['table'][cell]:.0f}" for k in COHORTS_V2) + " |")
+        return out
+
+    L += ["", "## Primary: task success against people (whole scene)", "",
+          "The grader's \"same\" is task success. Per pair uses the majority of people; tied pairs are left out.", ""]
+    L += table("whole", "grader")
+    L += ["", "## Primary: target score against people (zoomed view)", "",
+          "The grader's \"same\" is a target score of 1. Pairs of tasks without a target are not in this table.", ""]
+    L += table("target", "grader")
+
+    L += ["", "## What people said, by the grader's verdict", "",
+          "Share of labelled answers that say \"same\". Expected if the grader is right: high for *right* on both "
+          "views; for *close*, low on the whole scene and high on the zoomed view; low for *wrong* on both.", ""]
+    for k in ("primary", "no_author"):
+        L += [f"**{names[k]}**", "", "| grader's verdict | pairs | whole scene: same | zoomed view: same |", "|---|---|---|---|"]
+        for cls in CLASSES:
+            w, t = c[k]["whole"]["by_class"].get(cls), c[k]["target"]["by_class"].get(cls)
+            L.append(f"| {cls} | {w['pairs'] if w else 0} | {_ci(w['same_share']) if w else 'n/a'} | "
+                     f"{_ci(t['same_share']) if t else 'n/a'} |")
+        L.append("")
+
+    L += ["## By tier (without the author, task success against the whole scene)", "",
+          "| tier | pairs | labelled answers | raw agreement | Cohen's kappa | grader passes -> people say same | "
+          "grader fails -> people say different |", "|---|---|---|---|---|---|---|"]
+    for g, v in c["no_author"]["whole"]["by_tier"].items():
+        L.append(f"| {g} | {v['pairs']} | {v['ratings']} | {_ci(v['agreement'])} | {_ci(v['cohen_kappa'])} | "
+                 f"{_ci(v['rescue_precision'])} | {_ci(v['npv'])} |")
+
+    L += ["", "## People against people (pairs with two or more labelled answers)", "", head, rule]
+    for view, label in (("whole", "whole scene"), ("target", "zoomed view")):
+        L.append(f"| **{label}**: pairs (of which split) | " + " | ".join(
+            f"{c[k][view]['human_vs_human']['pairs']} ({c[k][view]['human_vs_human']['pairs_split']})" for k in COHORTS_V2) + " |")
+        for m, lab in (("agreement", "raw agreement"), ("fleiss_kappa", "Fleiss' kappa"),
+                       ("krippendorff_alpha", "Krippendorff's alpha")):
+            L.append(f"| {lab} | " + " | ".join(_ci(c[k][view]["human_vs_human"][m]) for k in COHORTS_V2) + " |")
+    rt = res["retest_no_author"]
+    L += ["", "Test-retest (a rater's second answer to a pair they rated earlier; without the author): "
+          + "; ".join(f"{label}: the same answer on {rt[v]['same_answer']} of {rt[v]['n']}"
+                      for v, label in (("whole", "whole scene"), ("target", "zoomed view"))) + "."]
+
+    L += ["", "## Secondary: the image-pair judge against people", ""]
+    if c["all"]["judge"] is None:
+        L.append("The image-pair judge was not run on these pairs (no pair in the key carries a verdict).")
+    else:
+        L += [f"{rs['with_judge_verdict']} pairs carry a judge verdict. Unweighted; whole-scene answers.", "", head, rule,
+              "| labelled answers / pairs | " + " | ".join(f"{c[k]['judge']['ratings']} / {c[k]['judge']['pairs']}"
+                                                           for k in COHORTS_V2) + " |"]
+        for level, m, label in rows:
+            L.append(f"| {label.replace('grader passes', 'judge says same').replace('grader fails', 'judge says different')} | "
+                     + " | ".join(_ci(c[k]["judge"]["unweighted"][level][m]) for k in COHORTS_V2) + " |")
+
+    f = res["flags"]
+    L += ["", "## Flags and notes", "",
+          f"- \"Reference looks wrong\": {f['ref_wrong_ratings']} ratings. "
+          f"\"Model looks better\": {f['model_better_ratings']} ratings.", "",
+          "| task | ratings (raters) | reference flagged wrong by | model looked better to | notes |", "|---|---|---|---|---|"]
+    order = sorted(f["tasks"].items(), key=lambda kv: (-len(kv[1]["ref_wrong"]), -len(kv[1]["notes"]),
+                                                       -len(kv[1]["model_better_raters"]), kv[0]))
+    for t, v in order:
+        mb = "; ".join(f"{m} ({', '.join(r)})" for m, r in v["model_better"].items())
+        notes = " / ".join(f"{x['rater']} ({x['answer']}): \"{x['note']}\"" for x in v["notes"]).replace("|", "\\|")
+        L.append(f"| {t} | {v['ratings']} ({v['raters']}) | {', '.join(v['ref_wrong']) or '-'} | {mb or '-'} | {notes or '-'} |")
+    return "\n".join(L) + "\n"
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("key", type=pathlib.Path, help="private answer key (never printed)")
@@ -576,7 +1030,7 @@ def main(argv: list[str] | None = None) -> None:
         print(text, end="")
     if a.markdown:
         a.markdown.parent.mkdir(parents=True, exist_ok=True)
-        a.markdown.write_text(markdown(res))
+        a.markdown.write_text(markdown_v2(res) if res.get("design") == "v2" else markdown(res))
 
 
 if __name__ == "__main__":
