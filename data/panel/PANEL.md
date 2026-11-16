@@ -79,6 +79,9 @@ Offset = author residue numbers differ from UniProt numbers for at least one map
 | 9fb2 | Gcase in complex with small molecule inhibitor 1 | X-ray 1.14 Å | 4971 | no | basic, clinical, disulfide, glycan, interactions, ligand, metal | GBA1 (P04062): Gaucher disease. |
 | 9gio | Crystal structure of the VHL-EloC-EloB complex with a covalent compound bound to C77 of VHL. | X-ray 1.49 Å | 3043 | no | basic, chains, clinical, interactions, ligand, numbering | VHL (P40337): von Hippel-Lindau disease. |
 | af-p04637-f1-model_v6 | AlphaFold DB model of Cellular tumor antigen p53 (TP53, Homo sapiens) | AlphaFold prediction | 3060 | no | alphafold, basic, clinical | AlphaFold model of full-length p53: used by an existing task; UniProt numbering by construction, long low-confidence regions. |
+| af-p07320-f1-model_v6 | AlphaFold DB model of Gamma-crystallin D (CRYGD, Homo sapiens) | AlphaFold prediction | 1459 | no | alphafold, basic, clinical | AlphaFold model of gamma-crystallin D: the same protein as 1HK0 but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen). |
+| af-p0dp23-f1-model_v6 | AlphaFold DB model of Calmodulin-1 (CALM1, Homo sapiens) | AlphaFold prediction | 1174 | no | alphafold, basic, clinical | AlphaFold model of calmodulin-1: the same protein as 6M7H but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen). |
+| af-p61626-f1-model_v6 | AlphaFold DB model of Lysozyme C (LYZ, Homo sapiens) | AlphaFold prediction | 1157 | no | alphafold, basic, clinical | AlphaFold model of human lysozyme: the same protein as 2NWD but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen). |
 | af-p68871-f1-model_v6 | AlphaFold DB model of Hemoglobin subunit beta (HBB, Homo sapiens) | AlphaFold prediction | 1131 | no | alphafold, basic, clinical | AlphaFold model of haemoglobin beta: same protein as 2HHB chain B but numbered as UniProt, so the same variant sits at a different residue number. |
 
 ## Disease proteins
@@ -121,11 +124,11 @@ Features are read from each file by the build (never taken on trust).
 
 | feature | entries | which |
 |---|---:|---|
-| alphafold | 2 | af-p04637-f1-model_v6 af-p68871-f1-model_v6 |
+| alphafold | 5 | af-p04637-f1-model_v6 af-p07320-f1-model_v6 af-p0dp23-f1-model_v6 af-p61626-f1-model_v6 af-p68871-f1-model_v6 |
 | assembly-differs | 16 | 1ake 1c3w 1hho 1iep 1iro 1k4c 1stp 2omf 2p4e 3ert 3ngb 4ins 7a4m 8c86 8eph 9f69 |
 | auth-label-chain | 15 | 1aay 1aoi 1atp 1hk0 1lmb 1tup 1y26 2c9v 2nwd 2p4e 2ptc 3kcg 3ngb 5uak 8c86 |
 | auth-label-number | 36 | 1a3k 1aay 1aoi 1atp 1bna 1c3w 1d5r 1ema 1hk0 1hrc 1iep 1igt 1lmb 1trn 1tup 1udt 1y26 2ptc 3ave 3eml 3ert 3f9m 3k34 3kcg 3ngb 3ptb 5cj6 6tc2 6vxx 7a4m 8ce0 8eph 8k7f 8pi2 9f69 9gio |
-| clinical | 30 | 1ctq 1d5r 1hho 1hk0 1trn 1tup 2c9v 2hhb 2nwd 3f9m 3k34 3kcg 5cj6 5edm 5ni1 5uak 6hpo 6m7h 6tc2 6tha 8c86 8ce0 8eph 8k7f 8pi2 9f69 9fb2 9gio af-p04637-f1-model_v6 af-p68871-f1-model_v6 |
+| clinical | 33 | 1ctq 1d5r 1hho 1hk0 1trn 1tup 2c9v 2hhb 2nwd 3f9m 3k34 3kcg 5cj6 5edm 5ni1 5uak 6hpo 6m7h 6tc2 6tha 8c86 8ce0 8eph 8k7f 8pi2 9f69 9fb2 9gio af-p04637-f1-model_v6 af-p07320-f1-model_v6 af-p0dp23-f1-model_v6 af-p61626-f1-model_v6 af-p68871-f1-model_v6 |
 | cryo-em | 4 | 5ni1 5uak 6vxx 7a4m |
 | disulfide | 24 | 1aki 1crn 1f88 1fs3 1igt 1k4c 1lyz 1trn 2c9v 2nwd 2p4e 2ptc 3ave 3eml 3kcg 3ngb 3ptb 4ins 5edm 6tc2 6vxx 8eph 8k7f 9fb2 |
 | glycan | 10 | 1a3k 1f88 1igt 3ave 3kcg 3ngb 5edm 6vxx 8k7f 9fb2 |

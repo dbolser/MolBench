@@ -48,7 +48,7 @@ Held-back structures (15): 1ehz 1fs3 1igt 1lmb 1rx2 2c9v 2omf 2ptc 3kcg 5ni1 6hp
 
 | tier | structures | held-back structures | tasks | held-back tasks |
 |---|---:|---:|---:|---:|
-| tool_only | 30 | 5 (17%) | 34 | 5 |
+| tool_only | 31 | 5 (16%) | 34 | 5 |
 | translation | 73 | 15 (21%) | 106 | 21 |
 
 ## Viewer rules that tasks turn on

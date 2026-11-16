@@ -69,8 +69,14 @@ PDB_URL = "https://files.rcsb.org/download/{}.cif"
 # them (ClinVar-confirmed and verified on the structure); otherwise the choice is
 # seeded. This list picks *which* variant is asked about, never what the answer is.
 FEATURED = {"P04637": ["R175H", "R248Q", "R273H"], "P68871": ["E7V"], "P02766": ["V50M"],
-            "P13569": ["G551D"], "P01009": ["E366K"], "P00441": ["A5V"], "P02649": ["R176C"],
+            "P13569": ["G551D"], "P01009": ["E366K"], "P00441": ["A5V"],
             "P61626": ["I74T"], "P04062": ["N409S"], "P01112": ["G12S"]}
+# Variants this tier does not ask about, whatever ClinVar says: (accession, UniProt
+# position, one-letter name) -> why. A contested example is not a fair test item
+# (ruling of 2026-11-15).
+NOT_USED = {("P02649", "R176C"): "APOE R158C in mature numbering (rs7412): the common e2 allele, "
+                                 "carried by about 8% of people; its ClinVar 'pathogenic' record "
+                                 "has no assertion criteria"}
 
 # Colours a request may name: plain words from the task palette.
 HIGHLIGHT = ("red", "orange", "yellow", "green", "blue", "purple", "magenta", "cyan")
@@ -225,7 +231,7 @@ class Site:
 
 def sites(protein: dict, entry: str) -> list[Site]:
     return [s for s in (Site(protein, entry, v) for v in V.confirmed(protein["accession"]))
-            if s.complete]
+            if s.complete and (protein["accession"], V.short(s.v)) not in NOT_USED]
 
 
 def uniprot_residue_name(protein: dict, position: int) -> str | None:
@@ -581,6 +587,10 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
                          if chain is None or x["label_asym_id"] == chain["label_asym_id"]],
         } for s, n, m in zip(group, variant_names(naming, group)[0], mature)],
         "secondary_structure": sse,
+        # Reported apart from the rest of the tier (ruling of 2026-11-15): the answer
+        # needs the entry's own helix / strand records, which only the grounding pack
+        # states, so without the pack these tasks measure something else.
+        "report_apart": "needs the entry's secondary-structure annotation" if sse else None,
         "difficulty": difficulty,
         "pair": None,
     }
@@ -749,7 +759,9 @@ def plan() -> list[dict]:
 
     pair_of(hbb, ("2hhb", af_hbb), "clin-pair-target", "hgvs", "none", offs, featured=True, k=0)
     pair_of(hbb, ("2hhb", af_hbb), "clin-pair-context", "short", "structure", offs, k=1)
-    pair_of(hbb, ("5ni1", af_hbb), "clin-pair-context", "hgvs", "structure", offs, k=2)
+    # 1HHO, not 5NI1: 5NI1 is held back and the AlphaFold model is public, and the two
+    # sides of a pair are in one split.
+    pair_of(hbb, ("1hho", af_hbb), "clin-pair-context", "hgvs", "structure", offs, k=2)
     pair_of(hbb, ("1hho", af_hbb), "clin-pair-target", "short", "none", offs, k=3)
     pair_of(p53, ("1tup", af_p53), "clin-pair-target", "hgvs", "none", same, featured=True, k=4)
     pair_of(p53, ("1tup", af_p53), "clin-pair-context", "short", "structure", same, k=5)
@@ -822,6 +834,20 @@ def plan() -> list[dict]:
                            scope="all" if single else "chain", chain=None if single else chain,
                            sse=element))
             n += 1
+
+    # G. Offset pairs on more proteins than HBB (ruling of 2026-11-15): the same variant
+    # on the protein's PDB entry, whose author numbers differ from the UniProt numbers,
+    # and on its AlphaFold model, which is numbered as UniProt. Added last, so that no
+    # earlier choice changes. (TTR has no pair: 8C86 already carries six tasks.)
+    more = [("P61626", "clin-pair-target", "short", "none"),
+            ("P07320", "clin-pair-context", "hgvs", "structure"),
+            ("P0DP23", "clin-pair-target", "hgvs", "none")]
+    for k, (acc, family, naming, context) in enumerate(more, start=7):
+        p = by_acc[acc]
+        model = next(e for e in p["entries"] if e.startswith("af-"))
+        before = len(out)
+        pair_of(p, (p["entry"], model), family, naming, context, offs, k=k)
+        assert len(out) > before, f"no offset pair could be built for {p['gene']}"
     return out
 
 

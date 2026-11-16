@@ -1,17 +1,17 @@
 {
-  "id": "api-alphafold-af-p04637-f1",
+  "id": "api-alphafold-af-p0dp23-f1",
   "track": "api",
   "tier": "tool_only",
   "family": "api-alphafold",
   "structures": [
-    "af-p04637-f1-model_v6"
+    "af-p0dp23-f1-model_v6"
   ],
-  "prompt": "Open the AlphaFold prediction for UniProt P04637 (Cellular tumor antigen p53) coloured by pLDDT, with a tooltip reading 'residues 168-189' on residues 168-189.",
+  "prompt": "I want the AlphaFold DB model of Calmodulin-1 (P0DP23) in the confidence (pLDDT) colouring; residues 71 to 85 should carry the tooltip 'residues 71-85'.",
   "reference": [
     {
       "action": "load",
       "custom_data": {
-        "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v6.cif",
+        "url": "https://alphafold.ebi.ac.uk/files/AF-P0DP23-F1-model_v6.cif",
         "format": "cif",
         "binary": false
       }
@@ -25,9 +25,9 @@
       "action": "tooltips",
       "data": [
         {
-          "start_auth_residue_number": 168,
-          "end_auth_residue_number": 189,
-          "tooltip": "residues 168-189"
+          "start_auth_residue_number": 71,
+          "end_auth_residue_number": 85,
+          "tooltip": "residues 71-85"
         }
       ]
     }
@@ -43,9 +43,9 @@
   "provenance": {
     "script": "scripts/generate_api_tasks.py",
     "inputs": [
-      "data/panel/facts/af-p04637-f1-model_v6.json",
-      "molbench/atom_tables/af-p04637-f1-model_v6.json.gz",
-      "molbench/sifts_tables/af-p04637-f1-model_v6.json.gz"
+      "data/panel/facts/af-p0dp23-f1-model_v6.json",
+      "molbench/atom_tables/af-p0dp23-f1-model_v6.json.gz",
+      "molbench/sifts_tables/af-p0dp23-f1-model_v6.json.gz"
     ],
     "date": "2026-11-12",
     "checks": [
@@ -58,11 +58,11 @@
       "equivalent answer succeeds: the binary file of another model version, the flag in the load action, label numbers",
       "wrong answer fails: the accession as molecule_id (not a PDB id: nothing loads) (F1 0.0)"
     ],
-    "structure": "af-p04637-f1",
+    "structure": "af-p0dp23-f1",
     "derived": "The panel's frozen AlphaFold DB model. In pdbe-molstar 3.3.2 alphafold_view only switches the colouring to pLDDT; the model is loaded with custom_data from the AlphaFold DB URL pattern the API reference gives. An AlphaFold model is numbered as UniProt, so author and label numbers agree.",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
-    "wording": "2 of 3",
+    "wording": "3 of 3",
     "difficulty": {
       "numbering_offset": false,
       "auth_label_chain": false,
@@ -73,15 +73,15 @@
     },
     "targets": [
       {
-        "what": "residues 168-189",
+        "what": "residues 71-85",
         "action": 2,
         "param": 0,
         "atoms": {
           "label_asym_id": "A",
-          "beg_label_seq_id": 168,
-          "end_label_seq_id": 189
+          "beg_label_seq_id": 71,
+          "end_label_seq_id": 85
         },
-        "n_atoms": 174
+        "n_atoms": 121
       }
     ]
   },

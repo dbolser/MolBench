@@ -1,12 +1,12 @@
 {
- "id": "clin-legacy-target-apoe-8ce0-r176c-mvs",
+ "id": "clin-legacy-target-apoe-8ce0-r154s-mvs",
  "track": "mvs",
  "tier": "clinical",
  "family": "clin-legacy-target",
  "structures": [
   "8ce0"
  ],
- "prompt": "In PDB entry 8CE0, show the residue replaced by the pathogenic APOE (Apolipoprotein E, UniProt P02649) variant R158C (ClinVar) as magenta ball-and-stick. The name R158C is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 18-residue signal peptide.",
+ "prompt": "Using PDB entry 8CE0, show as purple ball-and-stick the wild-type residue at the position of the APOE (Apolipoprotein E) missense variant R136S (pathogenic/likely pathogenic in ClinVar). The name R136S is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 18-residue signal peptide.",
  "reference": {
   "root": {
    "kind": "root",
@@ -34,7 +34,7 @@
            "params": {
             "selector": {
              "auth_asym_id": "A",
-             "auth_seq_id": 158
+             "auth_seq_id": 136
             }
            },
            "children": [
@@ -47,7 +47,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "magenta"
+                "color": "purple"
                }
               }
              ]
@@ -69,19 +69,19 @@
   {
    "selector": {
     "label_asym_id": "A",
-    "label_seq_id": 534
+    "label_seq_id": 512
    },
    "representation": "ball_and_stick",
-   "color": "magenta"
+   "color": "purple"
   }
  ],
- "twin_of": "clin-legacy-target-apoe-8ce0-r176c-api",
+ "twin_of": "clin-legacy-target-apoe-8ce0-r154s-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  R158C (mature-protein numbering; 18 residues precede the mature chain in UniProt) = UniProt position 176\n  R158C: UniProt position 176 (Arg in UniProt) -> in 8CE0: auth A 158 ARG (label A 534)"
+  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  R136S (mature-protein numbering; 18 residues precede the mature chain in UniProt) = UniProt position 154\n  R136S: UniProt position 154 (Arg in UniProt) -> in 8CE0: auth A 136 ARG (label A 512)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -107,45 +107,45 @@
    "scope": "all",
    "context": "none",
    "chain": null,
-   "wording": 0,
+   "wording": 2,
    "look": {
     "rep": "ball_and_stick",
-    "color": "magenta"
+    "color": "purple"
    },
    "variants": [
     {
-     "name_in_prompt": "R158C",
-     "variant": "R176C",
-     "hgvs": "p.Arg176Cys",
-     "uniprot_position": 176,
+     "name_in_prompt": "R136S",
+     "variant": "R154S",
+     "hgvs": "p.Arg154Ser",
+     "uniprot_position": 154,
      "mature_numbering": {
-      "number": 158,
+      "number": 136,
       "removed": 18,
       "what": "the 18-residue signal peptide"
      },
      "clinvar_vcv": [
-      "VCV000441262",
-      "VCV000441265"
+      "VCV000017850"
      ],
      "clinvar_classification": [
-      "Pathogenic"
+      "Pathogenic/Likely pathogenic"
      ],
      "clinvar_review_status": [
-      "no assertion criteria provided"
+      "criteria provided, multiple submitters, no conflicts"
      ],
      "residues": [
       {
        "auth_asym_id": "A",
-       "auth_seq_id": 158,
+       "auth_seq_id": 136,
        "pdbx_PDB_ins_code": "",
        "label_asym_id": "A",
-       "label_seq_id": 534,
+       "label_seq_id": 512,
        "comp_id": "ARG"
       }
      ]
     }
    ],
    "secondary_structure": null,
+   "report_apart": null,
    "difficulty": {
     "needs_uniprot_mapping": true,
     "needs_numbering_offset": true,
@@ -157,7 +157,7 @@
     "author_number_differs_from_label_number": true,
     "insertion_code": false,
     "needs_ligand_identity": false,
-    "accession_in_prompt": true,
+    "accession_in_prompt": false,
     "protein_copies_in_structure": 1,
     "target_residues": 1,
     "alphafold_model": false,

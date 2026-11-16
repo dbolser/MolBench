@@ -85,6 +85,9 @@
   ],
   "alphafold": [
     {"accession": "P04637", "why": "AlphaFold model of full-length p53: used by an existing task; UniProt numbering by construction, long low-confidence regions."},
-    {"accession": "P68871", "why": "AlphaFold model of haemoglobin beta: same protein as 2HHB chain B but numbered as UniProt, so the same variant sits at a different residue number."}
+    {"accession": "P68871", "why": "AlphaFold model of haemoglobin beta: same protein as 2HHB chain B but numbered as UniProt, so the same variant sits at a different residue number."},
+    {"accession": "P61626", "why": "AlphaFold model of human lysozyme: the same protein as 2NWD but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen).", "public_only": true},
+    {"accession": "P07320", "why": "AlphaFold model of gamma-crystallin D: the same protein as 1HK0 but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen).", "public_only": true},
+    {"accession": "P0DP23", "why": "AlphaFold model of calmodulin-1: the same protein as 6M7H but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen).", "public_only": true}
   ]
 }

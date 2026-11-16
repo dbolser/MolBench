@@ -3061,6 +3061,111 @@
    ]
   },
   {
+   "id": "af-p07320-f1-model_v6",
+   "why": "AlphaFold model of gamma-crystallin D: the same protein as 1HK0 but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen).",
+   "origin": [
+    "alphafold:P07320"
+   ],
+   "public_only": true,
+   "kind": "alphafold",
+   "title": "AlphaFold DB model of Gamma-crystallin D (CRYGD, Homo sapiens)",
+   "method": "AlphaFold prediction",
+   "resolution": null,
+   "deposited": "2025-08-01",
+   "atoms": 1459,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://alphafold.ebi.ac.uk/files/AF-P07320-F1-model_v6.cif",
+   "sha256": "0529b50a07f79d1552f45d2185cfff376675456a10fb03e890ea0abf3b3c809a",
+   "retrieved": "2026-11-16",
+   "membrane_sources": [],
+   "features": [
+    "alphafold",
+    "clinical"
+   ],
+   "uniprot": [
+    "P07320"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "alphafold",
+    "basic",
+    "clinical"
+   ]
+  },
+  {
+   "id": "af-p0dp23-f1-model_v6",
+   "why": "AlphaFold model of calmodulin-1: the same protein as 6M7H but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen).",
+   "origin": [
+    "alphafold:P0DP23"
+   ],
+   "public_only": true,
+   "kind": "alphafold",
+   "title": "AlphaFold DB model of Calmodulin-1 (CALM1, Homo sapiens)",
+   "method": "AlphaFold prediction",
+   "resolution": null,
+   "deposited": "2025-08-01",
+   "atoms": 1174,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://alphafold.ebi.ac.uk/files/AF-P0DP23-F1-model_v6.cif",
+   "sha256": "e698114902202d87b9cf6ea7656fbf433db61571d085593905885de6389b475f",
+   "retrieved": "2026-11-16",
+   "membrane_sources": [],
+   "features": [
+    "alphafold",
+    "clinical"
+   ],
+   "uniprot": [
+    "P0DP23"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "alphafold",
+    "basic",
+    "clinical"
+   ]
+  },
+  {
+   "id": "af-p61626-f1-model_v6",
+   "why": "AlphaFold model of human lysozyme: the same protein as 2NWD but numbered as UniProt, so the same variant sits at a different residue number. Added 2026-11-16 as the no-offset side of an offset pair in the clinical tier; public (added after the held-back list was frozen).",
+   "origin": [
+    "alphafold:P61626"
+   ],
+   "public_only": true,
+   "kind": "alphafold",
+   "title": "AlphaFold DB model of Lysozyme C (LYZ, Homo sapiens)",
+   "method": "AlphaFold prediction",
+   "resolution": null,
+   "deposited": "2025-08-01",
+   "atoms": 1157,
+   "models": 1,
+   "over_size_limit": false,
+   "used_by_tasks": [],
+   "source": "https://alphafold.ebi.ac.uk/files/AF-P61626-F1-model_v6.cif",
+   "sha256": "8444ea54dc496d7a8107257040ca7d12476f0508a943b17890b846ecd1e2b99e",
+   "retrieved": "2026-11-16",
+   "membrane_sources": [],
+   "features": [
+    "alphafold",
+    "clinical"
+   ],
+   "uniprot": [
+    "P61626"
+   ],
+   "sifts": true,
+   "offset": false,
+   "families": [
+    "alphafold",
+    "basic",
+    "clinical"
+   ]
+  },
+  {
    "id": "af-p68871-f1-model_v6",
    "why": "AlphaFold model of haemoglobin beta: same protein as 2HHB chain B but numbered as UniProt, so the same variant sits at a different residue number.",
    "origin": [
@@ -3216,7 +3321,8 @@
    "disease": "hereditary lysozyme amyloidosis",
    "entry": "2nwd",
    "entries": [
-    "2nwd"
+    "2nwd",
+    "af-p61626-f1-model_v6"
    ],
    "variants": 3,
    "verified_on_entry": 3,
@@ -3513,7 +3619,8 @@
    "disease": "congenital cataract",
    "entry": "1hk0",
    "entries": [
-    "1hk0"
+    "1hk0",
+    "af-p07320-f1-model_v6"
    ],
    "variants": 6,
    "verified_on_entry": 6,
@@ -3570,7 +3677,8 @@
    "disease": "long QT syndrome 14; CPVT4",
    "entry": "6m7h",
    "entries": [
-    "6m7h"
+    "6m7h",
+    "af-p0dp23-f1-model_v6"
    ],
    "variants": 30,
    "verified_on_entry": 29,

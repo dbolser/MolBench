@@ -47,7 +47,7 @@ def _comps(atoms, mask: int) -> set[str]:
 def test_panel_size():
     pdb = [e for e in ENTRIES.values() if e["kind"] == "pdb"]
     assert len(pdb) >= 55
-    assert 1 <= sum(e["kind"] == "alphafold" for e in ENTRIES.values()) <= 2
+    assert 1 <= sum(e["kind"] == "alphafold" for e in ENTRIES.values()) <= 6
     assert len(ENTRIES) == len(PANEL["entries"])  # ids are unique
 
 

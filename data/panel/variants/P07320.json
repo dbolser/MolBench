@@ -36,6 +36,17 @@
     "auth_chain_differs_from_label_chain": true
    },
    "verified": 6
+  },
+  "af-p07320-f1-model_v6": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 174
+    },
+    "n_insertion_codes": 0,
+    "offset": false,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "verified": 6
   }
  },
  "variants": [
@@ -79,6 +90,16 @@
       "label_seq_id": 14,
       "comp_id": "ARG"
      }
+    ],
+    "af-p07320-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 15,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 15,
+      "comp_id": "ARG"
+     }
     ]
    }
   },
@@ -119,6 +140,16 @@
       "label_seq_id": 23,
       "comp_id": "PRO"
      }
+    ],
+    "af-p07320-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 24,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 24,
+      "comp_id": "PRO"
+     }
     ]
    }
   },
@@ -154,6 +185,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 36,
+      "comp_id": "ARG"
+     }
+    ],
+    "af-p07320-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 37,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 37,
       "comp_id": "ARG"
      }
     ]
@@ -202,6 +243,16 @@
       "label_seq_id": 44,
       "comp_id": "LEU"
      }
+    ],
+    "af-p07320-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 45,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 45,
+      "comp_id": "LEU"
+     }
     ]
    }
   },
@@ -239,6 +290,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 51,
+      "comp_id": "SER"
+     }
+    ],
+    "af-p07320-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 52,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 52,
       "comp_id": "SER"
      }
     ]
@@ -282,6 +343,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 58,
+      "comp_id": "ARG"
+     }
+    ],
+    "af-p07320-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 59,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 59,
       "comp_id": "ARG"
      }
     ]

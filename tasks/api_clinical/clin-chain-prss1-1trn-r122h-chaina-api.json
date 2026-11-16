@@ -129,6 +129,7 @@
     }
    ],
    "secondary_structure": null,
+   "report_apart": null,
    "difficulty": {
     "needs_uniprot_mapping": true,
     "needs_numbering_offset": true,

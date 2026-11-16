@@ -143,6 +143,7 @@
     "end_label_seq_id": 567,
     "color": "teal"
    },
+   "report_apart": "needs the entry's secondary-structure annotation",
    "difficulty": {
     "needs_uniprot_mapping": true,
     "needs_numbering_offset": true,

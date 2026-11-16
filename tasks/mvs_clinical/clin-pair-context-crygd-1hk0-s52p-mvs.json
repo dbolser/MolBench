@@ -1,12 +1,12 @@
 {
- "id": "clin-pair-context-hbb-af-p68871-f1-f43s-mvs",
+ "id": "clin-pair-context-crygd-1hk0-s52p-mvs",
  "track": "mvs",
  "tier": "clinical",
  "family": "clin-pair-context",
  "structures": [
-  "af-p68871-f1-model_v6"
+  "1hk0"
  ],
- "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), draw a white cartoon of the whole structure and show, as cyan ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant p.Phe43Ser (pathogenic in ClinVar).",
+ "prompt": "PDB entry 1HK0: the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Ser52Pro is classified as likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as green spacefill spheres.",
  "reference": {
   "root": {
    "kind": "root",
@@ -14,7 +14,7 @@
     {
      "kind": "download",
      "params": {
-      "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif"
+      "url": "https://files.rcsb.org/download/1hk0.cif"
      },
      "children": [
       {
@@ -55,21 +55,21 @@
            "kind": "component",
            "params": {
             "selector": {
-             "auth_asym_id": "A",
-             "auth_seq_id": 43
+             "auth_asym_id": "X",
+             "auth_seq_id": 51
             }
            },
            "children": [
             {
              "kind": "representation",
              "params": {
-              "type": "ball_and_stick"
+              "type": "spacefill"
              },
              "children": [
               {
                "kind": "color",
                "params": {
-                "color": "cyan"
+                "color": "green"
                }
               }
              ]
@@ -91,103 +91,104 @@
   {
    "selector": {
     "label_asym_id": "A",
-    "label_seq_id": 43
+    "label_seq_id": 51
    },
-   "representation": "ball_and_stick",
-   "color": "cyan"
+   "representation": "spacefill",
+   "color": "green"
   }
  ],
- "twin_of": "clin-pair-context-hbb-af-p68871-f1-f43s-api",
+ "twin_of": "clin-pair-context-crygd-1hk0-s52p-api",
  "paraphrase_of": null,
  "style": "full",
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  p.Phe43Ser: UniProt position 43 (Phe in UniProt) -> in the model: auth A 43 PHE (label A 43)"
+  "text": "PDB 1HK0: Human GammaD Crystallin Structure at 1.25 A Resolution\nMethod: X-RAY DIFFRACTION, 1.25 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Gamma-crystallin D), protein, 173 of 173 residues observed: auth 1-85 = label 1-85; auth 87-174 = label 86-173\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P07320 (CRGD_HUMAN): UniProt 2-86 = auth 1-85; UniProt 87-174 = auth 87-174\n\nFrom the request:\n  CRYGD: UniProt P07320 (CRGD_HUMAN, Gamma-crystallin D)\n  p.Ser52Pro: UniProt position 52 (Ser in UniProt) -> in 1HK0: auth X 51 SER (label A 51)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
   "inputs": [
-   "data/panel/variants/P68871.json",
-   "data/panel/facts/af-p68871-f1-model_v6.json",
-   "molbench/sifts_tables/af-p68871-f1-model_v6.json.gz",
-   "molbench/atom_tables/af-p68871-f1-model_v6.json.gz"
+   "data/panel/variants/P07320.json",
+   "data/panel/facts/1hk0.json",
+   "molbench/sifts_tables/1hk0.json.gz",
+   "molbench/atom_tables/1hk0.json.gz"
   ],
   "date": "2026-11-13",
   "checks": [
-   "target (1 residue(s), 11 atoms, residue name(s) PHE = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "target (1 residue(s), 6 atoms, residue name(s) SER = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
    "the twin on the other track selects the same target atoms",
-   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
   ],
   "clinical": {
-   "gene": "HBB",
-   "accession": "P68871",
-   "protein": "Hemoglobin subunit beta",
+   "gene": "CRYGD",
+   "accession": "P07320",
+   "protein": "Gamma-crystallin D",
    "naming": "hgvs",
    "scope": "all",
    "context": "structure",
    "chain": null,
-   "wording": 2,
+   "wording": 1,
    "look": {
-    "rep": "ball_and_stick",
-    "color": "cyan",
+    "rep": "spacefill",
+    "color": "green",
     "backdrop": "white"
    },
    "variants": [
     {
-     "name_in_prompt": "p.Phe43Ser",
-     "variant": "F43S",
-     "hgvs": "p.Phe43Ser",
-     "uniprot_position": 43,
+     "name_in_prompt": "p.Ser52Pro",
+     "variant": "S52P",
+     "hgvs": "p.Ser52Pro",
+     "uniprot_position": 52,
      "mature_numbering": null,
      "clinvar_vcv": [
-      "VCV000015190"
+      "VCV001994732"
      ],
      "clinvar_classification": [
-      "Pathogenic"
+      "Likely pathogenic"
      ],
      "clinvar_review_status": [
-      "criteria provided, multiple submitters, no conflicts"
+      "criteria provided, single submitter"
      ],
      "residues": [
       {
-       "auth_asym_id": "A",
-       "auth_seq_id": 43,
+       "auth_asym_id": "X",
+       "auth_seq_id": 51,
        "pdbx_PDB_ins_code": "",
        "label_asym_id": "A",
-       "label_seq_id": 43,
-       "comp_id": "PHE"
+       "label_seq_id": 51,
+       "comp_id": "SER"
       }
      ]
     }
    ],
    "secondary_structure": null,
+   "report_apart": null,
    "difficulty": {
     "needs_uniprot_mapping": true,
-    "needs_numbering_offset": false,
+    "needs_numbering_offset": true,
     "author_minus_uniprot": [
-     0
+     -1
     ],
-    "structure_has_offset": false,
-    "author_chain_differs_from_label_chain": false,
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": true,
     "author_number_differs_from_label_number": false,
     "insertion_code": false,
     "needs_ligand_identity": false,
     "accession_in_prompt": true,
     "protein_copies_in_structure": 1,
     "target_residues": 1,
-    "alphafold_model": true,
+    "alphafold_model": false,
     "name_in_mature_numbering": false,
     "mature_number_equals_author_number": null,
     "number_in_name_as_author_number_is_same_amino_acid": false,
     "name_read_as_mature_number_is_same_amino_acid": false,
-    "number_in_name_as_author_number_is_right": true,
-    "number_in_name_as_label_number_is_right": true
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
    },
    "pair": {
-    "with": "clin-pair-context-hbb-5ni1-f43s-mvs",
-    "this_structure": "author numbers are UniProt numbers"
+    "with": "clin-pair-context-crygd-af-p07320-f1-s52p-mvs",
+    "this_structure": "author numbers differ from UniProt numbers"
    }
   }
  },

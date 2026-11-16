@@ -1,17 +1,17 @@
 {
-  "id": "api-alphafold-af-p68871-f1",
+  "id": "api-alphafold-af-p07320-f1",
   "track": "api",
   "tier": "tool_only",
   "family": "api-alphafold",
   "structures": [
-    "af-p68871-f1-model_v6"
+    "af-p07320-f1-model_v6"
   ],
-  "prompt": "Load the AlphaFold DB model of Hemoglobin subunit beta (UniProt P68871), colour it by the model's per-residue confidence (pLDDT), and attach the tooltip 'residues 94-107' to residues 94 to 107.",
+  "prompt": "I want the AlphaFold DB model of Gamma-crystallin D (P07320) in the confidence (pLDDT) colouring; residues 117 to 133 should carry the tooltip 'residues 117-133'.",
   "reference": [
     {
       "action": "load",
       "custom_data": {
-        "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif",
+        "url": "https://alphafold.ebi.ac.uk/files/AF-P07320-F1-model_v6.cif",
         "format": "cif",
         "binary": false
       }
@@ -25,9 +25,9 @@
       "action": "tooltips",
       "data": [
         {
-          "start_auth_residue_number": 94,
-          "end_auth_residue_number": 107,
-          "tooltip": "residues 94-107"
+          "start_auth_residue_number": 117,
+          "end_auth_residue_number": 133,
+          "tooltip": "residues 117-133"
         }
       ]
     }
@@ -43,9 +43,9 @@
   "provenance": {
     "script": "scripts/generate_api_tasks.py",
     "inputs": [
-      "data/panel/facts/af-p68871-f1-model_v6.json",
-      "molbench/atom_tables/af-p68871-f1-model_v6.json.gz",
-      "molbench/sifts_tables/af-p68871-f1-model_v6.json.gz"
+      "data/panel/facts/af-p07320-f1-model_v6.json",
+      "molbench/atom_tables/af-p07320-f1-model_v6.json.gz",
+      "molbench/sifts_tables/af-p07320-f1-model_v6.json.gz"
     ],
     "date": "2026-11-12",
     "checks": [
@@ -58,11 +58,11 @@
       "equivalent answer succeeds: the binary file of another model version, the flag in the load action, label numbers",
       "wrong answer fails: the accession as molecule_id (not a PDB id: nothing loads) (F1 0.0)"
     ],
-    "structure": "af-p68871-f1",
+    "structure": "af-p07320-f1",
     "derived": "The panel's frozen AlphaFold DB model. In pdbe-molstar 3.3.2 alphafold_view only switches the colouring to pLDDT; the model is loaded with custom_data from the AlphaFold DB URL pattern the API reference gives. An AlphaFold model is numbered as UniProt, so author and label numbers agree.",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
-    "wording": "1 of 3",
+    "wording": "3 of 3",
     "difficulty": {
       "numbering_offset": false,
       "auth_label_chain": false,
@@ -73,15 +73,15 @@
     },
     "targets": [
       {
-        "what": "residues 94-107",
+        "what": "residues 117-133",
         "action": 2,
         "param": 0,
         "atoms": {
           "label_asym_id": "A",
-          "beg_label_seq_id": 94,
-          "end_label_seq_id": 107
+          "beg_label_seq_id": 117,
+          "end_label_seq_id": 133
         },
-        "n_atoms": 118
+        "n_atoms": 142
       }
     ]
   },

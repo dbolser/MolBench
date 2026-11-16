@@ -36,6 +36,17 @@
    },
    "verified": 29,
    "wild_type_mismatch": 1
+  },
+  "af-p0dp23-f1-model_v6": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 149
+    },
+    "n_insertion_codes": 0,
+    "offset": false,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "verified": 30
   }
  },
  "variants": [
@@ -71,6 +82,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 29,
+      "comp_id": "THR"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 30,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 30,
       "comp_id": "THR"
      }
     ]
@@ -112,6 +133,16 @@
       "label_seq_id": 89,
       "comp_id": "PHE"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 90,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 90,
+      "comp_id": "PHE"
+     }
     ]
    }
   },
@@ -150,6 +181,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 93,
+      "comp_id": "ASP"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 94,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 94,
       "comp_id": "ASP"
      }
     ]
@@ -193,6 +234,16 @@
       "label_seq_id": 95,
       "comp_id": "ASP"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 96,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 96,
+      "comp_id": "ASP"
+     }
     ]
    }
   },
@@ -233,6 +284,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 95,
+      "comp_id": "ASP"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 96,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 96,
       "comp_id": "ASP"
      }
     ]
@@ -283,6 +344,16 @@
       "label_seq_id": 95,
       "comp_id": "ASP"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 96,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 96,
+      "comp_id": "ASP"
+     }
     ]
    }
   },
@@ -322,6 +393,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 97,
+      "comp_id": "ASN"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 98,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 98,
       "comp_id": "ASN"
      }
     ]
@@ -382,6 +463,16 @@
       "label_seq_id": 97,
       "comp_id": "ASN"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 98,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 98,
+      "comp_id": "ASN"
+     }
     ]
    }
   },
@@ -417,6 +508,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 104,
+      "comp_id": "GLU"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 105,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 105,
       "comp_id": "GLU"
      }
     ]
@@ -458,6 +559,16 @@
       "label_seq_id": 104,
       "comp_id": "GLU"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 105,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 105,
+      "comp_id": "GLU"
+     }
     ]
    }
   },
@@ -497,6 +608,16 @@
       "label_seq_id": 113,
       "comp_id": "GLY"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 114,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 114,
+      "comp_id": "GLY"
+     }
     ]
    }
   },
@@ -534,6 +655,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 129,
+      "comp_id": "ASP"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 130,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 130,
       "comp_id": "ASP"
      }
     ]
@@ -589,6 +720,16 @@
       "label_seq_id": 129,
       "comp_id": "ASP"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 130,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 130,
+      "comp_id": "ASP"
+     }
     ]
    }
   },
@@ -626,6 +767,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 129,
+      "comp_id": "ASP"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 130,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 130,
       "comp_id": "ASP"
      }
     ]
@@ -668,6 +819,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 132,
       "comp_id": "ASP"
      }
     ]
@@ -719,6 +880,16 @@
       "label_seq_id": 131,
       "comp_id": "ASP"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 132,
+      "comp_id": "ASP"
+     }
     ]
    }
   },
@@ -757,6 +928,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 132,
       "comp_id": "ASP"
      }
     ]
@@ -799,6 +980,16 @@
       "label_seq_id": 131,
       "comp_id": "ASP"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 132,
+      "comp_id": "ASP"
+     }
     ]
    }
   },
@@ -836,6 +1027,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 131,
+      "comp_id": "ASP"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 132,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 132,
       "comp_id": "ASP"
      }
     ]
@@ -878,6 +1079,16 @@
       "label_seq_id": 132,
       "comp_id": "GLY"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 133,
+      "comp_id": "GLY"
+     }
     ]
    }
   },
@@ -915,6 +1126,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 132,
+      "comp_id": "GLY"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 133,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 133,
       "comp_id": "GLY"
      }
     ]
@@ -958,6 +1179,16 @@
       "label_seq_id": 133,
       "comp_id": "ASP"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 134,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 134,
+      "comp_id": "ASP"
+     }
     ]
    }
   },
@@ -997,6 +1228,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 135,
+      "comp_id": "GLN"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 136,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 136,
       "comp_id": "GLN"
      }
     ]
@@ -1039,6 +1280,16 @@
       "label_seq_id": 139,
       "comp_id": "GLU"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 140,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 140,
+      "comp_id": "GLU"
+     }
     ]
    }
   },
@@ -1076,6 +1327,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 140,
+      "comp_id": "GLU"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
       "comp_id": "GLU"
      }
     ]
@@ -1123,6 +1384,16 @@
       "label_seq_id": 140,
       "comp_id": "GLU"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "GLU"
+     }
     ]
    }
   },
@@ -1164,6 +1435,16 @@
       "label_seq_id": 140,
       "comp_id": "GLU"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
+      "comp_id": "GLU"
+     }
     ]
    }
   },
@@ -1201,6 +1482,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 140,
+      "comp_id": "GLU"
+     }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 141,
       "comp_id": "GLU"
      }
     ]
@@ -1255,6 +1546,16 @@
       "label_seq_id": 141,
       "comp_id": "PHE"
      }
+    ],
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 142,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 142,
+      "comp_id": "PHE"
+     }
     ]
    }
   },
@@ -1284,7 +1585,18 @@
    "clinvar_review_status": [
     "criteria provided, single submitter"
    ],
-   "structures": {}
+   "structures": {
+    "af-p0dp23-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 145,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 145,
+      "comp_id": "MET"
+     }
+    ]
+   }
   }
  ],
  "rejected": [

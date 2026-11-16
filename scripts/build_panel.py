@@ -966,7 +966,13 @@ def build(args) -> None:
 
     for e in seed["entries"]:
         add(e["id"].lower(), e["why"], e["claims"], "named")
-    missing = sorted(set(in_use) - set(records) - {x for x in in_use if x.startswith("af-")})
+    # Entries that tasks used before the panel existed had to be named in seed.json.
+    # Since the corpus was generated from the panel, every panel entry is "used by a
+    # task", so the guard looks only at entries the frozen panel does not hold either
+    # (and at ids that are PDB ids: a superposition task loads a UniProt accession).
+    frozen = {e["id"] for e in old_panel().get("entries", [])}
+    missing = sorted(x for x in set(in_use) - set(records) - frozen
+                     if not x.startswith("af-") and re.fullmatch(r"[0-9][a-z0-9]{3}", x))
     if missing:
         raise SystemExit(f"entries used by tasks but not in seed.json: {missing}")
 
@@ -989,7 +995,9 @@ def build(args) -> None:
         print(f"  {d['gene']:9s} {d['accession']}  {len(cv['variants']):4d} variants -> {entry}  {trail}")
 
     for a in seed["alphafold"]:
-        add(af_id(a["accession"]), a["why"], [], f"alphafold:{a['accession']}")
+        rec = add(af_id(a["accession"]), a["why"], [], f"alphafold:{a['accession']}")
+        if a.get("public_only"):       # added after the held-back list was frozen
+            rec["public_only"] = True
 
     # Per entry: structure file, SIFTS, facts.
     for entry, rec in sorted(records.items()):
@@ -1013,8 +1021,16 @@ def build(args) -> None:
         unverified = sorted(set(rec["claims"]) - set(feats))
         if unverified:
             raise SystemExit(f"{entry}: seed.json claims {unverified} but the file shows {feats}")
-        used = in_use.get(entry) or (in_use.get("-".join(entry.split("-")[:2]), [])
-                                     if is_af else [])
+        # `used_by_tasks` records the tasks published *before* the final corpus (it
+        # decides which entries may be held back), so it is frozen: an entry already in
+        # the panel keeps its list, and an entry added later was used by none of them.
+        if before:
+            used = before.get("used_by_tasks", [])
+        elif frozen:
+            used = []
+        else:
+            used = in_use.get(entry) or (in_use.get("-".join(entry.split("-")[:2]), [])
+                                         if is_af else [])
         exempt = bool(used)
         if facts["n_atoms"] > MAX_ATOMS and not exempt:
             raise SystemExit(f"{entry}: {facts['n_atoms']} atoms is over the limit")

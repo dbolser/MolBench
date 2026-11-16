@@ -81,7 +81,8 @@ def heldback_candidates() -> list[dict]:
     """Panel entries that may be held back: never used by a task published before the
     final corpus (``used_by_tasks`` empty in panel.json), and not the worked example."""
     return [e for e in grounding.panel()["entries"]
-            if not e["used_by_tasks"] and e["id"] != T.WORKED_EXAMPLE]
+            if not e["used_by_tasks"] and e["id"] != T.WORKED_EXAMPLE
+            and not e.get("public_only")]      # joined the panel after the list was frozen
 
 
 def _heldback_for(seed: int) -> list[dict]:

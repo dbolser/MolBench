@@ -1,12 +1,12 @@
 {
- "id": "clin-multi-context-apoe-8ce0-l46p-r154s-a170p-api",
+ "id": "clin-multi-context-apoe-8ce0-l46p-a170p-g183a-api",
  "track": "api",
  "tier": "clinical",
  "family": "clin-multi-context",
  "structures": [
   "8ce0"
  ],
- "prompt": "In PDB entry 8CE0, show the whole structure as a white cartoon and the residues replaced by the APOE (Apolipoprotein E, UniProt P02649) variants p.Leu46Pro, p.Arg154Ser and p.Ala170Pro (each pathogenic or likely pathogenic in ClinVar) as red spacefill spheres.",
+ "prompt": "PDB entry 8CE0: the APOE (Apolipoprotein E) variants p.Leu46Pro, p.Ala170Pro and p.Gly183Ala are each classified as pathogenic or likely pathogenic in ClinVar. Show the whole structure as a gray cartoon, with the residues they replace as cyan spacefill spheres.",
  "reference": [
   {
    "action": "load",
@@ -18,26 +18,26 @@
     {
      "uniprot_accession": "P02649",
      "uniprot_residue_number": 46,
-     "color": "white",
+     "color": "gray",
      "representation": "spacefill",
-     "representationColor": "red"
-    },
-    {
-     "uniprot_accession": "P02649",
-     "uniprot_residue_number": 154,
-     "color": "white",
-     "representation": "spacefill",
-     "representationColor": "red"
+     "representationColor": "cyan"
     },
     {
      "uniprot_accession": "P02649",
      "uniprot_residue_number": 170,
-     "color": "white",
+     "color": "gray",
      "representation": "spacefill",
-     "representationColor": "red"
+     "representationColor": "cyan"
+    },
+    {
+     "uniprot_accession": "P02649",
+     "uniprot_residue_number": 183,
+     "color": "gray",
+     "representation": "spacefill",
+     "representationColor": "cyan"
     }
    ],
-   "non_selected_color": "white"
+   "non_selected_color": "gray"
   }
  ],
  "accepted": [
@@ -52,26 +52,26 @@
      {
       "uniprot_accession": "P02649",
       "uniprot_residue_number": 46,
-      "color": "red",
+      "color": "cyan",
       "representation": "spacefill",
-      "representationColor": "red"
-     },
-     {
-      "uniprot_accession": "P02649",
-      "uniprot_residue_number": 154,
-      "color": "red",
-      "representation": "spacefill",
-      "representationColor": "red"
+      "representationColor": "cyan"
      },
      {
       "uniprot_accession": "P02649",
       "uniprot_residue_number": 170,
-      "color": "red",
+      "color": "cyan",
       "representation": "spacefill",
-      "representationColor": "red"
+      "representationColor": "cyan"
+     },
+     {
+      "uniprot_accession": "P02649",
+      "uniprot_residue_number": 183,
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "white"
+    "non_selected_color": "gray"
    }
   ],
   [
@@ -89,26 +89,26 @@
      {
       "uniprot_accession": "P02649",
       "uniprot_residue_number": 46,
-      "color": "white",
+      "color": "gray",
       "representation": "spacefill",
-      "representationColor": "red"
-     },
-     {
-      "uniprot_accession": "P02649",
-      "uniprot_residue_number": 154,
-      "color": "white",
-      "representation": "spacefill",
-      "representationColor": "red"
+      "representationColor": "cyan"
      },
      {
       "uniprot_accession": "P02649",
       "uniprot_residue_number": 170,
-      "color": "white",
+      "color": "gray",
       "representation": "spacefill",
-      "representationColor": "red"
+      "representationColor": "cyan"
+     },
+     {
+      "uniprot_accession": "P02649",
+      "uniprot_residue_number": 183,
+      "color": "gray",
+      "representation": "spacefill",
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "white"
+    "non_selected_color": "gray"
    }
   ],
   [
@@ -126,26 +126,26 @@
      {
       "uniprot_accession": "P02649",
       "uniprot_residue_number": 46,
-      "color": "red",
+      "color": "cyan",
       "representation": "spacefill",
-      "representationColor": "red"
-     },
-     {
-      "uniprot_accession": "P02649",
-      "uniprot_residue_number": 154,
-      "color": "red",
-      "representation": "spacefill",
-      "representationColor": "red"
+      "representationColor": "cyan"
      },
      {
       "uniprot_accession": "P02649",
       "uniprot_residue_number": 170,
-      "color": "red",
+      "color": "cyan",
       "representation": "spacefill",
-      "representationColor": "red"
+      "representationColor": "cyan"
+     },
+     {
+      "uniprot_accession": "P02649",
+      "uniprot_residue_number": 183,
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
      }
     ],
-    "non_selected_color": "white"
+    "non_selected_color": "gray"
    }
   ]
  ],
@@ -159,24 +159,24 @@
     },
     {
      "label_asym_id": "A",
-     "label_seq_id": 512
+     "label_seq_id": 528
     },
     {
      "label_asym_id": "A",
-     "label_seq_id": 528
+     "label_seq_id": 541
     }
    ],
    "representation": "spacefill",
-   "color": "red"
+   "color": "cyan"
   }
  ],
- "twin_of": "clin-multi-context-apoe-8ce0-l46p-r154s-a170p-mvs",
+ "twin_of": "clin-multi-context-apoe-8ce0-l46p-a170p-g183a-mvs",
  "paraphrase_of": null,
  "style": "full",
  "split": "heldback",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  p.Leu46Pro: UniProt position 46 (Leu in UniProt) -> in 8CE0: auth A 28 LEU (label A 404)\n  p.Arg154Ser: UniProt position 154 (Arg in UniProt) -> in 8CE0: auth A 136 ARG (label A 512)\n  p.Ala170Pro: UniProt position 170 (Ala in UniProt) -> in 8CE0: auth A 152 ALA (label A 528)"
+  "text": "PDB 8CE0: N-terminal domain of human apolipoprotein E\nMethod: X-RAY DIFFRACTION, 1.75 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Maltodextrin-binding protein,Apolipoprotein E), protein, 143 of 675 residues observed: auth 23-165 = label 399-541\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P02649 (APOE_HUMAN): UniProt 41-183 = auth 23-165\n\nFrom the request:\n  APOE: UniProt P02649 (APOE_HUMAN, Apolipoprotein E)\n  p.Leu46Pro: UniProt position 46 (Leu in UniProt) -> in 8CE0: auth A 28 LEU (label A 404)\n  p.Ala170Pro: UniProt position 170 (Ala in UniProt) -> in 8CE0: auth A 152 ALA (label A 528)\n  p.Gly183Ala: UniProt position 183 (Gly in UniProt) -> in 8CE0: auth A 165 GLY (label A 541)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -188,7 +188,7 @@
   ],
   "date": "2026-11-13",
   "checks": [
-   "target (3 residue(s), 24 atoms, residue name(s) ALA/ARG/LEU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "target (3 residue(s), 17 atoms, residue name(s) ALA/GLY/LEU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
    "the twin on the other track selects the same target atoms",
    "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
@@ -201,11 +201,11 @@
    "scope": "all",
    "context": "structure",
    "chain": null,
-   "wording": 0,
+   "wording": 1,
    "look": {
     "rep": "spacefill",
-    "color": "red",
-    "backdrop": "white"
+    "color": "cyan",
+    "backdrop": "gray"
    },
    "variants": [
     {
@@ -235,32 +235,6 @@
      ]
     },
     {
-     "name_in_prompt": "p.Arg154Ser",
-     "variant": "R154S",
-     "hgvs": "p.Arg154Ser",
-     "uniprot_position": 154,
-     "mature_numbering": null,
-     "clinvar_vcv": [
-      "VCV000017850"
-     ],
-     "clinvar_classification": [
-      "Pathogenic/Likely pathogenic"
-     ],
-     "clinvar_review_status": [
-      "criteria provided, multiple submitters, no conflicts"
-     ],
-     "residues": [
-      {
-       "auth_asym_id": "A",
-       "auth_seq_id": 136,
-       "pdbx_PDB_ins_code": "",
-       "label_asym_id": "A",
-       "label_seq_id": 512,
-       "comp_id": "ARG"
-      }
-     ]
-    },
-    {
      "name_in_prompt": "p.Ala170Pro",
      "variant": "A170P",
      "hgvs": "p.Ala170Pro",
@@ -285,9 +259,36 @@
        "comp_id": "ALA"
       }
      ]
+    },
+    {
+     "name_in_prompt": "p.Gly183Ala",
+     "variant": "G183A",
+     "hgvs": "p.Gly183Ala",
+     "uniprot_position": 183,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001341575"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, single submitter"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 165,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 541,
+       "comp_id": "GLY"
+      }
+     ]
     }
    ],
    "secondary_structure": null,
+   "report_apart": null,
    "difficulty": {
     "needs_uniprot_mapping": true,
     "needs_numbering_offset": true,
@@ -299,7 +300,7 @@
     "author_number_differs_from_label_number": true,
     "insertion_code": false,
     "needs_ligand_identity": false,
-    "accession_in_prompt": true,
+    "accession_in_prompt": false,
     "protein_copies_in_structure": 1,
     "target_residues": 3,
     "alphafold_model": false,
@@ -335,11 +336,11 @@
     "atoms": [
      {
       "label_asym_id": "A",
-      "label_seq_id": 512
+      "label_seq_id": 528
      }
     ],
-    "what": "p.Arg154Ser residue(s)",
-    "n_atoms": 11
+    "what": "p.Ala170Pro residue(s)",
+    "n_atoms": 5
    },
    {
     "action": 1,
@@ -347,11 +348,11 @@
     "atoms": [
      {
       "label_asym_id": "A",
-      "label_seq_id": 528
+      "label_seq_id": 541
      }
     ],
-    "what": "p.Ala170Pro residue(s)",
-    "n_atoms": 5
+    "what": "p.Gly183Ala residue(s)",
+    "n_atoms": 4
    }
   ],
   "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"

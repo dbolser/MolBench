@@ -35,6 +35,17 @@
     "auth_chain_differs_from_label_chain": true
    },
    "verified": 3
+  },
+  "af-p61626-f1-model_v6": {
+   "numbering": {
+    "auth_minus_unp": {
+     "0": 148
+    },
+    "n_insertion_codes": 0,
+    "offset": false,
+    "auth_chain_differs_from_label_chain": false
+   },
+   "verified": 3
   }
  },
  "variants": [
@@ -75,6 +86,16 @@
       "label_seq_id": 56,
       "comp_id": "ILE"
      }
+    ],
+    "af-p61626-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 74,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 74,
+      "comp_id": "ILE"
+     }
     ]
    }
   },
@@ -112,6 +133,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 57,
+      "comp_id": "PHE"
+     }
+    ],
+    "af-p61626-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 75,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 75,
       "comp_id": "PHE"
      }
     ]
@@ -155,6 +186,16 @@
       "pdbx_PDB_ins_code": "",
       "label_asym_id": "A",
       "label_seq_id": 64,
+      "comp_id": "TRP"
+     }
+    ],
+    "af-p61626-f1-model_v6": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 82,
+      "pdbx_PDB_ins_code": "",
+      "label_asym_id": "A",
+      "label_seq_id": 82,
       "comp_id": "TRP"
      }
     ]
