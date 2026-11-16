@@ -6,7 +6,7 @@
  "structures": [
   "8k7f"
  ],
- "prompt": "In PDB entry 8K7F, show the whole structure as a white cartoon and the residue replaced by the pathogenic/likely pathogenic GLA (Alpha-galactosidase A, UniProt P06280) variant H125L (ClinVar) as cyan ball-and-stick in every chain that has it.",
+ "prompt": "In PDB entry 8K7F, show the whole structure as a white cartoon and the residue replaced by the pathogenic/likely pathogenic GLA (Alpha-galactosidase A, UniProt P06280) variant p.H125L (ClinVar) as cyan ball-and-stick in every chain that has it.",
  "reference": {
   "root": {
    "kind": "root",
@@ -115,7 +115,7 @@
  "split": "heldback",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 8K7F: Crystal structure of human lysosomal alpha-galactosidase A in complex with (2R,3S,4R,5R)-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol\nMethod: X-RAY DIFFRACTION, 1.98 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Alpha-galactosidase A), protein, 390 of 398 residues observed: auth 32-421 = label 1-390\n  B [B]: entity 1 (Alpha-galactosidase A), protein, 392 of 398 residues observed: auth 32-423 = label 1-392\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P06280 (AGAL_HUMAN): UniProt 32-421 = auth 32-421\n  B [B]: P06280 (AGAL_HUMAN): UniProt 32-423 = auth 32-423\n\nFrom the request:\n  GLA: UniProt P06280 (AGAL_HUMAN, Alpha-galactosidase A)\n  H125L: UniProt position 125 (His in UniProt) -> in 8K7F: auth A 125 HIS (label A 94); auth B 125 HIS (label B 94)"
+  "text": "PDB 8K7F: Crystal structure of human lysosomal alpha-galactosidase A in complex with (2R,3S,4R,5R)-2,5-bis(hydroxymethyl)pyrrolidine-3,4-diol\nMethod: X-RAY DIFFRACTION, 1.98 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Alpha-galactosidase A), protein, 390 of 398 residues observed: auth 32-421 = label 1-390\n  B [B]: entity 1 (Alpha-galactosidase A), protein, 392 of 398 residues observed: auth 32-423 = label 1-392\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P06280 (AGAL_HUMAN): UniProt 32-421 = auth 32-421\n  B [B]: P06280 (AGAL_HUMAN): UniProt 32-423 = auth 32-423\n\nFrom the request:\n  GLA: UniProt P06280 (AGAL_HUMAN, Alpha-galactosidase A)\n  p.H125L: UniProt position 125 (His in UniProt) -> in 8K7F: auth A 125 HIS (label A 94); auth B 125 HIS (label B 94)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -148,7 +148,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "H125L",
+     "name_in_prompt": "p.H125L",
      "variant": "H125L",
      "hgvs": "p.His125Leu",
      "uniprot_position": 125,

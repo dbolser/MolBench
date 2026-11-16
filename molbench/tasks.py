@@ -51,7 +51,9 @@ WORKED_EXAMPLE = "1hsg"
 REQUIRED = ("id", "track", "tier", "family", "structures", "prompt", "reference",
             "accepted", "context", "target", "twin_of", "paraphrase_of", "style", "split",
             "grounding", "provenance", "skills")
-OPTIONAL = ("title", "notes", "accepted_structures", "accepted_targets")
+OPTIONAL = ("title", "notes", "accepted_structures", "accepted_targets", "free_hide")
+# Hide toggles a task may leave to the answer (``free_hide``; GRADING.md).
+FREE_HIDE = ("hide_water", "hide_heteroatoms", "hide_carbs", "hide_non_standard")
 PROVENANCE_KEYS = ("script", "inputs", "date", "checks")
 TARGET_KEYS = ("selector", "representation", "color", "structure")
 CONTEXT_STATE = {"mvs": "scene", "api": "calls"}
@@ -364,6 +366,13 @@ def validate_task(task: dict) -> list[str]:
             else:
                 for i, alt in enumerate(alt_targets):
                     errors += _target_errors(task, alt, f"accepted_targets[{i}]")
+    free = task.get("free_hide")
+    if free is not None:
+        if not isinstance(free, list) or not free or any(f not in FREE_HIDE for f in free) \
+                or len(set(free)) != len(free):
+            errors.append(f"free_hide: a non-empty list of distinct toggles from {FREE_HIDE}")
+        if track != "api" or task["context"] is not None:
+            errors.append("free_hide: single-turn API tasks only")
     for key in ("twin_of", "paraphrase_of"):
         if task[key] is not None and (not isinstance(task[key], str) or task[key] == task["id"]):
             errors.append(f"{key}: null or the id of another task")

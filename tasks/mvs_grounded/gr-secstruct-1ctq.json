@@ -295,7 +295,8 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_structure_lookup": true
-  }
+  },
+  "report_apart": "needs the entry's own helix and strand records, which no prompt condition supplies on this tier (annotation recall); reported apart from the tier, like the clinical helix/strand tasks"
  },
  "skills": [
   "load",

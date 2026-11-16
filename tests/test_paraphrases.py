@@ -67,7 +67,8 @@ def test_no_accept_set_task_is_paraphrased_and_only_public_ones_are():
 def test_selection_is_seeded_spread_and_keeps_twins_together():
     ids = para.select_seeded(SOURCES, 30, False, None, public_only=True)
     assert ids == para.select_seeded(SOURCES, 30, False, None, public_only=True)
-    assert len(ids) == 30 and set(ids) == set(para.WORDINGS)
+    # WORDINGS may keep the words of a request that a later rebuild of its tier replaced
+    assert len(ids) == 30 and set(ids) <= set(para.WORDINGS)
     recorded = [x for x in (OUT / para.SELECTION).read_text().splitlines()
                 if x.strip() and not x.startswith("#")]
     assert recorded == ids

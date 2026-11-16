@@ -55,6 +55,62 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1hk0"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "X",
+      "start_auth_residue_number": 51,
+      "end_auth_residue_number": 62,
+      "color": "brown"
+     },
+     {
+      "uniprot_accession": "P07320",
+      "uniprot_residue_number": 59,
+      "color": "brown",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1hk0"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "X",
+      "start_auth_residue_number": 51,
+      "end_auth_residue_number": 62,
+      "color": "brown"
+     },
+     {
+      "uniprot_accession": "P07320",
+      "uniprot_residue_number": 59,
+      "color": "yellow",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     }
+    ]
+   }
   ]
  ],
  "context": null,
@@ -88,6 +144,7 @@
   "checks": [
    "target (1 residue(s), 11 atoms, residue name(s) ARG = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
    "the strand range is the same atom set in author and in label numbering and contains the target residue",
+   "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)",
    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
    "the twin on the other track selects the same target atoms",
    "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
@@ -206,5 +263,8 @@
   "representation",
   "color",
   "context"
+ ],
+ "free_hide": [
+  "hide_water"
  ]
 }

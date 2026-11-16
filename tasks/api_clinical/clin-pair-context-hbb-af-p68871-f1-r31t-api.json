@@ -20,8 +20,8 @@
    "action": "color",
    "data": [
     {
-     "auth_asym_id": "A",
-     "auth_seq_id": 31,
+     "uniprot_accession": "P68871",
+     "uniprot_residue_number": 31,
      "color": "white",
      "representation": "spacefill",
      "representationColor": "blue"
@@ -44,8 +44,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 31,
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 31,
       "color": "blue",
       "representation": "spacefill",
       "representationColor": "blue"
@@ -71,8 +71,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 31,
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 31,
       "color": "white",
       "representation": "spacefill",
       "representationColor": "blue"
@@ -98,8 +98,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 31,
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 31,
       "color": "blue",
       "representation": "spacefill",
       "representationColor": "blue"
@@ -222,11 +222,13 @@
    {
     "action": 1,
     "param": 0,
-    "atoms": {
-     "label_asym_id": "A",
-     "label_seq_id": 31
-    },
-    "what": "p.Arg31Thr residue",
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 31
+     }
+    ],
+    "what": "p.Arg31Thr residue(s)",
     "n_atoms": 11
    }
   ],

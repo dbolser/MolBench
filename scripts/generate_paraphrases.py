@@ -92,6 +92,9 @@ WORDINGS: dict[str, dict[str, str]] = {
     'clin-hgvs-context-serpina1-8pi2-m409t-api': {
         "terse": '8pi2 white cartoon; SERPINA1 (alpha-1-antitrypsin) p.Met409Thr, pathogenic/likely pathogenic in ClinVar: the residue it replaces as orange ball-and-stick',
         "indirect": "ClinVar lists the SERPINA1 (Alpha-1-antitrypsin) variant p.Met409Thr as pathogenic/likely pathogenic, and I'd like to see where it sits. Could you show PDB entry 8PI2 as a white cartoon of the whole structure and draw the residue the variant replaces as orange ball-and-stick?"},
+    'clin-hgvs-target-ar-5cj6-l702f-api': {
+        "terse": '5cj6, AR (androgen receptor) p.Leu702Phe, likely pathogenic in ClinVar: the residue it replaces as purple ball-and-stick',
+        "indirect": "ClinVar lists the AR (Androgen receptor) variant p.Leu702Phe as likely pathogenic. Could you show me, in PDB entry 5CJ6, the residue that this variant replaces, drawn as purple ball-and-stick?"},
     'clin-hgvs-target-f9-8eph-i344t-api': {
         "terse": '8eph, F9 (coagulation factor IX, UniProt P00740) p.Ile344Thr, pathogenic in ClinVar: the residue it replaces as blue spacefill spheres, in every chain that has it',
         "indirect": "Could you help me locate a pathogenic ClinVar variant of F9 (Coagulation factor IX, UniProt P00740), p.Ile344Thr, in PDB entry 8EPH? I'd like the residue it replaces drawn as blue spacefill spheres in every chain that has it."},

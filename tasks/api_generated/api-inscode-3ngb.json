@@ -6,7 +6,7 @@
   "structures": [
     "3ngb"
   ],
-  "prompt": "Load 3NGB and colour Pro52A of chain H teal: the residue with insertion code A, not the other residue numbered 52.",
+  "prompt": "Load 3NGB and colour Pro52A of chain H teal: the residue with insertion code A, not the other residue numbered 52. In the mmCIF label numbering it is residue 53 of label chain B.",
   "reference": [
     {
       "action": "load",

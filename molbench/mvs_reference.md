@@ -75,25 +75,26 @@ residue numbers and atom names.
 
 ## Worked example
 
-Prompt: *"Load 1HHO; protein as grey cartoon, heme groups as orange ball-and-stick."*
+Prompt: *"Load 1HSG; protein as grey cartoon, the inhibitor MK1 as orange ball-and-stick."*
 
 ```json
 {"root": {"kind": "root", "children": [
-  {"kind": "download", "params": {"url": "https://files.rcsb.org/download/1hho.cif"},
+  {"kind": "download", "params": {"url": "https://files.rcsb.org/download/1hsg.cif"},
    "children": [
     {"kind": "parse", "params": {"format": "mmcif"}, "children": [
      {"kind": "structure", "params": {"type": "model"}, "children": [
        {"kind": "component", "params": {"selector": "polymer"}, "children": [
          {"kind": "representation", "params": {"type": "cartoon"}, "children": [
            {"kind": "color", "params": {"color": "gray"}}]}]},
-       {"kind": "component", "params": {"selector": "ligand"}, "children": [
+       {"kind": "component", "params": {"selector": {"label_comp_id": "MK1"}}, "children": [
          {"kind": "representation", "params": {"type": "ball_and_stick"}, "children": [
            {"kind": "color", "params": {"color": "orange"}}]}]}
      ]}]}]}
 ]}}
 ```
 
-To select specific residues, replace the selector string with an expression, e.g.
+A named compound is selected by its code, as above: the string `"ligand"` is every
+ligand of the entry at once. To select specific residues, use an expression such as
 `"selector": {"auth_asym_id": "A", "auth_seq_id": 35}`.
 
 **Transparency:** `{"kind": "opacity", "params": {"opacity": 0.5}}` as a child of

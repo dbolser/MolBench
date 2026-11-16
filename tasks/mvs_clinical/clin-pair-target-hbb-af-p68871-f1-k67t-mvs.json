@@ -6,7 +6,7 @@
  "structures": [
   "af-p68871-f1-model_v6"
  ],
- "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), show as cyan spacefill spheres the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant K67T (likely pathogenic in ClinVar).",
+ "prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), show as cyan spacefill spheres the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant p.K67T (likely pathogenic in ClinVar).",
  "reference": {
   "root": {
    "kind": "root",
@@ -81,7 +81,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  K67T: UniProt position 67 (Lys in UniProt) -> in the model: auth A 67 LYS (label A 67)"
+  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  p.K67T: UniProt position 67 (Lys in UniProt) -> in the model: auth A 67 LYS (label A 67)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -113,7 +113,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "K67T",
+     "name_in_prompt": "p.K67T",
      "variant": "K67T",
      "hgvs": "p.Lys67Thr",
      "uniprot_position": 67,

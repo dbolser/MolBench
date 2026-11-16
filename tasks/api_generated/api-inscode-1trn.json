@@ -6,7 +6,7 @@
   "structures": [
     "1trn"
   ],
-  "prompt": "Load 1TRN and colour Gly184A of chain A purple: the residue with insertion code A, not the other residue numbered 184.",
+  "prompt": "Load 1TRN and colour Gly184A of chain A purple: the residue with insertion code A, not the other residue numbered 184. In the mmCIF label numbering it is residue 164 of label chain A.",
   "reference": [
     {
       "action": "load",

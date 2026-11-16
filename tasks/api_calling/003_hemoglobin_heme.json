@@ -112,7 +112,7 @@
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
       "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.552)",
-      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1); the near miss and every wrong answer above still fail (scripts/api_forms.py)"
+      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does; the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "1hho",
     "derived": "Under a cartoon style the heme's default representation is not drawn; the added ball-and-stick takes its colour from representationColor.",
@@ -163,5 +163,8 @@
     "color"
   ],
   "title": "Heme groups as orange ball-and-stick",
-  "notes": "An added representation is coloured by representationColor, not color."
+  "notes": "An added representation is coloured by representationColor, not color.",
+  "free_hide": [
+    "hide_water"
+  ]
 }

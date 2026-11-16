@@ -144,7 +144,10 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_structure_lookup": true
-  }
+  },
+  "excludes": [
+   "carbs"
+  ]
  },
  "skills": [
   "load",

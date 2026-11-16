@@ -47,7 +47,9 @@ DIRECTORIES = [
 
 def call_forms(t: dict) -> list[str]:
     p = t["provenance"]
-    return p.get("call_forms") or (p.get("twin") or {}).get("call_forms") or []
+    forms = p.get("call_forms") or (p.get("twin") or {}).get("call_forms") or []
+    # a form made of two rewrites is labelled "first; second": count each rewrite once
+    return sorted({part for f in forms for part in f.split("; ")})
 
 
 def numbers() -> dict:

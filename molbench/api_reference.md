@@ -79,6 +79,7 @@ A dict; its tests are AND-ed, a list of dicts is the union. `{}` selects everyth
 | `start_residue_number`, `end_residue_number` | inclusive **label** range |
 | `auth_seq_id` (alias `auth_residue_number`) | **author** residue number — the number used in the literature (His57, Asp25) |
 | `start_auth_residue_number`, `end_auth_residue_number` | inclusive **author** range |
+| `auth_ins_code_id` | accepted but **ignored** by this viewer release: an insertion code cannot be selected. `auth_seq_id: 221` selects 221 and 221A alike; name one of them by `struct_asym_id` + `residue_number` |
 | `uniprot_accession` + `uniprot_residue_number` | residue by UniProt numbering (the viewer maps it with SIFTS) |
 | `uniprot_accession` + `start_uniprot_residue_number`, `end_uniprot_residue_number` | UniProt range |
 | `atoms` | list of atom names, e.g. `["CA", "CB"]` |

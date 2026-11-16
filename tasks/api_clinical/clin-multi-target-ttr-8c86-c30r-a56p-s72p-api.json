@@ -6,7 +6,7 @@
  "structures": [
   "8c86"
  ],
- "prompt": "In PDB entry 8C86, show the residues replaced by the TTR (Transthyretin, UniProt P02766) variants C30R, A56P and S72P (each pathogenic or likely pathogenic in ClinVar) as green spacefill spheres in every chain that has them.",
+ "prompt": "In PDB entry 8C86, show the residues replaced by the TTR (Transthyretin, UniProt P02766) variants p.C30R, p.A56P and p.S72P (each pathogenic or likely pathogenic in ClinVar) as green spacefill spheres in every chain that has them.",
  "reference": [
   {
    "action": "load",
@@ -141,7 +141,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 8C86: Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2\nMethod: X-RAY DIFFRACTION, 1.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  B [A]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\n  A [B]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  B [A]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n  A [B]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n\nFrom the request:\n  TTR: UniProt P02766 (TTHY_HUMAN, Transthyretin)\n  C30R: UniProt position 30 (Cys in UniProt) -> in 8C86: auth A 10 CYS (label B 10); auth B 10 CYS (label A 10)\n  A56P: UniProt position 56 (Ala in UniProt) -> in 8C86: auth A 36 ALA (label B 36); auth B 36 ALA (label A 36)\n  S72P: UniProt position 72 (Ser in UniProt) -> in 8C86: auth A 52 SER (label B 52); auth B 52 SER (label A 52)"
+  "text": "PDB 8C86: Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2\nMethod: X-RAY DIFFRACTION, 1.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  B [A]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\n  A [B]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  B [A]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n  A [B]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n\nFrom the request:\n  TTR: UniProt P02766 (TTHY_HUMAN, Transthyretin)\n  p.C30R: UniProt position 30 (Cys in UniProt) -> in 8C86: auth A 10 CYS (label B 10); auth B 10 CYS (label A 10)\n  p.A56P: UniProt position 56 (Ala in UniProt) -> in 8C86: auth A 36 ALA (label B 36); auth B 36 ALA (label A 36)\n  p.S72P: UniProt position 72 (Ser in UniProt) -> in 8C86: auth A 52 SER (label B 52); auth B 52 SER (label A 52)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -173,7 +173,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "C30R",
+     "name_in_prompt": "p.C30R",
      "variant": "C30R",
      "hgvs": "p.Cys30Arg",
      "uniprot_position": 30,
@@ -207,7 +207,7 @@
      ]
     },
     {
-     "name_in_prompt": "A56P",
+     "name_in_prompt": "p.A56P",
      "variant": "A56P",
      "hgvs": "p.Ala56Pro",
      "uniprot_position": 56,
@@ -241,7 +241,7 @@
      ]
     },
     {
-     "name_in_prompt": "S72P",
+     "name_in_prompt": "p.S72P",
      "variant": "S72P",
      "hgvs": "p.Ser72Pro",
      "uniprot_position": 72,

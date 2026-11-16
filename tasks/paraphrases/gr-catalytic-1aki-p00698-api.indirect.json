@@ -92,6 +92,62 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1aki"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 35,
+      "color": "green",
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 52,
+      "color": "green",
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1aki"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 35,
+      "color": "green",
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     },
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 52,
+      "color": "green",
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ],
+    "non_selected_color": "gray"
+   }
   ]
  ],
  "context": null,
@@ -143,7 +199,8 @@
     "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
     "the reference grades as exactly right against the task (F1 1, success, target score 1)",
     "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
-    "2 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour; default view, rest untouched): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
+    "4 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour | default view, rest untouched | the stretch under the added representation in the highlight colour, not the backdrop colour | default view, rest in the backdrop colour; the stretch under the added representation in the highlight colour, not the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (scripts/api_forms.py)",
+    "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)"
    ],
    "twin": {
     "of": "gr-catalytic-1aki-p00698",
@@ -153,7 +210,9 @@
     "colour_classes": 1,
     "call_forms": [
      "default view, rest in the backdrop colour",
-     "default view, rest untouched"
+     "default view, rest untouched",
+     "the stretch under the added representation in the highlight colour, not the backdrop colour",
+     "default view, rest in the backdrop colour; the stretch under the added representation in the highlight colour, not the backdrop colour"
     ]
    },
    "difficulty": {
@@ -183,5 +242,8 @@
   "representation",
   "color",
   "multi-component"
+ ],
+ "free_hide": [
+  "hide_water"
  ]
 }

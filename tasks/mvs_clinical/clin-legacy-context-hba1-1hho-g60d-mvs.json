@@ -1,0 +1,205 @@
+{
+ "id": "clin-legacy-context-hba1-1hho-g60d-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-legacy-context",
+ "structures": [
+  "1hho"
+ ],
+ "prompt": "Using PDB entry 1HHO, draw a white cartoon of the whole structure and show, as purple spacefill spheres, the wild-type residue at the position of the HBA1 (Hemoglobin subunit alpha) missense variant G59D (pathogenic in ClinVar). The name G59D is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the initiator methionine.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1hho.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "all"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "white"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 59
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 59
+   },
+   "representation": "spacefill",
+   "color": "purple"
+  }
+ ],
+ "twin_of": "clin-legacy-context-hba1-1hho-g60d-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 1HHO: STRUCTURE OF HUMAN OXYHAEMOGLOBIN AT 2.1 ANGSTROMS RESOLUTION\nMethod: X-RAY DIFFRACTION, 2.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (HEMOGLOBIN A (OXY) (ALPHA CHAIN)), protein, 141 of 141 residues observed: auth 1-141 = label 1-141\n  B [B]: entity 2 (HEMOGLOBIN A (OXY) (BETA CHAIN)), protein, 146 of 146 residues observed: auth 1-146 = label 1-146\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P69905 (HBA_HUMAN): UniProt 2-142 = auth 1-141\n  B [B]: P68871 (HBB_HUMAN): UniProt 2-147 = auth 1-146\n\nFrom the request:\n  HBA1: UniProt P69905 (HBA_HUMAN, Hemoglobin subunit alpha)\n  G59D (mature-protein numbering; 1 residues precede the mature chain in UniProt) = UniProt position 60\n  G59D: UniProt position 60 (Gly in UniProt) -> in 1HHO: auth A 59 GLY (label A 59)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P69905.json",
+   "data/panel/facts/1hho.json",
+   "molbench/sifts_tables/1hho.json.gz",
+   "molbench/atom_tables/1hho.json.gz",
+   "data/clinical/uniprot_processing.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 4 atoms, residue name(s) GLY = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "HBA1",
+   "accession": "P69905",
+   "protein": "Hemoglobin subunit alpha",
+   "naming": "legacy",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "spacefill",
+    "color": "purple",
+    "backdrop": "white"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "G59D",
+     "variant": "G60D",
+     "hgvs": "p.Gly60Asp",
+     "uniprot_position": 60,
+     "mature_numbering": {
+      "number": 59,
+      "removed": 1,
+      "what": "the initiator methionine"
+     },
+     "clinvar_vcv": [
+      "VCV000015849"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 59,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 59,
+       "comp_id": "GLY"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "report_apart": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -1
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": true,
+    "mature_number_equals_author_number": true,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": null,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

@@ -2,11 +2,11 @@
 
 Written by `scripts/corpus_report.py`; do not edit. Every number below is counted from the task files through `molbench.tasks.load_corpus()`; the sections after "Rulings applied" are `data/corpus/corpus_notes.md`, word for word. Format: `TASK_FORMAT.md`. Grading: `GRADING.md`. Each tier directory has its own generated `README.md` with templates and how each reference is derived.
 
-**Not frozen yet.** The manifest names the corpus version and pins the hash at the freeze. Hash of `tasks/` on disk now: `ea9d32276bd33c66e3d892b3811e32dad40a71694d15c6834c69d3fb085ea7fa`.
+**Not frozen yet.** The manifest names the corpus version and pins the hash at the freeze. Hash of `tasks/` on disk now: `ab76adffc83b5c56bc5a4c27f71388fd3e19c28017984524a7033a6d34127e26`.
 
 ## Size
 
-885 task files: **803 original tasks** (384 MVS, 419 API) and **82 paraphrases** of 41 of them.
+879 task files: **797 original tasks** (381 MVS, 416 API) and **82 paraphrases** of 41 of them.
 
 Original tasks by track, tier and split (public / held back):
 
@@ -16,15 +16,15 @@ Original tasks by track, tier and split (public / held back):
 | grounded | 52 | 11 | 63 | 52 | 11 | 63 |
 | interactions | 32 | 8 | 40 | – | – | – |
 | resolve | 32 | 7 | 39 | – | – | – |
-| clinical | 66 | 19 | 85 | 66 | 19 | 85 |
+| clinical | 63 | 19 | 82 | 63 | 19 | 82 |
 | follow-up | 50 | 8 | 58 | 34 | 10 | 44 |
 | accept-set | 21 | 5 | 26 | 11 | 4 | 15 |
 | tool-only | – | – | – | 29 | 5 | 34 |
-| **all** | **308** | **76** | **384** | **330** | **89** | **419** |
+| **all** | **305** | **76** | **381** | **327** | **89** | **416** |
 
 - The API translation tier is 116 tasks written for the API (13 curated, 103 generated) plus 62 twins of MVS translation tasks. The API grounded tier is twins only.
 - Paraphrases (all public): api clinical 10; api followup 4; api grounded 8; api tool_only 8; api translation 8; mvs clinical 10; mvs followup 6; mvs grounded 8; mvs interactions 8; mvs resolve 8; mvs translation 4.
-- 129 templates ("families"). Largest template share per track and tier: api accept_set `acc-chain-colours` 3 of 15 (20%); api clinical `clin-pair-target` 10 of 85 (12%); api followup `fu-add-residue` 4 of 44 (9%); api grounded `gr-catalytic` 6 of 63 (10%); api tool_only `api-canvas` 4 of 34 (12%); api translation `api-hide` 11 of 178 (6%); mvs accept_set `acc-chain-colours` 3 of 26 (12%); mvs clinical `clin-pair-target` 10 of 85 (12%); mvs followup `fu-add-residue` 4 of 58 (7%); mvs grounded `gr-catalytic` 6 of 63 (10%); mvs interactions `in-ca-distance` 5 of 40 (12%); mvs resolve `res-name` 12 of 39 (31%); mvs translation `tr-colour-by-chain` 5 of 73 (7%).
+- 129 templates ("families"). Largest template share per track and tier: api accept_set `acc-chain-colours` 3 of 15 (20%); api clinical `clin-pair-target` 10 of 82 (12%); api followup `fu-add-residue` 4 of 44 (9%); api grounded `gr-catalytic` 6 of 63 (10%); api tool_only `api-canvas` 4 of 34 (12%); api translation `api-hide` 11 of 178 (6%); mvs accept_set `acc-chain-colours` 3 of 26 (12%); mvs clinical `clin-pair-target` 10 of 82 (12%); mvs followup `fu-add-residue` 4 of 58 (7%); mvs grounded `gr-catalytic` 6 of 63 (10%); mvs interactions `in-ca-distance` 5 of 40 (12%); mvs resolve `res-name` 12 of 39 (31%); mvs translation `tr-colour-by-chain` 5 of 73 (7%).
 
 Where the files are:
 
@@ -46,21 +46,21 @@ Where the files are:
 - **78 structures** are used, of the frozen panel of 79 (`data/panel`). Not used: 1HSG (1HSG is the API prompt's worked example).
 - **Reuse.** Within one tier of one track no structure is in more than 6 tasks (reached by api clinical 2HHB, api clinical 8C86, mvs clinical 2HHB, mvs clinical 8C86). Over the whole corpus (both tracks, all tiers, paraphrases not counted) the most used are 2HHB, 8C86 with 22 tasks each; the least used are 1L2Y, 1UBQ, AF-P61626-F1-MODEL_V6 with 2.
 - 3 API tasks name no single structure (`api-005`, `api-superposition-p00740`, `api-superposition-p10275`).
-- **Held back: 15 structures**, one list for the whole corpus (`data/panel/heldback.json`): 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F. Public tasks on a held-back structure: 0. 165 original tasks are held back (20%).
+- **Held back: 15 structures**, one list for the whole corpus (`data/panel/heldback.json`): 1EHZ, 1FS3, 1IGT, 1LMB, 1RX2, 2C9V, 2OMF, 2PTC, 3KCG, 5NI1, 6HPO, 6TC2, 6THA, 8CE0, 8K7F. Public tasks on a held-back structure: 0. 165 original tasks are held back (21%).
 
 ## Special kinds
 
-- **Twins.** 261 of the 384 MVS tasks (68%) have an API twin with the same prompt and the same target atoms: accept-set 15, clinical 85, follow-up 36, grounded 63, translation 62. 125 of them were written by the translator; 18 of those set a hide toggle (`provenance.difficulty.context_switched_off`), and 6 of these also accept the list without it, because the request never asks for anything to be hidden. MVS tasks without a twin: accept-set 11, follow-up 22, interactions 40, resolve 39, translation 11.
-- **Unstated attributes.** 112 API tasks outside the accept-set tier list accepted call forms for what their request leaves open (`scripts/api_forms.py`): cartoon style set: 1; default view, rest in the backdrop colour: 105; default view, rest untouched: 80; nothing hidden: what the request does not name is drawn too: 6. On the MVS track the grader does it: 20 single-turn references draw something with no colour node, and there any colour is right.
+- **Twins.** 258 of the 381 MVS tasks (68%) have an API twin with the same prompt and the same target atoms: accept-set 15, clinical 82, follow-up 36, grounded 63, translation 62. 125 of them were written by the translator; 15 of those set a hide toggle (`provenance.difficulty.context_switched_off`), and 6 of these also accept the list without it, because the request never asks for anything to be hidden. MVS tasks without a twin: accept-set 11, follow-up 22, interactions 40, resolve 39, translation 11.
+- **Unstated attributes.** 126 API tasks outside the accept-set tier list accepted call forms for what their request leaves open (`scripts/api_forms.py`): cartoon style set: 1; chains by author id: their ligands, ions and waters take the chain's colour: 15; chains by label id: the polymer chains alone are coloured: 13; default view: 2; default view, rest in the backdrop colour: 113; default view, rest untouched: 85; nothing hidden: what the request does not name is drawn too: 6; the stretch under the added representation in the highlight colour, not the backdrop colour: 45; the viewer's own drawing under the spheres or surface in the select colour: 17; the viewer's own drawing under the spheres or surface left as it is: 17. On the MVS track the grader does it: 20 single-turn references draw something with no colour node, and there any colour is right.
 - **Paraphrases.** 30 requests (a twin pair is one request), seeded, public split only (0 held back), none of an accept-set task (0); each has the full, a terse and an indirect phrasing, written by hand and checked by rule. 82 new task files.
 - **Follow-ups.** 58 MVS and 44 API two-turn tasks (36 twinned). 10 MVS and 8 API are "no change" tasks, where the start state returned unchanged is the right answer (already true: 16, not expressible in the format: 2; none is a question).
-- **Accept-set.** 26 MVS and 15 API tasks where the request leaves one countable thing open. They hold 87 MVS and 43 API *readings* (`provenance.accepted_states`); as final states, counting API call forms, 87 and 92. The paper counts readings. Besides these, 242 other tasks list accepted alternatives and are not accept-set tasks: API call forms (unstated attributes): 112; API clinical twins: the residue's own stretch of cartoon: 85; other equivalents an API generator lists: 9; resolve: other namings of the same drawing: 36.
-- **Clinical tier** (85 tasks per track, 27 proteins, 33 structures, 8 of them held back):
-  - target residue's author number differs from its UniProt number: **60 of 85** (71%);
-  - target's author chain id differs from its label chain id: **25 of 85** (29%);
-  - a target has an insertion code: **1 of 85** (1%);
-  - an answer that uses the number in the variant name as the author residue number is right: **37 of 85** (44%);
-  - 14 names are in mature-protein numbering;
+- **Accept-set.** 26 MVS and 15 API tasks where the request leaves one countable thing open. They hold 87 MVS and 43 API *readings* (`provenance.accepted_states`); as final states, counting API call forms, 87 and 92. The paper counts readings. Besides these, 250 other tasks list accepted alternatives and are not accept-set tasks: API call forms (unstated attributes): 126; API clinical twins: the residue's own stretch of cartoon: 82; other equivalents an API generator lists: 6; resolve: other namings of the same drawing: 36.
+- **Clinical tier** (82 tasks per track, 25 proteins, 31 structures, 8 of them held back):
+  - target residue's author number differs from its UniProt number: **59 of 82** (72%);
+  - target's author chain id differs from its label chain id: **25 of 82** (30%);
+  - a target has an insertion code: **0 of 82** (0%);
+  - an answer that uses the number in the variant name as the author residue number is right: **34 of 82** (41%);
+  - 13 names are in mature-protein numbering;
   - offset pairs (the same variant on a structure whose author numbers differ from UniProt and on one numbered as UniProt): CALM1 1, CRYGD 1, HBB 4, LYZ 1 (4 proteins); mature-numbering pair: HBB 1; no-offset control pairs: TP53 2; pairs with one side held back: 0;
   - 10 tasks per track (`clin-sse-helix`, `clin-sse-strand`) are flagged `provenance.clinical.report_apart`: they need the entry's own helix or strand records, which only the grounding pack states, and are reported apart from the tier.
 
@@ -83,8 +83,8 @@ Where the files are:
 - `res-gene-p01009`: "Find a PDB entry of human SERPINA1 and show it as a brown cartoon."; 2 accepted alternative(s)
 
 **Clinical**
-- `clin-pair-target-calm1-6m7h-e141k-mvs`: "Using PDB entry 6M7H, show as red spacefill spheres the wild-type residue at the position of the CALM1 (Calmodulin-1, UniProt P0DP23) missense variant p.Glu141Lys (pathogenic in ClinVar)."
-- `clin-pair-context-crygd-1hk0-s52p-mvs`: "PDB entry 1HK0: the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Ser52Pro is classified as likely pathogenic in ClinVar. Show the whole structure as a white cartoon, with the residue it replaces as green spacefill spheres."
+- `clin-pair-target-calm1-6m7h-f142l-mvs`: "Using PDB entry 6M7H, show as cyan spacefill spheres the wild-type residue at the position of the CALM1 (Calmodulin-1, UniProt P0DP23) missense variant p.Phe142Leu (pathogenic in ClinVar)."
+- `clin-pair-context-crygd-1hk0-r37p-mvs`: "PDB entry 1HK0: the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Arg37Pro is classified as likely pathogenic in ClinVar. Show the whole structure as a khaki cartoon, with the residue it replaces as orange spacefill spheres."
 
 **Follow-up**
 - `fu-add-residue-2hhb-mvs`: "Now draw His122 of chain A as ball-and-stick too, in yellow; the cartoon keeps its colour."; with a start state

@@ -751,20 +751,34 @@ def make_twin(task: dict, twins: dict[str, str]) -> dict:
     # are accepted too, and so is a list that does not hide what the request never names. They end in other states than the MVS reference (a bare load
     # draws what the request does not name), which is why they come after `verify`.
     if context is None and not twin.get("accepted_targets"):
-        forms = api_forms.unhidden_forms(reference)
-        if api_forms.whole_polymer_cartoon(reference):
-            forms += api_forms.cartoon_forms(reference)
+        if task["provenance"].get("report_apart"):
+            prov["report_apart"] = task["provenance"]["report_apart"]
+        excludes = tuple((task["provenance"].get("excludes") or []))
+        if excludes:
+            prov["excludes"] = list(excludes)
+        forms = api_forms.all_forms(reference, excludes,
+                                    cartoon=api_forms.whole_polymer_cartoon(reference),
+                                    extra=api_forms.unhidden_forms(reference))
         kept = api_forms.accepted_forms(reference, forms,
-                                        runner.grader_target(twin, twin["target"]), accepted)
+                                        runner.grader_target(twin, twin["target"]), accepted,
+                                        excludes=excludes)
         for label, calls in kept:
             twin["accepted"].append(calls)
         if kept:
             prov["twin"]["call_forms"] = [label for label, _ in kept]
             prov["checks"].append(
                 f"{len(kept)} further call form(s) accepted, because the request does not state what "
-                f"they differ in ({'; '.join(label for label, _ in kept)}): each replays with nothing "
+                f"they differ in ({' | '.join(label for label, _ in kept)}): each replays with nothing "
                 "ignored, ends in a state of its own and draws the target atoms as the reference "
-                "does (target recall 1) (scripts/api_forms.py)")
+                "does (scripts/api_forms.py)")
+        free = api_forms.free_hides(reference, twin["accepted"],
+                                    runner.grader_target(twin, twin["target"]))
+        if free:
+            twin["free_hide"] = free
+            prov["checks"].append(
+                "the task accepts the cartoon style (ligands, ions and water gone) and the default "
+                f"view (all drawn), so an answer may also set {', '.join(free)}: with each, every "
+                "accepted list still draws the target atoms as before (scripts/api_forms.py)")
     return twin
 
 

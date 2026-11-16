@@ -6,7 +6,7 @@
  "structures": [
   "1tup"
  ],
- "prompt": "PDB entry 1TUP: the TP53 (Cellular tumor antigen p53) variant Y163H is classified as pathogenic in ClinVar. Show the residue it replaces as magenta ball-and-stick in chain C only (author chain ID).",
+ "prompt": "PDB entry 1TUP: the TP53 (Cellular tumor antigen p53) variant p.Y163H is classified as pathogenic in ClinVar. Show the residue it replaces as magenta ball-and-stick in chain C only (author chain ID).",
  "reference": [
   {
    "action": "load",
@@ -82,7 +82,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 1TUP: TUMOR SUPPRESSOR P53 COMPLEXED WITH DNA\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  E [A]: entity 1 (DNA (5'-D(*TP*TP*TP*CP*CP*TP*AP*GP*AP*CP*TP*TP*GP*CP*CP*CP*A P*AP*TP*TP*A)-3')), DNA, 21 of 21 residues observed: auth 1001-1021 = label 1-21\n  F [B]: entity 2 (DNA (5'-D(*AP*TP*AP*AP*TP*TP*GP*GP*GP*CP*AP*AP*GP*TP*CP*TP*A P*GP*GP*AP*A)-3')), DNA, 21 of 21 residues observed: auth 1101-1121 = label 1-21\n  A [C]: entity 3 (PROTEIN (P53 TUMOR SUPPRESSOR )), protein, 196 of 219 residues observed: auth 94-289 = label 1-196\n  B [D]: entity 3 (PROTEIN (P53 TUMOR SUPPRESSOR )), protein, 194 of 219 residues observed: auth 96-289 = label 3-196\n  C [E]: entity 3 (PROTEIN (P53 TUMOR SUPPRESSOR )), protein, 195 of 219 residues observed: auth 95-289 = label 2-196\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [C]: P04637 (P53_HUMAN): UniProt 94-289 = auth 94-289\n  B [D]: P04637 (P53_HUMAN): UniProt 96-289 = auth 96-289\n  C [E]: P04637 (P53_HUMAN): UniProt 95-289 = auth 95-289\n\nFrom the request:\n  TP53: UniProt P04637 (P53_HUMAN, Cellular tumor antigen p53)\n  Y163H: UniProt position 163 (Tyr in UniProt) -> in 1TUP, chain C: auth C 163 TYR (label E 70)"
+  "text": "PDB 1TUP: TUMOR SUPPRESSOR P53 COMPLEXED WITH DNA\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  E [A]: entity 1 (DNA (5'-D(*TP*TP*TP*CP*CP*TP*AP*GP*AP*CP*TP*TP*GP*CP*CP*CP*A P*AP*TP*TP*A)-3')), DNA, 21 of 21 residues observed: auth 1001-1021 = label 1-21\n  F [B]: entity 2 (DNA (5'-D(*AP*TP*AP*AP*TP*TP*GP*GP*GP*CP*AP*AP*GP*TP*CP*TP*A P*GP*GP*AP*A)-3')), DNA, 21 of 21 residues observed: auth 1101-1121 = label 1-21\n  A [C]: entity 3 (PROTEIN (P53 TUMOR SUPPRESSOR )), protein, 196 of 219 residues observed: auth 94-289 = label 1-196\n  B [D]: entity 3 (PROTEIN (P53 TUMOR SUPPRESSOR )), protein, 194 of 219 residues observed: auth 96-289 = label 3-196\n  C [E]: entity 3 (PROTEIN (P53 TUMOR SUPPRESSOR )), protein, 195 of 219 residues observed: auth 95-289 = label 2-196\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [C]: P04637 (P53_HUMAN): UniProt 94-289 = auth 94-289\n  B [D]: P04637 (P53_HUMAN): UniProt 96-289 = auth 96-289\n  C [E]: P04637 (P53_HUMAN): UniProt 95-289 = auth 95-289\n\nFrom the request:\n  TP53: UniProt P04637 (P53_HUMAN, Cellular tumor antigen p53)\n  p.Y163H: UniProt position 163 (Tyr in UniProt) -> in 1TUP, chain C: auth C 163 TYR (label E 70)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -117,7 +117,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "Y163H",
+     "name_in_prompt": "p.Y163H",
      "variant": "Y163H",
      "hgvs": "p.Tyr163His",
      "uniprot_position": 163,

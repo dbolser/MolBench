@@ -6,7 +6,7 @@
  "structures": [
   "2nwd"
  ],
- "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.",
+ "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.",
  "reference": [
   {
    "action": "load",
@@ -79,7 +79,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  W82R: UniProt position 82 (Trp in UniProt) -> in 2NWD: auth X 64 TRP (label A 64)"
+  "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  p.W82R: UniProt position 82 (Trp in UniProt) -> in 2NWD: auth X 64 TRP (label A 64)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -111,7 +111,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "W82R",
+     "name_in_prompt": "p.W82R",
      "variant": "W82R",
      "hgvs": "p.Trp82Arg",
      "uniprot_position": 82,

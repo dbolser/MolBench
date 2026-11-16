@@ -1,0 +1,246 @@
+{
+ "id": "clin-multi-target-sod1-2c9v-d77v-d125g-mvs",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-multi-target",
+ "structures": [
+  "2c9v"
+ ],
+ "prompt": "PDB entry 2C9V: the SOD1 (Superoxide dismutase [Cu-Zn]) variants p.Asp77Val and p.Asp125Gly are each classified as pathogenic/likely pathogenic in ClinVar. Show the residues they replace as magenta ball-and-stick in every chain that has them.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2c9v.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": [
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 76
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 76
+             },
+             {
+              "auth_asym_id": "A",
+              "auth_seq_id": 124
+             },
+             {
+              "auth_asym_id": "F",
+              "auth_seq_id": 124
+             }
+            ]
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "magenta"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 76
+    },
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 76
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 124
+    },
+    {
+     "label_asym_id": "B",
+     "label_seq_id": 124
+    }
+   ],
+   "representation": "ball_and_stick",
+   "color": "magenta"
+  }
+ ],
+ "twin_of": "clin-multi-target-sod1-2c9v-d77v-d125g-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 2C9V: Atomic resolution structure of Cu-Zn Human Superoxide dismutase\nMethod: X-RAY DIFFRACTION, 1.07 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (SUPEROXIDE DISMUTASE [CU-ZN]), protein, 153 of 153 residues observed: auth 1-153 = label 1-153\n  F [B]: entity 1 (SUPEROXIDE DISMUTASE [CU-ZN]), protein, 153 of 153 residues observed: auth 1-153 = label 1-153\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00441 (SODC_HUMAN): UniProt 2-154 = auth 1-153\n  F [B]: P00441 (SODC_HUMAN): UniProt 2-154 = auth 1-153\n\nFrom the request:\n  SOD1: UniProt P00441 (SODC_HUMAN, Superoxide dismutase [Cu-Zn])\n  p.Asp77Val: UniProt position 77 (Asp in UniProt) -> in 2C9V: auth A 76 ASP (label A 76); auth F 76 ASP (label B 76)\n  p.Asp125Gly: UniProt position 125 (Asp in UniProt) -> in 2C9V: auth A 124 ASP (label A 124); auth F 124 ASP (label B 124)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P00441.json",
+   "data/panel/facts/2c9v.json",
+   "molbench/sifts_tables/2c9v.json.gz",
+   "molbench/atom_tables/2c9v.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (4 residue(s), 32 atoms, residue name(s) ASP = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "SOD1",
+   "accession": "P00441",
+   "protein": "Superoxide dismutase [Cu-Zn]",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 1,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "magenta"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Asp77Val",
+     "variant": "D77V",
+     "hgvs": "p.Asp77Val",
+     "uniprot_position": 77,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001030809"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 76,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 76,
+       "comp_id": "ASP"
+      },
+      {
+       "auth_asym_id": "F",
+       "auth_seq_id": 76,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 76,
+       "comp_id": "ASP"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "p.Asp125Gly",
+     "variant": "D125G",
+     "hgvs": "p.Asp125Gly",
+     "uniprot_position": 125,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001212596"
+     ],
+     "clinvar_classification": [
+      "Pathogenic/Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 124,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 124,
+       "comp_id": "ASP"
+      },
+      {
+       "auth_asym_id": "F",
+       "auth_seq_id": 124,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "B",
+       "label_seq_id": 124,
+       "comp_id": "ASP"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "report_apart": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -1
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": true,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 2,
+    "target_residues": 4,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": true,
+    "name_read_as_mature_number_is_same_amino_acid": true,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

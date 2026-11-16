@@ -131,6 +131,13 @@
    ],
    "representation": "ball_and_stick",
    "color": "brown"
+  },
+  {
+   "selector": {
+    "label_comp_id": "HEC"
+   },
+   "representation": "ball_and_stick",
+   "color": "teal"
   }
  ],
  "twin_of": "gr-attachment-1hrc-hec-api",
@@ -149,7 +156,7 @@
   "checks": [
    "each link re-measured in the frozen mmCIF: 1.75 A, 1.86 A",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 12 atoms on the frozen atom table"
+   "target selects 55 atoms on the frozen atom table"
   ],
   "derivation": "every copy of HEC (HEME C) and the polymer residues with a covalent link record (`_struct_conn`, `covale`) to it in the facts: CYS14 (A), CYS17 (A)",
   "difficulty": {

@@ -1535,13 +1535,16 @@ def t_inscode(s: S) -> dict | None:
               [{"auth_asym_id": r["ac"], "auth_seq_id": r["an"], "pdbx_PDB_ins_code": r["ins"]}], color=c)
     siblings = s.mask(auth_asym_id=r["ac"], auth_seq_id=r["an"]) & s.poly
     n_sib = len({(x["an"], x["ins"]) for x in s.residues if x["mask"] & siblings})
+    # The label position is stated: nobody knows it from memory and this tier runs
+    # without a lookup. What the task tests is knowing that the viewer needs it.
+    label = f"In the mmCIF label numbering it is residue {r['ls']} of label chain {r['lc']}."
     return {
         "prompts": [f"Load {s.name} and colour {name}{where} {cw(c)}: the residue with insertion code "
-                    f"{r['ins']}, not the other residue{'s' if n_sib > 2 else ''} numbered {r['an']}.",
+                    f"{r['ins']}, not the other residue{'s' if n_sib > 2 else ''} numbered {r['an']}. {label}",
                     f"In {s.name}, colour residue {r['an']}{r['ins']}{where} ({r['comp'].capitalize()}, insertion "
-                    f"code {r['ins']}) {cw(c)}; every other residue numbered {r['an']} keeps its colour.",
+                    f"code {r['ins']}) {cw(c)}; every other residue numbered {r['an']} keeps its colour. {label}",
                     f"Open {s.name}. {name}{where} carries the insertion code {r['ins']}. Colour that one "
-                    f"residue {cw(c)} and nothing else."],
+                    f"residue {cw(c)} and nothing else. {label}"],
         "reference": [L, color_call([one])],
         "target": [{"selector": [{"auth_asym_id": r["ac"], "auth_seq_id": r["an"],
                                   "pdbx_PDB_ins_code": r["ins"]}], "representation": None, "color": c}],
@@ -1974,7 +1977,7 @@ def add_call_forms(task: dict, spec: dict) -> None:
             or not api_forms.whole_polymer_cartoon(task["reference"]):
         return
     view = T._with_aliases(dict(task))
-    kept = api_forms.accepted_forms(task["reference"], api_forms.cartoon_forms(task["reference"]),
+    kept = api_forms.accepted_forms(task["reference"], api_forms.all_forms(task["reference"]),
                                     runner.grader_target(view, task["target"]), task["accepted"])
     if not kept:
         return
@@ -1983,11 +1986,18 @@ def add_call_forms(task: dict, spec: dict) -> None:
     if any(grade(trial, w)["success"] for w in wrong) or T.validate_task({**task, "accepted": trial["accepted"]}):
         return
     task["accepted"] = trial["accepted"]
+    free = api_forms.free_hides(task["reference"], task["accepted"],
+                                runner.grader_target(view, task["target"]))
+    if free:
+        hidden = T._with_aliases({**task, "free_hide": free})
+        if not any(grade(hidden, api_forms.with_hidden(w, free))["success"] for w in wrong
+                   if isinstance(w, list)):
+            task["free_hide"] = free
     task["provenance"]["call_forms"] = [label for label, _ in kept]
     task["provenance"]["checks"].append(
         f"{len(kept)} further call form(s) accepted, because the request does not state what they "
-        f"differ in ({'; '.join(label for label, _ in kept)}): each replays with nothing ignored, ends in "
-        "a state of its own and draws the target atoms as the reference does (target recall 1); the "
+        f"differ in ({' | '.join(label for label, _ in kept)}): each replays with nothing ignored, ends in "
+        "a state of its own and draws the target atoms as the reference does; the "
         "near miss and every wrong answer above still fail (scripts/api_forms.py)")
 
 
@@ -2196,7 +2206,7 @@ DERIVATION = {
     "api-canvas": "Background, lighting and spin.",
     "api-highlight": "The viewer's highlight on seeded author-numbered residues, with a highlight colour and focus.",
     "api-tooltips": "Tooltips on seeded author-numbered residues (the text is the residue's own name and number), waters hidden.",
-    "api-inscode": "One residue that carries an insertion code (221A), from the frozen atom table. The viewer ignores insertion codes, so the reference names it by label chain and label number; the author number, with or without auth_ins_code_id, selects its siblings too and is a trap.",
+    "api-inscode": "One residue that carries an insertion code (221A), from the frozen atom table. The viewer ignores insertion codes, so the reference names it by label chain and label number, both of which the prompt states; the author number, with or without auth_ins_code_id, selects its siblings too and is a trap.",
     "api-label-chain": "A polymer chain named by its mmCIF label chain id where that differs from the author chain id (frozen facts): struct_asym_id. The same letter as an author chain id, and the whole author chain, are traps.",
     "api-undo": "A request with a step that is undone again (one of two colours taken off, a highlight cleared, one of two tooltips removed, the selection colour reset). Only the final state is graded, and the undo is needed: the list of every step but the undo is a trap that must fail.",
     "api-maps": "X-ray entries: electron-density maps on, one map styled (declared settings).",

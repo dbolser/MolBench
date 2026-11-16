@@ -111,6 +111,170 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "6tc2"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "entity_id": "6",
+            "representation": "spacefill",
+            "representationColor": "yellow",
+            "color": null
+          }
+        ],
+        "non_selected_color": "steelblue"
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "6tc2"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "entity_id": "6",
+            "representation": "spacefill",
+            "representationColor": "yellow"
+          }
+        ],
+        "non_selected_color": "steelblue"
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "6tc2"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "struct_asym_id": "A",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "B",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "C",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "D",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "E",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "F",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "G",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "H",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "I",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "J",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "K",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "L",
+            "color": "steelblue"
+          },
+          {
+            "entity_id": "6",
+            "representation": "spacefill",
+            "representationColor": "yellow",
+            "color": null
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "6tc2"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "struct_asym_id": "A",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "B",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "C",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "D",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "E",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "F",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "G",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "H",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "I",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "J",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "K",
+            "color": "steelblue"
+          },
+          {
+            "struct_asym_id": "L",
+            "color": "steelblue"
+          },
+          {
+            "entity_id": "6",
+            "representation": "spacefill",
+            "representationColor": "yellow"
+          }
+        ]
+      }
     ]
   ],
   "context": null,
@@ -138,7 +302,8 @@
       "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
-      "2 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour; default view, rest untouched): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
+      "6 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour | default view, rest untouched | default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface left as it is | default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface in the select colour | default view, rest untouched; the viewer's own drawing under the spheres or surface left as it is | default view, rest untouched; the viewer's own drawing under the spheres or surface in the select colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (scripts/api_forms.py)",
+      "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_heteroatoms: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)"
     ],
     "twin": {
       "of": "tr-water-6tc2",
@@ -148,7 +313,11 @@
       "colour_classes": 1,
       "call_forms": [
         "default view, rest in the backdrop colour",
-        "default view, rest untouched"
+        "default view, rest untouched",
+        "default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface left as it is",
+        "default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface in the select colour",
+        "default view, rest untouched; the viewer's own drawing under the spheres or surface left as it is",
+        "default view, rest untouched; the viewer's own drawing under the spheres or surface in the select colour"
       ]
     },
     "difficulty": {
@@ -175,5 +344,8 @@
     "representation",
     "color",
     "multi-component"
+  ],
+  "free_hide": [
+    "hide_heteroatoms"
   ]
 }

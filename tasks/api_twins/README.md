@@ -4,12 +4,12 @@ Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin 
 
 Run this script after every MVS generator, then `scripts/generate_paraphrases.py`, then this script once more (the counts below include the paraphrases). It writes `twin_of` into the MVS task files; the generators of the translation and grounded tiers keep a link that is already in the file when they rebuild.
 
-- MVS tasks read: 428
-- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 158
+- MVS tasks read: 425
+- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 155
 - left without an API counterpart by a generator that writes both tracks: 55
 - in the old task format (no `twin_of` field, so no twin is written): 0, of which the API could express 0
 - left for this script: 215; **twins written: 125 (58%)**
-- MVS tasks with an API twin, all generators together: 283 of 428 (66%)
+- MVS tasks with an API twin, all generators together: 280 of 425 (66%)
 
 ## Twins by template
 
@@ -65,32 +65,32 @@ Run this script after every MVS generator, then `scripts/generate_paraphrases.py
 An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin has to take away what the scene does not draw: with hide toggles (`provenance.twin.switched_off`) or with a global style that draws polymer only (`provenance.twin.base`). The request says what to show, not what to remove, so task success on a twin also asks the model to know what a load draws by default. The paired analysis should report twins with and without such steps separately (`provenance.difficulty.context_switched_off`, `order_matters`); the target score does not depend on them.
 
 - base: the cartoon style 115; the default view 4; the molecular-surface style 4; the spacefill style 2
-- hide toggles: `hide_carbs` 2; `hide_heteroatoms` 6; `hide_polymer` 12; `hide_water` 5
+- hide toggles: `hide_carbs` 2; `hide_heteroatoms` 6; `hide_polymer` 9; `hide_water` 5
 - twins on the default view with nothing switched off: 3
-- twins with an added, coloured representation (`representationColor`): 84
+- twins with an added, coloured representation (`representationColor`): 83
 
 | surface | name | twins |
 |---|---|---:|
 | action | `color` | 125 |
 | action | `focus` | 4 |
 | action | `load` | 125 |
-| action | `set_property` | 18 |
+| action | `set_property` | 15 |
 | action | `set_visual_style` | 121 |
-| call option | `color.non_selected_color` | 89 |
+| call option | `color.non_selected_color` | 91 |
 | property | `hide_carbs` | 2 |
 | property | `hide_heteroatoms` | 6 |
-| property | `hide_polymer` | 12 |
+| property | `hide_polymer` | 9 |
 | property | `hide_water` | 5 |
-| selection attribute | `color` | 86 |
-| selection attribute | `representation` | 84 |
-| selection attribute | `representationColor` | 84 |
-| selector key | `auth_asym_id` | 60 |
-| selector key | `auth_seq_id` | 42 |
-| selector key | `end_auth_residue_number` | 11 |
+| selection attribute | `color` | 87 |
+| selection attribute | `representation` | 83 |
+| selection attribute | `representationColor` | 83 |
+| selector key | `auth_asym_id` | 58 |
+| selector key | `auth_seq_id` | 40 |
+| selector key | `end_auth_residue_number` | 9 |
 | selector key | `end_residue_number` | 8 |
 | selector key | `entity_id` | 17 |
 | selector key | `label_comp_id` | 28 |
-| selector key | `start_auth_residue_number` | 11 |
+| selector key | `start_auth_residue_number` | 9 |
 | selector key | `start_residue_number` | 8 |
 | selector key | `struct_asym_id` | 24 |
 | visual style | `cartoon` | 115 |
@@ -101,7 +101,7 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 
 | reason | tasks |
 |---|---:|
-| already has a twin from its own generator | 158 |
+| already has a twin from its own generator | 155 |
 | left without an API counterpart by its own two-track generator | 55 |
 | the structure is named by protein and entries outside the panel are accepted | 39 |
 | a distance line or another drawn primitive | 30 |

@@ -16,6 +16,9 @@ form `{"root": {"kind": "root", "children": [ ... ]}}`.
   numbers. Make your best specific guess rather than a vague selection.
 * Only include what the user asks for — MVS is additive, so to "hide waters" you
   simply do not add a water component.
+* The answer is judged by what the viewer ends up showing: which atoms are drawn, in
+  which representation and colour, plus labels, focus and measurements. How the tree
+  is written does not matter; anything drawn that was not asked for counts against it.
 
 ## Follow-up requests
 

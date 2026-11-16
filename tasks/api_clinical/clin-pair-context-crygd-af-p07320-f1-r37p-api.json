@@ -1,0 +1,245 @@
+{
+ "id": "clin-pair-context-crygd-af-p07320-f1-r37p-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-pair-context",
+ "structures": [
+  "af-p07320-f1-model_v6"
+ ],
+ "prompt": "The AlphaFold DB model AF-P07320-F1 (model version 6): the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Arg37Pro is classified as likely pathogenic in ClinVar. Show the whole structure as a khaki cartoon, with the residue it replaces as orange spacefill spheres.",
+ "reference": [
+  {
+   "action": "load",
+   "custom_data": {
+    "url": "https://alphafold.ebi.ac.uk/files/AF-P07320-F1-model_v6.cif",
+    "format": "cif",
+    "binary": false
+   }
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P07320",
+     "uniprot_residue_number": 37,
+     "color": "khaki",
+     "representation": "spacefill",
+     "representationColor": "orange"
+    }
+   ],
+   "non_selected_color": "khaki"
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P07320-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P07320",
+      "uniprot_residue_number": 37,
+      "color": "orange",
+      "representation": "spacefill",
+      "representationColor": "orange"
+     }
+    ],
+    "non_selected_color": "khaki"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P07320-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P07320",
+      "uniprot_residue_number": 37,
+      "color": "khaki",
+      "representation": "spacefill",
+      "representationColor": "orange"
+     }
+    ],
+    "non_selected_color": "khaki"
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P07320-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P07320",
+      "uniprot_residue_number": 37,
+      "color": "orange",
+      "representation": "spacefill",
+      "representationColor": "orange"
+     }
+    ],
+    "non_selected_color": "khaki"
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 37
+   },
+   "representation": "spacefill",
+   "color": "orange"
+  }
+ ],
+ "twin_of": "clin-pair-context-crygd-af-p07320-f1-r37p-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "AlphaFold DB model AF-P07320-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Gamma-crystallin D), protein, 174 of 174 residues observed: auth 1-174 = label 1-174\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P07320 (CRGD_HUMAN): UniProt 1-174 = auth 1-174\n\nFrom the request:\n  CRYGD: UniProt P07320 (CRGD_HUMAN, Gamma-crystallin D)\n  p.Arg37Pro: UniProt position 37 (Arg in UniProt) -> in the model: auth A 37 ARG (label A 37)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P07320.json",
+   "data/panel/facts/af-p07320-f1-model_v6.json",
+   "molbench/sifts_tables/af-p07320-f1-model_v6.json.gz",
+   "molbench/atom_tables/af-p07320-f1-model_v6.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 11 atoms, residue name(s) ARG = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "CRYGD",
+   "accession": "P07320",
+   "protein": "Gamma-crystallin D",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "structure",
+   "chain": null,
+   "wording": 1,
+   "look": {
+    "rep": "spacefill",
+    "color": "orange",
+    "backdrop": "khaki"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Arg37Pro",
+     "variant": "R37P",
+     "hgvs": "p.Arg37Pro",
+     "uniprot_position": 37,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV002580739"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 37,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 37,
+       "comp_id": "ARG"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "report_apart": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": false,
+    "author_minus_uniprot": [
+     0
+    ],
+    "structure_has_offset": false,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": true,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": true,
+    "number_in_name_as_label_number_is_right": true
+   },
+   "pair": {
+    "with": "clin-pair-context-crygd-1hk0-r37p-api",
+    "this_structure": "author numbers are UniProt numbers"
+   },
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "af-p07320-f1",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 37
+     }
+    ],
+    "what": "p.Arg37Pro residue(s)",
+    "n_atoms": 11
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ]
+}

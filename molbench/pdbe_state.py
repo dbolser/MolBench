@@ -309,7 +309,8 @@ def _between(table: AtomTable, column: str, lo: Any, hi: Any) -> int:
     return out
 
 
-def resolve_param(table: AtomTable, param: dict[str, Any], entry: str = "") -> int:
+def resolve_param(table: AtomTable, param: dict[str, Any], entry: str = "",
+                  sifts: bool = True) -> int:
     """Atoms one QueryParam selects, as a bitmask over the table's rows."""
     p = param
     sel = (1 << table.n) - 1
@@ -348,12 +349,14 @@ def resolve_param(table: AtomTable, param: dict[str, Any], entry: str = "") -> i
         sel &= _eq(table, "label_comp_id", p["label_comp_id"]) if isinstance(p["label_comp_id"], str) else 0
     elif _truthy(p.get("uniprot_accession")) and defined("uniprot_residue_number"):
         n = p["uniprot_residue_number"]
-        sel &= uniprot_residue_atoms(entry, p["uniprot_accession"], int(n)) if _whole(n) else 0
+        # sifts=False: the loaded file has no SIFTS columns, so nothing matches
+        sel &= uniprot_residue_atoms(entry, p["uniprot_accession"], int(n)) \
+            if sifts and _whole(n) else 0
     elif (_truthy(p.get("uniprot_accession")) and defined("start_uniprot_residue_number")
           and defined("end_uniprot_residue_number")):
         lo, hi = p["start_uniprot_residue_number"], p["end_uniprot_residue_number"]
         sel &= uniprot_range_atoms(entry, p["uniprot_accession"], lo, hi) \
-            if _is_num(lo) and _is_num(hi) else 0
+            if sifts and _is_num(lo) and _is_num(hi) else 0
     elif defined("residue_number"):
         sel &= num_eq("label_seq_id", p["residue_number"])
     elif ordered("start_residue_number", "end_residue_number"):
@@ -483,11 +486,30 @@ def canonical_entry(molecule_id: Any, custom_data: Any) -> str | None:
     return None
 
 
+_SIFTS_URL = re.compile(
+    r"^https?://(?:alphafold\.ebi\.ac\.uk/files/AF-"
+    r"|(?:www\.)?ebi\.ac\.uk/pdbe/(?:entry-files/(?:download/)?[0-9][a-z0-9]{3}(?:_updated\.cif|\.bcif)"
+    r"|model-server/))", re.I)
+
+
+def has_sifts_columns(custom_data: Any) -> bool:
+    """Whether what a load fetches carries the residue-level UniProt mapping
+    (``pdbx_sifts_xref_db_*``) that ``uniprot_*`` selections read. A ``molecule_id``
+    load fetches PDBe's updated file, which does; so do PDBe's updated files and
+    AlphaFold DB files named by URL. Any other URL (RCSB's archive mmCIF, a PDB-format
+    file) does not, and there the viewer selects nothing for those keys (read back in
+    pdbe-molstar 3.3.2: 0 atoms on files.rcsb.org/download/8eph.cif)."""
+    if isinstance(custom_data, dict) and custom_data.get("url"):
+        return bool(_SIFTS_URL.match(str(custom_data["url"])))
+    return True
+
+
 class ViewerState:
     """Where the viewer ends up. Atom sets are bitmasks over ``table`` rows."""
 
     def __init__(self) -> None:
         self.entry: str | None = None          # canonical_entry of what is loaded
+        self.sifts: bool = True                # the loaded file carries SIFTS columns
         self.table: AtomTable | None = None
         self.assembly: str = ""                # "" = deposited model
         self.preset: str = "default"
@@ -528,7 +550,7 @@ class ViewerState:
         if self.table is None:
             return _symbol(param)
         try:
-            return resolve_param(self.table, param, self.entry or "")
+            return resolve_param(self.table, param, self.entry or "", self.sifts)
         except NotImplementedError as e:
             self.unresolved.append(f"{json.dumps(_locator(param), sort_keys=True)}: {e}")
             return 0
@@ -564,7 +586,16 @@ class ViewerState:
         """The atoms of a component that a representation type actually draws."""
         t = self.table
         if rep in ("cartoon", "putty"):
-            return atoms & t.static.get("polymer", 0)
+            # Only polymer residues that have a trace atom (CA; O3' of a nucleotide):
+            # the viewer draws no ribbon through Pro552 of 3ERT (only N is modelled) or
+            # the acetyl cap of 1HRC. Read back per representation in pdbe-molstar
+            # 3.3.2; the same rule as mvs._what_is_drawn.
+            from .mvs import _grow, _table_extras
+            ex = _table_extras(t)
+            traced = getattr(t, "_traced_residues", None)
+            if traced is None:
+                traced = t._traced_residues = _grow(t, ex["trace"]) & ex["polymer"]
+            return atoms & traced
         if rep == "carbohydrate":
             return atoms & t.static.get("branched", 0) & ~t.static.get("polymer", 0)
         if rep == "ellipsoid" or rep not in REPRESENTATIONS:
@@ -729,6 +760,7 @@ def _apply(s: ViewerState, act: dict, tables) -> None:
         if spec == (s.entry, s.assembly, s.preset, s.ligand_view):
             return                      # same trait values: no change event, no reload
         s.entry, s.assembly, s.preset, s.ligand_view = spec
+        s.sifts = has_sifts_columns(act.get("custom_data"))
         _reload(s, tables)
         return
 
@@ -1071,7 +1103,7 @@ def target_atoms(target: Any, s: ViewerState) -> int | None:
     for prm in target.get("data") if isinstance(target.get("data"), list) else []:
         if isinstance(prm, dict):
             try:
-                out |= resolve_param(s.table, prm, s.entry or "")
+                out |= resolve_param(s.table, prm, s.entry or "")   # a task's target: by entry
             except NotImplementedError:
                 pass
     if "selector" in target:
@@ -1306,13 +1338,16 @@ def gradable(reference: Any, tables: Callable = load_table) -> bool:
 
 def grade_state(reference: list, predicted: Any, accepted: list[list] | None = None,
                 tables: Callable = load_table, target: Any = None,
-                accepted_targets: list | None = None) -> dict[str, Any]:
+                accepted_targets: list | None = None,
+                free_hide: list[str] | tuple[str, ...] | None = None) -> dict[str, Any]:
     """Grade an answer by the final viewer state. ``accepted`` lists further action
     lists that are also right; the answer is scored against the one it matches best.
     ``target`` is the task's ``target`` (the atoms the request is about);
     ``accepted_targets`` gives one per accepted list (``mvs.alternative_target`` says
-    which target an alternative is scored on). The result has the same keys as the MVS
-    grader's (``drawn.RESULT_KEYS``)."""
+    which target an alternative is scored on). ``free_hide`` (the task's field of that
+    name) lists hide toggles the request leaves open: where the answer sets one that a
+    right list does not, the answer is compared with that list plus the toggle. The
+    result has the same keys as the MVS grader's (``drawn.RESULT_KEYS``)."""
     from . import drawn
     from .mvs import alternative_target
     if not isinstance(predicted, list):
@@ -1322,6 +1357,9 @@ def grade_state(reference: list, predicted: Any, accepted: list[list] | None = N
     for i, ref in enumerate([reference] + list(accepted or [])):
         try:
             ref_state = replay(copy.deepcopy(ref), tables)
+            for flag in free_hide or ():
+                if flag in HIDE_FLAGS and flag != "hide_polymer" and pred.hide.get(flag):
+                    ref_state.hide[flag] = True
             tgt = alternative_target(
                 i, target, accepted_targets,
                 lambda t, st=ref_state: compare(st, st, t)["target_f1"] == 1.0)

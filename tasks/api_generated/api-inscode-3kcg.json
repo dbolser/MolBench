@@ -6,7 +6,7 @@
   "structures": [
     "3kcg"
   ],
-  "prompt": "Open 3KCG. Phe184A of chain H carries the insertion code A. Colour that one residue brown and nothing else.",
+  "prompt": "Open 3KCG. Phe184A of chain H carries the insertion code A. Colour that one residue brown and nothing else. In the mmCIF label numbering it is residue 173 of label chain B.",
   "reference": [
     {
       "action": "load",

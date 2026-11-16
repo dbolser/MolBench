@@ -8,7 +8,7 @@ api-domain-overlay-5cj6
 api-highlight-7a4m
 clin-chain-hbb-2hhb-v68m-chainb-api
 clin-hgvs-context-serpina1-8pi2-m409t-api
-clin-hgvs-target-f9-8eph-i344t-api
+clin-hgvs-target-ar-5cj6-l702f-api
 clin-legacy-context-f9-8eph-p101a-api
 clin-legacy-target-hbb-af-p68871-f1-e7v-api
 fu-add-chain-3ave-mvs

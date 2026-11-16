@@ -6,7 +6,7 @@
   "structures": [
     "8eph"
   ],
-  "prompt": "Open 8EPH. Thr60A of chain D carries the insertion code A. Colour that one residue plum and nothing else.",
+  "prompt": "Open 8EPH. Thr60A of chain D carries the insertion code A. Colour that one residue plum and nothing else. In the mmCIF label numbering it is residue 45 of label chain D.",
   "reference": [
     {
       "action": "load",

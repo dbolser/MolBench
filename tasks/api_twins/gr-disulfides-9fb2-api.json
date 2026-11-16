@@ -134,6 +134,133 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "9fb2"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 43,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 55,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 57,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 62,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          }
+        ],
+        "non_selected_color": "gray"
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "9fb2"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 43,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 55,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 57,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 62,
+            "color": "teal",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          }
+        ],
+        "non_selected_color": "gray"
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "9fb2"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "color": "gray",
+            "auth_asym_id": "A"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 43,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 55,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 57,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 62,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "teal"
+          }
+        ]
+      }
     ]
   ],
   "context": null,
@@ -178,7 +305,8 @@
       "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
-      "2 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour; default view, rest untouched): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
+      "5 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour | default view, rest untouched | the stretch under the added representation in the highlight colour, not the backdrop colour | default view, rest in the backdrop colour; the stretch under the added representation in the highlight colour, not the backdrop colour | default view, rest untouched; chains by author id: their ligands, ions and waters take the chain's colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (scripts/api_forms.py)",
+      "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water, hide_heteroatoms, hide_carbs: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)"
     ],
     "twin": {
       "of": "gr-disulfides-9fb2",
@@ -188,7 +316,10 @@
       "colour_classes": 1,
       "call_forms": [
         "default view, rest in the backdrop colour",
-        "default view, rest untouched"
+        "default view, rest untouched",
+        "the stretch under the added representation in the highlight colour, not the backdrop colour",
+        "default view, rest in the backdrop colour; the stretch under the added representation in the highlight colour, not the backdrop colour",
+        "default view, rest untouched; chains by author id: their ligands, ions and waters take the chain's colour"
       ]
     },
     "difficulty": {
@@ -217,5 +348,10 @@
     "representation",
     "color",
     "multi-component"
+  ],
+  "free_hide": [
+    "hide_water",
+    "hide_heteroatoms",
+    "hide_carbs"
   ]
 }

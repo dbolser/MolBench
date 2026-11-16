@@ -65,6 +65,33 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "4ins"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "color": "green",
+            "auth_asym_id": "B"
+          },
+          {
+            "color": "green",
+            "auth_asym_id": "D"
+          },
+          {
+            "color": "plum",
+            "auth_asym_id": "A"
+          },
+          {
+            "color": "plum",
+            "auth_asym_id": "C"
+          }
+        ]
+      }
     ]
   ],
   "context": null,
@@ -111,7 +138,8 @@
       "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
-      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
+      "2 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour | default view, rest in the backdrop colour; chains by author id: their ligands, ions and waters take the chain's colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (scripts/api_forms.py)",
+      "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water, hide_heteroatoms: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)"
     ],
     "twin": {
       "of": "gr-entity-4ins",
@@ -120,7 +148,8 @@
       "added_representations": 0,
       "colour_classes": 2,
       "call_forms": [
-        "default view, rest in the backdrop colour"
+        "default view, rest in the backdrop colour",
+        "default view, rest in the backdrop colour; chains by author id: their ligands, ions and waters take the chain's colour"
       ]
     },
     "difficulty": {
@@ -145,5 +174,9 @@
     "selection",
     "representation",
     "color"
+  ],
+  "free_hide": [
+    "hide_water",
+    "hide_heteroatoms"
   ]
 }

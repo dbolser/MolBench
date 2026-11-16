@@ -193,6 +193,13 @@ def cand(entry, wordings, children, target, derivation, checks, numbering=None,
             "flags": flags or {}, "more": more or {}, "words": words}
 
 
+#: Tasks that need the entry's own helix and strand records (audit of 2026-11-16): the
+#: same kind of task as the clinical helix/strand ones, and flagged the same way.
+ANNOTATION = {"report_apart": "needs the entry's own helix and strand records, which no "
+                              "prompt condition supplies on this tier (annotation recall); "
+                              "reported apart from the tier, like the clinical helix/strand tasks"}
+
+
 def grey_cartoon() -> dict:
     return C.drawn_comp("polymer", "cartoon", GREY)
 
@@ -343,7 +350,7 @@ def t_heme_axial():
              "protein that bind{vs} the heme iron{hs} directly, as {c2} ball-and-stick."],
             [grey_cartoon(), C.drawn_comp(hsel, "ball_and_stick", c1),
              C.drawn_comp(rsel, "ball_and_stick", c2)],
-            [C.part(rsel, "ball_and_stick", c2)],
+            [C.part(rsel, "ball_and_stick", c2), C.part(hsel, "ball_and_stick", c1)],
             "the polymer residues with a metal-coordination record (`_struct_conn`, "
             "`metalc`) to a heme iron in the facts: "
             + ", ".join(f"{p['comp_id']}{p['auth_seq_id']} of chain {p['auth_asym_id']}"
@@ -452,7 +459,7 @@ def t_metal_site():
                  "the {what} that coordinates {a_metal} {metal} ion, as {c2} ball-and-stick."],
                 [grey_cartoon(), C.drawn_comp(msel, "spacefill", c1),
                  C.drawn_comp(rsel, "ball_and_stick", c2)],
-                [C.part(rsel, "ball_and_stick", c2)],
+                [C.part(rsel, "ball_and_stick", c2), C.part(msel, "spacefill", c1)],
                 f"every {comp} ion of the facts ({n}) as a sphere, and the polymer residues "
                 f"with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: "
                 + ", ".join(f"{p['comp_id']}{p['auth_seq_id']}{p.get('pdbx_PDB_ins_code') or ''}"
@@ -563,6 +570,7 @@ def t_glyco_sites():
              f"{max(dists):.2f} A",
              "the residues are exactly the polymer part of Mol*'s `branched` selection"],
             numbering=sel, flags={"structure_lookup": True},
+            more={"excludes": ["carbs"]},      # "no sugars": read by the API translator
             word=word, c=C.say_colour(col), sites="site" if n == 1 else "sites",
             carry="carries" if n == 1 else "carry"))
     return out
@@ -640,7 +648,8 @@ def t_secstruct():
             + ("; strands " + ", ".join(element_text(s) for s in strands) if strands else ""),
             ["the helix and strand records were re-read from the frozen mmCIF and agree "
              "with the facts", "no residue is in both a helix and a strand"],
-            numbering=hsel + ssel, flags={"structure_lookup": True}, what=what))
+            numbering=hsel + ssel, flags={"structure_lookup": True}, more=dict(ANNOTATION),
+            what=what))
     return out
 
 
@@ -673,7 +682,8 @@ def t_longest_helix():
             f"({sized[0][0]} residues; the next longest has {sized[1][0]})",
             ["the helix records were re-read from the frozen mmCIF and agree with the facts",
              "the longest helix is at least 3 residues longer than any other"],
-            numbering=sel, flags={"structure_lookup": True}, c=C.say_colour(col)))
+            numbering=sel, flags={"structure_lookup": True}, more=dict(ANNOTATION),
+            c=C.say_colour(col)))
     return out
 
 
@@ -709,13 +719,17 @@ def t_nucleic():
             rep = C.pick(["ball_and_stick", "cartoon"], "g-nucleic-rep", entry)
             out.append(cand(
                 entry,
-                ["Load {ID} and show only the {na}, as {rep_a}. No water, no ions.",
-                 "From {ID}, show just the {na} itself as {rep_a}, leaving out waters and ions.",
+                # the entry's own hetero groups decide the words: 1BNA has no ions
+                ["Load {ID} and show only the {na}, as {rep_a}. " + ("No water, no ions."
+                                                                    if f["ligands"] else "No water."),
+                 "From {ID}, show just the {na} itself as {rep_a}, leaving out "
+                 + ("waters and ions." if f["ligands"] else "the waters."),
                  "{ID}: the {na} alone, as {rep_a}."],
                 [C.drawn_comp("nucleic", rep, c1)],
                 [C.part("nucleic", rep, c1)],
                 f"Mol*'s `nucleic` selection in one representation; nothing else is drawn",
                 checks, flags={"structure_lookup": True},
+                more={"excludes": ["water", "heteroatoms"]},   # "only the DNA", "the DNA alone"
                 na=na, rep_a=f"{C.say_colour(c1)} {C.REP_WORDS[rep]}"
                 if rep != "cartoon" else f"{C.article(C.say_colour(c1))}{C.say_colour(c1)} cartoon"))
     return out
@@ -904,7 +918,7 @@ def t_attachment():
                  "linked to it as {c2} ball-and-stick."],
                 [grey_cartoon(), C.drawn_comp(lsel, "ball_and_stick", c1),
                  C.drawn_comp(rsel, "ball_and_stick", c2)],
-                [C.part(rsel, "ball_and_stick", c2)],
+                [C.part(rsel, "ball_and_stick", c2), C.part(lsel, "ball_and_stick", c1)],
                 f"every copy of {comp} ({g['name'][:60]}) and the polymer residues with a "
                 "covalent link record (`_struct_conn`, `covale`) to it in the facts: "
                 + ", ".join(f"{r['comp_id']}{r['auth_seq_id']} ({r['auth_asym_id']})"

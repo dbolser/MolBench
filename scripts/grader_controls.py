@@ -624,6 +624,24 @@ def _(c: Ctx):
 
 
 
+@control(MVS_WRONG, "file_that_loads_nothing",
+         "the right scene on a source Mol* cannot read: the mmCIF file parsed as BinaryCIF, the "
+         "entry's web page instead of its file, or a bare file name (the viewer shows nothing)",
+         viewer=False)
+def _(c: Ctx):
+    if c.res is None or c.e.af:
+        return None
+    ref = c.highlight()
+    which = c.rng.choice(["format", "page", "relative"])
+    if which == "format":
+        url, fmt = f"https://files.rcsb.org/download/{c.e.id}.cif", "bcif"
+    elif which == "page":
+        url, fmt = f"https://www.rcsb.org/structure/{c.e.id.upper()}", "mmcif"
+    else:
+        url, fmt = f"{c.e.id}.cif", "mmcif"
+    return ref, scene(c.e, copy.deepcopy(components(ref)), url=url, fmt=fmt)
+
+
 @control(MVS_WRONG, "residue_off_by_one", "the neighbouring residue is highlighted")
 def _(c: Ctx):
     cands = [r for r in c.plain if c.neighbour(r)]
@@ -1178,7 +1196,111 @@ def _(c: Ctx):
     return ref, pred, accepted
 
 
+def _stretch_task(c: Ctx):
+    """'<entry>: grey cartoon, with <residue> as <colour> ball-and-stick', as an API task
+    with the call forms scripts/api_forms.py accepts for it. Returns (reference,
+    accepted, free hide toggles, residue)."""
+    r = c.res
+    item = api_auth(r, color="gray", representation="ball-and-stick", representationColor=c.c1)
+    ref = [load(c.e), {"action": "set_visual_style", "style": "cartoon"},
+           {"action": "color", "non_selected_color": "gray", "data": [item]}]
+    target = {"data": [api_auth(r)]}
+    kept = api_forms.accepted_forms(ref, api_forms.all_forms(ref), target)
+    accepted = [calls for _, calls in kept]
+    if not accepted:
+        return None
+    return ref, accepted, api_forms.free_hides(ref, accepted, target), r
+
+
+@control(API_EQUIVALENT, "unstated_stretch_in_highlight_colour",
+         "a grey cartoon and a residue as coloured ball-and-stick are asked for: the answer "
+         "colours the residue and adds the ball-and-stick in the same colour, the form the API "
+         "prompt's own example teaches (the residue's stretch of cartoon takes the highlight colour)",
+         viewer=False)
+@_api
+def _(c: Ctx):
+    made = _stretch_task(c)
+    if made is None:
+        return None
+    ref, accepted, free, r = made
+    pred = [load(c.e), {"action": "set_visual_style", "style": "cartoon"},
+            {"action": "color", "non_selected_color": "gray", "data": [api_auth(
+                r, color=c.c1, representation="ball-and-stick", representationColor=c.c1)]}]
+    return ref, pred, accepted, free
+
+
+@control(API_EQUIVALENT, "unstated_hide_water",
+         "the same request answered on the default view with the waters hidden, which nobody "
+         "asked for: the task accepts the cartoon style (no water drawn) and the default view "
+         "(water drawn), so the state in between is right too (the task's free_hide)", viewer=False)
+@_api
+def _(c: Ctx):
+    made = _stretch_task(c)
+    if made is None or "hide_water" not in made[2]:
+        return None
+    ref, accepted, free, r = made
+    pred = [load(c.e), {"action": "set_property", "name": "hide_water", "value": True},
+            {"action": "color", "non_selected_color": "gray", "data": [api_auth(
+                r, color="gray", representation="ball-and-stick", representationColor=c.c1)]}]
+    return ref, pred, accepted, free
+
+
+@control(API_EQUIVALENT, "uniprot_number_on_alphafold_model",
+         "on an AlphaFold DB model, a residue by UniProt accession and number instead of author "
+         "numbering (the model file carries the SIFTS columns)")
+def _(c: Ctx):
+    if not c.e.af or c.res is None:
+        return None
+    acc = c.e.id.split("-")[1].upper()
+    pool = [r for r in c.plain if sifts.uniprot_atoms(c.e.id, acc, r["auth_seq_id"]) == r["mask"]]
+    if not pool:
+        return None
+    r = c.rng.choice(pool)
+    af = {"action": "load", "custom_data": {
+        "url": f"https://alphafold.ebi.ac.uk/files/AF-{acc}-F1-model_v6.cif", "format": "cif",
+        "binary": False}}
+    return ([af, {"action": "color", "data": [api_auth(r, color=c.c1)]}],
+            [af, {"action": "color", "data": [{"uniprot_accession": acc,
+                                               "uniprot_residue_number": r["auth_seq_id"],
+                                               "color": c.c1}]}])
+
+
 # --- API: wrong answers ---------------------------------------------------------------
+
+@control(API_WRONG, "unstated_hide_polymer",
+         "the default-view answer to 'grey cartoon, residue as coloured ball-and-stick' with the "
+         "polymer hidden: a free hide toggle never covers what was asked for", viewer=False)
+@_api
+def _(c: Ctx):
+    made = _stretch_task(c)
+    if made is None or "hide_water" not in made[2]:
+        return None
+    ref, accepted, free, r = made
+    pred = [load(c.e), {"action": "set_property", "name": "hide_polymer", "value": True},
+            {"action": "color", "non_selected_color": "gray", "data": [api_auth(
+                r, color="gray", representation="ball-and-stick", representationColor=c.c1)]}]
+    return ref, pred, accepted, free
+
+
+@control(API_WRONG, "uniprot_number_on_a_file_without_sifts",
+         "a residue by UniProt accession and number on RCSB's mmCIF loaded by URL: that file has "
+         "no SIFTS columns, so the viewer selects nothing")
+@_api
+def _(c: Ctx):
+    table = sifts.load(c.e.id)
+    if table is None:
+        return None
+    rows = [x for x in table.rows if x.observed]
+    by_key = {(r["label_asym_id"], r["label_seq_id"]): r for r in c.plain}
+    rows = [x for x in rows if (x.label_asym_id, x.label_seq_id) in by_key]
+    if not rows:
+        return None
+    x = c.rng.choice(rows)
+    data = [{"uniprot_accession": x.accession, "uniprot_residue_number": x.unp_num, "color": c.c1}]
+    return ([load(c.e), {"action": "color", "data": data}],
+            [{"action": "load", "custom_data": {
+                "url": f"https://files.rcsb.org/download/{c.e.id}.cif", "format": "cif",
+                "binary": False}}, {"action": "color", "data": data}])
 
 @control(API_WRONG, "unstated_default_view_wrong_colour",
          "the default-view answer to 'grey cartoon, ligand in <colour>' with the ligand in another "
@@ -1433,8 +1555,10 @@ def build(seed: int = SEED, per_kind: int = PER_KIND) -> dict[str, list[dict]]:
                         "kind": kind, "what": what, "entry": eid,
                         "expect": "pass" if group == "equivalent" else "fail",
                         "viewer": viewer, "reference": ref, "prediction": pred,
-                        # a task's accepted alternatives, for the kinds that are about them
-                        **({"accepted": more[0]} if more else {})})
+                        # a task's accepted alternatives (and the hide toggles it leaves
+                        # free), for the kinds that are about them
+                        **({"accepted": more[0]} if more else {}),
+                        **({"free_hide": more[1]} if len(more) > 1 and more[1] else {})})
                     identical.setdefault(json.dumps(ref, sort_keys=True), (kind, eid, ref))
         every = sorted(identical.values(), key=lambda x: (x[1], x[0], json.dumps(x[2], sort_keys=True)))
         random.Random(f"{seed}:{track}:identical").shuffle(every)
@@ -1450,7 +1574,8 @@ def as_task(ctl: dict) -> dict:
     if ctl["track"] == "mvs":
         return {"id": ctl["id"], "category": "mvs", "reference_mvs": ctl["reference"]}
     return {"id": ctl["id"], "category": "api_calling", "reference": ctl["reference"],
-            **({"accepted": ctl["accepted"]} if ctl.get("accepted") else {})}
+            **({"accepted": ctl["accepted"]} if ctl.get("accepted") else {}),
+            **({"free_hide": ctl["free_hide"]} if ctl.get("free_hide") else {})}
 
 
 def old_success(ctl: dict) -> bool:

@@ -76,6 +76,169 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "4ins"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "color": "blue",
+            "struct_asym_id": "A"
+          },
+          {
+            "color": "blue",
+            "struct_asym_id": "C"
+          },
+          {
+            "color": "yellow",
+            "struct_asym_id": "B"
+          },
+          {
+            "color": "yellow",
+            "struct_asym_id": "D"
+          },
+          {
+            "label_comp_id": "ZN",
+            "representation": "spacefill",
+            "representationColor": "magenta",
+            "color": "magenta"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "4ins"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "color": "blue"
+          },
+          {
+            "auth_asym_id": "C",
+            "color": "blue"
+          },
+          {
+            "auth_asym_id": "B",
+            "color": "yellow"
+          },
+          {
+            "auth_asym_id": "D",
+            "color": "yellow"
+          },
+          {
+            "label_comp_id": "ZN",
+            "representation": "spacefill",
+            "representationColor": "magenta",
+            "color": null
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "4ins"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "color": "blue"
+          },
+          {
+            "auth_asym_id": "C",
+            "color": "blue"
+          },
+          {
+            "auth_asym_id": "B",
+            "color": "yellow"
+          },
+          {
+            "auth_asym_id": "D",
+            "color": "yellow"
+          },
+          {
+            "label_comp_id": "ZN",
+            "representation": "spacefill",
+            "representationColor": "magenta"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "4ins"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "color": "blue",
+            "struct_asym_id": "A"
+          },
+          {
+            "color": "blue",
+            "struct_asym_id": "C"
+          },
+          {
+            "color": "yellow",
+            "struct_asym_id": "B"
+          },
+          {
+            "color": "yellow",
+            "struct_asym_id": "D"
+          },
+          {
+            "label_comp_id": "ZN",
+            "representation": "spacefill",
+            "representationColor": "magenta",
+            "color": null
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "4ins"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "color": "blue",
+            "struct_asym_id": "A"
+          },
+          {
+            "color": "blue",
+            "struct_asym_id": "C"
+          },
+          {
+            "color": "yellow",
+            "struct_asym_id": "B"
+          },
+          {
+            "color": "yellow",
+            "struct_asym_id": "D"
+          },
+          {
+            "label_comp_id": "ZN",
+            "representation": "spacefill",
+            "representationColor": "magenta"
+          }
+        ]
+      }
     ]
   ],
   "context": null,
@@ -100,7 +263,7 @@
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
       "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.9184)",
-      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1); the near miss and every wrong answer above still fail (scripts/api_forms.py)"
+      "6 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour | default view, rest in the backdrop colour; chains by label id: the polymer chains alone are coloured | default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface left as it is | default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface in the select colour | default view, rest in the backdrop colour; chains by label id: the polymer chains alone are coloured; the viewer's own drawing under the spheres or surface left as it is | default view, rest in the backdrop colour; chains by label id: the polymer chains alone are coloured; the viewer's own drawing under the spheres or surface in the select colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does; the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "4ins",
     "derived": "Chain ids and the zinc ions are those of the frozen facts.",
@@ -200,7 +363,12 @@
     "july_task": "reworded",
     "prompt_change": "the ligand's component code added to the request (it was named in words only)",
     "call_forms": [
-      "default view, rest in the backdrop colour"
+      "default view, rest in the backdrop colour",
+      "default view, rest in the backdrop colour; chains by label id: the polymer chains alone are coloured",
+      "default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface left as it is",
+      "default view, rest in the backdrop colour; the viewer's own drawing under the spheres or surface in the select colour",
+      "default view, rest in the backdrop colour; chains by label id: the polymer chains alone are coloured; the viewer's own drawing under the spheres or surface left as it is",
+      "default view, rest in the backdrop colour; chains by label id: the polymer chains alone are coloured; the viewer's own drawing under the spheres or surface in the select colour"
     ]
   },
   "skills": [

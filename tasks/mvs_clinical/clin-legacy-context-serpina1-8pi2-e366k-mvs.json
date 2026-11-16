@@ -6,7 +6,7 @@
  "structures": [
   "8pi2"
  ],
- "prompt": "Using PDB entry 8PI2, draw a white cartoon of the whole structure and show, as red spacefill spheres, the wild-type residue at the position of the SERPINA1 (Alpha-1-antitrypsin) missense variant E342K (pathogenic or likely pathogenic in ClinVar). The name E342K is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 24-residue signal peptide.",
+ "prompt": "Using PDB entry 8PI2, draw a white cartoon of the whole structure and show, as red spacefill spheres, the wild-type residue at the position of the SERPINA1 (Alpha-1-antitrypsin) missense variant E342K (pathogenic/likely pathogenic in ClinVar). The name E342K is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 24-residue signal peptide.",
  "reference": {
   "root": {
    "kind": "root",
@@ -147,16 +147,13 @@
       "what": "the 24-residue signal peptide"
      },
      "clinvar_vcv": [
-      "VCV000017967",
-      "VCV000626304"
+      "VCV000017967"
      ],
      "clinvar_classification": [
-      "Pathogenic",
       "Pathogenic/Likely pathogenic; risk factor"
      ],
      "clinvar_review_status": [
-      "criteria provided, multiple submitters, no conflicts",
-      "criteria provided, single submitter"
+      "criteria provided, multiple submitters, no conflicts"
      ],
      "residues": [
       {

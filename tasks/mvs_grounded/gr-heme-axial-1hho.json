@@ -131,6 +131,13 @@
    ],
    "representation": "ball_and_stick",
    "color": "purple"
+  },
+  {
+   "selector": {
+    "label_comp_id": "HEM"
+   },
+   "representation": "ball_and_stick",
+   "color": "khaki"
   }
  ],
  "twin_of": "gr-heme-axial-1hho-api",
@@ -150,7 +157,7 @@
    "each bond re-measured in the frozen mmCIF: HIS87 NE2 1.94 A; HIS92 NE2 2.07 A",
    "a neighbour search finds no other polymer N, O or S atom within 2.6 A of a heme iron",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 20 atoms on the frozen atom table"
+   "target selects 106 atoms on the frozen atom table"
   ],
   "derivation": "the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to a heme iron in the facts: HIS87 of chain A, HIS92 of chain B",
   "difficulty": {

@@ -28,6 +28,7 @@ from __future__ import annotations
 import functools
 import json
 import pathlib
+import re
 from typing import NamedTuple
 
 from . import grounding
@@ -77,17 +78,118 @@ def proteins() -> list[dict]:
     return list(grounding.panel()["disease_proteins"])
 
 
+# --- ClinVar's own records behind a variant (audit of 2026-11-16) ----------------------
+#
+# The panel build kept a variant when *a* ClinVar record with the same protein change is
+# classified pathogenic. Three kinds of record do not back the sentence "the <gene>
+# variant ... is classified as pathogenic in ClinVar", and are not counted here:
+#   * a record of another gene that encodes the same protein (CALM2/CALM3, HBA2);
+#   * a haplotype record (two changes in cis: it says nothing about the single variant);
+# and a variant whose every remaining record has no assertion criteria (zero stars) is
+# kept apart (`criteria_provided`): the task generator does not ask about it.
+CLINVAR_RECORDS = REPO / "data" / "panel" / "clinvar_records.json"
+NOT_ONE_VARIANT = ("Haplotype", "Diplotype", "CompoundHeterozygote", "Phase unknown",
+                   "Distinct chromosomes")
+NO_CRITERIA = "no assertion criteria provided"
+_TITLE_GENE = re.compile(r"^[^()\s]+\(([^()]+)\):")
+
+
+def proteins_by_accession() -> dict[str, str]:
+    """accession -> gene symbol, for the panel's disease proteins."""
+    return {p["accession"]: p["gene"] for p in proteins()}
+
+
 @functools.lru_cache(maxsize=None)
-def confirmed(accession: str) -> tuple[Variant, ...]:
-    """The ClinVar-confirmed missense variants of a panel disease protein, in the
-    frozen file's order. Empty if the accession is not a panel disease protein."""
+def clinvar_records() -> dict:
+    """``{VCV: {title, kind, genes, classification, review_status, conditions}}``, frozen
+    by ``scripts/freeze_clinvar_records.py``; with ``"retrieved"`` under the key ``""``."""
+    data = json.loads(CLINVAR_RECORDS.read_text(encoding="utf-8"))
+    return {**data["records"], "": {"retrieved": data["retrieved"], "source": data["source"]}}
+
+
+def clinvar_snapshot() -> str:
+    """The date the ClinVar classifications were read (``YYYY-MM-DD``)."""
+    return clinvar_records()[""]["retrieved"]
+
+
+def record_gene(record: dict) -> str | None:
+    """The gene a ClinVar record's title names: ``NM_001743.6(CALM2):c.287A>T`` is CALM2."""
+    m = _TITLE_GENE.match(record.get("title") or "")
+    return m.group(1) if m else None
+
+
+def own_records(gene: str, vcvs) -> list[tuple[str, dict]]:
+    """The records among ``vcvs`` that are about one variant of ``gene``: the title
+    names the gene (or a read-through locus that contains it, ``INS-IGF2`` for INS), the
+    record is not a haplotype, and its classification is one the panel accepts."""
+    out = []
+    for vcv in vcvs:
+        rec = clinvar_records().get(vcv)
+        if rec is None:
+            continue
+        titled = record_gene(rec) or ""
+        if titled != gene and gene not in titled.split("-"):
+            continue
+        if rec["kind"] in NOT_ONE_VARIANT or "c.[" in rec["title"] or "g.[" in rec["title"]:
+            continue
+        if rec["classification"].split(";")[0].strip() not in _CLASS_WORDS:
+            continue
+        out.append((vcv, rec))
+    return out
+
+
+@functools.lru_cache(maxsize=None)
+def _sorted_variants(accession: str) -> tuple[tuple, tuple]:
     data = grounding.variants(accession)
     if data is None:
-        return ()
-    return tuple(Variant(accession, v["position"], v["wild_type"], v["mutant"],
-                         tuple(v["clinvar_classification"]), tuple(v["clinvar_review_status"]),
-                         tuple(v["clinvar_vcv"]), v["structures"])
-                 for v in data["variants"])
+        return (), ()
+    gene = data["gene"]
+    kept, dropped = [], []
+    for v in data["variants"]:
+        own = own_records(gene, v["clinvar_vcv"])
+        if not own:
+            recs = [clinvar_records().get(x) or {} for x in v["clinvar_vcv"]]
+            why = ("haplotype record only" if any(
+                (record_gene(r) or "") == gene for r in recs) else
+                "record of another gene only (" + ", ".join(sorted(
+                    {record_gene(r) or "?" for r in recs})) + ")")
+            dropped.append({"variant": f"{v['wild_type']}{v['position']}{v['mutant']}",
+                            "reason": why, "clinvar_vcv": list(v["clinvar_vcv"])})
+            continue
+        # The words of a prompt come from the single-nucleotide record(s) when there is
+        # one; an indel record with the same protein change counts only without one.
+        snv = [x for x in own if x[1]["kind"] == "single nucleotide variant"] or own
+        kept.append(Variant(accession, v["position"], v["wild_type"], v["mutant"],
+                            tuple(sorted({r["classification"] for _, r in snv})),
+                            tuple(sorted({r["review_status"] for _, r in snv})),
+                            tuple(sorted(x for x, _ in snv)), v["structures"]))
+    return tuple(kept), tuple(dropped)
+
+
+def confirmed(accession: str) -> tuple[Variant, ...]:
+    """The ClinVar-confirmed missense variants of a panel disease protein, in the
+    frozen file's order: those with a ClinVar record of their own (`own_records`).
+    Empty if the accession is not a panel disease protein."""
+    return _sorted_variants(accession)[0]
+
+
+def _forget() -> None:
+    _sorted_variants.cache_clear()
+    clinvar_records.cache_clear()
+
+
+confirmed.cache_clear = _forget          # as when `confirmed` itself was the cached function
+
+
+def not_confirmed(accession: str) -> tuple[dict, ...]:
+    """Variants of the frozen list with no ClinVar record of their own, each with the
+    reason (another gene's record only; a haplotype record only)."""
+    return _sorted_variants(accession)[1]
+
+
+def criteria_provided(v: Variant) -> bool:
+    """At least one confirming record has assertion criteria (one star or more)."""
+    return any(s != NO_CRITERIA for s in v.review_status)
 
 
 def pathogenic_clinvar(acc: str) -> list[tuple[int, str, str, str]]:

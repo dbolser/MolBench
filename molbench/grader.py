@@ -187,7 +187,8 @@ def _values_eq(a: Any, b: Any) -> bool:
 
 def grade(reference: list[dict], predicted: Any, accepted: list[list] | None = None,
           mode: str = "state", target: Any = None,
-          accepted_targets: list | None = None) -> dict[str, Any]:
+          accepted_targets: list | None = None,
+          free_hide: list[str] | None = None) -> dict[str, Any]:
     """Grade a predicted action list against the reference.
 
     ``mode="state"`` (default): by final viewer state; the result has precision,
@@ -203,7 +204,7 @@ def grade(reference: list[dict], predicted: Any, accepted: list[list] | None = N
         from . import pdbe_state
         if pdbe_state.gradable(reference):
             return pdbe_state.grade_state(reference, predicted, accepted=accepted, target=target,
-                                          accepted_targets=accepted_targets)
+                                          accepted_targets=accepted_targets, free_hide=free_hide)
     from . import drawn
     result = {**drawn.zero(), **grade_sequence(reference, predicted)}
     result["grader"] = "sequence"
@@ -247,9 +248,10 @@ def grade_task(task: dict[str, Any], predicted: Any, mode: str = "state") -> dic
     """
     if is_mvs_task(task):
         from . import mvs
-        return mvs.grade_mvs_task(task, predicted)
+        return _no_target_on_an_edit(task, mvs.grade_mvs_task(task, predicted))
     result = grade(task["reference"], predicted, accepted=task.get("accepted"), mode=mode,
-                   target=task.get("target"), accepted_targets=task.get("accepted_targets"))
+                   target=task.get("target"), accepted_targets=task.get("accepted_targets"),
+                   free_hide=task.get("free_hide"))
     from . import schema
     try:
         schema_errors = schema.validate_actions(predicted)
@@ -257,6 +259,17 @@ def grade_task(task: dict[str, Any], predicted: Any, mode: str = "state") -> dic
         schema_errors = [f"schema check failed: {type(e).__name__}: {e}"]
     result["schema_errors"] = schema_errors
     result["outcome"] = "invalid_api" if result.get("error") or schema_errors else "valid"
+    return _no_target_on_an_edit(task, result)
+
+
+def _no_target_on_an_edit(task: dict[str, Any], result: dict[str, Any]) -> dict[str, Any]:
+    """A follow-up task without a ``target`` has **no target score**. Its edit takes
+    something away or resets a setting (hide the waters, remove the label, stop the
+    spin): there are no atoms "drawn as asked" to score, and scoring everything the
+    reference draws would give full marks to the start state returned unchanged. The
+    three target keys are None, and averages leave the sample out."""
+    if start_state(task) is not None and task.get("target") is None:
+        result.update(target_f1=None, target_precision=None, target_recall=None)
     return result
 
 

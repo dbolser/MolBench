@@ -1,0 +1,272 @@
+{
+ "id": "clin-sse-strand-serpinc1-3kcg-q286p-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-sse-strand",
+ "structures": [
+  "3kcg"
+ ],
+ "prompt": "Using PDB entry 3KCG, show the annotated beta strand that carries the wild-type residue at the position of the SERPINC1 (Antithrombin-III) missense variant p.Gln286Pro (pathogenic in ClinVar) as a salmon cartoon, with that residue as yellow ball-and-stick.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "3kcg"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "I",
+     "start_auth_residue_number": 246,
+     "end_auth_residue_number": 262,
+     "color": "salmon"
+    },
+    {
+     "uniprot_accession": "P01008",
+     "uniprot_residue_number": 286,
+     "color": "salmon",
+     "representation": "ball-and-stick",
+     "representationColor": "yellow"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "3kcg"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "I",
+      "start_auth_residue_number": 246,
+      "end_auth_residue_number": 262,
+      "color": "salmon"
+     },
+     {
+      "uniprot_accession": "P01008",
+      "uniprot_residue_number": 286,
+      "color": "yellow",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "3kcg"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "I",
+      "start_auth_residue_number": 246,
+      "end_auth_residue_number": 262,
+      "color": "salmon"
+     },
+     {
+      "uniprot_accession": "P01008",
+      "uniprot_residue_number": 286,
+      "color": "salmon",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "3kcg"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "I",
+      "start_auth_residue_number": 246,
+      "end_auth_residue_number": 262,
+      "color": "salmon"
+     },
+     {
+      "uniprot_accession": "P01008",
+      "uniprot_residue_number": 286,
+      "color": "yellow",
+      "representation": "ball-and-stick",
+      "representationColor": "yellow"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "C",
+    "label_seq_id": 254
+   },
+   "representation": "ball-and-stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": "clin-sse-strand-serpinc1-3kcg-q286p-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "heldback",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 3KCG: Crystal structure of the antithrombin-factor IXa-pentasaccharide complex\nMethod: X-RAY DIFFRACTION, 1.70 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  L [A]: entity 1 (Coagulation factor IXa light chain), protein, 54 of 59 residues observed: auth 84-137 = label 1-54\n  H [B]: entity 2 (Coagulation factor IXa heavy chain), protein, 235 of 235 residues observed: auth 16-36 = label 1-21; auth 38-60 = label 22-44; auth 60A = label 45; auth 61-95 = label 46-80; auth 95A = label 81; auth 95B = label 82; auth 96-129 = label 83-116; auth 129A = label 117; auth 129B = label 118; auth 130-145 = label 119-134; auth 147-184 = label 135-172; auth 184A = label 173; auth 185-188 = label 174-177; auth 188A = label 178; auth 189-217 = label 179-207; auth 219-221 = label 208-210; auth 221A = label 211; auth 222-245 = label 212-235\n  I [C]: entity 3 (Antithrombin-III), protein, 419 of 432 residues observed: auth 3-27 = label 3-27; auth 38-431 = label 38-431\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  L [A]: P00740 (FA9_HUMAN): UniProt 130-183 = auth 84-137\n  H [B]: P00740 (FA9_HUMAN): UniProt 227-247 = auth 16-36; UniProt 248-270 = auth 38-60; UniProt 271 = auth 60A; UniProt 272-306 = auth 61-95; UniProt 307 = auth 95A; UniProt 308 = auth 95B; UniProt 309-342 = auth 96-129; UniProt 343 = auth 129A; UniProt 344 = auth 129B; UniProt 345-360 = auth 130-145; UniProt 361-398 = auth 147-184; UniProt 399 = auth 184A; UniProt 400-403 = auth 185-188; UniProt 404 = auth 188A; UniProt 405-433 = auth 189-217; UniProt 434-436 = auth 219-221; UniProt 437 = auth 221A; UniProt 438-461 = auth 222-245\n  I [C]: P01008 (ANT3_HUMAN): UniProt 35-59 = auth 3-27; UniProt 70-463 = auth 38-431\n\nFrom the request:\n  SERPINC1: UniProt P01008 (ANT3_HUMAN, Antithrombin-III)\n  p.Gln286Pro: UniProt position 286 (Gln in UniProt) -> in 3KCG: auth I 254 GLN (label C 254)\n  Beta strand annotated in the entry that contains that residue: auth I 246-262 (label C 246-262)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P01008.json",
+   "data/panel/facts/3kcg.json",
+   "molbench/sifts_tables/3kcg.json.gz",
+   "molbench/atom_tables/3kcg.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (1 residue(s), 9 atoms, residue name(s) GLN = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the strand range is the same atom set in author and in label numbering and contains the target residue",
+   "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water, hide_heteroatoms, hide_carbs: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "SERPINC1",
+   "accession": "P01008",
+   "protein": "Antithrombin-III",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "sse",
+   "chain": null,
+   "wording": 2,
+   "look": {
+    "rep": "ball_and_stick",
+    "color": "yellow"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Gln286Pro",
+     "variant": "Q286P",
+     "hgvs": "p.Gln286Pro",
+     "uniprot_position": 286,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV003242375"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "reviewed by expert panel"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "I",
+       "auth_seq_id": 254,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "C",
+       "label_seq_id": 254,
+       "comp_id": "GLN"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": {
+    "kind": "strand",
+    "auth_asym_id": "I",
+    "beg_auth_seq_id": 246,
+    "end_auth_seq_id": 262,
+    "label_asym_id": "C",
+    "beg_label_seq_id": 246,
+    "end_label_seq_id": 262,
+    "color": "salmon"
+   },
+   "report_apart": "needs the entry's secondary-structure annotation",
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -32
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": true,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": false,
+    "protein_copies_in_structure": 1,
+    "target_residues": 1,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": false,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "3kcg",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": {
+     "label_asym_id": "C",
+     "beg_label_seq_id": 246,
+     "end_label_seq_id": 262
+    },
+    "what": "the annotated strand",
+    "n_atoms": 159
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "atoms": [
+     {
+      "label_asym_id": "C",
+      "label_seq_id": 254
+     }
+    ],
+    "what": "p.Gln286Pro residue(s)",
+    "n_atoms": 9
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color",
+  "context"
+ ],
+ "free_hide": [
+  "hide_water",
+  "hide_heteroatoms",
+  "hide_carbs"
+ ]
+}

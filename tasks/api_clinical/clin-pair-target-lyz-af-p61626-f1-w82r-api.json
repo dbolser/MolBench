@@ -6,7 +6,7 @@
  "structures": [
   "af-p61626-f1-model_v6"
  ],
- "prompt": "The AlphaFold DB model AF-P61626-F1 (model version 6): the LYZ (Lysozyme C, UniProt P61626) variant W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.",
+ "prompt": "The AlphaFold DB model AF-P61626-F1 (model version 6): the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.",
  "reference": [
   {
    "action": "load",
@@ -20,8 +20,8 @@
    "action": "color",
    "data": [
     {
-     "auth_asym_id": "A",
-     "auth_seq_id": 82,
+     "uniprot_accession": "P61626",
+     "uniprot_residue_number": 82,
      "color": null,
      "representation": "spacefill",
      "representationColor": "yellow"
@@ -43,8 +43,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 82,
+      "uniprot_accession": "P61626",
+      "uniprot_residue_number": 82,
       "color": "yellow",
       "representation": "spacefill",
       "representationColor": "yellow"
@@ -65,8 +65,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 82,
+      "uniprot_accession": "P61626",
+      "uniprot_residue_number": 82,
       "representation": "spacefill",
       "representationColor": "yellow"
      }
@@ -91,7 +91,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "AlphaFold DB model AF-P61626-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Lysozyme C), protein, 148 of 148 residues observed: auth 1-148 = label 1-148\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P61626 (LYSC_HUMAN): UniProt 1-148 = auth 1-148\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  W82R: UniProt position 82 (Trp in UniProt) -> in the model: auth A 82 TRP (label A 82)"
+  "text": "AlphaFold DB model AF-P61626-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Lysozyme C), protein, 148 of 148 residues observed: auth 1-148 = label 1-148\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P61626 (LYSC_HUMAN): UniProt 1-148 = auth 1-148\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  p.W82R: UniProt position 82 (Trp in UniProt) -> in the model: auth A 82 TRP (label A 82)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -123,7 +123,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "W82R",
+     "name_in_prompt": "p.W82R",
      "variant": "W82R",
      "hgvs": "p.Trp82Arg",
      "uniprot_position": 82,
@@ -187,11 +187,13 @@
    {
     "action": 1,
     "param": 0,
-    "atoms": {
-     "label_asym_id": "A",
-     "label_seq_id": 82
-    },
-    "what": "p.Trp82Arg residue",
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 82
+     }
+    ],
+    "what": "p.Trp82Arg residue(s)",
     "n_atoms": 14
    }
   ],

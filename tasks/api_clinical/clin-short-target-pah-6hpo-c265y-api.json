@@ -6,7 +6,7 @@
  "structures": [
   "6hpo"
  ],
- "prompt": "Using PDB entry 6HPO, show as yellow ball-and-stick the wild-type residue at the position of the PAH (Phenylalanine-4-hydroxylase) missense variant C265Y (likely pathogenic in ClinVar).",
+ "prompt": "Using PDB entry 6HPO, show as yellow ball-and-stick the wild-type residue at the position of the PAH (Phenylalanine-4-hydroxylase) missense variant p.C265Y (likely pathogenic in ClinVar).",
  "reference": [
   {
    "action": "load",
@@ -79,7 +79,7 @@
  "split": "heldback",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 6HPO: Crystallographic structure of the catalytic domain of Human Phenylalanine Hydroxylase (hPAH CD) in complex with iron at 1.6 Angstrom\nMethod: X-RAY DIFFRACTION, 1.67 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Phenylalanine-4-hydroxylase), protein, 310 of 452 residues observed: auth 117-426 = label 117-426\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00439 (PH4H_HUMAN): UniProt 117-426 = auth 117-426\n\nFrom the request:\n  PAH: UniProt P00439 (PH4H_HUMAN, Phenylalanine-4-hydroxylase)\n  C265Y: UniProt position 265 (Cys in UniProt) -> in 6HPO: auth A 265 CYS (label A 265)"
+  "text": "PDB 6HPO: Crystallographic structure of the catalytic domain of Human Phenylalanine Hydroxylase (hPAH CD) in complex with iron at 1.6 Angstrom\nMethod: X-RAY DIFFRACTION, 1.67 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Phenylalanine-4-hydroxylase), protein, 310 of 452 residues observed: auth 117-426 = label 117-426\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00439 (PH4H_HUMAN): UniProt 117-426 = auth 117-426\n\nFrom the request:\n  PAH: UniProt P00439 (PH4H_HUMAN, Phenylalanine-4-hydroxylase)\n  p.C265Y: UniProt position 265 (Cys in UniProt) -> in 6HPO: auth A 265 CYS (label A 265)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -111,7 +111,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "C265Y",
+     "name_in_prompt": "p.C265Y",
      "variant": "C265Y",
      "hgvs": "p.Cys265Tyr",
      "uniprot_position": 265,

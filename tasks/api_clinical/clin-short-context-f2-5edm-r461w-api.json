@@ -6,7 +6,7 @@
  "structures": [
   "5edm"
  ],
- "prompt": "In PDB entry 5EDM, show the whole structure as a white cartoon and the residue replaced by the pathogenic/likely pathogenic F2 (Prothrombin) variant R461W (ClinVar) as cyan ball-and-stick.",
+ "prompt": "In PDB entry 5EDM, show the whole structure as a white cartoon and the residue replaced by the pathogenic/likely pathogenic F2 (Prothrombin) variant p.R461W (ClinVar) as cyan ball-and-stick.",
  "reference": [
   {
    "action": "load",
@@ -110,7 +110,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 5EDM: Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I )\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Prothrombin), protein, 550 of 568 residues observed: auth 1-242 = label 1-242; auth 261-568 = label 261-568\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00734 (THRB_HUMAN): UniProt 44-196 = auth 1-153; UniProt 211-299 = auth 154-242; UniProt 318-622 = auth 261-565\n\nFrom the request:\n  F2: UniProt P00734 (THRB_HUMAN, Prothrombin)\n  R461W: UniProt position 461 (Arg in UniProt) -> in 5EDM: auth A 404 ARG (label A 404)"
+  "text": "PDB 5EDM: Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I )\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Prothrombin), protein, 550 of 568 residues observed: auth 1-242 = label 1-242; auth 261-568 = label 261-568\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00734 (THRB_HUMAN): UniProt 44-196 = auth 1-153; UniProt 211-299 = auth 154-242; UniProt 318-622 = auth 261-565\n\nFrom the request:\n  F2: UniProt P00734 (THRB_HUMAN, Prothrombin)\n  p.R461W: UniProt position 461 (Arg in UniProt) -> in 5EDM: auth A 404 ARG (label A 404)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -123,6 +123,7 @@
   "date": "2026-11-13",
   "checks": [
    "target (1 residue(s), 11 atoms, residue name(s) ARG = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water, hide_heteroatoms, hide_carbs, hide_non_standard: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)",
    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
    "the twin on the other track selects the same target atoms",
    "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
@@ -143,7 +144,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "R461W",
+     "name_in_prompt": "p.R461W",
      "variant": "R461W",
      "hgvs": "p.Arg461Trp",
      "uniprot_position": 461,
@@ -222,5 +223,11 @@
   "representation",
   "color",
   "context"
+ ],
+ "free_hide": [
+  "hide_water",
+  "hide_heteroatoms",
+  "hide_carbs",
+  "hide_non_standard"
  ]
 }

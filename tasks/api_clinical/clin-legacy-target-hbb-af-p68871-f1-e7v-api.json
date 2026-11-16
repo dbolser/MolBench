@@ -20,8 +20,8 @@
    "action": "color",
    "data": [
     {
-     "auth_asym_id": "A",
-     "auth_seq_id": 7,
+     "uniprot_accession": "P68871",
+     "uniprot_residue_number": 7,
      "color": null,
      "representation": "spacefill",
      "representationColor": "purple"
@@ -43,8 +43,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 7,
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 7,
       "color": "purple",
       "representation": "spacefill",
       "representationColor": "purple"
@@ -65,8 +65,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 7,
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 7,
       "representation": "spacefill",
       "representationColor": "purple"
      }
@@ -134,19 +134,13 @@
       "what": "the initiator methionine"
      },
      "clinvar_vcv": [
-      "VCV000015333",
-      "VCV000446735",
-      "VCV000446736",
-      "VCV000446737",
-      "VCV000446738",
-      "VCV000446747"
+      "VCV000015333"
      ],
      "clinvar_classification": [
       "Pathogenic"
      ],
      "clinvar_review_status": [
-      "criteria provided, multiple submitters, no conflicts",
-      "no assertion criteria provided"
+      "criteria provided, multiple submitters, no conflicts"
      ],
      "residues": [
       {
@@ -197,11 +191,13 @@
    {
     "action": 1,
     "param": 0,
-    "atoms": {
-     "label_asym_id": "A",
-     "label_seq_id": 7
-    },
-    "what": "p.Glu7Val residue",
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 7
+     }
+    ],
+    "what": "p.Glu7Val residue(s)",
     "n_atoms": 9
    }
   ],

@@ -57,6 +57,64 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2c9v"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "F",
+      "start_auth_residue_number": 133,
+      "end_auth_residue_number": 138,
+      "color": "salmon"
+     },
+     {
+      "auth_asym_id": "F",
+      "uniprot_accession": "P00441",
+      "uniprot_residue_number": 138,
+      "color": "salmon",
+      "representation": "ball-and-stick",
+      "representationColor": "red"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2c9v"
+   },
+   {
+    "action": "set_visual_style",
+    "style": "cartoon"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "F",
+      "start_auth_residue_number": 133,
+      "end_auth_residue_number": 138,
+      "color": "salmon"
+     },
+     {
+      "auth_asym_id": "F",
+      "uniprot_accession": "P00441",
+      "uniprot_residue_number": 138,
+      "color": "red",
+      "representation": "ball-and-stick",
+      "representationColor": "red"
+     }
+    ]
+   }
   ]
  ],
  "context": null,
@@ -90,6 +148,7 @@
   "checks": [
    "target (1 residue(s), 7 atoms, residue name(s) THR = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
    "the helix range is the same atom set in author and in label numbering and contains the target residue",
+   "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water, hide_heteroatoms: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)",
    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
    "the twin on the other track selects the same target atoms",
    "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
@@ -211,5 +270,9 @@
   "representation",
   "color",
   "context"
+ ],
+ "free_hide": [
+  "hide_water",
+  "hide_heteroatoms"
  ]
 }

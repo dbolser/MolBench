@@ -6,7 +6,7 @@
  "structures": [
   "1bna"
  ],
- "prompt": "Load 1BNA and show only the DNA, as a lime green cartoon. No water, no ions.",
+ "prompt": "Load 1BNA and show only the DNA, as a lime green cartoon. No water.",
  "reference": {
   "root": {
    "kind": "root",
@@ -95,7 +95,11 @@
    "needs_ligand_identity": false,
    "needs_uniprot_mapping": false,
    "needs_structure_lookup": false
-  }
+  },
+  "excludes": [
+   "water",
+   "heteroatoms"
+  ]
  },
  "skills": [
   "load",

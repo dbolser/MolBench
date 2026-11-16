@@ -147,6 +147,13 @@
    ],
    "representation": "ball_and_stick",
    "color": "hotpink"
+  },
+  {
+   "selector": {
+    "label_comp_id": "ZN"
+   },
+   "representation": "spacefill",
+   "color": "red"
   }
  ],
  "twin_of": "gr-metal-site-1udt-zn-api",
@@ -166,7 +173,7 @@
    "4 metal-residue bonds re-measured in the frozen mmCIF: 2.10 to 2.31 A",
    "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a ZN ion; none is added out to 3.2 A, so no weak ligand is left to argue over",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 36 atoms on the frozen atom table"
+   "target selects 37 atoms on the frozen atom table"
   ],
   "derivation": "every ZN ion of the facts (1) as a sphere, and the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: HIS617 (A), HIS653 (A), ASP654 (A), ASP764 (A). Water and other non-polymer partners are not residues and are left out",
   "difficulty": {

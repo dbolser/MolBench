@@ -43,6 +43,9 @@ from molbench import drawn, grounding, runner, sifts, tasks as T, variants as V 
 from molbench import pdbe_state as ps  # noqa: E402
 from molbench.atoms import load_table  # noqa: E402
 
+sys.path.insert(0, str(REPO / "scripts"))
+import api_forms  # noqa: E402
+
 SCRIPT = "scripts/generate_clinical_tasks.py"
 OUT = {"mvs": REPO / "tasks" / "mvs_clinical", "api": REPO / "tasks" / "api_clinical"}
 SEED = "molbench-clinical-v1"
@@ -75,8 +78,31 @@ FEATURED = {"P04637": ["R175H", "R248Q", "R273H"], "P68871": ["E7V"], "P02766": 
 # position, one-letter name) -> why. A contested example is not a fair test item
 # (ruling of 2026-11-15).
 NOT_USED = {("P02649", "R176C"): "APOE R158C in mature numbering (rs7412): the common e2 allele, "
-                                 "carried by about 8% of people; its ClinVar 'pathogenic' record "
-                                 "has no assertion criteria"}
+                                 "carried by about 8% of people; its only 'pathogenic' ClinVar "
+                                 "record is a two-variant haplotype",
+            ("P02649", "R154S"): "APOE R136S in mature numbering, the Christchurch variant: "
+                                 "ClinVar's pathogenic record is for type III "
+                                 "hyperlipoproteinaemia, and it is widely known as protective "
+                                 "against Alzheimer's disease (ClinVar also holds a 'protective' "
+                                 "record)",
+            ("P00918", "K18E"): "CA2 p.Lys18Glu: its one ClinVar record has no assertion criteria "
+                                "and names the condition 'carbonic anhydrase II variant', an "
+                                "electrophoretic protein variant, not a disease"}
+# A variant whose every ClinVar record has no assertion criteria (zero stars) is not
+# asked about (audit of 2026-11-16), with the exceptions named here: (accession,
+# name) -> why the variant is well established all the same.
+ZERO_STAR_KEPT = {("P61626", "I74T"): "LYZ I56T in mature numbering: the first described cause "
+                                      "of hereditary lysozyme amyloidosis (Pepys et al. 1993), "
+                                      "with crystal structures of the variant protein"}
+
+# The name clinicians use, where UniProt's recommended name is another one.
+PROTEIN_NAMES = {"P35557": "Glucokinase", "P07477": "Cationic trypsinogen"}
+
+# Offset pairs on more proteins than HBB (section G of the plan): accession, template,
+# naming, context.
+MORE_PAIRS = [("P61626", "clin-pair-target", "short", "none"),
+              ("P07320", "clin-pair-context", "hgvs", "structure"),
+              ("P0DP23", "clin-pair-target", "hgvs", "none")]
 
 OMITTED = object()     # an API `color` call item with no `color` key (see `build_pair`)
 
@@ -233,7 +259,9 @@ class Site:
 
 def sites(protein: dict, entry: str) -> list[Site]:
     return [s for s in (Site(protein, entry, v) for v in V.confirmed(protein["accession"]))
-            if s.complete and (protein["accession"], V.short(s.v)) not in NOT_USED]
+            if s.complete and (protein["accession"], V.short(s.v)) not in NOT_USED
+            and (V.criteria_provided(s.v)
+                 or (protein["accession"], V.short(s.v)) in ZERO_STAR_KEPT)]
 
 
 def uniprot_residue_name(protein: dict, position: int) -> str | None:
@@ -306,7 +334,7 @@ def pick(pool: list[Site], used: set, key: tuple, n: int = 1, featured: bool = F
 # --------------------------------------------------------------------------- #
 def protein_phrase(protein: dict, with_accession: bool) -> str:
     data = grounding.variants(protein["accession"])
-    name = data["protein"]
+    name = PROTEIN_NAMES.get(protein["accession"], data["protein"])
     if with_accession:
         return f"{protein['gene']} ({name}, UniProt {protein['accession']})"
     return f"{protein['gene']} ({name})"
@@ -318,7 +346,10 @@ def variant_names(naming: str, group: list[Site]) -> tuple[list[str], str]:
     if naming == "hgvs":
         return [V.hgvs(s.v) for s in group], ""
     if naming == "short":
-        return [V.short(s.v) for s in group], ""
+        # "p.E122Q": the HGVS short form. The prefix says the number is the UniProt
+        # (precursor) one; the bare form "E121Q" is kept for mature-protein numbering,
+        # which is how the older literature writes it (audit of 2026-11-16).
+        return ["p." + V.short(s.v) for s in group], ""
     m = V.mature_numbering(group[0].v.accession, group[0].v.position)
     names = [V.short(s.v, V.mature_numbering(s.v.accession, s.v.position)["number"]) for s in group]
     note = (f" The name {names[0]} is in mature-protein numbering: residues are counted from "
@@ -458,21 +489,13 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
         for s in group:
             mine = [x for x in s.residues
                     if chain is None or x["label_asym_id"] == chain["label_asym_id"]]
-            if is_af(entry):
-                meant.extend({"atoms": label_selector(x), "what": f"{V.hgvs(s.v)} residue"}
-                             for x in mine)
-            else:
-                meant.append({"atoms": [label_selector(x) for x in mine],
-                              "what": f"{V.hgvs(s.v)} residue(s)"})
-            if is_af(entry):
-                # The grader has no UniProt lookup for an AlphaFold model yet (see the
-                # README); the model is numbered as UniProt, so author numbers say the same.
-                sels = [{"auth_asym_id": x["auth_asym_id"], "auth_seq_id": x["auth_seq_id"]}
-                        for x in s.residues]
-            else:
-                sels = [{"uniprot_accession": acc, "uniprot_residue_number": s.v.position}]
-                if chain is not None:
-                    sels = [{"auth_asym_id": chain["auth_asym_id"], **sels[0]}]
+            meant.append({"atoms": [label_selector(x) for x in mine],
+                          "what": f"{V.hgvs(s.v)} residue(s)"})
+            # The same keys on an AlphaFold model: its file carries the SIFTS columns
+            # and the viewer selects by them (read back in pdbe-molstar 3.3.2).
+            sels = [{"uniprot_accession": acc, "uniprot_residue_number": s.v.position}]
+            if chain is not None:
+                sels = [{"auth_asym_id": chain["auth_asym_id"], **sels[0]}]
             items += [{**item, **({} if ribbon is OMITTED else {"color": ribbon}),
                        "representation": api_rep, "representationColor": look["color"]}
                       for item in sels]
@@ -494,7 +517,9 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
     # `color` key left out, which paints the stretch in the viewer's select colour:
     # an unstated attribute is free (ruling of 2026-11-15).
     api_accepted = [calls(look["color"], False)]
-    if context == "structure":
+    if context in ("structure", "sse"):
+        # the helix/strand tasks too: "show the helix as a salmon cartoon" is as well
+        # answered with the cartoon style set as on the default view
         api_accepted += [calls(under, True), calls(look["color"], True)]
     if context == "none":
         api_accepted += [calls(OMITTED, False)]
@@ -639,6 +664,13 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
 
     a = task("mvs", mvs_ref, [], look["rep"])
     b = task("api", api_ref, api_accepted, api_rep)
+    free = api_forms.free_hides(api_ref, api_accepted, runner.grader_target(b, b["target"]))
+    if free:
+        b["free_hide"] = free
+        b["provenance"]["checks"].append(
+            "the task accepts the cartoon style (ligands, ions and water gone) and the default "
+            f"view (all drawn), so an answer may also set {', '.join(free)}: with each, every "
+            "accepted list still draws the target atoms as before (scripts/api_forms.py)")
     a["twin_of"], b["twin_of"] = b["id"], a["id"]
     return [a, b]
 
@@ -706,6 +738,20 @@ def plan() -> list[dict]:
 
     order = sorted(proteins, key=lambda p: p["accession"])
     rng("order").shuffle(order)
+
+    # The offset pairs of section G are built last, but their variant is set aside
+    # first: a protein with few usable variants (LYZ has two) would otherwise have
+    # none left for its pair.
+    reserved: dict[str, V.Variant] = {}
+    for k, (acc, _family, _naming, _context) in enumerate(MORE_PAIRS, start=7):
+        p = by_acc[acc]
+        model = next(e for e in p["entries"] if e.startswith("af-"))
+        common = [s for s in pools[(acc, p["entry"])]
+                  if any(t.v == s.v for t in pools[(acc, model)])]
+        got = pick(common, used, ("pair", acc, p["entry"], model, k))
+        if got:
+            reserved[acc] = got[0].v
+            used.add((model, got[0].v.position))
 
     # A. One variant per protein on its primary structure, cycling the four templates.
     cycle = ["clin-hgvs-target", "clin-short-context", "clin-short-target", "clin-hgvs-context",
@@ -846,14 +892,16 @@ def plan() -> list[dict]:
     # on the protein's PDB entry, whose author numbers differ from the UniProt numbers,
     # and on its AlphaFold model, which is numbered as UniProt. Added last, so that no
     # earlier choice changes. (TTR has no pair: 8C86 already carries six tasks.)
-    more = [("P61626", "clin-pair-target", "short", "none"),
-            ("P07320", "clin-pair-context", "hgvs", "structure"),
-            ("P0DP23", "clin-pair-target", "hgvs", "none")]
-    for k, (acc, family, naming, context) in enumerate(more, start=7):
+    for k, (acc, family, naming, context) in enumerate(MORE_PAIRS, start=7):
         p = by_acc[acc]
         model = next(e for e in p["entries"] if e.startswith("af-"))
         before = len(out)
-        pair_of(p, (p["entry"], model), family, naming, context, offs, k=k)
+        v = reserved.get(acc)
+        if v is not None:
+            used.discard((p["entry"], v.position))
+            used.discard((model, v.position))
+        pair_of(p, (p["entry"], model), family, naming, context, offs, k=k,
+                want=lambda s, v=v: s.v == v)
         assert len(out) > before, f"no offset pair could be built for {p['gene']}"
     return out
 
@@ -1007,6 +1055,28 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
          "in `data/panel/variants/`), and asks for the residue each variant replaces to be "
          "shown. The structure holds the wild-type residue; the task is to find it. The "
          "prompt names the structure and the variant, never which residue of the structure it is.",
+         "",
+         "**What \"classified in ClinVar\" rests on.** A variant is asked about only if ClinVar "
+         "has a record of its own for it: a record of the named gene (not of another gene that "
+         "encodes the same protein: CALM2 or CALM3 for CALM1, HBA2 for HBA1), about that one "
+         "variant (not a two-variant haplotype), whose aggregate germline classification is "
+         "pathogenic, likely pathogenic or pathogenic/likely pathogenic, with assertion criteria "
+         "(one star or more). The words in the prompt are that record's classification. "
+         f"Classifications were read from ClinVar on {V.clinvar_snapshot()} "
+         "(`data/panel/clinvar_records.json`, `scripts/freeze_clinvar_records.py`); they can "
+         "change later. Not asked about, by name: "
+         + "; ".join(f"{V.proteins_by_accession()[acc]} {name} ({why})"
+                     for (acc, name), why in sorted(NOT_USED.items()))
+         + ". Asked about although its record has no assertion criteria: "
+         + "; ".join(f"{V.proteins_by_accession()[acc]} {name} ({why})"
+                     for (acc, name), why in sorted(ZERO_STAR_KEPT.items()))
+         + ". Two panel proteins have no task for this reason: CA2 and TPI1.",
+         "",
+         "**Names.** HGVS-style protein names on the UniProt canonical sequence: three-letter "
+         "(`p.Arg175His`) or one-letter (`p.R175H`), without a reference sequence. A bare "
+         "one-letter name (`V30M`) is used only for mature-protein numbering, and the prompt "
+         "then says so. On an AlphaFold model the API reference uses the same UniProt keys as "
+         "on a PDB entry (the model file carries the SIFTS columns).",
          ""]
     if track == "api":
         L += [API_NOTE + " Half of the prompts give the UniProt accession and half give only "
@@ -1045,9 +1115,8 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
           f"Held-back structures ({len(held)}): {', '.join(s.upper() for s in held)}. They are "
           "in no public task of this tier. "
           + ("They are the structures of this tier on the corpus-wide held-back list "
-             "(`data/panel/heldback.json`); a pair of tasks (same variant, two structures) "
-             "is split between public and held back when only one of its structures is on "
-             "the list." if HELDBACK_FILE.exists() else
+             "(`data/panel/heldback.json`); no pair of tasks (same variant, two structures) "
+             "has a side on the list." if HELDBACK_FILE.exists() else
              "They were drawn (seeded) from the structures that no task published before "
              "this corpus uses, half from those numbered differently from UniProt."),
           "",

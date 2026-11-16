@@ -617,7 +617,10 @@ def test_every_task_in_the_corpus_is_gradable_and_its_reference_succeeds():
             continue
         ref = task.get("reference_mvs", task.get("reference"))
         r = grader.grade_task(task, ref)
-        assert r["success"] and r["f1"] == 1.0 and r["target_f1"] == 1.0, task["id"]
+        # a follow-up without a target has no target score (GRADING.md)
+        no_target = task.get("context") is not None and task.get("target") is None
+        assert r["success"] and r["f1"] == 1.0, task["id"]
+        assert r["target_f1"] == (None if no_target else 1.0), task["id"]
         problems = grader.check_task(task)
         if task["id"] == "api-005":     # the superposition view: compared by its settings
             continue

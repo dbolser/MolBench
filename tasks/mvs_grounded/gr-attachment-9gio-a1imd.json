@@ -123,6 +123,13 @@
    ],
    "representation": "ball_and_stick",
    "color": "purple"
+  },
+  {
+   "selector": {
+    "label_comp_id": "A1IMD"
+   },
+   "representation": "ball_and_stick",
+   "color": "green"
   }
  ],
  "twin_of": "gr-attachment-9gio-a1imd-api",
@@ -141,7 +148,7 @@
   "checks": [
    "each link re-measured in the frozen mmCIF: 1.84 A",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 6 atoms on the frozen atom table"
+   "target selects 31 atoms on the frozen atom table"
   ],
   "derivation": "every copy of A1IMD (N-[2-(dimethylsulfamoyl)-5-[(1-methylpyrazol-4-yl)methoxy]ph) and the polymer residues with a covalent link record (`_struct_conn`, `covale`) to it in the facts: CYS77 (C)",
   "difficulty": {

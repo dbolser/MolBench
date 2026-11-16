@@ -121,7 +121,9 @@ def test_the_task_files_are_what_the_generator_writes():
 def test_size_and_coverage():
     assert len(MVS) == len(API) >= 60
     genes = {_clin(t)["gene"] for t in MVS}
-    assert genes == {p["gene"] for p in V.proteins()} and len(genes) == 27
+    # CA2 and TPI1 have no variant left: every ClinVar record of theirs that maps to a
+    # panel structure has no assertion criteria (audit of 2026-11-16).
+    assert genes == {p["gene"] for p in V.proteins()} - {"CA2", "TPI1"} and len(genes) == 25
     d = [_clin(t)["difficulty"] for t in MVS]
     assert sum(x["structure_has_offset"] for x in d) * 2 >= len(MVS)
     assert sum(x["needs_numbering_offset"] for x in d) * 2 >= len(MVS)
@@ -219,7 +221,10 @@ def test_variants_are_confirmed_and_named_truthfully(task):
             assert "mature-protein numbering" in task["prompt"] and mature["what"] in task["prompt"]
             assert V.hgvs(v) not in task["prompt"]
         else:
-            assert rec["name_in_prompt"] in (V.hgvs(v), V.short(v))
+            # a one-letter name in UniProt numbering carries the HGVS prefix (p.E122Q);
+            # the bare form is kept for mature-protein numbering
+            assert rec["name_in_prompt"] in (V.hgvs(v), "p." + V.short(v))
+            assert not re.search(r"(?<![.\w])" + V.short(v) + r"\b", task["prompt"])
     # The only claim about pathogenicity is ClinVar's own classification, in its words.
     words = V.classification_words(used)
     assert words in task["prompt"] and "ClinVar" in task["prompt"]
@@ -377,14 +382,13 @@ def _walk(node):
 @pytest.mark.parametrize("task", API, ids=lambda t: t["id"])
 def test_api_twin_selects_by_uniprot_number(task):
     """The API reference uses the viewer's own UniProt selector (so the twin tests
-    knowing it exists), except on an AlphaFold model, whose residue numbers already
-    are UniProt numbers."""
+    knowing it exists), on an AlphaFold model too: its file carries the SIFTS columns."""
     c = _clin(task)
     items = [d for call in task["reference"] if call["action"] == "color"
              for d in call["data"] if "representation" in d]
     assert items
-    if c["difficulty"]["alphafold_model"]:
-        assert all("uniprot_accession" not in d for d in items)
+    if False:
+        pass
     else:
         assert all(d["uniprot_accession"] == c["accession"] for d in items)
         assert {d["uniprot_residue_number"] for d in items} == \

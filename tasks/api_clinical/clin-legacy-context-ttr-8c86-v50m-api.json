@@ -130,6 +130,7 @@
   "date": "2026-11-13",
   "checks": [
    "target (2 residue(s), 32 atoms, residue name(s) VAL = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water, hide_heteroatoms: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)",
    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
    "the twin on the other track selects the same target atoms",
    "graded what the number in the variant's name selects when taken at face value as the author residue number (right) and as the label residue number (right); recorded under clinical.difficulty"
@@ -245,5 +246,9 @@
   "representation",
   "color",
   "context"
+ ],
+ "free_hide": [
+  "hide_water",
+  "hide_heteroatoms"
  ]
 }

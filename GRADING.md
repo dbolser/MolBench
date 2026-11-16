@@ -117,9 +117,17 @@ cartoon around the residue) is ignored, in either direction.
   spill + extra). The target score (`target_f1`) is the harmonic mean of the two, each averaged
   over the target's classes and over the scene facts that touch the target atoms
   (labels, tooltips, focus, interaction request).
-- A task without a `target` field uses everything the reference draws as the target.
-  The target score then differs from F1 only in ignoring what the answer draws
-  elsewhere in another style.
+- A single-turn task without a `target` field uses everything the reference draws as
+  the target. The target score then differs from F1 only in ignoring what the answer
+  draws elsewhere in another style.
+- **A follow-up task without a `target` has no target score** (`target_f1` is `None`, and
+  averages leave the sample out). Such an edit takes something away or resets a setting
+  (hide the waters, remove the label, stop the spin, a new background): there are no
+  atoms "drawn as asked", and "everything the reference draws" would give the start
+  state returned unchanged full marks. Where an edit has a target (recolour chain B),
+  the unchanged start state scores below 1 on it: 0 on the API track (nothing was
+  changed on those atoms), and one half on the MVS track where the atoms are already
+  drawn in the right representation and only the colour is wrong.
 
 A task's `target` is `{"selector": <MVS selector>}` and/or `{"data": [<API
 selection>, …]}` (either form works on either track; both are resolved on the same atom
@@ -186,14 +194,40 @@ attribute open: any value is right. What it does state must match. (Ruling of
     should be. It may stay as it was (`"color": null`), take the highlight colour, or
     take the viewer's select colour (no `color` key). If the request states a colour
     for the cartoon ("a grey cartoon, with ..."), the stretch is grey or the highlight
-    colour.
+    colour. The second is the form the API prompt's own example teaches
+    (`"color": "red", "representationColor": "red"`), and every task accepts it
+    (`tests/test_audit_fixes.py`).
+  - *chains by either id.* On the default view a chain named by its author id also
+    selects the ligands, ions and waters filed under that chain; named by its label id
+    it selects the polymer alone. "Colour chain A brown" says nothing of those, so both
+    are accepted.
+  - *the viewer's drawing under spheres or a surface.* On the default view a ligand
+    asked for as spheres keeps the viewer's own ball-and-stick inside them, where it
+    cannot be seen; it may be painted in the requested colour, left alone or left to
+    the select colour.
   - *nothing hidden.* Where the request asks for the protein in one representation
     ("as a surface") and the reference hides water or ligands only to match the MVS
     scene, the same list without those toggles is accepted.
   A request that names the viewer's style itself ("in the cartoon style") states it.
+  A request that **excludes** something in words ("no sugars", "only the DNA, no
+  water") states that too: every default-view form of such a task carries the matching
+  hide toggle, and no accepted form draws the excluded component
+  (`provenance.excludes`).
+- **API track: hide toggles nobody asked for (`free_hide`), a grader rule.** Where a
+  task accepts both the cartoon style (ligands, ions and water are gone) and the
+  default view (they are all drawn), the request evidently leaves open whether they are
+  on screen, so every state in between is right as well: the default view with the
+  waters hidden, say. The task file lists the toggles this holds for (`free_hide`, from
+  `hide_water`, `hide_heteroatoms`, `hide_carbs`, `hide_non_standard`): those that no
+  accepted list sets, and that leave the requested atoms drawn as they were on every
+  accepted list. When an answer sets one of them, it is compared with each right list
+  plus that toggle. `hide_polymer` is never free, and a toggle that would hide what the
+  request names (the heme of "the heme in teal spheres") is not listed. A task whose
+  only right form is the default view (a clinical request for the residue alone) has no
+  `free_hide`: there an unrequested hide toggle is an unrequested change, and wrong.
   A call list that changes something the request does not mention in any other way
-  (another global style, hidden components, a second colour) is still wrong, as an
-  unrequested extra component is on the MVS track.
+  (another global style, a second colour) is still wrong, as an unrequested extra
+  component is on the MVS track.
 
 ## What the viewer draws (MVS track)
 
@@ -238,8 +272,18 @@ each representation object holds, and in which colour), not taken from documenta
   "one colour per chain" would be any colour at all, so there only the theme itself
   matches, and `grader.check_task` reports a reference that uses the theme that way.
 
-Not graded on the MVS track: the envelope and metadata, the file's host and format
-variant, the order of children, representation size and surface kind
+**The file must load.** A scene Mol\* accepts can still show nothing: the download URL
+is the entry's web page, a bare file name or a file on an unknown host, or the `parse`
+format is not the file's (an mmCIF text parsed as `bcif` gives 0 atoms; read back in
+headless Mol\* 5.9.0). Such an answer has outcome `load_failed` and scores 0
+(`mvs.load_problem`). Accepted sources: an http(s) URL on a wwPDB site or mirror
+(`rcsb.org`, `ebi.ac.uk`, `wwpdb.org`, `pdbj.org`, `pdbe.org`, which covers AlphaFold
+DB) that ends in `.cif`, `.bcif`, `.pdb` or `.ent` (optionally `.gz`) or is a
+model-server query, with the matching `parse` format. Which of those hosts and which
+file variant (`1cbs`, `1cbs_updated`, `pdb1cbs`) is not graded.
+
+Not graded on the MVS track: the envelope and metadata, the file's host and name
+variant (within the rule above), the order of children, representation size and surface kind
 (`size_factor`, `surface_type`), label and primitive styling, and explicit camera
 numbers (below).
 
@@ -341,8 +385,8 @@ Every sample has an **outcome**:
 | MVS | `invalid_mvs` | a scene tree that Mol\* 5.9.0's own validation rejects (it would load nothing) | 0 |
 | MVS | `valid` | Mol\* accepts the scene | as graded |
 | MVS | `unchecked` | a scene tree graded without running Mol\*'s validation (no browser available) | as graded; no validity is claimed |
-| MVS | `load_failed` | (legacy render path only) Mol\* accepted the tree but could not load it | 0 |
-| API | `invalid_api` | a JSON list that breaks the call schema (an unknown action, a wrong field type) | as graded: the replay ignores what the viewer would ignore |
+| MVS | `load_failed` | the scene names a source Mol\* cannot load (see "The file must load"); also set by the legacy render path | 0 |
+| API | `invalid_api` | a JSON list that breaks the call schema (an unknown action, a wrong field type, a representation name outside the viewer's list) | as graded: the replay ignores what the viewer would ignore, and falls back as the viewer does |
 | API | `valid` | a schema-valid call list | as graded |
 
 `grade_task` sets `not_mvs` / `unchecked` and `valid` / `invalid_api`; whoever parses the
@@ -371,7 +415,20 @@ Scores are averaged in three ways, always named:
 - **Structures with no atom table** (an entry outside the panel, a PDB-format file) are
   compared as written: two selections are equal only if spelled the same way, and the
   equivalences above (all vs polymer under a cartoon, and so on) do not apply.
-  `grader.check_task` reports such a task; no benchmark task is one.
+  `grader.check_task` reports such a task; no benchmark task's reference is one.
+- **Resolve tier: an answer on another accepted entry is graded as written.** A resolve
+  task names a protein and accepts any PDB entry of it (5,739 accepted entries over the
+  39 tasks). Three of those entries have a frozen atom table; on every other one the
+  answer's selections are compared with the reference's as text. The usual namings pass
+  (the accepted scenes list `polymer`, `all`, `protein`, `nucleic` and the component
+  code), but a correct selection by chain id on such an entry scores 0, where the same
+  answer on the reference entry passes. The runner records which kind of entry each
+  answer used (`entry_outcome`), and resolve results are reported split that way.
+- **Reply parsing.** The answer is the outermost JSON array (API) or object (MVS) in the
+  reply; if that span is not JSON because the prose around it has a bracket of its own,
+  the first balanced array that parses as a list of objects is taken. A reply no JSON
+  parser can read (a number of thousands of digits, nesting thousands deep) is
+  `invalid_json`.
 - **Themes** other than `chain-id` and `entity-id` are matched only by the same theme.
 - **Carbohydrate** representations: which sugar residues are drawn is modelled; the
   colour of a sugar when a colour node selects only some of its atoms is not checked
@@ -397,7 +454,14 @@ Scores are averaged in three ways, always named:
   ligand component. The AlphaFold models and entries outside the panel were not
   compared.
 - **UniProt-numbered API selections** resolve through the frozen SIFTS tables, which
-  match PDBe's updated mmCIF (the file a `molecule_id` load fetches).
+  match PDBe's updated mmCIF (the file a `molecule_id` load fetches) and, for an
+  AlphaFold model, the model file itself (read back in pdbe-molstar 3.3.2). On any other
+  file loaded by URL (RCSB's mmCIF, a PDB-format file) the viewer has no SIFTS columns
+  and selects nothing, and so does the replay. PDBe's `.bcif` and model-server URLs are
+  taken to carry the columns; that was not read back.
+- **A cartoon needs a trace atom** on both tracks: a polymer residue with no CA (O3′ for
+  a nucleotide) has no ribbon in the viewer (Pro552 of 3ERT, the acetyl cap of 1HRC),
+  and none in the replay.
 - **F1 arithmetic differs slightly between the tracks** (see "What the viewer does").
   Task success is the same idea on both: the final state is exactly right.
 
@@ -420,6 +484,13 @@ and an answer whose verdict is known from how the pair was made.
   colour; a nearby shade; another representation; a missing or an extra component;
   another copy of the ligand; another entry; …). Must fail.
 
+Six kinds were added after the audits of 2026-11-16, each for a fault an auditor
+found: the API prompt's example form (residue and its stretch of cartoon in one colour)
+and an unrequested `hide_water` on the default view (must pass); the polymer hidden,
+and UniProt keys on a file without SIFTS columns (must fail); UniProt keys on an
+AlphaFold model (must pass; five controls, one per model in the panel); and, on the MVS
+track, a scene whose file cannot load (must fail).
+
 Five kinds are about unstated attributes: on the MVS track a reference with no colour
 node answered in a palette colour (must pass) and answered with the stated colour all
 over (must fail); on the API track "a grey cartoon and the ligand in a colour" answered
@@ -435,8 +506,8 @@ fails if the grader stops agreeing with any control.
 
 | track | controls | kinds (equivalent / wrong) | false pass | false fail | graders before this work: false pass / false fail |
 |---|---|---|---|---|---|
-| MVS | 1,090 on 78 entries | 24 / 23 | 0 of 460 | 0 of 630 | 0 of 460 / 264 of 630 (October path grader, F1 = 1 as success) |
-| API | 910 on 69 entries | 19 / 19 | 0 of 380 | 0 of 530 | 75 of 380 / 266 of 530 (July sequence grader, F1 = 1 as success) |
+| MVS | 1,110 on 78 entries | 24 / 24 | 0 of 480 | 0 of 630 | 13 of 480 / 264 of 630 (October path grader, F1 = 1 as success) |
+| API | 995 on 74 entries | 22 / 21 | 0 of 420 | 0 of 575 | 75 of 420 / 311 of 575 (July sequence grader, F1 = 1 as success) |
 
 Read these zeros with care: the grader was corrected until it agreed with every
 control, so they show that the rules above are implemented, not how often an unforeseen

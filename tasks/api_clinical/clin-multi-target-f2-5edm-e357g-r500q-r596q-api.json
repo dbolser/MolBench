@@ -1,0 +1,319 @@
+{
+ "id": "clin-multi-target-f2-5edm-e357g-r500q-r596q-api",
+ "track": "api",
+ "tier": "clinical",
+ "family": "clin-multi-target",
+ "structures": [
+  "5edm"
+ ],
+ "prompt": "In PDB entry 5EDM, show the residues replaced by the F2 (Prothrombin, UniProt P00734) variants p.Glu357Gly, p.Arg500Gln and p.Arg596Gln (each pathogenic or likely pathogenic in ClinVar) as cyan spacefill spheres.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "5edm"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "uniprot_accession": "P00734",
+     "uniprot_residue_number": 357,
+     "color": null,
+     "representation": "spacefill",
+     "representationColor": "cyan"
+    },
+    {
+     "uniprot_accession": "P00734",
+     "uniprot_residue_number": 500,
+     "color": null,
+     "representation": "spacefill",
+     "representationColor": "cyan"
+    },
+    {
+     "uniprot_accession": "P00734",
+     "uniprot_residue_number": 596,
+     "color": null,
+     "representation": "spacefill",
+     "representationColor": "cyan"
+    }
+   ]
+  }
+ ],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "5edm"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 357,
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     },
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 500,
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     },
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 596,
+      "color": "cyan",
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     }
+    ]
+   }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "5edm"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 357,
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     },
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 500,
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     },
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 596,
+      "representation": "spacefill",
+      "representationColor": "cyan"
+     }
+    ]
+   }
+  ]
+ ],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 300
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 443
+    },
+    {
+     "label_asym_id": "A",
+     "label_seq_id": 539
+    }
+   ],
+   "representation": "spacefill",
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "clin-multi-target-f2-5edm-e357g-r500q-r596q-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "PDB 5EDM: Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I )\nMethod: X-RAY DIFFRACTION, 2.20 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Prothrombin), protein, 550 of 568 residues observed: auth 1-242 = label 1-242; auth 261-568 = label 261-568\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P00734 (THRB_HUMAN): UniProt 44-196 = auth 1-153; UniProt 211-299 = auth 154-242; UniProt 318-622 = auth 261-565\n\nFrom the request:\n  F2: UniProt P00734 (THRB_HUMAN, Prothrombin)\n  p.Glu357Gly: UniProt position 357 (Glu in UniProt) -> in 5EDM: auth A 300 GLU (label A 300)\n  p.Arg500Gln: UniProt position 500 (Arg in UniProt) -> in 5EDM: auth A 443 ARG (label A 443)\n  p.Arg596Gln: UniProt position 596 (Arg in UniProt) -> in 5EDM: auth A 539 ARG (label A 539)"
+ },
+ "provenance": {
+  "script": "scripts/generate_clinical_tasks.py",
+  "inputs": [
+   "data/panel/variants/P00734.json",
+   "data/panel/facts/5edm.json",
+   "molbench/sifts_tables/5edm.json.gz",
+   "molbench/atom_tables/5edm.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "target (3 residue(s), 31 atoms, residue name(s) ARG/GLU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+   "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+   "the twin on the other track selects the same target atoms",
+   "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+  ],
+  "clinical": {
+   "gene": "F2",
+   "accession": "P00734",
+   "protein": "Prothrombin",
+   "naming": "hgvs",
+   "scope": "all",
+   "context": "none",
+   "chain": null,
+   "wording": 0,
+   "look": {
+    "rep": "spacefill",
+    "color": "cyan"
+   },
+   "variants": [
+    {
+     "name_in_prompt": "p.Glu357Gly",
+     "variant": "E357G",
+     "hgvs": "p.Glu357Gly",
+     "uniprot_position": 357,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV001098520"
+     ],
+     "clinvar_classification": [
+      "Likely pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, single submitter"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 300,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 300,
+       "comp_id": "GLU"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "p.Arg500Gln",
+     "variant": "R500Q",
+     "hgvs": "p.Arg500Gln",
+     "uniprot_position": 500,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV002706763"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 443,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 443,
+       "comp_id": "ARG"
+      }
+     ]
+    },
+    {
+     "name_in_prompt": "p.Arg596Gln",
+     "variant": "R596Q",
+     "hgvs": "p.Arg596Gln",
+     "uniprot_position": 596,
+     "mature_numbering": null,
+     "clinvar_vcv": [
+      "VCV000692073"
+     ],
+     "clinvar_classification": [
+      "Pathogenic"
+     ],
+     "clinvar_review_status": [
+      "criteria provided, multiple submitters, no conflicts"
+     ],
+     "residues": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 539,
+       "pdbx_PDB_ins_code": "",
+       "label_asym_id": "A",
+       "label_seq_id": 539,
+       "comp_id": "ARG"
+      }
+     ]
+    }
+   ],
+   "secondary_structure": null,
+   "report_apart": null,
+   "difficulty": {
+    "needs_uniprot_mapping": true,
+    "needs_numbering_offset": true,
+    "author_minus_uniprot": [
+     -57
+    ],
+    "structure_has_offset": true,
+    "author_chain_differs_from_label_chain": false,
+    "author_number_differs_from_label_number": false,
+    "insertion_code": false,
+    "needs_ligand_identity": false,
+    "accession_in_prompt": true,
+    "protein_copies_in_structure": 1,
+    "target_residues": 3,
+    "alphafold_model": false,
+    "name_in_mature_numbering": false,
+    "mature_number_equals_author_number": null,
+    "number_in_name_as_author_number_is_same_amino_acid": false,
+    "name_read_as_mature_number_is_same_amino_acid": true,
+    "number_in_name_as_author_number_is_right": false,
+    "number_in_name_as_label_number_is_right": false
+   },
+   "pair": null,
+   "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
+  },
+  "structure": "5edm",
+  "derived": "UniProt position of each variant from the frozen ClinVar-confirmed list; structure residues from the frozen SIFTS mapping",
+  "checked_by": "scripts/generate_clinical_tasks.py (atom tables, SIFTS tables, grader) and scripts/check_api_refs.py",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 300
+     }
+    ],
+    "what": "p.Glu357Gly residue(s)",
+    "n_atoms": 9
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 443
+     }
+    ],
+    "what": "p.Arg500Gln residue(s)",
+    "n_atoms": 11
+   },
+   {
+    "action": 1,
+    "param": 2,
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 539
+     }
+    ],
+    "what": "p.Arg596Gln residue(s)",
+    "n_atoms": 11
+   }
+  ],
+  "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

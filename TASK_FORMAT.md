@@ -38,7 +38,11 @@ uv run python scripts/validate_tasks.py --final   # what the frozen corpus must 
 
 Optional fields: `title` and `notes` (free text for people); `accepted_structures`
 (resolve tier: other structure ids that count as the reference's); `accepted_targets`
-(one target per entry of `accepted`, when the alternatives have different targets).
+(one target per entry of `accepted`, when the alternatives have different targets);
+`free_hide` (single-turn API tasks: the hide toggles, from `hide_water`,
+`hide_heteroatoms`, `hide_carbs`, `hide_non_standard`, that an answer may set although
+the request does not ask for it; written by `scripts/api_forms.py` only where the task
+accepts both the cartoon style and the default view, see GRADING.md).
 Any other field is an error, which is how a typo in a field name is caught.
 
 ### Tiers

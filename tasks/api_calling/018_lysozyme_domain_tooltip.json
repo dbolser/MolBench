@@ -32,7 +32,29 @@
       ]
     }
   ],
-  "accepted": [],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "1aki"
+      },
+      {
+        "action": "set_property",
+        "name": "domain_annotation",
+        "value": true
+      },
+      {
+        "action": "tooltips",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 35,
+            "tooltip": "catalytic glutamate"
+          }
+        ]
+      }
+    ]
+  ],
   "context": null,
   "target": [
     {
@@ -66,7 +88,8 @@
       "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8)"
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8)",
+      "1 further call form(s) accepted, because the request does not state what they differ in (default view): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does; the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "1aki",
     "derived": "Author residue 35 of chain A is a glutamate (atom table).",
@@ -102,7 +125,10 @@
         "n_atoms": 9
       }
     ],
-    "july_task": "unchanged"
+    "july_task": "unchanged",
+    "call_forms": [
+      "default view"
+    ]
   },
   "skills": [
     "load",
@@ -112,5 +138,8 @@
     "author-numbering",
     "tooltip"
   ],
-  "title": "Domains and a tooltip"
+  "title": "Domains and a tooltip",
+  "free_hide": [
+    "hide_water"
+  ]
 }

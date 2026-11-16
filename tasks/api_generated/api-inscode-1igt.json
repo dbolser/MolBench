@@ -6,7 +6,7 @@
   "structures": [
     "1igt"
   ],
-  "prompt": "Load 1IGT and colour Asn52A of chain D purple: the residue with insertion code A, not the other residue numbered 52.",
+  "prompt": "Load 1IGT and colour Asn52A of chain D purple: the residue with insertion code A, not the other residue numbered 52. In the mmCIF label numbering it is residue 53 of label chain D.",
   "reference": [
     {
       "action": "load",

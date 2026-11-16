@@ -275,6 +275,13 @@
    ],
    "representation": "ball_and_stick",
    "color": "yellow"
+  },
+  {
+   "selector": {
+    "label_comp_id": "CA"
+   },
+   "representation": "spacefill",
+   "color": "green"
   }
  ],
  "twin_of": "gr-metal-site-6m7h-ca-api",
@@ -294,7 +301,7 @@
    "24 metal-residue bonds re-measured in the frozen mmCIF: 2.19 to 2.56 A",
    "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a CA ion; none is added out to 3.2 A, so no weak ligand is left to argue over",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 167 atoms on the frozen atom table"
+   "target selects 171 atoms on the frozen atom table"
   ],
   "derivation": "every CA ion of the facts (4) as a sphere, and the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: ASP20 (A), ASP22 (A), ASP24 (A), THR26 (A), GLU31 (A), ASP56 (A), ASP58 (A), ASN60 (A), THR62 (A), GLU67 (A), ASP93 (A), ASP95 (A), ASN97 (A), TYR99 (A), GLU104 (A), ASP129 (A), ASP131 (A), ASP133 (A), GLN135 (A), GLU140 (A). Water and other non-polymer partners are not residues and are left out",
   "difficulty": {

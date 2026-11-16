@@ -3,17 +3,17 @@
  "seed": 20261112,
  "tracks": {
   "mvs": {
-   "n_controls": 1090,
+   "n_controls": 1110,
    "n_identical": 150,
    "n_equivalent": 480,
-   "n_wrong": 460,
+   "n_wrong": 480,
    "n_equivalent_kinds": 24,
-   "n_wrong_kinds": 23,
+   "n_wrong_kinds": 24,
    "n_entries": 78,
    "grader": {
     "false_pass": {
      "errors": 0,
-     "n": 460,
+     "n": 480,
      "rate": 0.0
     },
     "false_fail": {
@@ -30,9 +30,9 @@
    "previous_grader": {
     "what": "October path grader, F1 = 1 taken as success",
     "false_pass": {
-     "errors": 0,
-     "n": 460,
-     "rate": 0.0
+     "errors": 13,
+     "n": 480,
+     "rate": 0.0271
     },
     "false_fail": {
      "errors": 264,
@@ -359,6 +359,16 @@
     },
     {
      "group": "wrong",
+     "kind": "file_that_loads_nothing",
+     "what": "the right scene on a source Mol* cannot read: the mmCIF file parsed as BinaryCIF, the entry's web page instead of its file, or a bare file name (the viewer shows nothing)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 13,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
      "kind": "focus_wrong_or_missing",
      "what": "the camera focus is on another residue, or absent",
      "n": 20,
@@ -530,27 +540,27 @@
    ]
   },
   "api": {
-   "n_controls": 910,
+   "n_controls": 995,
    "n_identical": 150,
-   "n_equivalent": 380,
-   "n_wrong": 380,
-   "n_equivalent_kinds": 19,
-   "n_wrong_kinds": 19,
-   "n_entries": 69,
+   "n_equivalent": 425,
+   "n_wrong": 420,
+   "n_equivalent_kinds": 22,
+   "n_wrong_kinds": 21,
+   "n_entries": 74,
    "grader": {
     "false_pass": {
      "errors": 0,
-     "n": 380,
+     "n": 420,
      "rate": 0.0
     },
     "false_fail": {
      "errors": 0,
-     "n": 530,
+     "n": 575,
      "rate": 0.0
     },
     "false_fail_equivalent_only": {
      "errors": 0,
-     "n": 380,
+     "n": 425,
      "rate": 0.0
     }
    },
@@ -558,18 +568,18 @@
     "what": "July sequence grader, F1 = 1 taken as success",
     "false_pass": {
      "errors": 75,
-     "n": 380,
-     "rate": 0.1974
+     "n": 420,
+     "rate": 0.1786
     },
     "false_fail": {
-     "errors": 266,
-     "n": 530,
-     "rate": 0.5019
+     "errors": 311,
+     "n": 575,
+     "rate": 0.5409
     },
     "false_fail_equivalent_only": {
-     "errors": 266,
-     "n": 380,
-     "rate": 0.7
+     "errors": 311,
+     "n": 425,
+     "rate": 0.7318
     }
    },
    "mistakes": [],
@@ -746,6 +756,16 @@
     },
     {
      "group": "equivalent",
+     "kind": "uniprot_number_on_alphafold_model",
+     "what": "on an AlphaFold DB model, a residue by UniProt accession and number instead of author numbering (the model file carries the SIFTS columns)",
+     "n": 5,
+     "graded_success": 5,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
      "kind": "uniprot_vs_author_number",
      "what": "a residue by UniProt accession and number, or every mapped copy by author numbering",
      "n": 20,
@@ -758,6 +778,26 @@
      "group": "equivalent",
      "kind": "unstated_default_view",
      "what": "a grey cartoon and a coloured ligand are asked for: the answer leaves the cartoon to the viewer's default view and paints the ligand (water and other components stay on screen, which the request does not mention)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "unstated_hide_water",
+     "what": "the same request answered on the default view with the waters hidden, which nobody asked for: the task accepts the cartoon style (no water drawn) and the default view (water drawn), so the state in between is right too (the task's free_hide)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
+     "kind": "unstated_stretch_in_highlight_colour",
+     "what": "a grey cartoon and a residue as coloured ball-and-stick are asked for: the answer colours the residue and adds the ball-and-stick in the same colour, the form the API prompt's own example teaches (the residue's stretch of cartoon takes the highlight colour)",
      "n": 20,
      "graded_success": 20,
      "old_grader_success": 0,
@@ -882,12 +922,22 @@
      "graded_success": 0,
      "old_grader_success": 20,
      "mean_f1": 0.6658,
-     "mean_target_f1": 0.929
+     "mean_target_f1": 0.9306
     },
     {
      "group": "wrong",
      "kind": "uniprot_number_as_author_number",
      "what": "the UniProt residue number used as the author number (structures with an offset)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
+    },
+    {
+     "group": "wrong",
+     "kind": "uniprot_number_on_a_file_without_sifts",
+     "what": "a residue by UniProt accession and number on RCSB's mmCIF loaded by URL: that file has no SIFTS columns, so the viewer selects nothing",
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
@@ -913,6 +963,16 @@
      "old_grader_success": 0,
      "mean_f1": 0.8621,
      "mean_target_f1": 0.8621
+    },
+    {
+     "group": "wrong",
+     "kind": "unstated_hide_polymer",
+     "what": "the default-view answer to 'grey cartoon, residue as coloured ball-and-stick' with the polymer hidden: a free hide toggle never covers what was asked for",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.5582,
+     "mean_target_f1": 0.5162
     },
     {
      "group": "wrong",

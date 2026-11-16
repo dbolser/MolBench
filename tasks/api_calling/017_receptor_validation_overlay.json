@@ -22,7 +22,19 @@
       "value": true
     }
   ],
-  "accepted": [],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "3eml"
+      },
+      {
+        "action": "set_property",
+        "name": "validation_annotation",
+        "value": true
+      }
+    ]
+  ],
   "context": null,
   "target": null,
   "twin_of": null,
@@ -43,7 +55,8 @@
       "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)"
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "1 further call form(s) accepted, because the request does not state what they differ in (default view): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does; the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "3eml",
     "derived": "The annotation is compared as a declared setting.",
@@ -61,7 +74,10 @@
       ]
     },
     "targets": [],
-    "july_task": "unchanged"
+    "july_task": "unchanged",
+    "call_forms": [
+      "default view"
+    ]
   },
   "skills": [
     "load",

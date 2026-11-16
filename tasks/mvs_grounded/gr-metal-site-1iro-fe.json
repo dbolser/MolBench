@@ -147,6 +147,13 @@
    ],
    "representation": "ball_and_stick",
    "color": "green"
+  },
+  {
+   "selector": {
+    "label_comp_id": "FE"
+   },
+   "representation": "spacefill",
+   "color": "khaki"
   }
  ],
  "twin_of": "gr-metal-site-1iro-fe-api",
@@ -166,7 +173,7 @@
    "4 metal-residue bonds re-measured in the frozen mmCIF: 2.23 to 2.29 A",
    "a neighbour search (with crystal symmetry) finds exactly these residues, and no other polymer N, O or S atom, within 2.6 A of a FE ion; none is added out to 3.2 A, so no weak ligand is left to argue over",
    "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-   "target selects 40 atoms on the frozen atom table"
+   "target selects 41 atoms on the frozen atom table"
   ],
   "derivation": "every FE ion of the facts (1) as a sphere, and the polymer residues with a metal-coordination record (`_struct_conn`, `metalc`) to one of them: CYS6 (A), CYS9 (A), CYS39 (A), CYS42 (A). Water and other non-polymer partners are not residues and are left out",
   "difficulty": {

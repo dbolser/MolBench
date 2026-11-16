@@ -123,6 +123,13 @@
    ],
    "representation": "ball_and_stick",
    "color": "limegreen"
+  },
+  {
+   "selector": {
+    "label_comp_id": "RET"
+   },
+   "representation": "ball_and_stick",
+   "color": "steelblue"
   }
  ],
  "twin_of": "gr-attachment-1c3w-ret-api.terse",
@@ -156,7 +163,7 @@
    "checks": [
     "each link re-measured in the frozen mmCIF: 1.34 A",
     "reference grades as exactly right against the task with the benchmark's grader (success, F1 = 1, target score 1); no selection is empty",
-    "target selects 9 atoms on the frozen atom table"
+    "target selects 29 atoms on the frozen atom table"
    ],
    "derivation": "every copy of RET (RETINAL) and the polymer residues with a covalent link record (`_struct_conn`, `covale`) to it in the facts: LYS216 (A)",
    "difficulty": {

@@ -20,8 +20,8 @@
    "action": "color",
    "data": [
     {
-     "auth_asym_id": "A",
-     "auth_seq_id": 98,
+     "uniprot_accession": "P68871",
+     "uniprot_residue_number": 98,
      "color": null,
      "representation": "ball-and-stick",
      "representationColor": "green"
@@ -43,8 +43,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 98,
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 98,
       "color": "green",
       "representation": "ball-and-stick",
       "representationColor": "green"
@@ -65,8 +65,8 @@
     "action": "color",
     "data": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 98,
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 98,
       "representation": "ball-and-stick",
       "representationColor": "green"
      }
@@ -189,11 +189,13 @@
    {
     "action": 1,
     "param": 0,
-    "atoms": {
-     "label_asym_id": "A",
-     "label_seq_id": 98
-    },
-    "what": "p.His98Gln residue",
+    "atoms": [
+     {
+      "label_asym_id": "A",
+      "label_seq_id": 98
+     }
+    ],
+    "what": "p.His98Gln residue(s)",
     "n_atoms": 10
    }
   ],

@@ -266,6 +266,93 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "1a3k"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "color": "gray",
+            "auth_asym_id": "A"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 41,
+            "end_residue_number": 49,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 127,
+            "end_residue_number": 136,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 84,
+            "end_residue_number": 91,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 17,
+            "end_residue_number": 25,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 32,
+            "end_residue_number": 38,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 103,
+            "end_residue_number": 109,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 95,
+            "end_residue_number": 100,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 120,
+            "end_residue_number": 125,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 57,
+            "end_residue_number": 61,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 5,
+            "end_residue_number": 8,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 72,
+            "end_residue_number": 74,
+            "color": "limegreen"
+          },
+          {
+            "struct_asym_id": "A",
+            "start_residue_number": 115,
+            "end_residue_number": 117,
+            "color": "blue"
+          }
+        ]
+      }
     ]
   ],
   "context": null,
@@ -360,7 +447,8 @@
       "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
-      "2 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour; default view, rest untouched): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
+      "3 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour | default view, rest untouched | default view, rest untouched; chains by author id: their ligands, ions and waters take the chain's colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (scripts/api_forms.py)",
+      "the task accepts the cartoon style (ligands, ions and water gone) and the default view (all drawn), so an answer may also set hide_water, hide_carbs: with each, every accepted list still draws the target atoms as before (scripts/api_forms.py)"
     ],
     "twin": {
       "of": "gr-secstruct-1a3k",
@@ -370,7 +458,8 @@
       "colour_classes": 3,
       "call_forms": [
         "default view, rest in the backdrop colour",
-        "default view, rest untouched"
+        "default view, rest untouched",
+        "default view, rest untouched; chains by author id: their ligands, ions and waters take the chain's colour"
       ]
     },
     "difficulty": {
@@ -390,12 +479,17 @@
       "hinges_on": [],
       "order_matters": true,
       "context_switched_off": []
-    }
+    },
+    "report_apart": "needs the entry's own helix and strand records, which no prompt condition supplies on this tier (annotation recall); reported apart from the tier, like the clinical helix/strand tasks"
   },
   "skills": [
     "load",
     "selection",
     "representation",
     "color"
+  ],
+  "free_hide": [
+    "hide_water",
+    "hide_carbs"
   ]
 }

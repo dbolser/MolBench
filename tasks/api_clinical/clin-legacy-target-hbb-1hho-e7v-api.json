@@ -122,19 +122,13 @@
       "what": "the initiator methionine"
      },
      "clinvar_vcv": [
-      "VCV000015333",
-      "VCV000446735",
-      "VCV000446736",
-      "VCV000446737",
-      "VCV000446738",
-      "VCV000446747"
+      "VCV000015333"
      ],
      "clinvar_classification": [
       "Pathogenic"
      ],
      "clinvar_review_status": [
-      "criteria provided, multiple submitters, no conflicts",
-      "no assertion criteria provided"
+      "criteria provided, multiple submitters, no conflicts"
      ],
      "residues": [
       {

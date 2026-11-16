@@ -6,7 +6,7 @@
  "structures": [
   "8c86"
  ],
- "prompt": "Using PDB entry 8C86, show the annotated beta strand that carries the wild-type residue at the position of the TTR (Transthyretin, UniProt P02766) missense variant A65V (pathogenic/likely pathogenic in ClinVar) in chain B only (author chain ID) as a brown cartoon, with that residue as magenta ball-and-stick.",
+ "prompt": "Using PDB entry 8C86, show the annotated beta strand that carries the wild-type residue at the position of the TTR (Transthyretin, UniProt P02766) missense variant p.A65V (pathogenic/likely pathogenic in ClinVar) in chain B only (author chain ID) as a brown cartoon, with that residue as magenta ball-and-stick.",
  "reference": {
   "root": {
    "kind": "root",
@@ -107,7 +107,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 8C86: Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2\nMethod: X-RAY DIFFRACTION, 1.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  B [A]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\n  A [B]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  B [A]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n  A [B]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n\nFrom the request:\n  TTR: UniProt P02766 (TTHY_HUMAN, Transthyretin)\n  A65V: UniProt position 65 (Ala in UniProt) -> in 8C86, chain B: auth B 45 ALA (label A 45)\n  Beta strand annotated in the entry that contains that residue: auth B 41-48 (label A 41-48)"
+  "text": "PDB 8C86: Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2\nMethod: X-RAY DIFFRACTION, 1.10 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  B [A]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\n  A [B]: entity 1 (Transthyretin), protein, 116 of 127 residues observed: auth 10-125 = label 10-125\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  B [A]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n  A [B]: P02766 (TTHY_HUMAN): UniProt 30-145 = auth 10-125\n\nFrom the request:\n  TTR: UniProt P02766 (TTHY_HUMAN, Transthyretin)\n  p.A65V: UniProt position 65 (Ala in UniProt) -> in 8C86, chain B: auth B 45 ALA (label A 45)\n  Beta strand annotated in the entry that contains that residue: auth B 41-48 (label A 41-48)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",
@@ -143,7 +143,7 @@
    },
    "variants": [
     {
-     "name_in_prompt": "A65V",
+     "name_in_prompt": "p.A65V",
      "variant": "A65V",
      "hgvs": "p.Ala65Val",
      "uniprot_position": 65,
