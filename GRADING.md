@@ -394,7 +394,7 @@ Scores are averaged in three ways, always named:
   carries an older Mol\*. A bare load of 73 panel entries was compared with the viewer.
   Two differences were found and are now modelled as measured: the acetyl cap of 1HRC
   is not in the viewer's "non-standard" component, and Arg167 of 1AKE is not in its
-  ligand component. The two AlphaFold models and entries outside the panel were not
+  ligand component. The AlphaFold models and entries outside the panel were not
   compared.
 - **UniProt-numbered API selections** resolve through the frozen SIFTS tables, which
   match PDBe's updated mmCIF (the file a `molecule_id` load fetches).

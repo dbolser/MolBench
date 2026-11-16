@@ -56,7 +56,7 @@ PALETTE = drawn.TASK_PALETTE
 # The held-back split (decision 21)
 # --------------------------------------------------------------------------- #
 HELDBACK_SEED = 2            # the smallest covering seed; a test re-derives it
-HELDBACK_N = 15              # 20% of the 75 usable panel entries
+HELDBACK_N = 15              # 20% of the 75 usable panel entries when the list was frozen
 # The corpus-wide list, when the lead has frozen one: a JSON list of panel ids. It
 # replaces the rule below (the API and accept-set generators read the same file).
 HELDBACK_FILE = REPO / "data" / "panel" / "heldback.json"

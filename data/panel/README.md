@@ -190,3 +190,9 @@ Everything is from the frozen mmCIF, first model, plus the SIFTS table.
   were rebuilt independently from the raw UniProt responses; a sample of ten variants
   looked up in ClinVar found three that ClinVar calls "Conflicting", which is why
   step 2 of the variant rule exists (it removed 657 of 3,352 candidates).
+- Added after that review (2026-11-16): the AlphaFold models of LYZ (P61626), CRYGD
+  (P07320) and CALM1 (P0DP23), as the no-offset side of the clinical tier's offset
+  pairs. They are marked `public_only` in `seed.json` (the held-back list was already
+  frozen), and passed `build_panel.py --check` and the Mol\* comparison of
+  `build_atom_tables.py`, not the independent review. `used_by_tasks` is frozen since
+  then: it lists the tasks published before the final corpus, and a rebuild keeps it.
