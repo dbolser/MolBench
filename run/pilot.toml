@@ -37,45 +37,45 @@ per_model_concurrency = 2
 validate = "required"               # as in the final run: Mol* validates every parsed scene
 # BEGIN TASKS (written by run/select_pilot.py; do not edit by hand)
 tasks = [
-    "tr-range-rows-3k34",                               # translation, MVS, public, twin
-    "tr-range-rows-3k34-api",                           # translation, API, public, twin of tr-range-rows-3k34
-    "tr-het-code-6tha",                                 # translation, MVS, held back
-    "api-range-colour-8k7f",                            # translation, API, held back
-    "tr-rep-word-1mbn",                                 # translation, MVS, public, second template
-    "tr-chain-only-8c86-api",                           # translation, API, public, second template
-    "gr-attachment-1hrc-hec",                           # grounded, MVS, public, twin
-    "gr-attachment-1hrc-hec-api",                       # grounded, API, public, twin of gr-attachment-1hrc-hec
-    "gr-disulfides-3kcg",                               # grounded, MVS, held back
-    "gr-metal-site-2c9v-zn-api",                        # grounded, API, held back
-    "gr-ligand-1ake-ap5",                               # grounded, MVS, public, second template
-    "gr-glyco-sites-9fb2-api",                          # grounded, API, public, second template
-    "in-ca-distance-1ake",                              # interactions, MVS, public
-    "in-transparent-1rx2-nap",                          # interactions, MVS, held back
-    "res-complex-p69905-p68871",                        # resolve, MVS, public
-    "res-name-p02649",                                  # resolve, MVS, held back
-    "clin-chain-hbb-2hhb-v68m-chainb-mvs",              # clinical, MVS, public, twin
-    "clin-chain-hbb-2hhb-v68m-chainb-api",              # clinical, API, public, twin of clin-chain-hbb-2hhb-v68m-chainb-mvs
-    "clin-short-target-ins-6tc2-v42a-mvs",              # clinical, MVS, held back
-    "clin-multi-context-ins-6tc2-h34p-l35m-c109f-api",  # clinical, API, held back
-    "clin-short-context-tpi1-9f69-f241s-mvs",           # clinical, MVS, public, second template
-    "clin-hgvs-context-calm1-6m7h-d96v-api",            # clinical, API, public, second template
-    "fu-referent-colour-5cj6-mvs",                      # followup, MVS, public, twin
-    "fu-referent-colour-5cj6-api",                      # followup, API, public, twin of fu-referent-colour-5cj6-mvs
-    "fu-background-6tha-mvs",                           # followup, MVS, held back
-    "fu-also-colour-chain-6tc2-api",                    # followup, API, held back
-    "fu-remove-ligand-1k4c-mvs",                        # followup, MVS, public, second template
-    "fu-noop-shown-1f88-api",                           # followup, API, public, second template
-    "acc-ligand-colours-2cpp-mvs",                      # accept_set, MVS, public, twin
-    "acc-ligand-colours-2cpp-api",                      # accept_set, API, public, twin of acc-ligand-colours-2cpp-mvs
-    "acc-residue-colour-1igt-mvs",                      # accept_set, MVS, held back
-    "acc-residue-colour-1igt-api",                      # accept_set, API, held back
-    "api-canvas-1udt",                                  # tool_only, API, public
-    "api-undo-8k7f",                                    # tool_only, API, held back
-    "fu-noop-shown-3ert-mvs",                           # follow-up with no change, MVS
-    "clin-chain-hbb-2hhb-v68m-chainb-mvs.indirect",     # paraphrase (indirect) of clin-chain-hbb-2hhb-v68m-chainb-mvs
-    "clin-chain-hbb-2hhb-v68m-chainb-mvs.terse",        # paraphrase (terse) of clin-chain-hbb-2hhb-v68m-chainb-mvs
-    "clin-chain-hbb-2hhb-v68m-chainb-api.indirect",     # paraphrase (indirect) of clin-chain-hbb-2hhb-v68m-chainb-api
-    "clin-chain-hbb-2hhb-v68m-chainb-api.terse",        # paraphrase (terse) of clin-chain-hbb-2hhb-v68m-chainb-api
+    "tr-range-rows-3k34",                                    # translation, MVS, public, twin
+    "tr-range-rows-3k34-api",                                # translation, API, public, twin of tr-range-rows-3k34
+    "tr-het-code-6tha",                                      # translation, MVS, held back
+    "api-label-chain-1lmb",                                  # translation, API, held back
+    "tr-rep-word-1mbn",                                      # translation, MVS, public, second template
+    "tr-chain-only-8c86-api",                                # translation, API, public, second template
+    "gr-attachment-1hrc-hec",                                # grounded, MVS, public, twin
+    "gr-attachment-1hrc-hec-api",                            # grounded, API, public, twin of gr-attachment-1hrc-hec
+    "gr-disulfides-3kcg",                                    # grounded, MVS, held back
+    "gr-metal-site-2c9v-zn-api",                             # grounded, API, held back
+    "gr-ligand-1ake-ap5",                                    # grounded, MVS, public, second template
+    "gr-glyco-sites-9fb2-api",                               # grounded, API, public, second template
+    "in-ca-distance-1ake",                                   # interactions, MVS, public
+    "in-transparent-1rx2-nap",                               # interactions, MVS, held back
+    "res-complex-p69905-p68871",                             # resolve, MVS, public
+    "res-name-p02649",                                       # resolve, MVS, held back
+    "clin-legacy-target-hbb-af-p68871-f1-e7v-mvs",           # clinical, MVS, public, twin
+    "clin-legacy-target-hbb-af-p68871-f1-e7v-api",           # clinical, API, public, twin of clin-legacy-target-hbb-af-p68871-f1-e7v-mvs
+    "clin-short-target-ins-6tc2-v42a-mvs",                   # clinical, MVS, held back
+    "clin-legacy-target-sod1-2c9v-a5v-api",                  # clinical, API, held back
+    "clin-legacy-context-hba1-1hho-g60d-mvs",                # clinical, MVS, public, second template
+    "clin-chain-f9-8eph-g412e-chainb-api",                   # clinical, API, public, second template
+    "fu-referent-colour-5cj6-mvs",                           # followup, MVS, public, twin
+    "fu-referent-colour-5cj6-api",                           # followup, API, public, twin of fu-referent-colour-5cj6-mvs
+    "fu-noop-hidden-8k7f-mvs",                               # followup, MVS, held back
+    "fu-also-colour-chain-6tc2-api",                         # followup, API, held back
+    "fu-recolour-ligand-1mbn-mvs",                           # followup, MVS, public, second template
+    "fu-noop-shown-1f88-api",                                # followup, API, public, second template
+    "acc-ligand-colours-2cpp-mvs",                           # accept_set, MVS, public, twin
+    "acc-ligand-colours-2cpp-api",                           # accept_set, API, public, twin of acc-ligand-colours-2cpp-mvs
+    "acc-residue-colour-1igt-mvs",                           # accept_set, MVS, held back
+    "acc-residue-colour-1igt-api",                           # accept_set, API, held back
+    "api-canvas-1udt",                                       # tool_only, API, public
+    "api-undo-8k7f",                                         # tool_only, API, held back
+    "fu-noop-spin-1cbs-mvs",                                 # follow-up with no change, MVS
+    "clin-legacy-target-hbb-af-p68871-f1-e7v-mvs.indirect",  # paraphrase (indirect) of clin-legacy-target-hbb-af-p68871-f1-e7v-mvs
+    "clin-legacy-target-hbb-af-p68871-f1-e7v-mvs.terse",     # paraphrase (terse) of clin-legacy-target-hbb-af-p68871-f1-e7v-mvs
+    "clin-legacy-target-hbb-af-p68871-f1-e7v-api.indirect",  # paraphrase (indirect) of clin-legacy-target-hbb-af-p68871-f1-e7v-api
+    "clin-legacy-target-hbb-af-p68871-f1-e7v-api.terse",     # paraphrase (terse) of clin-legacy-target-hbb-af-p68871-f1-e7v-api
 ]
 # END TASKS
 

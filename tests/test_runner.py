@@ -1345,9 +1345,9 @@ def test_one_difficulty_vocabulary_covers_every_generator(whole_corpus):
     clinical = [t for t in whole_corpus if t["tier"] == "clinical" and not t.get("paraphrase_of")
                 and t["category"] == "mvs"]
     n = lambda key: sum(bool(difficulty.normalised(t)[key]) for t in clinical)  # noqa: E731
-    assert len(clinical) == 79
+    assert len(clinical) == 82
     assert (n("needs_offset"), n("chain_mismatch"),
-            n("number_in_name_as_author_number_is_right")) == (57, 23, 34)   # CORPUS.md
+            n("number_in_name_as_author_number_is_right")) == (59, 25, 34)   # CORPUS.md
     # a paraphrase carries its original's facts
     para = next(t for t in whole_corpus if t.get("paraphrase_of") and t["tier"] == "clinical")
     original = next(t for t in whole_corpus if t["id"] == para["paraphrase_of"])

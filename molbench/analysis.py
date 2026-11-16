@@ -56,6 +56,9 @@ HEADLINE = "spec"
 MOCK_BANNER = ("> **MOCK DATA.** Dry run answered by the mock model: the table has its final "
                "shape, **every number in it is fake**.")
 CLINICAL_SSE = ("clin-sse-helix", "clin-sse-strand")
+# Grounded-tier tasks that need the entry's own helix and strand records, like the
+# clinical ones above (`provenance.report_apart`; audit of 2026-11-16).
+GROUNDED_ANNOTATION = ("gr-longest-helix", "gr-secstruct")
 # Tables that are not results of the run (counted from the task files, or measured on
 # the grader's control set): real whatever answered the run, so they carry no mock banner.
 NOT_RUN_RESULTS = ("table_corpus", "table_corpus_kinds", "table_corpus_difficulty",
@@ -261,6 +264,17 @@ def solved(row: dict) -> bool:
     """A task counts as solved (for paired tests) when more than half of its samples
     are exactly right."""
     return row["success"] > 0.5
+
+
+def target_solved(row: dict) -> bool:
+    """The same, on the target score: more than half of the samples draw the requested
+    atoms exactly as asked (target score 1), whatever else the answer draws. False when
+    the task has no target score."""
+    scores = [s.get("target_f1") for s in row.get("samples") or []]
+    scores = [x for x in scores if x is not None]
+    if not scores:
+        return row.get("target_f1") == 1.0
+    return sum(x == 1.0 for x in scores) > len(scores) / 2
 
 
 def samples_of(rows: list[dict]) -> list[dict]:
@@ -609,6 +623,10 @@ class Tables:
         tiers = [t for t in tasks_mod.TIERS
                  if any(r.pick(HEADLINE, m, lambda x, t=t: x["category"] == track and x["tier"] == t)
                         for m in r.models(HEADLINE)[:1])]
+
+        def plain_grounded(x: dict) -> bool:
+            return (x["category"] == track and x["tier"] == "grounded"
+                    and (r.task(x) or {}).get("family") not in GROUNDED_ANNOTATION)
         rows = []
         for m in r.models(HEADLINE):
             row = [self.name(m)]
@@ -618,14 +636,27 @@ class Tables:
                 row.append(with_ci(su, suci))
                 self.put(f"{T}.{HEADLINE}.{m}.{tier}.success", su)
                 self.put(f"{T}.{HEADLINE}.{m}.{tier}.f1", mean(t["f1"] for t in got))
+            if "grounded" in tiers:
+                got = r.pick(HEADLINE, m, plain_grounded)
+                su, suci = self.stat(items(got), f"tier|{track}|grounded-plain|{m}")
+                row.append(with_ci(su, suci))
+                self.put(f"{T}.{HEADLINE}.{m}.grounded_without_annotation.success", su)
             rows.append(row)
         n = {tier: len(r.pick(HEADLINE, r.models(HEADLINE)[0],
                               lambda x: x["category"] == track and x["tier"] == tier))
              for tier in tiers}
+        head = ["model"] + [f"{TIER_NAME[t]} (n = {n[t]})" for t in tiers]
+        if "grounded" in tiers:
+            head.append("grounded without annotation tasks "
+                        f"(n = {len(r.pick(HEADLINE, r.models(HEADLINE)[0], plain_grounded))})")
         self.add(f"table_{T}_tiers",
                  f"{TRACK_NAME[track]} track: task success by tier [95% CI]",
-                 md_table(["model"] + [f"{TIER_NAME[t]} (n = {n[t]})" for t in tiers], rows),
-                 "Original tasks, headline condition. Intervals: bootstrap over structures.")
+                 md_table(head, rows),
+                 "Original tasks, headline condition. Intervals: bootstrap over structures. "
+                 "The last column leaves out the grounded tasks that need the entry's own "
+                 "helix and strand records (longest helix, secondary-structure colouring): "
+                 "no prompt condition supplies those on this tier, so they measure recall of "
+                 "an annotation.")
 
     def tier_track(self) -> None:
         r = self.run
@@ -828,12 +859,12 @@ class Tables:
         ]
         blocks = []
 
-        def tally(model: str, chosen) -> Counter:
+        def tally(model: str, chosen, right=solved) -> Counter:
             rows = r.rows(HEADLINE, model)
             c: Counter = Counter()
             for a, b, _ in chosen:
                 if a in rows and b in rows:
-                    c[(solved(rows[a]), solved(rows[b]))] += 1
+                    c[(right(rows[a]), right(rows[b]))] += 1
             return c
 
         def line(name: str, c: Counter) -> list:
@@ -844,26 +875,35 @@ class Tables:
                     pval(mcnemar_exact(mvs_only, api_only))]
         head = ["model", "pairs", "both solved", "MVS only", "API only", "neither",
                 "MVS solved", "API solved", "McNemar p (exact)"]
-        for key, title, chosen in sets:
-            rows, pooled = [], Counter()
-            for m in r.models(HEADLINE):
-                c = tally(m, chosen)
-                if not c:
+        # Two measures. The target score is the like-for-like one: the two formats do
+        # not treat unrequested context alike (an API answer on the viewer's default view
+        # shows water and ligands and is right; an MVS scene that adds them is not), so
+        # full-state success is not the same test on the two sides (audit of 2026-11-16).
+        measures = [("paired_target", target_solved, "requested atoms drawn as asked (target score 1)"),
+                    ("paired", solved, "final state exactly right (task success)")]
+        for prefix, right, measure in measures:
+            for key, title, chosen in sets:
+                rows, pooled = [], Counter()
+                for m in r.models(HEADLINE):
+                    c = tally(m, chosen, right)
+                    if not c:
+                        continue
+                    rows.append(line(self.name(m), c))
+                    self.put(f"{prefix}.{key}.{m}.mvs_only", c[(True, False)])
+                    self.put(f"{prefix}.{key}.{m}.api_only", c[(False, True)])
+                    self.put(f"{prefix}.{key}.{m}.p", mcnemar_exact(c[(True, False)], c[(False, True)]))
+                    if m != BASELINE:
+                        pooled.update(c)
+                if not rows:
                     continue
-                rows.append(line(self.name(m), c))
-                self.put(f"paired.{key}.{m}.mvs_only", c[(True, False)])
-                self.put(f"paired.{key}.{m}.api_only", c[(False, True)])
-                self.put(f"paired.{key}.{m}.p", mcnemar_exact(c[(True, False)], c[(False, True)]))
-                if m != BASELINE:
-                    pooled.update(c)
-            if not rows:
-                continue
-            rows.append(line("**pooled over models**", pooled))
-            self.put(f"paired.{key}.n_pairs", len(chosen))
-            self.put(f"paired.{key}.pooled.mvs_only", pooled[(True, False)])
-            self.put(f"paired.{key}.pooled.api_only", pooled[(False, True)])
-            self.put(f"paired.{key}.pooled.p", mcnemar_exact(pooled[(True, False)], pooled[(False, True)]))
-            blocks.append(f"*{title} ({len(chosen)} pairs).*\n\n" + md_table(head, rows))
+                rows.append(line("**pooled over models**", pooled))
+                self.put(f"{prefix}.{key}.n_pairs", len(chosen))
+                self.put(f"{prefix}.{key}.pooled.mvs_only", pooled[(True, False)])
+                self.put(f"{prefix}.{key}.pooled.api_only", pooled[(False, True)])
+                self.put(f"{prefix}.{key}.pooled.p",
+                         mcnemar_exact(pooled[(True, False)], pooled[(False, True)]))
+                blocks.append(f"*{title} ({len(chosen)} pairs). Solved = {measure}.*\n\n"
+                              + md_table(head, rows))
         rows = []
         for tier in tasks_mod.TIERS:
             chosen = [p for p in pairs if p[2]["tier"] == tier]
@@ -879,7 +919,12 @@ class Tables:
         self.add("table_paired", "The same request in both formats: paired analysis",
                  "\n\n".join(blocks),
                  "A pair is one request posed on both tracks with the same target atoms. A side "
-                 "is solved when more than half of its samples are exactly right. McNemar's "
+                 "is solved when more than half of its samples are right, by two measures: the "
+                 "target score (the requested atoms drawn exactly as asked, whatever else is on "
+                 "screen), which is the same test on both tracks and is the primary one, and "
+                 "task success (the whole final state exactly right), which is not: the API "
+                 "track accepts the viewer's default view, with water and ligands on screen, "
+                 "where an MVS scene that draws them is marked wrong. McNemar's "
                  "exact test uses the discordant pairs only (solved on one side and not the "
                  "other). The pooled rows add the counts of all models (keyword baseline left "
                  "out); the same pairs recur across models, so their p value is descriptive.")

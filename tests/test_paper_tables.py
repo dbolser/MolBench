@@ -350,14 +350,28 @@ def test_every_final_table_is_built_from_a_dry_run_and_says_it_is_mock(mock_run,
     assert values["status"] == "MOCK" and values["run.name"] == "pilot-v1"
     assert "MOCK" in (out / "README.md").read_text().splitlines()[0]
     # the corpus numbers come from the task files, whatever was run (CORPUS.md)
-    assert (values["corpus.n_original"], values["corpus.n_paraphrases"]) == (781, 88)
-    assert (values["corpus.mvs.n"], values["corpus.api.n"]) == (378, 403)
-    assert (values["corpus.n_twin_pairs"], values["corpus.n_twin_pairs_hide_toggle"]) == (255, 18)
+    from molbench import difficulty, tasks as tasks_mod
+    corpus = tasks_mod.load_corpus()
+    orig = [t for t in corpus if not t["paraphrase_of"]]
+    mvs_o = [t for t in orig if t["track"] == "mvs"]
+    twins = [t for t in mvs_o if t["twin_of"]]
+    by_id = {t["id"]: t for t in corpus}
+    hide = [t for t in twins if difficulty.normalised(by_id[t["twin_of"]])["hide_toggle"]]
+    assert (values["corpus.n_original"], values["corpus.n_paraphrases"]) == \
+        (len(orig), len(corpus) - len(orig)) == (797, 82)
+    assert (values["corpus.mvs.n"], values["corpus.api.n"]) == (len(mvs_o), len(orig) - len(mvs_o))
+    assert (values["corpus.n_twin_pairs"], values["corpus.n_twin_pairs_hide_toggle"]) == \
+        (len(twins), len(hide))
     assert values["corpus.n_paraphrase_requests"] == 30
     assert (values["corpus.mvs.followup.n_noop"], values["corpus.api.followup.n_noop"]) == (10, 8)
-    # twins: all outside the clinical tier, the same without unstated hide toggles, clinical apart
-    assert (values["paired.all.n_pairs"], values["paired.no_hide_toggle.n_pairs"],
-            values["paired.clinical.n_pairs"]) == (176, 158, 79)
+    # twins: all outside the clinical tier, the same without unstated hide toggles, clinical
+    # apart; by the target score (the like-for-like measure) and by task success
+    plain = [t for t in twins if t["tier"] != "clinical"]
+    want = (len(plain), len([t for t in plain if t not in hide]), len(twins) - len(plain))
+    for prefix in ("paired", "paired_target"):
+        assert (values[f"{prefix}.all.n_pairs"], values[f"{prefix}.no_hide_toggle.n_pairs"],
+                values[f"{prefix}.clinical.n_pairs"]) == want
+    assert want[2] == 82
     assert values["controls.mvs.false_pass_rate"] == 0 and values["controls.api.n"] > 0
     assert values["clinical.needs_offset.yes.n_proteins"] > 1      # not one protein's story
 
@@ -469,6 +483,6 @@ def test_paraphrase_groups_have_three_phrasings(mock_run):
     run = analysis.Run(mock_run)
     t = analysis.Tables(run, replicates=10)
     groups = {track: t.paraphrase_groups(track) for track in analysis.TRACKS}
-    assert (len(groups["mvs"]), len(groups["api_calling"])) == (24, 20)
+    assert (len(groups["mvs"]), len(groups["api_calling"])) == (22, 19)   # tasks/paraphrases
     assert all(set(g) == {"full", "terse", "indirect"} for gs in groups.values() for g in gs.values())
     assert run.mock and run.samples == {"spec": 1, "spec_structured": 1, "spec_grounded": 1}
