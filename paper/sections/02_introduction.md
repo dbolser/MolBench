@@ -15,10 +15,10 @@ request, which we follow through this paper, shows why:
 > {{ex.color}} {{ex.rep}}."*
 
 The variant name {{ex.variant}} counts residues along the UniProt sequence of human lysozyme:
-phenylalanine {{ex.uniprot_position}}. The Protein Data Bank (PDB) entry {{ex.entry}} numbers
+tryptophan {{ex.uniprot_position}}. The Protein Data Bank (PDB) entry {{ex.entry}} numbers
 the same chain from the start of the mature protein, {{ex.offset}} residues later. In the file,
-that phenylalanine is residue {{ex.auth_number}}, and residue {{ex.uniprot_position}} is an
-asparagine. A model that selects residue {{ex.uniprot_position}} returns a clean picture of the
+that tryptophan is residue {{ex.auth_number}}, and residue {{ex.uniprot_position}} is a
+serine. A model that selects residue {{ex.uniprot_position}} returns a clean picture of the
 wrong amino acid, and nothing in the picture says so. The case is not unusual: a survey of the
 PDB found that 38.6% of 176,507 entries contain proteins that are not numbered as their
 UniProt sequences are [@faezov2021pdbrenum].
@@ -31,7 +31,7 @@ the answer is written.
 MolBench is built on that thesis (Figure 1). The reference for the request above is not
 written by a person. A script reads the variant from ClinVar [@landrum2018clinvar], maps its
 UniProt position [@uniprot2025] to the residues of the entry with the SIFTS mapping
-[@dana2019sifts], and confirms that the structure holds a phenylalanine there. The grader then
+[@dana2019sifts], and confirms that the structure holds a tryptophan there. The grader then
 resolves any answer to the atoms it would draw in that structure, with their representation
 and colour, and compares this *drawn state* with that of the reference. Two answers that name
 the same atoms in different ways receive the same score.

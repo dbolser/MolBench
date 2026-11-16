@@ -1,13 +1,13 @@
 {
  "scene_task": {
-  "id": "clin-short-target-lyz-2nwd-f75i-mvs",
+  "id": "clin-pair-target-lyz-2nwd-w82r-mvs",
   "track": "mvs",
   "tier": "clinical",
-  "family": "clin-short-target",
+  "family": "clin-pair-target",
   "structures": [
    "2nwd"
   ],
-  "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the residue it replaces as green ball-and-stick.",
+  "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.",
   "reference": {
    "root": {
     "kind": "root",
@@ -35,20 +35,20 @@
             "params": {
              "selector": {
               "auth_asym_id": "X",
-              "auth_seq_id": 57
+              "auth_seq_id": 64
              }
             },
             "children": [
              {
               "kind": "representation",
               "params": {
-               "type": "ball_and_stick"
+               "type": "spacefill"
               },
               "children": [
                {
                 "kind": "color",
                 "params": {
-                 "color": "green"
+                 "color": "yellow"
                 }
                }
               ]
@@ -70,19 +70,19 @@
    {
     "selector": {
      "label_asym_id": "A",
-     "label_seq_id": 57
+     "label_seq_id": 64
     },
-    "representation": "ball_and_stick",
-    "color": "green"
+    "representation": "spacefill",
+    "color": "yellow"
    }
   ],
-  "twin_of": "clin-short-target-lyz-2nwd-f75i-api",
+  "twin_of": "clin-pair-target-lyz-2nwd-w82r-api",
   "paraphrase_of": null,
   "style": "full",
   "split": "public",
   "grounding": {
    "rule": "clinical-v1",
-   "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 Å\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  F75I: UniProt position 75 (Phe in UniProt) -> in 2NWD: auth X 57 PHE (label A 57)"
+   "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 Å\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  p.W82R: UniProt position 82 (Trp in UniProt) -> in 2NWD: auth X 64 TRP (label A 64)"
   },
   "provenance": {
    "script": "scripts/generate_clinical_tasks.py",
@@ -94,7 +94,7 @@
    ],
    "date": "2026-11-13",
    "checks": [
-    "target (1 residue(s), 20 atoms, residue name(s) PHE = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+    "target (1 residue(s), 24 atoms, residue name(s) TRP = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
     "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
     "the twin on the other track selects the same target atoms",
     "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
@@ -109,38 +109,40 @@
     "chain": null,
     "wording": 1,
     "look": {
-     "rep": "ball_and_stick",
-     "color": "green"
+     "rep": "spacefill",
+     "color": "yellow"
     },
     "variants": [
      {
-      "name_in_prompt": "F75I",
-      "variant": "F75I",
-      "hgvs": "p.Phe75Ile",
-      "uniprot_position": 75,
+      "name_in_prompt": "p.W82R",
+      "variant": "W82R",
+      "hgvs": "p.Trp82Arg",
+      "uniprot_position": 82,
       "mature_numbering": null,
       "clinvar_vcv": [
-       "VCV000014377"
+       "VCV000014376",
+       "VCV000014378"
       ],
       "clinvar_classification": [
        "Pathogenic"
       ],
       "clinvar_review_status": [
-       "no assertion criteria provided"
+       "criteria provided, single submitter"
       ],
       "residues": [
        {
         "auth_asym_id": "X",
-        "auth_seq_id": 57,
+        "auth_seq_id": 64,
         "pdbx_PDB_ins_code": "",
         "label_asym_id": "A",
-        "label_seq_id": 57,
-        "comp_id": "PHE"
+        "label_seq_id": 64,
+        "comp_id": "TRP"
        }
       ]
      }
     ],
     "secondary_structure": null,
+    "report_apart": null,
     "difficulty": {
      "needs_uniprot_mapping": true,
      "needs_numbering_offset": true,
@@ -152,7 +154,7 @@
      "author_number_differs_from_label_number": false,
      "insertion_code": false,
      "needs_ligand_identity": false,
-     "accession_in_prompt": false,
+     "accession_in_prompt": true,
      "protein_copies_in_structure": 1,
      "target_residues": 1,
      "alphafold_model": false,
@@ -163,7 +165,10 @@
      "number_in_name_as_author_number_is_right": false,
      "number_in_name_as_label_number_is_right": false
     },
-    "pair": null
+    "pair": {
+     "with": "clin-pair-target-lyz-af-p61626-f1-w82r-mvs",
+     "this_structure": "author numbers differ from UniProt numbers"
+    }
    }
   },
   "skills": [
@@ -175,14 +180,14 @@
   ]
  },
  "call_list_task": {
-  "id": "clin-short-target-lyz-2nwd-f75i-api",
+  "id": "clin-pair-target-lyz-2nwd-w82r-api",
   "track": "api",
   "tier": "clinical",
-  "family": "clin-short-target",
+  "family": "clin-pair-target",
   "structures": [
    "2nwd"
   ],
-  "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the residue it replaces as green ball-and-stick.",
+  "prompt": "PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.",
   "reference": [
    {
     "action": "load",
@@ -193,10 +198,10 @@
     "data": [
      {
       "uniprot_accession": "P61626",
-      "uniprot_residue_number": 75,
+      "uniprot_residue_number": 82,
       "color": null,
-      "representation": "ball-and-stick",
-      "representationColor": "green"
+      "representation": "spacefill",
+      "representationColor": "yellow"
      }
     ]
    }
@@ -212,10 +217,27 @@
      "data": [
       {
        "uniprot_accession": "P61626",
-       "uniprot_residue_number": 75,
-       "color": "green",
-       "representation": "ball-and-stick",
-       "representationColor": "green"
+       "uniprot_residue_number": 82,
+       "color": "yellow",
+       "representation": "spacefill",
+       "representationColor": "yellow"
+      }
+     ]
+    }
+   ],
+   [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "uniprot_accession": "P61626",
+       "uniprot_residue_number": 82,
+       "representation": "spacefill",
+       "representationColor": "yellow"
       }
      ]
     }
@@ -226,19 +248,19 @@
    {
     "selector": {
      "label_asym_id": "A",
-     "label_seq_id": 57
+     "label_seq_id": 64
     },
-    "representation": "ball-and-stick",
-    "color": "green"
+    "representation": "spacefill",
+    "color": "yellow"
    }
   ],
-  "twin_of": "clin-short-target-lyz-2nwd-f75i-mvs",
+  "twin_of": "clin-pair-target-lyz-2nwd-w82r-mvs",
   "paraphrase_of": null,
   "style": "full",
   "split": "public",
   "grounding": {
    "rule": "clinical-v1",
-   "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 Å\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  F75I: UniProt position 75 (Phe in UniProt) -> in 2NWD: auth X 57 PHE (label A 57)"
+   "text": "PDB 2NWD: Structure of chemically synthesized human lysozyme at 1 Angstrom resolution\nMethod: X-RAY DIFFRACTION, 1.04 Å\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  X [A]: entity 1 (Lysozyme C), protein, 130 of 130 residues observed: auth 1-130 = label 1-130\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  X [A]: P61626 (LYSC_HUMAN): UniProt 19-148 = auth 1-130\n\nFrom the request:\n  LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)\n  p.W82R: UniProt position 82 (Trp in UniProt) -> in 2NWD: auth X 64 TRP (label A 64)"
   },
   "provenance": {
    "script": "scripts/generate_clinical_tasks.py",
@@ -250,7 +272,7 @@
    ],
    "date": "2026-11-13",
    "checks": [
-    "target (1 residue(s), 20 atoms, residue name(s) PHE = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+    "target (1 residue(s), 24 atoms, residue name(s) TRP = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
     "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
     "the twin on the other track selects the same target atoms",
     "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
@@ -265,38 +287,40 @@
     "chain": null,
     "wording": 1,
     "look": {
-     "rep": "ball_and_stick",
-     "color": "green"
+     "rep": "spacefill",
+     "color": "yellow"
     },
     "variants": [
      {
-      "name_in_prompt": "F75I",
-      "variant": "F75I",
-      "hgvs": "p.Phe75Ile",
-      "uniprot_position": 75,
+      "name_in_prompt": "p.W82R",
+      "variant": "W82R",
+      "hgvs": "p.Trp82Arg",
+      "uniprot_position": 82,
       "mature_numbering": null,
       "clinvar_vcv": [
-       "VCV000014377"
+       "VCV000014376",
+       "VCV000014378"
       ],
       "clinvar_classification": [
        "Pathogenic"
       ],
       "clinvar_review_status": [
-       "no assertion criteria provided"
+       "criteria provided, single submitter"
       ],
       "residues": [
        {
         "auth_asym_id": "X",
-        "auth_seq_id": 57,
+        "auth_seq_id": 64,
         "pdbx_PDB_ins_code": "",
         "label_asym_id": "A",
-        "label_seq_id": 57,
-        "comp_id": "PHE"
+        "label_seq_id": 64,
+        "comp_id": "TRP"
        }
       ]
      }
     ],
     "secondary_structure": null,
+    "report_apart": null,
     "difficulty": {
      "needs_uniprot_mapping": true,
      "needs_numbering_offset": true,
@@ -308,7 +332,7 @@
      "author_number_differs_from_label_number": false,
      "insertion_code": false,
      "needs_ligand_identity": false,
-     "accession_in_prompt": false,
+     "accession_in_prompt": true,
      "protein_copies_in_structure": 1,
      "target_residues": 1,
      "alphafold_model": false,
@@ -319,7 +343,10 @@
      "number_in_name_as_author_number_is_right": false,
      "number_in_name_as_label_number_is_right": false
     },
-    "pair": null,
+    "pair": {
+     "with": "clin-pair-target-lyz-af-p61626-f1-w82r-api",
+     "this_structure": "author numbers differ from UniProt numbers"
+    },
     "api_note": "pdbe-molstar resolves uniprot_accession + uniprot_residue_number itself (SIFTS), so this API task tests knowing that selector and supplying the accession; its MVS twin tests doing the UniProt-to-structure mapping."
    },
    "structure": "2nwd",
@@ -332,11 +359,11 @@
      "atoms": [
       {
        "label_asym_id": "A",
-       "label_seq_id": 57
+       "label_seq_id": 64
       }
      ],
-     "what": "p.Phe75Ile residue(s)",
-     "n_atoms": 20
+     "what": "p.Trp82Arg residue(s)",
+     "n_atoms": 24
     }
    ],
    "accepted_differ": "each alternative is another final state that the request equally describes: the residue's own stretch of cartoon in the highlight colour, and/or the cartoon style set explicitly"
@@ -378,20 +405,20 @@
              "params": {
               "selector": {
                "auth_asym_id": "X",
-               "auth_seq_id": 57
+               "auth_seq_id": 64
               }
              },
              "children": [
               {
                "kind": "representation",
                "params": {
-                "type": "ball_and_stick"
+                "type": "spacefill"
                },
                "children": [
                 {
                  "kind": "color",
                  "params": {
-                  "color": "green"
+                  "color": "yellow"
                  }
                 }
                ]
@@ -434,20 +461,20 @@
              "params": {
               "selector": {
                "label_asym_id": "A",
-               "label_seq_id": 57
+               "label_seq_id": 64
               }
              },
              "children": [
               {
                "kind": "representation",
                "params": {
-                "type": "ball_and_stick"
+                "type": "spacefill"
                },
                "children": [
                 {
                  "kind": "color",
                  "params": {
-                  "color": "green"
+                  "color": "yellow"
                  }
                 }
                ]
@@ -490,20 +517,20 @@
              "params": {
               "selector": {
                "auth_asym_id": "X",
-               "auth_seq_id": 75
+               "auth_seq_id": 82
               }
              },
              "children": [
               {
                "kind": "representation",
                "params": {
-                "type": "ball_and_stick"
+                "type": "spacefill"
                },
                "children": [
                 {
                  "kind": "color",
                  "params": {
-                  "color": "green"
+                  "color": "yellow"
                  }
                 }
                ]
@@ -568,20 +595,20 @@
              "params": {
               "selector": {
                "auth_asym_id": "X",
-               "auth_seq_id": 57
+               "auth_seq_id": 64
               }
              },
              "children": [
               {
                "kind": "representation",
                "params": {
-                "type": "ball_and_stick"
+                "type": "spacefill"
                },
                "children": [
                 {
                  "kind": "color",
                  "params": {
-                  "color": "green"
+                  "color": "yellow"
                  }
                 }
                ]
@@ -624,14 +651,14 @@
              "params": {
               "selector": {
                "auth_asym_id": "X",
-               "auth_seq_id": 57
+               "auth_seq_id": 64
               }
              },
              "children": [
               {
                "kind": "representation",
                "params": {
-                "type": "ball_and_stick"
+                "type": "spacefill"
                },
                "children": [
                 {
@@ -702,20 +729,20 @@
              "params": {
               "selector": {
                "auth_asym_id": "X",
-               "auth_seq_id": 75
+               "auth_seq_id": 82
               }
              },
              "children": [
               {
                "kind": "representation",
                "params": {
-                "type": "ball_and_stick"
+                "type": "spacefill"
                },
                "children": [
                 {
                  "kind": "color",
                  "params": {
-                  "color": "green"
+                  "color": "yellow"
                  }
                 }
                ]
@@ -743,10 +770,10 @@
      "data": [
       {
        "uniprot_accession": "P61626",
-       "uniprot_residue_number": 75,
+       "uniprot_residue_number": 82,
        "color": null,
-       "representation": "ball-and-stick",
-       "representationColor": "green"
+       "representation": "spacefill",
+       "representationColor": "yellow"
       }
      ]
     }
@@ -761,10 +788,10 @@
      "data": [
       {
        "auth_asym_id": "X",
-       "auth_seq_id": 57,
+       "auth_seq_id": 64,
        "color": null,
-       "representation": "ball-and-stick",
-       "representationColor": "green"
+       "representation": "spacefill",
+       "representationColor": "yellow"
       }
      ]
     }
@@ -779,10 +806,10 @@
      "data": [
       {
        "auth_asym_id": "X",
-       "auth_seq_id": 75,
+       "auth_seq_id": 82,
        "color": null,
-       "representation": "ball-and-stick",
-       "representationColor": "green"
+       "representation": "spacefill",
+       "representationColor": "yellow"
       }
      ]
     }
@@ -797,9 +824,9 @@
      "data": [
       {
        "uniprot_accession": "P61626",
-       "uniprot_residue_number": 75,
+       "uniprot_residue_number": 82,
        "color": null,
-       "representation": "ball-and-stick",
+       "representation": "spacefill",
        "representationColor": "red"
       }
      ]
@@ -815,9 +842,9 @@
      "data": [
       {
        "uniprot_accession": "P61626",
-       "uniprot_residue_number": 75,
-       "representation": "ball-and-stick",
-       "representationColor": "green"
+       "uniprot_residue_number": 82,
+       "representation": "spacefill",
+       "representationColor": "yellow"
       }
      ]
     }

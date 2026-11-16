@@ -2,16 +2,16 @@
 
 | kind | MVS | API |
 |:---|---:|---:|
-| twins (same request on both tracks) | 255 | 255 |
-|   of which need an unstated hide toggle on the API side | – | 18 |
+| twins (same request on both tracks) | 258 | 258 |
+|   of which need an unstated hide toggle on the API side | – | 15 |
 | follow-up tasks | 58 | 44 |
 |   of which the right answer is no change | 10 | 8 |
 | accept-set tasks (several right final states) | 26 | 15 |
-|   readings accepted, in all | 85 | 43 |
-| other tasks that list equivalent answers | 39 | 89 |
-| requests with three phrasings | 24 | 20 |
-| tasks with a grounding pack | 118 | 79 |
-| clinical: answer needs a numbering offset | 57 | 57 |
+|   readings accepted, in all | 87 | 43 |
+| other tasks that list equivalent answers | 39 | 211 |
+| requests with three phrasings | 22 | 19 |
+| tasks with a grounding pack | 121 | 82 |
+| clinical: answer needs a numbering offset | 59 | 59 |
 | clinical: number in the name is already the right author number | 34 | 34 |
 | clinical: helix / strand context tasks | 10 | 10 |
 

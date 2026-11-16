@@ -21,9 +21,9 @@ Run numbers currently come from: **October 2026 panel** (PRELIMINARY). They appe
 | 3 | `sections/02_introduction.md` | 56 | 1 | final run — one sentence stating the main result | final run |
 | 4 | `sections/07_results.md` | 24 | 363 | final run | final run |
 | 5 | `sections/07_results.md` | 49 | 1 | final run — the table for the call-list track, in the shape of Table 5 | final run |
-| 6 | `sections/07_results.md` | 109 | 1 | final run — the same counts without the 18 pairs that need an unstated hide step, and without the clinical pairs | final run |
-| 7 | `sections/07_results.md` | 159 | 1 | final run — outcome counts per model (valid, invalid JSON, rejected by the viewer, cut off), the JSON-repair counterfactual and the cost per model, as tables in SI Section S8 | final run |
-| 8 | `sections/07_results.md` | 161 | 1 | rating study — agreement between people, and between people and the grader's task success, with intervals (Section 5.5) | rating study |
+| 6 | `sections/07_results.md` | 110 | 1 | final run — the same counts without the 15 pairs that need an unstated hide step, and without the clinical pairs | final run |
+| 7 | `sections/07_results.md` | 160 | 1 | final run — outcome counts per model (valid, invalid JSON, rejected by the viewer, cut off), the JSON-repair counterfactual and the cost per model, as tables in SI Section S8 | final run |
+| 8 | `sections/07_results.md` | 162 | 1 | rating study — agreement between people, and between people and the grader's task success, with intervals (Section 5.5) | rating study |
 | 9 | `sections/09_discussion.md` | 3 | 1 | final run — discussion of the results: which tiers separate models, what the paired comparison shows, whether the held-back split differs from the public one | final run |
 | 10 | `sections/11_ethics.md` | 14 | 1 | Dan — confirm the consent wording shown to raters, and whether the target journal or the author's institution requires an ethics statement or a waiver for this study | Dan |
 | 11 | `sections/11_ethics.md` | 19 | 1 | Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements | Dan |

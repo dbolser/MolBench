@@ -4,7 +4,7 @@ The two system prompts as sent in the headline condition. A name in double angle
 marks a slot that is filled with a longer frozen text from the repository: the MolViewSpec
 reference (`molbench/mvs_reference.md`), the list of call-list actions with their fields, and
 the reference of the viewer's calls (`molbench/api_reference.md`). In the condition without a
-format reference, the section "MVS reference" is removed. The worked example in the call-list
+format reference, the section "MVS reference" is removed. The worked example in each
 prompt uses entry 1HSG, which no task uses.
 
 {{include:generated/si_prompts.md}}

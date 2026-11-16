@@ -1,31 +1,31 @@
 > **MOCK DATA.** Dry run answered by the mock model: the table has its final shape, **every number in it is fake**.
 
-**API track: sensitivity to wording (20 requests, three phrasings each)**
+**API track: sensitivity to wording (19 requests, three phrasings each)**
 
 | model | requests | full | terse | indirect | mean spread per request | requests where the outcome flips | phrasings whose own samples disagree |
 |:---|---:|---:|---:|---:|---:|---:|---:|
-| moonshotai/kimi-k2.6 | 20 | 0.800 | 0.667 | 0.683 | 0.417 | 8 of 20 | 63.3% |
-| nvidia/nemotron-3-super-120b-a12b | 20 | 0.617 | 0.533 | 0.633 | 0.367 | 11 of 20 | 80.0% |
-| openai/gpt-5.4-nano | 20 | 0.500 | 0.600 | 0.500 | 0.400 | 14 of 20 | 80.0% |
-| z-ai/glm-5.2 | 20 | 0.567 | 0.517 | 0.633 | 0.467 | 16 of 20 | 71.7% |
-| deepseek/deepseek-v3.2 | 20 | 0.683 | 0.517 | 0.483 | 0.517 | 16 of 20 | 75.0% |
-| google/gemini-4-argon | 20 | 0.567 | 0.600 | 0.550 | 0.367 | 13 of 20 | 81.7% |
-| google/gemma-3-27b-it | 20 | 0.617 | 0.600 | 0.600 | 0.450 | 14 of 20 | 75.0% |
-| openai/gpt-oss-120b | 20 | 0.600 | 0.617 | 0.567 | 0.400 | 15 of 20 | 81.7% |
-| meta-llama/llama-4-maverick | 20 | 0.567 | 0.500 | 0.567 | 0.400 | 14 of 20 | 78.3% |
-| qwen/qwen3-30b-a3b-instruct-2507 | 20 | 0.483 | 0.600 | 0.567 | 0.350 | 13 of 20 | 83.3% |
-| minimax/minimax-m3 | 20 | 0.667 | 0.483 | 0.633 | 0.450 | 15 of 20 | 76.7% |
-| anthropic/claude-opus-5.5 | 20 | 0.517 | 0.600 | 0.600 | 0.500 | 14 of 20 | 73.3% |
-| x-ai/grok-4.7 | 20 | 0.567 | 0.550 | 0.583 | 0.533 | 16 of 20 | 70.0% |
-| claude-haiku-4-5 | 20 | 0.583 | 0.667 | 0.533 | 0.450 | 13 of 20 | 75.0% |
-| openai/gpt-6.1-sol | 20 | 0.617 | 0.533 | 0.550 | 0.483 | 14 of 20 | 65.0% |
-| deepseek/deepseek-v4-pro-0813 | 20 | 0.650 | 0.583 | 0.533 | 0.400 | 17 of 20 | 86.7% |
-| deepseek/deepseek-v4-flash | 20 | 0.517 | 0.533 | 0.500 | 0.500 | 12 of 20 | 66.7% |
-| openai/gpt-oss-20b | 20 | 0.533 | 0.517 | 0.550 | 0.483 | 17 of 20 | 80.0% |
-| google/gemini-3.5-flash | 20 | 0.617 | 0.583 | 0.467 | 0.500 | 16 of 20 | 70.0% |
-| mistralai/mistral-small-2603 | 20 | 0.600 | 0.483 | 0.533 | 0.483 | 16 of 20 | 75.0% |
-| qwen/qwen3-next-80b-a3b-instruct | 20 | 0.583 | 0.567 | 0.583 | 0.450 | 14 of 20 | 70.0% |
-| baseline-rules (keyword baseline) | 20 | 0.517 | 0.633 | 0.550 | 0.517 | 15 of 20 | 63.3% |
-| **panel mean** | 20 | 0.593 | 0.564 | 0.564 | 0.446 | 71.0% | 75.2% |
+| moonshotai/kimi-k2.6 | 19 | 0.702 | 0.632 | 0.684 | 0.456 | 9 of 19 | 66.7% |
+| openai/gpt-5.4-nano | 19 | 0.614 | 0.632 | 0.491 | 0.509 | 15 of 19 | 71.9% |
+| google/gemma-3-27b-it | 19 | 0.526 | 0.526 | 0.544 | 0.368 | 14 of 19 | 87.7% |
+| anthropic/claude-opus-5.5 | 19 | 0.544 | 0.596 | 0.561 | 0.474 | 13 of 19 | 75.4% |
+| x-ai/grok-4.7 | 19 | 0.614 | 0.614 | 0.649 | 0.544 | 13 of 19 | 64.9% |
+| z-ai/glm-5.2 | 19 | 0.614 | 0.544 | 0.649 | 0.456 | 14 of 19 | 66.7% |
+| minimax/minimax-m3 | 19 | 0.614 | 0.456 | 0.667 | 0.456 | 15 of 19 | 77.2% |
+| nvidia/nemotron-3-super-120b-a12b | 19 | 0.649 | 0.561 | 0.614 | 0.386 | 11 of 19 | 80.7% |
+| deepseek/deepseek-v3.2 | 19 | 0.667 | 0.509 | 0.544 | 0.386 | 14 of 19 | 86.0% |
+| google/gemini-4-argon | 19 | 0.561 | 0.632 | 0.456 | 0.439 | 13 of 19 | 75.4% |
+| deepseek/deepseek-v4-pro-0813 | 19 | 0.614 | 0.614 | 0.561 | 0.404 | 15 of 19 | 82.5% |
+| meta-llama/llama-4-maverick | 19 | 0.544 | 0.491 | 0.561 | 0.456 | 13 of 19 | 70.2% |
+| openai/gpt-oss-20b | 19 | 0.596 | 0.579 | 0.544 | 0.386 | 13 of 19 | 82.5% |
+| qwen/qwen3-30b-a3b-instruct-2507 | 19 | 0.421 | 0.509 | 0.474 | 0.439 | 13 of 19 | 71.9% |
+| deepseek/deepseek-v4-flash | 19 | 0.509 | 0.561 | 0.596 | 0.456 | 13 of 19 | 70.2% |
+| google/gemini-3.5-flash | 19 | 0.579 | 0.649 | 0.526 | 0.351 | 11 of 19 | 82.5% |
+| openai/gpt-oss-120b | 19 | 0.561 | 0.544 | 0.596 | 0.474 | 16 of 19 | 75.4% |
+| claude-haiku-4-5 | 19 | 0.544 | 0.632 | 0.579 | 0.421 | 13 of 19 | 80.7% |
+| openai/gpt-6.1-sol | 19 | 0.526 | 0.649 | 0.526 | 0.561 | 15 of 19 | 57.9% |
+| qwen/qwen3-next-80b-a3b-instruct | 19 | 0.579 | 0.579 | 0.667 | 0.456 | 14 of 19 | 71.9% |
+| mistralai/mistral-small-2603 | 19 | 0.649 | 0.579 | 0.544 | 0.491 | 14 of 19 | 73.7% |
+| baseline-rules (keyword baseline) | 19 | 0.596 | 0.596 | 0.632 | 0.474 | 14 of 19 | 68.4% |
+| **panel mean** | 19 | 0.582 | 0.576 | 0.573 | 0.446 | 70.4% | 74.9% |
 
 Task success per phrasing. Spread: for each request, the highest minus the lowest task success among its three phrasings, then the mean over requests. A request flips when it is solved (more than half the samples right) in one phrasing and not in another. Sampling noise alone gives a spread above 0: the last column is the share of single phrasings whose own samples do not all agree, the noise the spread has to be read against.

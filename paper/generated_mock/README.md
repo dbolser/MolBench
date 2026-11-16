@@ -5,7 +5,7 @@
 Nothing here may be quoted as a result. The real tables are written to another directory and never mixed with these.
 
 Built by `scripts/paper_tables.py --from-dry-run` from the scorecards in `results/final-v1.dryrun`
-(run `final-v1`, corpus `corpus-v1.0-dev ef851e529f43`, 67 scorecards). Rebuild, do not edit.
+(run `final-v1`, corpus `corpus-v1.0-dev ab76adffc83b`, 67 scorecards). Rebuild, do not edit.
 
 | file | what |
 |---|---|
@@ -14,18 +14,18 @@ Built by `scripts/paper_tables.py --from-dry-run` from the scorecards in `result
 | `table_corpus_difficulty.md` | Corpus: difficulty facts under one vocabulary |
 | `table_panel.md` | Model panel |
 | `table_controls.md` | Grader control set: the grader's own error rate |
-| `table_mvs_leaderboard.md` | MVS track: leaderboard (378 original tasks, headline condition, 3 samples per task) |
+| `table_mvs_leaderboard.md` | MVS track: leaderboard (381 original tasks, headline condition, 3 samples per task) |
 | `table_mvs_validity.md` | MVS track: what came back (samples, headline condition) |
 | `table_mvs_tiers.md` | MVS track: task success by tier [95% CI] |
-| `table_api_leaderboard.md` | API track: leaderboard (403 original tasks, headline condition, 3 samples per task) |
+| `table_api_leaderboard.md` | API track: leaderboard (416 original tasks, headline condition, 3 samples per task) |
 | `table_api_validity.md` | API track: what came back (samples, headline condition) |
 | `table_api_tiers.md` | API track: task success by tier [95% CI] |
 | `table_tier_track.md` | Tier by track: panel mean |
 | `table_tracks.md` | The two tracks, model by model |
 | `table_mvs_split.md` | MVS track: public and held-back tasks (task success) |
 | `table_api_split.md` | API track: public and held-back tasks (task success) |
-| `table_mvs_paraphrase.md` | MVS track: sensitivity to wording (24 requests, three phrasings each) |
-| `table_api_paraphrase.md` | API track: sensitivity to wording (20 requests, three phrasings each) |
+| `table_mvs_paraphrase.md` | MVS track: sensitivity to wording (22 requests, three phrasings each) |
+| `table_api_paraphrase.md` | API track: sensitivity to wording (19 requests, three phrasings each) |
 | `table_paired.md` | The same request in both formats: paired analysis |
 | `table_followup.md` | Follow-up turns: the edit made, and what had to stay |
 | `table_followup_edits.md` | Follow-up turns by kind of edit (panel mean) |

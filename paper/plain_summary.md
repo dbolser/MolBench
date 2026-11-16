@@ -9,8 +9,8 @@ what they want to see, for example "show the amino acid that is changed in this 
 a language model writes the viewer commands. The picture that comes back always looks neat,
 even when it highlights the wrong amino acid.
 
-MolBench is a test for these models. It holds 781 requests about
-75 protein structures. For each request we know the right picture,
+MolBench is a test for these models. It holds 797 requests about
+78 protein structures. For each request we know the right picture,
 because a script works it out from public databases. A program then checks each model's answer
 atom by atom.
 

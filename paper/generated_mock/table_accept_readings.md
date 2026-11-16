@@ -8,9 +8,9 @@
 | MVS | `acc-ligand-colours` | 3 | 6 | 0.471 | 89 | 50.6% | 6 of 6 |
 | MVS | `acc-ligand-copy` | 3 | 9 | 0.466 | 88 | 37.5% | 9 of 9 |
 | MVS | `acc-ligand-which` | 3 | 12 | 0.561 | 106 | 23.6% | 12 of 12 |
-| MVS | `acc-metal-copy` | 3 | 12 | 0.566 | 107 | 27.1% | 12 of 12 |
+| MVS | `acc-metal-copy` | 3 | 14 | 0.566 | 107 | 26.2% | 14 of 14 |
 | MVS | `acc-metal-which` | 2 | 6 | 0.524 | 66 | 36.4% | 6 of 6 |
-| MVS | `acc-representation-open` | 3 | 12 | 0.566 | 107 | 25.2% | 12 of 12 |
+| MVS | `acc-representation-open` | 3 | 12 | 0.582 | 110 | 22.7% | 12 of 12 |
 | MVS | `acc-residue-colour` | 3 | 9 | 0.556 | 105 | 23.8% | 9 of 9 |
 | MVS | `acc-residue-copy` | 3 | 9 | 0.587 | 111 | 34.2% | 9 of 9 |
 | API | `acc-chain-colours` | 3 | 10 | 0.550 | 104 | 44.2% | 10 of 10 |

@@ -47,3 +47,13 @@ another benchmark of this kind could make.
    often an answer was cut off. *Change*: {{plan.samples}} samples, {{corpus.n_structures}}
    structures, a limit of {{plan.max_tokens:,}} tokens, and the finish reason archived for
    every call.
+9. **The prompts taught answers that the graders marked wrong.** Before the final run, four
+   independent audits wrote natural answers by hand and graded them. The worked example of the
+   scene prompt selected a named compound in a way the references did not; the worked example
+   of the call-list prompt coloured a residue in a form that many generated tasks did not
+   accept; a residue named by UniProt number on a predicted model was scored as selecting
+   nothing; and a scene with an unreadable file passed. The same audits found clinical requests
+   whose "pathogenic" record belonged to another gene or to a pair of variants
+   (Section 3.1). *Change*: each finding was fixed in the generator or grader and is pinned by
+   a test and a control kind, and both prompt examples are graded by the benchmark's own
+   grader as a test.

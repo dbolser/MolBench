@@ -32,7 +32,19 @@ variant record names the same protein change and carries the aggregate classific
 "Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic". This removed
 {{variants.n_removed_by_clinvar}} candidates ({{variants.removed_share:.0%}}), most of them
 classified as conflicting or of uncertain significance, and left {{variants.n_confirmed:,}}.
-ClinVar was read on {{variants.clinvar_retrieved}}.
+A second pass looked at what kind of record each of these rests on, because a request says
+"the *GENE* variant ... is classified as pathogenic in ClinVar". For
+{{variants.n_other_gene_only}} variants the only such record belongs to another gene, nearly
+always one that encodes the same protein (*CALM2* or *CALM3* for calmodulin, *HBA2* for
+alpha-globin); for
+{{variants.n_haplotype_only}} it is a record of two changes on one chromosome, which says
+nothing about either alone; and for {{variants.n_no_criteria}} every record was submitted
+without assertion criteria. None of these is asked about, with one named exception (lysozyme
+p.Ile74Thr, the first described cause of lysozyme amyloidosis), which leaves
+{{variants.n_usable:,}} variants to draw from. Two variants are also left out by name because
+their clinical meaning is disputed or easily misread (APOE p.Arg176Cys, the common ε2 allele,
+and APOE p.Arg154Ser, the Christchurch variant). ClinVar was read on
+{{variants.clinvar_retrieved}} and its records again on {{variants.records_retrieved}}.
 
 **Atom tables and residue mapping.** For each structure we store two frozen tables. The *atom
 table* lists every atom with its chain and residue in both author and label numbering; it is
@@ -159,6 +171,14 @@ outside the panel. {{corpus.twins.need_hide_toggle}} call-list partners need an 
 the request does not state: switching off parts of the viewer's default drawing. The paired
 analysis is reported with and without them.
 
+The two formats do not treat unrequested context alike, and that decides how the pairs are
+compared. A viewer that is told only to load a structure already draws all of it, so a
+call list that colours one residue and leaves the rest of the default view on screen is a
+right answer; a scene has to list everything it draws, so a scene that adds a cartoon nobody
+asked for is not (Section 4). Task success is therefore not the same test on the two sides of
+a pair. The target score is: it asks only whether the requested atoms are drawn as asked. The
+paired comparison is made on the target score first and on task success second (Section 5.3).
+
 ### 3.5 What a request may leave open
 
 Requests written by people leave things unsaid, and a benchmark must decide what silence
@@ -176,8 +196,14 @@ MolBench tasks have been public since May 2026, so a model released later may ha
 earlier tasks. Two measures address this. First, generators are seeded, and
 {{corpus.heldback.n_structures}} structures were set aside before generation. The
 {{corpus.heldback.n_tasks}} tasks on them ({{corpus.heldback.share:.0%}} of the corpus) form a
-*held-back split*: no public task uses those structures, and the split is not published before
-the final run. Results are reported for both splits and compared. Second, to measure
+*held-back split*: no public task uses those structures, and no MolBench task published before
+November 2026 used them either. The split is not secret: the corpus was developed in a public
+repository, so these tasks were online for some days before the final run. What the split
+compares is therefore structures that earlier MolBench tasks made familiar with structures
+that no MolBench task had used, not seen with unseen tasks; nearly all tasks of both splits are
+new in this corpus. Three held-back structures also share a protein with a public structure.
+Results are reported for both splits and compared, as a description; the split is too small
+for a test (Section 8). Second, to measure
 sensitivity to wording, {{corpus.n_requests_paraphrased}} requests of the public split have two
 further phrasings each, a terse one and an indirect one, with the same reference
 ({{corpus.n_paraphrase_files}} additional task files, not counted in Table 1).

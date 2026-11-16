@@ -1,6 +1,6 @@
-**Request (both tracks).** PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the residue it replaces as green ball-and-stick.
+**Request (both tracks).** PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.
 
-**Scene track, task `clin-short-target-lyz-2nwd-f75i-mvs`: reference answer.**
+**Scene track, task `clin-pair-target-lyz-2nwd-w82r-mvs`: reference answer.**
 
 ```json
 {
@@ -30,20 +30,20 @@
           "params": {
            "selector": {
             "auth_asym_id": "X",
-            "auth_seq_id": 57
+            "auth_seq_id": 64
            }
           },
           "children": [
            {
             "kind": "representation",
             "params": {
-             "type": "ball_and_stick"
+             "type": "spacefill"
             },
             "children": [
              {
               "kind": "color",
               "params": {
-               "color": "green"
+               "color": "yellow"
               }
              }
             ]
@@ -61,7 +61,7 @@
 }
 ```
 
-**Call-list track, task `clin-short-target-lyz-2nwd-f75i-api`: reference answer.**
+**Call-list track, task `clin-pair-target-lyz-2nwd-w82r-api`: reference answer.**
 
 ```json
 [
@@ -74,10 +74,10 @@
   "data": [
    {
     "uniprot_accession": "P61626",
-    "uniprot_residue_number": 75,
+    "uniprot_residue_number": 82,
     "color": null,
-    "representation": "ball-and-stick",
-    "representationColor": "green"
+    "representation": "spacefill",
+    "representationColor": "yellow"
    }
   ]
  }
@@ -97,10 +97,10 @@
   "data": [
    {
     "uniprot_accession": "P61626",
-    "uniprot_residue_number": 75,
-    "color": "green",
-    "representation": "ball-and-stick",
-    "representationColor": "green"
+    "uniprot_residue_number": 82,
+    "color": "yellow",
+    "representation": "spacefill",
+    "representationColor": "yellow"
    }
   ]
  }
@@ -114,10 +114,10 @@
  {
   "selector": {
    "label_asym_id": "A",
-   "label_seq_id": 57
+   "label_seq_id": 64
   },
-  "representation": "ball_and_stick",
-  "color": "green"
+  "representation": "spacefill",
+  "color": "yellow"
  }
 ]
 ```
@@ -134,5 +134,5 @@ UniProt mapping (SIFTS; observed residues as UniProt numbering = author numberin
 
 From the request:
   LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)
-  F75I: UniProt position 75 (Phe in UniProt) -> in 2NWD: auth X 57 PHE (label A 57)
+  p.W82R: UniProt position 82 (Trp in UniProt) -> in 2NWD: auth X 64 TRP (label A 64)
 ```

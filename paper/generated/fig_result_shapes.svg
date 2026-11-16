@@ -39,7 +39,7 @@
 <text x="234" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">95% interval</text>
 <rect x="330" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="340" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">B  The same request in both formats</text>
-<text x="340" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 255 pairs, split four ways.</text>
+<text x="340" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 258 pairs, split four ways.</text>
 <line x1="404" y1="238" x2="612" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="404.0" y1="238" x2="404.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="404.0" y1="136" x2="404.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>

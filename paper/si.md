@@ -18,18 +18,18 @@ and prices · S7, the system prompts · S8, further tables of the pilot run.
 
 The request, the two reference answers, the accepted alternative on the call-list track, the
 stored target and the grounding pack, exactly as they are in the task files
-`clin-short-target-lyz-2nwd-f75i-mvs` and `clin-short-target-lyz-2nwd-f75i-api`. The variant is LYZ F75I
-(p.Phe75Ile; UniProt P61626; ClinVar VCV000014377, "Amyloidosis, hereditary systemic 5",
-classified pathogenic, review status "no assertion criteria provided").
+`clin-pair-target-lyz-2nwd-w82r-mvs` and `clin-pair-target-lyz-2nwd-w82r-api`. The variant is LYZ W82R
+(p.Trp82Arg; UniProt P61626; ClinVar VCV000014376, "Familial visceral amyloidosis, Ostertag type (AMYLD2)",
+classified pathogenic, review status "criteria provided, single submitter").
 
 On the call-list track the reference sets `"color": null` on the residue. Without it, the
 viewer also paints that stretch of the cartoon in its selection colour, which the request does
 not ask for. An answer that paints the stretch green, as the residue is, is the accepted
 alternative.
 
-**Request (both tracks).** PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the residue it replaces as green ball-and-stick.
+**Request (both tracks).** PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.
 
-**Scene track, task `clin-short-target-lyz-2nwd-f75i-mvs`: reference answer.**
+**Scene track, task `clin-pair-target-lyz-2nwd-w82r-mvs`: reference answer.**
 
 ```json
 {
@@ -59,20 +59,20 @@ alternative.
           "params": {
            "selector": {
             "auth_asym_id": "X",
-            "auth_seq_id": 57
+            "auth_seq_id": 64
            }
           },
           "children": [
            {
             "kind": "representation",
             "params": {
-             "type": "ball_and_stick"
+             "type": "spacefill"
             },
             "children": [
              {
               "kind": "color",
               "params": {
-               "color": "green"
+               "color": "yellow"
               }
              }
             ]
@@ -90,7 +90,7 @@ alternative.
 }
 ```
 
-**Call-list track, task `clin-short-target-lyz-2nwd-f75i-api`: reference answer.**
+**Call-list track, task `clin-pair-target-lyz-2nwd-w82r-api`: reference answer.**
 
 ```json
 [
@@ -103,10 +103,10 @@ alternative.
   "data": [
    {
     "uniprot_accession": "P61626",
-    "uniprot_residue_number": 75,
+    "uniprot_residue_number": 82,
     "color": null,
-    "representation": "ball-and-stick",
-    "representationColor": "green"
+    "representation": "spacefill",
+    "representationColor": "yellow"
    }
   ]
  }
@@ -126,10 +126,10 @@ alternative.
   "data": [
    {
     "uniprot_accession": "P61626",
-    "uniprot_residue_number": 75,
-    "color": "green",
-    "representation": "ball-and-stick",
-    "representationColor": "green"
+    "uniprot_residue_number": 82,
+    "color": "yellow",
+    "representation": "spacefill",
+    "representationColor": "yellow"
    }
   ]
  }
@@ -143,10 +143,10 @@ alternative.
  {
   "selector": {
    "label_asym_id": "A",
-   "label_seq_id": 57
+   "label_seq_id": 64
   },
-  "representation": "ball_and_stick",
-  "color": "green"
+  "representation": "spacefill",
+  "color": "yellow"
  }
 ]
 ```
@@ -163,7 +163,7 @@ UniProt mapping (SIFTS; observed residues as UniProt numbering = author numberin
 
 From the request:
   LYZ: UniProt P61626 (LYSC_HUMAN, Lysozyme C)
-  F75I: UniProt position 75 (Phe in UniProt) -> in 2NWD: auth X 57 PHE (label A 57)
+  p.W82R: UniProt position 82 (Trp in UniProt) -> in 2NWD: auth X 64 TRP (label A 64)
 ```
 
 **Table S1. Scores of the answers discussed in Section 4.3 of the paper.** *F1*: how much of
@@ -173,23 +173,23 @@ score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1)
 | Answer | F1 | Task success | Target score |
 |:---|---:|:---|---:|
 | **Scene track** | | | |
-| Reference: author chain X, author residue 57, green ball-and-stick | 1.00 | yes | 1.00 |
-| The same residue named by label numbering (label chain A, residue 57) | 1.00 | yes | 1.00 |
-| Number in the variant name used as the author number (Asn75) | 0.00 | no | 0.00 |
+| Reference: author chain X, author residue 64, green ball-and-stick | 1.00 | yes | 1.00 |
+| The same residue named by label numbering (label chain A, residue 64) | 1.00 | yes | 1.00 |
+| Number in the variant name used as the author number (Ser82) | 0.00 | no | 0.00 |
 | Right residue, drawn red | 0.50 | no | 0.50 |
 | Right residue, plus a grey cartoon of the protein that the request does not ask for | 0.40 | no | 1.00 |
 | Wrong residue, plus the grey cartoon | 0.00 | no | 0.00 |
 | **Call-list track** | | | |
-| Reference: UniProt P61626 position 75, resolved by the viewer | 1.00 | yes | 1.00 |
-| The same residue named by author numbering (chain X, residue 57) | 1.00 | yes | 1.00 |
-| Number in the variant name used as the author number (Asn75) | 0.00 | no | 0.00 |
+| Reference: UniProt P61626 position 82, resolved by the viewer | 1.00 | yes | 1.00 |
+| The same residue named by author numbering (chain X, residue 64) | 1.00 | yes | 1.00 |
+| Number in the variant name used as the author number (Ser82) | 0.00 | no | 0.00 |
 | Right residue, drawn red | 0.50 | no | 0.50 |
 | Load only, no further call | 0.00 | no | 0.00 |
 
 ## S2. Task templates
 
 A template fixes what is asked; a seeded generator fills in the structure, the residues, the
-colours and the wording. The corpus has 127 templates.
+colours and the wording. The corpus has 129 templates.
 
 **Table S2. Every template, with its number of tasks on each track and one example request**
 (shortened where long). A dash means that the template has no task on that track. Template
@@ -202,7 +202,9 @@ names are the identifiers used in the task files.
 | Translation | `api-chain-colour` | – | 10 | Load insulin (4INS) as a cartoon. Colour the two A chains (author chains A and C) blue and the two B chains (author chains B and D) yellow, and show the zinc ions (ZN)… |
 | Translation | `api-entity` | – | 5 | In 1AOI, colour by molecule: entity 3 (protein) cyan and entity 4 (protein) steel blue. Leave the other entities alone. |
 | Translation | `api-hide` | – | 11 | Load the myoglobin structure 1A6M and hide all the water molecules. |
+| Translation | `api-inscode` | – | 5 | Load 1IGT and colour Asn52A of chain D purple: the residue with insertion code A, not the other residue numbered 52. In the mmCIF label numbering it is residue 53 of l… |
 | Translation | `api-keep-sticks` | – | 3 | Open 1D5R. Step one: Asp268 as ball-and-stick. Step two, on top of step one: Thr26 as spacefill. Element colours for both, and no other colour changes. |
+| Translation | `api-label-chain` | – | 5 | In 1ATP, colour label chain B hot pink: B is the mmCIF label chain id, not the author chain id. |
 | Translation | `api-layered-colour` | – | 7 | Open 1A3K; residues 197 to 204 in plum, but Val202 in hot pink. |
 | Translation | `api-ligand` | – | 8 | Load streptavidin (1STP), hide the waters, and centre the view on the bound biotin (BTN). |
 | Translation | `api-ligand-sticks` | – | 3 | Open haemoglobin (1HHO) and show the heme groups (HEM) in ball-and-stick coloured orange, with the rest as cartoon. |
@@ -210,8 +212,8 @@ names are the identifiers used in the task files.
 | Translation | `api-residue-colour` | – | 9 | Load 1AAY and colour Ser147, Ala164 and Glu177 of chain A khaki. |
 | Translation | `api-residue-sticks` | – | 7 | Load hen egg-white lysozyme (1LYZ) as a cartoon, colour the two catalytic residues Glu35 and Asp52 red, and also show them as a red molecular surface. |
 | Translation | `api-sticks-plain` | – | 3 | Open 1D5R and draw His61 as ball-and-stick on top of the default view; keep every colour at its default. |
-| Translation | `api-style-colour` | – | 5 | Show 1CRN as a Gaussian surface and colour residues 14 to 20 purple. |
-| Translation | `api-uniprot-range` | – | 6 | In 2HHB, colour the segment 24-30 (UniProt numbering, P68871) in both chains that have them hot pink. |
+| Translation | `api-style-colour` | – | 5 | Show 1CRN as putty and colour residues 14 to 20 purple. |
+| Translation | `api-uniprot-range` | – | 6 | Load 1IGT and colour residues 108 to 121 of UniProt P01863 in both chains that have them orange. |
 | Translation | `api-uniprot-residue` | – | 9 | Load 1AKI and colour His33 and Asn62 purple. The numbers are in UniProt numbering (P00698). |
 | Translation | `tr-cartoon` | 4 | 4 | Open PDB entry 1C3W; draw the whole protein as a cartoon, coloured yellow. |
 | Translation | `tr-chain-colour` | 4 | 4 | Load 1K4C as a grey cartoon and colour chain A blue. |
@@ -222,6 +224,7 @@ names are the identifiers used in the task files.
 | Translation | `tr-het-code` | 4 | 4 | Show 1CBS as a grey cartoon with the REA residue in teal ball-and-stick. |
 | Translation | `tr-ions` | 4 | 4 | Show 2P4E as a grey cartoon with the metal ions drawn as hot pink spheres. |
 | Translation | `tr-ligands` | 4 | 4 | 1HVR: grey cartoon for the protein, magenta ball-and-stick for the ligand. |
+| Translation | `tr-nucleic` | 5 | 5 | 1AAY, cartoon: DNA khaki, protein salmon. |
 | Translation | `tr-range-labels` | 4 | – | Load 1A6M as a grey cartoon, then colour residues 5-12 of chain A yellow with the text label "patch B" and colour residues 68-79 of chain A red with the text label "si… |
 | Translation | `tr-range-rows` | 4 | 4 | Load 1ATP as a grey cartoon and colour these segments: chain E 16-30 yellow; chain E 58-69 salmon. |
 | Translation | `tr-range-sticks` | 5 | 5 | Load 1CRN as a grey cartoon and show residues 14-23 as brown ball-and-stick. |
@@ -242,7 +245,6 @@ names are the identifiers used in the task files.
 | Structure-grounded | `gr-longest-helix` | 4 | 4 | Load 1D5R as a grey cartoon and colour its longest helix lime green, going by the helix records of the entry. |
 | Structure-grounded | `gr-metal-site` | 6 | 6 | 1IRO: grey cartoon; iron ion as a khaki sphere; every residue of the protein that coordinates the iron ion, as green ball-and-stick. |
 | Structure-grounded | `gr-modres` | 5 | 5 | Show 1ATP as a grey cartoon and highlight the phosphorylated residues in lime green ball-and-stick. |
-| Structure-grounded | `gr-nucleic` | 5 | 5 | 1AAY, cartoon: DNA khaki, protein salmon. |
 | Structure-grounded | `gr-secstruct` | 4 | 4 | Show 1A3K as a grey cartoon, then colour the helices blue and the beta strands lime green, following the helix and sheet records of the entry. |
 | Interactions | `in-ca-distance` | 5 | – | Show 1AKE as a yellow cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Ser183 to the CA atom of Lys200. Both residues are… |
 | Interactions | `in-computed` | 5 | – | 1A6M: grey cartoon; heme as red ball-and-stick with its computed non-covalent interactions shown; camera on the heme. |
@@ -259,57 +261,57 @@ names are the identifiers used in the task files.
 | Name resolution | `res-name` | 12 | – | Find a PDB entry of horse heart cytochrome c and show it as a yellow cartoon. |
 | Clinical variant | `clin-chain` | 8 | 8 | PDB entry 8EPH: the F9 (Coagulation factor IX, UniProt P00740) variant p.Gly412Glu is classified as pathogenic in ClinVar. Show the residue it replaces as magenta ball… |
 | Clinical variant | `clin-hgvs-context` | 6 | 6 | PDB entry 8CE0: the APOE (Apolipoprotein E) variant p.Arg43Cys is classified as pathogenic/likely pathogenic in ClinVar. Show the whole structure as a white cartoon, w… |
-| Clinical variant | `clin-hgvs-target` | 6 | 6 | In PDB entry 5CJ6, show the residue replaced by the likely pathogenic AR (Androgen receptor) variant p.Leu702Phe (ClinVar) as purple ball-and-stick. |
-| Clinical variant | `clin-legacy-context` | 6 | 6 | In PDB entry 1HK0, show the whole structure as a gray cartoon and the residue replaced by the likely pathogenic CRYGD (Gamma-crystallin D) variant R36P (ClinVar) as ye… |
-| Clinical variant | `clin-legacy-target` | 8 | 8 | In PDB entry 8CE0, show the residue replaced by the pathogenic APOE (Apolipoprotein E, UniProt P02649) variant R158C (ClinVar) as magenta ball-and-stick. The name R158… |
-| Clinical variant | `clin-multi-context` | 4 | 4 | In PDB entry 8CE0, show the whole structure as a white cartoon and the residues replaced by the APOE (Apolipoprotein E, UniProt P02649) variants p.Leu46Pro, p.Arg154Se… |
-| Clinical variant | `clin-multi-target` | 4 | 4 | PDB entry 6M7H: the CALM1 (Calmodulin-1) variants p.Asn98Ser, p.Glu140Val and p.Phe142Leu are each classified as pathogenic or likely pathogenic in ClinVar. Show the r… |
-| Clinical variant | `clin-pair-context` | 6 | 6 | Using PDB entry 2HHB, draw a khaki cartoon of the whole structure and show, as purple ball-and-stick, the wild-type residue at the position of the HBB (Hemoglobin subu… |
-| Clinical variant | `clin-pair-target` | 6 | 6 | Using PDB entry 1HHO, show as cyan spacefill spheres the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant K67T (… |
-| Clinical variant | `clin-short-context` | 6 | 6 | In PDB entry 5EDM, show the whole structure as a white cartoon and the residue replaced by the pathogenic/likely pathogenic F2 (Prothrombin) variant R461W (ClinVar) as… |
-| Clinical variant | `clin-short-target` | 9 | 9 | In PDB entry 5UAK, show the residue replaced by the pathogenic CFTR (Cystic fibrosis transmembrane conductance regulator) variant G551D (ClinVar) as magenta ball-and-s… |
-| Clinical variant | `clin-sse-helix` | 5 | 5 | In PDB entry 6M7H, take the residue replaced by the pathogenic or likely pathogenic CALM1 (Calmodulin-1, UniProt P0DP23) variant D130G (ClinVar). Show the helix that c… |
+| Clinical variant | `clin-hgvs-target` | 5 | 5 | In PDB entry 5CJ6, show the residue replaced by the likely pathogenic AR (Androgen receptor) variant p.Leu702Phe (ClinVar) as purple ball-and-stick. |
+| Clinical variant | `clin-legacy-context` | 6 | 6 | In PDB entry 1HK0, show the whole structure as a gray cartoon and the residue replaced by the likely pathogenic CRYGD (Gamma-crystallin D, UniProt P07320) variant L44P… |
+| Clinical variant | `clin-legacy-target` | 7 | 7 | In PDB entry 8CE0, show the residue replaced by the likely pathogenic APOE (Apolipoprotein E) variant R136L (ClinVar) as green ball-and-stick. The name R136L is in mat… |
+| Clinical variant | `clin-multi-context` | 4 | 4 | In PDB entry 5CJ6, show the whole structure as a white cartoon and the residues replaced by the AR (Androgen receptor) variants p.P724S and p.M781I (each pathogenic or… |
+| Clinical variant | `clin-multi-target` | 4 | 4 | Using PDB entry 6M7H, show as green spacefill spheres the wild-type residues at the positions of the CALM1 (Calmodulin-1) missense variants p.Thr30Pro, p.Glu105Lys and… |
+| Clinical variant | `clin-pair-context` | 8 | 8 | PDB entry 1HK0: the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Arg37Pro is classified as likely pathogenic in ClinVar. Show the whole structure as a khaki ca… |
+| Clinical variant | `clin-pair-target` | 10 | 10 | Using PDB entry 6M7H, show as cyan spacefill spheres the wild-type residue at the position of the CALM1 (Calmodulin-1, UniProt P0DP23) missense variant p.Phe142Leu (pa… |
+| Clinical variant | `clin-short-context` | 5 | 5 | In PDB entry 5EDM, show the whole structure as a white cartoon and the residue replaced by the pathogenic/likely pathogenic F2 (Prothrombin) variant p.R461W (ClinVar)… |
+| Clinical variant | `clin-short-target` | 9 | 9 | In PDB entry 5UAK, show the residue replaced by the pathogenic CFTR (Cystic fibrosis transmembrane conductance regulator) variant p.G551D (ClinVar) as magenta ball-and… |
+| Clinical variant | `clin-sse-helix` | 5 | 5 | PDB entry 6M7H: the CALM1 (Calmodulin-1, UniProt P0DP23) variant p.E141V is classified as pathogenic in ClinVar. Show the helix (as annotated in the entry) that contai… |
 | Clinical variant | `clin-sse-strand` | 5 | 5 | PDB entry 1HK0: the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Arg59His is classified as pathogenic in ClinVar. Show the beta strand (as annotated in the ent… |
 | Follow-up turn | `fu-add-chain` | 2 | – | Also show chain 4 as a blue cartoon. |
 | Follow-up turn | `fu-add-label` | 2 | – | Add a label reading "BTN" to the biotin (BTN). |
-| Follow-up turn | `fu-add-ligand` | 2 | – | Now bring in the ligand 51Y in purple ball-and-stick. |
-| Follow-up turn | `fu-add-residue` | 4 | 4 | Add Thr348 (chain A) in red ball-and-stick, without recolouring the cartoon. |
+| Follow-up turn | `fu-add-ligand` | 2 | – | Now bring in the ligand HEM in plum ball-and-stick. |
+| Follow-up turn | `fu-add-residue` | 4 | 4 | Now draw His122 of chain A as ball-and-stick too, in yellow; the cartoon keeps its colour. |
 | Follow-up turn | `fu-also-colour-chain` | 2 | 2 | Now colour chain B as well, in brown. |
 | Follow-up turn | `fu-api-clear-colours` | – | 1 | Go back to the default colours; the waters stay hidden. |
-| Follow-up turn | `fu-api-show-water` | – | 2 | Show the waters again. |
+| Follow-up turn | `fu-api-show-water` | – | 2 | Bring the water molecules back. |
 | Follow-up turn | `fu-api-stop-spin` | – | 1 | Stop the spinning. |
 | Follow-up turn | `fu-api-style` | – | 2 | Switch the whole structure to the putty style and keep the two chain colours. |
-| Follow-up turn | `fu-api-uncolour` | – | 2 | Put the heme c (HEC) back to its default colours; the protein stays red. |
-| Follow-up turn | `fu-background` | 2 | 2 | Make the background black. |
+| Follow-up turn | `fu-api-uncolour` | – | 2 | Put the retinal (RET) back to its default colours; the protein stays yellow. |
+| Follow-up turn | `fu-background` | 2 | 2 | Black background, please. |
 | Follow-up turn | `fu-focus-ligand` | 2 | 2 | Now focus the camera on the ligand GNP. |
 | Follow-up turn | `fu-hide-water` | 2 | 2 | Get rid of the waters, please. |
-| Follow-up turn | `fu-it-colour` | 2 | – | Make it purple. |
+| Follow-up turn | `fu-it-colour` | 2 | – | Colour it steel blue. |
 | Follow-up turn | `fu-it-surface` | 1 | – | Make it a surface instead of a cartoon. |
-| Follow-up turn | `fu-noop-colour` | 2 | 2 | Show the ligand NAP in yellow. |
-| Follow-up turn | `fu-noop-hidden` | 2 | 2 | Hide the water molecules. |
-| Follow-up turn | `fu-noop-question` | 2 | 2 | How many chains does this structure have? |
+| Follow-up turn | `fu-noop-colour` | 2 | 2 | Show the heme c (HEC) in cyan. |
+| Follow-up turn | `fu-noop-hidden` | 2 | 2 | Hide the waters. |
+| Follow-up turn | `fu-noop-ligand-rep` | 2 | 2 | Show the ligand HEM as ball-and-stick. |
 | Follow-up turn | `fu-noop-shown` | 2 | 2 | Cartoon for the protein, please. |
-| Follow-up turn | `fu-noop-spin` | 2 | – | Start the molecule spinning; if that cannot be done in the scene, change nothing. |
+| Follow-up turn | `fu-noop-spin` | 2 | – | Make the structure spin slowly, or leave the scene as it is if spinning is not possible here. |
 | Follow-up turn | `fu-only-chain` | 2 | – | Only chain A, please. |
-| Follow-up turn | `fu-opacity` | 2 | – | The protein surface should be half transparent. |
+| Follow-up turn | `fu-opacity` | 2 | – | Can you make the surface of the protein 70% transparent? |
 | Follow-up turn | `fu-other-chain` | 2 | 2 | Colour the other chain grey. |
 | Follow-up turn | `fu-recolour-chain` | 2 | 2 | Change chain I to yellow. |
 | Follow-up turn | `fu-recolour-ligand` | 3 | 3 | Could you turn the ligand XK2 blue? |
 | Follow-up turn | `fu-referent-colour` | 3 | 3 | Change the teal chain to brown. |
 | Follow-up turn | `fu-remove-label` | 1 | – | Take the label off. |
-| Follow-up turn | `fu-remove-ligand` | 2 | – | Hide the diacyl glycerol (DGA). |
-| Follow-up turn | `fu-rep-ligand` | 2 | – | Switch the ligand XK2 to spacefill. |
-| Follow-up turn | `fu-rep-polymer` | 2 | – | Show the protein as a surface instead of a cartoon. |
-| Follow-up turn | `fu-same-colour-as` | 2 | 2 | Give the C8E ligands the same colour as the protein. |
+| Follow-up turn | `fu-remove-ligand` | 2 | – | Remove the ligand ATP from the view. |
+| Follow-up turn | `fu-rep-ligand` | 2 | – | Show the ligand XK2 as spacefill instead of ball-and-stick. |
+| Follow-up turn | `fu-rep-polymer` | 2 | – | Switch the protein from cartoon to surface. |
+| Follow-up turn | `fu-same-colour-as` | 2 | 2 | Give the retinoic acid (REA) the same colour as the protein. |
 | Follow-up turn | `fu-swap-colours` | 2 | 2 | Swap the colours of the two chains. |
-| Follow-up turn | `fu-undo-grey` | 2 | 2 | Make the retinoic acid (REA) grey again. |
+| Follow-up turn | `fu-undo-grey` | 2 | 2 | Undo the magenta on the biotin (BTN): grey again, please. |
 | Several right answers | `acc-chain-colours` | 3 | 3 | Load 1AAY and show it as a cartoon, with the three chains coloured green, magenta and cyan. |
 | Several right answers | `acc-ligand-colours` | 3 | 3 | Show 1RX2 with the protein as a cartoon and the two ligands as ball-and-stick: one cyan, the other blue. |
 | Several right answers | `acc-ligand-copy` | 3 | 3 | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
 | Several right answers | `acc-ligand-which` | 3 | 3 | Open 1RX2 with the protein as a cartoon and the ligand in cyan ball-and-stick. |
 | Several right answers | `acc-metal-copy` | 3 | – | Show 1TUP with the protein and DNA as a cartoon and the zinc ion as a spacefill sphere, coloured magenta. |
 | Several right answers | `acc-metal-which` | 2 | – | Open 1UDT with the protein as a cartoon and the metal ion in red spacefill. |
-| Several right answers | `acc-representation-open` | 3 | – | Open 1HRC with the protein as a cartoon, and show the heme in green. |
+| Several right answers | `acc-representation-open` | 3 | – | Open 1MBN with the protein as a cartoon, and show the heme in blue. |
 | Several right answers | `acc-residue-colour` | 3 | 3 | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
 | Several right answers | `acc-residue-copy` | 3 | – | Show 1TRN with the protein as a cartoon and Lys236 as ball-and-stick, coloured purple. |
 | Viewer settings | `api-alphafold` | – | 3 | Load the AlphaFold DB model of human p53 (UniProt P04637) and colour it by the model's per-residue confidence (pLDDT). |
@@ -322,7 +324,7 @@ names are the identifiers used in the task files.
 | Viewer settings | `api-superposition` | – | 3 | Open the PDBe-KB superposition view for human haemoglobin subunit alpha (UniProt P69905) on a white background. |
 | Viewer settings | `api-symmetry-overlay` | – | 1 | Open 2OMF as assembly 1, the trimer, with the symmetry annotation turned on. |
 | Viewer settings | `api-tooltips` | – | 3 | In 1C3W, switch off the water molecules and add hover tooltips reading 'Leu100' on Leu100 and 'Gly218' on Gly218. |
-| Viewer settings | `api-undo` | – | 4 | Load 1F88 and hide the waters. Highlight chain A, then clear that highlight and highlight both copies of the retinal (RET) instead. |
+| Viewer settings | `api-undo` | – | 4 | Load 1F88 and hide the waters. Colour both copies of the retinal (RET) orange and highlight chain A; then clear the highlight again. |
 | Viewer settings | `api-validation-overlay` | – | 3 | Load the A2A adenosine receptor (3EML) as a cartoon and overlay the PDBe geometry-validation colouring. |
 
 ## S3. The structure panel
@@ -356,7 +358,7 @@ Counts of verified features in the panel: ligand 44, metal
 15, glycan 10, nucleic acid
 8, modified residue 8, haem
 7, insertion codes 7, membrane protein
-7. Structure files were retrieved on 2026-11-12; the
+7. Structure files were retrieved on 2026-11-16; the
 checksum of each file is stored with the panel.
 
 **Table S3. The panel.** *Atoms*: atoms in the first model. *Author numbering differs from
@@ -373,76 +375,79 @@ rephrasings.
 | 1AKE | STRUCTURE OF THE COMPLEX BETWEEN ADENYLATE KINASE FROM ESCHERICHIA COLI AND THE INHIBIT… | X-ray 2.00 Å | 1991-11-08 | 3816 | no | public | 9 |
 | 1AKI | THE STRUCTURE OF THE ORTHORHOMBIC FORM OF HEN EGG-WHITE LYSOZYME AT 1.5 ANGSTROMS RESOL… | X-ray 1.50 Å | 1997-05-19 | 1079 | yes | public | 6 |
 | 1AOI | COMPLEX BETWEEN NUCLEOSOME CORE PARTICLE (H3,H4,H2A,H2B) AND 146 BP LONG DNA FRAGMENT | X-ray 2.80 Å | 1997-07-03 | 12385 | yes | public | 9 |
-| 1ATP | 2.2 angstrom refined crystal structure of the catalytic subunit of cAMP-dependent prote… | X-ray 2.20 Å | 1993-01-08 | 3070 | yes | public | 9 |
+| 1ATP | 2.2 angstrom refined crystal structure of the catalytic subunit of cAMP-dependent prote… | X-ray 2.20 Å | 1993-01-08 | 3070 | yes | public | 12 |
 | 1BNA | STRUCTURE OF A B-DNA DODECAMER. CONFORMATION AND DYNAMICS | X-ray 1.90 Å | 1981-01-26 | 566 | – | public | 8 |
 | 1C3W | BACTERIORHODOPSIN/LIPID COMPLEX AT 1.55 A RESOLUTION | X-ray 1.55 Å | 1999-07-28 | 2073 | yes | public | 11 |
-| 1CBS | CRYSTAL STRUCTURE OF CELLULAR RETINOIC-ACID-BINDING PROTEINS I AND II IN COMPLEX WITH A… | X-ray 1.80 Å | 1994-09-28 | 1213 | yes | public | 9 |
+| 1CBS | CRYSTAL STRUCTURE OF CELLULAR RETINOIC-ACID-BINDING PROTEINS I AND II IN COMPLEX WITH A… | X-ray 1.80 Å | 1994-09-28 | 1213 | yes | public | 10 |
 | 1CRN | WATER STRUCTURE OF A HYDROPHOBIC PROTEIN AT ATOMIC RESOLUTION. PENTAGON RINGS OF WATER… | X-ray 1.50 Å | 1981-04-30 | 327 | no | public | 5 |
-| 1CTQ | STRUCTURE OF P21RAS IN COMPLEX WITH GPPNHP AT 100 K | X-ray 1.26 Å | 1999-08-20 | 1655 | no | public | 11 |
+| 1CTQ | STRUCTURE OF P21RAS IN COMPLEX WITH GPPNHP AT 100 K | X-ray 1.26 Å | 1999-08-20 | 1655 | no | public | 12 |
 | 1D3Z | UBIQUITIN NMR STRUCTURE | NMR | 1999-10-01 | 1231 | yes | public | 3 |
-| 1D5R | Crystal Structure of the PTEN Tumor Suppressor | X-ray 2.10 Å | 1999-10-11 | 2968 | no | public | 8 |
+| 1D5R | Crystal Structure of the PTEN Tumor Suppressor | X-ray 2.10 Å | 1999-10-11 | 2968 | no | public | 6 |
 | 1EHZ | The crystal structure of yeast phenylalanine tRNA at 1.93 A resolution | X-ray 1.93 Å | 2000-02-23 | 1821 | – | held back | 3 |
 | 1EMA | GREEN FLUORESCENT PROTEIN FROM AEQUOREA VICTORIA | X-ray 1.90 Å | 1996-08-01 | 1866 | no | public | 8 |
-| 1F88 | CRYSTAL STRUCTURE OF BOVINE RHODOPSIN | X-ray 2.80 Å | 2000-06-29 | 5267 | no | public | 12 |
+| 1F88 | CRYSTAL STRUCTURE OF BOVINE RHODOPSIN | X-ray 2.80 Å | 2000-06-29 | 5267 | no | public | 13 |
 | 1FS3 | CRYSTAL STRUCTURE OF WILD-TYPE BOVINE PANCREATIC RIBONUCLEASE A | X-ray 1.40 Å | 2000-09-08 | 1066 | yes | held back | 3 |
-| 1HHO | STRUCTURE OF HUMAN OXYHAEMOGLOBIN AT 2.1 ANGSTROMS RESOLUTION | X-ray 2.10 Å | 1983-06-10 | 2396 | yes | public | 18 |
-| 1HK0 | Human GammaD Crystallin Structure at 1.25 A Resolution | X-ray 1.25 Å | 2003-03-05 | 1772 | yes | public | 9 |
-| 1HRC | HIGH-RESOLUTION THREE-DIMENSIONAL STRUCTURE OF HORSE HEART CYTOCHROME C | X-ray 1.90 Å | 1994-08-16 | 993 | yes | public | 10 |
+| 1HHO | STRUCTURE OF HUMAN OXYHAEMOGLOBIN AT 2.1 ANGSTROMS RESOLUTION | X-ray 2.10 Å | 1983-06-10 | 2396 | yes | public | 20 |
+| 1HK0 | Human GammaD Crystallin Structure at 1.25 A Resolution | X-ray 1.25 Å | 2003-03-05 | 1772 | yes | public | 11 |
+| 1HRC | HIGH-RESOLUTION THREE-DIMENSIONAL STRUCTURE OF HORSE HEART CYTOCHROME C | X-ray 1.90 Å | 1994-08-16 | 993 | yes | public | 9 |
 | 1HSG | CRYSTAL STRUCTURE AT 1.9 ANGSTROMS RESOLUTION OF HUMAN IMMUNODEFICIENCY VIRUS (HIV) II… | X-ray 2.00 Å | 1995-03-31 | 1686 | yes | not used (worked example of the call-list prompt) | 0 |
 | 1HVR | RATIONAL DESIGN OF POTENT, BIOAVAILABLE, NONPEPTIDE CYCLIC UREAS AS HIV PROTEASE INHIBI… | X-ray 1.80 Å | 1994-02-14 | 1890 | yes | public | 10 |
-| 1IEP | CRYSTAL STRUCTURE OF THE C-ABL KINASE DOMAIN IN COMPLEX WITH STI-571. | X-ray 2.10 Å | 2001-04-10 | 4710 | no | public | 13 |
-| 1IGT | STRUCTURE OF IMMUNOGLOBULIN | X-ray 2.80 Å | 1996-10-25 | 12956 | yes | held back | 9 |
-| 1IRO | RUBREDOXIN (OXIDIZED, FE(III)) AT 1.1 ANGSTROMS RESOLUTION | X-ray 1.10 Å | 1995-12-13 | 858 | no | public | 6 |
-| 1K4C | Potassium Channel KcsA-Fab complex in high concentration of K+ | X-ray 2.00 Å | 2001-10-07 | 4534 | yes | public | 10 |
+| 1IEP | CRYSTAL STRUCTURE OF THE C-ABL KINASE DOMAIN IN COMPLEX WITH STI-571. | X-ray 2.10 Å | 2001-04-10 | 4710 | no | public | 14 |
+| 1IGT | STRUCTURE OF IMMUNOGLOBULIN | X-ray 2.80 Å | 1996-10-25 | 12956 | yes | held back | 10 |
+| 1IRO | RUBREDOXIN (OXIDIZED, FE(III)) AT 1.1 ANGSTROMS RESOLUTION | X-ray 1.10 Å | 1995-12-13 | 858 | no | public | 5 |
+| 1K4C | Potassium Channel KcsA-Fab complex in high concentration of K+ | X-ray 2.00 Å | 2001-10-07 | 4534 | yes | public | 7 |
 | 1KF1 | Structure and Packing of Human Telomeric DNA | X-ray 2.10 Å | 2001-11-19 | 536 | – | public | 3 |
 | 1L2Y | NMR Structure of Trp-Cage Miniprotein Construct TC5b | NMR | 2002-02-25 | 304 | – | public | 2 |
-| 1LMB | REFINED 1.8 ANGSTROM CRYSTAL STRUCTURE OF THE LAMBDA REPRESSOR-OPERATOR COMPLEX | X-ray 1.80 Å | 1991-11-05 | 2334 | yes | held back | 11 |
+| 1LMB | REFINED 1.8 ANGSTROM CRYSTAL STRUCTURE OF THE LAMBDA REPRESSOR-OPERATOR COMPLEX | X-ray 1.80 Å | 1991-11-05 | 2334 | yes | held back | 12 |
 | 1LYZ | Real-space refinement of the structure of hen egg-white lysozyme | X-ray 2.00 Å | 1975-02-01 | 1102 | yes | public | 3 |
-| 1MBN | The stereochemistry of the protein myoglobin | X-ray 2.00 Å | 1973-04-05 | 1260 | yes | public | 9 |
+| 1MBN | The stereochemistry of the protein myoglobin | X-ray 2.00 Å | 1973-04-05 | 1260 | yes | public | 10 |
 | 1PLC | ACCURACY AND PRECISION IN PROTEIN CRYSTAL STRUCTURE ANALYSIS: RESTRAINED LEAST-SQUARES… | X-ray 1.33 Å | 1992-03-11 | 1657 | yes | public | 5 |
 | 1RX2 | DIHYDROFOLATE REDUCTASE (E.C.1.5.1.3) COMPLEXED WITH WITH FOLATE AND NICOTINAMIDE ADENI… | X-ray 1.80 Å | 1996-09-19 | 1503 | no | held back | 16 |
 | 1STP | STRUCTURAL ORIGINS OF HIGH-AFFINITY BIOTIN BINDING TO STREPTAVIDIN | X-ray 2.60 Å | 1992-03-12 | 1001 | yes | public | 10 |
-| 1TRN | CRYSTAL STRUCTURE OF HUMAN TRYPSIN 1: UNEXPECTED PHOSPHORYLATION OF TYROSINE 151 | X-ray 2.20 Å | 1995-03-16 | 3705 | yes | public | 17 |
+| 1TRN | CRYSTAL STRUCTURE OF HUMAN TRYPSIN 1: UNEXPECTED PHOSPHORYLATION OF TYROSINE 151 | X-ray 2.20 Å | 1995-03-16 | 3705 | yes | public | 18 |
 | 1TUP | TUMOR SUPPRESSOR P53 COMPLEXED WITH DNA | X-ray 2.20 Å | 1995-07-11 | 5828 | no | public | 16 |
 | 1UBQ | STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION | X-ray 1.80 Å | 1987-01-02 | 660 | yes | public | 2 |
-| 1UDT | Crystal structure of Human Phosphodiesterase 5 complexed with Sildenafil(Viagra) | X-ray 2.30 Å | 2003-05-06 | 2655 | no | public | 11 |
-| 1Y26 | A-riboswitch-adenine complex | X-ray 2.10 Å | 2004-11-20 | 1608 | – | public | 8 |
+| 1UDT | Crystal structure of Human Phosphodiesterase 5 complexed with Sildenafil(Viagra) | X-ray 2.30 Å | 2003-05-06 | 2655 | no | public | 12 |
+| 1Y26 | A-riboswitch-adenine complex | X-ray 2.10 Å | 2004-11-20 | 1608 | – | public | 9 |
 | 2C9V | Atomic resolution structure of Cu-Zn Human Superoxide dismutase | X-ray 1.07 Å | 2005-12-14 | 3043 | yes | held back | 18 |
 | 2CPP | HIGH-RESOLUTION CRYSTAL STRUCTURE OF CYTOCHROME P450-CAM | X-ray 1.63 Å | 1987-04-06 | 3462 | yes | public | 13 |
 | 2HHB | THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION | X-ray 1.74 Å | 1984-03-07 | 4779 | yes | public | 22 |
-| 2NWD | Structure of chemically synthesized human lysozyme at 1 Angstrom resolution | X-ray 1.04 Å | 2006-11-14 | 2691 | yes | public | 10 |
-| 2OMF | OMPF PORIN | X-ray 2.40 Å | 1995-02-28 | 2827 | yes | held back | 8 |
-| 2P4E | Crystal Structure of PCSK9 | X-ray 1.98 Å | 2007-03-12 | 4776 | no | public | 9 |
+| 2NWD | Structure of chemically synthesized human lysozyme at 1 Angstrom resolution | X-ray 1.04 Å | 2006-11-14 | 2691 | yes | public | 11 |
+| 2OMF | OMPF PORIN | X-ray 2.40 Å | 1995-02-28 | 2827 | yes | held back | 6 |
+| 2P4E | Crystal Structure of PCSK9 | X-ray 1.98 Å | 2007-03-12 | 4776 | no | public | 10 |
 | 2PTC | THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND… | X-ray 1.90 Å | 1982-09-27 | 2241 | yes | held back | 12 |
 | 3AVE | Crystal Structure of the Fucosylated Fc Fragment from Human Immunoglobulin G1 | X-ray 2.00 Å | 2011-03-04 | 3796 | yes | public | 10 |
 | 3EML | The 2.6 A Crystal Structure of a Human A2A Adenosine Receptor bound to ZM241385. | X-ray 2.60 Å | 2008-09-24 | 3757 | yes | public | 11 |
 | 3ERT | HUMAN ESTROGEN RECEPTOR ALPHA LIGAND-BINDING DOMAIN IN COMPLEX WITH 4-HYDROXYTAMOXIFEN | X-ray 1.90 Å | 1999-03-30 | 2070 | no | public | 11 |
 | 3F9M | Human pancreatic glucokinase in complex with glucose and activator showing a mobile flap | X-ray 1.50 Å | 2008-11-14 | 4065 | no | public | 14 |
-| 3K34 | Human carbonic anhydrase II with a sulfonamide inhibitor | X-ray 0.90 Å | 2009-10-01 | 2387 | yes | public | 10 |
-| 3KCG | Crystal structure of the antithrombin-factor IXa-pentasaccharide complex | X-ray 1.70 Å | 2009-10-21 | 6669 | yes | held back | 12 |
-| 3NGB | Crystal structure of broadly and potently neutralizing antibody VRC01 in complex with H… | X-ray 2.68 Å | 2010-06-11 | 25808 | yes | public | 4 |
+| 3K34 | Human carbonic anhydrase II with a sulfonamide inhibitor | X-ray 0.90 Å | 2009-10-01 | 2387 | yes | public | 9 |
+| 3KCG | Crystal structure of the antithrombin-factor IXa-pentasaccharide complex | X-ray 1.70 Å | 2009-10-21 | 6669 | yes | held back | 16 |
+| 3NGB | Crystal structure of broadly and potently neutralizing antibody VRC01 in complex with H… | X-ray 2.68 Å | 2010-06-11 | 25808 | yes | public | 5 |
 | 3PTB | THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND… | X-ray 1.70 Å | 1982-09-27 | 1701 | yes | public | 12 |
 | 4INS | THE STRUCTURE OF 2ZN PIG INSULIN CRYSTALS AT 1.5 ANGSTROMS RESOLUTION | X-ray 1.50 Å | 1989-07-10 | 1182 | yes | public | 13 |
-| 5CJ6 | Crystal Structure of a Selective Androgen Receptor Modulator Bound to the Ligand Bindin… | X-ray 2.07 Å | 2015-07-14 | 2233 | yes | public | 13 |
+| 5CJ6 | Crystal Structure of a Selective Androgen Receptor Modulator Bound to the Ligand Bindin… | X-ray 2.07 Å | 2015-07-14 | 2233 | yes | public | 15 |
 | 5EDM | Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I ) | X-ray 2.20 Å | 2015-10-21 | 5005 | yes | public | 13 |
-| 5NI1 | CryoEM structure of haemoglobin at 3.2 A determined with the Volta phase plate | EM 3.20 Å | 2017-03-22 | 4579 | yes | held back | 16 |
-| 5UAK | Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (C… | EM 3.87 Å | 2016-12-19 | 9232 | no | public | 7 |
+| 5NI1 | CryoEM structure of haemoglobin at 3.2 A determined with the Volta phase plate | EM 3.20 Å | 2017-03-22 | 4579 | yes | held back | 15 |
+| 5UAK | Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (C… | EM 3.87 Å | 2016-12-19 | 9232 | no | public | 8 |
 | 6HPO | Crystallographic structure of the catalytic domain of Human Phenylalanine Hydroxylase (… | X-ray 1.67 Å | 2018-09-21 | 2880 | no | held back | 6 |
-| 6M7H | Structure of calmodulin with KN93 | X-ray 1.60 Å | 2018-08-20 | 1311 | yes | public | 15 |
+| 6M7H | Structure of calmodulin with KN93 | X-ray 1.60 Å | 2018-08-20 | 1311 | yes | public | 17 |
 | 6TC2 | Monoclinic human insulin in complex with p-coumaric acid | X-ray 1.36 Å | 2019-11-04 | 5094 | yes | held back | 16 |
-| 6THA | Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation | X-ray 2.40 Å | 2019-11-19 | 3556 | no | held back | 10 |
+| 6THA | Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation | X-ray 2.40 Å | 2019-11-19 | 3556 | no | held back | 7 |
 | 6VXX | Structure of the SARS-CoV-2 spike glycoprotein (closed state) | EM 2.80 Å | 2020-02-25 | 23694 | no | public | 8 |
 | 7A4M | Cryo-EM structure of mouse heavy-chain apoferritin at 1.22 A | EM 1.22 Å | 2020-08-20 | 3177 | yes | public | 9 |
 | 8C86 | Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2 | X-ray 1.10 Å | 2023-01-18 | 4150 | yes | public | 22 |
-| 8CE0 | N-terminal domain of human apolipoprotein E | X-ray 1.75 Å | 2023-02-01 | 1335 | yes | held back | 14 |
-| 8EPH | Crystal structure of human coagulation factor IXa (S195A), apo-form, DES-GLA | X-ray 1.88 Å | 2022-10-05 | 5564 | yes | public | 18 |
+| 8CE0 | N-terminal domain of human apolipoprotein E | X-ray 1.75 Å | 2023-02-01 | 1335 | yes | held back | 12 |
+| 8EPH | Crystal structure of human coagulation factor IXa (S195A), apo-form, DES-GLA | X-ray 1.88 Å | 2022-10-05 | 5564 | yes | public | 19 |
 | 8K7F | Crystal structure of human lysosomal alpha-galactosidase A in complex with (2R,3S,4R,5R… | X-ray 1.98 Å | 2023-07-26 | 7126 | no | held back | 13 |
-| 8PI2 | Native alpha-1-antitrypsin at 1.5 Angstrom (Cys232Ser) | X-ray 1.48 Å | 2023-06-20 | 6156 | yes | public | 12 |
-| 9F69 | Crystal structure of human triose phosphate isomerase with methyl malonic acid ligand | X-ray 1.17 Å | 2024-04-30 | 4040 | no | public | 12 |
+| 8PI2 | Native alpha-1-antitrypsin at 1.5 Angstrom (Cys232Ser) | X-ray 1.48 Å | 2023-06-20 | 6156 | yes | public | 10 |
+| 9F69 | Crystal structure of human triose phosphate isomerase with methyl malonic acid ligand | X-ray 1.17 Å | 2024-04-30 | 4040 | no | public | 10 |
 | 9FB2 | Gcase in complex with small molecule inhibitor 1 | X-ray 1.14 Å | 2024-05-11 | 4971 | no | public | 15 |
 | 9GIO | Crystal structure of the VHL-EloC-EloB complex with a covalent compound bound to C77 of… | X-ray 1.49 Å | 2024-08-19 | 3043 | no | public | 15 |
-| af-p04637-f1-model_v6 | AlphaFold DB model of Cellular tumor antigen p53 (TP53, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 3060 | no | public | 6 |
-| af-p68871-f1-model_v6 | AlphaFold DB model of Hemoglobin subunit beta (HBB, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1131 | no | public | 11 |
+| af-p04637-f1-model_v6 | AlphaFold DB model of Cellular tumor antigen p53 (TP53, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 3060 | no | public | 5 |
+| af-p07320-f1-model_v6 | AlphaFold DB model of Gamma-crystallin D (CRYGD, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1459 | no | public | 3 |
+| af-p0dp23-f1-model_v6 | AlphaFold DB model of Calmodulin-1 (CALM1, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1174 | no | public | 3 |
+| af-p61626-f1-model_v6 | AlphaFold DB model of Lysozyme C (LYZ, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1157 | no | public | 2 |
+| af-p68871-f1-model_v6 | AlphaFold DB model of Hemoglobin subunit beta (HBB, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1131 | no | public | 10 |
 
 ## S4. Grading rules in full
 
@@ -594,11 +599,11 @@ is counted apart from a malformed one in the outcome tables.
 
 ## S5. The control set by kind
 
-The control set has 1,880 pairs of a reference and an answer on the structures of the
-panel: 1,030 on the scene track (150
-identical, 440 equivalent, 440 wrong) and
-850 on the call-list track (150 identical,
-360 equivalent, 340 wrong). The verdict of each
+The control set has 2,105 pairs of a reference and an answer on the structures of the
+panel: 1,110 on the scene track (150
+identical, 480 equivalent, 480 wrong) and
+995 on the call-list track (150 identical,
+425 equivalent, 420 wrong). The verdict of each
 pair is known from how it was made.
 
 Read-back from the viewers. Scene track: 890 pairs were loaded in
@@ -627,7 +632,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | a colour given as #rrggbb (lower or upper case) instead of its name | 20 | 20 | 0 |
 | must pass (equivalent) | defaults stated explicitly: opacity 1, colour selector 'all', model_index 0, size_factor 1 | 20 | 20 | 0 |
 | must pass (equivalent) | an extra component that selects no atoms (nothing is drawn for it) | 20 | 20 | 0 |
-| must pass (equivalent) | a full state with metadata, and the same entry from another server or as BinaryCIF | 20 | 20 | 15 |
+| must pass (equivalent) | a full state with metadata, and the same entry from another server or as BinaryCIF | 20 | 20 | 13 |
 | must pass (equivalent) | the focus node on its own component with the same selector | 20 | 20 | 20 |
 | must pass (equivalent) | 'grey' instead of 'gray' | 20 | 20 | 20 |
 | must pass (equivalent) | a residue range in label numbering instead of author numbering | 20 | 20 | 20 |
@@ -641,6 +646,8 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | a residue's ball-and-stick selected atom by atom instead of as a residue | 20 | 20 | 20 |
 | must pass (equivalent) | a cartoon asked for on a ligand or ion: Mol* draws ball-and-stick instead | 20 | 20 | 0 |
 | must pass (equivalent) | a cartoon on the C-alpha atoms of a range instead of on the residues | 20 | 20 | 0 |
+| must pass (equivalent) | the request states no colour for the cartoon (the reference has no colour node there): the answer gives it a palette colour | 20 | 20 | 0 |
+| must pass (equivalent) | a stretch of the cartoon is to be coloured and the rest has no stated colour: the answer colours the rest in another palette colour | 20 | 20 | 0 |
 | must pass (equivalent) | another entry's file is downloaded and parsed as well, and nothing of it is drawn | 20 | 20 | 0 |
 | must pass (identical) | the answer is the reference itself | 150 | 150 | 150 |
 | must fail (wrong) | 'all' instead of 'polymer' under ball-and-stick (waters and ligands are drawn too) | 20 | 0 | 0 |
@@ -649,6 +656,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must fail (wrong) | two chains' colours the wrong way round | 20 | 0 | 0 |
 | must fail (wrong) | the structure is loaded and nothing is drawn | 20 | 0 | 0 |
 | must fail (wrong) | something that was not asked for is drawn as well | 20 | 0 | 0 |
+| must fail (wrong) | the right scene on a source Mol* cannot read: the mmCIF file parsed as BinaryCIF, the entry's web page instead of its file, or a bare file name (the viewer shows nothing) | 20 | 0 | 13 |
 | must fail (wrong) | the camera focus is on another residue, or absent | 20 | 0 | 0 |
 | must fail (wrong) | the label residue number written in the author-number field (structures where they differ) | 20 | 0 | 0 |
 | must fail (wrong) | the residue label has another text | 20 | 0 | 0 |
@@ -659,6 +667,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must fail (wrong) | the neighbouring residue is highlighted | 20 | 0 | 0 |
 | must fail (wrong) | only the side chain is drawn where the whole residue was asked for | 20 | 0 | 0 |
 | must fail (wrong) | the UniProt residue number used as the author number (structures with an offset) | 20 | 0 | 0 |
+| must fail (wrong) | a stretch of the cartoon is to be coloured and the rest has no stated colour: the answer colours the whole cartoon in the stated colour, so nothing stands out | 20 | 0 | 0 |
 | must fail (wrong) | the same residue number in another chain | 20 | 0 | 0 |
 | must fail (wrong) | the highlight in another palette colour | 20 | 0 | 0 |
 | must fail (wrong) | the same scene on another structure | 20 | 0 | 0 |
@@ -670,14 +679,14 @@ this work replaces on that track, with a score of exactly 1 read as success.
 
 | Verdict known from construction | Kind of pair | Pairs | Graded as success | Graded as success by the earlier grader |
 |:---|:---|---:|---:|---:|
-| must pass (equivalent) | struct_asym_id (label chain) instead of auth_asym_id for the same chain | 20 | 20 | 15 |
+| must pass (equivalent) | struct_asym_id (label chain) instead of auth_asym_id for the same chain | 20 | 20 | 17 |
 | must pass (equivalent) | auth_residue_number instead of auth_seq_id | 20 | 20 | 20 |
 | must pass (equivalent) | a colour as #rrggbb or as an {r,g,b} object instead of its name | 20 | 20 | 0 |
 | must pass (equivalent) | an entity id instead of the entity's only chain | 20 | 20 | 0 |
-| must pass (equivalent) | the entry id in upper case, or the same entry loaded by URL | 20 | 20 | 10 |
+| must pass (equivalent) | the entry id in upper case, or the same entry loaded by URL | 20 | 20 | 7 |
 | must pass (equivalent) | focus: true inside the color call, or a separate focus action | 20 | 20 | 0 |
 | must pass (equivalent) | settings that do not interact, in another order | 20 | 20 | 20 |
-| must pass (equivalent) | struct_asym_id + residue_number (label) instead of auth_asym_id + auth_seq_id | 20 | 20 | 8 |
+| must pass (equivalent) | struct_asym_id + residue_number (label) instead of auth_asym_id + auth_seq_id | 20 | 20 | 10 |
 | must pass (equivalent) | a ligand by residue name, or each copy by author chain and number | 20 | 20 | 0 |
 | must pass (equivalent) | steps that change nothing are added | 20 | 20 | 0 |
 | must pass (equivalent) | two residues in one color call, or in two calls with keep_colors | 20 | 20 | 0 |
@@ -687,7 +696,11 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | sideChain: true instead of representation: ball-and-stick | 20 | 20 | 0 |
 | must pass (equivalent) | set_property visual_style instead of set_visual_style | 20 | 20 | 0 |
 | must pass (equivalent) | tooltip text differing only in case and repeated spaces | 20 | 20 | 20 |
+| must pass (equivalent) | on an AlphaFold DB model, a residue by UniProt accession and number instead of author numbering (the model file carries the SIFTS columns) | 5 | 5 | 0 |
 | must pass (equivalent) | a residue by UniProt accession and number, or every mapped copy by author numbering | 20 | 20 | 0 |
+| must pass (equivalent) | a grey cartoon and a coloured ligand are asked for: the answer leaves the cartoon to the viewer's default view and paints the ligand (water and other components stay on screen, which the request does not mention) | 20 | 20 | 0 |
+| must pass (equivalent) | the same request answered on the default view with the waters hidden, which nobody asked for: the task accepts the cartoon style (no water drawn) and the default view (water drawn), so the state in between is right too (the task's free_hide) | 20 | 20 | 0 |
+| must pass (equivalent) | a grey cartoon and a residue as coloured ball-and-stick are asked for: the answer colours the residue and adds the ball-and-stick in the same colour, the form the API prompt's own example teaches (the residue's stretch of cartoon takes the highlight colour) | 20 | 20 | 0 |
 | must pass (identical) | the answer is the reference itself | 150 | 150 | 150 |
 | must fail (wrong) | the author residue number given as residue_number, which is label numbering | 20 | 0 | 15 |
 | must fail (wrong) | the structure is loaded and nothing else is done | 20 | 0 | 0 |
@@ -701,6 +714,10 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must fail (wrong) | the neighbouring residue is coloured | 20 | 0 | 0 |
 | must fail (wrong) | the global style is set after colouring, which wipes it | 20 | 0 | 20 |
 | must fail (wrong) | the UniProt residue number used as the author number (structures with an offset) | 20 | 0 | 0 |
+| must fail (wrong) | a residue by UniProt accession and number on RCSB's mmCIF loaded by URL: that file has no SIFTS columns, so the viewer selects nothing | 20 | 0 | 0 |
+| must fail (wrong) | the default-view answer to 'grey cartoon, ligand in <colour>' without the grey: the cartoon keeps the viewer's chain colours, and grey was stated | 20 | 0 | 0 |
+| must fail (wrong) | the default-view answer to 'grey cartoon, ligand in <colour>' with the ligand in another palette colour: what the request states still has to match | 20 | 0 | 0 |
+| must fail (wrong) | the default-view answer to 'grey cartoon, residue as coloured ball-and-stick' with the polymer hidden: a free hide toggle never covers what was asked for | 20 | 0 | 0 |
 | must fail (wrong) | the same residue number in another chain | 20 | 0 | 0 |
 | must fail (wrong) | another palette colour | 20 | 0 | 0 |
 | must fail (wrong) | the same calls on another structure | 20 | 0 | 0 |
@@ -733,27 +750,27 @@ price*: US dollars per million input / output tokens, read on the date given.
 | Model identifier | Panel | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
 |:---|:---|:---|:---|:---|:---|:---|
 | Keyword script | core | not a model | – | – | 0 / 0 | – |
-| `claude-haiku-4-5` | core | closed | no | no | 1.0 / 5.0 | 2026-11-12 |
-| `deepseek/deepseek-v3.2` | core | open | no | yes | 0.26 / 0.38 | 2026-11-12 |
-| `deepseek/deepseek-v4-flash` | core | open | yes | yes | 0.09 / 0.18 | 2026-11-12 |
-| `google/gemini-3.5-flash` | core | closed | yes | yes | 1.5 / 9.0 | 2026-11-12 |
-| `google/gemma-3-27b-it` | core | open | no | yes | 0.08 / 0.35 | 2026-11-12 |
-| `openai/gpt-5.4-nano` | core | closed | no | yes | 0.2 / 1.25 | 2026-11-12 |
-| `meta-llama/llama-4-maverick` | core | open | no | yes | 0.35 / 1.0 | 2026-11-12 |
-| `minimax/minimax-m3` | core | open | yes | yes | 0.3 / 1.2 | 2026-11-12 |
-| `mistralai/mistral-small-2603` | core | open | no | yes | 0.15 / 0.6 | 2026-11-12 |
-| `moonshotai/kimi-k2.6` | core | open | yes | yes | 0.65 / 3.41 | 2026-11-12 |
-| `nvidia/nemotron-3-super-120b-a12b` | core | open | yes | yes | 0.075 / 0.4 | 2026-11-12 |
-| `openai/gpt-oss-120b` | core | open | yes | yes | 0.15 / 0.6 | 2026-11-12 |
-| `openai/gpt-oss-20b` | core | open | yes | yes | 0.03 / 0.13 | 2026-11-12 |
-| `qwen/qwen3-30b-a3b-instruct-2507` | core | open | no | yes | 0.1 / 0.3 | 2026-11-12 |
-| `qwen/qwen3-next-80b-a3b-instruct` | core | open | no | yes | 0.09 / 1.1 | 2026-11-12 |
-| `z-ai/glm-5.2` | core | open | no | yes | 0.007 / 6.8 | 2026-11-12 |
-| `anthropic/claude-opus-5.5` | optional | closed | yes | yes | 4.0 / 20.0 | 2026-11-12 |
-| `openai/gpt-6.1-sol` | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-12 |
-| `google/gemini-4-argon` | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-12 |
-| `x-ai/grok-4.7` | optional | closed | yes | yes | 2.0 / 6.0 | 2026-11-12 |
-| `deepseek/deepseek-v4-pro-0813` | optional | open | yes | yes | 0.111 / 4.44 | 2026-11-12 |
+| `claude-haiku-4-5` | core | closed | no | no | 1.0 / 5.0 | 2026-11-16 |
+| `deepseek/deepseek-v3.2` | core | open | no | yes | 0.26 / 0.38 | 2026-11-16 |
+| `deepseek/deepseek-v4-flash` | core | open | yes | yes | 0.09 / 0.18 | 2026-11-16 |
+| `google/gemini-3.5-flash` | core | closed | yes | yes | 1.5 / 9.0 | 2026-11-16 |
+| `google/gemma-3-27b-it` | core | open | no | yes | 0.08 / 0.35 | 2026-11-16 |
+| `openai/gpt-5.4-nano` | core | closed | no | yes | 0.2 / 1.25 | 2026-11-16 |
+| `meta-llama/llama-4-maverick` | core | open | no | yes | 0.35 / 1.0 | 2026-11-16 |
+| `minimax/minimax-m3` | core | open | yes | yes | 0.3 / 1.2 | 2026-11-16 |
+| `mistralai/mistral-small-2603` | core | open | no | yes | 0.15 / 0.6 | 2026-11-16 |
+| `moonshotai/kimi-k2.6` | core | open | yes | yes | 0.65 / 3.41 | 2026-11-16 |
+| `nvidia/nemotron-3-super-120b-a12b` | core | open | yes | yes | 0.075 / 0.4 | 2026-11-16 |
+| `openai/gpt-oss-120b` | core | open | yes | yes | 0.15 / 0.6 | 2026-11-16 |
+| `openai/gpt-oss-20b` | core | open | yes | yes | 0.075 / 0.3 | 2026-11-16 |
+| `qwen/qwen3-30b-a3b-instruct-2507` | core | open | no | yes | 0.1 / 0.3 | 2026-11-16 |
+| `qwen/qwen3-next-80b-a3b-instruct` | core | open | no | yes | 0.09 / 1.1 | 2026-11-16 |
+| `z-ai/glm-5.2` | core | open | no | yes | 0.007 / 6.8 | 2026-11-16 |
+| `anthropic/claude-opus-5.5` | optional | closed | yes | yes | 4.0 / 20.0 | 2026-11-16 |
+| `openai/gpt-6.1-sol` | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-16 |
+| `google/gemini-4-argon` | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-16 |
+| `x-ai/grok-4.7` | optional | closed | yes | yes | 2.0 / 6.0 | 2026-11-16 |
+| `deepseek/deepseek-v4-pro-0813` | optional | open | yes | yes | 0.111 / 4.44 | 2026-11-16 |
 
 ## S7. System prompts
 
@@ -761,7 +778,7 @@ The two system prompts as sent in the headline condition. A name in double angle
 marks a slot that is filled with a longer frozen text from the repository: the MolViewSpec
 reference (`molbench/mvs_reference.md`), the list of call-list actions with their fields, and
 the reference of the viewer's calls (`molbench/api_reference.md`). In the condition without a
-format reference, the section "MVS reference" is removed. The worked example in the call-list
+format reference, the section "MVS reference" is removed. The worked example in each
 prompt uses entry 1HSG, which no task uses.
 
 **Scene track: system prompt** (`prompts/system_mvs.md`).
@@ -785,6 +802,9 @@ form `{"root": {"kind": "root", "children": [ ... ]>>`.
   numbers. Make your best specific guess rather than a vague selection.
 * Only include what the user asks for — MVS is additive, so to "hide waters" you
   simply do not add a water component.
+* The answer is judged by what the viewer ends up showing: which atoms are drawn, in
+  which representation and colour, plus labels, focus and measurements. How the tree
+  is written does not matter; anything drawn that was not asked for counts against it.
 
 ## Follow-up requests
 

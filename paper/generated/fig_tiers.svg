@@ -6,13 +6,13 @@
 <text x="12" y="44" font-size="11" font-weight="normal" fill="#555555" text-anchor="start">Counts are tasks on the scene track / the call-list track. Requests are quoted from the corpus.</text>
 <rect x="12" y="60" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="22" y="82" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Translation</text>
-<text x="232" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">68 / 163</text>
+<text x="232" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">73 / 178</text>
 <text x="22" y="102" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Everything is in the request.</text>
 <text x="22" y="124" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“3ERT: grey cartoon, and the het group</text>
 <text x="22" y="138" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">OHT as lime green ball-and-stick.”</text>
 <rect x="254" y="60" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="264" y="82" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Structure-grounded</text>
-<text x="474" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">68 / 68</text>
+<text x="474" y="82" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">63 / 63</text>
 <text x="264" y="102" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">A named feature must be found in the</text>
 <text x="264" y="116" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">structure.</text>
 <text x="264" y="138" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“In 1STP, draw the protein as a grey</text>
@@ -36,14 +36,14 @@
 <text x="748" y="166" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">blue cartoon.”</text>
 <rect x="12" y="224" width="230" height="152" rx="6" fill="#e8f1f8" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="22" y="246" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Clinical variant</text>
-<text x="232" y="246" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">79 / 79</text>
+<text x="232" y="246" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">82 / 82</text>
 <text x="22" y="266" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">UniProt numbering must be mapped to</text>
 <text x="22" y="280" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">the structure.</text>
-<text x="22" y="302" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“PDB entry 2NWD: the LYZ (Lysozyme C)</text>
-<text x="22" y="316" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">variant F75I is classified as</text>
-<text x="22" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">pathogenic in ClinVar. Show the</text>
-<text x="22" y="344" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">residue it replaces as green ball-and-</text>
-<text x="22" y="358" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">stick.”</text>
+<text x="22" y="302" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“PDB entry 2NWD: the LYZ (Lysozyme C,</text>
+<text x="22" y="316" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">UniProt P61626) variant p.W82R is</text>
+<text x="22" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">classified as pathogenic in ClinVar.</text>
+<text x="22" y="344" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">Show the residue it replaces as yellow</text>
+<text x="22" y="358" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">spacefill spheres.”</text>
 <rect x="254" y="224" width="230" height="152" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="264" y="246" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Follow-up turn</text>
 <text x="474" y="246" font-size="11.5" font-weight="normal" fill="#555555" text-anchor="end">58 / 44</text>

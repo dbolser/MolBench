@@ -2,9 +2,9 @@
 
 | track | grader | controls | identical | equivalent | wrong | false passes | false fails |
 |:---|:---|---:|---:|---:|---:|---:|---:|
-| MVS | this grader | 1030 | 150 | 440 | 440 | 0 of 440 (0.0%) | 0 of 590 (0.0%) |
-| MVS | previous grader | 1030 | 150 | 440 | 440 | 0 of 440 (0.0%) | 222 of 590 (37.6%) |
-| API | this grader | 850 | 150 | 360 | 340 | 0 of 340 (0.0%) | 0 of 510 (0.0%) |
-| API | previous grader | 850 | 150 | 360 | 340 | 75 of 340 (22.1%) | 247 of 510 (48.4%) |
+| MVS | this grader | 1110 | 150 | 480 | 480 | 0 of 480 (0.0%) | 0 of 630 (0.0%) |
+| MVS | previous grader | 1110 | 150 | 480 | 480 | 13 of 480 (2.7%) | 264 of 630 (41.9%) |
+| API | this grader | 995 | 150 | 425 | 420 | 0 of 420 (0.0%) | 0 of 575 (0.0%) |
+| API | previous grader | 995 | 150 | 425 | 420 | 75 of 420 (17.9%) | 311 of 575 (54.1%) |
 
 From `tests/controls/summary.json` (built by `scripts/grader_controls.py`; these are measured values, not run results). A false pass is a wrong answer graded as a task success; a false fail is an identical or equivalent answer graded as not a success.

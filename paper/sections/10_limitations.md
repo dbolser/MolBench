@@ -12,8 +12,11 @@
   settings; the atoms they would draw are not modelled.
 - **Public tasks and contamination.** Earlier MolBench tasks have been public since May 2026,
   and the public split of this corpus will be public when the paper is. A model trained later
-  may have seen them. The held-back split measures the effect for the present run; it cannot
-  protect future runs once it is released. The generators are seeded, so a fresh split on new
+  may have seen them. The held-back split is on structures that no earlier MolBench task used,
+  but its tasks were in a public repository for some days before the run, three of its
+  structures share a protein with a public structure, and almost no public task of this corpus
+  was published before either. It compares familiar with unfamiliar structures and cannot show
+  that a model has, or has not, memorised tasks; it cannot protect future runs at all. The generators are seeded, so a fresh split on new
   structures can be drawn.
 - **A panel of {{panel.n}} structures.** The structures were chosen by hand for coverage and
   are mostly well known: the median year of deposition is {{panel.deposited_median}}, and only
@@ -34,11 +37,29 @@
   of valid answers. A difference between the tracks can therefore come from the prompt as well
   as from the format.
 - **Offset comparison on few proteins.** Pairs of tasks that ask the same variant on a
-  structure with and without an offset exist for one protein only.
+  structure with and without an offset exist for four proteins (five pairs for beta-globin, one
+  each for three others), and the structure without an offset is always an AlphaFold model, so
+  "no offset" and "predicted model" cannot be told apart.
+- **What the run can and cannot detect.** Track totals and tier means rest on dozens to nearly two hundred tasks
+  and are estimated with useful precision. Several planned contrasts are descriptive only: the
+  public against the held-back split within one tier (held-back tasks sit on {{corpus.heldback.n_structures}} structures),
+  the offset pairs, the {{clin.n_sse}} helix and strand tasks, and paraphrases within one tier
+  ({{corpus.n_requests_paraphrased}} requests in all). We report them with intervals and do not test them.
+- **Graded as written on most entries of the name-resolution tier.** A request that names a
+  protein accepts any PDB entry of it. Only the reference entries have frozen atom tables, so on
+  any other accepted entry an answer's selections are compared with the reference's as text.
+  The common ways of writing "the protein" pass; a correct selection by chain id does not. The
+  tier's results are reported split by whether the answer used the reference entry.
+- **The floor.** The keyword baseline is a weak floor: a script of regular expressions over the
+  request templates, with no knowledge of any structure, would solve a share of the translation
+  tier, and on the clinical tier the number in the variant name is the right author number in
+  a sizeable share of the tasks (Section 3.2). Clinical results are therefore split by that
+  property, and follow-up results by whether the right answer is to change nothing.
 - **Generated requests.** Requests come from templates. They are cleaner than what people
   type, and they have been read for naturalness by the authors and by reviewers of the corpus,
   not yet by an independent structural biologist. The terse and indirect phrasings were
-  produced mechanically for most requests, and some read awkwardly.
+  each written out by hand by the CI assistant that built the corpus, and checked by rule for
+  dropped values; no second person has read them.
 - **Closed-book, one answer.** A model cannot look anything up, ask back, or see the picture.
   A product that wraps a model in tools, validation and retries may do better. We measure the
   model, not such a product.

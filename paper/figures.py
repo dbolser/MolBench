@@ -178,7 +178,7 @@ TIER_CARDS = [
     ("grounded", "Structure-grounded", "gr-ligand-1stp-btn", "A named feature must be found in the structure."),
     ("interactions", "Interactions", "in-ca-distance-9fb2", "Named atoms and a measurement."),
     ("resolve", "Name resolution", "res-gene-p01112", "The protein is named; the entry is not."),
-    ("clinical", "Clinical variant", "clin-short-target-lyz-2nwd-f75i-mvs", "UniProt numbering must be mapped to the structure."),
+    ("clinical", "Clinical variant", "clin-pair-target-lyz-2nwd-w82r-mvs", "UniProt numbering must be mapped to the structure."),
     ("followup", "Follow-up turn", "fu-referent-colour-5cj6-mvs", "A start state plus an edit."),
     ("accept_set", "Several right answers", "acc-residue-colour-4ins-mvs", "One countable thing is left open."),
     ("tool_only", "Viewer settings", "api-canvas-1udt", "Call-list track only."),

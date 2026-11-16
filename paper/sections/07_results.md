@@ -38,8 +38,9 @@ correctly.
 
 **Table 8. Paired comparison of the two formats.** For each model, its
 {{corpus.n_twin_pairs}} pairs (one request on both tracks, same target atoms) are split four
-ways. A side is *right* when at least two of its three sampled answers are exactly right (task
-success). *McNemar p*: exact test that the two one-sided counts are equal; a small value means
+ways. A side is *right* when at least two of its three sampled answers are right, first by
+the target score (the requested atoms drawn exactly as asked) and then by task success (the
+whole final state exactly right; not the same test in the two formats, Section 3.4). *McNemar p*: exact test that the two one-sided counts are equal; a small value means
 that one format is harder for this model. † marks an optional model.
 
 {{include:generated/table_final_paired.md|else:generated/shape_paired.md}}

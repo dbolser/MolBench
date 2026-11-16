@@ -59,7 +59,10 @@ TIER_ASKS = {
     "accept_set": "The request leaves one countable thing open; several final states are right.",
     "tool_only": "A viewer setting that only the call-list format can express.",
 }
-EXAMPLE = "clin-short-target-lyz-2nwd-f75i"
+# LYZ p.W82R on 2NWD: a ClinVar record of its own with assertion criteria, an offset of
+# 18 residues, and a partner task on the AlphaFold model (the earlier example, F75I,
+# rested on a record without assertion criteria and is no longer a task).
+EXAMPLE = "clin-pair-target-lyz-2nwd-w82r"
 
 
 def jload(path):
@@ -262,6 +265,24 @@ def panel_values(V: dict, used) -> list[dict]:
     V["variants.removed_share"] = pct(rej_clinvar, kept + rej_clinvar)
     V["variants.n_wild_type_mismatch"] = rej_other
     V["variants.clinvar_retrieved"] = max(str(r)[:10] for r in retrieved if r)
+    # The second pass (audit of 2026-11-16): a ClinVar record of the variant's own.
+    from molbench import variants as variants_mod
+    own = other_gene = haplotype = zero_star = 0
+    for p in variants_mod.proteins():
+        ok = variants_mod.confirmed(p["accession"])
+        own += len(ok)
+        zero_star += sum(not variants_mod.criteria_provided(v) for v in ok)
+        for d in variants_mod.not_confirmed(p["accession"]):
+            if d["reason"].startswith("haplotype"):
+                haplotype += 1
+            else:
+                other_gene += 1
+    V["variants.n_own_record"] = own
+    V["variants.n_other_gene_only"] = other_gene
+    V["variants.n_haplotype_only"] = haplotype
+    V["variants.n_no_criteria"] = zero_star
+    V["variants.n_usable"] = own - zero_star
+    V["variants.records_retrieved"] = variants_mod.clinvar_snapshot()
     return entries
 
 
@@ -611,7 +632,9 @@ def example_values(V: dict, by_id: dict) -> dict:
     row = (face & -face).bit_length() - 1
     V["ex.face_value_residue"] = table.columns["auth_comp_id"][row].capitalize()
     V["ex.face_value_n_atoms"] = bin(face).count("1")
-    V["ex.rep"], V["ex.color"] = "ball-and-stick", cl["look"]["color"]
+    api_rep, rep_words = {"ball_and_stick": ("ball-and-stick", "ball-and-stick"),
+                          "spacefill": ("spacefill", "spacefill spheres")}[cl["look"]["rep"]]
+    V["ex.rep"], V["ex.color"] = rep_words, cl["look"]["color"]
     import re
     rng = re.search(r"UniProt (\d+)-(\d+) = auth (\d+)-(\d+)", m["grounding"]["text"])
     V["ex.map_uniprot_first"], V["ex.map_uniprot_last"] = int(rng.group(1)), int(rng.group(2))
@@ -642,11 +665,11 @@ def example_values(V: dict, by_id: dict) -> dict:
         "face_context": scene(wrong, context=True),
     }
 
-    def calls(sel, colour="green", cartoon="keep"):
+    def calls(sel, colour=cl["look"]["color"], cartoon="keep"):
         d = dict(sel)
         if cartoon == "keep":
             d["color"] = None
-        d["representation"] = "ball-and-stick"
+        d["representation"] = api_rep
         d["representationColor"] = colour
         return [{"action": "load", "molecule_id": m["structures"][0]}, {"action": "color", "data": [d]}]
 

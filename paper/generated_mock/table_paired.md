@@ -2,98 +2,182 @@
 
 **The same request in both formats: paired analysis**
 
-*All twins outside the clinical tier (176 pairs).*
+*All twins outside the clinical tier (176 pairs). Solved = requested atoms drawn as asked (target score 1).*
 
 | model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| moonshotai/kimi-k2.6 | 176 | 63 | 40 | 46 | 27 | 58.5% | 61.9% | 0.590 |
-| nvidia/nemotron-3-super-120b-a12b | 176 | 59 | 44 | 50 | 23 | 58.5% | 61.9% | 0.606 |
-| openai/gpt-5.4-nano | 176 | 62 | 40 | 48 | 26 | 58.0% | 62.5% | 0.456 |
-| z-ai/glm-5.2 | 176 | 60 | 30 | 62 | 24 | 51.1% | 69.3% | 0.001 |
-| deepseek/deepseek-v3.2 | 176 | 57 | 34 | 48 | 37 | 51.7% | 59.7% | 0.151 |
-| google/gemini-4-argon | 176 | 64 | 32 | 53 | 27 | 54.5% | 66.5% | 0.029 |
-| google/gemma-3-27b-it | 176 | 56 | 38 | 48 | 34 | 53.4% | 59.1% | 0.332 |
-| openai/gpt-oss-120b | 176 | 56 | 38 | 53 | 29 | 53.4% | 61.9% | 0.142 |
-| meta-llama/llama-4-maverick | 176 | 64 | 41 | 38 | 33 | 59.7% | 58.0% | 0.822 |
-| qwen/qwen3-30b-a3b-instruct-2507 | 176 | 73 | 40 | 33 | 30 | 64.2% | 60.2% | 0.483 |
-| minimax/minimax-m3 | 176 | 65 | 40 | 42 | 29 | 59.7% | 60.8% | 0.912 |
-| anthropic/claude-opus-5.5 | 176 | 58 | 35 | 52 | 31 | 52.8% | 62.5% | 0.086 |
-| x-ai/grok-4.7 | 176 | 65 | 29 | 48 | 34 | 53.4% | 64.2% | 0.040 |
-| claude-haiku-4-5 | 176 | 53 | 38 | 60 | 25 | 51.7% | 64.2% | 0.033 |
-| openai/gpt-6.1-sol | 176 | 60 | 33 | 45 | 38 | 52.8% | 59.7% | 0.213 |
-| deepseek/deepseek-v4-pro-0813 | 176 | 62 | 34 | 56 | 24 | 54.5% | 67.0% | 0.026 |
-| deepseek/deepseek-v4-flash | 176 | 61 | 38 | 47 | 30 | 56.2% | 61.4% | 0.386 |
-| openai/gpt-oss-20b | 176 | 57 | 40 | 49 | 30 | 55.1% | 60.2% | 0.397 |
-| google/gemini-3.5-flash | 176 | 50 | 50 | 46 | 30 | 56.8% | 54.5% | 0.760 |
-| mistralai/mistral-small-2603 | 176 | 56 | 38 | 50 | 32 | 53.4% | 60.2% | 0.241 |
-| qwen/qwen3-next-80b-a3b-instruct | 176 | 45 | 47 | 46 | 38 | 52.3% | 51.7% | 1.000 |
-| baseline-rules (keyword baseline) | 176 | 63 | 37 | 52 | 24 | 56.8% | 65.3% | 0.137 |
-| **pooled over models** | 3696 | 1246 | 799 | 1020 | 631 | 55.3% | 61.3% | < 0.001 |
+| moonshotai/kimi-k2.6 | 176 | 93 | 39 | 25 | 19 | 75.0% | 67.0% | 0.103 |
+| openai/gpt-5.4-nano | 176 | 90 | 37 | 27 | 22 | 72.2% | 66.5% | 0.260 |
+| google/gemma-3-27b-it | 176 | 80 | 41 | 28 | 27 | 68.8% | 61.4% | 0.148 |
+| anthropic/claude-opus-5.5 | 176 | 87 | 48 | 28 | 13 | 76.7% | 65.3% | 0.029 |
+| x-ai/grok-4.7 | 176 | 94 | 36 | 22 | 24 | 73.9% | 65.9% | 0.087 |
+| z-ai/glm-5.2 | 176 | 91 | 29 | 33 | 23 | 68.2% | 70.5% | 0.704 |
+| minimax/minimax-m3 | 176 | 90 | 41 | 21 | 24 | 74.4% | 63.1% | 0.015 |
+| nvidia/nemotron-3-super-120b-a12b | 176 | 81 | 46 | 33 | 16 | 72.2% | 64.8% | 0.177 |
+| deepseek/deepseek-v3.2 | 176 | 85 | 41 | 25 | 25 | 71.6% | 62.5% | 0.064 |
+| google/gemini-4-argon | 176 | 89 | 34 | 29 | 24 | 69.9% | 67.0% | 0.615 |
+| deepseek/deepseek-v4-pro-0813 | 176 | 95 | 28 | 34 | 19 | 69.9% | 73.3% | 0.526 |
+| meta-llama/llama-4-maverick | 176 | 84 | 43 | 25 | 24 | 72.2% | 61.9% | 0.038 |
+| openai/gpt-oss-20b | 176 | 85 | 39 | 30 | 22 | 70.5% | 65.3% | 0.336 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 176 | 88 | 42 | 20 | 26 | 73.9% | 61.4% | 0.007 |
+| deepseek/deepseek-v4-flash | 176 | 87 | 43 | 24 | 22 | 73.9% | 63.1% | 0.027 |
+| google/gemini-3.5-flash | 176 | 77 | 56 | 24 | 19 | 75.6% | 57.4% | < 0.001 |
+| openai/gpt-oss-120b | 176 | 89 | 40 | 22 | 25 | 73.3% | 63.1% | 0.030 |
+| claude-haiku-4-5 | 176 | 85 | 37 | 30 | 24 | 69.3% | 65.3% | 0.464 |
+| openai/gpt-6.1-sol | 176 | 81 | 45 | 22 | 28 | 71.6% | 58.5% | 0.007 |
+| qwen/qwen3-next-80b-a3b-instruct | 176 | 72 | 49 | 27 | 28 | 68.8% | 56.2% | 0.015 |
+| mistralai/mistral-small-2603 | 176 | 89 | 38 | 27 | 22 | 72.2% | 65.9% | 0.215 |
+| baseline-rules (keyword baseline) | 176 | 87 | 36 | 32 | 21 | 69.9% | 67.6% | 0.716 |
+| **pooled over models** | 3696 | 1812 | 852 | 556 | 476 | 72.1% | 64.1% | < 0.001 |
 
-*Sensitivity: without the twins whose API side needs a hide toggle the request does not state (158 pairs).*
-
-| model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
-|:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| moonshotai/kimi-k2.6 | 158 | 53 | 36 | 43 | 26 | 56.3% | 60.8% | 0.500 |
-| nvidia/nemotron-3-super-120b-a12b | 158 | 54 | 38 | 45 | 21 | 58.2% | 62.7% | 0.510 |
-| openai/gpt-5.4-nano | 158 | 57 | 34 | 44 | 23 | 57.6% | 63.9% | 0.308 |
-| z-ai/glm-5.2 | 158 | 50 | 29 | 58 | 21 | 50.0% | 68.4% | 0.002 |
-| deepseek/deepseek-v3.2 | 158 | 50 | 33 | 43 | 32 | 52.5% | 58.9% | 0.302 |
-| google/gemini-4-argon | 158 | 57 | 31 | 48 | 22 | 55.7% | 66.5% | 0.071 |
-| google/gemma-3-27b-it | 158 | 53 | 33 | 43 | 29 | 54.4% | 60.8% | 0.302 |
-| openai/gpt-oss-120b | 158 | 51 | 34 | 47 | 26 | 53.8% | 62.0% | 0.182 |
-| meta-llama/llama-4-maverick | 158 | 57 | 38 | 34 | 29 | 60.1% | 57.6% | 0.724 |
-| qwen/qwen3-30b-a3b-instruct-2507 | 158 | 66 | 35 | 30 | 27 | 63.9% | 60.8% | 0.620 |
-| minimax/minimax-m3 | 158 | 59 | 36 | 39 | 24 | 60.1% | 62.0% | 0.818 |
-| anthropic/claude-opus-5.5 | 158 | 53 | 33 | 43 | 29 | 54.4% | 60.8% | 0.302 |
-| x-ai/grok-4.7 | 158 | 59 | 26 | 44 | 29 | 53.8% | 65.2% | 0.041 |
-| claude-haiku-4-5 | 158 | 51 | 34 | 52 | 21 | 53.8% | 65.2% | 0.066 |
-| openai/gpt-6.1-sol | 158 | 53 | 29 | 40 | 36 | 51.9% | 58.9% | 0.228 |
-| deepseek/deepseek-v4-pro-0813 | 158 | 56 | 29 | 50 | 23 | 53.8% | 67.1% | 0.024 |
-| deepseek/deepseek-v4-flash | 158 | 56 | 34 | 43 | 25 | 57.0% | 62.7% | 0.362 |
-| openai/gpt-oss-20b | 158 | 52 | 36 | 46 | 24 | 55.7% | 62.0% | 0.320 |
-| google/gemini-3.5-flash | 158 | 46 | 44 | 40 | 28 | 57.0% | 54.4% | 0.744 |
-| mistralai/mistral-small-2603 | 158 | 48 | 38 | 43 | 29 | 54.4% | 57.6% | 0.657 |
-| qwen/qwen3-next-80b-a3b-instruct | 158 | 41 | 43 | 41 | 33 | 53.2% | 51.9% | 0.913 |
-| baseline-rules (keyword baseline) | 158 | 53 | 35 | 48 | 22 | 55.7% | 63.9% | 0.187 |
-| **pooled over models** | 3318 | 1122 | 723 | 916 | 557 | 55.6% | 61.4% | < 0.001 |
-
-*Clinical twins (reported apart: the PDBe viewer maps UniProt numbering itself, an MVS scene cannot) (79 pairs).*
+*Sensitivity: without the twins whose API side needs a hide toggle the request does not state (161 pairs). Solved = requested atoms drawn as asked (target score 1).*
 
 | model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| moonshotai/kimi-k2.6 | 79 | 34 | 10 | 21 | 14 | 55.7% | 69.6% | 0.071 |
-| nvidia/nemotron-3-super-120b-a12b | 79 | 33 | 16 | 18 | 12 | 62.0% | 64.6% | 0.864 |
-| openai/gpt-5.4-nano | 79 | 21 | 17 | 29 | 12 | 48.1% | 63.3% | 0.104 |
-| z-ai/glm-5.2 | 79 | 23 | 21 | 24 | 11 | 55.7% | 59.5% | 0.766 |
-| deepseek/deepseek-v3.2 | 79 | 27 | 13 | 25 | 14 | 50.6% | 65.8% | 0.073 |
-| google/gemini-4-argon | 79 | 24 | 19 | 18 | 18 | 54.4% | 53.2% | 1.000 |
-| google/gemma-3-27b-it | 79 | 30 | 9 | 25 | 15 | 49.4% | 69.6% | 0.009 |
-| openai/gpt-oss-120b | 79 | 32 | 13 | 22 | 12 | 57.0% | 68.4% | 0.175 |
-| meta-llama/llama-4-maverick | 79 | 35 | 16 | 17 | 11 | 64.6% | 65.8% | 1.000 |
-| qwen/qwen3-30b-a3b-instruct-2507 | 79 | 29 | 14 | 22 | 14 | 54.4% | 64.6% | 0.243 |
-| minimax/minimax-m3 | 79 | 20 | 26 | 18 | 15 | 58.2% | 48.1% | 0.291 |
-| anthropic/claude-opus-5.5 | 79 | 20 | 19 | 26 | 14 | 49.4% | 58.2% | 0.371 |
-| x-ai/grok-4.7 | 79 | 26 | 15 | 19 | 19 | 51.9% | 57.0% | 0.608 |
-| claude-haiku-4-5 | 79 | 23 | 17 | 21 | 18 | 50.6% | 55.7% | 0.627 |
-| openai/gpt-6.1-sol | 79 | 25 | 22 | 19 | 13 | 59.5% | 55.7% | 0.755 |
-| deepseek/deepseek-v4-pro-0813 | 79 | 23 | 22 | 21 | 13 | 57.0% | 55.7% | 1.000 |
-| deepseek/deepseek-v4-flash | 79 | 19 | 19 | 27 | 14 | 48.1% | 58.2% | 0.302 |
-| openai/gpt-oss-20b | 79 | 23 | 8 | 20 | 28 | 39.2% | 54.4% | 0.036 |
-| google/gemini-3.5-flash | 79 | 32 | 15 | 19 | 13 | 59.5% | 64.6% | 0.608 |
-| mistralai/mistral-small-2603 | 79 | 30 | 15 | 16 | 18 | 57.0% | 58.2% | 1.000 |
-| qwen/qwen3-next-80b-a3b-instruct | 79 | 35 | 11 | 23 | 10 | 58.2% | 73.4% | 0.058 |
-| baseline-rules (keyword baseline) | 79 | 30 | 18 | 21 | 10 | 60.8% | 64.6% | 0.749 |
-| **pooled over models** | 1659 | 564 | 337 | 450 | 308 | 54.3% | 61.1% | < 0.001 |
+| moonshotai/kimi-k2.6 | 161 | 84 | 36 | 23 | 18 | 74.5% | 66.5% | 0.117 |
+| openai/gpt-5.4-nano | 161 | 85 | 32 | 23 | 21 | 72.7% | 67.1% | 0.281 |
+| google/gemma-3-27b-it | 161 | 77 | 37 | 23 | 24 | 70.8% | 62.1% | 0.092 |
+| anthropic/claude-opus-5.5 | 161 | 82 | 47 | 20 | 12 | 80.1% | 63.4% | 0.001 |
+| x-ai/grok-4.7 | 161 | 88 | 33 | 19 | 21 | 75.2% | 66.5% | 0.070 |
+| z-ai/glm-5.2 | 161 | 83 | 28 | 30 | 20 | 68.9% | 70.2% | 0.896 |
+| minimax/minimax-m3 | 161 | 85 | 39 | 18 | 19 | 77.0% | 64.0% | 0.008 |
+| nvidia/nemotron-3-super-120b-a12b | 161 | 78 | 41 | 28 | 14 | 73.9% | 65.8% | 0.148 |
+| deepseek/deepseek-v3.2 | 161 | 79 | 40 | 21 | 21 | 73.9% | 62.1% | 0.020 |
+| google/gemini-4-argon | 161 | 83 | 34 | 24 | 20 | 72.7% | 66.5% | 0.237 |
+| deepseek/deepseek-v4-pro-0813 | 161 | 90 | 24 | 29 | 18 | 70.8% | 73.9% | 0.583 |
+| meta-llama/llama-4-maverick | 161 | 79 | 41 | 21 | 20 | 74.5% | 62.1% | 0.015 |
+| openai/gpt-oss-20b | 161 | 81 | 37 | 27 | 16 | 73.3% | 67.1% | 0.260 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 161 | 82 | 38 | 17 | 24 | 74.5% | 61.5% | 0.006 |
+| deepseek/deepseek-v4-flash | 161 | 83 | 40 | 20 | 18 | 76.4% | 64.0% | 0.013 |
+| google/gemini-3.5-flash | 161 | 75 | 50 | 19 | 17 | 77.6% | 58.4% | < 0.001 |
+| openai/gpt-oss-120b | 161 | 85 | 36 | 17 | 23 | 75.2% | 63.4% | 0.013 |
+| claude-haiku-4-5 | 161 | 83 | 35 | 23 | 20 | 73.3% | 65.8% | 0.148 |
+| openai/gpt-6.1-sol | 161 | 75 | 42 | 17 | 27 | 72.7% | 57.1% | 0.002 |
+| qwen/qwen3-next-80b-a3b-instruct | 161 | 69 | 47 | 22 | 23 | 72.0% | 56.5% | 0.004 |
+| mistralai/mistral-small-2603 | 161 | 82 | 38 | 21 | 20 | 74.5% | 64.0% | 0.036 |
+| baseline-rules (keyword baseline) | 161 | 79 | 35 | 28 | 19 | 70.8% | 66.5% | 0.450 |
+| **pooled over models** | 3381 | 1708 | 795 | 462 | 416 | 74.0% | 64.2% | < 0.001 |
+
+*Clinical twins (reported apart: the PDBe viewer maps UniProt numbering itself, an MVS scene cannot) (82 pairs). Solved = requested atoms drawn as asked (target score 1).*
+
+| model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| moonshotai/kimi-k2.6 | 82 | 40 | 20 | 12 | 10 | 73.2% | 63.4% | 0.215 |
+| openai/gpt-5.4-nano | 82 | 35 | 20 | 18 | 9 | 67.1% | 64.6% | 0.871 |
+| google/gemma-3-27b-it | 82 | 41 | 20 | 14 | 7 | 74.4% | 67.1% | 0.392 |
+| anthropic/claude-opus-5.5 | 82 | 37 | 21 | 18 | 6 | 70.7% | 67.1% | 0.749 |
+| x-ai/grok-4.7 | 82 | 40 | 22 | 7 | 13 | 75.6% | 57.3% | 0.008 |
+| z-ai/glm-5.2 | 82 | 28 | 26 | 21 | 7 | 65.9% | 59.8% | 0.560 |
+| minimax/minimax-m3 | 82 | 30 | 24 | 17 | 11 | 65.9% | 57.3% | 0.349 |
+| nvidia/nemotron-3-super-120b-a12b | 82 | 35 | 23 | 16 | 8 | 70.7% | 62.2% | 0.337 |
+| deepseek/deepseek-v3.2 | 82 | 39 | 22 | 13 | 8 | 74.4% | 63.4% | 0.175 |
+| google/gemini-4-argon | 82 | 30 | 23 | 21 | 8 | 64.6% | 62.2% | 0.880 |
+| deepseek/deepseek-v4-pro-0813 | 82 | 33 | 21 | 13 | 15 | 65.9% | 56.1% | 0.229 |
+| meta-llama/llama-4-maverick | 82 | 38 | 20 | 13 | 11 | 70.7% | 62.2% | 0.296 |
+| openai/gpt-oss-20b | 82 | 35 | 22 | 11 | 14 | 69.5% | 56.1% | 0.080 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 82 | 38 | 19 | 15 | 10 | 69.5% | 64.6% | 0.608 |
+| deepseek/deepseek-v4-flash | 82 | 32 | 23 | 18 | 9 | 67.1% | 61.0% | 0.533 |
+| google/gemini-3.5-flash | 82 | 34 | 23 | 14 | 11 | 69.5% | 58.5% | 0.188 |
+| openai/gpt-oss-120b | 82 | 30 | 21 | 21 | 10 | 62.2% | 62.2% | 1.000 |
+| claude-haiku-4-5 | 82 | 39 | 19 | 8 | 16 | 70.7% | 57.3% | 0.052 |
+| openai/gpt-6.1-sol | 82 | 32 | 24 | 17 | 9 | 68.3% | 59.8% | 0.349 |
+| qwen/qwen3-next-80b-a3b-instruct | 82 | 41 | 21 | 14 | 6 | 75.6% | 67.1% | 0.311 |
+| mistralai/mistral-small-2603 | 82 | 36 | 19 | 12 | 15 | 67.1% | 58.5% | 0.281 |
+| baseline-rules (keyword baseline) | 82 | 38 | 15 | 19 | 10 | 64.6% | 69.5% | 0.608 |
+| **pooled over models** | 1722 | 743 | 453 | 313 | 213 | 69.5% | 61.3% | < 0.001 |
+
+*All twins outside the clinical tier (176 pairs). Solved = final state exactly right (task success).*
+
+| model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| moonshotai/kimi-k2.6 | 176 | 65 | 37 | 49 | 25 | 58.0% | 64.8% | 0.235 |
+| openai/gpt-5.4-nano | 176 | 61 | 41 | 50 | 24 | 58.0% | 63.1% | 0.402 |
+| google/gemma-3-27b-it | 176 | 53 | 39 | 51 | 33 | 52.3% | 59.1% | 0.246 |
+| anthropic/claude-opus-5.5 | 176 | 58 | 36 | 54 | 28 | 53.4% | 63.6% | 0.073 |
+| x-ai/grok-4.7 | 176 | 66 | 32 | 47 | 31 | 55.7% | 64.2% | 0.115 |
+| z-ai/glm-5.2 | 176 | 63 | 26 | 63 | 24 | 50.6% | 71.6% | < 0.001 |
+| minimax/minimax-m3 | 176 | 68 | 39 | 40 | 29 | 60.8% | 61.4% | 1.000 |
+| nvidia/nemotron-3-super-120b-a12b | 176 | 61 | 39 | 55 | 21 | 56.8% | 65.9% | 0.121 |
+| deepseek/deepseek-v3.2 | 176 | 60 | 37 | 45 | 34 | 55.1% | 59.7% | 0.440 |
+| google/gemini-4-argon | 176 | 62 | 33 | 51 | 30 | 54.0% | 64.2% | 0.063 |
+| deepseek/deepseek-v4-pro-0813 | 176 | 65 | 33 | 57 | 21 | 55.7% | 69.3% | 0.015 |
+| meta-llama/llama-4-maverick | 176 | 64 | 42 | 40 | 30 | 60.2% | 59.1% | 0.912 |
+| openai/gpt-oss-20b | 176 | 58 | 39 | 51 | 28 | 55.1% | 61.9% | 0.246 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 176 | 70 | 40 | 36 | 30 | 62.5% | 60.2% | 0.731 |
+| deepseek/deepseek-v4-flash | 176 | 65 | 34 | 48 | 29 | 56.2% | 64.2% | 0.151 |
+| google/gemini-3.5-flash | 176 | 53 | 50 | 46 | 27 | 58.5% | 56.2% | 0.760 |
+| openai/gpt-oss-120b | 176 | 54 | 39 | 51 | 32 | 52.8% | 59.7% | 0.246 |
+| claude-haiku-4-5 | 176 | 53 | 35 | 60 | 28 | 50.0% | 64.2% | 0.013 |
+| openai/gpt-6.1-sol | 176 | 59 | 33 | 43 | 41 | 52.3% | 58.0% | 0.302 |
+| qwen/qwen3-next-80b-a3b-instruct | 176 | 50 | 45 | 46 | 35 | 54.0% | 54.5% | 1.000 |
+| mistralai/mistral-small-2603 | 176 | 60 | 33 | 52 | 31 | 52.8% | 63.6% | 0.050 |
+| baseline-rules (keyword baseline) | 176 | 63 | 37 | 53 | 23 | 56.8% | 65.9% | 0.113 |
+| **pooled over models** | 3696 | 1268 | 782 | 1035 | 611 | 55.5% | 62.3% | < 0.001 |
+
+*Sensitivity: without the twins whose API side needs a hide toggle the request does not state (161 pairs). Solved = final state exactly right (task success).*
+
+| model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| moonshotai/kimi-k2.6 | 161 | 56 | 34 | 47 | 24 | 55.9% | 64.0% | 0.182 |
+| openai/gpt-5.4-nano | 161 | 56 | 36 | 46 | 23 | 57.1% | 63.4% | 0.320 |
+| google/gemma-3-27b-it | 161 | 50 | 35 | 46 | 30 | 52.8% | 59.6% | 0.266 |
+| anthropic/claude-opus-5.5 | 161 | 53 | 35 | 46 | 27 | 54.7% | 61.5% | 0.266 |
+| x-ai/grok-4.7 | 161 | 60 | 29 | 44 | 28 | 55.3% | 64.6% | 0.101 |
+| z-ai/glm-5.2 | 161 | 55 | 25 | 60 | 21 | 49.7% | 71.4% | < 0.001 |
+| minimax/minimax-m3 | 161 | 63 | 37 | 37 | 24 | 62.1% | 62.1% | 1.000 |
+| nvidia/nemotron-3-super-120b-a12b | 161 | 58 | 34 | 50 | 19 | 57.1% | 67.1% | 0.101 |
+| deepseek/deepseek-v3.2 | 161 | 54 | 36 | 41 | 30 | 55.9% | 59.0% | 0.649 |
+| google/gemini-4-argon | 161 | 56 | 33 | 46 | 26 | 55.3% | 63.4% | 0.177 |
+| deepseek/deepseek-v4-pro-0813 | 161 | 60 | 29 | 52 | 20 | 55.3% | 69.6% | 0.014 |
+| meta-llama/llama-4-maverick | 161 | 59 | 40 | 36 | 26 | 61.5% | 59.0% | 0.731 |
+| openai/gpt-oss-20b | 161 | 54 | 37 | 48 | 22 | 56.5% | 63.4% | 0.278 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 161 | 64 | 36 | 33 | 28 | 62.1% | 60.2% | 0.810 |
+| deepseek/deepseek-v4-flash | 161 | 61 | 31 | 44 | 25 | 57.1% | 65.2% | 0.165 |
+| google/gemini-3.5-flash | 161 | 51 | 44 | 41 | 25 | 59.0% | 57.1% | 0.828 |
+| openai/gpt-oss-120b | 161 | 50 | 35 | 46 | 30 | 52.8% | 59.6% | 0.266 |
+| claude-haiku-4-5 | 161 | 51 | 33 | 53 | 24 | 52.2% | 64.6% | 0.040 |
+| openai/gpt-6.1-sol | 161 | 53 | 30 | 38 | 40 | 51.6% | 56.5% | 0.396 |
+| qwen/qwen3-next-80b-a3b-instruct | 161 | 47 | 43 | 41 | 30 | 55.9% | 54.7% | 0.913 |
+| mistralai/mistral-small-2603 | 161 | 53 | 33 | 46 | 29 | 53.4% | 61.5% | 0.177 |
+| baseline-rules (keyword baseline) | 161 | 55 | 36 | 49 | 21 | 56.5% | 64.6% | 0.193 |
+| **pooled over models** | 3381 | 1164 | 725 | 941 | 551 | 55.9% | 62.3% | < 0.001 |
+
+*Clinical twins (reported apart: the PDBe viewer maps UniProt numbering itself, an MVS scene cannot) (82 pairs). Solved = final state exactly right (task success).*
+
+| model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| moonshotai/kimi-k2.6 | 82 | 32 | 17 | 20 | 13 | 59.8% | 63.4% | 0.743 |
+| openai/gpt-5.4-nano | 82 | 29 | 18 | 24 | 11 | 57.3% | 64.6% | 0.441 |
+| google/gemma-3-27b-it | 82 | 32 | 12 | 23 | 15 | 53.7% | 67.1% | 0.090 |
+| anthropic/claude-opus-5.5 | 82 | 32 | 16 | 23 | 11 | 58.5% | 67.1% | 0.337 |
+| x-ai/grok-4.7 | 82 | 30 | 18 | 17 | 17 | 58.5% | 57.3% | 1.000 |
+| z-ai/glm-5.2 | 82 | 23 | 21 | 26 | 12 | 53.7% | 59.8% | 0.560 |
+| minimax/minimax-m3 | 82 | 22 | 19 | 25 | 16 | 50.0% | 57.3% | 0.451 |
+| nvidia/nemotron-3-super-120b-a12b | 82 | 29 | 17 | 22 | 14 | 56.1% | 62.2% | 0.522 |
+| deepseek/deepseek-v3.2 | 82 | 27 | 16 | 25 | 14 | 52.4% | 63.4% | 0.211 |
+| google/gemini-4-argon | 82 | 25 | 17 | 26 | 14 | 51.2% | 62.2% | 0.222 |
+| deepseek/deepseek-v4-pro-0813 | 82 | 25 | 17 | 21 | 19 | 51.2% | 56.1% | 0.627 |
+| meta-llama/llama-4-maverick | 82 | 31 | 18 | 20 | 13 | 59.8% | 62.2% | 0.871 |
+| openai/gpt-oss-20b | 82 | 28 | 15 | 18 | 21 | 52.4% | 56.1% | 0.728 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 82 | 35 | 12 | 18 | 17 | 57.3% | 64.6% | 0.362 |
+| deepseek/deepseek-v4-flash | 82 | 26 | 18 | 24 | 14 | 53.7% | 61.0% | 0.441 |
+| google/gemini-3.5-flash | 82 | 30 | 21 | 18 | 13 | 62.2% | 58.5% | 0.749 |
+| openai/gpt-oss-120b | 82 | 24 | 12 | 27 | 19 | 43.9% | 62.2% | 0.024 |
+| claude-haiku-4-5 | 82 | 31 | 17 | 16 | 18 | 58.5% | 57.3% | 1.000 |
+| openai/gpt-6.1-sol | 82 | 23 | 17 | 26 | 16 | 48.8% | 59.8% | 0.222 |
+| qwen/qwen3-next-80b-a3b-instruct | 82 | 34 | 18 | 21 | 9 | 63.4% | 67.1% | 0.749 |
+| mistralai/mistral-small-2603 | 82 | 26 | 16 | 22 | 18 | 51.2% | 58.5% | 0.418 |
+| baseline-rules (keyword baseline) | 82 | 27 | 13 | 30 | 12 | 48.8% | 69.5% | 0.014 |
+| **pooled over models** | 1722 | 594 | 352 | 462 | 314 | 54.9% | 61.3% | < 0.001 |
 
 *Pooled over models, by tier.*
 
 | tier | model × pair | both solved | MVS only | API only | neither | MVS solved | API solved | pairs | McNemar p (exact) |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| translation | 1197 | 406 | 245 | 341 | 205 | 54.4% | 62.4% | 57 | < 0.001 |
-| grounded | 1428 | 489 | 313 | 392 | 234 | 56.2% | 61.7% | 68 | 0.003 |
-| clinical | 1659 | 564 | 337 | 450 | 308 | 54.3% | 61.1% | 79 | < 0.001 |
-| follow-up | 756 | 238 | 187 | 191 | 140 | 56.2% | 56.7% | 36 | 0.877 |
+| translation | 1302 | 450 | 265 | 369 | 218 | 54.9% | 62.9% | 62 | < 0.001 |
+| grounded | 1323 | 452 | 292 | 368 | 211 | 56.2% | 62.0% | 63 | 0.003 |
+| clinical | 1722 | 594 | 352 | 462 | 314 | 54.9% | 61.3% | 82 | < 0.001 |
+| follow-up | 756 | 253 | 171 | 202 | 130 | 56.1% | 60.2% | 36 | 0.120 |
 | accept-set | 315 | 113 | 54 | 96 | 52 | 53.0% | 66.3% | 15 | < 0.001 |
 
-A pair is one request posed on both tracks with the same target atoms. A side is solved when more than half of its samples are exactly right. McNemar's exact test uses the discordant pairs only (solved on one side and not the other). The pooled rows add the counts of all models (keyword baseline left out); the same pairs recur across models, so their p value is descriptive.
+A pair is one request posed on both tracks with the same target atoms. A side is solved when more than half of its samples are right, by two measures: the target score (the requested atoms drawn exactly as asked, whatever else is on screen), which is the same test on both tracks and is the primary one, and task success (the whole final state exactly right), which is not: the API track accepts the viewer's default view, with water and ligands on screen, where an MVS scene that draws them is marked wrong. McNemar's exact test uses the discordant pairs only (solved on one side and not the other). The pooled rows add the counts of all models (keyword baseline left out); the same pairs recur across models, so their p value is descriptive.

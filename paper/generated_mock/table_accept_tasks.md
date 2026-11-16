@@ -45,11 +45,13 @@
 | MVS | `acc-metal-copy-1tup-mvs` | ZN B:952 | 8 |
 | MVS | `acc-metal-copy-1tup-mvs` | ZN C:953 | 11 |
 | MVS | `acc-metal-copy-1tup-mvs` | all 3 copies | 12 |
-| MVS | `acc-metal-copy-8eph-mvs` | CA A:202 | 6 |
+| MVS | `acc-metal-copy-8eph-mvs` | CA A:202 | 5 |
 | MVS | `acc-metal-copy-8eph-mvs` | CA B:301 | 3 |
-| MVS | `acc-metal-copy-8eph-mvs` | CA C:202 | 6 |
-| MVS | `acc-metal-copy-8eph-mvs` | CA D:301 | 13 |
-| MVS | `acc-metal-copy-8eph-mvs` | all 4 copies | 6 |
+| MVS | `acc-metal-copy-8eph-mvs` | CA C:202 | 7 |
+| MVS | `acc-metal-copy-8eph-mvs` | CA D:301 | 6 |
+| MVS | `acc-metal-copy-8eph-mvs` | all 4 copies | 3 |
+| MVS | `acc-metal-copy-8eph-mvs` | the 2 ions of one copy of the complex (assembly 1: chains A and B) | 8 |
+| MVS | `acc-metal-copy-8eph-mvs` | the 2 ions of one copy of the complex (assembly 2: chains C and D) | 2 |
 | MVS | `acc-metal-copy-9fb2-mvs` | K A:602 | 10 |
 | MVS | `acc-metal-copy-9fb2-mvs` | K A:603 | 12 |
 | MVS | `acc-metal-copy-9fb2-mvs` | both copies | 7 |
@@ -59,10 +61,6 @@
 | MVS | `acc-metal-which-7a4m-mvs` | FE | 11 |
 | MVS | `acc-metal-which-7a4m-mvs` | ZN | 12 |
 | MVS | `acc-metal-which-7a4m-mvs` | FE + ZN | 10 |
-| MVS | `acc-representation-open-1hrc-mvs` | ball_and_stick | 12 |
-| MVS | `acc-representation-open-1hrc-mvs` | spacefill | 7 |
-| MVS | `acc-representation-open-1hrc-mvs` | line | 7 |
-| MVS | `acc-representation-open-1hrc-mvs` | surface | 8 |
 | MVS | `acc-representation-open-1mbn-mvs` | ball_and_stick | 6 |
 | MVS | `acc-representation-open-1mbn-mvs` | spacefill | 10 |
 | MVS | `acc-representation-open-1mbn-mvs` | line | 13 |
@@ -71,6 +69,10 @@
 | MVS | `acc-representation-open-3f9m-mvs` | spacefill | 12 |
 | MVS | `acc-representation-open-3f9m-mvs` | line | 11 |
 | MVS | `acc-representation-open-3f9m-mvs` | surface | 6 |
+| MVS | `acc-representation-open-3k34-mvs` | ball_and_stick | 10 |
+| MVS | `acc-representation-open-3k34-mvs` | spacefill | 9 |
+| MVS | `acc-representation-open-3k34-mvs` | line | 6 |
+| MVS | `acc-representation-open-3k34-mvs` | surface | 12 |
 | MVS | `acc-residue-colour-1aoi-mvs` | ILE B:66 | 7 |
 | MVS | `acc-residue-colour-1aoi-mvs` | ILE F:66 | 12 |
 | MVS | `acc-residue-colour-1aoi-mvs` | both copies | 13 |

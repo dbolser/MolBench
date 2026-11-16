@@ -3,31 +3,31 @@
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
 <rect width="980" height="520" fill="#ffffff"/>
 <text x="12" y="28" font-size="15" font-weight="bold" fill="#1a1a1a" text-anchor="start">Grading on drawn state: three answers to the running example</text>
-<text x="12" y="46" font-size="11" font-weight="normal" fill="#555555" text-anchor="start" font-style="italic">Request: “PDB entry 2NWD: the LYZ (Lysozyme C) variant F75I is classified as pathogenic in ClinVar. Show the residue it replaces as green ball-and-</text>
-<text x="12" y="60" font-size="11" font-weight="normal" fill="#555555" text-anchor="start" font-style="italic">stick.”</text>
+<text x="12" y="46" font-size="11" font-weight="normal" fill="#555555" text-anchor="start" font-style="italic">Request: “PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as</text>
+<text x="12" y="60" font-size="11" font-weight="normal" fill="#555555" text-anchor="start" font-style="italic">yellow spacefill spheres.”</text>
 <rect x="12" y="86" width="310" height="418" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="24" y="108" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Reference</text>
-<text x="24" y="126" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Phe57 of chain X as green ball-and-stick. Nothing</text>
+<text x="24" y="126" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Trp64 of chain X as green ball-and-stick. Nothing</text>
 <text x="24" y="140" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">else.</text>
 <text x="24" y="184" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Chain X, author residue numbers</text>
 <rect x="28" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="46" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">56</text>
+<text x="46" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">63</text>
 <rect x="68" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="86" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">57</text>
+<text x="86" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">64</text>
 <rect x="108" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="126" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">58</text>
+<text x="126" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">65</text>
 <text x="162" y="241" font-size="14" font-weight="normal" fill="#555555" text-anchor="middle">…</text>
 <rect x="176" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="194" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">74</text>
+<text x="194" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">81</text>
 <rect x="216" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="234" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">75</text>
+<text x="234" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">82</text>
 <rect x="256" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="274" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">76</text>
+<text x="274" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">83</text>
 <line x1="86" y1="222" x2="86" y2="206" stroke="#009E73" stroke-width="3"/>
 <circle cx="86" cy="202" r="7" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>
 <text x="98" y="205" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">green ball-and-stick</text>
 <text x="24" y="312" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">Facts of the final state</text>
-<text x="24" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">1 display class: 20 atoms of Phe57,</text>
+<text x="24" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">1 display class: 24 atoms of Trp64,</text>
 <text x="24" y="345" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   green ball-and-stick</text>
 <line x1="24" y1="394" x2="310" y2="394" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="24" y="412" font-size="11" font-weight="normal" fill="#1a1a1a" text-anchor="start">Recall (reference facts present)</text>
@@ -42,27 +42,27 @@
 <text x="310" y="484" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="end">1.00</text>
 <rect x="335" y="86" width="310" height="418" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="347" y="108" font-size="12.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Answer A: number taken at face value</text>
-<text x="347" y="126" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Author residue 75 drawn. It is Asn75, another</text>
+<text x="347" y="126" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">Author residue 82 drawn. It is Ser82, another</text>
 <text x="347" y="140" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">residue.</text>
 <text x="347" y="184" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Chain X, author residue numbers</text>
 <rect x="351" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="369" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">56</text>
+<text x="369" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">63</text>
 <rect x="391" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="409" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">57</text>
+<text x="409" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">64</text>
 <rect x="431" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="449" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">58</text>
+<text x="449" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">65</text>
 <text x="485" y="241" font-size="14" font-weight="normal" fill="#555555" text-anchor="middle">…</text>
 <rect x="499" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="517" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">74</text>
+<text x="517" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">81</text>
 <rect x="539" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="557" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">75</text>
+<text x="557" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">82</text>
 <rect x="579" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="597" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">76</text>
+<text x="597" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">83</text>
 <line x1="557" y1="222" x2="557" y2="206" stroke="#009E73" stroke-width="3"/>
 <circle cx="557" cy="202" r="7" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>
 <text x="545" y="205" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="end">green ball-and-stick</text>
 <text x="347" y="312" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">Facts of the final state</text>
-<text x="347" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">1 display class: 14 atoms of Asn75,</text>
+<text x="347" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">1 display class: 11 atoms of Ser82,</text>
 <text x="347" y="345" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   green ball-and-stick (no atom shared</text>
 <text x="347" y="360" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   with the reference)</text>
 <line x1="347" y1="394" x2="633" y2="394" stroke="#8a8a8a" stroke-width="1.0"/>
@@ -82,25 +82,25 @@
 <text x="670" y="140" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">protein that the request does not ask for.</text>
 <text x="670" y="184" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Chain X, author residue numbers</text>
 <rect x="674" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="692" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">56</text>
+<text x="692" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">63</text>
 <rect x="714" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="732" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">57</text>
+<text x="732" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">64</text>
 <rect x="754" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="772" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">58</text>
+<text x="772" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">65</text>
 <text x="808" y="241" font-size="14" font-weight="normal" fill="#555555" text-anchor="middle">…</text>
 <rect x="822" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="840" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">74</text>
+<text x="840" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">81</text>
 <rect x="862" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="880" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">75</text>
+<text x="880" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">82</text>
 <rect x="902" y="222" width="36" height="28" rx="3" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="920" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">76</text>
+<text x="920" y="240" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">83</text>
 <path d="M672,266 C738,254 808,280 948,264" fill="none" stroke="#b8b8b8" stroke-width="7" stroke-linecap="round"/>
 <text x="950" y="286" font-size="10" font-weight="normal" fill="#555555" text-anchor="end">grey cartoon, all residues</text>
 <line x1="732" y1="222" x2="732" y2="206" stroke="#009E73" stroke-width="3"/>
 <circle cx="732" cy="202" r="7" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>
 <text x="744" y="205" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">green ball-and-stick</text>
 <text x="670" y="312" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">Facts of the final state</text>
-<text x="670" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">class 1: Phe57, grey cartoon and</text>
+<text x="670" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">class 1: Trp64, grey cartoon and</text>
 <text x="670" y="345" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   green ball-and-stick (half unrequested)</text>
 <text x="670" y="360" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">class 2: all other residues, grey cartoon</text>
 <text x="670" y="375" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   (unrequested)</text>
