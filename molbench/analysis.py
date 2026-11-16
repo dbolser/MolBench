@@ -350,6 +350,7 @@ class Tables:
                     self.validity(track)
                     self.tiers(track)
             self.tier_track()
+            self.tracks()
             self.split()
             self.paraphrases()
             self.paired()
@@ -660,6 +661,38 @@ class Tables:
                  f"Each task's value is its mean over the {len(r.models(HEADLINE, False))} models "
                  "of the panel (keyword baseline left out); a cell is the mean over the tier's "
                  "original tasks. Intervals: bootstrap over structures, the panel held fixed.")
+
+    # -- the two tracks, model by model ------------------------------------------------------
+    def tracks(self) -> None:
+        """Per model: MVS against API (ledger L-032: in October the two were unrelated)."""
+        r = self.run
+        rows, pts = [], {"success": [], "f1": []}
+        for m in r.models(HEADLINE):
+            got = {t: r.pick(HEADLINE, m, is_track(t)) for t in TRACKS}
+            if not all(got.values()):
+                continue
+            su = [mean(t["success"] for t in got[t]) for t in TRACKS]
+            f1 = [mean(t["f1"] for t in got[t]) for t in TRACKS]
+            rows.append([self.name(m), f3(su[0]), f3(su[1]), signed(su[1] - su[0]),
+                         f3(f1[0]), f3(f1[1]), signed(f1[1] - f1[0])])
+            if m != BASELINE:
+                pts["success"].append(su)
+                pts["f1"].append(f1)
+        if len(pts["success"]) < 3:
+            return
+        rs = {k: statistics.correlation([a for a, _ in v], [b for _, b in v])
+              if len({a for a, _ in v}) > 1 and len({b for _, b in v}) > 1 else None
+              for k, v in pts.items()}
+        self.put("tracks.r_success", rs["success"])
+        self.put("tracks.r_f1", rs["f1"])
+        self.put("tracks.n_models", len(pts["success"]))
+        self.add("table_tracks", "The two tracks, model by model",
+                 md_table(["model", "MVS task success", "API task success", "API − MVS",
+                           "MVS strict F1", "API strict F1", "API − MVS"], rows),
+                 f"All original tasks of each track (not only twins), headline condition. Over "
+                 f"the {len(pts['success'])} models (keyword baseline left out), Pearson r "
+                 f"between the two tracks is {f3(rs['success'])} for task success and "
+                 f"{f3(rs['f1'])} for strict F1.")
 
     # -- public vs held back -------------------------------------------------------------
     def split(self) -> None:

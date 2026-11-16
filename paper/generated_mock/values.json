@@ -2952,5 +2952,8 @@
  "structured.MVS_track.x-ai/grok-4.7.valid_with": 0.7937,
  "structured.MVS_track.z-ai/glm-5.2.delta_success": 0.0485,
  "structured.MVS_track.z-ai/glm-5.2.valid_plain": 0.7566,
- "structured.MVS_track.z-ai/glm-5.2.valid_with": 0.7884
+ "structured.MVS_track.z-ai/glm-5.2.valid_with": 0.7884,
+ "tracks.n_models": 21,
+ "tracks.r_f1": 0.1572,
+ "tracks.r_success": -0.1828
 }

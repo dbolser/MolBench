@@ -320,6 +320,7 @@ FINAL_TABLES = {
     "table_accept_tasks", "table_clinical_strata", "table_clinical_models",
     "table_clinical_pairs", "table_difficulty", "table_resolve_entries", "table_structured",
     "table_grounding", "table_cost"}
+# plus table_tracks and table_bare, which need three models and the bare condition
 
 
 @pytest.fixture(scope="module")
@@ -406,7 +407,8 @@ def test_committed_mock_tables_are_flagged_and_october_tables_stay_labelled():
     values = json.loads((mock / "values.json").read_text())
     assert values["status"] == "MOCK"
     tables = sorted(mock.glob("table_*.md"))
-    assert FINAL_TABLES | {"table_bare"} <= {f.stem for f in tables}
+    assert FINAL_TABLES | {"table_bare", "table_tracks"} <= {f.stem for f in tables}
+    assert -1.0 <= values["tracks.r_success"] <= 1.0
     for f in tables:
         first = f.read_text().splitlines()[0]
         assert first.startswith("> **MOCK DATA.**") or f.stem in analysis.NOT_RUN_RESULTS, f.name

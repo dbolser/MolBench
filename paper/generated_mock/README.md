@@ -21,6 +21,7 @@ Built by `scripts/paper_tables.py --from-dry-run` from the scorecards in `result
 | `table_api_validity.md` | API track: what came back (samples, headline condition) |
 | `table_api_tiers.md` | API track: task success by tier [95% CI] |
 | `table_tier_track.md` | Tier by track: panel mean |
+| `table_tracks.md` | The two tracks, model by model |
 | `table_mvs_split.md` | MVS track: public and held-back tasks (task success) |
 | `table_api_split.md` | API track: public and held-back tasks (task success) |
 | `table_mvs_paraphrase.md` | MVS track: sensitivity to wording (24 requests, three phrasings each) |
