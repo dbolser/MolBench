@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import bisect
 import functools
+import re
 import gzip
 import json
 import pathlib
@@ -120,12 +121,29 @@ class SiftsTable:
         return segs
 
 
+def frozen_name(entry: str | None) -> str | None:
+    """The name a structure's frozen tables are stored under. An AlphaFold model is
+    named without its file version by the graders (``af-<acc>-f<n>``) and is frozen
+    under the versioned file name (``af-<acc>-f<n>-model_v6``): the newest frozen
+    version answers for the version-free name, as ``pdbe_state._table_for`` does for
+    atom tables."""
+    if not entry:
+        return None
+    entry = entry.lower()
+    if (TABLES / f"{entry}.json.gz").exists() or not re.fullmatch(r"af-[a-z0-9]+-f\d+", entry):
+        return entry
+    versioned = sorted(TABLES.glob(f"{entry}-model_v*.json.gz"),
+                       key=lambda q: int(re.sub(r"\D", "", q.name.rsplit("_v", 1)[-1]) or 0))
+    return versioned[-1].name[:-len(".json.gz")] if versioned else entry
+
+
 @functools.lru_cache(maxsize=None)
 def load(entry: str | None) -> SiftsTable | None:
     """The frozen table for a structure id (e.g. '1tup'), or None if there isn't one."""
+    entry = frozen_name(entry)
     if not entry:
         return None
-    path = TABLES / f"{entry.lower()}.json.gz"
+    path = TABLES / f"{entry}.json.gz"
     if not path.exists():
         return None
     with gzip.open(path, "rt", encoding="utf-8") as f:
@@ -151,7 +169,7 @@ def uniprot_atoms(entry: str, accession: str, unp_num: int, end: int | None = No
     SIFTS accession and number match, in every chain.
     """
     from .atoms import load_table
-    table, atoms = load(entry), load_table(entry)
+    table, atoms = load(entry), load_table(frozen_name(entry))
     if table is None or atoms is None:
         return None
     out = 0

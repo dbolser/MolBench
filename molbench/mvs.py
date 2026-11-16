@@ -587,6 +587,69 @@ def entry_of_url(url: Any) -> str | None:
     return m.group(1) if m else ident or None
 
 
+#: Hosts that serve structure files (the wwPDB sites and their mirrors, AlphaFold DB).
+SOURCE_HOSTS = ("rcsb.org", "ebi.ac.uk", "wwpdb.org", "pdbj.org", "pdbe.org")
+_FILE_FORMAT = {"cif": "mmcif", "mmcif": "mmcif", "bcif": "bcif", "pdb": "pdb", "ent": "pdb"}
+
+
+def source_format(url: Any) -> str | None:
+    """The file format a download URL serves (``mmcif``, ``bcif`` or ``pdb``), or None
+    when the URL names no structure file Mol* could load: not an absolute http(s) URL,
+    not on a host that serves structure files, or neither a structure file (by its
+    extension) nor a model-server query."""
+    if not isinstance(url, str):
+        return None
+    m = re.fullmatch(r"\s*https?://([^/?#\s]+)(/[^?#\s]*)?(\?[^#\s]*)?(#\S*)?\s*", url, re.I)
+    if not m:
+        return None
+    host, path, query = m.group(1).lower().split(":")[0], (m.group(2) or "").lower(), (m.group(3) or "").lower()
+    if not any(host == h or host.endswith("." + h) for h in SOURCE_HOSTS):
+        return None
+    name = path.rsplit("/", 1)[-1]
+    if name.endswith(".gz"):
+        name = name[:-3]
+    if "." in name:
+        return _FILE_FORMAT.get(name.rsplit(".", 1)[-1])
+    if "/model-server/" in path or host.startswith("models."):
+        return "bcif" if "encoding=bcif" in query else "mmcif"
+    return None
+
+
+def load_problem(tree: Any) -> str | None:
+    """Why a scene tree that Mol* accepts would still load nothing, or None. The
+    download URL must name a structure file (``source_format``), and the ``parse``
+    node's format must be the format of that file: Mol* reads an mmCIF text as BinaryCIF
+    (or the reverse) into nothing at all (read back in headless Mol* 5.9.0: 0 atoms).
+    Such an answer shows an empty canvas and scores 0, outcome ``load_failed``."""
+    root = extract_root(tree)
+    if root is None:
+        return None
+
+    def walk(node: dict, fmt: str | None, url: Any) -> str | None:
+        p = node.get("params") if isinstance(node.get("params"), dict) else {}
+        kind = node.get("kind")
+        if kind == "download":
+            url = p.get("url")
+            fmt = source_format(url)
+            if fmt is None:
+                return f"download url {str(url)[:120]!r} names no structure file on a known host"
+        elif kind == "parse" and url is not None:
+            want = p.get("format")
+            if isinstance(want, str) and want in ("mmcif", "bcif", "pdb") and want != fmt:
+                return f"parse format {want!r} on a {fmt} file ({str(url)[:120]!r})"
+        for c in node.get("children") or []:
+            if isinstance(c, dict):
+                bad = walk(c, fmt, url)
+                if bad:
+                    return bad
+        return None
+
+    try:
+        return walk(root, None, None)
+    except RecursionError:
+        return None
+
+
 def _entry_table(entry: str | None) -> AtomTable | None:
     if not entry or not re.fullmatch(r"[a-z0-9_-]+", entry):
         return None
@@ -1276,14 +1339,19 @@ def grade_mvs(reference: Any, predicted: Any,
 def grade_mvs_task(task: dict[str, Any], predicted: Any) -> dict[str, Any]:
     """Grade an answer against an MVS task: ``reference_mvs``, plus ``accepted`` scenes,
     ``accepted_ids`` and ``target`` when the task has them. ``outcome`` is ``not_mvs``
-    for something that is not a scene tree, else ``unchecked`` (Mol*'s own validation,
-    ``render.molstar_issues``, turns that into ``valid`` or ``invalid_mvs``).
+    for something that is not a scene tree, ``load_failed`` (score 0) for a scene whose
+    download or parse node loads nothing (``load_problem``), else ``unchecked`` (Mol*'s
+    own validation, ``render.molstar_issues``, turns that into ``valid`` or
+    ``invalid_mvs``).
 
     **Unstated colours are free** on a single-turn task: where the reference draws
     something with no colour node, the request named no colour, and the answer may use
     any (``drawn.unstated_colour``). A follow-up's start scene states every colour (an
     uncoloured drawing there *is* white), so on a follow-up nothing is free."""
     from .grader import start_state
+    problem = load_problem(predicted)
+    if problem:
+        return {**_drawn.zero(load_error=problem), "grader": "drawn", "outcome": "load_failed"}
     res = grade_mvs(task["reference_mvs"], predicted, accepted_refs=task.get("accepted_ids"),
                     accepted=task.get("accepted"), target=task.get("target"),
                     accepted_targets=task.get("accepted_targets"),

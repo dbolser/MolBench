@@ -248,6 +248,12 @@ def validate_actions(actions: Any) -> list[str]:
                 errors.append(f"{where}: {sel_field!r} must be a list of selections")
             elif sel_field in act and not all(isinstance(p, dict) for p in act[sel_field]):
                 errors.append(f"{where}: every item of {sel_field!r} must be an object")
+            elif sel_field in act:
+                for k, p in enumerate(act[sel_field]):
+                    rep = p.get("representation")
+                    if rep is not None and not (isinstance(rep, str) and rep in REPRESENTATIONS):
+                        errors.append(f"{where}: {sel_field}[{k}].representation {rep!r} "
+                                      f"not in {REPRESENTATIONS}")
     return errors
 
 

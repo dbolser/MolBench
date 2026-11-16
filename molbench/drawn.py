@@ -134,7 +134,7 @@ def mvs_color(value: Any) -> Any:
     number) is rejected by Mol* with the whole scene; it becomes an ``("invalid", …)``
     token here, which matches no real colour. Checked in the viewer."""
     if isinstance(value, str):
-        v = value.strip()
+        v = value            # as written: Mol* rejects " red " (checked in the viewer)
         if v in COLOR_NAMES:
             return COLOR_NAMES[v]
         if v[:1] == "#" and len(v) in (4, 7):

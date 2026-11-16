@@ -197,11 +197,52 @@ def _strip_fence(raw: str) -> str:
     return raw
 
 
+def _loads(text: str) -> tuple[Any, str | None]:
+    """``json.loads`` that never raises: a reply can hold a number of thousands of
+    digits (ValueError, not a JSONDecodeError) or brackets nested deeper than the
+    interpreter's stack (RecursionError). Both are replies with no usable JSON."""
+    try:
+        return json.loads(text), None
+    except json.JSONDecodeError as e:
+        return None, f"JSON parse error: {e}"
+    except (ValueError, RecursionError) as e:
+        return None, f"JSON parse error: {type(e).__name__}: {str(e)[:120]}"
+
+
+def _balanced(raw: str, opener: str, closer: str, limit: int = 50):
+    """Top-level ``opener … closer`` spans of ``raw``, left to right, skipping JSON
+    strings; at most ``limit`` of them."""
+    depth, start, in_str, esc, found = 0, -1, False, False, 0
+    for i, ch in enumerate(raw):
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+        elif ch == '"' and depth:
+            in_str = True
+        elif ch == opener:
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == closer and depth:
+            depth -= 1
+            if depth == 0:
+                yield raw[start:i + 1]
+                found += 1
+                if found >= limit:
+                    return
+
+
 def extract_actions(raw: str) -> tuple[Any, str | None]:
     """Pull a JSON array of actions out of a model's raw text. Returns (obj, error).
 
     Takes the outermost ``[...]``, so a JSON-mode reply that wraps the array in an
-    object (``{"actions": [...]}``) parses the same way.
+    object (``{"actions": [...]}``) parses the same way. If that span is not JSON
+    (prose around the answer has a bracket of its own: "[see notes]: [ ... ]"), the
+    first balanced array that parses as a list of objects is the answer.
     """
     raw = _strip_fence(raw)
     try:
@@ -209,10 +250,14 @@ def extract_actions(raw: str) -> tuple[Any, str | None]:
         end = raw.rindex("]") + 1
     except ValueError:
         return None, "no JSON array found in output"
-    try:
-        return json.loads(raw[start:end]), None
-    except json.JSONDecodeError as e:
-        return None, f"JSON parse error: {e}"
+    obj, err = _loads(raw[start:end])
+    if err is None:
+        return obj, None
+    for span in _balanced(raw, "[", "]"):
+        got, e = _loads(span)
+        if e is None and isinstance(got, list) and got and all(isinstance(a, dict) for a in got):
+            return got, None
+    return None, err
 
 
 def extract_json_object(raw: str) -> tuple[Any, str | None]:
@@ -223,10 +268,7 @@ def extract_json_object(raw: str) -> tuple[Any, str | None]:
         end = raw.rindex("}") + 1
     except ValueError:
         return None, "no JSON object found in output"
-    try:
-        return json.loads(raw[start:end]), None
-    except json.JSONDecodeError as e:
-        return None, f"JSON parse error: {e}"
+    return _loads(raw[start:end])
 
 
 # --- running ----------------------------------------------------------------------
@@ -495,7 +537,7 @@ def _grade_tree(task: dict, tree: Any, raw: str) -> dict[str, Any]:
         raise
     except Exception as e:  # noqa: BLE001 - see _grader_crash
         return {**_grader_crash(e, "not_mvs", tree, raw), "track": "mvs"}
-    if result.get("outcome") not in ("not_mvs", "unchecked"):
+    if result.get("outcome") not in ("not_mvs", "unchecked", "load_failed"):
         # Mol* has the last word on validity (`validate_samples`); until it has run a
         # parsed scene is 'unchecked', whatever the grader called it.
         result["outcome"] = "not_mvs" if result.get("error") else "unchecked"

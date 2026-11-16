@@ -451,10 +451,10 @@ def test_every_colour_a_task_asks_for_is_in_the_palette():
 
 def test_colour_spellings_mol_star_reads_and_rejects():
     red = (255, 0, 0)
-    for ok in ("red", "#ff0000", "#FF0000", "#f00", " red "):
+    for ok in ("red", "#ff0000", "#FF0000", "#f00"):
         assert drawn.mvs_color(ok) == red, ok
     assert drawn.mvs_color("grey") == drawn.mvs_color("gray") == (128, 128, 128)
-    for bad in ("RED", "Red", "rgb(255,0,0)", "ff0000", 0xFF0000, [255, 0, 0], "", None):
+    for bad in ("RED", "Red", " red ", "rgb(255,0,0)", "ff0000", 0xFF0000, [255, 0, 0], "", None):
         assert drawn.mvs_color(bad)[0] == "invalid", bad      # Mol* rejects the scene
     assert not g(highlight(), highlight(colour="RED"))["success"]
 
