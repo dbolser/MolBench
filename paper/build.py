@@ -29,7 +29,9 @@ A literal ``⟦PENDING: …⟧`` in the text marks something only the final run,
 freeze or an author decision can supply. The first words of a tag say which (see
 ``FILLED_BY``); ``paper/PENDING.md`` lists every tag of the paper and of the Supporting
 Information with what fills it. The Supporting Information is built the same way from
-``paper/si/*.md`` into ``paper/si.md``.
+``paper/si/*.md`` into ``paper/si.md``, and the plain-language summary for volunteer raters
+from ``paper/plain/`` into ``paper/plain_summary.md`` (its length is checked, as is the
+abstract's).
 """
 
 from __future__ import annotations
@@ -49,6 +51,10 @@ VALUES = PAPER / "generated" / "values.json"
 CORPUS_VALUES = PAPER / "generated" / "corpus_values.json"
 SI_SECTIONS = PAPER / "si"
 OUT_SI = PAPER / "si.md"
+PLAIN_SECTIONS = PAPER / "plain"
+OUT_PLAIN = PAPER / "plain_summary.md"
+ABSTRACT_MAX_WORDS = 200          # the brief for this paper; JCIM asks for a short abstract
+PLAIN_WORDS = (135, 165)          # "a 150-word plain-language summary"
 BIB = PAPER / "references.bib"
 OUT_MD = PAPER / "molbench.md"
 OUT_PENDING = PAPER / "PENDING.md"
@@ -398,6 +404,8 @@ th{border-bottom:2px solid #444} img{max-width:100%}
 code{font-size:90%} pre{font-size:8.5pt;background:#f6f6f6;padding:8px;overflow-x:auto;white-space:pre-wrap}
 blockquote{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.4em 1em;background:#fafafa}
 blockquote table{background:#fff} figure{margin:1.2em 0} figcaption{font-size:9.5pt;color:#222}
+div.box{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.2em 1em;background:#fafafa}
+div.box table{background:#fff}
 @page{size:A4;margin:18mm}
 """
 
@@ -465,7 +473,8 @@ def main(argv=None) -> int:
     ap.add_argument("--check", action="store_true", help="check only; write nothing")
     ap.add_argument("--pdf", action="store_true", help="also write HTML and PDF of both documents")
     args = ap.parse_args(argv)
-    docs = [(SECTIONS, OUT_MD)] + ([(SI_SECTIONS, OUT_SI)] if SI_SECTIONS.exists() else [])
+    docs = [(SECTIONS, OUT_MD)] + [(d, o) for d, o in ((SI_SECTIONS, OUT_SI), (PLAIN_SECTIONS, OUT_PLAIN))
+                                   if d.exists() and any(d.glob("*.md"))]
     try:
         values = load_values()
         built = [(out, *build(values, sec)) for sec, out in docs]
@@ -476,6 +485,15 @@ def main(argv=None) -> int:
     for _, _, pending, _ in built:
         problems += [f"{p['section']}:{p['line']}: PENDING tag with no owner: {p['what']!r}"
                      for p in pending if not filled_by(p["what"])]
+    abstract = re.search(r"## Abstract\n(.*?)\n## ", built[0][1], flags=re.S)
+    n_abstract = words(PENDING.sub("", abstract.group(1))) if abstract else 0
+    if n_abstract > ABSTRACT_MAX_WORDS:
+        problems.append(f"abstract has {n_abstract} words (limit {ABSTRACT_MAX_WORDS}, PENDING tags not counted)")
+    for out, md, _, _ in built:
+        if out == OUT_PLAIN:
+            n_plain = words(re.sub(r"^(#.*|\*.*\*)$", "", md, flags=re.M))
+            if not PLAIN_WORDS[0] <= n_plain <= PLAIN_WORDS[1]:
+                problems.append(f"plain-language summary has {n_plain} words (wanted {PLAIN_WORDS[0]}-{PLAIN_WORDS[1]})")
     for p in problems:
         print(f"error: {p}", file=sys.stderr)
     if problems:
@@ -497,9 +515,7 @@ def main(argv=None) -> int:
             print(f"error: {name} is stale: run python paper/build.py", file=sys.stderr)
         return 1 if stale else 0
     OUT_PENDING.write_text(report, encoding="utf-8")
-    abstract = re.search(r"## Abstract\n(.*?)\n## ", built[0][1], flags=re.S)
-    if abstract:
-        print(f"abstract: {words(abstract.group(1))} words")
+    print(f"abstract: {n_abstract} words without PENDING tags (limit {ABSTRACT_MAX_WORDS})")
     if args.pdf:
         for out, _, _, _ in built:
             made = render(out)

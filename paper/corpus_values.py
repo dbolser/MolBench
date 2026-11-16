@@ -376,6 +376,34 @@ def october_values(V: dict) -> None:
     f1 = sorted(m["new_f1"] for m in by_model.values())
     V["oct.spec.f1_min"], V["oct.spec.f1_max"] = f1[0], f1[-1]
     V["oct.spec.clinical.success_n"] = round(V["oct.spec.clinical.success"] * V["oct.spec.clinical.n"])
+    # Per model: does the share of valid outputs explain the strict score?
+    xs = [m["valid"] / m["n"] for m in by_model.values()]
+    ys = [m["new_f1"] for m in by_model.values()]
+    V["oct.spec.r_valid_f1"] = round(statistics.correlation(xs, ys), 3)
+    V["oct.spec.valid_share"] = round(V["oct.spec.n_valid"] / V["oct.spec.n"], 4)
+    V["oct.spec.valid_share_min"], V["oct.spec.valid_share_max"] = round(min(xs), 4), round(max(xs), 4)
+    vf = sorted(m["valid_only"]["new_f1"] for m in by_model.values())
+    V["oct.spec.valid.f1_min"], V["oct.spec.valid.f1_max"] = vf[0], vf[-1]
+    V["oct.spec.clinical.target_f1"] = o["spec"]["by_tier"]["clinical"]["target_f1"]
+    V["oct.spec.clinical.highlight_valid_share"] = round(
+        V["oct.spec.clinical.highlight_exact_n"] / V["oct.spec.clinical.n_valid"], 4)
+    V["oct.grounding.success_delta"] = round(V["oct.spec_grounded.success"] - V["oct.spec.success"], 4)
+    V["oct.grounding.valid_delta_n"] = V["oct.spec_grounded.n_valid"] - V["oct.spec.n_valid"]
+
+
+def october_models_table() -> str:
+    """One row per model of the October run, regraded on drawn state, best task success first."""
+    by_model = jload(REPO / "tests/controls/october_regrade.json")["conditions"]["spec"]["by_model"]
+    info = jload(PAPER / "inputs.json")["model_info"]
+    alias = jload(PAPER / "inputs.json")["aliases"]
+    weights = {k.split("/")[-1]: v["weights"] for k, v in info.items()}
+    rows = ["| Model | Weights | Valid outputs | F1 (strict) | Task success (strict) | F1, valid outputs only | Task success, valid outputs only |",
+            "|:---|:---|---:|---:|---:|---:|---:|"]
+    for k, m in sorted(by_model.items(), key=lambda kv: (-kv[1]["success"], -kv[1]["new_f1"], kv[0])):
+        name = alias.get(k, k).split("/")[-1]
+        rows.append(f"| {name} | {weights.get(name, '?')} | {m['valid']} of {m['n']} | {m['new_f1']:.3f} "
+                    f"| {m['success']:.1%} | {m['valid_only']['new_f1']:.3f} | {m['valid_only']['success']:.1%} |")
+    return "\n".join(rows) + "\n"
 
 
 def october_table(V: dict) -> str:
@@ -426,6 +454,15 @@ def pilot_values(V: dict) -> None:
         V[f"{p}.pairs_split"] = hh["pairs_split"]
     V["pilot.flag_reference_wrong"] = a["flags"]["ref_wrong_ratings"]
     V["pilot.flag_model_better"] = a["flags"]["model_better_ratings"]
+
+
+def study_values(V: dict) -> None:
+    """Design numbers of the second rating study, read from its design note."""
+    import re
+    text = (PAPER / "a4/FINAL_CALL.md").read_text(encoding="utf-8")
+    V["study.n_pairs"] = int(re.search(r"\*\*Size: (\d+) judged pairs", text).group(1))
+    V["study.n_grader_check_pairs"] = int(re.search(r"small grader check \((\d+) pairs", text).group(1))
+    V["study.raters_per_pair"] = int(re.search(r"with\s+(\d+) raters per pair", text).group(1))
 
 
 # --------------------------------------------------------------------------- #
@@ -575,6 +612,11 @@ def example_values(V: dict, by_id: dict) -> dict:
     V["ex.face_value_residue"] = table.columns["auth_comp_id"][row].capitalize()
     V["ex.face_value_n_atoms"] = bin(face).count("1")
     V["ex.rep"], V["ex.color"] = "ball-and-stick", cl["look"]["color"]
+    import re
+    rng = re.search(r"UniProt (\d+)-(\d+) = auth (\d+)-(\d+)", m["grounding"]["text"])
+    V["ex.map_uniprot_first"], V["ex.map_uniprot_last"] = int(rng.group(1)), int(rng.group(2))
+    V["ex.map_auth_first"], V["ex.map_auth_last"] = int(rng.group(3)), int(rng.group(4))
+    assert pos - V["ex.map_uniprot_first"] + V["ex.map_auth_first"] == res["auth_seq_id"]
 
     def scene(selector, color=None, context=False):
         s = copy.deepcopy(m["reference"])
@@ -661,6 +703,39 @@ def example_table(V: dict) -> str:
     return "\n".join(rows) + "\n"
 
 
+def si_example(ex: dict) -> str:
+    """The running example as stored: both references, the accepted alternative, the pack."""
+    m, a = T.public_form(ex["mvs_task"]), T.public_form(ex["api_task"])
+    fence = "`" * 3
+
+    def block(obj, lang="json"):
+        text = obj if isinstance(obj, str) else json.dumps(obj, indent=1, ensure_ascii=False)
+        return f"{fence}{lang}\n{text}\n{fence}"
+
+    return "\n\n".join([
+        f"**Request (both tracks).** {m['prompt']}",
+        f"**Scene track, task `{m['id']}`: reference answer.**", block(m["reference"]),
+        f"**Call-list track, task `{a['id']}`: reference answer.**", block(a["reference"]),
+        "**Call-list track: accepted alternative** (the residue's own cartoon stretch is painted green as well).",
+        block(a["accepted"][0]),
+        "**Target** (the atoms the request is about, stored in label numbering on both tasks).",
+        block(m["target"]),
+        "**Grounding pack** (appended to the request only in the grounding-pack condition).",
+        block(m["grounding"]["text"], "text"),
+    ]) + "\n"
+
+
+def si_prompts() -> str:
+    """The two system prompts as sent, with the long vendored references left as slots."""
+    fence = "`" * 4
+    out = []
+    for name, title in (("system_mvs.md", "Scene track"), ("system_api.md", "Call-list track")):
+        text = (REPO / "prompts" / name).read_text(encoding="utf-8").rstrip()
+        text = text.replace("{{", "<<").replace("}}", ">>")   # not a marker of paper/build.py
+        out.append(f"**{title}: system prompt** (`prompts/{name}`).\n\n{fence}text\n{text}\n{fence}")
+    return "\n\n".join(out) + "\n"
+
+
 # --------------------------------------------------------------------------- #
 def build() -> tuple[dict, dict[str, str]]:
     V: dict = {}
@@ -671,6 +746,7 @@ def build() -> tuple[dict, dict[str, str]]:
     s = controls_values(V)
     october_values(V)
     pilot_values(V)
+    study_values(V)
     models = plan_values(V)
     ex = example_values(V, c["by_id"])
     files = {
@@ -681,6 +757,9 @@ def build() -> tuple[dict, dict[str, str]]:
         "si_controls.md": si_controls_table(s),
         "si_models.md": si_models_table(models),
         "si_templates.md": si_templates_table(c["orig"]),
+        "si_example.md": si_example(ex),
+        "si_prompts.md": si_prompts(),
+        "table_october_models.md": october_models_table(),
         "example_task.json": json.dumps(
             {"scene_task": T.public_form(ex["mvs_task"]), "call_list_task": T.public_form(ex["api_task"]),
              "graded_answers": ex["answers"]}, indent=1, ensure_ascii=False) + "\n",
