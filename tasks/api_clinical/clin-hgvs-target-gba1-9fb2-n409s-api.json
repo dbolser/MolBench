@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "9fb2"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P04062",
+      "uniprot_residue_number": 409,
+      "representation": "spacefill",
+      "representationColor": "magenta"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

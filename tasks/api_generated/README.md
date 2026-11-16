@@ -2,7 +2,7 @@
 
 Written by `scripts/generate_api_tasks.py` (seed 20261113); do not edit by hand. Re-running the script reproduces every file byte for byte (`--check`). The 20 curated tasks are in `tasks/api_calling/`.
 
-120 tasks on 68 structures; 26 held back.
+130 tasks on 68 structures; 29 held back.
 
 | tier | template (family) | tasks | share of the tier (both directories) | how the reference is derived |
 |---|---|---:|---:|---|
@@ -18,21 +18,23 @@ Written by `scripts/generate_api_tasks.py` (seed 20261113); do not edit by hand.
 | tool_only | `api-tooltips` | 3 | 3 of 34 (9%) | Tooltips on seeded author-numbered residues (the text is the residue's own name and number), waters hidden. |
 | tool_only | `api-undo` | 4 | 4 of 34 (12%) | A request with a step that is undone again (one of two colours taken off, a highlight cleared, one of two tooltips removed, the selection colour reset). Only the final state is graded, and the undo is needed: the list of every step but the undo is a trap that must fail. |
 | tool_only | `api-validation-overlay` | 2 | 3 of 34 (9%) | X-ray entries with waters: waters hidden, validation annotation on (a declared setting). |
-| translation | `api-assembly` | 5 | 6 of 106 (6%) | Assembly 1 where the facts say it is built by symmetry from every deposited chain, plus a ligand or range colouring. The assembly is a fact of the state; atoms are compared on the deposited unit. |
-| translation | `api-atoms` | 5 | 5 of 106 (5%) | Named atoms of a single-copy ligand (its metal, when it has one), or two side-chain atoms of a seeded residue under the ball-and-stick style. |
-| translation | `api-chain-colour` | 8 | 10 of 106 (9%) | One or two chains of an entry whose author chain ids differ from the label chain ids, named by author id. The cartoon style is asked for unless the author chain is exactly the polymer chain, so every reading of 'chain X' gives the same picture. |
-| translation | `api-entity` | 5 | 5 of 106 (5%) | Two polymer entities by entity id; intended atoms are the entity's label chains from the facts. Entity ids as numbers fail (the viewer compares with ===). |
-| translation | `api-hide` | 8 | 11 of 106 (10%) | Hide toggles for components the entry has (waters, heteroatoms, carbohydrates on entries whose sugars are all branched, non-standard residues, polymer), with a colouring or a second toggle. |
-| translation | `api-keep-sticks` | 3 | 3 of 106 (3%) | Two seeded residues, each given an added representation in its own call; the second call has keep_representations. Two calls without it fail; one call with both succeeds. |
-| translation | `api-layered-colour` | 7 | 7 of 106 (7%) | A seeded author range and one residue inside it in another colour: one call in order, or two calls with keep_colors. The reverse order and two calls without keep_colors fail. |
-| translation | `api-ligand` | 7 | 8 of 106 (8%) | A ligand from the frozen facts (more than five heavy atoms, not a crystallisation additive), named with its component code; coloured and focused. One copy by chain when each chain has one. |
-| translation | `api-range-colour` | 8 | 9 of 106 (8%) | A seeded author-numbered range inside one run of a chain with a numbering offset; kept only if it selects exactly the polymer residues of the matching label range. A third of the tasks also colour everything else. |
-| translation | `api-residue-colour` | 9 | 9 of 106 (8%) | 1-3 seeded residues of a protein chain whose author numbers differ from the label numbers; named as papers do (His57). Checked: author keys select exactly the residue of that name; the label form succeeds; the author number in `residue_number` fails. |
-| translation | `api-residue-sticks` | 5 | 7 of 106 (7%) | The same, plus an added representation in the same colour (`representationColor`). Hinges on the viewer rule that `color` does not colour an added representation. |
-| translation | `api-sticks-plain` | 3 | 3 of 106 (3%) | The same, with an added ball-and-stick and no recolouring (`color: null`; without the key the viewer paints its default orange). |
-| translation | `api-style-colour` | 5 | 5 of 106 (5%) | A global style and a seeded author range colouring. The style has to be set first (setting it reloads and wipes colouring); the reverse order fails. |
-| translation | `api-uniprot-range` | 6 | 6 of 106 (6%) | A seeded run of consecutive UniProt positions, selected with the viewer's UniProt range keys; same checks. |
-| translation | `api-uniprot-residue` | 9 | 9 of 106 (8%) | 1-2 seeded UniProt positions from the frozen SIFTS table (observed, same residue as UniProt, author number != UniProt number), selected with the viewer's UniProt keys. Checked: the SIFTS rows in author numbering give the same atoms; the UniProt number as an author number fails. |
+| translation | `api-assembly` | 5 | 6 of 116 (5%) | Assembly 1 where the facts say it is built by symmetry from every deposited chain, plus a ligand or range colouring. The assembly is a fact of the state; atoms are compared on the deposited unit. |
+| translation | `api-atoms` | 5 | 5 of 116 (4%) | Named atoms of a single-copy ligand (its metal, when it has one), or two side-chain atoms of a seeded residue under the ball-and-stick style. |
+| translation | `api-chain-colour` | 8 | 10 of 116 (9%) | One or two chains of an entry whose author chain ids differ from the label chain ids, named by author id. The cartoon style is asked for unless the author chain is exactly the polymer chain, so every reading of 'chain X' gives the same picture. |
+| translation | `api-entity` | 5 | 5 of 116 (4%) | Two polymer entities by entity id; intended atoms are the entity's label chains from the facts. Entity ids as numbers fail (the viewer compares with ===). |
+| translation | `api-hide` | 8 | 11 of 116 (9%) | Hide toggles for components the entry has (waters, heteroatoms, carbohydrates on entries whose sugars are all branched, non-standard residues, polymer), with a colouring or a second toggle. |
+| translation | `api-inscode` | 5 | 5 of 116 (4%) | One residue that carries an insertion code (221A), from the frozen atom table. The viewer ignores insertion codes, so the reference names it by label chain and label number; the author number, with or without auth_ins_code_id, selects its siblings too and is a trap. |
+| translation | `api-keep-sticks` | 3 | 3 of 116 (3%) | Two seeded residues, each given an added representation in its own call; the second call has keep_representations. Two calls without it fail; one call with both succeeds. |
+| translation | `api-label-chain` | 5 | 5 of 116 (4%) | A polymer chain named by its mmCIF label chain id where that differs from the author chain id (frozen facts): struct_asym_id. The same letter as an author chain id, and the whole author chain, are traps. |
+| translation | `api-layered-colour` | 7 | 7 of 116 (6%) | A seeded author range and one residue inside it in another colour: one call in order, or two calls with keep_colors. The reverse order and two calls without keep_colors fail. |
+| translation | `api-ligand` | 7 | 8 of 116 (7%) | A ligand from the frozen facts (more than five heavy atoms, not a crystallisation additive), named with its component code; coloured and focused. One copy by chain when each chain has one. |
+| translation | `api-range-colour` | 8 | 9 of 116 (8%) | A seeded author-numbered range inside one run of a chain with a numbering offset; kept only if it selects exactly the polymer residues of the matching label range. A third of the tasks also colour everything else. |
+| translation | `api-residue-colour` | 9 | 9 of 116 (8%) | 1-3 seeded residues of a protein chain whose author numbers differ from the label numbers; named as papers do (His57). Checked: author keys select exactly the residue of that name; the label form succeeds; the author number in `residue_number` fails. |
+| translation | `api-residue-sticks` | 5 | 7 of 116 (6%) | The same, plus an added representation in the same colour (`representationColor`). Hinges on the viewer rule that `color` does not colour an added representation. |
+| translation | `api-sticks-plain` | 3 | 3 of 116 (3%) | The same, with an added ball-and-stick and no recolouring (`color: null`; without the key the viewer paints its default orange). |
+| translation | `api-style-colour` | 5 | 5 of 116 (4%) | A global style and a seeded author range colouring. The style has to be set first (setting it reloads and wipes colouring); the reverse order fails. |
+| translation | `api-uniprot-range` | 6 | 6 of 116 (5%) | A seeded run of consecutive UniProt positions, selected with the viewer's UniProt range keys; same checks. |
+| translation | `api-uniprot-residue` | 9 | 9 of 116 (8%) | 1-2 seeded UniProt positions from the frozen SIFTS table (observed, same residue as UniProt, author number != UniProt number), selected with the viewer's UniProt keys. Checked: the SIFTS rows in author numbering give the same atoms; the UniProt number as an author number fails. |
 
 ## Rules every task obeys
 
@@ -49,20 +51,20 @@ Held-back structures (15): 1ehz 1fs3 1igt 1lmb 1rx2 2c9v 2omf 2ptc 3kcg 5ni1 6hp
 | tier | structures | held-back structures | tasks | held-back tasks |
 |---|---:|---:|---:|---:|
 | tool_only | 31 | 5 (16%) | 34 | 5 |
-| translation | 73 | 15 (21%) | 106 | 21 |
+| translation | 73 | 15 (21%) | 116 | 24 |
 
 ## Viewer rules that tasks turn on
 
-Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%); `default_select_colour` 6 (4%).
+Of the 150 API tasks in both directories: `added_representation_colour` 10 (7%); `default_select_colour` 6 (4%); `label_chain_id` 5 (3%); `label_numbering` 5 (3%).
 
 ## Viewer surface exercised (references of both directories)
 
 | surface | name | tasks |
 |---|---|---:|
-| action | `load` | 140 |
+| action | `load` | 150 |
 | action | `set_visual_style` | 25 |
 | action | `set_property` | 43 |
-| action | `color` | 100 |
+| action | `color` | 110 |
 | action | `focus` | 9 |
 | action | `highlight` | 4 |
 | action | `tooltips` | 7 |
@@ -92,10 +94,10 @@ Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%);
 | property | `select_color` | 0 |
 | property | `lighting` | 4 |
 | selector key | `entity_id` | 5 |
-| selector key | `struct_asym_id` | 0 |
+| selector key | `struct_asym_id` | 10 |
 | selector key | `auth_asym_id` | 70 |
 | selector key | `label_comp_id` | 22 |
-| selector key | `residue_number` | 0 |
+| selector key | `residue_number` | 5 |
 | selector key | `start_residue_number` | 1 |
 | selector key | `end_residue_number` | 1 |
 | selector key | `auth_seq_id` | 39 |
@@ -120,7 +122,7 @@ Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%);
 | visual style | `point` | 0 |
 | visual style | `putty` | 1 |
 | visual style | `spacefill` | 1 |
-| selection attribute | `color` | 99 |
+| selection attribute | `color` | 109 |
 | selection attribute | `representation` | 17 |
 | selection attribute | `representationColor` | 11 |
 | selection attribute | `sideChain` | 0 |
@@ -135,7 +137,7 @@ Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%);
 | selection attribute | `representation=point` | 0 |
 | selection attribute | `representation=putty` | 0 |
 | selection attribute | `representation=spacefill` | 5 |
-| load option | `molecule_id` | 137 |
+| load option | `molecule_id` | 147 |
 | load option | `custom_data` | 3 |
 | load option | `assembly_id` | 7 |
 | load option | `preset` | 2 |

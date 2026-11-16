@@ -71,6 +71,35 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 30,
+      "representation": "spacefill",
+      "representationColor": "green"
+     },
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 56,
+      "representation": "spacefill",
+      "representationColor": "green"
+     },
+     {
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 72,
+      "representation": "spacefill",
+      "representationColor": "green"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

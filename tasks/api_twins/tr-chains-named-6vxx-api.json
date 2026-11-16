@@ -34,7 +34,31 @@
       ]
     }
   ],
-  "accepted": [],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "6vxx"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "color": "blue"
+          },
+          {
+            "auth_asym_id": "C",
+            "color": "green"
+          },
+          {
+            "auth_asym_id": "B",
+            "color": "orange"
+          }
+        ]
+      }
+    ]
+  ],
   "context": null,
   "target": [
     {
@@ -75,14 +99,18 @@
       "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
       "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
-      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
+      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
     ],
     "twin": {
       "of": "tr-chains-named-6vxx",
       "base": "the cartoon style",
       "switched_off": [],
       "added_representations": 0,
-      "colour_classes": 3
+      "colour_classes": 3,
+      "call_forms": [
+        "default view, rest in the backdrop colour"
+      ]
     },
     "difficulty": {
       "author_number_differs_from_label": true,

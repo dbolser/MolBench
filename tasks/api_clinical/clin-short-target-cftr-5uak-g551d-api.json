@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "5uak"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P13569",
+      "uniprot_residue_number": 551,
+      "representation": "ball-and-stick",
+      "representationColor": "magenta"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

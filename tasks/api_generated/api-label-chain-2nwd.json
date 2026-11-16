@@ -1,0 +1,95 @@
+{
+  "id": "api-label-chain-2nwd",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-label-chain",
+  "structures": [
+    "2nwd"
+  ],
+  "prompt": "Load 2NWD and colour the chain with the label chain id A steel blue. (In the authors' naming it is chain X.)",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "2nwd"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "struct_asym_id": "A",
+          "color": "steelblue"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": {
+        "label_asym_id": "A"
+      },
+      "representation": null,
+      "color": "steelblue"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/2nwd.json",
+      "molbench/atom_tables/2nwd.json.gz",
+      "molbench/sifts_tables/2nwd.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "wrong answer fails: the label id written as an author chain id (F1 0.0)",
+      "wrong answer fails: the whole author chain, with its ligands and water (F1 0.6667)"
+    ],
+    "structure": "2nwd",
+    "derived": "A polymer chain whose label chain id differs from its author chain id (frozen facts), drawn by seed. The request names the label id, so the reference uses struct_asym_id. The label chain holds the polymer only; the author chain of the same name, where there is one, is another chain or holds ligands and water too.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": false,
+      "auth_label_chain": true,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "label_chain_id"
+      ],
+      "author_chain_of_the_label_chain": "X",
+      "label_id_is_another_author_chain": false
+    },
+    "targets": [
+      {
+        "what": "label chain A",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "label_asym_id": "A"
+          }
+        ],
+        "n_atoms": 2061
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "select-by-chain",
+    "label-chain",
+    "color"
+  ]
+}

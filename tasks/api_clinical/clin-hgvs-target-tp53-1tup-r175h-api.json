@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1tup"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P04637",
+      "uniprot_residue_number": 175,
+      "representation": "spacefill",
+      "representationColor": "green"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

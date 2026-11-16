@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2hhb"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 98,
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

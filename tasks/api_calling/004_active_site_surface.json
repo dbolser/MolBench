@@ -65,6 +65,31 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "1lyz"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 35,
+            "color": "red",
+            "representation": "molecular-surface",
+            "representationColor": "red"
+          },
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 52,
+            "color": "red",
+            "representation": "molecular-surface",
+            "representationColor": "red"
+          }
+        ]
+      }
     ]
   ],
   "context": null,
@@ -105,7 +130,8 @@
       "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8501)"
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8501)",
+      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1); the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "1lyz",
     "derived": "The residue names at author numbers 35 and 52 are read from the atom table.",
@@ -153,7 +179,10 @@
         "n_atoms": 8
       }
     ],
-    "july_task": "reworded"
+    "july_task": "reworded",
+    "call_forms": [
+      "default view, rest in the backdrop colour"
+    ]
   },
   "skills": [
     "load",

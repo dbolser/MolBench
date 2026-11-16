@@ -1,0 +1,107 @@
+{
+  "id": "api-inscode-1trn",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-inscode",
+  "structures": [
+    "1trn"
+  ],
+  "prompt": "Load 1TRN and colour Gly184A of chain A purple: the residue with insertion code A, not the other residue numbered 184.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1trn"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "struct_asym_id": "A",
+          "residue_number": 164,
+          "color": "purple"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 184,
+          "pdbx_PDB_ins_code": "A"
+        }
+      ],
+      "representation": null,
+      "color": "purple"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "public",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1trn.json",
+      "molbench/atom_tables/1trn.json.gz",
+      "molbench/sifts_tables/1trn.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "wrong answer fails: the author number, which also selects the residues that share it (F1 0.4211)",
+      "wrong answer fails: the author number with auth_ins_code_id, which the viewer ignores (F1 0.4211)"
+    ],
+    "structure": "1trn",
+    "derived": "A residue with an insertion code, drawn by seed from the frozen atom table. The viewer ignores insertion codes, so the reference names the residue by label chain and label number (struct_asym_id + residue_number); the intended atoms are written a second time by author chain, author number and insertion code.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": false,
+      "hinges_on": [
+        "label_numbering"
+      ],
+      "author_minus_label": [
+        20
+      ],
+      "insertion_codes_in_structure": true,
+      "insertion_code": true,
+      "residues_sharing_the_author_number": 2
+    },
+    "targets": [
+      {
+        "what": "Gly184A",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 184,
+            "pdbx_PDB_ins_code": "A"
+          }
+        ],
+        "n_atoms": 4
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "insertion-code",
+    "label-numbering",
+    "color"
+  ]
+}

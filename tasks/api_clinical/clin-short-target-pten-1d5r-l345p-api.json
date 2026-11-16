@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1d5r"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P60484",
+      "uniprot_residue_number": 345,
+      "representation": "ball-and-stick",
+      "representationColor": "magenta"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

@@ -51,6 +51,27 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "custom_data": {
+     "url": "https://alphafold.ebi.ac.uk/files/AF-P0DP23-F1-model_v6.cif",
+     "format": "cif",
+     "binary": false
+    }
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 141,
+      "representation": "spacefill",
+      "representationColor": "red"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

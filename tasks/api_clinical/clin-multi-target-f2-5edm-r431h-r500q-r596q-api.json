@@ -71,6 +71,35 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "5edm"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 431,
+      "representation": "spacefill",
+      "representationColor": "magenta"
+     },
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 500,
+      "representation": "spacefill",
+      "representationColor": "magenta"
+     },
+     {
+      "uniprot_accession": "P00734",
+      "uniprot_residue_number": 596,
+      "representation": "spacefill",
+      "representationColor": "magenta"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

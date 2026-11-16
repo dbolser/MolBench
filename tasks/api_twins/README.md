@@ -4,12 +4,12 @@ Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin 
 
 Run this script after every MVS generator, then `scripts/generate_paraphrases.py`, then this script once more (the counts below include the paraphrases). It writes `twin_of` into the MVS task files; the generators of the translation and grounded tiers keep a link that is already in the file when they rebuild.
 
-- MVS tasks read: 426
-- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 158
+- MVS tasks read: 432
+- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 164
 - left without an API counterpart by a generator that writes both tracks: 53
 - in the old task format (no `twin_of` field, so no twin is written): 0, of which the API could express 0
 - left for this script: 215; **twins written: 125 (58%)**
-- MVS tasks with an API twin, all generators together: 283 of 426 (66%)
+- MVS tasks with an API twin, all generators together: 289 of 432 (67%)
 
 ## Twins by template
 
@@ -101,7 +101,7 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 
 | reason | tasks |
 |---|---:|
-| already has a twin from its own generator | 158 |
+| already has a twin from its own generator | 164 |
 | left without an API counterpart by its own two-track generator | 53 |
 | the structure is named by protein and entries outside the panel are accepted | 39 |
 | a distance line or another drawn primitive | 30 |
@@ -118,9 +118,9 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 | `acc-metal-copy-9fb2-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `acc-metal-which-1udt-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `acc-metal-which-7a4m-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
-| `acc-representation-open-1hrc-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `acc-representation-open-1mbn-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `acc-representation-open-3f9m-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
+| `acc-representation-open-3k34-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `acc-residue-copy-1trn-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `acc-residue-copy-2hhb-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
 | `acc-residue-copy-5ni1-mvs` | accept_set | left without an API counterpart by its own two-track generator | scripts/generate_accept_set_tasks.py |
@@ -132,23 +132,23 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 | `fu-add-label-3ptb-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-add-label-3ptb-mvs.indirect` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `fu-add-label-3ptb-mvs.terse` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
-| `fu-add-ligand-5cj6-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-add-ligand-1mbn-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-add-ligand-5ni1-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-it-colour-1hrc-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-it-colour-3ptb-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-it-colour-1udt-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-it-colour-3eml-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-it-surface-9f69-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-noop-spin-1c3w-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-noop-spin-8k7f-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-noop-spin-1cbs-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-only-chain-1aoi-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-only-chain-5uak-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-opacity-1a6m-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-opacity-1ctq-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-opacity-1iep-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-remove-label-3f9m-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-remove-ligand-1k4c-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-remove-ligand-3eml-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-remove-ligand-1atp-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-remove-ligand-1f88-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-rep-ligand-1hvr-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-rep-ligand-1k4c-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
-| `fu-rep-polymer-6tha-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-rep-ligand-5cj6-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-rep-polymer-1a6m-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-rep-polymer-8c86-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `in-ca-distance-1ake` | interactions | a distance line or another drawn primitive |  |
 | `in-ca-distance-1hho` | interactions | a distance line or another drawn primitive |  |

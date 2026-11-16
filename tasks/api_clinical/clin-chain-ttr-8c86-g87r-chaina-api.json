@@ -45,6 +45,24 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8c86"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "uniprot_accession": "P02766",
+      "uniprot_residue_number": 87,
+      "representation": "ball-and-stick",
+      "representationColor": "green"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

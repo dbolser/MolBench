@@ -88,6 +88,9 @@ from molbench import drawn, mvs, runner  # noqa: E402
 from molbench import pdbe_state as ps  # noqa: E402
 from molbench import tasks as T  # noqa: E402
 
+sys.path.insert(0, str(REPO / "scripts"))
+import api_forms  # noqa: E402
+
 _spec = importlib.util.spec_from_file_location("check_api_refs", REPO / "scripts" / "check_api_refs.py")
 check = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(check)
@@ -743,6 +746,25 @@ def make_twin(task: dict, twins: dict[str, str]) -> dict:
     if task.get("accepted_targets"):
         twin["accepted_targets"] = [_api_target(t) for t in task["accepted_targets"]]
     verify(twin, task, scenes)
+    # Unstated attributes are free (ruling of 2026-11-15): where the request asks for a
+    # cartoon of the whole polymer, the call forms that reach it by the viewer's default
+    # are accepted too, and so is a list that does not hide what the request never names. They end in other states than the MVS reference (a bare load
+    # draws what the request does not name), which is why they come after `verify`.
+    if context is None and not twin.get("accepted_targets"):
+        forms = api_forms.unhidden_forms(reference)
+        if api_forms.whole_polymer_cartoon(reference):
+            forms += api_forms.cartoon_forms(reference)
+        kept = api_forms.accepted_forms(reference, forms,
+                                        runner.grader_target(twin, twin["target"]), accepted)
+        for label, calls in kept:
+            twin["accepted"].append(calls)
+        if kept:
+            prov["twin"]["call_forms"] = [label for label, _ in kept]
+            prov["checks"].append(
+                f"{len(kept)} further call form(s) accepted, because the request does not state what "
+                f"they differ in ({'; '.join(label for label, _ in kept)}): each replays with nothing "
+                "ignored, ends in a state of its own and draws the target atoms as the reference "
+                "does (target recall 1) (scripts/api_forms.py)")
     return twin
 
 

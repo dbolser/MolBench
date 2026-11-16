@@ -39,7 +39,44 @@
       ]
     }
   ],
-  "accepted": [],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "3kcg"
+      },
+      {
+        "action": "set_visual_style",
+        "style": "cartoon"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 105,
+            "color": "hotpink",
+            "representation": "ball-and-stick",
+            "representationColor": "hotpink"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 195,
+            "color": "hotpink",
+            "representation": "ball-and-stick",
+            "representationColor": "hotpink"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 226,
+            "color": "hotpink",
+            "representation": "ball-and-stick",
+            "representationColor": "hotpink"
+          }
+        ]
+      }
+    ]
+  ],
   "context": null,
   "target": [
     {
@@ -86,7 +123,8 @@
       "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5143)",
       "equivalent answer succeeds: label chain and label number",
       "wrong answer fails: no representationColor (the added representation stays element-coloured) (F1 0.5)",
-      "wrong answer fails: the author number in residue_number (F1 0.0)"
+      "wrong answer fails: the author number in residue_number (F1 0.0)",
+      "1 further call form(s) accepted, because the request does not state what they differ in (cartoon style set): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1); the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "3kcg",
     "derived": "As api-residue-colour, plus an added representation in the same colour. In pdbe-molstar 3.3.2 `color` paints only the representations the structure already has; the added one takes its colour from `representationColor`.",
@@ -147,6 +185,9 @@
         ],
         "n_atoms": 4
       }
+    ],
+    "call_forms": [
+      "cartoon style set"
     ]
   },
   "skills": [

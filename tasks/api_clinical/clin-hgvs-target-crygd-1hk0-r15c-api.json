@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1hk0"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P07320",
+      "uniprot_residue_number": 15,
+      "representation": "ball-and-stick",
+      "representationColor": "magenta"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

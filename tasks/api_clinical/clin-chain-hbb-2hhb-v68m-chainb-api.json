@@ -45,6 +45,24 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "2hhb"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "B",
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 68,
+      "representation": "spacefill",
+      "representationColor": "red"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

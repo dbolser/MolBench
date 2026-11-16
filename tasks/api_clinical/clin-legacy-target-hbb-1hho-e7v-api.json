@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "1hho"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P68871",
+      "uniprot_residue_number": 7,
+      "representation": "spacefill",
+      "representationColor": "purple"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

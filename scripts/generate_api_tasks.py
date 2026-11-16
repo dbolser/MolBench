@@ -45,6 +45,7 @@ sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 
 import additives  # noqa: E402
+import api_forms  # noqa: E402
 from molbench import grounding, runner, sifts  # noqa: E402
 from molbench import pdbe_state as ps  # noqa: E402
 from molbench import tasks as T  # noqa: E402
@@ -1514,6 +1515,90 @@ def superposition_tasks(n: int, used: set[str]) -> list[dict]:
     return out
 
 
+def t_inscode(s: S) -> dict | None:
+    """One residue that carries an insertion code. pdbe-molstar 3.3.2 never tests the
+    insertion code, so the author number selects the residue and its siblings (221 and
+    221A); only the label chain and label number name the one residue."""
+    if s.kind != "pdb":
+        return None
+    pool = [r for r in s.residues if r["poly"] and r["ins"] and r["comp"] in AA
+            and s.mask(label_asym_id=r["lc"], label_seq_id=r["ls"]) == r["mask"]
+            and s.mask(auth_asym_id=r["ac"], auth_seq_id=r["an"]) != r["mask"]]
+    if not pool:
+        return None
+    r = shuffled(pool, "inscode", s.id)[0]
+    (c,) = colours(1, "inscode", s.id)
+    name = f"{r['comp'].capitalize()}{r['an']}{r['ins']}"
+    where = f" of chain {r['ac']}" if s.multi_chain else ""
+    L = s.load()
+    one = sel({"struct_asym_id": r["lc"], "residue_number": r["ls"]}, name,
+              [{"auth_asym_id": r["ac"], "auth_seq_id": r["an"], "pdbx_PDB_ins_code": r["ins"]}], color=c)
+    siblings = s.mask(auth_asym_id=r["ac"], auth_seq_id=r["an"]) & s.poly
+    n_sib = len({(x["an"], x["ins"]) for x in s.residues if x["mask"] & siblings})
+    return {
+        "prompts": [f"Load {s.name} and colour {name}{where} {cw(c)}: the residue with insertion code "
+                    f"{r['ins']}, not the other residue{'s' if n_sib > 2 else ''} numbered {r['an']}.",
+                    f"In {s.name}, colour residue {r['an']}{r['ins']}{where} ({r['comp'].capitalize()}, insertion "
+                    f"code {r['ins']}) {cw(c)}; every other residue numbered {r['an']} keeps its colour.",
+                    f"Open {s.name}. {name}{where} carries the insertion code {r['ins']}. Colour that one "
+                    f"residue {cw(c)} and nothing else."],
+        "reference": [L, color_call([one])],
+        "target": [{"selector": [{"auth_asym_id": r["ac"], "auth_seq_id": r["an"],
+                                  "pdbx_PDB_ins_code": r["ins"]}], "representation": None, "color": c}],
+        "skills": ["load", "selection", "insertion-code", "label-numbering", "color"],
+        "difficulty": {**numbering_facts(s, [r]), "insertion_code": True, "hinges_on": ["label_numbering"],
+                       "residues_sharing_the_author_number": n_sib},
+        "derived": "A residue with an insertion code, drawn by seed from the frozen atom table. The "
+                   "viewer ignores insertion codes, so the reference names the residue by label chain "
+                   "and label number (struct_asym_id + residue_number); the intended atoms are written "
+                   "a second time by author chain, author number and insertion code.",
+        "alts": [],
+        "traps": [("the author number, which also selects the residues that share it",
+                   [L, color_call([{"auth_asym_id": r["ac"], "auth_seq_id": r["an"], "color": c}])]),
+                  ("the author number with auth_ins_code_id, which the viewer ignores",
+                   [L, color_call([{"auth_asym_id": r["ac"], "auth_seq_id": r["an"],
+                                    "auth_ins_code_id": r["ins"], "color": c}])])],
+    }
+
+
+def t_label_chain(s: S) -> dict | None:
+    """A polymer chain named by its mmCIF label chain id, where that is not the id the
+    authors gave it: struct_asym_id, not auth_asym_id."""
+    if s.kind != "pdb":
+        return None
+    chains = [ch for ch in s.chains if ch["auth_asym_id"] != ch["label_asym_id"]]
+    if not chains:
+        return None
+    ch = shuffled(chains, "label-chain", s.id)[0] if "id" in chains[0] else \
+        sorted(chains, key=lambda x: h("label-chain", s.id, x["label_asym_id"]))[0]
+    lc, ac = ch["label_asym_id"], ch["auth_asym_id"]
+    (c,) = colours(1, "label-chain", s.id)
+    L = s.load()
+    whole = sel({"struct_asym_id": lc}, f"label chain {lc}", [{"label_asym_id": lc}], color=c)
+    return {
+        "prompts": [f"Load {s.name} and colour the chain with the label chain id {lc} {cw(c)}. (In the "
+                    f"authors' naming it is chain {ac}.)",
+                    f"In {s.name}, colour label chain {lc} {cw(c)}: {lc} is the mmCIF label chain id, not "
+                    f"the author chain id.",
+                    f"Open {s.name}. Going by mmCIF label chain ids, not author chain ids, colour chain "
+                    f"{lc} {cw(c)}."],
+        "reference": [L, color_call([whole])],
+        "target": [{"selector": {"label_asym_id": lc}, "representation": None, "color": c}],
+        "skills": ["load", "select-by-chain", "label-chain", "color"],
+        "difficulty": {"auth_label_chain": True, "hinges_on": ["label_chain_id"],
+                       "author_chain_of_the_label_chain": ac,
+                       "label_id_is_another_author_chain": any(x["auth_asym_id"] == lc for x in s.chains)},
+        "derived": "A polymer chain whose label chain id differs from its author chain id (frozen "
+                   "facts), drawn by seed. The request names the label id, so the reference uses "
+                   "struct_asym_id. The label chain holds the polymer only; the author chain of the "
+                   "same name, where there is one, is another chain or holds ligands and water too.",
+        "alts": [],
+        "traps": [("the label id written as an author chain id", [L, color_call([{"auth_asym_id": lc, "color": c}])]),
+                  ("the whole author chain, with its ligands and water",
+                   [L, color_call([{"auth_asym_id": ac, "color": c}])])],
+    }
+
+
 def only(template: Callable, variant: str) -> Callable:
     return lambda s: template(s, variant)
 
@@ -1556,6 +1641,9 @@ FAMILIES: list[tuple[str, str, Callable, int]] = [
     # added after the first viewer run; kept last so that the tasks above do not change
     ("api-keep-sticks", "translation", t_keep_sticks, 3),
     ("api-undo", "tool_only", t_undo_tooltips, 1),
+    # added 2026-11-16 (two parts of the API no other reference of this tier exercised)
+    ("api-inscode", "translation", t_inscode, 5),
+    ("api-label-chain", "translation", t_label_chain, 5),
 ]
 N_SUPERPOSITION = 2
 
@@ -1870,7 +1958,37 @@ def build_task(spec: dict, s: S | None, tid: str, tier: str, family: str, split:
     if spec.get("notes"):
         task["notes"] = spec["notes"]
     verify(task, spec)
+    add_call_forms(task, spec)
     return task
+
+
+def add_call_forms(task: dict, spec: dict) -> None:
+    """Unstated attributes are free (ruling of 2026-11-15; scripts/api_forms.py). Where
+    the request asks for a cartoon and the whole polymer ends up as one, the call forms
+    that reach it the other way (cartoon style set, or left to the viewer's default) are
+    accepted too. They are added only if every trap and the near miss still fail."""
+    # "in the cartoon style" asks for the viewer's global style itself, which also takes
+    # away ligands and water: there the style is stated, and nothing is added.
+    if "cartoon" not in task["prompt"].lower() or "cartoon style" in task["prompt"].lower() \
+            or not task["structures"] \
+            or not api_forms.whole_polymer_cartoon(task["reference"]):
+        return
+    view = T._with_aliases(dict(task))
+    kept = api_forms.accepted_forms(task["reference"], api_forms.cartoon_forms(task["reference"]),
+                                    runner.grader_target(view, task["target"]), task["accepted"])
+    if not kept:
+        return
+    trial = T._with_aliases({**task, "accepted": task["accepted"] + [calls for _, calls in kept]})
+    wrong = [perturb_reference(task["reference"])] + [trap for _, trap in spec.get("traps", [])]
+    if any(grade(trial, w)["success"] for w in wrong) or T.validate_task({**task, "accepted": trial["accepted"]}):
+        return
+    task["accepted"] = trial["accepted"]
+    task["provenance"]["call_forms"] = [label for label, _ in kept]
+    task["provenance"]["checks"].append(
+        f"{len(kept)} further call form(s) accepted, because the request does not state what they "
+        f"differ in ({'; '.join(label for label, _ in kept)}): each replays with nothing ignored, ends in "
+        "a state of its own and draws the target atoms as the reference does (target recall 1); the "
+        "near miss and every wrong answer above still fail (scripts/api_forms.py)")
 
 
 def verify(task: dict, spec: dict) -> None:
@@ -2078,6 +2196,8 @@ DERIVATION = {
     "api-canvas": "Background, lighting and spin.",
     "api-highlight": "The viewer's highlight on seeded author-numbered residues, with a highlight colour and focus.",
     "api-tooltips": "Tooltips on seeded author-numbered residues (the text is the residue's own name and number), waters hidden.",
+    "api-inscode": "One residue that carries an insertion code (221A), from the frozen atom table. The viewer ignores insertion codes, so the reference names it by label chain and label number; the author number, with or without auth_ins_code_id, selects its siblings too and is a trap.",
+    "api-label-chain": "A polymer chain named by its mmCIF label chain id where that differs from the author chain id (frozen facts): struct_asym_id. The same letter as an author chain id, and the whole author chain, are traps.",
     "api-undo": "A request with a step that is undone again (one of two colours taken off, a highlight cleared, one of two tooltips removed, the selection colour reset). Only the final state is graded, and the undo is needed: the list of every step but the undo is a trap that must fail.",
     "api-maps": "X-ray entries: electron-density maps on, one map styled (declared settings).",
     "api-preset": "A load preset (unit cell or supercell for an X-ray entry, all models for an NMR ensemble) and a background colour.",

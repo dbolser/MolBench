@@ -78,6 +78,8 @@ NOT_USED = {("P02649", "R176C"): "APOE R158C in mature numbering (rs7412): the c
                                  "carried by about 8% of people; its ClinVar 'pathogenic' record "
                                  "has no assertion criteria"}
 
+OMITTED = object()     # an API `color` call item with no `color` key (see `build_pair`)
+
 # Colours a request may name: plain words from the task palette.
 HIGHLIGHT = ("red", "orange", "yellow", "green", "blue", "purple", "magenta", "cyan")
 BACKDROP = ("gray", "white", "khaki")
@@ -471,8 +473,9 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
                 sels = [{"uniprot_accession": acc, "uniprot_residue_number": s.v.position}]
                 if chain is not None:
                     sels = [{"auth_asym_id": chain["auth_asym_id"], **sels[0]}]
-            items += [{**item, "color": ribbon, "representation": api_rep,
-                       "representationColor": look["color"]} for item in sels]
+            items += [{**item, **({} if ribbon is OMITTED else {"color": ribbon}),
+                       "representation": api_rep, "representationColor": look["color"]}
+                      for item in sels]
         call = {"action": "color", "data": items}
         if context == "structure":
             call["non_selected_color"] = look["backdrop"]
@@ -485,12 +488,16 @@ def build_pair(family: str, naming: str, group: list[Site], *, context: str, sco
     api_targets = [{"action": 1, "param": i, "atoms": m["atoms"], "what": m["what"],
                     "n_atoms": bin(table.selector(m["atoms"])).count("1")}
                    for i, m in enumerate(meant)]
-    # Equally right: the residue's stretch of cartoon also takes the highlight colour
-    # (the API's `color` key cannot simply be left out: that paints it orange); and,
-    # with a whole-structure cartoon, setting the cartoon style explicitly.
+    # Equally right: the residue's stretch of cartoon also takes the highlight colour;
+    # with a whole-structure cartoon, setting the cartoon style explicitly; and, where
+    # the request states no colour for the cartoon (only the residue is asked for), the
+    # `color` key left out, which paints the stretch in the viewer's select colour:
+    # an unstated attribute is free (ruling of 2026-11-15).
     api_accepted = [calls(look["color"], False)]
     if context == "structure":
         api_accepted += [calls(under, True), calls(look["color"], True)]
+    if context == "none":
+        api_accepted += [calls(OMITTED, False)]
 
     # --- checks against the frozen tables
     checks = []
@@ -1088,9 +1095,11 @@ def readme(track: str, tasks: list[dict], held: list[str]) -> str:
               "its author range | grades itself: success, F1 = 1, target score 1 |",
               "| accepted alternatives | the residue's own stretch of cartoon may also take the "
               "highlight colour (`color` on the item; the reference leaves it as its "
-              "surroundings); with a whole-structure cartoon, `set_visual_style: cartoon` may be "
-              "set first. Nothing else is accepted | each grades as itself and is accepted by "
-              "the task |"]
+              "surroundings); where only the residue is requested, so that no colour is stated "
+              "for the cartoon, the item may also have no `color` key, which paints the stretch "
+              "in the viewer's select colour (an unstated attribute is free); with a "
+              "whole-structure cartoon, `set_visual_style: cartoon` may be set first. Nothing "
+              "else is accepted | each grades as itself and is accepted by the task |"]
     L += ["",
           "Every task also carries a grounding pack (`grounding`, rule `clinical-v1`, built by "
           "`scripts/build_grounding_packs.py`): the entry's chains and numbering runs, the SIFTS "

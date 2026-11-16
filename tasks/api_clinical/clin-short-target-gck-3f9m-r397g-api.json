@@ -43,6 +43,23 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "3f9m"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P35557",
+      "uniprot_residue_number": 397,
+      "representation": "ball-and-stick",
+      "representationColor": "orange"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

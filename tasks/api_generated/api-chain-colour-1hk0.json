@@ -26,7 +26,23 @@
       ]
     }
   ],
-  "accepted": [],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "1hk0"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "X",
+            "color": "magenta"
+          }
+        ]
+      }
+    ]
+  ],
   "context": null,
   "target": [
     {
@@ -60,7 +76,8 @@
       "a bare load scores 0",
       "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
       "equivalent answer succeeds: label chain ids",
-      "wrong answer fails: the author letters in struct_asym_id (the label chain key) (F1 0.6667)"
+      "wrong answer fails: the author letters in struct_asym_id (the label chain key) (F1 0.6667)",
+      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1); the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "1hk0",
     "derived": "Chains of an entry whose author chain ids differ from the label chain ids. The request uses the author ids (the letters in the paper). The cartoon style is asked for, so ligands and waters that share the author chain id are not drawn and every reading of 'chain X' agrees.",
@@ -93,6 +110,9 @@
         ],
         "n_atoms": 1772
       }
+    ],
+    "call_forms": [
+      "default view, rest in the backdrop colour"
     ]
   },
   "skills": [

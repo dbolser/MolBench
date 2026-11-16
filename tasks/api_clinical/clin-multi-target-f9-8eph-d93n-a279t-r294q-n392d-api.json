@@ -85,6 +85,41 @@
      }
     ]
    }
+  ],
+  [
+   {
+    "action": "load",
+    "molecule_id": "8eph"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "uniprot_accession": "P00740",
+      "uniprot_residue_number": 93,
+      "representation": "ball-and-stick",
+      "representationColor": "blue"
+     },
+     {
+      "uniprot_accession": "P00740",
+      "uniprot_residue_number": 279,
+      "representation": "ball-and-stick",
+      "representationColor": "blue"
+     },
+     {
+      "uniprot_accession": "P00740",
+      "uniprot_residue_number": 294,
+      "representation": "ball-and-stick",
+      "representationColor": "blue"
+     },
+     {
+      "uniprot_accession": "P00740",
+      "uniprot_residue_number": 392,
+      "representation": "ball-and-stick",
+      "representationColor": "blue"
+     }
+    ]
+   }
   ]
  ],
  "context": null,

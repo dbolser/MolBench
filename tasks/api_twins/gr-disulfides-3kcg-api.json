@@ -163,7 +163,323 @@
       "non_selected_color": "gray"
     }
   ],
-  "accepted": [],
+  "accepted": [
+    [
+      {
+        "action": "load",
+        "molecule_id": "3kcg"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 182,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 95,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 88,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 99,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 95,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 109,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 111,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 124,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 132,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 122,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 42,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 58,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 168,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 191,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 220,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 8,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 128,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 21,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 247,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 430,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          }
+        ],
+        "non_selected_color": "gray"
+      }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "3kcg"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "struct_asym_id": "A",
+            "color": "gray"
+          },
+          {
+            "struct_asym_id": "B",
+            "color": "gray"
+          },
+          {
+            "struct_asym_id": "C",
+            "color": "gray"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 182,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 95,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 88,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 99,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 95,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 109,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 111,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 124,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "L",
+            "auth_seq_id": 132,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 122,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 42,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 58,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 168,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 191,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "H",
+            "auth_seq_id": 220,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 8,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 128,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 21,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 247,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          },
+          {
+            "auth_asym_id": "I",
+            "auth_seq_id": 430,
+            "color": "gray",
+            "representation": "ball-and-stick",
+            "representationColor": "salmon"
+          }
+        ]
+      }
+    ]
+  ],
   "context": null,
   "target": [
     {
@@ -269,14 +585,19 @@
       "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
       "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
-      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+      "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
+      "2 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour; default view, rest untouched): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
     ],
     "twin": {
       "of": "gr-disulfides-3kcg",
       "base": "the cartoon style",
       "switched_off": [],
       "added_representations": 1,
-      "colour_classes": 1
+      "colour_classes": 1,
+      "call_forms": [
+        "default view, rest in the backdrop colour",
+        "default view, rest untouched"
+      ]
     },
     "difficulty": {
       "author_number_differs_from_label": true,

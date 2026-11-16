@@ -56,6 +56,21 @@
           }
         ]
       }
+    ],
+    [
+      {
+        "action": "load",
+        "molecule_id": "1hho"
+      },
+      {
+        "action": "color",
+        "data": [
+          {
+            "label_comp_id": "HEM",
+            "color": "orange"
+          }
+        ]
+      }
     ]
   ],
   "context": null,
@@ -96,7 +111,8 @@
       "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.552)"
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.552)",
+      "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1); the near miss and every wrong answer above still fail (scripts/api_forms.py)"
     ],
     "structure": "1hho",
     "derived": "Under a cartoon style the heme's default representation is not drawn; the added ball-and-stick takes its colour from representationColor.",
@@ -134,7 +150,10 @@
       }
     ],
     "july_task": "unchanged",
-    "prompt_change": "the ligand's component code added to the request (it was named in words only)"
+    "prompt_change": "the ligand's component code added to the request (it was named in words only)",
+    "call_forms": [
+      "default view, rest in the backdrop colour"
+    ]
   },
   "skills": [
     "load",
