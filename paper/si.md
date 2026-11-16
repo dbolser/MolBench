@@ -5,7 +5,7 @@
 **MolBench: Grading Language Models on What a Molecular Viewer Would Show**
 
 This file accompanies the paper. Every table in it is written by script from the task files,
-the frozen data or archived model outputs. Terms are used as defined in Box 1 of the paper:
+the frozen data or archived model answers. Terms are used as defined in Box 1 of the paper:
 *scene track* (answers are MolViewSpec scenes), *call-list track* (answers are ordered calls to
 the PDBe Mol\* viewer), *drawn state*, *fact*, *F1*, *task success*, *target score*, *strict*
 and *valid-only*. Task identifiers are those of the task files; in them the endings `-mvs` and
@@ -767,7 +767,7 @@ The final run is defined by one manifest file in the repository. Its contents, i
 
 - **Corpus.** Version `corpus-v1.0-dev` ⟦PENDING: corpus freeze — final version tag and hash⟧.
 - **Samples.** 3 per task, model and condition (1 in the JSON-mode condition);
-  no temperature is sent, so each provider's default applies. Output limit
+  no temperature is sent, so each provider's default applies. Limit on the length of an answer:
   8,000 tokens; models that reason before answering get a larger limit,
   because the hidden reasoning counts against it.
 - **Retries.** Only transport errors are retried. A malformed answer is archived and scored

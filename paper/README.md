@@ -16,7 +16,7 @@ result tables), then the three commands above.
 
 | File | What it is |
 |---|---|
-| `sections/*.md` | The paper. Title 11 words; abstract at most 200 words (checked by the build). |
+| `sections/*.md` | The paper. Title 11 words; abstract at most 200 words (checked by the build). The build also checks that the running example is shown with the colour and representation of its request in the generated table and figures. |
 | `si/*.md` | Supporting Information S1–S8: running example in full, templates, panel, grading rules, control set, manifest and models, prompts, pilot-run tables. |
 | `plain/summary.md` | A 150-word summary for volunteer raters, to paste into an email (length checked by the build). |
 | `molbench.md`, `si.md`, `plain_summary.md` | Built. Do not edit; edit the sources. |
@@ -28,6 +28,7 @@ result tables), then the three commands above.
 | `references.bib`, `related_work_checks.md` | References, and the record of how each was verified. |
 | `a4/` | The pilot rating study (readout) and the design of the next one. |
 | `venues.md` | Where to submit, with checked requirements. |
+| `REVIEW_LOG.md` | Clarity reviews of the manuscript, round by round: scores, what changed, what was declined and why. |
 
 ## Markers in the sources
 
@@ -50,5 +51,5 @@ column:
 `table_final_robustness.md`. The three result figures (`fig_result_shapes.svg` shows their
 layout) are then drawn from the same archive.
 
-The October pilot numbers are quoted only in Section 6.6 of the paper (boxed) and in SI
-Section S8.
+The October pilot numbers are reported in Section 6.6 of the paper (boxed) and in SI Section S8;
+where another section cites one, it says that it is a pilot result.

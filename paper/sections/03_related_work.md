@@ -25,7 +25,7 @@ alpha) of 0.669 and a correlation between judge and human scores of about 0.81. 
 narrower and stricter: it covers only molecular viewers, and its scores need no judge model.
 
 **OSWorld-Science** [@dai2026osworldscience] follows the OSWorld desktop benchmark
-[@xie2024osworld] with 146 tasks over scientific applications, one of which pairs PyMOL with a
+[@xie2024osworld] with 146 tasks over scientific applications, one of which combines PyMOL with a
 nuclear magnetic resonance package. Evaluators inspect application state and output files and
 give partial credit. The overlap with MolBench is small: a molecular viewer is one application
 among many, and the tasks test the operation of a graphical interface.

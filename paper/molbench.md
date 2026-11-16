@@ -171,7 +171,7 @@ alpha) of 0.669 and a correlation between judge and human scores of about 0.81. 
 narrower and stricter: it covers only molecular viewers, and its scores need no judge model.
 
 **OSWorld-Science** [12] follows the OSWorld desktop benchmark
-[13] with 146 tasks over scientific applications, one of which pairs PyMOL with a
+[13] with 146 tasks over scientific applications, one of which combines PyMOL with a
 nuclear magnetic resonance package. Evaluators inspect application state and output files and
 give partial credit. The overlap with MolBench is small: a molecular viewer is one application
 among many, and the tasks test the operation of a graphical interface.
@@ -252,8 +252,9 @@ selection rule.
 UniProt accession. For each, one PDB entry is chosen by a scripted rule (coverage of variant
 positions, then resolution; SI Section S3). Whether an entry is numbered differently from
 UniProt played no part in the choice. A variant may also be asked on any other panel structure
-of the same protein: 6 proteins have more than one,
-among them the 5 predicted models.
+of the same protein: 6 proteins have more than one
+structure in the panel, counting the 5 predicted models. The clinical
+tasks therefore sit on 31 structures.
 
 **Variants.** We use *missense* variants only: one amino acid replaced by another. Throughout,
 the *classification* of a variant means ClinVar's combined (aggregate) germline classification
@@ -322,8 +323,8 @@ The clinical generator produced the running example in six steps.
    64).
 4. **Identity check.** The atom table must hold the amino acid of the reference sequence at
    that residue. It does: Trp64, 24 atoms
-   (14 and 10 hydrogens, which this entry
-   contains). Had the structure carried an engineered substitution there, the variant would
+   (14 heavy atoms and 10 hydrogens, which
+   this entry contains). Had the structure carried an engineered substitution there, the variant would
    not be offered for this entry.
 5. **Wording.** A seeded random choice picks one of the template's three wordings, the colour
    (yellow) and the representation (spacefill spheres). The request names the entry, the gene,
@@ -371,28 +372,29 @@ template with an example.
 - **Clinical variant.** As in the running example. There are 82 tasks per track, on
   25 proteins and 31 structures. Two properties of a task
   matter for the results, and they are not the same property.
-  *Split A: would an answer that copies the number in the variant name be right?* Yes in
-  34 tasks, no in 48. This is the primary
-  split.
-  *Split B: does the author number of the target differ from its UniProt number?* Yes in
-  59 tasks (72%), by 1 to
-  216 residues; no in 23.
-  The splits differ because 13 requests use a traditional name that is
-  counted along the mature protein, the form found in older literature (transthyretin V30M,
-  which is p.Val50Met), and say so. In 12 of these the entry is
-  numbered in the same traditional way, so the number in the name is the author number
-  although the UniProt number is not. In the remaining 1 the
-  structure is a predicted model numbered as UniProt is, so the traditional number is wrong
-  there. Split A therefore has 22 +
-  12 = 34 tasks on its "yes" side.
-  Further facts: in 25 tasks the author chain identifier differs from
-  the label chain identifier; 46 requests state the UniProt
-  accession, as the running example does; 29 also ask, in words, for a
-  cartoon of the structure; and 10 ask for the helix or strand that contains the
-  residue, as annotated in the entry, together with the residue. 20 tasks
-  form 10 sets of two *matched tasks* that ask the same variant on two
-  structures of one protein; in 8 of these sets one structure has an
-  offset and the other, always a predicted model, has none.
+    - *Split A (primary): would an answer that copies the number in the variant name be
+      right?* Yes in 34 tasks, no in 48.
+    - *Split B: does the author number of the target differ from its UniProt number?* Yes in
+      59 tasks (72%), by 1 to
+      216 residues; no in 23.
+    - *Why the splits differ.* 13 requests use a traditional name that is
+      counted along the mature protein, the form found in older literature (transthyretin
+      V30M, which is p.Val50Met), and say so. In 12 of them the
+      entry is numbered in the same traditional way, so the number in the name is the author
+      number although the UniProt number is not. In the other
+      1 the structure is a predicted model numbered as UniProt
+      is, so there the traditional number is wrong. The "yes" side of Split A is therefore
+      22 + 12 =
+      34 tasks.
+    - *Further facts.* In 25 tasks the author chain identifier differs
+      from the label chain identifier. 46 requests state the
+      UniProt accession, as the running example does. 29 requests
+      also ask, in words, for a cartoon of the structure. 10 ask for the helix or
+      strand that contains the residue, as annotated in the entry, together with the residue.
+    - *Matched tasks.* 20 tasks form 10 sets of two
+      *matched tasks*, which ask the same variant on two structures of one protein. In
+      8 of these sets one structure has an offset and the other, always
+      a predicted model, has none.
 - **Follow-up turn.** The model receives a start state and an edit request ("make the magenta
   chain plum") and returns the complete new state. Only the resulting drawn state is graded,
   so an answer that makes the edit but drops something from the start state, such as the
@@ -511,9 +513,9 @@ split is small (Section 9).
 
 *Wording.* To measure sensitivity to wording, 30 requests of
 the public split have two further phrasings each, a terse one and an indirect one, with the
-same reference. For example, the request "Add chain B too, as a cartoon in grey." also exists as
-"chain B too, grey cartoon" and as "Could I see chain B as well? A grey cartoon would be fine.".
-11 of the 30 requests are pairs, so
+same reference. For example, the request "Add chain B too, as a cartoon in grey." also exists in
+a terse form ("chain B too, grey cartoon") and in an indirect form
+("Could I see chain B as well? A grey cartoon would be fine."). 11 of the 30 requests are pairs, so
 they are 41 tasks, and two further phrasings of each give
 82 additional task files. These are not counted in Table 1.
 
@@ -527,11 +529,12 @@ Four checks involve no model (Figure 1, bottom row).
 - **Atom tables against the viewer.** Selections were read back from the running viewers. For
   the scene track, Mol\* 5.9.0 was run without a display and asked which atoms each
   representation holds. For the call-list track, 234 call lists, a
-  sample of the control set (Section 4.5), were replayed in PDBe Mol\* 3.3.2 and each
+  sample taken in turn from every kind of control (Section 4.5), were replayed in PDBe Mol\* 3.3.2 and each
   selection was compared atom for atom: all agreed. Loading a structure with no further call
   was compared in the same way for 73 of the
-  73 PDB entries used in tasks. Selections by UniProt number were not part
-  of this replay (SI Section S4.8).
+  74 PDB entries of the panel (the entry reserved as a worked example was left
+  out, as were the predicted models). Selections by UniProt number were not part of this
+  replay (SI Section S4.8).
 - **Grader against a control set.** The grader is run on 2,105 answers whose
   verdict is known (Section 4.5).
 - **Format rules.** One script validates every task file against the written task format, and
@@ -851,7 +854,7 @@ Every raw answer is archived with its token counts, finish reason and cost.
   score is reported beside it; F1 is shown with the keyword script beside it, which marks
   that floor.
 
-The planned comparisons are the six differences with intervals of Table 11. The McNemar tests
+The planned comparisons are the differences with intervals of Tables 9 and 11. The McNemar tests
 are one per model; we read each as a description of that model and not as a family of tests.
 We do not correct for multiple comparisons, and we report every count.
 
@@ -871,8 +874,8 @@ contributes to no score in this paper. A smaller pilot of the study has been run
 ### 5.6 Reproducibility
 
 One command performs the run from the manifest. It does not start if the projected cost is
-above a cap in US dollars that the manifest states, and it stops if spending would pass it. One command rebuilds every table, figure and number in this paper from the archived
-answers. A rehearsal with a mock model exercises the whole path at no cost. Grading needs no
+above a cap in US dollars that the manifest states, and it stops if spending would pass it.
+One command rebuilds every table, figure and number in this paper from the archived answers. A rehearsal with a mock model exercises the whole path at no cost. Grading needs no
 network access and no paid service.
 
 ## 6. Results
@@ -937,20 +940,30 @@ answers, which shows the difficulty of a tier once the format has been written c
 
 **Table 8. Paired comparison of the two formats.** For each model, its
 258 pairs (one request on both tracks, same target atoms) are split four
-ways, twice. A side is *right* when at least two of its three answers are right. *Target-right*
-columns (primary): an answer is right when its target score is 1, that is, the requested
-atoms are drawn exactly as asked; this is the same test in both formats. *Task success*
-columns (secondary): an answer is right when its whole drawn state is exactly right; this is
-not the same test in the two formats (Section 3.4). *Both*, *scene only*, *call list only*,
-*neither*: the number of pairs right on both sides, on one side only, or on neither. *McNemar
-p*: exact test that the two one-sided counts are equal; a small value means that one format
-is harder for this model. † marks an optional model.
+ways, in two tables. A side of a pair is *right* when at least two of its three answers are
+right. *Table 8a* (primary): an answer is right when it is target-right, that is, its target
+score is 1 and the requested atoms are drawn exactly as asked; this is the same test in both
+formats. *Table 8b* (secondary): an answer is right when it is a task success, that is, its
+whole drawn state is exactly right; this is not the same test in the two formats (Section
+3.4). The four count columns give the number of pairs right on both sides, on one side only,
+or on neither. *McNemar p*: exact test that the two one-sided counts are equal; a small value
+means that one format is harder for this model. † marks an optional model.
 
-| Model | Pairs | Target-right: both | Target-right: scene only | Target-right: call list only | Target-right: neither | McNemar p | Task success: both | Task success: scene only | Task success: call list only | Task success: neither | McNemar p |
-|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| claude-haiku-4-5 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
-| deepseek-v3.2 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
-| … 19 further rows, one per model | | ⟦PENDING: final run⟧ | | | | | | | | | |
+**Table 8a. Right = target-right (primary).**
+
+| Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only | Right on neither side | McNemar p |
+|:---|---:|---:|---:|---:|---:|---:|
+| claude-haiku-4-5 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
+| deepseek-v3.2 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
+| … 19 further rows, one per model | | ⟦PENDING: final run⟧ | | | | |
+
+**Table 8b. Right = task success (secondary).**
+
+| Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only | Right on neither side | McNemar p |
+|:---|---:|---:|---:|---:|---:|---:|
+| claude-haiku-4-5 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
+| deepseek-v3.2 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
+| … 19 further rows, one per model | | ⟦PENDING: final run⟧ | | | | |
 
 Where both formats demand the same knowledge, which is every tier with pairs except the
 clinical one, a pair that is target-right on one side only points to the format: the model
@@ -1223,7 +1236,7 @@ another benchmark of this kind could make.
    coloured a residue in a form that many generated tasks did not accept; a residue named by
    UniProt number on a predicted model was scored as selecting nothing; and a scene with an
    unreadable file passed. The same reviews found clinical requests whose "pathogenic" record
-   belonged to another gene or to a pair of variants (Section 3.1). *Change*: each finding was
+   belonged to another gene or to two variants taken together (Section 3.1). *Change*: each finding was
    fixed in the generator or grader and is now covered by an automated test and by a new kind
    of control answer, and both prompt examples are graded by the benchmark's own grader as a
    test.

@@ -85,7 +85,7 @@ Every raw answer is archived with its token counts, finish reason and cost.
   score is reported beside it; F1 is shown with the keyword script beside it, which marks
   that floor.
 
-The planned comparisons are the six differences with intervals of Table 11. The McNemar tests
+The planned comparisons are the differences with intervals of Tables 9 and 11. The McNemar tests
 are one per model; we read each as a description of that model and not as a family of tests.
 We do not correct for multiple comparisons, and we report every count.
 
@@ -105,6 +105,6 @@ contributes to no score in this paper. A smaller pilot of the study has been run
 ### 5.6 Reproducibility
 
 One command performs the run from the manifest. It does not start if the projected cost is
-above a cap in US dollars that the manifest states, and it stops if spending would pass it. One command rebuilds every table, figure and number in this paper from the archived
-answers. A rehearsal with a mock model exercises the whole path at no cost. Grading needs no
+above a cap in US dollars that the manifest states, and it stops if spending would pass it.
+One command rebuilds every table, figure and number in this paper from the archived answers. A rehearsal with a mock model exercises the whole path at no cost. Grading needs no
 network access and no paid service.

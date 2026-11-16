@@ -621,14 +621,15 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
         f"| **Split B**: target residue numbered differently from UniProt | {V['clin.n_offset']} | {P} | {P} | {P} |\n"
         f"| Helix or strand requested (a subset, reported apart) | {V['clin.n_sse']} | {P} | {P} | {P} |\n")
     lm = [n for n, x in zip(names, models) if x["route"] != "baseline"]
-    out["shape_paired.md"] = (
-        "| Model | Pairs | Target-right: both | Target-right: scene only | Target-right: call list only "
-        "| Target-right: neither | McNemar p | Task success: both | Task success: scene only "
-        "| Task success: call list only | Task success: neither | McNemar p |\n"
-        "|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|\n"
-        + "".join(f"| {n} | {V['corpus.n_twin_pairs']} | {P} | {P} | {P} | {P} | {P} | {P} | {P} | {P} | {P} | {P} |\n"
-                  for n in lm[:2])
-        + f"| … {len(lm) - 2} further rows, one per model | | {P} | | | | | | | | | |\n")
+    def paired(title: str) -> str:
+        return (f"**{title}**\n\n"
+                "| Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only "
+                "| Right on neither side | McNemar p |\n"
+                "|:---|---:|---:|---:|---:|---:|---:|\n"
+                + "".join(f"| {n} | {V['corpus.n_twin_pairs']} | {P} | {P} | {P} | {P} | {P} |\n" for n in lm[:2])
+                + f"| … {len(lm) - 2} further rows, one per model | | {P} | | | | |\n")
+    out["shape_paired.md"] = (paired("Table 8a. Right = target-right (primary).") + "\n"
+                              + paired("Table 8b. Right = task success (secondary)."))
     out["shape_robustness.md"] = (
         "| Comparison | Tasks | Task success, first group | Task success, second group | Difference (95% interval) |\n"
         "|:---|---:|---:|---:|---:|\n"

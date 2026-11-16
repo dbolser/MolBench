@@ -4,7 +4,7 @@ The final run is defined by one manifest file in the repository. Its contents, i
 
 - **Corpus.** Version `{{plan.corpus_version}}` ⟦PENDING: corpus freeze — final version tag and hash⟧.
 - **Samples.** {{plan.samples}} per task, model and condition (1 in the JSON-mode condition);
-  no temperature is sent, so each provider's default applies. Output limit
+  no temperature is sent, so each provider's default applies. Limit on the length of an answer:
   {{plan.max_tokens:,}} tokens; models that reason before answering get a larger limit,
   because the hidden reasoning counts against it.
 - **Retries.** Only transport errors are retried. A malformed answer is archived and scored

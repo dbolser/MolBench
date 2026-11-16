@@ -56,7 +56,7 @@ another benchmark of this kind could make.
    coloured a residue in a form that many generated tasks did not accept; a residue named by
    UniProt number on a predicted model was scored as selecting nothing; and a scene with an
    unreadable file passed. The same reviews found clinical requests whose "pathogenic" record
-   belonged to another gene or to a pair of variants (Section 3.1). *Change*: each finding was
+   belonged to another gene or to two variants taken together (Section 3.1). *Change*: each finding was
    fixed in the generator or grader and is now covered by an automated test and by a new kind
    of control answer, and both prompt examples are graded by the benchmark's own grader as a
    test.

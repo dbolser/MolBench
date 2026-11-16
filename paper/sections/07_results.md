@@ -41,14 +41,14 @@ answers, which shows the difficulty of a tier once the format has been written c
 
 **Table 8. Paired comparison of the two formats.** For each model, its
 {{corpus.n_twin_pairs}} pairs (one request on both tracks, same target atoms) are split four
-ways, twice. A side is *right* when at least two of its three answers are right. *Target-right*
-columns (primary): an answer is right when its target score is 1, that is, the requested
-atoms are drawn exactly as asked; this is the same test in both formats. *Task success*
-columns (secondary): an answer is right when its whole drawn state is exactly right; this is
-not the same test in the two formats (Section 3.4). *Both*, *scene only*, *call list only*,
-*neither*: the number of pairs right on both sides, on one side only, or on neither. *McNemar
-p*: exact test that the two one-sided counts are equal; a small value means that one format
-is harder for this model. † marks an optional model.
+ways, in two tables. A side of a pair is *right* when at least two of its three answers are
+right. *Table 8a* (primary): an answer is right when it is target-right, that is, its target
+score is 1 and the requested atoms are drawn exactly as asked; this is the same test in both
+formats. *Table 8b* (secondary): an answer is right when it is a task success, that is, its
+whole drawn state is exactly right; this is not the same test in the two formats (Section
+3.4). The four count columns give the number of pairs right on both sides, on one side only,
+or on neither. *McNemar p*: exact test that the two one-sided counts are equal; a small value
+means that one format is harder for this model. † marks an optional model.
 
 {{include:generated/table_final_paired.md|else:generated/shape_paired.md}}
 

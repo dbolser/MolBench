@@ -29,8 +29,9 @@ selection rule.
 UniProt accession. For each, one PDB entry is chosen by a scripted rule (coverage of variant
 positions, then resolution; SI Section S3). Whether an entry is numbered differently from
 UniProt played no part in the choice. A variant may also be asked on any other panel structure
-of the same protein: {{clin.n_proteins_several_structures}} proteins have more than one,
-among them the {{panel.n_alphafold}} predicted models.
+of the same protein: {{clin.n_proteins_several_structures}} proteins have more than one
+structure in the panel, counting the {{panel.n_alphafold}} predicted models. The clinical
+tasks therefore sit on {{clin.n_structures}} structures.
 
 **Variants.** We use *missense* variants only: one amino acid replaced by another. Throughout,
 the *classification* of a variant means ClinVar's combined (aggregate) germline classification
@@ -93,8 +94,8 @@ The clinical generator produced the running example in six steps.
    {{ex.label_number}}).
 4. **Identity check.** The atom table must hold the amino acid of the reference sequence at
    that residue. It does: {{ex.wild_type}}{{ex.auth_number}}, {{ex.n_target_atoms}} atoms
-   ({{ex.n_target_heavy_atoms}} and {{ex.n_target_hydrogens}} hydrogens, which this entry
-   contains). Had the structure carried an engineered substitution there, the variant would
+   ({{ex.n_target_heavy_atoms}} heavy atoms and {{ex.n_target_hydrogens}} hydrogens, which
+   this entry contains). Had the structure carried an engineered substitution there, the variant would
    not be offered for this entry.
 5. **Wording.** A seeded random choice picks one of the template's three wordings, the colour
    ({{ex.color}}) and the representation ({{ex.rep}}). The request names the entry, the gene,
@@ -142,28 +143,29 @@ template with an example.
 - **Clinical variant.** As in the running example. There are {{clin.n}} tasks per track, on
   {{clin.n_proteins}} proteins and {{clin.n_structures}} structures. Two properties of a task
   matter for the results, and they are not the same property.
-  *Split A: would an answer that copies the number in the variant name be right?* Yes in
-  {{clin.n_face_value_right}} tasks, no in {{clin.n_face_value_wrong}}. This is the primary
-  split.
-  *Split B: does the author number of the target differ from its UniProt number?* Yes in
-  {{clin.n_offset}} tasks ({{clin.offset_share:.0%}}), by {{clin.offset_min}} to
-  {{clin.offset_max}} residues; no in {{clin.n_no_offset}}.
-  The splits differ because {{clin.n_mature_name}} requests use a traditional name that is
-  counted along the mature protein, the form found in older literature (transthyretin V30M,
-  which is p.Val50Met), and say so. In {{clin.n_face_right_offset}} of these the entry is
-  numbered in the same traditional way, so the number in the name is the author number
-  although the UniProt number is not. In the remaining {{clin.n_face_wrong_no_offset}} the
-  structure is a predicted model numbered as UniProt is, so the traditional number is wrong
-  there. Split A therefore has {{clin.n_face_right_no_offset}} +
-  {{clin.n_face_right_offset}} = {{clin.n_face_value_right}} tasks on its "yes" side.
-  Further facts: in {{clin.n_chain_differs}} tasks the author chain identifier differs from
-  the label chain identifier; {{clin.n_accession_in_prompt}} requests state the UniProt
-  accession, as the running example does; {{clin.n_context_cartoon}} also ask, in words, for a
-  cartoon of the structure; and {{clin.n_sse}} ask for the helix or strand that contains the
-  residue, as annotated in the entry, together with the residue. {{clin.n_in_pairs}} tasks
-  form {{clin.n_structure_pairs}} sets of two *matched tasks* that ask the same variant on two
-  structures of one protein; in {{clin.n_offset_pairs}} of these sets one structure has an
-  offset and the other, always a predicted model, has none.
+    - *Split A (primary): would an answer that copies the number in the variant name be
+      right?* Yes in {{clin.n_face_value_right}} tasks, no in {{clin.n_face_value_wrong}}.
+    - *Split B: does the author number of the target differ from its UniProt number?* Yes in
+      {{clin.n_offset}} tasks ({{clin.offset_share:.0%}}), by {{clin.offset_min}} to
+      {{clin.offset_max}} residues; no in {{clin.n_no_offset}}.
+    - *Why the splits differ.* {{clin.n_mature_name}} requests use a traditional name that is
+      counted along the mature protein, the form found in older literature (transthyretin
+      V30M, which is p.Val50Met), and say so. In {{clin.n_face_right_offset}} of them the
+      entry is numbered in the same traditional way, so the number in the name is the author
+      number although the UniProt number is not. In the other
+      {{clin.n_face_wrong_no_offset}} the structure is a predicted model numbered as UniProt
+      is, so there the traditional number is wrong. The "yes" side of Split A is therefore
+      {{clin.n_face_right_no_offset}} + {{clin.n_face_right_offset}} =
+      {{clin.n_face_value_right}} tasks.
+    - *Further facts.* In {{clin.n_chain_differs}} tasks the author chain identifier differs
+      from the label chain identifier. {{clin.n_accession_in_prompt}} requests state the
+      UniProt accession, as the running example does. {{clin.n_context_cartoon}} requests
+      also ask, in words, for a cartoon of the structure. {{clin.n_sse}} ask for the helix or
+      strand that contains the residue, as annotated in the entry, together with the residue.
+    - *Matched tasks.* {{clin.n_in_pairs}} tasks form {{clin.n_structure_pairs}} sets of two
+      *matched tasks*, which ask the same variant on two structures of one protein. In
+      {{clin.n_offset_pairs}} of these sets one structure has an offset and the other, always
+      a predicted model, has none.
 - **Follow-up turn.** The model receives a start state and an edit request ("make the magenta
   chain plum") and returns the complete new state. Only the resulting drawn state is graded,
   so an answer that makes the edit but drops something from the start state, such as the
@@ -272,9 +274,9 @@ split is small (Section 9).
 
 *Wording.* To measure sensitivity to wording, {{corpus.n_requests_paraphrased}} requests of
 the public split have two further phrasings each, a terse one and an indirect one, with the
-same reference. For example, the request "{{corpus.paraphrase_example.full}}" also exists as
-"{{corpus.paraphrase_example.terse}}" and as "{{corpus.paraphrase_example.indirect}}".
-{{corpus.n_paraphrased_pairs}} of the {{corpus.n_requests_paraphrased}} requests are pairs, so
+same reference. For example, the request "{{corpus.paraphrase_example.full}}" also exists in
+a terse form ("{{corpus.paraphrase_example.terse}}") and in an indirect form
+("{{corpus.paraphrase_example.indirect}}"). {{corpus.n_paraphrased_pairs}} of the {{corpus.n_requests_paraphrased}} requests are pairs, so
 they are {{corpus.n_tasks_paraphrased}} tasks, and two further phrasings of each give
 {{corpus.n_paraphrase_files}} additional task files. These are not counted in Table 1.
 
@@ -288,11 +290,12 @@ Four checks involve no model (Figure 1, bottom row).
 - **Atom tables against the viewer.** Selections were read back from the running viewers. For
   the scene track, Mol\* 5.9.0 was run without a display and asked which atoms each
   representation holds. For the call-list track, {{controls.viewer.api.lists}} call lists, a
-  sample of the control set (Section 4.5), were replayed in PDBe Mol\* 3.3.2 and each
+  sample taken in turn from every kind of control (Section 4.5), were replayed in PDBe Mol\* 3.3.2 and each
   selection was compared atom for atom: all agreed. Loading a structure with no further call
   was compared in the same way for {{controls.viewer.api.bare_loads}} of the
-  {{corpus.n_pdb_entries}} PDB entries used in tasks. Selections by UniProt number were not part
-  of this replay (SI Section S4.8).
+  {{panel.n_pdb}} PDB entries of the panel (the entry reserved as a worked example was left
+  out, as were the predicted models). Selections by UniProt number were not part of this
+  replay (SI Section S4.8).
 - **Grader against a control set.** The grader is run on {{controls.n:,}} answers whose
   verdict is known (Section 4.5).
 - **Format rules.** One script validates every task file against the written task format, and
