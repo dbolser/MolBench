@@ -423,7 +423,8 @@ Scores are averaged in three ways, always named:
   (the accepted scenes list `polymer`, `all`, `protein`, `nucleic` and the component
   code), but a correct selection by chain id on such an entry scores 0, where the same
   answer on the reference entry passes. The runner records which kind of entry each
-  answer used (`entry_outcome`), and resolve results are reported split that way.
+  answer used (`entry_outcome`) and, for an accepted entry, whether it is the reference
+  entry (`entry_is_reference`); resolve success is reported apart for the two.
 - **Reply parsing.** The answer is the outermost JSON array (API) or object (MVS) in the
   reply; if that span is not JSON because the prose around it has a bracket of its own,
   the first balanced array that parses as a list of objects is taken. A reply no JSON

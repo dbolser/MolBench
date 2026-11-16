@@ -1009,9 +1009,18 @@ class Tables:
                 if not ss:
                     continue
                 c = Counter(s["entry_outcome"] for s in ss)
+                on_ref = [s for s in ss if s.get("entry_is_reference") is True]
+                on_other = [s for s in ss if s.get("entry_is_reference") is False]
+
+                def by_entry(some: list[dict]) -> str:
+                    return f"{f3(mean(bool(s['success']) for s in some))} ({len(some)})" if some else "–"
                 rows.append([self.name(m), cond, len(ss),
                              *[pct(c[o] / len(ss)) for o in resolve_mod.ENTRY_OUTCOMES],
-                             f3(mean(t["success"] for t in got))])
+                             f3(mean(t["success"] for t in got)), by_entry(on_ref), by_entry(on_other)])
+                for key, some in (("on_reference_entry", on_ref), ("on_other_accepted_entry", on_other)):
+                    self.put(f"mvs.{cond}.{m}.resolve.{key}.n", len(some))
+                    self.put(f"mvs.{cond}.{m}.resolve.{key}.success",
+                             mean(bool(s["success"]) for s in some) if some else None)
                 for o in resolve_mod.ENTRY_OUTCOMES:
                     self.put(f"mvs.{cond}.{m}.resolve.{o}", c[o] / len(ss))
                 if m != BASELINE:
@@ -1019,7 +1028,7 @@ class Tables:
             n = sum(pooled.values())
             if n:
                 rows.append([f"**all models, {cond}**", cond, n,
-                             *[pct(pooled[o] / n) for o in resolve_mod.ENTRY_OUTCOMES], "–"])
+                             *[pct(pooled[o] / n) for o in resolve_mod.ENTRY_OUTCOMES], "–", "–", "–"])
                 for o in resolve_mod.ENTRY_OUTCOMES:
                     self.put(f"mvs.{cond}.panel.resolve.{o}", pooled[o] / n)
         if not rows:
@@ -1028,12 +1037,16 @@ class Tables:
                  "Resolve tier: which entry the answer loads (share of samples)",
                  md_table(["model", "condition", "samples",
                            *[resolve_mod.ENTRY_OUTCOME_LABEL[o] for o in resolve_mod.ENTRY_OUTCOMES],
-                           "task success"], rows, "llrrrrrrr"),
+                           "task success", "success on the reference entry (samples)",
+                           "success on another accepted entry (samples)"], rows, "llrrrrrrrrr"),
                  "The request names a protein; many entries are right (the frozen accepted "
                  "list). A wrong id is either a real entry of something else or an id that no "
                  f"entry has (the list of current PDB ids frozen on {resolve_mod.pdb_ids_date()}). "
-                 "\"No entry loaded\" includes answers that could not be read. Paraphrases "
-                 "are left out.")
+                 "\"No entry loaded\" includes answers that could not be read. The last two "
+                 "columns split the answers on an accepted entry: only the reference entry of "
+                 "a task has a frozen atom table, and on any other accepted entry an answer is "
+                 "compared with the reference as written, so a correct selection by chain id "
+                 "fails there. Paraphrases are left out.")
 
     # -- accept-set ---------------------------------------------------------------------------
     def accept_set(self) -> None:

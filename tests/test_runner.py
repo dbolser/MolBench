@@ -1306,6 +1306,26 @@ def test_a_resolve_answer_is_sorted_by_the_entry_it_loads(whole_corpus):
     assert set(resolve.ENTRY_OUTCOME_LABEL) == set(resolve.ENTRY_OUTCOMES)
 
 
+def test_a_resolve_answer_says_whether_it_is_on_the_reference_entry(whole_corpus):
+    """Audit of 2026-11-16: an answer on another accepted entry is graded as written (no
+    atom table), so resolve results are reported apart for the two kinds of entry."""
+    from molbench import resolve
+    task = next(t for t in whole_corpus if t["tier"] == "resolve"
+                and len(t["accepted_structures"]) > 1)
+    ref = task["reference"]
+
+    def field(scene):
+        return runner.analysis_fields(task, {"predicted": scene, "outcome": "valid"})["entry_is_reference"]
+    assert field(ref) is True
+    other = next(i for i in task["accepted_structures"] if i not in task["structures"])
+    assert field(resolve.repoint(ref, task, other)) is False
+    assert field(resolve.repoint(ref, task, resolve.missing_id())) is None
+    not_resolve = next(t for t in whole_corpus if t["tier"] != "resolve")
+    assert runner.analysis_fields(not_resolve, {"predicted": not_resolve["reference"],
+                                                "outcome": "valid"})["entry_is_reference"] is None
+    assert "entry_is_reference" in runner.SAMPLE_RECORD_FIELDS
+
+
 def test_every_resolve_reference_loads_an_accepted_entry(whole_corpus):
     from molbench import resolve
     tasks = [t for t in whole_corpus if t["tier"] == "resolve"]

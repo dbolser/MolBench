@@ -1479,16 +1479,24 @@ def analysis_fields(task: dict, sample: dict) -> dict[str, Any]:
       of what the edit had to leave alone the answer kept (0 when nothing parsed);
     * ``entry_outcome`` - a resolve task: which kind of entry the answer loads
       (`resolve.ENTRY_OUTCOMES`: accepted, a real entry of something else, an id that
-      does not exist, not a PDB entry, none).
+      does not exist, not a PDB entry, none);
+    * ``entry_is_reference`` - a resolve answer on an accepted entry: whether that
+      entry is the task's reference entry. Only reference entries have a frozen atom
+      table; on any other accepted entry the answer is graded as written (GRADING.md),
+      so resolve results are reported apart for the two.
 
-    Both are None on every other task. Neither changes a score."""
-    out: dict[str, Any] = {"preserved_f1": None, "preserved_ok": None, "entry_outcome": None}
+    All are None on every other task. None changes a score."""
+    out: dict[str, Any] = {"preserved_f1": None, "preserved_ok": None, "entry_outcome": None,
+                           "entry_is_reference": None}
     parsed = sample.get("predicted") if sample.get("outcome") != "invalid_json" else None
     if preserved_parts(task):
         kept = preserved_score(task, parsed) if parsed is not None else None
         out.update(kept or {"preserved_f1": 0.0, "preserved_ok": False})
     if task.get("tier") == "resolve":
         out["entry_outcome"] = resolve_mod.entry_outcome(task, parsed)
+        if out["entry_outcome"] == "accepted":
+            loaded = tasks_mod.loaded_entries("mvs", parsed)
+            out["entry_is_reference"] = bool(loaded) and loaded[0] in (task.get("structures") or [])
     return out
 
 
@@ -1594,7 +1602,7 @@ def _sample_summary(s: dict) -> dict[str, Any]:
     for k in ("error", "mvs_issues", "load_error", "grader_crash", "matched_reference"):
         if s.get(k):
             out[k] = s[k]
-    for k in ("preserved_f1", "preserved_ok", "entry_outcome"):
+    for k in ("preserved_f1", "preserved_ok", "entry_outcome", "entry_is_reference"):
         if s.get(k) is not None:
             out[k] = s[k]
     if "repair" in s:
@@ -1746,7 +1754,7 @@ SAMPLE_RECORD_FIELDS = (
     "run", "model", "route", "condition", "task_id", "sample", "track", "tier", "split",
     "structures", "raw", "predicted", "f1", "precision", "recall", "success", "target_f1",
     "outcome", "error", "grader", "matched_reference", "preserved_f1", "preserved_ok",
-    "entry_outcome", "finish_reason", "truncated",
+    "entry_outcome", "entry_is_reference", "finish_reason", "truncated",
     "input_tokens", "output_tokens", "reasoning_tokens", "cost_usd", "cost_source",
     "latency_s", "temperature", "reasoning_effort", "max_tokens", "structured", "provider",
     "response_model",
@@ -1771,7 +1779,7 @@ def sample_record(cell: Cell, s: dict) -> dict[str, Any]:
         "error": s.get("error") or s.get("mvs_issues") or s.get("load_error"),
         "grader": s.get("grader"), "matched_reference": s.get("matched_reference"),
         "preserved_f1": s.get("preserved_f1"), "preserved_ok": s.get("preserved_ok"),
-        "entry_outcome": s.get("entry_outcome"),
+        "entry_outcome": s.get("entry_outcome"), "entry_is_reference": s.get("entry_is_reference"),
         "finish_reason": r.get("finish_reason"), "truncated": is_truncated(r),
         "input_tokens": usage.get("input_tokens"), "output_tokens": usage.get("output_tokens"),
         "reasoning_tokens": usage.get("reasoning_tokens"),
