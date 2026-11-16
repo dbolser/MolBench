@@ -263,11 +263,11 @@ def test_a_chain_named_by_its_colour_is_one_of_exactly_two(on_disk):
 def test_the_chain_difficulty_flag_follows_the_answer_not_the_wording(on_disk):
     """``author_chain_differs_from_label`` is set when the final state picks a chain by
     its author id on an entry whose author and label chain ids differ: "the blue one"
-    (2P4E) picks a chain without the word, "how many chains?" (1ATP) picks none."""
+    (2P4E) picks a chain without the word, "hide the waters" (1ATP) picks none."""
     flag = lambda tid: on_disk[tid]["provenance"]["difficulty"]["author_chain_differs_from_label"]
     for track in T.TRACKS:
         assert flag(f"fu-referent-colour-2p4e-{track}")
-        assert not flag(f"fu-noop-question-1atp-{track}")
+        assert not flag(f"fu-noop-hidden-1atp-{track}")
     for t in on_disk.values():
         differs = gen.grounding.facts(t["structures"][0])["numbering"]["auth_chain_differs_from_label_chain"]
         picks = '"auth_asym_id"' in json.dumps(t["reference"]) or (

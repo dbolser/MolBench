@@ -173,8 +173,9 @@ attribute open: any value is right. What it does state must match. (Ruling of
   words can be answered by call lists that end in different states. Each API task
   lists, under `accepted`, the end states that differ from the reference only in
   something the request does not state. The forms are built by one module
-  (`scripts/api_forms.py`) and each is checked to draw the requested atoms exactly as
-  the reference does (target score 1 against the reference):
+  (`scripts/api_forms.py`) and each is checked to draw the requested atoms as the
+  reference does (target recall 1 against the reference: nothing asked for is missing
+  or drawn another way):
   - *cartoon by default.* Where the request asks for a cartoon and the reference sets
     the cartoon style, the same colouring on the default view is accepted, and the
     other way round: the viewer already draws the polymer as a cartoon. What the
@@ -186,6 +187,10 @@ attribute open: any value is right. What it does state must match. (Ruling of
     take the viewer's select colour (no `color` key). If the request states a colour
     for the cartoon ("a grey cartoon, with ..."), the stretch is grey or the highlight
     colour.
+  - *nothing hidden.* Where the request asks for the protein in one representation
+    ("as a surface") and the reference hides water or ligands only to match the MVS
+    scene, the same list without those toggles is accepted.
+  A request that names the viewer's style itself ("in the cartoon style") states it.
   A call list that changes something the request does not mention in any other way
   (another global style, hidden components, a second colour) is still wrong, as an
   unrequested extra component is on the MVS track.
@@ -399,7 +404,7 @@ Scores are averaged in three ways, always named:
 ## How well the grader itself works
 
 `scripts/grader_controls.py` builds a control set from the frozen structure panel
-(75 entries; 1HSG, the API prompt's worked example, is left out): pairs of a reference
+(78 entries; 1HSG, the API prompt's worked example, is left out): pairs of a reference
 and an answer whose verdict is known from how the pair was made.
 
 - **Identical**: the answer is the reference. Must pass.
@@ -422,8 +427,8 @@ fails if the grader stops agreeing with any control.
 
 | track | controls | kinds (equivalent / wrong) | false pass | false fail | graders before this work: false pass / false fail |
 |---|---|---|---|---|---|
-| MVS | 1,090 on 75 entries | 24 / 23 | 0 of 460 | 0 of 630 | 0 of 460 / 262 of 630 (October path grader, F1 = 1 as success) |
-| API | 850 on 69 entries | 18 / 17 | 0 of 340 | 0 of 510 | 75 of 340 / 247 of 510 (July sequence grader, F1 = 1 as success) |
+| MVS | 1,090 on 78 entries | 24 / 23 | 0 of 460 | 0 of 630 | 0 of 460 / 264 of 630 (October path grader, F1 = 1 as success) |
+| API | 850 on 69 entries | 18 / 17 | 0 of 340 | 0 of 510 | 75 of 340 / 246 of 510 (July sequence grader, F1 = 1 as success) |
 
 Read these zeros with care: the grader was corrected until it agreed with every
 control, so they show that the rules above are implemented, not how often an unforeseen

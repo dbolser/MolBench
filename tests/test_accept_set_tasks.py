@@ -91,15 +91,23 @@ def _components(scene):
 def test_any_one_copy_or_all_but_not_two_of_four():
     tid = "acc-metal-copy-8eph-mvs"
     t = TASKS[tid]
-    assert len(t["accepted"]) == 4                         # 4 single ions + all four
+    # 4 single ions + all four + the two ions of each copy of the complex (chains A+B, C+D)
+    assert len(t["accepted"]) == 6
     singles = [t["reference"]] + t["accepted"][:3]
     for s in singles + [t["accepted"][3]]:
         assert grade(tid, s)["success"]
+    for s in t["accepted"][4:]:                            # one copy of the complex
+        assert grade(tid, s)["success"]
+    # two ions that are not one copy of the complex (chain A's and chain C's): no reading
     two = copy.deepcopy(singles[0])
     _components(two)[1]["params"]["selector"] = [
-        _components(s)[1]["params"]["selector"] for s in singles[:2]]
+        _components(s)[1]["params"]["selector"] for s in (singles[0], singles[2])]
     res = grade(tid, two)
     assert not res["success"] and res["f1"] < 1
+    one_copy = copy.deepcopy(singles[0])
+    _components(one_copy)[1]["params"]["selector"] = [
+        _components(s)[1]["params"]["selector"] for s in singles[:2]]
+    assert grade(tid, one_copy)["success"]                 # chain A's and chain B's: one complex
 
 
 def test_wrong_colour_and_wrong_representation_fail():
@@ -145,7 +153,7 @@ def test_the_ligand_accepts_the_viewers_own_ligand_selection():
 
 
 def test_representation_open_accepts_what_the_viewer_draws_for_a_cartoon_on_a_ligand():
-    tid = "acc-representation-open-1hrc-mvs"
+    tid = "acc-representation-open-3k34-mvs"
     t = TASKS[tid]
     assert len(t["accepted"]) == 3
     as_cartoon = copy.deepcopy(t["reference"])

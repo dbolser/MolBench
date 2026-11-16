@@ -9,7 +9,7 @@
    "n_wrong": 460,
    "n_equivalent_kinds": 24,
    "n_wrong_kinds": 23,
-   "n_entries": 75,
+   "n_entries": 78,
    "grader": {
     "false_pass": {
      "errors": 0,
@@ -35,14 +35,14 @@
      "rate": 0.0
     },
     "false_fail": {
-     "errors": 262,
+     "errors": 264,
      "n": 630,
-     "rate": 0.4159
+     "rate": 0.419
     },
     "false_fail_equivalent_only": {
-     "errors": 262,
+     "errors": 264,
      "n": 480,
-     "rate": 0.5458
+     "rate": 0.55
     }
    },
    "mistakes": [],
@@ -123,7 +123,7 @@
      "what": "a full state with metadata, and the same entry from another server or as BinaryCIF",
      "n": 20,
      "graded_success": 20,
-     "old_grader_success": 15,
+     "old_grader_success": 13,
      "mean_f1": 1.0,
      "mean_target_f1": 1.0
     },
@@ -304,8 +304,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.946,
-     "mean_target_f1": 0.946
+     "mean_f1": 0.945,
+     "mean_target_f1": 0.945
     },
     {
      "group": "wrong",
@@ -364,7 +364,7 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.754,
+     "mean_f1": 0.7473,
      "mean_target_f1": 0.6676
     },
     {
@@ -374,7 +374,7 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.7618,
+     "mean_f1": 0.78,
      "mean_target_f1": 0.8568
     },
     {
@@ -394,8 +394,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.56,
-     "mean_target_f1": 0.5166
+     "mean_f1": 0.6514,
+     "mean_target_f1": 0.6214
     },
     {
      "group": "wrong",
@@ -424,8 +424,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.9497,
-     "mean_target_f1": 0.9497
+     "mean_f1": 0.9526,
+     "mean_target_f1": 0.9526
     },
     {
      "group": "wrong",
@@ -444,8 +444,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.9361,
-     "mean_target_f1": 0.9361
+     "mean_f1": 0.9259,
+     "mean_target_f1": 0.9259
     },
     {
      "group": "wrong",
@@ -454,8 +454,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.7586,
-     "mean_target_f1": 0.8564
+     "mean_f1": 0.7532,
+     "mean_target_f1": 0.8565
     },
     {
      "group": "wrong",
@@ -464,7 +464,7 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.6079,
+     "mean_f1": 0.6098,
      "mean_target_f1": 0.75
     },
     {
@@ -562,14 +562,14 @@
      "rate": 0.2206
     },
     "false_fail": {
-     "errors": 247,
+     "errors": 246,
      "n": 510,
-     "rate": 0.4843
+     "rate": 0.4824
     },
     "false_fail_equivalent_only": {
-     "errors": 247,
+     "errors": 246,
      "n": 360,
-     "rate": 0.6861
+     "rate": 0.6833
     }
    },
    "mistakes": [],
@@ -580,7 +580,7 @@
      "what": "struct_asym_id (label chain) instead of auth_asym_id for the same chain",
      "n": 20,
      "graded_success": 20,
-     "old_grader_success": 15,
+     "old_grader_success": 17,
      "mean_f1": 1.0,
      "mean_target_f1": 1.0
     },
@@ -620,7 +620,7 @@
      "what": "the entry id in upper case, or the same entry loaded by URL",
      "n": 20,
      "graded_success": 20,
-     "old_grader_success": 10,
+     "old_grader_success": 7,
      "mean_f1": 1.0,
      "mean_target_f1": 1.0
     },
@@ -650,7 +650,7 @@
      "what": "struct_asym_id + residue_number (label) instead of auth_asym_id + auth_seq_id",
      "n": 20,
      "graded_success": 20,
-     "old_grader_success": 8,
+     "old_grader_success": 10,
      "mean_f1": 1.0,
      "mean_target_f1": 1.0
     },
@@ -811,7 +811,7 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.4834,
+     "mean_f1": 0.5167,
      "mean_target_f1": 0.65
     },
     {
@@ -821,8 +821,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.5422,
-     "mean_target_f1": 0.5006
+     "mean_f1": 0.5759,
+     "mean_target_f1": 0.501
     },
     {
      "group": "wrong",
@@ -841,8 +841,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 0,
-     "mean_f1": 0.5593,
-     "mean_target_f1": 0.5169
+     "mean_f1": 0.5578,
+     "mean_target_f1": 0.5623
     },
     {
      "group": "wrong",
@@ -851,8 +851,8 @@
      "n": 20,
      "graded_success": 0,
      "old_grader_success": 20,
-     "mean_f1": 0.7605,
-     "mean_target_f1": 0.7541
+     "mean_f1": 0.7749,
+     "mean_target_f1": 0.7749
     },
     {
      "group": "wrong",
@@ -872,7 +872,7 @@
      "graded_success": 0,
      "old_grader_success": 20,
      "mean_f1": 0.6658,
-     "mean_target_f1": 0.9242
+     "mean_target_f1": 0.929
     },
     {
      "group": "wrong",
