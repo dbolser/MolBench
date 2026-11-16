@@ -1,51 +1,83 @@
 ## 5. Experimental setup
 
+One run fills every result in Section 6. Its plan is fixed in a single manifest file before any
+model is called: the corpus version and its hash, the models and their prices, the prompting
+conditions, the number of samples and the limits. SI Section S6 reproduces it.
+
 ### 5.1 Models
 
-⟦PENDING: final model panel, with provider, version string, access date and weight licence, from
-the run manifest⟧
-
-The preliminary panel has {{mvs.spec.n_models}} models from several providers, most of them
-small or mid-sized and inexpensive. Each is marked as having open or closed weights, as
-classified on the project leaderboard. ⟦PENDING: confirm the weight licence of each model⟧
+The panel is set by a written rule, not by results. It has {{plan.n_core_models}} language
+models ({{plan.n_core_open}} with openly available weights, {{plan.n_core_closed}} without):
+every model on the project's public leaderboard of October 2026, so that old and new numbers
+can be compared. Up to {{plan.n_optional_models}} further models, the largest current model of
+each major provider on the price date, are optional entries marked † in the tables. No model is
+added or dropped after results are seen. A *keyword script* that uses no model is run on both
+tracks as a floor: it maps words in the request to fixed output by rule.
 
 ### 5.2 Prompting conditions
 
-- **`spec`** (headline; all models). The system prompt holds a short instruction, the output
-  contract ("answer with one JSON object and nothing else") and the frozen format reference.
-- **`spec` + grounding pack** (lookup regimes). As `spec`, with the task's grounding pack
-  appended to the request. A pack states facts that an offline lookup could have produced:
-  chains and their residue ranges in both numbering schemes, the UniProt mapping, ligand codes
-  and atom names, and, where the request names a variant, the residues it maps to. A pack never
-  contains a scene, a colour or a representation.
-- **`bare`** (three models). The system prompt holds only the instruction and the output
-  contract, with no format reference. This measures what a model knows about the format
-  unaided.
-- **Structured output** (models that support it). As `spec`, with the provider's JSON mode
-  switched on. ⟦PENDING: structured-output condition, final run only⟧
+Every model receives a system prompt and the request, and returns one answer. Models cannot
+look anything up, ask a question back, or see a rendered result.
 
-No prompt was tuned on benchmark tasks. The worked example in each system prompt is not a
-benchmark task. ⟦PENDING: confirm for the rebuilt API prompt⟧
+**Table 4. Prompting conditions.** *Format reference*: a frozen text that documents the answer
+format. *JSON mode*: a provider option that forces syntactically valid JSON. *Grounding pack*:
+facts about the structure that an offline lookup could produce.
+
+| Condition | What the model is given | Run on |
+|:---|:---|:---|
+| **Format reference** (headline) | A short instruction, the output rule ("answer with one JSON value and nothing else") and a frozen reference text for the answer format | all models, all tasks, both tracks |
+| Format reference + JSON mode | The same, with the provider's option that forces syntactically valid JSON | models that offer it; 1 sample |
+| Format reference + grounding pack | The same, with a *grounding pack* appended to the request: facts about the structure that an offline lookup could produce (chains, residue ranges in both numberings, the UniProt mapping) | name-resolution and clinical tiers, scene track |
+| No format reference | The instruction and the output rule only | {{plan.n_bare_models}} models, scene track |
+
+A grounding pack never contains a scene, a colour or a representation. For the running example
+it states that UniProt {{ex.map_uniprot_first}}–{{ex.map_uniprot_last}} are author residues
+{{ex.map_auth_first}}–{{ex.map_auth_last}} of chain {{ex.auth_chain}} (SI Section S1). No prompt was tuned on benchmark tasks, and the worked example in the call-list prompt
+uses a structure that no task uses. SI Section S7 gives both system prompts.
 
 ### 5.3 Sampling
 
-The final run draws three samples per task per model at the provider's default temperature.
-Every raw output is archived. A malformed output is scored as it stands and is not retried;
-only transport errors are retried.
+Each model answers each task {{plan.samples}} times in the headline condition, at the
+provider's default temperature. The output limit is {{plan.max_tokens:,}} tokens. A malformed
+answer is scored as it stands and is not retried; only transport errors are retried. Every raw
+answer is archived with its token counts, finish reason and cost.
 
-The preliminary panel drew {{mvs.spec.samples_per_task}} sample per task. Its intervals
-therefore reflect which tasks and structures were chosen, and not run-to-run variation of a
-model.
+### 5.4 Statistics
 
-### 5.4 Cost
+- **Per-model scores** are means over tasks of the mean over samples. Task success is also
+  reported as the share of tasks on which all {{plan.samples}} samples are right.
+- **Intervals** are 95% bootstrap intervals [@efron1979] with {{run.bootstrap_replicates:,}}
+  resamples. Whole structures are resampled, not single tasks, because tasks on one structure
+  share its difficulties.
+- **Paired comparison of formats.** For each model and pair, a side counts as right when at
+  least two of its three samples are exactly right. Pairs right on one side only are compared
+  with McNemar's exact test [@mcnemar1947]. We report the four counts for every model, and
+  repeat the analysis without the {{corpus.twins.need_hide_toggle}} pairs that need an unstated
+  hide step and without the clinical pairs, where the call-list viewer can do the mapping
+  itself (Section 3.4).
+- **Planned comparisons**, each as a difference in task success with an interval: public
+  against held-back split; full against terse and indirect wording; with and without JSON
+  mode; with and without grounding pack; clinical tasks in which the number in the variant name
+  is, or is not, the author residue number.
 
-Token counts are those reported by the provider. Cost is tokens times list price on the day of
-the run. Section 6.8 gives the cost per model.
+We do not correct for multiple comparisons; the comparisons are few, stated here in advance,
+and reported in full.
 
-### 5.5 Reproducibility
+### 5.5 Human check of the grader
 
-One manifest file names the corpus version, the models, the conditions, the samples and the
-prices. One command performs the run. One command (`scripts/paper_tables.py`) rebuilds every
-table, figure and in-text number of this paper from the archived outputs. A dry run with a mock
-model exercises the whole path at no cost.
-⟦PENDING: run manifest and dry run (runner work package)⟧
+The grader's verdict is also checked against people. After the run, volunteers will see pairs
+of pictures, a reference and a model answer rendered from the same camera and framed on the
+target atoms, and say whether the two show the same thing. The design calls for
+{{study.n_pairs}} pairs with {{study.raters_per_pair}} raters each. People's answers are compared
+with the grader's task success. A further {{study.n_grader_check_pairs}} pairs are answers that the
+grader counts as exactly right although their pictures are not identical pixel for pixel;
+people should call these the same. The study also tests an *image judge*: a vision-language
+model that is shown the same two pictures and asked the same question. The image judge
+contributes to no score in this paper. A smaller pilot of the study has been run (Section 6.6).
+
+### 5.6 Reproducibility
+
+One command performs the run from the manifest and stops if the projected cost passes a stated
+cap. One command rebuilds every table, figure and number in this paper from the archived
+answers. A rehearsal with a mock model exercises the whole path at no cost. Grading needs no
+network access and no paid service.

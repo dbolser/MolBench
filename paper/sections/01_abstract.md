@@ -1,24 +1,18 @@
 ## Abstract
 
-Researchers increasingly ask computational intelligence (CI) assistants to drive molecular
-viewers in plain language: "show the haem", "highlight the residue changed by this variant".
-There is no agreed way to measure whether the result is right. We present MolBench, a benchmark
-that grades a language model on **what the viewer would show**: which atoms are selected, and how
-they are drawn and coloured. Every reference answer is built by script from the deposited
-structure and tested against it. The same requests are posed in two output formats, a declarative
-scene (MolViewSpec) and an imperative call list (the PDBe Mol\* viewer API), so that not knowing
-the biology can be told apart from not being able to write the format. Difficulty rises from
-translating a fully specified request, to requests that need facts about the structure, to
-clinical-variant requests that need a mapping from UniProt numbering to the residues of a
-structure. In a preliminary panel of {{mvs.spec.n_models}} models on {{mvs.n_tasks}} scene tasks,
-strict scores ranged from {{mvs.spec.f1_min:.2f}} to {{mvs.spec.f1_max:.2f}}. Almost all of that
-range came from whether the output was a valid scene at all (correlation between valid-scene rate
-and score: r = {{mvs.spec.r_valid_f1:.3f}}). Over valid scenes only, models were close
-({{mvs.spec.f1_valid_min:.2f}} to {{mvs.spec.f1_valid_max:.2f}}). Clinical tasks scored lowest,
-but {{mvs.spec.target.Clinical.target_exact}} of {{mvs.spec.target.Clinical.n}} valid clinical
-scenes drew the requested residue exactly; most points were lost on parts of the scene that the
-request did not specify. Adding frozen facts about the structure to the request did not
-help (mean change {{mvs.grounding.all.delta:+.3f}}). ⟦PENDING: replace the preliminary numbers
-with the final run (both tracks, three samples per task) and add the paired-format result⟧
-The tasks, references, graders, raw model outputs and the scripts that produce every number in
-this paper are openly available.
+Scientists now ask language models to drive molecular viewers in plain words: "show the residue
+changed by this variant". A wrong picture looks as polished as a right one. MolBench grades a model on what the viewer
+would draw: which atoms, in which representation and colour. Every reference answer is
+computed by script from the deposited structure, a residue-level mapping to UniProt, and ClinVar,
+and is checked against the structure. The corpus has {{corpus.n_tasks}} tasks on
+{{corpus.n_structures}} structures in eight tiers, from fully specified requests to clinical
+variants that must be mapped from UniProt numbering to the residues of a structure.
+{{corpus.n_twin_pairs}} requests are posed in two output formats, a declarative scene and an
+imperative call list, to separate not knowing the answer from not being able to write it. On
+{{controls.n:,}} control answers with known verdicts the grader made no error; the two graders it
+replaces failed {{controls.mvs.old.false_fail_rate:.0%}} and
+{{controls.api.old.false_fail_rate:.0%}} of the correct ones. In a pilot run, clinical tasks
+scored lowest although most answers drew the right residue: they lost points on context that
+nobody had requested. References now hold only what the request states.
+⟦PENDING: final run — headline results on both tracks and the paired comparison, two sentences⟧
+Tasks, graders and model outputs are open.

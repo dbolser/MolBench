@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 372" width="960" height="372" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="Shapes of the three result figures that the final run will fill; no data are shown">
+<title>Shapes of the three result figures that the final run will fill; no data are shown</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
+<rect width="960" height="372" fill="#ffffff"/>
+<text x="12" y="24" font-size="15" font-weight="bold" fill="#1a1a1a" text-anchor="start">Result figures as they will be drawn (no data yet)</text>
+<text x="12" y="42" font-size="11" font-weight="normal" fill="#555555" text-anchor="start">Axes and marks are final. The grey row in each panel is an example of a mark, not a result.</text>
+<rect x="12" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="22" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">A  Task success by model and track</text>
+<text x="22" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per model (17 rows, keyword script</text>
+<text x="22" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">included), best first.</text>
+<line x1="86" y1="238" x2="294" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="86.0" y1="238" x2="86.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="86.0" y1="136" x2="86.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="86.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0</text>
+<line x1="138.0" y1="238" x2="138.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="138.0" y1="136" x2="138.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="138.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.25</text>
+<line x1="190.0" y1="238" x2="190.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="190.0" y1="136" x2="190.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="190.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.5</text>
+<line x1="242.0" y1="238" x2="242.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="242.0" y1="136" x2="242.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="242.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.75</text>
+<line x1="294.0" y1="238" x2="294.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="294.0" y1="136" x2="294.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="294.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">1</text>
+<text x="162.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Task success, strict</text>
+<text x="190.0" y="202" font-size="12" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
+<text x="80" y="158" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">model</text>
+<line x1="173.36" y1="149" x2="210.8" y2="149" stroke="#b8b8b8" stroke-width="2"/>
+<circle cx="192.07999999999998" cy="149" r="4.5" fill="#b8b8b8" stroke="#ffffff" stroke-width="1.5"/>
+<line x1="200.4" y1="160" x2="239.92" y2="160" stroke="#b8b8b8" stroke-width="2"/>
+<rect x="216.16" y="156" width="8" height="8" fill="#ffffff" stroke="#b8b8b8" stroke-width="2"/>
+<circle cx="28" cy="312" r="4.5" fill="#0072B2" stroke="#ffffff" stroke-width="1.5"/>
+<text x="38" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">scene track</text>
+<rect x="112" y="308" width="8" height="8" fill="#ffffff" stroke="#E69F00" stroke-width="2"/>
+<text x="126" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">call-list track</text>
+<line x1="208" y1="312" x2="228" y2="312" stroke="#1a1a1a" stroke-width="2"/>
+<text x="234" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">95% interval</text>
+<rect x="330" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="340" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">B  The same request in both formats</text>
+<text x="340" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 255 pairs, split four ways.</text>
+<line x1="404" y1="238" x2="612" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="404.0" y1="238" x2="404.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="404.0" y1="136" x2="404.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="404.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0</text>
+<line x1="456.0" y1="238" x2="456.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="456.0" y1="136" x2="456.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="456.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.25</text>
+<line x1="508.0" y1="238" x2="508.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="508.0" y1="136" x2="508.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="508.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.5</text>
+<line x1="560.0" y1="238" x2="560.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="560.0" y1="136" x2="560.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="560.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.75</text>
+<line x1="612.0" y1="238" x2="612.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="612.0" y1="136" x2="612.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="612.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">1</text>
+<text x="480.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Share of pairs</text>
+<text x="508.0" y="202" font-size="12" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
+<text x="398" y="158" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">model</text>
+<defs><pattern id="hatchA" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#ffffff"/><line x1="0" y1="0" x2="0" y2="6" stroke="#0072B2" stroke-width="2.4"/></pattern><pattern id="hatchB" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#ffffff"/><circle cx="3" cy="3" r="1.6" fill="#E69F00"/></pattern></defs>
+<rect x="404.0" y="148" width="93.6" height="14" fill="#8a8a8a" stroke="#ffffff"/>
+<rect x="497.6" y="148" width="31.2" height="14" fill="url(#hatchA)" stroke="#ffffff"/>
+<rect x="528.8" y="148" width="25.0" height="14" fill="url(#hatchB)" stroke="#ffffff"/>
+<rect x="553.8" y="148" width="58.2" height="14" fill="#f1f1f1" stroke="#ffffff"/>
+<rect x="342" y="291" width="14" height="10" fill="#8a8a8a" stroke="#8a8a8a" stroke-width="0.8"/>
+<text x="362" y="300" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">both right</text>
+<rect x="486" y="291" width="14" height="10" fill="url(#hatchA)" stroke="#8a8a8a" stroke-width="0.8"/>
+<text x="506" y="300" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">scene right only</text>
+<rect x="342" y="307" width="14" height="10" fill="url(#hatchB)" stroke="#8a8a8a" stroke-width="0.8"/>
+<text x="362" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">call list right only</text>
+<rect x="486" y="307" width="14" height="10" fill="#f1f1f1" stroke="#8a8a8a" stroke-width="0.8"/>
+<text x="506" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">both wrong</text>
+<rect x="648" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="658" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">C  Where points are lost, by tier</text>
+<text x="658" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per tier and track, models averaged. A gap</text>
+<text x="658" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">between the marks is unrequested extra drawing.</text>
+<line x1="722" y1="238" x2="930" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="722.0" y1="238" x2="722.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="722.0" y1="136" x2="722.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="722.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0</text>
+<line x1="774.0" y1="238" x2="774.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="774.0" y1="136" x2="774.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="774.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.25</text>
+<line x1="826.0" y1="238" x2="826.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="826.0" y1="136" x2="826.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="826.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.5</text>
+<line x1="878.0" y1="238" x2="878.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="878.0" y1="136" x2="878.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="878.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">0.75</text>
+<line x1="930.0" y1="238" x2="930.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
+<line x1="930.0" y1="136" x2="930.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
+<text x="930.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">1</text>
+<text x="798.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Score, valid outputs only</text>
+<text x="826.0" y="202" font-size="12" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
+<text x="716" y="158" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">tier</text>
+<line x1="801.04" y1="154" x2="888.4" y2="154" stroke="#b8b8b8" stroke-width="1.5"/>
+<path d="M796.04,154 l5,-5 l5,5 l-5,5 z" fill="#b8b8b8"/>
+<circle cx="888.4" cy="154" r="4.5" fill="#b8b8b8" stroke="#ffffff" stroke-width="1.5"/>
+<path d="M659,312 l5,-5 l5,5 l-5,5 z" fill="#E69F00"/>
+<text x="674" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">task success</text>
+<circle cx="758" cy="312" r="4.5" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>
+<text x="768" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">target score</text>
+</svg>

@@ -2,9 +2,7 @@
 
 ⟦PENDING: Dan — author list, affiliations, corresponding author⟧
 
-> **Draft status.** Numbers in this draft come from the *{{run.label}}* ({{run.status_tag}}).
-> Every number is written by `scripts/paper_tables.py`; none is typed by hand. Results labelled
-> PRELIMINARY will be replaced by the final run. Parts of the design that are not yet built, and
-> numbers only the final run can supply, carry a visible PENDING tag in double brackets and are
-> listed in
-> `paper/PENDING.md`.
+*Draft for review. Every number in this paper is written by a script from the task files, the
+frozen data or archived model outputs; none is typed by hand. A cell or sentence marked
+PENDING in double brackets waits for the one paid model run or for an author decision. Results that exist
+today come from a pilot run in October 2026 and appear only in the boxed Section 6.6.*

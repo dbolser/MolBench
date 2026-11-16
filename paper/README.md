@@ -1,32 +1,54 @@
 # The MolBench paper
 
-The paper is Markdown, one file per section in `sections/`. No result is typed by hand.
+The paper, its Supporting Information and a plain-language summary are Markdown, one file per
+section. No number is typed by hand.
 
 ```bash
-uv run scripts/paper_tables.py     # archives -> paper/generated/ (values.json, table_*.md, figdata.json)
-uv run scripts/paper_figures.py    # figdata.json -> paper/generated/fig_*.svg and .pdf
-python paper/build.py              # sections + generated -> paper/molbench.md and paper/PENDING.md
-python paper/build.py --pdf        # also molbench.html and molbench.pdf (needs pandoc and Chromium)
+uv run python paper/corpus_values.py           # task files, frozen data -> generated/corpus_values.json, tables
+uv run --with matplotlib python paper/figures.py   # generated/fig_*.svg (five schematics, one chart)
+python paper/build.py                          # -> molbench.md, si.md, plain_summary.md, PENDING.md
+python paper/build.py --check                  # same checks, writes nothing; exit 1 if anything is stale or wrong
+python paper/build.py --pdf                    # also HTML and PDF of the paper and the SI (pandoc + Chromium)
 ```
 
-The first two scripts carry their own dependencies (`json-repair`, `matplotlib`) as inline
-script metadata, so `uv run <script>` is enough. `paper/build.py` uses the standard library only.
+After a model run: `uv run scripts/paper_tables.py` (archives → `generated/values.json` and the
+result tables), then the three commands above.
 
 | File | What it is |
 |---|---|
-| `inputs.json` | The manifest: which scorecards, raw archives and task directory the numbers come from, the headline condition, model aliases and weight licences. **To rebuild on the final run, point this at the final archives (or pass `--manifest`); the scripts do not change.** Set `"status": "final"` to drop the PRELIMINARY labels. |
-| `generated/` | Output of the two scripts. Committed, so the paper builds without the git-ignored archives. `provenance.json` records the inputs, code version and bootstrap seed. |
-| `sections/*.md` | The text. `{{key}}` takes a value from `generated/values.json` (optionally `{{key:.3f}}`); `{{key\|PENDING: what}}` shows a PENDING tag until the key exists; `{{include:generated/table_x.md}}` pulls in a table; `[@key]` cites `references.bib`. |
-| `molbench.md` | The built paper. Do not edit; edit the sections. |
-| `PENDING.md` | Every PENDING tag in the built paper, and the keys and files the final run must supply. Generated. |
-| `references.bib` | References. Every entry was verified; see `related_work_checks.md`. |
+| `sections/*.md` | The paper. Title 11 words; abstract at most 200 words (checked by the build). |
+| `si/*.md` | Supporting Information S1–S8: running example in full, templates, panel, grading rules, control set, manifest and models, prompts, pilot-run tables. |
+| `plain/summary.md` | A 150-word summary for volunteer raters, to paste into an email (length checked by the build). |
+| `molbench.md`, `si.md`, `plain_summary.md` | Built. Do not edit; edit the sources. |
+| `PENDING.md` | Built. Every PENDING tag with what fills it, and the files the final run must write. |
+| `corpus_values.py` | Every number that does not come from a model run: corpus counts, panel and variant facts, control set, the October answers regraded, the pilot rating study, the run plan, the running example graded by the benchmark's grader. Also writes the corpus table, the empty result tables (`generated/shape_*.md`) and the SI tables. `--check` fails if a committed file is stale. |
+| `figures.py` | Schematic figures as plain SVG (pipeline, tiers, paired design, drawn-state grading, shapes of the result figures) and the chart of the pilot run. Okabe–Ito colours; every mark also has a label or a pattern. |
+| `generated/` | Output of the scripts, committed so the paper builds without the git-ignored archives. `values.json` and the `table_mvs_*`/`fig_mvs_*` files are written by `scripts/paper_tables.py` and `scripts/paper_figures.py` from the October 2026 pilot run. |
+| `inputs.json` | Which archives `scripts/paper_tables.py` reads. |
+| `references.bib`, `related_work_checks.md` | References, and the record of how each was verified. |
+| `a4/` | The pilot rating study (readout) and the design of the next one. |
 | `venues.md` | Where to submit, with checked requirements. |
 
-Input paths in the manifest are looked up in this checkout first, then under `--data-root`
-(default: the main git checkout, which holds the git-ignored `results/` and `runs/`).
+## Markers in the sources
 
-What the scripts expect of a run: one scorecard JSON per model and condition, with
-`meta.condition`, `meta.grounding` (and optionally `meta.condition_label`, `meta.run_id`), and
-task rows carrying `id`, `category` (the track), `samples_f1` and `outcomes`. Raw archives
-carry `raw_samples[model][task] = [{"raw": …}]` and are matched to scorecards by `run_id`, or
-by start time and model. A task's regime comes from its `regime` field, else from its `source`.
+- `{{key}}`, `{{key:.1%}}`: a value from `generated/values.json` or `generated/corpus_values.json`.
+  An unknown key is an error; so is a key in both files.
+- `{{include:generated/x.md}}`: a generated table. `{{include:generated/table_final_x.md|else:generated/shape_x.md}}`
+  shows the table in its final shape, with pending cells, until the final run writes the real one.
+- `[@key]`: a citation from `references.bib`.
+- `⟦PENDING: owner — what⟧`: something still open. The first words name what fills it: `final run`,
+  `corpus freeze`, `rating study`, `deposit` or `Dan`. A tag that starts in another way fails the build.
+
+## What the final run has to write
+
+`scripts/paper_tables.py` should write these files into `generated/`; each replaces the
+shape table of the same name, and the captions in `sections/07_results.md` already define every
+column:
+
+`table_final_leaderboard_scene.md`, `table_final_leaderboard_calls.md`, `table_final_tiers.md`,
+`table_final_paired.md`, `table_final_clinical.md`, `table_final_followup.md`,
+`table_final_robustness.md`. The three result figures (`fig_result_shapes.svg` shows their
+layout) are then drawn from the same archive.
+
+The October pilot numbers are quoted only in Section 6.6 of the paper (boxed) and in SI
+Section S8.

@@ -1,224 +1,204 @@
 ## 6. Results
 
-> **{{run.status_tag}}.** Everything in this section comes from the *{{run.label}}*
-> (run of {{run.date}}): {{mvs.spec.n_models}} models, the MVS track only, {{mvs.n_tasks}} tasks
-> on {{mvs.n_structures}} structures, {{mvs.spec.samples_per_task}} sample per task. The tables
-> have the shape the final run will fill. The API track, the paired analysis, the follow-up tier
-> and the accept-set tier have no results yet.
+Sections 6.1 to 6.5 show every result table in its final shape. The cells wait for the one
+paid run and are filled by script from its archive; the layout, the captions and the
+definitions will not change. Section 6.6 is different: it reports, in a box, what a pilot run
+in October 2026 showed. Those numbers are real but come from an older corpus, and they are
+kept apart from everything else.
 
-{{include:generated/table_mvs_corpus.md}}
+![**Figure 5. The result figures that the final run will fill.** No data are shown. **A**: task success per model on both tracks, with 95% intervals; *task success* is the share of answers whose drawn state is exactly right, with an invalid answer counted as wrong (strict). **B**: for each model, its pairs split by which side was right. **C**: task success and target score per tier over valid outputs; *target score* asks only whether the requested atoms are drawn as asked, so a gap between the two marks is unrequested extra drawing.](generated/fig_result_shapes.svg)
 
-### 6.1 Whether the output is a valid scene decides the ranking
+### 6.1 Models on both tracks
 
-{{include:generated/table_mvs_leaderboard.md}}
+**Table 5. Scene track, headline condition (format reference).** One row per model; † marks an
+optional model. *Valid outputs*: share of answers that parse and that the viewer accepts. *F1*:
+how much of the drawn state is right (0 to 1). *Task success*: share of answers whose drawn
+state is exactly right. *Target score*: whether the requested atoms are drawn as asked,
+whatever else was drawn (0 to 1). *Strict*: an invalid answer counts as 0. *Valid outputs
+only*: the mean over valid answers. *All 3 samples right*: share of tasks on which every
+sampled answer is exactly right. *Cost*: US dollars for all calls of the model in this
+condition, at list price. Intervals (95%, structures resampled) will be given with each score.
 
-Strict F1 ranged from {{mvs.spec.f1_min:.3f}} ({{mvs.spec.worst.name}}) to
-{{mvs.spec.f1_max:.3f}} ({{mvs.spec.best.name}}), a spread of {{mvs.spec.f1_spread:.2f}}. The
-valid-scene rate ranged from {{mvs.spec.valid_min:.1%}} to {{mvs.spec.valid_max:.1%}}. The two
-are almost the same ranking: across the {{mvs.spec.n_models}} models the correlation between
-valid-scene rate and strict F1 is r = {{mvs.spec.r_valid_f1:.3f}} (Figure 1).
+{{include:generated/table_final_leaderboard_scene.md|else:generated/shape_leaderboard.md}}
 
-![**Figure 1.** Strict F1 against valid-scene rate, one point per model ({{run.status_tag}}). Strict F1 is the mean score over all tasks, with unshowable output scoring 0. Valid-scene rate is the share of outputs that Mol\* accepts and loads. Points near the dashed line are models whose valid scenes are almost all correct. Circles: open weights. Squares: closed weights.](generated/fig_mvs_validity.svg)
+**Table 6. Call-list track, headline condition.** Same columns and definitions as Table 5.
 
-Over valid scenes only, the models are close. F1 over valid scenes ranged from
-{{mvs.spec.f1_valid_min:.3f}} to {{mvs.spec.f1_valid_max:.3f}}, a spread of
-{{mvs.spec.f1_valid_spread:.2f}} against {{mvs.spec.f1_spread:.2f}} for strict F1 (Figure 2). The
-model with the lowest strict score, {{mvs.spec.worst.name}}, produced a valid scene for
-{{mvs.spec.worst.valid:.1%}} of tasks, and those few scenes scored
-{{mvs.spec.worst.f1_valid:.2f}}.
+{{include:generated/table_final_leaderboard_calls.md|PENDING: final run — the table for the call-list track, in the shape of Table 5}}
 
-![**Figure 2.** Per model: strict F1 with its 95% interval (filled circle and bar) and F1 over valid scenes only (open diamond) ({{run.status_tag}}). The interval resamples whole structures. The gap between circle and diamond is the cost of invalid output.](generated/fig_mvs_leaderboard.svg)
+### 6.2 Tiers
 
-The intervals are wide. With {{mvs.n_structures}} structures and one sample, the interval of the
-best model ({{mvs.spec.best.f1_lo:.2f}} to {{mvs.spec.best.f1_hi:.2f}}) overlaps those of
-{{mvs.spec.n_overlap_best}} other models. This panel cannot order the leading models.
+**Table 7. Scores by tier and track**, mean over models. *F1*, *task success* and *target
+score* as in Table 5. *Strict*: an invalid answer counts as 0. *Valid outputs only*: the mean
+over valid answers, which shows the difficulty of a tier once the format has been written
+correctly.
 
-Task success is lower than F1 suggests. The share of outputs that were exactly right ranged
-from {{mvs.spec.success_min:.1%}} to {{mvs.spec.success_max:.1%}}.
+{{include:generated/table_final_tiers.md|else:generated/shape_tiers.md}}
 
-### 6.2 What the invalid outputs are
+### 6.3 The same request in two formats
 
-{{include:generated/table_mvs_outcomes.md}}
+**Table 8. Paired comparison of the two formats.** For each model, its
+{{corpus.n_twin_pairs}} pairs (one request on both tracks, same target atoms) are split four
+ways. A side is *right* when at least two of its three sampled answers are exactly right (task
+success). *McNemar p*: exact test that the two one-sided counts are equal; a small value means
+that one format is harder for this model. † marks an optional model.
 
-Of {{mvs.spec.n_samples}} outputs, {{mvs.spec.n_failed}} were not valid scenes, and
-{{mvs.spec.invalid_json_share_of_failures:.0%}} of those were invalid JSON. Three models
-({{mvs.spec.failures_top3_models}}) account for {{mvs.spec.failures_top3_share:.0%}} of the
-invalid outputs.
+{{include:generated/table_final_paired.md|else:generated/shape_paired.md}}
 
-{{include:generated/table_mvs_json_shapes.md}}
+A model that is right on the scene and wrong on the call list knew which atoms were meant and
+failed on the format, and likewise in the other direction. Pairs that are wrong on both sides
+are the candidates for an error of content.
+⟦PENDING: final run — the same counts without the {{corpus.twins.need_hide_toggle}} pairs that need an unstated hide step, and without the clinical pairs⟧
 
-Most invalid JSON is a miscount of braces. Of the {{mvs.spec.json_shape.n_raw}} invalid-JSON
-outputs with archived text, {{mvs.spec.json_shape.brace_count_share:.0%}} open and close a
-different number of braces. A scene is a tree nested at least seven levels deep, and one brace
-too many or too few loses the whole answer.
+### 6.4 Clinical variants
 
-### 6.3 Repairing the JSON offline removes most of the spread
+**Table 9. Clinical tier on the scene track, by what the request demands.** *Task success* and
+*target score* as in Table 5, strict, mean over models. *Grounding pack*: facts about the
+structure, including the UniProt mapping, appended to the request. The first two rows split the
+tasks by whether an answer that takes the number in the variant name as the author residue
+number would be right. Rows overlap; the helix and strand tasks need the entry's own annotation
+and are reported apart.
 
-{{include:generated/table_mvs_repair.md}}
+{{include:generated/table_final_clinical.md|else:generated/shape_clinical.md}}
 
-We passed each invalid-JSON output through a JSON repair library and graded the result, without
-calling any model. Of {{mvs.spec.repair.n_raw}} outputs with archived text,
-{{mvs.spec.repair.n_scene}} became a scene tree and {{mvs.spec.repair.n_positive}} scored above
-zero, with a mean F1 of {{mvs.spec.repair.mean_f1:.2f}}. The largest changes were for
-{{mvs.spec.repair.top1.name}} ({{mvs.spec.repair.top1.strict:.2f}} to
-{{mvs.spec.repair.top1.repaired:.2f}}), {{mvs.spec.repair.top2.name}}
-({{mvs.spec.repair.top2.strict:.2f}} to {{mvs.spec.repair.top2.repaired:.2f}}) and
-{{mvs.spec.repair.top3.name}} ({{mvs.spec.repair.top3.strict:.2f}} to
-{{mvs.spec.repair.top3.repaired:.2f}}) (Figure 3).
+This table carries the benchmark's central question. If models read variant numbers at face
+value, task success will be high in the first row and low in the second, and the grounding pack
+will close the gap. If models carry out the mapping, the rows will be alike.
 
-Two cautions apply. The repaired scenes were not checked by the viewer, so these are upper
-bounds. And the raw text of {{mvs.spec.repair.n_no_raw}} invalid outputs was never archived
-(model: {{mvs.spec.repair.models_missing_raw}}), so that model could not be repaired here.
+### 6.5 Follow-up turns, open requests and robustness
 
-![**Figure 3.** Per model: strict F1 as reported (filled circle) and after offline JSON repair (open diamond) ({{run.status_tag}}). Repair is a counterfactual computed from archived outputs; no model was called. Repaired scenes were not checked by Mol\*, so the diamonds are upper bounds.](generated/fig_mvs_repair.svg)
+**Table 10. Follow-up turns and requests with several right answers.** *Task success*: share
+of answers whose final drawn state is exactly right (for requests with several right answers:
+exactly one of the accepted states), strict, mean over models.
 
-### 6.4 Difficulty by regime
+{{include:generated/table_final_followup.md|else:generated/shape_followup.md}}
 
-{{include:generated/table_mvs_regimes.md}}
+**Table 11. Planned comparisons.** Each row compares task success (strict, mean over models)
+between two groups of tasks or two conditions, with a 95% interval on the difference
+(structures resampled). *JSON mode*: the provider's option that forces syntactically valid
+JSON. *Grounding pack*: as in Table 9. *Format reference*: the reference text for the answer
+format in the system prompt.
 
-On strict F1 the regimes mostly reflect validity. Once invalid output is set aside, a gradient
-appears (Figure 4). Translation and structure-grounded tasks are near the ceiling: F1 over valid
-scenes is {{mvs.spec.regime.Translation.f1_valid_mean:.2f}} and
-{{mvs.spec.regime.Grounded.f1_valid_mean:.2f}}. Clinical tasks score much lower
-({{mvs.spec.regime.Clinical.f1_valid_mean:.2f}}), and almost no clinical output was exactly
-right (success {{mvs.spec.regime.Clinical.success_mean:.1%}}). The two tables after Figure 4
-show that, in this panel, most of that loss is not a failure to find the residue.
+{{include:generated/table_final_robustness.md|else:generated/shape_robustness.md}}
 
-These numbers rest on thin samples, and we state them with that caveat. The clinical regime is
-{{mvs.spec.regime.Clinical.n_tasks}} tasks on {{mvs.spec.regime.Clinical.n_structures}}
-structure, so no interval over structures can be given. The resolution regime has
-{{mvs.spec.regime.Resolution.n_valid}} valid outputs out of
-{{mvs.spec.regime.Resolution.n_samples}}, from
-{{mvs.spec.regime.Resolution.n_models_with_valid}} of {{mvs.spec.n_models}} models. The
-interactions regime has {{mvs.spec.regime.Interactions.n_valid}} valid outputs out of
-{{mvs.spec.regime.Interactions.n_samples}}.
+⟦PENDING: final run — outcome counts per model (valid, invalid JSON, rejected by the viewer, cut off), the JSON-repair counterfactual and the cost per model, as tables in SI Section S8⟧
 
-![**Figure 4.** Scores by regime ({{run.status_tag}}). Solid bar: strict F1, mean over models. Hatched bar: F1 over valid scenes, mean over models. Dots: F1 over valid scenes for each model. The labels give the number of tasks, structures and valid outputs behind each row.](generated/fig_mvs_regimes.svg)
+⟦PENDING: rating study — agreement between people, and between people and the grader's task success, with intervals (Section 5.5)⟧
 
-{{include:generated/table_mvs_differences.md}}
+### 6.6 Preliminary evidence (October 2026 pilot run, older corpus and grader)
 
-{{include:generated/table_mvs_targets.md}}
+<div class="box">
 
-The breakdown of where valid scenes lose points shows what each regime measures, and exposes a
-flaw in the two lookup regimes of the preliminary corpus.
+**Everything in this box is preliminary.** It comes from a pilot run of {{run.date}}:
+{{oct.spec.n_models}} models, the scene track only, {{mvs.n_tasks}} tasks on
+{{mvs.n_structures}} structures, {{mvs.spec.samples_per_task}} sample per task. The tasks were
+an earlier corpus; none of them is in the corpus of Section 3. The answers were archived and
+are graded here with the present grader (Section 4) against the references of that time, so the
+scores differ somewhat from those published in October with the earlier grader. With one
+sample and {{mvs.n_structures}} structures, the numbers below can show patterns; they cannot
+rank the leading models.
 
-In the clinical regime the commonest fault is a missing component
-({{mvs.spec.diff_regime.Clinical.missing_component}} of the
-{{mvs.spec.diff_regime.Clinical.n}} imperfect valid scenes). The missing part is rarely the
-residue. The clinical references draw the whole protein as a grey cartoon behind the highlighted
-residue, and the requests ask only for the residue. Of the
-{{mvs.spec.target.Clinical.n}} valid clinical scenes,
-{{mvs.spec.target.Clinical.target_exact}}
-({{mvs.spec.target.Clinical.target_exact_share:.0%}}) drew the requested residue with exactly
-the reference atoms, representation and colour. Only {{mvs.spec.target.Clinical.perfect}}
-scored 1. Of the {{mvs.spec.target.Clinical.target_exact_imperfect}} that had the residue right
-and still lost points, {{mvs.spec.target.Clinical.target_exact_context_differs}} left out the
-grey cartoon or drew it differently. {{mvs.spec.target.Clinical.target_wrong}} valid clinical
-scenes selected the wrong atoms.
+**Finding 1: whether the output was valid decided the ranking.** Of {{oct.spec.n:,}} answers,
+{{oct.spec.n_valid}} ({{oct.spec.valid_share:.0%}}) were valid scenes. Per model the share
+ranged from {{oct.spec.valid_share_min:.0%}} to {{oct.spec.valid_share_max:.0%}}, and strict F1
+from {{oct.spec.f1_min:.2f}} to {{oct.spec.f1_max:.2f}} (Table P1). The two are nearly the same
+ranking: the correlation between a model's share of valid outputs and its strict F1 is
+r = {{oct.spec.r_valid_f1:.2f}}. Over valid outputs only, the models are much closer (F1 from
+{{oct.spec.valid.f1_min:.2f}} to {{oct.spec.valid.f1_max:.2f}}). Of the
+{{mvs.spec.n_failed}} invalid answers, {{mvs.spec.outcome.invalid_json}} were not parseable
+JSON, and {{mvs.spec.json_shape.brace_count_share:.0%}} of the {{mvs.spec.json_shape.n_raw}}
+whose text was archived opened and closed a different number of braces. A scene is a deeply
+nested tree, and one brace too many or too few loses the whole answer. An offline repair of
+the JSON turned {{mvs.spec.repair.n_scene}} of those {{mvs.spec.repair.n_raw}} answers into
+scene trees (these were not checked by the viewer). This is why the final run reports strict and valid-only scores side by side and adds a
+JSON-mode condition.
 
-In the resolution regime,
-{{mvs.spec.diff_regime.Resolution.unrequested_colour}} of the
-{{mvs.spec.diff_regime.Resolution.n}} imperfect valid scenes lost points for a colour that the
-request did not ask for and the reference does not contain.
-{{mvs.spec.diff_regime.Resolution.structure}} of them loaded an entry outside the accepted
-list.
+**Table P1. Pilot run, per model (preliminary).** {{mvs.n_tasks}} tasks, one sample each,
+ordered by task success. *Valid outputs*: answers that parse and that the viewer accepts.
+*F1*: how much of the drawn state is right (0 to 1). *Task success*: share of answers whose
+drawn state is exactly right. *Strict*: an invalid answer counts as 0. *Valid outputs only*:
+the mean over valid answers.
 
-The low clinical and resolution scores are therefore mostly penalties for scenery that the
-request did not specify: context that the reference adds, or styling that the output adds. They
-are not, in this panel, evidence that the lookup is hard. The clinical structure also has no
-numbering offset (Section 3.3), so the residue could be found without a mapping.
-⟦PENDING: decide before the final run whether a reference may contain context the request does
-not ask for, and whether unrequested styling in an answer is penalised; references or grader
-change accordingly⟧
+{{include:generated/table_october_models.md}}
 
-### 6.5 Grounding packs did not help
+**Finding 2: clinical tasks lost their points on unrequested context, not on the residue.**
+The clinical tier scored lowest: strict F1 {{oct.spec.clinical.f1:.2f}}, and task success
+{{oct.spec.clinical.success:.1%}}, that is {{oct.spec.clinical.success_n}} of
+{{oct.spec.clinical.n}} answers (Table P2, Figure 6). The natural reading is that finding the
+residue of a variant is hard. That reading is wrong for this run. In
+{{oct.spec.clinical.highlight_exact_n}} of the {{oct.spec.clinical.n}} answers, which is
+{{oct.spec.clinical.highlight_valid_share:.0%}} of the {{oct.spec.clinical.n_valid}} valid ones,
+the requested residue was drawn exactly as in the reference: same atoms, same representation,
+same colour. The points were lost elsewhere. Each clinical reference of that corpus also drew
+a grey cartoon of the whole protein, and the requests asked only for the residue. An answer
+that drew the residue alone was missing a fact; an answer that drew the cartoon differently had
+a wrong one. There was a second flaw: all {{mvs.spec.regime.Clinical.n_tasks}} clinical tasks
+used {{mvs.spec.regime.Clinical.n_structures}} structure, in which author numbers equal UniProt
+numbers. The residue could be found without any mapping, so the tier could not test the
+mapping at all.
 
-{{include:generated/table_mvs_grounding.md}}
+**Table P2. Pilot run by tier, all models pooled (preliminary).** *Outputs*: answers, one per
+model and task. *Valid*: answers that parse and that the viewer accepts. *F1, earlier grader*:
+the score under the grader used in October, for comparison. *F1* and *task success*: as in
+Table P1, strict. *Requested part exactly right*: among answers to tasks whose reference marks
+out a requested part against a background, the share that draw that part with exactly the
+reference's atoms, representation and colour (strict).
 
-We expected that giving the model the facts it needs would raise scores on the tasks that need
-a lookup. It did not. We give three numbers, because each answers a different question.
+{{include:generated/table_october_regrade.md}}
 
-- Over all tasks and outputs, mean F1 changed by {{mvs.grounding.all.delta:+.3f}} (95% interval
-  {{mvs.grounding.all.lo:+.3f}} to {{mvs.grounding.all.hi:+.3f}}): it fell.
-- On the {{mvs.grounding.n_lookup_tasks}} lookup tasks ({{mvs.grounding.lookup_regimes}}), the
-  change was {{mvs.grounding.lookup.delta:+.3f}} ({{mvs.grounding.lookup.lo:+.3f}} to
-  {{mvs.grounding.lookup.hi:+.3f}}).
-- Over the {{mvs.grounding.both_valid.n}} task and model pairs whose output was valid in both
-  conditions, the change was {{mvs.grounding.both_valid.delta:+.3f}}
-  ({{mvs.grounding.both_valid.lo:+.3f}} to {{mvs.grounding.both_valid.hi:+.3f}}):
-  {{mvs.grounding.both_valid.better}} pairs improved, {{mvs.grounding.both_valid.worse}} got
-  worse and {{mvs.grounding.both_valid.same}} did not change.
+![**Figure 6. Pilot run: three scores by tier (preliminary).** Strict means over all answers of all {{oct.spec.n_models}} models. *F1*: how much of the drawn state is right. *Task success*: drawn state exactly right. *Requested part exactly right*: the residues or ligand the request is about drawn exactly as in the reference, whatever the rest of the answer shows. In the clinical tier the requested part was usually right and the whole state almost never.](generated/fig_october_regrade.svg)
 
-The first number is negative mainly because the longer request produced more invalid output.
-The mean valid-scene rate changed by {{mvs.grounding.valid_delta_mean_pp:+.1f}} percentage points,
-and for {{mvs.grounding.valid_drop_max.name}} it fell from
-{{mvs.grounding.valid_drop_max.from:.0%}} to {{mvs.grounding.valid_drop_max.to:.0%}}. The third
-number removes that effect and is indistinguishable from zero. Individual models moved in both
-directions on the lookup tasks: {{mvs.grounding.n_models_lookup_gain_10}} gained 0.10 or more
-and {{mvs.grounding.n_models_lookup_loss_10}} lost 0.10 or more (Figure 5).
+**How Finding 2 changed the design.** (i) A reference now holds only what the request
+states; if context is wanted, the request asks for it in words. (ii) Every task stores its
+target atoms, and the target score is reported next to F1 and task success, so that scenery and
+substance can no longer be confused. (iii) An attribute that the request does not state is
+free (Section 3.5). (iv) The clinical tier was rebuilt: {{clin.n}} tasks on
+{{clin.n_proteins}} proteins, {{clin.n_offset}} of them with a numbering offset, in place of
+{{mvs.spec.regime.Clinical.n_tasks}} tasks on one protein with none.
 
-We had set a threshold in advance: build a live tool loop only if packs raised the lookup tasks
-by 0.10 F1. The threshold was not met.
+**Finding 3: grounding packs did not help.** Appending each task's grounding pack to the
+request lowered task success over all tasks from {{oct.spec.success:.1%}} to
+{{oct.spec_grounded.success:.1%}}, and the number of valid answers from {{oct.spec.n_valid}} to
+{{oct.spec_grounded.n_valid}}: the longer prompt produced more invalid output. On the clinical
+tier, task success was {{oct.spec.clinical.success:.1%}} without the pack and
+{{oct.spec_grounded.clinical.success:.1%}} with it. Finding 2 explains why the pack had little
+to add: the residue was already right without it. Whether a pack helps when it holds a number
+that the model cannot guess is a question for the rebuilt clinical tier (Table 9).
 
-![**Figure 5.** Per model: change in strict F1 when the grounding pack is added ({{run.status_tag}}). Bar: all tasks. Diamond: lookup tasks only. Values left of zero mean the pack made the score worse.](generated/fig_mvs_grounding.svg)
+**Finding 4: without the format reference, no answer was valid.**
+The condition with the instruction and the output rule only was run on {{mvs.bare.n_models}}
+models, with and without grounding packs. None of their {{mvs.bare.n_samples}} answers was a
+valid scene. For these models, knowledge of the
+MolViewSpec format came from the prompt and not from training.
 
-### 6.6 Without the format reference, no scene was valid
+**Finding 5: our first call-list track did not separate models from a keyword script.** That
+track had {{legacy_api.n_tasks}} hand-written tasks and a grader that compared call lists field
+by field. The keyword script scored {{legacy_api.baseline_f1:.2f}} on it, and the
+{{legacy_api.n_models}} models between {{legacy_api.f1_min:.2f}} and
+{{legacy_api.f1_max:.2f}} (run of {{legacy_api.run}}). These numbers are the reason the track
+was rebuilt; they are not results of the present benchmark.
 
-{{include:generated/table_mvs_conditions.md}}
+**Finding 6: a pilot rating study, with its limits.** In October, valid scenes that scored
+below 1 were also rendered and shown to the image judge (Section 5.5); a scene that the judge
+called the same as the reference was counted as right in a side column, a *rescue*. Volunteers
+then rated a sample of those picture pairs. In this pilot ({{pilot.n_raters}} raters, one of
+them the author; {{pilot.all.n_labelled}} labelled answers on {{pilot.all.n_pairs}} image
+pairs), people agreed with the judge on {{pilot.all.agreement:.0%}} of answers (Cohen's kappa
+{{pilot.all.kappa:.2f}}, 95% interval {{pilot.all.kappa_lo:.2f}} to
+{{pilot.all.kappa_hi:.2f}}), and confirmed {{pilot.all.rescue:.0%}}
+({{pilot.all.rescue_lo:.0%}} to {{pilot.all.rescue_hi:.0%}}) of its "same" calls;
+{{pilot.indep.rescue:.0%}} ({{pilot.indep.rescue_lo:.0%}} to {{pilot.indep.rescue_hi:.0%}})
+without the author. Cohen's kappa is agreement beyond what chance would give: 0 is chance and
+1 is perfect. Under the earlier grader, the judge's rescues changed no model's mean F1 by more than
+{{mvs.spec.escalation.lift_max:.3f}}, and no result above uses them. Only
+{{pilot.n_raters_passing_checks}} of the {{pilot.n_raters}} raters passes the attention-check
+rule as it was written before the data were seen (at least {{pilot.check_rule:.0%}} right on
+each kind of check item): the author was never shown a check item, and one volunteer answered
+"can't tell" on a check, which the rule counts as a miss. The all-rater numbers therefore
+depart from that rule. This pilot does not validate the image judge. It gives no measure of
+agreement between people, because only {{pilot.all.pairs_two_raters}} pairs received two
+labelled answers. It supports no statement about tiers or single models, and none about the
+final run.
 
-{{mvs.bare.n_models}} models ({{mvs.bare.models}}) were run in the `bare` condition, with and
-without grounding packs. Of {{mvs.bare.n_samples}} outputs, {{mvs.bare.n_valid}} were valid
-scenes ({{mvs.bare.outcomes}}). The models wrote JSON that resembled a scene and that the viewer
-rejected. This result rests on {{mvs.bare.n_models}} models only. It says that, for these
-models, knowledge of the MolViewSpec format came from the prompt and not from training.
+*End of the preliminary evidence.*
 
-### 6.7 Tree score against render-checked score
-
-{{include:generated/table_mvs_escalation.md}}
-
-Of {{mvs.spec.escalation.n}} outputs, {{mvs.spec.escalation.perfect}} matched the reference tree
-exactly, {{mvs.spec.escalation.failed}} were invalid, and {{mvs.spec.escalation.escalated}}
-valid but imperfect scenes were rendered and compared. {{mvs.spec.escalation.rescued}} were
-rescued: {{mvs.spec.escalation.rescued_pixel}} by near-identical pixels and
-{{mvs.spec.escalation.rescued_judge}} by the image-pair judge ({{mvs.spec.escalation.judge}}).
-Validated F1 exceeded tree F1 by {{mvs.spec.escalation.lift_min:.3f}} to
-{{mvs.spec.escalation.lift_max:.3f}} per model. The tree score is thus slightly strict, and the
-correction is too small to change any conclusion above. How far the judge's rescues can be
-trusted is the subject of the rating study.
-⟦PENDING: rating-study readout⟧
-
-### 6.8 The first API track did not separate models
-
-The first version of the API track had {{legacy_api.n_tasks}} hand-written tasks and a grader
-that compared call lists field by field. A keyword script that uses no model scored
-{{legacy_api.baseline_f1:.3f}} on it. The {{legacy_api.n_models}} models scored between
-{{legacy_api.f1_min:.3f}} and {{legacy_api.f1_max:.3f}} (median
-{{legacy_api.f1_median:.3f}}; run of {{legacy_api.run}}). The script matched or beat the mean
-model on {{legacy_api.n_tasks_baseline_ge_mean}} tasks, and API scores were unrelated to MVS
-scores (r = {{legacy_api.r_api_mvs:.2f}} over {{legacy_api.r_api_mvs_n}} models). A check of the
-references against the structures also found errors, including references that used label
-numbering where author numbering was meant.
-
-We report these numbers only as the reason for the rebuild described in Sections 3 and 4. They
-are not results of this benchmark.
-
-{{include:generated/table_api_leaderboard.md|PENDING: API-track leaderboard (final run)}}
-
-{{include:generated/table_paired.md|PENDING: paired MVS–API analysis: discordant pairs and McNemar test per model, with and without clinical twins (final run)}}
-
-{{include:generated/table_followup.md|PENDING: follow-up and accept-set tiers (final run)}}
-
-### 6.9 Cost
-
-{{include:generated/table_mvs_cost.md}}
-
-The {{mvs.spec.n_models}} models used {{mvs.spec.cost.input_mtok}} million input tokens and
-{{mvs.spec.cost.output_mtok}} million output tokens for the headline condition. A price was
-recorded for {{mvs.spec.cost.n_priced}} models, which together cost
-${{mvs.spec.cost.total_priced_usd:.2f}}. The best open-weight model
-({{mvs.spec.cost.best_open.name}}, strict F1 {{mvs.spec.cost.best_open.f1:.2f}}) cost
-${{mvs.spec.cost.best_open.usd:.3f}} for the run. The best closed-weight model
-({{mvs.spec.cost.best_closed.name}}, {{mvs.spec.cost.best_closed.f1:.2f}}) cost
-${{mvs.spec.cost.best_closed.usd:.3f}}, {{mvs.spec.cost.closed_over_open}} times as much.
-⟦PENDING: prices for the {{mvs.spec.cost.n_unpriced}} models with no recorded price; final-run
-cost for all models and both tracks⟧
+</div>

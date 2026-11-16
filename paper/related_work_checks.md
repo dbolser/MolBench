@@ -64,3 +64,15 @@ full text (first 100,000 characters of each):
   description".
 - The human rating study is presented as a check on a side column, not as a contribution;
   SciVisAgentBench has a larger expert study.
+
+## Re-check for the rewrite (2026-11-16)
+
+- Every `references.bib` entry with a DOI was compared by script with the Crossref record
+  saved at the first check (title, year, volume, pages): all 17 match. The eight arXiv
+  identifiers are present in the saved arXiv API response. `jia2025voice` and
+  `sun2024chatmol` have no saved Crossref record; their fields stand as checked on
+  2026-11-12 (journal page and ACL Anthology).
+- One reference was added: Jumper et al. 2021 (AlphaFold, Nature 596:583–589), from its
+  Crossref record, because the AlphaFold DB licence asks for it.
+- No other citation was added. Statements about other benchmarks (169, 108 and 146 tasks;
+  alpha 0.669; r about 0.81; 38.6% of 176,507 entries) are unchanged from the verified draft.
