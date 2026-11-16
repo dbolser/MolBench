@@ -21,17 +21,17 @@ python scripts/paper_tables.py --from-run results/final-v1          # the real o
 python -m molbench.runner --manifest run/pilot.toml --dry-run       # rehearse the pilot, $0
 ```
 
-## Run sizes (projected 2026-11-16, corpus as merged: 869 task files)
+## Run sizes (projected 2026-11-16, corpus after the audit fixes: 879 task files)
 
 | size | what runs | calls | expected | cap to set | what it buys |
 |---|---|---:|---:|---:|---|
-| lean | core panel, every condition, `run.samples = 1` | 31,364 | $61 | $76 | every table filled once; no within-task sample spread, so no "all samples right", wider intervals, and paraphrase spread cannot be told from sampling noise |
-| **recommended** (the manifest as committed) | core panel (16 models + keyword baseline), 3 samples; structured-output condition 1 sample | 68,022 | $133 | $165 | everything the plan decided, on the models already tracked |
-| full | recommended + the five optional frontier models (`--include-optional`) | 87,412 | $479 | $600 | the same tables with a closed-frontier row from four labs and the largest open model |
+| lean | core panel, every condition, `run.samples = 1` | 31,766 | $62 | $78 | every table filled once; no within-task sample spread, so no "all samples right", wider intervals, and paraphrase spread cannot be told from sampling noise |
+| **recommended** (the manifest as committed) | core panel (16 models + keyword baseline), 3 samples; structured-output condition 1 sample | 68,928 | $135 | $165 | everything the plan decided, on the models already tracked |
+| full | recommended + the five optional frontier models (`--include-optional`) | 88,593 | $486 | $610 | the same tables with a closed-frontier row from four labs and the largest open model |
 
 One optional model at a time (`--only-models` takes manifest ids; the archive is per model,
-so models can be added later without re-running the rest): claude-opus-5.5 +$137,
-gpt-6.1-sol +$69, gemini-4-argon +$69, grok-4.7 +$52, deepseek-v4-pro-0813 +$20. None of
+so models can be added later without re-running the rest): claude-opus-5.5 +$139,
+gpt-6.1-sol +$70, gemini-4-argon +$70, grok-4.7 +$53, deepseek-v4-pro-0813 +$20. None of
 the five has measured token rates: their projection uses the highest output rate seen.
 
 The projection is tokens × manifest price: input tokens from the real prompts, output
@@ -68,7 +68,9 @@ What a run sends and scores:
   state the edit had to leave alone, from `provenance.preserved`); on a resolve task,
   which kind of entry the answer loads (`entry_outcome`: accepted, a real entry of
   something else, an id that does not exist; the rule is the resolve generator's own,
-  through `molbench/resolve.py`). Each task row carries its difficulty facts under one
+  through `molbench/resolve.py`) and, on an accepted entry, whether it is the task's
+  reference entry (`entry_is_reference`: other accepted entries have no atom table and
+  are graded as written). Each task row carries its difficulty facts under one
   vocabulary (`molbench/difficulty.py`).
 - **Samples** are per condition: `run.samples`, or a condition's own `samples`.
 - **A dry run** adds the fixture tasks in `tests/fixtures/tasks/` only if the corpus has

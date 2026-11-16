@@ -36,14 +36,14 @@ timeout_seconds = 300.0
 cap_usd = 165.00
 note = """Hard stop. The run aborts before the first call if the plan is projected above \
 the cap, and mid-run as soon as (spent + estimated cost of the calls still to make) passes it. \
-Sized on 2026-11-16 for the corpus as merged (869 task files, 68,022 calls for the core panel): \
+Sized on 2026-11-16 for the corpus after the audit fixes (879 task files, 68,928 calls for the core panel): \
 this manifest is the RECOMMENDED run - the 17-entry core panel, 3 samples per task, 1 in the \
-structured-output condition - projected at $132.51 (scripts/estimate_cost.py --core-only); the \
-cap is that plus 25%. LEAN (run.samples = 1, all else unchanged): about $61; set the cap to \
-$76. FULL (--include-optional, five frontier models): about $479; set the cap to $600. One \
-optional model at a time adds: claude-opus-5.5 $137, gpt-6.1-sol $69, gemini-4-argon $69, \
-grok-4.7 $52, deepseek-v4-pro-0813 $20 (their token use is a pooled worst-case rate, never \
-measured). gemini-3.5-flash is $51 of the $133: the highest price in the core panel and about \
+structured-output condition - projected at $134.84 (python -m molbench.runner --manifest run/final_run.toml); the \
+cap is that plus 22%. LEAN (run.samples = 1, all else unchanged): about $62; set the cap to \
+$78. FULL (--include-optional, five frontier models): about $486; set the cap to $610. One \
+optional model at a time adds: claude-opus-5.5 $139, gpt-6.1-sol $70, gemini-4-argon $70, \
+grok-4.7 $53, deepseek-v4-pro-0813 $20 (their token use is a pooled worst-case rate, never \
+measured). gemini-3.5-flash is $51 of the $135: the highest price in the core panel and about \
 three hidden reasoning tokens for every visible one. Re-project after the freeze \
 (python -m molbench.runner --manifest run/final_run.toml) and after the pilot."""
 
