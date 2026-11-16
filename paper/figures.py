@@ -4,8 +4,8 @@
     uv run python paper/figures.py           # writes paper/generated/fig_*.svg
     uv run python paper/figures.py --check   # exit 1 if a committed schematic is stale
 
-Four schematics are written as plain SVG by this script (pipeline, tiers, drawn-state
-grading, paired design), so they are text, diff cleanly and need no drawing program. One
+Five schematics are written as plain SVG by this script (pipeline, tiers, drawn-state
+grading, paired design, and the shapes of the result figures), so they are text, diff cleanly and need no drawing program. One
 chart (the October predictions regraded) is drawn with matplotlib. Every number and every
 request shown is read from ``paper/generated/values.json`` / ``corpus_values.json`` or from
 the task files; nothing is typed here. Colours are the Okabe-Ito set (blue, orange, bluish
@@ -408,8 +408,98 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
     plt.close(fig)
 
 
+# --------------------------------------------------------------------------- #
+# Figure 7: the shapes of the result figures (no data)
+# --------------------------------------------------------------------------- #
+def fig_result_shapes(v: dict) -> str:
+    """Three empty panels that show how the final-run figures will be read. Nothing in
+    this figure is a result: each panel has axes, the marks explained in a key, and one
+    greyed example row that is labelled as an example."""
+    W, H = 960, 372
+    s = Svg(W, H, "Shapes of the three result figures that the final run will fill; no data are shown")
+    s.text(12, 24, "Result figures as they will be drawn (no data yet)", size=15, weight="bold")
+    s.text(12, 42, "Axes and marks are final. The grey row in each panel is an example of a mark, not a result.",
+           size=11, fill=MUTED)
+    pw, ph, top = 300, 268, 62
+    n_models = v["plan.n_core_models"] + 1
+
+    def frame(i, title, sub, xlabel, ticks):
+        x0 = 12 + i * (pw + 18)
+        s.rect(x0, top, pw, ph, fill="#ffffff")
+        s.text(x0 + 10, top + 20, title, size=12, weight="bold")
+        s.para(x0 + 10, top + 36, sub, 52, size=10, fill=MUTED)
+        ax, ay, aw = x0 + 74, top + 176, pw - 92
+        s.line(ax, ay, ax + aw, ay, stroke=INK)
+        for k, t in enumerate(ticks):
+            tx = ax + aw * k / (len(ticks) - 1)
+            s.line(tx, ay, tx, ay + 4, stroke=INK)
+            s.line(tx, top + 74, tx, ay, stroke="#e3e3e3")
+            s.text(tx, ay + 16, t, size=9.5, anchor="middle", fill=MUTED)
+        s.text(x0 + pw / 2, ay + 34, xlabel, size=10.5, anchor="middle")
+        s.text(ax + aw / 2, top + 140, "⟦PENDING: final run⟧", size=12, anchor="middle", fill=MUTED)
+        return x0, ax, ay, aw
+
+    # A: leaderboard
+    x0, ax, ay, aw = frame(0, "A  Task success by model and track",
+                           f"One row per model ({n_models} rows, keyword script included), best first.",
+                           "Task success, strict",
+                           ["0", "0.25", "0.5", "0.75", "1"])
+    ry = top + 92
+    s.text(ax - 6, ry + 4, "model", size=9.5, anchor="end", fill=MUTED)
+    s.line(ax + aw * 0.42, ry - 5, ax + aw * 0.60, ry - 5, stroke=GREY, sw=2)
+    s.circle(ax + aw * 0.51, ry - 5, 4.5, GREY)
+    s.line(ax + aw * 0.55, ry + 6, ax + aw * 0.74, ry + 6, stroke=GREY, sw=2)
+    s.raw(f'<rect x="{ax + aw * 0.645 - 4}" y="{ry + 2}" width="8" height="8" fill="#ffffff" stroke="{GREY}" stroke-width="2"/>')
+    ky = top + ph - 14
+    s.circle(x0 + 16, ky - 4, 4.5, BLUE)
+    s.text(x0 + 26, ky, "scene track", size=9.5)
+    s.raw(f'<rect x="{x0 + 100}" y="{ky - 8}" width="8" height="8" fill="#ffffff" stroke="{ORANGE}" stroke-width="2"/>')
+    s.text(x0 + 114, ky, "call-list track", size=9.5)
+    s.line(x0 + 196, ky - 4, x0 + 216, ky - 4, stroke=INK, sw=2)
+    s.text(x0 + 222, ky, "95% interval", size=9.5)
+
+    # B: pairs
+    x0, ax, ay, aw = frame(1, "B  The same request in both formats",
+                           f"One bar per model: its {v['corpus.n_twin_pairs']} pairs, split four ways.",
+                           "Share of pairs", ["0", "0.25", "0.5", "0.75", "1"])
+    ry = top + 86
+    s.text(ax - 6, ry + 10, "model", size=9.5, anchor="end", fill=MUTED)
+    cuts = [(0.0, 0.45, "#8a8a8a", ""), (0.45, 0.60, "#c4c4c4", "url(#hatchA)"),
+            (0.60, 0.72, "#c4c4c4", "url(#hatchB)"), (0.72, 1.0, "#f1f1f1", "")]
+    s.raw('<defs><pattern id="hatchA" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+          f'<rect width="6" height="6" fill="#ffffff"/><line x1="0" y1="0" x2="0" y2="6" stroke="{BLUE}" stroke-width="2.4"/></pattern>'
+          '<pattern id="hatchB" width="6" height="6" patternUnits="userSpaceOnUse">'
+          f'<rect width="6" height="6" fill="#ffffff"/><circle cx="3" cy="3" r="1.6" fill="{ORANGE}"/></pattern></defs>')
+    for a, b, fill, pat in cuts:
+        s.raw(f'<rect x="{ax + aw * a:.1f}" y="{ry}" width="{aw * (b - a):.1f}" height="14" fill="{pat or fill}" stroke="#ffffff"/>')
+    ky = top + ph - 30
+    keys = [("#8a8a8a", "", "both right"), ("", "url(#hatchA)", "scene right only"),
+            ("", "url(#hatchB)", "call list right only"), ("#f1f1f1", "", "both wrong")]
+    for k, (fill, pat, label) in enumerate(keys):
+        kx, kyy = x0 + 12 + (k % 2) * 144, ky + (k // 2) * 16
+        s.raw(f'<rect x="{kx}" y="{kyy - 9}" width="14" height="10" fill="{pat or fill}" stroke="{LINE}" stroke-width="0.8"/>')
+        s.text(kx + 20, kyy, label, size=9.5)
+
+    # C: tiers
+    x0, ax, ay, aw = frame(2, "C  Where points are lost, by tier",
+                           "One row per tier and track, models averaged. A gap between the marks is unrequested extra drawing.",
+                           "Score, valid outputs only", ["0", "0.25", "0.5", "0.75", "1"])
+    ry = top + 92
+    s.text(ax - 6, ry + 4, "tier", size=9.5, anchor="end", fill=MUTED)
+    s.line(ax + aw * 0.38, ry, ax + aw * 0.80, ry, stroke=GREY, sw=1.5)
+    s.raw(f'<path d="M{ax + aw * 0.38 - 5},{ry} l5,-5 l5,5 l-5,5 z" fill="{GREY}"/>')
+    s.circle(ax + aw * 0.80, ry, 4.5, GREY)
+    ky = top + ph - 14
+    s.raw(f'<path d="M{x0 + 11},{ky - 4} l5,-5 l5,5 l-5,5 z" fill="{ORANGE}"/>')
+    s.text(x0 + 26, ky, "task success", size=9.5)
+    s.circle(x0 + 110, ky - 4, 4.5, GREEN)
+    s.text(x0 + 120, ky, "target score", size=9.5)
+    return s.done()
+
+
 SCHEMATICS = {"fig_pipeline.svg": fig_pipeline, "fig_tiers.svg": fig_tiers,
-              "fig_grading.svg": fig_grading, "fig_twins.svg": fig_twins}
+              "fig_grading.svg": fig_grading, "fig_twins.svg": fig_twins,
+              "fig_result_shapes.svg": fig_result_shapes}
 
 
 def main(argv=None) -> int:
