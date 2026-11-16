@@ -73,12 +73,12 @@ class BuildError(Exception):
 # reported by ``build.py --check`` so that no tag is left without an owner.
 FILLED_BY = [
     ("final run", "The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then "
-                  "`scripts/paper_tables.py` on its archives. Tables shown in their final shape are "
-                  "replaced when the script writes the file named in the section source."),
+                  "`scripts/paper_tables.py` on its archives. A table shown in its final shape is replaced "
+                  "when the script writes the file named under \"Keys and files\" below."),
     ("corpus freeze", "The freeze of the corpus (version tag and hash pinned in `run/final_run.toml`), "
                       "then `paper/corpus_values.py`."),
-    ("rating study", "The second rating study (`paper/a4/FINAL_CALL.md`), run on the final run's scenes; "
-                     "`scripts/agreement.py` writes the numbers."),
+    ("rating study", "The second rating study (design: `paper/a4/FINAL_CALL.md`), run on the final run's "
+                     "scenes; `scripts/agreement.py` writes the numbers."),
     ("deposit", "Depositing the frozen corpus, the run archives and the ratings in a public repository "
                 "that issues a DOI."),
     ("Dan", "An author decision or author-supplied text."),
@@ -86,9 +86,10 @@ FILLED_BY = [
 
 
 def filled_by(what: str) -> str | None:
-    for start, how in FILLED_BY:
+    """The owner of a tag: the entry of ``FILLED_BY`` that the tag starts with (its first words)."""
+    for start, _ in FILLED_BY:
         if what.startswith(start):
-            return how
+            return start
     return None
 
 
@@ -362,9 +363,15 @@ def pending_report(pending: list[dict], values: dict) -> str:
         f"{len(rows)} tag(s) in the built paper and Supporting Information, in {len(groups)} "
         "distinct places. The first words of a tag say what fills it.",
         "",
-        "| # | Source file | First line | Times | Waiting for | Filled by |",
-        "|---:|:---|---:|---:|:---|:---|",
+        "| Filled by | Tags | How |",
+        "|:---|---:|:---|",
     ]
+    for start, how in FILLED_BY:
+        n = sum(g["n"] for (_, what), g in groups.items() if filled_by(what) == start)
+        lines.append(f"| **{start}** | {n} | {how} |")
+    lines += ["",
+              "| # | Source file | First line | Times | Waiting for | Filled by |",
+              "|---:|:---|---:|---:|:---|:---|"]
     for i, ((section, what), g) in enumerate(groups.items(), 1):
         how = filled_by(what) or "**not classified: start the tag with one of the words in `FILLED_BY`**"
         lines.append(f"| {i} | `{section}` | {g['line']} | {g['n']} | {what.replace('|', '/')} | {how} |")
@@ -518,6 +525,8 @@ def main(argv=None) -> int:
     print(f"abstract: {n_abstract} words without PENDING tags (limit {ABSTRACT_MAX_WORDS})")
     if args.pdf:
         for out, _, _, _ in built:
+            if out == OUT_PLAIN:        # an email text, not a document to typeset
+                continue
             made = render(out)
             if made:
                 print("also wrote " + ", ".join(made))

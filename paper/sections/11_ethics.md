@@ -19,10 +19,10 @@ this manuscript. The authors checked all content and are responsible for it.
 ⟦PENDING: Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements⟧
 
 **Licences of data and software.** We read each licence at its source on 2026-11-16 (Table
-11). Frozen copies of third-party data in the repository keep their original terms and are
+12). Frozen copies of third-party data in the repository keep their original terms and are
 attributed in the repository.
 
-**Table 11. Data and software used, with licence or terms as stated at the source.**
+**Table 12. Data and software used, with licence or terms as stated at the source.**
 
 | Resource | Used for | Licence or terms | Read at |
 |:---|:---|:---|:---|

@@ -593,6 +593,10 @@ tracks as a floor: it maps words in the request to fixed output by rule.
 Every model receives a system prompt and the request, and returns one answer. Models cannot
 look anything up, ask a question back, or see a rendered result.
 
+**Table 4. Prompting conditions.** *Format reference*: a frozen text that documents the answer
+format. *JSON mode*: a provider option that forces syntactically valid JSON. *Grounding pack*:
+facts about the structure that an offline lookup could produce.
+
 | Condition | What the model is given | Run on |
 |:---|:---|:---|
 | **Format reference** (headline) | A short instruction, the output rule ("answer with one JSON value and nothing else") and a frozen reference text for the answer format | all models, all tasks, both tracks |
@@ -664,7 +668,7 @@ kept apart from everything else.
 
 ### 6.1 Models on both tracks
 
-**Table 4. Scene track, headline condition (format reference).** One row per model; † marks an
+**Table 5. Scene track, headline condition (format reference).** One row per model; † marks an
 optional model. *Valid outputs*: share of answers that parse and that the viewer accepts. *F1*:
 how much of the drawn state is right (0 to 1). *Task success*: share of answers whose drawn
 state is exactly right. *Target score*: whether the requested atoms are drawn as asked,
@@ -698,14 +702,14 @@ condition, at list price. Intervals (95%, structures resampled) will be given wi
 | grok-4.7 † | closed | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | deepseek-v4-pro-0813 † | open | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 
-**Table 5. Call-list track, headline condition.** Same columns and definitions as Table 4.
+**Table 6. Call-list track, headline condition.** Same columns and definitions as Table 5.
 
-⟦PENDING: final run — the table for the call-list track, in the shape of Table 4⟧
+⟦PENDING: final run — the table for the call-list track, in the shape of Table 5⟧
 
 ### 6.2 Tiers
 
-**Table 6. Scores by tier and track**, mean over models. *F1*, *task success* and *target
-score* as in Table 4. *Strict*: an invalid answer counts as 0. *Valid outputs only*: the mean
+**Table 7. Scores by tier and track**, mean over models. *F1*, *task success* and *target
+score* as in Table 5. *Strict*: an invalid answer counts as 0. *Valid outputs only*: the mean
 over valid answers, which shows the difficulty of a tier once the format has been written
 correctly.
 
@@ -727,7 +731,7 @@ correctly.
 
 ### 6.3 The same request in two formats
 
-**Table 7. Paired comparison of the two formats.** For each model, its
+**Table 8. Paired comparison of the two formats.** For each model, its
 255 pairs (one request on both tracks, same target atoms) are split four
 ways. A side is *right* when at least two of its three sampled answers are exactly right (task
 success). *McNemar p*: exact test that the two one-sided counts are equal; a small value means
@@ -764,8 +768,8 @@ are the candidates for an error of content.
 
 ### 6.4 Clinical variants
 
-**Table 8. Clinical tier on the scene track, by what the request demands.** *Task success* and
-*target score* as in Table 4, strict, mean over models. *Grounding pack*: facts about the
+**Table 9. Clinical tier on the scene track, by what the request demands.** *Task success* and
+*target score* as in Table 5, strict, mean over models. *Grounding pack*: facts about the
 structure, including the UniProt mapping, appended to the request. The first two rows split the
 tasks by whether an answer that takes the number in the variant name as the author residue
 number would be right. Rows overlap; the helix and strand tasks need the entry's own annotation
@@ -785,7 +789,7 @@ will close the gap. If models carry out the mapping, the rows will be alike.
 
 ### 6.5 Follow-up turns, open requests and robustness
 
-**Table 9. Follow-up turns and requests with several right answers.** *Task success*: share
+**Table 10. Follow-up turns and requests with several right answers.** *Task success*: share
 of answers whose final drawn state is exactly right (for requests with several right answers:
 exactly one of the accepted states), strict, mean over models.
 
@@ -795,10 +799,10 @@ exactly one of the accepted states), strict, mean over models.
 | Follow-up turns that need no change | 10 | ⟦PENDING: final run⟧ | 8 | ⟦PENDING: final run⟧ |
 | Requests with several right answers | 26 | ⟦PENDING: final run⟧ | 15 | ⟦PENDING: final run⟧ |
 
-**Table 10. Planned comparisons.** Each row compares task success (strict, mean over models)
+**Table 11. Planned comparisons.** Each row compares task success (strict, mean over models)
 between two groups of tasks or two conditions, with a 95% interval on the difference
 (structures resampled). *JSON mode*: the provider's option that forces syntactically valid
-JSON. *Grounding pack*: as in Table 8. *Format reference*: the reference text for the answer
+JSON. *Grounding pack*: as in Table 9. *Format reference*: the reference text for the answer
 format in the system prompt.
 
 | Comparison | Tasks | Task success, first group | Task success, second group | Difference (95% interval) |
@@ -913,7 +917,7 @@ request lowered task success over all tasks from 49.9% to
 tier, task success was 3.7% without the pack and
 3.0% with it. Finding 2 explains why the pack had little
 to add: the residue was already right without it. Whether a pack helps when it holds a number
-that the model cannot guess is a question for the rebuilt clinical tier (Table 8).
+that the model cannot guess is a question for the rebuilt clinical tier (Table 9).
 
 **Finding 4: without the format reference, no answer was valid.**
 3 models were run with the instruction and the output rule only. None of
@@ -1107,10 +1111,10 @@ this manuscript. The authors checked all content and are responsible for it.
 ⟦PENDING: Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements⟧
 
 **Licences of data and software.** We read each licence at its source on 2026-11-16 (Table
-11). Frozen copies of third-party data in the repository keep their original terms and are
+12). Frozen copies of third-party data in the repository keep their original terms and are
 attributed in the repository.
 
-**Table 11. Data and software used, with licence or terms as stated at the source.**
+**Table 12. Data and software used, with licence or terms as stated at the source.**
 
 | Resource | Used for | Licence or terms | Read at |
 |:---|:---|:---|:---|

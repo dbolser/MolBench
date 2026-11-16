@@ -6,26 +6,34 @@ Run numbers currently come from: **October 2026 panel** (PRELIMINARY). They appe
 
 380 tag(s) in the built paper and Supporting Information, in 18 distinct places. The first words of a tag say what fills it.
 
+| Filled by | Tags | How |
+|:---|---:|:---|
+| **final run** | 371 | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. A table shown in its final shape is replaced when the script writes the file named under "Keys and files" below. |
+| **corpus freeze** | 2 | The freeze of the corpus (version tag and hash pinned in `run/final_run.toml`), then `paper/corpus_values.py`. |
+| **rating study** | 1 | The second rating study (design: `paper/a4/FINAL_CALL.md`), run on the final run's scenes; `scripts/agreement.py` writes the numbers. |
+| **deposit** | 2 | Depositing the frozen corpus, the run archives and the ratings in a public repository that issues a DOI. |
+| **Dan** | 4 | An author decision or author-supplied text. |
+
 | # | Source file | First line | Times | Waiting for | Filled by |
 |---:|:---|---:|---:|:---|:---|
-| 1 | `sections/00_title.md` | 3 | 1 | Dan — author list, affiliations, corresponding author | An author decision or author-supplied text. |
-| 2 | `sections/01_abstract.md` | 17 | 1 | final run — headline results on both tracks and the paired comparison, two sentences | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 3 | `sections/02_introduction.md` | 56 | 1 | final run — one sentence stating the main result | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 4 | `sections/07_results.md` | 24 | 363 | final run | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 5 | `sections/07_results.md` | 49 | 1 | final run — the table for the call-list track, in the shape of Table 4 | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 6 | `sections/07_results.md` | 109 | 1 | final run — the same counts without the 18 pairs that need an unstated hide step, and without the clinical pairs | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 7 | `sections/07_results.md` | 159 | 1 | final run — outcome counts per model (valid, invalid JSON, rejected by the viewer, cut off), the JSON-repair counterfactual and the cost per model, as tables in SI Section S8 | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 8 | `sections/07_results.md` | 161 | 1 | rating study — agreement between people, and between people and the grader's task success, with intervals (Section 5.5) | The second rating study (`paper/a4/FINAL_CALL.md`), run on the final run's scenes; `scripts/agreement.py` writes the numbers. |
-| 9 | `sections/09_discussion.md` | 3 | 1 | final run — discussion of the results: which tiers separate models, what the paired comparison shows, whether the held-back split differs from the public one | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 10 | `sections/11_ethics.md` | 14 | 1 | Dan — confirm the consent wording shown to raters, and whether the target journal or the author's institution requires an ethics statement or a waiver for this study | An author decision or author-supplied text. |
-| 11 | `sections/11_ethics.md` | 19 | 1 | Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements | An author decision or author-supplied text. |
-| 12 | `sections/12_availability.md` | 4 | 1 | corpus freeze — version tag and hash of the frozen corpus | The freeze of the corpus (version tag and hash pinned in `run/final_run.toml`), then `paper/corpus_values.py`. |
-| 13 | `sections/12_availability.md` | 5 | 1 | deposit — DOI of the frozen corpus, including the held-back split, and of the raw model answers and score files of the final run | Depositing the frozen corpus, the run archives and the ratings in a public repository that issues a DOI. |
-| 14 | `sections/12_availability.md` | 6 | 1 | deposit — anonymised ratings of both rating studies, with the analysis scripts | Depositing the frozen corpus, the run archives and the ratings in a public repository that issues a DOI. |
-| 15 | `sections/12_availability.md` | 25 | 1 | Dan — acknowledgements, funding, competing interests, author contributions, and the disclosure of language-model use | An author decision or author-supplied text. |
-| 16 | `si/s6_run.md` | 5 | 1 | corpus freeze — final version tag and hash | The freeze of the corpus (version tag and hash pinned in `run/final_run.toml`), then `paper/corpus_values.py`. |
-| 17 | `si/s6_run.md` | 22 | 1 | final run — the version string each provider reports, and the dates of the calls | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
-| 18 | `si/s8_pilot.md` | 187 | 1 | final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, cost per model | The paid run (`python -m molbench.runner --manifest run/final_run.toml --go`), then `scripts/paper_tables.py` on its archives. Tables shown in their final shape are replaced when the script writes the file named in the section source. |
+| 1 | `sections/00_title.md` | 3 | 1 | Dan — author list, affiliations, corresponding author | Dan |
+| 2 | `sections/01_abstract.md` | 17 | 1 | final run — headline results on both tracks and the paired comparison, two sentences | final run |
+| 3 | `sections/02_introduction.md` | 56 | 1 | final run — one sentence stating the main result | final run |
+| 4 | `sections/07_results.md` | 24 | 363 | final run | final run |
+| 5 | `sections/07_results.md` | 49 | 1 | final run — the table for the call-list track, in the shape of Table 5 | final run |
+| 6 | `sections/07_results.md` | 109 | 1 | final run — the same counts without the 18 pairs that need an unstated hide step, and without the clinical pairs | final run |
+| 7 | `sections/07_results.md` | 159 | 1 | final run — outcome counts per model (valid, invalid JSON, rejected by the viewer, cut off), the JSON-repair counterfactual and the cost per model, as tables in SI Section S8 | final run |
+| 8 | `sections/07_results.md` | 161 | 1 | rating study — agreement between people, and between people and the grader's task success, with intervals (Section 5.5) | rating study |
+| 9 | `sections/09_discussion.md` | 3 | 1 | final run — discussion of the results: which tiers separate models, what the paired comparison shows, whether the held-back split differs from the public one | final run |
+| 10 | `sections/11_ethics.md` | 14 | 1 | Dan — confirm the consent wording shown to raters, and whether the target journal or the author's institution requires an ethics statement or a waiver for this study | Dan |
+| 11 | `sections/11_ethics.md` | 19 | 1 | Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements | Dan |
+| 12 | `sections/12_availability.md` | 4 | 1 | corpus freeze — version tag and hash of the frozen corpus | corpus freeze |
+| 13 | `sections/12_availability.md` | 5 | 1 | deposit — DOI of the frozen corpus, including the held-back split, and of the raw model answers and score files of the final run | deposit |
+| 14 | `sections/12_availability.md` | 6 | 1 | deposit — anonymised ratings of both rating studies, with the analysis scripts | deposit |
+| 15 | `sections/12_availability.md` | 25 | 1 | Dan — acknowledgements, funding, competing interests, author contributions, and the disclosure of language-model use | Dan |
+| 16 | `si/s6_run.md` | 5 | 1 | corpus freeze — final version tag and hash | corpus freeze |
+| 17 | `si/s6_run.md` | 22 | 1 | final run — the version string each provider reports, and the dates of the calls | final run |
+| 18 | `si/s8_pilot.md` | 187 | 1 | final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, cost per model | final run |
 
 ## Keys and files the final run must supply
 

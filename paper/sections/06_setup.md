@@ -19,6 +19,10 @@ tracks as a floor: it maps words in the request to fixed output by rule.
 Every model receives a system prompt and the request, and returns one answer. Models cannot
 look anything up, ask a question back, or see a rendered result.
 
+**Table 4. Prompting conditions.** *Format reference*: a frozen text that documents the answer
+format. *JSON mode*: a provider option that forces syntactically valid JSON. *Grounding pack*:
+facts about the structure that an offline lookup could produce.
+
 | Condition | What the model is given | Run on |
 |:---|:---|:---|
 | **Format reference** (headline) | A short instruction, the output rule ("answer with one JSON value and nothing else") and a frozen reference text for the answer format | all models, all tasks, both tracks |
