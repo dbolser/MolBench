@@ -1,0 +1,146 @@
+# MolBench pilot - proves the real provider path on about 40 tasks before the paid run.
+#
+#   python -m molbench.runner --manifest run/pilot.toml --dry-run     # rehearse, $0, no network
+#   python -m molbench.runner --manifest run/pilot.toml               # plan + projected cost
+#
+#   Route 1, the direct Anthropic key (ANTHROPIC_API_KEY), about $0.30:
+#   python -m molbench.runner --manifest run/pilot.toml --go
+#
+#   Route 2, OpenRouter with a ":free" model (OPENROUTER_API_KEY), $0:
+#   python -m molbench.runner --manifest run/pilot.toml --go \
+#       --include-optional --only-models google/gemma-4-31b-it:free
+#
+# One model per start, one sample per task. Both routes write to runs/pilot-v1/ and
+# results/pilot-v1/ (cells are kept per model). A pilot may run before the corpus is
+# frozen: run.pilot = true lifts the pinned-hash rule and caps the budget at $5; the hash
+# of the corpus it ran on is recorded in runs/pilot-v1/run.json.
+#
+# What each route exercises:
+#   Anthropic direct   plain and grounded requests; native finish reason and token counts.
+#                      JSON mode is not wired for this route, so spec_structured has no
+#                      cells here.
+#   OpenRouter :free   the same, plus JSON mode (response_format) and the billed-cost field
+#                      (usage.cost, expected 0). Free models are rate-limited by OpenRouter;
+#                      a call that fails every retry is not archived, so starting the same
+#                      command again continues where it stopped.
+
+[run]
+name = "pilot-v1"
+pilot = true
+samples = 1
+max_tokens = 8000                   # as in the final run
+reasoning_max_tokens = 16000
+reasoning_effort = "provider-default"
+temperature = "provider-default"
+concurrency = 2
+per_model_concurrency = 2
+validate = "required"               # as in the final run: Mol* validates every parsed scene
+# BEGIN TASKS (written by run/select_pilot.py; do not edit by hand)
+tasks = [
+    "tr-range-rows-3k34",                               # translation, MVS, public, twin
+    "tr-range-rows-3k34-api",                           # translation, API, public, twin of tr-range-rows-3k34
+    "tr-het-code-6tha",                                 # translation, MVS, held back
+    "api-range-colour-8k7f",                            # translation, API, held back
+    "tr-rep-word-1mbn",                                 # translation, MVS, public, second template
+    "tr-chain-only-8c86-api",                           # translation, API, public, second template
+    "gr-attachment-1hrc-hec",                           # grounded, MVS, public, twin
+    "gr-attachment-1hrc-hec-api",                       # grounded, API, public, twin of gr-attachment-1hrc-hec
+    "gr-disulfides-3kcg",                               # grounded, MVS, held back
+    "gr-metal-site-2c9v-zn-api",                        # grounded, API, held back
+    "gr-ligand-1ake-ap5",                               # grounded, MVS, public, second template
+    "gr-glyco-sites-9fb2-api",                          # grounded, API, public, second template
+    "in-ca-distance-1ake",                              # interactions, MVS, public
+    "in-transparent-1rx2-nap",                          # interactions, MVS, held back
+    "res-complex-p69905-p68871",                        # resolve, MVS, public
+    "res-name-p02649",                                  # resolve, MVS, held back
+    "clin-chain-hbb-2hhb-v68m-chainb-mvs",              # clinical, MVS, public, twin
+    "clin-chain-hbb-2hhb-v68m-chainb-api",              # clinical, API, public, twin of clin-chain-hbb-2hhb-v68m-chainb-mvs
+    "clin-short-target-ins-6tc2-v42a-mvs",              # clinical, MVS, held back
+    "clin-multi-context-ins-6tc2-h34p-l35m-c109f-api",  # clinical, API, held back
+    "clin-short-context-tpi1-9f69-f241s-mvs",           # clinical, MVS, public, second template
+    "clin-hgvs-context-calm1-6m7h-d96v-api",            # clinical, API, public, second template
+    "fu-referent-colour-5cj6-mvs",                      # followup, MVS, public, twin
+    "fu-referent-colour-5cj6-api",                      # followup, API, public, twin of fu-referent-colour-5cj6-mvs
+    "fu-background-6tha-mvs",                           # followup, MVS, held back
+    "fu-also-colour-chain-6tc2-api",                    # followup, API, held back
+    "fu-remove-ligand-1k4c-mvs",                        # followup, MVS, public, second template
+    "fu-noop-shown-1f88-api",                           # followup, API, public, second template
+    "acc-ligand-colours-2cpp-mvs",                      # accept_set, MVS, public, twin
+    "acc-ligand-colours-2cpp-api",                      # accept_set, API, public, twin of acc-ligand-colours-2cpp-mvs
+    "acc-residue-colour-1igt-mvs",                      # accept_set, MVS, held back
+    "acc-residue-colour-1igt-api",                      # accept_set, API, held back
+    "api-canvas-1udt",                                  # tool_only, API, public
+    "api-undo-8k7f",                                    # tool_only, API, held back
+    "fu-noop-shown-3ert-mvs",                           # follow-up with no change, MVS
+    "clin-chain-hbb-2hhb-v68m-chainb-mvs.indirect",     # paraphrase (indirect) of clin-chain-hbb-2hhb-v68m-chainb-mvs
+    "clin-chain-hbb-2hhb-v68m-chainb-mvs.terse",        # paraphrase (terse) of clin-chain-hbb-2hhb-v68m-chainb-mvs
+    "clin-chain-hbb-2hhb-v68m-chainb-api.indirect",     # paraphrase (indirect) of clin-chain-hbb-2hhb-v68m-chainb-api
+    "clin-chain-hbb-2hhb-v68m-chainb-api.terse",        # paraphrase (terse) of clin-chain-hbb-2hhb-v68m-chainb-api
+]
+# END TASKS
+
+[run.retry]
+max_attempts = 5
+backoff_seconds = 2.0
+backoff_max_seconds = 60.0
+timeout_seconds = 300.0
+
+[budget]
+cap_usd = 2.00
+note = "Hard stop, as in the final run. The Anthropic route is projected at well under $1."
+
+[corpus]
+version = "corpus-v1.0-dev"
+sha256 = ""                         # a pilot does not need the pinned hash
+note = "The pilot runs on the corpus on disk; its hash is recorded in the archive."
+
+[[conditions]]
+name = "spec"
+prompt = "spec"
+models = "all"
+tracks = ["mvs", "api_calling"]
+note = "Every pilot task, as in the headline condition."
+
+[[conditions]]
+name = "spec_structured"
+prompt = "spec"
+structured = true
+models = "structured"
+tracks = ["mvs", "api_calling"]
+where = { tier = ["translation", "followup", "accept_set"] }
+note = """JSON mode, for a route that has it. Three tiers are enough to prove the switch, the \
+API track's {"actions": [...]} wrapper and the follow-up message; fewer calls for a \
+rate-limited free model."""
+
+[[conditions]]
+name = "spec_grounded"
+prompt = "spec"
+grounding = true
+models = "all"
+tracks = ["mvs"]
+where = { tier = ["resolve", "clinical"] }
+note = "Grounding pack appended, lookup tiers, as in the final run."
+
+[panel]
+rule = """Not a result: one model per start, chosen to prove a route. The Anthropic entry is \
+the final panel's own claude-haiku-4-5 on its own route; the OpenRouter entry is a zero-price \
+model that is not in the final panel."""
+
+[[models]]
+id = "claude-haiku-4-5"
+route = "anthropic:claude-haiku-4-5"
+open_weights = false
+reasoning = false
+structured = "none"
+price = { input = 1.0, output = 5.0, source = "Anthropic price list (platform.claude.com/docs/en/about-claude/pricing), as cached 2026-11-03; same on OpenRouter", date = "2026-11-16", verified = true }
+
+[[models]]
+id = "google/gemma-4-31b-it:free"
+route = "openrouter:google/gemma-4-31b-it:free"
+open_weights = true
+reasoning = false
+structured = "json_object"
+optional = true
+max_concurrency = 1
+reason = "A zero-price OpenRouter model whose listing has response_format: proves the OpenRouter route, JSON mode and the billed-cost field without spending."
+price = { input = 0.0, output = 0.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-16", verified = true }
