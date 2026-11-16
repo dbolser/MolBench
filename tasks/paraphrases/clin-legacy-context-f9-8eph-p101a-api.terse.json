@@ -6,7 +6,7 @@
  "structures": [
   "8eph"
  ],
- "prompt": "Using PDB entry 8eph, gray cartoon whole structure, orange ball-and-stick, wild-type residue position F9 (Coagulation factor IX) missense variant P55A (pathogenic ClinVar) every chain that has it; name P55A mature-protein numbering: residues counted from first residue mature protein, that, after 46-residue signal peptide and propeptide",
+ "prompt": "8eph grey cartoon; F9 (coagulation factor IX) P55A, pathogenic in ClinVar: the wild-type residue at that position as orange ball-and-stick, in every chain that has it. P55A is in mature-protein numbering (counted after the 46-residue signal peptide and propeptide)",
  "reference": [
   {
    "action": "load",
@@ -127,11 +127,11 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
    "its twin on the other track has the same words and the same style"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "Using PDB entry 8EPH, draw a gray cartoon of the whole structure and show, as orange ball-and-stick, the wild-type residue at the position of the F9 (Coagulation factor IX) missense variant P55A (pathogenic in ClinVar) in every chain that has it. The name P55A is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the 46-residue signal peptide and propeptide.",
   "source": {
    "script": "scripts/generate_clinical_tasks.py",
@@ -204,6 +204,7 @@
      }
     ],
     "secondary_structure": null,
+    "report_apart": null,
     "difficulty": {
      "needs_uniprot_mapping": true,
      "needs_numbering_offset": true,

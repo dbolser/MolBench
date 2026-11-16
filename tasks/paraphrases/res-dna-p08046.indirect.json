@@ -6,7 +6,7 @@
  "structures": [
   "1aay"
  ],
- "prompt": "I'd be grateful for your help with a figure, if you have a moment. This is what I need: I want to see how the mouse transcription factor Zif268 sits on DNA. Any PDB structure of the complex will do: protein as a red cartoon, DNA as a magenta cartoon.",
+ "prompt": "Could you find me a PDB structure of the mouse transcription factor Zif268 bound to DNA? Any entry of the complex is fine. I'd like the protein as a red cartoon and the DNA as a magenta cartoon.",
  "reference": {
   "root": {
    "kind": "root",
@@ -108,10 +108,10 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')"
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "I want to see how the mouse transcription factor Zif268 sits on DNA. Any PDB structure of the complex will do: protein as a red cartoon, DNA as a magenta cartoon.",
   "source": {
    "script": "scripts/generate_resolve_tasks.py",

@@ -1,0 +1,173 @@
+{
+ "id": "api-highlight-7a4m.indirect",
+ "track": "api",
+ "tier": "tool_only",
+ "family": "api-highlight",
+ "structures": [
+  "7a4m"
+ ],
+ "prompt": "I'd like to find Ser31 and Asn125 in 7A4M. Could you highlight the two residues, with steel blue as the highlight colour, and centre the view on them?",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "7a4m"
+  },
+  {
+   "action": "highlight",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 31
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 125
+    }
+   ],
+   "color": "steelblue",
+   "focus": true
+  }
+ ],
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 31,
+     "auth_comp_id": "SER"
+    },
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 125,
+     "auth_comp_id": "ASN"
+    }
+   ],
+   "representation": null,
+   "color": null
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "api-highlight-7a4m",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/api_generated/api-highlight-7a4m.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
+  "original_prompt": "Open 7A4M; highlight Ser31 and Asn125 using a steel blue highlight colour and centre the view on them.",
+  "source": {
+   "script": "scripts/generate_api_tasks.py",
+   "inputs": [
+    "data/panel/facts/7a4m.json",
+    "molbench/atom_tables/7a4m.json.gz",
+    "molbench/sifts_tables/7a4m.json.gz"
+   ],
+   "date": "2026-11-12",
+   "checks": [
+    "matches the task format (molbench.tasks.validate_task)",
+    "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+    "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+    "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+    "a bare load scores 0",
+    "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+    "equivalent answer succeeds: label numbering; colour and focus as separate calls",
+    "wrong answer fails: the author number in residue_number (F1 0.3333)"
+   ],
+   "structure": "7a4m",
+   "derived": "As api-residue-colour, with the viewer's highlight instead of a colouring. The highlight and the focus are compared by the residues the selection resolves to; they were not read back from the viewer.",
+   "checked_by": "scripts/check_api_refs.py",
+   "seed": 20261113,
+   "wording": "3 of 3",
+   "difficulty": {
+    "numbering_offset": true,
+    "auth_label_chain": false,
+    "ligand_identity_needed": false,
+    "uniprot_mapping": false,
+    "hinges_on": [],
+    "author_minus_label": [
+     4
+    ],
+    "insertion_codes_in_structure": false
+   },
+   "targets": [
+    {
+     "what": "Ser31",
+     "action": 1,
+     "param": 0,
+     "atoms": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 31,
+       "auth_comp_id": "SER"
+      }
+     ],
+     "n_atoms": 11
+    },
+    {
+     "what": "Asn125",
+     "action": 1,
+     "param": 1,
+     "atoms": [
+      {
+       "auth_asym_id": "A",
+       "auth_seq_id": 125,
+       "auth_comp_id": "ASN"
+      }
+     ],
+     "n_atoms": 14
+    }
+   ]
+  },
+  "structure": "7a4m",
+  "derived": "As api-residue-colour, with the viewer's highlight instead of a colouring. The highlight and the focus are compared by the residues the selection resolves to; they were not read back from the viewer.",
+  "checked_by": "scripts/check_api_refs.py",
+  "targets": [
+   {
+    "what": "Ser31",
+    "action": 1,
+    "param": 0,
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 31,
+      "auth_comp_id": "SER"
+     }
+    ],
+    "n_atoms": 11
+   },
+   {
+    "what": "Asn125",
+    "action": 1,
+    "param": 1,
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 125,
+      "auth_comp_id": "ASN"
+     }
+    ],
+    "n_atoms": 14
+   }
+  ]
+ },
+ "skills": [
+  "load",
+  "selection",
+  "author-numbering",
+  "highlight",
+  "set-highlight-color",
+  "focus"
+ ]
+}

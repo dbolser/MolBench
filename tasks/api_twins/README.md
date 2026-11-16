@@ -4,12 +4,12 @@ Written by `scripts/translate_mvs_to_api.py --all`; do not edit by hand. A twin 
 
 Run this script after every MVS generator, then `scripts/generate_paraphrases.py`, then this script once more (the counts below include the paraphrases). It writes `twin_of` into the MVS task files; the generators of the translation and grounded tiers keep a link that is already in the file when they rebuild.
 
-- MVS tasks read: 432
-- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 164
-- left without an API counterpart by a generator that writes both tracks: 53
+- MVS tasks read: 428
+- already paired by their own generator (clinical, follow-up, accept-set, paraphrases): 158
+- left without an API counterpart by a generator that writes both tracks: 55
 - in the old task format (no `twin_of` field, so no twin is written): 0, of which the API could express 0
 - left for this script: 215; **twins written: 125 (58%)**
-- MVS tasks with an API twin, all generators together: 289 of 432 (67%)
+- MVS tasks with an API twin, all generators together: 283 of 428 (66%)
 
 ## Twins by template
 
@@ -101,8 +101,8 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 
 | reason | tasks |
 |---|---:|
-| already has a twin from its own generator | 164 |
-| left without an API counterpart by its own two-track generator | 53 |
+| already has a twin from its own generator | 158 |
+| left without an API counterpart by its own two-track generator | 55 |
 | the structure is named by protein and entries outside the panel are accepted | 39 |
 | a distance line or another drawn primitive | 30 |
 | a colour theme (colour by chain) | 5 |
@@ -133,6 +133,8 @@ An MVS scene draws only what it lists; a `load` draws the whole entry. So a twin
 | `fu-add-label-3ptb-mvs.indirect` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `fu-add-label-3ptb-mvs.terse` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `fu-add-ligand-1mbn-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
+| `fu-add-ligand-1mbn-mvs.indirect` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
+| `fu-add-ligand-1mbn-mvs.terse` | followup | left without an API counterpart by its own two-track generator | scripts/generate_paraphrases.py |
 | `fu-add-ligand-5ni1-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-it-colour-1udt-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |
 | `fu-it-colour-3eml-mvs` | followup | left without an API counterpart by its own two-track generator | scripts/generate_followup_tasks.py |

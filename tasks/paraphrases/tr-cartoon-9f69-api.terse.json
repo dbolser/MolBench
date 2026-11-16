@@ -6,7 +6,7 @@
  "structures": [
   "9f69"
  ],
- "prompt": "PDB entry 9f69; whole protein cartoon, coloured hot pink",
+ "prompt": "9f69 whole protein, hot pink cartoon",
  "reference": [
   {
    "action": "load",
@@ -25,7 +25,22 @@
    ]
   }
  ],
- "accepted": [],
+ "accepted": [
+  [
+   {
+    "action": "load",
+    "molecule_id": "9f69"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "color": "hotpink"
+     }
+    ]
+   }
+  ]
+ ],
  "context": null,
  "target": [
   {
@@ -48,11 +63,11 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
    "its twin on the other track has the same words and the same style"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "Open PDB entry 9F69; draw the whole protein as a cartoon, coloured hot pink.",
   "source": {
    "script": "scripts/translate_mvs_to_api.py",
@@ -65,14 +80,18 @@
     "the replayed final state of the call list is the drawn state of the MVS reference: every atom carries the same representations in the same colours, and focus, tooltips, assembly and background agree (scripts/translate_mvs_to_api.py, state_differences)",
     "schema-valid; replays with nothing ignored or unresolved; every selection selects atoms; every hide toggle hides a component the entry has (scripts/check_api_refs.py)",
     "the reference grades as exactly right against the task (F1 1, success, target score 1)",
-    "same prompt, structures, split, style and tier as the MVS task, and the same target atoms"
+    "same prompt, structures, split, style and tier as the MVS task, and the same target atoms",
+    "1 further call form(s) accepted, because the request does not state what they differ in (default view, rest in the backdrop colour): each replays with nothing ignored, ends in a state of its own and draws the target atoms as the reference does (target recall 1) (scripts/api_forms.py)"
    ],
    "twin": {
     "of": "tr-cartoon-9f69",
     "base": "the cartoon style",
     "switched_off": [],
     "added_representations": 0,
-    "colour_classes": 1
+    "colour_classes": 1,
+    "call_forms": [
+     "default view, rest in the backdrop colour"
+    ]
    },
    "difficulty": {
     "author_number_differs_from_label": false,

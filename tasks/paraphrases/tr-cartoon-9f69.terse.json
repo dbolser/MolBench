@@ -6,7 +6,7 @@
  "structures": [
   "9f69"
  ],
- "prompt": "PDB entry 9f69; whole protein cartoon, coloured hot pink",
+ "prompt": "9f69 whole protein, hot pink cartoon",
  "reference": {
   "root": {
    "kind": "root",
@@ -83,11 +83,11 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
    "its twin on the other track has the same words and the same style"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "Open PDB entry 9F69; draw the whole protein as a cartoon, coloured hot pink.",
   "source": {
    "script": "scripts/generate_mvs_tasks.py",

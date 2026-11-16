@@ -6,7 +6,7 @@
  "structures": [
   "1aki"
  ],
- "prompt": "1aki: grey cartoon, two catalytic residues drawn green ball-and-stick",
+ "prompt": "1aki grey cartoon + its two catalytic residues, green ball-and-stick",
  "reference": {
   "root": {
    "kind": "root",
@@ -123,11 +123,11 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
    "its twin on the other track has the same words and the same style"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "1AKI: grey cartoon, with the two catalytic residues drawn as green ball-and-stick.",
   "source": {
    "script": "scripts/generate_grounded_tasks.py",

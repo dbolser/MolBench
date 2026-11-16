@@ -1,21 +1,21 @@
 # command: --select-seeded 30 --public-only
 # one request per line (its first task id); a twin is paraphrased with it
-acc-chain-colours-1f88-api
-acc-ligand-colours-2cpp-api
-acc-ligand-copy-8c86-api
-acc-ligand-which-2cpp-api
 api-010
-api-016
+api-alphafold-af-p07320-f1
 api-assembly-7a4m
+api-atoms-1hvr
 api-domain-overlay-5cj6
+api-highlight-7a4m
 clin-chain-hbb-2hhb-v68m-chainb-api
 clin-hgvs-context-serpina1-8pi2-m409t-api
 clin-hgvs-target-f9-8eph-i344t-api
 clin-legacy-context-f9-8eph-p101a-api
+clin-legacy-target-hbb-af-p68871-f1-e7v-api
 fu-add-chain-3ave-mvs
 fu-add-label-3ptb-mvs
-fu-api-clear-colours-1c3w-api
-fu-api-stop-spin-3ptb-api
+fu-add-ligand-1mbn-mvs
+fu-api-stop-spin-1atp-api
+fu-api-style-8eph-api
 gr-all-but-chain-4ins
 gr-attachment-1c3w-ret
 gr-catalytic-1aki-p00698

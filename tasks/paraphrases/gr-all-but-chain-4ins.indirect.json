@@ -6,7 +6,7 @@
  "structures": [
   "4ins"
  ],
- "prompt": "Would you mind setting something up for me? Here is what I'm after: 4INS as a green cartoon without chain C: hide that chain and keep all the others.",
+ "prompt": "I'd like to see 4INS as a green cartoon, but chain C is in the way. Could you leave that chain out and show all the others?",
  "reference": {
   "root": {
    "kind": "root",
@@ -103,11 +103,11 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
    "its twin on the other track has the same words and the same style"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "4INS as a green cartoon without chain C: hide that chain and keep all the others.",
   "source": {
    "script": "scripts/generate_grounded_tasks.py",

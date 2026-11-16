@@ -1,0 +1,194 @@
+{
+ "id": "fu-api-style-8eph-api.indirect",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-api-style",
+ "structures": [
+  "8eph"
+ ],
+ "prompt": "Could you switch to the cartoon-only style, so that the ligands and waters are gone, while keeping the same colours on the two chains?",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "8eph"
+  },
+  {
+   "action": "set_visual_style",
+   "style": "cartoon"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "color": "teal"
+    },
+    {
+     "auth_asym_id": "B",
+     "color": "khaki"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "8eph"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "auth_asym_id": "A",
+      "color": "teal"
+     },
+     {
+      "auth_asym_id": "B",
+      "color": "khaki"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": null,
+ "twin_of": null,
+ "paraphrase_of": "fu-api-style-8eph-api",
+ "style": "indirect",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/api_followup/fu-api-style-8eph-api.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
+  "original_prompt": "Change the display to the cartoon-only style (no ligands or waters), with the same colours on the two chains.",
+  "source": {
+   "script": "scripts/generate_followup_tasks.py",
+   "inputs": [
+    "data/panel/panel.json",
+    "data/panel/facts/8eph.json",
+    "molbench/atom_tables/8eph.json.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "reference grades as exactly right against the task (success, F1 1; no atom target)",
+    "start state grades as itself; it is not the requested final state",
+    "1 other way(s) of writing the final state grade as exactly right",
+    "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right"
+   ],
+   "seed": "20261113|fu-api-style|1|8eph",
+   "edit": "change the representation (order-sensitive on this track)",
+   "noop_kind": null,
+   "referent": null,
+   "preserved": null,
+   "removed": null,
+   "difficulty": {
+    "needs_numbering_offset": false,
+    "author_chain_differs_from_label": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_referent_from_context": false
+   },
+   "structure": "8eph",
+   "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+   "targets": [
+    {
+     "action": 2,
+     "param": 0,
+     "what": "author chain A (label chains A, E, F, K)",
+     "atoms": [
+      {
+       "label_asym_id": "A"
+      },
+      {
+       "label_asym_id": "E"
+      },
+      {
+       "label_asym_id": "F"
+      },
+      {
+       "label_asym_id": "K"
+      }
+     ],
+     "n_atoms": 794
+    },
+    {
+     "action": 2,
+     "param": 1,
+     "what": "author chain B (label chains B, G, L)",
+     "atoms": [
+      {
+       "label_asym_id": "B"
+      },
+      {
+       "label_asym_id": "G"
+      },
+      {
+       "label_asym_id": "L"
+      }
+     ],
+     "n_atoms": 1999
+    }
+   ]
+  },
+  "structure": "8eph",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 2,
+    "param": 0,
+    "what": "author chain A (label chains A, E, F, K)",
+    "atoms": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "E"
+     },
+     {
+      "label_asym_id": "F"
+     },
+     {
+      "label_asym_id": "K"
+     }
+    ],
+    "n_atoms": 794
+   },
+   {
+    "action": 2,
+    "param": 1,
+    "what": "author chain B (label chains B, G, L)",
+    "atoms": [
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "G"
+     },
+     {
+      "label_asym_id": "L"
+     }
+    ],
+    "n_atoms": 1999
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "representation",
+  "color"
+ ]
+}

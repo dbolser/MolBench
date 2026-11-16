@@ -1,0 +1,206 @@
+{
+ "id": "clin-legacy-target-hbb-af-p68871-f1-e7v-mvs.terse",
+ "track": "mvs",
+ "tier": "clinical",
+ "family": "clin-legacy-target",
+ "structures": [
+  "af-p68871-f1-model_v6"
+ ],
+ "prompt": "AlphaFold DB model AF-P68871-F1 (version 6); HBB (hemoglobin subunit beta, UniProt P68871) E6V, pathogenic in ClinVar: the wild-type residue at that position as purple spacefill spheres. E6V is in mature-protein numbering (counted after the initiator methionine)",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "auth_asym_id": "A",
+             "auth_seq_id": 7
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "spacefill"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "purple"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": null,
+ "target": [
+  {
+   "selector": {
+    "label_asym_id": "A",
+    "label_seq_id": 7
+   },
+   "representation": "spacefill",
+   "color": "purple"
+  }
+ ],
+ "twin_of": "clin-legacy-target-hbb-af-p68871-f1-e7v-api.terse",
+ "paraphrase_of": "clin-legacy-target-hbb-af-p68871-f1-e7v-mvs",
+ "style": "terse",
+ "split": "public",
+ "grounding": {
+  "rule": "clinical-v1",
+  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  E6V (mature-protein numbering; 1 residues precede the mature chain in UniProt) = UniProt position 7\n  E6V: UniProt position 7 (Glu in UniProt) -> in the model: auth A 7 GLU (label A 7)"
+ },
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_clinical/clin-legacy-target-hbb-af-p68871-f1-e7v-mvs.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
+   "its twin on the other track has the same words and the same style"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
+  "original_prompt": "Using the AlphaFold DB model AF-P68871-F1 (model version 6), show as purple spacefill spheres the wild-type residue at the position of the HBB (Hemoglobin subunit beta, UniProt P68871) missense variant E6V (pathogenic in ClinVar). The name E6V is in mature-protein numbering: residues are counted from the first residue of the mature protein, that is, after the initiator methionine.",
+  "source": {
+   "script": "scripts/generate_clinical_tasks.py",
+   "inputs": [
+    "data/panel/variants/P68871.json",
+    "data/panel/facts/af-p68871-f1-model_v6.json",
+    "molbench/sifts_tables/af-p68871-f1-model_v6.json.gz",
+    "molbench/atom_tables/af-p68871-f1-model_v6.json.gz",
+    "data/clinical/uniprot_processing.json"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "target (1 residue(s), 9 atoms, residue name(s) GLU = the wild type) is the same atom set by three routes on the frozen atom table: label numbering from the frozen variant file, author numbering as written in the MVS reference, and the frozen SIFTS lookup of the UniProt position",
+    "the reference grades as exactly right against the task (success, F1 = 1, target score 1), and so does every accepted alternative",
+    "the twin on the other track selects the same target atoms",
+    "graded what the number in the variant's name selects when taken at face value as the author residue number (wrong) and as the label residue number (wrong); recorded under clinical.difficulty"
+   ],
+   "clinical": {
+    "gene": "HBB",
+    "accession": "P68871",
+    "protein": "Hemoglobin subunit beta",
+    "naming": "legacy",
+    "scope": "all",
+    "context": "none",
+    "chain": null,
+    "wording": 2,
+    "look": {
+     "rep": "spacefill",
+     "color": "purple"
+    },
+    "variants": [
+     {
+      "name_in_prompt": "E6V",
+      "variant": "E7V",
+      "hgvs": "p.Glu7Val",
+      "uniprot_position": 7,
+      "mature_numbering": {
+       "number": 6,
+       "removed": 1,
+       "what": "the initiator methionine"
+      },
+      "clinvar_vcv": [
+       "VCV000015333",
+       "VCV000446735",
+       "VCV000446736",
+       "VCV000446737",
+       "VCV000446738",
+       "VCV000446747"
+      ],
+      "clinvar_classification": [
+       "Pathogenic"
+      ],
+      "clinvar_review_status": [
+       "criteria provided, multiple submitters, no conflicts",
+       "no assertion criteria provided"
+      ],
+      "residues": [
+       {
+        "auth_asym_id": "A",
+        "auth_seq_id": 7,
+        "pdbx_PDB_ins_code": "",
+        "label_asym_id": "A",
+        "label_seq_id": 7,
+        "comp_id": "GLU"
+       }
+      ]
+     }
+    ],
+    "secondary_structure": null,
+    "report_apart": null,
+    "difficulty": {
+     "needs_uniprot_mapping": true,
+     "needs_numbering_offset": false,
+     "author_minus_uniprot": [
+      0
+     ],
+     "structure_has_offset": false,
+     "author_chain_differs_from_label_chain": false,
+     "author_number_differs_from_label_number": false,
+     "insertion_code": false,
+     "needs_ligand_identity": false,
+     "accession_in_prompt": true,
+     "protein_copies_in_structure": 1,
+     "target_residues": 1,
+     "alphafold_model": true,
+     "name_in_mature_numbering": true,
+     "mature_number_equals_author_number": false,
+     "number_in_name_as_author_number_is_same_amino_acid": false,
+     "name_read_as_mature_number_is_same_amino_acid": null,
+     "number_in_name_as_author_number_is_right": false,
+     "number_in_name_as_label_number_is_right": false
+    },
+    "pair": {
+     "with": "clin-legacy-target-hbb-1hho-e7v-mvs",
+     "this_structure": "author numbers are UniProt numbers"
+    }
+   }
+  }
+ },
+ "skills": [
+  "load",
+  "selection",
+  "clinical-variant",
+  "representation",
+  "color"
+ ]
+}

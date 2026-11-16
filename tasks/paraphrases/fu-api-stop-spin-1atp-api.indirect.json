@@ -1,27 +1,31 @@
 {
- "id": "fu-api-stop-spin-3ptb-api.indirect",
+ "id": "fu-api-stop-spin-1atp-api.indirect",
  "track": "api",
  "tier": "followup",
  "family": "fu-api-stop-spin",
  "structures": [
-  "3ptb"
+  "1atp"
  ],
- "prompt": "Would you mind setting something up for me? Here is what I'm after: Stop the spinning.",
+ "prompt": "The rotation is making it hard to look at. Could you stop it spinning, please?",
  "reference": [
   {
    "action": "load",
-   "molecule_id": "3ptb"
+   "molecule_id": "1atp"
   },
   {
    "action": "color",
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "purple"
+     "color": "teal"
     },
     {
-     "label_comp_id": "BEN",
-     "color": "gray"
+     "struct_asym_id": "B",
+     "color": "teal"
+    },
+    {
+     "label_comp_id": "ATP",
+     "color": "magenta"
     }
    ]
   }
@@ -31,7 +35,7 @@
   "calls": [
    {
     "action": "load",
-    "molecule_id": "3ptb"
+    "molecule_id": "1atp"
    },
    {
     "action": "set_property",
@@ -43,11 +47,15 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "purple"
+      "color": "teal"
      },
      {
-      "label_comp_id": "BEN",
-      "color": "gray"
+      "struct_asym_id": "B",
+      "color": "teal"
+     },
+     {
+      "label_comp_id": "ATP",
+      "color": "magenta"
      }
     ]
    }
@@ -56,30 +64,30 @@
  },
  "target": null,
  "twin_of": null,
- "paraphrase_of": "fu-api-stop-spin-3ptb-api",
+ "paraphrase_of": "fu-api-stop-spin-1atp-api",
  "style": "indirect",
  "split": "public",
  "grounding": null,
  "provenance": {
   "script": "scripts/generate_paraphrases.py",
   "inputs": [
-   "tasks/api_followup/fu-api-stop-spin-3ptb-api.json"
+   "tasks/api_followup/fu-api-stop-spin-1atp-api.json"
   ],
   "date": "2026-11-13",
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')"
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "Stop the spinning.",
   "source": {
    "script": "scripts/generate_followup_tasks.py",
    "inputs": [
     "data/panel/panel.json",
-    "data/panel/facts/3ptb.json",
-    "molbench/atom_tables/3ptb.json.gz"
+    "data/panel/facts/1atp.json",
+    "molbench/atom_tables/1atp.json.gz"
    ],
    "date": "2026-11-13",
    "checks": [
@@ -89,7 +97,7 @@
     "1 other way(s) of writing the final state grade as exactly right",
     "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
    ],
-   "seed": "20261113|fu-api-stop-spin|1|3ptb",
+   "seed": "20261113|fu-api-stop-spin|1|1atp",
    "edit": "undo one earlier choice (a setting)",
    "noop_kind": null,
    "referent": null,
@@ -98,17 +106,20 @@
      "selector": [
       {
        "label_asym_id": "A"
+      },
+      {
+       "label_asym_id": "B"
       }
      ],
      "representation": null,
-     "color": "purple"
+     "color": "teal"
     },
     {
      "selector": {
-      "label_comp_id": "BEN"
+      "label_comp_id": "ATP"
      },
      "representation": null,
-     "color": "gray"
+     "color": "magenta"
     }
    ],
    "removed": null,
@@ -119,61 +130,81 @@
     "needs_uniprot_mapping": false,
     "needs_referent_from_context": false
    },
-   "structure": "3ptb",
+   "structure": "1atp",
    "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
    "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
    "targets": [
     {
      "action": 1,
      "param": 0,
-     "what": "polymer chain A (entity 1)",
+     "what": "polymer chain E (entity 1)",
      "atoms": {
-      "auth_asym_id": "A",
+      "auth_asym_id": "E",
       "label_entity_id": "1"
      },
-     "n_atoms": 1629
+     "n_atoms": 2777
     },
     {
      "action": 1,
      "param": 1,
-     "what": "every copy of BEN",
+     "what": "polymer chain I (entity 2)",
+     "atoms": {
+      "auth_asym_id": "I",
+      "label_entity_id": "2"
+     },
+     "n_atoms": 157
+    },
+    {
+     "action": 1,
+     "param": 2,
+     "what": "every copy of ATP",
      "atoms": [
       {
-       "auth_asym_id": "A",
-       "auth_seq_id": 1,
-       "auth_comp_id": "BEN"
+       "auth_asym_id": "E",
+       "auth_seq_id": 355,
+       "auth_comp_id": "ATP"
       }
      ],
-     "n_atoms": 9
+     "n_atoms": 31
     }
    ]
   },
-  "structure": "3ptb",
+  "structure": "1atp",
   "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
   "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
   "targets": [
    {
     "action": 1,
     "param": 0,
-    "what": "polymer chain A (entity 1)",
+    "what": "polymer chain E (entity 1)",
     "atoms": {
-     "auth_asym_id": "A",
+     "auth_asym_id": "E",
      "label_entity_id": "1"
     },
-    "n_atoms": 1629
+    "n_atoms": 2777
    },
    {
     "action": 1,
     "param": 1,
-    "what": "every copy of BEN",
+    "what": "polymer chain I (entity 2)",
+    "atoms": {
+     "auth_asym_id": "I",
+     "label_entity_id": "2"
+    },
+    "n_atoms": 157
+   },
+   {
+    "action": 1,
+    "param": 2,
+    "what": "every copy of ATP",
     "atoms": [
      {
-      "auth_asym_id": "A",
-      "auth_seq_id": 1,
-      "auth_comp_id": "BEN"
+      "auth_asym_id": "E",
+      "auth_seq_id": 355,
+      "auth_comp_id": "ATP"
      }
     ],
-    "n_atoms": 9
+    "n_atoms": 31
    }
   ]
  },

@@ -6,7 +6,7 @@
  "structures": [
   "1trn"
  ],
- "prompt": "Could you show 1TRN as a cartoon: chain B in orange, everything else grey?",
+ "prompt": "I'd like chain B to stand out in 1TRN. Could you show the structure as a cartoon with chain B in orange and everything else in grey?",
  "reference": {
   "root": {
    "kind": "root",
@@ -94,11 +94,11 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
    "its twin on the other track has the same words and the same style"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "Show 1TRN as a cartoon: chain B in orange, everything else grey.",
   "source": {
    "script": "scripts/generate_mvs_tasks.py",

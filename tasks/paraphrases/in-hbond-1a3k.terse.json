@@ -6,7 +6,7 @@
  "structures": [
   "1a3k"
  ],
- "prompt": "1a3k: grey cartoon; Asn174 and Arg224 magenta ball-and-stick; measure hydrogen bond between OD1 Asn174 and NH1 Arg224 labelled dashed line; focus camera these two residues",
+ "prompt": "1a3k grey cartoon, Asn174 + Arg224 magenta ball-and-stick, labelled dashed line from OD1 of Asn174 to NH1 of Arg224 (hydrogen bond), camera on the two residues",
  "reference": {
   "root": {
    "kind": "root",
@@ -151,10 +151,10 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')"
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "1A3K: grey cartoon; Asn174 and Arg224 as magenta ball-and-stick; measure the hydrogen bond between OD1 of Asn174 and NH1 of Arg224 with a labelled dashed line; focus the camera on these two residues.",
   "source": {
    "script": "scripts/author_interaction_tasks.py",

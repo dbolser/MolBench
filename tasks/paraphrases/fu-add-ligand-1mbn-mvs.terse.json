@@ -1,0 +1,215 @@
+{
+ "id": "fu-add-ligand-1mbn-mvs.terse",
+ "track": "mvs",
+ "tier": "followup",
+ "family": "fu-add-ligand",
+ "structures": [
+  "1mbn"
+ ],
+ "prompt": "add ligand HEM, plum ball-and-stick",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1mbn.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HEM"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "plum"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": {
+  "scene": {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1mbn.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "HEM"
+   },
+   "representation": "ball_and_stick",
+   "color": "plum"
+  }
+ ],
+ "twin_of": null,
+ "paraphrase_of": "fu-add-ligand-1mbn-mvs",
+ "style": "terse",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_paraphrases.py",
+  "inputs": [
+   "tasks/mvs_followup/fu-add-ligand-1mbn-mvs.json"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
+   "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)"
+  ],
+  "seed": "molbench-paraphrases-v1",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
+  "original_prompt": "Now bring in the ligand HEM in plum ball-and-stick.",
+  "source": {
+   "script": "scripts/generate_followup_tasks.py",
+   "inputs": [
+    "data/panel/panel.json",
+    "data/panel/facts/1mbn.json",
+    "molbench/atom_tables/1mbn.json.gz"
+   ],
+   "date": "2026-11-13",
+   "checks": [
+    "reference grades as exactly right against the task (success, F1 1, target score 1)",
+    "start state grades as itself; it is not the requested final state",
+    "target selects 43 atoms on the frozen atom table",
+    "start state scores 0.0 on the target (below 1)",
+    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
+    "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
+   ],
+   "seed": "20261113|fu-add-ligand|2|1mbn",
+   "edit": "add a component (the ligand), keeping the rest",
+   "noop_kind": null,
+   "referent": null,
+   "preserved": [
+    {
+     "selector": "polymer",
+     "representation": "cartoon",
+     "color": "cyan"
+    }
+   ],
+   "removed": null,
+   "difficulty": {
+    "needs_numbering_offset": false,
+    "author_chain_differs_from_label": false,
+    "needs_ligand_identity": false,
+    "needs_uniprot_mapping": false,
+    "needs_referent_from_context": false
+   }
+  }
+ },
+ "skills": [
+  "edit",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

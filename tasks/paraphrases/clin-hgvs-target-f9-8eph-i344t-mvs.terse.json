@@ -6,7 +6,7 @@
  "structures": [
   "8eph"
  ],
- "prompt": "PDB entry 8eph: F9 (Coagulation factor IX, UniProt P00740) variant p.Ile344Thr classified pathogenic ClinVar; residue it replaces blue spacefill spheres every chain that has it",
+ "prompt": "8eph, F9 (coagulation factor IX, UniProt P00740) p.Ile344Thr, pathogenic in ClinVar: the residue it replaces as blue spacefill spheres, in every chain that has it",
  "reference": {
   "root": {
    "kind": "root",
@@ -106,11 +106,11 @@
   "checks": [
    "same reference, accepted alternatives, target, structures, split, tier and family as the original (molbench.tasks.check_corpus)",
    "the reference grades as exactly right against the paraphrase (runner.grade_parsed)",
-   "wording checked by the rule of its method (see 'method')",
+   "every id, number, code, chain letter, quoted text, colour and representation word of the original is in the wording (scripts/generate_paraphrases.py, lost)",
    "its twin on the other track has the same words and the same style"
   ],
   "seed": "molbench-paraphrases-v1",
-  "method": "generic rewrite of the full prompt (terse: function words deleted, every other word kept; indirect: turned into a polite question, or put word for word inside a polite frame)",
+  "method": "written wording (scripts/generate_paraphrases.py WORDINGS), checked by rule: every id, number, code, chain letter, quoted text, colour and representation word of the original is in it",
   "original_prompt": "PDB entry 8EPH: the F9 (Coagulation factor IX, UniProt P00740) variant p.Ile344Thr is classified as pathogenic in ClinVar. Show the residue it replaces as blue spacefill spheres in every chain that has it.",
   "source": {
    "script": "scripts/generate_clinical_tasks.py",
@@ -177,6 +177,7 @@
      }
     ],
     "secondary_structure": null,
+    "report_apart": null,
     "difficulty": {
      "needs_uniprot_mapping": true,
      "needs_numbering_offset": true,
