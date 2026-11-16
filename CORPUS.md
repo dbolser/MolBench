@@ -151,55 +151,85 @@ Where the files are:
 - All 88 old paraphrases are replaced by 82 new ones (44 old originals, four of them
   accept-set; 41 now).
 
-## Checks run on this state (2026-11-16)
+## Audit of 2026-11-16 (four independent audits) and what was done
+
+Four audits (structural biologist, clinical geneticist, benchmark methodologist, adversarial
+grader tester) graded hand-written answers and re-derived references. No reference residue
+was found wrong. Every finding below was reproduced before it was acted on; each fix is in a
+generator, a grader or a prompt, and `tests/test_audit_fixes.py` pins it.
+
+| finding | verdict | what was done |
+|---|---|---|
+| API: the prompt's own example form (residue stretch in the highlight colour) failed on 45 twins | real | `api_forms.py` adds the form wherever the request states the backdrop; control kind `unstated_stretch_in_highlight_colour` |
+| API: 7 tasks accepted a view that draws what the request excludes ("no sugars", "only the DNA") | real | `provenance.excludes`; every default-view form carries the hide toggle; a build check and a test forbid an accepted form that draws the excluded component |
+| API: UniProt keys on an AlphaFold model scored 0 (10 tasks, the no-offset side of the offset pairs) | real | `sifts.frozen_name`; AlphaFold references use the UniProt keys; control kind `uniprot_number_on_alphafold_model` |
+| MVS prompt's worked example used the selector `ligand` for a named compound, on a panel structure | real | example is on 1HSG with the compound by its code; a test grades it and checks 1HSG is in no task |
+| Task success is not the same test on the two tracks (135 of 225 pairs) | real, by design (decisions 17, 18) | paired analysis is on the target score first, task success second; said in the paper |
+| Clinical: variants confirmed only by another gene's record (43), by a haplotype (37) or without assertion criteria (246) | real | `data/panel/clinvar_records.json`; a variant needs a record of its own; APOE R154S and CA2 K18E named as not used; CA2 and TPI1 have no task; LYZ I74T kept by name |
+| Clinical: one-letter names in UniProt numbering looked like mature numbering (25 tasks) | real | such names carry `p.`; GCK and PRSS1 by their usual names |
+| Clinical: pooled classification wording, no snapshot date, stale README sentence | real | wording from the variant's own record; date in the tier README |
+| API: three twins failed their plain answer (residue with no trace atom) | real | the replay draws cartoon only on residues with a trace atom; the three twins are plain again |
+| API: default-view ruling applied unevenly (tr-chains-named, api-017, api-018, clin-sse, gr-entity by author id, spheres over a ligand) | real | forms added in `api_forms.py`; a corpus test over every request that says "cartoon" |
+| API: an unrequested `hide_water` on an accepted default view failed 157 of 175 tasks | real | `free_hide` (a grader rule) on the 146 tasks that accept both the cartoon style and the default view; elsewhere it stays an unrequested change (135 of 302 tasks probed still fail it, with target score 1) |
+| MVS: download source and parse format were not graded | real | a URL that names no structure file, or a format that is not the file's, is `load_failed`, score 0 |
+| `api-inscode` (5 tasks) could not be answered from the request | real | the prompt states the label chain and number; the API reference says `auth_ins_code_id` is ignored |
+| Reply parser: a huge integer or very deep nesting crashed grading | real | `invalid_json`; a bracket in the prose no longer hides the answer |
+| Follow-ups without a target: the unchanged start state had target score 1 (13 tasks) | real | no target score on those tasks |
+| Grounded: named ligand missing from the target; helix and secondary-structure tasks not flagged | real | ligand is a target part; `report_apart` on `gr-longest-helix` and `gr-secstruct` |
+| Resolve: a correct chain-id answer on another accepted entry scores 0 (3 of 5,739 accepted entries have an atom table) | real, not fixed | said in GRADING.md; each sample records `entry_is_reference` and the resolve table shows success apart for the reference entry and for other accepted entries |
+| Held-back split is public, and compares structures, not exposure | real | reworded in TASK_FORMAT.md and the paper; reported as a description, not a test. Three held-back structures share a protein with a public one: said, not changed |
+| F1 floor; weak keyword baseline; grounding pack states the answer; power of small contrasts; track totals not like for like; paraphrases by one author | real, reporting | said in the paper (setup and limitations); clinical results split by whether the literal number is right, follow-ups by edit / no change. A second scripted baseline and an F1 over changed facts only were not built |
+| `tr-ligands-8ce0` ("the small molecule" is glycerol), `tr-ions-2p4e` (mercury from a derivative) | real, left | references are right; the wording follows the additive ruling. `tr-nucleic-1bna` no longer says "no ions" |
+| Small parsing and labelling edges (representation enum, `" red "`, UniProt keys on a file without SIFTS columns) | real | fixed in `schema.py`, `drawn.py`, `pdbe_state.py` |
+
+## Checks run on this state (2026-11-16, after the audit fixes)
 
 | check | result |
 |---|---|
 | every generator with `--check` (eight), translator `--all --check`, paraphrases `--check`, `build_grounding_packs.py --check`, `build_panel.py --check` | all up to date; 79 panel entries checked, 0 bad |
-| `scripts/validate_tasks.py --final` | OK: every check passed (885 tasks, 0 old-format) |
-| `scripts/check_api_refs.py --cif` (offline, all 458 API task files) | all checks passed |
-| `check_api_refs.py --viewer --sample 60 --seed 20261116 --no-probes` | 153 call lists (references and accepted forms) run in pdbe-molstar 3.3.2, 396 selections compared atom for atom, all agree; 1 list skipped (settings only) |
-| `check_api_refs.py --viewer --no-probes --only` every API task file changed or added since the merge (277 files) | 705 call lists run in pdbe-molstar 3.3.2, 1,645 selections compared atom for atom, all agree; 0 lists skipped (settings only) |
-| `generate_mvs_tasks.py --check --viewer` (translation tier, with `tr-nucleic`) | 76 scenes of 73 tasks loaded in Mol\* 5.9.0; 0 differ |
-| `generate_followup_tasks.py --check --viewer` | 106 scenes drawn in Mol\*, 0 differ; 76 call lists in pdbe-molstar, 181 selections, 0 differ |
-| `generate_accept_set_tasks.py --check --viewer` | 87 MVS states loaded in Mol\* 5.9.0, 0 differ |
-| `build_atom_tables.py --verify --check` on the 15 component selectors of the 10 new clinical MVS references (9 structures, four of them AlphaFold models) | exit 0, every selector agrees with Mol\*; the rebuilt tables are byte-identical |
-| `scripts/grader_controls.py --check` | up to date; MVS 1,090 controls on 78 entries, API 910 on 69: 0 false passes, 0 false fails |
-| `uv run pytest -q` | 2,696 passed |
+| `scripts/validate_tasks.py --final` | OK: every check passed (879 tasks, 0 old-format) |
+| `scripts/check_api_refs.py --cif` (offline, every API task file) | all checks passed |
+| `check_api_refs.py --viewer --sample 60 --seed 20261116 --no-probes` | 198 call lists (references and accepted forms) run in pdbe-molstar 3.3.2, 606 selections compared atom for atom, all agree; 1 list skipped (settings only) |
+| `build_atom_tables.py --verify --check` with the 67 component selectors of 40 seeded MVS references (seed 20261116, 29 structures) | exit 0: all 79 frozen atom tables are what Mol\* 5.9.0 gives, every selector agrees |
+| `scripts/grader_controls.py --check` | up to date; MVS 1,110 controls on 78 entries, API 995 on 74: 0 false passes, 0 false fails |
+| `python -m molbench.runner --manifest run/final_run.toml --dry-run` (all 22 panel entries, mock model) | 88,593 cells, 23 of 23 checks, DRY RUN PASSED; core panel 68,928 calls, projected $134.84 against a cap of $165.00 |
+| `scripts/paper_tables.py --from-dry-run`, `paper/build.py --check` | 31 mock tables, 3,063 values; paper and SI build, nothing stale |
+| `uv run pytest -q` | 2,750 passed |
 
-Not re-run in this pass: the manifest dry run and its cost projection (the runner is
-being changed in another worktree; the corpus is 16 task files larger than at the merge,
-so the projection there is about 2% low), `grader_controls.py --viewer` (the two new
-"equivalent" control kinds cannot be read back from the viewer by construction: the
-viewer shows two colours where the request states none), and the 40-reference Mol\*
-read-back of the MVS core tiers, whose task files did not change apart from `tr-nucleic`.
+Not re-run in this pass: the viewer read-backs of the follow-up, accept-set and translation
+generators (`--check --viewer`), and `grader_controls.py --viewer`. The API viewer check ran
+on a seeded sample of 60 task files, not on all.
 
 ## Known weaknesses
 
-- **Unstated attributes on the API track are an enumerated list, not a grader rule.** The
-  accepted forms cover what the call format gives naturally (style or default view,
-  backdrop by `non_selected_color` or by naming the chains, hide toggles left out, the
-  three natural colours of the stretch under an added representation). An answer that
-  paints an unmentioned component in some other colour, or reaches the picture by another
-  mix of toggles, is still graded as wrong. A form is not offered where the viewer's own
-  default drawing of the requested atoms would stay visible in another type (sugars keep
-  their 3D-SNFG symbols), where the request is "only chain A" or "nothing else", or
-  where the reference had to hide and redraw the polymer (three twins: `gr-attachment-1hrc-hec`,
-  `gr-secstruct-3ert`, `tr-het-code-3ert`).
+- **Unstated attributes on the API track are mostly an enumerated list.** The accepted
+  forms cover what the call format gives naturally (style or default view, backdrop by
+  `non_selected_color` or by naming the chains by author or label id, the stretch under an
+  added representation in the backdrop, highlight or untouched colour). Hide toggles nobody
+  asked for are a grader rule (`free_hide`) only where the task accepts both the cartoon
+  style and the default view. An answer that paints an unmentioned component in some other
+  colour is still graded as wrong. A form is not offered where the viewer's own default
+  drawing of the requested atoms would stay visible in another type (sugars keep their
+  3D-SNFG symbols), or where the request is "only chain A" or "nothing else".
 - **Twins are not graded by the same leniency.** An MVS answer that draws something the
   request does not name loses success (decision 18); the API twin accepts the default
-  view, which draws water and other ligands. The paired analysis should say so, and its
-  sensitivity check (twins without an unstated hide toggle) is still needed for the 12
-  twins that keep one.
-- **The budget** was not re-projected (see above).
+  view, which draws water and other ligands. The paired analysis is therefore made on the
+  target score first; task success is shown beside it, with a sensitivity check without
+  the twins that need an unstated hide toggle.
+- **Resolve tier: answers on an accepted entry other than the reference entry are graded
+  as written** (GRADING.md). A correct selection by chain id fails there. Reported apart.
+- **The held-back split is not secret** and compares structures no earlier task used with
+  structures earlier tasks used; three held-back structures (5NI1, 2PTC, 3KCG) share a
+  protein with a public one.
 - **Tier sizes are above the plan** in places, by ruling: translation 73 MVS, grounded 63,
-  accept-set 26 + 15, clinical 85.
-- **Held-back share is uneven**: 8 of the 33 clinical structures and 4 of the 15 API
+  accept-set 26 + 15, clinical 82.
+- **Held-back share is uneven**: 8 of the 31 clinical structures and 4 of the 15 API
   accept-set tasks, against about a fifth elsewhere.
-- **Offset pairs outside HBB are one per protein** (LYZ, CRYGD, CALM1), and their no-offset
-  side is always an AlphaFold model, so "no offset" and "predicted model, named by a file
-  URL on the API track" are confounded there. TTR could not get a pair without exceeding
-  six tasks on 8C86.
+- **Offset pairs rest on four proteins** (HBB five pairs; LYZ, CRYGD, CALM1 one each), and
+  their no-offset side is always an AlphaFold model, so "no offset" and "predicted model,
+  named by a file URL on the API track" are confounded. The two TP53 pairs (1TUP and the
+  AlphaFold model) have no offset on either side. TTR could not get a pair without
+  exceeding six tasks on 8C86.
 - **The 10 clinical helix/strand tasks** need the entry's own annotation, which only the
   grounding pack states: flagged, to be reported apart.
 - **Paraphrase wordings were written and read by one author** and checked by rule for
@@ -215,9 +245,6 @@ read-back of the MVS core tiers, whose task files did not change apart from `tr-
 - **Not exercisable in the headless viewer** (graded as declared settings only):
   AlphaFold view, domain / validation / symmetry annotation, maps, sequence panel,
   lighting, superposition, ligand view.
-- **Not computed yet** (runner and paper tables): the preserved score of follow-ups
-  (`provenance.preserved`), the three-way outcome for made-up PDB ids, one vocabulary for
-  the difficulty keys of the generators.
 - **Left as found**: `in-metal-contact-1plc-cu` omits Met92 (the prompt names its three
   residues); `res-name-p00299` accepts isoform A only.
 
