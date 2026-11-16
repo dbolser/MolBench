@@ -1876,14 +1876,17 @@ def run_meta(manifest: Manifest, corpus_sha: str, mock: bool, archive_dir: pathl
 
 def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpus_sha: str,
             calib: Calibration, runs_dir: pathlib.Path, results_dir: pathlib.Path,
-            seed: int = 0, site: bool = True) -> bool:
+            seed: int = 0, site: bool = True, corpus: list[dict] | None = None) -> bool:
     """The whole pipeline at $0 with the mock model: plan, generate (interrupted half
     way, then resumed), archive, grade, scorecards, per-sample records, site build, and
     the cost of the real run. Returns whether every check passed.
 
     Follow-up, accept-set, twin, paraphrase and held-back tasks must all pass through
     it; when the corpus on disk has none of some kind the fixture tasks are added
-    (`with_fixtures`). Fixtures are left out of the cost projection."""
+    (`with_fixtures`). Fixtures are left out of the cost projection.
+
+    ``corpus``: every task on disk, when ``tasks`` is a manifest's own selection (a
+    pilot): links between tasks are checked against it, as a paid start does."""
     archive_dir = runs_dir / f"{manifest.name}.dryrun"
     out_dir = results_dir / f"{manifest.name}.dryrun"
     _fresh_dryrun_dir(archive_dir)
@@ -1909,10 +1912,16 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
                    all(n for per in kinds.values() for n in per.values()),
                    "; ".join(f"{k}: {per['mvs']} MVS, {per['api_calling']} API"
                              for k, per in kinds.items())))
-    bad = corpus_problems(planned_tasks)
-    checks.append(("every planned task passes the corpus checks a paid run makes before "
-                   "its first call", not bad,
-                   f"{len(planned_tasks)} tasks" if not bad else "; ".join(bad[:3])))
+    subset = bool(manifest.task_ids)
+    checked = corpus if subset and corpus is not None else planned_tasks
+    bad = corpus_problems(checked)
+    checks.append((("the corpus" if subset else "every planned task") + " passes the corpus "
+                   "checks a paid run makes before its first call", not bad,
+                   f"{len(checked)} tasks" if not bad else "; ".join(bad[:3])))
+    per_cell = Counter((c.condition.name, c.model.id, c.task["id"]) for c in cells)
+    checks.append(("every task has the number of samples its condition asks for",
+                   all(n == manifest.samples_for(cond) for (cond, _, _), n in per_cell.items()),
+                   ", ".join(f"{c.name} {manifest.samples_for(c)}" for c in manifest.conditions)))
     follow = [c for c in cells if c.task.get("context")]
     shown = all(json.dumps(start_state(c.task), separators=(",", ":")) in c.user
                 and c.user.rstrip().split("Request: ")[-1].startswith(c.task["prompt"])
@@ -1963,7 +1972,15 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     want += [("mvs", "valid"), ("mvs", "invalid_mvs")] if validated else [("mvs", "unchecked")]
     present_tracks = {c.task["category"] for c in cells}
     want = [w for w in want if w[0] in present_tracks]
-    checks.append(("grading meets every outcome class", all(seen[w] for w in want),
+    if subset:  # a few dozen cells cannot be expected to meet every class
+        ok_class = "valid" if validated else "unchecked"
+        met = all(seen[(t, "valid" if t == "api_calling" else ok_class)]
+                  and any(n for (tr, o), n in seen.items() if tr == t and o not in ("valid", "unchecked"))
+                  for t in present_tracks)
+    else:
+        met = all(seen[w] for w in want)
+    checks.append(("grading meets " + ("a right and a not-valid answer on each track" if subset
+                                       else "every outcome class"), met,
                    ", ".join(f"{t}:{o}={n}" for (t, o), n in sorted(seen.items()))))
     api = [s for s in every if s.get("track") == "api_calling"]
     checks.append(("every API answer that parsed was graded by the final-state grader",
@@ -1973,6 +1990,21 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
     alt = [s for s in every if s.get("matched_reference") and is_success(s)]
     checks.append(("an accepted alternative answer counts as exactly right", bool(alt),
                    f"{len(alt):,} samples matched an alternative"))
+    kept = [s for s in every if s.get("preserved_f1") is not None]
+    kept_tracks = {s.get("track", "mvs") for s in kept}
+    lost = [s for s in kept if not s["preserved_ok"] and (target_score(s) or 0.0) >= 1.0]
+    checks.append(("follow-ups carry a preserved score next to the target score, on both tracks",
+                   kept_tracks >= present_tracks and any(s["preserved_ok"] for s in kept)
+                   and any(not s["preserved_ok"] for s in kept),
+                   f"{len(kept):,} samples; {len(lost):,} made the edit and lost something that "
+                   "had to stay"))
+    entries = Counter(s["entry_outcome"] for s in every if s.get("entry_outcome"))
+    if entries or "mvs" in present_tracks:
+        need_entries = ("accepted",) if subset else ("accepted", "wrong_entry", "no_such_entry")
+        checks.append(("resolve answers are sorted by the entry they load (accepted, a real "
+                       "entry of something else, an id that does not exist)",
+                       all(entries[o] for o in need_entries),
+                       ", ".join(f"{o}={entries[o]}" for o in resolve_mod.ENTRY_OUTCOMES)))
     cut = [s for s in every if s.get("truncated")]
     checks.append(("truncated output (finish reason 'length') is counted apart from malformed",
                    bool(cut) and any(not s.get("truncated") and s.get("outcome") == "invalid_json"
@@ -2002,6 +2034,20 @@ def dry_run(manifest: Manifest, panel: list[ModelSpec], tasks: list[dict], corpu
                    and bool(api_cards) == ("api_calling" in present_tracks)
                    and all(d.get("valid_rate") is not None for d in api_cards),
                    f"{len(cards)} scorecards"))
+    try:
+        from . import analysis
+        built = analysis.build(out_dir, out_dir / "paper", replicates=200,
+                               extra_tasks=FIXTURE_TASKS if n_fixtures else None,
+                               flag="--from-dry-run", require_mock=True)
+        checks.append(("every paper table builds from the run's scorecards (mock numbers)",
+                       bool(built.tables) and all(
+                           analysis.MOCK_BANNER in t or n in analysis.NOT_RUN_RESULTS
+                           for n, t in built.tables.items()),
+                       f"{len(built.tables)} tables, {len(built.values)} values -> "
+                       f"{out_dir / 'paper'}"))
+    except Exception as e:  # noqa: BLE001 - a dry run reports every broken stage
+        checks.append(("every paper table builds from the run's scorecards (mock numbers)",
+                       False, f"{type(e).__name__}: {e}"))
     sample_files = write_sample_records(cells, graded, out_dir)
     n_lines = 0
     fields_ok = True
@@ -2090,13 +2136,14 @@ def manifest_main(args: argparse.Namespace) -> int:
     calib = Calibration.load(args.calibration)
     runs_dir = pathlib.Path(args.runs_dir) if args.runs_dir else RUNS_DIR
     results_dir = pathlib.Path(args.results_dir) if args.results_dir else RESULTS_DIR
-    tasks = manifest.select_tasks(load_tasks(list(manifest_mod.TRACKS)))
+    corpus = load_tasks(list(manifest_mod.TRACKS))
+    tasks = manifest.select_tasks(corpus)  # the whole corpus, or a pilot's own list
 
     if args.dry_run:
         corpus_sha = manifest_mod.check_corpus(manifest, TASKS_DIR, strict=False)
         panel = manifest.panel(include_optional=not args.core_only, only=args.only_models)
         ok = dry_run(manifest, panel, tasks, corpus_sha, calib, runs_dir, results_dir,
-                     seed=args.seed, site=not args.no_site)
+                     seed=args.seed, site=not args.no_site, corpus=corpus)
         print("\nDRY RUN " + ("PASSED" if ok else "FAILED"))
         return 0 if ok else 1
 
@@ -2118,7 +2165,7 @@ def manifest_main(args: argparse.Namespace) -> int:
                   "to start the paid run, or --dry-run to rehearse it for $0.")
             return 0
         corpus_sha = manifest_mod.check_corpus(manifest, TASKS_DIR, strict=True)
-        bad = corpus_problems(tasks)
+        bad = corpus_problems(corpus)  # links are checked against every task on disk
         if bad:
             raise ManifestError(
                 f"the corpus has {len(bad)} problem(s) (scripts/validate_tasks.py lists "

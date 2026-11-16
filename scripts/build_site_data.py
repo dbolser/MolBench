@@ -658,8 +658,10 @@ def build_from_run(run_dir: pathlib.Path, archive: pathlib.Path, docs: pathlib.P
                    extra_tasks: list[pathlib.Path] | None = None) -> dict:
     """The data files of a manifest run (no render cascade: no escalation or gallery)."""
     configure(None)
+    # One directory per condition. site/, samples/ and paper/ (tables built from the same
+    # scorecards) sit beside them and hold no scorecard.
     names = [d.name for d in sorted(run_dir.iterdir())
-             if d.is_dir() and any(d.glob("*.json"))]
+             if d.is_dir() and d.name not in ("site", "samples", "paper") and any(d.glob("*.json"))]
     order = [c for c in CONDITIONS if c in names] + [c for c in names if c not in CONDITIONS]
     conds = {c: load_condition(run_dir, c) for c in order}
     if not conds.get("spec"):

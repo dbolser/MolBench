@@ -56,6 +56,9 @@ HEADLINE = "spec"
 MOCK_BANNER = ("> **MOCK DATA.** Dry run answered by the mock model: the table has its final "
                "shape, **every number in it is fake**.")
 CLINICAL_SSE = ("clin-sse-helix", "clin-sse-strand")
+# Tables that are not results of the run (counted from the task files, or measured on
+# the grader's control set): real whatever answered the run, so they carry no mock banner.
+NOT_RUN_RESULTS = ("table_controls",)
 
 
 # --------------------------------------------------------------------------- #
