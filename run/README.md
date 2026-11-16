@@ -3,6 +3,8 @@
 | file | what it is |
 |---|---|
 | `final_run.toml` | The run manifest: corpus version + hash, model panel with prices (source and date), conditions, samples, token limits, retry policy, budget cap. The only input to the run. |
+| `pilot.toml` | The provider-path pilot: 39 tasks, one model per start, one sample, cap $2. Two routes: the direct Anthropic key, or an OpenRouter `:free` model. Its commands are at the top of the file. |
+| `select_pilot.py` | Picks the pilot's tasks by rule (every tier × track, public and held back, twins, follow-ups, accept-set, one request in three phrasings) and writes them into `pilot.toml`; `--check` says whether the list is current. |
 | `token_calibration.json` | Per-model token rates measured on the 2026-10-18 archives; used to project cost. Rebuild with `python scripts/estimate_cost.py --calibrate <runs dir>`. |
 | `site_r2x2.toml` | Renamed / not-run models of the October 2026 leaderboard build (`scripts/build_site_data.py --results`). Not used by a manifest run. |
 
@@ -14,7 +16,35 @@ python -m molbench.runner --manifest run/final_run.toml --dry-run   # rehearse e
 python -m molbench.runner --manifest run/final_run.toml             # plan + projected cost, no calls
 python -m molbench.runner --manifest run/final_run.toml --go        # the paid run (resumable)
 python -m molbench.runner --manifest run/final_run.toml --grade-only   # re-grade the archive, $0
+python scripts/paper_tables.py --from-dry-run                       # MOCK tables -> paper/generated_mock/
+python scripts/paper_tables.py --from-run results/final-v1          # the real ones -> paper/generated_final/
+python -m molbench.runner --manifest run/pilot.toml --dry-run       # rehearse the pilot, $0
 ```
+
+## Run sizes (projected 2026-11-16, corpus as merged: 869 task files)
+
+| size | what runs | calls | expected | cap to set | what it buys |
+|---|---|---:|---:|---:|---|
+| lean | core panel, every condition, `run.samples = 1` | 31,364 | $61 | $76 | every table filled once; no within-task sample spread, so no "all samples right", wider intervals, and paraphrase spread cannot be told from sampling noise |
+| **recommended** (the manifest as committed) | core panel (16 models + keyword baseline), 3 samples; structured-output condition 1 sample | 68,022 | $133 | $165 | everything the plan decided, on the models already tracked |
+| full | recommended + the five optional frontier models (`--include-optional`) | 87,412 | $479 | $600 | the same tables with a closed-frontier row from four labs and the largest open model |
+
+One optional model at a time (`--only-models` takes manifest ids; the archive is per model,
+so models can be added later without re-running the rest): claude-opus-5.5 +$137,
+gpt-6.1-sol +$69, gemini-4-argon +$69, grok-4.7 +$52, deepseek-v4-pro-0813 +$20. None of
+the five has measured token rates: their projection uses the highest output rate seen.
+
+The projection is tokens × manifest price: input tokens from the real prompts, output
+tokens from each model's rate on the 2026-10-18 runs. Those runs capped output at 2,000
+tokens (now 8,000, and 16,000 for reasoning models), so a model that was being cut off
+then (kimi-k2.6 returned an empty answer in 27 of 140 calls) will spend more now. The cap
+is the guard: the run stops itself when spent + still-to-run passes it.
+
+**Reasoning effort.** `run.reasoning_effort = "provider-default"` sends nothing, as in every
+earlier run. Any other value is one setting for the whole run: it is sent unchanged to
+every model flagged `reasoning = true` and archived with each call. It is not used to make
+one model cheaper. A lower token limit is not a saving either: it turns reasoning into
+truncated, invalid answers.
 
 What a run sends and scores:
 
@@ -33,9 +63,18 @@ What a run sends and scores:
   share of tasks with every sample right (`success_all`); the target score
   (`target_f1`, once the grader reports it); the valid-output rate on both tracks; and
   outputs cut off at the token limit counted apart from malformed ones (`not_valid`).
-- **A dry run** adds the fixture tasks in `tests/fixtures/tasks/` while the corpus has
-  no follow-up, accept-set, twin, paraphrase or held-back task of its own, so those
-  paths are rehearsed too. They are left out of the cost projection.
+- **Analysis fields.** Each sample also carries, without changing any score: on a
+  follow-up, the preserved score (`preserved_f1`, `preserved_ok`: the parts of the start
+  state the edit had to leave alone, from `provenance.preserved`); on a resolve task,
+  which kind of entry the answer loads (`entry_outcome`: accepted, a real entry of
+  something else, an id that does not exist; the rule is the resolve generator's own,
+  through `molbench/resolve.py`). Each task row carries its difficulty facts under one
+  vocabulary (`molbench/difficulty.py`).
+- **Samples** are per condition: `run.samples`, or a condition's own `samples`.
+- **A dry run** adds the fixture tasks in `tests/fixtures/tasks/` only if the corpus has
+  no follow-up, accept-set, twin, paraphrase or held-back task of its own (it has them
+  all now). It also builds every paper table from its mock scorecards into
+  `results/<name>.dryrun/paper/`.
 
 Where things land (`<name>` is `run.name` in the manifest):
 
@@ -53,11 +92,17 @@ Where things land (`<name>` is `run.name` in the manifest):
   finish reason, tokens, cost, latency, temperature, token limit, serving provider,
   prompt hash. Rebuilt from the archive on every grading.
 - `results/<name>/site/` — leaderboard data files and pages built from those scorecards.
+- `paper/generated_final/` — the paper's tables, from `scripts/paper_tables.py --from-run`.
+  `paper/generated_mock/` holds the same tables from the dry run: final shapes, fake
+  numbers, every file flagged MOCK; the two are never written to the same directory.
+  `paper/generated/` stays the October 2026 preliminary set.
 - A dry run writes to `runs/<name>.dryrun/` and `results/<name>.dryrun/` instead, and
   empties them first. Everything in them is mock data.
 
-Before the paid run: freeze the corpus and pin `corpus.sha256`; check the prices are
-current; install the `execute` extra and the Mol* bundle (`run.validate = "required"`).
+Before the paid run: freeze the corpus and pin `corpus.sha256`; run the pilot; re-project
+the cost and set `budget.cap_usd` (a test holds it between the projection and 1.5 times
+it); check the prices are current (last read from OpenRouter's public model list on
+2026-11-16); install the `execute` extra and the Mol* bundle (`run.validate = "required"`).
 The run refuses to start if any of these is missing, and stops itself when projected
 spend passes `budget.cap_usd`. It also makes every check of `scripts/validate_tasks.py`
 on the corpus before its first call (each reference graded against itself, links, panel,

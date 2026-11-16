@@ -6,7 +6,9 @@ What will a manifest run cost? No model is called; nothing is spent.
     python scripts/estimate_cost.py --tasks mvs=450 api_calling=250   # a planned corpus
     python scripts/estimate_cost.py --calibrate /path/to/runs    # re-measure token rates
 
-The table has one row per model and one column per condition. Input tokens come from
+The table has one row per model and one column per condition; a condition runs
+``run.samples`` samples per task, or its own ``samples`` (the structured-output condition
+runs one). Run sizes and what each buys: ``run/README.md``. Input tokens come from
 the real prompts (system prompt + task prompt + grounding pack) divided by each
 model's measured characters-per-token; output tokens from the size of each task's
 reference answer times each model's measured output rate (which includes hidden
