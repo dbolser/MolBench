@@ -6,7 +6,7 @@
   "structures": [
     "1crn"
   ],
-  "prompt": "Show 1CRN as a Gaussian surface and colour residues 14 to 20 purple.",
+  "prompt": "Show 1CRN as putty and colour residues 14 to 20 purple.",
   "reference": [
     {
       "action": "load",
@@ -14,7 +14,7 @@
     },
     {
       "action": "set_visual_style",
-      "style": "gaussian-surface"
+      "style": "putty"
     },
     {
       "action": "color",
@@ -81,7 +81,7 @@
       ],
       "insertion_codes_in_structure": false,
       "order_matters": true,
-      "style": "gaussian-surface"
+      "style": "putty"
     },
     "targets": [
       {

@@ -6,7 +6,7 @@
   "structures": [
     "6hpo"
   ],
-  "prompt": "Open 6HPO drawn as a molecular surface throughout, with the stretch from residue 122 to residue 127 in purple.",
+  "prompt": "Open 6HPO drawn as a Gaussian surface throughout, with the stretch from residue 122 to residue 127 in purple.",
   "reference": [
     {
       "action": "load",
@@ -14,7 +14,7 @@
     },
     {
       "action": "set_visual_style",
-      "style": "molecular-surface"
+      "style": "gaussian-surface"
     },
     {
       "action": "color",
@@ -81,7 +81,7 @@
       ],
       "insertion_codes_in_structure": false,
       "order_matters": true,
-      "style": "molecular-surface"
+      "style": "gaussian-surface"
     },
     "targets": [
       {

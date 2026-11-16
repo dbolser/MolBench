@@ -1,24 +1,29 @@
 {
-  "id": "api-uniprot-residue-1d3z",
+  "id": "api-uniprot-residue-6m7h",
   "track": "api",
   "tier": "translation",
   "family": "api-uniprot-residue",
   "structures": [
-    "1d3z"
+    "6m7h"
   ],
-  "prompt": "Open 1D3Z. Using the UniProt numbering of P0CG48, colour Ile621 lime green.",
+  "prompt": "Open 6M7H. Using the UniProt numbering of P0DP23, colour Thr45 and Lys116 magenta.",
   "reference": [
     {
       "action": "load",
-      "molecule_id": "1d3z"
+      "molecule_id": "6m7h"
     },
     {
       "action": "color",
       "data": [
         {
-          "uniprot_accession": "P0CG48",
-          "uniprot_residue_number": 621,
-          "color": "limegreen"
+          "uniprot_accession": "P0DP23",
+          "uniprot_residue_number": 45,
+          "color": "magenta"
+        },
+        {
+          "uniprot_accession": "P0DP23",
+          "uniprot_residue_number": 116,
+          "color": "magenta"
         }
       ]
     }
@@ -30,13 +35,19 @@
       "selector": [
         {
           "auth_asym_id": "A",
-          "auth_seq_id": 13,
+          "auth_seq_id": 44,
           "pdbx_PDB_ins_code": "",
-          "auth_comp_id": "ILE"
+          "auth_comp_id": "THR"
+        },
+        {
+          "auth_asym_id": "A",
+          "auth_seq_id": 115,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "LYS"
         }
       ],
       "representation": null,
-      "color": "limegreen"
+      "color": "magenta"
     }
   ],
   "twin_of": null,
@@ -47,22 +58,22 @@
   "provenance": {
     "script": "scripts/generate_api_tasks.py",
     "inputs": [
-      "data/panel/facts/1d3z.json",
-      "molbench/atom_tables/1d3z.json.gz",
-      "molbench/sifts_tables/1d3z.json.gz"
+      "data/panel/facts/6m7h.json",
+      "molbench/atom_tables/6m7h.json.gz",
+      "molbench/sifts_tables/6m7h.json.gz"
     ],
     "date": "2026-11-12",
     "checks": [
       "matches the task format (molbench.tasks.validate_task)",
       "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
-      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5294)",
       "equivalent answer succeeds: author chain and author number, mapped by hand",
       "wrong answer fails: the UniProt number used as the author number (F1 0.0)"
     ],
-    "structure": "1d3z",
+    "structure": "6m7h",
     "derived": "Positions drawn by seed from the frozen SIFTS table: observed, the residue is the UniProt residue, and its author number differs from the UniProt number. The viewer maps UniProt numbers itself (uniprot_accession + uniprot_residue_number); the intended atoms are the SIFTS rows written in author numbering with the residue name.",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
@@ -74,25 +85,39 @@
       "uniprot_mapping": true,
       "hinges_on": [],
       "author_minus_uniprot": [
-        -608
+        -1
       ],
       "label_equals_uniprot": false,
       "chains_mapped": 1
     },
     "targets": [
       {
-        "what": "UniProt P0CG48 621",
+        "what": "UniProt P0DP23 45",
         "action": 1,
         "param": 0,
         "atoms": [
           {
             "auth_asym_id": "A",
-            "auth_seq_id": 13,
+            "auth_seq_id": 44,
             "pdbx_PDB_ins_code": "",
-            "auth_comp_id": "ILE"
+            "auth_comp_id": "THR"
           }
         ],
-        "n_atoms": 19
+        "n_atoms": 7
+      },
+      {
+        "what": "UniProt P0DP23 116",
+        "action": 1,
+        "param": 1,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 115,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "LYS"
+          }
+        ],
+        "n_atoms": 9
       }
     ]
   },

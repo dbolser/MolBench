@@ -1,0 +1,430 @@
+{
+  "id": "api-uniprot-range-1igt",
+  "track": "api",
+  "tier": "translation",
+  "family": "api-uniprot-range",
+  "structures": [
+    "1igt"
+  ],
+  "prompt": "Load 1IGT and colour residues 108 to 121 of UniProt P01863 in both chains that have them orange.",
+  "reference": [
+    {
+      "action": "load",
+      "molecule_id": "1igt"
+    },
+    {
+      "action": "color",
+      "data": [
+        {
+          "uniprot_accession": "P01863",
+          "start_uniprot_residue_number": 108,
+          "end_uniprot_residue_number": 121,
+          "color": "orange"
+        }
+      ]
+    }
+  ],
+  "accepted": [],
+  "context": null,
+  "target": [
+    {
+      "selector": [
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 238,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 238,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 239,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 239,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 240,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "CYS"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 240,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "CYS"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 241,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "LYS"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 241,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "LYS"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 242,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "CYS"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 242,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "CYS"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 243,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 243,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 244,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "ALA"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 244,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "ALA"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 245,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 245,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 246,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "ASN"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 246,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "ASN"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 247,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "LEU"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 247,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "LEU"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 248,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "LEU"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 248,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "LEU"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 249,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "GLY"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 249,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "GLY"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 250,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "GLY"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 250,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "GLY"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 251,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        },
+        {
+          "auth_asym_id": "D",
+          "auth_seq_id": 251,
+          "pdbx_PDB_ins_code": "",
+          "auth_comp_id": "PRO"
+        }
+      ],
+      "representation": null,
+      "color": "orange"
+    }
+  ],
+  "twin_of": null,
+  "paraphrase_of": null,
+  "style": "full",
+  "split": "heldback",
+  "grounding": null,
+  "provenance": {
+    "script": "scripts/generate_api_tasks.py",
+    "inputs": [
+      "data/panel/facts/1igt.json",
+      "molbench/atom_tables/1igt.json.gz",
+      "molbench/sifts_tables/1igt.json.gz"
+    ],
+    "date": "2026-11-12",
+    "checks": [
+      "matches the task format (molbench.tasks.validate_task)",
+      "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
+      "each of the 1 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "the reference grades as exactly right against the task (F1 1, success, target score 1)",
+      "a bare load scores 0",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.5)",
+      "wrong answer fails: the UniProt numbers used as an author range (F1 0.0)"
+    ],
+    "structure": "1igt",
+    "derived": "A seeded run of consecutive UniProt positions from the frozen SIFTS table, all observed and all with an author number different from the UniProt number; selected with the viewer's own UniProt range keys.",
+    "checked_by": "scripts/check_api_refs.py",
+    "seed": 20261113,
+    "wording": "1 of 3",
+    "difficulty": {
+      "numbering_offset": true,
+      "auth_label_chain": false,
+      "ligand_identity_needed": false,
+      "uniprot_mapping": true,
+      "hinges_on": [],
+      "author_minus_uniprot": [
+        130
+      ],
+      "label_equals_uniprot": false,
+      "chains_mapped": 2
+    },
+    "targets": [
+      {
+        "what": "UniProt P01863 108-121",
+        "action": 1,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 238,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 238,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 239,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 239,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 240,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "CYS"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 240,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "CYS"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 241,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "LYS"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 241,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "LYS"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 242,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "CYS"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 242,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "CYS"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 243,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 243,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 244,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "ALA"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 244,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "ALA"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 245,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 245,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 246,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "ASN"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 246,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "ASN"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 247,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "LEU"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 247,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "LEU"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 248,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "LEU"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 248,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "LEU"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 249,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "GLY"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 249,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "GLY"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 250,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "GLY"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 250,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "GLY"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 251,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          },
+          {
+            "auth_asym_id": "D",
+            "auth_seq_id": 251,
+            "pdbx_PDB_ins_code": "",
+            "auth_comp_id": "PRO"
+          }
+        ],
+        "n_atoms": 214
+      }
+    ]
+  },
+  "skills": [
+    "load",
+    "selection",
+    "uniprot-numbering",
+    "residue-range",
+    "color"
+  ]
+}

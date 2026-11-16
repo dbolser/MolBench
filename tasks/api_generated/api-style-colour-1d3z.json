@@ -1,20 +1,20 @@
 {
-  "id": "api-style-colour-1iro",
+  "id": "api-style-colour-1d3z",
   "track": "api",
   "tier": "translation",
   "family": "api-style-colour",
   "structures": [
-    "1iro"
+    "1d3z"
   ],
-  "prompt": "Show 1IRO as putty and colour residues 14 to 33 yellow.",
+  "prompt": "Show 1D3Z as spacefill and colour residues 14 to 24 salmon.",
   "reference": [
     {
       "action": "load",
-      "molecule_id": "1iro"
+      "molecule_id": "1d3z"
     },
     {
       "action": "set_visual_style",
-      "style": "putty"
+      "style": "spacefill"
     },
     {
       "action": "color",
@@ -22,8 +22,8 @@
         {
           "auth_asym_id": "A",
           "start_auth_residue_number": 14,
-          "end_auth_residue_number": 33,
-          "color": "yellow"
+          "end_auth_residue_number": 24,
+          "color": "salmon"
         }
       ]
     }
@@ -35,10 +35,10 @@
       "selector": {
         "label_asym_id": "A",
         "beg_label_seq_id": 14,
-        "end_label_seq_id": 33
+        "end_label_seq_id": 24
       },
       "representation": null,
-      "color": "yellow"
+      "color": "salmon"
     }
   ],
   "twin_of": null,
@@ -49,9 +49,9 @@
   "provenance": {
     "script": "scripts/generate_api_tasks.py",
     "inputs": [
-      "data/panel/facts/1iro.json",
-      "molbench/atom_tables/1iro.json.gz",
-      "molbench/sifts_tables/1iro.json.gz"
+      "data/panel/facts/1d3z.json",
+      "molbench/atom_tables/1d3z.json.gz",
+      "molbench/sifts_tables/1d3z.json.gz"
     ],
     "date": "2026-11-12",
     "checks": [
@@ -62,10 +62,10 @@
       "a bare load scores 0",
       "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
       "equivalent answer succeeds: label chain and label range",
-      "wrong answer fails: the style set after the colouring (the reload wipes the colour) (F1 0.5831)",
+      "wrong answer fails: the style set after the colouring (the reload wipes the colour) (F1 0.6342)",
       "wrong answer fails: no style (F1 0.3333)"
     ],
-    "structure": "1iro",
+    "structure": "1d3z",
     "derived": "A global style and a seeded author-numbered range. Setting the style reloads the structure, so it has to come before the colouring.",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
@@ -81,19 +81,19 @@
       ],
       "insertion_codes_in_structure": false,
       "order_matters": true,
-      "style": "putty"
+      "style": "spacefill"
     },
     "targets": [
       {
-        "what": "residues 14-33 of chain A",
+        "what": "residues 14-24 of chain A",
         "action": 2,
         "param": 0,
         "atoms": {
           "label_asym_id": "A",
           "beg_label_seq_id": 14,
-          "end_label_seq_id": 33
+          "end_label_seq_id": 24
         },
-        "n_atoms": 258
+        "n_atoms": 164
       }
     ]
   },

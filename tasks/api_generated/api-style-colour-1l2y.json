@@ -6,7 +6,7 @@
   "structures": [
     "1l2y"
   ],
-  "prompt": "Show 1L2Y as ball-and-stick and colour residues 4 to 13 steel blue.",
+  "prompt": "Show 1L2Y as a molecular surface and colour residues 4 to 13 steel blue.",
   "reference": [
     {
       "action": "load",
@@ -14,7 +14,7 @@
     },
     {
       "action": "set_visual_style",
-      "style": "ball-and-stick"
+      "style": "molecular-surface"
     },
     {
       "action": "color",
@@ -80,7 +80,7 @@
       ],
       "insertion_codes_in_structure": false,
       "order_matters": true,
-      "style": "ball-and-stick"
+      "style": "molecular-surface"
     },
     "targets": [
       {

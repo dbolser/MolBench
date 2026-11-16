@@ -1,27 +1,27 @@
 {
-  "id": "api-entity-1igt",
+  "id": "api-entity-5uak",
   "track": "api",
   "tier": "translation",
   "family": "api-entity",
   "structures": [
-    "1igt"
+    "5uak"
   ],
-  "prompt": "Open 1IGT; make entity 1 (protein) purple and entity 2 (protein) green.",
+  "prompt": "Open 5UAK; make entity 1 (protein) yellow and entity 2 (protein) cyan.",
   "reference": [
     {
       "action": "load",
-      "molecule_id": "1igt"
+      "molecule_id": "5uak"
     },
     {
       "action": "color",
       "data": [
         {
           "entity_id": "1",
-          "color": "purple"
+          "color": "yellow"
         },
         {
           "entity_id": "2",
-          "color": "green"
+          "color": "cyan"
         }
       ]
     }
@@ -35,13 +35,7 @@
           "label_asym_id": "A"
         },
         {
-          "label_asym_id": "C"
-        },
-        {
           "label_asym_id": "B"
-        },
-        {
-          "label_asym_id": "D"
         }
       ],
       "representation": null,
@@ -51,14 +45,14 @@
   "twin_of": null,
   "paraphrase_of": null,
   "style": "full",
-  "split": "heldback",
+  "split": "public",
   "grounding": null,
   "provenance": {
     "script": "scripts/generate_api_tasks.py",
     "inputs": [
-      "data/panel/facts/1igt.json",
-      "molbench/atom_tables/1igt.json.gz",
-      "molbench/sifts_tables/1igt.json.gz"
+      "data/panel/facts/5uak.json",
+      "molbench/atom_tables/5uak.json.gz",
+      "molbench/sifts_tables/5uak.json.gz"
     ],
     "date": "2026-11-12",
     "checks": [
@@ -67,18 +61,18 @@
       "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8333)",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
       "equivalent answer succeeds: the entity's label chains, one by one",
       "wrong answer fails: entity ids as numbers (the viewer compares with ===, so 2 never equals \"2\") (F1 0.0)"
     ],
-    "structure": "1igt",
+    "structure": "5uak",
     "derived": "Two polymer entities drawn by seed from the frozen facts; the intended atoms are the entity's label chains as the facts list them.",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
     "wording": "3 of 3",
     "difficulty": {
       "numbering_offset": false,
-      "auth_label_chain": false,
+      "auth_label_chain": true,
       "ligand_identity_needed": false,
       "uniprot_mapping": false,
       "hinges_on": [],
@@ -95,12 +89,9 @@
         "atoms": [
           {
             "label_asym_id": "A"
-          },
-          {
-            "label_asym_id": "C"
           }
         ],
-        "n_atoms": 4066
+        "n_atoms": 9137
       },
       {
         "what": "entity 2",
@@ -109,12 +100,9 @@
         "atoms": [
           {
             "label_asym_id": "B"
-          },
-          {
-            "label_asym_id": "D"
           }
         ],
-        "n_atoms": 8464
+        "n_atoms": 95
       }
     ]
   },

@@ -613,6 +613,13 @@ def t_chain_colour(s: S) -> dict | None:
     }
 
 
+#: UniProt entries that are tandem repeats of the protein in the structure. SIFTS maps
+#: the structure to one repeat, so "Ile621 of P0CG48" names ubiquitin's Ile13 by a
+#: number nobody uses and that is one of nine equally good ones. No task asks for it.
+REPEAT_PROTEINS = {"P0CG48": "polyubiquitin-C (nine ubiquitin repeats)",
+                   "P0CG47": "polyubiquitin-B (three ubiquitin repeats)"}
+
+
 def unp_positions(s: S, key: str) -> tuple[str, list] | None:
     """An accession of the entry and its positions whose residue is observed, is the
     UniProt residue, and has an author number different from the UniProt number."""
@@ -620,7 +627,7 @@ def unp_positions(s: S, key: str) -> tuple[str, list] | None:
         return None
     by_acc: dict[str, dict[int, list]] = {}
     for r in s.sifts.rows:
-        if r.observed and "-" not in r.accession:
+        if r.observed and "-" not in r.accession and r.accession not in REPEAT_PROTEINS:
             by_acc.setdefault(r.accession, {}).setdefault(r.unp_num, []).append(r)
     good = {}
     for acc, pos in by_acc.items():
