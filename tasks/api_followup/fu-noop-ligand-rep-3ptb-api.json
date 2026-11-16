@@ -1,0 +1,145 @@
+{
+ "id": "fu-noop-ligand-rep-3ptb-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-noop-ligand-rep",
+ "structures": [
+  "3ptb"
+ ],
+ "prompt": "Ball-and-stick for the benzamidine (BEN), please.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "3ptb"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "cyan"
+    },
+    {
+     "label_comp_id": "BEN",
+     "color": "brown"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "3ptb"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "cyan"
+     },
+     {
+      "label_comp_id": "BEN",
+      "color": "brown"
+     }
+    ]
+   }
+  ],
+  "noop": true
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "BEN"
+   },
+   "representation": "ball-and-stick",
+   "color": null
+  }
+ ],
+ "twin_of": "fu-noop-ligand-rep-3ptb-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/3ptb.json",
+   "molbench/atom_tables/3ptb.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it already is the requested final state (no change needed)",
+   "target selects 9 atoms on the frozen atom table",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-noop-ligand-rep|1|3ptb",
+  "edit": "no change: already true",
+  "noop_kind": "already true",
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     }
+    ],
+    "representation": null,
+    "color": "cyan"
+   },
+   {
+    "selector": {
+     "label_comp_id": "BEN"
+    },
+    "representation": null,
+    "color": "brown"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "3ptb",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 1629
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "every copy of BEN",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 1,
+      "auth_comp_id": "BEN"
+     }
+    ],
+    "n_atoms": 9
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "representation",
+  "noop"
+ ]
+}

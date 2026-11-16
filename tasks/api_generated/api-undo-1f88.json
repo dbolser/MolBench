@@ -6,7 +6,7 @@
   "structures": [
     "1f88"
   ],
-  "prompt": "Load 1F88 and hide the waters. Highlight chain A, then clear that highlight and highlight both copies of the retinal (RET) instead.",
+  "prompt": "Load 1F88 and hide the waters. Colour both copies of the retinal (RET) orange and highlight chain A; then clear the highlight again.",
   "reference": [
     {
       "action": "load",
@@ -18,6 +18,15 @@
       "value": true
     },
     {
+      "action": "color",
+      "data": [
+        {
+          "label_comp_id": "RET",
+          "color": "orange"
+        }
+      ]
+    },
+    {
       "action": "highlight",
       "data": [
         {
@@ -27,14 +36,6 @@
     },
     {
       "action": "clear_highlight"
-    },
-    {
-      "action": "highlight",
-      "data": [
-        {
-          "label_comp_id": "RET"
-        }
-      ]
     }
   ],
   "accepted": [],
@@ -54,7 +55,7 @@
         }
       ],
       "representation": null,
-      "color": null
+      "color": "orange"
     }
   ],
   "twin_of": null,
@@ -76,12 +77,12 @@
       "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.75)",
       "equivalent answer succeeds: without the highlight that is cleared",
-      "wrong answer fails: the highlight left on the chain (F1 0.5037)"
+      "wrong answer fails: every step but the undo (F1 0.8)"
     ],
     "structure": "1f88",
-    "derived": "The first highlight is cleared, so the final state is the waters hidden and the ligand highlighted.",
+    "derived": "The highlight is cleared, so the final state is the waters hidden and the ligand coloured, with nothing highlighted. The undo is needed: a list that makes every step but the last leaves the chain highlighted and is wrong. A list that never highlights ends in the same state and is right.",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
     "wording": "1 of 3",
@@ -96,8 +97,26 @@
     },
     "targets": [
       {
-        "what": "chain A",
+        "what": "RET",
         "action": 2,
+        "param": 0,
+        "atoms": [
+          {
+            "auth_asym_id": "A",
+            "auth_seq_id": 977,
+            "auth_comp_id": "RET"
+          },
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 978,
+            "auth_comp_id": "RET"
+          }
+        ],
+        "n_atoms": 40
+      },
+      {
+        "what": "chain A",
+        "action": 3,
         "param": 0,
         "atoms": [
           {
@@ -126,24 +145,6 @@
           }
         ],
         "n_atoms": 2679
-      },
-      {
-        "what": "RET",
-        "action": 4,
-        "param": 0,
-        "atoms": [
-          {
-            "auth_asym_id": "A",
-            "auth_seq_id": 977,
-            "auth_comp_id": "RET"
-          },
-          {
-            "auth_asym_id": "B",
-            "auth_seq_id": 978,
-            "auth_comp_id": "RET"
-          }
-        ],
-        "n_atoms": 40
       }
     ]
   },
@@ -152,6 +153,7 @@
     "hide",
     "highlight",
     "clear-highlight",
-    "select-by-ligand"
+    "select-by-ligand",
+    "color"
   ]
 }

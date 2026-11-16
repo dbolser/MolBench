@@ -1,0 +1,229 @@
+{
+ "id": "fu-noop-ligand-rep-2cpp-mvs",
+ "track": "mvs",
+ "tier": "followup",
+ "family": "fu-noop-ligand-rep",
+ "structures": [
+  "2cpp"
+ ],
+ "prompt": "Show the ligand HEM as ball-and-stick.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/2cpp.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "red"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HEM"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": {
+  "scene": {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/2cpp.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "red"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "HEM"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "gray"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "noop": true
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "HEM"
+   },
+   "representation": "ball_and_stick",
+   "color": null
+  }
+ ],
+ "twin_of": "fu-noop-ligand-rep-2cpp-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/2cpp.json",
+   "molbench/atom_tables/2cpp.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it already is the requested final state (no change needed)",
+   "target selects 43 atoms on the frozen atom table",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-noop-ligand-rep|2|2cpp",
+  "edit": "no change: already true",
+  "noop_kind": "already true",
+  "referent": null,
+  "preserved": [
+   {
+    "selector": "polymer",
+    "representation": "cartoon",
+    "color": "red"
+   },
+   {
+    "selector": {
+     "label_comp_id": "HEM"
+    },
+    "representation": "ball_and_stick",
+    "color": "gray"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  }
+ },
+ "skills": [
+  "edit",
+  "representation",
+  "noop"
+ ]
+}

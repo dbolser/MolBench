@@ -1,0 +1,45 @@
+{
+ "what": "Components that are not biological ligands: crystallisation additives, buffers, salts, detergents and lipids. A request about 'the ligand' of an entry never means one of these, and a generator never picks one as an entry's main ligand.",
+ "rule": "A biological ligand is a non-polymer component of kind 'ligand' in the frozen facts whose component code is not listed here. The list is written by hand from the components of the frozen panel (data/panel/facts) plus the commonest additives of the PDB; a component is listed when the entry's primary citation treats it as part of the crystallisation or purification mix, not as a bound substrate, cofactor, inhibitor or drug.",
+ "date": "2026-11-16",
+ "classes": {
+  "crystallisation precipitant or cryoprotectant": {
+   "GOL": "glycerol",
+   "EDO": "1,2-ethanediol",
+   "PEG": "diethylene glycol",
+   "PGE": "triethylene glycol",
+   "PG4": "tetraethylene glycol",
+   "P33": "heptaethylene glycol (a PEG fragment)",
+   "MPD": "2-methyl-2,4-pentanediol",
+   "IPA": "isopropanol",
+   "EOH": "ethanol",
+   "DMS": "dimethyl sulfoxide"
+  },
+  "buffer or salt": {
+   "SO4": "sulfate",
+   "PO4": "phosphate",
+   "ACT": "acetate",
+   "FMT": "formate",
+   "CIT": "citrate",
+   "TLA": "tartrate",
+   "SCN": "thiocyanate",
+   "TRS": "Tris",
+   "MES": "MES",
+   "EPE": "HEPES",
+   "GLY": "free glycine",
+   "BME": "beta-mercaptoethanol"
+  },
+  "detergent, or lipid and alkyl chains from the membrane or the crystallisation mix": {
+   "C8E": "C8E4 detergent",
+   "BNG": "nonyl glucoside",
+   "LI1": "archaeal lipid fragment",
+   "SQU": "squalane",
+   "STE": "stearic acid",
+   "DGA": "diacylglycerol",
+   "F09": "nonan-1-ol"
+  },
+  "heavy-atom or thiol reagent": {
+   "HGB": "4-(hydroxymercuri)benzoate"
+  }
+ }
+}

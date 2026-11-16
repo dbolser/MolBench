@@ -6,7 +6,7 @@
   "structures": [
     "8k7f"
   ],
-  "prompt": "Load 8K7F and hide the waters. Attach the tooltip 'Glu48' to Glu48 of chain B; then remove all tooltips again and attach 'Tyr152' to Tyr152 of chain B instead.",
+  "prompt": "Load 8K7F and hide the waters. Attach the tooltips 'Glu48' to Glu48 of chain B and 'Tyr152' to Tyr152 of chain B; then remove the 'Glu48' tooltip again and keep the other one.",
   "reference": [
     {
       "action": "load",
@@ -24,11 +24,13 @@
           "auth_asym_id": "B",
           "auth_seq_id": 48,
           "tooltip": "Glu48"
+        },
+        {
+          "auth_asym_id": "B",
+          "auth_seq_id": 152,
+          "tooltip": "Tyr152"
         }
       ]
-    },
-    {
-      "action": "clear_tooltips"
     },
     {
       "action": "tooltips",
@@ -72,16 +74,16 @@
     "checks": [
       "matches the task format (molbench.tasks.validate_task)",
       "schema-valid; replays with nothing ignored or unresolved (scripts/check_api_refs.py)",
-      "each of the 2 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
+      "each of the 3 selection(s) selects exactly the atoms written a second time in provenance.targets (author chain, author number and residue name, or label chains / label ranges from the frozen facts), resolved by molbench.atoms",
       "the reference grades as exactly right against the task (F1 1, success, target score 1)",
       "a bare load scores 0",
-      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
-      "equivalent answer succeeds: without the tooltip that is cleared",
-      "equivalent answer succeeds: no clear: a new tooltips call replaces the earlier tooltips",
-      "wrong answer fails: both tooltips left on (F1 0.8)"
+      "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.8)",
+      "equivalent answer succeeds: without the tooltip that is removed",
+      "equivalent answer succeeds: all tooltips cleared, then the one that stays set again",
+      "wrong answer fails: every step but the undo (F1 0.8)"
     ],
     "structure": "8k7f",
-    "derived": "Seeded residues as in api-tooltips. The first tooltip is cleared, so the final state is the waters hidden and one tooltip; a list that never sets the first is right too.",
+    "derived": "Seeded residues as in api-tooltips. Two tooltips are set and one is taken off again, so the final state is the waters hidden and one tooltip. The undo is needed: a list that makes every step but the last leaves both tooltips on and is wrong. A list that never sets the first tooltip ends in the same state and is right.",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
     "wording": "1 of 3",
@@ -113,7 +115,20 @@
       },
       {
         "what": "Tyr152",
-        "action": 4,
+        "action": 2,
+        "param": 1,
+        "atoms": [
+          {
+            "auth_asym_id": "B",
+            "auth_seq_id": 152,
+            "auth_comp_id": "TYR"
+          }
+        ],
+        "n_atoms": 12
+      },
+      {
+        "what": "Tyr152",
+        "action": 3,
         "param": 0,
         "atoms": [
           {

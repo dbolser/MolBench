@@ -5,7 +5,7 @@ Each task is a start state (the list of calls made so far), an edit request, and
 as the reference. Start state and reference are built from the same component list,
 from the frozen panel only. Only the final state is graded.
 
-- **44 tasks** on 44 structures, at most 3 per structure; 10 held back (structures: 1lmb, 1rx2, 2c9v, 2omf, 2ptc, 5ni1, 6hpo, 6tc2, 6tha, 8k7f).
+- **44 tasks** on 41 structures, at most 3 per structure; 10 held back (structures: 1lmb, 1rx2, 2c9v, 2ptc, 3kcg, 5ni1, 6hpo, 6tc2, 8k7f).
 - **8 need no change** (`context.noop`): the reference is the start state.
 - **36 have a twin** on the MVS track (`twin_of`): same request, same structure, same target atoms.
 
@@ -26,7 +26,7 @@ from the frozen panel only. Only the final state is graded.
 | `fu-noop-colour` | 2 | no change: already true | the ligand already has the requested colour: reference = start state |
 | `fu-noop-shown` | 2 | no change: already true | the polymer already is a cartoon: reference = start state |
 | `fu-noop-hidden` | 2 | no change: already true | no water is drawn (MVS) / hide_water is already set (API): reference = start state |
-| `fu-noop-question` | 2 | no change: a question | a question about the structure: reference = start state |
+| `fu-noop-ligand-rep` | 2 | no change: already true | the ligand asked for as ball-and-stick, which it already is: reference = start state |
 | `fu-api-style` | 2 | change the representation (order-sensitive on this track) (API only) | start: two coloured chains, default view; set_visual_style (putty or cartoon, the polymer-only styles) inserted before the colour call (a style reloads and drops colouring) |
 | `fu-api-uncolour` | 2 | undo one earlier choice (API only) | start: polymer + ligand coloured; the ligand's selection removed from the colour call |
 | `fu-api-show-water` | 2 | undo one earlier choice (a hidden component) (API only) | start: waters hidden, polymer coloured; the hide_water call removed |
@@ -35,7 +35,7 @@ from the frozen panel only. Only the final state is graded.
 
 ## What each task records (`provenance`)
 
-- `edit`: the edit kind; `noop_kind`: why no change is right (already true, a question,
+- `edit`: the edit kind; `noop_kind`: why no change is right (already true,
   not expressible in the format); `referent`: why a pronoun or description ("it", "the
   red chain") names one thing only in the start state.
 - `preserved`: the parts of the start state the edit must leave alone, in the form of

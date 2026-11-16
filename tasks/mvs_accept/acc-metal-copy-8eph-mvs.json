@@ -371,6 +371,158 @@
      }
     ]
    }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8eph.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": [
+              {
+               "label_asym_id": "F",
+               "auth_seq_id": 202
+              },
+              {
+               "label_asym_id": "G",
+               "auth_seq_id": 301
+              }
+             ]
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "spacefill"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/8eph.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              }
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": [
+              {
+               "label_asym_id": "I",
+               "auth_seq_id": 202
+              },
+              {
+               "label_asym_id": "J",
+               "auth_seq_id": 301
+              }
+             ]
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "spacefill"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "magenta"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
   }
  ],
  "context": null,
@@ -397,7 +549,7 @@
   ],
   "date": "2026-11-13",
   "checks": [
-   "each of the 5 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
+   "each of the 7 accepted states: the atoms it draws, read back from mvs.resolve_scene, equal the atoms computed from the atom-table columns",
    "reference grades as exactly right against the task (success, F1 1, target score 1; runner.grade_parsed)",
    "every accepted alternative grades as itself, is accepted by the task with target score 1, and is a different final state from the reference",
    "target selects 1 atoms on the frozen atom table",
@@ -414,7 +566,7 @@
    "colour": "magenta"
   },
   "open": "which of several ions of the named metal (or all)",
-  "rule": "The request asks for \"the <metal> ion\"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them.",
+  "rule": "The request asks for \"the <metal> ion\"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them; and, where the entry holds several copies of one complex (one assembly each), the ions of one copy of the complex.",
   "candidates": [
    "CA A:202",
    "CA B:301",
@@ -426,10 +578,12 @@
    "CA B:301",
    "CA C:202",
    "CA D:301",
-   "all 4 copies"
+   "all 4 copies",
+   "the 2 ions of one copy of the complex (assembly 1: chains A and B)",
+   "the 2 ions of one copy of the complex (assembly 2: chains C and D)"
   ],
   "not_accepted": [
-   "some but not all ions (when there are more than two): no reading of the request",
+   "some but not all ions, other than the ions of one copy of the complex: no reading of the request",
    "the residues that bind the metal: not requested",
    "another representation or colour: both are stated"
   ],
@@ -439,8 +593,8 @@
    "needs_ligand_identity": true,
    "needs_uniprot_mapping": false,
    "n_candidates": 4,
-   "n_readings": 5,
-   "n_accepted_states": 5
+   "n_readings": 7,
+   "n_accepted_states": 7
   }
  },
  "skills": [
@@ -503,7 +657,39 @@
     "representation": "spacefill",
     "color": "magenta"
    }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "F",
+      "auth_seq_id": 202
+     },
+     {
+      "label_asym_id": "G",
+      "auth_seq_id": 301
+     }
+    ],
+    "representation": "spacefill",
+    "color": "magenta"
+   }
+  ],
+  [
+   {
+    "selector": [
+     {
+      "label_asym_id": "I",
+      "auth_seq_id": 202
+     },
+     {
+      "label_asym_id": "J",
+      "auth_seq_id": 301
+     }
+    ],
+    "representation": "spacefill",
+    "color": "magenta"
+   }
   ]
  ],
- "notes": "Left open: which of several ions of the named metal (or all). Reference = accepted state 1 of 5 (CA A:202); the others are in 'accepted', in the order of provenance.accepted_states."
+ "notes": "Left open: which of several ions of the named metal (or all). Reference = accepted state 1 of 7 (CA A:202); the others are in 'accepted', in the order of provenance.accepted_states."
 }

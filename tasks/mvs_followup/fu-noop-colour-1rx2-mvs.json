@@ -6,7 +6,7 @@
  "structures": [
   "1rx2"
  ],
- "prompt": "Show the ligand NAP in yellow.",
+ "prompt": "Make the ligand NAP orange.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "blue"
+                "color": "hotpink"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "yellow"
+                "color": "orange"
                }
               }
              ]
@@ -123,7 +123,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "blue"
+                 "color": "hotpink"
                 }
                }
               ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "yellow"
+                 "color": "orange"
                 }
                }
               ]
@@ -171,7 +171,7 @@
     "label_comp_id": "NAP"
    },
    "representation": null,
-   "color": "yellow"
+   "color": "orange"
   }
  ],
  "twin_of": "fu-noop-colour-1rx2-api",
@@ -194,7 +194,7 @@
    "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
    "twin selects the same target atoms"
   ],
-  "seed": "20261113|fu-noop-colour|2|1rx2",
+  "seed": "20261113|fu-noop-colour|1|1rx2",
   "edit": "no change: already true",
   "noop_kind": "already true",
   "referent": null,
@@ -202,14 +202,14 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "blue"
+    "color": "hotpink"
    },
    {
     "selector": {
      "label_comp_id": "NAP"
     },
     "representation": "ball_and_stick",
-    "color": "yellow"
+    "color": "orange"
    }
   ],
   "removed": null,

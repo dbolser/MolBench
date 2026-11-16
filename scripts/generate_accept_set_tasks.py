@@ -50,7 +50,9 @@ from collections import Counter
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(REPO / "scripts"))
 
+import additives  # noqa: E402
 from molbench import drawn, grounding, mvs, pdbe_state, runner, tasks as T  # noqa: E402
 from molbench.atoms import load_table  # noqa: E402
 
@@ -171,7 +173,8 @@ def ligand_phrase(lig: dict) -> str:
 
 
 def real_ligands(e: Entry) -> list[dict]:
-    return [x for x in e.ligands if x["kind"] == "ligand"]
+    """The entry's biological ligands (``data/corpus/additives.json`` lists what is not one)."""
+    return [x for x in e.ligands if additives.is_biological(x)]
 
 
 def metal_ions(e: Entry) -> list[dict]:
@@ -283,8 +286,8 @@ RULES = {
          "another representation or colour: both are stated"]),
     "acc-metal-copy": (
         "The request asks for \"the <metal> ion\"; the entry holds several ions of that "
-        "metal and no other metal. Accepted: any one of them, or all of them.",
-        ["some but not all ions (when there are more than two): no reading of the request",
+        "metal and no other metal. Accepted: any one of them, or all of them; and, where the entry holds several copies of one complex (one assembly each), the ions of one copy of the complex.",
+        ["some but not all ions, other than the ions of one copy of the complex: no reading of the request",
          "the residues that bind the metal: not requested",
          "another representation or colour: both are stated"]),
     "acc-metal-which": (
@@ -553,8 +556,18 @@ def spec_metal_copy(e: Entry) -> dict | None:
     ion = metals[0]
     colour = colours(1, "acc-metal-copy", e.id)[0]
     items = [(copy_label(c), copy_selector(c), None, e.copy_mask(c)) for c in ion["copies"]]
-    return {"states": highlight_states(e, items, one_or_all([i[0] for i in items]),
-                                       "spacefill", colour),
+    groups = one_or_all([i[0] for i in items])
+    # Where the entry holds several copies of one complex (each its own assembly in the
+    # facts), "the <metal> ion" is also read as the ions of one copy of the complex.
+    for asm in e.facts.get("assemblies", []):
+        chains = set(asm.get("polymer_chain_copies") or {})
+        mine = [i for i, c in enumerate(ion["copies"]) if c["auth_asym_id"] in chains]
+        if 2 <= len(mine) < len(items) and asm.get("relation_to_deposited") == "part of deposited":
+            label = (f"the {len(mine)} ions of one copy of the complex (assembly {asm['id']}: chains "
+                     + " and ".join(sorted(chains)) + ")")
+            if all(sorted(g) != mine for _, g in groups):
+                groups.append((label, mine))
+    return {"states": highlight_states(e, items, groups, "spacefill", colour),
             "candidates": [i[0] for i in items],
             "slots": {"thing": METAL[ion["comp_id"]], "colour": colour},
             "facts": e.difficulty(ligand_identity=True)}

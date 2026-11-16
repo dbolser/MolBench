@@ -6,7 +6,7 @@
  "structures": [
   "1rx2"
  ],
- "prompt": "Show the ligand NAP in yellow.",
+ "prompt": "Make the ligand NAP orange.",
  "reference": [
   {
    "action": "load",
@@ -17,11 +17,11 @@
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "blue"
+     "color": "hotpink"
     },
     {
      "label_comp_id": "NAP",
-     "color": "yellow"
+     "color": "orange"
     }
    ]
   }
@@ -38,11 +38,11 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "blue"
+      "color": "hotpink"
      },
      {
       "label_comp_id": "NAP",
-      "color": "yellow"
+      "color": "orange"
      }
     ]
    }
@@ -55,7 +55,7 @@
     "label_comp_id": "NAP"
    },
    "representation": null,
-   "color": "yellow"
+   "color": "orange"
   }
  ],
  "twin_of": "fu-noop-colour-1rx2-mvs",
@@ -78,7 +78,7 @@
    "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
    "twin selects the same target atoms"
   ],
-  "seed": "20261113|fu-noop-colour|2|1rx2",
+  "seed": "20261113|fu-noop-colour|1|1rx2",
   "edit": "no change: already true",
   "noop_kind": "already true",
   "referent": null,
@@ -90,14 +90,14 @@
      }
     ],
     "representation": null,
-    "color": "blue"
+    "color": "hotpink"
    },
    {
     "selector": {
      "label_comp_id": "NAP"
     },
     "representation": null,
-    "color": "yellow"
+    "color": "orange"
    }
   ],
   "removed": null,

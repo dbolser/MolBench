@@ -6,7 +6,7 @@
  "structures": [
   "1hho"
  ],
- "prompt": "Make the background black.",
+ "prompt": "Black background, please.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "hotpink"
+                "color": "khaki"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "plum"
+                "color": "purple"
                }
               }
              ]
@@ -129,7 +129,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "hotpink"
+                 "color": "khaki"
                 }
                }
               ]
@@ -153,7 +153,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "plum"
+                 "color": "purple"
                 }
                }
               ]
@@ -191,7 +191,7 @@
    "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
    "twin selects the same target atoms"
   ],
-  "seed": "20261113|fu-background|2|1hho",
+  "seed": "20261113|fu-background|1|1hho",
   "edit": "also: a scene setting",
   "noop_kind": null,
   "referent": null,
@@ -199,14 +199,14 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "hotpink"
+    "color": "khaki"
    },
    {
     "selector": {
      "label_comp_id": "HEM"
     },
     "representation": "ball_and_stick",
-    "color": "plum"
+    "color": "purple"
    }
   ],
   "removed": null,

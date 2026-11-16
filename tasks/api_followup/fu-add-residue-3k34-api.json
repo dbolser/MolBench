@@ -6,7 +6,7 @@
  "structures": [
   "3k34"
  ],
- "prompt": "Now draw Met241 of chain A as ball-and-stick too, in cyan; the cartoon keeps its colour.",
+ "prompt": "Add Glu187 (chain A) in grey ball-and-stick, without recolouring the cartoon.",
  "reference": [
   {
    "action": "load",
@@ -17,11 +17,11 @@
    "data": [
     {
      "struct_asym_id": "A",
-     "color": "yellow"
+     "color": "magenta"
     },
     {
      "label_comp_id": "SUA",
-     "color": "khaki"
+     "color": "orange"
     }
    ]
   },
@@ -30,10 +30,10 @@
    "data": [
     {
      "auth_asym_id": "A",
-     "auth_seq_id": 241,
+     "auth_seq_id": 187,
      "color": null,
      "representation": "ball-and-stick",
-     "representationColor": "cyan"
+     "representationColor": "gray"
     }
    ],
    "keep_colors": true,
@@ -52,11 +52,11 @@
     "data": [
      {
       "struct_asym_id": "A",
-      "color": "yellow"
+      "color": "magenta"
      },
      {
       "label_comp_id": "SUA",
-      "color": "khaki"
+      "color": "orange"
      }
     ]
    }
@@ -67,10 +67,10 @@
   {
    "selector": {
     "auth_asym_id": "A",
-    "auth_seq_id": 241
+    "auth_seq_id": 187
    },
    "representation": "ball-and-stick",
-   "color": "cyan"
+   "color": "gray"
   }
  ],
  "twin_of": "fu-add-residue-3k34-mvs",
@@ -89,7 +89,7 @@
   "checks": [
    "reference grades as exactly right against the task (success, F1 1, target score 1)",
    "start state grades as itself; it is not the requested final state",
-   "target selects 8 atoms on the frozen atom table",
+   "target selects 14 atoms on the frozen atom table",
    "start state scores 0.0 on the target (below 1)",
    "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
    "1 other way(s) of writing the final state grade as exactly right",
@@ -97,7 +97,7 @@
    "twin selects the same target atoms",
    "the residue's author number differs from its label number; author chain + number select exactly that residue's atoms"
   ],
-  "seed": "20261113|fu-add-residue|4|3k34",
+  "seed": "20261113|fu-add-residue|3|3k34",
   "edit": "add a component (a residue), keeping the rest",
   "noop_kind": null,
   "referent": null,
@@ -106,22 +106,22 @@
     "selector": [
      {
       "label_asym_id": "A",
-      "end_label_seq_id": 239
+      "end_label_seq_id": 185
      },
      {
       "label_asym_id": "A",
-      "beg_label_seq_id": 241
+      "beg_label_seq_id": 187
      }
     ],
     "representation": null,
-    "color": "yellow"
+    "color": "magenta"
    },
    {
     "selector": {
      "label_comp_id": "SUA"
     },
     "representation": null,
-    "color": "khaki"
+    "color": "orange"
    }
   ],
   "removed": null,
@@ -162,13 +162,13 @@
    {
     "action": 2,
     "param": 0,
-    "what": "Met241 of chain A",
+    "what": "Glu187 of chain A",
     "atoms": {
      "auth_asym_id": "A",
-     "auth_seq_id": 241,
-     "auth_comp_id": "MET"
+     "auth_seq_id": 187,
+     "auth_comp_id": "GLU"
     },
-    "n_atoms": 8
+    "n_atoms": 14
    }
   ]
  },

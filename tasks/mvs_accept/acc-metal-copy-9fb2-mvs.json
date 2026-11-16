@@ -266,7 +266,7 @@
    "colour": "orange"
   },
   "open": "which of several ions of the named metal (or all)",
-  "rule": "The request asks for \"the <metal> ion\"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them.",
+  "rule": "The request asks for \"the <metal> ion\"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them; and, where the entry holds several copies of one complex (one assembly each), the ions of one copy of the complex.",
   "candidates": [
    "K A:602",
    "K A:603"
@@ -277,7 +277,7 @@
    "both copies"
   ],
   "not_accepted": [
-   "some but not all ions (when there are more than two): no reading of the request",
+   "some but not all ions, other than the ions of one copy of the complex: no reading of the request",
    "the residues that bind the metal: not requested",
    "another representation or colour: both are stated"
   ],

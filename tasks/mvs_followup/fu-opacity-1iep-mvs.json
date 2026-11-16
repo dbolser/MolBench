@@ -6,7 +6,7 @@
  "structures": [
   "1iep"
  ],
- "prompt": "Can you make the surface of the protein half transparent?",
+ "prompt": "The protein surface should be half transparent.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "yellow"
+                "color": "brown"
                }
               },
               {
@@ -74,7 +74,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "brown"
+                "color": "red"
                }
               }
              ]
@@ -129,7 +129,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "yellow"
+                 "color": "brown"
                 }
                }
               ]
@@ -153,7 +153,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "brown"
+                 "color": "red"
                 }
                }
               ]
@@ -198,7 +198,7 @@
    "start state scores 0.5 on the target (below 1)",
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference"
   ],
-  "seed": "20261113|fu-opacity|2|1iep",
+  "seed": "20261113|fu-opacity|1|1iep",
   "edit": "change one property of an existing component (opacity)",
   "noop_kind": null,
   "referent": null,
@@ -208,7 +208,7 @@
      "label_comp_id": "STI"
     },
     "representation": "ball_and_stick",
-    "color": "brown"
+    "color": "red"
    }
   ],
   "removed": null,

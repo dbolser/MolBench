@@ -6,7 +6,7 @@
  "structures": [
   "8c86"
  ],
- "prompt": "Switch the protein from cartoon to surface.",
+ "prompt": "Show the protein as a surface instead of a cartoon.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "cyan"
+                "color": "green"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "blue"
+                "color": "purple"
                }
               }
              ]
@@ -123,7 +123,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "cyan"
+                 "color": "green"
                 }
                }
               ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "blue"
+                 "color": "purple"
                 }
                }
               ]
@@ -193,7 +193,7 @@
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
    "1 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
   ],
-  "seed": "20261113|fu-rep-polymer|2|8c86",
+  "seed": "20261113|fu-rep-polymer|1|8c86",
   "edit": "change a representation",
   "noop_kind": null,
   "referent": null,
@@ -203,7 +203,7 @@
      "label_comp_id": "TQ0"
     },
     "representation": "ball_and_stick",
-    "color": "blue"
+    "color": "purple"
    }
   ],
   "removed": null,

@@ -1,0 +1,225 @@
+{
+ "id": "fu-background-1y26-mvs",
+ "track": "mvs",
+ "tier": "followup",
+ "family": "fu-background",
+ "structures": [
+  "1y26"
+ ],
+ "prompt": "Make the background black.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1y26.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "gray"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "ADE"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "brown"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "canvas",
+     "params": {
+      "background_color": "black"
+     }
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": {
+  "scene": {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1y26.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "gray"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "ADE"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "brown"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "noop": false
+ },
+ "target": null,
+ "twin_of": "fu-background-1y26-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1y26.json",
+   "molbench/atom_tables/1y26.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
+   "start state grades as itself; it is not the requested final state",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-background|2|1y26",
+  "edit": "also: a scene setting",
+  "noop_kind": null,
+  "referent": null,
+  "preserved": [
+   {
+    "selector": "polymer",
+    "representation": "cartoon",
+    "color": "gray"
+   },
+   {
+    "selector": {
+     "label_comp_id": "ADE"
+    },
+    "representation": "ball_and_stick",
+    "color": "brown"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  }
+ },
+ "skills": [
+  "edit",
+  "canvas"
+ ]
+}

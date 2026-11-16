@@ -5,7 +5,7 @@ Each task is a start state (an MVS scene), an edit request, and the complete fin
 as the reference. Start state and reference are built from the same component list,
 from the frozen panel only. Only the final state is graded.
 
-- **58 tasks** on 46 structures, at most 3 per structure; 11 held back (structures: 1lmb, 1rx2, 2c9v, 2omf, 2ptc, 5ni1, 6tc2, 6tha, 8k7f).
+- **58 tasks** on 42 structures, at most 3 per structure; 8 held back (structures: 1lmb, 1rx2, 2c9v, 2ptc, 5ni1, 6tc2, 8k7f).
 - **10 need no change** (`context.noop`): the reference is the start state.
 - **36 have a twin** on the API track (`twin_of`): same request, same structure, same target atoms.
 
@@ -26,7 +26,7 @@ from the frozen panel only. Only the final state is graded.
 | `fu-noop-colour` | 2 | no change: already true | the ligand already has the requested colour: reference = start state |
 | `fu-noop-shown` | 2 | no change: already true | the polymer already is a cartoon: reference = start state |
 | `fu-noop-hidden` | 2 | no change: already true | no water is drawn (MVS) / hide_water is already set (API): reference = start state |
-| `fu-noop-question` | 2 | no change: a question | a question about the structure: reference = start state |
+| `fu-noop-ligand-rep` | 2 | no change: already true | the ligand asked for as ball-and-stick, which it already is: reference = start state |
 | `fu-noop-spin` | 2 | no change: the format cannot express the request (MVS only) | the MVS reference has no motion, and the request says to change nothing in that case: reference = start state |
 | `fu-it-colour` | 2 | pronoun: recolour (MVS only) | start: the ligand alone (one copy); "it" recoloured |
 | `fu-it-surface` | 1 | pronoun: change a representation (MVS only) | start: the polymer alone; "it" changed from cartoon to surface, colour kept |
@@ -42,7 +42,7 @@ from the frozen panel only. Only the final state is graded.
 
 ## What each task records (`provenance`)
 
-- `edit`: the edit kind; `noop_kind`: why no change is right (already true, a question,
+- `edit`: the edit kind; `noop_kind`: why no change is right (already true,
   not expressible in the format); `referent`: why a pronoun or description ("it", "the
   red chain") names one thing only in the start state.
 - `preserved`: the parts of the start state the edit must leave alone, in the form of

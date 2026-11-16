@@ -1,0 +1,258 @@
+{
+ "id": "fu-add-residue-2hhb-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-add-residue",
+ "structures": [
+  "2hhb"
+ ],
+ "prompt": "Now draw His122 of chain A as ball-and-stick too, in yellow; the cartoon keeps its colour.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "2hhb"
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "green"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "green"
+    },
+    {
+     "struct_asym_id": "C",
+     "color": "green"
+    },
+    {
+     "struct_asym_id": "D",
+     "color": "green"
+    },
+    {
+     "label_comp_id": "HEM",
+     "color": "magenta"
+    }
+   ]
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "auth_asym_id": "A",
+     "auth_seq_id": 122,
+     "color": null,
+     "representation": "ball-and-stick",
+     "representationColor": "yellow"
+    }
+   ],
+   "keep_colors": true,
+   "keep_representations": true
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "2hhb"
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "green"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "green"
+     },
+     {
+      "struct_asym_id": "C",
+      "color": "green"
+     },
+     {
+      "struct_asym_id": "D",
+      "color": "green"
+     },
+     {
+      "label_comp_id": "HEM",
+      "color": "magenta"
+     }
+    ]
+   }
+  ],
+  "noop": false
+ },
+ "target": [
+  {
+   "selector": {
+    "auth_asym_id": "A",
+    "auth_seq_id": 122
+   },
+   "representation": "ball-and-stick",
+   "color": "yellow"
+  }
+ ],
+ "twin_of": "fu-add-residue-2hhb-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/2hhb.json",
+   "molbench/atom_tables/2hhb.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it is not the requested final state",
+   "target selects 10 atoms on the frozen atom table",
+   "start state scores 0.0 on the target (below 1)",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "1 other way(s) of writing the final state grade as exactly right",
+   "4 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 4 of them lose a preserved part",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-add-residue|4|2hhb",
+  "edit": "add a component (a residue), keeping the rest",
+  "noop_kind": null,
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A",
+      "end_label_seq_id": 121
+     },
+     {
+      "label_asym_id": "A",
+      "beg_label_seq_id": 123
+     },
+     {
+      "label_asym_id": "B"
+     },
+     {
+      "label_asym_id": "C"
+     },
+     {
+      "label_asym_id": "D"
+     }
+    ],
+    "representation": null,
+    "color": "green"
+   },
+   {
+    "selector": {
+     "label_comp_id": "HEM"
+    },
+    "representation": null,
+    "color": "magenta"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "2hhb",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 1,
+    "param": 0,
+    "what": "polymer chain A (entity 1)",
+    "atoms": {
+     "auth_asym_id": "A",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 1069
+   },
+   {
+    "action": 1,
+    "param": 1,
+    "what": "polymer chain B (entity 2)",
+    "atoms": {
+     "auth_asym_id": "B",
+     "label_entity_id": "2"
+    },
+    "n_atoms": 1123
+   },
+   {
+    "action": 1,
+    "param": 2,
+    "what": "polymer chain C (entity 1)",
+    "atoms": {
+     "auth_asym_id": "C",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 1069
+   },
+   {
+    "action": 1,
+    "param": 3,
+    "what": "polymer chain D (entity 2)",
+    "atoms": {
+     "auth_asym_id": "D",
+     "label_entity_id": "2"
+    },
+    "n_atoms": 1123
+   },
+   {
+    "action": 1,
+    "param": 4,
+    "what": "every copy of HEM",
+    "atoms": [
+     {
+      "auth_asym_id": "A",
+      "auth_seq_id": 142,
+      "auth_comp_id": "HEM"
+     },
+     {
+      "auth_asym_id": "B",
+      "auth_seq_id": 148,
+      "auth_comp_id": "HEM"
+     },
+     {
+      "auth_asym_id": "C",
+      "auth_seq_id": 142,
+      "auth_comp_id": "HEM"
+     },
+     {
+      "auth_asym_id": "D",
+      "auth_seq_id": 148,
+      "auth_comp_id": "HEM"
+     }
+    ],
+    "n_atoms": 172
+   },
+   {
+    "action": 2,
+    "param": 0,
+    "what": "His122 of chain A",
+    "atoms": {
+     "auth_asym_id": "A",
+     "auth_seq_id": 122,
+     "auth_comp_id": "HIS"
+    },
+    "n_atoms": 10
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "selection",
+  "representation",
+  "color"
+ ]
+}

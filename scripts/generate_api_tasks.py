@@ -42,7 +42,9 @@ from typing import Any, Callable
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(REPO / "scripts"))
 
+import additives  # noqa: E402
 from molbench import grounding, runner, sifts  # noqa: E402
 from molbench import pdbe_state as ps  # noqa: E402
 from molbench import tasks as T  # noqa: E402
@@ -69,8 +71,7 @@ MAX_PER_STRUCTURE = 4          # generated tasks per structure and tier (the bri
 AA = ("ALA ARG ASN ASP CYS GLN GLU GLY HIS ILE LEU LYS MET PHE PRO SER THR TRP TYR VAL").split()
 ONE = dict(zip(AA, "ARNDCQEGHILKMFPSTWYV"))
 # crystallisation additives: real components, but not what a request would be about
-ADDITIVES = {"SO4", "PO4", "GOL", "EDO", "PEG", "DMS", "MPD", "TRS", "ACT", "BME", "P33", "SCN",
-             "GLY", "TLA", "BNG", "C8E", "LI1", "SQU", "STE", "DGA", "F09"}
+ADDITIVES = additives.ADDITIVES      # one list for the corpus: data/corpus/additives.json
 COLOUR_WORDS = {"steelblue": "steel blue", "limegreen": "lime green", "hotpink": "hot pink",
                 "gray": "grey"}
 BRIGHT = [c for c in TASK_PALETTE if c not in ("white", "black", "gray")]
@@ -1302,6 +1303,11 @@ def t_tooltips(s: S) -> dict | None:
     }
 
 
+#: The trap every undo task carries: all the steps of the request except the undo. It must
+#: fail, or the task would not test the undo (ruling of 2026-11-15).
+UNDO_SKIPPED = "every step but the undo"
+
+
 def t_undo_tooltips(s: S) -> dict | None:
     rs = chosen_residues(s, "undo-tooltips", 2)
     if rs is None or s.kind != "pdb" or "water" not in s.components:
@@ -1311,26 +1317,31 @@ def t_undo_tooltips(s: S) -> dict | None:
     tip = lambda r: {"action": "tooltips", "data": [by_author(r, tooltip=res_word(r))]}  # noqa: E731
     plain = lambda r: {"action": "tooltips", "data": [by_label(r, tooltip=res_word(r))]}  # noqa: E731
     w1, w2 = res_words(s, [r1]), res_words(s, [r2])
+    t1, t2 = res_word(r1), res_word(r2)
+    both = {"action": "tooltips", "data": [by_author(r1, tooltip=t1), by_author(r2, tooltip=t2)]}
     return {
-        "prompts": [f"Load {s.name} and hide the waters. Attach the tooltip '{res_word(r1)}' to {w1}; then remove "
-                    f"all tooltips again and attach '{res_word(r2)}' to {w2} instead.",
-                    f"In {s.name} with the waters hidden: give {w1} a hover tooltip reading '{res_word(r1)}', "
-                    f"clear the tooltips, and leave only a tooltip '{res_word(r2)}' on {w2}.",
-                    f"Open {s.name}, waters off. First a tooltip '{res_word(r1)}' on {w1}. On second thoughts, "
-                    f"clear it: the only tooltip should be '{res_word(r2)}' on {w2}."],
-        "reference": [L, prop("hide_water", True), tip(r1), {"action": "clear_tooltips"}, tip(r2)],
+        "prompts": [f"Load {s.name} and hide the waters. Attach the tooltips '{t1}' to {w1} and '{t2}' to {w2}; "
+                    f"then remove the '{t1}' tooltip again and keep the other one.",
+                    f"In {s.name} with the waters hidden: give {w1} a hover tooltip reading '{t1}' and {w2} one "
+                    f"reading '{t2}'. Then take the first one off again, so that only '{t2}' is left.",
+                    f"Open {s.name}, waters off. Put a tooltip '{t1}' on {w1} and a tooltip '{t2}' on {w2}. On "
+                    f"second thoughts, drop '{t1}': the only tooltip should be '{t2}' on {w2}."],
+        "reference": [L, prop("hide_water", True), both, tip(r2)],
         "target": [{"selector": [residue_atoms(r2)], "representation": None, "color": None}],
         "skills": ["load", "hide", "selection", "author-numbering", "tooltip", "clear-tooltips"],
         "difficulty": {**numbering_facts(s, [r1, r2]), "undo_step": "tooltips"},
-        "derived": "Seeded residues as in api-tooltips. The first tooltip is cleared, so the final state "
-                   "is the waters hidden and one tooltip; a list that never sets the first is right too.",
-        "alts": [("without the tooltip that is cleared", [L, prop("hide_water", True), plain(r2)]),
-                 ("no clear: a new tooltips call replaces the earlier tooltips",
-                  [L, prop("hide_water", True), plain(r1), plain(r2)])],
-        "traps": [("both tooltips left on",
+        "derived": "Seeded residues as in api-tooltips. Two tooltips are set and one is taken off again, so "
+                   "the final state is the waters hidden and one tooltip. The undo is needed: a list that "
+                   "makes every step but the last leaves both tooltips on and is wrong. A list that never "
+                   "sets the first tooltip ends in the same state and is right.",
+        "alts": [("without the tooltip that is removed", [L, prop("hide_water", True), plain(r2)]),
+                 ("all tooltips cleared, then the one that stays set again",
+                  [L, prop("hide_water", True),
+                   {"action": "tooltips", "data": [by_label(r1, tooltip=t1), by_label(r2, tooltip=t2)]},
+                   {"action": "clear_tooltips"}, plain(r2)])],
+        "traps": [(UNDO_SKIPPED,
                    [L, prop("hide_water", True),
-                    {"action": "tooltips", "data": [by_label(r1, tooltip=res_word(r1)),
-                                                    by_label(r2, tooltip=res_word(r2))]}])],
+                    {"action": "tooltips", "data": [by_label(r1, tooltip=t1), by_label(r2, tooltip=t2)]}])],
     }
 
 
@@ -1351,45 +1362,57 @@ def t_undo(s: S, variant: str) -> dict | None:
     # No "zoom in, then reset the camera" variant: when the reference has no focus an
     # answer's focus is not counted (GRADING.md, "The camera"), so leaving the camera
     # zoomed in would be graded as right and the task would test nothing.
+    (c1,) = [x for x in colours(2, "undo-chain", s.id) if x != c][:1]
+    A = chain["auth_asym_id"]
     if variant == "selection":
         return {**base,
-                "prompts": [f"Load {s.name} and hide the waters. Select chain {chain['auth_asym_id']} (default "
-                            f"selection colouring) to see where it is, then clear that selection again and colour "
-                            f"only {what} {cw(c)}.",
-                            f"In {s.name} with the waters hidden: mark chain {chain['auth_asym_id']} with the "
-                            f"default selection colour, clear the selection, and then colour just {what} {cw(c)}.",
-                            f"Open {s.name}, waters off. Briefly select chain {chain['auth_asym_id']}, clear it, "
-                            f"and finish with {what} in {cw(c)} and nothing else coloured."],
-                "reference": [L, prop("hide_water", True), color_call([whole]), {"action": "clear_selection"},
-                              color_call([ligand_sel(lig, color=c)])],
+                "prompts": [f"Load {s.name} and hide the waters. Colour chain {A} {cw(c1)} and {what} {cw(c)}; then "
+                            f"take the {cw(c1)} off chain {A} again, so that only {what} is coloured.",
+                            f"In {s.name} with the waters hidden: colour chain {A} {cw(c1)} and {what} {cw(c)}, "
+                            f"then undo the chain colour and keep the {cw(c)}.",
+                            f"Open {s.name}, waters off, with chain {A} in {cw(c1)} and {what} in {cw(c)}. On "
+                            f"second thoughts, put chain {A} back to its default colours and leave {what} {cw(c)}."],
+                # the reference is the shortest list that ends in the final state; the list
+                # that colours the chain and takes the colour off again is under "alts"
+                "reference": [L, prop("hide_water", True), color_call([ligand_sel(lig, color=c)])],
                 "target": [{"selector": ligand_sel(lig)["_t"]["atoms"], "representation": None, "color": c}],
                 "skills": ["load", "hide", "select-by-chain", "clear-selection", "select-by-ligand", "color"],
-                "derived": "The chain selection is cleared again, so the final state is the waters "
-                           "hidden and the ligand coloured; a list that skips the selection is right too.",
-                "alts": [("without the selection that is cleared",
-                          [L, prop("hide_water", True), color_call([{**plain_lig, "color": c}])])],
-                "traps": [("the chain left selected",
-                           [L, prop("hide_water", True), color_call([{"auth_asym_id": chain["auth_asym_id"]}]),
-                            color_call([{**plain_lig, "color": c}], keep_colors=True)])]}
+                "derived": "Two things are coloured and one colour is taken off again, so the final state "
+                           "is the waters hidden and the ligand coloured. The undo is needed: a list that "
+                           "makes every step but the last leaves the chain coloured and is wrong. A list "
+                           "that never colours the chain ends in the same state and is right.",
+                "alts": [("both coloured, then one colour call for the ligand alone (it replaces the first)",
+                          [L, prop("hide_water", True),
+                           color_call([{"auth_asym_id": A, "color": c1}, {**plain_lig, "color": c}]),
+                           color_call([{**plain_lig, "color": c}])]),
+                         ("the colouring cleared, then the ligand coloured again",
+                          [L, prop("hide_water", True),
+                           color_call([{"auth_asym_id": A, "color": c1}, {**plain_lig, "color": c}]),
+                           {"action": "clear_selection"}, color_call([{**plain_lig, "color": c}])])],
+                "traps": [(UNDO_SKIPPED,
+                           [L, prop("hide_water", True),
+                            color_call([{"auth_asym_id": A, "color": c1}, {**plain_lig, "color": c}])])]}
     if variant == "highlight":
         return {**base,
-                "prompts": [f"Load {s.name} and hide the waters. Highlight chain {chain['auth_asym_id']}, then clear "
-                            f"that highlight and highlight {what} instead.",
-                            f"In {s.name} with the waters hidden: put the highlight on chain "
-                            f"{chain['auth_asym_id']}, remove it again, and leave {what} highlighted.",
-                            f"Open {s.name}, waters off. Highlight chain {chain['auth_asym_id']} for a moment, clear "
-                            f"the highlight, and end with only {what} highlighted."],
-                "reference": [L, prop("hide_water", True), {"action": "highlight", "data": [whole]},
-                              {"action": "clear_highlight"}, {"action": "highlight", "data": [ligand_sel(lig)]}],
-                "target": [{"selector": ligand_sel(lig)["_t"]["atoms"], "representation": None, "color": None}],
-                "skills": ["load", "hide", "highlight", "clear-highlight", "select-by-ligand"],
-                "derived": "The first highlight is cleared, so the final state is the waters hidden "
-                           "and the ligand highlighted.",
+                "prompts": [f"Load {s.name} and hide the waters. Colour {what} {cw(c)} and highlight chain {A}; "
+                            f"then clear the highlight again.",
+                            f"In {s.name} with the waters hidden: colour {what} {cw(c)} and put the highlight on "
+                            f"chain {A}. Then remove the highlight; the colour stays.",
+                            f"Open {s.name}, waters off, with {what} in {cw(c)}. Highlight chain {A} for a moment, "
+                            f"then clear the highlight so that nothing is highlighted."],
+                "reference": [L, prop("hide_water", True), color_call([ligand_sel(lig, color=c)]),
+                              {"action": "highlight", "data": [whole]}, {"action": "clear_highlight"}],
+                "target": [{"selector": ligand_sel(lig)["_t"]["atoms"], "representation": None, "color": c}],
+                "skills": ["load", "hide", "highlight", "clear-highlight", "select-by-ligand", "color"],
+                "derived": "The highlight is cleared, so the final state is the waters hidden and the "
+                           "ligand coloured, with nothing highlighted. The undo is needed: a list that "
+                           "makes every step but the last leaves the chain highlighted and is wrong. A "
+                           "list that never highlights ends in the same state and is right.",
                 "alts": [("without the highlight that is cleared",
-                          [L, prop("hide_water", True), {"action": "highlight", "data": [plain_lig]}])],
-                "traps": [("the highlight left on the chain",
-                           [L, prop("hide_water", True),
-                            {"action": "highlight", "data": [{"auth_asym_id": chain["auth_asym_id"]}]}])]}
+                          [L, prop("hide_water", True), color_call([{**plain_lig, "color": c}])])],
+                "traps": [(UNDO_SKIPPED,
+                           [L, prop("hide_water", True), color_call([{**plain_lig, "color": c}]),
+                            {"action": "highlight", "data": [{"auth_asym_id": A}]}])]}
     hi, se = colours(2, "undo-colours", s.id)
     return {**base,
             "prompts": [f"Load {s.name}, set the hover-highlight colour to {cw(hi)} and the selection colour to "
@@ -1405,7 +1428,7 @@ def t_undo(s: S, variant: str) -> dict | None:
             "derived": "Canvas colours only: the final state has the highlight colour set and the "
                        "selection colour at its default.",
             "alts": [("only the highlight colour set", [s.load(), prop("highlight_color", hi)])],
-            "traps": [("the selection colour left set", [s.load(), {"action": "set_color", "highlight": hi, "select": se}])]}
+            "traps": [(UNDO_SKIPPED, [s.load(), {"action": "set_color", "highlight": hi, "select": se}])]}
 
 
 def t_maps(s: S) -> dict | None:
@@ -2048,7 +2071,7 @@ DERIVATION = {
     "api-canvas": "Background, lighting and spin.",
     "api-highlight": "The viewer's highlight on seeded author-numbered residues, with a highlight colour and focus.",
     "api-tooltips": "Tooltips on seeded author-numbered residues (the text is the residue's own name and number), waters hidden.",
-    "api-undo": "A request with a step that is undone again (clear selection, clear highlight, clear tooltips, reset selection colour). Only the final state is graded.",
+    "api-undo": "A request with a step that is undone again (one of two colours taken off, a highlight cleared, one of two tooltips removed, the selection colour reset). Only the final state is graded, and the undo is needed: the list of every step but the undo is a trap that must fail.",
     "api-maps": "X-ray entries: electron-density maps on, one map styled (declared settings).",
     "api-preset": "A load preset (unit cell or supercell for an X-ray entry, all models for an NMR ensemble) and a background colour.",
 }

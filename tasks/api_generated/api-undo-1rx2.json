@@ -45,7 +45,7 @@
       "a bare load scores 0",
       "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
       "equivalent answer succeeds: only the highlight colour set",
-      "wrong answer fails: the selection colour left set (F1 0.6667)"
+      "wrong answer fails: every step but the undo (F1 0.6667)"
     ],
     "structure": "1rx2",
     "derived": "Canvas colours only: the final state has the highlight colour set and the selection colour at its default.",

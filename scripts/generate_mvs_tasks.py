@@ -23,6 +23,7 @@ import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+import additives  # noqa: E402
 import mvscore_common as C  # noqa: E402
 import generate_grounded_tasks as grounded  # noqa: E402
 
@@ -116,8 +117,7 @@ def ligands_unambiguous(entry: str) -> bool:
 # Crystallisation and buffer additives. An entry whose only non-polymer groups are
 # these has no "ligand" in a structural biologist's sense, so its prompt says "small
 # molecule" (same atoms: Mol*'s `ligand` selection).
-ADDITIVES = frozenset({"GOL", "EDO", "DMS", "GLY", "TLA", "C8E", "PEG", "PGE", "PG4", "MPD",
-                       "ACT", "FMT", "IPA", "EOH", "BME", "TRS", "MES", "EPE", "CIT"})
+ADDITIVES = additives.ADDITIVES      # one list for the corpus: data/corpus/additives.json
 
 
 def sugar_chains(entry: str) -> list[str]:

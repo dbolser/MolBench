@@ -19,10 +19,10 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 | `acc-metal-which` | 2 | 3 | which of two different metal ions (or both) | Open 1UDT with the protein as a cartoon and the metal ion in red spacefill. |
 | `acc-chain-colours` | 3 | 2, 6 | which chain gets which colour | Load 1AAY and show it as a cartoon, with the three chains coloured green, magenta and cyan. |
 | `acc-ligand-copy` | 3 | 3 | which copy of the named ligand (or all) | Open 1IEP with the protein as a cartoon and the ligand STI in purple ball-and-stick. |
-| `acc-metal-copy` | 3 | 3, 4, 5 | which of several ions of the named metal (or all) | Show 1TUP with the protein and DNA as a cartoon and the zinc ion as a spacefill sphere, coloured magenta. |
+| `acc-metal-copy` | 3 | 3, 4, 7 | which of several ions of the named metal (or all) | Show 1TUP with the protein and DNA as a cartoon and the zinc ion as a spacefill sphere, coloured magenta. |
 | `acc-residue-copy` | 3 | 3 | which chain's copy of the named residue (or all) | Show 1TRN with the protein as a cartoon and Lys236 as ball-and-stick, coloured purple. |
 | `acc-residue-colour` | 3 | 3 | which chain's copy of the named residue (or all) | Show 1AOI with the protein and DNA as a cartoon. Colour Ile66 blue. |
-| `acc-representation-open` | 3 | 4 | which representation | Open 1HRC with the protein as a cartoon, and show the heme in green. |
+| `acc-representation-open` | 3 | 4 | which representation | Open 1MBN with the protein as a cartoon, and show the heme in blue. |
 
 ## How each reference is derived
 
@@ -33,7 +33,7 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 | `acc-metal-which` | exactly two metal `ion` components, one copy each, equal to Mol*'s static `ion` selection, no metal in any ligand; states = A, B, A+B | The request asks for "the metal ion"; the entry holds exactly two metal ions, of different elements, and no metal inside a ligand. Accepted: either ion, or both. |
 | `acc-chain-colours` | polymer chains from `facts.chains`; exactly 2 or 3; n colours by seed; all n! assignments | The request gives one colour per chain but not which chain gets which. Accepted: every one-to-one assignment of the named colours to the polymer chains (n! states), on a cartoon of the whole polymer. |
 | `acc-ligand-copy` | a `ligand` component with 2–4 copies (≥ 8 heavy atoms); each copy, and all | The request names one ligand; the entry holds several copies of it. Accepted: any one copy, or every copy. Not an arbitrary several-but-not-all: no reading of the request picks, say, two of four. |
-| `acc-metal-copy` | the entry's only metal: an `ion` component with 2–4 copies, no metal in any ligand; each ion, and all | The request asks for "the <metal> ion"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them. |
+| `acc-metal-copy` | the entry's only metal: an `ion` component with 2–4 copies, no metal in any ligand; each ion, and all | The request asks for "the <metal> ion"; the entry holds several ions of that metal and no other metal. Accepted: any one of them, or all of them; and, where the entry holds several copies of one complex (one assembly each), the ions of one copy of the complex. |
 | `acc-residue-copy` | a protein entity with 2–3 chains; a residue (seeded) with the same author number and name in every one of them and in no other chain; each chain's copy, and all | The request names a residue by type and author number but no chain; the protein is present as several identical chains, each with that residue. Accepted: the residue in any one chain, or in every chain. |
 | `acc-residue-colour` | as above, coloured on the cartoon instead of added as sticks | The request asks to colour a residue, named by type and author number but with no chain; the protein is present as several identical chains. Accepted: the residue coloured in any one chain, or in every chain. |
 | `acc-representation-open` | the entry's only `ligand` component (one copy, ≥ 8 heavy atoms); one state per representation type that draws all its atoms | The request asks to show a ligand in a stated colour and names no representation. Accepted: each MVS representation type that draws every atom of the ligand (GRADING.md, 'A representation draws atoms of its component'): ball_and_stick, spacefill, line, surface. A cartoon, backbone or putty asked for on a ligand is drawn by the viewer as ball-and-stick and so is graded as that state. |
@@ -55,13 +55,13 @@ tables) and listed in the task: `reference` is the first, `accepted` the others,
 | `acc-ligand-which-2cpp-mvs` | 2cpp | public | 4 | CAM, HEM |
 | `acc-ligand-which-9gio-mvs` | 9gio | public | 4 | 3JF, A1IMD |
 | `acc-metal-copy-1tup-mvs` | 1tup | public | 4 | ZN A:951, ZN B:952, ZN C:953 |
-| `acc-metal-copy-8eph-mvs` | 8eph | public | 5 | CA A:202, CA B:301, CA C:202, CA D:301 |
+| `acc-metal-copy-8eph-mvs` | 8eph | public | 7 | CA A:202, CA B:301, CA C:202, CA D:301 |
 | `acc-metal-copy-9fb2-mvs` | 9fb2 | public | 3 | K A:602, K A:603 |
 | `acc-metal-which-1udt-mvs` | 1udt | public | 3 | MG, ZN |
 | `acc-metal-which-7a4m-mvs` | 7a4m | public | 3 | FE, ZN |
-| `acc-representation-open-1hrc-mvs` | 1hrc | public | 4 | ball_and_stick, spacefill, line, surface |
 | `acc-representation-open-1mbn-mvs` | 1mbn | public | 4 | ball_and_stick, spacefill, line, surface |
 | `acc-representation-open-3f9m-mvs` | 3f9m | public | 4 | ball_and_stick, spacefill, line, surface |
+| `acc-representation-open-3k34-mvs` | 3k34 | public | 4 | ball_and_stick, spacefill, line, surface |
 | `acc-residue-colour-1aoi-mvs` | 1aoi | public | 3 | ILE B:66, ILE F:66 |
 | `acc-residue-colour-1igt-mvs` | 1igt | heldback | 3 | ASP B:101, ASP D:101 |
 | `acc-residue-colour-4ins-mvs` | 4ins | public | 3 | LYS B:29, LYS D:29 |

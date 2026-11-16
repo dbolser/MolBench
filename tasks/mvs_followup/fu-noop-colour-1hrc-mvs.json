@@ -1,0 +1,229 @@
+{
+ "id": "fu-noop-colour-1hrc-mvs",
+ "track": "mvs",
+ "tier": "followup",
+ "family": "fu-noop-colour",
+ "structures": [
+  "1hrc"
+ ],
+ "prompt": "Show the heme c (HEC) in cyan.",
+ "reference": {
+  "root": {
+   "kind": "root",
+   "children": [
+    {
+     "kind": "download",
+     "params": {
+      "url": "https://files.rcsb.org/download/1hrc.cif"
+     },
+     "children": [
+      {
+       "kind": "parse",
+       "params": {
+        "format": "mmcif"
+       },
+       "children": [
+        {
+         "kind": "structure",
+         "params": {
+          "type": "model"
+         },
+         "children": [
+          {
+           "kind": "component",
+           "params": {
+            "selector": "polymer"
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "cartoon"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "green"
+               }
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "kind": "component",
+           "params": {
+            "selector": {
+             "label_comp_id": "HEC"
+            }
+           },
+           "children": [
+            {
+             "kind": "representation",
+             "params": {
+              "type": "ball_and_stick"
+             },
+             "children": [
+              {
+               "kind": "color",
+               "params": {
+                "color": "cyan"
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "accepted": [],
+ "context": {
+  "scene": {
+   "root": {
+    "kind": "root",
+    "children": [
+     {
+      "kind": "download",
+      "params": {
+       "url": "https://files.rcsb.org/download/1hrc.cif"
+      },
+      "children": [
+       {
+        "kind": "parse",
+        "params": {
+         "format": "mmcif"
+        },
+        "children": [
+         {
+          "kind": "structure",
+          "params": {
+           "type": "model"
+          },
+          "children": [
+           {
+            "kind": "component",
+            "params": {
+             "selector": "polymer"
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "cartoon"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "green"
+                }
+               }
+              ]
+             }
+            ]
+           },
+           {
+            "kind": "component",
+            "params": {
+             "selector": {
+              "label_comp_id": "HEC"
+             }
+            },
+            "children": [
+             {
+              "kind": "representation",
+              "params": {
+               "type": "ball_and_stick"
+              },
+              "children": [
+               {
+                "kind": "color",
+                "params": {
+                 "color": "cyan"
+                }
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "noop": true
+ },
+ "target": [
+  {
+   "selector": {
+    "label_comp_id": "HEC"
+   },
+   "representation": null,
+   "color": "cyan"
+  }
+ ],
+ "twin_of": "fu-noop-colour-1hrc-api",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1hrc.json",
+   "molbench/atom_tables/1hrc.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1, target score 1)",
+   "start state grades as itself; it already is the requested final state (no change needed)",
+   "target selects 43 atoms on the frozen atom table",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-noop-colour|2|1hrc",
+  "edit": "no change: already true",
+  "noop_kind": "already true",
+  "referent": null,
+  "preserved": [
+   {
+    "selector": "polymer",
+    "representation": "cartoon",
+    "color": "green"
+   },
+   {
+    "selector": {
+     "label_comp_id": "HEC"
+    },
+    "representation": "ball_and_stick",
+    "color": "cyan"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  }
+ },
+ "skills": [
+  "edit",
+  "color",
+  "noop"
+ ]
+}

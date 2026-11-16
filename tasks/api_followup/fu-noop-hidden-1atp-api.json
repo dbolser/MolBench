@@ -1,0 +1,167 @@
+{
+ "id": "fu-noop-hidden-1atp-api",
+ "track": "api",
+ "tier": "followup",
+ "family": "fu-noop-hidden",
+ "structures": [
+  "1atp"
+ ],
+ "prompt": "Hide the waters.",
+ "reference": [
+  {
+   "action": "load",
+   "molecule_id": "1atp"
+  },
+  {
+   "action": "set_property",
+   "name": "hide_water",
+   "value": true
+  },
+  {
+   "action": "color",
+   "data": [
+    {
+     "struct_asym_id": "A",
+     "color": "cyan"
+    },
+    {
+     "struct_asym_id": "B",
+     "color": "cyan"
+    },
+    {
+     "label_comp_id": "ATP",
+     "color": "plum"
+    }
+   ]
+  }
+ ],
+ "accepted": [],
+ "context": {
+  "calls": [
+   {
+    "action": "load",
+    "molecule_id": "1atp"
+   },
+   {
+    "action": "set_property",
+    "name": "hide_water",
+    "value": true
+   },
+   {
+    "action": "color",
+    "data": [
+     {
+      "struct_asym_id": "A",
+      "color": "cyan"
+     },
+     {
+      "struct_asym_id": "B",
+      "color": "cyan"
+     },
+     {
+      "label_comp_id": "ATP",
+      "color": "plum"
+     }
+    ]
+   }
+  ],
+  "noop": true
+ },
+ "target": null,
+ "twin_of": "fu-noop-hidden-1atp-mvs",
+ "paraphrase_of": null,
+ "style": "full",
+ "split": "public",
+ "grounding": null,
+ "provenance": {
+  "script": "scripts/generate_followup_tasks.py",
+  "inputs": [
+   "data/panel/panel.json",
+   "data/panel/facts/1atp.json",
+   "molbench/atom_tables/1atp.json.gz"
+  ],
+  "date": "2026-11-13",
+  "checks": [
+   "reference grades as exactly right against the task (success, F1 1; no atom target)",
+   "start state grades as itself; it already is the requested final state (no change needed)",
+   "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference",
+   "twin selects the same target atoms"
+  ],
+  "seed": "20261113|fu-noop-hidden|1|1atp",
+  "edit": "no change: already true",
+  "noop_kind": "already true",
+  "referent": null,
+  "preserved": [
+   {
+    "selector": [
+     {
+      "label_asym_id": "A"
+     },
+     {
+      "label_asym_id": "B"
+     }
+    ],
+    "representation": null,
+    "color": "cyan"
+   },
+   {
+    "selector": {
+     "label_comp_id": "ATP"
+    },
+    "representation": null,
+    "color": "plum"
+   }
+  ],
+  "removed": null,
+  "difficulty": {
+   "needs_numbering_offset": false,
+   "author_chain_differs_from_label": false,
+   "needs_ligand_identity": false,
+   "needs_uniprot_mapping": false,
+   "needs_referent_from_context": false
+  },
+  "structure": "1atp",
+  "derived": "start state and final state written by the generator from one component list; see README.md in this directory",
+  "checked_by": "scripts/generate_followup_tasks.py (grader checks listed under checks) and scripts/check_api_refs.py (each selection against the intended atoms under targets)",
+  "targets": [
+   {
+    "action": 2,
+    "param": 0,
+    "what": "polymer chain E (entity 1)",
+    "atoms": {
+     "auth_asym_id": "E",
+     "label_entity_id": "1"
+    },
+    "n_atoms": 2777
+   },
+   {
+    "action": 2,
+    "param": 1,
+    "what": "polymer chain I (entity 2)",
+    "atoms": {
+     "auth_asym_id": "I",
+     "label_entity_id": "2"
+    },
+    "n_atoms": 157
+   },
+   {
+    "action": 2,
+    "param": 2,
+    "what": "every copy of ATP",
+    "atoms": [
+     {
+      "auth_asym_id": "E",
+      "auth_seq_id": 355,
+      "auth_comp_id": "ATP"
+     }
+    ],
+    "n_atoms": 31
+   }
+  ]
+ },
+ "skills": [
+  "edit",
+  "visibility",
+  "noop"
+ ]
+}

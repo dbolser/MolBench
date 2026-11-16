@@ -6,7 +6,7 @@
  "structures": [
   "1c3w"
  ],
- "prompt": "Start the molecule spinning; if that cannot be done in the scene, change nothing.",
+ "prompt": "Make the structure spin slowly, or leave the scene as it is if spinning is not possible here.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "magenta"
                }
               }
              ]
@@ -55,7 +55,7 @@
            "kind": "component",
            "params": {
             "selector": {
-             "label_comp_id": "LI1"
+             "label_comp_id": "RET"
             }
            },
            "children": [
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "cyan"
+                "color": "yellow"
                }
               }
              ]
@@ -123,7 +123,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "orange"
+                 "color": "magenta"
                 }
                }
               ]
@@ -134,7 +134,7 @@
             "kind": "component",
             "params": {
              "selector": {
-              "label_comp_id": "LI1"
+              "label_comp_id": "RET"
              }
             },
             "children": [
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "cyan"
+                 "color": "yellow"
                 }
                }
               ]
@@ -184,7 +184,7 @@
    "start state grades as itself; it already is the requested final state (no change needed)",
    "each of the 2 preserved part(s) scores 1 as a target on both the start state and the reference"
   ],
-  "seed": "20261113|fu-noop-spin|2|1c3w",
+  "seed": "20261113|fu-noop-spin|1|1c3w",
   "edit": "no change: the format cannot express the request",
   "noop_kind": "not expressible in the format",
   "referent": null,
@@ -192,14 +192,14 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "orange"
+    "color": "magenta"
    },
    {
     "selector": {
-     "label_comp_id": "LI1"
+     "label_comp_id": "RET"
     },
     "representation": "ball_and_stick",
-    "color": "cyan"
+    "color": "yellow"
    }
   ],
   "removed": null,

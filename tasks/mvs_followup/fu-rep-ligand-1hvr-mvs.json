@@ -6,7 +6,7 @@
  "structures": [
   "1hvr"
  ],
- "prompt": "Switch the ligand XK2 to spacefill.",
+ "prompt": "Show the ligand XK2 as spacefill instead of ball-and-stick.",
  "reference": {
   "root": {
    "kind": "root",
@@ -44,7 +44,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "orange"
+                "color": "green"
                }
               }
              ]
@@ -68,7 +68,7 @@
               {
                "kind": "color",
                "params": {
-                "color": "teal"
+                "color": "magenta"
                }
               }
              ]
@@ -123,7 +123,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "orange"
+                 "color": "green"
                 }
                }
               ]
@@ -147,7 +147,7 @@
                {
                 "kind": "color",
                 "params": {
-                 "color": "teal"
+                 "color": "magenta"
                 }
                }
               ]
@@ -195,7 +195,7 @@
    "each of the 1 preserved part(s) scores 1 as a target on both the start state and the reference",
    "2 wrong control answer(s) (the edit on an empty viewer, or a known slip) do not grade as right; 1 of them lose a preserved part"
   ],
-  "seed": "20261113|fu-rep-ligand|2|1hvr",
+  "seed": "20261113|fu-rep-ligand|1|1hvr",
   "edit": "change a representation",
   "noop_kind": null,
   "referent": null,
@@ -203,7 +203,7 @@
    {
     "selector": "polymer",
     "representation": "cartoon",
-    "color": "orange"
+    "color": "green"
    }
   ],
   "removed": null,

@@ -16,7 +16,7 @@ Written by `scripts/generate_api_tasks.py` (seed 20261113); do not edit by hand.
 | tool_only | `api-superposition` | 2 | 3 of 34 (9%) | The PDBe-KB superposition view of a panel disease protein by UniProt accession. No structure entry; compared by settings. |
 | tool_only | `api-symmetry-overlay` | 1 | 1 of 34 (3%) | An entry whose assembly 1 is built by symmetry: that assembly with the symmetry annotation on. |
 | tool_only | `api-tooltips` | 3 | 3 of 34 (9%) | Tooltips on seeded author-numbered residues (the text is the residue's own name and number), waters hidden. |
-| tool_only | `api-undo` | 4 | 4 of 34 (12%) | A request with a step that is undone again (clear selection, clear highlight, clear tooltips, reset selection colour). Only the final state is graded. |
+| tool_only | `api-undo` | 4 | 4 of 34 (12%) | A request with a step that is undone again (one of two colours taken off, a highlight cleared, one of two tooltips removed, the selection colour reset). Only the final state is graded, and the undo is needed: the list of every step but the undo is a trap that must fail. |
 | tool_only | `api-validation-overlay` | 2 | 3 of 34 (9%) | X-ray entries with waters: waters hidden, validation annotation on (a declared setting). |
 | translation | `api-assembly` | 5 | 6 of 106 (6%) | Assembly 1 where the facts say it is built by symmetry from every deposited chain, plus a ligand or range colouring. The assembly is a fact of the state; atoms are compared on the deposited unit. |
 | translation | `api-atoms` | 5 | 5 of 106 (5%) | Named atoms of a single-copy ligand (its metal, when it has one), or two side-chain atoms of a seeded residue under the ball-and-stick style. |
@@ -62,15 +62,15 @@ Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%);
 | action | `load` | 140 |
 | action | `set_visual_style` | 25 |
 | action | `set_property` | 43 |
-| action | `color` | 99 |
+| action | `color` | 100 |
 | action | `focus` | 9 |
 | action | `highlight` | 4 |
 | action | `tooltips` | 7 |
 | action | `set_color` | 2 |
 | action | `reset` | 1 |
 | action | `clear_highlight` | 1 |
-| action | `clear_selection` | 1 |
-| action | `clear_tooltips` | 1 |
+| action | `clear_selection` | 0 |
+| action | `clear_tooltips` | 0 |
 | property | `hide_polymer` | 3 |
 | property | `hide_water` | 22 |
 | property | `hide_heteroatoms` | 2 |
@@ -93,7 +93,7 @@ Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%);
 | property | `lighting` | 4 |
 | selector key | `entity_id` | 5 |
 | selector key | `struct_asym_id` | 0 |
-| selector key | `auth_asym_id` | 71 |
+| selector key | `auth_asym_id` | 70 |
 | selector key | `label_comp_id` | 22 |
 | selector key | `residue_number` | 0 |
 | selector key | `start_residue_number` | 1 |
@@ -120,7 +120,7 @@ Of the 140 API tasks in both directories: `added_representation_colour` 10 (7%);
 | visual style | `point` | 0 |
 | visual style | `putty` | 1 |
 | visual style | `spacefill` | 1 |
-| selection attribute | `color` | 98 |
+| selection attribute | `color` | 99 |
 | selection attribute | `representation` | 17 |
 | selection attribute | `representationColor` | 11 |
 | selection attribute | `sideChain` | 0 |

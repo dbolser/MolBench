@@ -56,7 +56,9 @@ from typing import Any, Callable
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(REPO / "scripts"))
 
+import additives  # noqa: E402
 from molbench import drawn, grounding, runner, tasks as T  # noqa: E402
 from molbench.atoms import load_table  # noqa: E402
 
@@ -112,10 +114,13 @@ class Entry:
         self.numbering = self.facts["numbering"]
 
     def _main_ligand(self) -> dict | None:
-        """The structure's main ligand: the non-polymer component of kind ``ligand``
-        with the most heavy atoms (at least 9, which leaves out glycerol, sulfate and
-        other small additives); ties go to the component code."""
-        hits = [x for x in self.facts["ligands"] if x["kind"] == "ligand"
+        """The structure's main ligand: its biological ligand with the most heavy atoms
+        (at least 9); ties go to the component code. A biological ligand is a
+        non-polymer component of kind ``ligand`` that is not on the corpus list of
+        crystallisation additives, buffers, detergents and lipids
+        (``data/corpus/additives.json``): tartrate in 1D5R, the detergent of 2OMF and
+        the PEG fragment of 6THA are not what "the ligand" means."""
+        hits = [x for x in self.facts["ligands"] if additives.is_biological(x)
                 and x["n_heavy_atoms"] >= 9 and self.table.selector({"label_comp_id": x["comp_id"]})]
         return min(hits, key=lambda x: (-x["n_heavy_atoms"], x["comp_id"])) if hits else None
 
@@ -719,23 +724,24 @@ def noop_hidden(e: Entry, r: random.Random):
     }
 
 
-def noop_question(e: Entry, r: random.Random):
+def noop_ligand_rep(e: Entry, r: random.Random):
+    """A clear request for something the start state already has: the ligand is drawn
+    as ball-and-stick. (Question prompts, "How many chains does this structure have?",
+    are not used as no-change tasks: a question is not a request to the viewer, and
+    what the right reply to one is cannot be graded as a scene. Ruling of 2026-11-15.)"""
     if not needs_pair(e):
         return None
     c1, c2 = colours(r, 2)
     p = Pair(e, c1, c2)
     return {
-        # only questions no change to the scene could answer ("which ligand is bound?"
-        # could fairly be answered by labelling it, so it is not asked)
-        "prompt": pick(r, ["How many residues does this structure have?",
-                           "How many chains does this structure have?",
-                           "What is the resolution of this structure?",
-                           "Which organism is this {noun} from?"], noun=e.noun),
-        "edit": "no change: a question", "noop": True, "noop_kind": "question",
-        "skills": ["edit", "noop"],
+        "prompt": pick(r, ["Show {lig} as ball-and-stick.", "Draw {lig} as ball-and-stick.",
+                           "Ball-and-stick for {lig}, please."], lig=e.ligand_words()),
+        "edit": "no change: already true", "noop": True, "noop_kind": "already true",
+        "skills": ["edit", "representation", "noop"],
         "mvs": {"start": mvs_scene(e.id, p.mvs()), "ref": mvs_scene(e.id, p.mvs()),
-                "target": None, "preserved": p.kept("mvs")},
-        "api": {"start": p.api(), "ref": p.api(), "target": None, "preserved": p.kept("api")},
+                "target": [part(lig_sel(e), "ball_and_stick", None)], "preserved": p.kept("mvs")},
+        "api": {"start": p.api(), "ref": p.api(),
+                "target": [part(lig_sel(e), "ball-and-stick", None)], "preserved": p.kept("api")},
     }
 
 
@@ -1073,7 +1079,7 @@ FAMILIES: list[tuple[str, Callable, int, tuple[str, ...]]] = [
     ("fu-noop-colour", noop_colour, 2, ("mvs", "api")),
     ("fu-noop-shown", noop_shown, 2, ("mvs", "api")),
     ("fu-noop-hidden", noop_hidden, 2, ("mvs", "api")),
-    ("fu-noop-question", noop_question, 2, ("mvs", "api")),
+    ("fu-noop-ligand-rep", noop_ligand_rep, 2, ("mvs", "api")),
     ("fu-noop-spin", noop_spin, 2, ("mvs",)),
     ("fu-it-colour", it_colour, 2, ("mvs",)),
     ("fu-it-surface", it_surface, 1, ("mvs",)),
@@ -1110,7 +1116,7 @@ DERIVED = {
     "fu-noop-colour": "the ligand already has the requested colour: reference = start state",
     "fu-noop-shown": "the polymer already is a cartoon: reference = start state",
     "fu-noop-hidden": "no water is drawn (MVS) / hide_water is already set (API): reference = start state",
-    "fu-noop-question": "a question about the structure: reference = start state",
+    "fu-noop-ligand-rep": "the ligand asked for as ball-and-stick, which it already is: reference = start state",
     "fu-noop-spin": "the MVS reference has no motion, and the request says to change nothing in that case: reference = start state",
     "fu-it-colour": "start: the ligand alone (one copy); \"it\" recoloured",
     "fu-it-surface": "start: the polymer alone; \"it\" changed from cartoon to surface, colour kept",
@@ -1376,7 +1382,7 @@ def readme(track: str, built: list[dict]) -> str:
         "",
         "## What each task records (`provenance`)",
         "",
-        "- `edit`: the edit kind; `noop_kind`: why no change is right (already true, a question,",
+        "- `edit`: the edit kind; `noop_kind`: why no change is right (already true,",
         "  not expressible in the format); `referent`: why a pronoun or description (\"it\", \"the",
         "  red chain\") names one thing only in the start state.",
         "- `preserved`: the parts of the start state the edit must leave alone, in the form of",
