@@ -198,6 +198,287 @@ class BaselineModel(Model):
                  {"kind": "structure", "params": {"type": "model"}, "children": components}]}]}]}}
 
 
+# --- literal baseline -------------------------------------------------------------
+
+#: Colour words a request may use -> the name written in the answer. Two-word names
+#: first, so that "steel blue" is not read as "blue".
+_LITERAL_COLOURS = (
+    ("steel blue", "steelblue"), ("lime green", "limegreen"), ("hot pink", "hotpink"),
+    ("steelblue", "steelblue"), ("limegreen", "limegreen"), ("hotpink", "hotpink"),
+    ("red", "red"), ("green", "green"), ("blue", "blue"), ("yellow", "yellow"),
+    ("orange", "orange"), ("purple", "purple"), ("magenta", "magenta"), ("cyan", "cyan"),
+    ("pink", "pink"), ("white", "white"), ("grey", "gray"), ("gray", "gray"),
+    ("black", "black"), ("brown", "brown"), ("teal", "teal"), ("salmon", "salmon"),
+    ("khaki", "khaki"), ("plum", "plum"), ("gold", "gold"), ("violet", "violet"))
+#: Representation words -> (MVS type, API representation).
+_LITERAL_REPS = (
+    ("ball-and-stick", ("ball_and_stick", "ball-and-stick")),
+    ("ball and stick", ("ball_and_stick", "ball-and-stick")),
+    ("sticks", ("ball_and_stick", "ball-and-stick")),
+    ("space-filling", ("spacefill", "spacefill")), ("space filling", ("spacefill", "spacefill")),
+    ("spacefill", ("spacefill", "spacefill")), ("spheres", ("spacefill", "spacefill")),
+    ("sphere", ("spacefill", "spacefill")),
+    ("surface", ("surface", "molecular-surface")), ("cartoon", ("cartoon", "cartoon")),
+    ("ribbon", ("cartoon", "cartoon")), ("putty", ("putty", "putty")))
+_AMINO = {"ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS",
+          "MET", "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL"}
+_ONE_LETTER = "ACDEFGHIKLMNPQRSTVWY"
+_PDB_ID = re.compile(r"\b([1-9][A-Za-z0-9]{3})\b")
+_AF_ID = re.compile(r"\bAF-([A-Z0-9]{6,10})-F(\d+)\b")
+_CHAIN = re.compile(r"\bchains?\s+([A-Za-z0-9]{1,2})\b(?:\s*(?:,|and|&)\s*([A-Za-z0-9]{1,2})\b)?")
+_RANGE = re.compile(r"\b(?:residues?\s+)?(\d+)\s*(?:-|–|to)\s*(\d+)\b")
+_RESIDUE = re.compile(r"\b([A-Z][a-z]{2})\s?-?(\d+)\b")
+_VARIANT = re.compile(rf"\b(?:p\.)?(?:([A-Z][a-z]{{2}})(\d+)[A-Z][a-z]{{2}}|"
+                      rf"([{_ONE_LETTER}])(\d+)[{_ONE_LETTER}])\b")
+_CODE = re.compile(r"\b([A-Z0-9]{2,3})\b")
+_CLAUSE = re.compile(r";|:|\.\s|,\s*(?:and\s+)?(?:with\s+)?|\bwith\b|\band\b(?=\s+(?:the|its|residues?|chain|show|colou?r|draw)\b)")
+
+
+class LiteralBaseline(Model):
+    """Surface parsing, no model and no lookup: the second scripted floor.
+
+    It reads from the request what is written there (a PDB id or an AlphaFold model
+    name, chain letters, residue numbers and ranges, three-letter component codes,
+    colour words, representation words) and writes the obvious scene or call list
+    from them, **using every number exactly as written, as the author residue
+    number**. So it is right where the request spells everything out in the
+    structure's own numbering, and wrong wherever something has to be looked up: a
+    protein named instead of an entry, "the ligand" or "the catalytic residues", a
+    variant whose UniProt number is not the structure's number, a chain that the
+    request does not name. The gap between this baseline and a model is what the model
+    knows beyond the words of the request; the gap between the keyword baseline and
+    this one is what parsing alone buys.
+
+    The request is cut into clauses (at ``;``, ``:``, ``,`` and "with"). In each
+    clause the first colour word, the first representation word and the things named
+    are put together: a clause that names residues, a range, a variant or a component
+    code draws those; a clause that names chains colours those chains; any other
+    clause is about the whole polymer. A follow-up request is answered with the start
+    state unchanged, as by the keyword baseline. It sees what a model sees and nothing
+    else, and it is deterministic.
+    """
+    name = "baseline-literal"
+
+    def generate(self, system: str, user: str) -> str:
+        followup = _FOLLOWUP.match(user)
+        if followup:
+            return followup.group(1)
+        # the grounding pack, when there is one, is not parsed: a baseline that read
+        # the answer off it would measure the pack, not the request
+        text = user.split("\n\nFacts about the structures involved:")[0]
+        source = self._source(text)
+        parts = self._parts(text, source)
+        if "molviewspec" in system.lower():
+            return json.dumps(self._scene(source, parts))
+        return json.dumps(self._calls(text, source, parts))
+
+    # -- reading the request -------------------------------------------------------
+
+    @staticmethod
+    def _source(text: str) -> dict[str, str] | None:
+        af = _AF_ID.search(text)
+        if af:
+            version = re.search(r"\bversion\s+(\d+)\b", text)
+            return {"af": f"https://alphafold.ebi.ac.uk/files/AF-{af.group(1)}-F{af.group(2)}"
+                          f"-model_v{version.group(1) if version else '6'}.cif"}
+        for m in _PDB_ID.finditer(text):
+            if re.search(r"[A-Za-z]", m.group(1)):      # "1000" is a number, not an entry
+                return {"pdb": m.group(1).lower()}
+        return None
+
+    @staticmethod
+    def _parts(text: str, source: dict | None) -> list[dict[str, Any]]:
+        """One part per clause that names a colour or a representation."""
+        own = (source or {}).get("pdb", "").upper()
+        # A variant name anywhere in the request ("p.Arg248Gln", "E6V"): its number is
+        # the residue the request is about, whichever clause carries the colour.
+        variants = [{"auth_seq_id": n} for n in dict.fromkeys(
+            int(m.group(2) or m.group(4)) for m in _VARIANT.finditer(text))]
+        both_polymers = bool(re.search(r"\b(dna|rna|nucleic)\b", text.lower()))
+        parts: list[dict[str, Any]] = []
+        chain_in_force: list[str] = []
+        for clause in _CLAUSE.split(text):
+            if not clause or not clause.strip():
+                continue
+            low = clause.lower()
+            colour = next((name for word, name in _LITERAL_COLOURS
+                           if re.search(rf"\b{word}\b", low)), None)
+            rep = next((r for word, r in _LITERAL_REPS if word in low), None)
+            chains = [c for m in _CHAIN.finditer(clause) for c in m.groups() if c]
+            chains = [c for c in chains if c.lower() not in ("of", "in", "as", "is", "to", "a")]
+            residues: list[dict[str, Any]] = []
+            spans = [m.span() for m in _VARIANT.finditer(clause)]
+            for m in _RESIDUE.finditer(clause):
+                if m.group(1).upper() in _AMINO and not any(a <= m.start() < b for a, b in spans):
+                    residues.append({"auth_seq_id": int(m.group(2))})
+            ranges = [(int(m.group(1)), int(m.group(2))) for m in _RANGE.finditer(clause)
+                      if int(m.group(1)) < int(m.group(2))]
+            # a component code: two or three capitals or digits that are not the entry,
+            # an amino acid or a chain. Not read at all in a request about a variant,
+            # where such tokens are gene names (HBB, INS, F9).
+            codes = [] if variants else [
+                c for c in _CODE.findall(clause)
+                if c != own and c not in _AMINO and re.search(r"[A-Z]", c)
+                and c not in ("PDB", "DNA", "RNA", "AF", "CA", "ID", "API", "MVS")
+                and not re.fullmatch(r"F\d", c) and c not in chains]
+            if chains and not (residues or ranges or codes):
+                chain_in_force = chains
+            if colour is None and rep is None:
+                continue
+            if variants and not (residues or ranges) and re.search(r"\b(residue|position|variant)", low):
+                residues, chain_in_force = variants, chain_in_force or chains
+            where = chains or (chain_in_force if (residues or ranges) else [])
+            things: list[dict[str, Any]] = []
+            for r in residues:
+                things += [{**r, "auth_asym_id": c} for c in where] or [r]
+            for a, b in ranges:
+                things += [{"beg": a, "end": b, "auth_asym_id": c} for c in where] \
+                    or [{"beg": a, "end": b}]
+            things += [{"label_comp_id": c} for c in codes]
+            if not things and chains:
+                things = [{"auth_asym_id": c} for c in chains]
+            whole = None
+            if not things:
+                # Mol*'s own words for whole classes; the polymer when the clause says
+                # so or says next to nothing ("grey cartoon"). Anything else ("the
+                # heme", "the catalytic residues") would have to be looked up: skipped.
+                words = [w for w in re.findall(r"[a-z]+", low)
+                         if w not in ("a", "an", "the", "as", "in", "it", "show", "draw", "load",
+                                      "colour", "color", "coloured", "colored", "and", "with")]
+                bare = len(words) <= 3 + (colour is not None)
+                whole = ("nucleic" if re.search(r"\b(dna|rna|nucleic)\b", low) else
+                         "ligand" if re.search(r"\bligands?\b", low) else
+                         "water" if re.search(r"\bwaters?\b", low) else
+                         "ion" if re.search(r"\bions?\b", low) else
+                         ("protein" if both_polymers else "polymer")
+                         if re.search(r"\bprotein\b", low) else
+                         "polymer" if bare or own.lower() in low and own or re.search(
+                             r"\b(polymer|structure|backbone|complex|entry|model|everything|whole)\b",
+                             low) else None)
+                if whole is None:
+                    continue
+            parts.append({"things": things, "whole": whole, "rep": rep, "colour": colour})
+        # several clauses about the whole polymer are one drawing: the first
+        # representation and the first colour named for it
+        poly = [p for p in parts if p["whole"] == "polymer"]
+        if len(poly) > 1:
+            poly[0]["rep"] = next((p["rep"] for p in poly if p["rep"]), None)
+            poly[0]["colour"] = next((p["colour"] for p in poly if p["colour"]), None)
+            parts = [p for p in parts if p["whole"] != "polymer" or p is poly[0]]
+        # "cartoon: DNA khaki, protein salmon": the representation named for the whole
+        # goes to the classes that are coloured one by one, and the whole is not drawn
+        # a second time under them
+        classes = [p for p in parts if p["whole"] in ("protein", "nucleic")]
+        if poly and classes and not poly[0]["colour"]:
+            for p in classes:
+                p["rep"] = p["rep"] or poly[0]["rep"]
+            parts = [p for p in parts if p is not poly[0]]
+        return parts
+
+    # -- writing the answer --------------------------------------------------------
+
+    @staticmethod
+    def _selector(thing: dict[str, Any]) -> dict[str, Any]:
+        out = {k: v for k, v in thing.items() if k in ("auth_asym_id", "auth_seq_id", "label_comp_id")}
+        if "beg" in thing:
+            out.update(beg_auth_seq_id=thing["beg"], end_auth_seq_id=thing["end"])
+        return out
+
+    def _scene(self, source: dict | None, parts: list[dict[str, Any]]) -> dict[str, Any]:
+        if not source:
+            return {"root": {"kind": "root", "children": []}}
+        url = source.get("af") or f"https://files.rcsb.org/download/{source['pdb']}.cif"
+
+        def rep(rtype: str, colours: list[dict]) -> dict:
+            return {"kind": "representation", "params": {"type": rtype},
+                    **({"children": colours} if colours else {})}
+
+        def colour(name: str | None, selector: Any = None) -> list[dict]:
+            if not name:
+                return []
+            return [{"kind": "color", "params": {"color": name,
+                                                 **({"selector": selector} if selector else {})}}]
+        # the polymer cartoon, if a clause asks for one or a clause only recolours
+        # part of it; chains and stretches named with a colour and no representation
+        # of their own are colour nodes on it
+        base = next((p for p in parts if p["whole"] == "polymer"), None)
+        recolour = [p for p in parts if p["things"] and (p["rep"] is None or p["rep"][0] == "cartoon")
+                    and p["colour"]]
+        components: list[dict] = []
+        if base or recolour:
+            rtype = (base["rep"][0] if base and base["rep"] else "cartoon")
+            nodes = colour(base["colour"] if base else None)
+            for p in recolour:
+                for t in p["things"]:
+                    nodes += colour(p["colour"], self._selector(t))
+            components.append({"kind": "component", "params": {"selector": "polymer"},
+                               "children": [rep(rtype, nodes)]})
+        for p in parts:
+            if p is base or p in recolour:
+                continue
+            if p["whole"]:
+                default = "ball_and_stick" if p["whole"] in ("ligand", "ion", "water") else "cartoon"
+                components.append({"kind": "component", "params": {"selector": p["whole"]},
+                                   "children": [rep(p["rep"][0] if p["rep"] else default,
+                                                    colour(p["colour"]))]})
+            elif p["things"]:
+                sel = [self._selector(t) for t in p["things"]]
+                components.append({"kind": "component",
+                                   "params": {"selector": sel[0] if len(sel) == 1 else sel},
+                                   "children": [rep(p["rep"][0] if p["rep"] else "ball_and_stick",
+                                                    colour(p["colour"]))]})
+        return {"root": {"kind": "root", "children": [
+            {"kind": "download", "params": {"url": url},
+             "children": [{"kind": "parse", "params": {"format": "mmcif"}, "children": [
+                 {"kind": "structure", "params": {"type": "model"}, "children": components}]}]}]}}
+
+    def _calls(self, text: str, source: dict | None, parts: list[dict[str, Any]]) -> list[dict]:
+        if not source:
+            return []
+        calls: list[dict[str, Any]] = [
+            {"action": "load", "custom_data": {"url": source["af"], "format": "cif", "binary": False}}
+            if "af" in source else {"action": "load", "molecule_id": source["pdb"]}]
+        low = text.lower()
+        base = next((p for p in parts if p["whole"] == "polymer"), None)
+        if base and base["rep"] and base["rep"][1] != "cartoon":
+            calls.append({"action": "set_visual_style", "style": base["rep"][1]})
+        for kw, prop in _HIDE_WORDS.items():
+            if re.search(rf"\b(?:hide|remove|no|without)\s+(?:the\s+)?{kw}", low):
+                calls.append({"action": "set_property", "name": prop, "value": True})
+        if re.search(r"\bspin", low):
+            calls.append({"action": "set_property", "name": "spin", "value": True})
+        data: list[dict[str, Any]] = []
+        for p in parts:
+            for t in p["things"]:
+                item = {k: v for k, v in t.items() if k in ("auth_asym_id", "auth_seq_id", "label_comp_id")}
+                if "beg" in t:
+                    item.update(start_auth_residue_number=t["beg"], end_auth_residue_number=t["end"])
+                if p["rep"] and p["rep"][1] != "cartoon":
+                    item["representation"] = p["rep"][1]
+                    if p["colour"]:
+                        item["representationColor"] = p["colour"]
+                    # the form the API reference's own example teaches: the residue's
+                    # stretch of cartoon in the same colour
+                    item["color"] = p["colour"]
+                    if not p["colour"]:
+                        item.pop("color")
+                elif p["colour"]:
+                    item["color"] = p["colour"]
+                else:
+                    continue
+                data.append(item)
+        backdrop = base["colour"] if base else None
+        if data or backdrop:
+            call: dict[str, Any] = {"action": "color", "data": data}
+            if backdrop:
+                call["non_selected_color"] = backdrop
+            if not data:
+                call["data"] = [{"color": backdrop}]
+                call.pop("non_selected_color")
+            calls.append(call)
+        return calls
+
+
 # --- live model adapters ----------------------------------------------------------
 
 class AnthropicModel(Model):
@@ -502,6 +783,7 @@ def build_model(spec: str) -> Model:
 
     Supported:
       baseline                              keyless rule-based floor
+      baseline-literal                      keyless surface parser: ids, numbers, colours as written
       mock:<name>                           deterministic stand-in, zero cost (dry runs)
       anthropic:<id>                        e.g. anthropic:claude-opus-4-8         (ANTHROPIC_API_KEY)
       openai:<id>                           e.g. openai:gpt-4o                     (OPENAI_API_KEY)
@@ -512,6 +794,8 @@ def build_model(spec: str) -> Model:
     """
     if spec in ("baseline", "baseline-rules"):
         return BaselineModel()
+    if spec in ("baseline-literal", "literal"):
+        return LiteralBaseline()
     if ":" in spec:
         provider, model_id = spec.split(":", 1)
         if provider == "mock":

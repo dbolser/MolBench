@@ -105,8 +105,9 @@ note = "Output contract only, no MVS reference. Three models (the same three as 
 [panel]
 rule = """(1) Every open-weight and closed model on the published leaderboard \
 (docs/scorecard.json, October 2026) stays, on the route it was run on, so the final numbers \
-can be compared with the earlier ones. (2) The keyword baseline (no model; fixed rules in \
-molbench/models.py) is a panel member on both tracks. (3) Optional entries: the current \
+can be compared with the earlier ones. (2) Two scripted baselines (no model; fixed rules in \
+molbench/models.py) are panel members on both tracks: keyword matching, and a literal parser \
+that writes what the request spells out, using every number as written. (3) Optional entries: the current \
 flagship model of each major lab on OpenRouter's public list on the price date, plus the \
 largest model there with public weights; they run only with --include-optional. No model is \
 added or dropped after results are seen."""
@@ -119,6 +120,15 @@ reasoning = false
 structured = "none"
 reason = "Score floor on both tracks: what keyword matching alone achieves."
 price = { input = 0.0, output = 0.0, source = "runs locally; no provider is called", date = "2026-11-16", verified = true }
+
+[[models]]
+id = "baseline-literal"
+route = "baseline-literal"             # molbench.models.LiteralBaseline: surface parsing, no call
+open_weights = false                   # not a model at all
+reasoning = false
+structured = "none"
+reason = "Second scripted floor: ids, chain letters, residue numbers, colours and representation words taken from the request as written, every number used as the author residue number. Right where the request spells everything out; wrong where a numbering offset or a lookup is needed."
+price = { input = 0.0, output = 0.0, source = "runs locally; no provider is called", date = "2026-11-22", verified = true }
 
 # ---------------------------------------------------------------------------------------
 # The 16 models of the current leaderboard (docs/scorecard.json).

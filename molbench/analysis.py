@@ -25,7 +25,7 @@ Conventions, the same in every table:
   that resamples whole **structures** (all tasks on one entry are drawn together);
 * for paired tests a task counts as solved when **more than half** of its samples are
   exactly right;
-* the keyword baseline is listed, and left out of every "panel mean".
+* the scripted baselines (keyword, literal) are listed, and left out of every "panel mean".
 """
 
 from __future__ import annotations
@@ -52,6 +52,10 @@ TIER_NAME = {"translation": "translation", "grounded": "grounded", "interactions
              "resolve": "resolve", "clinical": "clinical", "followup": "follow-up",
              "accept_set": "accept-set", "tool_only": "tool-only"}
 BASELINE = "baseline-rules"
+#: The scripted baselines (no model is called): keyword rules, and the literal parser
+#: that writes ids, numbers, colours and representation words as the request has them.
+#: Both are listed in every table and left out of every panel mean and pooled count.
+BASELINES = {"baseline-rules": "keyword baseline", "baseline-literal": "literal baseline"}
 HEADLINE = "spec"
 MOCK_BANNER = ("> **MOCK DATA.** Dry run answered by the mock model: the table has its final "
                "shape, **every number in it is fake**.")
@@ -224,12 +228,12 @@ class Run:
         self._rows: dict[tuple[str, str], dict[str, dict]] = {}
         order = self.models(HEADLINE) if HEADLINE in self.conditions else []
         rank = {m: -(self.cards[(HEADLINE, m)].get("mean_f1") or 0.0) for m in order}
-        self.model_order = sorted(order, key=lambda m: (m == BASELINE, rank[m], m))
+        self.model_order = sorted(order, key=lambda m: (m in BASELINES, rank[m], m))
         self.model_order += sorted({k[1] for k in self.cards} - set(self.model_order))
 
     # -- access ----------------------------------------------------------------
     def models(self, cond: str, baseline: bool = True) -> list[str]:
-        got = [m for (c, m) in self.cards if c == cond and (baseline or m != BASELINE)]
+        got = [m for (c, m) in self.cards if c == cond and (baseline or m not in BASELINES)]
         order = getattr(self, "model_order", None)
         return sorted(got, key=order.index) if order else got
 
@@ -255,7 +259,7 @@ class Run:
 
     def weights(self, model: str) -> str:
         rec = next((r for (c, m), r in self.cards.items() if m == model), {})
-        if model == BASELINE:
+        if model in BASELINES:
             return "no model"
         return "open" if rec.get("open_weights") else "closed"
 
@@ -335,7 +339,7 @@ class Tables:
         return (mean(v for _, v in its), self.boot.ci(its, label))
 
     def name(self, model: str) -> str:
-        return model + (" (keyword baseline)" if model == BASELINE else "")
+        return model + (f" ({BASELINES[model]})" if model in BASELINES else "")
 
     # -- build -------------------------------------------------------------------
     def build(self) -> "Tables":
@@ -504,7 +508,7 @@ class Tables:
                  "From the run's scorecards (the manifest names each route and price). "
                  f"Reasoning effort sent: {r.meta.get('reasoning_effort') or 'provider-default'}; "
                  "no temperature is sent.")
-        self.put("panel.n_models", len([m for m in r.model_order if m != BASELINE]))
+        self.put("panel.n_models", len([m for m in r.model_order if m not in BASELINES]))
 
     # -- grader control set --------------------------------------------------------------
     def controls(self) -> None:
@@ -566,7 +570,7 @@ class Tables:
             self.put(f"{T}.{HEADLINE}.{m}.success_ci", [round(x, 4) for x in suci] if suci else None)
         n = board[0]["n"] if board else 0
         self.put(f"{T}.n_tasks", n)
-        models = [e for e in board if e["model"] != BASELINE]
+        models = [e for e in board if e["model"] not in BASELINES]
         if models:
             best = max(models, key=lambda e: e["success"])
             self.put(f"{T}.best_model", best["model"])
@@ -690,7 +694,7 @@ class Tables:
         self.add("table_tier_track", "Tier by track: panel mean",
                  md_table(head, rows),
                  f"Each task's value is its mean over the {len(r.models(HEADLINE, False))} models "
-                 "of the panel (keyword baseline left out); a cell is the mean over the tier's "
+                 "of the panel (scripted baselines left out); a cell is the mean over the tier's "
                  "original tasks. Intervals: bootstrap over structures, the panel held fixed.")
 
     # -- the two tracks, model by model ------------------------------------------------------
@@ -706,7 +710,7 @@ class Tables:
             f1 = [mean(t["f1"] for t in got[t]) for t in TRACKS]
             rows.append([self.name(m), f3(su[0]), f3(su[1]), signed(su[1] - su[0]),
                          f3(f1[0]), f3(f1[1]), signed(f1[1] - f1[0])])
-            if m != BASELINE:
+            if m not in BASELINES:
                 pts["success"].append(su)
                 pts["f1"].append(f1)
         if len(pts["success"]) < 3:
@@ -721,7 +725,7 @@ class Tables:
                  md_table(["model", "MVS task success", "API task success", "API − MVS",
                            "MVS strict F1", "API strict F1", "API − MVS"], rows),
                  f"All original tasks of each track (not only twins), headline condition. Over "
-                 f"the {len(pts['success'])} models (keyword baseline left out), Pearson r "
+                 f"the {len(pts['success'])} models (scripted baselines left out), Pearson r "
                  f"between the two tracks is {f3(rs['success'])} for task success and "
                  f"{f3(rs['f1'])} for strict F1.")
 
@@ -801,7 +805,7 @@ class Tables:
                 rows.append([self.name(m), len(per), *map(f3, by_style), f3(spread),
                              f"{flips} of {len(per)}", pct(mixed)])
                 self.put(f"{T}.{HEADLINE}.{m}.paraphrase_spread", spread)
-                if m != BASELINE:
+                if m not in BASELINES:
                     pooled["mixed"].append(mixed)
                     pooled["spread"].append(spread)
                     pooled["flips"].append(flips / len(per))
@@ -892,7 +896,7 @@ class Tables:
                     self.put(f"{prefix}.{key}.{m}.mvs_only", c[(True, False)])
                     self.put(f"{prefix}.{key}.{m}.api_only", c[(False, True)])
                     self.put(f"{prefix}.{key}.{m}.p", mcnemar_exact(c[(True, False)], c[(False, True)]))
-                    if m != BASELINE:
+                    if m not in BASELINES:
                         pooled.update(c)
                 if not rows:
                     continue
@@ -926,7 +930,7 @@ class Tables:
                  "track accepts the viewer's default view, with water and ligands on screen, "
                  "where an MVS scene that draws them is marked wrong. McNemar's "
                  "exact test uses the discordant pairs only (solved on one side and not the "
-                 "other). The pooled rows add the counts of all models (keyword baseline left "
+                 "other). The pooled rows add the counts of all models (scripted baselines left "
                  "out); the same pairs recur across models, so their p value is descriptive.")
 
     # -- follow-ups ------------------------------------------------------------------------
@@ -1023,7 +1027,7 @@ class Tables:
                              mean(bool(s["success"]) for s in some) if some else None)
                 for o in resolve_mod.ENTRY_OUTCOMES:
                     self.put(f"mvs.{cond}.{m}.resolve.{o}", c[o] / len(ss))
-                if m != BASELINE:
+                if m not in BASELINES:
                     pooled.update(c)
             n = sum(pooled.values())
             if n:
@@ -1285,7 +1289,7 @@ class Tables:
                 self.put(f"{name}.{slug}.{m}.delta_success", dm)
                 self.put(f"{name}.{slug}.{m}.valid_plain", va)
                 self.put(f"{name}.{slug}.{m}.valid_with", vb)
-                if m != BASELINE:
+                if m not in BASELINES:
                     for x, y in zip(a, b):
                         pooled[label][x["id"]].append((x["cluster"], y["success"] - x["success"]))
         if not rows:
