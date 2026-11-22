@@ -180,3 +180,7 @@ committing them. Giving the script a v1 key with v2 ratings, or the reverse, is 
    lower `GOAL` in `supabase/functions/rate/plan.ts` and `PER_RATER` in the builder together.
 6. **Two raters at the same moment** can both be given the same unopened pair (good), and three
    can too (a third answer). Harmless at this scale; not prevented.
+7. **The pilot's by-tier table no longer rebuilds.** The October tasks are gone from the corpus,
+   so `scripts/agreement.py` on the a4-v1 key now puts every task in tier "unknown". Every other
+   a4-v1 number rebuilds unchanged (checked 2026-11-22). Do not regenerate
+   `paper/a4/tables/agreement.*` on this branch; the committed files are the record.
