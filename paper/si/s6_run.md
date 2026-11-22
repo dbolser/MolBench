@@ -18,7 +18,8 @@ The final run is defined by one manifest file in the repository. Its contents, i
 **Table S6. The models.** *Set*: core, or optional (run only if decided so before the run,
 from the projected cost; marked † in the paper). Identifiers are given as the provider or
 the routing service lists them; the paper uses the part after the slash. *Weights*: open if the model's weights can be downloaded. *Hidden
-reasoning*: the model spends reasoning tokens by default, billed as output. *JSON mode*: the
+reasoning*: by default the model first writes reasoning text that the user does not see; the
+provider bills it as output and counts it against the limit on the length of the answer. *JSON mode*: the
 provider offers an option that forces syntactically valid JSON on the route used. *List
 price*: US dollars per million input / output tokens, read on the date given.
 ⟦PENDING: final run — the version string each provider reports, and the dates of the calls⟧

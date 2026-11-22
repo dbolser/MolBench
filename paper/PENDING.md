@@ -36,7 +36,7 @@ Run numbers currently come from: **October 2026 panel** (PRELIMINARY). They appe
 | 18 | `sections/12_availability.md` | 25 | 1 | Dan — corresponding author, author contributions, and the notes the journal asks for (competing interests) | Dan |
 | 19 | `sections/12_availability.md` | 29 | 1 | Dan — acknowledgements, funding, and the disclosure of language-model use | Dan |
 | 20 | `si/s6_run.md` | 5 | 1 | corpus freeze — final version tag and hash | corpus freeze |
-| 21 | `si/s6_run.md` | 24 | 1 | final run — the version string each provider reports, and the dates of the calls | final run |
+| 21 | `si/s6_run.md` | 25 | 1 | final run — the version string each provider reports, and the dates of the calls | final run |
 | 22 | `si/s8_pilot.md` | 186 | 1 | final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, F1 valid-only, cost per model | final run |
 
 ## Keys and files the final run must supply
