@@ -91,7 +91,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "AlphaFold DB model AF-P0DP23-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Calmodulin-1), protein, 149 of 149 residues observed: auth 1-149 = label 1-149\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P0DP23 (CALM1_HUMAN): UniProt 1-149 = auth 1-149\n\nFrom the request:\n  CALM1: UniProt P0DP23 (CALM1_HUMAN, Calmodulin-1)\n  p.Phe142Leu: UniProt position 142 (Phe in UniProt) -> in the model: auth A 142 PHE (label A 142)"
+  "text": "AlphaFold DB model AF-P0DP23-F1 (model version 6)\nMethod: predicted model (AlphaFold), not an experiment\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Calmodulin-1), protein, 149 of 149 residues observed: auth 1-149 = label 1-149\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P0DP23 (CALM1_HUMAN): UniProt 1-149 = auth 1-149\n\nFrom the request:\n  CALM1: UniProt P0DP23 (CALM1_HUMAN, Calmodulin-1)\n  p.Phe142Leu: UniProt position 142 (Phe in UniProt) -> in the model: auth A 142 PHE (label A 142)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",

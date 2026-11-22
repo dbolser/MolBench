@@ -79,7 +79,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "PDB 6M7H: Structure of calmodulin with KN93\nMethod: X-RAY DIFFRACTION, 1.60 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Calmodulin-1), protein, 144 of 147 residues observed: auth 4-147 = label 4-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P0DP23 (CALM1_HUMAN): UniProt 5-148 = auth 4-147\n\nFrom the request:\n  CALM1: UniProt P0DP23 (CALM1_HUMAN, Calmodulin-1)\n  D129G (mature-protein numbering; 1 residues precede the mature chain in UniProt) = UniProt position 130\n  D129G: UniProt position 130 (Asp in UniProt) -> in 6M7H: auth A 129 ASP (label A 129)"
+  "text": "PDB 6M7H: Structure of calmodulin with KN93\nMethod: X-RAY DIFFRACTION, 1.60 \u00c5\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Calmodulin-1), protein, 144 of 147 residues observed: auth 4-147 = label 4-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P0DP23 (CALM1_HUMAN): UniProt 5-148 = auth 4-147\n\nFrom the request:\n  CALM1: UniProt P0DP23 (CALM1_HUMAN, Calmodulin-1)\n  D129G (mature-protein numbering; 1 residue precedes the mature chain in UniProt) = UniProt position 130\n  D129G: UniProt position 130 (Asp in UniProt) -> in 6M7H: auth A 129 ASP (label A 129)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",

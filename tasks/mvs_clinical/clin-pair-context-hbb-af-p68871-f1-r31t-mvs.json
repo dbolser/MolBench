@@ -103,7 +103,7 @@
  "split": "public",
  "grounding": {
   "rule": "clinical-v1",
-  "text": "AlphaFold DB model AF-P68871-F1 (model version 6): None\nMethod: None\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  p.Arg31Thr: UniProt position 31 (Arg in UniProt) -> in the model: auth A 31 ARG (label A 31)"
+  "text": "AlphaFold DB model AF-P68871-F1 (model version 6)\nMethod: predicted model (AlphaFold), not an experiment\nPolymer chains (author chain [label chain]; observed residues as author numbering = label numbering):\n  A [A]: entity 1 (Hemoglobin subunit beta), protein, 147 of 147 residues observed: auth 1-147 = label 1-147\nUniProt mapping (SIFTS; observed residues as UniProt numbering = author numbering):\n  A [A]: P68871 (HBB_HUMAN): UniProt 1-147 = auth 1-147\n\nFrom the request:\n  HBB: UniProt P68871 (HBB_HUMAN, Hemoglobin subunit beta)\n  p.Arg31Thr: UniProt position 31 (Arg in UniProt) -> in the model: auth A 31 ARG (label A 31)"
  },
  "provenance": {
   "script": "scripts/generate_clinical_tasks.py",

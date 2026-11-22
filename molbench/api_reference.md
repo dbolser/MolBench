@@ -22,7 +22,7 @@ calling **methods**.
 | `superposition` | bool | PDBe-KB superposition view: the superposed PDB entries of one protein, addressed by UniProt accession in `molecule_id`. |
 | `superposition_params` | dict | `{"matrixAccession": str, "segment": int, "cluster": [int], "superposeCompleteCluster": bool, "ligandView": bool, "superposeAll": bool, "ligandColor": color}`. |
 | `visual_style` | enum | One representation for every component: `cartoon`, `ball-and-stick`, `carbohydrate`, `ellipsoid`, `gaussian-surface`, `molecular-surface`, `point`, `putty`, `spacefill`. Unset = the default view: polymer as cartoon; ligands, ions, waters and non-standard residues as ball-and-stick. `cartoon` and `putty` draw polymer only (ligands, ions and waters disappear). |
-| `hide_polymer`, `hide_water`, `hide_heteroatoms`, `hide_carbs`, `hide_non_standard`, `hide_coarse` | bool | Hide the polymer / waters / ligands and ions / carbohydrates / non-standard residues / coarse parts. |
+| `hide_polymer`, `hide_water`, `hide_heteroatoms`, `hide_carbs`, `hide_non_standard`, `hide_coarse` | bool | Hide the polymer / waters / ligands and ions / carbohydrates / non-standard residues / coarse parts. They switch off the viewer's own drawing of that component; a representation added by `color()` (below) is not part of it and stays on screen. |
 | `load_maps` | bool | Load electron-density (or EM) maps. |
 | `map_settings` | dict | Map style, e.g. `{"2fo-fc": {"opacity": 0.5, "wireframe": True}}` (also `"fo-fc(+ve)"`, `"fo-fc(-ve)"`, `"em"`). |
 | `validation_annotation`, `domain_annotation`, `symmetry_annotation` | bool | PDBe validation / domain / assembly-symmetry overlays. |

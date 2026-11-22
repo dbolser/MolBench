@@ -53,6 +53,7 @@ sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 
 import additives  # noqa: E402
+import api_forms as call_forms  # noqa: E402
 from molbench import drawn, grounding, mvs, pdbe_state, runner, tasks as T  # noqa: E402
 from molbench.atoms import load_table  # noqa: E402
 
@@ -344,7 +345,10 @@ API_NOT_ACCEPTED = [
     "an added representation in the requested colour on top of a default drawing that was "
     "given another colour or none (bare load, 'representation' + 'representationColor' "
     "with no matching 'color'): the ligand is then drawn twice, in two colours",
-    "another global style, or hidden components: not requested",
+    "another global style, or the polymer hidden: not requested. Hiding water, ligands "
+    "and ions, sugars or non-standard residues is another matter where the task lists "
+    "`free_hide`: the default form draws them and the style form does not, so the request "
+    "leaves open whether they are on screen (GRADING.md, 'hide toggles nobody asked for')",
 ]
 
 WORDINGS = {
@@ -873,6 +877,26 @@ def choose(template: str, cands: list[tuple[Entry, dict]], n: int, twin: bool,
     return sorted(chosen, key=lambda c: c[0].id)
 
 
+def free_hide(entry: str, answers: list, targets: list) -> list[str]:
+    """The hide toggles an API answer may set unasked (``free_hide``, GRADING.md), by
+    the one rule every other API task follows (``scripts/api_forms.free_hides``): the
+    task accepts the cartoon style, where ligands, ions and water are gone, and the
+    default view, where they are drawn, so every state in between is right too. The
+    readings of an accept-set task have targets of their own, so the rule is applied to
+    the call forms of each reading and a toggle is free only if it is free in all of
+    them. (Found on the pilot of 2026-11-16: the right colours on the default view with
+    the waters hidden scored 0.995 and failed.)"""
+    view = {"id": entry, "structures": [entry]}
+    groups: dict[str, tuple[Any, list]] = {}
+    for calls, tgt in zip(answers, targets):
+        groups.setdefault(json.dumps(tgt, sort_keys=True), (tgt, []))[1].append(calls)
+    free: set[str] | None = None
+    for tgt, lists in groups.values():
+        got = set(call_forms.free_hides(lists[0], lists[1:], runner.grader_target(view, tgt)))
+        free = got if free is None else free & got
+    return [f for f in call_forms.FREE_HIDE_FLAGS if f in (free or ())]
+
+
 def make_task(track: str, template: str, e: Entry, spec: dict, split: str, prompt: str,
               wording: int) -> dict:
     # One answer per accepted state: on the MVS track one scene per reading of the
@@ -947,7 +971,9 @@ def make_task(track: str, template: str, e: Entry, spec: dict, split: str, promp
                          "n_atoms": bin(e.table.selector(i["atoms"])).count("1")}
                         for n, i in enumerate(intents)],
         })
+    free = free_hide(e.id, answers, [target(track, st) for st in states]) if track == "api" else []
     return {
+        **({"free_hide": free} if free else {}),
         "id": f"{template}-{e.id}-{track}", "track": track, "tier": "accept_set",
         "family": template, "structures": [e.id], "prompt": prompt,
         "reference": answers[0], "accepted": answers[1:], "context": None,

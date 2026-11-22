@@ -28,7 +28,7 @@
         "action": "load",
         "alphafold": true,
         "custom_data": {
-          "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v4.bcif",
+          "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v6.bcif",
           "format": "bcif",
           "binary": true
         }
@@ -57,7 +57,7 @@
       "a bare load scores 0"
     ],
     "structure": "af-p04637-f1",
-    "derived": "alphafold_view only switches the colouring; the model comes in as custom_data from the AlphaFold DB file. The entry is compared as AF-P04637-F1 whatever the file version or format.",
+    "derived": "alphafold_view only switches the colouring; the model comes in as custom_data from the AlphaFold DB file. The entry is compared as AF-P04637-F1 whatever the file format; the model version must be the one AlphaFold DB serves (an older file name answers 404 and nothing loads).",
     "checked_by": "scripts/check_api_refs.py",
     "seed": 20261113,
     "wording": "1 of 1",

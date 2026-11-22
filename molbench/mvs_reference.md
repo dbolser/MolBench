@@ -48,6 +48,11 @@ it draws. A node may also carry `"custom": {...}`: viewer-specific extras (see
 | `primitives` | optional `color`, `label_color`, `opacity` | structure | a group of drawn shapes |
 | `primitive` | `kind` + params below | primitives | one shape |
 
+**Structure files** (`download`): a PDB entry is
+`https://files.rcsb.org/download/<id>.cif`, parsed as `mmcif`. An AlphaFold DB model
+is `https://alphafold.ebi.ac.uk/files/AF-<accession>-F1-model_v6.cif`, parsed as
+`mmcif`; AlphaFold DB serves the model under no other name, and RCSB does not hold it.
+
 **Component selectors** — a string for whole classes:
 `all`, `polymer`, `protein`, `nucleic`, `ligand`, `ion`, `water`, `branched`.
 Or a **ComponentExpression** object (or list of them) to pick specific atoms/residues:
@@ -71,7 +76,14 @@ residue numbers and atom names.
 `spacefill`, `surface`, `putty`, `carbohydrate`.
 
 **Colours:** lowercase CSS names (`"red"`, `"orange"`, `"steelblue"`) or hex
-(`"#FF6699"`). A `color` node takes ONE colour.
+(`"#FF6699"`). A `color` node takes ONE colour. To colour part of a representation,
+give it a second `color` child with a `selector`; later `color` children paint over
+earlier ones.
+
+**Two representations of the same type on the same atoms coincide.** Only the one
+listed first is seen (a grey cartoon of the polymer followed by a green cartoon of
+residues 10-20 shows a cartoon that is grey all over). Representations of different
+types on the same atoms (a cartoon and ball-and-stick) are both seen.
 
 ## Worked example
 

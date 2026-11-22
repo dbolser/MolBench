@@ -559,11 +559,16 @@ def clinical_structure_facts(entry: str) -> list[str]:
     f = grounding.facts(entry)
     if entry.startswith("af-"):
         acc = entry.split("-")[1].upper()
-        head = f"AlphaFold DB model AF-{acc}-F1 (model version 6): {f['title']}"
+        # a predicted model has no deposition title, experiment or resolution
+        head = f"AlphaFold DB model AF-{acc}-F1 (model version 6)"
+        if f.get("title"):
+            head += f": {f['title']}"
+        method = f.get("method") or "predicted model (AlphaFold), not an experiment"
     else:
-        head = f"PDB {entry.upper()}: {f['title']}"
+        head = f"PDB {entry.upper()}" + (f": {f['title']}" if f.get("title") else "")
+        method = f.get("method") or "not recorded"
     reso = f", {f['resolution']:.2f} Å" if f.get("resolution") else ""
-    lines = [head, f"Method: {f['method']}{reso}"]
+    lines = [head, f"Method: {method}{reso}"]
     desc = {e["id"]: e.get("description") or "?" for e in f["entities"]}
     lines.append("Polymer chains (author chain [label chain]; observed residues as "
                  "author numbering = label numbering):")
@@ -602,8 +607,10 @@ def clinical_pack(task: dict) -> dict:
         pos = v["uniprot_position"]
         if v["mature_numbering"]:
             m = v["mature_numbering"]
-            lines.append(f"{v['name_in_prompt']} (mature-protein numbering; {m['removed']} "
-                         f"residues precede the mature chain in UniProt) = UniProt position {pos}")
+            n = m["removed"]
+            lines.append(f"{v['name_in_prompt']} (mature-protein numbering; {n} "
+                         f"{'residue precedes' if n == 1 else 'residues precede'} "
+                         f"the mature chain in UniProt) = UniProt position {pos}")
         hits = [r for r in (sifts.uniprot_residues(entry, acc, pos) or [])]
         if c["chain"]:
             hits = [r for r in hits if r.label_asym_id == c["chain"]["label_asym_id"]]

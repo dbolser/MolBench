@@ -1,4 +1,7 @@
 {
+ "free_hide": [
+  "hide_water"
+ ],
  "id": "acc-ligand-which-2cpp-api",
  "track": "api",
  "tier": "accept_set",
@@ -190,7 +193,7 @@
    "part of a ligand, or protein residues around it (other than through the viewer's built-in selection): not requested",
    "another representation or colour: both are stated",
    "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
-   "another global style, or hidden components: not requested"
+   "another global style, or the polymer hidden: not requested. Hiding water, ligands and ions, sugars or non-standard residues is another matter where the task lists `free_hide`: the default form draws them and the style form does not, so the request leaves open whether they are on screen (GRADING.md, 'hide toggles nobody asked for')"
   ],
   "difficulty": {
    "needs_numbering_offset": false,

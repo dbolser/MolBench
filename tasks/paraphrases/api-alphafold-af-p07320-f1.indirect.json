@@ -69,7 +69,7 @@
     "the reference grades as exactly right against the task (F1 1, success, target score 1)",
     "a bare load scores 0",
     "a near miss (first colour changed, or last step dropped) is not a success and earns partial credit (F1 0.6667)",
-    "equivalent answer succeeds: the binary file of another model version, the flag in the load action, label numbers",
+    "equivalent answer succeeds: the binary file of the model, the flag in the load action, label numbers",
     "wrong answer fails: the accession as molecule_id (not a PDB id: nothing loads) (F1 0.0)"
    ],
    "structure": "af-p07320-f1",

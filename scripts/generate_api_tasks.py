@@ -1137,9 +1137,9 @@ def t_alphafold(s: S) -> dict | None:
                    "only switches the colouring to pLDDT; the model is loaded with custom_data "
                    "from the AlphaFold DB URL pattern the API reference gives. An AlphaFold "
                    "model is numbered as UniProt, so author and label numbers agree.",
-        "alts": [("the binary file of another model version, the flag in the load action, label numbers",
+        "alts": [("the binary file of the model, the flag in the load action, label numbers",
                   [{"action": "load", "alphafold": True, "custom_data": {
-                      "url": f"https://alphafold.ebi.ac.uk/files/AF-{acc}-F1-model_v4.bcif",
+                      "url": f"https://alphafold.ebi.ac.uk/files/AF-{acc}-F1-model_v6.bcif",
                       "format": "bcif", "binary": True}},
                    {"action": "tooltips", "data": [{"start_residue_number": start, "end_residue_number": end,
                                                     "tooltip": text}]}])],
@@ -1866,9 +1866,10 @@ def curated(structs: dict[str, S]) -> list[dict]:
         "confidence (pLDDT).",
         [s.load(), prop("alphafold_view", True)], None, ["load", "custom-data", "alphafold"], "reworded",
         "alphafold_view only switches the colouring; the model comes in as custom_data from the AlphaFold DB "
-        "file. The entry is compared as AF-P04637-F1 whatever the file version or format.",
+        "file. The entry is compared as AF-P04637-F1 whatever the file format; the model version "
+        "must be the one AlphaFold DB serves (an older file name answers 404 and nothing loads).",
         accepted=[[{"action": "load", "alphafold": True, "custom_data": {
-            "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v4.bcif", "format": "bcif",
+            "url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v6.bcif", "format": "bcif",
             "binary": True}}]],
         notes="Tool-control: custom data source plus a colouring switch.",
         difficulty={"needs_alphafold_url": True, "setting_only": ["alphafold_view"]})

@@ -1,4 +1,7 @@
 {
+ "free_hide": [
+  "hide_carbs"
+ ],
  "id": "acc-residue-colour-1igt-api",
  "track": "api",
  "tier": "accept_set",
@@ -187,7 +190,7 @@
    "a residue with that number in another protein of the entry, or the residue with that label (sequence) number where it differs: a different residue",
    "an added representation (sticks) for the residue: only a colour is requested",
    "an added representation in the requested colour on top of a default drawing that was given another colour or none (bare load, 'representation' + 'representationColor' with no matching 'color'): the ligand is then drawn twice, in two colours",
-   "another global style, or hidden components: not requested"
+   "another global style, or the polymer hidden: not requested. Hiding water, ligands and ions, sugars or non-standard residues is another matter where the task lists `free_hide`: the default form draws them and the style form does not, so the request leaves open whether they are on screen (GRADING.md, 'hide toggles nobody asked for')"
   ],
   "difficulty": {
    "needs_numbering_offset": true,
