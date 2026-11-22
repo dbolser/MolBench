@@ -610,6 +610,19 @@ def _(c: Ctx):
 
 # --- MVS: wrong answers (must fail) ---------------------------------------------------
 
+@control(MVS_EQUIVALENT, "overlay_listed_before_the_base",
+         "a stretch in a colour of its own, drawn as a component of its own that is listed "
+         "before the grey drawing of the whole polymer in the same representation type: the "
+         "first one listed is the one seen (pixels counted in Mol*, "
+         "tests/controls/overlap_evidence.json)", viewer=False)
+def _(c: Ctx):
+    made = _overlay(c, c.rng.choice(["cartoon", "cartoon", "ball_and_stick", "spacefill"]))
+    if made is None:
+        return None
+    nested, base, part = made
+    return nested, scene(c.e, [part, base])
+
+
 @control(MVS_WRONG, "unstated_colour_takes_stated",
          "a stretch of the cartoon is to be coloured and the rest has no stated colour: "
          "the answer colours the whole cartoon in the stated colour, so nothing stands out")
@@ -640,6 +653,54 @@ def _(c: Ctx):
     else:
         url, fmt = f"{c.e.id}.cif", "mmcif"
     return ref, scene(c.e, copy.deepcopy(components(ref)), url=url, fmt=fmt)
+
+
+def _af_misses(e: Entry, rng: random.Random) -> str:
+    """The model's file under an address AlphaFold DB does not serve (each answered 404
+    on 2026-11-16; ``drawn.alphafold_problem``)."""
+    _, acc, frag, _ = e.id.split("-", 3)
+    name = f"AF-{acc.upper()}-{frag.upper()}"
+    return rng.choice([f"https://files.rcsb.org/download/{name}.cif",
+                       f"https://alphafold.ebi.ac.uk/files/{name}.cif",
+                       f"https://alphafold.ebi.ac.uk/files/{name}-model_v4.cif",
+                       f"https://alphafold.ebi.ac.uk/files/{name.lower()}-model_v6.cif"])
+
+
+@control(MVS_WRONG, "alphafold_file_not_served",
+         "the right scene on an AlphaFold model address that does not exist: the file name on "
+         "RCSB's host, without its model version, with an old version, or in lower case "
+         "(the viewer shows nothing)", viewer=False)
+def _(c: Ctx):
+    if c.res is None or not c.e.af:
+        return None
+    ref = c.highlight()
+    return ref, scene(c.e, copy.deepcopy(components(ref)), url=_af_misses(c.e, c.rng))
+
+
+def _overlay(c: Ctx, rtype: str = "cartoon"):
+    """A stretch of the polymer in a colour of its own: as a colour node inside the one
+    representation, and as a second component of the same type over the first."""
+    run = c.run()
+    if not run:
+        return None
+    sel = {"auth_asym_id": run[0]["auth_asym_id"], "beg_auth_seq_id": run[0]["auth_seq_id"],
+           "end_auth_seq_id": run[-1]["auth_seq_id"]}
+    nested = scene(c.e, [comp("polymer", rep(rtype, col("gray"), col(c.c1, sel)))])
+    base, part = comp("polymer", rep(rtype, col("gray"))), comp(sel, rep(rtype, col(c.c1)))
+    return nested, base, part
+
+
+@control(MVS_WRONG, "overlay_hidden_under_the_same_type",
+         "a stretch is to be coloured: the answer draws the whole polymer in grey and then the "
+         "stretch again, same representation type, in the colour. The second drawing lies "
+         "exactly under the first and is not seen: the picture is grey all over "
+         "(pixels counted in Mol*, tests/controls/overlap_evidence.json)", viewer=False)
+def _(c: Ctx):
+    made = _overlay(c, c.rng.choice(["cartoon", "cartoon", "ball_and_stick", "spacefill"]))
+    if made is None:
+        return None
+    nested, base, part = made
+    return nested, scene(c.e, [base, part])
 
 
 @control(MVS_WRONG, "residue_off_by_one", "the neighbouring residue is highlighted")
@@ -1266,6 +1327,19 @@ def _(c: Ctx):
 
 
 # --- API: wrong answers ---------------------------------------------------------------
+
+@control(API_WRONG, "alphafold_file_not_served",
+         "the right calls on an AlphaFold model address that does not exist (the file name on "
+         "RCSB's host, without its model version, with an old version, or in lower case): "
+         "nothing loads")
+def _(c: Ctx):
+    if not c.e.af or c.res is None:
+        return None
+    mk = lambda url: [{"action": "load", "custom_data": {"url": url, "format": "cif",  # noqa: E731
+                                                         "binary": False}},
+                      {"action": "color", "data": [api_auth(c.res, color=c.c1)]}]
+    return mk(c.e.url), mk(_af_misses(c.e, c.rng))
+
 
 @control(API_WRONG, "unstated_hide_polymer",
          "the default-view answer to 'grey cartoon, residue as coloured ball-and-stick' with the "

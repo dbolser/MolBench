@@ -19,6 +19,7 @@ GRADING.md is the plain-language version of all of it.
 
 from __future__ import annotations
 
+import re
 from typing import Any, Callable, Iterable
 
 # --- colours ----------------------------------------------------------------------
@@ -319,7 +320,10 @@ def target_display(ref: dict[tuple, Any], pred: dict[tuple, Any], target: Any
     * ``wanted``   the reference's items on the class;
     * ``credit``   1 for each of them the answer has, ``PARTIAL`` for one the answer
                    draws with the right representation type but another colour or
-                   opacity;
+                   opacity, in a drawing that is confined to the target (the right
+                   residue as blue sticks where red were asked for). The same type in
+                   another colour in a drawing that runs on beyond the target is
+                   backdrop, not an attempt: no credit, and no spill;
     * ``attempted`` how many of them the answer drew at all (right type);
     * ``spill``    answer items *outside* the target that repeat what the answer drew
                    on this class, where the reference draws no such thing: the answer
@@ -360,6 +364,13 @@ def target_display(ref: dict[tuple, Any], pred: dict[tuple, Any], target: Any
                             own_style.append(pd)
             for pd, pm in pred.items():      # then the right type in another colour
                 if pd[0] == d[0] and not draw_eq(d, pd):
+                    if size(minus(pm, target)):
+                        # ... but only where that drawing is about the target. One that
+                        # runs on beyond it (the grey cartoon of the whole chain, the
+                        # white a call paints "everything else") is the backdrop: the
+                        # target atoms are not singled out by it. It earns nothing and
+                        # is not held against the answer either.
+                        continue
                     hit = left & pm
                     n = size(hit)
                     if n:
@@ -421,6 +432,36 @@ def _show(v: Any) -> Any:
 show = _show
 show_look = _show_look
 
+TARGET_KEYS = ("target_precision", "target_recall", "target_f1", "target_facts")
+
+
+def best_of(results: list[dict[str, Any]], rank: Callable[[dict], tuple] | None = None
+            ) -> dict[str, Any]:
+    """The result that counts when an answer was graded against the reference and each
+    accepted alternative: a success first, then the highest F1 (``rank`` may refine
+    that order). **The target score is the best over all of them**, not the one of the
+    alternative with the best F1. The alternatives of a task differ only in what the
+    request leaves open, so the question "are the requested atoms drawn as asked" has
+    one answer whichever of them the rest of the picture resembles most. (Found on
+    the pilot of 2026-11-16: with one of two residues right and the rest painted white,
+    an API answer scored 0.67 on the target against the form that leaves the residue's
+    cartoon alone and 0.01 against the form that colours it, because there the white
+    cartoon on the missed residue counts as an attempt that spills over the whole
+    structure; the second form had the higher F1.)"""
+    rank = rank or (lambda r: (bool(r.get("success")), r.get("f1") or 0.0))
+    best = None
+    for r in results:
+        if best is None or rank(r) > rank(best):
+            best = r
+    top = max(results, key=lambda r: r.get("target_f1") or 0.0)
+    if (top.get("target_f1") or 0.0) > (best.get("target_f1") or 0.0):
+        best = dict(best)
+        for k in TARGET_KEYS:
+            if k in top:
+                best[k] = top[k]
+    return best
+
+
 #: The keys every grading result has, on both tracks (``grader.grade_task``).
 RESULT_KEYS = ("precision", "recall", "f1", "success", "target_precision", "target_recall",
                "target_f1", "outcome", "grader", "matched_reference", "same_structure",
@@ -441,3 +482,39 @@ def zero(**extra: Any) -> dict[str, Any]:
                            "target_facts": []}
     out.update(extra)
     return out
+
+
+# --- AlphaFold DB files -----------------------------------------------------------
+
+_AF_NAME = re.compile(r"AF-[A-Za-z0-9]+-F\d+", re.I)
+_AF_FILE = re.compile(r"\s*(?i:https?://(?:www\.)?alphafold\.(?:ebi\.ac\.uk|com))/files/"
+                      r"AF-([A-Z0-9]+)-F(\d+)-model_v(\d+)\.(?:cif|bcif|pdb)\s*")
+
+
+def alphafold_problem(url: Any) -> str | None:
+    """Why a URL that names an AlphaFold DB model would load nothing, or None (also
+    None for a URL that names no AlphaFold model at all).
+
+    AlphaFold DB serves a model under one address only,
+    ``https://alphafold.ebi.ac.uk/files/AF-<accession>-F<n>-model_v<version>.cif`` (also
+    ``.bcif``, ``.pdb``, and the same path on ``alphafold.com``). The same file name on
+    another host, the name without ``-model_v<version>``, the name in another letter case
+    and a version the database no longer serves all answer 404 (checked 2026-11-16:
+    ``files.rcsb.org/download/AF-P68871-F1.cif``, ``.../files/AF-P68871-F1.cif``,
+    ``.../files/af-p68871-f1-model_v6.cif`` and ``...-model_v4.cif`` are 404,
+    ``...-model_v6.cif`` is 200), so the viewer shows an empty canvas. Where the panel
+    holds the model, the version must be the frozen one."""
+    if not isinstance(url, str) or not _AF_NAME.search(url):
+        return None
+    m = _AF_FILE.fullmatch(url.split("?")[0].split("#")[0])
+    if not m:
+        return (f"{url.strip()[:120]!r} is not an AlphaFold DB file address "
+                "(https://alphafold.ebi.ac.uk/files/AF-<accession>-F1-model_v<version>.cif)")
+    from .atoms import TABLES
+    stem = f"af-{m.group(1).lower()}-f{m.group(2)}"
+    frozen = {q.name[len(stem) + len("-model_v"):-len(".json.gz")]
+              for q in TABLES.glob(f"{stem}-model_v*.json.gz")}
+    if frozen and m.group(3) not in frozen:
+        return (f"AlphaFold DB model version {m.group(3)} of {stem.upper()} is not the "
+                f"version in use (v{', v'.join(sorted(frozen))}); older files are no longer served")
+    return None

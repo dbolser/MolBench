@@ -95,10 +95,10 @@ def scene_root(scene: Any) -> dict | None:
     bare root node."""
     if not isinstance(scene, dict):
         return None
-    if scene.get("kind") == "root":
-        return scene
     root = scene.get("root")
-    return root if isinstance(root, dict) and root.get("kind") == "root" else None
+    if isinstance(root, dict) and root.get("kind") == "root":
+        return root            # a state's own root wins over a stray top-level "kind"
+    return scene if scene.get("kind") == "root" else None
 
 
 def loaded_entries(track: str, state: Any) -> list[str]:

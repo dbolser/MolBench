@@ -1,0 +1,180 @@
+{
+ "what": "green pixels of residues A 84-95 of 3K34 drawn green, alone, after and before the same representation type drawn grey on the whole polymer; one camera",
+ "viewer": "headless Mol* (molbench/static/molstar), 800x600",
+ "thresholds": {
+  "hidden_below_share_of_alone": 0.01,
+  "seen_above_share_of_alone": 0.25
+ },
+ "rows": [
+  {
+   "type": "cartoon",
+   "size_factor_of_part": 1.0,
+   "green_pixels": {
+    "part_alone": 7176,
+    "base_then_part": 0,
+    "part_then_base": 4977
+   },
+   "viewer_shows_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "backbone",
+   "size_factor_of_part": 1.0,
+   "green_pixels": {
+    "part_alone": 3059,
+    "base_then_part": 0,
+    "part_then_base": 2618
+   },
+   "viewer_shows_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "putty",
+   "size_factor_of_part": 1.0,
+   "green_pixels": {
+    "part_alone": 15058,
+    "base_then_part": 0,
+    "part_then_base": 8396
+   },
+   "viewer_shows_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "ball_and_stick",
+   "size_factor_of_part": 1.0,
+   "green_pixels": {
+    "part_alone": 19774,
+    "base_then_part": 0,
+    "part_then_base": 12789
+   },
+   "viewer_shows_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "line",
+   "size_factor_of_part": 1.0,
+   "green_pixels": {
+    "part_alone": 4979,
+    "base_then_part": 0,
+    "part_then_base": 4530
+   },
+   "viewer_shows_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "spacefill",
+   "size_factor_of_part": 1.0,
+   "green_pixels": {
+    "part_alone": 59029,
+    "base_then_part": 0,
+    "part_then_base": 22069
+   },
+   "viewer_shows_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": false,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "surface",
+   "size_factor_of_part": 1.0,
+   "green_pixels": {
+    "part_alone": 60675,
+    "base_then_part": 10601,
+    "part_then_base": 10601
+   },
+   "viewer_shows_part": {
+    "base_then_part": null,
+    "part_then_base": null
+   },
+   "grader_draws_part": {
+    "base_then_part": true,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "cartoon",
+   "size_factor_of_part": 1.3,
+   "green_pixels": {
+    "part_alone": 9347,
+    "base_then_part": 6364,
+    "part_then_base": 6364
+   },
+   "viewer_shows_part": {
+    "base_then_part": true,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": true,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "ball_and_stick",
+   "size_factor_of_part": 1.5,
+   "green_pixels": {
+    "part_alone": 30479,
+    "base_then_part": 19103,
+    "part_then_base": 19103
+   },
+   "viewer_shows_part": {
+    "base_then_part": true,
+    "part_then_base": true
+   },
+   "grader_draws_part": {
+    "base_then_part": true,
+    "part_then_base": true
+   }
+  },
+  {
+   "type": "ball_and_stick",
+   "size_factor_of_part": 0.6,
+   "green_pixels": {
+    "part_alone": 11133,
+    "base_then_part": 24,
+    "part_then_base": 24
+   },
+   "viewer_shows_part": {
+    "base_then_part": false,
+    "part_then_base": false
+   },
+   "grader_draws_part": {
+    "base_then_part": false,
+    "part_then_base": false
+   }
+  }
+ ]
+}

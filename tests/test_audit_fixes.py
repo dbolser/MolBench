@@ -76,7 +76,7 @@ def test_uniprot_keys_select_nothing_on_a_file_without_sifts_columns():
     assert ps.grade_state(ref, by_url("https://www.ebi.ac.uk/pdbe/entry-files/download/1tup_updated.cif"))["success"]
     assert not ps.grade_state(ref, by_url("https://files.rcsb.org/download/1tup.cif"))["success"]
     assert ps.has_sifts_columns(None) and ps.has_sifts_columns(
-        {"url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v4.cif"})
+        {"url": "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v6.cif"})
 
 
 # --- the reply parser (major) ---------------------------------------------------------

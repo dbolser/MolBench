@@ -140,7 +140,7 @@ from .atoms import AtomTable, load_table
 
 # The colour-name table and the tolerance are shared with the MVS grader (drawn.py):
 # Mol*'s ColorNames, the same in the pdbe-molstar 3.3.2 bundle and in Mol* 5.9.0.
-from .drawn import COLOR_NAMES, COLOR_TOLERANCE, color_eq  # noqa: E402,F401
+from .drawn import COLOR_NAMES, COLOR_TOLERANCE, alphafold_problem, color_eq  # noqa: E402,F401
 
 RGB = tuple  # (r, g, b)
 GREY = (170, 170, 170)            # normalizeColor's fallback
@@ -474,7 +474,9 @@ def canonical_entry(molecule_id: Any, custom_data: Any) -> str | None:
             return None            # "Provide all custom data parameters": nothing loads
         m = _AF_URL.search(url)
         if m:
-            return f"af-{m.group(1).lower()}-f{m.group(2)}"
+            # an AlphaFold model name on an address that serves no such file loads
+            # nothing: it stays a bare URL, which is no entry (drawn.alphafold_problem)
+            return url if alphafold_problem(url) else f"af-{m.group(1).lower()}-f{m.group(2)}"
         m = _PDB_URL.search(url)
         return m.group(1).lower() if m else url
     if isinstance(molecule_id, str) and molecule_id.strip():
@@ -487,7 +489,7 @@ def canonical_entry(molecule_id: Any, custom_data: Any) -> str | None:
 
 
 _SIFTS_URL = re.compile(
-    r"^https?://(?:alphafold\.ebi\.ac\.uk/files/AF-"
+    r"^https?://(?:(?:www\.)?alphafold\.(?:ebi\.ac\.uk|com)/files/AF-"
     r"|(?:www\.)?ebi\.ac\.uk/pdbe/(?:entry-files/(?:download/)?[0-9][a-z0-9]{3}(?:_updated\.cif|\.bcif)"
     r"|model-server/))", re.I)
 
@@ -1353,7 +1355,7 @@ def grade_state(reference: list, predicted: Any, accepted: list[list] | None = N
     if not isinstance(predicted, list):
         return drawn.zero(error="prediction is not a list", grader="state")
     pred = replay(copy.deepcopy(predicted), tables)
-    best = None
+    results = []
     for i, ref in enumerate([reference] + list(accepted or [])):
         try:
             ref_state = replay(copy.deepcopy(ref), tables)
@@ -1367,7 +1369,7 @@ def grade_state(reference: list, predicted: Any, accepted: list[list] | None = N
         except Exception as e:  # an answer must never be able to crash the grader
             res = drawn.zero(error=f"could not compare states ({type(e).__name__}: {e})")
         res["matched_reference"] = i
-        if best is None or (res["success"], res["f1"]) > (best["success"], best["f1"]):
-            best = res
+        results.append(res)
+    best = drawn.best_of(results)
     best["grader"] = "state"
     return best

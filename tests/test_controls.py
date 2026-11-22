@@ -68,8 +68,9 @@ def test_the_set_is_as_wide_as_the_plan_asks(controls, track):
     for c in ctls:
         if c["group"] != "identical":
             per_kind[c["kind"]] = per_kind.get(c["kind"], 0) + 1
-    # one kind can only be built on the panel's five AlphaFold models
+    # two kinds can only be built on the panel's five AlphaFold models
     assert per_kind.pop("uniprot_number_on_alphafold_model", 5) == 5
+    assert per_kind.pop("alphafold_file_not_served", 5) == 5
     assert min(per_kind.values()) >= 8, {k: v for k, v in per_kind.items() if v < 8}
     assert len({c["entry"] for c in ctls}) >= 50
     assert not any(c["entry"] == "1hsg" for c in ctls)      # the API prompt's worked example

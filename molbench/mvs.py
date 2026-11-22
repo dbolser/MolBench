@@ -202,9 +202,16 @@ def _param_signature(kind: str, params: dict | None, custom: dict | None = None,
 # --- tree handling ----------------------------------------------------------------
 
 def extract_root(obj: Any) -> dict | None:
-    """Accept a full MVS state, a {'root': ...} wrapper, or a bare root node."""
+    """Accept a full MVS state, a {'root': ...} wrapper, or a bare root node.
+
+    A state's own ``root`` wins over a ``kind`` key beside it: Mol* reads the tree
+    under ``root`` whatever the top-level ``kind`` says, unless it is ``"multiple"``
+    (``{"root": {...}, "kind": "root"}`` loads the scene; read back in headless Mol*
+    5.9.0 on the pilot of 2026-11-16, PILOT.md)."""
     if not isinstance(obj, dict):
         return None
+    if isinstance(obj.get("root"), dict) and obj["root"].get("kind") == "root":
+        return obj["root"]
     if obj.get("kind") == "root":
         return obj
     if isinstance(obj.get("root"), dict):
@@ -566,6 +573,10 @@ REPRESENTATION_TYPES = RIBBON_TYPES + ATOMIC_TYPES + ("carbohydrate",)
 PARTITION_THEMES = {"chain-id": "auth_asym_id", "entity-id": "label_entity_id"}
 DEFAULT_BACKGROUND = (255, 255, 255)
 
+#: Representation types whose drawing on a part is not hidden by the same type drawn
+#: earlier on the whole (see ``DrawnStructure.settle``).
+COINCIDENT_EXEMPT = {"surface"}
+
 # node kinds that are scaffolding or handled explicitly; anything else is a generic fact
 _IGNORED_KINDS = {"camera"}          # explicit camera numbers are not graded
 
@@ -588,7 +599,7 @@ def entry_of_url(url: Any) -> str | None:
 
 
 #: Hosts that serve structure files (the wwPDB sites and their mirrors, AlphaFold DB).
-SOURCE_HOSTS = ("rcsb.org", "ebi.ac.uk", "wwpdb.org", "pdbj.org", "pdbe.org")
+SOURCE_HOSTS = ("rcsb.org", "ebi.ac.uk", "wwpdb.org", "pdbj.org", "pdbe.org", "alphafold.com")
 _FILE_FORMAT = {"cif": "mmcif", "mmcif": "mmcif", "bcif": "bcif", "pdb": "pdb", "ent": "pdb"}
 
 
@@ -633,6 +644,9 @@ def load_problem(tree: Any) -> str | None:
             fmt = source_format(url)
             if fmt is None:
                 return f"download url {str(url)[:120]!r} names no structure file on a known host"
+            af = _drawn.alphafold_problem(url)
+            if af:
+                return af
         elif kind == "parse" and url is not None:
             want = p.get("format")
             if isinstance(want, str) and want in ("mmcif", "bcif", "pdb") and want != fmt:
@@ -722,6 +736,11 @@ class DrawnStructure:
         self.interactions: dict[Any, Any] = {}   # radius -> atoms
         self.other: list[tuple] = []             # nodes with no special handling
         self._classes: list | None = None
+        #: opaque draws in scene order, (type, colour, opacity, atoms, size factor), kept
+        #: until ``settle`` decides which of two coincident ones is seen
+        self.pending: list[tuple] = []
+        #: draws ``settle`` found hidden under an earlier one: (type, colour, atoms)
+        self.hidden: list[tuple] = []
 
     @property
     def none(self) -> Any:
@@ -731,6 +750,26 @@ class DrawnStructure:
         if size(atoms):
             store[key] = store[key] | atoms if key in store else atoms
             self._classes = None
+
+    def settle(self) -> None:
+        """Coincident drawing: where two opaque representations of the same type are
+        drawn on the same atom, the viewer shows one of them. Their geometry is the
+        same, so the one created first wins the depth test and the later one is not
+        seen at all; with different size factors the larger encloses the smaller
+        (measured in headless Mol* 5.9.0, ``scripts/check_overlap.py``). A surface is
+        left out: the surface of a part is not part of the surface of the whole."""
+        by_type: dict[Any, list[tuple]] = {}
+        for order, (rtype, colour, opacity, atoms, factor) in enumerate(self.pending):
+            by_type.setdefault(rtype, []).append((-factor, order, colour, opacity, atoms))
+        for rtype, recs in by_type.items():
+            covered = 0
+            for _, _, colour, opacity, atoms in sorted(recs, key=lambda r: r[:2]):
+                seen = atoms if rtype in COINCIDENT_EXEMPT else atoms & ~covered
+                if size(atoms) and seen != atoms:
+                    self.hidden.append((rtype, colour, atoms & covered))
+                covered |= atoms
+                self.add(self.draws, (rtype, colour, opacity), seen)
+        self.pending = []
 
     def classes(self) -> list[tuple[Any, tuple]]:
         if self._classes is None:
@@ -936,6 +975,10 @@ def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
         p = params_of(node)
         rtype = p.get("type")
         layers: list[tuple[Any, Any]] = []       # (selector or None, colour token)
+        try:
+            factor = float(p.get("size_factor", 1.0))
+        except (TypeError, ValueError):
+            factor = 1.0
         opacity: Any = 1.0
         for c in kids(node):
             ck, cp, cc = c.get("kind"), params_of(c), custom_of(c)
@@ -994,9 +1037,14 @@ def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
         for mask, token in regions:
             if level == "trace":
                 mask = _grow(t, mask) & drawn_atoms
-            st.add(st.draws, (actual, token, opacity), mask)
+            if isinstance(opacity, float) and opacity >= 1 - _drawn.OPACITY_TOLERANCE:
+                st.pending.append((actual, token, opacity, mask, factor))
+            else:
+                st.add(st.draws, (actual, token, opacity), mask)
 
     walk(root, None, True)
+    for st in scene.structures.values():
+        st.settle()
     if unstated_colour_free:
         for st in scene.structures.values():
             stated: dict[Any, set] = {}
@@ -1320,7 +1368,7 @@ def grade_mvs(reference: Any, predicted: Any,
     """
     if extract_root(predicted) is None:
         return _drawn.zero(error="prediction is not an MVS state tree", grader="drawn")
-    best: dict[str, Any] | None = None
+    results: list[dict[str, Any]] = []
     for i, ref in enumerate([reference] + list(accepted or [])):
         try:
             tgt = alternative_target(
@@ -1330,8 +1378,8 @@ def grade_mvs(reference: Any, predicted: Any,
         except Exception as e:  # noqa: BLE001 - an answer must never crash the grader
             res = _drawn.zero(error=f"could not compare scenes ({type(e).__name__}: {e})")
         res["matched_reference"] = i
-        if best is None or (res["success"], res["f1"]) > (best["success"], best["f1"]):
-            best = res
+        results.append(res)
+    best = _drawn.best_of(results)
     best["grader"] = "drawn"
     return best
 
@@ -1358,6 +1406,23 @@ def grade_mvs_task(task: dict[str, Any], predicted: Any) -> dict[str, Any]:
                     unstated_colour_free=start_state(task) is None)
     res["outcome"] = "not_mvs" if extract_root(predicted) is None else "unchecked"
     return res
+
+
+def hidden_overlays(tree: Any) -> list[str]:
+    """The drawings of a scene that the viewer does not show because the same
+    representation type was already drawn on the same atoms (``DrawnStructure.settle``):
+    one line each, empty for a scene with none. The usual case is an answer that draws
+    the whole polymer as a grey cartoon and then a stretch of it again as a cartoon in
+    another colour, as a component of its own."""
+    scene = resolve_scene(tree)
+    if scene is None:
+        return []
+    out = []
+    for entry, st in scene.structures.items():
+        for rtype, colour, atoms in st.hidden:
+            out.append(f"{entry}: {rtype} in {colour} on {size(atoms)} atom(s) lies under an "
+                       f"earlier {rtype} and is not seen")
+    return out
 
 
 def check_mvs_task(task: dict[str, Any]) -> list[str]:
@@ -1390,6 +1455,8 @@ def check_mvs_task(task: dict[str, Any]) -> list[str]:
             problems.append(f"{name}: a selector cannot be resolved on the atom table")
         if name != "context" and not scene.draws_anything() and not scene.primitives:
             problems.append(f"{name}: draws nothing")
+        for line in hidden_overlays(tree):
+            problems.append(f"{name}: {line}")
         if name != "context":
             for bad in _empty_components(tree):
                 problems.append(f"{name}: selector selects no atoms: {bad}")

@@ -105,7 +105,12 @@ cartoon around the residue) is ignored, in either direction.
   reference draws on those atoms. It is cut into classes as above.
 - For each class, counting (atom, draw) items: `wanted` = the reference's items;
   `credit` = 1 for each the answer has, ½ for each the answer draws in the right
-  representation with another colour or opacity; `attempted` = how many the answer
+  representation with another colour or opacity **in a drawing confined to the
+  target** (the right residue as blue sticks where red were asked for). The right
+  representation in another colour in a drawing that runs on beyond the target (the
+  grey cartoon of the whole chain; the white that an API call paints "everything
+  else") is backdrop: the target is not singled out by it, so it earns no credit and
+  is not counted as an attempt or as spill either. `attempted` = how many the answer
   drew at all; `spill` = items *outside* the target on which the answer repeats what it
   drew on the target, where the reference draws no such thing (the answer coloured the
   whole chain red when one residue was asked for); `extra` = items on the target from
@@ -126,8 +131,10 @@ cartoon around the residue) is ignored, in either direction.
   atoms "drawn as asked", and "everything the reference draws" would give the start
   state returned unchanged full marks. Where an edit has a target (recolour chain B),
   the unchanged start state scores below 1 on it: 0 on the API track (nothing was
-  changed on those atoms), and one half on the MVS track where the atoms are already
-  drawn in the right representation and only the colour is wrong.
+  changed on those atoms); on the MVS track one half where the start scene already
+  draws exactly those atoms in a colour of their own (chain B magenta, to be made
+  plum: right atoms, right representation, wrong colour), and 0 where they are part of
+  a larger drawing in one colour.
 
 A task's `target` is `{"selector": <MVS selector>}` and/or `{"data": [<API
 selection>, …]}` (either form works on either track; both are resolved on the same atom
@@ -138,7 +145,11 @@ atoms in the target.
 
 - A task may list further right answers under `accepted`. The answer is graded against
   the reference and each of them; the best result counts (a success first, then the
-  highest F1), and `matched_reference` says which one it was. An alternative may be
+  highest F1), and `matched_reference` says which one it was. **The target score is
+  the best over the reference and all alternatives**, whichever of them has the best
+  F1: the alternatives differ only in what the request leaves open, so whether the
+  requested atoms are drawn as asked does not depend on which of them the rest of the
+  picture resembles (`drawn.best_of`). An alternative may be
   about other atoms than the reference (an ambiguous request with several right
   residues), so its target score uses, in this order: its own entry in
   `accepted_targets` (a list parallel to `accepted`), if the task gives one; the
@@ -225,6 +236,8 @@ attribute open: any value is right. What it does state must match. (Ruling of
   request names (the heme of "the heme in teal spheres") is not listed. A task whose
   only right form is the default view (a clinical request for the residue alone) has no
   `free_hide`: there an unrequested hide toggle is an unrequested change, and wrong.
+  Accept-set tasks follow the same rule, applied to the call forms of each reading: a
+  toggle is free when it is free in all of them (14 of the 15 API accept-set tasks).
   A call list that changes something the request does not mention in any other way
   (another global style, a second colour) is still wrong, as an unrequested extra
   component is on the MVS track.
@@ -257,8 +270,24 @@ each representation object holds, and in which colour), not taken from documenta
   `"rgb(255,0,0)"`, a number) makes Mol\* reject the whole scene.
 - **Opacity** is set per representation; the default is 1. Two opacities within 0.05
   are the same.
-- **Overlap.** Two representations on overlapping components are both drawn; the atom
-  carries both draws.
+- **Overlap.** Two representations of *different* types on overlapping components are
+  both drawn; the atom carries both draws.
+- **Coincident representations: only one is seen.** Two opaque representations of the
+  *same* type on the same atoms have the same geometry there, and the viewer shows the
+  one listed first; the later one is not seen at all. With different `size_factor`s
+  the larger one is seen, whatever the order. So "a grey cartoon of the polymer, then
+  residues 84-95 again as a green cartoon in a component of their own" is a cartoon
+  that is grey all over, and is graded as that; the same two components in the other
+  order, or one cartoon with a `color` child that has a selector, show the green. A
+  surface is the exception (the surface of a part is not part of the surface of the
+  whole, so both are seen), and so is a representation with opacity below 1. Measured
+  by counting pixels in headless Mol\* 5.9.0 for every representation type
+  (`scripts/check_overlap.py`, `tests/controls/overlap_evidence.json`); the rule is
+  `mvs.DrawnStructure.settle`. This is the one place where the order of sibling nodes
+  changes the picture. The MVS reference shown to the models states the rule. Each MVS
+  sample records whether its answer has such a hidden drawing (`hidden_overlay`), so
+  failures of this kind can be counted; no reference, accepted scene or start scene
+  of the corpus has one (`grader.check_task` refuses it).
 - **Selections** are resolved exactly as Mol\* resolves them (author and label
   numbering are different columns and are never pooled; a residue-number range, a list
   of the same residues, and one component per residue are the same atoms).
@@ -278,12 +307,26 @@ format is not the file's (an mmCIF text parsed as `bcif` gives 0 atoms; read bac
 headless Mol\* 5.9.0). Such an answer has outcome `load_failed` and scores 0
 (`mvs.load_problem`). Accepted sources: an http(s) URL on a wwPDB site or mirror
 (`rcsb.org`, `ebi.ac.uk`, `wwpdb.org`, `pdbj.org`, `pdbe.org`, which covers AlphaFold
-DB) that ends in `.cif`, `.bcif`, `.pdb` or `.ent` (optionally `.gz`) or is a
-model-server query, with the matching `parse` format. Which of those hosts and which
-file variant (`1cbs`, `1cbs_updated`, `pdb1cbs`) is not graded.
+DB; also `alphafold.com`) that ends in `.cif`, `.bcif`, `.pdb` or `.ent` (optionally
+`.gz`) or is a model-server query, with the matching `parse` format. Which of those
+hosts and which file variant (`1cbs`, `1cbs_updated`, `pdb1cbs`) is not graded.
+
+**An AlphaFold DB model has one address**,
+`https://alphafold.ebi.ac.uk/files/AF-<accession>-F<n>-model_v<version>.cif` (also
+`.bcif`, `.pdb`). The same file name on RCSB's host, the name without
+`-model_v<version>`, the name in lower case and a version the database no longer
+serves all answer 404 (checked 2026-11-16), so the viewer shows an empty canvas: the
+answer is `load_failed` on the MVS track and loads nothing on the API track
+(`drawn.alphafold_problem`). The version must be the one frozen in the panel (6).
+Both references shown to the models give the address. (Found on the pilot: an answer
+on `files.rcsb.org/download/AF-P68871-F1.cif` had passed.)
+
+A state's own `root` is the scene: `{"root": {...}, "kind": "root"}` (a stray
+top-level `kind`) loads in Mol\* as the tree under `root`, and is graded as that.
 
 Not graded on the MVS track: the envelope and metadata, the file's host and name
-variant (within the rule above), the order of children, representation size and surface kind
+variant (within the rule above), the order of children (except where two coincident
+representations make it visible, above), representation size and surface kind
 (`size_factor`, `surface_type`), label and primitive styling, and explicit camera
 numbers (below).
 
@@ -492,6 +535,12 @@ and UniProt keys on a file without SIFTS columns (must fail); UniProt keys on an
 AlphaFold model (must pass; five controls, one per model in the panel); and, on the MVS
 track, a scene whose file cannot load (must fail).
 
+Four kinds were added after the pilot of 2026-11-16 (`PILOT.md`): on the MVS track a
+stretch drawn a second time in the same representation type over the whole (must fail:
+it is hidden) and the same two components in the other order (must pass); and on both
+tracks the right answer on an AlphaFold file address that does not exist (must fail;
+five controls each, one per model in the panel).
+
 Five kinds are about unstated attributes: on the MVS track a reference with no colour
 node answered in a palette colour (must pass) and answered with the stated colour all
 over (must fail); on the API track "a grey cartoon and the ligand in a colour" answered
@@ -507,8 +556,8 @@ fails if the grader stops agreeing with any control.
 
 | track | controls | kinds (equivalent / wrong) | false pass | false fail | graders before this work: false pass / false fail |
 |---|---|---|---|---|---|
-| MVS | 1,110 on 78 entries | 24 / 24 | 0 of 480 | 0 of 630 | 13 of 480 / 264 of 630 (October path grader, F1 = 1 as success) |
-| API | 995 on 74 entries | 22 / 21 | 0 of 420 | 0 of 575 | 75 of 420 / 311 of 575 (July sequence grader, F1 = 1 as success) |
+| MVS | 1,155 on 78 entries | 25 / 26 | 0 of 505 | 0 of 650 | 16 of 505 / 284 of 650 (October path grader, F1 = 1 as success) |
+| API | 1,000 on 74 entries | 22 / 22 | 0 of 425 | 0 of 575 | 75 of 425 / 312 of 575 (July sequence grader, F1 = 1 as success) |
 
 Read these zeros with care: the grader was corrected until it agreed with every
 control, so they show that the rules above are implemented, not how often an unforeseen

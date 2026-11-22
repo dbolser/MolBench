@@ -3,46 +3,46 @@
  "seed": 20261112,
  "tracks": {
   "mvs": {
-   "n_controls": 1110,
+   "n_controls": 1155,
    "n_identical": 150,
-   "n_equivalent": 480,
-   "n_wrong": 480,
-   "n_equivalent_kinds": 24,
-   "n_wrong_kinds": 24,
+   "n_equivalent": 500,
+   "n_wrong": 505,
+   "n_equivalent_kinds": 25,
+   "n_wrong_kinds": 26,
    "n_entries": 78,
    "grader": {
     "false_pass": {
      "errors": 0,
-     "n": 480,
+     "n": 505,
      "rate": 0.0
     },
     "false_fail": {
      "errors": 0,
-     "n": 630,
+     "n": 650,
      "rate": 0.0
     },
     "false_fail_equivalent_only": {
      "errors": 0,
-     "n": 480,
+     "n": 500,
      "rate": 0.0
     }
    },
    "previous_grader": {
     "what": "October path grader, F1 = 1 taken as success",
     "false_pass": {
-     "errors": 13,
-     "n": 480,
-     "rate": 0.0271
+     "errors": 16,
+     "n": 505,
+     "rate": 0.0317
     },
     "false_fail": {
-     "errors": 264,
-     "n": 630,
-     "rate": 0.419
+     "errors": 284,
+     "n": 650,
+     "rate": 0.4369
     },
     "false_fail_equivalent_only": {
-     "errors": 264,
-     "n": 480,
-     "rate": 0.55
+     "errors": 284,
+     "n": 500,
+     "rate": 0.568
     }
    },
    "mistakes": [],
@@ -199,6 +199,16 @@
     },
     {
      "group": "equivalent",
+     "kind": "overlay_listed_before_the_base",
+     "what": "a stretch in a colour of its own, drawn as a component of its own that is listed before the grey drawing of the whole polymer in the same representation type: the first one listed is the one seen (pixels counted in Mol*, tests/controls/overlap_evidence.json)",
+     "n": 20,
+     "graded_success": 20,
+     "old_grader_success": 0,
+     "mean_f1": 1.0,
+     "mean_target_f1": 1.0
+    },
+    {
+     "group": "equivalent",
      "kind": "overridden_colour",
      "what": "a colour that a later colour node replaces (the last one wins)",
      "n": 20,
@@ -306,6 +316,16 @@
      "old_grader_success": 0,
      "mean_f1": 0.945,
      "mean_target_f1": 0.945
+    },
+    {
+     "group": "wrong",
+     "kind": "alphafold_file_not_served",
+     "what": "the right scene on an AlphaFold model address that does not exist: the file name on RCSB's host, without its model version, with an old version, or in lower case (the viewer shows nothing)",
+     "n": 5,
+     "graded_success": 0,
+     "old_grader_success": 3,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
     },
     {
      "group": "wrong",
@@ -429,6 +449,16 @@
     },
     {
      "group": "wrong",
+     "kind": "overlay_hidden_under_the_same_type",
+     "what": "a stretch is to be coloured: the answer draws the whole polymer in grey and then the stretch again, same representation type, in the colour. The second drawing lies exactly under the first and is not seen: the picture is grey all over (pixels counted in Mol*, tests/controls/overlap_evidence.json)",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.8521,
+     "mean_target_f1": 0.75
+    },
+    {
+     "group": "wrong",
      "kind": "range_too_short",
      "what": "a residue range that stops three residues early",
      "n": 20,
@@ -540,17 +570,17 @@
    ]
   },
   "api": {
-   "n_controls": 995,
+   "n_controls": 1000,
    "n_identical": 150,
    "n_equivalent": 425,
-   "n_wrong": 420,
+   "n_wrong": 425,
    "n_equivalent_kinds": 22,
-   "n_wrong_kinds": 21,
+   "n_wrong_kinds": 22,
    "n_entries": 74,
    "grader": {
     "false_pass": {
      "errors": 0,
-     "n": 420,
+     "n": 425,
      "rate": 0.0
     },
     "false_fail": {
@@ -568,13 +598,13 @@
     "what": "July sequence grader, F1 = 1 taken as success",
     "false_pass": {
      "errors": 75,
-     "n": 420,
-     "rate": 0.1786
+     "n": 425,
+     "rate": 0.1765
     },
     "false_fail": {
-     "errors": 311,
+     "errors": 312,
      "n": 575,
-     "rate": 0.5409
+     "rate": 0.5426
     },
     "false_fail_equivalent_only": {
      "errors": 311,
@@ -810,9 +840,19 @@
      "what": "the answer is the reference itself",
      "n": 150,
      "graded_success": 150,
-     "old_grader_success": 150,
+     "old_grader_success": 149,
      "mean_f1": 1.0,
      "mean_target_f1": 1.0
+    },
+    {
+     "group": "wrong",
+     "kind": "alphafold_file_not_served",
+     "what": "the right calls on an AlphaFold model address that does not exist (the file name on RCSB's host, without its model version, with an old version, or in lower case): nothing loads",
+     "n": 5,
+     "graded_success": 0,
+     "old_grader_success": 0,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
     },
     {
      "group": "wrong",
@@ -952,7 +992,7 @@
      "graded_success": 0,
      "old_grader_success": 0,
      "mean_f1": 0.5667,
-     "mean_target_f1": 0.3425
+     "mean_target_f1": 0.4
     },
     {
      "group": "wrong",
