@@ -245,5 +245,6 @@ are called (families, categories, tiers, types), and whose the earlier graders w
 9. Still open from round 1: the read-back record is older than the control set (80 scene
    controls not read back); the variant counts in CORPUS.md (43 / 37 / 246) differ from the
    generated ones (44 / 35 / 216); who the four reviews of the corpus were.
-10. **Layout.** Five pages of the PDF were looked at (Figures 3, 5 and 6, Tables 6 and 13);
-    the rest of the layout was not checked.
+10. **Layout.** Four pages of the PDF were looked at (those with Figures 3, 5 and 6 and with
+    Tables 6 and 13). Figures 1, 2 and 4 were not looked at in the PDF, and the rest of the
+    layout was not checked.
