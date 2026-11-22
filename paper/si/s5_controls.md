@@ -1,6 +1,6 @@
 ## S5. The control set by kind
 
-The control set has {{controls.n:,}} controls on the structures of the panel, each a reference
+The control set has {{controls.n:,}} controls on the structures of the structure panel, each a reference
 and one answer: {{controls.mvs.n_controls:,}} on the scene track ({{controls.mvs.n_identical}}
 identical, {{controls.mvs.n_equivalent}} equivalent, {{controls.mvs.n_wrong}} wrong) and
 {{controls.api.n_controls}} on the call-list track ({{controls.api.n_identical}} identical,
@@ -17,8 +17,9 @@ the verdict. The other {{controls.viewer.mvs.skipped}} are of kinds that cannot 
 read back in the viewer. In the same run the grader's resolved state equalled the viewer's for all
 {{controls.viewer.mvs.scenes}} scenes, and {{controls.viewer.mvs.probe_draws:,}} single
 representations probed across the panel were drawn as the grader predicts. Call-list track:
-the call lists of a sample of controls ({{controls.viewer.api.lists}} lists; those that select
-by UniProt number were left out) were replayed in PDBe Mol\*
+the call lists of a sample of controls ({{controls.viewer.api.lists}} of
+{{controls.api.n_controls}}, taken from every kind in rotation; those that select by UniProt
+number were left out) were replayed in PDBe Mol\*
 {{controls.viewer.pdbe_molstar}}, and every one ended in the state that the grader computes.
 
 **Table S5. Every kind of control.** *Controls*: number of controls of this kind. *Graded as

@@ -7,8 +7,9 @@
 This file accompanies the paper. Every table in it is written by script from the task files,
 the frozen data or archived model answers. Terms are used as defined in Box 1 of the paper:
 *scene track* (answers are MolViewSpec scenes), *call-list track* (answers are ordered calls to
-the PDBe Mol\* viewer), *drawn state*, *fact*, *F1*, *task success*, *target score*, *strict*
-and *valid-only*. Task identifiers are those of the task files; in them the endings `-mvs` and
+the PDBe Mol\* viewer), *drawn state*, *style*, *fact*, *F1*, *task success*, *target score*, *strict*
+and *valid-only*. *Model* always means a language model. The repository's own grading
+document calls a style a *draw* and a category a *tier*; the rules are the same. Task identifiers are those of the task files; in them the endings `-mvs` and
 `-api` mark the scene track and the call-list track.
 
 Contents: S1, the running example in full · S2, all task templates · S3, the structure panel ·
@@ -20,15 +21,21 @@ and prices · S7, the system prompts · S8, further tables of the pilot run.
 The request, the two reference answers, the further accepted answers on the call-list track,
 the stored target and the grounding pack, exactly as they are in the task files
 `clin-pair-target-lyz-2nwd-w82r-mvs` (scene track) and `clin-pair-target-lyz-2nwd-w82r-api` (call-list track). The variant is
-LYZ W82R (p.Trp82Arg; UniProt P61626; "Familial visceral amyloidosis, Ostertag type (AMYLD2)";
-classified pathogenic, review status "criteria provided, single submitter").
-ClinVar records of this protein change: VCV000014376, NM_000239.3(LYZ):c.244T>C (p.Trp82Arg); VCV000014378, NM_000239.3(LYZ):c.244T>A (p.Trp82Arg).
+LYZ W82R (p.Trp82Arg; UniProt P61626). UniProt names the disease
+as "Familial visceral amyloidosis, Ostertag type (AMYLD2)". ClinVar holds 2 records of this protein change, one
+for each DNA change that causes it: VCV000014376, NM_000239.3(LYZ):c.244T>C (p.Trp82Arg); VCV000014378, NM_000239.3(LYZ):c.244T>A (p.Trp82Arg). Both carry the aggregate
+classification "pathogenic" and the review status
+"criteria provided, single submitter"; ClinVar's own field for the condition reads
+"not provided" on both. The entry 2NWD is human lysozyme at
+1.04 Å resolution; the target residue has 24 atoms
+(14 heavy atoms and 10 hydrogens, which this
+entry contains).
 
-On the call-list track the reference sets `"color": null` on the residue, which leaves the
-cartoon as it was. Without that field the viewer also paints the residue's stretch of the
-cartoon in its selection colour. The request says nothing about that stretch, so an answer
-that paints it, in the selection colour or in yellow as the residue is, is accepted as
-well.
+On the call-list track the viewer starts with the protein drawn as a cartoon. The reference
+sets `"color": null` on the residue, which leaves that cartoon as it was. Without that field
+the viewer also recolours the residue's own segment of the cartoon, in its selection colour.
+The request says nothing about the cartoon, so an answer that recolours the segment, in the
+selection colour or in yellow as the residue is, is accepted as well.
 
 **Request (both tracks).** PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as yellow spacefill spheres.
 
@@ -116,7 +123,7 @@ well.
 ]
 ```
 
-**Call-list track: accepted answers** (2; the residue's own stretch of cartoon is painted as well, in the residue's colour or in the viewer's selection colour).
+**Call-list track: accepted answers** (2; the residue's own segment of the cartoon is recoloured as well, in the residue's colour or in the viewer's selection colour).
 
 ```json
 [
@@ -189,9 +196,10 @@ From the request:
   p.W82R: UniProt position 82 (Trp in UniProt) -> in 2NWD: auth X 64 TRP (label A 64)
 ```
 
-**Table S1. Scores of the answers discussed in Section 4.3 of the paper.** *F1*: how much of
+**Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1).
+score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1). *Spill*, *extra on the target* and *context* are the three rules for extra
+drawing of Section S4.3.
 
 | Answer | F1 | Task success | Target score |
 |:---|---:|:---|---:|
@@ -202,6 +210,10 @@ score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1)
 | Right residue, drawn red | 0.50 | no | 0.50 |
 | Right residue, plus a grey cartoon of the protein that the request does not ask for | 0.40 | no | 1.00 |
 | Wrong residue, plus the grey cartoon | 0.00 | no | 0.00 |
+| Right residue, and the same yellow spacefill spheres on its two neighbours (residues 63 to 65): spill | 0.60 | no | 0.60 |
+| The whole chain as yellow spacefill spheres: spill | 0.02 | no | 0.02 |
+| Right residue, plus ball-and-stick on the same residue: extra on the target | 0.67 | no | 0.67 |
+| Right residue, plus ball-and-stick on residues 63 to 65: context | 0.40 | no | 1.00 |
 | **Call-list track** | | | |
 | Reference: UniProt P61626 position 82, resolved by the viewer | 1.00 | yes | 1.00 |
 | The same residue named by author numbering (chain X, residue 64) | 1.00 | yes | 1.00 |
@@ -218,7 +230,7 @@ colours and the wording. The corpus has 129 templates.
 (shortened where long). A dash means that the template has no task on that track. Template
 names are the identifiers used in the task files.
 
-| Tier | Template | Scene tasks | Call-list tasks | Example request |
+| Category | Template | Scene tasks | Call-list tasks | Example request |
 |:---|:---|---:|---:|:---|
 | Translation | `api-assembly` | – | 6 | Load oxyhaemoglobin (1HHO) as its biological assembly (the tetramer, assembly 1) and show it as a molecular surface. |
 | Translation | `api-atoms` | – | 5 | Open 1AAY in the ball-and-stick style; atoms CB and OD1 of Asp166 of chain A should be cyan. |
@@ -350,15 +362,17 @@ names are the identifiers used in the task files.
 | Viewer settings | `api-undo` | – | 4 | Load 1F88 and hide the waters. Colour both copies of the retinal (RET) orange and highlight chain A; then clear the highlight again. |
 | Viewer settings | `api-validation-overlay` | – | 3 | Load the A2A adenosine receptor (3EML) as a cartoon and overlay the PDBe geometry-validation colouring. |
 
-## S3. The structure panel
+## S3. The structure panel and the variant list
+
+### S3.1 The structure panel
 
 **Selection rule.** The panel is the union of four groups. Every entry must be current in the
-PDB archive and have at most 15,000 atoms in its first model
-(2 larger entries are kept because earlier tasks used them). Every
-feature claimed for an entry (ligand, haem, metal, disulfide, nucleic acid, glycan, membrane
-protein, assembly that differs from the deposited model, insertion codes, author chain
-identifiers that differ from label identifiers, a UniProt numbering offset) must be found in the
-file by the build script, or the build fails.
+PDB archive and have at most 15,000 atoms in its first coordinate set, so that
+it renders quickly (2 larger entries are kept because earlier tasks
+used them). Every feature claimed for an entry (ligand, haem, metal, disulfide, nucleic acid,
+glycan, membrane protein, assembly that differs from the deposited coordinates, insertion
+codes, author chain identifiers that differ from label identifiers, a UniProt numbering
+offset) must be found in the file by the build script, or the build fails.
 
 1. *Entries used by earlier tasks.*
 2. *Named entries*, chosen by hand to cover folds and features that the first group lacks.
@@ -368,14 +382,15 @@ file by the build script, or the build fails.
    accession. For each, candidate entries are all PDB entries that SIFTS maps to the accession.
    The script keeps X-ray entries at 2.5 Å or better that cover at least one variant position
    (failing that, X-ray or cryo-electron microscopy entries at 3.5 Å or better), drops entries
-   above the size limit or with several models, and then chooses by, in order: most variant
-   positions covered, fewest engineered mutations, fewest polymer entities, best resolution.
-   Whether the author numbering differs from UniProt was not a criterion. A variant may also
-   be asked on any other panel structure of the same protein.
-4. *5 AlphaFold models*, numbered as UniProt is by construction: of
-   p53, gamma-crystallin D, calmodulin-1, lysozyme and haemoglobin beta. The model of p53 was used by earlier tasks. Each of the
-   others is a partner to an experimental structure of the same protein that is numbered
-   differently, so that the same variant can be asked with and without an offset.
+   above the size limit or with several coordinate sets, and then chooses by, in order: most
+   variant positions covered, fewest engineered mutations, fewest polymer entities, best
+   resolution. Whether the author numbering differs from UniProt was not a criterion. A
+   variant may also be asked on any other panel structure of the same protein.
+4. *5 predicted structures* from the AlphaFold Protein Structure Database,
+   numbered as UniProt is by construction: of p53, gamma-crystallin D, calmodulin-1, lysozyme and haemoglobin beta. The predicted
+   structure of p53 was used by earlier tasks. Each of the others is a partner to an
+   experimental structure of the same protein that is numbered differently, so that the same
+   variant can be asked with and without an offset.
 
 Counts of verified features in the panel: ligand 44, metal
 36, disulfide 24, assembly differs
@@ -383,14 +398,16 @@ Counts of verified features in the panel: ligand 44, metal
 15, glycan 10, nucleic acid
 8, modified residue 8, haem
 7, insertion codes 7, membrane protein
-7. Structure files were retrieved on 2026-11-16; the
-checksum of each file is stored with the panel.
+7. 29 structures contain alternate
+conformers and 13 contain hydrogens; the atom tables keep both.
+Structure files were retrieved on 2026-11-16; the checksum of each file is stored
+with the panel.
 
-**Table S3. The panel.** *Atoms*: atoms in the first model. *Author numbering differs from
-UniProt*: at least one observed residue has an author number that is not its UniProt position
-(a dash: no protein chain mapped to UniProt). *Split*: public, or held back (structures used
-only by held-back tasks). *Tasks*: tasks of the corpus on this structure, both tracks, without
-rephrasings.
+**Table S3. The panel.** *Atoms*: atoms in the first coordinate set. *Author numbering differs
+from UniProt*: at least one observed residue has an author number that is not its UniProt
+position (a dash: no protein chain mapped to UniProt). *Split*: public, or held back
+(structures used only by held-back tasks; Section 3.6 of the paper). *Tasks*: tasks of the
+corpus on this structure, both tracks, without rephrasings.
 
 | Entry | Title (as deposited) | Method | Deposited | Atoms | Author numbering differs from UniProt | Split | Tasks |
 |:---|:---|:---|:---|---:|:---|:---|---:|
@@ -474,19 +491,92 @@ rephrasings.
 | af-p61626-f1-model_v6 | AlphaFold DB model of Lysozyme C (LYZ, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1157 | no | public | 2 |
 | af-p68871-f1-model_v6 | AlphaFold DB model of Hemoglobin subunit beta (HBB, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1131 | no | public | 10 |
 
+### S3.2 The variant list, step by step
+
+We use *missense* variants only: one amino acid replaced by another. Throughout, the
+*classification* of a variant means ClinVar's aggregate germline classification on a variation
+record, the record whose accession begins with VCV. ClinVar keeps germline classifications
+apart from somatic ones; we use the germline one. A variation record is about one change at
+the level of DNA, so one amino-acid change can have several records.
+74 of the variants that we keep have more than one qualifying
+record.
+
+**Table S3b. The variant list in three steps.** Counts are of variants (amino-acid changes)
+removed and left. The tests 3a to 3c are applied in this order.
+
+| Step | Rule | Removed | Left |
+|:---|:---|---:|---:|
+| 1 | Single-residue missense variants of the 27 proteins that UniProt reports as pathogenic or likely pathogenic, with ClinVar as a source | | 3,352 |
+| 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same amino-acid change at that position and has the aggregate germline classification "Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic" (a *qualifying record*) | 657 | 2,695 |
+| 3a | Remove if no qualifying record is of the gene that the request names | 44 | |
+| 3b | Remove if every qualifying record of that gene is a haplotype (two changes on one chromosome) | 35 | |
+| 3c | Remove if every remaining qualifying record has the review status "no assertion criteria provided" | 216 | 2,400 |
+
+*The rule in one sentence.* A variant is kept if at least one ClinVar record that lists it is
+classified as pathogenic or likely pathogenic, is of the gene that the request names,
+describes that change alone, and states its assertion criteria.
+
+*Step 1.* The candidates come from UniProt's variant annotation of the
+27 proteins. The position is that of the UniProt canonical sequence.
+
+*Step 2.* UniProt's annotation can carry a pathogenic label where ClinVar's aggregate
+classification does not; we observed this for 657 candidates
+(20%), most of which ClinVar classifies as "Conflicting
+classifications of pathogenicity" or "Uncertain significance". A candidate is kept only if a
+ClinVar record, reached through UniProt's cross-references to ClinVar, lists the same
+amino-acid change at the same position among its protein changes and is classified
+"Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic". ClinVar lists the protein
+change of a record for each transcript; we did not check which transcript the matching name
+belongs to. We therefore rely on at least one reference protein of the record being numbered as
+the UniProt canonical sequence is at that position. We also did not look for further records
+of the same amino-acid change that carry another classification: one qualifying record is
+enough, and ClinVar may hold a second record that disagrees with it.
+
+*Step 3.* A request says, in ClinVar's own word for the record, that the variant of a named
+gene is classified as pathogenic, as likely pathogenic, or as pathogenic/likely pathogenic
+("the *LYZ* variant p.W82R is classified as pathogenic in ClinVar"). The classification must
+therefore rest on a record of that gene, about that one change, with stated criteria. In step
+3a the other gene is nearly always one that encodes the same protein (*CALM2* or *CALM3* for
+calmodulin, *HBA2* for alpha-globin). In step 3b the record describes two changes on one
+chromosome and says nothing about either alone. In step 3c no submitter stated the criteria
+behind the classification.
+
+*Two variants were handled individually, outside these rules.* One variant removed in step 3c
+is used all the same, in 1 task per track: lysozyme p.Ile74Thr
+(I56T in the older literature), one of the first two variants reported to cause hereditary
+lysozyme amyloidosis [1]. It is outside the 2,400. Its
+request says that the variant "is classified as pathogenic in
+ClinVar", which is what the record says; the record states no assertion criteria, and this
+task is therefore an exception to the rule above. One variant inside the
+2,400 is never asked about: APOE p.Arg154Ser (R136S in the older literature,
+the Christchurch variant). ClinVar's pathogenic record for it concerns a disorder of blood
+lipids, while the variant is widely known for a reported protective effect in Alzheimer's
+disease, so a request that calls it pathogenic would mislead.
+
+*Proteins without a task.* Tasks exist for 25 of the
+27 proteins. For the other
+2 (CA2 and TPI1, by gene name)
+the steps above left at most 1 variant, and we
+made no task.
+
+*Dates.* The variant lists and the classifications of step 2 were read from UniProt and
+ClinVar on 2026-11-12. The records were read again on
+2026-11-16, with their kind, gene, classification and review status; step
+3 and the wording of the requests rest on that second reading.
+
 ## S4. Grading rules in full
 
 ### S4.1 Facts
 
 The drawn state is cut into facts, each of weight 1.
 
-- **Facts about atoms.** An atom's drawing is the set of its draws (representation type,
-  colour, opacity). All atoms with the same set form one fact.
+- **Facts about atoms.** An atom's drawing is the set of its styles (a style is a
+  representation type with a colour and an opacity). All atoms with the same set form one fact.
 - **Facts about the scene**, when present: each label text with the atoms it is attached to; each
   tooltip text with its atoms; the camera target (the atoms it frames); each distance line or
   other drawn primitive; a request that the viewer compute and draw non-covalent interactions
-  around some atoms; the structure type when it is not the deposited model (an assembly,
-  another model); the background colour when it is not the default.
+  around some atoms; the structure type when it is not the first deposited coordinate set (an
+  assembly, or another coordinate set of the entry); the background colour when it is not the default.
 
 The structure is the frame in which facts are stated, not a fact. A file that an answer
 downloads and never draws changes nothing on screen and is not counted. A second structure
@@ -498,9 +588,9 @@ Recall is the mean, over the reference's facts, of how much of each the answer h
 is the mean, over the answer's facts, of how much of each the reference has. F1 is their
 harmonic mean. How much of a fact the other side has:
 
-- *Fact about atoms*: the mean over its atoms of the share of the atom's draws that the other side
-  also has. A draw that the other side has with the same representation type and another
-  colour or opacity counts half. An atom that the other side does not draw counts 0. Draws that
+- *Fact about atoms*: the mean over its atoms of the share of the atom's styles that the other side
+  also has. A style that the other side has with the same representation type and another
+  colour or opacity counts half. An atom that the other side does not draw counts 0. Styles that
   the other side has in addition do not lower this number; they lower the number computed in
   the other direction.
 - *Label, tooltip, interaction request*: the share of the atoms carrying it that carry the
@@ -513,10 +603,10 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 
 ### S4.3 Target score
 
-The *target's drawing* is the set of the reference's draws that lie wholly inside the target
+The *target's drawing* is the set of the reference's styles that lie wholly inside the target
 atoms (in the running example the yellow spacefill spheres of the residue; a cartoon of the
 whole chain that passes through the residue is not part of it). It is
-cut into facts as above. For each fact, counting (atom, draw) items:
+cut into facts as above. For each fact, counting (atom, style) items:
 
 - *wanted*: the reference's items;
 - *credit*: 1 for each item the answer has, ½ for each that the answer draws in the right
@@ -524,15 +614,25 @@ cut into facts as above. For each fact, counting (atom, draw) items:
 - *attempted*: the items the answer drew at all;
 - *spill*: items outside the target on which the answer repeats what it drew on the target,
   where the reference draws no such thing;
-- *extra*: items on the target from an answer draw that is confined to the target, in a
-  representation type that the reference does not draw there.
+- *extra*: items on the target from a style of the answer that is confined to the target, in
+  a representation type that the reference does not draw there.
 
 Target recall = credit / wanted. Target precision = credit / (attempted + spill + extra). The
 target score is the harmonic mean of the two, each averaged over the target's facts and over
-the facts about the scene that touch the target atoms. A draw of the answer that is not
-confined to the target (a cartoon or a surface of the whole chain) is unrequested context and
-is ignored, even if it would hide the target in a picture; F1 and task success count it. A task without a stored target
-uses everything the reference draws.
+the facts about the scene that touch the target atoms. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats what
+it drew on the target on atoms outside it; the items count against target precision. *Extra
+on the target*: a style of the answer in another representation that is confined to the
+target; its items count against target precision. *Unrequested context*: any other style of
+the answer that is not confined to the target (a cartoon or a surface of the chain, of the
+whole chain or of part of it) is ignored, even if it would hide the target in a picture; F1
+and task success count it. Table S1 gives the score of one example of each rule.
+
+Tasks without a stored target are of two kinds (Section 4.2 of the paper). A single request
+without one, such as a change of the background colour, uses everything the reference draws or
+changes as its target. A follow-up task without one, in which the edit takes something away
+or resets a setting, has no target score, and averages leave it out: there are no atoms
+"drawn as asked", and to use everything the reference draws would give full marks to the
+start state returned unchanged.
 
 ### S4.4 Accepted answers and follow-up turns
 
@@ -556,26 +656,26 @@ Each rule was read back from the running viewer.
 - A component whose selector matches no atom is not created.
 - A representation with no colour is white. Colour nodes apply in order, later over earlier.
   A colour value that is not a known name or a hexadecimal code makes Mol\* reject the scene.
-- Two representations on overlapping components are both drawn; the atom carries both draws.
+- Two representations on overlapping components are both drawn; the atom carries both styles.
 - Author and label numbering are different columns and are never pooled.
 - A reference that colours "by chain" is matched by the same colour theme, or by an answer
   that gives every chain one colour of its own, all different.
 
 Not graded on the scene track: metadata, the host of the structure file, the order of
-children, representation size and surface kind, label and primitive styling, explicit camera
+children, representation size and surface kind, the appearance of labels and primitives, explicit camera
 numbers.
 
 ### S4.6 What the viewer does (call-list track, PDBe Mol\* 3.3.2)
 
 The grader replays the calls in order with a port of the viewer's own code paths (selection,
 colouring, representation, visibility, reset). The facts of the drawn state that a call list
-ends in are its differences from a bare load of the same structure (a load with no further
-call):
+ends in are its differences from the default view of the same structure, that is, from a
+*bare load*, a load with no further call:
 
 | Fact | One per |
 |:---|:---|
 | atoms | each group of atoms whose drawing a colouring call changed, now drawn the same way |
-| scene | the effect of the global style and the hide switches on all other atoms |
+| scene | the effect of the viewer's global representation setting and of the hide switches on all other atoms |
 | focus, highlight, tooltip | the residues framed, the residues highlighted, each tooltip text with its atoms |
 | assembly, preset, option, canvas | the assembly identifier, the load preset, each non-default option, each non-default canvas setting |
 
@@ -583,34 +683,37 @@ A bare load has no facts and scores 0, unless a bare load is the reference. Two 
 from the scene track. A fact about atoms scores the share of its atoms that end up looking exactly
 the same on the other side; atoms that both sides changed but that look different count half.
 The target score is computed on the changes from a bare load on the target atoms. Selections in
-UniProt numbering are resolved through the frozen SIFTS tables.
+UniProt numbering are resolved through the frozen SIFTS tables; the viewer reads the same
+mapping from the structure file that PDBe distributes.
 
 ### S4.7 Outcomes
 
 **Table S4. The outcome of an answer and how it is scored.** *As graded*: the answer receives
 the scores that the grader computes. Strict averages count every answer with the score in the
-last column; valid-only averages count the answers with outcome "valid". An answer with one of
-the first three outcomes *cannot be shown*. An answer that was cut off at the token limit
-is counted apart from a malformed one in the outcome tables.
+last column; valid-only averages count the answers with outcome "valid". *Class*: the three
+classes of Section 4.4 of the paper. An answer that was cut off at the token limit gets the
+outcome of the text that arrived and is counted apart from other invalid answers in the outcome
+tables.
 
-| Track | Outcome | Meaning | Score |
-|:---|:---|:---|:---|
-| both | invalid JSON | the answer contains no parseable JSON of the right outer shape | 0 |
-| scene | not a scene | JSON, but not a scene tree | 0 |
-| scene | rejected by the viewer | a scene tree that the validation of Mol\* 5.9.0 rejects | 0 |
-| scene | valid | Mol\* accepts the scene | as graded |
-| call list | not valid | a JSON list that breaks the call schema (unknown call, wrong field type) | as graded: the replay ignores what the viewer would ignore |
-| call list | valid | a call list that fits the schema | as graded |
+| Track | Outcome | Class | Meaning | Score |
+|:---|:---|:---|:---|:---|
+| both | invalid JSON | unshowable | the answer contains no parseable JSON of the right outer shape | 0 |
+| scene | not a scene | unshowable | JSON, but not a scene tree | 0 |
+| scene | rejected by the viewer | unshowable | a scene tree that the validation of Mol\* 5.9.0 rejects | 0 |
+| scene | valid | valid | Mol\* accepts the scene | as graded |
+| call list | not valid | schema-breaking | a JSON list that breaks the call schema (unknown call, wrong field type) | as graded: the replay ignores what the viewer would ignore |
+| call list | valid | valid | a call list that fits the schema | as graded |
 
 ### S4.8 Known limits of the grader
 
-- **Assemblies.** Atom tables hold model 1 of the deposited unit. An assembly is a fact (its
+- **Assemblies.** Atom tables hold the first coordinate set of the deposited unit. An assembly is a fact (its
   identifier), and atoms are compared on the deposited unit. Selections of single symmetry
   copies are not modelled.
-- **Other models of a multi-model entry** are compared on the atoms of model 1, with the model
+- **Other coordinate sets of an entry that has several** are compared on the atoms of the
+  first, with the number of the coordinate set
   index as a fact.
-- **Entries outside the panel** have no atom table. An answer on such an entry (possible only
-  in the name-resolution tier) is compared as written: two selections are equal only if
+- **Entries outside the structure panel** have no atom table. An answer on such an entry (possible only
+  in the name-resolution category) is compared as written: two selections are equal only if
   spelled the same way.
 - **Colour themes** other than colouring by chain or by entity are matched only by the same
   theme.
@@ -632,7 +735,7 @@ is counted apart from a malformed one in the outcome tables.
 
 ## S5. The control set by kind
 
-The control set has 2,105 controls on the structures of the panel, each a reference
+The control set has 2,105 controls on the structures of the structure panel, each a reference
 and one answer: 1,110 on the scene track (150
 identical, 480 equivalent, 480 wrong) and
 995 on the call-list track (150 identical,
@@ -649,8 +752,9 @@ the verdict. The other 140 are of kinds that cannot be read back
 read back in the viewer. In the same run the grader's resolved state equalled the viewer's for all
 1498 scenes, and 3,818 single
 representations probed across the panel were drawn as the grader predicts. Call-list track:
-the call lists of a sample of controls (234 lists; those that select
-by UniProt number were left out) were replayed in PDBe Mol\*
+the call lists of a sample of controls (234 of
+995, taken from every kind in rotation; those that select by UniProt
+number were left out) were replayed in PDBe Mol\*
 3.3.2, and every one ended in the state that the grader computes.
 
 **Table S5. Every kind of control.** *Controls*: number of controls of this kind. *Graded as
@@ -688,7 +792,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | another entry's file is downloaded and parsed as well, and nothing of it is drawn | 20 | 20 | 0 |
 | must pass (identical) | the answer is the reference itself | 150 | 150 | 150 |
 | must fail (wrong) | 'all' instead of 'polymer' under ball-and-stick (waters and ligands are drawn too) | 20 | 0 | 0 |
-| must fail (wrong) | the biological assembly is loaded where the deposited model was asked for | 20 | 0 | 0 |
+| must fail (wrong) | the biological assembly is loaded where the deposited coordinates was asked for | 20 | 0 | 0 |
 | must fail (wrong) | the author residue number written in the label-number field (structures where they differ) | 20 | 0 | 0 |
 | must fail (wrong) | two chains' colours the wrong way round | 20 | 0 | 0 |
 | must fail (wrong) | the structure is loaded and nothing is drawn | 20 | 0 | 0 |
@@ -766,25 +870,27 @@ this work replaces on that track, with a score of exactly 1 read as success.
 The final run is defined by one manifest file in the repository. Its contents, in words:
 
 - **Corpus.** Version `corpus-v1.0-dev` ⟦PENDING: corpus freeze — final version tag and hash⟧.
-- **Samples.** 3 per task, model and condition (1 in the JSON-mode condition);
+- **Answers.** 3 per task, model and condition (1 in the JSON-mode condition);
   no temperature is sent, so each provider's default applies. Limit on the length of an answer:
-  8,000 tokens; models that reason before answering get a larger limit,
-  because the hidden reasoning counts against it.
-- **Retries.** Only transport errors are retried. A malformed answer is archived and scored
+  8,000 tokens. Models that write reasoning text before the answer, which the
+  user does not see, get 16,000 tokens for reasoning and answer
+  together, because the provider counts the reasoning against the limit.
+- **Retries.** Only transport errors are retried. An invalid answer is archived and scored
   as it stands.
 - **Conditions.** 4, as in Section 5.2 of the paper.
 - **Budget.** A cap in US dollars; the run refuses to start if the projected cost is above it
   and stops if spending would pass it. Costs are list prices on the day of the run.
 - **Validation.** Every parsed scene is validated by Mol\* 5.9.0.
 
-**Table S6. The model panel.** *Panel*: core, or optional (run only if the budget allows;
-marked † in the paper). *Weights*: open if the model's weights can be downloaded. *Hidden
+**Table S6. The models.** *Set*: core, or optional (run only if decided so before the run,
+from the projected cost; marked † in the paper). Identifiers are given as the provider or
+the routing service lists them; the paper uses the part after the slash. *Weights*: open if the model's weights can be downloaded. *Hidden
 reasoning*: the model spends reasoning tokens by default, billed as output. *JSON mode*: the
 provider offers an option that forces syntactically valid JSON on the route used. *List
 price*: US dollars per million input / output tokens, read on the date given.
 ⟦PENDING: final run — the version string each provider reports, and the dates of the calls⟧
 
-| Model identifier | Panel | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
+| Model identifier | Set | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
 |:---|:---|:---|:---|:---|:---|:---|
 | Keyword script | core | not a model | – | – | 0 / 0 | – |
 | `claude-haiku-4-5` | core | closed | no | no | 1.0 / 5.0 | 2026-11-16 |
@@ -814,9 +920,12 @@ price*: US dollars per million input / output tokens, read on the date given.
 The two system prompts as sent in the main condition. A name in double angle brackets, such
 as `<<MVS_REFERENCE>>`, marks a slot that is filled with a longer frozen text from the
 repository: the MolViewSpec reference, the list of call-list actions with their fields, and
-the reference of the viewer's calls. Everything else is printed as sent. In the condition
-without a format reference, the section "MVS reference" is removed. The worked example in each
-prompt uses entry 1HSG, which no task uses.
+the reference of the viewer's calls. These longer texts are the *format guide* of each track.
+Everything else is printed as sent. In the condition without a format guide, the section "MVS
+reference" is removed. Each prompt has one worked example, on entry 1HSG, which no task uses:
+the example of the call-list prompt is printed below, and that of the scene prompt sits inside
+its format guide. The format guide of the scene track also has one short illustration of a
+distance line on entry 1A6M, which tasks use; no task asks for that distance.
 
 **Scene track: system prompt.**
 
@@ -917,37 +1026,29 @@ scene (scene track) or the calls made so far (call-list track), followed by `Req
 
 ## S8. Further tables of the pilot run (October 2026)
 
-**These tables are preliminary and use the vocabulary and the grader of October 2026.** They
-were written by script from the archived pilot run and are kept unchanged, as the record
-behind Section 6.6 of the paper. Two things differ from the paper. First, the scores are those
-of the *earlier* scene grader, which compared scene trees path by path; Section 6.6 of the
-paper regrades the same answers on drawn state, so its numbers are somewhat lower. "Success"
-here is a score of exactly 1 under the earlier grader. Second, the words differ:
+**These tables are preliminary.** They were written by script from the archived pilot run and
+are the record behind Section 6.6 of the paper. They differ from Section 6.6 in one way that
+matters: the scores here are those of the *earlier* scene grader, which compared scene trees
+path by path, whereas Section 6.6 regrades the same answers on drawn state, so its numbers are
+somewhat lower. Three words have a meaning of their own in these tables. *Success* is a score
+of exactly 1 under the earlier grader. *Tree F1* and *tree score* are the F1 of the earlier
+grader. *Target*, in Table S13 only, is defined in the caption of that table and is not the
+stored target of Section 4.2 of the paper, which the pilot tasks did not have.
 
-| In these tables | In the paper |
-|:---|:---|
-| MVS track | scene track |
-| regime | tier |
-| Resolution | name-resolution tier |
-| `spec` | main condition (format reference) |
-| `spec_grounded` | format reference + grounding pack |
-| `bare` | no format reference |
-| output | answer |
+**Table S7. Corpus of the October 2026 pilot run (pilot run, preliminary, earlier grader).** Tasks and distinct structures (PDB entries) per category. A category is a group of tasks that need the same kind of knowledge.
 
-**Corpus used for the October 2026 panel (PRELIMINARY).** Tasks and distinct structures (PDB entries) per regime. A regime is a group of tasks that need the same kind of knowledge.
-
-| Regime | Tasks | Structures |
+| Category | Tasks | Structures |
 | :--- | ---: | ---: |
 | Translation | 41 | 7 |
-| Grounded | 8 | 6 |
+| Structure-grounded | 8 | 6 |
 | Clinical | 9 | 1 |
-| Resolution | 6 | 6 |
+| Name resolution | 6 | 6 |
 | Interactions | 6 | 3 |
 | **All** | 70 | 14 |
 
-**MVS track, `spec` condition (PRELIMINARY).** 15 models, 70 tasks on 14 structures, 1 sample per task. *Strict F1*: mean score over all tasks, where an output the viewer cannot show scores 0. *Valid*: share of outputs that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid outputs only. *Success*: share of outputs that are valid and score exactly 1. 95% CI: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: whether the model weights are openly released.
+**Table S8. Scene track, main condition (pilot run, preliminary, earlier grader).** 15 models, 70 tasks on 14 structures, 1 answer per task. *Strict F1*: mean score over all tasks, where an answer the viewer cannot show scores 0. *Valid*: share of answers that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid answers only. *Success*: share of answers that are valid and score exactly 1. 95% interval: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: whether the model weights are openly released.
 
-| # | Model | Weights | Strict F1 | 95% CI | Valid | 95% CI | F1 (valid) | 95% CI | Success |
+| # | Model | Weights | Strict F1 | 95% interval | Valid | 95% interval | F1 (valid) | 95% interval | Success |
 | ---: | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 1 | deepseek-v3.2 | open | 0.903 | 0.829–0.958 | 98.6% | 95.8%–100.0% | 0.916 | 0.839–0.965 | 64.3% |
 | 2 | deepseek-v4-flash | open | 0.859 | 0.768–0.928 | 92.9% | 87.5%–97.3% | 0.925 | 0.824–0.983 | 62.9% |
@@ -965,7 +1066,7 @@ here is a score of exactly 1 under the earlier grader. Second, the words differ:
 | 14 | gpt-oss-20b | open | 0.252 | 0.165–0.333 | 28.6% | 19.7%–37.0% | 0.883 | 0.726–0.981 | 20.0% |
 | 15 | nemotron-3-super-120b-a12b | open | 0.078 | 0.027–0.130 | 8.6% | 3.3%–13.8% | 0.910 | 0.700–1.000 | 5.7% |
 
-**What happened to each output, `spec` condition (PRELIMINARY).** Every output falls into exactly one class. *Valid scene*: parses as JSON, Mol\* accepts it as MolViewSpec and loads the structure. *Invalid JSON*: no parsable JSON object. *JSON, not a scene*: valid JSON that is not a MolViewSpec tree. *Scene rejected by Mol\**: a tree with a wrong node or parameter. *Structure failed to load*: the scene is well formed but names a file that does not load. All classes except the first score 0.
+**Table S9. What happened to each answer, main condition (pilot run, preliminary, earlier grader).** Every answer falls into exactly one class. *Valid scene*: parses as JSON, Mol\* accepts it as MolViewSpec and loads the structure. *Invalid JSON*: no parsable JSON object. *JSON, not a scene*: valid JSON that is not a MolViewSpec tree. *Scene rejected by Mol\**: a tree with a wrong node or parameter. *Structure failed to load*: the scene is well formed but names a file that does not load. All classes except the first score 0.
 
 | Model | valid scene | invalid JSON | scene rejected by Mol* | structure failed to load |
 | :--- | ---: | ---: | ---: | ---: |
@@ -986,16 +1087,16 @@ here is a score of exactly 1 under the earlier grader. Second, the words differ:
 | nemotron-3-super-120b-a12b | 6 | 64 | 0 | 0 |
 | **All models** | 784 | 227 | 36 | 3 |
 
-**Shape of the invalid-JSON outputs (PRELIMINARY).** For the 199 invalid-JSON outputs whose raw text was archived: does the text open and close the same number of braces? A scene is a deeply nested tree, so a miscount by one brace is enough to lose the whole answer.
+**Table S10. Shape of the invalid-JSON answers (pilot run, preliminary, earlier grader).** For the 199 invalid-JSON answers whose raw text was archived: does the text open and close the same number of braces? A scene is a deeply nested tree, so a miscount by one brace is enough to lose the whole answer.
 
-| Shape | Outputs | Share |
+| Shape | Answers | Share |
 | :--- | ---: | ---: |
 | too many closing braces | 72 | 36.2% |
 | too few closing braces | 59 | 29.6% |
 | braces balance; other syntax error | 53 | 26.6% |
-| empty output | 15 | 7.5% |
+| empty answer | 15 | 7.5% |
 
-**Offline JSON-repair counterfactual, `spec` condition (PRELIMINARY).** Each invalid-JSON output with archived raw text was passed through the `json-repair` library and graded again. No model was called. *Strict F1* is the reported score. *Repaired F1* adds the score of the repaired outputs. The repaired scenes were graded as trees but **not** checked by Mol\*, so repaired F1 is an upper bound. Outputs with no archived raw text stay at 0 (*Raw text* < *Invalid JSON*).
+**Table S11. Offline JSON-repair counterfactual, main condition (pilot run, preliminary, earlier grader).** Each invalid-JSON answer with archived raw text was passed through the `json-repair` library and graded again. No model was called. *Strict F1* is the reported score. *Repaired F1* adds the score of the repaired answers. The repaired scenes were graded as trees but **not** checked by Mol\*, so repaired F1 is an upper bound. Answers with no archived raw text stay at 0 (*Raw text* < *Invalid JSON*).
 
 | Model | Invalid JSON | Raw text | Repaired to a scene | Strict F1 | Repaired F1 | Change |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1015,29 +1116,29 @@ here is a score of exactly 1 under the earlier grader. Second, the words differ:
 | gpt-oss-20b | 50 | 50 | 47 | 0.252 | 0.868 | +0.616 |
 | nemotron-3-super-120b-a12b | 64 | 64 | 64 | 0.078 | 0.911 | +0.833 |
 
-**Scores by regime, `spec` condition (PRELIMINARY).** *Valid / all*: valid outputs out of all outputs, pooled over models. *Models*: models with at least one valid output in the regime (the others cannot contribute to a valid-only mean). *F1 (valid)*: mean score over valid outputs, first averaged per model and then over models (mean), and over all valid outputs together (pooled). *Strict F1*: mean over all outputs, invalid ones scoring 0, averaged per model then over models. *Success*: share of outputs that are valid and score exactly 1. 95% CIs are for the pooled valid-only and pooled strict values, resampling whole structures; n/a where a regime has a single structure. Read the thin rows with care: the sample sizes are in the table.
+**Table S12. Scores by category, main condition (pilot run, preliminary, earlier grader).** *Valid / all*: valid answers out of all answers, pooled over models. *Models*: models with at least one valid answer in the category (the others cannot contribute to a valid-only mean). *F1 (valid)*: mean score over valid answers, first averaged per model and then over models (mean), and over all valid answers together (pooled). *Strict F1*: mean over all answers, invalid ones scoring 0, averaged per model then over models. *Success*: share of answers that are valid and score exactly 1. 95% intervals are for the pooled valid-only and pooled strict values, resampling whole structures; n/a where a category has a single structure. Read the thin rows with care: the sample sizes are in the table.
 
-| Regime | Tasks | Structures | Valid / all | Models | F1 (valid), mean | F1 (valid), pooled | 95% CI | Strict F1 | 95% CI | Success |
+| Category | Tasks | Structures | Valid / all | Models | F1 (valid), mean | F1 (valid), pooled | 95% interval | Strict F1 | 95% interval | Success |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Translation | 41 | 7 | 491/615 | 15/15 | 0.978 | 0.977 | 0.974–0.979 | 0.780 | 0.755–0.795 | 65.4% |
-| Grounded | 8 | 6 | 91/120 | 14/15 | 0.972 | 0.971 | 0.955–0.991 | 0.737 | 0.705–0.770 | 53.3% |
+| Structure-grounded | 8 | 6 | 91/120 | 14/15 | 0.972 | 0.971 | 0.955–0.991 | 0.737 | 0.705–0.770 | 53.3% |
 | Clinical | 9 | 1 | 96/135 | 15/15 | 0.672 | 0.679 | n/a | 0.483 | n/a | 1.5% |
-| Resolution | 6 | 6 | 52/90 | 12/15 | 0.542 | 0.564 | 0.512–0.606 | 0.326 | 0.247–0.392 | 2.2% |
+| Name resolution | 6 | 6 | 52/90 | 12/15 | 0.542 | 0.564 | 0.512–0.606 | 0.326 | 0.247–0.392 | 2.2% |
 | Interactions | 6 | 3 | 54/90 | 14/15 | 0.850 | 0.854 | 0.822–0.884 | 0.512 | 0.356–0.770 | 22.2% |
 
-**Is the requested component itself right? `spec` condition (PRELIMINARY).** Valid scenes only. The *target* of a task is every component of the reference scene except, when the reference has more than one, the component with the most atoms, which is treated as *context* (for example a grey cartoon of the whole protein behind one highlighted residue). *Target exact*: the output draws every target with exactly the reference atoms, representation and colour. *Scene exact*: the whole scene scores 1. *Target exact, scene not*: the target is right and the scene still loses points for something else (missing or different context, extra components). *Atoms only*: the target atoms are selected exactly, in the reference entry or an accepted one, but drawn or coloured differently. *Target wrong*: no component selects exactly the target atoms.
+**Table S13. Is the requested component itself right? main condition (pilot run, preliminary, earlier grader).** Valid scenes only. The *target* of a task is every component of the reference scene except, when the reference has more than one, the component with the most atoms, which is treated as *context* (for example a grey cartoon of the whole protein behind one highlighted residue). *Target exact*: the answer draws every target with exactly the reference atoms, representation and colour. *Scene exact*: the whole scene scores 1. *Target exact, scene not*: the target is right and the scene still loses points for something else (missing or different context, extra components). *Atoms only*: the target atoms are selected exactly, in the reference entry or an accepted one, but drawn or coloured differently. *Target wrong*: no component selects exactly the target atoms.
 
-| Regime | Valid scenes | Target exact | Share | Scene exact | Target exact, scene not | Atoms only | Target wrong |
+| Category | Valid scenes | Target exact | Share | Scene exact | Target exact, scene not | Atoms only | Target wrong |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Translation | 491 | 404 | 82.3% | 402 | 2 | 55 | 32 |
-| Grounded | 91 | 64 | 70.3% | 64 | 0 | 2 | 25 |
+| Structure-grounded | 91 | 64 | 70.3% | 64 | 0 | 2 | 25 |
 | Clinical | 96 | 85 | 88.5% | 2 | 83 | 2 | 9 |
-| Resolution | 52 | 2 | 3.9% | 2 | 0 | 33 | 17 |
+| Name resolution | 52 | 2 | 3.9% | 2 | 0 | 33 | 17 |
 | Interactions | 54 | 22 | 40.7% | 20 | 2 | 15 | 17 |
 
-**Where valid scenes lose points, `spec` condition (PRELIMINARY).** For the 294 valid scenes that scored below 1 (of 784 valid scenes): which part of the scene differs from the reference. One scene can differ in several parts, so the rows add up to more than the total. *Selection*: the right kind of component, but it picks different atoms. *Unrequested colour*: the output colours something the reference leaves at the viewer default; the tree score counts this as a difference even where a reader might not. *Missing* / *extra component*: a part of the reference scene is absent, or the output draws something the reference does not. *Structure*: a different entry or file is loaded.
+**Table S14. Where valid scenes lose points, main condition (pilot run, preliminary, earlier grader).** For the 294 valid scenes that scored below 1 (of 784 valid scenes): which part of the scene differs from the reference. One scene can differ in several parts, so the rows add up to more than the total. *Selection*: the right kind of component, but it picks different atoms. *Unrequested colour*: the answer colours something the reference leaves at the viewer default; the tree score counts this as a difference even where a reader might not. *Missing* / *extra component*: a part of the reference scene is absent, or the answer draws something the reference does not. *Structure*: a different entry or file is loaded.
 
-| Difference | Scenes | Share | Translation | Grounded | Clinical | Resolution | Interactions |
+| Difference | Scenes | Share | Translation | Structure-grounded | Clinical | Name resolution | Interactions |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | selection | 126 | 42.9% | 60 | 25 | 21 | 3 | 17 |
 | unrequested colour | 73 | 24.8% | 0 | 0 | 0 | 50 | 23 |
@@ -1051,24 +1152,24 @@ here is a score of exactly 1 under the earlier grader. Second, the words differ:
 | missing colour | 10 | 3.4% | 0 | 0 | 10 | 0 | 0 |
 | *imperfect valid scenes* | 294 |  | 89 | 27 | 94 | 50 | 34 |
 
-**Effect of grounding packs (PRELIMINARY).** Change in F1 when the task's frozen grounding pack is added to the request (`spec_grounded` minus `spec`), for the 15 models that ran both. Three ways to count, because they answer different questions. Row 1 includes the outputs that became invalid. Row 2 keeps only the 15 tasks that need a lookup (Clinical, Resolution). Row 3 keeps only task × model pairs whose output was valid in both conditions, so it isolates the effect on content; of those pairs 69 improved, 92 got worse and 486 did not change. 95% CI: bootstrap, resampling whole structures.
+**Table S15. Effect of grounding packs (pilot run, preliminary, earlier grader).** Change in F1 when the task's frozen grounding pack is added to the request (main + grounding pack minus main), for the 15 models that ran both. Three ways to count, because they answer different questions. Row 1 includes the answers that became invalid. Row 2 keeps only the 15 tasks that need a lookup (Clinical, Name resolution). Row 3 keeps only task-model combinations whose answer was valid in both conditions, so it isolates the effect on content; of those combinations 69 improved, 92 got worse and 486 did not change. 95% interval: bootstrap, resampling whole structures.
 
-| Comparison | n | Change in F1 | 95% CI |
+| Comparison | n | Change in F1 | 95% interval |
 | :--- | ---: | ---: | ---: |
-| All tasks, all outputs (mean over models) | 70 | -0.041 | -0.066 to -0.021 |
-| Lookup tasks only, all outputs (mean over models) | 15 | -0.021 | -0.038 to +0.006 |
-| Task × model pairs valid in both conditions (pooled) | 647 | -0.004 | -0.010 to +0.003 |
+| All tasks, all answers (mean over models) | 70 | -0.041 | -0.066 to -0.021 |
+| Lookup tasks only, all answers (mean over models) | 15 | -0.021 | -0.038 to +0.006 |
+| Task-model combinations valid in both conditions (pooled) | 647 | -0.004 | -0.010 to +0.003 |
 
-**Prompting conditions (PRELIMINARY).** `spec`: the system prompt contains the frozen MolViewSpec reference. `bare`: it contains only the output contract ("answer with one MolViewSpec JSON scene"). `_grounded`: the task's frozen grounding pack (facts about the structure, built offline) is added to the request. Each row is a mean over the models that ran that condition; the number of models differs by row and is stated. *Strict F1*, *Valid* and *F1 (valid)* as in the leaderboard table.
+**Table S16. Prompting conditions (pilot run, preliminary, earlier grader).** main: the system prompt contains the format guide. no format guide: it contains only the rule for the answer ("answer with one MolViewSpec JSON scene"). + grounding pack: the task's frozen grounding pack (facts about the structure, built offline) is added to the request. Each row is a mean over the models that ran that condition; the number of models differs by row and is stated. *Strict F1*, *Valid* and *F1 (valid)* as in the per-model table.
 
 | Condition | Models | Valid / all | Strict F1 | Valid | F1 (valid) |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| `bare` | 3 | 0/210 | 0.000 | 0.0% | n/a (no valid output) |
-| `bare_grounded` | 3 | 0/210 | 0.000 | 0.0% | n/a (no valid output) |
-| `spec` | 15 | 784/1050 | 0.675 | 74.7% | 0.903 |
-| `spec_grounded` | 15 | 739/1050 | 0.634 | 70.4% | 0.898 |
+| no format guide | 3 | 0/210 | 0.000 | 0.0% | n/a (no valid answer) |
+| no format guide + grounding pack | 3 | 0/210 | 0.000 | 0.0% | n/a (no valid answer) |
+| main | 15 | 784/1050 | 0.675 | 74.7% | 0.903 |
+| main + grounding pack | 15 | 739/1050 | 0.634 | 70.4% | 0.898 |
 
-**Tree score vs render-checked score, `spec` condition (PRELIMINARY).** *Tree F1*: the strict F1 from comparing scene trees. A valid scene that scores below 1 is *escalated*: it is rendered next to the reference. It is *rescued* (counted as correct) if the two images are near-identical pixel for pixel, or if the image-pair judge model calls them the same. *Validated F1* is the tree F1 with rescued scenes set to 1. Scores are never lowered by escalation.
+**Table S17. Tree score vs render-checked score, main condition (pilot run, preliminary, earlier grader).** *Tree F1*: the strict F1 from comparing scene trees. A valid scene that scores below 1 is *escalated*: it is rendered next to the reference. It is *rescued* (counted as correct) if the two images are near-identical pixel for pixel, or if the image judge calls them the same. *Validated F1* is the tree F1 with rescued scenes set to 1. Scores are never lowered by escalation.
 
 | Model | Tree F1 | Validated F1 | Change | Escalated | Rescued (pixels) | Rescued (judge) | Judged different |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1088,9 +1189,9 @@ here is a score of exactly 1 under the earlier grader. Second, the words differ:
 | gpt-oss-20b | 0.252 | 0.256 | +0.003 | 6 | 0 | 1 | 5 |
 | nemotron-3-super-120b-a12b | 0.078 | 0.079 | +0.001 | 2 | 0 | 1 | 1 |
 
-**Tokens and cost, `spec` condition (PRELIMINARY).** Tokens are as reported by the provider for the whole run of the model. Cost is in US dollars at list price on the day of the run; *not recorded* means no price was stored for that model, not that it was free. *Per 100 outputs*: cost divided by the number of outputs, times 100. Total for the 7 priced models: $0.65.
+**Table S18. Tokens and cost, main condition (pilot run, preliminary, earlier grader).** Tokens are as reported by the provider for the whole run of the model. Cost is in US dollars at list price on the day of the run; *not recorded* means no price was stored for that model, not that it was free. *Per 100 answers*: cost divided by the number of answers, times 100. Total for the 7 priced models: $0.65.
 
-| Model | Weights | Strict F1 | Input tokens | Output tokens | Cost | Per 100 outputs |
+| Model | Weights | Strict F1 | Input tokens | Answer tokens | Cost | Per 100 answers |
 | :--- | :--- | ---: | ---: | ---: | ---: | ---: |
 | deepseek-v3.2 | open | 0.903 | 165,839 | 21,147 | $0.0453 | $0.065 |
 | deepseek-v4-flash | open | 0.859 | 167,340 | 49,201 | not recorded | – |
@@ -1108,4 +1209,8 @@ here is a score of exactly 1 under the earlier grader. Second, the words differ:
 | gpt-oss-20b | open | 0.252 | 166,348 | 58,094 | $0.0131 | $0.019 |
 | nemotron-3-super-120b-a12b | open | 0.078 | 165,256 | 50,967 | not recorded | – |
 
-⟦PENDING: final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, cost per model⟧
+⟦PENDING: final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, F1 valid-only, cost per model⟧
+
+## References
+
+1. Pepys MB, Hawkins PN, Booth DR, Vigushin DM, Tennent GA, Soutar AK, Totty N, Nguyen O et al. Human lysozyme gene mutations cause hereditary systemic amyloidosis. *Nature* 1993;362(6420):553–557. doi:[10.1038/362553a0](https://doi.org/10.1038/362553a0)

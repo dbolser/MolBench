@@ -34,6 +34,9 @@ result tables), then the three commands above.
 
 - `{{key}}`, `{{key:.1%}}`: a value from `generated/values.json` or `generated/corpus_values.json`.
   An unknown key is an error; so is a key in both files.
+- `{{include:generated/x.md|pilot:Table S7}}`: a pilot table of SI Section S8, shown with that
+  table number and in the words of the paper (`PILOT_WORDS` in `build.py` maps words, never
+  numbers).
 - `{{include:generated/x.md}}`: a generated table. `{{include:generated/table_final_x.md|else:generated/shape_x.md}}`
   shows the table in its final shape, with pending cells, until the final run writes the real one.
 - `[@key]`: a citation from `references.bib`.
@@ -53,3 +56,14 @@ layout) are then drawn from the same archive.
 
 The October pilot numbers are reported in Section 6.6 of the paper (boxed) and in SI Section S8;
 where another section cites one, it says that it is a pilot result.
+
+## Words and table numbers (review round 2)
+
+The paper says *category* where the repository says tier, *style* where `GRADING.md` says
+draw, *format guide* for the vendored reference in the system prompt, *main* for the `spec`
+condition, *structure panel* for the 79 structures and *core / optional models* for the
+models. The clinical results are grouped by *copying the number* (primary) and by *offset*.
+Tables: 1 corpus, 2 clinical groupings, 3 running example, 4 control set, 5 conditions,
+6 and 7 per model, 8 categories, 9a and 9b pairs, 10 clinical, 11 follow-up, 12 planned
+comparisons, 13 what changed, 14 licences. The final tables that `scripts/paper_tables.py`
+writes must use the column names of `generated/shape_*.md`.

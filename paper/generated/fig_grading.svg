@@ -2,7 +2,6 @@
 <title>Drawn-state grading of the running example</title>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
 <rect width="980" height="520" fill="#ffffff"/>
-<text x="12" y="28" font-size="15" font-weight="bold" fill="#1a1a1a" text-anchor="start">Grading on drawn state: three answers to the running example</text>
 <text x="12" y="46" font-size="11" font-weight="normal" fill="#555555" text-anchor="start" font-style="italic">Request: “PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in ClinVar. Show the residue it replaces as</text>
 <text x="12" y="60" font-size="11" font-weight="normal" fill="#555555" text-anchor="start" font-style="italic">yellow spacefill spheres.”</text>
 <rect x="12" y="86" width="310" height="418" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
@@ -100,7 +99,7 @@
 <text x="745" y="204" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">yellow spacefill</text>
 <text x="670" y="312" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">Facts of the drawn state</text>
 <text x="670" y="330" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">fact 1: Trp64, grey cartoon and yellow spacefill:</text>
-<text x="670" y="345" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   one of its two draws is in the reference</text>
+<text x="670" y="345" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   one of its two styles is in the reference</text>
 <text x="670" y="360" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">fact 2: all other residues, grey cartoon:</text>
 <text x="670" y="375" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">   none of it is in the reference</text>
 <line x1="670" y1="394" x2="956" y2="394" stroke="#8a8a8a" stroke-width="1.0"/>

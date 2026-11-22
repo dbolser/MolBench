@@ -28,7 +28,7 @@
 | must pass (equivalent) | another entry's file is downloaded and parsed as well, and nothing of it is drawn | 20 | 20 | 0 |
 | must pass (identical) | the answer is the reference itself | 150 | 150 | 150 |
 | must fail (wrong) | 'all' instead of 'polymer' under ball-and-stick (waters and ligands are drawn too) | 20 | 0 | 0 |
-| must fail (wrong) | the biological assembly is loaded where the deposited model was asked for | 20 | 0 | 0 |
+| must fail (wrong) | the biological assembly is loaded where the deposited coordinates was asked for | 20 | 0 | 0 |
 | must fail (wrong) | the author residue number written in the label-number field (structures where they differ) | 20 | 0 | 0 |
 | must fail (wrong) | two chains' colours the wrong way round | 20 | 0 | 0 |
 | must fail (wrong) | the structure is loaded and nothing is drawn | 20 | 0 | 0 |

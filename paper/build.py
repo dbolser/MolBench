@@ -120,6 +120,44 @@ def fmt_value(value, spec: str | None) -> str:
     return str(value)
 
 
+# The pilot tables of SI Section S8 are written by scripts/paper_tables.py in the words of
+# October 2026. They are shown with a table number and in the words of the paper; the map
+# below changes words only, never a number. Order matters (longer forms first).
+PILOT_WORDS = [
+    (r"`spec_grounded`", "main + grounding pack"),
+    (r"`bare_grounded`", "no format guide + grounding pack"),
+    (r"`_grounded`", "+ grounding pack"),
+    (r"`spec`", "main"),
+    (r"`bare`", "no format guide"),
+    (r"\bMVS track\b", "Scene track"),
+    (r"Corpus used for the October 2026 panel", "Corpus of the October 2026 pilot run"),
+    (r"the frozen MolViewSpec reference", "the format guide"),
+    (r"only the output contract", "only the rule for the answer"),
+    (r"as in the leaderboard table", "as in the per-model table"),
+    (r"image-pair judge model", "image judge"),
+    (r"[Tt]ask × model pairs", lambda m: ("T" if m.group(0)[0] == "T" else "t") + "ask-model combinations"),
+    (r"of those pairs", "of those combinations"),
+    (r"\bA regime is\b", "A category is"),
+    (r"\bregimes\b", "categories"), (r"\bregime\b", "category"), (r"\bRegime\b", "Category"),
+    (r"\bOutputs\b", "Answers"), (r"\bOutput\b", "Answer"),
+    (r"\boutputs\b", "answers"), (r"\boutput\b", "answer"),
+    (r"\bResolution\b", "Name resolution"),
+    (r"\bGrounded\b", "Structure-grounded"),
+    (r"\b(\d+) samples? per task", lambda m: f"{m.group(1)} answer{'' if m.group(1) == '1' else 's'} per task"),
+    (r"95% CIs\b", "95% intervals"), (r"95% CI\b", "95% interval"),
+    (r"\(PRELIMINARY\)", "(pilot run, preliminary, earlier grader)"),
+]
+
+
+def pilot_table(text: str, label: str) -> str:
+    """A pilot table with its number and in the paper's words (see PILOT_WORDS)."""
+    for pattern, new in PILOT_WORDS:
+        text = re.sub(pattern, new, text)
+    if not text.startswith("**"):
+        raise BuildError(f"pilot table for {label} does not start with a bold title")
+    return f"**{label}. " + text[2:]
+
+
 def substitute(text: str, values: dict, where: str, problems: list[str], depth: int = 0) -> str:
     """Resolve ``{{…}}`` markers (includes are resolved recursively, once)."""
 
@@ -137,6 +175,13 @@ def substitute(text: str, values: dict, where: str, problems: list[str], depth: 
                     return m.group(0)
                 return substitute(f.read_text(encoding="utf-8").rstrip(), values, rel, problems,
                                   depth + 1)
+            if body.startswith("include:") and fallback.startswith("pilot:"):
+                rel = body[len("include:"):].strip()
+                f = (PAPER / rel).resolve()
+                if PAPER not in f.parents or not f.exists():
+                    problems.append(f"{where}: missing include {rel}")
+                    return m.group(0)
+                return pilot_table(f.read_text(encoding="utf-8").rstrip(), fallback[len("pilot:"):].strip())
             if not fallback.startswith("PENDING:"):
                 problems.append(f"{where}: fallback must start with 'PENDING:' in {{{{{m.group(1)}}}}}")
                 return m.group(0)
@@ -484,7 +529,9 @@ def example_problems(values: dict) -> list[str]:
         if colour not in text or (rep not in text and values["ex.rep_scene"] not in text):
             problems.append(f"generated/{name} does not show the running example as {colour} {rep}")
         other = [w for w in REPRESENTATION_WORDS
-                 if w not in (rep, values["ex.rep_scene"], "cartoon", "line") and w in text]
+                 if w not in (rep, values["ex.rep_scene"], "cartoon", "line") and w in text
+                 # the table also grades answers that add another representation, and says so
+                 and not (name == "table_example.md" and w == values.get("ex.other_rep"))]
         if other:
             problems.append(f"generated/{name} names a representation the request does not ask for: {other}")
     return problems

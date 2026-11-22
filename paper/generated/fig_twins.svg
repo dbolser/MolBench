@@ -2,7 +2,6 @@
 <title>The paired design: one request, two output formats, the same target atoms</title>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
 <rect width="980" height="500" fill="#ffffff"/>
-<text x="12" y="28" font-size="15" font-weight="bold" fill="#1a1a1a" text-anchor="start">One request, two formats, the same target atoms</text>
 <rect x="190" y="44" width="600" height="56" rx="6" fill="#e8f1f8" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="490" y="62" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="middle">Request (identical on both tracks)</text>
 <text x="490" y="78" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle" font-style="italic">“PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626) variant p.W82R is classified as pathogenic in</text>
@@ -25,7 +24,7 @@
 <text x="516" y="210" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       uniprot_residue_number = 82,</text>
 <text x="516" y="226" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representation = &quot;spacefill&quot;,</text>
 <text x="516" y="242" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representationColor = &quot;yellow&quot;</text>
-<text x="514" y="290" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The viewer does the mapping; the model passes on the accession and position from the request.</text>
+<text x="514" y="290" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="start">The viewer does the mapping; the model only passes on accession and position.</text>
 <line x1="245.0" y1="304" x2="400" y2="334" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
 <line x1="735.0" y1="304" x2="580" y2="334" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
 <rect x="290" y="336" width="400" height="44" rx="6" fill="#e6f4ef" stroke="#009E73" stroke-width="1.5"/>
@@ -33,8 +32,9 @@
 <text x="490" y="371" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">Trp64, chain X of 2NWD: 24 atoms (checked when the task is built)</text>
 <line x1="490" y1="382" x2="490" y2="406" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
 <text x="318" y="424" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="end">Per model, over the 258 pairs:</text>
-<text x="318" y="440" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">is each side right? (target score = 1;</text>
-<text x="318" y="454" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">repeated with task success)</text>
+<text x="318" y="440" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">is each side right? (at least 2 of its 3</text>
+<text x="318" y="454" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">answers target-right; repeated with</text>
+<text x="318" y="468" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">task success)</text>
 <text x="405.0" y="404" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">call list right</text>
 <text x="555.0" y="404" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="middle">call list wrong</text>
 <rect x="330" y="410" width="150" height="34" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>

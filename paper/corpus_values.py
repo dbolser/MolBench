@@ -52,10 +52,10 @@ TIER_NAME = {"translation": "Translation", "grounded": "Structure-grounded",
              "accept_set": "Several right answers", "tool_only": "Viewer settings"}
 TIER_ASKS = {
     "translation": "Everything needed is in the request; write it in the format.",
-    "grounded": "The request names a feature (the ligand, the disulfides); its atoms must be found in the structure.",
+    "grounded": "The request names a feature (the ligand, the disulfides); the model must know which atoms these are.",
     "interactions": "Named atoms and a measurement or contact between them.",
     "resolve": "The structure is named by protein, not by identifier.",
-    "clinical": "A variant in UniProt numbering must be mapped to the residues of the structure.",
+    "clinical": "A variant, named in UniProt numbering or in traditional numbering, must be mapped to the residues of the structure.",
     "followup": "A start state plus an edit request; the full new state is returned.",
     "accept_set": "The request leaves one countable thing open; several drawn states are right.",
     "tool_only": "A viewer setting that only the call-list format can express.",
@@ -158,6 +158,34 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     pub_structs = {s for t in orig if t["split"] == "public" for s in t["structures"]}
     assert not pub_structs & set(held), "a held-back structure is used by a public task"
     V["corpus.n_tasks_without_structure"] = sum(not t["structures"] for t in orig)
+    # Structures per category and track: the units that the bootstrap resamples.
+    for track in ("mvs", "api"):
+        for tier in TIERS:
+            V[f"corpus.{track}.{tier}.n_structures"] = len(
+                {T.cluster_key(t) for t in orig if t["track"] == track and t["tier"] == tier})
+    # Which structures did tasks published before this corpus use? (frozen in the panel file)
+    earlier = {e["id"] for e in jload(REPO / "data/panel/panel.json")["entries"] if e.get("used_by_tasks")}
+    V["corpus.public.n_structures"] = len(pub_structs)
+    V["corpus.public.n_structures_used_earlier"] = len(pub_structs & earlier)
+    V["corpus.public.n_structures_not_used_earlier"] = len(pub_structs - earlier)
+    assert not earlier & set(held), "a held-back structure was used by an earlier task"
+    # Targets: tasks that are about no atoms store none and get no target score.
+    V["corpus.n_with_target"] = sum(t.get("target") is not None for t in orig)
+    V["corpus.n_without_target"] = len(orig) - V["corpus.n_with_target"]
+    no_target = collections.Counter((t["track"], t["tier"]) for t in orig if t.get("target") is None)
+    assert set(k[1] for k in no_target) <= {"followup", "tool_only", "translation"}, no_target
+    assert not any(t.get("target") is None for t in orig if t["track"] == "mvs" and t["tier"] != "followup")
+    V["corpus.n_without_target_followup"] = sum(n for (_, tier), n in no_target.items() if tier == "followup")
+    V["corpus.n_without_target_settings"] = V["corpus.n_without_target"] - V["corpus.n_without_target_followup"]
+    V["corpus.twins.n_without_target"] = sum(t.get("target") is None for t in twins)
+    assert all(t["tier"] == "followup" and by_id[t["twin_of"]].get("target") is None
+               for t in twins if t.get("target") is None)
+    V["corpus.twins.n_with_target"] = len(twins) - V["corpus.twins.n_without_target"]
+    # Translation on the call-list track: templates for calls that a scene has no partner for.
+    api_tr = [t for t in orig if t["track"] == "api" and t["tier"] == "translation"]
+    V["corpus.api.translation.n_call_only"] = sum(not t.get("twin_of") for t in api_tr)
+    V["corpus.api.translation.n_call_only_templates"] = len(
+        {t["family"] for t in api_tr} - {t["family"] for t in api_tr if t.get("twin_of")})
 
     # Follow-up turns and accept sets.
     for track in ("mvs", "api"):
@@ -193,6 +221,8 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     n = len(clin)
     V["clin.n"] = n
     V["clin.n_proteins"] = len({x["gene"] for x in c})
+    panel_genes = {p["gene"] for p in jload(REPO / "data/panel/panel.json")["disease_proteins"]}
+    V["_genes_without_task"] = panel_genes - {x["gene"] for x in c}
     V["clin.n_structures"] = len({s for t in clin for s in t["structures"]})
     V["clin.n_alphafold_tasks"] = sum(bool(x["alphafold_model"]) for x in d)
     V["clin.n_offset"] = sum(bool(x["needs_numbering_offset"]) for x in d)
@@ -250,11 +280,58 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
         per_gene[t["provenance"]["clinical"]["gene"]].update(t["structures"])
     V["clin.n_proteins_several_structures"] = sum(len(v) > 1 for v in per_gene.values())
     V["clin.n_alphafold_structures"] = sum(s.startswith("af-") for s in {s for v in per_gene.values() for s in v})
+    V["clin.n_pdb_structures"] = V["clin.n_structures"] - V["clin.n_alphafold_structures"]
+    V["clin.n_proteins_one_structure"] = V["clin.n_proteins"] - V["clin.n_proteins_several_structures"]
+    # An entry that holds two of the proteins (the haemoglobin entries hold alpha and beta chains).
+    holders = collections.defaultdict(set)
+    for g, ss in per_gene.items():
+        for s_ in ss:
+            holders[s_].add(g)
+    shared = {s_: g for s_, g in holders.items() if len(g) > 1}
+    V["clin.n_structures_two_proteins"] = len(shared)
+    assert all(g == {"HBA1", "HBB"} for g in shared.values()), shared   # the text names haemoglobin
+    V["clin.max_tasks_per_structure"] = max(collections.Counter(s_ for t in clin for s_ in t["structures"]).values())
+    V["clin.n_variants"] = len({(x["gene"], v["variant"]) for x in c for v in x["variants"]})
+    V["clin.n_one_variant"] = sum(len(x["variants"]) == 1 for x in c)
+    V["clin.max_variants_per_task"] = max(len(x["variants"]) for x in c)
+    # A request that uses a traditional name, quoted in full: the shortest one with no context.
+    trad = [t for t in clin if t["provenance"]["clinical"]["difficulty"]["name_in_mature_numbering"]
+            and t["provenance"]["clinical"]["context"] == "none"]
+    q = min(trad, key=lambda t: (len(t["prompt"]), t["id"]))
+    V["clin.mature_example.prompt"] = " ".join(q["prompt"].split())
+    qv = q["provenance"]["clinical"]["variants"][0]
+    V["clin.mature_example.name"] = qv["name_in_prompt"]
+    V["clin.mature_example.hgvs"] = qv["hgvs"]
+    assert "mature-protein numbering" in q["prompt"]
+    # The one variant kept by name although its only record has no assertion criteria.
+    kept = [t for t in clin if any(v["variant"] == "I74T" for v in t["provenance"]["clinical"]["variants"])
+            and t["provenance"]["clinical"]["gene"] == "LYZ"]
+    assert kept and all("classified as pathogenic in ClinVar" in t["prompt"] or "pathogenic" in t["prompt"]
+                        for t in kept)
+    V["clin.n_tasks_kept_by_name"] = len(kept)
+    kv = [v for v in kept[0]["provenance"]["clinical"]["variants"] if v["variant"] == "I74T"][0]
+    assert kv["clinvar_review_status"] == ["no assertion criteria provided"]
+    V["clin.kept_by_name.classification"] = kv["clinvar_classification"][0].lower()
+    assert V["clin.n_insertion_code"] == 0      # the text says no clinical target has one
     return {"orig": orig, "para": para, "by_id": by_id, "used": used}
 
 
+def clinical_groupings_table(V: dict) -> str:
+    """The two groupings of the clinical tasks, crossed (Section 3.3.1)."""
+    n = V
+    return "\n".join([
+        "| | Copying the number is right | Copying the number is wrong | All |",
+        "|:---|---:|---:|---:|",
+        f"| **No offset**: the target's author number is its UniProt number | {n['clin.n_face_right_no_offset']} "
+        f"| {n['clin.n_face_wrong_no_offset']} | {n['clin.n_no_offset']} |",
+        f"| **Offset**: the target's author number differs from its UniProt number | {n['clin.n_face_right_offset']} "
+        f"| {n['clin.n_face_wrong_offset']} | {n['clin.n_offset']} |",
+        f"| **All** | **{n['clin.n_face_value_right']}** | **{n['clin.n_face_value_wrong']}** | **{n['clin.n']}** |",
+    ]) + "\n"
+
+
 def corpus_table(V: dict) -> str:
-    rows = ["| Tier | What is asked | Scene track (public + held back) | Call-list track (public + held back) | Pairs |",
+    rows = ["| Category | What is asked | Scene track (public + held back) | Call-list track (public + held back) | Pairs |",
             "|:---|:---|---:|---:|---:|"]
     for tier in TIERS:
         cells = []
@@ -298,6 +375,14 @@ def panel_values(V: dict, used) -> list[dict]:
           for e in entries if e["kind"] != "pdb"]
     V["panel.alphafold_proteins"] = ", ".join(af[:-1]) + " and " + af[-1]
     V["panel.retrieved"] = max(e["retrieved"] for e in entries)
+    blank = ("", ".", "?", None)
+    alt = hyd = 0
+    for e in entries:
+        cols = atoms.load_table(e["id"]).columns
+        alt += any(a not in blank for a in cols["label_alt_id"])
+        hyd += any(x in ("H", "D") for x in cols["type_symbol"])
+    V["panel.n_with_alternate_conformers"] = alt
+    V["panel.n_with_hydrogens"] = hyd
     feats = collections.Counter(f for e in entries for f in e.get("features", []))
     for f in ("ligand", "heme", "metal", "disulfide", "nucleic", "glycan", "membrane",
               "insertion-codes", "auth-label-chain", "modified-residue", "assembly-differs"):
@@ -339,6 +424,12 @@ def panel_values(V: dict, used) -> list[dict]:
     V["variants.n_second_pass_removed"] = other_gene + haplotype + zero_star
     assert V["variants.n_confirmed"] - V["variants.n_second_pass_removed"] == V["variants.n_usable"]
     V["variants.records_retrieved"] = variants_mod.clinvar_snapshot()
+    usable = {p["gene"]: [v for v in variants_mod.confirmed(p["accession"]) if variants_mod.criteria_provided(v)]
+              for p in variants_mod.proteins()}
+    V["variants.n_several_records"] = sum(len(v.vcv) > 1 for vs in usable.values() for v in vs)
+    V["variants.max_usable_per_protein_without_task"] = max(
+        len(vs) for g, vs in usable.items() if g in V["_genes_without_task"])
+    V["variants.proteins_without_task"] = " and ".join(sorted(V.pop("_genes_without_task")))
     return entries
 
 
@@ -347,11 +438,15 @@ def variants_table(V: dict) -> str:
     rows = ["| Step | Rule | Removed | Left |", "|:---|:---|---:|---:|",
             f"| 1 | Single-residue missense variants of the {V['panel.n_disease_proteins']} proteins that UniProt reports as "
             f"pathogenic or likely pathogenic, with ClinVar as a source | | {V['variants.n_candidates']:,} |",
-            f"| 2 | Keep if a ClinVar variation record lists the same amino-acid change and its aggregate classification is "
-            f"pathogenic, likely pathogenic or both | {V['variants.n_removed_by_clinvar']:,} | {V['variants.n_confirmed']:,} |",
-            f"| 3a | Remove if the only such record belongs to another gene | {V['variants.n_other_gene_only']} | |",
-            f"| 3b | Remove if the only such record is a haplotype (two changes on one chromosome) | {V['variants.n_haplotype_only']} | |",
-            f"| 3c | Remove if every such record has the review status \"no assertion criteria provided\" "
+            f"| 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same "
+            f"amino-acid change at that position and has the aggregate germline classification \"Pathogenic\", "
+            f"\"Likely pathogenic\" or \"Pathogenic/Likely pathogenic\" (a *qualifying record*) "
+            f"| {V['variants.n_removed_by_clinvar']:,} | {V['variants.n_confirmed']:,} |",
+            f"| 3a | Remove if no qualifying record is of the gene that the request names "
+            f"| {V['variants.n_other_gene_only']} | |",
+            f"| 3b | Remove if every qualifying record of that gene is a haplotype (two changes on one chromosome) "
+            f"| {V['variants.n_haplotype_only']} | |",
+            f"| 3c | Remove if every remaining qualifying record has the review status \"no assertion criteria provided\" "
             f"| {V['variants.n_no_criteria']} | {V['variants.n_usable']:,} |"]
     return "\n".join(rows) + "\n"
 
@@ -406,11 +501,15 @@ def controls_values(V: dict) -> dict:
     V["controls.viewer.mvs.probe_agree"] = m["rule_probes"]["agree"]
     V["controls.viewer.pdbe_molstar"] = a["pdbe_molstar"]
     V["controls.viewer.api.lists"] = a["lists_run"]
+    V["controls.viewer.api.n_not_replayed"] = V["controls.api.n_controls"] - a["lists_run"]
     V["controls.viewer.api.agree"] = a["agree"]
     V["controls.viewer.api.bare_loads"] = a["bare_loads"]["entries"]
     V["controls.viewer.api.bare_agree"] = a["bare_loads"]["agree"]
     c = jload(REPO / "tests/controls/colour_evidence.json")
     V["colour.tolerance"] = c["tolerance"]
+    from molbench import drawn
+    V["colour.opacity_tolerance"] = drawn.OPACITY_TOLERANCE
+    assert drawn.PARTIAL == 0.5      # the text says "half credit"
     V["colour.palette_n"] = len(c["palette"])
     V["colour.closest_pair_distance"] = c["closest_palette_pairs"][0]["distance"]
     V["colour.closest_pair"] = f"{c['closest_palette_pairs'][0]['a']} and {c['closest_palette_pairs'][0]['b']}"
@@ -431,7 +530,8 @@ def si_controls_table(s: dict) -> str:
         for k in s["tracks"][track]["kinds"]:
             verdict = {"identical": "must pass (identical)", "equivalent": "must pass (equivalent)",
                        "wrong": "must fail (wrong)"}.get(k["group"], k["group"])
-            out.append(f"| {verdict} | {k['what'].replace('|', '/')} | {k['n']} | {k['graded_success']} "
+            what = k['what'].replace('|', '/').replace('the deposited model', 'the deposited coordinates')
+            out.append(f"| {verdict} | {what} | {k['n']} | {k['graded_success']} "
                        f"| {k.get('old_grader_success', '–')} |")
         out.append("")
     return "\n".join(out)
@@ -502,7 +602,7 @@ def october_models_table() -> str:
 
 
 def october_table(V: dict) -> str:
-    rows = ["| Tier (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success | Requested part exactly right |",
+    rows = ["| Category (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success | Requested part exactly right |",
             "|:---|---:|---:|---:|---:|---:|---:|"]
     for key, name in (("translation", "Translation"), ("grounded", "Structure-grounded, name resolution and interactions"),
                       ("clinical", "Clinical variant")):
@@ -558,6 +658,9 @@ def study_values(V: dict) -> None:
     V["study.n_pairs"] = int(re.search(r"\*\*Size: (\d+) judged pairs", text).group(1))
     V["study.n_grader_check_pairs"] = int(re.search(r"small grader check \((\d+) pairs", text).group(1))
     V["study.raters_per_pair"] = int(re.search(r"with\s+(\d+) raters per pair", text).group(1))
+    V["study.max_model_share"] = int(re.search(r"no model above (\d+)% of the set", text).group(1)) / 100
+    V["study.max_per_task"] = int(re.search(r"at most (\d+) pairs per task", text).group(1))
+    V["study.max_per_task_model"] = {"one": 1}[re.search(r"at most (\w+) sample per \(task, model\)", text).group(1)]
 
 
 # --------------------------------------------------------------------------- #
@@ -586,6 +689,16 @@ def plan_values(V: dict) -> list[dict]:
     V["plan.core_not_in_pilot"] = ", ".join(short(x["id"]) for x in core if short(x["id"]) not in pilot)
     V["plan.n_models_max"] = len(core) + len(opt)
     V["plan.n_json_mode_models"] = sum(x.get("structured") not in (None, "none") for x in core)
+    V["plan.core_without_json_mode"] = ", ".join(short(x["id"]) for x in core if x.get("structured") in (None, "none"))
+    V["plan.core_models"] = ", ".join(short(x["id"]) for x in core)
+    V["plan.reasoning_max_tokens"] = m["run"]["reasoning_max_tokens"]
+    V["plan.n_core_reasoning"] = sum(bool(x.get("reasoning")) for x in core)
+    assert not any(x.get("max_tokens") for x in models), "a model has a token limit of its own; the text gives two"
+    V["plan.core_price_output_min"] = min(x["price"]["output"] for x in core)
+    V["plan.core_price_output_max"] = max(x["price"]["output"] for x in core)
+    V["plan.optional_price_output_min"] = min(x["price"]["output"] for x in opt)
+    V["plan.optional_price_output_max"] = max(x["price"]["output"] for x in opt)
+    V["plan.n_table_rows_max"] = len(models)
     return models
 
 
@@ -596,30 +709,41 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
              + (" †" if x.get("optional") else "") for x in models]
     weights = ["–" if x["route"] == "baseline" else ("open" if x["open_weights"] else "closed") for x in models]
     out = {}
-    head = ("| Model | Weights | Valid answers | F1 (strict) | Task success (strict) | Target score (strict) "
-            "| F1, valid-only | Tasks with all 3 samples right | Cost (USD) |\n"
-            "|:---|:---|---:|---:|---:|---:|---:|---:|---:|\n")
+    head = ("| Model | Weights | Valid answers | Task success rate (strict) | Target score (strict) | F1 (strict) "
+            "| Task success rate, valid-only | Target score, valid-only | All-3 rate | Cost (USD) |\n"
+            "|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|\n")
     # The review draft shows the first rows; the final table has one row per model (SI Table S6).
     shown = 3
-    body = "".join(f"| {n} | {w} | {P} | {P} | {P} | {P} | {P} | {P} | {P} |\n"
+    body = "".join(f"| {n} | {w} | {P} | {P} | {P} | {P} | {P} | {P} | {P} | {P} |\n"
                    for n, w in list(zip(names, weights))[:shown])
-    body += f"| … {len(names) - shown} further rows, one per model of SI Table S6 | | {P} | | | | | | |\n"
+    n_core = sum(not x.get("optional") for x in models)
+    body += (f"| … {n_core - shown} further rows for the other core models and up to {len(names) - n_core} "
+             f"for the optional models (SI Table S6) | | {P} | | | | | | | |\n")
     out["shape_leaderboard.md"] = head + body
-    tiers = "| Tier | Tasks | Structures | F1 (strict) | Task success (strict) | Target score (strict) | Task success, valid-only |\n|:---|---:|---:|---:|---:|---:|---:|\n"
+    tiers = ("| Category | Tasks | Structures | Task success rate (strict) | Target score (strict) | F1 (strict) "
+             "| Task success rate, valid-only | Target score, valid-only |\n|:---|---:|---:|---:|---:|---:|---:|---:|\n")
     for track, label in (("mvs", "Scene track"), ("api", "Call-list track")):
         for tier in TIERS:
             n = V[f"corpus.{track}.{tier}.n"]
             if n:
-                tiers += f"| {label}: {TIER_NAME[tier]} | {n} | {P} | {P} | {P} | {P} | {P} |\n"
+                tiers += (f"| {label}: {TIER_NAME[tier]} | {n} | {V[f'corpus.{track}.{tier}.n_structures']} "
+                          f"| {P} | {P} | {P} | {P} | {P} |\n")
+            if n and tier == "resolve":
+                for which in ("answers on the reference entry", "answers on another accepted entry"):
+                    tiers += f"| {label}: {TIER_NAME[tier]}, {which} | – | – | {P} | {P} | {P} | {P} | {P} |\n"
     out["shape_tiers.md"] = tiers
     out["shape_clinical.md"] = (
-        "| Clinical tasks (scene track) | Tasks | Task success | Target score | Task success with grounding pack |\n"
-        "|:---|---:|---:|---:|---:|\n"
-        f"| **Split A** (primary): the number in the variant name is the author residue number | {V['clin.n_face_value_right']} | {P} | {P} | {P} |\n"
-        f"| **Split A**: the number in the variant name is **not** the author residue number | {V['clin.n_face_value_wrong']} | {P} | {P} | {P} |\n"
-        f"| **Split B**: target residue numbered as in UniProt | {V['clin.n_no_offset']} | {P} | {P} | {P} |\n"
-        f"| **Split B**: target residue numbered differently from UniProt | {V['clin.n_offset']} | {P} | {P} | {P} |\n"
-        f"| Helix or strand requested (a subset, reported apart) | {V['clin.n_sse']} | {P} | {P} | {P} |\n")
+        "| Clinical tasks (scene track) | Tasks | Target score | Task success rate | Target score with grounding pack "
+        "| Task success rate with grounding pack |\n"
+        "|:---|---:|---:|---:|---:|---:|\n"
+        f"| **Copying the number** (primary grouping): copying is right | {V['clin.n_face_value_right']} | {P} | {P} | {P} | {P} |\n"
+        f"| **Copying the number**: copying is wrong | {V['clin.n_face_value_wrong']} | {P} | {P} | {P} | {P} |\n"
+        f"| Difference between these two rows (95% interval) | | {P} | {P} | {P} | {P} |\n"
+        f"| **Offset** (descriptive grouping): no offset | {V['clin.n_no_offset']} | {P} | {P} | {P} | {P} |\n"
+        f"| **Offset**: offset | {V['clin.n_offset']} | {P} | {P} | {P} | {P} |\n"
+        f"| Matched tasks, structure with an offset | {V['clin.n_offset_pairs']} | {P} | {P} | {P} | {P} |\n"
+        f"| Matched tasks, predicted structure without an offset | {V['clin.n_offset_pairs']} | {P} | {P} | {P} | {P} |\n"
+        f"| Helix or strand requested (a subset, reported apart) | {V['clin.n_sse']} | {P} | {P} | {P} | {P} |\n")
     lm = [n for n, x in zip(names, models) if x["route"] != "baseline"]
     def paired(title: str) -> str:
         return (f"**{title}**\n\n"
@@ -627,22 +751,22 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
                 "| Right on neither side | McNemar p |\n"
                 "|:---|---:|---:|---:|---:|---:|---:|\n"
                 + "".join(f"| {n} | {V['corpus.n_twin_pairs']} | {P} | {P} | {P} | {P} | {P} |\n" for n in lm[:2])
-                + f"| … {len(lm) - 2} further rows, one per model | | {P} | | | | |\n")
-    out["shape_paired.md"] = (paired("Table 8a. Right = target-right (primary).") + "\n"
-                              + paired("Table 8b. Right = task success (secondary)."))
+                + f"| … up to {len(lm) - 2} further rows, one per model | | {P} | | | | |\n")
+    out["shape_paired.md"] = (paired("Table 9a. Right = target-right (primary); majority of the three answers.") + "\n"
+                              + paired("Table 9b. Right = task success (secondary); majority of the three answers."))
     out["shape_robustness.md"] = (
-        "| Comparison | Tasks | Task success, first group | Task success, second group | Difference (95% interval) |\n"
+        "| Comparison | Tasks | Task success rate, first group | Task success rate, second group | Difference (95% interval) |\n"
         "|:---|---:|---:|---:|---:|\n"
         f"| Public split against held-back split (both tracks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
         f"| Full wording against terse wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
         f"| Full wording against indirect wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
-        f"| Format reference against format reference plus JSON mode (the {V['plan.n_json_mode_models']} models that offer it; 1 sample in JSON mode) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
-        f"| Format reference against format reference plus grounding pack (name-resolution and clinical tiers, scene track) "
+        f"| Main against main + JSON mode (the {V['plan.n_json_mode_models']} core models that offer it; 1 answer per task in JSON mode) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| Main against main + grounding pack (name-resolution and clinical categories, scene track) "
         f"| {V['corpus.mvs.resolve.n'] + V['corpus.mvs.clinical.n']} | {P} | {P} | {P} |\n"
-        f"| Format reference against no format reference ({V['plan.n_bare_models']} models, scene track) "
+        f"| Main against no format guide ({V['plan.n_bare_models']} models, scene track) "
         f"| {V['corpus.mvs.n']} | {P} | {P} | {P} |\n")
     out["shape_followup.md"] = (
-        "| Group | Scene track: tasks | Scene track: task success | Call-list track: tasks | Call-list track: task success |\n"
+        "| Group | Scene track: tasks | Scene track: task success rate | Call-list track: tasks | Call-list track: task success rate |\n"
         "|:---|---:|---:|---:|---:|\n"
         f"| Follow-up turns that need a change | {V['corpus.mvs.followup.n'] - V['corpus.followup.mvs.noop']} | {P} "
         f"| {V['corpus.api.followup.n'] - V['corpus.followup.api.noop']} | {P} |\n"
@@ -652,7 +776,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
 
 
 def si_models_table(models: list[dict]) -> str:
-    rows = ["| Model identifier | Panel | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |",
+    rows = ["| Model identifier | Set | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |",
             "|:---|:---|:---|:---|:---|:---|:---|"]
     for x in models:
         if x["route"] == "baseline":
@@ -673,7 +797,7 @@ def si_templates_table(orig: list[dict]) -> str:
         f[t["track"]] += 1
         if f["ex"] is None or (t["track"] == "mvs" and f["ex"]["track"] != "mvs"):
             f["ex"] = t
-    rows = ["| Tier | Template | Scene tasks | Call-list tasks | Example request |", "|:---|:---|---:|---:|:---|"]
+    rows = ["| Category | Template | Scene tasks | Call-list tasks | Example request |", "|:---|:---|---:|---:|:---|"]
     for tier in TIERS:
         for (tr, fam), f in sorted(fams.items()):
             if tr != tier:
@@ -720,6 +844,8 @@ def example_values(V: dict, by_id: dict) -> dict:
     V["ex.clinvar_records"] = "; ".join(f"{k}, {recs[k]['title']}" for k in var["clinvar_vcv"])
     assert all(cl["gene"] in recs[k]["genes"] and f"({var['hgvs']})" in recs[k]["title"] for k in var["clinvar_vcv"])
     V["ex.clinvar_classification"] = var["clinvar_classification"][0].lower()
+    assert len(set(var["clinvar_classification"])) == 1 and len(set(var["clinvar_review_status"])) == 1
+    V["ex.clinvar_conditions"] = "; ".join(sorted({c for k in var["clinvar_vcv"] for c in recs[k]["conditions"]}))
     V["ex.clinvar_review_status"] = var["clinvar_review_status"][0]
     vfile = jload(REPO / f"data/panel/variants/{cl['accession']}.json")
     V["ex.disease"] = [v for v in vfile["variants"] if v["variant"] == var["variant"]][0]["diseases"][0]
@@ -762,7 +888,26 @@ def example_values(V: dict, by_id: dict) -> dict:
 
     right = {"auth_asym_id": res["auth_asym_id"], "auth_seq_id": res["auth_seq_id"]}
     wrong = {"auth_asym_id": res["auth_asym_id"], "auth_seq_id": pos}
+    def scene_plus(selector, rep_type, color):
+        s = copy.deepcopy(m["reference"])
+        st = s["root"]["children"][0]["children"][0]["children"][0]
+        st["children"].append({"kind": "component", "params": {"selector": selector}, "children": [
+            {"kind": "representation", "params": {"type": rep_type}, "children": [
+                {"kind": "color", "params": {"color": color}}]}]})
+        return s
+
+    n0 = res["auth_seq_id"]
+    around = {"auth_asym_id": res["auth_asym_id"], "beg_auth_seq_id": n0 - 1, "end_auth_seq_id": n0 + 1}
+    V["ex.neighbours_first"], V["ex.neighbours_last"] = n0 - 1, n0 + 1
+    look_rep = cl["look"]["rep"]
+    other_rep = "ball_and_stick" if look_rep != "ball_and_stick" else "spacefill"
+    V["ex.other_rep"] = {"ball_and_stick": "ball-and-stick", "spacefill": "spacefill spheres"}[other_rep]
     mvs_answers = {
+        "spill": scene(around),
+        "spill_chain": scene({"auth_asym_id": res["auth_asym_id"]}),
+        "extra": scene_plus(right_sel := {"auth_asym_id": res["auth_asym_id"], "auth_seq_id": n0}, other_rep, cl["look"]["color"]),
+        "other_rep_around": scene_plus(around, other_rep, cl["look"]["color"]),
+        "surface": scene_plus("polymer", "surface", "gray"),
         "right": scene(right),
         "label": scene({"label_asym_id": res["label_asym_id"], "label_seq_id": res["label_seq_id"]}),
         "face": scene(wrong),
@@ -810,6 +955,11 @@ def example_values(V: dict, by_id: dict) -> dict:
     # Section 4.3 derives the precision of the cartoon answer in words (two facts: one half, none).
     assert V["ex.mvs.context.precision"] == 0.25 and V["ex.mvs.context.recall"] == 1
     assert V["ex.mvs.colour.f1"] == 0.5 and V["ex.mvs.face_context.f1"] == 0
+    # Section 4.2 states the three rules for extra drawing in words; these are its examples.
+    assert 0 < V["ex.mvs.spill.target"] < 1 and 0 < V["ex.mvs.spill_chain.target"] < V["ex.mvs.spill.target"]
+    assert 0 < V["ex.mvs.extra.target"] < 1
+    assert V["ex.mvs.other_rep_around.target"] == 1 and not V["ex.mvs.other_rep_around.success"]
+    assert V["ex.mvs.surface.target"] == 1 and not V["ex.mvs.surface.success"]
     return {"mvs_task": m, "api_task": a, "answers": answers}
 
 
@@ -826,6 +976,12 @@ def example_table(V: dict) -> str:
             row("Right residue, drawn red", "ex.mvs.colour"),
             row("Right residue, plus a grey cartoon of the protein that the request does not ask for", "ex.mvs.context"),
             row("Wrong residue, plus the grey cartoon", "ex.mvs.face_context"),
+            row(f"Right residue, and the same {e['ex.color']} {e['ex.rep']} on its two neighbours "
+                f"(residues {e['ex.neighbours_first']} to {e['ex.neighbours_last']}): spill", "ex.mvs.spill"),
+            row(f"The whole chain as {e['ex.color']} {e['ex.rep']}: spill", "ex.mvs.spill_chain"),
+            row(f"Right residue, plus {e['ex.other_rep']} on the same residue: extra on the target", "ex.mvs.extra"),
+            row(f"Right residue, plus {e['ex.other_rep']} on residues {e['ex.neighbours_first']} to "
+                f"{e['ex.neighbours_last']}: context", "ex.mvs.other_rep_around"),
             "| **Call-list track** | | | |",
             row(f"Reference: UniProt {e['ex.accession']} position {e['ex.uniprot_position']}, resolved by the viewer", "ex.api.right"),
             row(f"The same residue named by author numbering (chain {e['ex.auth_chain']}, residue {e['ex.auth_number']})", "ex.api.author"),
@@ -848,7 +1004,7 @@ def si_example(ex: dict) -> str:
         f"**Request (both tracks).** {m['prompt']}",
         f"**Scene track, task `{m['id']}`: reference answer.**", block(m["reference"]),
         f"**Call-list track, task `{a['id']}`: reference answer.**", block(a["reference"]),
-        f"**Call-list track: accepted answers** ({len(a['accepted'])}; the residue's own stretch of cartoon is painted "
+        f"**Call-list track: accepted answers** ({len(a['accepted'])}; the residue's own segment of the cartoon is recoloured "
         "as well, in the residue's colour or in the viewer's selection colour).",
         *[block(x) for x in a["accepted"]],
         "**Target** (the atoms the request is about, stored in label numbering on both tasks).",
@@ -887,6 +1043,7 @@ def build() -> tuple[dict, dict[str, str]]:
         "table_october_regrade.md": october_table(V),
         "table_example.md": example_table(V),
         "table_variants.md": variants_table(V),
+        "table_clinical_groupings.md": clinical_groupings_table(V),
         "si_panel.md": si_panel_table(entries, c["used"], held),
         "si_controls.md": si_controls_table(s),
         "si_models.md": si_models_table(models),

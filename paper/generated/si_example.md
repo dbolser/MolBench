@@ -84,7 +84,7 @@
 ]
 ```
 
-**Call-list track: accepted answers** (2; the residue's own stretch of cartoon is painted as well, in the residue's colour or in the viewer's selection colour).
+**Call-list track: accepted answers** (2; the residue's own segment of the cartoon is recoloured as well, in the residue's colour or in the viewer's selection colour).
 
 ```json
 [

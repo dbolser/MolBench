@@ -2,12 +2,11 @@
 <title>Shapes of the three result figures that the final run will fill; no data are shown</title>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
 <rect width="960" height="372" fill="#ffffff"/>
-<text x="12" y="24" font-size="15" font-weight="bold" fill="#1a1a1a" text-anchor="start">Result figures as they will be drawn (no data yet)</text>
-<text x="12" y="42" font-size="11" font-weight="normal" fill="#555555" text-anchor="start">Axes and marks are final. The grey row in each panel is an example of a mark, not a result.</text>
+<text x="12" y="42" font-size="11" font-weight="normal" fill="#555555" text-anchor="start">No data yet. Axes and marks are final. The grey row in each panel is an example of a mark, not a result.</text>
 <rect x="12" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="22" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">A  Task success by model and track</text>
-<text x="22" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per model, best first: 16 panel models, up</text>
-<text x="22" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">to 5 optional ones (†) and the keyword script.</text>
+<text x="22" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per model, best first: 16 core models, up to</text>
+<text x="22" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">5 optional ones (†) and the keyword script.</text>
 <line x1="86" y1="238" x2="294" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="86.0" y1="238" x2="86.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="86.0" y1="136" x2="86.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
@@ -24,7 +23,7 @@
 <line x1="294.0" y1="238" x2="294.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="294.0" y1="136" x2="294.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
 <text x="294.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">1</text>
-<text x="162.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Task success, strict</text>
+<text x="162.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Task success rate, strict</text>
 <text x="190.0" y="202" font-size="12" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
 <text x="80" y="158" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">model</text>
 <line x1="173.36" y1="149" x2="210.8" y2="149" stroke="#b8b8b8" stroke-width="2"/>
@@ -39,8 +38,8 @@
 <text x="234" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">95% interval</text>
 <rect x="330" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="340" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">B  The same request in both formats</text>
-<text x="340" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 258 pairs, split by which</text>
-<text x="340" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">side is right (target score of 1).</text>
+<text x="340" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 258 pairs, by which side is</text>
+<text x="340" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">right (at least 2 of 3 answers target-right).</text>
 <line x1="404" y1="238" x2="612" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="404.0" y1="238" x2="404.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="404.0" y1="136" x2="404.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
@@ -74,9 +73,10 @@
 <rect x="486" y="307" width="14" height="10" fill="#f1f1f1" stroke="#8a8a8a" stroke-width="0.8"/>
 <text x="506" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">both wrong</text>
 <rect x="648" y="62" width="300" height="268" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="658" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">C  Where points are lost, by tier</text>
-<text x="658" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per tier and track, models averaged. A gap</text>
-<text x="658" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">between the marks is unrequested extra drawing.</text>
+<text x="658" y="82" font-size="12" font-weight="bold" fill="#1a1a1a" text-anchor="start">C  Where points are lost, by category</text>
+<text x="658" y="98" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per category and track, models averaged.</text>
+<text x="658" y="111" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Target score above task success: the requested atoms</text>
+<text x="658" y="124" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">were right, the rest was not exact.</text>
 <line x1="722" y1="238" x2="930" y2="238" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="722.0" y1="238" x2="722.0" y2="242" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="722.0" y1="136" x2="722.0" y2="238" stroke="#e3e3e3" stroke-width="1.0"/>
@@ -95,12 +95,12 @@
 <text x="930.0" y="254" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="middle">1</text>
 <text x="798.0" y="272" font-size="10.5" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Score, valid answers only</text>
 <text x="826.0" y="202" font-size="12" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
-<text x="716" y="158" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">tier</text>
+<text x="716" y="158" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">category</text>
 <line x1="801.04" y1="154" x2="888.4" y2="154" stroke="#b8b8b8" stroke-width="1.5"/>
 <path d="M796.04,154 l5,-5 l5,5 l-5,5 z" fill="#b8b8b8"/>
 <circle cx="888.4" cy="154" r="4.5" fill="#b8b8b8" stroke="#ffffff" stroke-width="1.5"/>
 <path d="M659,312 l5,-5 l5,5 l-5,5 z" fill="#E69F00"/>
-<text x="674" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">task success</text>
-<circle cx="758" cy="312" r="4.5" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>
-<text x="768" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">target score</text>
+<text x="674" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">task success rate</text>
+<circle cx="784" cy="312" r="4.5" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>
+<text x="794" y="316" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">target score</text>
 </svg>

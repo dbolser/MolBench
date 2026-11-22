@@ -108,15 +108,16 @@ def fig_pipeline(v: dict) -> str:
             "target atoms",
             "record of how it was made"]),
         ("3  Task corpus", [
-            f"{v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} tiers",
+            f"{v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} categories",
             f"scene track: {v['corpus.mvs.n']}",
             f"call-list track: {v['corpus.api.n']}",
             f"{v['corpus.n_twin_pairs']} pairs (same request,",
-            "both tracks)"]),
+            "both tracks)",
+            f"{v['corpus.heldback.n_tasks']} on held-back structures"]),
         ("4  Model", [
-            "system prompt with the",
-            "format reference",
-            "+ the request",
+            "is given a format guide",
+            "and the request only:",
+            "no structure file, no lookup",
             f"{v['plan.samples']} answers per request:",
             "scene or call list"]),
         ("5  Grader", [
@@ -129,12 +130,11 @@ def fig_pipeline(v: dict) -> str:
             "F1 (partial credit)",
             "task success (yes or no)",
             "target score",
-            "valid or invalid output",
+            "valid or invalid answer",
             "strict / valid-only means"]),
     ]
     w, h, gap, x0, y0 = 146, 150, 16, 12, 56
-    s.text(x0, 28, "From public data to a score", size=15, weight="bold")
-    s.text(x0, 44, "No step uses the network or a model at grading time.", size=11, fill=MUTED)
+    s.text(x0, 40, "Steps 1 to 6. Grading (steps 5 and 6) uses no network and no model.", size=11, fill=MUTED)
     for i, (title, lines) in enumerate(boxes):
         x = x0 + i * (w + gap)
         fill = "#e8f1f8" if i in (2, 5) else PALE
@@ -155,11 +155,11 @@ def fig_pipeline(v: dict) -> str:
         ("Atom tables against the viewer (step 5)",
          "Selections were read back from the running viewers (Mol* 5.9.0, PDBe Mol* 3.3.2) and agree atom for atom."),
         ("Grader against a control set (step 5)",
-         f"{v['controls.n']:,} control answers with a verdict known from how they were made: "
-         f"{v['controls.mvs.new.false_pass'] + v['controls.api.new.false_pass']} wrong answers passed, "
-         f"{v['controls.mvs.new.false_fail'] + v['controls.api.new.false_fail']} right answers failed."),
-        ("Held-back split (step 3)",
-         f"{v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} structures that no public task and no earlier release uses. Not secret."),
+         f"{v['controls.n']:,} control answers with a verdict known from how they were made. The grader "
+         "was developed against them and now agrees with all; they are re-run on every change."),
+        ("Format rules (step 3)",
+         "One script validates every task file against the written task format; the run does not start "
+         "unless every check passes."),
     ]
     cw = (980 - 2 * x0 - 3 * gap) / 4
     for i, (title, body) in enumerate(checks):
@@ -175,10 +175,10 @@ def fig_pipeline(v: dict) -> str:
 # --------------------------------------------------------------------------- #
 TIER_CARDS = [
     ("translation", "Translation", "tr-het-code-3ert", "Everything is in the request."),
-    ("grounded", "Structure-grounded", "gr-ligand-1stp-btn", "A named feature must be found in the structure."),
+    ("grounded", "Structure-grounded", "gr-ligand-1stp-btn", "A feature is named; the model must know its atoms."),
     ("interactions", "Interactions", "in-ca-distance-9fb2", "Named atoms and a measurement."),
     ("resolve", "Name resolution", "res-gene-p01112", "The protein is named; the entry is not."),
-    ("clinical", "Clinical variant", "clin-pair-target-lyz-2nwd-w82r-mvs", "UniProt numbering must be mapped to the structure."),
+    ("clinical", "Clinical variant", "clin-pair-target-lyz-2nwd-w82r-mvs", "The variant's position must be mapped to the structure."),
     ("followup", "Follow-up turn", "fu-referent-colour-5cj6-mvs", "A start state plus an edit."),
     ("accept_set", "Several right answers", "acc-residue-colour-4ins-mvs", "One countable thing is left open."),
     ("tool_only", "Viewer settings", "api-canvas-1udt", "Call-list track only."),
@@ -190,9 +190,8 @@ def fig_tiers(v: dict) -> str:
     for f in (REPO / "tasks").rglob("*.json"):
         t = json.loads(f.read_text(encoding="utf-8"))
         prompts[t.get("id")] = t
-    s = Svg(980, 400, "The eight tiers of the benchmark, each with one request from the corpus")
-    s.text(12, 28, "Eight tiers, one example request each", size=15, weight="bold")
-    s.text(12, 44, "Counts are tasks on the scene track / the call-list track. Requests are quoted from the corpus.",
+    s = Svg(980, 400, "The eight categories of task, each with one request from the corpus")
+    s.text(12, 40, "Counts are tasks on the scene track / the call-list track. Requests are quoted from the corpus.",
            size=11, fill=MUTED)
     cw, ch, gap = 230, 152, 12
     for i, (tier, name, tid, needs) in enumerate(TIER_CARDS):
@@ -212,7 +211,7 @@ def fig_tiers(v: dict) -> str:
             prompt = prompt[:202].rsplit(" ", 1)[0] + " …"
         s.para(x + 10, yy + 8, "“" + prompt + "”", width=38, size=10.5, italic=True)
     s.text(12, 60 + 2 * ch + gap + 18,
-           "Shaded: the two lookup tiers (name resolution, clinical variant), where one fact must be looked up in a database: an entry, or a residue number.",
+           "Shaded: the two lookup categories. The answer needs one fact that a person would look up (an entry, a residue number); the model must recall it.",
            size=10.5, fill=MUTED)
     return s.done()
 
@@ -225,7 +224,6 @@ def fig_grading(v: dict) -> str:
     right, wrong = v["ex.auth_number"], v["ex.uniprot_position"]
     look = f"{v['ex.color']} {v['ex.rep_short']}"          # the look the request states
     mark = {"yellow": "#F0E442", "green": GREEN, "orange": ORANGE, "blue": BLUE}.get(v["ex.color"], GREEN)
-    s.text(12, 28, "Grading on drawn state: three answers to the running example", size=15, weight="bold")
     s.para(12, 46, "Request: “" + v["ex.prompt"] + "”", width=150, size=11, fill=MUTED, italic=True)
     panels = [
         ("Reference", f"{v['ex.wild_type']}{right} of chain {v['ex.auth_chain']} as {look}. Nothing else.",
@@ -281,7 +279,7 @@ def fig_grading(v: dict) -> str:
                      "   with the reference)"]
         else:
             facts = [f"fact 1: {v['ex.wild_type']}{right}, grey cartoon and {look}:",
-                     "   one of its two draws is in the reference",
+                     "   one of its two styles is in the reference",
                      "fact 2: all other residues, grey cartoon:",
                      "   none of it is in the reference"]
         for j, ln in enumerate(facts):
@@ -306,7 +304,6 @@ def fig_grading(v: dict) -> str:
 # --------------------------------------------------------------------------- #
 def fig_twins(v: dict) -> str:
     s = Svg(980, 500, "The paired design: one request, two output formats, the same target atoms")
-    s.text(12, 28, "One request, two formats, the same target atoms", size=15, weight="bold")
     s.rect(190, 44, 600, 56, fill="#e8f1f8")
     s.text(490, 62, "Request (identical on both tracks)", size=11, weight="bold", anchor="middle")
     yy = 78
@@ -338,7 +335,7 @@ def fig_twins(v: dict) -> str:
              f'       representationColor = "{v["ex.color"]}"']
     for j, ln in enumerate(calls):
         s.text(rx + 14, y + 46 + j * 16, ln, size=10.5, mono=True)
-    s.text(rx + 12, y + h - 12, "The viewer does the mapping; the model passes on the accession and position from the request.",
+    s.text(rx + 12, y + h - 12, "The viewer does the mapping; the model only passes on accession and position.",
            size=10.5, fill=MUTED)
     # same atoms
     ty = y + h + 34
@@ -353,8 +350,9 @@ def fig_twins(v: dict) -> str:
     s.arrow(490, ty + 46, 490, gy - 4)
     gx, cw, chh = 330, 150, 34
     s.text(gx - 12, gy + 14, f"Per model, over the {v['corpus.n_twin_pairs']} pairs:", size=11, anchor="end", weight="bold")
-    s.text(gx - 12, gy + 30, "is each side right? (target score = 1;", size=10.5, anchor="end", fill=MUTED)
-    s.text(gx - 12, gy + 44, "repeated with task success)", size=10.5, anchor="end", fill=MUTED)
+    s.text(gx - 12, gy + 30, "is each side right? (at least 2 of its 3", size=10.5, anchor="end", fill=MUTED)
+    s.text(gx - 12, gy + 44, "answers target-right; repeated with", size=10.5, anchor="end", fill=MUTED)
+    s.text(gx - 12, gy + 58, "task success)", size=10.5, anchor="end", fill=MUTED)
     s.text(gx + cw / 2, gy - 6, "call list right", size=10.5, anchor="middle", fill=MUTED)
     s.text(gx + cw * 1.5, gy - 6, "call list wrong", size=10.5, anchor="middle", fill=MUTED)
     cells = [("both right", PALE, INK), ("right in scene only", "#fdf0d5", INK),
@@ -383,8 +381,8 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
 
     tiers = [("translation", "Translation"), ("grounded", "Structure-grounded,\nname resolution,\ninteractions"),
              ("clinical", "Clinical variant")]
-    series = [("f1", "F1 (whole drawn state)", BLUE, ""),
-              ("success", "Task success (drawn state exactly right)", ORANGE, "//"),
+    series = [("f1", "F1", BLUE, ""),
+              ("success", "Task success", ORANGE, "//"),
               ("highlight_exact", "Requested part exactly right", GREEN, "..")]
     fig, ax = plt.subplots(figsize=(7.2, 3.6))
     bw = 0.25
@@ -392,12 +390,16 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
         xs = [i + (j - 1) * (bw + 0.02) for i in range(len(tiers))]
         ys = [v[f"oct.spec.{t}.{key}"] for t, _ in tiers]
         ax.bar(xs, ys, width=bw, color=colour, edgecolor="white", linewidth=1.0, hatch=hatch, label=label)
-        for x, y in zip(xs, ys):
-            ax.text(x, y + 0.015, f"{y:.2f}", ha="center", va="bottom", fontsize=8, color=INK)
+        for (t, _), x, y in zip(tiers, xs, ys):
+            # The third series has its own denominator: answers to tasks with a marked requested part.
+            n = v[f"oct.spec.{t}.highlight_n"] if key == "highlight_exact" else v[f"oct.spec.{t}.n"]
+            ax.text(x, y + 0.015, f"{y:.2f}\nn = {n}", ha="center", va="bottom", fontsize=7, color=INK,
+                    linespacing=1.15)
     ax.set_xticks(range(len(tiers)))
     ax.set_xticklabels([n for _, n in tiers], fontsize=9)
-    ax.set_ylim(0, 1.0)
-    ax.set_ylabel("Mean over all answers (invalid answer = 0)", fontsize=9)
+    ax.set_ylim(0, 1.22)
+    ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
+    ax.set_ylabel("Score (invalid answer = 0)", fontsize=9)
     ax.tick_params(axis="y", labelsize=8, length=0)
     ax.tick_params(axis="x", length=0)
     ax.yaxis.grid(True, color="#e3e3e3", linewidth=0.8)
@@ -405,7 +407,7 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
     for side in ("top", "right", "left"):
         ax.spines[side].set_visible(False)
     ax.spines["bottom"].set_color(LINE)
-    ax.legend(frameon=False, fontsize=8.5, loc="upper right")
+    ax.legend(frameon=False, fontsize=8, loc="upper center", ncol=3, columnspacing=1.2, handlelength=1.4)
     fig.tight_layout()
     fig.savefig(out, format="svg", metadata={"Date": None, "Creator": None})
     plt.close(fig)
@@ -420,8 +422,7 @@ def fig_result_shapes(v: dict) -> str:
     greyed example row that is labelled as an example."""
     W, H = 960, 372
     s = Svg(W, H, "Shapes of the three result figures that the final run will fill; no data are shown")
-    s.text(12, 24, "Result figures as they will be drawn (no data yet)", size=15, weight="bold")
-    s.text(12, 42, "Axes and marks are final. The grey row in each panel is an example of a mark, not a result.",
+    s.text(12, 42, "No data yet. Axes and marks are final. The grey row in each panel is an example of a mark, not a result.",
            size=11, fill=MUTED)
     pw, ph, top = 300, 268, 62
 
@@ -443,8 +444,8 @@ def fig_result_shapes(v: dict) -> str:
 
     # A: leaderboard
     x0, ax, ay, aw = frame(0, "A  Task success by model and track",
-                           f"One row per model, best first: {v['plan.n_core_models']} panel models, up to {v['plan.n_optional_models']} optional ones (†) and the keyword script.",
-                           "Task success, strict",
+                           f"One row per model, best first: {v['plan.n_core_models']} core models, up to {v['plan.n_optional_models']} optional ones (†) and the keyword script.",
+                           "Task success rate, strict",
                            ["0", "0.25", "0.5", "0.75", "1"])
     ry = top + 92
     s.text(ax - 6, ry + 4, "model", size=9.5, anchor="end", fill=MUTED)
@@ -462,7 +463,7 @@ def fig_result_shapes(v: dict) -> str:
 
     # B: pairs
     x0, ax, ay, aw = frame(1, "B  The same request in both formats",
-                           f"One bar per model: its {v['corpus.n_twin_pairs']} pairs, split by which side is right (target score of 1).",
+                           f"One bar per model: its {v['corpus.n_twin_pairs']} pairs, by which side is right (at least 2 of 3 answers target-right).",
                            "Share of pairs", ["0", "0.25", "0.5", "0.75", "1"])
     ry = top + 86
     s.text(ax - 6, ry + 10, "model", size=9.5, anchor="end", fill=MUTED)
@@ -483,19 +484,19 @@ def fig_result_shapes(v: dict) -> str:
         s.text(kx + 20, kyy, label, size=9.5)
 
     # C: tiers
-    x0, ax, ay, aw = frame(2, "C  Where points are lost, by tier",
-                           "One row per tier and track, models averaged. A gap between the marks is unrequested extra drawing.",
+    x0, ax, ay, aw = frame(2, "C  Where points are lost, by category",
+                           "One row per category and track, models averaged. Target score above task success: the requested atoms were right, the rest was not exact.",
                            "Score, valid answers only", ["0", "0.25", "0.5", "0.75", "1"])
     ry = top + 92
-    s.text(ax - 6, ry + 4, "tier", size=9.5, anchor="end", fill=MUTED)
+    s.text(ax - 6, ry + 4, "category", size=9.5, anchor="end", fill=MUTED)
     s.line(ax + aw * 0.38, ry, ax + aw * 0.80, ry, stroke=GREY, sw=1.5)
     s.raw(f'<path d="M{ax + aw * 0.38 - 5},{ry} l5,-5 l5,5 l-5,5 z" fill="{GREY}"/>')
     s.circle(ax + aw * 0.80, ry, 4.5, GREY)
     ky = top + ph - 14
     s.raw(f'<path d="M{x0 + 11},{ky - 4} l5,-5 l5,5 l-5,5 z" fill="{ORANGE}"/>')
-    s.text(x0 + 26, ky, "task success", size=9.5)
-    s.circle(x0 + 110, ky - 4, 4.5, GREEN)
-    s.text(x0 + 120, ky, "target score", size=9.5)
+    s.text(x0 + 26, ky, "task success rate", size=9.5)
+    s.circle(x0 + 136, ky - 4, 4.5, GREEN)
+    s.text(x0 + 146, ky, "target score", size=9.5)
     return s.done()
 
 

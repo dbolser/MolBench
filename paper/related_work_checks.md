@@ -76,3 +76,11 @@ full text (first 100,000 characters of each):
   Crossref record, because the AlphaFold DB licence asks for it.
 - No other citation was added. Statements about other benchmarks (169, 108 and 146 tasks;
   alpha 0.669; r about 0.81; 38.6% of 176,507 entries) are unchanged from the verified draft.
+
+## Review round 2 (2026-11-22)
+
+- One reference was added: Pepys et al. 1993 (Nature 362:553–557, DOI 10.1038/362553a0), for
+  the lysozyme variant p.Ile74Thr (I56T) in SI Section S3.2. Title, journal, year, volume,
+  pages and authors were taken from its Crossref record on 2026-11-22. The statement that the
+  paper reports two variants (Ile56Thr and Asp67His) was written from memory by the
+  editing assistant and was not re-read at the source: check before submission.

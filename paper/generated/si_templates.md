@@ -1,4 +1,4 @@
-| Tier | Template | Scene tasks | Call-list tasks | Example request |
+| Category | Template | Scene tasks | Call-list tasks | Example request |
 |:---|:---|---:|---:|:---|
 | Translation | `api-assembly` | – | 6 | Load oxyhaemoglobin (1HHO) as its biological assembly (the tetramer, assembly 1) and show it as a molecular surface. |
 | Translation | `api-atoms` | – | 5 | Open 1AAY in the ball-and-stick style; atoms CB and OD1 of Asp166 of chain A should be cyan. |

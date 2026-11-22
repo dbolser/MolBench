@@ -1,4 +1,4 @@
-| Model identifier | Panel | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
+| Model identifier | Set | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
 |:---|:---|:---|:---|:---|:---|:---|
 | Keyword script | core | not a model | – | – | 0 / 0 | – |
 | `claude-haiku-4-5` | core | closed | no | no | 1.0 / 5.0 | 2026-11-16 |
