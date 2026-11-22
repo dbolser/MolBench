@@ -17,10 +17,11 @@ from __future__ import annotations
 import hashlib
 import json
 import pathlib
+import re
 import statistics
 import sys
 import threading
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Any, Iterable
 
 try:  # Python >= 3.11
@@ -47,6 +48,12 @@ REASONING_EFFORTS = ("provider-default", "minimal", "low", "medium", "high")
 # A pilot manifest (``run.pilot = true``) proves the provider path on a handful of
 # tasks. It may run on a corpus that is not frozen yet, so it is kept small by rule.
 PILOT_MAX_BUDGET_USD = 5.0
+
+
+#: An OpenRouter model id that is billed at zero.
+FREE_MODEL = re.compile(r"[A-Za-z0-9._-]+/[A-Za-z0-9._:-]+:free")
+#: Stands in for the free model in a pilot's dry run, where no model is called.
+FREE_MODEL_PLACEHOLDER = "example/free-model:free"
 
 
 class ManifestError(ValueError):
@@ -186,6 +193,33 @@ class Manifest:
             raise ManifestError(f"--only-models names models not in the manifest: {sorted(unknown)}")
         return [m for m in self.models
                 if (m.id in only if only else (include_optional or not m.optional))]
+
+    def with_free_model(self, model_id: str, reasoning: bool = False,
+                        date: str = "") -> "Manifest":
+        """This pilot with one zero-price OpenRouter model added to its panel
+        (``--free-model``): any model id that ends in ``:free``, which OpenRouter bills
+        at 0. The free listings come and go and are rate-limited upstream (on
+        2026-11-16 the first one tried answered 429 to every call), so the model is
+        named when the pilot is started, not in the manifest. ``reasoning`` gives it
+        the reasoning token limit: a model that thinks before it answers spends most
+        of its output tokens on that, and at the plain limit its answers come back
+        empty with finish reason ``length`` (12 of 63 pilot calls did)."""
+        if not self.pilot:
+            raise ManifestError("--free-model is for a pilot manifest (run.pilot = true); "
+                                "the final run's panel is the manifest's")
+        if not FREE_MODEL.fullmatch(model_id):
+            raise ManifestError(f"--free-model {model_id!r}: give an OpenRouter model id that "
+                                "ends in ':free' (vendor/name:free); anything else has a price")
+        if any(m.id == model_id for m in self.models):
+            return self
+        spec = ModelSpec(
+            id=model_id, route=f"openrouter:{model_id}", open_weights=True,
+            reasoning=reasoning, structured="json_object", optional=True, max_concurrency=1,
+            reason="A zero-price OpenRouter model named on the command line: proves the "
+                   "OpenRouter route, JSON mode and the billed-cost field without spending.",
+            price=Price(0.0, 0.0, source="OpenRouter ':free' model id (billed at 0; the "
+                        "archive records usage.cost per call)", date=date, verified=True))
+        return replace(self, models=self.models + (spec,))
 
     def max_tokens_for(self, model: ModelSpec) -> int:
         if model.max_tokens:

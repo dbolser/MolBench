@@ -6,9 +6,11 @@
 #   Route 1, the direct Anthropic key (ANTHROPIC_API_KEY), about $0.30:
 #   python -m molbench.runner --manifest run/pilot.toml --go
 #
-#   Route 2, OpenRouter with a ":free" model (OPENROUTER_API_KEY), $0:
+#   Route 2, OpenRouter with any ":free" model (OPENROUTER_API_KEY), $0. Name the model
+#   when you start; add --free-model-reasoning if it reasons before it answers:
 #   python -m molbench.runner --manifest run/pilot.toml --go \
-#       --include-optional --only-models google/gemma-4-31b-it:free
+#       --free-model nvidia/nemotron-3.5-lightning:free --free-model-reasoning
+#   (the same two flags with --grade-only re-grade that model's archive)
 #
 # One model per start, one sample per task. Both routes write to runs/pilot-v1/ and
 # results/pilot-v1/ (cells are kept per model). A pilot may run before the corpus is
@@ -86,8 +88,10 @@ backoff_max_seconds = 60.0
 timeout_seconds = 300.0
 
 [budget]
-cap_usd = 2.00
-note = "Hard stop, as in the final run. The Anthropic route is projected at well under $1."
+cap_usd = 2.25
+note = """Hard stop, as in the final run. The Anthropic route is projected at about $0.25 and \
+cost $0.21 on 2026-11-16; the cap is its worst case (every answer at the token limit, $2.01), \
+which went past $2.00 when the format references grew by a few lines after the pilot."""
 
 [corpus]
 version = "corpus-v1.0-dev"
@@ -123,8 +127,8 @@ note = "Grounding pack appended, lookup tiers, as in the final run."
 
 [panel]
 rule = """Not a result: one model per start, chosen to prove a route. The Anthropic entry is \
-the final panel's own claude-haiku-4-5 on its own route; the OpenRouter entry is a zero-price \
-model that is not in the final panel."""
+the final panel's own claude-haiku-4-5 on its own route; the OpenRouter model is any \
+zero-price (":free") model named with --free-model, and is not in the final panel."""
 
 [[models]]
 id = "claude-haiku-4-5"
@@ -134,13 +138,7 @@ reasoning = false
 structured = "none"
 price = { input = 1.0, output = 5.0, source = "Anthropic price list (platform.claude.com/docs/en/about-claude/pricing), as cached 2026-11-03; same on OpenRouter", date = "2026-11-16", verified = true }
 
-[[models]]
-id = "google/gemma-4-31b-it:free"
-route = "openrouter:google/gemma-4-31b-it:free"
-open_weights = true
-reasoning = false
-structured = "json_object"
-optional = true
-max_concurrency = 1
-reason = "A zero-price OpenRouter model whose listing has response_format: proves the OpenRouter route, JSON mode and the billed-cost field without spending."
-price = { input = 0.0, output = 0.0, source = "https://openrouter.ai/api/v1/models", date = "2026-11-16", verified = true }
+# The OpenRouter route has no entry here: free listings come and go and are rate-limited
+# upstream (google/gemma-4-31b-it:free answered 429 to every call on 2026-11-16), so the
+# model is named on the command line (--free-model). It is added to the panel at price 0
+# with JSON mode on, optional, one call at a time (molbench.manifest.with_free_model).

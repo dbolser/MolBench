@@ -3,7 +3,7 @@
 | file | what it is |
 |---|---|
 | `final_run.toml` | The run manifest: corpus version + hash, model panel with prices (source and date), conditions, samples, token limits, retry policy, budget cap. The only input to the run. |
-| `pilot.toml` | The provider-path pilot: 39 tasks, one model per start, one sample, cap $2. Two routes: the direct Anthropic key, or an OpenRouter `:free` model. Its commands are at the top of the file. |
+| `pilot.toml` | The provider-path pilot: 39 tasks, one model per start, one sample, cap $2.25. Two routes: the direct Anthropic key, or any OpenRouter `:free` model named with `--free-model` (add `--free-model-reasoning` for one that reasons before it answers). Its commands are at the top of the file; what the pilot of 2026-11-16 found is in `PILOT.md`. |
 | `select_pilot.py` | Picks the pilot's tasks by rule (every tier × track, public and held back, twins, follow-ups, accept-set, one request in three phrasings) and writes them into `pilot.toml`; `--check` says whether the list is current. |
 | `token_calibration.json` | Per-model token rates measured on the 2026-10-18 archives; used to project cost. Rebuild with `python scripts/estimate_cost.py --calibrate <runs dir>`. |
 | `site_r2x2.toml` | Renamed / not-run models of the October 2026 leaderboard build (`scripts/build_site_data.py --results`). Not used by a manifest run. |

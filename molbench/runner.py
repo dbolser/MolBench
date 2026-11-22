@@ -45,6 +45,7 @@ from datetime import datetime, timezone
 from typing import Any, Callable
 
 from . import difficulty as difficulty_mod
+from . import drawn as drawn_mod
 from . import grader as grader_mod
 from . import manifest as manifest_mod
 from . import mvs as mvs_mod
@@ -434,15 +435,14 @@ def _grade_task(task: dict, prediction: Any) -> dict[str, Any]:
     if not alt_targets:
         return grader_mod.grade_task(
             _grader_view(task, reference, task.get("target"), accepted), prediction)
-    best, best_rank = None, None
+    results = []
     answers = [(reference, task.get("target"))] + list(zip(accepted, alt_targets))
     for i, (state, target) in enumerate(answers):
         res = grader_mod.grade_task(_grader_view(task, state, target, []), prediction)
         res["matched_reference"] = i
-        rank = (bool(res.get("success")), res.get("f1") or 0.0, res.get("target_f1") or 0.0)
-        if best is None or rank > best_rank:
-            best, best_rank = res, rank
-    return best
+        results.append(res)
+    return drawn_mod.best_of(results, rank=lambda r: (
+        bool(r.get("success")), r.get("f1") or 0.0, r.get("target_f1") or 0.0))
 
 
 def grader_problems(task: dict) -> list[str]:
@@ -1485,10 +1485,21 @@ def analysis_fields(task: dict, sample: dict) -> dict[str, Any]:
       table; on any other accepted entry the answer is graded as written (GRADING.md),
       so resolve results are reported apart for the two.
 
+    * ``hidden_overlay`` - an MVS answer that parsed: whether it draws something the
+      viewer does not show because the same representation type was already drawn on
+      those atoms (`mvs.hidden_overlays`: a grey cartoon of the whole chain, then a
+      stretch of it again as a green cartoon). The answer is graded as what is seen;
+      the flag lets the paper count how many failures are of this one kind.
+
     All are None on every other task. None changes a score."""
     out: dict[str, Any] = {"preserved_f1": None, "preserved_ok": None, "entry_outcome": None,
-                           "entry_is_reference": None}
+                           "entry_is_reference": None, "hidden_overlay": None}
     parsed = sample.get("predicted") if sample.get("outcome") != "invalid_json" else None
+    if task.get("category") == "mvs" and isinstance(parsed, dict):
+        try:
+            out["hidden_overlay"] = bool(mvs_mod.hidden_overlays(parsed))
+        except Exception:  # noqa: BLE001 - an answer must never be able to stop the grading
+            out["hidden_overlay"] = None
     if preserved_parts(task):
         kept = preserved_score(task, parsed) if parsed is not None else None
         out.update(kept or {"preserved_f1": 0.0, "preserved_ok": False})
@@ -1602,7 +1613,8 @@ def _sample_summary(s: dict) -> dict[str, Any]:
     for k in ("error", "mvs_issues", "load_error", "grader_crash", "matched_reference"):
         if s.get(k):
             out[k] = s[k]
-    for k in ("preserved_f1", "preserved_ok", "entry_outcome", "entry_is_reference"):
+    for k in ("preserved_f1", "preserved_ok", "entry_outcome", "entry_is_reference",
+              "hidden_overlay"):
         if s.get(k) is not None:
             out[k] = s[k]
     if "repair" in s:
@@ -1754,7 +1766,7 @@ SAMPLE_RECORD_FIELDS = (
     "run", "model", "route", "condition", "task_id", "sample", "track", "tier", "split",
     "structures", "raw", "predicted", "f1", "precision", "recall", "success", "target_f1",
     "outcome", "error", "grader", "matched_reference", "preserved_f1", "preserved_ok",
-    "entry_outcome", "entry_is_reference", "finish_reason", "truncated",
+    "entry_outcome", "entry_is_reference", "hidden_overlay", "finish_reason", "truncated",
     "input_tokens", "output_tokens", "reasoning_tokens", "cost_usd", "cost_source",
     "latency_s", "temperature", "reasoning_effort", "max_tokens", "structured", "provider",
     "response_model",
@@ -1780,6 +1792,7 @@ def sample_record(cell: Cell, s: dict) -> dict[str, Any]:
         "grader": s.get("grader"), "matched_reference": s.get("matched_reference"),
         "preserved_f1": s.get("preserved_f1"), "preserved_ok": s.get("preserved_ok"),
         "entry_outcome": s.get("entry_outcome"), "entry_is_reference": s.get("entry_is_reference"),
+        "hidden_overlay": s.get("hidden_overlay"),
         "finish_reason": r.get("finish_reason"), "truncated": is_truncated(r),
         "input_tokens": usage.get("input_tokens"), "output_tokens": usage.get("output_tokens"),
         "reasoning_tokens": usage.get("reasoning_tokens"),
@@ -2162,14 +2175,27 @@ KEY_ENV = {"anthropic": "ANTHROPIC_API_KEY", "openai": "OPENAI_API_KEY",
            "google": "GEMINI_API_KEY"}
 
 
+#: provider -> (the package its adapter imports, the extra that installs it)
+SDK = {"anthropic": ("anthropic", "anthropic"), "openai": ("openai", "openai"),
+       "openrouter": ("openai", "openai"), "gemini": ("openai", "openai"),
+       "google": ("openai", "openai")}
+
+
 def preflight(manifest: Manifest, panel: list[ModelSpec]) -> list[str]:
     """Reasons a paid run cannot finish, found before the first call: a missing API
-    key, or Mol* validation required but not installed."""
+    key, a provider SDK that is not installed, or Mol* validation required but not
+    installed."""
     problems = []
-    for env in sorted({KEY_ENV[p] for p in (m.route.split(":")[0] for m in panel)
-                       if p in KEY_ENV}):
+    providers = {m.route.split(":")[0] for m in panel}
+    for env in sorted({KEY_ENV[p] for p in providers if p in KEY_ENV}):
         if not os.environ.get(env):
             problems.append(f"{env} is not set")
+    # The SDK each route needs. Without this check a missing package fails every call
+    # of the route instead of the start (the pilot's first start, 2026-11-16: 18 cells
+    # written to errors.jsonl as "No module named 'anthropic'").
+    for sdk, extra in sorted({SDK[p] for p in providers if p in SDK}):
+        if importlib.util.find_spec(sdk) is None:
+            problems.append(f"the '{sdk}' package is not installed (uv sync --extra {extra})")
     if manifest.validate == "required" and any("mvs" in c.tracks for c in manifest.conditions):
         from . import render
         if importlib.util.find_spec("playwright") is None:
@@ -2183,6 +2209,14 @@ def preflight(manifest: Manifest, panel: list[ModelSpec]) -> list[str]:
 
 def manifest_main(args: argparse.Namespace) -> int:
     manifest = manifest_mod.load_manifest(args.manifest)
+    free = args.free_model
+    if free is None and args.dry_run and manifest.pilot:
+        free = manifest_mod.FREE_MODEL_PLACEHOLDER   # rehearse the free route's cells too
+    if free is not None:
+        manifest = manifest.with_free_model(free, reasoning=args.free_model_reasoning,
+                                            date=datetime.now(timezone.utc).date().isoformat())
+        if args.free_model:
+            args.only_models = [free]    # one model per start: the free one
     calib = Calibration.load(args.calibration)
     runs_dir = pathlib.Path(args.runs_dir) if args.runs_dir else RUNS_DIR
     results_dir = pathlib.Path(args.results_dir) if args.results_dir else RESULTS_DIR
@@ -2207,7 +2241,22 @@ def manifest_main(args: argparse.Namespace) -> int:
         corpus_sha = manifest_mod.check_corpus(manifest, TASKS_DIR, strict=False)
         lock = json.loads((archive_dir / "run.json").read_text(encoding="utf-8"))
         if lock["corpus_sha256"] != corpus_sha:
-            raise ManifestError("the corpus on disk is not the corpus this archive was run on")
+            if not manifest.pilot:
+                raise ManifestError("the corpus on disk is not the corpus this archive was "
+                                    "run on")
+            # A pilot exists to find faults, and fixing them moves the corpus. Its
+            # archive may be graded again on the corpus as it is now; the tasks whose
+            # file or prompt changed since the call are named, and the scorecards say
+            # which corpus they were graded on.
+            done = archive.load()
+            moved = sorted({c.task["id"] for c in cells if c.key in done and (
+                done[c.key].get("task_sha256") != task_hash(c.task)
+                or done[c.key].get("prompt_sha256") != c.prompt_sha256)})
+            print(f"NOTE: the corpus has changed since this pilot was run (then "
+                  f"{lock['corpus_sha256'][:12]}, now {corpus_sha[:12]}). Grading the archived "
+                  f"answers on the corpus as it is now; {len(moved)} task(s) have another file "
+                  "or prompt than the one the model answered"
+                  + (": " + ", ".join(moved) if moved else "") + ".")
     else:
         print_projection(manifest, project_costs(manifest, cells, calib))
         if not args.go:
@@ -2310,6 +2359,12 @@ def main(argv: list[str] | None = None) -> None:
                    help="dry run: leave the optional models out (they are in by default)")
     g.add_argument("--only-models", nargs="+", default=None, metavar="ID",
                    help="restrict the run to these manifest model ids")
+    g.add_argument("--free-model", default=None, metavar="VENDOR/ID:free",
+                   help="pilot only: run this zero-price OpenRouter model (any id ending in "
+                        "':free') instead of the manifest's own panel")
+    g.add_argument("--free-model-reasoning", action="store_true",
+                   help="with --free-model: the model reasons before it answers, so give it "
+                        "the reasoning token limit")
     g.add_argument("--allow-unverified-prices", action="store_true",
                    help="start a paid run although some manifest prices are unverified")
     g.add_argument("--calibration", default=None,

@@ -46,10 +46,13 @@ def _with(extra: str = "", **swap: str) -> str:
 def test_final_manifest_states_the_planned_run():
     m = mf.load_manifest(FINAL)
     core = m.panel()
-    assert len(core) == 17 and not any(x.optional for x in core)   # 16 models + the baseline
-    assert 3 <= len(m.panel(include_optional=True)) - 17 <= 5
+    assert len(core) == 18 and not any(x.optional for x in core)   # 16 models + two baselines
+    assert 3 <= len(m.panel(include_optional=True)) - 18 <= 5
     baseline = next(x for x in core if x.route == "baseline")
     assert baseline.id == "baseline-rules" and baseline.price.cost(10**6, 10**6) == 0
+    literal = next(x for x in core if x.route == "baseline-literal")   # lead's ruling, 2026-11-22
+    assert literal.id == "baseline-literal" and literal.price.cost(10**6, 10**6) == 0
+    assert all(c.takes_model(literal) or c.structured or c.models != "all" for c in m.conditions)
     assert "baseline" in m.panel_rule and "optional" in m.panel_rule.lower()   # decision 22
     assert m.samples == 3 and m.temperature == "provider-default"
     assert m.budget_usd > 0 and m.validate == "required"
@@ -75,7 +78,8 @@ def test_every_model_has_a_sourced_price_and_optional_ones_a_reason():
 def test_panel_matches_the_published_leaderboard():
     card = json.loads((REPO / "docs" / "scorecard.json").read_text())
     published = {m["spec"] for m in card["models"].values() if m["spec"] != "baseline"}
-    assert {x.route for x in mf.load_manifest(FINAL).panel()} == published | {"baseline"}
+    assert {x.route for x in mf.load_manifest(FINAL).panel()} == published | {
+        "baseline", "baseline-literal"}
 
 
 def test_calibration_covers_the_core_panel_or_falls_back():
@@ -307,13 +311,27 @@ def _pilot():
 
 def test_pilot_manifest_is_one_cheap_model_per_route():
     m, corpus, select_pilot, runner = _pilot()
-    assert m.pilot and m.budget_usd == 2.0 and m.reasoning_effort == "provider-default"
+    assert m.pilot and m.budget_usd == 2.25 and m.reasoning_effort == "provider-default"
     assert all(m.samples_for(c) == 1 for c in m.conditions)
     assert [x.route for x in m.panel()] == ["anthropic:claude-haiku-4-5"]   # the default start
+    # The OpenRouter route has no entry of its own: any ":free" model is named at the
+    # start (--free-model), because free listings come and go and are rate-limited.
+    assert [x.id for x in m.models] == ["claude-haiku-4-5"]
+    name = "nvidia/nemotron-3.5-lightning:free"
+    m = m.with_free_model(name, reasoning=True, date="2026-11-22")
     free = [x for x in m.models if x.optional]
-    assert len(free) == 1 and free[0].route.startswith("openrouter:")
-    assert free[0].route.endswith(":free") and free[0].price.cost(10**6, 10**6) == 0
-    assert free[0].structured == "json_object"
+    assert len(free) == 1 and free[0].route == "openrouter:" + name
+    assert free[0].price.cost(10**6, 10**6) == 0 and free[0].price.verified
+    assert free[0].structured == "json_object" and free[0].max_concurrency == 1
+    assert m.max_tokens_for(free[0]) == m.reasoning_max_tokens          # it reasons first
+    assert m.max_tokens_for(mf.load_manifest(PILOT).with_free_model(name).models[-1]) == m.max_tokens
+    assert m.with_free_model(name) is m                                 # named twice: once
+    assert [x.route for x in m.panel()] == ["anthropic:claude-haiku-4-5"]   # still optional
+    for bad in ("nvidia/nemotron-3.5-lightning", "openai/gpt-4o", "free", ":free"):
+        with pytest.raises(mf.ManifestError, match="ends in ':free'"):
+            mf.load_manifest(PILOT).with_free_model(bad)
+    with pytest.raises(mf.ManifestError, match="pilot manifest"):
+        mf.load_manifest(FINAL).with_free_model(name)
     # the Anthropic model is the final panel's own entry, at the same price
     final = {x.id: x for x in mf.load_manifest(FINAL).models}
     mine = m.panel()[0]
