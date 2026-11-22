@@ -559,6 +559,24 @@ def test_v2_weights_stand_for_the_run():
     assert ag.weights_v2({k: items[k] for k in "ab"}, pop) == {"a": 90.0, "b": 10.0}   # c's cell is covered by scaling
 
 
+def test_v2_weights_undo_the_preference_for_passes_that_look_different():
+    """The set keeps 3 passes whose pictures differ and 1 identical one, but of the 20
+    passes drawn only 4 differed: the three stand for 20% of the run's passes, the one for 80%."""
+    items = {k: {**_pair(f"t{n}", "right"), "pictures_differ": k != "d"} for n, k in enumerate("abcd")}
+    pop = {"cells": [["clinical", "right", 100]], "right_pictures": {"drawn": 20, "differ": 4}}
+    w = ag.weights_v2(items, pop)
+    assert w["d"] == pytest.approx(80.0) and sum(w[k] for k in "abc") == pytest.approx(20.0)
+    # people reject one of the passes that differ: 1 in 3 of 20%, not 1 in 4 of everything
+    rows = [_a("R1", "a", D, D), _a("R1", "b", S, S), _a("R1", "c", S, S), _a("R1", "d", S, S)]
+    res = analyse(_v2_key(items), _v2(rows), population=pop)["cohorts"]["all"]["whole"]
+    assert res["unweighted"]["per_rating"]["agreement"]["est"] == 0.75
+    assert res["weighted"]["per_rating"]["agreement"]["est"] == pytest.approx(1 - 0.2 / 3)
+    assert {g: v["pairs"] for g, v in res["right_by_pictures"].items()} == {"differ": 3, "identical": 1}
+    # a key from before the preference (no flag, no counts) is weighted as before
+    plain = {k: _pair(f"t{n}", "right") for n, k in enumerate("ab")}
+    assert ag.weights_v2(plain, {"cells": [["clinical", "right", 100]]}) == {"a": 50.0, "b": 50.0}
+
+
 def test_v2_retest_judge_and_markdown():
     items = {**CHECK_ITEMS, "aaaaaaaaaaaa": _pair("t1", "right", judge_label=S),
              "bbbbbbbbbbbb": _pair("t2", "wrong", judge_label=S), "cccccccccccc": _pair("t3", "wrong")}

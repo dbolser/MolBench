@@ -682,6 +682,19 @@ def weights_v2(rated: dict[str, dict], population: dict | None) -> dict[str, flo
     small = collections.Counter((it["tier"], it["grader_class"]) for it in rated.values())
     w = {i: big.get((it["tier"], it["grader_class"]), small[it["tier"], it["grader_class"]])
             / small[it["tier"], it["grader_class"]] for i, it in rated.items()}
+    # Among the grader's passes the set prefers the ones whose pictures differ from the
+    # reference's. Undo that with the share of such passes among all passes drawn.
+    rp = population.get("right_pictures") or {}
+    if rp.get("drawn"):
+        share = {True: rp["differ"] / rp["drawn"], False: 1 - rp["differ"] / rp["drawn"]}
+        ids = [i for i, it in rated.items() if it["grader_class"] == "right" and "pictures_differ" in it]
+        both = sum(w[i] for i in ids)
+        for g in (True, False):
+            mine = [i for i in ids if bool(rated[i]["pictures_differ"]) is g]
+            if mine and share[g] > 0:
+                scale = share[g] * both / sum(w[i] for i in mine)
+                for i in mine:
+                    w[i] = w[i] * scale
     for cls in CLASSES:
         ids = [i for i, it in rated.items() if it["grader_class"] == cls]
         total = sum(n for (_, c), n in big.items() if c == cls)
@@ -775,7 +788,8 @@ def view_block(rows: list[dict], items: dict, view: str, machine, population: di
     def by(group_of, stat, keys) -> dict:
         groups = collections.defaultdict(list)
         for i in votes:
-            groups[group_of(items[i])].append(i)
+            if (g := group_of(items[i])) is not None:
+                groups[g].append(i)
         res = {}
         for g, ids in sorted(groups.items(), key=lambda kv: str(kv[0])):
             per_rating, _ = records(ids, None)
@@ -787,6 +801,11 @@ def view_block(rows: list[dict], items: dict, view: str, machine, population: di
     order = {c: n for n, c in enumerate(CLASSES)}
     by_class = by(lambda it: it["grader_class"], _share_same, ("same_share",))
     out["by_class"] = dict(sorted(by_class.items(), key=lambda kv: order.get(kv[0], 9)))
+    # The grader's passes, apart by whether the answer's pictures differ from the
+    # reference's at all: an identical picture cannot be called anything but "same".
+    out["right_by_pictures"] = by(
+        lambda it: None if it["grader_class"] != "right" or "pictures_differ" not in it
+        else ("differ" if it["pictures_differ"] else "identical"), _share_same, ("same_share",))
     out["by_tier"] = by(lambda it: it.get("tier", "unknown"), judge_measures,
                         ("agreement", "cohen_kappa", "rescue_precision", "npv"))
     return out
@@ -952,13 +971,21 @@ def markdown_v2(res: dict) -> str:
 
     L += ["", "## What people said, by the grader's verdict", "",
           "Share of labelled answers that say \"same\". Expected if the grader is right: high for *right* on both "
-          "views; for *close*, low on the whole scene and high on the zoomed view; low for *wrong* on both.", ""]
+          "views; for *close*, low on the whole scene and high on the zoomed view; low for *wrong* on both. "
+          "The rows that test the grader's passes are the ones whose pictures differ from the reference's: "
+          "an identical picture can only be called same.", ""]
     for k in ("primary", "no_author"):
         L += [f"**{names[k]}**", "", "| grader's verdict | pairs | whole scene: same | zoomed view: same |", "|---|---|---|---|"]
         for cls in CLASSES:
             w, t = c[k]["whole"]["by_class"].get(cls), c[k]["target"]["by_class"].get(cls)
             L.append(f"| {cls} | {w['pairs'] if w else 0} | {_ci(w['same_share']) if w else 'n/a'} | "
                      f"{_ci(t['same_share']) if t else 'n/a'} |")
+            for g, label in (("differ", "pictures differ from the reference's"),
+                             ("identical", "pictures identical to the reference's")) if cls == "right" else ():
+                w, t = c[k]["whole"]["right_by_pictures"].get(g), c[k]["target"]["right_by_pictures"].get(g)
+                if w:
+                    L.append(f"| &nbsp;&nbsp;right, {label} | {w['pairs']} | {_ci(w['same_share'])} | "
+                             f"{_ci(t['same_share']) if t else 'n/a'} |")
         L.append("")
 
     L += ["## By tier (without the author, task success against the whole scene)", "",

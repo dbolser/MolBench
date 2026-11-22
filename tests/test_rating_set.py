@@ -271,3 +271,37 @@ def test_plan_only_draws_nothing(run, corpus, tmp_path, capsys):
     assert "30 pairs" in out and "right (run)" in out
     with pytest.raises(SystemExit):
         rs.main([str(tmp_path / "run"), "--set", "a4-v1", "--plan-only"])
+
+
+def test_each_pair_records_how_far_its_pictures_differ(run, corpus, tmp_path):
+    key = build(run, corpus, tmp_path, n_checks=0)[1]
+    for v in key["items"].values():
+        shares = v["differing_pixels"]
+        assert len(shares) == (2 if v["has_target"] else 1)
+        assert all(0.0 <= x <= 1.0 for x in shares)
+
+
+def test_passes_whose_pictures_differ_are_preferred_and_counted(corpus, tmp_path):
+    """Most passes of a run repeat the reference exactly (identical pictures). The set
+    draws further passes, keeps those that differ, and records the share among all drawn."""
+    ts = [t for t in sorted(corpus.values(), key=lambda t: t["id"])
+          if t["track"] == "mvs" and t["tier"] == "translation" and t.get("target")][:12]
+    samples = []
+    for t in ts:
+        for m in range(6):
+            # one model in three gives a pass that looks different; the rest repeat the reference
+            scene = {**t["reference"], "_variant": m} if m % 3 == 0 else t["reference"]
+            samples.append(_sample(t, f"lab/model-{m}", 0, True, 1.0, predicted=scene))
+    kw = dict(n_pairs=12, n_checks=0, per_task=1, model_share=1.0, mix={"right": 1, "close": 0, "wrong": 0})
+    plain = build(samples, corpus, tmp_path, right_pool=1.0, **kw)[1]
+    key = build(samples, corpus, tmp_path, right_pool=3.0, differ_share=0.75, **kw)[1]
+    count = lambda k: sum(v["pictures_differ"] for v in k["items"].values())
+    rp = key["population"]["right_pictures"]
+    assert count(key) > count(plain)
+    n = len(key["items"])
+    assert n == len(plain["items"]) and rp["kept_differ"] == count(key) and rp["kept_differ"] + rp["kept_identical"] == n
+    assert rp["drawn"] > n and 0 < rp["differ"] / rp["drawn"] < 0.6       # near the run's one in three
+    assert plain["population"]["right_pictures"]["drawn"] == n
+    tasks_used = collections.Counter(v["base_task"] for v in key["items"].values())
+    assert max(tasks_used.values()) == 1                                    # the cap per task still holds
+    assert len({(v["model"], v["task"]) for v in key["items"].values()}) == n

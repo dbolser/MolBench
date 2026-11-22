@@ -40,7 +40,10 @@ the set is built to check the GRADER against people, not only the image judge:
   pairs    one answer per (task, model), MVS track, valid scenes only, drawn in three
            classes of the grader's verdict: right (task success), close (success
            false, target score 1) and wrong; an equal share per tier inside each
-           class, models taken in turn, at most --per-task pairs per task. Each pair is
+           class, models taken in turn, at most --per-task pairs per task. Among
+           the passes, those whose pictures differ from the reference's are preferred
+           (--right-pool, --differ-share): an identical picture tests nothing. The key
+           records the share among all passes drawn; agreement.py weights by it. Each pair is
            four pictures: reference and answer, whole and framed on the target atoms,
            the answer always from the reference's camera.
   checks   a pool of known answers of three kinds: the reference against itself
@@ -51,9 +54,12 @@ the set is built to check the GRADER against people, not only the image judge:
            class x tier; the rating site opens pairs in that order and gives a pair
            its second rater before it opens a new one.
 
-Scene track only: an API answer is a call list, graded by replaying it to a final
-viewer state; no picture of it is made by the run, and one taken in pdbe-molstar
-would test that viewer's defaults (see paper/a4/FINAL_CALL.md).
+Scene track only. The pictures, the shared camera and the framing on the target
+exist for MVS scenes (molbench/render.py). An API answer is a call list; its final
+state CAN be pictured in headless pdbe-molstar 3.3.2 from the reference's camera
+(paper/a4/api_render_probe.py did it for two pilot answers), but that path has no
+target framing and has not been tried on every call kind, so it is a probe, not part
+of this set (see paper/a4/FINAL_CALL.md).
 
     python scripts/build_rating_set.py results/final-v1 --set a4-v2 \\
         --out ../molstar-chat-driver/site/rate/a4-v2 --key results/a4/a4-v2/key.json --jobs 8
@@ -500,11 +506,93 @@ def is_blank(path: str) -> bool:
         return all(lo == hi for lo, hi in im.convert("RGB").getextrema())
 
 
+IDENTICAL = 0.0005   # two pictures differing in no more than this share of pixels are one picture
+
+
+def pictures_differ(ref: dict, pics: dict) -> bool:
+    """Can a person see ANY difference between the reference's pictures and the answer's?"""
+    return max(differing_share(ref[v], pics[v]) for v in ("whole", "target")
+               if ref.get(v) and pics.get(v)) > IDENTICAL
+
+
+def prefer_passes_that_differ(chosen: list[dict], cands: list[dict], banned: set[str], corpus: dict,
+                              renderer, refs: dict, per_task: int, model_cap: int, pool: float,
+                              differ_share: float, workers: int, log=print) -> dict:
+    """Among the grader's passes, make room for the ones a person can actually test.
+
+    A pass whose pictures are identical to the reference's tells nothing about the
+    grader: anyone calls it "same". The passes that test it are those where the answer
+    looks different and the grader still said "right" (an unstated colour, another
+    naming of the same atoms). So up to ``(pool - 1) x`` as many further passes are
+    drawn (same tiers, keyed order), and each one whose pictures differ takes the place
+    of an identical one of its tier, until ``differ_share`` of the passes differ or the
+    extra draws run out. ``chosen`` is changed in place.
+
+    Returns the counts the analysis needs to undo this: of every pass DRAWN (kept or
+    not), how many differ. That is the estimate of the share in the run.
+    """
+    ref_of = lambda s: refs[s["task_id"], s.get("matched_reference") or 0]
+    right = [s for s in chosen if s["cls"] == "right"]
+    for s in right:
+        s["_differs"] = pictures_differ(ref_of(s), s["_pics"])
+    same = [s for s in right if not s["_differs"]]
+    stats = {"drawn": len(right), "differ": len(right) - len(same), "extra_not_drawn": 0}
+    swaps = len(same) - int((1 - differ_share) * len(right))
+    budget = int((pool - 1) * len(right))
+    if swaps > 0 and budget > 0:
+        taken = {s["id"] for s in chosen} | set(banned)
+        task_n = collections.Counter(s["base"] for s in chosen)
+        model_n = collections.Counter(s["model"] for s in chosen)
+        need = collections.Counter(s["tier"] for s in same)
+        queue = {t: [s for s in cands if s["cls"] == "right" and s["tier"] == t and s["id"] not in taken]
+                 for t in need}
+        extras: list[dict] = []
+        while len(extras) < budget and any(queue.values()):
+            for t in sorted(need, key=lambda t: (-need[t], t)):
+                if queue[t] and len(extras) < budget:
+                    extras.append(queue[t].pop(0))
+        want = sorted({(s["task_id"], s.get("matched_reference") or 0) for s in extras} - set(refs))
+        got = render_all(renderer, "ref", [(reference_of(corpus[t], m), target_rows_of(corpus[t], m))
+                                           for t, m in want], workers)
+        refs.update({k: res for k, (res, err) in zip(want, got) if not err})
+        extras = [s for s in extras if (s["task_id"], s.get("matched_reference") or 0) in refs]
+        got = render_all(renderer, "answer", [(s["predicted"], ref_of(s)) for s in extras], workers)
+        for s, (res, err) in zip(extras, got):
+            if err:
+                stats["extra_not_drawn"] += 1
+                continue
+            s["_pics"], s["_differs"] = res, pictures_differ(ref_of(s), res)
+            stats["drawn"] += 1
+            stats["differ"] += s["_differs"]
+            if not s["_differs"] or swaps <= 0:
+                continue
+            # an identical pass of its tier whose place it can take with both caps kept
+            old = next((x for x in reversed(same) if x["tier"] == s["tier"]
+                        and task_n[s["base"]] - (x["base"] == s["base"]) < per_task
+                        and model_n[s["model"]] - (x["model"] == s["model"]) < model_cap), None)
+            if old is None:
+                continue
+            chosen[chosen.index(old)] = s
+            same.remove(old)
+            task_n[old["base"]] -= 1
+            model_n[old["model"]] -= 1
+            task_n[s["base"]] += 1
+            model_n[s["model"]] += 1
+            swaps -= 1
+    kept = [s for s in chosen if s["cls"] == "right"]
+    stats["kept_differ"] = sum(s["_differs"] for s in kept)
+    stats["kept_identical"] = len(kept) - stats["kept_differ"]
+    log(f"  passes: {stats['differ']} of {stats['drawn']} drawn look different from the reference; "
+        f"kept {stats['kept_differ']} that differ and {stats['kept_identical']} identical")
+    return stats
+
+
 # --- the build --------------------------------------------------------------------
 def build_v2(samples: list[dict], corpus: dict[str, dict], set_id: str, secret: str, renderer, *,
              n_pairs: int = 300, mix: dict[str, float] | None = None, per_task: int = 2,
              model_share: float = 0.12, n_checks: int = 10, workers: int = 1,
-             judge: dict | None = None, grade=None, log=print) -> tuple[list[dict], dict]:
+             judge: dict | None = None, grade=None, log=print,
+             right_pool: float = 2.0, differ_share: float = 0.75) -> tuple[list[dict], dict]:
     """(public items with picture sources under ``_img``, private key). ``renderer`` has
     ``ref(scene, rows)`` and ``answer(scene, ref)``; ``grade(task, scene)`` is the
     benchmark's grader (default `runner.grade_parsed`), used only to make sure a
@@ -548,6 +636,9 @@ def build_v2(samples: list[dict], corpus: dict[str, dict], set_id: str, secret: 
             break
     else:
         raise SystemExit("answers kept failing to render; see the errors above")
+    right_pictures = prefer_passes_that_differ(chosen, cands, banned, corpus, renderer, refs, per_task,
+                                               max(1, int(model_share * n_pairs)), right_pool, differ_share,
+                                               workers, log)
 
     items, key = [], {}
 
@@ -581,7 +672,14 @@ def build_v2(samples: list[dict], corpus: dict[str, dict], set_id: str, secret: 
                 "family": task.get("family"), "structure": (task.get("structures") or [None])[0],
                 "model": s["model"], "sample": s["sample"], "success": bool(s.get("success")),
                 "f1": s.get("f1"), "target_f1": s.get("target_f1"), "grader_class": s["cls"],
-                "matched_reference": matched, "answer_blank": is_blank(s["_pics"]["whole"])}
+                "matched_reference": matched, "answer_blank": is_blank(s["_pics"]["whole"]),
+                # How far the pictures themselves differ, whole then zoomed (share of pixels).
+                # Not a verdict: it lets the analysis find pairs where the grader's score and
+                # the picture part ways (an answer that draws the target twice, one colour
+                # over the other, scores the colour but may not show it).
+                "differing_pixels": [round(differing_share(ref[v], s["_pics"][v]), 5)
+                                     for v in ("whole", "target") if ref.get(v) and s["_pics"].get(v)],
+                "pictures_differ": pictures_differ(ref, s["_pics"])}
         verdict = (judge or {}).get((s["model"], s["task_id"], s["sample"]))
         if verdict:
             info.update(judge_label=verdict["label"], judge_score=verdict.get("score"), judge=verdict.get("judge"))
@@ -654,9 +752,9 @@ def build_v2(samples: list[dict], corpus: dict[str, dict], set_id: str, secret: 
     counts = collections.Counter((key[i]["grader_class"], key[i]["tier"]) for i in order)
     full_key = {
         "set": set_id, "design": DESIGN_V2, "secret": secret, "items": key, "order": order,
-        "per_rater": PER_RATER, "population": population_v2(kept),
+        "per_rater": PER_RATER, "population": {**population_v2(kept), "right_pictures": right_pictures},
         "sample": {"pairs": len(order), "per_task": per_task, "model_share": model_share,
-                   "mix": mix, "cells": [[c, t, n] for (c, t), n in sorted(counts.items())],
+                   "mix": mix, "right_pool": right_pool, "differ_share": differ_share, "cells": [[c, t, n] for (c, t), n in sorted(counts.items())],
                    "candidates": len(cands), "left_out": left_out,
                    "answers_not_drawn": failures, "checks_rejected": dict(rejected)},
     }
@@ -770,7 +868,7 @@ def write_v2(items: list[dict], key: dict, out: pathlib.Path, key_path: pathlib.
     sheets.mkdir(exist_ok=True)
     for old in sheets.glob("*.jpg"):
         old.unlink()
-    lines = ["item\tkind\tclass\ttier\ttask\tmodel\tsuccess\ttarget_f1\texpected"]
+    lines = ["item\tkind\tclass\ttier\ttask\tmodel\tsuccess\ttarget_f1\texpected\tdiffering_pixels"]
     for it in items:
         v = key["items"][it["id"]]
         names = [n for n in ("ref", "out", "ref_target", "out_target") if n in it["_img"]]
@@ -782,7 +880,8 @@ def write_v2(items: list[dict], key: dict, out: pathlib.Path, key_path: pathlib.
         sheet.save(sheets / f"{it['id']}.jpg", "JPEG", quality=80)
         lines.append("\t".join(str(x) for x in (
             it["id"], v["kind"], v.get("grader_class", ""), v.get("tier", ""), v["task"], v.get("model", ""),
-            v.get("success", ""), v.get("target_f1", ""), v.get("expected", ""))))
+            v.get("success", ""), v.get("target_f1", ""), v.get("expected", ""),
+            "/".join(f"{x:.4f}" for x in v.get("differing_pixels") or []))))
     (sheets / "index.tsv").write_text("\n".join(lines) + "\n")
 
 
@@ -844,13 +943,17 @@ def main_v2(a, ap) -> None:
     renderer = MolstarRenderer(cache, a.width, a.height, network=not a.offline)
     items, key = build_v2(samples, corpus, set_id, secret, renderer, n_pairs=a.pairs, mix=mix,
                           per_task=a.per_task, model_share=a.model_share, n_checks=a.checks,
-                          workers=a.jobs, judge=read_judge(a.judge))
+                          workers=a.jobs, judge=read_judge(a.judge),
+                          right_pool=a.right_pool, differ_share=a.differ_share)
     key["run"] = {"dir": str(a.results), "condition": a.condition}
     write_v2(items, key, a.out, a.key)
     kinds = collections.Counter(v["kind"] for v in key["items"].values())
     print(f"{len(items)} items -> {a.out} ({dict(kinds)})")
     print(plan_table(key["sample"]["cells"], key["population"]))
     s = key["sample"]
+    rp = key["population"]["right_pictures"]
+    print(f"passes drawn: {rp['drawn']}, of which {rp['differ']} look different from the reference; "
+          f"in the set: {rp['kept_differ']} that differ, {rp['kept_identical']} identical")
     print(f"answers that could not be drawn (replaced): {len(s['answers_not_drawn'])}; "
           f"checks rejected: {s['checks_rejected'] or 'none'}")
     print(f"private: key, seed_rating_items.sql and review/ -> {a.key.parent}")
@@ -878,6 +981,11 @@ def main(argv: list[str] | None = None) -> None:
     v2.add_argument("--per-task", type=int, default=2, help="most pairs of one task (a paraphrase counts as its original)")
     v2.add_argument("--model-share", type=float, default=0.12, help="largest share of the set from one model")
     v2.add_argument("--checks", type=int, default=10, help="pool of attention checks of each of the three kinds")
+    v2.add_argument("--right-pool", type=float, default=2.0,
+                    help="draw up to this many times the passes, to find passes whose pictures differ "
+                         "from the reference's (default 2; 1 = no extra draws)")
+    v2.add_argument("--differ-share", type=float, default=0.75,
+                    help="share of the passes that should look different from the reference, if the run has them")
     v2.add_argument("--judge", type=pathlib.Path, help="image-judge verdicts (JSON lines: model, task_id, sample, label)")
     v2.add_argument("--jobs", type=int, default=4, help="renders at a time")
     v2.add_argument("--offline", action="store_true",
