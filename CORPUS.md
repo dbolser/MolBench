@@ -229,6 +229,16 @@ Not re-run in this pass: Mol\* read-backs of MVS references (none changed) and t
 read-backs of the follow-up, accept-set and translation generators (`--check --viewer`).
 The API viewer check ran on the changed files and a seeded sample of 60, not on all.
 
+**After the merge of the rating tooling and the reviewed paper (same day).** No task file,
+prompt or grader rule changed in the merge, and the corpus hash is the same
+(`45a841ae…edd8`). Re-run on the merged state, with the same results as in the table: every
+generator `--check`, `validate_tasks.py --final`, `check_api_refs.py --cif`,
+`grader_controls.py --check`, both dry runs (final manifest: 91,647 cells, 23 of 23 checks,
+core panel $137.96 against the cap of $165.00), `paper_tables.py --from-dry-run` (38 mock
+tables, 3,181 values), `paper/corpus_values.py --check`, `paper/figures.py --check`,
+`paper/build.py --check` and `--pdf`. `uv run pytest -q`: 2,812 passed, none skipped. The
+viewer checks and the pilot's `--grade-only` were not run again.
+
 ## Known weaknesses
 
 - **Unstated attributes on the API track are mostly an enumerated list.** The accepted
