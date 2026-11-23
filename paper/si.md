@@ -1088,7 +1088,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 
 The final run is defined by one manifest file in the repository. Its contents, in words:
 
-- **Corpus.** Version `corpus-v1.0-dev` ⟦PENDING: corpus freeze — final version tag and hash⟧.
+- **Corpus.** Version `corpus-v1.0`, SHA-256 `45a841aecbd25a72c0d1f9a91704b3031318955bd44300e3bf547ffa95e4edd8`.
 - **Answers.** Each model gives three answers per task and condition (one in the JSON-mode condition);
   no temperature is sent, so each provider's default applies. Limit on the length of an answer:
   8,000 tokens. Models that write reasoning text before the answer, which the

@@ -2068,7 +2068,7 @@ MolBench's own code, tasks and references are released under the MIT licence.
 ## 12. Data and Software Availability
 
 - **Code, tasks, references, graders, control set:** <https://github.com/dbolser/MolBench>
-  (MIT licence). ⟦PENDING: corpus freeze — version tag and hash of the frozen corpus⟧
+  (MIT licence). Corpus version `corpus-v1.0`, SHA-256 `45a841aecbd25a72c0d1f9a91704b3031318955bd44300e3bf547ffa95e4edd8`.
 - **Archive:** ⟦PENDING: deposit — DOI of the frozen corpus, including the set-aside split, and of the raw model answers and score files of the final run⟧
 - **Rating data:** ⟦PENDING: deposit — anonymised ratings of both rating studies, with the analysis scripts⟧
 - **Results browser:** <https://dbolser.github.io/MolBench/>.

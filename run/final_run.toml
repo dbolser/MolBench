@@ -50,8 +50,8 @@ three hidden reasoning tokens for every visible one. Re-project after the freeze
 than projected on the one priced route (PILOT.md)."""
 
 [corpus]
-version = "corpus-v1.0-dev"         # becomes "corpus-v1.0" at the freeze
-sha256 = ""                         # pin at the freeze: python -m molbench.manifest
+version = "corpus-v1.0"
+sha256 = "45a841aecbd25a72c0d1f9a91704b3031318955bd44300e3bf547ffa95e4edd8"
 note = "SHA-256 over every tasks/**/*.json (sorted path + content). Empty = not frozen yet."
 
 # ---------------------------------------------------------------------------------------
