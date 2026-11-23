@@ -584,7 +584,7 @@ def clinical_groupings_table(V: dict) -> str:
 
 
 def corpus_table(V: dict) -> str:
-    rows = ["| Category | What is asked | Scene track (other + set-aside structures) | Call-list track (other + set-aside structures) | Pairs |",
+    rows = ["| Category | What is asked | Scene track (remaining + set-aside) | Call-list track (remaining + set-aside) | Pairs |",
             "|:---------|:----------------|-----:|-----:|--:|"]
     first = {g[0]: title for title, g in TIER_GROUPS}
     for tier in TIERS:
@@ -1401,7 +1401,7 @@ def example_table(V: dict) -> str:
     e = V
     scene = [
         (f"Reference: author chain {e['ex.auth_chain']}, author residue {e['ex.auth_number']}, {e['ex.color']} {e['ex.rep']}", "ex.mvs.right"),
-        (f"The same residue named by label numbering (label chain {e['ex.label_chain']}, residue {e['ex.label_number']})", "ex.mvs.label"),
+        (f"The same residue named by label numbering (label chain {e['ex.label_chain']}, residue {e['ex.label_number']}; in this entry only the chain name differs from the author numbering)", "ex.mvs.label"),
         (f"Number copied from the variant name and used as the author number ({e['ex.face_value_residue']}{e['ex.uniprot_position']})", "ex.mvs.face"),
         ("Right residue, drawn red", "ex.mvs.colour"),
         ("Right residue, plus a grey cartoon of the protein that the request does not ask for: context", "ex.mvs.context"),

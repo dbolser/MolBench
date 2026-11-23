@@ -38,7 +38,7 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 
 ### S4.3 Target score
 
-The target score, from 0 to 1, is how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. The counts below make this exact.
+The target score, from 0 to 1, is how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. The counts below make this exact.
 
 The *target's drawing* is the set of the reference's styles that lie wholly inside the target
 atoms (in the running example the {{ex.color}} {{ex.rep}} of the residue; a cartoon of the

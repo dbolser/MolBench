@@ -8,8 +8,8 @@
 <text x="20" y="74" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">79 structures (PDB and AlphaFold DB),</text>
 <text x="20" y="89" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">78 of them in tasks</text>
 <text x="20" y="104" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">residue mapping (SIFTS)</text>
-<text x="20" y="119" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">2,400 variants classified as</text>
-<text x="20" y="134" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">(likely) pathogenic in ClinVar</text>
+<text x="20" y="119" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">pool of 2,400 (likely) pathogenic</text>
+<text x="20" y="134" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">ClinVar variants, 87 in tasks</text>
 <line x1="217" y1="90.0" x2="226" y2="90.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
 <rect x="227" y="34" width="206" height="112" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="237" y="54" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">2  Generator scripts</text>

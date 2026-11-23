@@ -126,8 +126,8 @@ def fig_pipeline(v: dict) -> str:
             f"{v['panel.n']} structures (PDB and AlphaFold DB),",
             f"{v['corpus.n_structures']} of them in tasks",
             "residue mapping (SIFTS)",
-            f"{v['variants.n_usable']:,} variants classified as",
-            "(likely) pathogenic in ClinVar"]),
+            f"pool of {v['variants.n_usable']:,} (likely) pathogenic",
+            f"ClinVar variants, {v['clin.n_variants']} in tasks"]),
         ("2  Generator scripts", [
             f"{v['corpus.n_templates']} templates.",
             "Each task gets: a request,",
@@ -548,7 +548,7 @@ def fig_result_shapes(v: dict) -> str:
     # A: per model, one sub-panel per track (the two tracks are not compared with each other)
     y0 = frame(0, "A  Task success by model, one plot per track",
                f"One row per model, best first: {v['plan.n_core_models']} core models, up to "
-               f"{v['plan.n_optional_models']} optional ones (†) and the keyword script. The two tracks are "
+               f"{v['plan.n_optional_models']} optional ones (†) and the two scripts. The two tracks are "
                "not compared with each other.")
     ky = y0 + ph - 12
     s.circle(26, ky - 4, 4.5, BLUE)

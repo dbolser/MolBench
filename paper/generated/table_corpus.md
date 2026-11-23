@@ -1,4 +1,4 @@
-| Category | What is asked | Scene track (other + set-aside structures) | Call-list track (other + set-aside structures) | Pairs |
+| Category | What is asked | Scene track (remaining + set-aside) | Call-list track (remaining + set-aside) | Pairs |
 |:---------|:----------------|-----:|-----:|--:|
 | ***Differ in what the model must know*** | | | | |
 | Translation | Everything needed is in the request; write it in the format. | 73 (55 + 18) | 178 (138 + 40) | 62 |

@@ -1,4 +1,4 @@
-## S0. Background terms
+## S0. Glossary and background terms
 
 For readers from outside structural biology, and as the full glossary of the paper. Box 1 of
 the paper defines the few terms that carry its results. Table S0a adds background terms of
@@ -93,7 +93,7 @@ those of the paper.
 | F1 | How much of the drawn state is right, from 0 to 1, with partial credit. For each fact of the reference, take the fraction of it that the answer also draws; *recall* is the mean of these fractions. *Precision* is the same in the other direction, over the facts of the answer. F1 is the harmonic mean of the two. |
 | Task success | For one answer, yes or no: the drawn state is exactly right, with nothing missing and nothing extra. The *task success rate* of a model is the share of its answers that succeed. |
 | All-{{plan.samples}} rate, majority | *All-{{plan.samples}} rate*: the share of tasks on which all {{plan.samples}} answers succeed. *Majority*: at least 2 of the {{plan.samples}} answers are right; used only in the comparison of pairs. |
-| Target score | From 0 to 1: how exactly the answer marks out the target atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. |
+| Target score | From 0 to 1: how exactly the answer marks out the target atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. |
 | Primary score | The score on which a table or a comparison is read first. *Within a track* (Tables 6 to 8, 11 and 12 of the paper): the task success rate, strict. *Between the two formats* (Table 9a of the paper) *and for copying against mapping* (Table 10 of the paper): the target score, because task success is not the same test on the two tracks and also falls when an answer adds unrequested context. The comparison of pairs on the target score is the *primary comparison* (Table 9a of the paper), and the one on task success the secondary (Table 9b). F1 is reported for partial credit and is never primary. |
 | Unrequested context | Drawing that the request did not ask for, such as a cartoon of the protein behind a requested residue. |
 | Valid, invalid | An answer is *valid* if it obeys the answer format and the viewer can show it: on the scene track, a scene that Mol\* accepts and whose structure file it can load; on the call-list track, a JSON list in which every call and every field is documented. Otherwise it is *invalid*, in one of two ways. An *unshowable* answer cannot be shown at all and scores 0. A *schema-breaking* call list contains parts that the viewer ignores; it is graded as the viewer would treat it but is not counted as valid (Section 4.4). |

@@ -18,7 +18,7 @@ result tables), then the three commands above.
 | File | What it is |
 |---|---|
 | `sections/*.md` | The paper: about 9,300 words of text (the brief is 8,000 to 9,500; `build.py` prints the count). What a reader does not need in order to follow what was built, why, and how an answer is scored is in SI Sections S10 to S15, with a one-sentence pointer in the paper. Title 11 words; abstract at most 200 words (checked by the build). The build also checks that the running example is shown with the colour and representation of its request in the generated table and figures. |
-| `si/*.md` | Supporting Information S0–S15. S0 to S9: glossary (Tables S0a to S0f; S0d to S0f are the full glossaries that were Boxes 1 and 2 of the paper), running example in full, templates, panel and variant list, grading rules, control set, manifest, models and provider pilot, prompts, pilot-run tables with the trial of the rating study, and the place for the final-run tables. S10 to S15 (`sa10_*.md` to `sa15_*.md`; the file names sort after `s9_`) hold the long form of the paper's Sections 3 to 5, the six pilot findings and the nine errors of the first version, the limitations in full, related work in detail and the licences. SI tables are numbered S0 to S24 in order (S4 the variant list, S8 to S19 the pilot tables, S20 further properties of the clinical tasks, S21 and S22 the pilot run regraded per model and per category, S23 the nine errors with how each was found, S24 licences). |
+| `si/*.md` | Supporting Information S0–S15. S0 to S9: glossary (Tables S0a to S0f; S0d to S0f are the full glossaries that were Boxes 1 and 2 of the paper), running example in full, templates, panel and variant list, grading rules, control set, manifest, models and connection test, prompts, pilot-run tables with the trial of the rating study, and the place for the final-run tables. S10 to S15 (`sa10_*.md` to `sa15_*.md`; the file names sort after `s9_`) hold the long form of the paper's Sections 3 to 5, the six pilot findings and the nine errors of the first version, the limitations in full, related work in detail and the licences. SI tables are numbered S0 to S24 in order (S4 the variant list, S8 to S19 the pilot tables, S20 further properties of the clinical tasks, S21 and S22 the pilot run regraded per model and per category, S23 the nine errors with how each was found, S24 licences). |
 | `plain/summary.md` | A 150-word summary for volunteer raters, to paste into an email (length checked by the build). |
 | `molbench.md`, `si.md`, `plain_summary.md` | Built. Do not edit; edit the sources. |
 | `PENDING.md` | Built. Every PENDING tag with what fills it, and the files the final run must write. |
@@ -45,8 +45,10 @@ result tables), then the three commands above.
   results/final-v1 --into-paper`; until it exists, no such key can be used. The key names are
   those of `generated_mock/values.json`.
 - `{{include:generated/pilot_results.md}}`: the one table of the provider pilot (SI Section
-  S6.1), written by `scripts/paper_tables.py --from-run results/pilot-v1`. The paper calls
-  this the *provider pilot*; the *pilot run* is the October 2026 run of the first version.
+  S6.1), written by `scripts/paper_tables.py --from-run results/pilot-v1`. The repository
+  calls this trial the provider pilot; the paper calls it the *connection test*, so that
+  "pilot" means one thing in it: the *pilot run*, the October 2026 run of the first version.
+  `INCLUDE_WORDS` in `build.py` changes the words of the included table, never a number.
 - `{{include:generated/x.md|pilot:Table S8}}`: a pilot table of SI Section S8, shown with that
   table number and in the words of the paper (`PILOT_WORDS` in `build.py` maps words, never
   numbers).
@@ -85,7 +87,7 @@ models. The clinical results are grouped by *copying the number* and, for descri
 **The target score has one wording, and it must stay one.** Long form (Section 4.2, Table 3,
 SI Sections S1 and S4.3, SI Table S0f): "how exactly the answer marks out the requested atoms.
 It is 1 (*target-right*) when they carry the requested style, no other atom carries that
-style, and no other representation is drawn on them alone; any other drawing, such as a
+style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a
 cartoon of the protein, is ignored." Short form (abstract, other captions): "how exactly the
 answer marks out the requested atoms; any other drawing is ignored." Both agree with every
 row of Table 3. Task success and F1 are each defined once, in Section 4.2, and repeated only

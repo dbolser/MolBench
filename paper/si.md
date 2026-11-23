@@ -13,7 +13,7 @@ printed in Section S7 use a few other names for the same things (a *draw* for a 
 *tier* for a category); Table S0c lists them all. Task identifiers are those of the task
 files.
 
-Contents: S0, background terms · S1, the running example in full · S2,
+Contents: S0, glossary and background terms · S1, the running example in full · S2,
 all task templates · S3, the structure panel and the variant list · S4, grading rules and
 known limits · S5, the control set by kind · S6, the run manifest, models and prices · S7,
 the system prompts · S8, further tables of the pilot run, and the trial of the rating study ·
@@ -22,7 +22,7 @@ S10 to S15, detail that the paper gives in one sentence each: the corpus (S10), 
 (S11), the experimental setup (S12), the pilot findings and the errors of the first version
 (S13), limitations in full (S14), related work and licences (S15).
 
-## S0. Background terms
+## S0. Glossary and background terms
 
 For readers from outside structural biology, and as the full glossary of the paper. Box 1 of
 the paper defines the few terms that carry its results. Table S0a adds background terms of
@@ -117,7 +117,7 @@ those of the paper.
 | F1 | How much of the drawn state is right, from 0 to 1, with partial credit. For each fact of the reference, take the fraction of it that the answer also draws; *recall* is the mean of these fractions. *Precision* is the same in the other direction, over the facts of the answer. F1 is the harmonic mean of the two. |
 | Task success | For one answer, yes or no: the drawn state is exactly right, with nothing missing and nothing extra. The *task success rate* of a model is the share of its answers that succeed. |
 | All-3 rate, majority | *All-3 rate*: the share of tasks on which all 3 answers succeed. *Majority*: at least 2 of the 3 answers are right; used only in the comparison of pairs. |
-| Target score | From 0 to 1: how exactly the answer marks out the target atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. |
+| Target score | From 0 to 1: how exactly the answer marks out the target atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. |
 | Primary score | The score on which a table or a comparison is read first. *Within a track* (Tables 6 to 8, 11 and 12 of the paper): the task success rate, strict. *Between the two formats* (Table 9a of the paper) *and for copying against mapping* (Table 10 of the paper): the target score, because task success is not the same test on the two tracks and also falls when an answer adds unrequested context. The comparison of pairs on the target score is the *primary comparison* (Table 9a of the paper), and the one on task success the secondary (Table 9b). F1 is reported for partial credit and is never primary. |
 | Unrequested context | Drawing that the request did not ask for, such as a cartoon of the protein behind a requested residue. |
 | Valid, invalid | An answer is *valid* if it obeys the answer format and the viewer can show it: on the scene track, a scene that Mol\* accepts and whose structure file it can load; on the call-list track, a JSON list in which every call and every field is documented. Otherwise it is *invalid*, in one of two ways. An *unshowable* answer cannot be shown at all and scores 0. A *schema-breaking* call list contains parts that the viewer ignores; it is graded as the viewer would treat it but is not counted as valid (Section 4.4). |
@@ -312,14 +312,14 @@ From the request:
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score* (0 to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
+score* (0 to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
 | Row | Answer | F1 | Task success | Target score |
 |:--|:------------------------------------------|--:|:--|--:|
 | | **Scene track** | | | |
 | S1 | Reference: author chain X, author residue 64, yellow spacefill spheres | 1.00 | yes | 1.00 |
-| S2 | The same residue named by label numbering (label chain A, residue 64) | 1.00 | yes | 1.00 |
+| S2 | The same residue named by label numbering (label chain A, residue 64; in this entry only the chain name differs from the author numbering) | 1.00 | yes | 1.00 |
 | S3 | Number copied from the variant name and used as the author number (Ser82) | 0.00 | no | 0.00 |
 | S4 | Right residue, drawn red | 0.50 | no | 0.50 |
 | S5 | Right residue, plus a grey cartoon of the protein that the request does not ask for: context | 0.40 | no | 1.00 |
@@ -791,7 +791,7 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 
 ### S4.3 Target score
 
-The target score, from 0 to 1, is how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. The counts below make this exact.
+The target score, from 0 to 1, is how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. The counts below make this exact.
 
 The *target's drawing* is the set of the reference's styles that lie wholly inside the target
 atoms (in the running example the yellow spacefill spheres of the residue; a cartoon of the
@@ -1194,22 +1194,22 @@ price*: US dollars per million input / output tokens, read on the date given.
 | `x-ai/grok-4.7` | x-ai | optional | closed | yes | yes | 2.0 / 6.0 | 2026-11-16 |
 | `deepseek/deepseek-v4-pro-0813` | deepseek | optional | open | yes | yes | 0.111 / 4.44 | 2026-11-16 |
 
-### S6.1 Provider pilot
+### S6.1 Connection test
 
-Before the final run, the path from the manifest to a provider and back to a graded answer
-was tried once, on a few tasks of the present corpus and with one model of the core set. We
-call this the *provider pilot*. It is not the pilot run of October 2026 (Section 6.6 of the
-paper), and it is not a result of the benchmark. Every answer of the provider pilot that
-was not counted as a task success was read. This showed faults of the benchmark itself,
+Before the corpus was frozen, the way from the manifest to a provider and back to a graded
+answer was tested once, on a few tasks of the present corpus and with one model of the core
+set. We call this the *connection test*. It is not the pilot run of October 2026 (Section
+6.6 of the paper), and it is not a result of the benchmark. Every answer of the connection
+test that was not counted as a task success was read. This showed faults of the benchmark itself,
 which were corrected before the corpus was frozen: among them, wrong answers that had been
 graded as right (a file address that does not exist; a PDB identifier in upper case on the
 call-list track) and a second representation of the same type that the viewer does not show
 (Sections S4.5 and S4.6). No request and no reference changed. The table below gives the
 answers as graded after the corrections.
 
-> **PROVIDER PILOT.** A trial of the path to a provider on a few tasks, not the benchmark run: these numbers show that the path works, not how good a model is.
+> **CONNECTION TEST.** A test of the connection to one provider on a few tasks, not the benchmark run: these numbers show that the path works, not how good a model is.
 
-**Provider pilot: claude-haiku-4-5, 39 tasks, 1 sample per task, 46 calls, US $0.21**
+**Connection test: claude-haiku-4-5, 39 tasks, 1 sample per task, 46 calls, US $0.21**
 
 | Condition and track | Tasks | Valid answers | Task success rate, strict | Target score, strict | F1, strict | Cost (USD) |
 |:---|---:|---:|---:|---:|---:|---:|
@@ -1217,7 +1217,7 @@ answers as graded after the corrections.
 | Main, call-list track | 18 | 100.0% | 0.333 (6 of 18) | 0.430 | 0.556 | 0.08 |
 | Main + grounding pack, scene track | 7 | 85.7% | 0.857 (6 of 7) | 0.857 | 0.857 | 0.03 |
 
-Run of 2026-11-16 on the provider's own service; the archived answers were graded on 2026-11-23 with the grader and corpus as they stood after the faults the pilot showed were fixed (`PILOT.md` in the repository). The tasks were picked by rule to cover every category, track and kind of task, including the three wordings of one request; they are not a sample of the corpus, and one answer per task says nothing about the spread between answers. *Valid answers*: answers that parse and that the viewer accepts. *Strict*: every answer counts, and an unshowable answer scores 0. The grounding pack states the residue that a variant maps to, so that row is an upper bound.
+Run of 2026-11-16 on the provider's own service; the archived answers were graded on 2026-11-23 with the grader and corpus as they stood after the faults the test showed were fixed (`PILOT.md` in the repository). The tasks were picked by rule to cover every category, track and kind of task, including the three wordings of one request; they are not a sample of the corpus, and one answer per task says nothing about the spread between answers. *Valid answers*: answers that parse and that the viewer accepts. *Strict*: every answer counts, and an unshowable answer scores 0. The grounding pack states the residue that a variant maps to, so that row is an upper bound.
 
 ## S7. System prompts
 
@@ -2754,8 +2754,7 @@ tasks, and two graders that compared text (Section 4.5). Two of its runs are use
 paper: one of the call-list tasks in July 2026, and one of the scene tasks in October 2026,
 which we call the *pilot run*. The *present version* is the benchmark of Sections 3 and 4.
 
-Section 6.6 of the paper gives Findings 1 and 2 and names the others. All six follow, as
-they stood in the paper before it was shortened.
+Section 6.6 of the paper gives Findings 1 and 2 and names the others. All six follow in full.
 
 **Everything in this section is preliminary.** Findings 1 to 4 come from a pilot run of
 18 October 2026: 15 models, the scene track only, 70 tasks on

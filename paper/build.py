@@ -203,6 +203,28 @@ PILOT_WORDS = [
 ]
 
 
+# The table of SI Section S6.1 is written by scripts/paper_tables.py under the name the
+# repository uses (provider pilot, PILOT.md). The paper calls that trial the *connection test*,
+# so that "pilot" means one thing in it, the pilot run of October 2026. Words only.
+INCLUDE_WORDS = {
+    "generated/pilot_results.md": [
+        (r"\*\*PROVIDER PILOT\.\*\* A trial of the path to a provider on a few tasks",
+         "**CONNECTION TEST.** A test of the connection to one provider on a few tasks"),
+        (r"\*\*Provider pilot:", "**Connection test:"),
+        (r"the faults the pilot showed", "the faults the test showed"),
+    ],
+}
+
+
+def include_words(rel: str, text: str) -> str:
+    """An included file in the paper's words (see INCLUDE_WORDS); every pattern must be found."""
+    for pattern, new in INCLUDE_WORDS.get(rel, []):
+        text, n = re.subn(pattern, new, text)
+        if not n:
+            raise BuildError(f"{rel}: the words {pattern!r} are no longer in the file (INCLUDE_WORDS)")
+    return text
+
+
 def pilot_table(text: str, label: str) -> str:
     """A pilot table with its number and in the paper's words (see PILOT_WORDS)."""
     for pattern, new in PILOT_WORDS:
@@ -254,8 +276,8 @@ def substitute(text: str, values: dict, where: str, problems: list[str], depth: 
             if depth > 2:
                 problems.append(f"{where}: include nesting too deep at {rel}")
                 return m.group(0)
-            return substitute(f.read_text(encoding="utf-8").rstrip(), values, rel, problems,
-                              depth + 1)
+            return substitute(include_words(rel, f.read_text(encoding="utf-8").rstrip()), values, rel,
+                              problems, depth + 1)
         key, _, spec = body.partition(":")
         key = key.strip()
         if key not in values or values[key] is None:
@@ -621,6 +643,8 @@ STATED_IN_WORDS = [
     ("corpus.followup.noop_spin", 2, "'in 2 scene tasks, a spin' (SI Section S10.2)"),
     ("mvs.spec.outcome.not_mvs", 0, "'no answer of the pilot run fell in the class' (SI Section S8)"),
     ("mvs.spec.samples_per_task", 1, "'one answer per task' in the pilot run (Section 6.6, SI Table S21)"),
+    ("plan.n_core_models", 16, "'the other could not be reached' (Section 5.1): one core model not in the pilot run"),
+    ("plan.n_core_in_pilot", 15, "the same sentence of Section 5.1"),
 ]
 
 

@@ -10,8 +10,7 @@ tasks, and two graders that compared text (Section 4.5). Two of its runs are use
 paper: one of the call-list tasks in July 2026, and one of the scene tasks in October 2026,
 which we call the *pilot run*. The *present version* is the benchmark of Sections 3 and 4.
 
-Section 6.6 of the paper gives Findings 1 and 2 and names the others. All six follow, as
-they stood in the paper before it was shortened.
+Section 6.6 of the paper gives Findings 1 and 2 and names the others. All six follow in full.
 
 **Everything in this section is preliminary.** Findings 1 to 4 come from a pilot run of
 {{run.date:date}}: {{oct.spec.n_models}} models, the scene track only, {{mvs.n_tasks}} tasks on

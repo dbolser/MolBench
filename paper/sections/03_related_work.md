@@ -4,7 +4,7 @@
 software on a desktop through screenshots and clicks. ScienceBoard [@sun2026scienceboard]
 includes tasks in UCSF ChimeraX [@goddard2018chimerax] and checks the state of the
 application afterwards; OSWorld-Science [@dai2026osworldscience; @xie2024osworld] includes
-one application that involves PyMOL. SciVisAgentBench [@ai2026scivisagentbench] scores
+PyMOL in one of its software configurations. SciVisAgentBench [@ai2026scivisagentbench] scores
 scientific visualizations, some of them molecular, with a language-model judge. General
 benchmarks of tool use [@qin2023toolllm; @yao2024taubench] check that the right function is
 called with the right arguments. We found no benchmark that grades the atoms a viewer would
@@ -21,11 +21,7 @@ the error our clinical category is built to detect.
 
 **Data and software.** MolViewSpec describes a molecular scene as a tree of typed nodes and
 is implemented in Mol\* [@midlik2025mvs; @bittrich2024mvs; @sehnal2021molstar]; the call-list
-track targets the PDBe build of Mol\* [@pdbemolstar; @ipymolstar]. Structures come from the
-PDB [@wwpdb2019] and the AlphaFold Protein Structure Database [@varadi2024afdb;
-@jumper2021alphafold], the residue mapping from SIFTS [@dana2019sifts; @pdbekb2020;
-@pdbekb2022], and variants from ClinVar [@landrum2018clinvar] through UniProt
-[@uniprot2025]. Files are read with GEMMI [@wojdyr2022gemmi]. Residue mentions in the
+track targets the PDBe build of Mol\* [@pdbemolstar; @ipymolstar]. Residue mentions in the
 literature have been mapped to structures through SIFTS before [@vollmar2026residues], and
 vision-language models read rendered molecules well below human level [@li2025misibench],
 which is one reason our scores do not rest on a model that looks at pictures. SI Section S15

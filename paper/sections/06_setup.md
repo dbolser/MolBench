@@ -7,12 +7,14 @@ file before any model is called (SI Section S6). SI Section S12 gives this secti
 
 The models are chosen by a written rule, not by results. The {{plan.n_core_models}} *core
 models* are those in the results that we published online in October 2026; they are kept
-unchanged, so that the choice depends on no result of the present benchmark. Most are the
+unchanged, so that the choice depends on no result of the present benchmark.
+{{plan.n_core_in_pilot}} of them ran in the pilot run of Section 6.6; the other could
+not be reached that day and had call-list results only (SI Section S12.1). Most are the
 smaller, cheaper models of their providers. {{plan.n_core_open}} have *open weights* (the
 weights can be downloaded) and {{plan.n_core_closed}} have *closed weights* (the model can
 be used only through a provider's service). Up to {{plan.n_optional_models}} *optional
-models*, the largest of their kind at several providers, are named in the manifest and marked † in
-the tables; which of them are run is decided from the projected cost alone, before any
+models* (the largest current models of several providers of closed weights, and the largest
+model with open weights) are named in the manifest and marked † in the tables; which of them are run is decided from the projected cost alone, before any
 result exists. SI Table S7 lists every model with its price.
 ⟦PENDING: Dan — which of the optional models are run⟧
 
@@ -25,16 +27,14 @@ of the request.
 ### 5.2 Prompting conditions
 
 In each condition of Table 5 a model receives a system prompt and the request, and returns
-one answer. It cannot look anything up, cannot ask a question, and does not see a rendered
-result. Both system prompts say that the answer is judged by what the viewer ends up
+one answer. Both system prompts say that the answer is judged by what the viewer ends up
 showing; the scene prompt adds that anything drawn that was not asked for counts against the
 answer.
 
 **Table 5. Prompting conditions.** All main results come from the *main* condition. *Format
 guide*: a frozen text in the system prompt that documents the answer format. *JSON mode*: a
 provider option that forces syntactically valid JSON. *Grounding pack*: the result of an
-offline lookup, appended to the request. *Answers per task*: answers of each model to each
-task.
+offline lookup, appended to the request.
 
 | Condition | What the model is given | Run on | Answers per task |
 |:-----|:----------|:----------|--:|
@@ -81,15 +81,14 @@ so we read its p values as descriptions and give beside them the difference of t
 counts with a resampled interval.
 
 **The central clinical comparison.** On the scene track, clinical tasks in which copying the
-number is right are compared with those in which it is wrong. The primary score is the
-target score, because task success also falls when an answer adds unrequested context. The
-result is the difference row of Table 10.
+number is right are compared with those in which it is wrong, on the target score, because
+task success also falls when an answer adds unrequested context (difference row of Table
+10).
 
 **Six further planned comparisons** (Table 12), each a difference in task success rate with
 an interval: (1) the set-aside split against the other tasks; (2) terse and (3) indirect
 wording against the full wording; (4) with and without JSON mode; (5) with and without
-grounding pack; (6) with and without format guide. The totals of the two tracks are not
-compared, because the tracks differ in their mix of categories. We do not correct for
+grounding pack; (6) with and without format guide. We do not correct for
 multiple comparisons, and we report every count.
 
 ### 5.5 Human check of the grader
@@ -97,20 +96,19 @@ multiple comparisons, and we report every count.
 After the run, volunteers will check the grader's verdicts against pictures. A rater sees the request and
 four pictures from one camera: the reference and a model answer, each drawn whole and each
 zoomed on the target atoms. The rater says "same", "different" or "can't tell" twice: on
-the whole scenes, which is compared with the grader's task success, and on the zoomed
-pictures, which is compared with a target score of 1.
+the whole scenes (compared with the grader's task success) and on the zoomed pictures
+(compared with a target score of 1).
 
 The study has {{study.n_pairs}} such comparisons of valid scene-track answers, in three
 groups of {{study.n_per_verdict}} by the grader's verdict: task successes; answers that are
 target-right but not a success; and the other answers. Each is rated by
-{{study.raters_per_pair:word}} raters. We will report the share of the grader's task
-successes that people call the same, the share of the other answers that people call
-different, the same two shares for the target score, and the agreement between raters as
-the yardstick. The call-list track and the name-resolution category are left out (SI Section
-S12.5 gives the reasons and the sampling rules). A smaller trial has been run on the pilot
+{{study.raters_per_pair:word}} raters. We will report how often people call the grader's task
+successes the same and its other answers different, the same for the target score, and the
+agreement between raters as the yardstick. The call-list track and the name-resolution category are left out (SI Section
+S12.5). A smaller trial has been run on the pilot
 answers (Section 6.6).
 
 ### 5.6 Reproducibility
 
-One command performs the run from the manifest. One command rebuilds every table, figure and number in this paper from the archived
-answers. Grading needs no network access and no paid service.
+One command performs the run from the manifest, and one rebuilds every table, figure and
+number of this paper from the archived answers (Section 12).

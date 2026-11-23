@@ -11,7 +11,7 @@ printed in Section S7 use a few other names for the same things (a *draw* for a 
 *tier* for a category); Table S0c lists them all. Task identifiers are those of the task
 files.
 
-Contents: S0, background terms · S1, the running example in full · S2,
+Contents: S0, glossary and background terms · S1, the running example in full · S2,
 all task templates · S3, the structure panel and the variant list · S4, grading rules and
 known limits · S5, the control set by kind · S6, the run manifest, models and prices · S7,
 the system prompts · S8, further tables of the pilot run, and the trial of the rating study ·

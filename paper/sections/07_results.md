@@ -2,13 +2,13 @@
 
 The only results that exist today come from the *first version* of the benchmark: the
 corpus and the two text-comparing graders that were public from May 2026 until the present
-corpus replaced them. Its run of the scene tasks in October 2026 is the *pilot run*. These
-results are kept apart, in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that
-the final run will fill; their layout and captions are fixed, and a script fills the cells
-from the archive of the run. The path to a provider has been tried on
-a few tasks of the present corpus; this provider pilot exposed faults of the benchmark
-itself, which were corrected before the corpus was frozen, and it is not a result (SI
-Section S6.1).
+corpus replaced them. Its run of the scene tasks in October 2026 is the *pilot run*, whose
+results are kept apart in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that
+the final run will fill; their layout and captions are fixed, and a script fills the cells.
+Before the corpus was frozen, we also sent a few of its tasks
+to one provider to test the run script. This *connection test* (SI Section S6.1) exposed
+faults of the present grader, which were corrected. It is not a result, and it is distinct
+from the pilot run and from the errors of Table 13.
 
 {{include:generated/fig_final_results.md|else:figures/fig5_layout.md}}
 
@@ -18,12 +18,12 @@ Section S6.1).
 *Valid answers*: share of
 answers that parse and that the viewer accepts. *Task success rate*: share of answers whose
 drawn state is exactly right. *Target score* (0 to 1): how exactly the answer marks out the
-requested atoms; any other drawing, such as a cartoon of the protein, is ignored. *F1*: how
-much of the drawn state is right (0 to 1). *Strict*: every answer counts, and an unshowable
-answer scores 0. *Valid-only*: the mean over the model's valid answers. *All-{{plan.samples}}
+requested atoms; any other drawing is ignored. *F1* (0 to 1): how much of the drawn state
+is right. *Strict*: every answer counts, an unshowable one as 0. *Valid-only*: the mean over
+the model's valid answers. *All-{{plan.samples}}
 rate*: share of tasks on which all {{plan.samples}} answers are exactly right. *Cost*: US
-dollars for all calls of the model in this condition, at list price. Each score will be
-given with its 95% interval (structures resampled).
+dollars for all calls of the model in this condition, at list price. Scores will carry 95%
+intervals (structures resampled).
 
 {{include:generated/table_final_leaderboard_scene.md|else:generated/shape_leaderboard.md}}
 
@@ -45,17 +45,16 @@ answers, so they have no number of tasks.
 
 ### 6.3 The same request in two formats
 
-**Table 9. Paired comparison of the two formats.** For each model, its pairs (one request on
-both tracks, same target atoms) fall into four cells. A side is *right* when at least 2 of
+**Table 9. Paired comparison of the two formats.** For each model, its pairs fall into four
+cells. A side is *right* when at least 2 of
 its {{plan.samples}} answers are right. *Table 9a* (primary): an answer is right when it is
-target-right, that is, its target score is exactly 1: the requested atoms carry the
-requested style, no other atom carries that style, and no other representation is drawn on
-them alone; any other drawing is ignored. This is the same test in both formats.
+target-right (a target score of exactly 1, Section 4.2), which is the same test in both
+formats.
 *Table 9b* (secondary): an answer is right when it is a task success, which is not the same
 test in the two formats (Section 4.2). An unshowable answer is not right. *McNemar p*: exact
 test that the two one-sided counts are equal. *Difference*: pairs right in the scene only
 minus pairs right in the call list only, as a share of the pairs, with a 95% interval
-(structures resampled). † marks an optional model.
+(structures resampled).
 
 {{include:generated/table_final_paired.md|else:generated/shape_paired.md}}
 
@@ -69,20 +68,18 @@ counts without the clinical pairs are the cleaner test of the formats.
 ### 6.4 Clinical variants
 
 **Table 10. Clinical tasks on the scene track, grouped by whether copying the number is
-right.** On this track the model must map the number itself. *Target score* (0 to 1; the
-primary score of this table): how exactly the answer marks out the requested residue; any
-other drawing is ignored. *Task success rate*: share of answers whose drawn state is exactly
-right. Both are strict means over the models. *With grounding pack*: the mapped residue is
-appended to the request. The rows are two groupings of the same {{clin.n}} tasks (Table 2).
-*Copying the number* and *offset* are defined there. *Matched tasks*: the same variant asked on a
+right.** On this track the model must map the number itself. *Target score* (the primary
+score of this table) and *task success rate* as in Table 6; both are strict means over the
+models. *With grounding pack*: the mapped residue is
+appended to the request. The rows are the two groupings of the same {{clin.n}} tasks (Table
+2, Box 1). *Matched tasks*: the same variant asked on a
 structure with an offset and on a predicted structure without one (descriptive only). The
 helix and strand tasks also ask for the helix or strand that contains the residue.
 
 {{include:generated/table_final_clinical.md|else:generated/shape_clinical.md}}
 
-This table will answer the question of the Introduction: do models map the number in a
-variant name, or copy it? Four patterns are possible in its first two rows, and we predict
-none of them.
+This table will answer the question of the Introduction. Four patterns are possible in its first two rows. We state them
+before the run and do not predict which one a model will show.
 
 1. *Copying.* The target score is high where copying is right and low where it is wrong.
 2. *Mapping.* The target score is high in both rows.
@@ -92,9 +89,9 @@ none of them.
 4. *Neither.* The target score is low in both rows, and the loss lies elsewhere.
 
 Only pattern 2 shows that a model knows how each structure is numbered. With the grounding
-pack, patterns 1 and 3 should both turn into pattern 2. The patterns describe one model,
-and in a mean over models a mixture of copying and converting models could pass for pattern
-4, so the question is answered model by model (SI Section S9). A model shows pattern 1 when
+pack, patterns 1 and 3 should both turn into pattern 2. The patterns describe one model: in
+a mean over models, a mixture of copying and converting models could pass for pattern 4, so
+the question is answered model by model (SI Section S9). A model shows pattern 1 when
 the interval of its difference (copying right minus copying wrong) lies above zero, and
 pattern 3 when it lies below zero; otherwise pattern 2 or 4 is read from the level of the
 two rows, which we report and do not classify by rule.
@@ -104,7 +101,9 @@ two rows, which we report and do not classify by rule.
 
 **Table 11. Follow-up turns and requests with several right answers.** *Task success rate*:
 share of answers whose drawn state is exactly right (for a request with several right
-answers: equal to any one of the accepted answers), strict, mean over the models.
+answers: equal to any one of the accepted answers), strict, mean over the models. A
+follow-up turn *needs no change* when the start state already shows what is asked; the
+right answer returns it unaltered.
 
 {{include:generated/table_final_followup.md|else:generated/shape_followup.md}}
 
@@ -125,8 +124,8 @@ answers.
 <div class="box">
 
 **Everything in this box is preliminary.** The pilot run of {{run.date:date}} had
-{{oct.spec.n_models}} models, {{mvs.n_tasks}} scene tasks on {{mvs.n_structures}}
-structures, and {{mvs.spec.samples_per_task:word}} answer per task. None of its tasks is in
+{{oct.spec.n_models}} of the {{plan.n_core_models}} core models, {{mvs.n_tasks}} scene tasks
+on {{mvs.n_structures}} structures, and {{mvs.spec.samples_per_task:word}} answer per task. None of its tasks is in
 the corpus of Section 3. Its archived answers are graded here with the present grader
 against the references of that time. The numbers can show patterns; they cannot rank the
 leading models.
@@ -146,8 +145,9 @@ JSON-mode condition.
 The clinical category scored lowest: strict F1 {{oct.spec.clinical.f1:.2f}}, and task
 success in {{oct.spec.clinical.success_n}} of {{oct.spec.clinical.n}} answers (Figure 6).
 The natural reading is that finding the residue of a variant is hard. That reading is wrong
-for this run. In {{oct.spec.clinical.highlight_exact:.0%}} of all answers, and
-{{oct.spec.clinical.highlight_valid_share:.0%}} of the valid ones, the requested residue
+for this run. In {{oct.spec.clinical.highlight_exact:.0%}} of the {{oct.spec.clinical.n}}
+clinical answers, and in {{oct.spec.clinical.highlight_valid_share:.0%}} of the valid ones,
+the requested residue
 was drawn exactly as in the reference. The points were lost elsewhere: each clinical
 reference also drew a grey cartoon of the whole protein, and the requests asked only for
 the residue. There was a second flaw. All {{mvs.spec.regime.Clinical.n_tasks}} clinical
@@ -157,12 +157,14 @@ therefore a statement about drawing, not about mapping.
 
 ![**Figure 6. Pilot run: three scores by category (preliminary).** All three are on a scale from 0 to 1 (0.70 is 70% of answers; SI Table S22 gives the numbers). *F1* (how much of the drawn state is right) and *task success* (the share of answers whose drawn state is exactly right) are strict, over all answers of all {{oct.spec.n_models}} models; an unshowable answer scores 0. *Requested part exactly right*: among answers to tasks whose reference marks out a requested part against a background, the share that draw that part exactly as the reference does, whatever the rest of the answer shows. It is the forerunner of the target score; the pilot tasks stored no target. The number of answers behind each bar is printed above it (n). Three categories with few tasks are pooled in the middle group. In the clinical category the requested part was usually right and the whole drawn state almost never.](generated/fig_october_regrade.svg)
 
-**Further findings** (SI Section S13.1, Findings 3 to 6). Grounding packs did not help,
-which Finding 2 explains: the residue was already right without them. Without the format
-guide, none of {{mvs.bare.n_samples}} answers was a valid scene. On the call-list track of
-the first version, a keyword script reached a mean F1 of {{legacy_api.baseline_f1:.2f}}
-where the models scored {{legacy_api.f1_min:.2f}} to {{legacy_api.f1_max:.2f}}, which is why
-that track was rebuilt. And a trial of the rating study with {{pilot.n_raters:word}} raters
+**Further findings** rest on other conditions of the pilot run and on a separate run of
+the first version's call-list tasks in {{legacy_api.run:month}} (SI Section S13.1, Findings
+3 to 6). Grounding packs did not help, which
+Finding 2 explains: the residue was already right without them. Without the format guide,
+none of {{mvs.bare.n_samples}} answers was a valid scene. In the call-list run, a keyword
+script reached a mean F1 of {{legacy_api.baseline_f1:.2f}} where the models scored
+{{legacy_api.f1_min:.2f}} to {{legacy_api.f1_max:.2f}}, which is why that track was
+rebuilt. And a trial of the rating study with {{pilot.n_raters:word}} raters
 was too small to validate anything.
 
 </div>
