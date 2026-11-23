@@ -8,12 +8,12 @@ tasks, and two graders that compared text (Section 4.5). Two of its runs are use
 paper: one of the call-list tasks in July 2026, and one of the scene tasks in October 2026,
 which we call the *pilot run*. The *present version* is the benchmark of Sections 3 and 4.
 
-The only results that exist today come from the first version. They are real, they are kept
-apart from everything else, and they are in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that the final run will fill: their layout,
-captions and definitions are fixed, and the cells are filled by script from the archive of the
-run. Figure 5 shows the layout of the result figure, which has three panels. In this draft the tables with one
-row per model (Tables 6, 9a and 9b) show their first rows only, and Table 7 is described but
-not drawn.
+The only results that exist today come from the first version. They are kept apart from
+everything else, in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that the
+final run will fill: their layout, captions and definitions are fixed, and the cells are
+filled by script from the archive of the run. Figure 5 shows the layout of the result figure.
+In this draft the tables with one row per model (Tables 6, 9a and 9b) show their first rows
+only, and Table 7 is described but not drawn.
 
 ![**Figure 5. Layout of the result figure that the final run will fill (no data shown).** **A**: task success rate (the share of answers whose drawn state is exactly right) per model, strict, with 95% intervals, one plot per track. The two plots must not be compared with each other (Section 4.2); formats are compared in panel B only. **B**: for each model, its {{corpus.twins.n_with_target}} pairs that have a target score, by which side was right (at least 2 of its {{plan.samples}} answers target-right, that is, with a target score of exactly 1: the requested style on the requested atoms and on no others). **C**: valid answers only, so that the panel shows what is lost after an answer could be shown: task success rate and target score (how far the requested style is on the requested atoms and on no others; unrequested background is ignored) per category. A target score well above the task success rate means that the requested atoms were right and something else was not. Panel A is strict and panel C is valid-only, so the two must not be compared.](generated/fig_result_shapes.svg)
 
@@ -78,13 +78,12 @@ interval (structures resampled). † marks an optional model.
 {{include:generated/table_final_paired.md|else:generated/shape_paired.md}}
 
 Where both formats demand the same knowledge, which is every category with pairs except the
-clinical one, a pair that is target-right on one side only points to the format: the model
-produced the right atoms in one format and not in the other, either because the other answer
-could not be shown or because it selected other atoms. A pair that is wrong on both sides is a
-candidate for an error of content. Clinical pairs must be read differently. There a right call
-list does not show that the model knew the residue, because the viewer can do the mapping
-(Section 3.4); "call list right, scene wrong" then points to the mapping, not to the scene
-format. The counts without the clinical pairs are the cleaner test of the formats.
+clinical one, a pair that is target-right on one side only points to the format, and a pair
+that is wrong on both sides is a candidate for an error of content. Clinical pairs must be
+read differently. There a right call list does not show that the model knew the residue,
+because the viewer can do the mapping (Section 3.4); "call list right, scene wrong" then
+points to the mapping, not to the scene format. The counts without the clinical pairs are
+the cleaner test of the formats.
 ⟦PENDING: final run — the same counts without the clinical pairs, and without the {{corpus.twins.need_hide_toggle}} pairs whose reference call list switches off part of the default view (Section 3.4); and, in the SI, the one-sided pairs divided by whether the side that was not right was unshowable⟧
 
 ### 6.4 Clinical variants
@@ -117,7 +116,7 @@ of them.
 3. *Always converting.* The target score is low where copying is right and high where it is
    wrong. A model may have learned that file numbers usually differ from UniProt numbers and
    change the number in every case, for example by subtracting the length of a signal
-   peptide. On an entry that is numbered as the request is, this turns a right number into a
+   peptide. On a structure that is numbered as the request is, this turns a right number into a
    wrong one.
 4. *Neither.* The target score is low in both rows. The loss then lies elsewhere, for example
    in the chain identifier or in invalid answers, and the table does not decide between
@@ -128,15 +127,13 @@ of converting is not enough. With the grounding pack, which states the mapped re
 patterns 1 and 3 should both turn into pattern 2. The patterns are stated on the target
 score, because the task success rate also falls when an answer adds unrequested context.
 
-The patterns describe one model, and Table 10 gives a mean over models. A mixture of copying
-models and converting models could pass there for pattern 4 or for a weak pattern 2. The
-question is therefore answered model by model: SI Section S9 will give the first two rows
-and their difference, with its interval, for each model, and the text will count the models
-under each pattern. "High" and "low" have no fixed threshold. A model is assigned to pattern
-1 when the interval of its difference (copying right minus copying wrong) lies above zero,
-and to pattern 3 when it lies below zero. Where the interval includes zero, the two rows do
-not differ detectably; whether that is pattern 2 or pattern 4 is then read from the level of
-the two rows, which we report and do not classify by rule.
+The patterns describe one model, and Table 10 gives a mean over models, in which a mixture
+of copying and converting models could pass for pattern 4. The question is therefore answered
+model by model: SI Section S9 will give the first two rows and their difference, with its
+interval, for each model. "High" and "low" have no fixed threshold. A model shows pattern 1
+when the interval of its difference (copying right minus copying wrong) lies above zero, and
+pattern 3 when it lies below zero. Where the interval includes zero, pattern 2 or 4 is read
+from the level of the two rows, which we report and do not classify by rule.
 ⟦PENDING: final run — the number of models under each pattern, from the per-model rows of SI Section S9⟧
 
 ### 6.5 Follow-up turns, requests with several right answers, and planned comparisons
@@ -193,13 +190,12 @@ model's share of valid answers and its strict F1 is r = {{oct.spec.r_valid_f1:.2
 ordered, the correlation is r = {{oct.spec.r_valid_success:.2f}}. Valid-only, the models are much
 closer (F1 from {{oct.spec.valid.f1_min:.2f}} to {{oct.spec.valid.f1_max:.2f}}). Of the
 {{mvs.spec.n_failed}} invalid answers, {{mvs.spec.outcome.invalid_json}} were not parseable
-JSON. The text of {{mvs.spec.json_shape.n_raw}} of these
-{{mvs.spec.outcome.invalid_json}} was archived (the pilot archive holds no text for the
-rest). In {{mvs.spec.json_shape.brace_count_share:.0%}} of the
-{{mvs.spec.json_shape.n_raw}}, the numbers of opening and closing braces differed. A scene is
-a deeply nested tree, and one brace too many or too few loses the whole answer. An offline
-repair of the JSON turned {{mvs.spec.repair.n_scene}} of the {{mvs.spec.repair.n_raw}} into
-scene trees (these were not checked by the viewer). This is why the final run reports strict and valid-only scores
+JSON. The text of {{mvs.spec.json_shape.n_raw}} of these was archived. In
+{{mvs.spec.json_shape.brace_count_share:.0%}} of the {{mvs.spec.json_shape.n_raw}}, the
+numbers of opening and closing braces differed: a scene is a deeply nested tree, and one
+brace too many or too few loses the whole answer. An offline repair of the JSON turned
+{{mvs.spec.repair.n_scene}} of the {{mvs.spec.repair.n_raw}} into scene trees (these were
+not checked by the viewer). This is why the final run reports strict and valid-only scores
 together and adds a JSON-mode condition.
 
 **Table 13. Pilot run, per model (preliminary).** The run had {{mvs.n_tasks}} tasks and one
@@ -270,19 +266,13 @@ call lists field by field. Under that grader the keyword script reached a mean F
 numbers are the reason the track was rebuilt; they are not results of the present benchmark.
 
 **Finding 6: the trial of the rating study was too small to validate anything.** In October,
-each valid scene that the earlier grader scored below 1 was rendered, and an image judge
-(Section 5.5) was shown its picture beside the picture of the reference. Volunteers then
-judged a sample of the same picture comparisons, to see whether such answers looked the same
-as the reference to people. In all, {{pilot.n_raters:word}} raters, one of them an author, gave
-{{pilot.all.n_labelled}} verdicts of "same" or "different" on {{pilot.all.n_pairs}} picture
-comparisons. People and the image judge gave the same verdict in
-{{pilot.all.agreement:.0%}} of cases (Cohen's kappa, which is agreement beyond chance,
-{{pilot.all.kappa:.2f}}; 95% interval {{pilot.all.kappa_lo:.2f}} to
-{{pilot.all.kappa_hi:.2f}}). Only {{pilot.all.pairs_two_raters}} picture comparisons received
-two verdicts, so agreement between people cannot be estimated. The trial does not validate
-the image judge or the grader, and it supports no statement about categories, single models
-or the final run. No score in this paper uses the image judge. SI Section S8.1 reports the
-trial in full, with its limits.
+{{pilot.n_raters:word}} raters, one of them an author, gave {{pilot.all.n_labelled}} verdicts
+of "same" or "different" on {{pilot.all.n_pairs}} picture comparisons of valid scenes that
+the earlier grader scored below 1. Only {{pilot.all.pairs_two_raters}} comparisons received
+two verdicts, so agreement between people cannot be estimated. The trial validates neither
+the image judge (Section 5.5) nor the grader, and no score in this paper uses the image
+judge. SI Section S8.1 reports the trial in full, with the agreement between people and the
+image judge and with its limits.
 
 *End of the preliminary evidence.*
 

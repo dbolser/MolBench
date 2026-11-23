@@ -54,9 +54,7 @@ the AlphaFold Protein Structure Database [@varadi2024afdb]. One PDB entry,
 {{prompt.worked_example_entry}}, is reserved for the worked example of both system prompts,
 so tasks use {{corpus.n_structures}}. The panel was chosen for
 coverage, not at random: proteins alone, with bound small molecules or metal ions, with DNA or
-RNA, with attached sugars, and membrane proteins. Of the PDB entries, {{panel.n_xray}} were solved by X-ray
-crystallography, {{panel.n_cryoem}} by cryo-electron microscopy and {{panel.n_nmr}} by nuclear
-magnetic resonance. The {{panel.n_alphafold}} predicted structures are of
+RNA, with attached sugars, and membrane proteins. The {{panel.n_alphafold}} predicted structures are of
 {{panel.alphafold_proteins}}; each of these proteins also has an experimental structure in the
 panel, and a predicted structure uses UniProt numbering. In {{panel.n_offset}} of the
 {{panel.n}} structures at least one residue has an offset: its author number differs from its
@@ -85,7 +83,7 @@ ClinVar record that UniProt cross-references passes two tests; we call such a re
    germline classification. {{variants.n_removed_by_clinvar}} candidates have no such record.
 2. The record is of the gene named in the request, describes that change alone, and states
    the criteria of the classification. A further {{variants.n_second_pass_removed}}
-   candidates have no such record.
+   candidates have a record that passes the first test but none that passes both.
 
 The remaining {{variants.n_usable:,}} variants form the pool. We did not search ClinVar beyond
 UniProt's cross-references. SI Table S4 gives the filter step by step, and SI Section S3.2
@@ -95,20 +93,17 @@ the dates on which the data were read.
 for a stated condition; it does not classify protein changes as such. When a request says
 that a protein-level variant "is classified as pathogenic in ClinVar", it means that at
 least one qualifying record of this amino-acid change carries that classification. The
-request names no condition and no DNA change (Section 9.2). It repeats ClinVar's aggregate
-value in lower case: "pathogenic", "likely pathogenic" or "pathogenic/likely pathogenic",
-which is ClinVar's own value where submitters are divided between the two. Where the
-qualifying records behind one request carry different values, the request says "pathogenic
-or likely pathogenic" ({{clin.n_class_differs}} of the {{clin.n}} requests). The
-classification is always the germline one, also for variants that are better known as
-somatic changes in tumours, such as *TP53* p.Arg175His.
+request names no condition and no DNA change. It repeats ClinVar's aggregate value in lower
+case: "pathogenic", "likely pathogenic" or "pathogenic/likely pathogenic". Where the
+qualifying records behind one request carry different values, it says "pathogenic or likely
+pathogenic" ({{clin.n_class_differs}} of the {{clin.n}} requests). The classification is
+always the germline one, also for variants that are better known as somatic changes in
+tumours, such as *TP53* p.Arg175His.
 
 Two exceptions were made by hand (SI Section S3.2). One well-known lysozyme variant,
-p.Ile74Thr, is outside the pool because its ClinVar record states no criteria. We use it all
-the same, in {{clin.n_tasks_kept_by_name:word}} task per track; its request says, as the
-record does, that the variant is classified as {{clin.kept_by_name.classification}} in
-ClinVar. One *APOE* variant inside the pool is never asked about, because it is better known
-for a reported protective effect and a request that calls it pathogenic would mislead.
+p.Ile74Thr, is used in {{clin.n_tasks_kept_by_name:word}} task per track although its ClinVar
+record states no criteria and it is therefore outside the pool. One *APOE* variant inside the
+pool is never asked about, because it is better known for a reported protective effect.
 
 **From the pool to the clinical tasks.** A clinical task asks about one variant, or a few, on
 a panel structure of its protein. The generator picks the variant by seeded random choice
@@ -126,16 +121,15 @@ The other {{panel.n_disease_proteins_without_task:word}} proteins have no task, 
 variant of the pool is observed in their panel structure (SI Section S3.2).
 
 **Atom tables and residue mapping.** For each structure we freeze two tables. The *atom table*
-is built from the entry's file in the PDB archive, in the archive's mmCIF format (for a
-predicted structure, the file of the AlphaFold Protein Structure Database). It lists every
-atom record of the first coordinate set (the first "model" in PDB terms; we avoid that word
-because *model* here means a language model), with its chain and residue in both author and label
-numbering, and it keeps hydrogen atoms and alternate positions of an atom where the file has
-them: a selection of a residue takes all of its atom records, as the viewer does. The
-*mapping table* holds the SIFTS correspondence between each observed residue and its UniProt
-position. Generators and graders read only these tables, and nothing is fetched while a task
-is built from the tables, graded or loaded. The atom table is compared with what the viewer
-itself selects in the same file (Section 3.7); SI Section S3.1 gives the details.
+is built from the entry's file in the PDB archive (for a predicted structure, the file of the
+AlphaFold Protein Structure Database). It lists every atom record of the first coordinate set
+(the first "model" in PDB terms; we avoid that word because *model* here means a language
+model), hydrogen atoms included where the file has them, with its chain and residue in both
+author and label numbering. The *mapping table*
+holds the SIFTS correspondence between each observed residue and its UniProt position.
+Generators and graders read only these tables, and nothing is fetched while a task is built
+from the tables, graded or loaded. The atom table is compared with what the viewer itself
+selects in the same file (Section 3.7); SI Section S3.1 gives the details.
 
 ### 3.2 From data to a task: the running example
 
@@ -197,10 +191,8 @@ turn), a request with several right answers, and settings that only one format h
 settings). The categories are kinds of task, not steps on one scale of difficulty. Each
 category has several *templates*: a template fixes what is asked, and a seeded generator fills
 in the structure, the residues, the colours and the wording. The corpus has
-{{corpus.n_templates}} templates. No template supplies more than
-{{corpus.max_template_share_other:.0%}} of a category's tasks, except in name resolution (there
-are only five ways to name a protein) and in the small call-list category of requests with
-several right answers. SI Section S2 lists every template with an example.
+{{corpus.n_templates}} templates; SI Section S2 lists every template with an example and
+says how the tasks of a category are spread over its templates.
 
 ![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track (Table 1 gives the reasons). Requests are quoted from the corpus; a long one is cut short. Two words in them are file terms: a *het group* is a molecule in the entry that is not part of a polymer chain, such as a ligand, named by an identifier of up to three characters; *C-alpha* is the central carbon atom of an amino acid. Left column: the four categories that differ in what the model must know beyond the request. Right column: the four that differ in the form of the task. Framed in blue: the two *lookup categories*, name resolution and clinical variant, in which the answer needs one piece of information that a person would look up in a database and that the model must recall.](generated/fig_tiers.svg)
 
@@ -305,11 +297,7 @@ what mature-protein numbering leaves out. One of them in full:
 In UniProt numbering this variant is {{clin.mature_example.hgvs}}. Entry
 {{clin.mature_example.entry}} is numbered from the mature protein as well, so here the
 printed {{clin.mature_example.number}} is the author residue number, and copying it is right.
-Of the
-{{clin.n_mature_name}} traditional names, {{clin.n_traditional_init_met}} differ from the
-UniProt number by the initiator methionine alone (by 1), {{clin.n_traditional_signal}} by a
-signal peptide, and {{clin.n_traditional_signal_propeptide}} by a signal peptide and a
-propeptide.
+SI Section S3.2 says what each of the {{clin.n_mature_name}} traditional names leaves out.
 
 *Two groupings.* Each clinical task has two yes-or-no properties that matter for the results.
 They are not the same property (Table 2a).
@@ -317,12 +305,11 @@ They are not the same property (Table 2a).
 - **Copying the number** (the grouping on which the question of the Introduction is
   answered). If an answer uses the number printed in the
   variant name as the author residue number, is it right? Copying is right in
-  {{clin.n_face_value_right}} tasks and wrong in {{clin.n_face_value_wrong}}. The property is
-  defined on author numbering, and it describes what copying does on the scene track, where
-  the model must give an author or a label number. On the call-list track the printed number
-  can also be passed unchanged to the viewer's UniProt selector (Section 3.4), which is right
-  for every name in UniProt numbering, so results are grouped by this property on the scene
-  track only (Section 6.4).
+  {{clin.n_face_value_right}} tasks and wrong in {{clin.n_face_value_wrong}}. The property
+  describes what copying does on the scene track, where the model must give an author or a
+  label number. On the call-list track the printed number can also be passed unchanged to
+  the viewer's UniProt selector (Section 3.4), so results are grouped by this property on
+  the scene track only (Section 6.4).
 - **Offset** (reported for description only). Does the author number of the target residue differ
   from its UniProt number? An offset is present in {{clin.n_offset}} tasks
   ({{clin.offset_share:.0%}}) and absent in {{clin.n_no_offset}}. Where there is one, the
@@ -414,31 +401,26 @@ Mol\* 3.3.2 does with each call.
 The formats also differ in what they demand for a clinical request, and we state this openly
 because it shapes the comparison. The viewer behind the call-list track can select a residue by
 UniProt accession and position and does the mapping itself. A scene has no such selector: the
-model must produce author or label numbers. The running example's call-list reference uses the
-UniProt selector; its scene reference uses author residue {{ex.auth_number}}. Any selection
-that the format allows is accepted if it resolves to the right atoms: author or label
-numbering on the scene track, and those two or the UniProt selector on the call-list track. On
-the call-list side of a clinical pair, a model can thus be right without knowing any residue
-number of the entry. When the request states the accession and the name is in UniProt
-numbering ({{clin.n_accession_uniprot}} of the {{clin.n}} clinical requests), the model only
-has to pass the accession and the position on to the right call. When the name is in UniProt
-numbering and no accession is stated ({{clin.n_no_accession_uniprot}}), it must also know the
+model must produce author or label numbers. Any selection that the format allows is accepted
+if it resolves to the right atoms: author or label numbering on the scene track, and those
+two or the UniProt selector on the call-list track. On the call-list side of a clinical pair,
+a model can thus be right without knowing any residue number of the entry. When the request
+states the accession and the name is in UniProt numbering ({{clin.n_accession_uniprot}} of
+the {{clin.n}} clinical requests), the model only has to pass both on to the right call.
+When no accession is stated ({{clin.n_no_accession_uniprot}}), it must also know the
 accession.
 
 The {{clin.n_mature_name}} requests with a traditional name are a separate case. Their printed
 number is not the UniProt position, so the UniProt selector gives the wrong residue if the
-number is passed on as printed; the call-list reference uses the selector with the converted
-position. In {{clin.n_face_right_offset}} of the {{clin.n_mature_name}} the printed number is
-the entry's author number, so on either track an answer that selects by author number with
-the printed number is right. In the remaining one, on a predicted structure, the model must
-convert the number on either track. The format guide of the call-list track documents the UniProt selector, and the
+number is passed on as printed. In {{clin.n_face_right_offset}} of them the printed number is
+the entry's author number, and selecting by author number is right on either track; in the
+remaining one the model must convert the number on either track. The format guide of the call-list track documents the UniProt selector, and the
 guide of the scene track documents selection by author and by label numbering; neither says
 how a given structure is numbered (Section 5.2).
 
-The grader resolves the UniProt selector through the frozen mapping table. The viewer reads
-the same SIFTS mapping from the structure file that PDBe distributes. We did not replay
-UniProt selections on PDB entries in the viewer (Section 3.7), so for these entries the
-agreement between grader and viewer rests on both using SIFTS.
+The grader resolves the UniProt selector through the frozen mapping table. UniProt selections
+on PDB entries were not replayed in the viewer, so there the agreement between grader and
+viewer rests on both using SIFTS (Section 9.3).
 
 ![**Figure 3. One request, two formats, the same target atoms.** The scene and the call list are shown in shortened form. Below: for each model, every pair falls into one of four cells by whether each side is right. In the scene, "structure model" is MolViewSpec's name for the deposited coordinates and has nothing to do with a language model. The primary comparison counts a side as right when at least 2 of its {{plan.samples}} answers are *target-right*, that is, have a target score of exactly 1: the requested style is on the requested atoms and on no others, and unrequested background is ignored. It uses the {{corpus.twins.n_with_target}} pairs that have a target score; it is repeated with task success in place of the target score, on all {{corpus.n_twin_pairs}} pairs (Section 5.4). McNemar's test compares the two shaded cells, in which the model was right in one format only.](generated/fig_twins.svg)
 
@@ -500,20 +482,20 @@ set aside: no earlier MolBench release used them, and their tasks are reported a
 the *set-aside split*. The other {{corpus.public.n_tasks}} tasks sit on
 {{corpus.public.n_structures}} structures, of which
 {{corpus.public.n_structures_used_earlier}} appeared in earlier MolBench tasks (scene tasks
-or call-list tasks of any release of the first version) and
+or call-list tasks of any release of the first version; its pilot run, of scene tasks alone, used
+{{mvs.n_structures}}) and
 {{corpus.public.n_structures_not_used_earlier}} did not.
 
 The split compares two sets of structures. It does not compare seen tasks with unseen tasks:
-nearly all tasks in both parts were generated for this version and appear in no earlier
-release. Nor is the set-aside split a hidden test set: the corpus was developed in a public
-repository, so its tasks were online for some days before the final run. Three set-aside
-structures share a protein with one of the other structures.
+nearly all tasks in both parts were generated for this version. Nor is the set-aside split a
+hidden test set: the corpus was developed in a public repository, so its tasks were online
+for some days before the final run. Three set-aside structures share a protein with one of
+the other structures.
 
-*How we read it.* What would be informative is a clearly lower score on the set-aside
-structures: it would suggest that scores on the other structures profit from earlier tasks on
-them or from their being better known. A difference near zero would not show the opposite.
-We report the difference with an interval and do not test it, because the split is small
-(Section 9.4).
+*How we read it.* A clearly lower score on the set-aside structures would suggest that scores
+on the other structures profit from earlier tasks on them or from their being better known. A
+difference near zero would not show the opposite. We report the difference with an interval
+and do not test it, because the split is small (Section 9.4).
 
 *Wording.* To measure sensitivity to wording, {{corpus.n_requests_paraphrased}} requests on
 structures outside the set-aside split have, beside their original (*full*) wording, two further phrasings each, a
@@ -531,12 +513,9 @@ Four checks involve no model (Figure 1).
 - **Reference against structure.** Every reference must select at least one atom, must name the
   residue that the generator intended, and must grade as exactly right against itself. Every
   accepted answer must do the same.
-- **Atom tables against the viewer.** Selections were read back from the running viewers and
-  compared atom for atom with the atom tables: for {{controls.viewer.mvs.checked}} scene
-  controls in Mol\* 5.9.0, and for a sample of {{controls.viewer.api.sample}} call-list
-  controls in PDBe Mol\* 3.3.2. All agreed. The default view after a load with no further call
-  was compared in the same way for {{controls.viewer.api.bare_loads}} of the {{panel.n_pdb}}
-  PDB entries of the panel. Section 4.5 gives the details and lists what was not checked.
+- **Atom tables against the viewer.** Selections were read back from the running viewers
+  (Mol\* 5.9.0 and PDBe Mol\* 3.3.2) and compared atom for atom with the atom tables. All
+  agreed. Section 4.5 gives the numbers and lists what was not checked.
 - **Grader against a control set.** The grader is run on {{controls.n:,}} answers whose
   verdict is known (Section 4.5).
 - **Format rules.** One script validates every task file against the written task format, and

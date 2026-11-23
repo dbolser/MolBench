@@ -126,6 +126,15 @@ Each rule was read back from the running viewer.
 - A reference that colours "by chain" is matched by the same colour theme, or by an answer
   that gives every chain one colour of its own, all different.
 
+Colour. Two colours count as the same if their red, green and blue values (0 to 255) each
+differ by at most {{colour.tolerance}}; the distance between two colours is the largest of
+these three differences. Requests use a palette of {{colour.palette_n}} named colours. Its
+two closest colours ({{colour.closest_pair}}) are {{colour.closest_pair_distance}} apart. In
+the pilot run, {{colour.oct.n_comparable:,}} colour values in answers could be compared with
+a requested colour. Of these, {{colour.oct.exact:,}} were exactly the requested colour, and
+each of the other {{colour.oct.inexact}} was at least {{colour.oct.closest_inexact}} away
+from it, so the tolerance decided no case.
+
 Not graded on the scene track: metadata, the host of the structure file, the order of
 children, representation size and surface kind, the appearance of labels and primitives, explicit camera
 numbers.

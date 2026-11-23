@@ -710,3 +710,176 @@ copy-editor 8, cold reader 8. All five would accept on clarity. Two must-fix ite
    of the main PDF as one contact sheet at low resolution, which shows page breaks and white
    space (no half-empty page seen) but not text. No page was read at full size, and the SI
    PDF was not looked at.
+
+## Round 6 (2026-11-23; fifth round of the third paper branch)
+
+The job that asked for this round called it "round 5"; the log already had a round 5, and
+the reviews are of the paper as that round left it (about 20,400 words, 45 pages).
+
+Scores: structural bioinformatician 8, ML benchmark reviewer 8, clinical geneticist 8,
+copy-editor 8, cold reader 8. All five would accept on clarity. One must-fix item.
+
+### Must-fix item, fixed
+
+- **The gloss of the target score contradicted its definition** (structural
+  bioinformatician). "How well the requested atoms are drawn as asked, whatever else was
+  drawn" was wrong for spill and for extra on the target (Table 3, rows S7 to S9). One gloss
+  is now used in the abstract, Box 2, Sections 4 and 4.2, the captions of Figures 1, 3, 4 and
+  5 and of Tables 3, 6, 9 and 10, and SI Table S1: how far the requested style is on the
+  requested atoms and on no others, with unrequested background ignored. *Target-right* is
+  glossed in the same words. No "whatever else" is left in the paper or the SI.
+
+### Should-fix and polish items, fixed
+
+- **The four patterns and a table of means** (two reviewers). Section 6.4 now says that the
+  patterns describe one model, that the question is answered model by model (rows per model
+  in SI Section S9, new PENDING tags), and what "high" and "low" rest on: pattern 1 or 3 when
+  the interval of a model's difference lies above or below zero, otherwise the level of the
+  two rows is reported and not classified by rule. See "Open, for the lead", item 1.
+- **7 sets or 8** (three reviewers). Section 9.4 gives the 7 sets of Table 10 first, with
+  their proteins (new value `clin.n_offset_pair_proteins_uniprot_name`), and the 8 in a
+  bracket with the reason.
+- **"Valid"** (structural bioinformatician). Box 2 states the criterion that is applied:
+  the answer obeys the format and the viewer can show it, per track.
+- **Call-list target score where the default view already shows the style.** Checked with
+  the grader: a load with no further call is target-right in none of the 372 first requests
+  of the call-list track (asserted in `corpus_values.py`). Section 4.2 says so and gives a
+  paired cartoon request from the corpus as the case in point.
+- **Planned comparisons** (three reviewers). Section 5.4: the central clinical comparison
+  (comparison 7) has its own bullet, comparisons 1 to 6 are a numbered list, and "totals of
+  the two tracks are not compared" is a bullet of its own. Table 12, row 4 is short; its
+  detail is in the caption.
+- **Rules before the formula** (three reviewers). Section 4.2: three counts, then the three
+  rules (rule 1 gives spill, rule 2 extra, rule 3 nothing), then recall, precision and the
+  score.
+- **Spill** (ML reviewer). Read in the code (`molbench/drawn.py`, `target_display`) and
+  checked with the grader: spill is counted on a style of the answer that covers the target
+  in the requested representation; the requested representation outside the target in a
+  separate style of another colour is unrequested context. Rule 1 and SI Section S4.3 say
+  so, and `corpus_values.py` asserts two such answers.
+- **A target with several facts** (two reviewers). Section 4.2: recall and precision are
+  computed for each part and averaged (as `GRADING.md` and SI Section S4.3 say).
+- **Row C7 of Table 3 by hand** (three reviewers), with the reason why its target score
+  stays 1; and row C6 passes because the task lists a second accepted answer.
+- **Why the call-list F1 follows another rule** (cold reader). One sentence in Section 4.2.
+- **Name resolution told once** (four reviewers). Section 4.1 has the full account, with the
+  denominator that was missing: 5,778 accepted entries, of which 39 are reference entries, 3
+  further panel entries and 5,736 outside the panel (new value
+  `resolve.n_accepted_outside_panel`). The bullet of Section 3.3, the caption and the row
+  labels of Table 8 and Section 9.3 point to "the weaker rule of Section 4.1".
+- **"Primary" had five uses** (cold reader). Box 2 has an entry *Primary score*: which score
+  a table or comparison is read on first, and where. The word is now used for scores and
+  the comparisons on them only; the groupings are "the grouping on which the question is
+  answered" and "for description only", strict is "the default".
+- **"Held-back" read as a hidden test set** (two reviewers). The split is now the *set-aside
+  split* (Sections 3.6, 5.4, 9.2, 9.4; Table 1 and its caption; Figure 1 and its caption;
+  Table 12; SI Tables S0b, S0c and S3). Section 3.6 is three short paragraphs, the point
+  first. The complement has no name ("tasks on the other structures").
+- **Categories in the order of the text** (cold reader). Figure 2 (two headed columns),
+  Table 1 (two headed groups), Table 8, the bullets of Section 3.3 and SI Table S2 list the
+  four categories that differ in what must be known, then the four that differ in form.
+- **Rendered pictures** (cold reader). Figure 4 opens with the reference, Answer A and Answer
+  B as headless Mol\* 5.9.0 renders them, from one camera (`figures.py --viewer-strip`; the
+  pictures are committed with the hash of the scenes, and the figure script stops if the
+  running example has changed).
+- **Conclusion** (cold reader): corpus size, the pairs, and 48 of 82.
+- **Clinical naming** (clinical geneticist). "The amino acid that the UniProt canonical
+  sequence has at that position", three times; MANE Select named and cited in place of "the
+  gene's default transcript"; *qualifying record* and *best-reviewed record* defined
+  (Sections 3.1 and 9.2, SI Table S0b); what a request says about the classification, with
+  the four wordings and the count of requests that say "pathogenic or likely pathogenic"
+  (asserted against every clinical task); germline also for variants better known as
+  somatic; Box 1 entries ClinVar, Transcript and Missense variant; "each" record in step 1;
+  *mature-protein numbering* as the one name of the numbering of a traditional name.
+- **ClinVar's parentheses.** The sentence that gave ClinVar's reason for them is gone. SI
+  Section S3.2 describes the title of the running example and says that the requests write
+  the protein change without parentheses.
+- **HGVS and transcripts** (three reviewers). The two paragraphs of Section 3.3.1 are four
+  sentences; the detail is in SI Section S3.2.
+- **Step 6 of Section 3.2** says why 82 is right in the call-list reference.
+- **Glosses for readers from other fields** (ML reviewer): structure, entry, UniProt,
+  ClinVar and SIFTS in the Introduction; Mendelian disease, observed, codon, resolution,
+  helix and strand where first used; SIFTS and ClinVar in the abstract.
+- **The filter of Section 3.1** is two numbered tests with one count each.
+- **26 PDB entries for 25 proteins** and **23 structures against 14**: one clause each, from
+  new values.
+- **"Entry" for predicted structures**: "structure" in Sections 1, 3.4, 5.2 and 6.4.
+- **One name per thing** (copy-editor). "The final run" (no "paid run"); "first-version
+  corpus" in Table 14; the heading of Section 6.6; "side" (the other uses reworded, also in
+  SI Table S0a); "fact" in its everyday sense is "piece of information"; one punctuation for
+  "strict" in the headers of Tables 6, 8 and 13; "plot" in Figure 5; "clarifying question".
+- **Small things.** "Further properties", not five; the correlation of Finding 1 is called
+  nearly proportional, not a ranking; the title of Table 10; Table 14 has a pooled last
+  cell; Section 5.5 as a list with "what the study does not estimate" apart; Section 7's
+  first sentence and the title of Table 15; "returned a scene that the viewer could load";
+  the pointer after the remark on the classification; the price ranges of Section 5.1;
+  citation ranges ("[1–4]"); one link per arXiv reference and one year in reference 1; the
+  caption of SI Table S8; Figure 3 says what "structure model" is; Figure 6 has one axis
+  title and all bar labels in one form (declined last round; done now, with the caption
+  saying that Table 14 gives the shares as percentages).
+- **PDF layout.** A heading is kept with what follows it; "6.2 Categories" no longer stands
+  alone (looked at on the rendered page).
+
+### Length
+
+Three reviewers asked for a shorter text. Moved to the SI: the HGVS and transcript detail,
+what the traditional names leave out, the methods of the panel entries, the colour tolerance
+in the pilot run, the template shares, how the viewer sample was drawn. Shortened: the
+viewer check of Section 4.5, Findings 1 and 6, the row-9 paragraph of Section 7, Sections
+9.2 and 9.3, the name-resolution caveat. Added on request: the classification paragraph of
+Section 3.1, row C7 by hand, the per-model reading of Table 10, the glosses, the conclusion.
+The balance is about nil: the main text has about as many words as before this round
+(`build.py` prints the count). It is not shorter.
+
+### Declined, or done differently, and why
+
+| Suggestion | Decision |
+|:---|:---|
+| Rename the split "new-structure split" (two reviewers) | The name would be wrong on the facts: 40 of the 63 other structures were also used by no earlier release. What sets the 15 apart is that they were set aside before generation, so the split is called the *set-aside split*. |
+| Name both scores and the validity finding in the abstract (cold reader) | No room in 200 words once SIFTS, ClinVar and UniProt are glossed, as another reviewer asked. The abstract names the target score with its gloss; the sentences on the pilot are replaced after the final run. |
+| "ClinVar uses the MANE Select transcript in a record's preferred name" (clinical geneticist) | Not written: the ClinVar documentation could not be read at the source this round (`related_work_checks.md`). MANE Select is described from NCBI's page and cited. |
+| "This is ClinVar's naming format, not a complete HGVS expression" | Written more narrowly, for the same reason: the SI says what the title looks like and what we take the bracketed protein change to be. |
+| A table for the seven planned comparisons (ML reviewer) | A numbered list, as another reviewer proposed; Table 12 already has one row per comparison. |
+| Spearman's correlation for Finding 1 | The claim was reworded to what a Pearson correlation shows. No new number was computed for the pilot run. |
+| Delete "Both words are used for nothing else" in Box 1 (copy-editor, first option) | The second option was taken: the other uses were reworded, and the sentence stays. |
+| State the name-resolution caveat in full in Section 3.3 | It is in Section 4.1 only, as three reviewers asked; Section 3.3 has one sentence. |
+
+### Corrected although no reviewer asked
+
+- Section 3.1 said "(a further 295 were removed)" of candidates that have a pathogenic
+  record but none that passes the second test; it now says exactly that.
+- The row labels of Table 8 no longer carry the number of panel entries; Section 4.1 does.
+
+### Open, for the lead
+
+1. **Section 6.4 now specifies a per-model reading of Table 10** that no script has yet:
+   the first two rows and their difference with a bootstrap interval for each model (SI
+   Section S9), and a count of models under each pattern (pattern 1 or 3 by the sign of an
+   interval that excludes zero). If this rule is not wanted, the paragraph after the list of
+   patterns and the two PENDING tags must go. Item 1 of round 5 (three computations of
+   Section 5.4) is still open.
+2. **Shape tables changed again**, and `scripts/paper_tables.py` must follow them: the order
+   of the categories in Table 8 (`TIERS`); headers "Task success rate, strict", "Target
+   score, strict", "F1, strict" (Tables 6, 8 and 13); Table 10 header "Target score (the
+   primary score here)" and row labels without "(primary grouping)"; Table 12 rows 1 and 4;
+   the two "of which" rows of Table 8.
+3. **The repository still says "held back"** (task files, `CORPUS.md`, `TASK_FORMAT.md`);
+   the paper says "set-aside" and SI Table S0c maps the two. If Dan prefers the old name, the
+   change is a search and replace in `paper/` plus the header of Table 1 in
+   `corpus_values.py`.
+4. **New value keys**: `clin.n_offset_pair_proteins_uniprot_name`,
+   `clin.n_proteins_one_pdb_entry`, `clin.n_haemoglobin_pdb_entries`, `clin.n_class_differs`,
+   `clin.n_class_both_word`, `corpus.api.n_first_requests`, `corpus.api.cartoon_example`,
+   `resolve.n_accepted_outside_panel`, `oct.spec.highlight_n`, `oct.spec.highlight_exact_n`,
+   `oct.spec.highlight_exact`, `ex.mvs.other_colour_around.*`, `ex.mvs.other_colour_beside.*`.
+   `corpus_values.py` now grades a load-only answer for every first request of the call-list
+   track (372 gradings) on each run.
+5. **Figure 4 needs a browser once.** `paper/figures.py --viewer-strip` renders the three
+   pictures with `molbench.render` and the Mol\* bundle. In this worktree the bundle was a
+   link to the one in the main checkout (git-ignored). If the running example changes at
+   the merge, `figures.py` stops and says to run it again.
+6. **To check before submission** (`related_work_checks.md`, round 6): the given names of
+   the first three authors of Morales et al. 2022, and how ClinVar forms a record's title.
+7. **Layout.** Looked at this round as rendered pages: the pages with Figures 2, 4 and 6
+   and Tables 8 and 14 of the main PDF (47 pages). Not looked at: the other pages, and the
+   SI PDF (48 pages).

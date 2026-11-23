@@ -31,9 +31,7 @@ is made. Entry {{ex.entry}} numbers the same chain from the first residue of the
 once that segment has been cut off; older papers accordingly call the variant
 {{ex.mature_name}}. The case is not unusual: a survey of the PDB found that 38.6% of 176,507
 entries contain proteins that are not numbered as their UniProt sequences are
-[@faezov2021pdbrenum].
-
-The request also states a classification. It comes from ClinVar, a public archive of human
+[@faezov2021pdbrenum]. The request also states a classification. It comes from ClinVar, a public archive of human
 genetic variants and their clinical classification. The benchmark uses the variant only as an
 address: which residue does the name point to? It never asks whether a variant causes disease
 (Section 9.2; Section 3.2 gives the ClinVar record of this variant).

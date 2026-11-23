@@ -22,7 +22,7 @@ and that of the answer; where this section says *the other*, it means the other 
 | Task success | For one answer, yes or no: the drawn state is exactly right, with nothing missing and nothing extra. The *task success rate* of a model is the share of its answers that succeed. |
 | All-{{plan.samples}} rate, majority | *All-{{plan.samples}} rate*: the share of tasks on which all {{plan.samples}} answers succeed. *Majority*: at least 2 of the {{plan.samples}} answers are right; used only in the comparison of pairs. |
 | Target score | From 0 to 1: how far the requested style is on the target atoms and on no others. Unrequested background, such as a cartoon of the protein, is ignored. An answer is *target-right* when its target score is exactly 1. |
-| Primary score | The score on which a table or a comparison is read first. *Within a track* (Tables 6 to 8, 11 and 12): the task success rate, strict. *Between the two formats* (Table 9a) *and for copying against mapping* (Table 10): the target score, because task success is not the same test on the two tracks and also falls when an answer adds unrequested context. F1 is reported for partial credit and is never primary. |
+| Primary score | The score on which a table or a comparison is read first. *Within a track* (Tables 6 to 8, 11 and 12): the task success rate, strict. *Between the two formats* (Table 9a) *and for copying against mapping* (Table 10): the target score, because task success is not the same test on the two tracks and also falls when an answer adds unrequested context. The comparison of pairs on the target score is the *primary comparison* (Table 9a), and the one on task success the secondary (Table 9b). F1 is reported for partial credit and is never primary. |
 | Unrequested context | Drawing that the request did not ask for, such as a cartoon of the protein behind a requested residue. |
 | Valid, invalid | An answer is *valid* if it obeys the answer format and the viewer can show it: on the scene track, a scene that Mol\* accepts and whose structure file it can load; on the call-list track, a JSON list in which every call and every field is documented. Otherwise it is *invalid*, in one of two ways. An *unshowable* answer cannot be shown at all and scores 0. A *schema-breaking* call list contains parts that the viewer ignores; it is graded as the viewer would treat it but is not counted as valid (Section 4.4). |
 | Call schema | The list of calls that the format guide documents, with the type of each field. A call list *fits* it if every call is on the list and every field has the documented type. |
@@ -177,9 +177,8 @@ and the target score is {{ex.mvs.extra.target:.2f}}. The caption of Table 3 work
 the same way.
 
 The line between rules 2 and 3 is whether the added style is confined to the target. A second
-representation on the target alone is another answer to the question "how should these atoms
-be drawn?", and we count it as an error on the target. A style that also covers other atoms is
-read as background, which the target score is defined not to judge. The line is a convention,
+representation on the target alone is read as another answer to "how should these atoms be
+drawn?", and a style that also covers other atoms as background. The line is a convention,
 and it has a cost that two rows of Table 3 show: {{ex.other_rep}} added to the residue alone
 is penalised (row {{ex.row.mvs.extra}}, {{ex.mvs.extra.target:.2f}}), and the same
 {{ex.other_rep}} added to the residue and its two neighbours is not (row
@@ -201,15 +200,14 @@ recolours it.
 
 A target score exists for {{corpus.n_with_target_score}} of the {{corpus.n_tasks}} tasks. For
 {{corpus.n_with_target}} of them the generator stores the target. For
-{{corpus.n_without_target_settings}} more, in which a first request (not a follow-up) changes
-a setting of the viewer or hides something (a background colour, the water molecules), the
-target is everything the reference changes. The remaining
-{{corpus.n_without_target_followup}} tasks are follow-up turns whose edit takes something
-away, changes or restores a setting of the whole view, or needs no change because the start state already shows what is
-asked. They have no target score, and averages of the target score leave them out. The reason
-is that after such an edit no atoms are left that are "drawn as asked", and if we took
-everything the reference draws as the target, the start state returned unchanged would earn
-nearly full marks.
+{{corpus.n_without_target_settings}} more, in which a first request changes a setting of the
+viewer or hides something (a background colour, the water molecules), the target is
+everything the reference changes. The remaining {{corpus.n_without_target_followup}} tasks
+are follow-up turns whose edit takes something away, changes or restores a setting of the
+whole view, or needs no change. They have no target score, and averages leave them out:
+after such an edit no atoms are left that are "drawn as asked", and with everything the
+reference draws as the target, the start state returned unchanged would earn nearly full
+marks.
 
 **Unrequested context: the rule on each track.** On the scene track the screen starts empty,
 so anything drawn beyond the request counts against precision and task success. On the
@@ -383,43 +381,31 @@ call lists) were also checked in the running viewers (see the text below the tab
 | Call list | {{controls.api.n_controls}} | {{controls.api.n_entries}} | {{controls.api.n_equivalent_kinds}} / {{controls.api.n_wrong_kinds}} | {{controls.api.new.false_pass}} of {{controls.api.new.false_pass_n}} | {{controls.api.new.false_fail}} of {{controls.api.new.false_fail_n}} | {{controls.api.old.false_pass}} of {{controls.api.old.false_pass_n}} ({{controls.api.old.false_pass_rate:.0%}}) | {{controls.api.old.false_fail}} of {{controls.api.old.false_fail_n}} ({{controls.api.old.false_fail_rate:.0%}}) |
 
 **The check in the running viewers.** The verdict of a control comes from how it was made,
-not from the grader. For many controls it was also checked in the viewers. This is the same
-check that compares the atom tables with the viewer (Section 3.7), and it is described here
-once.
+not from the grader. For many controls it was also checked in the viewers; this is the same
+check that compares the atom tables with the viewer (Section 3.7).
 
-*Scene track.* Both scenes of {{controls.viewer.mvs.checked}} of the
-{{controls.mvs.n_controls:,}} controls were loaded in Mol\* 5.9.0, run without a display, and
-the atoms, colours and opacities of each representation were read back. In every one the
-viewer showed the same drawing where the control must pass and a different one where it must
-fail, and the grader's resolved atoms were those that the viewer drew.
+- *Scene track.* Both scenes of {{controls.viewer.mvs.checked}} of the
+  {{controls.mvs.n_controls:,}} controls were loaded in Mol\* 5.9.0, run without a display,
+  and their drawing was read back. In every one the viewer showed the same drawing where the
+  control must pass and a different one where it must fail, and the grader's resolved atoms
+  were those that the viewer drew.
+- *Call-list track.* A sample of {{controls.viewer.api.sample}} controls, with every kind of
+  control represented, was replayed in PDBe Mol\* 3.3.2: {{controls.viewer.api.lists}} of
+  their {{controls.viewer.api.sample_lists}} call lists. Each selection was compared atom for
+  atom, and every list ended in the state that the grader computes.
+- *Default view.* The default view after a load with no further call was compared in the
+  same way for {{controls.viewer.api.bare_loads}} of the {{panel.n_pdb}} PDB entries of the
+  panel.
 
-*Call-list track.* A sample of {{controls.viewer.api.sample}} controls, with every kind of
-control represented, was replayed in PDBe Mol\* 3.3.2: {{controls.viewer.api.lists}} of
-their {{controls.viewer.api.sample_lists}} call lists (SI Section S5 says how the sample was
-drawn and which lists were left out). Each selection was compared atom for atom, and every
-list ended in the state that the grader computes.
+Not checked in a viewer are {{controls.viewer.mvs.skipped}} scene controls of kinds that
+cannot be read back in this way (for example the text of a label), the controls that were
+added after the read-back, the call-list controls outside the sample, and every call list
+that selects by UniProt number. SI Section S5 gives the counts and says how the sample was
+drawn.
 
-*Default view.* The default view after a load with no further call was compared in the same
-way for {{controls.viewer.api.bare_loads}} of the {{panel.n_pdb}} PDB entries of the panel;
-the entry reserved for the worked example was left out, as were the predicted structures.
-
-Both viewers were given the archive file from which the atom table was built, not the copy of
-the file that PDBe Mol\* fetches by default (SI Section S4.8). Not checked in a viewer are:
-
-- {{controls.viewer.mvs.skipped}} scene controls of kinds that cannot be read back in this way
-  (for example the atoms the camera is centred on, or the text of a label);
-- {{controls.viewer.mvs.n_added_since}} scene controls that were added after the read-back;
-- the call-list controls outside that sample, among them the
-  {{controls.viewer.api.n_added_since}} that were added later, and every call list that
-  selects by UniProt number.
-
-The earlier graders give the scale of the problem that the control set detects. Both were our
-own. The scene grader used in our pilot run rejected
-{{controls.mvs.old.false_fail_rate:.0%}} of the correct control answers and passed
-{{controls.mvs.old.false_pass_rate:.0%}} of the wrong ones; the first call-list grader
-rejected {{controls.api.old.false_fail_rate:.0%}} of the correct ones and passed
-{{controls.api.old.false_pass_rate:.0%}} of the wrong ones. SI Section S5 lists every kind of
-control with its counts.
+The earlier graders, both our own, give the scale of the problem that the control set
+detects (Table 4, last two columns). SI Section S5 lists every kind of control with its
+counts.
 
 ### 4.6 What is deliberately not graded
 
@@ -427,12 +413,9 @@ Camera coordinates are never graded. A requested focus is graded by which residu
 frames; an unrequested focus in the answer is ignored. Sizes, line widths and the appearance of
 labels are not graded. Two opacities count as the same if they differ by at most
 {{colour.opacity_tolerance}}. Two colours count as the same if their red, green and blue values
-(0 to 255) each differ by at most {{colour.tolerance}}. We measure the distance between two
-colours as the largest of these three differences. Requests use a palette of
-{{colour.palette_n}} named colours. Its two closest colours ({{colour.closest_pair}}) are
+(0 to 255) each differ by at most {{colour.tolerance}}. Requests use a palette of
+{{colour.palette_n}} named colours, of which the two closest are
 {{colour.closest_pair_distance}} apart, so no palette colour can pass for another. A named
 lighter or darker shade of a requested colour, such as "darkred" for red, lies outside the
-tolerance and counts as wrong. In the pilot run, {{colour.oct.n_comparable:,}} colour values in
-answers could be compared with a requested colour. Of these, {{colour.oct.exact:,}} were exactly
-the requested colour, and each of the other {{colour.oct.inexact}} was at least
-{{colour.oct.closest_inexact}} away from it, so the tolerance decided no case.
+tolerance and counts as wrong. In the pilot run the tolerance decided no case (SI Section
+S4.5).

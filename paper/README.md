@@ -6,6 +6,7 @@ section. No number is typed by hand.
 ```bash
 uv run python paper/corpus_values.py           # task files, frozen data -> generated/corpus_values.json, tables
 uv run --with matplotlib python paper/figures.py   # generated/fig_*.svg (five schematics, one chart)
+uv run --with matplotlib python paper/figures.py --viewer-strip   # only when the running example changes: the three Mol* pictures of Figure 4
 python paper/build.py                          # -> molbench.md, si.md, plain_summary.md, PENDING.md
 python paper/build.py --check                  # same checks, writes nothing; exit 1 if anything is stale or wrong
 python paper/build.py --pdf                    # also HTML and PDF of the paper and the SI (pandoc + Chromium)
@@ -24,6 +25,7 @@ result tables), then the three commands above.
 | `corpus_values.py` | Every number that does not come from a model run: corpus counts, panel and variant facts, control set, the October answers regraded, the pilot rating study, the run plan, the running example graded by the benchmark's grader. Also writes the corpus table, the empty result tables (`generated/shape_*.md`) and the SI tables. `--check` fails if a committed file is stale. |
 | `figures.py` | Schematic figures as plain SVG (pipeline, tiers, paired design, drawn-state grading, shapes of the result figures) and the chart of the pilot run. Okabe–Ito colours; every mark also has a label or a pattern. The schematics are 660 px wide, the width at which the PDF prints them, and the script refuses in-figure text below 9.5 px (7 pt in print). |
 | `generated/` | Output of the scripts, committed so the paper builds without the git-ignored archives. `values.json` and the `table_mvs_*`/`fig_mvs_*` files are written by `scripts/paper_tables.py` and `scripts/paper_figures.py` from the October 2026 pilot run. |
+| `generated/viewer_strip/` | The three pictures at the top of Figure 4 (reference, Answer A, Answer B of the running example), rendered by headless Mol\* from one camera, and `record.json` with the hash of the scenes they were rendered from. Rendering needs a browser and the Mol\* bundle (`scripts/fetch_molstar.py`, `playwright install chromium`), so the pictures are committed and `figures.py` only embeds them; it stops if the running example has changed since. |
 | `generated/viewer_sample.json` | How many call-list controls were in the sample replayed in PDBe Mol\*. The record of that check counts call lists, not controls; `uv run python paper/corpus_values.py --viewer-sample` works the number out from the record and the control set of the same commit (it needs the git history) and writes this file. `corpus_values.py` reads it and stops if it no longer fits the record. Run the command again whenever `tests/controls/viewer_check.json` changes. |
 | `inputs.json` | Which archives `scripts/paper_tables.py` reads. |
 | `references.bib`, `related_work_checks.md` | References, and the record of how each was verified. |
@@ -60,12 +62,12 @@ layout) are then drawn from the same archive.
 The October pilot numbers are reported in Section 6.6 of the paper (boxed) and in SI Section S8;
 where another section cites one, it says that it is a pilot result.
 
-## Words and table numbers (review rounds 2 to 5)
+## Words and table numbers (review rounds 2 to 6)
 
-The paper says *category* where the repository says tier, *style* where `GRADING.md` says
+The paper says *category* where the repository says tier, *set-aside split* for the `heldback` split (the other tasks have no name: "tasks on the other structures"), *mature-protein numbering* for the numbering of a traditional name, *style* where `GRADING.md` says
 draw, *format guide* for the vendored reference in the system prompt, *main* for the `spec`
 condition, *structure panel* for the 79 structures and *core / optional models* for the
-models. The clinical results are grouped by *copying the number* (primary) and by *offset*.
+models. The clinical results are grouped by *copying the number* and, for description, by *offset*. *Primary* is said of scores and of the comparisons made on them only, and Box 2 says which score is primary in which table. Categories are listed in one order everywhere (`TIERS` in `corpus_values.py`): the four that differ in what the model must know (translation, structure-grounded, name resolution, clinical variant), then the four that differ in the form of the task. The target score has one gloss, used in every caption: how far the requested style is on the requested atoms and on no others, with unrequested background ignored.
 Tables: 1 corpus, 2a clinical groupings and 2b further properties of the clinical tasks, 3 running example (rows S1 to S10 and C1 to C7; the
 text cites them through `{{ex.row.*}}`), 4 control set, 5 conditions, 6 and 7 per model,
 8 categories, 9a and 9b pairs, 10 clinical, 11 follow-up, 12 planned comparisons, 13 and 14

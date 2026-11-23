@@ -2,6 +2,10 @@
 
 ### S3.1 The structure panel
 
+**Methods.** Of the {{panel.n_pdb}} PDB entries, {{panel.n_xray}} were solved by X-ray
+crystallography, {{panel.n_cryoem}} by cryo-electron microscopy and {{panel.n_nmr}} by nuclear
+magnetic resonance.
+
 **Selection rule.** The panel is the union of four groups. Every entry must be current in the
 PDB archive and have at most {{panel.max_atoms:,}} atoms in its first coordinate set, so that
 it renders quickly ({{panel.n_over_size_limit}} larger entries are kept because earlier tasks
@@ -154,6 +158,12 @@ random choice. For {{clin.n_featured_proteins}} proteins a list written by hand 
 generation names well-known variants that are tried first, and used if they are in the pool
 (or are the exception above) and observed in the structure: {{clin.featured_list}}. The list
 decides which variant is asked about, never what the answer is.
+
+*Traditional names.* A traditional name is used in {{clin.n_mature_name}} requests per
+track. {{clin.n_traditional_init_met}} of these names differ from the UniProt number by the
+initiator methionine alone (by 1), {{clin.n_traditional_signal}} by a signal peptide, and
+{{clin.n_traditional_signal_propeptide}} by a signal peptide and a propeptide; each request
+says which.
 
 *Proteins without a task.* Tasks exist for {{clin.n_proteins}} of the
 {{panel.n_disease_proteins}} proteins. The other {{panel.n_disease_proteins_without_task}}

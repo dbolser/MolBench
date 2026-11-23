@@ -19,14 +19,14 @@ Run numbers currently come from: **October 2026 panel** (PRELIMINARY). They appe
 | 1 | `sections/00_title.md` | 3 | 1 | Dan — author list, affiliations, corresponding author | Dan |
 | 2 | `sections/00_title.md` | 12 | 1 | Dan — graphic for the table of contents, which the journal asks for | Dan |
 | 3 | `sections/01_abstract.md` | 18 | 1 | final run — main results on both tracks and the paired comparison, with the number of models, in two sentences, which replace the four sentences on the pilot run so that the abstract stays within its limit | final run |
-| 4 | `sections/02_introduction.md` | 95 | 1 | final run — one sentence stating the main result | final run |
+| 4 | `sections/02_introduction.md` | 93 | 1 | final run — one sentence stating the main result | final run |
 | 5 | `sections/06_setup.md` | 36 | 1 | Dan — which of the optional models are run | Dan |
 | 6 | `sections/07_results.md` | 37 | 182 | final run | final run |
 | 7 | `sections/07_results.md` | 46 | 1 | final run — the table for the call-list track, in the shape of Table 6 | final run |
-| 8 | `sections/07_results.md` | 125 | 1 | final run — the same counts without the clinical pairs, and without the 15 pairs whose reference call list switches off part of the default view (Section 3.4); and, in the SI, the one-sided pairs divided by whether the side that was not right was unshowable | final run |
-| 9 | `sections/07_results.md` | 186 | 1 | final run — the number of models under each pattern, from the per-model rows of SI Section S9 | final run |
-| 10 | `sections/07_results.md` | 224 | 1 | final run — outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the repaired scores, F1 valid-only and the cost per model, as tables in SI Section S9 | final run |
-| 11 | `sections/07_results.md` | 226 | 1 | rating study — the share of answers not counted as a success that people judge to show the same as the reference, the agreement between raters, the agreement between people and the image judge, and the check of possible false passes, with intervals (Section 5.5) | rating study |
+| 8 | `sections/07_results.md` | 124 | 1 | final run — the same counts without the clinical pairs, and without the 15 pairs whose reference call list switches off part of the default view (Section 3.4); and, in the SI, the one-sided pairs divided by whether the side that was not right was unshowable | final run |
+| 9 | `sections/07_results.md` | 183 | 1 | final run — the number of models under each pattern, from the per-model rows of SI Section S9 | final run |
+| 10 | `sections/07_results.md` | 221 | 1 | final run — outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the repaired scores, F1 valid-only and the cost per model, as tables in SI Section S9 | final run |
+| 11 | `sections/07_results.md` | 223 | 1 | rating study — the share of answers not counted as a success that people judge to show the same as the reference, the agreement between raters, the agreement between people and the image judge, and the check of possible false passes, with intervals (Section 5.5) | rating study |
 | 12 | `sections/09_discussion.md` | 3 | 1 | final run — discussion of the results: which categories separate models, what the paired comparison shows, whether the set-aside split differs from the other tasks, and what Table 10 says about mapping against copying | final run |
 | 13 | `sections/10z_conclusion.md` | 20 | 1 | final run — two sentences on the results: how well the models drive the viewer on each track, and what the paired comparison shows | final run |
 | 14 | `sections/11_ethics.md` | 11 | 1 | Dan — ClinVar's own statement on clinical use, to be read at the source by hand and added to this sentence; the page refuses automated reading | Dan |

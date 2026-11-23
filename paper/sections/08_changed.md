@@ -24,10 +24,9 @@ Row 9 needs more words than a table cell holds. Before the final run, the benchm
 reviewed four times by language-model reviewers, each given one role (structural biologist,
 clinical geneticist, benchmark methodologist, tester of the grader). The reviewers wrote
 natural answers by hand and graded them, and we reproduced each finding before acting on it.
-The worked example of the scene prompt selected a named compound in a way that the references
-did not. The worked example of the call-list prompt coloured a residue in a form that many
-generated tasks did not accept. A residue named by UniProt number on a predicted structure was
-scored as selecting nothing. A scene that named a file which the viewer cannot load was
-graded as a success. The same reviews found
-clinical requests whose "pathogenic" record belonged to another gene or to two variants taken
-together (SI Section S3.2).
+Four examples: the worked example of each prompt was written in a way that the references,
+or many generated tasks, did not accept; a residue named by UniProt number on a predicted
+structure was scored as selecting nothing; and a scene that named a file which the viewer
+cannot load was graded as a success. The same reviews found clinical requests whose
+"pathogenic" record belonged to another gene or to two variants taken together (SI Section
+S3.2).

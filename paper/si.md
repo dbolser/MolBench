@@ -284,7 +284,10 @@ drawing of Section S4.3.
 ## S2. Task templates
 
 A template fixes what is asked; a seeded generator fills in the structure, the residues, the
-colours and the wording. The corpus has 129 templates.
+colours and the wording. The corpus has 129 templates. No template supplies more than
+12% of a category's tasks, except in name resolution (there
+are only five ways to name a protein) and in the small call-list category of requests with
+several right answers.
 
 **Table S2. Every template, with its number of tasks on each track and one example request**
 (shortened where long). A dash means that the template has no task on that track. Template
@@ -425,6 +428,10 @@ names are the identifiers used in the task files.
 ## S3. The structure panel and the variant list
 
 ### S3.1 The structure panel
+
+**Methods.** Of the 74 PDB entries, 68 were solved by X-ray
+crystallography, 4 by cryo-electron microscopy and 2 by nuclear
+magnetic resonance.
 
 **Selection rule.** The panel is the union of four groups. Every entry must be current in the
 PDB archive and have at most 15,000 atoms in its first coordinate set, so that
@@ -665,6 +672,12 @@ generation names well-known variants that are tried first, and used if they are 
 (or are the exception above) and observed in the structure: *CFTR* p.G551D; *GBA1* p.N409S; *HBB* p.E7V; *HRAS* p.G12S; *LYZ* p.I74T; *SERPINA1* p.E366K; *SOD1* p.A5V; *TP53* p.R175H, p.R248Q, p.R273H; *TTR* p.V50M. The list
 decides which variant is asked about, never what the answer is.
 
+*Traditional names.* A traditional name is used in 13 requests per
+track. 7 of these names differ from the UniProt number by the
+initiator methionine alone (by 1), 4 by a signal peptide, and
+2 by a signal peptide and a propeptide; each request
+says which.
+
 *Proteins without a task.* Tasks exist for 25 of the
 27 proteins. The other 2
 are, by gene name, CA2 and TPI1. For *TPI1* (triosephosphate isomerase)
@@ -809,6 +822,15 @@ Each rule was read back from the running viewer.
 - Author and label numbering are different columns and are never pooled.
 - A reference that colours "by chain" is matched by the same colour theme, or by an answer
   that gives every chain one colour of its own, all different.
+
+Colour. Two colours count as the same if their red, green and blue values (0 to 255) each
+differ by at most 32; the distance between two colours is the largest of
+these three differences. Requests use a palette of 19 named colours. Its
+two closest colours (plum and hotpink) are 55 apart. In
+the pilot run, 2,303 colour values in answers could be compared with
+a requested colour. Of these, 2,227 were exactly the requested colour, and
+each of the other 76 was at least 58 away
+from it, so the tolerance decided no case.
 
 Not graded on the scene track: metadata, the host of the structure file, the order of
 children, representation size and surface kind, the appearance of labels and primitives, explicit camera

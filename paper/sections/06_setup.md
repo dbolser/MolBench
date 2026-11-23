@@ -143,10 +143,10 @@ of the answer, and its cost.
     - *Secondary comparison.* An answer is right when it is a task success. This is not the
       same test in the two formats (Section 4.2). It uses all {{corpus.n_twin_pairs}} pairs
       and is shown beside the first.
-    - *Unshowable answers* count as not right. A pair that is right on one side only can
-      therefore reflect an answer that could not be shown as well as one that was shown and
-      selected the wrong atoms. The outcome tables of the SI give the share of unshowable
-      answers per model and track, against which the one-sided counts must be read.
+    - *Unshowable answers* count as not right, so a pair that is right on one side only can
+      reflect an answer that could not be shown as well as one that selected the wrong
+      atoms. The one-sided counts must be read against the share of unshowable answers per
+      model and track (SI Section S9).
     - *Test.* The two counts of pairs that are right on one side only are compared with
       McNemar's exact test [@mcnemar1947]. We report the four counts for every model. The
       test treats pairs as independent, although several pairs sit on one structure, so its p
@@ -158,7 +158,7 @@ of the answer, and its cost.
       and without the clinical pairs, in which the call-list viewer can do the mapping
       itself. The first set holds first requests only and the pairs without a target score
       are follow-up turns, so the two sets do not overlap.
-- **The primary clinical comparison (planned comparison 7).** It carries the question of the
+- **The central clinical comparison (planned comparison 7).** It carries the question of the
   Introduction. Clinical tasks of the scene track in which copying the number in the variant
   name is right are compared with those in which it is wrong. The primary score is the
   target score, because task success also falls when an answer adds unrequested context; the

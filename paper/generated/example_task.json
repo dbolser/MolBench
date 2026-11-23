@@ -731,6 +731,169 @@
      ]
     }
    },
+   "other_colour_around": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "beg_auth_seq_id": 63,
+               "end_auth_seq_id": 65
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "red"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "other_colour_beside": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 65
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "red"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
    "right": {
     "root": {
      "kind": "root",

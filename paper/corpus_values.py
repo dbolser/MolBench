@@ -48,9 +48,9 @@ PENDING = "⟦PENDING: final run⟧"
 # must know beyond the request, then the four that differ in the form of the task.
 TIERS = ["translation", "grounded", "resolve", "clinical", "interactions", "followup",
          "accept_set", "tool_only"]
-TIER_GROUPS = [("Categories that differ in what the model must know beyond the request",
+TIER_GROUPS = [("Differ in what the model must know",
                 ["translation", "grounded", "resolve", "clinical"]),
-               ("Categories that differ in the form of the task",
+               ("Differ in the form of the task",
                 ["interactions", "followup", "accept_set", "tool_only"])]
 assert [t for _, g in TIER_GROUPS for t in g] == TIERS
 TIER_NAME = {"translation": "Translation", "grounded": "Structure-grounded",
@@ -582,7 +582,7 @@ def clinical_groupings_table(V: dict) -> str:
 
 def corpus_table(V: dict) -> str:
     rows = ["| Category | What is asked | Scene track (other + set-aside structures) | Call-list track (other + set-aside structures) | Pairs |",
-            "|:------|:----------------|-----:|-----:|--:|"]
+            "|:---------|:----------------|-----:|-----:|--:|"]
     first = {g[0]: title for title, g in TIER_GROUPS}
     for tier in TIERS:
         if tier in first:
@@ -1283,6 +1283,9 @@ def example_values(V: dict, by_id: dict) -> dict:
         "extra": scene_plus(right_sel := {"auth_asym_id": res["auth_asym_id"], "auth_seq_id": n0}, other_rep, cl["look"]["color"]),
         "other_rep_around": scene_plus(around, other_rep, cl["look"]["color"]),
         "surface": scene_plus("polymer", "surface", "gray"),
+        # the requested representation on the neighbours in a separate style of another colour
+        "other_colour_around": scene_plus(around, look_rep, "red"),
+        "other_colour_beside": scene_plus({"auth_asym_id": res["auth_asym_id"], "auth_seq_id": n0 + 1}, look_rep, "red"),
         "right": scene(right),
         "label": scene({"label_asym_id": res["label_asym_id"], "label_seq_id": res["label_seq_id"]}),
         "face": scene(wrong),
@@ -1342,6 +1345,10 @@ def example_values(V: dict, by_id: dict) -> dict:
     assert V["ex.api.colour.f1"] == 0.5 and V["ex.api.bare.f1"] == 0
     assert V["ex.mvs.other_rep_around.target"] == 1 and not V["ex.mvs.other_rep_around.success"]
     assert V["ex.mvs.surface.target"] == 1 and not V["ex.mvs.surface.success"]
+    # Rule 1 in Section 4.2: the requested representation outside the target in a separate
+    # style of another colour is not spill but unrequested context.
+    for k in ("other_colour_around", "other_colour_beside"):
+        assert V[f"ex.mvs.{k}.target"] == 1 and not V[f"ex.mvs.{k}.success"], k
     # Section 4.2 works the "extra on the target" row by hand: credit n, attempted n, extra n.
     assert V["ex.mvs.extra.target_precision"] == 0.5 and round(V["ex.mvs.extra.target"], 2) == 0.67
     V["ex.n_target_atoms_twice"] = 2 * V["ex.n_target_atoms"]
