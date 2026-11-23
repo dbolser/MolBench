@@ -384,6 +384,9 @@ clarity.
 8. Still open from earlier rounds: helix and strand tasks in the clinical strata of the
    analysis; LYZ p.Ile74Thr request wording; Pepys et al. 1993 (two variants) to be checked at
    the source; which optional models are run; the 80 scene controls added after the read-back.
-9. **Layout.** Looked at in the PDF this round: pages with Figures 1 to 5, Box 1, Tables 1, 3,
-   6, 8 and 9. Not looked at: the rest of the paper and the SI (51 pages), including how the
-   printed format guides break across pages.
+9. **Layout.** Looked at in the PDF this round: pages 4, 9, 10, 13, 18, 19, 25, 26 and 27 of
+   41 (Box 1, Figures 2 to 5, Tables 1, 3, 6, 8 and the caption of Table 9). Figures 1 and 6
+   were looked at as rendered SVG files, not on their PDF pages. Not looked at: the rest of
+   the paper and the SI (51 pages), including how the printed format guides break across
+   pages. Tables that do not fit under their caption move to the next page and leave white
+   space (pages 18 and 26).
