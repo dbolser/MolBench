@@ -1,11 +1,12 @@
 ## 6. Results
 
 MolBench has had two versions, and this paper names them in one way throughout. The *first
-version* is the benchmark as it stood until October 2026: a corpus of {{mvs.n_tasks}} scene
+version* is the benchmark as it was public from May 2026 until the present corpus replaced
+it. At the time of its last run it had a corpus of {{mvs.n_tasks}} scene
 tasks on {{mvs.n_structures}} structures, {{legacy_api.n_tasks}} hand-written call-list
-tasks, and two graders that compared text (Section 4.5). It was run twice: the call-list
-tasks in July 2026, and the scene tasks in October 2026, which we call the *pilot run*. The
-*present version* is the benchmark of Sections 3 and 4.
+tasks, and two graders that compared text (Section 4.5). Two of its runs are used in this
+paper: one of the call-list tasks in July 2026, and one of the scene tasks in October 2026,
+which we call the *pilot run*. The *present version* is the benchmark of Sections 3 and 4.
 
 The only results that exist today come from the first version. They are real, they are kept
 apart from everything else, and they are in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that the one paid run will fill: their layout,
@@ -51,6 +52,8 @@ of tasks. An answer on the entry of the reference is graded on drawn state. An a
 another entry that the task accepts is compared with the reference as written, because we
 hold no atom table for it (Section 4.1); the exception is {{resolve.n_other_panel_entries}}
 such entries that are in the structure panel, on which answers are graded on drawn state.
+The rows follow what the run records for each answer, which is whether its entry is the
+reference entry.
 
 {{include:generated/table_final_tiers.md|else:generated/shape_tiers.md}}
 

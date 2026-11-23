@@ -80,11 +80,11 @@ has been tested only against cases that we foresaw. The full list follows in fou
   viewer (Sections 3.4 and 3.7).
 - **Name resolution: text comparison outside the panel.** A request that names a protein
   accepts any PDB entry of it. Only panel entries have frozen atom tables, so on any other
-  accepted entry an answer's selections are compared with the reference's as text. The common
-  ways of writing "the protein" pass; a correct selection by chain identifier does not. Table
-  8 reports answers on the reference entry and on any other accepted entry in separate rows;
-  all but {{resolve.n_other_panel_entries}} of the other accepted entries are outside the
-  panel.
+  entry that the task accepts an answer's selections are compared with the reference's as
+  text. The common ways of writing "the protein" pass; a correct selection by chain
+  identifier does not. Table 8 reports answers on the reference entry and on any other entry
+  that the task accepts in separate rows; all but {{resolve.n_other_panel_entries}} of those
+  other entries are outside the panel.
 - **The file behind the call-list viewer.** The atom tables are built from the archive file of
   each entry, and the read-back loaded that file into both viewers. Left to itself, PDBe Mol\*
   fetches PDBe's own copy of the entry, which carries the SIFTS mapping. We did not compare

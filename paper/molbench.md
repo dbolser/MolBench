@@ -99,7 +99,7 @@ some entries are numbered as the request is, and there the copied number is the 
 the model must know how each entry is numbered. Section 6.4 sets out the table that will
 answer this.
 
-![**Figure 1. From public data to a score.** Steps 1 to 6 run from left to right: frozen public data are turned into tasks by generator scripts; each model is given a guide to the answer format and the request, and answers each task three times, independently; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *F1*: how much of the drawn state is right, with partial credit. *Task success*: the drawn state is exactly right. *Target score*: the requested atoms are drawn as asked, whatever else was drawn. *Strict* and *valid-only* are two ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
+![**Figure 1. From public data to a score.** Steps 1 to 6 are numbered, in two rows: frozen public data are turned into tasks by generator scripts; each model is given a guide to the answer format and the request, and answers each task three times, independently; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *F1*: how much of the drawn state is right, with partial credit. *Task success*: the drawn state is exactly right. *Target score*: how well the requested atoms are drawn as asked, whatever else was drawn (0 to 1). *Strict* and *valid-only* are two ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
 
 This paper makes four contributions, presented in this order.
 
@@ -397,11 +397,14 @@ several right answers. SI Section S2 lists every template with an example.
   not whole residues, and something is drawn between or around them, such as a hydrogen bond
   as a dashed line labelled with its length, with the camera centred on it.
 - **Name resolution.** The request names a protein, not an entry ("a structure of human p53
-  bound to DNA"). Any entry on a frozen list of the PDB entries of that protein is accepted
-  (SI Section S4.4 gives the rule and the date of the list). An answer on a panel entry is
-  graded on drawn state. An answer on an accepted entry outside the panel is compared with
-  the reference as written, because we hold no atom table for it; this is a limit (Sections
-  4.1 and 9.3). The two kinds of answer are reported in separate rows (Section 6.2).
+  bound to DNA"). The task accepts any entry on a frozen list of the PDB entries of that
+  protein (SI Section S4.4 gives the rule and the date of the list). An answer on a panel
+  entry is graded on drawn state. An answer on an entry that the task accepts but that is
+  outside the panel is compared with the reference as written, because we hold no atom table
+  for it; this is a limit (Sections 4.1 and 9.3). Results are reported apart for answers on
+  the reference entry, which is always a panel entry, and for answers on any other entry that
+  the task accepts; all but 3 of those other entries are
+  outside the panel (Section 6.2).
 - **Clinical variant.** As in the running example: the request names a variant, and the model
   must find its residue in the structure, where its number often differs from the one in the
   name. Section 3.3.1 describes this category.
@@ -690,7 +693,8 @@ scored.
 ### 3.6 Public and held-back tasks; wording
 
 MolBench tasks have been public since May 2026, so a model released later may have seen
-earlier tasks. Two measures address this.
+earlier tasks. By *earlier* tasks and releases we mean those published before the present
+corpus (the first version of the benchmark, Section 6). Two measures address this.
 
 *Held-back split.* Before generation, 15 structures were set
 aside: no earlier MolBench release used them, and no task of the public split uses them.
@@ -941,7 +945,7 @@ Figure 4 and Table 3 grade several answers to the running example. The reference
 Trp64 of chain X as yellow spacefill spheres, and
 nothing else.
 
-![**Figure 4. Drawn-state grading of the reference and two answers to the running example.** Each panel shows a stretch of chain X in author numbering, the facts of the drawn state, and the scores. *Fact*: all atoms that are drawn in the same way. *Recall*: for each fact of the reference, the fraction that the answer also draws, averaged over those facts. *Precision*: the same for the facts of the answer. *F1*: the harmonic mean of recall and precision. *Task success*: drawn state exactly right. *Target score*: the requested atoms drawn as asked, whatever else was drawn.](generated/fig_grading.svg)
+![**Figure 4. Drawn-state grading of the reference and two answers to the running example.** Each panel shows a stretch of chain X in author numbering, the facts of the drawn state, and the scores. *Fact*: all atoms that are drawn in the same way. *Recall*: for each fact of the reference, the fraction that the answer also draws, averaged over those facts. *Precision*: the same for the facts of the answer. *F1*: the harmonic mean of recall and precision. *Task success*: drawn state exactly right. *Target score*: how well the requested atoms are drawn as asked, whatever else was drawn (0 to 1).](generated/fig_grading.svg)
 
 **Table 3. Answers to the running example and their scores**, computed by the benchmark's
 grader. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *F1*: how much of the drawn state
@@ -1386,11 +1390,12 @@ access and no paid service.
 ## 6. Results
 
 MolBench has had two versions, and this paper names them in one way throughout. The *first
-version* is the benchmark as it stood until October 2026: a corpus of 70 scene
+version* is the benchmark as it was public from May 2026 until the present corpus replaced
+it. At the time of its last run it had a corpus of 70 scene
 tasks on 14 structures, 20 hand-written call-list
-tasks, and two graders that compared text (Section 4.5). It was run twice: the call-list
-tasks in July 2026, and the scene tasks in October 2026, which we call the *pilot run*. The
-*present version* is the benchmark of Sections 3 and 4.
+tasks, and two graders that compared text (Section 4.5). Two of its runs are used in this
+paper: one of the call-list tasks in July 2026, and one of the scene tasks in October 2026,
+which we call the *pilot run*. The *present version* is the benchmark of Sections 3 and 4.
 
 The only results that exist today come from the first version. They are real, they are kept
 apart from everything else, and they are in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that the one paid run will fill: their layout,
@@ -1441,6 +1446,8 @@ of tasks. An answer on the entry of the reference is graded on drawn state. An a
 another entry that the task accepts is compared with the reference as written, because we
 hold no atom table for it (Section 4.1); the exception is 3
 such entries that are in the structure panel, on which answers are graded on drawn state.
+The rows follow what the run records for each answer, which is whether its entry is the
+reference entry.
 
 | Category | Tasks | Structures | Task success rate (strict) | Target score (strict) | F1 (strict) | Task success rate, valid-only | Target score, valid-only |
 |:------------------------|---:|---:|---:|---:|---:|---:|---:|
@@ -1450,7 +1457,7 @@ such entries that are in the structure panel, on which answers are graded on dra
 | Interactions | 40 | 38 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Name resolution | 39 | 39 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 |  *of which:* answers on the reference entry (graded on drawn state) | – | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
-|  *of which:* answers on another accepted entry (compared as written, except on 3 panel entries) | – | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
+|  *of which:* answers on another entry that the task accepts (compared as written, except on 3 panel entries) | – | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Clinical variant | 82 | 31 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Follow-up turn | 58 | 42 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Several right answers | 26 | 23 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
@@ -1868,11 +1875,11 @@ has been tested only against cases that we foresaw. The full list follows in fou
   viewer (Sections 3.4 and 3.7).
 - **Name resolution: text comparison outside the panel.** A request that names a protein
   accepts any PDB entry of it. Only panel entries have frozen atom tables, so on any other
-  accepted entry an answer's selections are compared with the reference's as text. The common
-  ways of writing "the protein" pass; a correct selection by chain identifier does not. Table
-  8 reports answers on the reference entry and on any other accepted entry in separate rows;
-  all but 3 of the other accepted entries are outside the
-  panel.
+  entry that the task accepts an answer's selections are compared with the reference's as
+  text. The common ways of writing "the protein" pass; a correct selection by chain
+  identifier does not. Table 8 reports answers on the reference entry and on any other entry
+  that the task accepts in separate rows; all but 3 of those
+  other entries are outside the panel.
 - **The file behind the call-list viewer.** The atom tables are built from the archive file of
   each entry, and the read-back loaded that file into both viewers. Left to itself, PDBe Mol\*
   fetches PDBe's own copy of the entry, which carries the SIFTS mapping. We did not compare

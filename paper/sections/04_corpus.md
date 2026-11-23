@@ -193,11 +193,14 @@ several right answers. SI Section S2 lists every template with an example.
   not whole residues, and something is drawn between or around them, such as a hydrogen bond
   as a dashed line labelled with its length, with the camera centred on it.
 - **Name resolution.** The request names a protein, not an entry ("a structure of human p53
-  bound to DNA"). Any entry on a frozen list of the PDB entries of that protein is accepted
-  (SI Section S4.4 gives the rule and the date of the list). An answer on a panel entry is
-  graded on drawn state. An answer on an accepted entry outside the panel is compared with
-  the reference as written, because we hold no atom table for it; this is a limit (Sections
-  4.1 and 9.3). The two kinds of answer are reported in separate rows (Section 6.2).
+  bound to DNA"). The task accepts any entry on a frozen list of the PDB entries of that
+  protein (SI Section S4.4 gives the rule and the date of the list). An answer on a panel
+  entry is graded on drawn state. An answer on an entry that the task accepts but that is
+  outside the panel is compared with the reference as written, because we hold no atom table
+  for it; this is a limit (Sections 4.1 and 9.3). Results are reported apart for answers on
+  the reference entry, which is always a panel entry, and for answers on any other entry that
+  the task accepts; all but {{resolve.n_other_panel_entries}} of those other entries are
+  outside the panel (Section 6.2).
 - **Clinical variant.** As in the running example: the request names a variant, and the model
   must find its residue in the structure, where its number often differs from the one in the
   name. Section 3.3.1 describes this category.
@@ -472,7 +475,8 @@ scored.
 ### 3.6 Public and held-back tasks; wording
 
 MolBench tasks have been public since May 2026, so a model released later may have seen
-earlier tasks. Two measures address this.
+earlier tasks. By *earlier* tasks and releases we mean those published before the present
+corpus (the first version of the benchmark, Section 6). Two measures address this.
 
 *Held-back split.* Before generation, {{corpus.heldback.n_structures}} structures were set
 aside: no earlier MolBench release used them, and no task of the public split uses them.

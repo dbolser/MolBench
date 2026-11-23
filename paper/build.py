@@ -501,7 +501,8 @@ code{font-size:90%} pre{font-size:8.5pt;background:#f6f6f6;padding:8px;overflow-
 blockquote{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.4em 1em;background:#fafafa}
 blockquote table{background:#fff} figure{margin:1.2em 0} figcaption{font-size:9.5pt;color:#222}
 div.box{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.2em 1em;background:#fafafa}
-div.box table{background:#fff}
+div.box table{background:#fff;break-inside:auto}
+p:has(+ table){break-inside:avoid}
 @page{size:A4;margin:18mm}
 """
 

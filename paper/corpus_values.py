@@ -1029,7 +1029,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
                           f"| {P} | {P} | {P} | {P} | {P} |\n")
             if n and tier == "resolve":
                 for which in ("answers on the reference entry (graded on drawn state)",
-                              "answers on another accepted entry (compared as written, except on "
+                              "answers on another entry that the task accepts (compared as written, except on "
                               f"{V['resolve.n_other_panel_entries']} panel entries)"):
                     tiers += f"| \u2003*of which:* {which} | – | – | {P} | {P} | {P} | {P} | {P} |\n"
     out["shape_tiers.md"] = tiers

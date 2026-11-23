@@ -60,19 +60,19 @@ layout) are then drawn from the same archive.
 The October pilot numbers are reported in Section 6.6 of the paper (boxed) and in SI Section S8;
 where another section cites one, it says that it is a pilot result.
 
-## Words and table numbers (review rounds 2 to 4)
+## Words and table numbers (review rounds 2 to 5)
 
 The paper says *category* where the repository says tier, *style* where `GRADING.md` says
 draw, *format guide* for the vendored reference in the system prompt, *main* for the `spec`
 condition, *structure panel* for the 79 structures and *core / optional models* for the
 models. The clinical results are grouped by *copying the number* (primary) and by *offset*.
-Tables: 1 corpus, 2 clinical groupings, 3 running example (rows S1 to S10 and C1 to C5; the
+Tables: 1 corpus, 2a clinical groupings and 2b further properties of the clinical tasks, 3 running example (rows S1 to S10 and C1 to C7; the
 text cites them through `{{ex.row.*}}`), 4 control set, 5 conditions, 6 and 7 per model,
 8 categories, 9a and 9b pairs, 10 clinical, 11 follow-up, 12 planned comparisons, 13 and 14
 pilot run (in the box of Section 6.6), 15 what changed, 16 licences. Terms are defined in two
-boxes: Box 1 (sequences and variants, numbering, corpus) in Section 1 and Box 2 (grading and
+boxes: Box 1 (sequences and variants, numbering, corpus) at the start of Section 3 and Box 2 (grading and
 the run) at the start of Section 4; background terms of structural biology are in SI Section
-S0. The variant filter has the same step numbers (1, 2, 3) in Section 3.1 and in SI Table S4. The final tables that `scripts/paper_tables.py` writes must use the column
+S0. The variant filter is one paragraph in Section 3.1 and three numbered steps in SI Table S4; SI Section S0 has three tables (S0a background terms, S0b further terms of the corpus, S0c names used in the repository). The benchmark before the present corpus is called the *first version* everywhere (defined at the start of Section 6), and its October 2026 run the *pilot run*. The final tables that `scripts/paper_tables.py` writes must use the column
 names of `generated/shape_*.md`. In particular, Table 9a is on the pairs that have a target
 score (250 of 258) and Table 9b on all pairs, and Table 8 has one header row per track.
 
@@ -80,6 +80,6 @@ Three checks of the build keep prose and numbers together: the running example m
 same in its table and figures; a number that the prose states in words (`STATED_IN_WORDS` in
 `build.py`, for example "a single structure") must still have that value; and
 `corpus_values.py` asserts each fact that a sentence states without a number (which proteins
-have no task, where the multi-variant tasks sit in Table 2, what the format guides document).
+have no task, where the multi-variant tasks sit in Table 2a, what the format guides document).
 A column of a pipe table is as wide as its run of dashes in the header rule, relative to the
 others; the generators set these so that text columns are wide and number columns narrow.

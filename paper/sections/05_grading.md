@@ -202,7 +202,7 @@ Figure 4 and Table 3 grade several answers to the running example. The reference
 {{ex.wild_type}}{{ex.auth_number}} of chain {{ex.auth_chain}} as {{ex.color}} {{ex.rep}}, and
 nothing else.
 
-![**Figure 4. Drawn-state grading of the reference and two answers to the running example.** Each panel shows a stretch of chain {{ex.auth_chain}} in author numbering, the facts of the drawn state, and the scores. *Fact*: all atoms that are drawn in the same way. *Recall*: for each fact of the reference, the fraction that the answer also draws, averaged over those facts. *Precision*: the same for the facts of the answer. *F1*: the harmonic mean of recall and precision. *Task success*: drawn state exactly right. *Target score*: the requested atoms drawn as asked, whatever else was drawn.](generated/fig_grading.svg)
+![**Figure 4. Drawn-state grading of the reference and two answers to the running example.** Each panel shows a stretch of chain {{ex.auth_chain}} in author numbering, the facts of the drawn state, and the scores. *Fact*: all atoms that are drawn in the same way. *Recall*: for each fact of the reference, the fraction that the answer also draws, averaged over those facts. *Precision*: the same for the facts of the answer. *F1*: the harmonic mean of recall and precision. *Task success*: drawn state exactly right. *Target score*: how well the requested atoms are drawn as asked, whatever else was drawn (0 to 1).](generated/fig_grading.svg)
 
 **Table 3. Answers to the running example and their scores**, computed by the benchmark's
 grader. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *F1*: how much of the drawn state

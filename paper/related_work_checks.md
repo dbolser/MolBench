@@ -93,3 +93,23 @@ full text (first 100,000 characters of each):
   and the ten named authors were taken from its Crossref record on 2026-11-23. The paper cites
   it only for the existence of the nomenclature and its "p." prefix; no further claim about its
   content is made.
+
+## Review round 5 (2026-11-23)
+
+- One reference was added: Hart et al. 2024, "HGVS Nomenclature 2024: improvements to
+  community engagement, usability, and computability" (Genome Medicine 16:149, DOI
+  10.1186/s13073-024-01421-5), cited beside den Dunnen et al. 2016 in Section 3.3.1. Title,
+  journal, year, volume, article number and the eight authors were taken from its Crossref
+  record on 2026-11-23.
+- Three statements of Section 3.3.1 about the HGVS nomenclature were read on 2026-11-23 at
+  hgvs-nomenclature.org (pages "General recommendations" and "Reference sequences" of the
+  stable version; the pages show no version number): a variant description without a
+  versioned reference sequence is not valid, and accepted protein references are RefSeq NP_
+  and Ensembl ENSP accessions; the three-letter amino-acid code is preferred; a predicted
+  protein consequence is given in parentheses. The pages were read through an automated
+  summary, not word for word: check before submission.
+- Not read at the source this round: that "c." positions are counted from the A of the start
+  codon ATG (Box 1 and Section 3.3.1). This is the rule of den Dunnen et al. 2016 as the
+  clinical-genetics reviewer stated it; check before submission.
+- The paper does not name the RefSeq protein accession of lysozyme (the reviewer proposed
+  one); it says only what kind of accession a complete description needs.
