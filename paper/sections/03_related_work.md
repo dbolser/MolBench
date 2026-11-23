@@ -14,8 +14,8 @@ biochemistry domain uses UCSF ChimeraX [@goddard2018chimerax], and a task is che
 the state of the application after the agent has finished. MolBench shares the idea of checking
 the resulting state. It differs in four ways. It tests the step from request to commands
 directly, with no desktop in between. Its references are computed by script and record their
-origin. Its categories of task are defined by what the model must know, up to clinical variants. And it
-poses requests in two answer formats.
+origin. Its categories of task are defined by what the model must know beyond the request, and
+include clinical variants. And it poses requests in two answer formats.
 
 **SciVisAgentBench** [@ai2026scivisagentbench] has 108 expert-written cases of scientific
 visualization; its molecular cases use GROMACS and VMD. Outcomes are scored by a language-model

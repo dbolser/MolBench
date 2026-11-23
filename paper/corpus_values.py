@@ -55,7 +55,7 @@ TIER_ASKS = {
     "grounded": "The request names a feature (the ligand, the disulfides); the model must know which atoms these are.",
     "interactions": "Named atoms and a measurement or contact between them.",
     "resolve": "The structure is named by protein, not by identifier.",
-    "clinical": "A variant, named in UniProt numbering or in traditional numbering, must be mapped to the residues of the structure.",
+    "clinical": "A variant is named in UniProt numbering or in traditional numbering; its residue must be found in the structure, where its number often differs.",
     "followup": "A start state plus an edit request; the full new state is returned.",
     "accept_set": "The request leaves one countable thing open; several drawn states are right.",
     "tool_only": "A viewer setting that only the call-list format can express.",
@@ -181,6 +181,19 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     assert all(t["tier"] == "followup" and by_id[t["twin_of"]].get("target") is None
                for t in twins if t.get("target") is None)
     V["corpus.twins.n_with_target"] = len(twins) - V["corpus.twins.n_without_target"]
+    # A task has a target score if it stores a target or is a single request without one.
+    V["corpus.n_with_target_score"] = V["corpus.n_with_target"] + V["corpus.n_without_target_settings"]
+    assert V["corpus.n_with_target_score"] + V["corpus.n_without_target_followup"] == len(orig)
+    # The pairs without a target score are not among those whose call list must hide the default view.
+    hide_ids = {t["twin_of"] for t in hide}
+    assert not hide_ids & {t["id"] for t in twins if t.get("target") is None}
+    per_cell = [V[f"corpus.{track}.{tier}.n"] for track in ("mvs", "api") for tier in TIERS
+                if V[f"corpus.{track}.{tier}.n"]]
+    V["corpus.tier_tasks_min"], V["corpus.tier_tasks_max"] = min(per_cell), max(per_cell)
+    # Requests that ask for a lone metal ion as a sphere (SI Section S4.8).
+    ion = [t for t in orig if t["family"] == "tr-ions"]
+    assert all("sphere" in t["prompt"] for t in ion)
+    V["corpus.n_ion_sphere_tasks"] = len(ion)
     # Translation on the call-list track: templates for calls that a scene has no partner for.
     api_tr = [t for t in orig if t["track"] == "api" and t["tier"] == "translation"]
     V["corpus.api.translation.n_call_only"] = sum(not t.get("twin_of") for t in api_tr)
@@ -199,6 +212,12 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
         if all(isinstance(r, int) for r in readings):
             V[f"corpus.accept.{track}.median_readings"] = statistics.median(readings)
             V[f"corpus.accept.{track}.max_readings"] = max(readings)
+    # Name resolution: how the list of accepted entries was made (frozen with the tasks).
+    res_data = jload(REPO / "data/mvscore/resolve_entries.json")
+    V["resolve.retrieved"] = res_data["retrieved"]
+    src = (REPO / "scripts/generate_resolve_tasks.py").read_text(encoding="utf-8")
+    V["resolve.min_residues"] = int(re.search(r"^MIN_RESIDUES = (\d+)$", src, flags=re.M).group(1))
+    assert re.search(r"^MIN_SHARE = 0\.5$", src, flags=re.M) and "RCSB" in res_data["source"]   # "half", "RCSB PDB"
     V["corpus.n_other_tasks_with_alternatives"] = sum(
         1 for t in orig if t["accepted"] and t["tier"] != "accept_set")
 
@@ -235,6 +254,7 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     V["clin.n_face_value_right"] = sum(bool(x["number_in_name_as_author_number_is_right"]) for x in d)
     V["clin.n_face_value_wrong"] = n - V["clin.n_face_value_right"]
     V["clin.n_accession_in_prompt"] = sum(bool(x["accession_in_prompt"]) for x in d)
+    V["clin.n_no_accession"] = n - V["clin.n_accession_in_prompt"]
     V["clin.n_context_none"] = sum(x["context"] == "none" for x in c)
     V["clin.n_context_cartoon"] = sum(x["context"] not in ("none",) and not x.get("secondary_structure") for x in c)
     V["clin.n_sse"] = sum(bool(x.get("secondary_structure")) for x in c)
@@ -313,6 +333,12 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     assert kv["clinvar_review_status"] == ["no assertion criteria provided"]
     V["clin.kept_by_name.classification"] = kv["clinvar_classification"][0].lower()
     assert V["clin.n_insertion_code"] == 0      # the text says no clinical target has one
+    # Section 3.3.1 says in words where the tasks with several variants and the helix and
+    # strand tasks sit in Table 2: all of them have an offset, and copying is wrong in all.
+    for x, y in zip(c, d):
+        if len(x["variants"]) > 1 or x.get("secondary_structure"):
+            assert y["needs_numbering_offset"] and not y["number_in_name_as_author_number_is_right"], x
+    assert V["clin.n_multi"] == n - V["clin.n_one_variant"]
     return {"orig": orig, "para": para, "by_id": by_id, "used": used}
 
 
@@ -429,7 +455,13 @@ def panel_values(V: dict, used) -> list[dict]:
     V["variants.n_several_records"] = sum(len(v.vcv) > 1 for vs in usable.values() for v in vs)
     V["variants.max_usable_per_protein_without_task"] = max(
         len(vs) for g, vs in usable.items() if g in V["_genes_without_task"])
-    V["variants.proteins_without_task"] = " and ".join(sorted(V.pop("_genes_without_task")))
+    without = V.pop("_genes_without_task")
+    V["variants.proteins_without_task"] = " and ".join(sorted(without))
+    # Section 3.1 says in words: triosephosphate isomerase kept no variant, carbonic anhydrase 2
+    # kept one, and that one is observed in no panel structure.
+    assert without == {"CA2", "TPI1"} and len(usable["TPI1"]) == 0 and len(usable["CA2"]) == 1
+    ca2 = jload(REPO / "data/panel/variants/P00918.json")
+    assert [v["structures"] for v in ca2["variants"] if v["variant"] == variants_mod.short(usable["CA2"][0])] == [{}]
     return entries
 
 
@@ -501,7 +533,17 @@ def controls_values(V: dict) -> dict:
     V["controls.viewer.mvs.probe_agree"] = m["rule_probes"]["agree"]
     V["controls.viewer.pdbe_molstar"] = a["pdbe_molstar"]
     V["controls.viewer.api.lists"] = a["lists_run"]
-    V["controls.viewer.api.n_not_replayed"] = V["controls.api.n_controls"] - a["lists_run"]
+    # Each control has two call lists (reference and answer); the replay record counts lists.
+    ents = {tr: {json.loads(line)["entry"] for line in (REPO / f"tests/controls/{tr}.jsonl").open(encoding="utf-8")}
+            for tr in ("mvs", "api")}
+    missing = sorted(ents["mvs"] - ents["api"])
+    assert not ents["api"] - ents["mvs"] and len(ents["api"]) == V["controls.api.n_entries"]
+    feats = {e["id"]: e for e in jload(REPO / "data/panel/panel.json")["entries"]}
+    # The text says these hold only DNA or RNA: no chain of theirs is mapped to UniProt.
+    assert all("nucleic" in feats[i]["features"] and not feats[i].get("sifts") for i in missing), missing
+    names = [i.upper() for i in missing]
+    V["controls.api.n_entries_without"] = len(names)
+    V["controls.api.entries_without"] = ", ".join(names[:-1]) + " and " + names[-1]
     V["controls.viewer.api.agree"] = a["agree"]
     V["controls.viewer.api.bare_loads"] = a["bare_loads"]["entries"]
     V["controls.viewer.api.bare_agree"] = a["bare_loads"]["agree"]
@@ -592,25 +634,25 @@ def october_models_table() -> str:
     info = jload(PAPER / "inputs.json")["model_info"]
     alias = jload(PAPER / "inputs.json")["aliases"]
     weights = {k.split("/")[-1]: v["weights"] for k, v in info.items()}
-    rows = ["| Model | Weights | Valid answers | F1 (strict) | Task success (strict) | F1, valid-only | Task success, valid-only |",
+    rows = ["| Model | Weights | Valid answers | F1 (strict) | Task success rate (strict) | F1, valid-only | Task success rate, valid-only |",
             "|:---|:---|---:|---:|---:|---:|---:|"]
     for k, m in sorted(by_model.items(), key=lambda kv: (-kv[1]["success"], -kv[1]["new_f1"], kv[0])):
         name = alias.get(k, k).split("/")[-1]
-        rows.append(f"| {name} | {weights.get(name, '?')} | {m['valid']} of {m['n']} | {m['new_f1']:.3f} "
-                    f"| {m['success']:.1%} | {m['valid_only']['new_f1']:.3f} | {m['valid_only']['success']:.1%} |")
+        rows.append(f"| {name} | {weights.get(name, '?')} | {m['valid']} of {m['n']} | {m['new_f1']:.2f} "
+                    f"| {m['success']:.1%} | {m['valid_only']['new_f1']:.2f} | {m['valid_only']['success']:.1%} |")
     return "\n".join(rows) + "\n"
 
 
 def october_table(V: dict) -> str:
-    rows = ["| Category (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success | Requested part exactly right |",
+    rows = ["| Category (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success rate | Requested part exactly right |",
             "|:---|---:|---:|---:|---:|---:|---:|"]
     for key, name in (("translation", "Translation"), ("grounded", "Structure-grounded, name resolution and interactions"),
                       ("clinical", "Clinical variant")):
         q = f"oct.spec.{key}"
-        rows.append(f"| {name} | {V[q + '.n']} | {V[q + '.n_valid']} | {V[q + '.old_f1']:.3f} | {V[q + '.f1']:.3f} "
+        rows.append(f"| {name} | {V[q + '.n']:,} | {V[q + '.n_valid']:,} | {V[q + '.old_f1']:.2f} | {V[q + '.f1']:.2f} "
                     f"| {V[q + '.success']:.1%} | {V[q + '.highlight_exact']:.1%} of {V[q + '.highlight_n']} |")
-    rows.append(f"| **All** | {V['oct.spec.n']} | {V['oct.spec.n_valid']} | {V['oct.spec.old_f1']:.3f} "
-                f"| {V['oct.spec.f1']:.3f} | {V['oct.spec.success']:.1%} | |")
+    rows.append(f"| **All** | {V['oct.spec.n']:,} | {V['oct.spec.n_valid']:,} | {V['oct.spec.old_f1']:.2f} "
+                f"| {V['oct.spec.f1']:.2f} | {V['oct.spec.success']:.1%} | |")
     return "\n".join(rows) + "\n"
 
 
@@ -691,6 +733,21 @@ def plan_values(V: dict) -> list[dict]:
     V["plan.n_json_mode_models"] = sum(x.get("structured") not in (None, "none") for x in core)
     V["plan.core_without_json_mode"] = ", ".join(short(x["id"]) for x in core if x.get("structured") in (None, "none"))
     V["plan.core_models"] = ", ".join(short(x["id"]) for x in core)
+    V["plan.n_optional_json_mode"] = sum(x.get("structured") not in (None, "none") for x in opt)
+    assert V["plan.n_optional_json_mode"] == len(opt)     # the text says "each optional model that is run"
+    # The system prompts as sent, in words (no tokenizer is used: token counts differ by model).
+    nwords = lambda text: len(text.split())  # noqa: E731
+    sent = runner.build_system_prompts("spec")
+    from molbench import schema
+    guide = {"mvs": runner.MVS_REFERENCE.read_text(encoding="utf-8"),
+             "api": schema.schema_text() + "\n" + runner.API_REFERENCE.read_text(encoding="utf-8")}
+    V["prompt.mvs.words"], V["prompt.api.words"] = nwords(sent["mvs"]), nwords(sent["api_calling"])
+    V["prompt.mvs.guide_words"], V["prompt.api.guide_words"] = nwords(guide["mvs"]), nwords(guide["api"])
+    V["prompt.longer_track"] = "call-list" if V["prompt.api.words"] > V["prompt.mvs.words"] else "scene"
+    # What Section 5.2 says the guides document, and what they do not mention.
+    assert "auth_seq_id" in guide["mvs"] and "label_seq_id" in guide["mvs"] and "uniprot" not in guide["mvs"].lower()
+    assert "uniprot_residue_number" in guide["api"] and "auth_seq_id" in guide["api"]
+    assert "uniprot" not in runner.PROMPT_MVS.read_text(encoding="utf-8").lower()
     V["plan.reasoning_max_tokens"] = m["run"]["reasoning_max_tokens"]
     V["plan.n_core_reasoning"] = sum(bool(x.get("reasoning")) for x in core)
     assert not any(x.get("max_tokens") for x in models), "a model has a token limit of its own; the text gives two"
@@ -721,16 +778,18 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
              f"for the optional models (SI Table S6) | | {P} | | | | | | | |\n")
     out["shape_leaderboard.md"] = head + body
     tiers = ("| Category | Tasks | Structures | Task success rate (strict) | Target score (strict) | F1 (strict) "
-             "| Task success rate, valid-only | Target score, valid-only |\n|:---|---:|---:|---:|---:|---:|---:|---:|\n")
+             "| Task success rate, valid-only | Target score, valid-only |\n"
+             "|:------------------------|---:|---:|---:|---:|---:|---:|---:|\n")
     for track, label in (("mvs", "Scene track"), ("api", "Call-list track")):
+        tiers += f"| **{label}** | | | | | | | |\n"
         for tier in TIERS:
             n = V[f"corpus.{track}.{tier}.n"]
             if n:
-                tiers += (f"| {label}: {TIER_NAME[tier]} | {n} | {V[f'corpus.{track}.{tier}.n_structures']} "
+                tiers += (f"| {TIER_NAME[tier]} | {n} | {V[f'corpus.{track}.{tier}.n_structures']} "
                           f"| {P} | {P} | {P} | {P} | {P} |\n")
             if n and tier == "resolve":
                 for which in ("answers on the reference entry", "answers on another accepted entry"):
-                    tiers += f"| {label}: {TIER_NAME[tier]}, {which} | – | – | {P} | {P} | {P} | {P} | {P} |\n"
+                    tiers += f"| \u2003*of which:* {which} | – | – | {P} | {P} | {P} | {P} | {P} |\n"
     out["shape_tiers.md"] = tiers
     out["shape_clinical.md"] = (
         "| Clinical tasks (scene track) | Tasks | Target score | Task success rate | Target score with grounding pack "
@@ -745,25 +804,31 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
         f"| Matched tasks, predicted structure without an offset | {V['clin.n_offset_pairs']} | {P} | {P} | {P} | {P} |\n"
         f"| Helix or strand requested (a subset, reported apart) | {V['clin.n_sse']} | {P} | {P} | {P} | {P} |\n")
     lm = [n for n, x in zip(names, models) if x["route"] != "baseline"]
-    def paired(title: str) -> str:
+    def paired(title: str, n_pairs: int) -> str:
         return (f"**{title}**\n\n"
                 "| Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only "
                 "| Right on neither side | McNemar p |\n"
                 "|:---|---:|---:|---:|---:|---:|---:|\n"
-                + "".join(f"| {n} | {V['corpus.n_twin_pairs']} | {P} | {P} | {P} | {P} | {P} |\n" for n in lm[:2])
+                + "".join(f"| {n} | {n_pairs} | {P} | {P} | {P} | {P} | {P} |\n" for n in lm[:2])
                 + f"| … up to {len(lm) - 2} further rows, one per model | | {P} | | | | |\n")
-    out["shape_paired.md"] = (paired("Table 9a. Right = target-right (primary); majority of the three answers.") + "\n"
-                              + paired("Table 9b. Right = task success (secondary); majority of the three answers."))
+    s3 = V["plan.samples"]
+    assert s3 == 3      # "at least 2 of the 3 answers" is written out here and in the text
+    out["shape_paired.md"] = (
+        paired(f"Table 9a. Right = target-right (primary); at least 2 of the {s3} answers. The "
+               f"{V['corpus.twins.n_with_target']} pairs that have a target score.", V["corpus.twins.n_with_target"])
+        + "\n"
+        + paired(f"Table 9b. Right = task success (secondary); at least 2 of the {s3} answers. All "
+                 f"{V['corpus.n_twin_pairs']} pairs.", V["corpus.n_twin_pairs"]))
     out["shape_robustness.md"] = (
-        "| Comparison | Tasks | Task success rate, first group | Task success rate, second group | Difference (95% interval) |\n"
-        "|:---|---:|---:|---:|---:|\n"
-        f"| Public split against held-back split (both tracks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
-        f"| Full wording against terse wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
-        f"| Full wording against indirect wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
-        f"| Main against main + JSON mode (the {V['plan.n_json_mode_models']} core models that offer it; 1 answer per task in JSON mode) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
-        f"| Main against main + grounding pack (name-resolution and clinical categories, scene track) "
+        "| | Comparison | Tasks | Task success rate, first group | Task success rate, second group | Difference (95% interval) |\n"
+        "|---:|:--------------------|---:|---:|---:|---:|\n"
+        f"| 1 | Public split against held-back split (both tracks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| 2 | Full wording against terse wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
+        f"| 3 | Full wording against indirect wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
+        f"| 4 | Main against main + JSON mode (the models that offer it: {V['plan.n_json_mode_models']} of the {V['plan.n_core_models']} core models and each optional model that is run; 1 answer per task in JSON mode) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| 5 | Main against main + grounding pack (name-resolution and clinical categories, scene track) "
         f"| {V['corpus.mvs.resolve.n'] + V['corpus.mvs.clinical.n']} | {P} | {P} | {P} |\n"
-        f"| Main against no format guide ({V['plan.n_bare_models']} models, scene track) "
+        f"| 6 | Main against no format guide ({V['plan.n_bare_models']} models, scene track) "
         f"| {V['corpus.mvs.n']} | {P} | {P} | {P} |\n")
     out["shape_followup.md"] = (
         "| Group | Scene track: tasks | Scene track: task success rate | Call-list track: tasks | Call-list track: task success rate |\n"
@@ -776,14 +841,15 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
 
 
 def si_models_table(models: list[dict]) -> str:
-    rows = ["| Model identifier | Set | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |",
-            "|:---|:---|:---|:---|:---|:---|:---|"]
+    rows = ["| Model identifier | Provider | Set | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |",
+            "|:---------|:---|:---|:---|:---|:---|:---|:---|"]
     for x in models:
         if x["route"] == "baseline":
-            rows.append("| Keyword script | core | not a model | – | – | 0 / 0 | – |")
+            rows.append("| Keyword script | – | core | not a model | – | – | 0 / 0 | – |")
             continue
         p = x["price"]
-        rows.append(f"| `{x['id']}` | {'optional' if x.get('optional') else 'core'} "
+        provider = x["id"].split("/")[0] if "/" in x["id"] else x["route"].split(":")[0]
+        rows.append(f"| `{x['id']}` | {provider} | {'optional' if x.get('optional') else 'core'} "
                     f"| {'open' if x['open_weights'] else 'closed'} | {'yes' if x.get('reasoning') else 'no'} "
                     f"| {'yes' if x.get('structured') not in (None, 'none') else 'no'} "
                     f"| {p['input']} / {p['output']} | {p['date']} |")
@@ -842,6 +908,7 @@ def example_values(V: dict, by_id: dict) -> dict:
     recs = jload(REPO / "data/panel/clinvar_records.json")["records"]
     V["ex.n_clinvar_records"] = len(var["clinvar_vcv"])
     V["ex.clinvar_records"] = "; ".join(f"{k}, {recs[k]['title']}" for k in var["clinvar_vcv"])
+    V["ex.clinvar_first_title"] = recs[var["clinvar_vcv"][0]]["title"]      # the change as ClinVar writes it
     assert all(cl["gene"] in recs[k]["genes"] and f"({var['hgvs']})" in recs[k]["title"] for k in var["clinvar_vcv"])
     V["ex.clinvar_classification"] = var["clinvar_classification"][0].lower()
     assert len(set(var["clinvar_classification"])) == 1 and len(set(var["clinvar_review_status"])) == 1
@@ -899,6 +966,8 @@ def example_values(V: dict, by_id: dict) -> dict:
     n0 = res["auth_seq_id"]
     around = {"auth_asym_id": res["auth_asym_id"], "beg_auth_seq_id": n0 - 1, "end_auth_seq_id": n0 + 1}
     V["ex.neighbours_first"], V["ex.neighbours_last"] = n0 - 1, n0 + 1
+    V["ex.neighbours_n_atoms"] = bin(table.selector(around)).count("1")
+    V["ex.chain_n_atoms"] = bin(table.selector({"auth_asym_id": res["auth_asym_id"]})).count("1")
     look_rep = cl["look"]["rep"]
     other_rep = "ball_and_stick" if look_rep != "ball_and_stick" else "spacefill"
     V["ex.other_rep"] = {"ball_and_stick": "ball-and-stick", "spacefill": "spacefill spheres"}[other_rep]
@@ -943,6 +1012,7 @@ def example_values(V: dict, by_id: dict) -> dict:
             V[f"{p}.precision"] = round(r["precision"], 3)
             V[f"{p}.recall"] = round(r["recall"], 3)
             V[f"{p}.target"] = round(r["target_f1"], 3)
+            V[f"{p}.target_precision"] = round(r["target_precision"], 4)
             V[f"{p}.success"] = bool(r["success"])
     # The text describes these verdicts in words; stop if the grader no longer gives them.
     for track in ("mvs", "api"):
@@ -958,36 +1028,53 @@ def example_values(V: dict, by_id: dict) -> dict:
     # Section 4.2 states the three rules for extra drawing in words; these are its examples.
     assert 0 < V["ex.mvs.spill.target"] < 1 and 0 < V["ex.mvs.spill_chain.target"] < V["ex.mvs.spill.target"]
     assert 0 < V["ex.mvs.extra.target"] < 1
+    # The caption of Table 3 derives the two spill rows: target atoms over atoms drawn that way.
+    assert V["ex.mvs.spill.target_precision"] == round(V["ex.n_target_atoms"] / V["ex.neighbours_n_atoms"], 4)
+    assert V["ex.mvs.spill_chain.target_precision"] == round(V["ex.n_target_atoms"] / V["ex.chain_n_atoms"], 4)
+    # Section 4.2 gives the red residue of the call-list track as the example of half credit.
+    assert V["ex.api.colour.f1"] == 0.5 and V["ex.api.bare.f1"] == 0
     assert V["ex.mvs.other_rep_around.target"] == 1 and not V["ex.mvs.other_rep_around.success"]
     assert V["ex.mvs.surface.target"] == 1 and not V["ex.mvs.surface.success"]
     return {"mvs_task": m, "api_task": a, "answers": answers}
 
 
 def example_table(V: dict) -> str:
-    def row(what, key):
-        return (f"| {what} | {V[key + '.f1']:.2f} | {'yes' if V[key + '.success'] else 'no'} "
-                f"| {V[key + '.target']:.2f} |")
+    """Table 3. Rows are numbered S1... (scene track) and C1... (call-list track) so that the
+    text can cite them."""
     e = V
-    rows = ["| Answer | F1 | Task success | Target score |", "|:---|---:|:---|---:|",
-            "| **Scene track** | | | |",
-            row(f"Reference: author chain {e['ex.auth_chain']}, author residue {e['ex.auth_number']}, {e['ex.color']} {e['ex.rep']}", "ex.mvs.right"),
-            row(f"The same residue named by label numbering (label chain {e['ex.label_chain']}, residue {e['ex.label_number']})", "ex.mvs.label"),
-            row(f"Number in the variant name used as the author number ({e['ex.face_value_residue']}{e['ex.uniprot_position']})", "ex.mvs.face"),
-            row("Right residue, drawn red", "ex.mvs.colour"),
-            row("Right residue, plus a grey cartoon of the protein that the request does not ask for", "ex.mvs.context"),
-            row("Wrong residue, plus the grey cartoon", "ex.mvs.face_context"),
-            row(f"Right residue, and the same {e['ex.color']} {e['ex.rep']} on its two neighbours "
-                f"(residues {e['ex.neighbours_first']} to {e['ex.neighbours_last']}): spill", "ex.mvs.spill"),
-            row(f"The whole chain as {e['ex.color']} {e['ex.rep']}: spill", "ex.mvs.spill_chain"),
-            row(f"Right residue, plus {e['ex.other_rep']} on the same residue: extra on the target", "ex.mvs.extra"),
-            row(f"Right residue, plus {e['ex.other_rep']} on residues {e['ex.neighbours_first']} to "
-                f"{e['ex.neighbours_last']}: context", "ex.mvs.other_rep_around"),
-            "| **Call-list track** | | | |",
-            row(f"Reference: UniProt {e['ex.accession']} position {e['ex.uniprot_position']}, resolved by the viewer", "ex.api.right"),
-            row(f"The same residue named by author numbering (chain {e['ex.auth_chain']}, residue {e['ex.auth_number']})", "ex.api.author"),
-            row(f"Number in the variant name used as the author number ({e['ex.face_value_residue']}{e['ex.uniprot_position']})", "ex.api.face"),
-            row("Right residue, drawn red", "ex.api.colour"),
-            row("Load only, no further call", "ex.api.bare")]
+    scene = [
+        (f"Reference: author chain {e['ex.auth_chain']}, author residue {e['ex.auth_number']}, {e['ex.color']} {e['ex.rep']}", "ex.mvs.right"),
+        (f"The same residue named by label numbering (label chain {e['ex.label_chain']}, residue {e['ex.label_number']})", "ex.mvs.label"),
+        (f"Number copied from the variant name and used as the author number ({e['ex.face_value_residue']}{e['ex.uniprot_position']})", "ex.mvs.face"),
+        ("Right residue, drawn red", "ex.mvs.colour"),
+        ("Right residue, plus a grey cartoon of the protein that the request does not ask for: context", "ex.mvs.context"),
+        ("Wrong residue, plus the grey cartoon", "ex.mvs.face_context"),
+        (f"Right residue, and the same {e['ex.color']} {e['ex.rep']} on its two neighbours "
+         f"(residues {e['ex.neighbours_first']} to {e['ex.neighbours_last']}): spill", "ex.mvs.spill"),
+        (f"The whole chain as {e['ex.color']} {e['ex.rep']}: spill", "ex.mvs.spill_chain"),
+        (f"Right residue, plus {e['ex.other_rep']} on the same residue alone: extra on the target", "ex.mvs.extra"),
+        (f"Right residue, plus {e['ex.other_rep']} on residues {e['ex.neighbours_first']} to "
+         f"{e['ex.neighbours_last']}: context", "ex.mvs.other_rep_around"),
+    ]
+    calls = [
+        (f"Reference: UniProt {e['ex.accession']} position {e['ex.uniprot_position']}, resolved by the viewer; "
+         "the cartoon of the default view is left as it is", "ex.api.right"),
+        (f"The same residue named by author numbering (chain {e['ex.auth_chain']}, residue {e['ex.auth_number']})", "ex.api.author"),
+        (f"Number copied from the variant name and used as the author number ({e['ex.face_value_residue']}{e['ex.uniprot_position']})", "ex.api.face"),
+        ("Right residue, drawn red", "ex.api.colour"),
+        ("Load only, no further call", "ex.api.bare"),
+    ]
+    rows = ["| Row | Answer | F1 | Task success | Target score |",
+            "|:--|:------------------------------------------|--:|:--|--:|"]
+    names = {}
+    for label, letter, block in (("Scene track", "S", scene), ("Call-list track", "C", calls)):
+        rows.append(f"| | **{label}** | | | |")
+        for i, (what, key) in enumerate(block, 1):
+            names[key] = f"{letter}{i}"
+            rows.append(f"| {letter}{i} | {what} | {V[key + '.f1']:.2f} | {'yes' if V[key + '.success'] else 'no'} "
+                        f"| {V[key + '.target']:.2f} |")
+    for key, row in names.items():      # the text cites rows by these numbers
+        V[key.replace("ex.", "ex.row.", 1)] = row
     return "\n".join(rows) + "\n"
 
 
@@ -1022,6 +1109,17 @@ def si_prompts() -> str:
         text = (REPO / "prompts" / name).read_text(encoding="utf-8").rstrip()
         text = re.sub(r"\{\{(\w+)\}\}", r"<<\1>>", text)   # a slot; not a marker of paper/build.py
         out.append(f"**{title}: system prompt.**\n\n{fence}text\n{text}\n{fence}")
+    from molbench import schema
+    long = "`" * 5
+    for slot, title, text in (
+            ("MVS_REFERENCE", "Scene track: the format guide", runner.MVS_REFERENCE.read_text(encoding="utf-8")),
+            ("SCHEMA_TEXT", "Call-list track: the format guide, first part (the list of actions)", schema.schema_text()),
+            ("API_REFERENCE", "Call-list track: the format guide, second part (the reference of the viewer's calls)",
+             runner.API_REFERENCE.read_text(encoding="utf-8"))):
+        # "{{distance}}" in a guide is literal text of the format, not a marker of paper/build.py:
+        # a zero-width space between the braces keeps the build from reading it as one.
+        shown = text.rstrip().replace("{{", "{\u200b{")
+        out.append(f"**{title}** (slot `<<{slot}>>`), {len(text.split()):,} words.\n\n{long}text\n{shown}\n{long}")
     return "\n\n".join(out) + "\n"
 
 
@@ -1038,6 +1136,7 @@ def build() -> tuple[dict, dict[str, str]]:
     study_values(V)
     models = plan_values(V)
     ex = example_values(V, c["by_id"])
+    assert V["controls.mvs.n_entries"] == V["corpus.n_structures"]   # caption of Table 4
     files = {
         "table_corpus.md": corpus_table(V),
         "table_october_regrade.md": october_table(V),

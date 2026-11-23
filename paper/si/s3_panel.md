@@ -14,8 +14,9 @@ offset) must be found in the file by the build script, or the build fails.
 2. *Named entries*, chosen by hand to cover folds and features that the first group lacks.
    Well-known entries were preferred, solved by X-ray crystallography at 2.5 Å or better where
    one exists. The choice is by hand; the check of each claimed feature is by script.
-3. *Disease proteins.* {{panel.n_disease_proteins}} human proteins are listed by UniProt
-   accession. For each, candidate entries are all PDB entries that SIFTS maps to the accession.
+3. *Disease proteins.* {{panel.n_disease_proteins}} human proteins in which missense variants
+   cause inherited disease are listed by UniProt accession. The list was written by hand:
+   familiar examples that have experimental structures. For each, candidate entries are all PDB entries that SIFTS maps to the accession.
    The script keeps X-ray entries at 2.5 Å or better that cover at least one variant position
    (failing that, X-ray or cryo-electron microscopy entries at 3.5 Å or better), drops entries
    above the size limit or with several coordinate sets, and then chooses by, in order: most
@@ -52,8 +53,9 @@ corpus on this structure, both tracks, without rephrasings.
 We use *missense* variants only: one amino acid replaced by another. Throughout, the
 *classification* of a variant means ClinVar's aggregate germline classification on a variation
 record, the record whose accession begins with VCV. ClinVar keeps germline classifications
-apart from somatic ones; we use the germline one. A variation record is about one change at
-the level of DNA, so one amino-acid change can have several records.
+(of inherited variants) apart from somatic ones; we use the germline one. A variation record
+is usually about one change at the level of DNA, and different DNA changes can give the same
+amino-acid change, so one amino-acid change can have several records.
 {{variants.n_several_records}} of the variants that we keep have more than one qualifying
 record.
 
@@ -104,10 +106,16 @@ lipids, while the variant is widely known for a reported protective effect in Al
 disease, so a request that calls it pathogenic would mislead.
 
 *Proteins without a task.* Tasks exist for {{clin.n_proteins}} of the
-{{panel.n_disease_proteins}} proteins. For the other
-{{panel.n_disease_proteins_without_task}} ({{variants.proteins_without_task}}, by gene name)
-the steps above left at most {{variants.max_usable_per_protein_without_task}} variant, and we
-made no task.
+{{panel.n_disease_proteins}} proteins. The other {{panel.n_disease_proteins_without_task}}
+are, by gene name, {{variants.proteins_without_task}}. For *TPI1* (triosephosphate isomerase)
+the steps above left no variant. For *CA2* (carbonic anhydrase 2) they left one, at the first
+residue of the sequence, which the panel structure does not contain; a task needs a residue
+that is observed in the structure.
+
+*Proteins and structures.* The {{clin.n_proteins}} proteins give tasks on
+{{clin.n_structures}} structures. {{clin.n_proteins_several_structures}} proteins have tasks
+on more than one structure, and {{clin.n_structures_two_proteins}} haemoglobin entries serve
+two proteins each, because they hold both the alpha and the beta chain.
 
 *Dates.* The variant lists and the classifications of step 2 were read from UniProt and
 ClinVar on {{variants.clinvar_retrieved}}. The records were read again on

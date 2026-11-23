@@ -17,7 +17,7 @@ The final run is defined by one manifest file in the repository. Its contents, i
 
 **Table S6. The models.** *Set*: core, or optional (run only if decided so before the run,
 from the projected cost; marked † in the paper). Identifiers are given as the provider or
-the routing service lists them; the paper uses the part after the slash. *Weights*: open if the model's weights can be downloaded. *Hidden
+the routing service lists them; the paper uses the part after the slash. *Provider*: the company that publishes the model, as the identifier or the route names it. *Weights*: open if the model's weights can be downloaded, closed if the model can be used only through a provider's service. *Hidden
 reasoning*: by default the model first writes reasoning text that the user does not see; the
 provider bills it as output and counts it against the limit on the length of the answer. *JSON mode*: the
 provider offers an option that forces syntactically valid JSON on the route used. *List

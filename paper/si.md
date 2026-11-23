@@ -5,7 +5,7 @@
 **MolBench: Grading Language Models on What a Molecular Viewer Would Show**
 
 This file accompanies the paper. Every table in it is written by script from the task files,
-the frozen data or archived model answers. Terms are used as defined in Box 1 of the paper:
+the frozen data or archived model answers. Terms are used as defined in Boxes 1 and 2 of the paper:
 *scene track* (answers are MolViewSpec scenes), *call-list track* (answers are ordered calls to
 the PDBe Mol\* viewer), *drawn state*, *style*, *fact*, *F1*, *task success*, *target score*, *strict*
 and *valid-only*. *Model* always means a language model. The repository's own grading
@@ -21,7 +21,7 @@ and prices · S7, the system prompts · S8, further tables of the pilot run.
 The request, the two reference answers, the further accepted answers on the call-list track,
 the stored target and the grounding pack, exactly as they are in the task files
 `clin-pair-target-lyz-2nwd-w82r-mvs` (scene track) and `clin-pair-target-lyz-2nwd-w82r-api` (call-list track). The variant is
-LYZ W82R (p.Trp82Arg; UniProt P61626). UniProt names the disease
+*LYZ* p.W82R (p.Trp82Arg; UniProt P61626). UniProt names the disease
 as "Familial visceral amyloidosis, Ostertag type (AMYLD2)". ClinVar holds 2 records of this protein change, one
 for each DNA change that causes it: VCV000014376, NM_000239.3(LYZ):c.244T>C (p.Trp82Arg); VCV000014378, NM_000239.3(LYZ):c.244T>A (p.Trp82Arg). Both carry the aggregate
 classification "pathogenic" and the review status
@@ -198,28 +198,28 @@ From the request:
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1). *Spill*, *extra on the target* and *context* are the three rules for extra
+score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1). Rows S1 to S10 are scenes, rows C1 to C5 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
-| Answer | F1 | Task success | Target score |
-|:---|---:|:---|---:|
-| **Scene track** | | | |
-| Reference: author chain X, author residue 64, yellow spacefill spheres | 1.00 | yes | 1.00 |
-| The same residue named by label numbering (label chain A, residue 64) | 1.00 | yes | 1.00 |
-| Number in the variant name used as the author number (Ser82) | 0.00 | no | 0.00 |
-| Right residue, drawn red | 0.50 | no | 0.50 |
-| Right residue, plus a grey cartoon of the protein that the request does not ask for | 0.40 | no | 1.00 |
-| Wrong residue, plus the grey cartoon | 0.00 | no | 0.00 |
-| Right residue, and the same yellow spacefill spheres on its two neighbours (residues 63 to 65): spill | 0.60 | no | 0.60 |
-| The whole chain as yellow spacefill spheres: spill | 0.02 | no | 0.02 |
-| Right residue, plus ball-and-stick on the same residue: extra on the target | 0.67 | no | 0.67 |
-| Right residue, plus ball-and-stick on residues 63 to 65: context | 0.40 | no | 1.00 |
-| **Call-list track** | | | |
-| Reference: UniProt P61626 position 82, resolved by the viewer | 1.00 | yes | 1.00 |
-| The same residue named by author numbering (chain X, residue 64) | 1.00 | yes | 1.00 |
-| Number in the variant name used as the author number (Ser82) | 0.00 | no | 0.00 |
-| Right residue, drawn red | 0.50 | no | 0.50 |
-| Load only, no further call | 0.00 | no | 0.00 |
+| Row | Answer | F1 | Task success | Target score |
+|:--|:------------------------------------------|--:|:--|--:|
+| | **Scene track** | | | |
+| S1 | Reference: author chain X, author residue 64, yellow spacefill spheres | 1.00 | yes | 1.00 |
+| S2 | The same residue named by label numbering (label chain A, residue 64) | 1.00 | yes | 1.00 |
+| S3 | Number copied from the variant name and used as the author number (Ser82) | 0.00 | no | 0.00 |
+| S4 | Right residue, drawn red | 0.50 | no | 0.50 |
+| S5 | Right residue, plus a grey cartoon of the protein that the request does not ask for: context | 0.40 | no | 1.00 |
+| S6 | Wrong residue, plus the grey cartoon | 0.00 | no | 0.00 |
+| S7 | Right residue, and the same yellow spacefill spheres on its two neighbours (residues 63 to 65): spill | 0.60 | no | 0.60 |
+| S8 | The whole chain as yellow spacefill spheres: spill | 0.02 | no | 0.02 |
+| S9 | Right residue, plus ball-and-stick on the same residue alone: extra on the target | 0.67 | no | 0.67 |
+| S10 | Right residue, plus ball-and-stick on residues 63 to 65: context | 0.40 | no | 1.00 |
+| | **Call-list track** | | | |
+| C1 | Reference: UniProt P61626 position 82, resolved by the viewer; the cartoon of the default view is left as it is | 1.00 | yes | 1.00 |
+| C2 | The same residue named by author numbering (chain X, residue 64) | 1.00 | yes | 1.00 |
+| C3 | Number copied from the variant name and used as the author number (Ser82) | 0.00 | no | 0.00 |
+| C4 | Right residue, drawn red | 0.50 | no | 0.50 |
+| C5 | Load only, no further call | 0.00 | no | 0.00 |
 
 ## S2. Task templates
 
@@ -378,8 +378,9 @@ offset) must be found in the file by the build script, or the build fails.
 2. *Named entries*, chosen by hand to cover folds and features that the first group lacks.
    Well-known entries were preferred, solved by X-ray crystallography at 2.5 Å or better where
    one exists. The choice is by hand; the check of each claimed feature is by script.
-3. *Disease proteins.* 27 human proteins are listed by UniProt
-   accession. For each, candidate entries are all PDB entries that SIFTS maps to the accession.
+3. *Disease proteins.* 27 human proteins in which missense variants
+   cause inherited disease are listed by UniProt accession. The list was written by hand:
+   familiar examples that have experimental structures. For each, candidate entries are all PDB entries that SIFTS maps to the accession.
    The script keeps X-ray entries at 2.5 Å or better that cover at least one variant position
    (failing that, X-ray or cryo-electron microscopy entries at 3.5 Å or better), drops entries
    above the size limit or with several coordinate sets, and then chooses by, in order: most
@@ -496,8 +497,9 @@ corpus on this structure, both tracks, without rephrasings.
 We use *missense* variants only: one amino acid replaced by another. Throughout, the
 *classification* of a variant means ClinVar's aggregate germline classification on a variation
 record, the record whose accession begins with VCV. ClinVar keeps germline classifications
-apart from somatic ones; we use the germline one. A variation record is about one change at
-the level of DNA, so one amino-acid change can have several records.
+(of inherited variants) apart from somatic ones; we use the germline one. A variation record
+is usually about one change at the level of DNA, and different DNA changes can give the same
+amino-acid change, so one amino-acid change can have several records.
 74 of the variants that we keep have more than one qualifying
 record.
 
@@ -554,10 +556,16 @@ lipids, while the variant is widely known for a reported protective effect in Al
 disease, so a request that calls it pathogenic would mislead.
 
 *Proteins without a task.* Tasks exist for 25 of the
-27 proteins. For the other
-2 (CA2 and TPI1, by gene name)
-the steps above left at most 1 variant, and we
-made no task.
+27 proteins. The other 2
+are, by gene name, CA2 and TPI1. For *TPI1* (triosephosphate isomerase)
+the steps above left no variant. For *CA2* (carbonic anhydrase 2) they left one, at the first
+residue of the sequence, which the panel structure does not contain; a task needs a residue
+that is observed in the structure.
+
+*Proteins and structures.* The 25 proteins give tasks on
+31 structures. 6 proteins have tasks
+on more than one structure, and 2 haemoglobin entries serve
+two proteins each, because they hold both the alpha and the beta chain.
 
 *Dates.* The variant lists and the classifications of step 2 were read from UniProt and
 ClinVar on 2026-11-12. The records were read again on
@@ -612,20 +620,27 @@ cut into facts as above. For each fact, counting (atom, style) items:
 - *credit*: 1 for each item the answer has, ½ for each that the answer draws in the right
   representation with another colour or opacity;
 - *attempted*: the items the answer drew at all;
-- *spill*: items outside the target on which the answer repeats what it drew on the target,
-  where the reference draws no such thing;
+- *spill*: items outside the target on which the answer repeats a style that it drew on the
+  target and that earned credit there (the requested representation, in the requested colour
+  or in another), where the reference draws no such thing;
 - *extra*: items on the target from a style of the answer that is confined to the target, in
   a representation type that the reference does not draw there.
 
 Target recall = credit / wanted. Target precision = credit / (attempted + spill + extra). The
 target score is the harmonic mean of the two, each averaged over the target's facts and over
-the facts about the scene that touch the target atoms. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats what
-it drew on the target on atoms outside it; the items count against target precision. *Extra
+the facts about the scene that touch the target atoms. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats, on
+atoms outside the target, the style that it drew on the target in the requested
+representation, whatever its colour (red spacefill on the whole chain, where yellow spacefill
+on one residue was asked for, is spill); the items count against target precision. *Extra
 on the target*: a style of the answer in another representation that is confined to the
 target; its items count against target precision. *Unrequested context*: any other style of
 the answer that is not confined to the target (a cartoon or a surface of the chain, of the
 whole chain or of part of it) is ignored, even if it would hide the target in a picture; F1
-and task success count it. Table S1 gives the score of one example of each rule.
+and task success count it. Table S1 gives the score of one example of each rule. The line
+between the second and the third rule is whether the style is confined to the target. It is a
+convention: a second representation on the target alone is read as part of the answer to "how
+should these atoms be drawn?", and a style that also covers other atoms is read as background.
+Rows S9 and S10 of Table S1 show the two cases side by side.
 
 Tasks without a stored target are of two kinds (Section 4.2 of the paper). A single request
 without one, such as a change of the background colour, uses everything the reference draws or
@@ -638,8 +653,15 @@ start state returned unchanged.
 
 A task may list further right answers. An answer is graded against the reference and each of
 them, and the best result counts (a success first, then the highest F1). A name-resolution
-task lists the entries that match the named protein; an answer on another listed entry is
-graded against the reference's drawing resolved on that entry. A follow-up task gives a start
+task lists the entries that match the named protein. The list was frozen on
+2026-11-13 from the web services of the RCSB PDB: it holds every current PDB entry
+in which a chain is aligned to the UniProt accession of the named protein over at least
+50 residues in total, or over at least half of the UniProt sequence if
+that is shorter. Where the request names several proteins, a ligand or bound DNA, the entry
+must hold all of them. An answer on another listed entry is graded against the reference's
+drawing resolved on that entry; where that entry is outside the structure panel, selections
+are compared as written (Section S4.8), and F1, task success and the target score all come
+from that comparison. A follow-up task gives a start
 state and an edit request; the answer is the complete new scene or call list, and only the
 drawn state it results in is graded. If the right answer is to change nothing, the reference is the start
 state.
@@ -710,8 +732,7 @@ tables.
   identifier), and atoms are compared on the deposited unit. Selections of single symmetry
   copies are not modelled.
 - **Other coordinate sets of an entry that has several** are compared on the atoms of the
-  first, with the number of the coordinate set
-  index as a fact.
+  first set, and the index of the coordinate set is a fact.
 - **Entries outside the structure panel** have no atom table. An answer on such an entry (possible only
   in the name-resolution category) is compared as written: two selections are equal only if
   spelled the same way.
@@ -719,7 +740,14 @@ tables.
   theme.
 - **Distance lines.** The target score does not notice a missing distance line. Lines, labels
   and the camera target were not read back from Mol\*; they are compared as declared.
-- **Lone ions.** An answer that draws a lone ion as ball-and-stick receives a target score of 0.
+- **Lone ions.** 8 tasks ask for a metal ion as a sphere, and the
+  reference draws it as spacefill. An answer that draws the ion as ball-and-stick uses another
+  representation and, by the general rule, receives a target score of 0, although a single
+  atom looks much the same in both.
+- **The file that PDBe Mol\* fetches.** The atom tables are built from the archive file of
+  each entry, and the replay in PDBe Mol\* loaded that file. Left to itself, the viewer
+  fetches PDBe's own copy of the entry, which also carries the SIFTS mapping; the mapping
+  tables are read from that copy. The atom records of the two copies were not compared.
 - **Call-list actions that one host ignores.** The call-list track grades what each call does
   in PDBe Mol\* 3.3.2. The notebook widget that hosts this viewer for Python users (ipymolstar
   0.1.0) has no handler for four of the actions (camera focus, setting the highlight colour,
@@ -752,10 +780,16 @@ the verdict. The other 140 are of kinds that cannot be read back
 read back in the viewer. In the same run the grader's resolved state equalled the viewer's for all
 1498 scenes, and 3,818 single
 representations probed across the panel were drawn as the grader predicts. Call-list track:
-the call lists of a sample of controls (234 of
-995, taken from every kind in rotation; those that select by UniProt
-number were left out) were replayed in PDBe Mol\*
+a sample of the 995 controls was drawn by taking one control from each
+kind in turn, and again, until the sample was full. Each control has two call lists, its
+reference and its answer. Those that select by UniProt number were left out, and
+3 could not be run by the test harness. The other
+234 call lists were replayed in PDBe Mol\*
 3.3.2, and every one ended in the state that the grader computes.
+The call-list controls use 74 structures: the
+4 entries that hold only DNA or RNA
+(1BNA, 1EHZ, 1KF1 and 1Y26) have none, because each call-list control is built around a
+protein residue.
 
 **Table S5. Every kind of control.** *Controls*: number of controls of this kind. *Graded as
 success*: controls that the grader counts as task success; this must equal *Controls* for
@@ -884,49 +918,57 @@ The final run is defined by one manifest file in the repository. Its contents, i
 
 **Table S6. The models.** *Set*: core, or optional (run only if decided so before the run,
 from the projected cost; marked † in the paper). Identifiers are given as the provider or
-the routing service lists them; the paper uses the part after the slash. *Weights*: open if the model's weights can be downloaded. *Hidden
+the routing service lists them; the paper uses the part after the slash. *Provider*: the company that publishes the model, as the identifier or the route names it. *Weights*: open if the model's weights can be downloaded, closed if the model can be used only through a provider's service. *Hidden
 reasoning*: by default the model first writes reasoning text that the user does not see; the
 provider bills it as output and counts it against the limit on the length of the answer. *JSON mode*: the
 provider offers an option that forces syntactically valid JSON on the route used. *List
 price*: US dollars per million input / output tokens, read on the date given.
 ⟦PENDING: final run — the version string each provider reports, and the dates of the calls⟧
 
-| Model identifier | Set | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
-|:---|:---|:---|:---|:---|:---|:---|
-| Keyword script | core | not a model | – | – | 0 / 0 | – |
-| `claude-haiku-4-5` | core | closed | no | no | 1.0 / 5.0 | 2026-11-16 |
-| `deepseek/deepseek-v3.2` | core | open | no | yes | 0.26 / 0.38 | 2026-11-16 |
-| `deepseek/deepseek-v4-flash` | core | open | yes | yes | 0.09 / 0.18 | 2026-11-16 |
-| `google/gemini-3.5-flash` | core | closed | yes | yes | 1.5 / 9.0 | 2026-11-16 |
-| `google/gemma-3-27b-it` | core | open | no | yes | 0.08 / 0.35 | 2026-11-16 |
-| `openai/gpt-5.4-nano` | core | closed | no | yes | 0.2 / 1.25 | 2026-11-16 |
-| `meta-llama/llama-4-maverick` | core | open | no | yes | 0.35 / 1.0 | 2026-11-16 |
-| `minimax/minimax-m3` | core | open | yes | yes | 0.3 / 1.2 | 2026-11-16 |
-| `mistralai/mistral-small-2603` | core | open | no | yes | 0.15 / 0.6 | 2026-11-16 |
-| `moonshotai/kimi-k2.6` | core | open | yes | yes | 0.65 / 3.41 | 2026-11-16 |
-| `nvidia/nemotron-3-super-120b-a12b` | core | open | yes | yes | 0.075 / 0.4 | 2026-11-16 |
-| `openai/gpt-oss-120b` | core | open | yes | yes | 0.15 / 0.6 | 2026-11-16 |
-| `openai/gpt-oss-20b` | core | open | yes | yes | 0.075 / 0.3 | 2026-11-16 |
-| `qwen/qwen3-30b-a3b-instruct-2507` | core | open | no | yes | 0.1 / 0.3 | 2026-11-16 |
-| `qwen/qwen3-next-80b-a3b-instruct` | core | open | no | yes | 0.09 / 1.1 | 2026-11-16 |
-| `z-ai/glm-5.2` | core | open | no | yes | 0.007 / 6.8 | 2026-11-16 |
-| `anthropic/claude-opus-5.5` | optional | closed | yes | yes | 4.0 / 20.0 | 2026-11-16 |
-| `openai/gpt-6.1-sol` | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-16 |
-| `google/gemini-4-argon` | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-16 |
-| `x-ai/grok-4.7` | optional | closed | yes | yes | 2.0 / 6.0 | 2026-11-16 |
-| `deepseek/deepseek-v4-pro-0813` | optional | open | yes | yes | 0.111 / 4.44 | 2026-11-16 |
+| Model identifier | Provider | Set | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
+|:---------|:---|:---|:---|:---|:---|:---|:---|
+| Keyword script | – | core | not a model | – | – | 0 / 0 | – |
+| `claude-haiku-4-5` | anthropic | core | closed | no | no | 1.0 / 5.0 | 2026-11-16 |
+| `deepseek/deepseek-v3.2` | deepseek | core | open | no | yes | 0.26 / 0.38 | 2026-11-16 |
+| `deepseek/deepseek-v4-flash` | deepseek | core | open | yes | yes | 0.09 / 0.18 | 2026-11-16 |
+| `google/gemini-3.5-flash` | google | core | closed | yes | yes | 1.5 / 9.0 | 2026-11-16 |
+| `google/gemma-3-27b-it` | google | core | open | no | yes | 0.08 / 0.35 | 2026-11-16 |
+| `openai/gpt-5.4-nano` | openai | core | closed | no | yes | 0.2 / 1.25 | 2026-11-16 |
+| `meta-llama/llama-4-maverick` | meta-llama | core | open | no | yes | 0.35 / 1.0 | 2026-11-16 |
+| `minimax/minimax-m3` | minimax | core | open | yes | yes | 0.3 / 1.2 | 2026-11-16 |
+| `mistralai/mistral-small-2603` | mistralai | core | open | no | yes | 0.15 / 0.6 | 2026-11-16 |
+| `moonshotai/kimi-k2.6` | moonshotai | core | open | yes | yes | 0.65 / 3.41 | 2026-11-16 |
+| `nvidia/nemotron-3-super-120b-a12b` | nvidia | core | open | yes | yes | 0.075 / 0.4 | 2026-11-16 |
+| `openai/gpt-oss-120b` | openai | core | open | yes | yes | 0.15 / 0.6 | 2026-11-16 |
+| `openai/gpt-oss-20b` | openai | core | open | yes | yes | 0.075 / 0.3 | 2026-11-16 |
+| `qwen/qwen3-30b-a3b-instruct-2507` | qwen | core | open | no | yes | 0.1 / 0.3 | 2026-11-16 |
+| `qwen/qwen3-next-80b-a3b-instruct` | qwen | core | open | no | yes | 0.09 / 1.1 | 2026-11-16 |
+| `z-ai/glm-5.2` | z-ai | core | open | no | yes | 0.007 / 6.8 | 2026-11-16 |
+| `anthropic/claude-opus-5.5` | anthropic | optional | closed | yes | yes | 4.0 / 20.0 | 2026-11-16 |
+| `openai/gpt-6.1-sol` | openai | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-16 |
+| `google/gemini-4-argon` | google | optional | closed | yes | yes | 2.0 / 10.0 | 2026-11-16 |
+| `x-ai/grok-4.7` | x-ai | optional | closed | yes | yes | 2.0 / 6.0 | 2026-11-16 |
+| `deepseek/deepseek-v4-pro-0813` | deepseek | optional | open | yes | yes | 0.111 / 4.44 | 2026-11-16 |
 
 ## S7. System prompts
 
-The two system prompts as sent in the main condition. A name in double angle brackets, such
-as `<<MVS_REFERENCE>>`, marks a slot that is filled with a longer frozen text from the
-repository: the MolViewSpec reference, the list of call-list actions with their fields, and
-the reference of the viewer's calls. These longer texts are the *format guide* of each track.
-Everything else is printed as sent. In the condition without a format guide, the section "MVS
-reference" is removed. Each prompt has one worked example, on entry 1HSG, which no task uses:
-the example of the call-list prompt is printed below, and that of the scene prompt sits inside
-its format guide. The format guide of the scene track also has one short illustration of a
-distance line on entry 1A6M, which tasks use; no task asks for that distance.
+The two system prompts as sent in the main condition, and then the texts that fill their
+slots. A name in double angle brackets, such as `<<MVS_REFERENCE>>`, marks a slot that is
+filled with a longer frozen text. These longer texts are the *format guide* of each track:
+for the scene track the MolViewSpec reference; for the call-list track the list of actions
+with their fields, followed by the reference of the viewer's calls. With its slots filled,
+the system prompt has 1,216 words on the scene track and
+1,514 on the call-list track. In the condition without a format guide, the
+section "MVS reference" is removed. Each prompt has one worked example, on entry 1HSG, which
+no task uses: the example of the call-list prompt is in the prompt itself, and that of the
+scene prompt sits inside its format guide. The format guide of the scene track also has one
+short illustration of a distance line on entry 1A6M, which tasks use; no task asks for that
+distance.
+
+The prompts and guides are printed as sent, so they use the words of the repository and not
+those of the paper. In them, *MVS* is MolViewSpec, an *MVS state* or *scene tree* is a scene,
+an *action* (or *canonical action*) is one call of a call list, and *pdbe-molstar* is PDBe
+Mol\*.
 
 **Scene track: system prompt.**
 
@@ -1022,6 +1064,289 @@ Output:
 (Emit the array only — the fences above are illustrative.)
 ````
 
+**Scene track: the format guide** (slot `<<MVS_REFERENCE>>`), 975 words.
+
+`````text
+# MolViewSpec (MVS) — scene-tree reference (vendored)
+
+> **Frozen snapshot** of the MVS scene tree as implemented by Mol\* 5.9.0 (the
+> version vendored in `molbench/static/molstar/`). This is both the context the
+> model-under-test receives (the **Spec** condition) and the structure the grader
+> trusts. It covers the structure-scene subset of MVS; volumes, trajectories,
+> annotation files (`*_from_uri`/`*_from_source`) and multi-snapshot animation are
+> left out.
+
+MVS describes a 3D molecular scene as a **tree of nodes**. A scene is built by
+nesting: you download data, parse it, derive a structure, carve out components,
+and give each a representation and colour.
+
+## State shape
+
+```json
+{
+  "root": {
+    "kind": "root",
+    "children": [ <node>, ... ]
+  }
+}
+```
+
+Every node is `{"kind": <str>, "params": {<...>}, "children": [<node>, ...]}`
+(`params`/`children` omitted when empty). Nesting encodes meaning — a `color` node
+is a child of the `representation` it colours, which is a child of the `component`
+it draws. A node may also carry `"custom": {...}`: viewer-specific extras (see
+*Mol\* extensions* below).
+
+## Node kinds
+
+| kind | params | parent | meaning |
+|---|---|---|---|
+| `download` | `url` | root | fetch a structure file |
+| `parse` | `format` (`mmcif`,`bcif`,`pdb`) | download | parse the data |
+| `structure` | `type` (`model`,`assembly`,`symmetry`), `assembly_id`, `model_index` | parse | build a structure |
+| `transform` | `rotation` (3×3, flat), `translation`, or `matrix` (4×4, flat) | structure | move it by a known matrix |
+| `component` | `selector` | structure | select a subset to draw |
+| `representation` | `type`, `size_factor` | component | how to draw it |
+| `color` | `color`, optional `selector` | representation | colour it (or only the selected part) |
+| `opacity` | `opacity` (0–1; 0.5 = 50% transparent) | representation | transparency |
+| `label` | `text` | component | text label on the component |
+| `tooltip` | `text` | component | hover text |
+| `focus` | optional `radius` | component (or root) | aim the camera at it |
+| `camera` | `target`, `position`, `up` | root | set the camera explicitly |
+| `canvas` | `background_color` | root | background colour |
+| `primitives` | optional `color`, `label_color`, `opacity` | structure | a group of drawn shapes |
+| `primitive` | `kind` + params below | primitives | one shape |
+
+**Component selectors** — a string for whole classes:
+`all`, `polymer`, `protein`, `nucleic`, `ligand`, `ion`, `water`, `branched`.
+Or a **ComponentExpression** object (or list of them) to pick specific atoms/residues:
+
+| field | meaning |
+|---|---|
+| `auth_asym_id` | author chain id (e.g. `"A"`) |
+| `auth_seq_id` | author residue number |
+| `label_asym_id`, `label_seq_id` | label (mmCIF) chain / residue |
+| `beg_auth_seq_id`, `end_auth_seq_id` | inclusive residue range (also `beg_/end_label_seq_id`) |
+| `label_comp_id`, `auth_comp_id` | residue/ligand 3-letter code (`"HEM"`) |
+| `label_atom_id`, `auth_atom_id` | atom name (`"FE"`, `"NE2"`) |
+| `type_symbol` | element (`"FE"`) |
+| `residue_index` | 0-based residue index in the file |
+
+Fields in one expression are AND-ed; a list of expressions is OR-ed. A selection
+that matches nothing draws nothing — it is not an error, so use real chain ids,
+residue numbers and atom names.
+
+**Representation types:** `cartoon`, `backbone`, `ball_and_stick`, `line`,
+`spacefill`, `surface`, `putty`, `carbohydrate`.
+
+**Colours:** lowercase CSS names (`"red"`, `"orange"`, `"steelblue"`) or hex
+(`"#FF6699"`). A `color` node takes ONE colour.
+
+## Worked example
+
+Prompt: *"Load 1HSG; protein as grey cartoon, the inhibitor MK1 as orange ball-and-stick."*
+
+```json
+{"root": {"kind": "root", "children": [
+  {"kind": "download", "params": {"url": "https://files.rcsb.org/download/1hsg.cif"},
+   "children": [
+    {"kind": "parse", "params": {"format": "mmcif"}, "children": [
+     {"kind": "structure", "params": {"type": "model"}, "children": [
+       {"kind": "component", "params": {"selector": "polymer"}, "children": [
+         {"kind": "representation", "params": {"type": "cartoon"}, "children": [
+           {"kind": "color", "params": {"color": "gray"}}]}]},
+       {"kind": "component", "params": {"selector": {"label_comp_id": "MK1"}}, "children": [
+         {"kind": "representation", "params": {"type": "ball_and_stick"}, "children": [
+           {"kind": "color", "params": {"color": "orange"}}]}]}
+     ]}]}]}
+]}}
+```
+
+A named compound is selected by its code, as above: the string `"ligand"` is every
+ligand of the entry at once. To select specific residues, use an expression such as
+`"selector": {"auth_asym_id": "A", "auth_seq_id": 35}`.
+
+**Transparency:** `{"kind": "opacity", "params": {"opacity": 0.5}}` as a child of
+the `representation`, beside its `color`.
+
+## Primitives: lines, distances, angles, 3D text
+
+A primitive position (`start`, `end`, `position`, `a`/`b`/`c`) is either
+`[x, y, z]` or a ComponentExpression naming **one atom**, e.g.
+`{"auth_asym_id": "A", "auth_seq_id": 64, "label_atom_id": "NE2"}`
+(if it matches several atoms, their centre is used).
+
+| primitive `kind` | params | draws |
+|---|---|---|
+| `distance_measurement` | `start`, `end`, `color`, `radius`, `dash_length`, `label_template` | a dashed line labelled with its length (`"{​{distance}}"` is replaced by it) |
+| `tube` | `start`, `end`, `radius`, `dash_length` | a line, dashed if `dash_length` is set |
+| `angle_measurement` | `a`, `b`, `c` | the angle at `b`, labelled |
+| `arrow` | `start`, `end`, `tube_radius`, `color` | an arrow |
+| `label` | `position`, `text`, `label_size` | 3D text |
+
+Example — *"1A6M: show the distance from the distal His64 to the bound O2"*
+(the ligand code is `OXY`). The `primitives` node is a child of `structure`, next
+to its `component` nodes:
+
+```json
+{"kind": "primitives", "params": {"color": "yellow", "label_color": "yellow"}, "children": [
+  {"kind": "primitive", "params": {"kind": "distance_measurement",
+    "start": {"auth_asym_id": "A", "auth_seq_id": 64, "label_atom_id": "NE2"},
+    "end": {"auth_asym_id": "A", "label_comp_id": "OXY", "label_atom_id": "O2"},
+    "radius": 0.06, "dash_length": 0.15, "label_template": "{​{distance}}"}}]}
+```
+
+## Mol\* extensions (`custom`)
+
+Mol\* reads these `custom` keys; other MVS viewers ignore them.
+
+* **Non-covalent interactions** (H-bonds, salt bridges, metal coordination, π
+  stacking…), computed by Mol\*: on a `component`, set
+  `"custom": {"molstar_show_non_covalent_interactions": true,
+  "molstar_non_covalent_interactions_radius_ang": 5}`. Mol\* draws the residues
+  within the radius as ball-and-stick plus dashed interaction lines coloured by
+  type. The component needs no `representation` child for this.
+* **Colour schemes** (rainbow, by chain, by secondary structure, by element): give
+  the representation ONE `color` child carrying
+  `"custom": {"molstar_color_theme_name": <theme>}` (its `color` param is a
+  placeholder the theme overrides). Themes: `"sequence-id"`, `"chain-id"`,
+  `"secondary-structure"`, `"element-symbol"`.
+`````
+
+**Call-list track: the format guide, first part (the list of actions)** (slot `<<SCHEMA_TEXT>>`), 228 words.
+
+`````text
+Each action is an object {"action": <name>, ...fields}. Fields marked * are required.
+- load(molecule_id, custom_data, assembly_id, preset, ligand_view, alphafold): Load a structure into the viewer.
+- set_visual_style(style*): Set the global representation for the whole structure.
+- set_property(name*, value*): Toggle/assign a widget property (e.g. hide_water, spin, bg_color).
+- color(data*, non_selected_color, keep_colors, keep_representations): Colour/select a set of residues (PDBeMolstar.color).
+- focus(data*): Centre and zoom the camera on a selection (PDBeMolstar.focus).
+- highlight(data*, color, focus): Transiently highlight a selection (PDBeMolstar.highlight).
+- tooltips(data*): Attach tooltips to a selection (PDBeMolstar.tooltips).
+- set_color(highlight, select): Set the highlight and/or select colours (PDBeMolstar.set_color).
+- reset(camera, theme, highlightColor, selectColor): Reset camera/theme/colours (PDBeMolstar.reset).
+- clear_highlight(): Clear current highlight.
+- clear_selection(): Clear current selection.
+- clear_tooltips(): Clear current tooltips.
+set_visual_style.style and a selection's representation: cartoon | ball-and-stick | carbohydrate | ellipsoid | gaussian-surface | molecular-surface | point | putty | spacefill
+load.preset: default | unitcell | all-models | supercell
+set_property.name: hide_polymer (bool), hide_water (bool), hide_heteroatoms (bool), hide_carbs (bool), hide_non_standard (bool), hide_coarse (bool), spin (bool), superposition (bool), superposition_params (dict), load_maps (bool), map_settings (dict), validation_annotation (bool), domain_annotation (bool), symmetry_annotation (bool), alphafold_view (bool), sequence_panel (bool), bg_color (str), highlight_color (str), select_color (str), lighting (str)
+data is a list of selections (QueryParam objects). Locator keys: entity_id, struct_asym_id, auth_asym_id, label_comp_id, residue_number, start_residue_number, end_residue_number, auth_seq_id, auth_residue_number, auth_ins_code_id, start_auth_residue_number, end_auth_residue_number, start_auth_ins_code_id, end_auth_ins_code_id, uniprot_accession, uniprot_residue_number, start_uniprot_residue_number, end_uniprot_residue_number, atoms, atom_id. Styling keys: color, representation, representationColor, sideChain, focus, tooltip.
+`````
+
+**Call-list track: the format guide, second part (the reference of the viewer's calls)** (slot `<<API_REFERENCE>>`), 983 words.
+
+`````text
+# ipymolstar `PDBeMolstar` — API reference (vendored)
+
+> **Frozen snapshot** of the public surface of `ipymolstar.PDBeMolstar` **0.1.0**, which
+> drives PDBe's Mol* viewer, **pdbe-molstar 3.3.2**. Behaviour notes below were read from
+> that release's source and checked in the running viewer. This file is the *authority*
+> for the benchmark: it is the context shown to the model-under-test and the spec the
+> grader follows. Do not edit to "fix" a model's mistake — pin a new snapshot instead.
+
+You configure the viewer by setting **traits** and trigger one-shot operations by
+calling **methods**.
+
+## Traits
+
+| Trait | Type | Notes |
+|---|---|---|
+| `molecule_id` | str | PDB id, e.g. `"1cbs"`. With `superposition=True` it is a **UniProt accession** instead. |
+| `custom_data` | dict | `{"url": str, "format": "cif"\|"bcif"\|"pdb", "binary": bool}` — load any structure file by URL instead of a PDB id. An AlphaFold DB model is `https://alphafold.ebi.ac.uk/files/AF-<accession>-F1-model_v6.cif`. |
+| `assembly_id` | str | Biological assembly to build, e.g. `"1"`; `"preferred"` = the first. Default: the deposited model. |
+| `default_preset` | enum | `default` \| `unitcell` \| `all-models` \| `supercell`. |
+| `ligand_view` | dict | PDBe ligand page view: only that ligand and its surroundings. `{"label_comp_id": "REA"}` and/or `auth_asym_id` + `auth_seq_id`. |
+| `alphafold_view` | bool | Colour by AlphaFold confidence (pLDDT). It does **not** load a model: load one with `custom_data`. |
+| `superposition` | bool | PDBe-KB superposition view: the superposed PDB entries of one protein, addressed by UniProt accession in `molecule_id`. |
+| `superposition_params` | dict | `{"matrixAccession": str, "segment": int, "cluster": [int], "superposeCompleteCluster": bool, "ligandView": bool, "superposeAll": bool, "ligandColor": color}`. |
+| `visual_style` | enum | One representation for every component: `cartoon`, `ball-and-stick`, `carbohydrate`, `ellipsoid`, `gaussian-surface`, `molecular-surface`, `point`, `putty`, `spacefill`. Unset = the default view: polymer as cartoon; ligands, ions, waters and non-standard residues as ball-and-stick. `cartoon` and `putty` draw polymer only (ligands, ions and waters disappear). |
+| `hide_polymer`, `hide_water`, `hide_heteroatoms`, `hide_carbs`, `hide_non_standard`, `hide_coarse` | bool | Hide the polymer / waters / ligands and ions / carbohydrates / non-standard residues / coarse parts. |
+| `load_maps` | bool | Load electron-density (or EM) maps. |
+| `map_settings` | dict | Map style, e.g. `{"2fo-fc": {"opacity": 0.5, "wireframe": True}}` (also `"fo-fc(+ve)"`, `"fo-fc(-ve)"`, `"em"`). |
+| `validation_annotation`, `domain_annotation`, `symmetry_annotation` | bool | PDBe validation / domain / assembly-symmetry overlays. |
+| `bg_color` | str | Background, a CSS colour, e.g. `"#FFFFFF"`. |
+| `highlight_color`, `select_color` | str | Hover-highlight and selection-mode colours (`"#rrggbb"` or a colour name). |
+| `lighting` | enum | `flat` \| `matte` \| `glossy` \| `metallic` \| `plastic`. |
+| `spin` | bool | Spin the camera. |
+| `sequence_panel` | bool | Show the sequence panel. |
+
+Setting `molecule_id`, `custom_data` or `visual_style` **reloads the structure**: colouring,
+added representations and the camera focus made before it are lost. Set them first.
+
+## Methods
+
+```python
+def color(data: list[QueryParam], non_selected_color=None,
+          keep_colors=False, keep_representations=False) -> None
+```
+pdbe-molstar's `select`. For each item of `data`:
+
+* `color` paints the selected atoms in the representations the structure **already has**
+  (not in ones this call adds). Left out, they are painted the default orange
+  (255,112,3); `"color": None` leaves them as they are.
+* `representation` (or `sideChain=True`, meaning ball-and-stick) **adds** a representation
+  for the selected residues, in element or chain colours unless `representationColor` is
+  given.
+* `focus=True` also zooms on the item.
+
+`non_selected_color` paints everything else. Each call first **removes** the colouring and
+the added representations of earlier calls, unless `keep_colors` / `keep_representations`.
+
+```python
+def focus(data: list[QueryParam]) -> None    # centre and zoom the camera on the selection
+highlight = {"data": [...], "color": ..., "focus": bool}   # (trait) hover-style highlight; color and focus optional
+tooltips = {"data": [{..., "tooltip": "text"}]}            # (trait) replaces earlier tooltips
+def set_color(highlight=None, select=None) -> None         # same as the highlight_color / select_color traits
+def reset(data) -> None     # keys: camera, theme, highlightColor, selectColor (bool)
+def clear_highlight() -> None
+def clear_selection() -> None                # removes colouring and added representations
+def clear_tooltips() -> None
+```
+
+## `QueryParam` — the selection language
+
+A dict; its tests are AND-ed, a list of dicts is the union. `{}` selects everything.
+
+| Key | Meaning |
+|---|---|
+| `entity_id` | mmCIF entity id (str, e.g. `"1"`) |
+| `struct_asym_id` | **label** chain id (mmCIF `label_asym_id`); wins if both chain keys are given |
+| `auth_asym_id` | **author** chain id — the chain letter in the paper and the PDB file |
+| `label_comp_id` | residue/ligand code, e.g. `"HEM"`, `"HOH"` (upper case). **Overrides** every residue-number key |
+| `residue_number` | **label** residue number (mmCIF `label_seq_id`: 1-based position in the deposited sequence) |
+| `start_residue_number`, `end_residue_number` | inclusive **label** range |
+| `auth_seq_id` (alias `auth_residue_number`) | **author** residue number — the number used in the literature (His57, Asp25) |
+| `start_auth_residue_number`, `end_auth_residue_number` | inclusive **author** range |
+| `auth_ins_code_id` | accepted but **ignored** by this viewer release: an insertion code cannot be selected. `auth_seq_id: 221` selects 221 and 221A alike; name one of them by `struct_asym_id` + `residue_number` |
+| `uniprot_accession` + `uniprot_residue_number` | residue by UniProt numbering (the viewer maps it with SIFTS) |
+| `uniprot_accession` + `start_uniprot_residue_number`, `end_uniprot_residue_number` | UniProt range |
+| `atoms` | list of atom names, e.g. `["CA", "CB"]` |
+| `color`, `representation`, `representationColor`, `sideChain`, `focus` | see `color()` |
+| `tooltip` | str — text for `tooltips` |
+
+Label and author numbers often differ; a residue named the way papers name it needs the
+**author** keys. Numbers are ints, not strings. Colours are `{"r": int, "g": int, "b": int}`,
+`"#rrggbb"`, or a lower-case CSS colour name (`"red"`, `"orange"`).
+
+Example — HIV-1 protease 1HSG: colour the catalytic Asp25 of both chains red and add red
+ball-and-stick for them, leave the rest white, then centre on the inhibitor (MK1):
+
+```python
+view.color(
+    data=[
+        {"auth_asym_id": "A", "auth_seq_id": 25, "color": "red",
+         "representation": "ball-and-stick", "representationColor": "red"},
+        {"auth_asym_id": "B", "auth_seq_id": 25, "color": "red",
+         "representation": "ball-and-stick", "representationColor": "red"},
+    ],
+    non_selected_color="white",
+)
+view.focus(data=[{"label_comp_id": "MK1"}])
+```
+`````
+
 A single-turn request is sent as the user message. A follow-up task is sent as the current
 scene (scene track) or the calls made so far (call-list track), followed by `Request: …`.
 
@@ -1031,10 +1356,11 @@ scene (scene track) or the calls made so far (call-list track), followed by `Req
 are the record behind Section 6.6 of the paper. They differ from Section 6.6 in one way that
 matters: the scores here are those of the *earlier* scene grader, which compared scene trees
 path by path, whereas Section 6.6 regrades the same answers on drawn state, so its numbers are
-somewhat lower. Three words have a meaning of their own in these tables. *Success* is a score
-of exactly 1 under the earlier grader. *Tree F1* and *tree score* are the F1 of the earlier
-grader. *Target*, in Table S13 only, is defined in the caption of that table and is not the
-stored target of Section 4.2 of the paper, which the pilot tasks did not have.
+somewhat lower. Three column names differ from those of the paper, so that no word has two
+meanings. *Score of 1* is the share of answers that score exactly 1 under the earlier grader
+(the forerunner of task success). *Earlier-grader F1* is the F1 of that grader. *Requested
+part*, in Table S13, is defined in the caption of that table; the pilot tasks stored no
+target, so there is no target score in these tables.
 
 **Table S7. Corpus of the October 2026 pilot run (pilot run, preliminary, earlier grader).** Tasks and distinct structures (PDB entries) per category. A category is a group of tasks that need the same kind of knowledge.
 
@@ -1047,9 +1373,9 @@ stored target of Section 4.2 of the paper, which the pilot tasks did not have.
 | Interactions | 6 | 3 |
 | **All** | 70 | 14 |
 
-**Table S8. Scene track, main condition (pilot run, preliminary, earlier grader).** 15 models, 70 tasks on 14 structures, 1 answer per task. *Strict F1*: mean score over all tasks, where an answer the viewer cannot show scores 0. *Valid*: share of answers that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid answers only. *Success*: share of answers that are valid and score exactly 1. 95% interval: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: whether the model weights are openly released.
+**Table S8. Scene track, main condition (pilot run, preliminary, earlier grader).** 15 models, 70 tasks on 14 structures, 1 answer per task. *Strict F1*: mean score over all tasks, where an answer the viewer cannot show scores 0. *Valid*: share of answers that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid answers only. *Score of 1*: share of answers that are valid and score exactly 1. 95% interval: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: whether the model weights are openly released.
 
-| # | Model | Weights | Strict F1 | 95% interval | Valid | 95% interval | F1 (valid) | 95% interval | Success |
+| # | Model | Weights | Strict F1 | 95% interval | Valid | 95% interval | F1 (valid) | 95% interval | Score of 1 |
 | ---: | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 1 | deepseek-v3.2 | open | 0.903 | 0.829–0.958 | 98.6% | 95.8%–100.0% | 0.916 | 0.839–0.965 | 64.3% |
 | 2 | deepseek-v4-flash | open | 0.859 | 0.768–0.928 | 92.9% | 87.5%–97.3% | 0.925 | 0.824–0.983 | 62.9% |
@@ -1117,9 +1443,9 @@ stored target of Section 4.2 of the paper, which the pilot tasks did not have.
 | gpt-oss-20b | 50 | 50 | 47 | 0.252 | 0.868 | +0.616 |
 | nemotron-3-super-120b-a12b | 64 | 64 | 64 | 0.078 | 0.911 | +0.833 |
 
-**Table S12. Scores by category, main condition (pilot run, preliminary, earlier grader).** *Valid / all*: valid answers out of all answers, pooled over models. *Models*: models with at least one valid answer in the category (the others cannot contribute to a valid-only mean). *F1 (valid)*: mean score over valid answers, first averaged per model and then over models (mean), and over all valid answers together (pooled). *Strict F1*: mean over all answers, invalid ones scoring 0, averaged per model then over models. *Success*: share of answers that are valid and score exactly 1. 95% intervals are for the pooled valid-only and pooled strict values, resampling whole structures; n/a where a category has a single structure. Read the thin rows with care: the sample sizes are in the table.
+**Table S12. Scores by category, main condition (pilot run, preliminary, earlier grader).** *Valid / all*: valid answers out of all answers, pooled over models. *Models*: models with at least one valid answer in the category (the others cannot contribute to a valid-only mean). *F1 (valid)*: mean score over valid answers, first averaged per model and then over models (mean), and over all valid answers together (pooled). *Strict F1*: mean over all answers, invalid ones scoring 0, averaged per model then over models. *Score of 1*: share of answers that are valid and score exactly 1. 95% intervals are for the pooled valid-only and pooled strict values, resampling whole structures; n/a where a category has a single structure. Read the thin rows with care: the sample sizes are in the table.
 
-| Category | Tasks | Structures | Valid / all | Models | F1 (valid), mean | F1 (valid), pooled | 95% interval | Strict F1 | 95% interval | Success |
+| Category | Tasks | Structures | Valid / all | Models | F1 (valid), mean | F1 (valid), pooled | 95% interval | Strict F1 | 95% interval | Score of 1 |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Translation | 41 | 7 | 491/615 | 15/15 | 0.978 | 0.977 | 0.974–0.979 | 0.780 | 0.755–0.795 | 65.4% |
 | Structure-grounded | 8 | 6 | 91/120 | 14/15 | 0.972 | 0.971 | 0.955–0.991 | 0.737 | 0.705–0.770 | 53.3% |
@@ -1127,9 +1453,9 @@ stored target of Section 4.2 of the paper, which the pilot tasks did not have.
 | Name resolution | 6 | 6 | 52/90 | 12/15 | 0.542 | 0.564 | 0.512–0.606 | 0.326 | 0.247–0.392 | 2.2% |
 | Interactions | 6 | 3 | 54/90 | 14/15 | 0.850 | 0.854 | 0.822–0.884 | 0.512 | 0.356–0.770 | 22.2% |
 
-**Table S13. Is the requested component itself right? main condition (pilot run, preliminary, earlier grader).** Valid scenes only. The *target* of a task is every component of the reference scene except, when the reference has more than one, the component with the most atoms, which is treated as *context* (for example a grey cartoon of the whole protein behind one highlighted residue). *Target exact*: the answer draws every target with exactly the reference atoms, representation and colour. *Scene exact*: the whole scene scores 1. *Target exact, scene not*: the target is right and the scene still loses points for something else (missing or different context, extra components). *Atoms only*: the target atoms are selected exactly, in the reference entry or an accepted one, but drawn or coloured differently. *Target wrong*: no component selects exactly the target atoms.
+**Table S13. Is the requested component itself right? main condition (pilot run, preliminary, earlier grader).** Valid scenes only. The *requested part* of a task is every component of the reference scene except, when the reference has more than one, the component with the most atoms, which is treated as *context* (for example a grey cartoon of the whole protein behind one highlighted residue). *Requested part exact*: the answer draws every requested part with exactly the reference atoms, representation and colour. *Scene exact*: the whole scene scores 1. *Requested part exact, scene not*: the requested part is right and the scene still loses points for something else (missing or different context, extra components). *Atoms only*: the atoms of the requested part are selected exactly, in the reference entry or an accepted one, but drawn or coloured differently. *Requested part wrong*: no component selects exactly the atoms of the requested part.
 
-| Category | Valid scenes | Target exact | Share | Scene exact | Target exact, scene not | Atoms only | Target wrong |
+| Category | Valid scenes | Requested part exact | Share | Scene exact | Requested part exact, scene not | Atoms only | Requested part wrong |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | Translation | 491 | 404 | 82.3% | 402 | 2 | 55 | 32 |
 | Structure-grounded | 91 | 64 | 70.3% | 64 | 0 | 2 | 25 |
@@ -1137,7 +1463,7 @@ stored target of Section 4.2 of the paper, which the pilot tasks did not have.
 | Name resolution | 52 | 2 | 3.9% | 2 | 0 | 33 | 17 |
 | Interactions | 54 | 22 | 40.7% | 20 | 2 | 15 | 17 |
 
-**Table S14. Where valid scenes lose points, main condition (pilot run, preliminary, earlier grader).** For the 294 valid scenes that scored below 1 (of 784 valid scenes): which part of the scene differs from the reference. One scene can differ in several parts, so the rows add up to more than the total. *Selection*: the right kind of component, but it picks different atoms. *Unrequested colour*: the answer colours something the reference leaves at the viewer default; the tree score counts this as a difference even where a reader might not. *Missing* / *extra component*: a part of the reference scene is absent, or the answer draws something the reference does not. *Structure*: a different entry or file is loaded.
+**Table S14. Where valid scenes lose points, main condition (pilot run, preliminary, earlier grader).** For the 294 valid scenes that scored below 1 (of 784 valid scenes): which part of the scene differs from the reference. One scene can differ in several parts, so the rows add up to more than the total. *Selection*: the right kind of component, but it picks different atoms. *Unrequested colour*: the answer colours something the reference leaves at the viewer default; the earlier-grader F1 counts this as a difference even where a reader might not. *Missing* / *extra component*: a part of the reference scene is absent, or the answer draws something the reference does not. *Structure*: a different entry or file is loaded.
 
 | Difference | Scenes | Share | Translation | Structure-grounded | Clinical | Name resolution | Interactions |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1170,9 +1496,9 @@ stored target of Section 4.2 of the paper, which the pilot tasks did not have.
 | main | 15 | 784/1050 | 0.675 | 74.7% | 0.903 |
 | main + grounding pack | 15 | 739/1050 | 0.634 | 70.4% | 0.898 |
 
-**Table S17. Tree score vs render-checked score, main condition (pilot run, preliminary, earlier grader).** *Tree F1*: the strict F1 from comparing scene trees. A valid scene that scores below 1 is *escalated*: it is rendered next to the reference. It is *rescued* (counted as correct) if the two images are near-identical pixel for pixel, or if the image judge calls them the same. *Validated F1* is the tree F1 with rescued scenes set to 1. Scores are never lowered by escalation.
+**Table S17. Earlier-grader F1 against the score after a check of the picture, main condition (pilot run, preliminary, earlier grader).** *Earlier-grader F1*: the strict F1 from comparing scene trees. A valid scene that scores below 1 is *escalated*: it is rendered next to the reference. It is *rescued* (counted as correct) if the two images are near-identical pixel for pixel, or if the image judge calls them the same. *Validated F1* is the earlier-grader F1 with rescued scenes set to 1. Scores are never lowered by escalation.
 
-| Model | Tree F1 | Validated F1 | Change | Escalated | Rescued (pixels) | Rescued (judge) | Judged different |
+| Model | Earlier-grader F1 | Validated F1 | Change | Escalated | Rescued (pixels) | Rescued (judge) | Judged different |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | deepseek-v3.2 | 0.903 | 0.921 | +0.018 | 24 | 0 | 6 | 18 |
 | deepseek-v4-flash | 0.859 | 0.870 | +0.011 | 21 | 4 | 3 | 14 |

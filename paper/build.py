@@ -146,6 +146,19 @@ PILOT_WORDS = [
     (r"\b(\d+) samples? per task", lambda m: f"{m.group(1)} answer{'' if m.group(1) == '1' else 's'} per task"),
     (r"95% CIs\b", "95% intervals"), (r"95% CI\b", "95% interval"),
     (r"\(PRELIMINARY\)", "(pilot run, preliminary, earlier grader)"),
+    # Words that the paper defines otherwise (Section 4.2): in the pilot tables "target" was the
+    # requested part read from the reference, "success" a score of 1 under the earlier grader,
+    # and "tree F1" or "tree score" that grader's F1.
+    (r"the target atoms are selected", "the atoms of the requested part are selected"),
+    (r"The \*target\* of a task", "The *requested part* of a task"),
+    (r"every target with", "every requested part with"),
+    (r"the target is right", "the requested part is right"),
+    (r"selects exactly the target atoms", "selects exactly the atoms of the requested part"),
+    (r"\bTarget (exact|wrong)\b", lambda m: "Requested part " + m.group(1)),
+    (r"\bSuccess\b", "Score of 1"),
+    (r"Tree score vs render-checked score", "Earlier-grader F1 against the score after a check of the picture"),
+    (r"\bTree F1\b", "Earlier-grader F1"), (r"\btree F1\b", "earlier-grader F1"),
+    (r"\btree score\b", "earlier-grader F1"),
 ]
 
 
@@ -450,9 +463,10 @@ def pending_report(pending: list[dict], values: dict) -> str:
 CSS = """
 body{font:11pt/1.5 Georgia,serif;max-width:46em;margin:2em auto;padding:0 1em;color:#111}
 h1,h2,h3{font-family:Helvetica,Arial,sans-serif;line-height:1.25}
-table{border-collapse:collapse;font:8.5pt Helvetica,Arial,sans-serif;margin:1em 0;width:100%}
-th,td{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left}
-th{border-bottom:2px solid #444} img{max-width:100%}
+table{border-collapse:collapse;font:8.5pt Helvetica,Arial,sans-serif;margin:1em 0;width:100%;break-inside:avoid}
+th,td{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left;vertical-align:top}
+th{border-bottom:2px solid #444} tr{break-inside:avoid} p:has(+ table){break-after:avoid}
+img{max-width:100%} figure{break-inside:avoid} figure img{width:100%}
 code{font-size:90%} pre{font-size:8.5pt;background:#f6f6f6;padding:8px;overflow-x:auto;white-space:pre-wrap}
 blockquote{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.4em 1em;background:#fafafa}
 blockquote table{background:#fff} figure{margin:1.2em 0} figcaption{font-size:9.5pt;color:#222}
@@ -537,6 +551,23 @@ def example_problems(values: dict) -> list[str]:
     return problems
 
 
+# Numbers that the prose states in words. If one of them changes, the sentence must change:
+# (key, value, where the words are).
+STATED_IN_WORDS = [
+    ("plan.samples", 3, "'at least 2 of its 3 answers' (Sections 4.2 and 5.4, Table 9, Figures 3 and 5)"),
+    ("mvs.spec.regime.Clinical.n_structures", 1, "'a single structure' (Section 6.6, Finding 2; abstract)"),
+    ("study.max_per_task_model", 1, "'from the same model' (Section 5.5)"),
+    ("panel.n_disease_proteins_without_task", 2, "the two proteins without a task, named in Section 3.1"),
+    ("clin.n_tasks_kept_by_name", 1, "'1 task per track' for lysozyme p.Ile74Thr (Section 3.1)"),
+    ("prompt.longer_track", "call-list", "the order of the two prompt lengths (Sections 5.2 and 9.2)"),
+]
+
+
+def stated_in_words_problems(values: dict) -> list[str]:
+    return [f"the text states {key} = {want!r} in words, but the value is {values.get(key)!r}: {where}"
+            for key, want, where in STATED_IN_WORDS if values.get(key) != want]
+
+
 def words(md: str) -> int:
     """Words outside tables, code blocks, figure captions, HTML comments and the reference list."""
     md = md.split("\n## References")[0]
@@ -562,6 +593,7 @@ def main(argv=None) -> int:
         return 1
     problems = [p for _, _, _, probs in built for p in probs]
     problems += example_problems(values)
+    problems += stated_in_words_problems(values)
     for _, _, pending, _ in built:
         problems += [f"{p['section']}:{p['line']}: PENDING tag with no owner: {p['what']!r}"
                      for p in pending if not filled_by(p["what"])]

@@ -44,15 +44,21 @@ has been tested only against cases that we foresaw. The full list follows in fou
   Several of the variants we use, including the running example, rest on records whose review
   status is "{{ex.clinvar_review_status}}": one laboratory, with stated criteria, and no
   confirmation by a second submitter or an expert panel. One variant is used although its
-  record states no criteria (SI Section S3.2). The benchmark uses a variant only as an address:
+  record states no criteria (SI Section S3.2). Two things were not checked. A variant is
+  matched to a ClinVar record by its amino-acid change and position; ClinVar states that
+  change per transcript, and we did not check which transcript the match belongs to, so we
+  assume that it is numbered as the UniProt canonical sequence is. And one qualifying record is
+  enough: we did not look for further records of the same amino-acid change that are
+  classified differently. The benchmark uses a variant only as an address:
   which residue does this name point to? That address does not depend on the classification.
   No task asks for a judgement about disease.
 - **The format gap in the clinical pairs.** On the call-list track the viewer can map a UniProt
   position itself; on the scene track the model must. The paired comparison is therefore
-  reported with and without clinical pairs. The two system prompts also differ in length,
-  because the two format guides do, and in the pilot run a longer prompt lowered the share of
-  valid answers. A difference between the tracks can therefore come from the prompt as well as
-  from the format.
+  reported with and without clinical pairs. The two system prompts also differ in length
+  ({{prompt.mvs.words:,}} words on the scene track, {{prompt.api.words:,}} on the call-list
+  track; Section 5.2), and in the pilot run a longer prompt lowered the share of valid
+  answers. A difference between the tracks can therefore come from the prompt as well as from
+  the format.
 
 ### 9.3 Grader
 
@@ -71,31 +77,38 @@ has been tested only against cases that we foresaw. The full list follows in fou
   accepted entry an answer's selections are compared with the reference's as text. The common
   ways of writing "the protein" pass; a correct selection by chain identifier does not. Table
   8 reports answers on the reference entry and on any other accepted entry in separate rows.
+- **The file behind the call-list viewer.** The atom tables are built from the archive file of
+  each entry, and the read-back loaded that file into both viewers. Left to itself, PDBe Mol\*
+  fetches PDBe's own copy of the entry, which carries the SIFTS mapping. We did not compare
+  the two copies atom record by atom record.
 - **Partial credit is a choice.** Facts have equal weight, and a wrong colour counts half.
   Other choices would give other F1 values. Task success does not depend on them.
-- **What the grader does not model.** Atoms are compared on the deposited coordinates. Where
-  the functional assembly of a structure is built from several copies by symmetry, single
-  copies are not modelled. The appearance of labels, sizes and camera coordinates are not
-  graded. Views of the call-list viewer that need live services (superposition, ligand view,
-  annotations, density maps) are graded as declared settings; the atoms they would draw are
-  not modelled. SI Section S4.8 gives the full list, including four call-list actions that one
-  host of the viewer ignores.
+- **What the grader does not model.** Atoms are compared on the coordinates as deposited. Some
+  files hold one copy of a molecule that works as several identical copies; the viewer can
+  generate the other copies, and the grader does not model selections of single generated
+  copies. The appearance of labels, sizes and camera coordinates are not graded. Four features
+  of the call-list viewer fetch data from live services while running (overlaying related
+  structures, a close-up of one ligand, annotations from databases, experimental density
+  maps). They are graded only as settings that the answer switched on; the atoms they would
+  draw are not modelled. SI Section S4.8 gives the full list, including four call-list actions
+  that one host program of the viewer, the notebook widget of Section 2.3, ignores.
 
 ### 9.4 Run
 
-- **What the run can and cannot detect.** Totals per track and means per category rest on
-  dozens to nearly two hundred tasks and are estimated with useful precision. Several planned
+- **What the run can and cannot detect.** Means per category and track rest on
+  {{corpus.tier_tasks_min}} to {{corpus.tier_tasks_max}} tasks (Table 8); the smallest
+  categories are estimated loosely. Several planned
   contrasts are descriptive only: the public against the held-back split within one category
   (held-back tasks sit on {{corpus.heldback.n_structures}} structures); the {{clin.n_sse}}
-  helix and strand tasks; paraphrases within one category
+  helix and strand tasks; the terse and indirect phrasings within one category
   ({{corpus.n_requests_paraphrased}} requests in all); and the matched clinical tasks. Of the
-  last there are {{clin.n_offset_pairs}} sets that ask the same variant on a structure with and
-  on one without an offset, on {{clin.n_offset_pair_proteins}} proteins, and the structure
+  last there are {{clin.n_offset_pairs}} sets that ask about the same variant on a structure
+  with an offset and on one without, on {{clin.n_offset_pair_proteins}} proteins, and the structure
   without an offset is always a predicted structure, so "no offset" and "predicted structure"
   cannot be told apart. We report these contrasts with intervals and do not test them.
 - **Structures of one protein are resampled separately.** Intervals resample structures. In
   the clinical category, {{clin.n_proteins_several_structures}} proteins have tasks on more
-  than one structure, and matched tasks ask the same variant on two structures. Such
+  than one structure, and matched tasks ask about the same variant on two structures. Such
   structures are not independent, so intervals in this category are somewhat too narrow.
 - **The floor.** The keyword script is a weak floor. A script of regular expressions over the
   request templates, with no knowledge of any structure, would solve a share of the

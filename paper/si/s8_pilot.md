@@ -4,10 +4,11 @@
 are the record behind Section 6.6 of the paper. They differ from Section 6.6 in one way that
 matters: the scores here are those of the *earlier* scene grader, which compared scene trees
 path by path, whereas Section 6.6 regrades the same answers on drawn state, so its numbers are
-somewhat lower. Three words have a meaning of their own in these tables. *Success* is a score
-of exactly 1 under the earlier grader. *Tree F1* and *tree score* are the F1 of the earlier
-grader. *Target*, in Table S13 only, is defined in the caption of that table and is not the
-stored target of Section 4.2 of the paper, which the pilot tasks did not have.
+somewhat lower. Three column names differ from those of the paper, so that no word has two
+meanings. *Score of 1* is the share of answers that score exactly 1 under the earlier grader
+(the forerunner of task success). *Earlier-grader F1* is the F1 of that grader. *Requested
+part*, in Table S13, is defined in the caption of that table; the pilot tasks stored no
+target, so there is no target score in these tables.
 
 {{include:generated/table_mvs_corpus.md|pilot:Table S7}}
 

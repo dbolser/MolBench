@@ -4,7 +4,7 @@
 | Structure-grounded | The request names a feature (the ligand, the disulfides); the model must know which atoms these are. | 63 (52 + 11) | 63 (52 + 11) | 63 |
 | Interactions | Named atoms and a measurement or contact between them. | 40 (32 + 8) | – | – |
 | Name resolution | The structure is named by protein, not by identifier. | 39 (32 + 7) | – | – |
-| Clinical variant | A variant, named in UniProt numbering or in traditional numbering, must be mapped to the residues of the structure. | 82 (63 + 19) | 82 (63 + 19) | 82 |
+| Clinical variant | A variant is named in UniProt numbering or in traditional numbering; its residue must be found in the structure, where its number often differs. | 82 (63 + 19) | 82 (63 + 19) | 82 |
 | Follow-up turn | A start state plus an edit request; the full new state is returned. | 58 (50 + 8) | 44 (34 + 10) | 36 |
 | Several right answers | The request leaves one countable thing open; several drawn states are right. | 26 (21 + 5) | 15 (11 + 4) | 15 |
 | Viewer settings | A viewer setting that only the call-list format can express. | – | 34 (29 + 5) | – |

@@ -3,7 +3,7 @@
 The request, the two reference answers, the further accepted answers on the call-list track,
 the stored target and the grounding pack, exactly as they are in the task files
 `{{ex.id_mvs}}` (scene track) and `{{ex.id_api}}` (call-list track). The variant is
-{{ex.gene}} {{ex.variant}} ({{ex.hgvs}}; UniProt {{ex.accession}}). UniProt names the disease
+*{{ex.gene}}* {{ex.name_in_prompt}} ({{ex.hgvs}}; UniProt {{ex.accession}}). UniProt names the disease
 as "{{ex.disease}}". ClinVar holds {{ex.n_clinvar_records}} records of this protein change, one
 for each DNA change that causes it: {{ex.clinvar_records}}. Both carry the aggregate
 classification "{{ex.clinvar_classification}}" and the review status
@@ -23,7 +23,7 @@ selection colour or in {{ex.color}} as the residue is, is accepted as well.
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1). *Spill*, *extra on the target* and *context* are the three rules for extra
+score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1). Rows S1 to S10 are scenes, rows C1 to C5 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
 {{include:generated/table_example.md}}

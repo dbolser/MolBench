@@ -13,21 +13,24 @@ why:
 
 > *"{{ex.prompt}}"*
 
-The variant name {{ex.name_in_prompt}} means that tryptophan (W) at position
-{{ex.uniprot_position}} of the protein is replaced by arginine (R); the prefix "p." says that
-the position is counted along the protein sequence. The classification is quoted from ClinVar
-as it stood in November 2026; the benchmark uses the variant only to ask which residue the name
-points to (Section 9.2). The request asks for "the residue it replaces": the tryptophan, which
-is what the structure contains. The position {{ex.uniprot_position}} is counted along the
-UniProt sequence of human lysozyme, which begins with {{ex.removed_what}}, a leading segment
-that the cell cuts off after the protein is made. The Protein Data Bank (PDB) entry
-{{ex.entry}} numbers the same chain from the first residue of the mature protein, the protein
-that is left once that segment has been cut off. In the file, the tryptophan is therefore
-residue {{ex.auth_number}} (older papers call the variant {{ex.mature_name}}), and residue
-{{ex.uniprot_position}} is a serine. A model that selects residue {{ex.uniprot_position}}
-returns a clean picture of the wrong amino acid, and nothing in the picture says so. The case
-is not unusual: a survey of the PDB found that 38.6% of 176,507 entries contain proteins that
-are not numbered as their UniProt sequences are [@faezov2021pdbrenum].
+The request asks for "the residue it replaces": the tryptophan (W) that the variant
+{{ex.name_in_prompt}} turns into an arginine (R). A model that takes the
+{{ex.uniprot_position}} of that name as the residue number selects residue
+{{ex.uniprot_position}} of the file. That residue is a serine. The model returns a clean
+picture of the wrong amino acid, and nothing in the picture says so. The tryptophan is residue
+{{ex.auth_number}} of this file.
+
+The two numbers come from two ways of counting. The position {{ex.uniprot_position}} is
+counted along the UniProt sequence of human lysozyme (the prefix "p." marks a position in a
+protein sequence). That sequence begins with {{ex.removed_what}}, a leading segment that the
+cell cuts off after the protein is made. The Protein Data Bank (PDB) entry {{ex.entry}}
+numbers the same chain from the first residue of the mature protein, the protein that is left
+once that segment has been cut off; older papers accordingly call the variant
+{{ex.mature_name}}. The case is not unusual: a survey of the PDB found that 38.6% of 176,507
+entries contain proteins that are not numbered as their UniProt sequences are
+[@faezov2021pdbrenum]. The classification in the request is quoted from ClinVar as it stood in
+November 2026; the benchmark uses the variant only to ask which residue the name points to
+(Section 9.2).
 
 **What the model is given.** In MolBench the model receives only the request and a guide to
 the answer format. It does not see the structure file, it cannot look anything up, and it
@@ -42,9 +45,9 @@ not on how the answer is written.
 
 **Question.** With that instrument we ask one question above the others. When a request gives
 a residue number in one numbering and the structure uses another, does the model map the
-number, or does it copy it? Table 10 is built to answer this.
+number, or does it copy it? Section 6.4 is built to answer this.
 
-MolBench is built on the thesis (Figure 1). The reference for the request above is not written
+MolBench is built on this thesis (Figure 1). The reference for the request above is not written
 by a person. A script reads the variant from ClinVar [@landrum2018clinvar], maps its UniProt
 position [@uniprot2025] to the residues of the entry with the SIFTS mapping [@dana2019sifts],
 and confirms that the structure holds a tryptophan there. The grader then resolves an answer
@@ -52,16 +55,15 @@ to the atoms it would draw in that structure, with their representation and colo
 compares this *drawn state* with that of the reference. Two answers that name the same atoms
 in different ways receive the same score.
 
-![**Figure 1. From public data to a score.** Top row: frozen public data are turned into tasks by generator scripts; each model is given a guide to the answer format and the request, and answers each request {{plan.samples}} times, independently; the grader resolves the reference and the answer to their drawn state and compares them. Bottom row: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *F1*: how much of the drawn state is right, with partial credit. *Task success*: the drawn state is exactly right. *Target score*: the requested atoms are drawn as asked, whatever else was drawn. *Strict* and *valid-only* are two ways to average (Box 1).](generated/fig_pipeline.svg)
+![**Figure 1. From public data to a score.** Boxes 1 to 6 are the steps: frozen public data are turned into tasks by generator scripts; each model is given a guide to the answer format and the request, and answers each task {{plan.samples}} times, independently; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *F1*: how much of the drawn state is right, with partial credit. *Task success*: the drawn state is exactly right. *Target score*: the requested atoms are drawn as asked, whatever else was drawn. *Strict* and *valid-only* are two ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
 
 This paper makes four contributions, presented in this order.
 
 1. **A corpus built by script** (Section 3): {{corpus.n_tasks}} tasks on
    {{corpus.n_structures}} structures in eight categories of task, which differ in what the
    model must know beyond the request. They include {{clin.n}} clinical-variant requests on
-   {{clin.n_proteins}} proteins. In {{clin.n_offset}} of them the residue is numbered
-   differently in the structure than in UniProt, and in {{clin.n_face_value_wrong}} the number
-   written in the variant name is not the residue number in the structure. Every reference
+   {{clin.n_proteins}} proteins; in {{clin.n_face_value_wrong}} of them a model that copies
+   the number from the variant name selects the wrong residue (Section 3.3.1). Every reference
    records how it was made and is tested against the structure.
 2. **A grader on drawn state, tested against a control set** (Section 4): three scores with
    plain definitions, and {{controls.n:,}} control answers whose verdict is known from how
@@ -74,62 +76,56 @@ This paper makes four contributions, presented in this order.
    and changed the design, and one final run will fill tables whose shape is already set.
    ⟦PENDING: final run — one sentence stating the main result⟧
 
-Box 1 defines the terms used throughout.
+Box 1 defines the terms needed to follow how the benchmark is built (Section 3); Box 2, at the
+start of Section 4, defines the terms of grading and of the run.
 
 <div class="box">
 
-**Box 1. Terms and notation.** In this paper *model* always means a language model.
+**Box 1. Terms and notation: structures, variants and the corpus.** In this paper *model*
+always means a language model. Seven terms carry the results: *track*, *pair*, *copying the
+number* (all three below), *drawn state*, *task success*, *target score* and *strict* (Box 2).
+The other entries are for reference.
 
 *Background terms, for readers from outside structural biology.*
 
 | Term | Meaning |
-|:---|:---|
+|:---------|:------------------------------|
 | Residue, chain | A protein is a chain of amino acids. One amino acid in the chain is a *residue*; residues are numbered along the chain. A structure file names each chain with a short identifier, often one letter. |
 | Polymer | The protein, DNA or RNA chains of a structure, as opposed to bound small molecules, ions and water. |
 | Structure, entry | A set of atom coordinates. An *entry* is one deposition in the Protein Data Bank, with a four-character identifier such as {{ex.entry}}; where an entry holds several coordinate sets we use the first. A *predicted structure* is one computed from the sequence; ours come from the AlphaFold Protein Structure Database. |
 | Ligand | A small molecule bound to the protein. |
 | Representation | A way of drawing atoms: *cartoon* (a ribbon that traces the chain), *ball-and-stick*, *spacefill* (every atom as a full-size sphere), *surface*. |
 | UniProt | The reference database of protein sequences. Each protein has an accession, such as {{ex.accession}}. |
-| ClinVar | A public archive of human genetic variants. Laboratories submit their judgement of whether a variant causes disease. For each *variation record* (one change at the level of DNA, with an accession that begins with VCV) ClinVar publishes an aggregate classification, such as "Pathogenic", and a *review status* that says how well it is supported. One amino-acid change can have more than one record. |
-| Missense variant; {{ex.variant}} | A change of one amino acid into another. {{ex.variant}}: the tryptophan (W) at position {{ex.uniprot_position}} becomes an arginine (R). The same in three-letter form is {{ex.hgvs}}; the prefix "p." marks a position in the protein. A complete description also names the sequence that the position is counted on, here UniProt {{ex.accession}}. |
-| Signal peptide, mature protein | A *signal peptide* is a leading segment of a newly made protein that the cell cuts off. The *mature protein* is what is left after such a segment has been removed. Older literature often numbers residues from the first residue of the mature protein; we call a variant name of this kind a *traditional name*. |
+| ClinVar | A public archive of human genetic variants. Laboratories submit their judgement of whether a variant causes disease. For each *variation record* (accession beginning with VCV; usually one change at the level of DNA, sometimes several changes on one chromosome) ClinVar publishes an aggregate classification of inherited (germline) variants, such as "Pathogenic", and a *review status* that says how well it is supported. Different DNA changes can give the same amino-acid change, so one amino-acid change can have more than one record. We write ClinVar's terms in lower case from here on. |
+| Missense variant; {{ex.name_in_prompt}} | A change of one amino acid into another. {{ex.name_in_prompt}}: the tryptophan (W) at position {{ex.uniprot_position}} becomes an arginine (R). The same in three-letter form is {{ex.hgvs}}; the prefix "p." marks a position in the protein. A complete description also names the sequence that the position is counted on, here UniProt {{ex.accession}} (Section 3.3.1). |
+| Signal peptide, mature protein | A *signal peptide* is a leading segment of a newly made protein that the cell cuts off. The *mature protein* is what is left after such a segment has been removed. Older literature often numbers residues from the first residue of the mature protein; we call a variant name of this kind a *traditional name* (the genetics literature also says legacy name). It carries no "p.", as in {{ex.mature_name}}. |
 | Mol\*, MolViewSpec | Mol\* is an open-source molecular viewer that runs in a web browser. MolViewSpec is a format, written in JSON (JavaScript Object Notation), that describes what Mol\* should load and draw. PDBe Mol\* is the build of Mol\* maintained by the Protein Data Bank in Europe (PDBe). |
 | Selection | The expression in an answer that picks atoms, for example "chain {{ex.auth_chain}}, residue {{ex.auth_number}}". |
 
-*Terms of this paper.*
+*Terms of the corpus.*
 
 | Term | Meaning in this paper |
-|:---|:---|
-| Author numbering | The chain identifiers and residue numbers chosen by the depositors (in the structure file: `auth_asym_id`, `auth_seq_id`, with an insertion code where the depositors used one). This is what papers and most viewers show. |
+|:---------|:------------------------------|
+| Author numbering | The chain identifiers and residue numbers chosen by the depositors (in the structure file: `auth_asym_id`, `auth_seq_id`). This is what papers and most viewers show. A number can carry an *insertion code*: a letter appended to it (52A) where the depositors placed an extra residue between two numbers. |
 | Label numbering | The chain identifiers and residue numbers assigned by the archive (`label_asym_id`, `label_seq_id`): residues are counted 1, 2, 3 … along each chain. |
 | UniProt numbering | The position of a residue in the UniProt canonical sequence, counted from its first residue and so including any signal peptide. The variant names we use are in this numbering unless the request says otherwise (Section 3.3.1). |
 | Offset | For one residue, its UniProt number minus its author number ({{ex.uniprot_position}} − {{ex.auth_number}} = {{ex.offset}} in the running example). It can differ from residue to residue within a chain. A residue *has an offset* when the two numbers differ. |
+| Copying the number | Using the number printed in a variant name as the author residue number, without converting it. Copying is *right* in a task if the answer written in this way is exactly right, and *wrong* otherwise (Section 3.3.1). |
 | SIFTS | Structure Integration with Function, Taxonomy and Sequences: the public residue-by-residue mapping between PDB entries and UniProt sequences. |
-| Structure panel | The fixed set of {{panel.n}} structures on which all tasks are built (Section 3.1). |
+| Structure panel | The fixed set of {{panel.n}} structures (Section 3.1). Tasks are built on {{corpus.n_structures}} of them; one is reserved for the worked example in the prompts. |
 | Request | The plain-language instruction given to the model. |
-| Answer | What the model returns for one request. Each request is answered {{plan.samples}} times. |
-| Scene | An answer in MolViewSpec: a description of what to load and how to draw it. |
+| Task | A request on one track, with its reference answer and its target. A request that is posed on both tracks is two tasks. |
+| Answer | What the model returns for one task. Each task is answered {{plan.samples}} times in the main condition. |
+| Scene | An answer in MolViewSpec: a description of what to load and how to draw it. A scene groups the atoms it selects into *components*; each component is a named set of atoms that is then drawn in one or more ways. Nothing is on screen unless the scene says so. |
 | Call list | An answer as an ordered list of calls to the PDBe Mol\* viewer. |
+| Default view | What the call-list viewer draws as soon as a structure is loaded, before any further call: the whole structure, with the polymer as a cartoon. A scene has no default view; its screen starts empty. |
 | Track, format, side | A *track* is one of the two halves of the benchmark. *Scene track*: answers are MolViewSpec scenes. *Call-list track*: answers are call lists. *Format* means the answer language itself (MolViewSpec, or PDBe Mol\* calls). A *side* is one of the two tasks of a pair. |
 | Pair | One request posed on both tracks, with the same target atoms. The word is used for nothing else in this paper. |
 | Category | One of eight kinds of task (Section 3.3). The categories are not steps on one scale of difficulty. |
 | Lookup categories | Name resolution and clinical variant. In these the answer needs one fact that a person would look up in a database: an entry identifier, or a residue number. The model cannot look it up and must recall it. |
 | Template | A fixed kind of request within a category; a generator script fills in the structure, the residues, the colours and the wording. |
 | Target | The atoms that the request is about, stored with the task (Section 4.2). |
-| Style | One representation with one colour and one opacity, for example "grey cartoon, opaque". |
-| Drawn state | For every atom of the structure, the set of its styles, plus a few facts about the whole scene (labels, distance lines, the atoms the camera is centred on). |
-| Fact | One unit of the drawn state: all atoms that carry the same set of styles form one fact; each label or distance line is one fact. Atoms that are not drawn belong to no fact. |
-| F1 | How much of the drawn state is right, from 0 to 1, with partial credit. For each fact of the reference, take the fraction of it that the answer also draws; *recall* is the mean of these fractions. *Precision* is the same in the other direction, over the facts of the answer. F1 is the harmonic mean of the two. |
-| Task success | For one answer, yes or no: the drawn state is exactly right, with nothing missing and nothing extra. The *task success rate* of a model is the share of its answers that succeed. The primary score. |
-| Target score | From 0 to 1: are the target atoms drawn as asked, whatever else the answer drew? An answer is *target-right* when its target score is exactly 1. |
-| Unrequested context | Drawing that the request did not ask for, such as a cartoon of the protein behind a requested residue. |
-| Valid, unshowable, schema-breaking | An answer is *valid* if the viewer can show it as it stands. An *unshowable* answer cannot be shown at all and scores 0. A *schema-breaking* call list contains parts that the viewer ignores; it is graded as the viewer would treat it but is not counted as valid (Section 4.4). |
-| Strict, valid-only, repaired | Three ways to average a score (Section 4.4). *Strict* (primary): every answer counts. *Valid-only*: the mean over valid answers. *Repaired*: strict, after unparseable answers have been passed through an offline JSON repair. |
-| Control, control set | A *control* is a reference and one answer whose verdict is known from how the answer was made; the *control set* is all {{controls.n:,}} of them (Section 4.5). |
-| Format guide | The frozen text in the system prompt that documents the answer format (Section 5.2). |
-| Grounding pack | The result of an offline lookup for one task, appended to the request in one prompting condition (Section 5.2). |
-| Core models, optional models | The {{plan.n_core_models}} models that are always run, and up to {{plan.n_optional_models}} larger ones (Section 5.1). |
-| Keyword script | A script that maps words of the request to fixed answers by rule and uses no model. It marks the score that needs no skill. |
+| Accepted answer | One of several drawn states that a task lists as right. An answer is graded against each, and the best result counts. |
 | Held-back split | The tasks on {{corpus.heldback.n_structures}} structures that were set aside before generation and kept out of every earlier MolBench release. The tasks are public; the name does not mean a hidden test set (Section 3.6). |
 
 </div>

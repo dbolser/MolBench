@@ -19,15 +19,15 @@ Run numbers currently come from: **October 2026 panel** (PRELIMINARY). They appe
 | 1 | `sections/00_title.md` | 3 | 1 | Dan — author list, affiliations, corresponding author | Dan |
 | 2 | `sections/00_title.md` | 11 | 1 | Dan — graphic for the table of contents, which the journal asks for | Dan |
 | 3 | `sections/01_abstract.md` | 19 | 1 | final run — main results on both tracks and the paired comparison, two sentences, which replace the two sentences on the pilot run so that the abstract stays within its limit | final run |
-| 4 | `sections/02_introduction.md` | 75 | 1 | final run — one sentence stating the main result | final run |
-| 5 | `sections/06_setup.md` | 26 | 1 | Dan — which of the optional models are run | Dan |
-| 6 | `sections/07_results.md` | 27 | 178 | final run | final run |
-| 7 | `sections/07_results.md` | 36 | 1 | final run — the table for the call-list track, in the shape of Table 6 | final run |
-| 8 | `sections/07_results.md` | 105 | 1 | final run — the same counts without the clinical pairs, and without the 15 pairs in which the call list must switch off part of the default view; and, in the SI, the one-sided pairs divided by whether the side that was not right was unshowable | final run |
-| 9 | `sections/07_results.md` | 166 | 1 | final run — outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the repaired scores, F1 valid-only and the cost per model, as tables in SI Section S8 | final run |
-| 10 | `sections/07_results.md` | 168 | 1 | rating study — how often people call an answer that the grader failed the same as the reference, agreement between people, and the check of possible false passes, with intervals (Section 5.5) | rating study |
+| 4 | `sections/02_introduction.md` | 77 | 1 | final run — one sentence stating the main result | final run |
+| 5 | `sections/06_setup.md` | 29 | 1 | Dan — which of the optional models are run | Dan |
+| 6 | `sections/07_results.md` | 28 | 178 | final run | final run |
+| 7 | `sections/07_results.md` | 37 | 1 | final run — the table for the call-list track, in the shape of Table 6 | final run |
+| 8 | `sections/07_results.md` | 111 | 1 | final run — the same counts without the clinical pairs, and without the 15 pairs in which the call list must switch off part of the default view; and, in the SI, the one-sided pairs divided by whether the side that was not right was unshowable | final run |
+| 9 | `sections/07_results.md` | 177 | 1 | final run — outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the repaired scores, F1 valid-only and the cost per model, as tables in SI Section S8 | final run |
+| 10 | `sections/07_results.md` | 179 | 1 | rating study — how often people call an answer that the grader failed the same as the reference, agreement between people, and the check of possible false passes, with intervals (Section 5.5) | rating study |
 | 11 | `sections/09_discussion.md` | 3 | 1 | final run — discussion of the results: which categories separate models, what the paired comparison shows, whether the held-back split differs from the public one, and what Table 10 says about mapping against copying | final run |
-| 12 | `sections/10z_conclusion.md` | 13 | 1 | final run — two sentences on the results: how well the models drive the viewer on each track, and what the paired comparison shows | final run |
+| 12 | `sections/10z_conclusion.md` | 15 | 1 | final run — two sentences on the results: how well the models drive the viewer on each track, and what the paired comparison shows | final run |
 | 13 | `sections/11_ethics.md` | 15 | 1 | Dan — confirm the consent wording shown to raters, and whether the target journal or the author's institution requires an ethics statement or a waiver for this study | Dan |
 | 14 | `sections/11_ethics.md` | 20 | 1 | Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements | Dan |
 | 15 | `sections/12_availability.md` | 4 | 1 | corpus freeze — version tag and hash of the frozen corpus | corpus freeze |
@@ -37,7 +37,7 @@ Run numbers currently come from: **October 2026 panel** (PRELIMINARY). They appe
 | 19 | `sections/12_availability.md` | 29 | 1 | Dan — acknowledgements, funding, and the disclosure of language-model use | Dan |
 | 20 | `si/s6_run.md` | 5 | 1 | corpus freeze — final version tag and hash | corpus freeze |
 | 21 | `si/s6_run.md` | 25 | 1 | final run — the version string each provider reports, and the dates of the calls | final run |
-| 22 | `si/s8_pilot.md` | 186 | 1 | final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, F1 valid-only, cost per model | final run |
+| 22 | `si/s8_pilot.md` | 187 | 1 | final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, F1 valid-only, cost per model | final run |
 
 ## Keys and files the final run must supply
 

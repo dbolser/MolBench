@@ -4,21 +4,22 @@ The only results that exist today come from a pilot run in October 2026 on an ol
 They are real, they are kept apart from everything else, and they are in the box of Section
 6.6. Sections 6.1 to 6.5 show the tables that the one paid run will fill: their layout,
 captions and definitions are fixed, and the cells are filled by script from the archive of the
-run. In this draft the tables with one row per model (Tables 6, 9a and 9b) show their first
-rows only, and Table 7 is described but not drawn.
+run. Figure 5 shows the layout of the three result figures. In this draft the tables with one
+row per model (Tables 6, 9a and 9b) show their first rows only, and Table 7 is described but
+not drawn.
 
-![**Figure 5. The result figures that the final run will fill.** No data are shown. **A**: task success rate per model on both tracks, with 95% intervals; the *task success rate* is the share of answers whose drawn state is exactly right, and an unshowable answer counts as wrong (strict). **B**: for each model, its pairs divided by which side was right; a side is *right* when at least two of its three answers are target-right, that is, have a target score of exactly 1. **C**: task success rate and target score per category, valid-only (the mean over valid answers; Table 8 holds the numbers). The *target score* asks only whether the requested atoms are drawn as asked. Where it lies well above the task success rate, answers drew the requested atoms correctly and were not exactly right elsewhere.](generated/fig_result_shapes.svg)
+![**Figure 5. The result figures that the final run will fill.** No data are shown. **A**: task success rate per model, with 95% intervals, in one panel per track; the *task success rate* is the share of answers whose drawn state is exactly right, and an unshowable answer counts as wrong (strict). The two panels of A must not be compared with each other: the tracks differ in their categories, and task success is a different test on each (Section 4.2). Formats are compared in panel B only. **B**: for each model, its {{corpus.twins.n_with_target}} pairs that have a target score, divided by which side was right; a side is *right* when at least 2 of its {{plan.samples}} answers are target-right, that is, have a target score of exactly 1. **C**: task success rate and target score per category, valid-only (the mean over valid answers), so that the gap between the two scores is not blurred by answers that could not be shown at all; the strict values are in Table 8. The *target score* asks only whether the requested atoms are drawn as asked. Where it lies well above the task success rate, answers drew the requested atoms correctly and were not exactly right elsewhere.](generated/fig_result_shapes.svg)
 
 ### 6.1 Models on both tracks
 
 **Table 6. Scene track, main condition.** One row per model; † marks an optional model.
-*Weights*: open if the weights of the model are openly available, closed if the model can be
+*Weights*: open if the weights of the model can be downloaded, closed if the model can be
 used only through a provider's service. *Valid answers*: share of answers that parse and that
 the viewer accepts. *Task success rate*: share of answers whose drawn state is exactly right.
 *Target score*: whether the requested atoms are drawn as asked, whatever else was drawn (0 to
 1). *F1*: how much of the drawn state is right (0 to 1). *Strict*: every answer counts, and an
-unshowable answer scores 0. *Valid-only*: the mean over valid answers. *All-3 rate*: share of
-tasks on which all three answers are exactly right. *Cost*: US dollars for all calls of the
+unshowable answer scores 0. *Valid-only*: the mean over valid answers. *All-{{plan.samples}} rate*: share of
+tasks on which all {{plan.samples}} answers are exactly right. *Cost*: US dollars for all calls of the
 model in this condition, at list price. Intervals (95%, structures resampled) will be given
 with each score. F1 valid-only is in the SI.
 
@@ -37,22 +38,25 @@ out). *Structures*: the number of structures that the tasks of the row sit on, w
 number of units resampled for its intervals. *Task success rate*, *target score* and *F1* as
 in Table 6. *Strict*: every answer counts, and an unshowable answer scores 0. *Valid-only*:
 the mean over valid answers, which shows the difficulty of a category once the format has been
-written correctly. The two rows under name resolution divide its answers by the entry that the
-model chose: the entry of the reference, or another accepted entry (Section 3.3); they are
-counts of answers, so they have no number of tasks.
+written correctly. The two rows marked *of which* divide the answers of the name-resolution
+category by the entry that the model chose: the entry of the reference, or another accepted
+entry (Section 3.3); they are sets of answers, so they have no number of tasks.
 
 {{include:generated/table_final_tiers.md|else:generated/shape_tiers.md}}
 
 ### 6.3 The same request in two formats
 
-**Table 9. Paired comparison of the two formats.** For each model, its
-{{corpus.n_twin_pairs}} pairs (one request on both tracks, same target atoms) are divided into
-four cells, in two tables. A side of a pair is *right* when at least two of its three answers
-are right. *Table 9a* (primary): an answer is right when it is target-right, that is, its
-target score is 1 and the requested atoms are drawn exactly as asked; this is the same test in
-both formats. *Table 9b* (secondary): an answer is right when it is a task success, that is,
-its whole drawn state is exactly right; this is not the same test in the two formats (Section
-4.2). An unshowable answer is not right. The four count columns give the number of pairs right
+**Table 9. Paired comparison of the two formats.** For each model, its pairs (one request on
+both tracks, same target atoms) are divided into four cells, in two tables. A side of a pair
+is *right* when at least 2 of its {{plan.samples}} answers are right. *Table 9a* (primary): an
+answer is right when it is target-right, that is, its target score is 1 and the requested
+atoms are drawn exactly as asked; this is the same test in both formats. Table 9a covers the
+{{corpus.twins.n_with_target}} pairs that have a target score; the
+{{corpus.twins.n_without_target}} follow-up pairs that ask for something to be removed have
+none (Section 4.2) and appear in Table 9b only. *Table 9b* (secondary): an answer is right
+when it is a task success, that is, its whole drawn state is exactly right; this is not the
+same test in the two formats (Section 4.2). Table 9b covers all {{corpus.n_twin_pairs}}
+pairs. An unshowable answer is not right. The four count columns give the number of pairs right
 on both sides, on one side only, or on neither. *McNemar p*: exact test that the two one-sided
 counts are equal; a small value means that one format is harder for this model. † marks an
 optional model.
@@ -88,10 +92,15 @@ own annotation; they are a subset of the {{clin.n}} and are also reported apart.
 This table answers the question of the Introduction: do models map the number in a variant
 name, or copy it? If they copy it, the target score will be high where copying is right and
 low where it is wrong, and the grounding pack will close the gap. If they carry out the
-mapping, the two rows will be alike. The prediction is stated on the target score, because the
+mapping, the two rows will be alike. If the target score is low in both rows, the loss lies
+elsewhere, for example in the chain identifier or in invalid answers, and the table does not
+decide between copying and mapping. The prediction is stated on the target score, because the
 task success rate also falls when an answer adds unrequested context.
 
 ### 6.5 Follow-up turns, requests with several right answers, and planned comparisons
+
+Table 11 divides the follow-up turns by whether a change is needed, and Table 12 holds the
+planned comparisons 1 to 6 of Section 5.4.
 
 **Table 11. Follow-up turns and requests with several right answers.** *Task success rate*:
 share of answers whose drawn state is exactly right (for a request with several right answers:
@@ -99,7 +108,7 @@ the drawn state equals any one of the accepted answers), strict, mean over the m
 
 {{include:generated/table_final_followup.md|else:generated/shape_followup.md}}
 
-**Table 12. Planned comparisons.** Each row compares the task success rate (share of answers
+**Table 12. Planned comparisons 1 to 6 of Section 5.4.** Each row compares the task success rate (share of answers
 whose drawn state is exactly right; strict, mean over the models) between two groups of tasks
 or two conditions, with a 95% interval on the difference (structures resampled). *Main*: the
 main condition. *JSON mode*: the provider's option that forces syntactically valid JSON; that
@@ -130,7 +139,7 @@ leading models.
 **Finding 1: whether the answer was valid decided the ranking.** Of {{oct.spec.n:,}} answers,
 {{oct.spec.n_valid}} ({{oct.spec.valid_share:.0%}}) were valid scenes. Per model the share
 ranged from {{oct.spec.valid_share_min:.0%}} to {{oct.spec.valid_share_max:.0%}}, and strict F1
-from {{oct.spec.f1_min:.2f}} to {{oct.spec.f1_max:.2f}} (Table P1). The two are nearly the same
+from {{oct.spec.f1_min:.2f}} to {{oct.spec.f1_max:.2f}} (Table 13). The two are nearly the same
 ranking: the Pearson correlation between a model's share of valid answers and its strict F1 is
 r = {{oct.spec.r_valid_f1:.2f}} ({{oct.spec.n_models}} models). Valid-only, the models are much
 closer (F1 from {{oct.spec.valid.f1_min:.2f}} to {{oct.spec.valid.f1_max:.2f}}). Of the
@@ -143,11 +152,11 @@ or too few loses the whole answer. An offline repair of the JSON turned
 were not checked by the viewer). This is why the final run reports strict and valid-only scores
 side by side and adds a JSON-mode condition.
 
-**Table P1. Pilot run, per model (preliminary).** {{mvs.n_tasks}} tasks, one answer each,
-ordered by task success. *Weights*: open if the weights of the model are openly available,
+**Table 13. Pilot run, per model (preliminary).** {{mvs.n_tasks}} tasks, one answer each,
+ordered by task success rate. *Weights*: open if the weights of the model can be downloaded,
 closed if the model can be used only through a provider's service. *Valid answers*: answers
 that parse and that the viewer accepts. *F1*: how much of the drawn state is right (0 to 1).
-*Task success*: share of answers whose drawn state is exactly right. *Strict*: every answer
+*Task success rate*: share of answers whose drawn state is exactly right. *Strict*: every answer
 counts, and an unshowable answer scores 0. *Valid-only*: the mean over valid answers. The
 pilot tasks stored no target, so there is no target score.
 
@@ -156,23 +165,25 @@ pilot tasks stored no target, so there is no target score.
 **Finding 2: clinical tasks lost their points on unrequested context, not on the residue.**
 The clinical category scored lowest: strict F1 {{oct.spec.clinical.f1:.2f}}, and task success
 {{oct.spec.clinical.success:.1%}}, that is {{oct.spec.clinical.success_n}} of
-{{oct.spec.clinical.n}} answers (Table P2, Figure 6). The natural reading is that finding the
+{{oct.spec.clinical.n}} answers (Table 14, Figure 6). The natural reading is that finding the
 residue of a variant is hard. That reading is wrong for this run. In
-{{oct.spec.clinical.highlight_exact_n}} of the {{oct.spec.clinical.n}} answers, which is
-{{oct.spec.clinical.highlight_valid_share:.0%}} of the {{oct.spec.clinical.n_valid}} valid ones,
-the requested residue was drawn exactly as in the reference: same atoms, same representation,
-same colour. The points were lost elsewhere. Each clinical reference of that corpus also drew
+{{oct.spec.clinical.highlight_exact_n}} answers the requested residue was drawn exactly as in
+the reference: same atoms, same representation, same colour. That is
+{{oct.spec.clinical.highlight_exact:.0%}} of all {{oct.spec.clinical.n}} answers and
+{{oct.spec.clinical.highlight_valid_share:.0%}} of the {{oct.spec.clinical.n_valid}} valid
+ones. The points were lost elsewhere. Each clinical reference of that corpus also drew
 a grey cartoon of the whole protein, and the requests asked only for the residue. An answer
 that drew the residue alone was missing a fact; an answer that drew the cartoon differently had
 a wrong one. There was a second flaw: all {{mvs.spec.regime.Clinical.n_tasks}} clinical tasks
-used {{mvs.spec.regime.Clinical.n_structures}} structure, in which author numbers equal UniProt
-numbers. The residue could be found without any mapping, so the category could not test the
-mapping at all. Section 7 (rows 1 and 2) says what replaced both.
+used a single structure, in which author numbers equal UniProt numbers. The residue could be
+found without any mapping, so the category could not test the mapping at all. "Most answers
+drew the right residue" is therefore a statement about drawing, not about mapping. Table 15
+(rows 1 and 2) says what replaced both.
 
-**Table P2. Pilot run by category, all models pooled (preliminary).** *Answers*: one per model
+**Table 14. Pilot run by category, all models pooled (preliminary).** *Answers*: one per model
 and task. *Valid*: answers that parse and that the viewer accepts. *F1, earlier grader*: the
-score under the grader used in October, for comparison. *F1* and *task success*: as in Table
-P1, strict, over all answers of the row. *Requested part exactly right*: this column has its
+score under the grader used in October, for comparison. *F1* and *task success rate*: as in
+Table 13, strict, over all answers of the row. *Requested part exactly right*: this column has its
 own denominator, given in each cell. Among answers to tasks whose reference marks out a
 requested part against a background, it is the share that draw that part with exactly the
 reference's atoms, representation and colour (an unshowable answer counts as wrong). It is the
@@ -182,7 +193,7 @@ its categories to show them apart, so they are pooled in one row.
 
 {{include:generated/table_october_regrade.md}}
 
-![**Figure 6. Pilot run: three scores by category (preliminary).** *F1* (how much of the drawn state is right) and *task success* (drawn state exactly right) are strict means over all answers of all {{oct.spec.n_models}} models; an unshowable answer scores 0. *Requested part exactly right* has a smaller denominator in two of the three groups: it is the share, among answers to tasks whose reference marks out a requested part against a background, that draw that part exactly as the reference does, whatever the rest of the answer shows; an unshowable answer counts as wrong. The number of answers behind each bar is printed above it (n). Three categories with few tasks are pooled in the middle group. In the clinical category, where every task marks a requested part, that part was usually right and the whole drawn state almost never.](generated/fig_october_regrade.svg)
+![**Figure 6. Pilot run: three scores by category (preliminary).** *F1* (how much of the drawn state is right; a mean score from 0 to 1) and *task success* (the share of answers whose drawn state is exactly right, printed as a percentage) are taken strictly, over all answers of all {{oct.spec.n_models}} models; an unshowable answer scores 0. *Requested part exactly right* has a smaller denominator in two of the three groups: it is the share, among answers to tasks whose reference marks out a requested part against a background, that draw that part exactly as the reference does, whatever the rest of the answer shows; an unshowable answer counts as wrong. The number of answers behind each bar is printed above it (n); for the third bar of a group this is the number of answers to tasks that mark a requested part. Three categories with few tasks are pooled in the middle group. In the clinical category, where every task marks a requested part, that part was usually right and the whole drawn state almost never.](generated/fig_october_regrade.svg)
 
 **Finding 3: grounding packs did not help.** Appending each task's grounding pack to the
 request lowered task success over all tasks from {{oct.spec.success:.1%}} to
@@ -210,9 +221,9 @@ see whether answers that the earlier grader scored below 1 looked the same as th
 people, that is, to look for false fails, and to try out the image judge as a way of finding
 them. *What was done.* In October, each valid scene that scored below 1 was rendered, and an
 image judge (Section 5.5) was shown its picture beside the picture of the reference.
-Volunteers then judged a sample of the same picture comparisons. {{pilot.n_raters}} raters,
-one of them an author, gave {{pilot.all.n_labelled}} verdicts of "same" or "different" on
-{{pilot.all.n_pairs}} picture comparisons.
+Volunteers then judged a sample of the same picture comparisons. In all,
+{{pilot.n_raters}} raters, one of them an author, gave {{pilot.all.n_labelled}} verdicts of
+"same" or "different" on {{pilot.all.n_pairs}} picture comparisons.
 
 *Result.* People and the image judge gave the same verdict in {{pilot.all.agreement:.0%}} of
 cases. Cohen's kappa, which is agreement beyond what chance would give (0 is chance, 1 is

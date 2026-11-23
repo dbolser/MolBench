@@ -46,20 +46,27 @@ cut into facts as above. For each fact, counting (atom, style) items:
 - *credit*: 1 for each item the answer has, ½ for each that the answer draws in the right
   representation with another colour or opacity;
 - *attempted*: the items the answer drew at all;
-- *spill*: items outside the target on which the answer repeats what it drew on the target,
-  where the reference draws no such thing;
+- *spill*: items outside the target on which the answer repeats a style that it drew on the
+  target and that earned credit there (the requested representation, in the requested colour
+  or in another), where the reference draws no such thing;
 - *extra*: items on the target from a style of the answer that is confined to the target, in
   a representation type that the reference does not draw there.
 
 Target recall = credit / wanted. Target precision = credit / (attempted + spill + extra). The
 target score is the harmonic mean of the two, each averaged over the target's facts and over
-the facts about the scene that touch the target atoms. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats what
-it drew on the target on atoms outside it; the items count against target precision. *Extra
+the facts about the scene that touch the target atoms. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats, on
+atoms outside the target, the style that it drew on the target in the requested
+representation, whatever its colour (red spacefill on the whole chain, where yellow spacefill
+on one residue was asked for, is spill); the items count against target precision. *Extra
 on the target*: a style of the answer in another representation that is confined to the
 target; its items count against target precision. *Unrequested context*: any other style of
 the answer that is not confined to the target (a cartoon or a surface of the chain, of the
 whole chain or of part of it) is ignored, even if it would hide the target in a picture; F1
-and task success count it. Table S1 gives the score of one example of each rule.
+and task success count it. Table S1 gives the score of one example of each rule. The line
+between the second and the third rule is whether the style is confined to the target. It is a
+convention: a second representation on the target alone is read as part of the answer to "how
+should these atoms be drawn?", and a style that also covers other atoms is read as background.
+Rows S9 and S10 of Table S1 show the two cases side by side.
 
 Tasks without a stored target are of two kinds (Section 4.2 of the paper). A single request
 without one, such as a change of the background colour, uses everything the reference draws or
@@ -72,8 +79,15 @@ start state returned unchanged.
 
 A task may list further right answers. An answer is graded against the reference and each of
 them, and the best result counts (a success first, then the highest F1). A name-resolution
-task lists the entries that match the named protein; an answer on another listed entry is
-graded against the reference's drawing resolved on that entry. A follow-up task gives a start
+task lists the entries that match the named protein. The list was frozen on
+{{resolve.retrieved}} from the web services of the RCSB PDB: it holds every current PDB entry
+in which a chain is aligned to the UniProt accession of the named protein over at least
+{{resolve.min_residues}} residues in total, or over at least half of the UniProt sequence if
+that is shorter. Where the request names several proteins, a ligand or bound DNA, the entry
+must hold all of them. An answer on another listed entry is graded against the reference's
+drawing resolved on that entry; where that entry is outside the structure panel, selections
+are compared as written (Section S4.8), and F1, task success and the target score all come
+from that comparison. A follow-up task gives a start
 state and an edit request; the answer is the complete new scene or call list, and only the
 drawn state it results in is graded. If the right answer is to change nothing, the reference is the start
 state.
@@ -144,8 +158,7 @@ tables.
   identifier), and atoms are compared on the deposited unit. Selections of single symmetry
   copies are not modelled.
 - **Other coordinate sets of an entry that has several** are compared on the atoms of the
-  first, with the number of the coordinate set
-  index as a fact.
+  first set, and the index of the coordinate set is a fact.
 - **Entries outside the structure panel** have no atom table. An answer on such an entry (possible only
   in the name-resolution category) is compared as written: two selections are equal only if
   spelled the same way.
@@ -153,7 +166,14 @@ tables.
   theme.
 - **Distance lines.** The target score does not notice a missing distance line. Lines, labels
   and the camera target were not read back from Mol\*; they are compared as declared.
-- **Lone ions.** An answer that draws a lone ion as ball-and-stick receives a target score of 0.
+- **Lone ions.** {{corpus.n_ion_sphere_tasks}} tasks ask for a metal ion as a sphere, and the
+  reference draws it as spacefill. An answer that draws the ion as ball-and-stick uses another
+  representation and, by the general rule, receives a target score of 0, although a single
+  atom looks much the same in both.
+- **The file that PDBe Mol\* fetches.** The atom tables are built from the archive file of
+  each entry, and the replay in PDBe Mol\* loaded that file. Left to itself, the viewer
+  fetches PDBe's own copy of the entry, which also carries the SIFTS mapping; the mapping
+  tables are read from that copy. The atom records of the two copies were not compared.
 - **Call-list actions that one host ignores.** The call-list track grades what each call does
   in PDBe Mol\* 3.3.2. The notebook widget that hosts this viewer for Python users (ipymolstar
   0.1.0) has no handler for four of the actions (camera focus, setting the highlight colour,
