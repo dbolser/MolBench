@@ -431,14 +431,53 @@ def test_the_papers_seven_tables_have_the_columns_of_the_shape_tables(mock_run, 
         want = _header((REPO / "paper" / "generated" / f"{shape}.md").read_text())
         got = _header(t.tables[name])
         if shape == "shape_leaderboard":      # the pilot manifest takes one sample
-            assert got[7] == "Tasks with the one sample right"
-            assert want[7] == "Tasks with all 3 samples right"
-            got[7] = want[7]
+            assert got[8] == "All-1 rate" and want[8] == "All-3 rate"
+            got[8] = want[8]
         assert got == want, name
         assert t.tables[name].startswith(analysis.MOCK_BANNER)
+        # what the paper includes is the table alone: its own caption stands above it
+        assert t.paper[name].startswith(("| ", "**Table 9a.")) and "MOCK" not in t.paper[name]
     tiers = t.tables["table_final_tiers"]
-    assert "Scene track: Clinical variant" in tiers and "Call-list track: Translation" in tiers
+    assert "| **Scene track** |" in tiers and "| **Call-list track** |" in tiers
+    assert "| Clinical variant |" in tiers and "*of which:* answers on the reference entry" in tiers
     assert "mvs" not in tiers.lower() and "api" not in tiers.lower()
+    paired = t.paper["table_final_paired"]
+    assert paired.count("| Model | Pairs | Right on both sides |") == 2 and "**Table 9b." in paired
+
+
+def _labels_and_counts(text: str, columns: int = 2) -> list[tuple]:
+    """The first columns (row label, number of tasks) of every table row that is not a
+    header, a rule or a placeholder for further rows."""
+    out = []
+    for line in text.splitlines():
+        if not line.startswith("| ") or line.startswith("| Model") or "further rows" in line:
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        out.append(tuple(cells[:columns]))
+    return out
+
+
+def test_the_committed_mock_tables_have_the_rows_and_task_counts_of_the_shape_tables():
+    """The mock tables are built from a dry run of the whole corpus. Their row labels
+    and task counts must be those of the pending-shape tables, which
+    ``paper/corpus_values.py`` counts from the task files on its own: two counts of the
+    same thing by two scripts."""
+    mock, gen = REPO / "paper" / "generated_mock", REPO / "paper" / "generated"
+    for name, shape, columns in (("table_final_tiers", "shape_tiers", 3),
+                                 ("table_final_clinical", "shape_clinical", 2),
+                                 ("table_final_followup", "shape_followup", 1),
+                                 ("table_final_robustness", "shape_robustness", 3)):
+        got = _labels_and_counts((mock / f"{name}.md").read_text(), columns)
+        want = _labels_and_counts((gen / f"{shape}.md").read_text(), columns)
+        assert got[0] == want[0] and got[1:] == want[1:], name      # header row, then every row
+    follow = (mock / "table_final_followup.md").read_text().splitlines()
+    shape = (gen / "shape_followup.md").read_text().splitlines()
+    for a, b in zip([x for x in follow if x.startswith("| ")][2:], [x for x in shape if x.startswith("| ")][2:]):
+        ca, cb = a.strip("|").split("|"), b.strip("|").split("|")
+        assert (ca[1].strip(), ca[3].strip()) == (cb[1].strip(), cb[3].strip())
+    paired = (mock / "table_final_paired.md").read_text()
+    for title in re.findall(r"^\*\*Table 9[ab]\..*\*\*$", (gen / "shape_paired.md").read_text(), re.M):
+        assert title in paired
     # every include of a result table in the paper has its table here, and no other
     text = (REPO / "paper" / "sections" / "07_results.md").read_text()
     asked = set(re.findall(r"include:generated/(table_final_\w+)\.md", text))

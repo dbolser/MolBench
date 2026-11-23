@@ -65,6 +65,10 @@ PAPER_TIER = {"translation": "Translation", "grounded": "Structure-grounded",
               "interactions": "Interactions", "resolve": "Name resolution",
               "clinical": "Clinical variant", "followup": "Follow-up turn",
               "accept_set": "Several right answers", "tool_only": "Viewer settings"}
+#: The order of the categories in the paper (``TIERS`` in paper/corpus_values.py): the four
+#: that differ in what the model must know, then those that differ in the form of the task.
+PAPER_TIER_ORDER = ("translation", "grounded", "resolve", "clinical", "interactions",
+                    "followup", "accept_set", "tool_only")
 #: The seven result tables the paper includes; each replaces ``shape_<name>.md``.
 PAPER_TABLES = ("table_final_leaderboard_scene", "table_final_leaderboard_calls",
                 "table_final_tiers", "table_final_paired", "table_final_clinical",
@@ -198,6 +202,33 @@ class Bootstrap:
         ra, rb = self._replicates(a, label + "|a"), self._replicates(b, label + "|b")
         d = [x - y for x, y in zip(ra, rb)]
         return (percentile(d, 0.025), percentile(d, 0.975))
+
+    def joint_diff_ci(self, a: list[tuple[str, float]], b: list[tuple[str, float]],
+                      label: str = "") -> tuple | None:
+        """95% interval of mean(a) - mean(b) for two groups that can *share* clusters (the
+        two groups of clinical tasks): each resample draws the clusters once, and both
+        groups are recomputed on that draw. A draw that leaves one group empty is skipped."""
+        keys = sorted({c for c, _ in a} | {c for c, _ in b})
+        if len(keys) < 2 or not a or not b or not self.n:
+            return None
+        tot = {k: [0.0, 0, 0.0, 0] for k in keys}
+        for c, v in a:
+            tot[c][0] += v
+            tot[c][1] += 1
+        for c, v in b:
+            tot[c][2] += v
+            tot[c][3] += 1
+        rng = random.Random(f"{self.seed}|{label}|joint")
+        out = []
+        for _ in range(self.n):
+            sa = na = sb = nb = 0.0
+            for k in rng.choices(keys, k=len(keys)):
+                sa, na, sb, nb = sa + tot[k][0], na + tot[k][1], sb + tot[k][2], nb + tot[k][3]
+            if na and nb:
+                out.append(sa / na - sb / nb)
+        if len(out) < 2:
+            return None
+        return (percentile(out, 0.025), percentile(out, 0.975))
 
 
 # --------------------------------------------------------------------------- #
@@ -1361,14 +1392,16 @@ class Tables:
         return model.split("/")[-1] + (" †" if rec.get("optional") else "")
 
     def final(self) -> None:
-        """The seven tables the paper includes (``table_final_*``), with the columns of
-        ``paper/generated/shape_*.md`` and in the paper's words: scene track and
-        call-list track, the paper's tier names, the paper's model names. Every cell is
-        computed here from the task rows; the definitions are those of the captions in
-        ``paper/sections/07_results.md`` (strict scores; a panel mean is the mean over
-        the models, scripted baselines left out, of each task's mean over its samples).
-        The other tables of this module keep the analysis vocabulary and go to the
-        Supporting Information."""
+        """The seven tables the paper includes (``table_final_*``), with the columns and
+        row labels of ``paper/generated/shape_*.md`` and in the paper's words: scene track
+        and call-list track, categories, the paper's model names. Every cell is computed
+        here from the task rows; the definitions are those of the captions in
+        ``paper/sections/07_results.md`` (strict: every answer counts; valid-only: valid
+        answers pooled; a mean over the models leaves the two scripts out and is the mean
+        of each task's mean over its answers). ``self.paper`` keeps each table as the
+        paper includes it: the table and at most one note, without a title, because the
+        paper's own caption stands above it. The other tables of this module keep the
+        analysis vocabulary and go to the Supporting Information."""
         r = self.run
         models = r.models(HEADLINE)
         panel = r.models(HEADLINE, baseline=False)
@@ -1376,26 +1409,30 @@ class Tables:
         pilot = bool(r.meta.get("pilot"))
         about = (f"{len(panel)} model{'s' if len(panel) != 1 else ''}, "
                  f"{n_samples(n_s)}")
+        self.paper: dict[str, str] = {}
+
+        def emit(name: str, title: str, body: str, note: str = "") -> None:
+            self.add(name, title, body, note)
+            self.paper[name] = body + (f"\n\n{note}" if note else "")
 
         def valid(s: dict) -> bool:
             return s["outcome"] in ("valid", "unchecked")
+
+        def pooled(answers: list[dict], field: str, valid_only: bool = False) -> float | None:
+            return mean(float(s[field]) for s in answers
+                        if s.get(field) is not None and (valid(s) or not valid_only))
+
+        def over_models(per_model) -> float | None:
+            return mean(v for v in (per_model(m) for m in panel) if v is not None)
 
         def panel_mean(test, field="success", cond=HEADLINE, only=None) -> tuple:
             its = self.panel_values(cond, test, field, only)
             return its, mean(v for _, v in its)
 
-        def valid_only(test) -> float | None:
-            per = []
-            for m in panel:
-                ss = [s for s in samples_of(r.pick(HEADLINE, m, test)) if valid(s)]
-                if ss:
-                    per.append(mean(float(s["success"]) for s in ss))
-            return mean(per)
+        def valid_only(test, field: str) -> float | None:
+            return over_models(lambda m: pooled(samples_of(r.pick(HEADLINE, m, test)), field, True))
 
-        # Tables 5 and 6: one row per model, per track
-        all_right = ("Tasks with all 3 samples right" if n_s == 3 else
-                     "Tasks with the one sample right" if n_s == 1 else
-                     f"Tasks with all {n_s} samples right")
+        # Tables 6 and 7: one row per model, per track
         for track, key, label in (("mvs", "scene", "Scene track"),
                                   ("api_calling", "calls", "Call-list track")):
             rows = []
@@ -1406,7 +1443,6 @@ class Tables:
                 if not got:
                     continue
                 ss = samples_of(got)
-                ok = [s for s in ss if valid(s)]
                 f1, f1ci = self.stat(items(got, "f1"), f"final|lb|{track}|{m}|f1")
                 su, suci = self.stat(items(got, "success"), f"final|lb|{track}|{m}|su")
                 tg, tgci = self.stat(items(got, "target_f1"), f"final|lb|{track}|{m}|tg")
@@ -1414,103 +1450,155 @@ class Tables:
                 cost = ("–" if m in BASELINES else "n/a" if any(c is None for c in costs)
                         else f"{sum(costs):.2f}")
                 rows.append([self.paper_name(m), "–" if m in BASELINES else r.weights(m),
-                             pct(len(ok) / len(ss)), with_ci(f1, f1ci), with_ci(su, suci),
-                             with_ci(tg, tgci), f3(mean(s["f1"] for s in ok)),
+                             pct(sum(valid(s) for s in ss) / len(ss)), with_ci(su, suci),
+                             with_ci(tg, tgci), with_ci(f1, f1ci),
+                             f3(pooled(ss, "success", True)), f3(pooled(ss, "target_f1", True)),
                              pct(mean(float(t["success_all"]) for t in got)), cost])
             if not rows:
                 continue
             n = len(r.pick(HEADLINE, models[0], is_track(track)))
-            self.add(f"table_final_leaderboard_{key}",
-                     f"{label}, headline condition (format reference): {n} tasks, {n_samples(n_s)}",
-                     md_table(["Model", "Weights", "Valid outputs", "F1 (strict)",
-                               "Task success (strict)", "Target score (strict)",
-                               "F1, valid outputs only", all_right, "Cost (USD)"], rows, "llrrrrrrr"),
-                     "Models in order of task success, the scripted baselines first. Square "
-                     "brackets: 95% interval, structures resampled. Cost: the calls of this "
-                     "track in this condition; a price of zero is shown as 0.00.")
+            emit(f"table_final_leaderboard_{key}",
+                 f"{label}, main condition: {n} tasks, {n_samples(n_s)}",
+                 md_table(["Model", "Weights", "Valid answers", "Task success rate, strict",
+                           "Target score, strict", "F1, strict", "Task success rate, valid-only",
+                           "Target score, valid-only", f"All-{n_s} rate", "Cost (USD)"],
+                          rows, "llrrrrrrrr"),
+                 "Models in order of task success rate, the two scripts first. Square "
+                 "brackets: 95% interval, structures resampled.")
 
-        # Table 7: tier by track, mean over models
+        # Table 8: category by track, mean over the models
+        on_entry = (("answers on the reference entry", True),
+                    ("answers on another entry that the task accepts (graded by the weaker "
+                     "rule of Section 4.1)", False))
         rows = []
         for track, label in (("mvs", "Scene track"), ("api_calling", "Call-list track")):
-            for tier in tasks_mod.TIERS:
+            block = []
+            for tier in PAPER_TIER_ORDER:
                 test = lambda x, a=track, b=tier: x["category"] == a and x["tier"] == b  # noqa: E731
                 its, su = panel_mean(test)
                 if not its:
                     continue
                 got = r.pick(HEADLINE, (panel or models)[0], test)
-                rows.append([f"{label}: {PAPER_TIER[tier]}", len(its), len({t["cluster"] for t in got}),
-                             f3(panel_mean(test, "f1")[1]), f3(su),
-                             f3(panel_mean(test, "target_f1")[1]), f3(valid_only(test))])
+                block.append([PAPER_TIER[tier], len(its), len({t["cluster"] for t in got}),
+                              f3(su), f3(panel_mean(test, "target_f1")[1]),
+                              f3(panel_mean(test, "f1")[1]),
+                              f3(valid_only(test, "success")), f3(valid_only(test, "target_f1"))])
+                if tier != "resolve":
+                    continue
+                for words, want in on_entry:      # sets of answers, so no number of tasks
+                    def part(m, want=want, test=test):
+                        return [s for s in samples_of(r.pick(HEADLINE, m, test))
+                                if s.get("entry_is_reference") is want]
+                    block.append([f" *of which:* {words}", "–", "–"]
+                                 + [f3(over_models(lambda m, f=f, v=v: pooled(part(m), f, v)))
+                                    for f, v in (("success", False), ("target_f1", False), ("f1", False),
+                                                 ("success", True), ("target_f1", True))])
+            if block:
+                rows += [[f"**{label}**"] + [""] * 7] + block
         if rows:
-            self.add("table_final_tiers", f"Scores by tier and track, mean over models ({about})",
-                     md_table(["Tier", "Tasks", "Structures", "F1 (strict)", "Task success (strict)",
-                               "Target score (strict)", "Task success, valid outputs only"], rows),
-                     "Original tasks. A follow-up turn without target atoms has no target "
-                     "score and is left out of that mean.")
+            emit("table_final_tiers", f"Scores by category and track, mean over the models ({about})",
+                 md_table(["Category", "Tasks", "Structures", "Task success rate, strict",
+                           "Target score, strict", "F1, strict", "Task success rate, valid-only",
+                           "Target score, valid-only"], rows))
 
-        # Table 8: the pairs of each model, split four ways, by two measures
+        # Table 9: the pairs of each model in four cells; 9a by the target score, 9b by task success
         pairs = self.twin_pairs()
-        rows = []
-        for m in panel:
-            got = r.rows(HEADLINE, m)
-            cells = {}
-            for name, right in (("target", target_solved), ("success", solved)):
+        need = ("at least 2 of its 3 answers are" if n_s == 3 else
+                f"more than half of its {n_s} answers are" if n_s > 1 else "its one answer is")
+        parts = []
+        for title, right, test in (
+                ("Table 9a. Primary comparison. A side is right when {need} target-right. "
+                 "The {n} pairs that have a target score.", target_solved,
+                 lambda t: t.get("target") is not None),
+                ("Table 9b. Secondary comparison. A side is right when {need} {successes}. "
+                 "All {n} pairs.", solved, lambda t: True)):
+            use = [(a, b) for a, b, t in pairs if test(t)]
+            rows = []
+            for m in panel:
+                got = r.rows(HEADLINE, m)
                 c: Counter = Counter()
-                for a, b, _ in pairs:
+                d = []
+                for a, b in use:
                     if a in got and b in got:
-                        c[(right(got[a]), right(got[b]))] += 1
-                cells[name] = c
-            n = sum(cells["target"].values())
-            if not n:
-                continue
+                        ra, rb = right(got[a]), right(got[b])
+                        c[(ra, rb)] += 1
+                        d.append((got[a]["cluster"], float(ra and not rb) - float(rb and not ra)))
+                if not d:
+                    continue
+                rows.append([self.paper_name(m), len(d), c[(True, True)], c[(True, False)],
+                             c[(False, True)], c[(False, False)],
+                             pval(mcnemar_exact(c[(True, False)], c[(False, True)])),
+                             signed(mean(v for _, v in d))
+                             + ci(self.boot.ci(d, f"final|pairs|{title[:8]}|{m}"), signed)])
+            if rows:
+                n_pairs = max(row[1] for row in rows)
+                parts.append("**" + title.format(need=need, n=n_pairs,
+                                                   successes="task successes" if n_s > 1 else "a task success") + "**\n\n"
+                             + md_table(["Model", "Pairs", "Right on both sides", "Right in the scene only",
+                                         "Right in the call list only", "Right on neither side", "McNemar p",
+                                         "Difference: scene only minus call list only, as a share of "
+                                         "the pairs (95% interval)"], rows))
+        if parts:
+            emit("table_final_paired", "Paired comparison of the two formats", "\n\n".join(parts))
 
-            def both(k):
-                return f"{cells['target'][k]} ({cells['success'][k]})"
-            p = [pval(mcnemar_exact(c[(True, False)], c[(False, True)])) for c in cells.values()]
-            rows.append([self.paper_name(m), n, both((True, True)), both((True, False)),
-                         both((False, True)), both((False, False)), f"{p[0]} ({p[1]})"])
-        if rows:
-            need = "at least two of its three sampled answers are" if n_s == 3 else \
-                "more than half of its sampled answers are" if n_s > 1 else "its one sampled answer is"
-            self.add("table_final_paired", "Paired comparison of the two formats",
-                     md_table(["Model", "Pairs", "Both right", "Scene right, call list wrong",
-                               "Call list right, scene wrong", "Both wrong", "McNemar p"], rows),
-                     f"A side is right when {need} right. Each cell: counted by the target "
-                     "score (the requested atoms drawn exactly as asked), and in brackets by "
-                     "task success (the whole final state exactly right).")
-
-        # Table 9: the clinical tier on the scene track
+        # Table 10: the clinical category on the scene track
         clin = lambda x: x["category"] == "mvs" and x["tier"] == "clinical"  # noqa: E731
-        groups = [
-            ("Number in the variant name is the author residue number",
-             lambda x: x["difficulty"].get("number_in_name_as_author_number_is_right") is True),
-            ("Number in the variant name is **not** the author residue number",
-             lambda x: x["difficulty"].get("number_in_name_as_author_number_is_right") is False),
-            ("Target residue numbered as in UniProt",
-             lambda x: x["difficulty"].get("needs_offset") is False),
-            ("Target residue numbered differently from UniProt",
-             lambda x: x["difficulty"].get("needs_offset") is True),
-            ("Helix or strand requested (reported apart)",
-             lambda x: x.get("family") in CLINICAL_SSE)]
-        with_pack = [m for m in panel if (GROUNDED, m) in r.cards]
-        rows = []
-        for label, test in groups:
-            both_ = lambda x, t=test: clin(x) and t(x)  # noqa: E731
-            its, su = panel_mean(both_)
-            if not its:
+        face = lambda want: (lambda x: x["difficulty"].get(                # noqa: E731
+            "number_in_name_as_author_number_is_right") is want)
+        offset = lambda want: (lambda x: x["difficulty"].get("needs_offset") is want)  # noqa: E731
+        # matched tasks: one variant, named in UniProt numbering, on a structure with an
+        # offset and on a predicted structure without one
+        with_offset, without = set(), set()
+        for t in r.tasks.values():
+            x = (difficulty_mod.source_provenance(t).get("clinical") or {})
+            other = r.tasks.get((x.get("pair") or {}).get("with"))
+            if t["track"] != "mvs" or t.get("paraphrase_of") or not other:
                 continue
-            pack = panel_mean(both_, cond=GROUNDED, only=with_pack)[1] if with_pack else None
-            rows.append([label, len(its), f3(su), f3(panel_mean(both_, "target_f1")[1]), f3(pack)])
-        if rows:
-            self.add("table_final_clinical",
-                     f"Clinical tier on the scene track, by what the request demands ({about})",
-                     md_table(["Clinical tasks (scene track)", "Tasks", "Task success", "Target score",
-                               "Task success with grounding pack"], rows),
-                     "Strict, mean over models. The grounding pack states the residue the "
-                     "variant maps to, so the last column is an upper bound: the lookup done "
-                     "and its result handed over.")
+            d1 = x["difficulty"]
+            d2 = (difficulty_mod.source_provenance(other).get("clinical") or {}).get("difficulty") or {}
+            if (bool(d1["needs_numbering_offset"]) != bool(d2.get("needs_numbering_offset"))
+                    and not d1.get("name_in_mature_numbering")):
+                (with_offset if d1["needs_numbering_offset"] else without).add(t["id"])
+        with_pack = [m for m in panel if (GROUNDED, m) in r.cards]
+        columns = [("target_f1", HEADLINE, None), ("success", HEADLINE, None)]
+        columns += [("target_f1", GROUNDED, with_pack), ("success", GROUNDED, with_pack)] if with_pack else []
 
-        # Table 10: follow-up turns and requests with several right answers
+        def cells(test) -> list[list]:
+            both_ = lambda x: clin(x) and test(x)  # noqa: E731
+            return [self.panel_values(cond, both_, field, only) for field, cond, only in columns]
+
+        def clinical_row(label: str, test) -> list | None:
+            got = cells(test)
+            if not got[0]:
+                return None
+            return [label, len(got[0])] + [f3(mean(v for _, v in its)) for its in got] \
+                + ["–"] * (4 - len(got))
+        rows = [clinical_row("**Copying the number**: copying is right", face(True)),
+                clinical_row("**Copying the number**: copying is wrong", face(False))]
+        if all(rows):
+            a, b = cells(face(True)), cells(face(False))
+            rows.append(["Difference between these two rows (95% interval)", ""]
+                        + [signed(mean(v for _, v in x) - mean(v for _, v in y))
+                           + ci(self.boot.joint_diff_ci(x, y, f"final|clin|{k}"), signed)
+                           if x and y else "–" for k, (x, y) in enumerate(zip(a, b))]
+                        + ["–"] * (4 - len(a)))
+        rows += [clinical_row("**Offset** (for description only): no offset", offset(False)),
+                 clinical_row("**Offset**: offset", offset(True)),
+                 clinical_row("Matched tasks named in UniProt numbering, structure with an offset "
+                              "(copying is wrong)", lambda x: x["id"] in with_offset),
+                 clinical_row("The same variants on the predicted structure, without an offset "
+                              "(copying is right)", lambda x: x["id"] in without),
+                 clinical_row("Helix or strand requested (a subset, reported apart)",
+                              lambda x: x.get("family") in CLINICAL_SSE)]
+        rows = [row for row in rows if row]
+        if rows:
+            emit("table_final_clinical",
+                 f"Clinical tasks on the scene track, grouped by whether copying the number is right ({about})",
+                 md_table(["Clinical tasks (scene track)", "Tasks", "Target score (the primary score here)",
+                           "Task success rate", "Target score with grounding pack",
+                           "Task success rate with grounding pack"], rows))
+
+        # Table 11: follow-up turns and requests with several right answers
         def noop(x: dict) -> bool:
             return bool(((r.task(x) or {}).get("context") or {}).get("noop"))
         groups = [("Follow-up turns that need a change", lambda x: x["tier"] == "followup" and not noop(x)),
@@ -1525,25 +1613,24 @@ class Tables:
             if row[1] or row[3]:
                 rows.append(row)
         if rows:
-            self.add("table_final_followup",
-                     f"Follow-up turns and requests with several right answers ({about})",
-                     md_table(["Group", "Scene track: tasks", "Scene track: task success",
-                               "Call-list track: tasks", "Call-list track: task success"], rows),
-                     "Task success, strict, mean over models.")
+            emit("table_final_followup",
+                 f"Follow-up turns and requests with several right answers ({about})",
+                 md_table(["Group", "Scene track: tasks", "Scene track: task success rate",
+                           "Call-list track: tasks", "Call-list track: task success rate"], rows))
 
-        # Table 11: the planned comparisons
+        # Table 12: the planned comparisons 1 to 6
         rows = []
 
-        def compare(label: str, tasks_cell, a: list, b: list, dci) -> None:
+        def compare(number: int, label: str, tasks_cell, a: list, b: list, dci) -> None:
             ma, mb = mean(v for _, v in a), mean(v for _, v in b)
             if ma is None or mb is None:
                 return
-            rows.append([label, tasks_cell, f3(ma), f3(mb), signed(mb - ma) + ci(dci, signed)])
+            rows.append([number, label, tasks_cell, f3(ma), f3(mb), signed(mb - ma) + ci(dci, signed)])
         pub = self.panel_values(HEADLINE, lambda x: x["split"] == "public")
         held = self.panel_values(HEADLINE, lambda x: x["split"] == "heldback")
-        compare("Public split against held-back split", f"{len(pub)} and {len(held)}", pub, held,
-                self.boot.diff_ci(held, pub, "final|split"))
-        for style in ("terse", "indirect"):
+        compare(1, "Tasks on the other structures against the set-aside split (both tracks; all tasks)",
+                f"{len(pub)} and {len(held)}", pub, held, self.boot.diff_ci(held, pub, "final|split"))
+        for number, style in ((2, "terse"), (3, "indirect")):
             # one row per request: a request asked on both tracks (a twin pair) is one
             # request, its value the mean of its two tasks
             by_request: dict[tuple, list] = {}
@@ -1564,10 +1651,12 @@ class Tables:
                 fa = statistics.fmean(v[1] for v in by_request[key])
                 fb = statistics.fmean(v[2] for v in by_request[key])
                 full.append((c, fa)), other.append((c, fb)), diff.append((c, fb - fa))
-            compare(f"Full wording against {style} wording", f"{len(full)} requests", full, other,
+            n_tasks = sum(len(v) for v in by_request.values())
+            compare(number, f"Full wording against {style} wording (both tracks)",
+                    f"{len(full)} requests ({n_tasks} tasks)", full, other,
                     self.boot.ci(diff, f"final|{style}"))
 
-        def conditions(label: str, cond: str, test=lambda x: True) -> None:
+        def conditions(number: int, label: str, cond: str, test=lambda x: True) -> None:
             ms = [m for m in panel if (cond, m) in r.cards]
             a, b, diff = [], [], []
             ids = sorted({i for m in ms for i, t in r.rows(cond, m).items()
@@ -1581,23 +1670,19 @@ class Tables:
                     c = got[0][0]["cluster"]
                     a.append((c, fa)), b.append((c, fb)), diff.append((c, fb - fa))
             if a:
-                compare(label.format(n=f"{len(ms)} model{'s' if len(ms) != 1 else ''}"), len(a), a, b,
+                compare(number, label.format(n=f"{len(ms)} model{'s' if len(ms) != 1 else ''}"), len(a), a, b,
                         self.boot.ci(diff, f"final|{cond}"))
-        conditions("Format reference against format reference plus JSON mode ({n})",
+        conditions(4, "Main against main + JSON mode (models that offer it; both tracks)",
                    "spec_structured")
-        conditions("Format reference against format reference plus grounding pack "
-                   "(lookup tiers, scene track)", GROUNDED, is_track("mvs"))
-        conditions("Format reference against no format reference ({n}, scene track)",
-                   "bare", is_track("mvs"))
+        conditions(5, "Main against main + grounding pack (name-resolution and clinical "
+                   "categories, scene track)", GROUNDED, is_track("mvs"))
+        conditions(6, "Main against no format guide ({n}, scene track)", "bare", is_track("mvs"))
         if rows:
-            self.add("table_final_robustness", f"Planned comparisons ({about})",
-                     md_table(["Comparison", "Tasks", "Task success, first group",
-                               "Task success, second group", "Difference (95% interval)"], rows),
-                     "Task success, strict, mean over the models that ran both sides. The "
-                     "difference is second minus first; its interval resamples structures (the "
-                     "two splits share none, so each side is resampled on its own; elsewhere "
-                     "the per-task difference is resampled). No interval where fewer than two "
-                     "structures are on a side.")
+            emit("table_final_robustness", f"Planned comparisons 1 to 6 ({about})",
+                 md_table(["", "Comparison", "Tasks", "Task success rate, first group",
+                           "Task success rate, second group", "Difference (95% interval)"],
+                          rows, "rlrrrr"),
+                 "The difference is the second group minus the first.")
         if pilot and not r.mock:        # a dry run of the pilot carries the mock banner
             for name in [n for n in self.tables if n.startswith("table_final_")]:
                 self.tables[name] = PILOT_BANNER + "\n\n" + self.tables[name]
@@ -1722,8 +1807,8 @@ def copy_into_paper(tables: Tables, generated: pathlib.Path) -> list[str]:
     missing = [n for n in PAPER_TABLES if n not in tables.tables]
     if missing:
         raise SystemExit("the run did not produce: " + ", ".join(missing))
-    for name in PAPER_TABLES:
-        (generated / f"{name}.md").write_text(tables.tables[name].rstrip() + "\n", encoding="utf-8")
+    for name in PAPER_TABLES:       # the table alone: the paper's own caption stands above it
+        (generated / f"{name}.md").write_text(tables.paper[name].rstrip() + "\n", encoding="utf-8")
     return list(PAPER_TABLES)
 
 

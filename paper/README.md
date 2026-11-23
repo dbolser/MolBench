@@ -57,9 +57,10 @@ result tables), then the three commands above.
 
 ## What the final run has to write
 
-`scripts/paper_tables.py` should write these files into `generated/`; each replaces the
-shape table of the same name, and the captions in `sections/07_results.md` already define every
-column:
+`scripts/paper_tables.py --from-run results/final-v1 --into-paper` writes these files into
+`generated/` (`Tables.final` in `molbench/analysis.py`; a dry run, a pilot and an incomplete
+run are refused). Each replaces the shape table of the same name and has its columns and row
+labels, which a test holds; the captions in `sections/07_results.md` define every column:
 
 `table_final_leaderboard_scene.md`, `table_final_leaderboard_calls.md`, `table_final_tiers.md`,
 `table_final_paired.md`, `table_final_clinical.md`, `table_final_followup.md`,
