@@ -340,7 +340,121 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
         if len(x["variants"]) > 1 or x.get("secondary_structure"):
             assert y["needs_numbering_offset"] and not y["number_in_name_as_author_number_is_right"], x
     assert V["clin.n_multi"] == n - V["clin.n_one_variant"]
+    clinical_details(V, clin, by_id)
+    pairs_and_followup_details(V, orig, twins, hide)
     return {"orig": orig, "para": para, "by_id": by_id, "used": used}
+
+
+def clinical_details(V: dict, clin: list[dict], by_id: dict) -> None:
+    """Facts of the clinical category that Section 3.3.1 states in words or in small counts."""
+    c = [t["provenance"]["clinical"] for t in clin]
+    d = [x["difficulty"] for x in c]
+    # Requests without an accession: a name with "p." (UniProt numbering) or a traditional name.
+    no_acc = [x for x in c if not x["difficulty"]["accession_in_prompt"]]
+    V["clin.n_no_accession_traditional"] = sum(bool(x["difficulty"]["name_in_mature_numbering"]) for x in no_acc)
+    V["clin.n_no_accession_uniprot"] = len(no_acc) - V["clin.n_no_accession_traditional"]
+    assert all(x["naming"] == "legacy" for x in c if x["difficulty"]["name_in_mature_numbering"])
+    assert all(v["name_in_prompt"].startswith("p.") for x in c for v in x["variants"] if x["naming"] != "legacy")
+    # What the traditional numbering leaves out, as each request says it.
+    kinds = collections.Counter()
+    for t, x in zip(clin, c):
+        if not x["difficulty"]["name_in_mature_numbering"]:
+            continue
+        assert len(x["variants"]) == 1 and "mature-protein numbering" in t["prompt"]
+        what = x["variants"][0]["mature_numbering"]["what"]
+        assert what in t["prompt"]
+        kinds["init_met" if what == "the initiator methionine"
+              else "signal_propeptide" if what.endswith("signal peptide and propeptide")
+              else "signal" if what.endswith("signal peptide") else what] += 1
+    assert set(kinds) == {"init_met", "signal", "signal_propeptide"}, kinds
+    for k, v in kinds.items():
+        V[f"clin.n_traditional_{k}"] = v
+    # The traditional name asked on a predicted structure (Table 2, top right).
+    odd = [(t, x) for t, x in zip(clin, c) if x["difficulty"]["name_in_mature_numbering"]
+           and not x["difficulty"]["needs_numbering_offset"]]
+    assert len(odd) == V["clin.n_face_wrong_no_offset"] == 1 and odd[0][1]["difficulty"]["alphafold_model"]
+    V["clin.traditional_on_predicted.name"] = odd[0][1]["variants"][0]["name_in_prompt"]
+    V["clin.traditional_on_predicted.hgvs"] = odd[0][1]["variants"][0]["hgvs"]
+    assert odd[0][1]["gene"] == "HBB"            # the text says "haemoglobin beta"
+    # Box 1 gives one example of each thing that a traditional numbering leaves out.
+    by_gene = {x["gene"]: x["variants"][0]["mature_numbering"] for x in c if x["difficulty"]["name_in_mature_numbering"]}
+    assert by_gene["HBB"]["what"] == "the initiator methionine"
+    assert by_gene["F9"]["what"].endswith("signal peptide and propeptide")
+    V["clin.f9_removed"] = by_gene["F9"]["removed"]
+    # The sign of the offset: the UniProt number is never the smaller one.
+    assert all(o <= 0 for y in d for o in y["author_minus_uniprot"])
+    # Several copies of the protein in the entry: the request says which are meant.
+    several = [(t, x) for t, x in zip(clin, c) if x["difficulty"]["protein_copies_in_structure"] > 1]
+    V["clin.n_several_copies"] = len(several)
+    V["clin.n_every_chain"] = sum(x["scope"] == "all" for _, x in several)
+    V["clin.n_one_chain"] = sum(x["scope"] == "chain" for _, x in several)
+    assert all(("every chain that has" in t["prompt"]) == (x["scope"] == "all") for t, x in several)
+    assert all("only" in t["prompt"] for t, x in several if x["scope"] == "chain")
+    assert all(x["scope"] == "all" and "every chain" not in t["prompt"] for t, x in zip(clin, c)
+               if x["difficulty"]["protein_copies_in_structure"] == 1)
+    assert all(len(v["residues"]) == x["difficulty"]["protein_copies_in_structure"]
+               for _, x in several if x["scope"] == "all" for v in x["variants"])
+    # The three wordings.
+    assert all(re.search(r"\b(it replaces|they replace|replaced by|wild-type residues? at the positions? of)", t["prompt"])
+               for t in clin)
+    # The matched sets in which both structures are numbered alike: p53, no offset on either.
+    same = [t for t in clin if (p := t["provenance"]["clinical"].get("pair"))
+            and bool(t["provenance"]["clinical"]["difficulty"]["needs_numbering_offset"])
+            == bool(by_id[p["with"]]["provenance"]["clinical"]["difficulty"]["needs_numbering_offset"])]
+    assert len(same) == 2 * V["clin.n_same_numbering_pairs"]
+    assert all(t["provenance"]["clinical"]["gene"] == "TP53"
+               and not t["provenance"]["clinical"]["difficulty"]["needs_numbering_offset"] for t in same)
+    # Review status of the variants asked about: the best-reviewed record that the task cites.
+    rank = ["no assertion criteria provided", "criteria provided, single submitter",
+            "criteria provided, multiple submitters, no conflicts", "reviewed by expert panel", "practice guideline"]
+    best = {}
+    for x in c:
+        for v in x["variants"]:
+            best[(x["gene"], v["variant"])] = max(v["clinvar_review_status"], key=rank.index)
+    count = collections.Counter(best.values())
+    assert len(best) == V["clin.n_variants"]
+    for key, status in zip(("none", "single", "multiple", "expert", "guideline"), rank):
+        V[f"clin.review.{key}"] = count[status]
+    assert V["clin.review.none"] == 1          # lysozyme p.Ile74Thr, the exception of Section 3.1
+    V["clin.review.expert_or_guideline"] = V["clin.review.expert"] + V["clin.review.guideline"]
+    # Well-known variants that the generator tries first (a list written by hand in the script).
+    import ast
+    src = (REPO / "scripts/generate_clinical_tasks.py").read_text(encoding="utf-8")
+    featured = ast.literal_eval(re.search(r"^FEATURED = (\{.*?\})\n", src, flags=re.M | re.S).group(1))
+    panel_acc = {p["accession"] for p in jload(REPO / "data/panel/panel.json")["disease_proteins"]}
+    V["clin.n_featured_proteins"] = len(set(featured) & panel_acc)
+    gene_of = {p["accession"]: p["gene"] for p in jload(REPO / "data/panel/panel.json")["disease_proteins"]}
+    V["clin.featured_list"] = "; ".join(
+        f"*{gene_of[a]}* " + ", ".join("p." + v for v in vs)
+        for a, vs in sorted(featured.items(), key=lambda kv: gene_of.get(kv[0], "")) if a in gene_of)
+    assert "E7V" in featured["P68871"]         # the text gives HBB p.Glu7Val as the example
+
+
+def pairs_and_followup_details(V: dict, orig: list[dict], twins: list[dict], hide: list[dict]) -> None:
+    """Pairs whose call list switches off part of the default view, pairs without a target
+    score, and follow-up tasks that need no change (Sections 3.3, 3.4, 4.2 and 5.4)."""
+    # The reference call list switches off part of the default view. Where the request asks
+    # for it, the call is needed; where it does not, the list without the call is accepted too.
+    optional = [t for t in hide if t["accepted"]]
+    V["corpus.twins.hide_optional"] = len(optional)
+    V["corpus.twins.hide_required"] = len(hide) - len(optional)
+    assert {t["family"] for t in optional} == {"tr-rep-word", "tr-surface"}
+    assert not {t["family"] for t in hide if not t["accepted"]} & {"tr-rep-word", "tr-surface"}
+    assert V["corpus.twins.hide_example"] in {" ".join(t["prompt"].split()) for t in hide if not t["accepted"]}
+    assert all(t["tier"] != "followup" for t in hide)       # "a first request, not a follow-up"
+    # Pairs without a target score: what their edits are.
+    fam = collections.Counter(t["family"] for t in twins if t.get("target") is None)
+    assert set(fam) == {"fu-background", "fu-hide-water", "fu-noop-hidden", "fu-noop-shown"}, fam
+    V["corpus.twins.no_target.background"] = fam["fu-background"]
+    V["corpus.twins.no_target.hide_water"] = fam["fu-hide-water"]
+    V["corpus.twins.no_target.noop"] = fam["fu-noop-hidden"] + fam["fu-noop-shown"]
+    # Follow-up tasks whose right answer is the start state.
+    noop = [t for t in orig if t["tier"] == "followup" and (t.get("context") or {}).get("noop")]
+    spin = [t for t in noop if t["family"] == "fu-noop-spin"]
+    assert all(t["track"] == "mvs" for t in spin) and all(t["family"].startswith("fu-noop-") for t in noop)
+    V["corpus.followup.noop_spin"] = len(spin)
+    q = min((t for t in noop if t["family"] == "fu-noop-hidden"), key=lambda t: (len(t["prompt"]), t["id"]))
+    V["corpus.followup.noop_example"] = " ".join(q["prompt"].split())
 
 
 def clinical_groupings_table(V: dict) -> str:
@@ -534,6 +648,23 @@ def controls_values(V: dict) -> dict:
     V["controls.viewer.mvs.probe_agree"] = m["rule_probes"]["agree"]
     V["controls.viewer.pdbe_molstar"] = a["pdbe_molstar"]
     V["controls.viewer.api.lists"] = a["lists_run"]
+    # The record counts call lists, not controls. Each control of the sample has two lists;
+    # a list is replayed unless it selects by UniProt number or cannot be run. So the lists
+    # that were replayed or could not be run come from at least half as many controls.
+    V["controls.viewer.api.min_controls"] = -(-(a["lists_run"] + a.get("not_runnable", 0)) // 2)
+    # How many controls the sample held is not in the record. ``--viewer-sample`` works it out
+    # from the control set as committed with the record and the fixed order in which the check
+    # takes controls; the result is kept in generated/viewer_sample.json and must fit the record.
+    vs = jload(GEN / "viewer_sample.json")
+    assert vs["lists_replayed"] == a["lists_run"] and vs["lists_not_runnable"] == a.get("not_runnable", 0)
+    assert 2 * vs["controls_in_sample"] - vs["lists_selecting_by_uniprot"] == a["lists_run"] + a.get("not_runnable", 0)
+    V["controls.viewer.api.sample"] = vs["controls_in_sample"]
+    V["controls.viewer.api.n_at_check"] = vs["controls_at_check"]
+    V["controls.viewer.api.kinds_at_check"] = vs["kinds_at_check"]
+    V["controls.viewer.api.sample_share"] = pct(vs["controls_in_sample"], vs["controls_at_check"])
+    V["controls.viewer.api.sample_lists"] = 2 * vs["controls_in_sample"]
+    V["controls.viewer.api.skipped_uniprot"] = vs["lists_selecting_by_uniprot"]
+    V["controls.viewer.api.n_added_since"] = V["controls.api.n_controls"] - vs["controls_at_check"]
     # Each control has two call lists (reference and answer); the replay record counts lists.
     ents = {tr: {json.loads(line)["entry"] for line in (REPO / f"tests/controls/{tr}.jsonl").open(encoding="utf-8")}
             for tr in ("mvs", "api")}
@@ -562,6 +693,48 @@ def controls_values(V: dict) -> dict:
     V["colour.oct.inexact"] = V["colour.oct.n_comparable"] - oc["exact"]
     V["colour.oct.closest_inexact"] = min(x["distance"] for x in oc["closest_inexact"])
     return s
+
+
+def viewer_sample() -> dict:
+    """The size of the sample of call-list controls that was replayed in the viewer.
+
+    ``tests/controls/viewer_check.json`` records the number of call lists replayed, not the
+    number of controls. The check (``viewer_check_api`` in ``scripts/grader_controls.py``)
+    takes controls in a fixed order, one from each kind in turn, up to a number N given on
+    the command line; of the two call lists of each control it leaves out those that select
+    by UniProt number. So N is the number for which that order, applied to the control set
+    as committed together with the record, gives exactly the recorded count of lists. Needs
+    the git history; the result is committed, so the build does not.
+    """
+    import subprocess
+    git = lambda *a: subprocess.run(["git", "-C", str(REPO), *a], check=True, capture_output=True,  # noqa: E731
+                                    text=True).stdout
+    commit = git("log", "-1", "--format=%H", "--", "tests/controls/viewer_check.json").strip()
+    record = json.loads(git("show", f"{commit}:tests/controls/viewer_check.json"))["api"]
+    controls = [json.loads(line) for line in git("show", f"{commit}:tests/controls/api.jsonl").splitlines()]
+    by_kind: dict[str, list[dict]] = {}
+    for c in controls:
+        by_kind.setdefault(c["kind"], []).append(c)
+    order = [by_kind[k][i] for i in range(max(len(v) for v in by_kind.values()))
+             for k in sorted(by_kind) if i < len(by_kind[k])]
+
+    def left_out(actions):
+        return (any("uniprot_accession" in p for a in actions for p in a.get("data", []) or [] if isinstance(p, dict))
+                or any("custom_data" in a for a in actions))
+
+    want = record["lists_run"] + record.get("not_runnable", 0)
+    fits, kept = [], 0
+    for n, c in enumerate(order, 1):
+        kept += sum(not left_out(c[side]) for side in ("reference", "prediction"))
+        if kept == want:
+            fits.append(n)
+    assert len(fits) == 1, f"the sample size is not determined by the record: {fits}"
+    n = fits[0]
+    return {"what": "sample of call-list controls replayed in PDBe Mol*, worked out by paper/corpus_values.py "
+                    "--viewer-sample from the record and the control set of the same commit",
+            "commit": commit, "controls_at_check": len(controls), "kinds_at_check": len(by_kind),
+            "controls_in_sample": n, "lists_selecting_by_uniprot": 2 * n - want,
+            "lists_replayed": record["lists_run"], "lists_not_runnable": record.get("not_runnable", 0)}
 
 
 def si_controls_table(s: dict) -> str:
@@ -618,6 +791,7 @@ def october_values(V: dict) -> None:
     xs = [m["valid"] / m["n"] for m in by_model.values()]
     ys = [m["new_f1"] for m in by_model.values()]
     V["oct.spec.r_valid_f1"] = round(statistics.correlation(xs, ys), 3)
+    V["oct.spec.r_valid_success"] = round(statistics.correlation(xs, [m["success"] for m in by_model.values()]), 3)
     V["oct.spec.valid_share"] = round(V["oct.spec.n_valid"] / V["oct.spec.n"], 4)
     V["oct.spec.valid_share_min"], V["oct.spec.valid_share_max"] = round(min(xs), 4), round(max(xs), 4)
     vf = sorted(m["valid_only"]["new_f1"] for m in by_model.values())
@@ -696,7 +870,6 @@ def pilot_values(V: dict) -> None:
 
 def study_values(V: dict) -> None:
     """Design numbers of the second rating study, read from its design note."""
-    import re
     text = (PAPER / "a4/FINAL_CALL.md").read_text(encoding="utf-8")
     V["study.n_pairs"] = int(re.search(r"\*\*Size: (\d+) judged pairs", text).group(1))
     V["study.n_grader_check_pairs"] = int(re.search(r"small grader check \((\d+) pairs", text).group(1))
@@ -734,6 +907,15 @@ def plan_values(V: dict) -> list[dict]:
     V["plan.n_json_mode_models"] = sum(x.get("structured") not in (None, "none") for x in core)
     V["plan.core_without_json_mode"] = ", ".join(short(x["id"]) for x in core if x.get("structured") in (None, "none"))
     V["plan.core_models"] = ", ".join(short(x["id"]) for x in core)
+    # The same list by weights, each model with the company that publishes it.
+    developer = {"anthropic": "Anthropic", "deepseek": "DeepSeek", "google": "Google", "openai": "OpenAI",
+                 "meta-llama": "Meta", "minimax": "MiniMax", "mistralai": "Mistral AI", "moonshotai": "Moonshot AI",
+                 "nvidia": "NVIDIA", "qwen": "Alibaba", "z-ai": "Z.ai", "x-ai": "xAI"}
+    def named(x):
+        slug = x["id"].split("/")[0] if "/" in x["id"] else x["route"].split(":")[0]
+        return f"{short(x['id'])} ({developer[slug]})"
+    V["plan.core_models_closed"] = ", ".join(named(x) for x in core if not x["open_weights"])
+    V["plan.core_models_open"] = ", ".join(named(x) for x in core if x["open_weights"])
     V["plan.n_optional_json_mode"] = sum(x.get("structured") not in (None, "none") for x in opt)
     assert V["plan.n_optional_json_mode"] == len(opt)     # the text says "each optional model that is run"
     # The system prompts as sent, in words (no tokenizer is used: token counts differ by model).
@@ -770,13 +952,13 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     head = ("| Model | Weights | Valid answers | Task success rate (strict) | Target score (strict) | F1 (strict) "
             "| Task success rate, valid-only | Target score, valid-only | All-3 rate | Cost (USD) |\n"
             "|:-------|:---|---:|---:|---:|---:|---:|---:|---:|---:|\n")
-    # The review draft shows the first rows; the final table has one row per model (SI Table S6).
+    # The review draft shows the first rows; the final table has one row per model (SI Table S7).
     shown = 3
     body = "".join(f"| {n} | {w} | {P} | {P} | {P} | {P} | {P} | {P} | {P} | {P} |\n"
                    for n, w in list(zip(names, weights))[:shown])
     n_core = sum(not x.get("optional") for x in models)
     body += (f"| … {n_core - shown} further rows for the other core models and up to {len(names) - n_core} "
-             f"for the optional models (SI Table S6) | | {P} | | | | | | | |\n")
+             f"for the optional models (SI Table S7) | | {P} | | | | | | | |\n")
     out["shape_leaderboard.md"] = head + body
     tiers = ("| Category | Tasks | Structures | Task success rate (strict) | Target score (strict) | F1 (strict) "
              "| Task success rate, valid-only | Target score, valid-only |\n"
@@ -815,18 +997,19 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     s3 = V["plan.samples"]
     assert s3 == 3      # "at least 2 of the 3 answers" is written out here and in the text
     out["shape_paired.md"] = (
-        paired(f"Table 9a. Right = target-right (primary); at least 2 of the {s3} answers. The "
-               f"{V['corpus.twins.n_with_target']} pairs that have a target score.", V["corpus.twins.n_with_target"])
+        paired(f"Table 9a. Primary comparison. A side is right when at least 2 of its {s3} answers are "
+               f"target-right. The {V['corpus.twins.n_with_target']} pairs that have a target score.",
+               V["corpus.twins.n_with_target"])
         + "\n"
-        + paired(f"Table 9b. Right = task success (secondary); at least 2 of the {s3} answers. All "
-                 f"{V['corpus.n_twin_pairs']} pairs.", V["corpus.n_twin_pairs"]))
+        + paired(f"Table 9b. Secondary comparison. A side is right when at least 2 of its {s3} answers are "
+                 f"task successes. All {V['corpus.n_twin_pairs']} pairs.", V["corpus.n_twin_pairs"]))
     out["shape_robustness.md"] = (
         "| | Comparison | Tasks | Task success rate, first group | Task success rate, second group | Difference (95% interval) |\n"
         "|---:|:--------------------|---:|---:|---:|---:|\n"
         f"| 1 | Public split against held-back split (both tracks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
         f"| 2 | Full wording against terse wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
         f"| 3 | Full wording against indirect wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
-        f"| 4 | Main against main + JSON mode (the models that offer it: {V['plan.n_json_mode_models']} of the {V['plan.n_core_models']} core models and each optional model that is run; 1 answer per task in JSON mode) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| 4 | Main against main + JSON mode (the models that offer it: {V['plan.n_json_mode_models']} of the {V['plan.n_core_models']} core models and each optional model that is run; one answer per task in JSON mode) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
         f"| 5 | Main against main + grounding pack (name-resolution and clinical categories, scene track) "
         f"| {V['corpus.mvs.resolve.n'] + V['corpus.mvs.clinical.n']} | {P} | {P} | {P} |\n"
         f"| 6 | Main against no format guide ({V['plan.n_bare_models']} models, scene track) "
@@ -910,6 +1093,9 @@ def example_values(V: dict, by_id: dict) -> dict:
     V["ex.n_clinvar_records"] = len(var["clinvar_vcv"])
     V["ex.clinvar_records"] = "; ".join(f"{k}, {recs[k]['title']}" for k in var["clinvar_vcv"])
     V["ex.clinvar_first_title"] = recs[var["clinvar_vcv"][0]]["title"]      # the change as ClinVar writes it
+    tm = re.fullmatch(r"(NM_[\d.]+)\(\w+\):(c\.(\d+)([ACGT])>([ACGT])) \(p\.\w+\)", V["ex.clinvar_first_title"])
+    V["ex.clinvar_transcript"], V["ex.clinvar_cdna"] = tm.group(1), tm.group(2)
+    V["ex.clinvar_cdna_position"], V["ex.clinvar_cdna_from"], V["ex.clinvar_cdna_to"] = int(tm.group(3)), tm.group(4), tm.group(5)
     assert all(cl["gene"] in recs[k]["genes"] and f"({var['hgvs']})" in recs[k]["title"] for k in var["clinvar_vcv"])
     V["ex.clinvar_classification"] = var["clinvar_classification"][0].lower()
     assert len(set(var["clinvar_classification"])) == 1 and len(set(var["clinvar_review_status"])) == 1
@@ -935,7 +1121,6 @@ def example_values(V: dict, by_id: dict) -> dict:
     V["ex.rep"], V["ex.color"] = rep_words, cl["look"]["color"]
     V["ex.rep_short"], V["ex.rep_scene"] = api_rep, cl["look"]["rep"]
     assert f"{V['ex.color']} {rep_words}" in m["prompt"], "the request does not state the look in these words"
-    import re
     rng = re.search(r"UniProt (\d+)-(\d+) = auth (\d+)-(\d+)", m["grounding"]["text"])
     V["ex.map_uniprot_first"], V["ex.map_uniprot_last"] = int(rng.group(1)), int(rng.group(2))
     V["ex.map_auth_first"], V["ex.map_auth_last"] = int(rng.group(3)), int(rng.group(4))
@@ -1163,7 +1348,14 @@ def build() -> tuple[dict, dict[str, str]]:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--check", action="store_true", help="write nothing; exit 1 if a file is stale")
+    ap.add_argument("--viewer-sample", action="store_true",
+                    help="work out the size of the viewer sample of call-list controls from the git history "
+                         "and write generated/viewer_sample.json")
     args = ap.parse_args(argv)
+    if args.viewer_sample:
+        (GEN / "viewer_sample.json").write_text(json.dumps(viewer_sample(), indent=1) + "\n", encoding="utf-8")
+        print(f"wrote {(GEN / 'viewer_sample.json').relative_to(REPO)}")
+        return 0
     V, files = build()
     stale = [n for n, text in files.items()
              if not (GEN / n).exists() or (GEN / n).read_text(encoding="utf-8") != text]

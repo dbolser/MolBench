@@ -3,7 +3,7 @@
 The final run is defined by one manifest file in the repository. Its contents, in words:
 
 - **Corpus.** Version `{{plan.corpus_version}}` ⟦PENDING: corpus freeze — final version tag and hash⟧.
-- **Answers.** {{plan.samples}} per task, model and condition (1 in the JSON-mode condition);
+- **Answers.** {{plan.samples:word}} per task, model and condition (one in the JSON-mode condition);
   no temperature is sent, so each provider's default applies. Limit on the length of an answer:
   {{plan.max_tokens:,}} tokens. Models that write reasoning text before the answer, which the
   user does not see, get {{plan.reasoning_max_tokens:,}} tokens for reasoning and answer
@@ -15,7 +15,7 @@ The final run is defined by one manifest file in the repository. Its contents, i
   and stops if spending would pass it. Costs are list prices on the day of the run.
 - **Validation.** Every parsed scene is validated by Mol\* 5.9.0.
 
-**Table S6. The models.** *Set*: core, or optional (run only if decided so before the run,
+**Table S7. The models.** *Set*: core, or optional (run only if decided so before the run,
 from the projected cost; marked † in the paper). Identifiers are given as the provider or
 the routing service lists them; the paper uses the part after the slash. *Provider*: the company that publishes the model, as the identifier or the route names it. *Weights*: open if the model's weights can be downloaded, closed if the model can be used only through a provider's service. *Hidden
 reasoning*: by default the model first writes reasoning text that the user does not see; the

@@ -37,20 +37,20 @@
 <text x="10" y="348" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Per model, every pair falls into one of four cells.</text>
 <text x="10" y="364" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">A side is right when at least 2 of its 3 answers are</text>
 <text x="10" y="377" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">target-right. Counted over the 250 pairs that have a</text>
-<text x="10" y="390" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">target score; repeated with task success over all 258</text>
-<text x="10" y="403" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">pairs.</text>
-<text x="379.0" y="340" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">call list right</text>
-<text x="501.0" y="340" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">call list wrong</text>
-<rect x="318" y="346" width="122" height="30" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="379.0" y="365" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">both right</text>
-<rect x="440" y="346" width="122" height="30" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="501.0" y="365" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right in scene only</text>
-<rect x="318" y="376" width="122" height="30" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="379.0" y="395" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right in call list only</text>
-<rect x="440" y="376" width="122" height="30" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="501.0" y="395" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">both wrong</text>
-<text x="570" y="365" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">scene right</text>
-<text x="570" y="395" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">scene wrong</text>
-<text x="440" y="424" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">McNemar&#x27;s test compares the two shaded cells</text>
-<text x="440" y="437" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">(right in one format only).</text>
+<text x="10" y="390" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">target score; repeated with task success over all</text>
+<text x="10" y="403" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">258 pairs.</text>
+<text x="361.0" y="340" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">call list right</text>
+<text x="503.0" y="340" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">call list wrong</text>
+<rect x="290" y="346" width="142" height="30" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="361.0" y="365" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right on both sides</text>
+<rect x="432" y="346" width="142" height="30" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="503.0" y="365" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right in the scene only</text>
+<rect x="290" y="376" width="142" height="30" rx="0" fill="#fdf0d5" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="361.0" y="395" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right in the call list only</text>
+<rect x="432" y="376" width="142" height="30" rx="0" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="503.0" y="395" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right on neither side</text>
+<text x="582" y="365" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">scene right</text>
+<text x="582" y="395" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">scene wrong</text>
+<text x="432" y="424" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">McNemar&#x27;s test compares the two shaded cells</text>
+<text x="432" y="437" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">(right in one format only).</text>
 </svg>

@@ -12,9 +12,33 @@ and *valid-only*. *Model* always means a language model. The repository's own gr
 document calls a style a *draw* and a category a *tier*; the rules are the same. Task identifiers are those of the task files; in them the endings `-mvs` and
 `-api` mark the scene track and the call-list track.
 
-Contents: S1, the running example in full · S2, all task templates · S3, the structure panel ·
-S4, grading rules and known limits · S5, the control set by kind · S6, the run manifest, models
-and prices · S7, the system prompts · S8, further tables of the pilot run.
+Contents: S0, background terms of structural biology · S1, the running example in full · S2,
+all task templates · S3, the structure panel and the variant list · S4, grading rules and
+known limits · S5, the control set by kind · S6, the run manifest, models and prices · S7,
+the system prompts · S8, further tables of the pilot run, and the trial of the rating study ·
+S9, further tables of the final run (pending).
+
+## S0. Background terms of structural biology
+
+For readers from outside structural biology. Box 1 of the paper defines the terms of
+sequences and variants (UniProt, ClinVar, transcript, missense variant, mature protein) and
+the terms of the corpus; Box 2 defines the terms of grading.
+
+**Table S0. Background terms.**
+
+| Term | Meaning |
+|:---------|:------------------------------|
+| Residue, chain | A protein is a chain of amino acids. One amino acid in the chain is a *residue*; residues are numbered along the chain. A structure file names each chain with a short identifier, often one letter. |
+| C-alpha | The central carbon atom of an amino acid, to which its side chain is attached. One C-alpha per residue traces the course of the chain. |
+| Polymer | The protein, DNA or RNA chains of a structure, as opposed to bound small molecules, ions and water. |
+| Structure, entry | A set of atom coordinates. An *entry* is one deposition in the Protein Data Bank (PDB), with a four-character identifier such as 2NWD; where an entry holds several coordinate sets we use the first. A *predicted structure* is one computed from the sequence; ours come from the AlphaFold Protein Structure Database. |
+| mmCIF | The file format of the PDB archive: tables of named columns, one row per atom in the table of atoms. |
+| Ligand, het group | A *ligand* is a small molecule bound to the protein. *Het group* is the older file term for any molecule in an entry that is not part of a polymer chain (a ligand, an ion, a water); each kind has an identifier of up to three characters, such as HEM for haem. |
+| Helix, strand | The two common local shapes of a protein chain. An entry records where each helix and each strand begins and ends. |
+| Disulfide bond | A link between the sulfur atoms of two cysteine residues. |
+| Representation | A way of drawing atoms: *cartoon* (a ribbon that traces the chain), *ball-and-stick*, *spacefill* (every atom as a full-size sphere), *surface*. |
+| Selection | The expression in an answer that picks atoms, for example "chain X, residue 64". |
+| Alternate positions | The same atom recorded at two or more positions, where the experiment saw a residue in more than one pose (the file calls these alternate conformers). |
 
 ## S1. The running example in full
 
@@ -27,9 +51,9 @@ for each DNA change that causes it: VCV000014376, NM_000239.3(LYZ):c.244T>C (p.T
 classification "pathogenic" and the review status
 "criteria provided, single submitter"; ClinVar's own field for the condition reads
 "not provided" on both. The entry 2NWD is human lysozyme at
-1.04 Å resolution; the target residue has 24 atoms
-(14 heavy atoms and 10 hydrogens, which this
-entry contains).
+1.04 Å resolution; the target residue has 24 atom records
+(14 non-hydrogen atoms and 10 hydrogens, which
+this entry contains).
 
 On the call-list track the viewer starts with the protein drawn as a cartoon. The reference
 sets `"color": null` on the residue, which leaves that cartoon as it was. Without that field
@@ -399,10 +423,19 @@ Counts of verified features in the panel: ligand 44, metal
 15, glycan 10, nucleic acid
 8, modified residue 8, haem
 7, insertion codes 7, membrane protein
-7. 29 structures contain alternate
-conformers and 13 contain hydrogens; the atom tables keep both.
-Structure files were retrieved on 2026-11-16; the checksum of each file is stored
-with the panel.
+7. Structure files were retrieved on 16 November 2026; the
+checksum of each file is stored with the panel.
+
+**Atom tables and mapping tables.** The atom table of a structure lists every atom record of
+the first coordinate set of its file. It keeps *alternate conformers*, the same atom recorded
+at two or more positions where the experiment saw a residue in more than one pose
+(29 structures have them), and hydrogen atoms, which many
+files omit (13 structures have them). A selection of a residue takes
+all of its atom records, as the viewer does. An author residue number is used together with
+its insertion code where there is one (7 entries have them).
+The mapping table holds the SIFTS correspondence between each observed residue and its
+UniProt position; it is read from the copy of the entry's file that PDBe distributes with the
+SIFTS mapping added, whereas the atom table is built from the archive file.
 
 **Table S3. The panel.** *Atoms*: atoms in the first coordinate set. *Author numbering differs
 from UniProt*: at least one observed residue has an author number that is not its UniProt
@@ -503,8 +536,9 @@ amino-acid change, so one amino-acid change can have several records.
 74 of the variants that we keep have more than one qualifying
 record.
 
-**Table S3b. The variant list in three steps.** Counts are of variants (amino-acid changes)
-removed and left. The tests 3a to 3c are applied in this order.
+**Table S4. The variant list in three steps.** Counts are of variants (amino-acid changes)
+removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper uses
+the same step numbers and gives step 3 as one step.
 
 | Step | Rule | Removed | Left |
 |:--|:----------------------------------|---:|---:|
@@ -521,7 +555,8 @@ describes that change alone, and states its assertion criteria.
 *Step 1.* The candidates come from UniProt's variant annotation of the
 27 proteins. The position is that of the UniProt canonical sequence.
 
-*Step 2.* UniProt's annotation can carry a pathogenic label where ClinVar's aggregate
+*Step 2.* We examined only the ClinVar records that UniProt cross-references for a variant;
+we did not search ClinVar itself. UniProt's annotation can carry a pathogenic label where ClinVar's aggregate
 classification does not; we observed this for 657 candidates
 (20%), most of which ClinVar classifies as "Conflicting
 classifications of pathogenicity" or "Uncertain significance". A candidate is kept only if a
@@ -555,6 +590,12 @@ the Christchurch variant). ClinVar's pathogenic record for it concerns a disorde
 lipids, while the variant is widely known for a reported protective effect in Alzheimer's
 disease, so a request that calls it pathogenic would mislead.
 
+*Well-known variants tried first.* Within the pool, the generator picks variants by seeded
+random choice. For 9 proteins a list written by hand before
+generation names well-known variants that are tried first, and used if they are in the pool
+(or are the exception above) and observed in the structure: *CFTR* p.G551D; *GBA1* p.N409S; *HBB* p.E7V; *HRAS* p.G12S; *LYZ* p.I74T; *SERPINA1* p.E366K; *SOD1* p.A5V; *TP53* p.R175H, p.R248Q, p.R273H; *TTR* p.V50M. The list
+decides which variant is asked about, never what the answer is.
+
 *Proteins without a task.* Tasks exist for 25 of the
 27 proteins. The other 2
 are, by gene name, CA2 and TPI1. For *TPI1* (triosephosphate isomerase)
@@ -568,8 +609,8 @@ on more than one structure, and 2 haemoglobin entries serve
 two proteins each, because they hold both the alpha and the beta chain.
 
 *Dates.* The variant lists and the classifications of step 2 were read from UniProt and
-ClinVar on 2026-11-12. The records were read again on
-2026-11-16, with their kind, gene, classification and review status; step
+ClinVar on 12 November 2026. The records were read again on
+16 November 2026, with their kind, gene, classification and review status; step
 3 and the wording of the requests rest on that second reading.
 
 ## S4. Grading rules in full
@@ -654,7 +695,8 @@ start state returned unchanged.
 A task may list further right answers. An answer is graded against the reference and each of
 them, and the best result counts (a success first, then the highest F1). A name-resolution
 task lists the entries that match the named protein. The list was frozen on
-2026-11-13 from the web services of the RCSB PDB: it holds every current PDB entry
+13 November 2026 from the web services of the RCSB PDB (the US member site of the
+Protein Data Bank): it holds every current PDB entry
 in which a chain is aligned to the UniProt accession of the named protein over at least
 50 residues in total, or over at least half of the UniProt sequence if
 that is shorter. Where the request names several proteins, a ligand or bound DNA, the entry
@@ -710,7 +752,7 @@ mapping from the structure file that PDBe distributes.
 
 ### S4.7 Outcomes
 
-**Table S4. The outcome of an answer and how it is scored.** *As graded*: the answer receives
+**Table S5. The outcome of an answer and how it is scored.** *As graded*: the answer receives
 the scores that the grader computes. Strict averages count every answer with the score in the
 last column; valid-only averages count the answers with outcome "valid". *Class*: the three
 classes of Section 4.4 of the paper. An answer that was cut off at the token limit gets the
@@ -722,7 +764,8 @@ tables.
 | both | invalid JSON | unshowable | the answer contains no parseable JSON of the right outer shape | 0 |
 | scene | not a scene | unshowable | JSON, but not a scene tree | 0 |
 | scene | rejected by the viewer | unshowable | a scene tree that the validation of Mol\* 5.9.0 rejects | 0 |
-| scene | valid | valid | Mol\* accepts the scene | as graded |
+| scene | structure failed to load | unshowable | a well-formed scene that names a file which Mol\* cannot load: a web page in place of a structure file, a file on an unknown host, or a file read in the wrong format | 0 |
+| scene | valid | valid | Mol\* accepts the scene and can load its file | as graded (0 on every score if the entry is not one that the task accepts) |
 | call list | not valid | schema-breaking | a JSON list that breaks the call schema (unknown call, wrong field type) | as graded: the replay ignores what the viewer would ignore |
 | call list | valid | valid | a call list that fits the schema | as graded |
 
@@ -778,20 +821,26 @@ the verdict. The other 140 are of kinds that cannot be read back
 (camera target, label text, colouring by chain, assembly, another entry).
 80 scene controls were added afterwards and have not been
 read back in the viewer. In the same run the grader's resolved state equalled the viewer's for all
-1498 scenes, and 3,818 single
+1,498 scenes, and 3,818 single
 representations probed across the panel were drawn as the grader predicts. Call-list track:
-a sample of the 995 controls was drawn by taking one control from each
-kind in turn, and again, until the sample was full. Each control has two call lists, its
-reference and its answer. Those that select by UniProt number were left out, and
-3 could not be run by the test harness. The other
-234 call lists were replayed in PDBe Mol\*
-3.3.2, and every one ended in the state that the grader computes.
+the replay was run on the control set as it then stood,
+850 call-list controls of 36
+kinds. A sample of 120 controls was drawn by taking one control
+from each kind in turn, and again, until that number was reached. Each control has two call
+lists, its reference and its answer, so the sample holds
+240. The 3 that select
+by UniProt number were left out, and 3 could not be run by
+our replay script. The other 234 call lists were replayed in PDBe
+Mol\* 3.3.2, and every one ended in the state that the grader
+computes. 145 call-list controls were added afterwards. The
+record of the replay holds the number of call lists; the number of controls in the sample was
+worked out by script from that record and from the control set of the same day.
 The call-list controls use 74 structures: the
 4 entries that hold only DNA or RNA
 (1BNA, 1EHZ, 1KF1 and 1Y26) have none, because each call-list control is built around a
 protein residue.
 
-**Table S5. Every kind of control.** *Controls*: number of controls of this kind. *Graded as
+**Table S6. Every kind of control.** *Controls*: number of controls of this kind. *Graded as
 success*: controls that the grader counts as task success; this must equal *Controls* for
 kinds that must pass and 0 for kinds that must fail. *Earlier grader*: the same count for the grader that
 this work replaces on that track, with a score of exactly 1 read as success.
@@ -904,7 +953,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 The final run is defined by one manifest file in the repository. Its contents, in words:
 
 - **Corpus.** Version `corpus-v1.0-dev` ⟦PENDING: corpus freeze — final version tag and hash⟧.
-- **Answers.** 3 per task, model and condition (1 in the JSON-mode condition);
+- **Answers.** three per task, model and condition (one in the JSON-mode condition);
   no temperature is sent, so each provider's default applies. Limit on the length of an answer:
   8,000 tokens. Models that write reasoning text before the answer, which the
   user does not see, get 16,000 tokens for reasoning and answer
@@ -916,7 +965,7 @@ The final run is defined by one manifest file in the repository. Its contents, i
   and stops if spending would pass it. Costs are list prices on the day of the run.
 - **Validation.** Every parsed scene is validated by Mol\* 5.9.0.
 
-**Table S6. The models.** *Set*: core, or optional (run only if decided so before the run,
+**Table S7. The models.** *Set*: core, or optional (run only if decided so before the run,
 from the projected cost; marked † in the paper). Identifiers are given as the provider or
 the routing service lists them; the paper uses the part after the slash. *Provider*: the company that publishes the model, as the identifier or the route names it. *Weights*: open if the model's weights can be downloaded, closed if the model can be used only through a provider's service. *Hidden
 reasoning*: by default the model first writes reasoning text that the user does not see; the
@@ -1355,14 +1404,25 @@ scene (scene track) or the calls made so far (call-list track), followed by `Req
 **These tables are preliminary.** They were written by script from the archived pilot run and
 are the record behind Section 6.6 of the paper. They differ from Section 6.6 in one way that
 matters: the scores here are those of the *earlier* scene grader, which compared scene trees
-path by path, whereas Section 6.6 regrades the same answers on drawn state, so its numbers are
-somewhat lower. Three column names differ from those of the paper, so that no word has two
+path by path, whereas Section 6.6 regrades the same answers on drawn state. Its numbers
+therefore differ, and not all in one direction. F1 is lower there, most of all in the clinical
+category (0.31 against 0.48 here).
+The share of exactly right answers is in places higher: in the translation category the task
+success rate of Section 6.6 is 69.9%, and the share of answers
+with a score of 1 here is 65.4%. Three column names differ from those of the paper, so that no word has two
 meanings. *Score of 1* is the share of answers that score exactly 1 under the earlier grader
 (the forerunner of task success). *Earlier-grader F1* is the F1 of that grader. *Requested
-part*, in Table S13, is defined in the caption of that table; the pilot tasks stored no
+part*, in Table S14, is defined in the caption of that table; the pilot tasks stored no
 target, so there is no target score in these tables.
 
-**Table S7. Corpus of the October 2026 pilot run (pilot run, preliminary, earlier grader).** Tasks and distinct structures (PDB entries) per category. A category is a group of tasks that need the same kind of knowledge.
+Two notes on single tables. In Table S10 the caption defines five classes and the table has
+four columns: no answer of the pilot run fell in the class "JSON, not a scene". In Table S14
+the count for the clinical category (85 answers with
+the requested part exactly right) differs slightly from that of Section 6.6 of the paper
+(87), because the two are found by different rules: here
+by the earlier grader, component by component of the scene tree, and there on drawn state.
+
+**Table S8. Corpus of the October 2026 pilot run (pilot run, preliminary, earlier grader).** Tasks and distinct structures (PDB entries) per category. A category is a group of tasks that need the same kind of knowledge.
 
 | Category | Tasks | Structures |
 | :--- | ---: | ---: |
@@ -1373,7 +1433,7 @@ target, so there is no target score in these tables.
 | Interactions | 6 | 3 |
 | **All** | 70 | 14 |
 
-**Table S8. Scene track, main condition (pilot run, preliminary, earlier grader).** 15 models, 70 tasks on 14 structures, 1 answer per task. *Strict F1*: mean score over all tasks, where an answer the viewer cannot show scores 0. *Valid*: share of answers that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid answers only. *Score of 1*: share of answers that are valid and score exactly 1. 95% interval: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: open if the weights of the model can be downloaded.
+**Table S9. Scene track, main condition (pilot run, preliminary, earlier grader).** 15 models, 70 tasks on 14 structures, 1 answer per task. *Strict F1*: mean score over all tasks, where an answer the viewer cannot show scores 0. *Valid*: share of answers that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid answers only. *Score of 1*: share of answers that are valid and score exactly 1. 95% interval: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: open if the weights of the model can be downloaded.
 
 | # | Model | Weights | Strict F1 | 95% interval | Valid | 95% interval | F1 (valid) | 95% interval | Score of 1 |
 | ---: | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1393,7 +1453,7 @@ target, so there is no target score in these tables.
 | 14 | gpt-oss-20b | open | 0.252 | 0.165–0.333 | 28.6% | 19.7%–37.0% | 0.883 | 0.726–0.981 | 20.0% |
 | 15 | nemotron-3-super-120b-a12b | open | 0.078 | 0.027–0.130 | 8.6% | 3.3%–13.8% | 0.910 | 0.700–1.000 | 5.7% |
 
-**Table S9. What happened to each answer, main condition (pilot run, preliminary, earlier grader).** Every answer falls into exactly one class. *Valid scene*: parses as JSON, Mol\* accepts it as MolViewSpec and loads the structure. *Invalid JSON*: no parsable JSON object. *JSON, not a scene*: valid JSON that is not a MolViewSpec tree. *Scene rejected by Mol\**: a tree with a wrong node or parameter. *Structure failed to load*: the scene is well formed but names a file that does not load. All classes except the first score 0.
+**Table S10. What happened to each answer, main condition (pilot run, preliminary, earlier grader).** Every answer falls into exactly one class. *Valid scene*: parses as JSON, Mol\* accepts it as MolViewSpec and loads the structure. *Invalid JSON*: no parsable JSON object. *JSON, not a scene*: valid JSON that is not a MolViewSpec tree. *Scene rejected by Mol\**: a tree with a wrong node or parameter. *Structure failed to load*: the scene is well formed but names a file that does not load. All classes except the first score 0.
 
 | Model | valid scene | invalid JSON | scene rejected by Mol* | structure failed to load |
 | :--- | ---: | ---: | ---: | ---: |
@@ -1414,7 +1474,7 @@ target, so there is no target score in these tables.
 | nemotron-3-super-120b-a12b | 6 | 64 | 0 | 0 |
 | **All models** | 784 | 227 | 36 | 3 |
 
-**Table S10. Shape of the invalid-JSON answers (pilot run, preliminary, earlier grader).** For the 199 invalid-JSON answers whose raw text was archived: does the text open and close the same number of braces? A scene is a deeply nested tree, so a miscount by one brace is enough to lose the whole answer.
+**Table S11. Shape of the invalid-JSON answers (pilot run, preliminary, earlier grader).** For the 199 invalid-JSON answers whose raw text was archived: does the text open and close the same number of braces? A scene is a deeply nested tree, so a miscount by one brace is enough to lose the whole answer.
 
 | Shape | Answers | Share |
 | :--- | ---: | ---: |
@@ -1423,7 +1483,7 @@ target, so there is no target score in these tables.
 | braces balance; other syntax error | 53 | 26.6% |
 | empty answer | 15 | 7.5% |
 
-**Table S11. Offline JSON-repair counterfactual, main condition (pilot run, preliminary, earlier grader).** Each invalid-JSON answer with archived raw text was passed through the `json-repair` library and graded again. No model was called. *Strict F1* is the reported score. *Repaired F1* adds the score of the repaired answers. The repaired scenes were graded as trees but **not** checked by Mol\*, so repaired F1 is an upper bound. Answers with no archived raw text stay at 0 (*Raw text* < *Invalid JSON*).
+**Table S12. Offline JSON-repair counterfactual, main condition (pilot run, preliminary, earlier grader).** Each invalid-JSON answer with archived raw text was passed through the `json-repair` library and graded again. No model was called. *Strict F1* is the reported score. *Repaired F1* adds the score of the repaired answers. The repaired scenes were graded as trees but **not** checked by Mol\*, so repaired F1 is an upper bound. Answers with no archived raw text stay at 0 (*Raw text* < *Invalid JSON*).
 
 | Model | Invalid JSON | Raw text | Repaired to a scene | Strict F1 | Repaired F1 | Change |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1443,7 +1503,7 @@ target, so there is no target score in these tables.
 | gpt-oss-20b | 50 | 50 | 47 | 0.252 | 0.868 | +0.616 |
 | nemotron-3-super-120b-a12b | 64 | 64 | 64 | 0.078 | 0.911 | +0.833 |
 
-**Table S12. Scores by category, main condition (pilot run, preliminary, earlier grader).** *Valid / all*: valid answers out of all answers, pooled over models. *Models*: models with at least one valid answer in the category (the others cannot contribute to a valid-only mean). *F1 (valid)*: mean score over valid answers, first averaged per model and then over models (mean), and over all valid answers together (pooled). *Strict F1*: mean over all answers, invalid ones scoring 0, averaged per model then over models. *Score of 1*: share of answers that are valid and score exactly 1. 95% intervals are for the pooled valid-only and pooled strict values, resampling whole structures; n/a where a category has a single structure. Read the thin rows with care: the sample sizes are in the table.
+**Table S13. Scores by category, main condition (pilot run, preliminary, earlier grader).** *Valid / all*: valid answers out of all answers, pooled over models. *Models*: models with at least one valid answer in the category (the others cannot contribute to a valid-only mean). *F1 (valid)*: mean score over valid answers, first averaged per model and then over models (mean), and over all valid answers together (pooled). *Strict F1*: mean over all answers, invalid ones scoring 0, averaged per model then over models. *Score of 1*: share of answers that are valid and score exactly 1. 95% intervals are for the pooled valid-only and pooled strict values, resampling whole structures; n/a where a category has a single structure. Rows with few tasks must be read with care: the numbers of tasks are in the table.
 
 | Category | Tasks | Structures | Valid / all | Models | F1 (valid), mean | F1 (valid), pooled | 95% interval | Strict F1 | 95% interval | Score of 1 |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1453,7 +1513,7 @@ target, so there is no target score in these tables.
 | Name resolution | 6 | 6 | 52/90 | 12/15 | 0.542 | 0.564 | 0.512–0.606 | 0.326 | 0.247–0.392 | 2.2% |
 | Interactions | 6 | 3 | 54/90 | 14/15 | 0.850 | 0.854 | 0.822–0.884 | 0.512 | 0.356–0.770 | 22.2% |
 
-**Table S13. Is the requested component itself right? main condition (pilot run, preliminary, earlier grader).** Valid scenes only. The *requested part* of a task is every component of the reference scene except, when the reference has more than one, the component with the most atoms, which is treated as *context* (for example a grey cartoon of the whole protein behind one highlighted residue). *Requested part exact*: the answer draws every requested part with exactly the reference atoms, representation and colour. *Scene exact*: the whole scene scores 1. *Requested part exact, scene not*: the requested part is right and the scene still loses points for something else (missing or different context, extra components). *Atoms only*: the atoms of the requested part are selected exactly, in the reference entry or an accepted one, but drawn or coloured differently. *Requested part wrong*: no component selects exactly the atoms of the requested part.
+**Table S14. Is the requested component itself right? main condition (pilot run, preliminary, earlier grader).** Valid scenes only. The *requested part* of a task is every component of the reference scene except, when the reference has more than one, the component with the most atoms, which is treated as *context* (for example a grey cartoon of the whole protein behind one highlighted residue). *Requested part exact*: the answer draws every requested part with exactly the reference atoms, representation and colour. *Scene exact*: the whole scene scores 1. *Requested part exact, scene not*: the requested part is right and the scene still loses points for something else (missing or different context, extra components). *Atoms only*: the atoms of the requested part are selected exactly, in the reference entry or an accepted one, but drawn or coloured differently. *Requested part wrong*: no component selects exactly the atoms of the requested part.
 
 | Category | Valid scenes | Requested part exact | Share | Scene exact | Requested part exact, scene not | Atoms only | Requested part wrong |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1463,7 +1523,7 @@ target, so there is no target score in these tables.
 | Name resolution | 52 | 2 | 3.9% | 2 | 0 | 33 | 17 |
 | Interactions | 54 | 22 | 40.7% | 20 | 2 | 15 | 17 |
 
-**Table S14. Where valid scenes lose points, main condition (pilot run, preliminary, earlier grader).** For the 294 valid scenes that scored below 1 (of 784 valid scenes): which part of the scene differs from the reference. One scene can differ in several parts, so the rows add up to more than the total. *Selection*: the right kind of component, but it picks different atoms. *Unrequested colour*: the answer colours something the reference leaves at the viewer default; the earlier-grader F1 counts this as a difference even where a reader might not. *Missing* / *extra component*: a part of the reference scene is absent, or the answer draws something the reference does not. *Structure*: a different entry or file is loaded.
+**Table S15. Where valid scenes lose points, main condition (pilot run, preliminary, earlier grader).** For the 294 valid scenes that scored below 1 (of 784 valid scenes): which part of the scene differs from the reference. One scene can differ in several parts, so the rows add up to more than the total. *Selection*: the right kind of component, but it picks different atoms. *Unrequested colour*: the answer colours something the reference leaves at the viewer default; the earlier-grader F1 counts this as a difference even where a reader might not. *Missing* / *extra component*: a part of the reference scene is absent, or the answer draws something the reference does not. *Structure*: a different entry or file is loaded.
 
 | Difference | Scenes | Share | Translation | Structure-grounded | Clinical | Name resolution | Interactions |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1479,7 +1539,7 @@ target, so there is no target score in these tables.
 | missing colour | 10 | 3.4% | 0 | 0 | 10 | 0 | 0 |
 | *imperfect valid scenes* | 294 |  | 89 | 27 | 94 | 50 | 34 |
 
-**Table S15. Effect of grounding packs (pilot run, preliminary, earlier grader).** Change in F1 when the task's frozen grounding pack is added to the request (main + grounding pack minus main), for the 15 models that ran both. Three ways to count, because they answer different questions. Row 1 includes the answers that became invalid. Row 2 keeps only the 15 tasks that need a lookup (Clinical, Name resolution). Row 3 keeps only task-model combinations whose answer was valid in both conditions, so it isolates the effect on content; of those combinations 69 improved, 92 got worse and 486 did not change. 95% interval: bootstrap, resampling whole structures.
+**Table S16. Effect of grounding packs (pilot run, preliminary, earlier grader).** Change in F1 when the task's frozen grounding pack is added to the request (main + grounding pack minus main), for the 15 models that ran both. Three ways to count, because they answer different questions. Row 1 includes the answers that became invalid. Row 2 keeps only the 15 tasks that need a lookup (Clinical, Name resolution). Row 3 keeps only task-model combinations whose answer was valid in both conditions, so it isolates the effect on content; of those combinations 69 improved, 92 got worse and 486 did not change. 95% interval: bootstrap, resampling whole structures.
 
 | Comparison | n | Change in F1 | 95% interval |
 | :--- | ---: | ---: | ---: |
@@ -1487,7 +1547,7 @@ target, so there is no target score in these tables.
 | Lookup tasks only, all answers (mean over models) | 15 | -0.021 | -0.038 to +0.006 |
 | Task-model combinations valid in both conditions (pooled) | 647 | -0.004 | -0.010 to +0.003 |
 
-**Table S16. Prompting conditions (pilot run, preliminary, earlier grader).** main: the system prompt contains the format guide. no format guide: it contains only the rule for the answer ("answer with one MolViewSpec JSON scene"). + grounding pack: the task's frozen grounding pack (facts about the structure, built offline) is added to the request. Each row is a mean over the models that ran that condition; the number of models differs by row and is stated. *Strict F1*, *Valid* and *F1 (valid)* as in the per-model table.
+**Table S17. Prompting conditions (pilot run, preliminary, earlier grader).** main: the system prompt contains the format guide. no format guide: it contains only the rule for the answer ("answer with one MolViewSpec JSON scene"). + grounding pack: the task's frozen grounding pack (facts about the structure, built offline) is added to the request. Each row is a mean over the models that ran that condition; the number of models differs by row and is stated. *Strict F1*, *Valid* and *F1 (valid)* as in the per-model table.
 
 | Condition | Models | Valid / all | Strict F1 | Valid | F1 (valid) |
 | :--- | ---: | ---: | ---: | ---: | ---: |
@@ -1496,9 +1556,9 @@ target, so there is no target score in these tables.
 | main | 15 | 784/1050 | 0.675 | 74.7% | 0.903 |
 | main + grounding pack | 15 | 739/1050 | 0.634 | 70.4% | 0.898 |
 
-**Table S17. Earlier-grader F1 against the score after a check of the picture, main condition (pilot run, preliminary, earlier grader).** *Earlier-grader F1*: the strict F1 from comparing scene trees. A valid scene that scores below 1 is *escalated*: it is rendered next to the reference. It is *rescued* (counted as correct) if the two images are near-identical pixel for pixel, or if the image judge calls them the same. *Validated F1* is the earlier-grader F1 with rescued scenes set to 1. Scores are never lowered by escalation.
+**Table S18. Earlier-grader F1 against the score after a check of the picture, main condition (pilot run, preliminary, earlier grader).** *Earlier-grader F1*: the strict F1 from comparing scene trees. A valid scene that scores below 1 is rendered next to the reference (*pictures compared*). It is *counted right* if the two images are near-identical pixel for pixel, or if the image judge calls them the same. *F1 after picture check* is the earlier-grader F1 with the scenes that were counted right set to 1. The check never lowers a score.
 
-| Model | Earlier-grader F1 | Validated F1 | Change | Escalated | Rescued (pixels) | Rescued (judge) | Judged different |
+| Model | Earlier-grader F1 | F1 after picture check | Change | Pictures compared | Counted right: pictures identical | Counted right: image judge says same | Judged different |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | deepseek-v3.2 | 0.903 | 0.921 | +0.018 | 24 | 0 | 6 | 18 |
 | deepseek-v4-flash | 0.859 | 0.870 | +0.011 | 21 | 4 | 3 | 14 |
@@ -1516,7 +1576,7 @@ target, so there is no target score in these tables.
 | gpt-oss-20b | 0.252 | 0.256 | +0.003 | 6 | 0 | 1 | 5 |
 | nemotron-3-super-120b-a12b | 0.078 | 0.079 | +0.001 | 2 | 0 | 1 | 1 |
 
-**Table S18. Tokens and cost, main condition (pilot run, preliminary, earlier grader).** Tokens are as reported by the provider for the whole run of the model. Cost is in US dollars at list price on the day of the run; *not recorded* means no price was stored for that model, not that it was free. *Per 100 answers*: cost divided by the number of answers, times 100. Total for the 7 priced models: $0.65.
+**Table S19. Tokens and cost, main condition (pilot run, preliminary, earlier grader).** Tokens are as reported by the provider for the whole run of the model. Cost is in US dollars at list price on the day of the run; *not recorded* means no price was stored for that model, not that it was free. *Per 100 answers*: cost divided by the number of answers, times 100. Total for the 7 priced models: $0.65.
 
 | Model | Weights | Strict F1 | Input tokens | Answer tokens | Cost | Per 100 answers |
 | :--- | :--- | ---: | ---: | ---: | ---: | ---: |
@@ -1536,7 +1596,42 @@ target, so there is no target score in these tables.
 | gpt-oss-20b | open | 0.252 | 166,348 | 58,094 | $0.0131 | $0.019 |
 | nemotron-3-super-120b-a12b | open | 0.078 | 165,256 | 50,967 | not recorded | – |
 
-⟦PENDING: final run — the same kinds of table for the final run on both tracks: outcomes per model, JSON-repair counterfactual, F1 valid-only, cost per model⟧
+### S8.1 The trial of the rating study
+
+*Purpose.* To see whether answers that the earlier grader scored below 1 looked the same as
+the reference to people, that is, to look for false fails, and to try out the image judge as
+a way of finding them.
+
+*What was done.* In October, each valid scene that scored below 1 was rendered, and an image
+judge (a vision-language model; Section 5.5 of the paper) was shown its picture beside the
+picture of the reference. Volunteers then judged a sample of the same picture comparisons. In
+all, three raters, one of them an author, gave 114
+verdicts of "same" or "different" on 109 picture comparisons.
+
+*Result.* People and the image judge gave the same verdict in 79% of
+cases. Cohen's kappa, which is agreement beyond what chance would give (0 is chance, 1 is
+perfect), was 0.54 (95% interval 0.34 to
+0.71). Where the judge had said "same", people agreed in
+74% of cases (95% interval 57% to
+89%), or in 62% (95% interval
+40% to 85%) when the author's verdicts
+are left out.
+
+*Limits.* Only one of the three raters
+met the attention-check rule that was written before the data were seen (at least
+80% right on each kind of check item): the author was never shown a check
+item, and one volunteer answered "can't tell" on a check, which the rule counts as a miss. The
+numbers above include all raters and so depart from that rule. Only
+5 picture comparisons received two verdicts, so agreement between
+people cannot be estimated. The trial does not validate the image judge, and it supports no
+statement about categories, single models or the final run. No score in the paper uses the
+image judge. As a check of how much it could matter: under the earlier grader, counting the
+judge's "same" verdicts as right would have changed no model's mean F1 by more than
+0.028 (Table S18).
+
+## S9. Further tables of the final run
+
+⟦PENDING: final run — the tables that Section 6.5 of the paper points to, for both tracks: outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the JSON-repair counterfactual, F1 valid-only, cost per model, and the one-sided pairs of Table 9 divided by whether the side that was not right was unshowable⟧
 
 ## References
 

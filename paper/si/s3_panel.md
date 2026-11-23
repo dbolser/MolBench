@@ -35,10 +35,19 @@ Counts of verified features in the panel: ligand {{panel.feature.ligand}}, metal
 {{panel.feature.auth-label-chain}}, glycan {{panel.feature.glycan}}, nucleic acid
 {{panel.feature.nucleic}}, modified residue {{panel.feature.modified-residue}}, haem
 {{panel.feature.heme}}, insertion codes {{panel.feature.insertion-codes}}, membrane protein
-{{panel.feature.membrane}}. {{panel.n_with_alternate_conformers}} structures contain alternate
-conformers and {{panel.n_with_hydrogens}} contain hydrogens; the atom tables keep both.
-Structure files were retrieved on {{panel.retrieved}}; the checksum of each file is stored
-with the panel.
+{{panel.feature.membrane}}. Structure files were retrieved on {{panel.retrieved:date}}; the
+checksum of each file is stored with the panel.
+
+**Atom tables and mapping tables.** The atom table of a structure lists every atom record of
+the first coordinate set of its file. It keeps *alternate conformers*, the same atom recorded
+at two or more positions where the experiment saw a residue in more than one pose
+({{panel.n_with_alternate_conformers}} structures have them), and hydrogen atoms, which many
+files omit ({{panel.n_with_hydrogens}} structures have them). A selection of a residue takes
+all of its atom records, as the viewer does. An author residue number is used together with
+its insertion code where there is one ({{panel.feature.insertion-codes}} entries have them).
+The mapping table holds the SIFTS correspondence between each observed residue and its
+UniProt position; it is read from the copy of the entry's file that PDBe distributes with the
+SIFTS mapping added, whereas the atom table is built from the archive file.
 
 **Table S3. The panel.** *Atoms*: atoms in the first coordinate set. *Author numbering differs
 from UniProt*: at least one observed residue has an author number that is not its UniProt
@@ -59,8 +68,9 @@ amino-acid change, so one amino-acid change can have several records.
 {{variants.n_several_records}} of the variants that we keep have more than one qualifying
 record.
 
-**Table S3b. The variant list in three steps.** Counts are of variants (amino-acid changes)
-removed and left. The tests 3a to 3c are applied in this order.
+**Table S4. The variant list in three steps.** Counts are of variants (amino-acid changes)
+removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper uses
+the same step numbers and gives step 3 as one step.
 
 {{include:generated/table_variants.md}}
 
@@ -71,7 +81,8 @@ describes that change alone, and states its assertion criteria.
 *Step 1.* The candidates come from UniProt's variant annotation of the
 {{panel.n_disease_proteins}} proteins. The position is that of the UniProt canonical sequence.
 
-*Step 2.* UniProt's annotation can carry a pathogenic label where ClinVar's aggregate
+*Step 2.* We examined only the ClinVar records that UniProt cross-references for a variant;
+we did not search ClinVar itself. UniProt's annotation can carry a pathogenic label where ClinVar's aggregate
 classification does not; we observed this for {{variants.n_removed_by_clinvar}} candidates
 ({{variants.removed_share:.0%}}), most of which ClinVar classifies as "Conflicting
 classifications of pathogenicity" or "Uncertain significance". A candidate is kept only if a
@@ -105,6 +116,12 @@ the Christchurch variant). ClinVar's pathogenic record for it concerns a disorde
 lipids, while the variant is widely known for a reported protective effect in Alzheimer's
 disease, so a request that calls it pathogenic would mislead.
 
+*Well-known variants tried first.* Within the pool, the generator picks variants by seeded
+random choice. For {{clin.n_featured_proteins}} proteins a list written by hand before
+generation names well-known variants that are tried first, and used if they are in the pool
+(or are the exception above) and observed in the structure: {{clin.featured_list}}. The list
+decides which variant is asked about, never what the answer is.
+
 *Proteins without a task.* Tasks exist for {{clin.n_proteins}} of the
 {{panel.n_disease_proteins}} proteins. The other {{panel.n_disease_proteins_without_task}}
 are, by gene name, {{variants.proteins_without_task}}. For *TPI1* (triosephosphate isomerase)
@@ -118,6 +135,6 @@ on more than one structure, and {{clin.n_structures_two_proteins}} haemoglobin e
 two proteins each, because they hold both the alpha and the beta chain.
 
 *Dates.* The variant lists and the classifications of step 2 were read from UniProt and
-ClinVar on {{variants.clinvar_retrieved}}. The records were read again on
-{{variants.records_retrieved}}, with their kind, gene, classification and review status; step
+ClinVar on {{variants.clinvar_retrieved:date}}. The records were read again on
+{{variants.records_retrieved:date}}, with their kind, gene, classification and review status; step
 3 and the wording of the requests rest on that second reading.

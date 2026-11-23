@@ -9,9 +9,9 @@ for each DNA change that causes it: {{ex.clinvar_records}}. Both carry the aggre
 classification "{{ex.clinvar_classification}}" and the review status
 "{{ex.clinvar_review_status}}"; ClinVar's own field for the condition reads
 "{{ex.clinvar_conditions}}" on both. The entry {{ex.entry}} is human lysozyme at
-{{ex.resolution}} Å resolution; the target residue has {{ex.n_target_atoms}} atoms
-({{ex.n_target_heavy_atoms}} heavy atoms and {{ex.n_target_hydrogens}} hydrogens, which this
-entry contains).
+{{ex.resolution}} Å resolution; the target residue has {{ex.n_target_atoms}} atom records
+({{ex.n_target_heavy_atoms}} non-hydrogen atoms and {{ex.n_target_hydrogens}} hydrogens, which
+this entry contains).
 
 On the call-list track the viewer starts with the protein drawn as a cartoon. The reference
 sets `"color": null` on the residue, which leaves that cartoon as it was. Without that field

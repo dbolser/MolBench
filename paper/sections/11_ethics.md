@@ -19,7 +19,7 @@ were also used as coding and drafting assistants in building the benchmark and i
 this manuscript. The authors checked all content and are responsible for it.
 ⟦PENDING: Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements⟧
 
-**Licences of data and software.** We read each licence at its source on 2026-11-16 (Table
+**Licences of data and software.** We read each licence at its source on 16 November 2026 (Table
 16). Frozen copies of third-party data in the repository keep their original terms and are
 attributed in the repository.
 

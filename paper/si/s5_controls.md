@@ -15,20 +15,26 @@ the verdict. The other {{controls.viewer.mvs.skipped}} are of kinds that cannot 
 (camera target, label text, colouring by chain, assembly, another entry).
 {{controls.viewer.mvs.n_added_since}} scene controls were added afterwards and have not been
 read back in the viewer. In the same run the grader's resolved state equalled the viewer's for all
-{{controls.viewer.mvs.scenes}} scenes, and {{controls.viewer.mvs.probe_draws:,}} single
+{{controls.viewer.mvs.scenes:,}} scenes, and {{controls.viewer.mvs.probe_draws:,}} single
 representations probed across the panel were drawn as the grader predicts. Call-list track:
-a sample of the {{controls.api.n_controls}} controls was drawn by taking one control from each
-kind in turn, and again, until the sample was full. Each control has two call lists, its
-reference and its answer. Those that select by UniProt number were left out, and
-{{controls.viewer.api.not_runnable}} could not be run by the test harness. The other
-{{controls.viewer.api.lists}} call lists were replayed in PDBe Mol\*
-{{controls.viewer.pdbe_molstar}}, and every one ended in the state that the grader computes.
+the replay was run on the control set as it then stood,
+{{controls.viewer.api.n_at_check}} call-list controls of {{controls.viewer.api.kinds_at_check}}
+kinds. A sample of {{controls.viewer.api.sample}} controls was drawn by taking one control
+from each kind in turn, and again, until that number was reached. Each control has two call
+lists, its reference and its answer, so the sample holds
+{{controls.viewer.api.sample_lists}}. The {{controls.viewer.api.skipped_uniprot}} that select
+by UniProt number were left out, and {{controls.viewer.api.not_runnable}} could not be run by
+our replay script. The other {{controls.viewer.api.lists}} call lists were replayed in PDBe
+Mol\* {{controls.viewer.pdbe_molstar}}, and every one ended in the state that the grader
+computes. {{controls.viewer.api.n_added_since}} call-list controls were added afterwards. The
+record of the replay holds the number of call lists; the number of controls in the sample was
+worked out by script from that record and from the control set of the same day.
 The call-list controls use {{controls.api.n_entries}} structures: the
 {{controls.api.n_entries_without}} entries that hold only DNA or RNA
 ({{controls.api.entries_without}}) have none, because each call-list control is built around a
 protein residue.
 
-**Table S5. Every kind of control.** *Controls*: number of controls of this kind. *Graded as
+**Table S6. Every kind of control.** *Controls*: number of controls of this kind. *Graded as
 success*: controls that the grader counts as task success; this must equal *Controls* for
 kinds that must pass and 0 for kinds that must fail. *Earlier grader*: the same count for the grader that
 this work replaces on that track, with a score of exactly 1 read as success.

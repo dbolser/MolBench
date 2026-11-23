@@ -148,7 +148,7 @@ def fig_pipeline(v: dict) -> str:
             "task success (yes or no)",
             "target score",
             "valid or invalid answer",
-            "strict / valid-only means"]),
+            "averages: strict, valid-only"]),
     ]
     x0, y0, w, h, gap, vgap = 10, 34, 206, 112, 11, 30
     yb = y0 + 2 * h + vgap + 44
@@ -229,8 +229,8 @@ def fig_tiers(v: dict) -> str:
         n_m, n_a = v[f"corpus.mvs.{tier}.n"], v[f"corpus.api.{tier}.n"]
         s.text(x + cw - 10, y + 19, f"{n_m or '–'} / {n_a or '–'}", size=10.5, anchor="end", fill=MUTED)
         if tier == "clinical":
-            needs = (f"The variant's residue must be found in the structure; in {v['clin.n_offset']} of "
-                     f"{v['clin.n']} tasks its number differs.")
+            needs = (f"The variant's residue must be found in the structure; in {v['clin.n_face_value_wrong']} of "
+                     f"{v['clin.n']} tasks the number in its name is not its number there.")
         yy = s.para(x + 10, y + 35, needs, width=chars(cw - 20, 10), size=10, fill=MUTED)
         prompt = " ".join(prompts[tid]["prompt"].split())
         if tier == "followup":
@@ -376,7 +376,7 @@ def fig_twins(v: dict) -> str:
     s.text(W / 2, ty + 33, f"{v['ex.wild_type']}{v['ex.auth_number']}, chain {v['ex.auth_chain']} of {v['ex.entry']}: "
            f"{v['ex.n_target_atoms']} atoms (checked when the task is built)", size=10, anchor="middle", fill=MUTED)
     gy = ty + 42 + 40
-    gx, cw, chh = 318, 122, 30
+    gx, cw, chh = 290, 142, 30
     s.arrow(W / 2, ty + 43, W / 2, gy - 22)
     s.text(10, gy + 2, "Per model, every pair falls into one of four cells.", size=10.5, weight="bold")
     s.para(10, gy + 18, f"A side is right when at least 2 of its {v['plan.samples']} answers are target-right. "
@@ -384,8 +384,8 @@ def fig_twins(v: dict) -> str:
            f"task success over all {v['corpus.n_twin_pairs']} pairs.", width=chars(gx - 30, 10), size=10, fill=MUTED)
     s.text(gx + cw / 2, gy - 6, "call list right", size=10, anchor="middle", fill=MUTED)
     s.text(gx + cw * 1.5, gy - 6, "call list wrong", size=10, anchor="middle", fill=MUTED)
-    cells = [("both right", PALE), ("right in scene only", "#fdf0d5"),
-             ("right in call list only", "#fdf0d5"), ("both wrong", PALE)]
+    cells = [("right on both sides", PALE), ("right in the scene only", "#fdf0d5"),
+             ("right in the call list only", "#fdf0d5"), ("right on neither side", PALE)]
     for k, (label, fill) in enumerate(cells):
         cx, cy = gx + (k % 2) * cw, gy + (k // 2) * chh
         s.rect(cx, cy, cw, chh, fill=fill, r=0)
@@ -447,14 +447,17 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
 # --------------------------------------------------------------------------- #
 # Figure 5: the shapes of the result figures (no data)
 # --------------------------------------------------------------------------- #
+EXAMPLE_OPACITY = 0.45     # example marks: the final colours and shapes, drawn pale
+
+
 def fig_result_shapes(v: dict) -> str:
     """Three empty panels that show how the final-run figures will be read. Nothing in
     this figure is a result: each panel has axes, the marks explained in a key, and one
     greyed example row that is labelled as an example."""
     ph, gap, top, split = 132, 10, 30, 300
     s = Svg(W, top + 3 * (ph + gap), "Shapes of the three result figures that the final run will fill; no data are shown")
-    s.text(10, 19, "No data yet. Axes and marks are final. The grey mark in each panel is an example, not a result.",
-           size=10, fill=MUTED)
+    s.text(10, 19, "No data yet. The pale example mark in each panel has the final colour and shape; "
+           "its position means nothing.", size=10, fill=MUTED)
     ticks = ["0", "0.25", "0.5", "0.75", "1"]
 
     def frame(i, title, sub):
@@ -495,8 +498,10 @@ def fig_result_shapes(v: dict) -> str:
         ry = y0 + 44
         if k == 0:
             s.text(ax - 6, ry + 4, "model", size=9.5, anchor="end", fill=MUTED)
-        s.line(ax + aw * (0.40 + 0.1 * k), ry, ax + aw * (0.62 + 0.1 * k), ry, stroke=GREY, sw=2)
-        s.circle(ax + aw * (0.51 + 0.1 * k), ry, 4.5, GREY)
+        s.raw(f'<g opacity="{EXAMPLE_OPACITY}">')
+        s.line(ax + aw * (0.40 + 0.1 * k), ry, ax + aw * (0.62 + 0.1 * k), ry, stroke=INK, sw=2)
+        s.circle(ax + aw * (0.51 + 0.1 * k), ry, 4.5, BLUE)
+        s.raw('</g>')
 
     # B: pairs
     y0 = frame(1, "B  The same request in both formats",
@@ -514,8 +519,9 @@ def fig_result_shapes(v: dict) -> str:
           f'<rect width="6" height="6" fill="#ffffff"/><circle cx="3" cy="3" r="1.6" fill="{ORANGE}"/></pattern></defs>')
     for a, b, fill, pat in cuts:
         s.raw(f'<rect x="{ax + aw * a:.1f}" y="{ry}" width="{aw * (b - a):.1f}" height="14" fill="{pat or fill}" stroke="#ffffff"/>')
-    keys = [("#8a8a8a", "", "both right"), ("", "url(#hatchA)", "scene right only"),
-            ("", "url(#hatchB)", "call list right only"), ("#f1f1f1", "", "both wrong")]
+    # the labels of Table 9; the two long ones sit in the right-hand column of the key
+    keys = [("#8a8a8a", "", "right on both sides"), ("", "url(#hatchA)", "right in the scene only"),
+            ("#f1f1f1", "", "right on neither side"), ("", "url(#hatchB)", "right in the call list only")]
     for k, (fill, pat, label) in enumerate(keys):
         kx, kyy = 22 + (k % 2) * 130, y0 + ph - 26 + (k // 2) * 15
         s.raw(f'<rect x="{kx}" y="{kyy - 9}" width="14" height="10" fill="{pat or fill}" stroke="{LINE}" stroke-width="0.8"/>')
@@ -528,9 +534,11 @@ def fig_result_shapes(v: dict) -> str:
     axis(ax, y0, aw, "Score, valid answers only")
     ry = y0 + 44
     s.text(ax - 6, ry + 4, "category", size=9.5, anchor="end", fill=MUTED)
+    s.raw(f'<g opacity="{EXAMPLE_OPACITY}">')
     s.line(ax + aw * 0.38, ry, ax + aw * 0.80, ry, stroke=GREY, sw=1.5)
-    s.raw(f'<path d="M{ax + aw * 0.38 - 5},{ry} l5,-5 l5,5 l-5,5 z" fill="{GREY}"/>')
-    s.circle(ax + aw * 0.80, ry, 4.5, GREY)
+    s.raw(f'<path d="M{ax + aw * 0.38 - 5},{ry} l5,-5 l5,5 l-5,5 z" fill="{ORANGE}"/>')
+    s.circle(ax + aw * 0.80, ry, 4.5, GREEN)
+    s.raw('</g>')
     ky = y0 + ph - 12
     s.raw(f'<path d="M{21},{ky - 4} l5,-5 l5,5 l-5,5 z" fill="{ORANGE}"/>')
     s.text(36, ky, "task success rate", size=9.5)

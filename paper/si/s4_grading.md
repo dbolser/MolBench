@@ -80,7 +80,8 @@ start state returned unchanged.
 A task may list further right answers. An answer is graded against the reference and each of
 them, and the best result counts (a success first, then the highest F1). A name-resolution
 task lists the entries that match the named protein. The list was frozen on
-{{resolve.retrieved}} from the web services of the RCSB PDB: it holds every current PDB entry
+{{resolve.retrieved:date}} from the web services of the RCSB PDB (the US member site of the
+Protein Data Bank): it holds every current PDB entry
 in which a chain is aligned to the UniProt accession of the named protein over at least
 {{resolve.min_residues}} residues in total, or over at least half of the UniProt sequence if
 that is shorter. Where the request names several proteins, a ligand or bound DNA, the entry
@@ -136,7 +137,7 @@ mapping from the structure file that PDBe distributes.
 
 ### S4.7 Outcomes
 
-**Table S4. The outcome of an answer and how it is scored.** *As graded*: the answer receives
+**Table S5. The outcome of an answer and how it is scored.** *As graded*: the answer receives
 the scores that the grader computes. Strict averages count every answer with the score in the
 last column; valid-only averages count the answers with outcome "valid". *Class*: the three
 classes of Section 4.4 of the paper. An answer that was cut off at the token limit gets the
@@ -148,7 +149,8 @@ tables.
 | both | invalid JSON | unshowable | the answer contains no parseable JSON of the right outer shape | 0 |
 | scene | not a scene | unshowable | JSON, but not a scene tree | 0 |
 | scene | rejected by the viewer | unshowable | a scene tree that the validation of Mol\* 5.9.0 rejects | 0 |
-| scene | valid | valid | Mol\* accepts the scene | as graded |
+| scene | structure failed to load | unshowable | a well-formed scene that names a file which Mol\* cannot load: a web page in place of a structure file, a file on an unknown host, or a file read in the wrong format | 0 |
+| scene | valid | valid | Mol\* accepts the scene and can load its file | as graded (0 on every score if the entry is not one that the task accepts) |
 | call list | not valid | schema-breaking | a JSON list that breaks the call schema (unknown call, wrong field type) | as graded: the replay ignores what the viewer would ignore |
 | call list | valid | valid | a call list that fits the schema | as graded |
 

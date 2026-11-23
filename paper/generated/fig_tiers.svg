@@ -34,10 +34,11 @@
 <text x="20" y="285" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Clinical variant</text>
 <text x="314" y="285" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">82 / 82</text>
 <text x="20" y="301" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">The variant&#x27;s residue must be found in the structure; in</text>
-<text x="20" y="314" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">59 of 82 tasks its number differs.</text>
-<text x="20" y="330" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626)</text>
-<text x="20" y="343" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">variant p.W82R is classified as pathogenic in ClinVar.</text>
-<text x="20" y="356" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">Show the residue it replaces as yellow spacefill spheres.”</text>
+<text x="20" y="314" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">48 of 82 tasks the number in its name is not its number</text>
+<text x="20" y="327" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">there.</text>
+<text x="20" y="343" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">“PDB entry 2NWD: the LYZ (Lysozyme C, UniProt P61626)</text>
+<text x="20" y="356" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">variant p.W82R is classified as pathogenic in ClinVar.</text>
+<text x="20" y="369" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-style="italic">Show the residue it replaces as yellow spacefill spheres.”</text>
 <rect x="336" y="266" width="314" height="104" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="346" y="285" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Follow-up turn</text>
 <text x="640" y="285" font-size="10.5" font-weight="normal" fill="#555555" text-anchor="end">58 / 44</text>

@@ -2,7 +2,7 @@
 <title>Shapes of the three result figures that the final run will fill; no data are shown</title>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
 <rect width="660" height="456" fill="#ffffff"/>
-<text x="10" y="19" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">No data yet. Axes and marks are final. The grey mark in each panel is an example, not a result.</text>
+<text x="10" y="19" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">No data yet. The pale example mark in each panel has the final colour and shape; its position means nothing.</text>
 <rect x="10" y="30" width="640" height="132" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="20" y="49" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">A  Task success by model, one panel per track</text>
 <text x="20" y="65" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per model, best first: 16 core models, up to 5</text>
@@ -32,8 +32,10 @@
 <text x="410.0" y="49" font-size="10" font-weight="bold" fill="#1a1a1a" text-anchor="middle">Scene track</text>
 <text x="410.0" y="110" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
 <text x="338" y="78" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">model</text>
-<line x1="396.8" y1="74" x2="425.84000000000003" y2="74" stroke="#b8b8b8" stroke-width="2"/>
-<circle cx="411.32" cy="74" r="4.5" fill="#b8b8b8" stroke="#ffffff" stroke-width="1.5"/>
+<g opacity="0.45">
+<line x1="396.8" y1="74" x2="425.84000000000003" y2="74" stroke="#1a1a1a" stroke-width="2"/>
+<circle cx="411.32" cy="74" r="4.5" fill="#0072B2" stroke="#ffffff" stroke-width="1.5"/>
+</g>
 <line x1="500" y1="124" x2="632" y2="124" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="500.0" y1="124" x2="500.0" y2="128" stroke="#1a1a1a" stroke-width="1.0"/>
 <line x1="500.0" y1="56" x2="500.0" y2="124" stroke="#e3e3e3" stroke-width="1.0"/>
@@ -53,8 +55,10 @@
 <text x="566.0" y="154" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Task success rate</text>
 <text x="566.0" y="49" font-size="10" font-weight="bold" fill="#1a1a1a" text-anchor="middle">Call-list track</text>
 <text x="566.0" y="110" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
-<line x1="566.0" y1="74" x2="595.04" y2="74" stroke="#b8b8b8" stroke-width="2"/>
-<circle cx="580.52" cy="74" r="4.5" fill="#b8b8b8" stroke="#ffffff" stroke-width="1.5"/>
+<g opacity="0.45">
+<line x1="566.0" y1="74" x2="595.04" y2="74" stroke="#1a1a1a" stroke-width="2"/>
+<circle cx="580.52" cy="74" r="4.5" fill="#0072B2" stroke="#ffffff" stroke-width="1.5"/>
+</g>
 <rect x="10" y="172" width="640" height="132" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="20" y="191" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">B  The same request in both formats</text>
 <text x="20" y="207" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One bar per model: its 250 pairs with a target score,</text>
@@ -85,13 +89,13 @@
 <rect x="516.8" y="208" width="34.6" height="14" fill="url(#hatchB)" stroke="#ffffff"/>
 <rect x="551.4" y="208" width="80.6" height="14" fill="#f1f1f1" stroke="#ffffff"/>
 <rect x="22" y="269" width="14" height="10" fill="#8a8a8a" stroke="#8a8a8a" stroke-width="0.8"/>
-<text x="42" y="278" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">both right</text>
+<text x="42" y="278" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">right on both sides</text>
 <rect x="152" y="269" width="14" height="10" fill="url(#hatchA)" stroke="#8a8a8a" stroke-width="0.8"/>
-<text x="172" y="278" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">scene right only</text>
-<rect x="22" y="284" width="14" height="10" fill="url(#hatchB)" stroke="#8a8a8a" stroke-width="0.8"/>
-<text x="42" y="293" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">call list right only</text>
-<rect x="152" y="284" width="14" height="10" fill="#f1f1f1" stroke="#8a8a8a" stroke-width="0.8"/>
-<text x="172" y="293" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">both wrong</text>
+<text x="172" y="278" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">right in the scene only</text>
+<rect x="22" y="284" width="14" height="10" fill="#f1f1f1" stroke="#8a8a8a" stroke-width="0.8"/>
+<text x="42" y="293" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">right on neither side</text>
+<rect x="152" y="284" width="14" height="10" fill="url(#hatchB)" stroke="#8a8a8a" stroke-width="0.8"/>
+<text x="172" y="293" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">right in the call list only</text>
 <rect x="10" y="314" width="640" height="132" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="20" y="333" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">C  Where points are lost, by category</text>
 <text x="20" y="349" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per category and track, models averaged, valid</text>
@@ -116,9 +120,11 @@
 <text x="488.0" y="438" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">Score, valid answers only</text>
 <text x="488.0" y="394" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">⟦PENDING: final run⟧</text>
 <text x="338" y="362" font-size="9.5" font-weight="normal" fill="#555555" text-anchor="end">category</text>
+<g opacity="0.45">
 <line x1="453.44" y1="358" x2="574.4" y2="358" stroke="#b8b8b8" stroke-width="1.5"/>
-<path d="M448.44,358 l5,-5 l5,5 l-5,5 z" fill="#b8b8b8"/>
-<circle cx="574.4" cy="358" r="4.5" fill="#b8b8b8" stroke="#ffffff" stroke-width="1.5"/>
+<path d="M448.44,358 l5,-5 l5,5 l-5,5 z" fill="#E69F00"/>
+<circle cx="574.4" cy="358" r="4.5" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>
+</g>
 <path d="M21,430 l5,-5 l5,5 l-5,5 z" fill="#E69F00"/>
 <text x="36" y="434" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start">task success rate</text>
 <circle cx="146" cy="430" r="4.5" fill="#009E73" stroke="#ffffff" stroke-width="1.5"/>

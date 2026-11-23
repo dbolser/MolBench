@@ -36,36 +36,38 @@ has been tested only against cases that we foresaw. The full list follows in fou
   than on a recent entry that a model has never read about. All but
   {{panel.n_over_size_limit}} entries have at most {{panel.max_atoms:,}} atoms, so large
   assemblies are not tested.
-- **Clinical labels move, and sources differ.** ClinVar classifications change as evidence is
-  submitted. Ours are a snapshot of {{variants.clinvar_retrieved}} to
-  {{variants.records_retrieved}}. Sources also differ on one day: for
+- **Classifications change, and sources differ.** ClinVar classifications change as evidence
+  is submitted. Ours are a snapshot of {{variants.clinvar_retrieved:date}} to
+  {{variants.records_retrieved:date}}. Sources also differ on one day: for
   {{variants.removed_share:.0%}} of the candidates that UniProt lists as pathogenic or likely
-  pathogenic, we found no ClinVar record with such an aggregate classification (Section 3.1).
-  Several of the variants we use, including the running example, rest on records whose review
-  status is "{{ex.clinvar_review_status}}": one laboratory, with stated criteria, and no
-  confirmation by a second submitter or an expert panel. One variant is used although its
-  record states no criteria (SI Section S3.2). Two things were not checked. A variant is
-  matched to a ClinVar record by its amino-acid change and position; ClinVar states that
-  change per transcript, and we did not check which transcript the match belongs to, so we
-  assume that it is numbered as the UniProt canonical sequence is. And one qualifying record is
-  enough: we did not look for further records of the same amino-acid change that are
-  classified differently. The benchmark uses a variant only as an address:
-  which residue does this name point to? That address does not depend on the classification.
-  No task asks for a judgement about disease.
-- **The format gap in the clinical pairs.** On the call-list track the viewer can map a UniProt
-  position itself; on the scene track the model must. The paired comparison is therefore
-  reported with and without clinical pairs. The two system prompts also differ in length
-  ({{prompt.mvs.words:,}} words on the scene track, {{prompt.api.words:,}} on the call-list
-  track; Section 5.2), and in the pilot run a longer prompt lowered the share of valid
-  answers. A difference between the tracks can therefore come from the prompt as well as from
-  the format.
+  pathogenic, none of the ClinVar records that UniProt cross-references gives the same
+  amino-acid change such an aggregate classification (Section 3.1). The benchmark uses a
+  variant only as an address: which residue does this name point to? That address does not
+  depend on the classification, and no task asks for a judgement about disease.
+- **Records with little review.** The clinical requests name {{clin.n_variants}} variants. For
+  {{clin.review.single}} of them, the running example among them, the best-reviewed record
+  that we use has the review status "{{ex.clinvar_review_status}}": one submitter, with stated
+  criteria, and no confirmation by a second submitter or an expert panel. For
+  {{clin.review.multiple}} it has several submitters and no conflicts, and for
+  {{clin.review.expert_or_guideline}} it was reviewed by an expert panel or comes from a
+  practice guideline. {{clin.review.none:word}} variant is used although its record states no
+  criteria (Section 3.1).
+- **What we did not check in ClinVar.** We looked only at the ClinVar records that UniProt
+  cross-references and did not search ClinVar beyond them. A variant is matched to a record by
+  its amino-acid change and position; ClinVar states that change per transcript, and we did
+  not check which transcript the match belongs to, so we assume that it is numbered as the
+  UniProt canonical sequence is. If a matching name came from a transcript that numbers the
+  protein differently, the record would be about another residue than the one we ask for;
+  the reference atoms would still be those of the UniProt position in the request. And one
+  qualifying record is enough: we did not look for further records of the same amino-acid
+  change that are classified differently.
 
 ### 9.3 Grader
 
 - **Tested only against cases we foresaw.** The grader makes no error on the control set
   because it was corrected until it made none (Section 4.5). How often it misjudges a way of
   writing an answer that the control set lacks is not known. The human check of the grader has
-  so far been run only as a trial with {{pilot.n_raters}} raters (Section 6.6). Until the
+  so far been run only as a trial with {{pilot.n_raters:word}} raters (Section 6.6). Until the
   planned study is done, the evidence that task success matches what people see is the control
   set and the read-back from the viewers.
 - **UniProt selections were not replayed in the viewer.** The call-list references of the
@@ -81,8 +83,10 @@ has been tested only against cases that we foresaw. The full list follows in fou
   each entry, and the read-back loaded that file into both viewers. Left to itself, PDBe Mol\*
   fetches PDBe's own copy of the entry, which carries the SIFTS mapping. We did not compare
   the two copies atom record by atom record.
-- **Partial credit is a choice.** Facts have equal weight, and a wrong colour counts half.
-  Other choices would give other F1 values. Task success does not depend on them.
+- **Partial credit is a choice.** Facts have equal weight, and a wrong colour counts half. On
+  the call-list track any other change to the right atoms counts half as well, so F1 is not
+  the same measure on the two tracks (Section 4.2). Other choices would give other F1 values.
+  Task success does not depend on them.
 - **What the grader does not model.** Atoms are compared on the coordinates as deposited. Some
   files hold one copy of a molecule that works as several identical copies; the viewer can
   generate the other copies, and the grader does not model selections of single generated
@@ -91,7 +95,7 @@ has been tested only against cases that we foresaw. The full list follows in fou
   structures, a close-up of one ligand, annotations from databases, experimental density
   maps). They are graded only as settings that the answer switched on; the atoms they would
   draw are not modelled. SI Section S4.8 gives the full list, including four call-list actions
-  that one host program of the viewer, the notebook widget of Section 2.3, ignores.
+  that the notebook widget of Section 3.4, which gives the calls their names, ignores.
 
 ### 9.4 Run
 
@@ -106,6 +110,13 @@ has been tested only against cases that we foresaw. The full list follows in fou
   with an offset and on one without, on {{clin.n_offset_pair_proteins}} proteins, and the structure
   without an offset is always a predicted structure, so "no offset" and "predicted structure"
   cannot be told apart. We report these contrasts with intervals and do not test them.
+- **The viewer can do the mapping on one track only.** On the call-list track the viewer can
+  map a UniProt position itself; on the scene track the model must. The paired comparison is
+  therefore reported with and without the clinical pairs (Sections 3.4 and 6.3).
+- **The two system prompts differ in length.** The system prompt has {{prompt.mvs.words:,}}
+  words on the scene track and {{prompt.api.words:,}} on the call-list track (Section 5.2),
+  and in the pilot run a longer prompt lowered the share of valid answers. A difference
+  between the tracks can therefore come from the prompt as well as from the format.
 - **Structures of one protein are resampled separately.** Intervals resample structures. In
   the clinical category, {{clin.n_proteins_several_structures}} proteins have tasks on more
   than one structure, and matched tasks ask about the same variant on two structures. Such

@@ -1,0 +1,10 @@
+{
+ "what": "sample of call-list controls replayed in PDBe Mol*, worked out by paper/corpus_values.py --viewer-sample from the record and the control set of the same commit",
+ "commit": "b2d63340bb8c77dbaa4095aa98acfeb1add4bb83",
+ "controls_at_check": 850,
+ "kinds_at_check": 36,
+ "controls_in_sample": 120,
+ "lists_selecting_by_uniprot": 3,
+ "lists_replayed": 234,
+ "lists_not_runnable": 3
+}

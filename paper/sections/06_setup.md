@@ -14,8 +14,13 @@ compared. They are lower-priced models, with list prices from {{plan.core_price_
 to {{plan.core_price_output_max:.0f}} US dollars per million output tokens. Of the
 {{plan.n_core_models}}, {{plan.n_core_open}} have *open weights* (the weights of the model can
 be downloaded) and {{plan.n_core_closed}} have *closed weights* (the model can be used only
-through a provider's service). They are: {{plan.core_models}}. SI Table S6 gives the provider,
-the full identifier and the price of each. All but one of them ran in the October pilot of the
+through a provider's service).
+
+- Closed weights ({{plan.n_core_closed}}): {{plan.core_models_closed}}.
+- Open weights ({{plan.n_core_open}}): {{plan.core_models_open}}.
+
+SI Table S7 lists every model with its full identifier and price. All but one of the core
+models ran in the October pilot of the
 scene track (Section 6.6); the exception, {{plan.core_not_in_pilot}}, could not be reached on
 that day and had earlier call-list results only.
 
@@ -23,13 +28,13 @@ Up to {{plan.n_optional_models}} *optional models* are larger (list prices from
 {{plan.optional_price_output_min}} to {{plan.optional_price_output_max:.0f}} US dollars per
 million output tokens): the largest current model of several providers of closed-weight
 models, and the largest model with open weights, as listed on the day the prices were recorded
-in the manifest ({{plan.price_date}}). The manifest names them (SI Table S6). Which of them
+in the manifest ({{plan.price_date:date}}). The manifest names them. Which of them
 are run is decided before any result exists, from the projected cost alone, and they are
 marked † in the tables. No model is added or dropped after results are seen.
 ⟦PENDING: Dan — which of the optional models are run⟧
 
 A *keyword script* that uses no model is run on both tracks as a floor: it maps words in the
-request to fixed answers by rule. SI Table S6 lists every model.
+request to fixed answers by rule.
 
 ### 5.2 Prompting conditions
 
@@ -52,7 +57,7 @@ variant maps to. *Answers per task*: answers of each model to each task.
 | **Main** | A short instruction, the rule for the answer ("answer with one JSON value and nothing else") and the format guide | all models, all tasks, both tracks | {{plan.samples}} |
 | Main + JSON mode | The same, with JSON mode switched on | every model that offers JSON mode: {{plan.n_json_mode_models}} of the {{plan.n_core_models}} core models (all but {{plan.core_without_json_mode}}) and each optional model that is run; all tasks, both tracks | 1 |
 | Main + grounding pack | The same, with the task's grounding pack appended to the request | all models; the lookup categories (name resolution, clinical variant), scene track | {{plan.samples}} |
-| No format guide | The instruction and the rule for the answer only | {{plan.n_bare_models}} models ({{plan.bare_models}}), the same as in the pilot run; scene track | {{plan.samples}} |
+| No format guide | The instruction and the rule for the answer only | {{plan.n_bare_models}} models ({{plan.bare_models}}), the same as in the pilot run; all tasks of the scene track | {{plan.samples}} |
 
 A grounding pack never contains a scene, a colour or a representation. But for a clinical
 task it contains the mapped residue, and for a name-resolution task a list of entries. The
@@ -84,11 +89,11 @@ distance line on an entry that tasks do use; no task asks for that distance.
 
 ### 5.3 Sampling
 
-Each model answers each task {{plan.samples}} times in the main condition, at the provider's
+Each model answers each task {{plan.samples:word}} times in the main condition, at the provider's
 default temperature. The limit on the length of an answer is {{plan.max_tokens:,}} tokens.
 Of the core models, {{plan.n_core_reasoning}} first write reasoning text that the user does not
 see; the provider bills it and counts it against the limit. For these models the limit is
-{{plan.reasoning_max_tokens:,}} tokens for reasoning and answer together (SI Table S6). An
+{{plan.reasoning_max_tokens:,}} tokens for reasoning and answer together (SI Table S7). An
 invalid answer is scored as it stands and is not retried; only transport errors are retried.
 Every raw answer is archived with its token counts, the reason the provider gives for the end
 of the answer, and its cost.
@@ -110,24 +115,31 @@ of the answer, and its cost.
   they are resampled as separate structures, which we name as a limit in Section 9.4. The
   table of results by category (Section 6.2) gives the number of structures beside the number
   of tasks.
-- **Paired comparison of formats.** For each model and pair, a side counts as right when at
-  least 2 of its {{plan.samples}} answers are right (the majority summary of Section 4.2).
-  "Right" is taken two ways. The primary comparison uses the target score: an answer is right
-  when it is target-right, that is, when its target score is exactly 1. This is the same test
-  in both formats. It is made on the {{corpus.twins.n_with_target}} pairs that have a target
-  score: the other {{corpus.twins.n_without_target}} are follow-up pairs that ask for
-  something to be removed, have none (Section 4.2), and are left out. The secondary comparison
-  uses task success, which is not the same test in the two formats (Section 4.2); it is made
-  on all {{corpus.n_twin_pairs}} pairs and shown beside the first. An unshowable answer counts
-  as not right. A pair that is right on one side only can therefore reflect an answer that
-  could not be shown as well as one that was shown and selected the wrong atoms; the outcome
-  tables of the SI give the share of unshowable answers per model and track, against which
-  the one-sided counts must be read. Pairs right on one side only are compared with McNemar's
-  exact test [@mcnemar1947]. We report the four counts for every model. We repeat the analysis
-  without the {{corpus.twins.need_hide_toggle}} pairs in which the call list must switch off
-  part of the default view (Section 3.4; none of them is among the
-  {{corpus.twins.n_without_target}} pairs without a target score), and without the clinical
-  pairs, in which the call-list viewer can do the mapping itself.
+- **Paired comparison of formats**, in six parts.
+    - *Unit.* For each model and pair, a side is right when at least 2 of its
+      {{plan.samples}} answers are right (the majority summary of Section 4.2).
+    - *Primary comparison.* An answer is right when it is target-right, that is, when its
+      target score is exactly 1. This is the same test in both formats. It uses the
+      {{corpus.twins.n_with_target}} pairs that have a target score. The other
+      {{corpus.twins.n_without_target}} pairs have none (Section 4.2) and are left out: they
+      are follow-up turns whose edit hides the water ({{corpus.twins.no_target.hide_water}}),
+      sets the background colour ({{corpus.twins.no_target.background}}) or needs no change
+      ({{corpus.twins.no_target.noop}}).
+    - *Secondary comparison.* An answer is right when it is a task success. This is not the
+      same test in the two formats (Section 4.2). It uses all {{corpus.n_twin_pairs}} pairs
+      and is shown beside the first.
+    - *Unshowable answers* count as not right. A pair that is right on one side only can
+      therefore reflect an answer that could not be shown as well as one that was shown and
+      selected the wrong atoms. The outcome tables of the SI give the share of unshowable
+      answers per model and track, against which the one-sided counts must be read.
+    - *Test.* The two counts of pairs that are right on one side only are compared with
+      McNemar's exact test [@mcnemar1947]. We report the four counts for every model.
+    - *Repeats.* The analysis is repeated without the {{corpus.twins.need_hide_toggle}}
+      pairs whose reference call list switches off part of the default view (Section 3.4),
+      and without the clinical pairs, in which the call-list viewer can do the mapping
+      itself. Those {{corpus.twins.need_hide_toggle}} pairs are first requests and the
+      {{corpus.twins.n_without_target}} pairs without a target score are follow-up turns, so
+      the two sets do not overlap.
 - **Planned comparisons**, each as a difference in task success rate with an interval:
   (1) public against held-back split; (2) full against terse wording and (3) full against
   indirect wording; (4) with and without JSON mode; (5) with and without grounding pack;
@@ -159,16 +171,16 @@ a valid scene-track answer of the main condition that the grader does not count 
 success. They are sampled under four limits: (i) no task supplies more than
 {{study.max_per_task}} answers, and never more than {{study.max_per_task_model}} from the same
 model; (ii) half are answers that an *image judge* calls the same as the reference, and half
-are answers that it calls different; (iii) within each half, the categories have equal
-numbers; (iv) no model supplies more than {{study.max_model_share:.0%}} of the set.
+are answers that it calls different; (iii) within each half, the categories have numbers as
+equal as the available answers allow; (iv) no model supplies more than {{study.max_model_share:.0%}} of the set.
 The image judge is a vision-language model that is shown the same two pictures and asked the
 same question; it is used here to find the answers most likely to look right, and it
 contributes to no score in this paper. Each comparison is rated by {{study.raters_per_pair}}
-raters. We will report, with intervals, how often people call an answer that the grader did not
-count as a success the same as the reference, the agreement between the raters, and the agreement between people
-and the image judge. An answer that all its raters call the same as the reference although the
-grader did not count it as a success is either a false fail of the grader or a difference that the picture does
-not show; each such case will be listed.
+raters. We will report three things, with intervals: the share of these answers that people
+judge to show the same as the reference; the agreement between raters; and the agreement
+between people and the image judge. An answer that all its raters judge to show the same as
+the reference, although the grader did not count it as a success, is either a false fail of
+the grader or a difference that the picture does not show; each such case will be listed.
 
 *Possible false passes.* A further {{study.n_grader_check_pairs}} picture comparisons are of
 answers that the grader counts as a task success although their pictures are not identical

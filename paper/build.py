@@ -110,7 +110,22 @@ def load_values() -> dict:
 # --------------------------------------------------------------------------- #
 # Values and includes
 # --------------------------------------------------------------------------- #
+NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+          "October", "November", "December"]
+
+
 def fmt_value(value, spec: str | None) -> str:
+    if spec == "word":          # a small count in running prose: "three times"; 10 and above stay digits
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise ValueError("'word' needs a whole number")
+        return NUMBER_WORDS[value] if 0 <= value < len(NUMBER_WORDS) else f"{value:,}"
+    if spec in ("date", "month"):   # an ISO date as "13 November 2026", or as "November 2026"
+        m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", str(value))
+        if not m:
+            raise ValueError(f"'{spec}' needs a value of the form YYYY-MM-DD")
+        month = f"{MONTHS[int(m.group(2)) - 1]} {m.group(1)}"
+        return month if spec == "month" else f"{int(m.group(3))} {month}"
     if spec:
         return format(value, spec)
     if isinstance(value, bool):
@@ -158,6 +173,20 @@ PILOT_WORDS = [
     (r"\bSuccess\b", "Score of 1"),
     (r"whether the model weights are openly released", "open if the weights of the model can be downloaded"),
     (r"Tree score vs render-checked score", "Earlier-grader F1 against the score after a check of the picture"),
+    # Table S19 (the check of pictures in October): column heads and caption in plain words.
+    (r"A valid scene that scores below 1 is \*escalated\*: it is rendered next to the reference\. It is "
+     r"\*rescued\* \(counted as correct\) if",
+     "A valid scene that scores below 1 is rendered next to the reference (*pictures compared*). It is "
+     "*counted right* if"),
+    (r"\*Validated F1\* is the tree F1 with rescued scenes set to 1\. Scores are never lowered by escalation\.",
+     "*F1 after picture check* is the earlier-grader F1 with the scenes that were counted right set to 1. "
+     "The check never lowers a score."),
+    (r"\bValidated F1\b", "F1 after picture check"),
+    (r"\bEscalated\b", "Pictures compared"),
+    (r"\bRescued \(pixels\)", "Counted right: pictures identical"),
+    (r"\bRescued \(judge\)", "Counted right: image judge says same"),
+    (r"Read the thin rows with care: the sample sizes are in the table\.",
+     "Rows with few tasks must be read with care: the numbers of tasks are in the table."),
     (r"\bTree F1\b", "Earlier-grader F1"), (r"\btree F1\b", "earlier-grader F1"),
     (r"\btree score\b", "earlier-grader F1"),
 ]
@@ -560,7 +589,13 @@ STATED_IN_WORDS = [
     ("study.max_per_task_model", 1, "'from the same model' (Section 5.5)"),
     ("panel.n_disease_proteins_without_task", 2, "the two proteins without a task, named in Section 3.1"),
     ("clin.n_tasks_kept_by_name", 1, "'1 task per track' for lysozyme p.Ile74Thr (Section 3.1)"),
-    ("prompt.longer_track", "call-list", "the order of the two prompt lengths (Sections 5.2 and 9.2)"),
+    ("prompt.longer_track", "call-list", "the order of the two prompt lengths (Sections 5.2 and 9.4)"),
+    ("ex.n_clinvar_records", 2, "'both DNA changes', 'both are classified' (Sections 1 and 3.2, SI Section S1)"),
+    ("clin.n_face_wrong_no_offset", 1, "'the one remaining traditional name' (Section 3.3.1)"),
+    ("clin.n_same_numbering_pairs", 2, "'in the other 2 sets' of matched tasks, both of p53 (Section 3.3.1)"),
+    ("corpus.followup.noop_spin", 2, "'in 2 scene tasks, a spin' (Section 3.3, follow-up turn)"),
+    ("mvs.spec.outcome.not_mvs", 0, "'no answer of the pilot run fell in the class' (SI Section S8)"),
+    ("mvs.spec.samples_per_task", 1, "'one answer per task' in the pilot run (Section 6.6, Table 13)"),
 ]
 
 

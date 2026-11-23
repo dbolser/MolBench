@@ -1,4 +1,4 @@
-## 12. Data and code availability
+## 12. Data and Software Availability
 
 - **Code, tasks, references, graders, control set:** <https://github.com/dbolser/MolBench>
   (MIT licence). ⟦PENDING: corpus freeze — version tag and hash of the frozen corpus⟧
@@ -14,11 +14,13 @@ for the rating study need a browser without a display and the Mol\* bundle, both
 
 ## Supporting Information
 
-The Supporting Information (one PDF file) contains: the running example in full (Section S1);
-all task templates with an example request each (S2); the structure panel and how it was
-chosen (S3); the full grading rules and the known limits of the grader (S4); the control set
-by kind (S5); the run manifest, the models and their prices (S6); the system prompts (S7); and
-further tables of the pilot run (S8).
+The Supporting Information (one PDF file) contains: background terms of structural biology
+(Section S0); the running example in full (S1); all task templates with an example request
+each (S2); the structure panel, how it was chosen, and the list of variants (S3); the full
+grading rules and the known limits of the grader (S4); the control set by kind (S5); the run
+manifest, the models and their prices (S6); the system prompts (S7); further tables of the
+pilot run and the trial of the rating study (S8); and further tables of the final run (S9,
+pending).
 
 ## Author information
 

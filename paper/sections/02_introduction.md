@@ -1,8 +1,9 @@
 ## 1. Introduction
 
 Molecular viewers are how structural biologists look at their data, and they are hard to
-drive. To show one residue of one chain, a user must know how the viewer writes a selection,
-the chain identifier, and which of several residue numbering schemes applies. Language models
+drive. To show one residue of one chain (one amino acid of one protein molecule in the file), a
+user must know how the viewer writes a selection, the chain identifier, and which of several
+residue numbering schemes applies. Language models
 promise to remove that barrier: the user says what they want, and the model writes the
 commands. Several viewers now ship such assistants, or can be operated by one through a
 programming interface [@chimeraxmcp; @molstarprism; @navarro2026speak; @sun2024chatmol].
@@ -13,7 +14,12 @@ why:
 
 > *"{{ex.prompt}}"*
 
-The request asks for "the residue it replaces": the tryptophan (W) that the variant
+The first sentence of the request states a classification. ClinVar classifies changes at the
+level of DNA; in {{variants.records_retrieved:month}} both DNA changes that give {{ex.name_in_prompt}} were classified
+as pathogenic (Section 3.2). The benchmark uses the variant only as an address, to ask which
+residue the name points to. It never asks whether a variant causes disease (Section 9.2).
+
+The second sentence asks for "the residue it replaces": the tryptophan (W) that the variant
 {{ex.name_in_prompt}} turns into an arginine (R). A model that takes the
 {{ex.uniprot_position}} of that name as the residue number selects residue
 {{ex.uniprot_position}} of the file. That residue is a serine. The model returns a clean
@@ -28,9 +34,7 @@ numbers the same chain from the first residue of the mature protein, the protein
 once that segment has been cut off; older papers accordingly call the variant
 {{ex.mature_name}}. The case is not unusual: a survey of the PDB found that 38.6% of 176,507
 entries contain proteins that are not numbered as their UniProt sequences are
-[@faezov2021pdbrenum]. The classification in the request is quoted from ClinVar as it stood in
-November 2026; the benchmark uses the variant only to ask which residue the name points to
-(Section 9.2).
+[@faezov2021pdbrenum].
 
 **What the model is given.** In MolBench the model receives only the request and a guide to
 the answer format. It does not see the structure file, it cannot look anything up, and it
@@ -44,8 +48,11 @@ computed from the structure itself, and each answer is graded on what the viewer
 not on how the answer is written.
 
 **Question.** With that instrument we ask one question above the others. When a request gives
-a residue number in one numbering and the structure uses another, does the model map the
-number, or does it copy it? Section 6.4 is built to answer this.
+a residue number in one numbering and the structure uses another, does the model give the
+number that the structure uses, or does it copy the number from the request? We call the first
+*mapping* the number and the second *copying* it. Mapping is more than a habit of converting:
+some entries are numbered as the request is, and there the copied number is the right one, so
+the model must know how each entry is numbered. Section 6.4 is built to answer this.
 
 MolBench is built on this thesis (Figure 1). The reference for the request above is not written
 by a person. A script reads the variant from ClinVar [@landrum2018clinvar], maps its UniProt
@@ -81,50 +88,46 @@ start of Section 4, defines the terms of grading and of the run.
 
 <div class="box">
 
-**Box 1. Terms and notation: structures, variants and the corpus.** In this paper *model*
+**Box 1. Terms and notation: variants, numbering and the corpus.** In this paper *model*
 always means a language model. Seven terms carry the results: *track*, *pair*, *copying the
 number* (all three below), *drawn state*, *task success*, *target score* and *strict* (Box 2).
-The other entries are for reference.
+The other entries are for reference. Background terms of structural biology (residue, chain,
+polymer, entry, predicted structure, ligand, representation, selection) are in SI Section S0.
 
-*Background terms, for readers from outside structural biology.*
+*Sequences, variants and the viewer.*
 
 | Term | Meaning |
 |:---------|:------------------------------|
-| Residue, chain | A protein is a chain of amino acids. One amino acid in the chain is a *residue*; residues are numbered along the chain. A structure file names each chain with a short identifier, often one letter. |
-| Polymer | The protein, DNA or RNA chains of a structure, as opposed to bound small molecules, ions and water. |
-| Structure, entry | A set of atom coordinates. An *entry* is one deposition in the Protein Data Bank, with a four-character identifier such as {{ex.entry}}; where an entry holds several coordinate sets we use the first. A *predicted structure* is one computed from the sequence; ours come from the AlphaFold Protein Structure Database. |
-| Ligand | A small molecule bound to the protein. |
-| Representation | A way of drawing atoms: *cartoon* (a ribbon that traces the chain), *ball-and-stick*, *spacefill* (every atom as a full-size sphere), *surface*. |
-| UniProt | The reference database of protein sequences. Each protein has an accession, such as {{ex.accession}}. |
-| ClinVar | A public archive of human genetic variants. Laboratories submit their judgement of whether a variant causes disease. For each *variation record* (accession beginning with VCV; usually one change at the level of DNA, sometimes several changes on one chromosome) ClinVar publishes an aggregate classification of inherited (germline) variants, such as "Pathogenic", and a *review status* that says how well it is supported. Different DNA changes can give the same amino-acid change, so one amino-acid change can have more than one record. We write ClinVar's terms in lower case from here on. |
-| Missense variant; {{ex.name_in_prompt}} | A change of one amino acid into another. {{ex.name_in_prompt}}: the tryptophan (W) at position {{ex.uniprot_position}} becomes an arginine (R). The same in three-letter form is {{ex.hgvs}}; the prefix "p." marks a position in the protein. A complete description also names the sequence that the position is counted on, here UniProt {{ex.accession}} (Section 3.3.1). |
-| Signal peptide, mature protein | A *signal peptide* is a leading segment of a newly made protein that the cell cuts off. The *mature protein* is what is left after such a segment has been removed. Older literature often numbers residues from the first residue of the mature protein; we call a variant name of this kind a *traditional name* (the genetics literature also says legacy name). It carries no "p.", as in {{ex.mature_name}}. |
+| UniProt, canonical sequence | UniProt is the reference database of protein sequences. Each protein has an accession, such as {{ex.accession}}, and one sequence that UniProt picks as its reference, the *canonical sequence*. |
+| ClinVar | A public archive of human genetic variants. Submitters, mostly clinical laboratories, send their classification of a variant: whether it causes disease. For each *variation record* (accession beginning with VCV; usually one change at the level of DNA, sometimes several changes on one chromosome) ClinVar publishes an aggregate classification of inherited (germline) variants, such as "Pathogenic", and a *review status*. The review status says how far the classification has been reviewed: whether the submitters stated their criteria, whether several submitters agree, and whether an expert panel has reviewed it. It is not a measure of the strength of the evidence. Different DNA changes can give the same amino-acid change, so one amino-acid change can have more than one record. We write ClinVar's terms in lower case from here on. |
+| Transcript | A numbered reference copy of the messenger RNA of a gene (accession beginning with NM_). ClinVar states each change on a transcript, in the form {{ex.clinvar_cdna}}: DNA letter {{ex.clinvar_cdna_position}} changes from {{ex.clinvar_cdna_from}} to {{ex.clinvar_cdna_to}}. A gene can have several transcripts, and they can number the protein differently. |
+| Missense variant; {{ex.name_in_prompt}} | A change of one amino acid into another. {{ex.name_in_prompt}}: the tryptophan (W) at position {{ex.uniprot_position}} becomes an arginine (R). The same in three-letter form is {{ex.hgvs}}; the prefix "p." marks a position in the protein. A complete description also names the sequence that the position is counted on. In this paper that is the UniProt canonical sequence, here {{ex.accession}}, which is not a reference sequence of the HGVS standard (Section 3.3.1). |
+| Signal peptide, mature protein, traditional name | The *mature protein* is what is left after the cell has removed the leading part of a newly made protein. That part can be the first residue alone, the *initiator methionine* (haemoglobin beta); a *signal peptide* (lysozyme: {{ex.offset}} residues); or a signal peptide and a further segment, a *propeptide* (coagulation factor IX: {{clin.f9_removed}} residues). Older literature often numbers residues from the first residue of the mature protein; we call a variant name of this kind a *traditional name* (the genetics literature also says legacy name). It carries no "p.", as in {{ex.mature_name}}. |
 | Mol\*, MolViewSpec | Mol\* is an open-source molecular viewer that runs in a web browser. MolViewSpec is a format, written in JSON (JavaScript Object Notation), that describes what Mol\* should load and draw. PDBe Mol\* is the build of Mol\* maintained by the Protein Data Bank in Europe (PDBe). |
-| Selection | The expression in an answer that picks atoms, for example "chain {{ex.auth_chain}}, residue {{ex.auth_number}}". |
 
 *Terms of the corpus.*
 
 | Term | Meaning in this paper |
 |:---------|:------------------------------|
 | Author numbering | The chain identifiers and residue numbers chosen by the depositors (in the structure file: `auth_asym_id`, `auth_seq_id`). This is what papers and most viewers show. A number can carry an *insertion code*: a letter appended to it (52A) where the depositors placed an extra residue between two numbers. |
-| Label numbering | The chain identifiers and residue numbers assigned by the archive (`label_asym_id`, `label_seq_id`): residues are counted 1, 2, 3 … along each chain. |
+| Label numbering | The chain identifiers and residue numbers assigned by the archive (`label_asym_id`, `label_seq_id`). Residues are counted 1, 2, 3 … along the full sequence of the molecule that was studied, including residues that are not seen in the coordinates, so the count has no gaps and no insertion codes. |
 | UniProt numbering | The position of a residue in the UniProt canonical sequence, counted from its first residue and so including any signal peptide. The variant names we use are in this numbering unless the request says otherwise (Section 3.3.1). |
-| Offset | For one residue, its UniProt number minus its author number ({{ex.uniprot_position}} − {{ex.auth_number}} = {{ex.offset}} in the running example). It can differ from residue to residue within a chain. A residue *has an offset* when the two numbers differ. |
+| Offset | For one residue, its UniProt number minus its author number ({{ex.uniprot_position}} − {{ex.auth_number}} = {{ex.offset}} in the running example). It can differ from residue to residue within a chain. A residue *has an offset* when the two numbers differ. In every clinical task with an offset the UniProt number is the larger one. |
 | Copying the number | Using the number printed in a variant name as the author residue number, without converting it. Copying is *right* in a task if the answer written in this way is exactly right, and *wrong* otherwise (Section 3.3.1). |
 | SIFTS | Structure Integration with Function, Taxonomy and Sequences: the public residue-by-residue mapping between PDB entries and UniProt sequences. |
 | Structure panel | The fixed set of {{panel.n}} structures (Section 3.1). Tasks are built on {{corpus.n_structures}} of them; one is reserved for the worked example in the prompts. |
 | Request | The plain-language instruction given to the model. |
-| Task | A request on one track, with its reference answer and its target. A request that is posed on both tracks is two tasks. |
+| Task | A request on one track, with its reference answer and, where it has one, its target. A request that is posed on both tracks is two tasks. |
 | Answer | What the model returns for one task. Each task is answered {{plan.samples}} times in the main condition. |
 | Scene | An answer in MolViewSpec: a description of what to load and how to draw it. A scene groups the atoms it selects into *components*; each component is a named set of atoms that is then drawn in one or more ways. Nothing is on screen unless the scene says so. |
-| Call list | An answer as an ordered list of calls to the PDBe Mol\* viewer. |
+| Call list | An answer as an ordered list of calls to the PDBe Mol\* viewer, written in JSON (Section 3.4). |
 | Default view | What the call-list viewer draws as soon as a structure is loaded, before any further call: the whole structure, with the polymer as a cartoon. A scene has no default view; its screen starts empty. |
 | Track, format, side | A *track* is one of the two halves of the benchmark. *Scene track*: answers are MolViewSpec scenes. *Call-list track*: answers are call lists. *Format* means the answer language itself (MolViewSpec, or PDBe Mol\* calls). A *side* is one of the two tasks of a pair. |
 | Pair | One request posed on both tracks, with the same target atoms. The word is used for nothing else in this paper. |
 | Category | One of eight kinds of task (Section 3.3). The categories are not steps on one scale of difficulty. |
 | Lookup categories | Name resolution and clinical variant. In these the answer needs one fact that a person would look up in a database: an entry identifier, or a residue number. The model cannot look it up and must recall it. |
 | Template | A fixed kind of request within a category; a generator script fills in the structure, the residues, the colours and the wording. |
-| Target | The atoms that the request is about, stored with the task (Section 4.2). |
+| Target | The atoms that the request is about. Most tasks store it. For a request that only changes a viewer setting or hides something, the target is everything the reference changes; {{corpus.n_without_target_followup}} follow-up tasks have none (Section 4.2). |
 | Accepted answer | One of several drawn states that a task lists as right. An answer is graded against each, and the best result counts. |
 | Held-back split | The tasks on {{corpus.heldback.n_structures}} structures that were set aside before generation and kept out of every earlier MolBench release. The tasks are public; the name does not mean a hidden test set (Section 3.6). |
 

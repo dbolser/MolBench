@@ -10,6 +10,8 @@ and *valid-only*. *Model* always means a language model. The repository's own gr
 document calls a style a *draw* and a category a *tier*; the rules are the same. Task identifiers are those of the task files; in them the endings `-mvs` and
 `-api` mark the scene track and the call-list track.
 
-Contents: S1, the running example in full · S2, all task templates · S3, the structure panel ·
-S4, grading rules and known limits · S5, the control set by kind · S6, the run manifest, models
-and prices · S7, the system prompts · S8, further tables of the pilot run.
+Contents: S0, background terms of structural biology · S1, the running example in full · S2,
+all task templates · S3, the structure panel and the variant list · S4, grading rules and
+known limits · S5, the control set by kind · S6, the run manifest, models and prices · S7,
+the system prompts · S8, further tables of the pilot run, and the trial of the rating study ·
+S9, further tables of the final run (pending).

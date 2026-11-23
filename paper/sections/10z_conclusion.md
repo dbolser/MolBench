@@ -8,8 +8,8 @@ grader agrees with every known verdict, where our earlier graders, which compare
 {{controls.mvs.old.false_fail_rate:.0%}} and {{controls.api.old.false_fail_rate:.0%}} of the
 correct answers; the control set is the one against which the grader was developed, and a
 check by people is planned. One score is not enough: we report the task success rate, the
-target score and F1. And in the clinical category of the pilot run the largest source of lost
-points was our own references, which drew more than the requests asked for; over the whole
-pilot it was answers that could not be shown. That clinical category did not yet test the
-mapping of residue numbers, which the final run is built to test.
+target score and F1. And the pilot run taught two things. Over all tasks, most points were
+lost to answers that the viewer could not show at all. In the clinical category, most were
+lost to our own references, which drew a cartoon that the requests did not ask for. That
+category did not yet test the mapping of residue numbers; the final run is built to test it.
 ⟦PENDING: final run — two sentences on the results: how well the models drive the viewer on each track, and what the paired comparison shows⟧

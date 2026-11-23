@@ -34,7 +34,7 @@ result tables), then the three commands above.
 
 - `{{key}}`, `{{key:.1%}}`: a value from `generated/values.json` or `generated/corpus_values.json`.
   An unknown key is an error; so is a key in both files.
-- `{{include:generated/x.md|pilot:Table S7}}`: a pilot table of SI Section S8, shown with that
+- `{{include:generated/x.md|pilot:Table S8}}`: a pilot table of SI Section S8, shown with that
   table number and in the words of the paper (`PILOT_WORDS` in `build.py` maps words, never
   numbers).
 - `{{include:generated/x.md}}`: a generated table. `{{include:generated/table_final_x.md|else:generated/shape_x.md}}`
