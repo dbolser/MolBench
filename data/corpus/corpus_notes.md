@@ -82,23 +82,52 @@ generator, a grader or a prompt, and `tests/test_audit_fixes.py` pins it.
 | `tr-ligands-8ce0` ("the small molecule" is glycerol), `tr-ions-2p4e` (mercury from a derivative) | real, left | references are right; the wording follows the additive ruling. `tr-nucleic-1bna` no longer says "no ions" |
 | Small parsing and labelling edges (representation enum, `" red "`, UniProt keys on a file without SIFTS columns) | real | fixed in `schema.py`, `drawn.py`, `pdbe_state.py` |
 
-## Checks run on this state (2026-11-16, after the audit fixes)
+## Provider pilot of 2026-11-16 and what it changed (PILOT.md)
+
+The lead ran `run/pilot.toml` for real (39 tasks, one answer each; claude-haiku-4-5 on the
+direct route, one free OpenRouter model). All 109 answers were read against request,
+reference and grade; `PILOT.md` has the table. Of the 71 answers that are not right, 61 are
+the model's fault, 4 the benchmark's, 6 arguable. Three answers had been graded right and
+were wrong. No reference answer and no request was wrong. Each fix is in a grader, a
+generator or a reference text shown to the models; `tests/test_pilot_fixes.py` and four new
+control kinds pin them.
+
+| finding | what was done |
+|---|---|
+| MVS: a second drawing of the same type on the same atoms is not seen (0 of 7,176 pixels in Mol\* 5.9.0) | the grader keeps the first listed; the MVS reference says so; each sample records `hidden_overlay`; control kinds `overlay_hidden_under_the_same_type`, `overlay_listed_before_the_base` |
+| An AlphaFold DB model has one address; an answer on an address that is a 404 had passed | such an address loads nothing, on both tracks; the MVS reference gives the address; `api-016` and two `api-alphafold` tasks no longer accept a v4 file; control kind `alphafold_file_not_served` |
+| API: a PDB id in upper case loads nothing in pdbe-molstar 3.3.2 (two answers had passed) | graded as no entry; the API reference says "lower case"; control kind `upper_case_entry_id` |
+| API reference did not say that a hide toggle leaves an added representation on screen (nine twins need it) | one sentence in the API reference |
+| MVS: a stray key beside `root` was graded as an empty scene | the grader reads the root, as Mol\* does |
+| Grounding packs of AlphaFold models said "None" for title and method | 36 packs regenerated |
+| Accept-set API tasks did not leave unrequested hide toggles open | `free_hide` by the common rule (14 of 15 tasks) |
+| Target score: a backdrop in the right representation counted as half an attempt; alternatives were not tried | half credit only for a drawing confined to the target; best over the accepted alternatives |
+
+56 task files were regenerated: 36 changed in `grounding` only, 14 in `free_hide`, 5 in
+`provenance` only, 1 in `accepted`. No `prompt` and no reference changed. A second scripted
+baseline (the literal parser) joined the panel on both tracks.
+
+## Checks run on this state (2026-11-23, after the pilot fixes)
 
 | check | result |
 |---|---|
-| every generator with `--check` (eight), translator `--all --check`, paraphrases `--check`, `build_grounding_packs.py --check`, `build_panel.py --check` | all up to date; 79 panel entries checked, 0 bad |
+| every generator with `--check` (eight), translator `--all --check`, paraphrases `--check`, `build_grounding_packs.py --check`, `build_panel.py --check`, `run/select_pilot.py --check` | all up to date; 79 panel entries checked, 0 bad |
 | `scripts/validate_tasks.py --final` | OK: every check passed (879 tasks, 0 old-format) |
 | `scripts/check_api_refs.py --cif` (offline, every API task file) | all checks passed |
-| `check_api_refs.py --viewer --sample 60 --seed 20261116 --no-probes` | 198 call lists (references and accepted forms) run in pdbe-molstar 3.3.2, 606 selections compared atom for atom, all agree; 1 list skipped (settings only) |
-| `build_atom_tables.py --verify --check` with the 67 component selectors of 40 seeded MVS references (seed 20261116, 29 structures) | exit 0: all 79 frozen atom tables are what Mol\* 5.9.0 gives, every selector agrees |
-| `scripts/grader_controls.py --check` | up to date; MVS 1,110 controls on 78 entries, API 995 on 74: 0 false passes, 0 false fails |
-| `python -m molbench.runner --manifest run/final_run.toml --dry-run` (all 22 panel entries, mock model) | 88,593 cells, 23 of 23 checks, DRY RUN PASSED; core panel 68,928 calls, projected $134.84 against a cap of $165.00 |
-| `scripts/paper_tables.py --from-dry-run`, `paper/build.py --check` | 31 mock tables, 3,063 values; paper and SI build, nothing stale |
-| `uv run pytest -q` | 2,750 passed |
+| `check_api_refs.py --viewer --no-probes --only` the 38 API tasks whose file changed | 158 call lists (references and accepted forms) run in pdbe-molstar 3.3.2, 230 selections compared atom for atom, all agree; `alphafold_view` not run in the viewer in 5 lists |
+| `check_api_refs.py --viewer --sample 60 --seed 20261123 --no-probes` | 145 call lists run, 365 selections compared atom for atom, all agree; four annotation settings and one all-models preset not read back |
+| `scripts/grader_controls.py --check` | up to date; MVS 1,155 controls on 78 entries, API 1,020 on 74: 0 false passes, 0 false fails |
+| `scripts/grader_controls.py --viewer` (Mol\* 5.9.0) | 910 controls, the viewer's verdict agrees on all; 1,545 scenes, the grader's resolved state (drawings as created) equals the viewer's on all; 245 controls of kinds that cannot be read back skipped; rule probes on 78 entries, 3,926 drawings, all agree |
+| `scripts/grader_controls.py --viewer-api 150` (pdbe-molstar 3.3.2) | 267 call lists, all agree; a bare load of 73 panel entries, all agree; 3 lists not runnable in the harness, 3 skipped because the grader's rule is that the host serves no file (upper-case id), which the harness cannot show |
+| `python -m molbench.runner --manifest run/final_run.toml --dry-run` (all 23 panel entries, mock model) | 91,647 cells, 23 of 23 checks, DRY RUN PASSED; core panel 71,982 calls, projected $137.96 against a cap of $165.00 (lean, one sample: 32,784 calls, $63.43; with the five optional models: 91,647 calls, about $496) |
+| `python -m molbench.runner --manifest run/pilot.toml --dry-run` | DRY RUN PASSED, projected $0.24 against a cap of $2.25 |
+| `--grade-only` on the pilot archives, both models | 38 of 109 answers right, as in `PILOT.md`; no model called |
+| `scripts/paper_tables.py --from-dry-run`, `--from-run results/pilot-v1`, `paper/build.py --check` | 38 mock tables, 3,181 values; the pilot's table in `paper/generated/pilot_results.md`; paper and SI build, nothing stale |
+| `uv run pytest -q` | 2,787 passed |
 
-Not re-run in this pass: the viewer read-backs of the follow-up, accept-set and translation
-generators (`--check --viewer`), and `grader_controls.py --viewer`. The API viewer check ran
-on a seeded sample of 60 task files, not on all.
+Not re-run in this pass: Mol\* read-backs of MVS references (none changed) and the viewer
+read-backs of the follow-up, accept-set and translation generators (`--check --viewer`).
+The API viewer check ran on the changed files and a seeded sample of 60, not on all.
 
 ## Known weaknesses
 
