@@ -16,9 +16,12 @@ the full list with numbers.
   hand; the median year of deposition is {{panel.deposited_median}}. Scores may be higher
   than on recent or very large structures.
 - **ClinVar is a snapshot, read through UniProt.** Classifications change. We looked only at
-  the records that UniProt cross-references, did not check which transcript (messenger RNA of the gene) a
-  record's protein-level name is counted on, and attach the classification to a protein-level name
-  without naming the disease, which ClinVar itself does not do. The residue that a name points to
+  the records that UniProt cross-references and did not check which transcript (messenger RNA of the gene) a
+  record's protein-level name is counted on. ClinVar classifies a variant for a stated condition;
+  we attach the classification to a protein-level name and drop the condition. In the
+  {{clin.n_no_accession}} requests without a UniProt accession, a "p." position is graded on
+  UniProt's canonical sequence, while a clinical reader would count it on the protein of the
+  MANE Select transcript; we assume, without checking, that the two agree (SI Section S10.3). The residue that a name points to
   does not depend on the classification.
 - **The grader is tested only against cases that we foresaw** (Section 4.5). Until the
   rating study is done,
@@ -30,7 +33,7 @@ the full list with numbers.
   depend on them.
 - **The formats are not compared on equal terms everywhere.** The call-list viewer can map a
   UniProt position itself, and the two system prompts differ in length
-  ({{prompt.mvs.words:,}} and {{prompt.api.words:,}} words).
+  ({{prompt.mvs.words:,}} words on the scene track, {{prompt.api.words:,}} on the call-list track).
 - **Small groups are descriptive only.** The set-aside split within one category, the
   matched clinical tasks, the helix and strand tasks and the two alternative wordings are reported
   with intervals and not tested. In every set of matched tasks the structure without an

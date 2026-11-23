@@ -2,7 +2,7 @@
 
 ⟦PENDING: final run — discussion of the results: which categories separate models, what the paired comparison shows, whether the set-aside split differs from the other tasks, and what Table 10 says about mapping against copying⟧
 
-Two points concern the instrument and can be made before the final run.
+Two points about the instrument can be made before the final run.
 
 **One score is not enough.** The pilot run gave three different pictures of the same
 answers. Strict scores mostly measured whether a model returned a scene that the viewer

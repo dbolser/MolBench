@@ -30,7 +30,7 @@ numbered as their UniProt sequences are [@faezov2021pdbrenum].
 **What the model is given.** In MolBench the model receives only the request and a guide to
 the answer format. It does not see the structure file, it cannot look anything up, and it
 does not see the picture that its answer produces. To answer the request above it must know
-from its training how entry {{ex.entry}} is numbered, as a model that is used without tools must. The classification in the request
+from its training how entry {{ex.entry}} is numbered. The classification in the request
 comes from ClinVar, a public archive of human genetic variants; the benchmark uses a variant
 only as an address for a residue and never asks whether it causes disease.
 
@@ -69,6 +69,6 @@ This paper makes four contributions.
    list of calls to the PDBe Mol\* viewer (the *call-list track*).
    {{corpus.n_twin_pairs}} requests are posed on both tracks, with the same target atoms, so
    that an error of content can be told apart from an error of format.
-4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 5 to 7). A pilot run exposed errors in our own references (Table 13, rows 1 and 2), and the analysis of the final
+4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 5 to 7). A pilot run exposed errors in our own benchmark (Table 13, rows 1 and 2), and the analysis of the final
    run (tables, comparisons and primary scores) was fixed before any model was called.
    ⟦PENDING: final run — one sentence stating the main result⟧

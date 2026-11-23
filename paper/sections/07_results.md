@@ -1,9 +1,7 @@
 ## 6. Results
 
-The only results that exist today come from the *first version* of the benchmark: the
-corpus and the two text-comparing graders that were public from May 2026 until the present
-corpus replaced them. Its run of the scene tasks in October 2026 is the *pilot run*, whose
-results are kept apart in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that
+The only results that exist today are those of the *pilot run*, the October 2026 run of the
+scene tasks of the first version (Section 3.6), kept apart in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that
 the final run will fill; their layout and captions are fixed, and a script fills the cells.
 Figure 5 shows the layout of the summary figure.
 
@@ -12,11 +10,9 @@ Figure 5 shows the layout of the summary figure.
 
 ### 6.1 Models on both tracks
 
-Tables 6 and 7 give one row per model, one table per track.
-
 **Table 6. Scene track, main condition.** One row per model; † marks an optional model.
 *Valid answers*: share of
-answers that parse and that the viewer accepts. *Task success rate*: share of answers whose
+answers that are valid (Section 4.4: they parse, pass the viewer's validation and name a loadable structure file). *Task success rate*: share of answers whose
 drawn state is exactly right. *Target score* (0 to 1): how exactly the answer marks out the
 requested atoms; any other drawing is ignored. *F1* (0 to 1): how much of the drawn state
 is right. *Strict*: every answer counts, an unshowable one as 0. *Valid-only*: the mean over
@@ -79,8 +75,8 @@ on a structure with an offset and on a predicted structure without one (descript
 
 {{include:generated/table_final_clinical.md|else:generated/shape_clinical.md}}
 
-This table will answer the question of the Introduction. Four patterns are possible in its first two rows. We state them
-before the run and do not predict which one a model will show.
+This table answers the question of the Introduction. Four patterns are possible in its first two rows; we state them
+before the run and predict none.
 
 1. *Copying.* The target score is high where copying is right and low where it is wrong.
 2. *Mapping.* The target score is high in both rows.
@@ -118,7 +114,7 @@ task success rates must not be compared (Section 4.2).
 rate (strict, mean over the models) between two groups of tasks or two conditions, with a
 95% interval on the difference (structures resampled). The conditions are those of Table 5;
 the one JSON-mode answer to a task is set against the mean of its {{plan.samples}} main
-answers. *Both tracks* means that the tasks of the two tracks are pooled.
+answers. *Both tracks* means that the tasks of the two tracks are pooled. Pooling compares like with like in rows 2 to 4, where both groups hold the same requests; in row 1 the share of scene tasks differs slightly ({{corpus.public.mvs_share:.0%}} and {{corpus.heldback.mvs_share:.0%}}).
 
 {{include:generated/table_final_robustness.md|else:generated/shape_robustness.md}}
 

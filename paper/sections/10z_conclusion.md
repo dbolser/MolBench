@@ -1,11 +1,10 @@
 ## 10. Conclusion
 
-MolBench grades how a language model drives a molecular viewer on the atoms,
-representations and colours that the viewer would draw, without a judge model. References
-are computed by script from the structure, the SIFTS mapping and ClinVar. The corpus has {{corpus.n_tasks}} tasks on {{corpus.n_structures}}
-structures, and {{corpus.n_twin_pairs}} requests are posed in two answer formats, to
-tell errors of content from errors of format. The grader agrees with all
-{{controls.n:,}} control answers against which it was developed, and a check by people is
+MolBench grades, without a judge model, the atoms, representations and colours that a
+molecular viewer would draw from a language model's answer. Its {{corpus.n_tasks}} tasks on
+{{corpus.n_structures}} structures have references computed by script, and
+{{corpus.n_twin_pairs}} requests are posed in two answer formats. The grader agrees with all
+{{controls.n:,}} control answers against which it was developed; a check by people is
 planned. A pilot run
 taught two things: most points were lost to answers that the viewer could not show,
 and in the clinical category most were lost to our own references, which drew an

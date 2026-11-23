@@ -42,7 +42,7 @@ offline lookup, appended to the request.
 | **Main** | A short instruction, the rule for the answer ("answer with one JSON value and nothing else") and the format guide | all models, all tasks, both tracks | {{plan.samples}} |
 | Main + JSON mode | The same, with JSON mode switched on | every model that offers JSON mode ({{plan.n_json_mode_models}} of the {{plan.n_core_models}} core models, and each optional model that is run); all tasks, both tracks | 1 |
 | Main + grounding pack | The same, with the task's grounding pack appended to the request | all models; the lookup categories, scene track | {{plan.samples}} |
-| No format guide | The instruction and the rule for the answer only | {{plan.n_bare_models}} models; all tasks of the scene track | {{plan.samples}} |
+| No format guide | The instruction and the rule for the answer only | {{plan.n_bare_models}} models, the three of the pilot run (SI Section S12.2); all tasks of the scene track | {{plan.samples}} |
 
 The format guide is all that a model is told about the answer format. The guide of the
 scene track documents selection by author and by label numbering; the guide of the

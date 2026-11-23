@@ -44,30 +44,30 @@ request for a feature against a background ("grey cartoon and the biotin in gree
 ball-and-stick"), the feature; where there is no such distinction, everything that the
 reference draws. The target score, from 0 to 1, is how exactly the answer marks out the
 target. It is 1, and the answer is *target-right*, when three things hold: the target
-atoms carry the requested style; no other atom carries that style; and no second
-representation is drawn on target atoms alone. Any other drawing, such as a cartoon of the
+atoms carry the requested style; no other atom carries that style; and no drawing in
+another representation is confined to the target atoms. Any other drawing, such as a cartoon of the
 protein, is ignored.
 
-The target score is the harmonic mean of a recall and a precision, counted in *items* (one
-style on one atom). Recall is the share of the requested items that the answer has, with
+The target score is the harmonic mean of a *target recall* and a *target precision*, counted
+in *items* (one style on one atom), not in facts as F1 is. Target recall is the share of the requested items that the answer has, with
 half credit for the right representation in another colour or opacity. Precision depends
 on what the answer drew beyond the request, which is of three kinds (rows of Table 3 in
 parentheses).
 
 - *Spill*: the style that marks the target, repeated on atoms outside it
-  ({{ex.row.mvs.spill}}, {{ex.row.mvs.spill_chain}}). It lowers precision.
-- *Extra*: another representation drawn on target atoms alone ({{ex.row.mvs.extra}}:
+  ({{ex.row.mvs.spill}}, {{ex.row.mvs.spill_chain}}). It lowers target precision.
+- *Extra*: another representation confined to the target atoms ({{ex.row.mvs.extra}}:
   {{ex.n_target_atoms}} credited items of {{ex.n_target_atoms_twice}} drawn, precision
-  {{ex.mvs.extra.target_precision:.2f}}). It lowers precision.
+  {{ex.mvs.extra.target_precision:.2f}}). It lowers target precision.
 - *Unrequested context*: any other style that reaches beyond the target, such as a cartoon
   of the protein ({{ex.row.mvs.context}}, {{ex.row.mvs.other_rep_around}}). It is not
   counted.
 
-Precision divides the credit counted for recall by everything that the answer drew to mark the
+Target precision divides the credit counted for target recall by everything that the answer drew to mark the
 target: its items of the requested representation on the target, plus its spill and extra
 items (formula in SI Section S4.3).
 
-The line between extra and context is a convention, and its consequence may surprise:
+The line between extra and context is a convention:
 {{ex.other_rep}} added to the target residue alone lowers the target score to
 {{ex.mvs.extra.target:.2f}} (row {{ex.row.mvs.extra}}), while the same {{ex.other_rep}} on
 the residue and its two neighbours is context and leaves the score at
@@ -80,9 +80,8 @@ are "drawn as asked" afterwards (SI Section S11.3).
 **F1: how much of the drawn state is right?** F1, from 0 to 1, gives partial credit. It is
 the harmonic mean of *recall*, the mean over the facts of the reference of the fraction
 that the answer also draws, and *precision*, the same over the facts of the answer. A style
-with the right representation and the wrong colour or opacity counts half. On the call-list track each changed
-atom is compared by its final appearance as a whole. This is more generous than the scene
-rule: any change to the right atoms earns one half, even in the wrong representation, which
+with the right representation and the wrong colour or opacity counts half. On the call-list track an
+atom's changed appearance is compared as one unit, not style by style, so any change to the right atoms earns one half, even in the wrong representation, which
 earns nothing on the scene track (SI Section S11.2). Where a task lists several accepted answers, an answer is graded against each, and
 the best result counts.
 
@@ -104,7 +103,7 @@ Figure 4 and Table 3 grade several answers to the running example. The reference
 {{ex.wild_type}}{{ex.auth_number}} of chain {{ex.auth_chain}} as {{ex.color}} {{ex.rep}}, and
 nothing else.
 
-![**Figure 4. Drawn-state grading of the reference and two answers to the running example.** Top: the three drawings as Mol\* 5.9.0 renders them, from one camera. The reference and Answer A look equally plausible: nothing in either picture says which residue it is. Below, each panel shows a stretch of chain {{ex.auth_chain}} in author numbering, the facts of the drawn state, and the scores. *Fact*: all atoms that are drawn in the same way. *Recall*: for each fact of the reference, the fraction that the answer also draws, averaged over those facts. *Precision*: the same for the facts of the answer. *F1*: the harmonic mean of recall and precision. *Task success* and *target score* as in Table 3; the target score ignores the cartoon of Answer B.](generated/fig_grading.svg)
+![**Figure 4. Drawn-state grading of the reference and two answers to the running example.** Top: the three drawings as Mol\* 5.9.0 renders them, from one camera. The reference and Answer A look equally plausible: nothing in either picture says which residue it is. Below, each panel shows a stretch of chain {{ex.auth_chain}} in author numbering, the facts of the drawn state, and the scores. *Fact*: all atoms that are drawn in the same way. *Recall*: for each fact of the reference, the fraction that the answer also draws, averaged over those facts. *Precision*: the same for the facts of the answer. *F1*: the harmonic mean of recall and precision. *Task success* and *target score* as in Table 3; the target score ignores the cartoon of Answer B. Recall and precision here are those of F1; the target score has its own, counted per item (Section 4.2).](generated/fig_grading.svg)
 
 **Table 3. Answers to the running example and their scores**, computed by the benchmark's
 grader. *F1* (0 to 1): how much of the drawn state is right. *Task success*: the drawn
@@ -141,10 +140,10 @@ one of two things. An *unshowable* answer cannot be shown at all:
 it holds no parseable JSON of the right outer shape (a scene, or a list of calls) or, on the
 scene track, is rejected by the viewer or names a file that cannot be loaded. It scores 0 on
 all three scores. A
-*schema-breaking* call list breaks that rule (an unknown call, a missing field or a wrongly
-typed value, for example). The viewer
-ignores such parts and carries on, so the list is graded as the viewer would treat it, but
-it is not counted as valid (SI Table S5).
+*schema-breaking* answer, possible only on the call-list track, is a parseable list with an
+unknown call, a missing field or a wrongly typed value, for example. The viewer ignores such parts and
+carries on, so even under strict the list keeps the score that its replay earns, but it is
+not counted as valid (SI Table S5).
 
 Scores are averaged in three named ways. *Strict*, the default: every answer counts, which
 is what a user of a model without tools would experience. *Valid-only*: the mean over a
@@ -189,9 +188,9 @@ drew the atoms that the grader resolves. On the call-list track, a sample of
 {{controls.viewer.api.sample}} controls holds {{controls.viewer.api.sample_lists}} call
 lists (a reference and an answer each). Of these, {{controls.viewer.api.lists}} were
 replayed in PDBe Mol\* 3.3.2, and every one ended in the state that the grader computes;
-the other {{controls.viewer.api.lists_not_replayed}} were not replayed
-({{controls.viewer.api.skipped_uniprot}} of them select by UniProt number), so none
-disagreed. Also not checked in a viewer: controls of kinds that cannot be read back (the
+the other {{controls.viewer.api.lists_not_replayed}} are untested:
+{{controls.viewer.api.skipped_uniprot}} select by UniProt number and
+{{controls.viewer.api.lists_other_not_replayed:word}} could not be run by our replay of local files. Also not checked in a viewer: controls of kinds that cannot be read back (the
 text of a label, for example) and call-list controls outside the sample (SI Sections S5
 and S11.6).
 

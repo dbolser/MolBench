@@ -165,6 +165,10 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     V["corpus.heldback.n_tasks"] = sum(t["split"] == "heldback" for t in orig)
     V["corpus.heldback.share"] = pct(V["corpus.heldback.n_tasks"], len(orig))
     V["corpus.public.n_tasks"] = len(orig) - V["corpus.heldback.n_tasks"]
+    # Row 1 of Table 12 pools the tracks: the share of scene tasks in each group.
+    for split, key in (("public", "public"), ("heldback", "heldback")):
+        n = sum(t["split"] == split for t in orig)
+        V[f"corpus.{key}.mvs_share"] = pct(sum(t["split"] == split and t["track"] == "mvs" for t in orig), n)
     pub_structs = {s for t in orig if t["split"] == "public" for s in t["structures"]}
     assert not pub_structs & set(held), "a held-back structure is used by a public task"
     V["corpus.n_tasks_without_structure"] = sum(not t["structures"] for t in orig)
@@ -792,6 +796,11 @@ def controls_values(V: dict) -> dict:
     V["controls.viewer.api.sample_lists"] = 2 * vs["controls_in_sample"]
     V["controls.viewer.api.lists_not_replayed"] = 2 * vs["controls_in_sample"] - a["lists_run"]
     V["controls.viewer.api.skipped_uniprot"] = vs["lists_selecting_by_uniprot"]
+    # Not replayed for another reason: the replay script could not run them, or they load
+    # nothing by the grader's rule for file addresses, which a replay of local files cannot test.
+    V["controls.viewer.api.lists_other_not_replayed"] = (V["controls.viewer.api.lists_not_replayed"]
+                                                       - V["controls.viewer.api.skipped_uniprot"])
+    assert V["controls.viewer.api.lists_other_not_replayed"] == a.get("not_runnable", 0) + by_rule
     V["controls.viewer.api.n_added_since"] = V["controls.api.n_controls"] - vs["controls_at_check"]
     # Each control has two call lists (reference and answer); the replay record counts lists.
     ents = {tr: {json.loads(line)["entry"] for line in (REPO / f"tests/controls/{tr}.jsonl").open(encoding="utf-8")}

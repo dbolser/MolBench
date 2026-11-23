@@ -15,7 +15,7 @@ is written by hand. Box 1 defines the main terms; SI Section S0 is the full glos
 | UniProt numbering | The position of a residue in UniProt's canonical sequence of the protein, counted from its first residue (the initiator methionine included). A variant name with the prefix "p." ({{ex.name_in_prompt}}, or {{ex.hgvs}}) is in this numbering here. |
 | Traditional name | A variant name from older literature, without "p.", numbered from the first residue of the *mature protein* ({{ex.mature_name}} for {{ex.name_in_prompt}}). The mature protein is what remains after the cell has cut off the leading segment: a signal peptide, sometimes with a propeptide, or the initiator methionine alone. |
 | Offset | For one residue, its UniProt number minus its author number ({{ex.uniprot_position}} − {{ex.auth_number}} = {{ex.offset}} in the running example). A residue *has an offset* when the two differ. |
-| Copying the number | Using the number printed in a variant name as the author residue number. Copying is *right* in a task if the answer written in this way is exactly right, and *wrong* otherwise. |
+| Copying the number | Using the number printed in a variant name as the author residue number. Copying is *right* in a task if the residue so named is the target residue, and *wrong* otherwise. |
 | Scene, call list | The two answer formats. A *scene* (MolViewSpec) states what to load and draw; nothing is on screen unless the scene says so. A *call list* is an ordered list of calls to the PDBe Mol\* viewer, which starts from a *default view*: the whole structure, with the polymer chains as a cartoon (a ribbon that traces each chain). |
 | Track | One of the two halves of the benchmark: *scene track* and *call-list track*, named after the answer format. |
 | Pair, side | A *pair* is one request posed on both tracks, with the same target atoms. A *side* is one of its two tasks. |
@@ -40,19 +40,16 @@ in every cell of a person, inherited or newly arisen, not acquired in a tumour. 
 here is one amino-acid change, of which ClinVar may hold several
 DNA-level records. UniProt lists {{variants.n_candidates:,}} such variants of these proteins as pathogenic or
 likely pathogenic. We keep a variant only if it has a *qualifying record*: a ClinVar
-variation record, cross-referenced by UniProt, that meets four conditions. It lists the same
-amino-acid change at the same position; its aggregate germline classification (ClinVar's
-summary over all submitters) is pathogenic, likely pathogenic or pathogenic/likely
-pathogenic; it is a record of the gene named in the request and of that change alone, not
-of a haplotype (several changes inherited together); and its review status is not "no
-assertion criteria provided", which means that no submitter said by which criteria the
-variant was classified. This leaves a pool of {{variants.n_usable:,}} variants, from which
+variation record, cross-referenced by UniProt, of that gene and that single change, whose
+aggregate germline classification (the summary over all submitters) is pathogenic, likely
+pathogenic or pathogenic/likely pathogenic, and whose review status is not "no assertion
+criteria provided". This leaves a pool of {{variants.n_usable:,}} variants, from which
 the generator draws. The clinical tasks name {{clin.n_variants}} variants (a few tasks name
 several) on {{clin.n_proteins}} of the {{panel.n_disease_proteins}} proteins:
 {{clin.n_variants_from_pool}} from the pool and one exception made by hand from outside it,
 lysozyme p.Ile74Thr, among the first variants reported to cause lysozyme amyloidosis, whose record
 states no assertion criteria ({{clin.n_tasks_kept_by_name:word}} task per track). SI Section
-S3.2 gives the filter step by step and what a request says about the classification.
+S3.2 gives the filter step by step.
 
 **Atom tables and residue mapping.** For each structure we freeze two tables: an *atom table*
 of every atom record of the file, with its chain and residue in author and in label
@@ -209,7 +206,7 @@ The split asks one thing: do models score higher on structures that earlier MolB
 used? The test is weak: only
 {{corpus.public.n_structures_used_earlier}} of the {{corpus.public.n_structures}} other
 structures appeared in any task of the first version (its pilot run, of scene tasks alone,
-used {{mvs.n_structures}} structures), nearly all tasks in both parts are new, and the
+used {{mvs.n_structures}} structures), nearly all tasks in both parts are new (none is a task of the pilot run), and the
 split's tasks are public too (Section 9).
 
 To measure sensitivity to wording, {{corpus.n_requests_paraphrased}} requests
@@ -222,5 +219,5 @@ counted in Table 1 (SI Section S10.6).
 
 Four checks involve no model (Figure 1, lower half): each reference against its structure,
 the atom tables against the running viewers, the grader against a control set, and every
-task file against the written task format. Section 4.5 reports the second and third. The
-run does not start unless every check passes.
+task file against the written task format. Section 4.5 reports the second and third; the
+first and fourth are gates, and the run does not start unless every check passes.
