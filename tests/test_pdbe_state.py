@@ -277,7 +277,9 @@ def test_tooltip_text_and_focus_tolerances():
 
 
 def test_structure_identity():
-    assert ps.canonical_entry("1HHO", None) == "1hho"
+    assert ps.canonical_entry("1hho", None) == "1hho"
+    # the viewer asks PDBe for the id as written, and PDBe has lower-case names only
+    assert ps.canonical_entry("1HHO", None) == "id:1HHO"
     af = "https://alphafold.ebi.ac.uk/files/AF-P04637-F1-model_v{}.{}"
     assert ps.canonical_entry(None, {"url": af.format(6, "cif"), "format": "cif"}) == "af-p04637-f1"
     # a version AlphaFold DB no longer serves answers 404: no entry (drawn.alphafold_problem)

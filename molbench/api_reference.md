@@ -13,7 +13,7 @@ calling **methods**.
 
 | Trait | Type | Notes |
 |---|---|---|
-| `molecule_id` | str | PDB id, e.g. `"1cbs"`. With `superposition=True` it is a **UniProt accession** instead. |
+| `molecule_id` | str | PDB id in **lower case**, e.g. `"1cbs"`: the viewer puts it into the file address as written, and `"1CBS"` loads nothing. With `superposition=True` it is a **UniProt accession** instead. |
 | `custom_data` | dict | `{"url": str, "format": "cif"\|"bcif"\|"pdb", "binary": bool}` — load any structure file by URL instead of a PDB id. An AlphaFold DB model is `https://alphafold.ebi.ac.uk/files/AF-<accession>-F1-model_v6.cif`. |
 | `assembly_id` | str | Biological assembly to build, e.g. `"1"`; `"preferred"` = the first. Default: the deposited model. |
 | `default_preset` | enum | `default` \| `unitcell` \| `all-models` \| `supercell`. |

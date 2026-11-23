@@ -321,6 +321,18 @@ answer is `load_failed` on the MVS track and loads nothing on the API track
 Both references shown to the models give the address. (Found on the pilot: an answer
 on `files.rcsb.org/download/AF-P68871-F1.cif` had passed.)
 
+**A PDB id on the API track is written in lower case.** pdbe-molstar puts `molecule_id`
+into PDBe's file address as written (`.../entry-files/download/<id>.bcif`), PDBe names
+its files in lower case and tells the cases apart, so `"3K34"` asks for a file that is
+not there and the canvas stays empty. Run in headless pdbe-molstar 3.3.2 against PDBe
+on 2026-11-23: 0 structures for `"3K34"` and `"1LMB"`, 2,387 atoms for `"3k34"`. Such
+an answer loads nothing and scores 0 (`pdbe_state.canonical_entry`); the same holds for
+a PDBe entry-file URL with the id in upper case, on either track
+(`drawn.pdbe_file_problem`). RCSB's download host serves either case, so
+`files.rcsb.org/download/3K34.cif` is graded as the entry. The API reference shown to
+the models says so. (Found on the pilot: the free model copied the id as the request
+writes it; two such answers had passed, and until then a control kind expected them to.)
+
 A state's own `root` is the scene: `{"root": {...}, "kind": "root"}` (a stray
 top-level `kind`) loads in Mol\* as the tree under `root`, and is graded as that.
 
@@ -557,7 +569,7 @@ fails if the grader stops agreeing with any control.
 | track | controls | kinds (equivalent / wrong) | false pass | false fail | graders before this work: false pass / false fail |
 |---|---|---|---|---|---|
 | MVS | 1,155 on 78 entries | 25 / 26 | 0 of 505 | 0 of 650 | 16 of 505 / 284 of 650 (October path grader, F1 = 1 as success) |
-| API | 1,000 on 74 entries | 22 / 22 | 0 of 425 | 0 of 575 | 75 of 425 / 312 of 575 (July sequence grader, F1 = 1 as success) |
+| API | 1,020 on 74 entries | 22 / 23 | 0 of 445 | 0 of 575 | 95 of 445 / 319 of 575 (July sequence grader, F1 = 1 as success) |
 
 Read these zeros with care: the grader was corrected until it agreed with every
 control, so they show that the rules above are implemented, not how often an unforeseen

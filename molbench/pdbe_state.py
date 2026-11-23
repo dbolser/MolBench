@@ -140,7 +140,8 @@ from .atoms import AtomTable, load_table
 
 # The colour-name table and the tolerance are shared with the MVS grader (drawn.py):
 # Mol*'s ColorNames, the same in the pdbe-molstar 3.3.2 bundle and in Mol* 5.9.0.
-from .drawn import COLOR_NAMES, COLOR_TOLERANCE, alphafold_problem, color_eq  # noqa: E402,F401
+from .drawn import (COLOR_NAMES, COLOR_TOLERANCE, alphafold_problem, color_eq,  # noqa: E402,F401
+                    pdbe_file_problem)
 
 RGB = tuple  # (r, g, b)
 GREY = (170, 170, 170)            # normalizeColor's fallback
@@ -478,13 +479,21 @@ def canonical_entry(molecule_id: Any, custom_data: Any) -> str | None:
             # nothing: it stays a bare URL, which is no entry (drawn.alphafold_problem)
             return url if alphafold_problem(url) else f"af-{m.group(1).lower()}-f{m.group(2)}"
         m = _PDB_URL.search(url)
-        return m.group(1).lower() if m else url
+        return m.group(1).lower() if m and not pdbe_file_problem(url) else url
     if isinstance(molecule_id, str) and molecule_id.strip():
-        m = molecule_id.strip().lower()
+        raw = molecule_id.strip()
+        m = raw.lower()
         # moleculeId is a PDB id (or, in the superposition view, a UniProt accession).
         # Anything else is asked of PDBe's model server as if it were a PDB id and
         # fails; the "id:" prefix keeps it apart from a file loaded by URL.
-        return m if _PDB_ID.fullmatch(m) else "id:" + m
+        # The viewer puts the id into PDBe's file address as written
+        # (.../entry-files/download/<id>.bcif) and PDBe names its files in lower case:
+        # "3K34" asks for 3K34.bcif, gets 404 and shows an empty canvas (run in headless
+        # pdbe-molstar 3.3.2 on 2026-11-23: 0 structures for "3K34" and "1LMB", 2,387
+        # atoms for "3k34"). So an id that is not in lower case is no entry.
+        if not _PDB_ID.fullmatch(m):
+            return "id:" + m
+        return m if raw == m else "id:" + raw
     return None
 
 

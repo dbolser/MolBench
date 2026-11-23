@@ -484,6 +484,27 @@ def zero(**extra: Any) -> dict[str, Any]:
     return out
 
 
+# --- PDBe entry files -------------------------------------------------------------
+
+_PDBE_FILE = re.compile(r"\s*https?://(?:www\.)?ebi\.ac\.uk/pdbe/entry-files/(?:download/)?"
+                        r"([^/?#\s]+)", re.I)
+
+
+def pdbe_file_problem(url: Any) -> str | None:
+    """Why a PDBe entry-file address would load nothing, or None. PDBe's file names are
+    in lower case and the server tells the cases apart: ``.../entry-files/download/
+    3K34_updated.cif``, ``3K34.bcif``, ``1LMB_updated.cif`` and ``1HRC.bcif`` answer 404
+    where the lower-case names answer 200 (checked 2026-11-23). RCSB's download host
+    serves either case, so this is about PDBe's address only. It is the address
+    pdbe-molstar builds from ``molecule_id`` as written, which is why an upper-case
+    ``molecule_id`` shows an empty canvas (``pdbe_state.canonical_entry``)."""
+    m = _PDBE_FILE.match(url) if isinstance(url, str) else None
+    if m and m.group(1) != m.group(1).lower():
+        return (f"{url.strip()[:120]!r}: PDBe's entry files are named in lower case; "
+                "this address answers 404")
+    return None
+
+
 # --- AlphaFold DB files -----------------------------------------------------------
 
 _AF_NAME = re.compile(r"AF-[A-Za-z0-9]+-F\d+", re.I)

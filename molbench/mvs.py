@@ -644,7 +644,7 @@ def load_problem(tree: Any) -> str | None:
             fmt = source_format(url)
             if fmt is None:
                 return f"download url {str(url)[:120]!r} names no structure file on a known host"
-            af = _drawn.alphafold_problem(url)
+            af = _drawn.alphafold_problem(url) or _drawn.pdbe_file_problem(url)
             if af:
                 return af
         elif kind == "parse" and url is not None:

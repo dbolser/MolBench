@@ -570,17 +570,17 @@
    ]
   },
   "api": {
-   "n_controls": 1000,
+   "n_controls": 1020,
    "n_identical": 150,
    "n_equivalent": 425,
-   "n_wrong": 425,
+   "n_wrong": 445,
    "n_equivalent_kinds": 22,
-   "n_wrong_kinds": 22,
+   "n_wrong_kinds": 23,
    "n_entries": 74,
    "grader": {
     "false_pass": {
      "errors": 0,
-     "n": 425,
+     "n": 445,
      "rate": 0.0
     },
     "false_fail": {
@@ -597,19 +597,19 @@
    "previous_grader": {
     "what": "July sequence grader, F1 = 1 taken as success",
     "false_pass": {
-     "errors": 75,
-     "n": 425,
-     "rate": 0.1765
+     "errors": 95,
+     "n": 445,
+     "rate": 0.2135
     },
     "false_fail": {
-     "errors": 312,
+     "errors": 319,
      "n": 575,
-     "rate": 0.5426
+     "rate": 0.5548
     },
     "false_fail_equivalent_only": {
-     "errors": 311,
+     "errors": 318,
      "n": 425,
-     "rate": 0.7318
+     "rate": 0.7482
     }
    },
    "mistakes": [],
@@ -656,11 +656,11 @@
     },
     {
      "group": "equivalent",
-     "kind": "entry_id_case_or_url",
-     "what": "the entry id in upper case, or the same entry loaded by URL",
+     "kind": "entry_by_url",
+     "what": "the same entry loaded by URL (PDBe's updated file) instead of by its id",
      "n": 20,
      "graded_success": 20,
-     "old_grader_success": 7,
+     "old_grader_success": 0,
      "mean_f1": 1.0,
      "mean_target_f1": 1.0
     },
@@ -1013,6 +1013,16 @@
      "old_grader_success": 0,
      "mean_f1": 0.5582,
      "mean_target_f1": 0.5162
+    },
+    {
+     "group": "wrong",
+     "kind": "upper_case_entry_id",
+     "what": "the right calls with the PDB id in upper case, as the request writes it: the viewer puts molecule_id into PDBe's file address as written, PDBe names its files in lower case, and nothing loads (run in pdbe-molstar 3.3.2 against PDBe on 2026-11-23: 0 structures for '3K34' and '1LMB', 2,387 atoms for '3k34')",
+     "n": 20,
+     "graded_success": 0,
+     "old_grader_success": 20,
+     "mean_f1": 0.0,
+     "mean_target_f1": 0.0
     },
     {
      "group": "wrong",

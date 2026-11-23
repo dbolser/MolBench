@@ -3,7 +3,8 @@
 Each test names the finding it pins. The answers graded here are the ones the two pilot
 models gave, or the smallest rewrite of them. The control set (tests/controls) carries
 the matching kinds: `overlay_hidden_under_the_same_type`,
-`overlay_listed_before_the_base`, `alphafold_file_not_served` (both tracks).
+`overlay_listed_before_the_base`, `alphafold_file_not_served` (both tracks),
+`upper_case_entry_id` (API).
 """
 
 from __future__ import annotations
@@ -246,6 +247,61 @@ def test_no_grounding_pack_says_none():
         assert "; 1 residues precede" not in text
     af = [p for p in packs if p.startswith("AlphaFold DB model")]
     assert af and all("predicted model (AlphaFold), not an experiment" in p for p in af)
+
+
+# --- an upper-case PDB id loads nothing on the API track (found: nemotron, 2026-11-23) -----
+
+def test_an_upper_case_molecule_id_loads_nothing():
+    """The free pilot model copied the id as the request writes it ("3K34"). pdbe-molstar
+    puts molecule_id into PDBe's file address as written, PDBe names its files in lower
+    case, and the canvas stays empty (run in headless pdbe-molstar 3.3.2 against PDBe:
+    0 structures for "3K34" and "1LMB", 2,387 atoms for "3k34"). Two such answers had
+    been graded as right."""
+    for tid in ("tr-range-rows-3k34-api", "api-label-chain-1lmb"):
+        ref = BY_ID[tid]["reference"]
+        upper = copy.deepcopy(ref)
+        upper[0]["molecule_id"] = upper[0]["molecule_id"].upper()
+        assert upper != ref
+        assert grade(tid, ref)["success"]
+        got = grade(tid, upper)
+        assert not got["success"] and got["f1"] == 0.0
+    assert ps.canonical_entry("3K34", None) == "id:3K34"
+    assert ps.canonical_entry("3k34", None) == "3k34"
+    # custom_data wins over molecule_id, and a UniProt accession is not a PDB id
+    af = {"url": "https://alphafold.ebi.ac.uk/files/AF-P68871-F1-model_v6.cif", "format": "cif"}
+    assert ps.canonical_entry("P68871", af) == "af-p68871-f1"
+    assert ps.canonical_entry("P69905", None) == ps.canonical_entry("p69905", None)
+
+
+def test_pdbe_serves_lower_case_file_names_only_and_rcsb_either():
+    pdbe = "https://www.ebi.ac.uk/pdbe/entry-files/download/{}"
+    assert drawn.pdbe_file_problem(pdbe.format("3K34_updated.cif"))
+    assert drawn.pdbe_file_problem(pdbe.format("1HRC.bcif"))
+    assert drawn.pdbe_file_problem(pdbe.format("3k34_updated.cif")) is None
+    assert drawn.pdbe_file_problem(RCSB.format("3K34")) is None
+    fmt = {"url": pdbe.format("3K34_updated.cif"), "format": "cif", "binary": False}
+    assert ps.canonical_entry(None, fmt) == fmt["url"]
+    assert ps.canonical_entry(None, {**fmt, "url": pdbe.format("3k34_updated.cif")}) == "3k34"
+    # the scene track: RCSB's host serves either case (what the models wrote), PDBe's does not
+    ok = grade("tr-range-rows-3k34", copy.deepcopy(BY_ID["tr-range-rows-3k34"]["reference"]))
+    assert ok["success"]
+    up = json.loads(json.dumps(BY_ID["tr-range-rows-3k34"]["reference"]).replace("3k34.cif", "3K34.cif"))
+    assert grade("tr-range-rows-3k34", up)["success"]
+    assert mvs.load_problem(scene(pdbe.format("3K34_updated.cif"), [BASE]))
+    assert mvs.load_problem(scene(pdbe.format("3k34_updated.cif"), [BASE])) is None
+
+
+def test_no_api_reference_writes_a_pdb_id_in_upper_case_and_the_reference_says_so():
+    for t in CORPUS:
+        if t["category"] != "api_calling":
+            continue
+        for calls in [t["reference"]] + list(t.get("accepted") or []):
+            for a in calls:
+                mid = a.get("molecule_id") if isinstance(a, dict) else None
+                if isinstance(mid, str) and ps._PDB_ID.fullmatch(mid.lower()):
+                    assert mid == mid.lower(), (t["id"], mid)
+    text = (REPO / "molbench" / "api_reference.md").read_text()
+    assert "lower case" in text and '"1CBS"` loads nothing' in text
 
 
 # --- the runner: a missing SDK, the free route, a pilot graded again ------------------------

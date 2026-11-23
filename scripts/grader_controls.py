@@ -1142,18 +1142,18 @@ def _(c: Ctx):
              {"action": "focus", "data": [api_label(r)]}])
 
 
-@control(API_EQUIVALENT, "entry_id_case_or_url",
-         "the entry id in upper case, or the same entry loaded by URL")
+@control(API_EQUIVALENT, "entry_by_url",
+         "the same entry loaded by URL (PDBe's updated file) instead of by its id")
 @_api
 def _(c: Ctx):
+    # (Until 2026-11-23 half of these wrote the id in upper case and were expected to
+    # pass. The viewer loads nothing for such an id: that is now the wrong-answer kind
+    # upper_case_entry_id.)
     ref = api_highlight(c)
     pred = copy.deepcopy(ref)
-    if c.rng.random() < 0.5:
-        pred[0] = {"action": "load", "molecule_id": c.e.id.upper()}
-    else:
-        pred[0] = {"action": "load", "custom_data": {
-            "url": f"https://www.ebi.ac.uk/pdbe/entry-files/download/{c.e.id}_updated.cif",
-            "format": "cif", "binary": False}}
+    pred[0] = {"action": "load", "custom_data": {
+        "url": f"https://www.ebi.ac.uk/pdbe/entry-files/download/{c.e.id}_updated.cif",
+        "format": "cif", "binary": False}}
     return ref, pred
 
 
@@ -1339,6 +1339,20 @@ def _(c: Ctx):
                                                          "binary": False}},
                       {"action": "color", "data": [api_auth(c.res, color=c.c1)]}]
     return mk(c.e.url), mk(_af_misses(c.e, c.rng))
+
+
+@control(API_WRONG, "upper_case_entry_id",
+         "the right calls with the PDB id in upper case, as the request writes it: the viewer "
+         "puts molecule_id into PDBe's file address as written, PDBe names its files in lower "
+         "case, and nothing loads (run in pdbe-molstar 3.3.2 against PDBe on 2026-11-23: "
+         "0 structures for '3K34' and '1LMB', 2,387 atoms for '3k34')", viewer=False)
+def _(c: Ctx):
+    if c.e.af or c.res is None:
+        return None
+    ref = [load(c.e), {"action": "color", "data": [api_auth(c.res, color=c.c1)]}]
+    pred = copy.deepcopy(ref)
+    pred[0]["molecule_id"] = pred[0]["molecule_id"].upper()
+    return (ref, pred) if pred != ref else None
 
 
 @control(API_WRONG, "unstated_hide_polymer",
