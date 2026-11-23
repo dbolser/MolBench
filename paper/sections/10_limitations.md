@@ -34,4 +34,5 @@ the full list with numbers.
 - **Small groups are descriptive only.** The set-aside split within one category, the
   matched clinical tasks, the helix and strand tasks and the two rephrasings are reported
   with intervals and not tested. In every set of matched tasks the structure without an
-  offset is a predicted structure, so the two effects cannot be told apart.
+  offset is a predicted structure, so the effect of the offset cannot be told apart from
+  that of a predicted structure.

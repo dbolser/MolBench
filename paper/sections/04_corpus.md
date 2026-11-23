@@ -14,7 +14,7 @@ Section S0 is the full glossary.
 | Author numbering | The chain names and residue numbers chosen by the depositors of a structure. Papers and most viewers show these. |
 | Label numbering | The chain names and residue numbers assigned by the archive: 1, 2, 3 … along the molecule that was studied. |
 | UniProt numbering | The position of a residue in UniProt's canonical sequence of the protein, counted from its first residue (the initiator methionine included). A variant name with the prefix "p." ({{ex.name_in_prompt}}, or {{ex.hgvs}}) is in this numbering here. |
-| Traditional name | A variant name from older literature, without "p.", numbered from the first residue of the *mature protein*: the protein after the cell has cut off its leading segment, which is a signal peptide or the initiator methionine alone ({{ex.mature_name}} for {{ex.name_in_prompt}}). |
+| Traditional name | A variant name from older literature, without "p.", numbered from the first residue of the *mature protein*: the protein after the cell has cut off its leading segment: a signal peptide, sometimes with a propeptide, or the initiator methionine alone ({{ex.mature_name}} for {{ex.name_in_prompt}}). |
 | Offset | For one residue, its UniProt number minus its author number ({{ex.uniprot_position}} − {{ex.auth_number}} = {{ex.offset}} in the running example). A residue *has an offset* when the two differ. |
 | Copying the number | Using the number printed in a variant name as the author residue number. Copying is *right* in a task if the answer written in this way is exactly right, and *wrong* otherwise. |
 | Scene, call list | The two answer formats. A *scene* (MolViewSpec) states what to load and draw; nothing is on screen unless the scene says so. A *call list* is an ordered list of calls to the PDBe Mol\* viewer, which starts from a *default view*: the whole structure, with the polymer chains as a cartoon (a ribbon that traces each chain). |
@@ -36,7 +36,8 @@ has an offset. Every feature that we claim for a structure is verified in its fi
 build script (SI Section S3.1).
 
 **Variants.** The panel includes structures of {{panel.n_disease_proteins}} human proteins in which germline *missense* variants (one amino acid replaced by another;
-germline: present in every cell of a person, not acquired in a tumour) cause single-gene
+germline: present in every cell of a person, inherited or newly arisen, not acquired in a
+tumour) cause single-gene
 disease. A variant here is one amino-acid change, of which ClinVar may hold several
 DNA-level records. UniProt lists {{variants.n_candidates:,}} such variants of these proteins as pathogenic or
 likely pathogenic. We keep a variant only if it has a *qualifying record*: a ClinVar
@@ -110,7 +111,7 @@ asks. Each category has several *templates*; a seeded generator fills in the str
 residues, the colours and the wording (SI Section S2 lists the {{corpus.n_templates}}
 templates, and SI Section S10.2 describes each category in full).
 
-![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track. Requests are quoted from the corpus; a long one is cut short.  A grey line under a request explains a term in it. Left column: the four categories that differ in what the model must know. Right column: the four that differ in the form of the task. Framed in blue: the two lookup categories.](generated/fig_tiers.svg)
+![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track. Requests are quoted from the corpus; a long one is cut short. A grey line under a request explains a term in it. Left column: the four categories that differ in what the model must know. Right column: the four that differ in the form of the task. Framed in blue: the two lookup categories.](generated/fig_tiers.svg)
 
 **Table 1. The corpus.** Tasks per category and track, written as total (a + b): a tasks on the
 {{corpus.public.n_structures}} other structures and b tasks on the
