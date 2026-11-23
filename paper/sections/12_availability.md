@@ -14,13 +14,14 @@ for the rating study need a browser without a display and the Mol\* bundle, both
 
 ## Supporting Information
 
-The Supporting Information (one PDF file) contains: background terms of structural biology and of the corpus
-(Section S0, with the names that the repository uses); the running example in full (S1); all task templates with an example request
-each (S2); the structure panel, how it was chosen, and the list of variants (S3); the full
-grading rules and the known limits of the grader (S4); the control set by kind (S5); the run
-manifest, the models and their prices (S6); the system prompts (S7); further tables of the
-pilot run and the trial of the rating study (S8); and further tables of the final run (S9,
-pending).
+The Supporting Information (one PDF file) contains: the full glossary (Section S0); the
+running example in full (S1); all task templates (S2); the structure panel and the list of
+variants (S3); the grading rules (S4); the control set by kind (S5); the run manifest, the
+models and the provider pilot (S6); the system prompts (S7); tables of the pilot run and
+the trial of the rating study (S8); further tables of the final run (S9, pending); and the
+long form of what this paper gives in one sentence each: the corpus (S10), grading (S11),
+the setup and statistics (S12), the pilot findings and the errors of the first version
+(S13), the limitations (S14), and related work and licences (S15).
 
 ## Author information
 

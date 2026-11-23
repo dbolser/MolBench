@@ -20,23 +20,8 @@ were also used as coding and drafting assistants in building the benchmark and i
 this manuscript. The authors checked all content and are responsible for it.
 ⟦PENDING: Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements⟧
 
-**Licences of data and software.** We read each licence at its source on 16 November 2026 (Table
-16). Frozen copies of third-party data in the repository keep their original terms and are
-attributed in the repository.
-
-**Table 16. Data and software used, with licence or terms as stated at the source.**
-
-| Resource | Used for | Licence or terms | Read at |
-|:---|:---|:---|:---|
-| Protein Data Bank archive and RCSB PDB web services [@wwpdb2019] | structure files, atom tables, entry annotations | CC0 1.0 public-domain dedication | rcsb.org/pages/usage-policy |
-| PDBe: SIFTS mapping, updated structure files, search of entries per protein [@dana2019sifts; @pdbekb2022] | residue mapping, choice of structures | EMBL-EBI terms of use: no additional restrictions on use or redistribution; attribution expected | ebi.ac.uk/about/terms-of-use |
-| UniProt [@uniprot2025] | sequences, candidate variants | CC BY 4.0 | uniprot.org/help/license |
-| ClinVar [@landrum2018clinvar] | classification of variants | NCBI molecular data policy: NCBI places no restrictions on use or distribution; submitters may hold rights | ncbi.nlm.nih.gov/home/about/policies |
-| AlphaFold Protein Structure Database [@varadi2024afdb; @jumper2021alphafold] | {{panel.n_alphafold}} predicted structures | CC BY 4.0 | alphafold.ebi.ac.uk (licence and disclaimer) |
-| Mol\* [@sehnal2021molstar] and MolViewSpec [@midlik2025mvs] | scene format, validation, read-back, pictures | MIT | github.com/molstar |
-| PDBe Mol\* [@pdbemolstar] | viewer of the call-list track | Apache-2.0 | github.com/molstar/pdbe-molstar |
-| ipymolstar [@ipymolstar] | Python host of that viewer | MIT | pypi.org/project/ipymolstar |
-| GEMMI [@wojdyr2022gemmi] | reading structure files | MPL-2.0 | github.com/project-gemmi/gemmi |
-| json-repair [@jsonrepair] | repair counterfactual | MIT | github.com/mangiucugna/json_repair |
-
-MolBench's own code, tasks and references are released under the MIT licence.
+**Licences of data and software.** The benchmark uses the Protein Data Bank archive, SIFTS,
+UniProt, ClinVar, the AlphaFold Protein Structure Database, Mol\*, PDBe Mol\*, ipymolstar,
+GEMMI and json-repair under their own terms, which we read at each source on 16 November
+2026 (SI Table S24). Frozen copies of third-party data in the repository keep their original
+terms. MolBench's own code, tasks and references are released under the MIT licence.

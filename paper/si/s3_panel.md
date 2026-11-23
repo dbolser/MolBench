@@ -122,7 +122,7 @@ the consequence predicted from the DNA change. A gene can have several transcrip
 can number the protein differently, so a ClinVar record lists the protein change once for
 each transcript. We accept a record if any one of these names equals our amino-acid change
 and position (step 2). We did not check which transcript that name is counted on; we take
-its position to be that of the UniProt canonical sequence (Section 9.2 of the paper).
+its position to be that of the UniProt canonical sequence (Section S14.2).
 
 *What a request says about the classification.* ClinVar classifies DNA-level records, each
 for a stated condition. A request attaches the classification to the protein-level name and

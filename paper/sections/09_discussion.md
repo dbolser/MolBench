@@ -2,18 +2,16 @@
 
 ⟦PENDING: final run — discussion of the results: which categories separate models, what the paired comparison shows, whether the set-aside split differs from the other tasks, and what Table 10 says about mapping against copying⟧
 
-Two points can be made before the final run, because they concern the instrument and not the
-models.
+Two points concern the instrument and can be made before the final run.
 
-**One score is not enough.** The pilot run gave three different pictures of the same answers
-(Section 6.6). Strict scores mostly measured whether a model returned a scene that the viewer could load. F1 in the
-clinical category mostly measured whether a model reproduced a background. Only a score
-restricted to the requested atoms showed that the residue was usually drawn right, and this
-in a pilot category that needed no mapping (Section 6.6, Finding 2). We therefore
-report the task success rate and the target score together, both strict and valid-only, and
-F1 for partial credit; Box 2 says which of the two is primary in which table.
+**One score is not enough.** The pilot run gave three different pictures of the same
+answers. Strict scores mostly measured whether a model returned a scene that the viewer
+could load. F1 in the clinical category mostly measured whether a model reproduced a
+background. Only a score restricted to the requested atoms showed that the residue was
+usually drawn right. We therefore report the task success rate and the target score
+together, strict and valid-only, and F1 for partial credit.
 
-**A benchmark's references need the same scrutiny as the models.** The most important finding
-so far concerns our own references (Table 15, row 1). It was found by asking where valid
-answers lost their points, and not by looking at totals. We recommend that analysis to anyone
-who builds a benchmark with partial credit.
+**A benchmark's references need the same scrutiny as the models.** The most important
+finding so far concerns our own references (Table 13, row 1). It was found by asking where
+valid answers lost their points, not by looking at totals. We recommend that analysis to
+anyone who builds a benchmark with partial credit.
