@@ -115,11 +115,10 @@
 <text x="326" y="620" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">   one of its two styles is in the reference: 0.5</text>
 <text x="326" y="633" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">fact 2: all other residues, grey cartoon;</text>
 <text x="326" y="646" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">   none of it is in the reference: 0</text>
-<text x="326" y="659" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">precision: (0.5 + 0) / 2 = 0.25</text>
 <line x1="326" y1="652" x2="640" y2="652" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="326" y="665" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">Recall (share of the reference the answer has)</text>
 <text x="640" y="665" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="end">1.00</text>
-<text x="326" y="678" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">Precision (share of the answer the reference has)</text>
+<text x="326" y="678" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">Precision, the mean over the two facts: (0.5 + 0) / 2</text>
 <text x="640" y="678" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="end">0.25</text>
 <text x="326" y="691" font-size="10" font-weight="bold" fill="#1a1a1a" text-anchor="start">F1</text>
 <text x="640" y="691" font-size="10" font-weight="bold" fill="#1a1a1a" text-anchor="end">0.40</text>

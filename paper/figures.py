@@ -394,15 +394,15 @@ def fig_grading(v: dict) -> str:
             facts = [f"fact 1: {v['ex.wild_type']}{right}, grey cartoon and {look};",
                      "   one of its two styles is in the reference: 0.5",
                      "fact 2: all other residues, grey cartoon;",
-                     "   none of it is in the reference: 0",
-                     f"precision: (0.5 + 0) / 2 = {v[key + '.precision']:.2f}"]
-            assert abs(v[key + ".precision"] - (0.5 + 0) / 2) < 1e-9
+                     "   none of it is in the reference: 0"]
+            assert abs(v[key + ".precision"] - (0.5 + 0) / 2) < 1e-9   # the sum shown in the precision row
         for j, ln in enumerate(facts):
             s.text(xr, y + 34 + j * 13, ln, size=10)
         ysc = y + ph - 58
         s.line(xr, ysc - 13, x + pw - 10, ysc - 13)
         rows = [("Recall (share of the reference the answer has)", f"{v[key + '.recall']:.2f}"),
-                ("Precision (share of the answer the reference has)", f"{v[key + '.precision']:.2f}"),
+                ("Precision, the mean over the two facts: (0.5 + 0) / 2" if key == "ex.mvs.context"
+                 else "Precision (share of the answer the reference has)", f"{v[key + '.precision']:.2f}"),
                 ("F1", f"{v[key + '.f1']:.2f}"),
                 ("Task success", "yes" if v[key + ".success"] else "no"),
                 ("Target score", f"{v[key + '.target']:.2f}")]
@@ -440,11 +440,13 @@ def fig_twins(v: dict) -> str:
              f"              auth_seq_id = {v['ex.auth_number']}",
              f"    representation  {v['ex.rep_scene']}",
              f"     color  {v['ex.color']}"]
-    calls = [f'load   molecule_id = "{entry}"',
-             f'color  uniprot_accession = "{v["ex.accession"]}",',
+    # No quotation marks, as in the scene panel: both are shortened forms, and one renderer
+    # (ImageMagick) drops a quotation mark at the end of a line.
+    calls = [f'load   molecule_id = {entry}',
+             f'color  uniprot_accession = {v["ex.accession"]},',
              f'       uniprot_residue_number = {v["ex.uniprot_position"]},',
-             f'       representation = "{v["ex.rep_short"]}",',
-             f'       representationColor = "{v["ex.color"]}"']
+             f'       representation = {v["ex.rep_short"]},',
+             f'       representationColor = {v["ex.color"]}']
     for x, code, note in (
             (lx, scene, f"The model must turn UniProt {v['ex.uniprot_position']} into author residue "
                         f"{v['ex.auth_number']} itself."),
