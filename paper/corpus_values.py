@@ -44,8 +44,15 @@ from molbench import atoms, runner, tasks as T  # noqa: E402
 
 PENDING = "⟦PENDING: final run⟧"
 
-TIERS = ["translation", "grounded", "interactions", "resolve", "clinical", "followup",
+# The order of the paper (Section 3.3): the four categories that differ in what the model
+# must know beyond the request, then the four that differ in the form of the task.
+TIERS = ["translation", "grounded", "resolve", "clinical", "interactions", "followup",
          "accept_set", "tool_only"]
+TIER_GROUPS = [("Categories that differ in what the model must know beyond the request",
+                ["translation", "grounded", "resolve", "clinical"]),
+               ("Categories that differ in the form of the task",
+                ["interactions", "followup", "accept_set", "tool_only"])]
+assert [t for _, g in TIER_GROUPS for t in g] == TIERS
 TIER_NAME = {"translation": "Translation", "grounded": "Structure-grounded",
              "interactions": "Interactions", "resolve": "Name resolution",
              "clinical": "Clinical variant", "followup": "Follow-up turn",
@@ -55,7 +62,7 @@ TIER_ASKS = {
     "grounded": "The request names a feature (the ligand, the disulfides); the model must know which atoms these are.",
     "interactions": "Named atoms and a measurement or contact between them.",
     "resolve": "The structure is named by protein, not by identifier.",
-    "clinical": "A variant is named in UniProt numbering or in traditional numbering; its residue must be found in the structure, where its number often differs.",
+    "clinical": "A variant is named in UniProt numbering or in mature-protein numbering; its residue must be found in the structure, where its number often differs.",
     "followup": "A start state plus an edit request; the full new state is returned.",
     "accept_set": "The request leaves one countable thing open; several drawn states are right.",
     "tool_only": "A viewer setting that only the call-list format can express.",
@@ -229,6 +236,9 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     V["resolve.n_accepted_entries"] = len(other) + len(res)
     V["resolve.n_other_panel_entries"] = sum(T.has_table(e) for _, e in other)
     V["resolve.n_tasks_with_other_panel_entry"] = len({i for i, e in other if T.has_table(e)})
+    # Section 4.1: reference entries + further panel entries + entries outside the panel.
+    V["resolve.n_accepted_outside_panel"] = len(other) - V["resolve.n_other_panel_entries"]
+    assert len({s for t in res for s in t["structures"]}) == len(res)      # one reference entry per task, all distinct
     assert all(T.has_table(s) for t in res for s in t["structures"])
     # The entry of the worked example of both system prompts, which no task uses.
     V["prompt.worked_example_entry"] = T.WORKED_EXAMPLE.upper()
@@ -326,6 +336,15 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     V["clin.n_alphafold_structures"] = sum(s.startswith("af-") for s in {s for v in per_gene.values() for s in v})
     V["clin.n_pdb_structures"] = V["clin.n_structures"] - V["clin.n_alphafold_structures"]
     V["clin.n_proteins_one_structure"] = V["clin.n_proteins"] - V["clin.n_proteins_several_structures"]
+    # Section 3.1 says why there is one PDB entry more than there are proteins: the two
+    # haemoglobin chains have tasks on three entries between them, every other protein on one.
+    pdb_of = {g: {s for s in v if not s.startswith("af-")} for g, v in per_gene.items()}
+    hb = {g for g, v in pdb_of.items() if len(v) > 1 or any(v & w for h, w in pdb_of.items() if h != g)}
+    assert hb == {"HBA1", "HBB"} and all(len(pdb_of[g]) == 1 for g in pdb_of if g not in hb)
+    V["clin.n_proteins_one_pdb_entry"] = len(pdb_of) - len(hb)
+    V["clin.n_haemoglobin_pdb_entries"] = len(set().union(*(pdb_of[g] for g in hb)))
+    assert V["clin.n_proteins_one_pdb_entry"] + V["clin.n_haemoglobin_pdb_entries"] == V["clin.n_pdb_structures"]
+    assert len(hb) == 2                                   # "the two haemoglobin chains"
     # An entry that holds two of the proteins (the haemoglobin entries hold alpha and beta chains).
     holders = collections.defaultdict(set)
     for g, ss in per_gene.items():
@@ -429,6 +448,19 @@ def clinical_details(V: dict, clin: list[dict], by_id: dict) -> None:
                if x["difficulty"]["protein_copies_in_structure"] == 1)
     assert all(len(v["residues"]) == x["difficulty"]["protein_copies_in_structure"]
                for _, x in several if x["scope"] == "all" for v in x["variants"])
+    # The classification word of a request (Section 3.1): ClinVar's aggregate value in lower
+    # case, or "pathogenic or likely pathogenic" where the records behind the request differ.
+    def said(t):
+        m = re.search(r"\b(pathogenic or likely pathogenic|pathogenic/likely pathogenic|likely pathogenic|pathogenic)\b", t["prompt"])
+        return m.group(1)
+    for t, x in zip(clin, c):
+        vals = {k.split(";")[0].strip().lower() for v in x["variants"] for k in v["clinvar_classification"]}
+        assert vals <= {"pathogenic", "likely pathogenic", "pathogenic/likely pathogenic"}, vals
+        assert said(t) == (vals.pop() if len(vals) == 1 else "pathogenic or likely pathogenic"), t["id"]
+    V["clin.n_class_differs"] = sum(said(t) == "pathogenic or likely pathogenic" for t in clin)
+    V["clin.n_class_both_word"] = sum(said(t) == "pathogenic/likely pathogenic" for t in clin)
+    # Section 3.1 names TP53 p.Arg175His as a variant better known as a somatic change.
+    assert any(x["gene"] == "TP53" and v["hgvs"] == "p.Arg175His" for x in c for v in x["variants"])
     # The three wordings.
     assert all(re.search(r"\b(it replaces|they replace|replaced by|wild-type residues? at the positions? of)", t["prompt"])
                for t in clin)
@@ -458,6 +490,9 @@ def clinical_details(V: dict, clin: list[dict], by_id: dict) -> None:
         assert off[0]["difficulty"]["number_in_name_as_author_number_is_right"] is trad
         assert flat[0]["difficulty"]["number_in_name_as_author_number_is_right"] is (not trad)
     V["clin.n_offset_pairs_traditional"] = len(trad_sets)
+    # Section 9.4: the proteins behind the sets that Table 10 reports (names in UniProt numbering).
+    V["clin.n_offset_pair_proteins_uniprot_name"] = len(
+        {v[0]["gene"] for v in sets.values() if not v[0]["difficulty"]["name_in_mature_numbering"]})
     V["clin.n_offset_pairs_uniprot_name"] = len(sets) - len(trad_sets)
     assert len(trad_sets) == 1 and trad_sets[0][0]["gene"] == "HBB"      # the text names E6V of haemoglobin beta
     assert trad_sets[0][0]["variants"][0]["name_in_prompt"] == V["clin.traditional_on_predicted.name"]
@@ -505,6 +540,23 @@ def pairs_and_followup_details(V: dict, orig: list[dict], twins: list[dict], hid
     V["corpus.twins.no_target.background"] = fam["fu-background"]
     V["corpus.twins.no_target.hide_water"] = fam["fu-hide-water"]
     V["corpus.twins.no_target.noop"] = fam["fu-noop-hidden"] + fam["fu-noop-shown"]
+    # Section 4.2 says that no first request of the call-list track asks only for what the
+    # default view already shows: a load with no further call is target-right in none of them.
+    n_first = 0
+    for t in orig:
+        if t["track"] != "api" or t["tier"] == "followup":
+            continue
+        n_first += 1
+        load = [c for c in t["reference"] if c.get("action") == "load"][:1]
+        r = runner.grade_parsed(t, load)
+        assert load and not r["success"] and r["target_f1"] != 1, t["id"]
+    V["corpus.api.n_first_requests"] = n_first
+    # ... and gives as its example a paired request for a cartoon in a stated colour: the
+    # reference recolours the default cartoon, which is a change.
+    q = min((t for t in orig if t["track"] == "api" and t["family"] == "tr-cartoon" and t.get("twin_of")),
+            key=lambda t: (len(t["prompt"]), t["id"]))
+    assert any(c.get("action") == "color" for c in q["reference"]) and "cartoon" in q["prompt"]
+    V["corpus.api.cartoon_example"] = " ".join(q["prompt"].split())
     # Follow-up tasks whose right answer is the start state.
     noop = [t for t in orig if t["tier"] == "followup" and (t.get("context") or {}).get("noop")]
     spin = [t for t in noop if t["family"] == "fu-noop-spin"]
@@ -529,9 +581,12 @@ def clinical_groupings_table(V: dict) -> str:
 
 
 def corpus_table(V: dict) -> str:
-    rows = ["| Category | What is asked | Scene track (public + held back) | Call-list track (public + held back) | Pairs |",
+    rows = ["| Category | What is asked | Scene track (other + set-aside structures) | Call-list track (other + set-aside structures) | Pairs |",
             "|:------|:----------------|-----:|-----:|--:|"]
+    first = {g[0]: title for title, g in TIER_GROUPS}
     for tier in TIERS:
+        if tier in first:
+            rows.append(f"| ***{first[tier]}*** | | | | |")
         cells = []
         for track in ("mvs", "api"):
             n = V[f"corpus.{track}.{tier}.n"]
@@ -662,7 +717,7 @@ def si_panel_table(entries, used, held) -> str:
         res = f" {e['resolution']:.2f} Å" if e.get("resolution") else ""
         off = "–" if not e.get("sifts") else ("yes" if e.get("offset") else "no")
         split = "not used (worked example of the call-list prompt)" if e["id"] not in used else (
-            "held back" if e["id"] in held else "public")
+            "set aside" if e["id"] in held else "other")
         title = " ".join(str(e.get("title", "")).split()).replace("|", "/")
         if len(title) > 90:
             title = title[:87].rstrip() + "…"
@@ -837,6 +892,11 @@ def october_values(V: dict) -> None:
             V[f"{q}.highlight_n"] = t["n_with_highlight_target"]
             V[f"{q}.highlight_exact"] = t["highlight_exactly_right"]
             V[f"{q}.highlight_exact_n"] = round(t["highlight_exactly_right"] * t["n_with_highlight_target"])
+    # The last column of Table 14, pooled over its three rows (each row has its own denominator).
+    keys = ("translation", "grounded", "clinical")
+    V["oct.spec.highlight_n"] = sum(V[f"oct.spec.{k}.highlight_n"] for k in keys)
+    V["oct.spec.highlight_exact_n"] = sum(V[f"oct.spec.{k}.highlight_exact_n"] for k in keys)
+    V["oct.spec.highlight_exact"] = round(V["oct.spec.highlight_exact_n"] / V["oct.spec.highlight_n"], 4)
     by_model = o["spec"]["by_model"]
     succ = sorted((m["success"], k) for k, m in by_model.items())
     V["oct.spec.n_models"] = len(by_model)
@@ -866,7 +926,7 @@ def october_models_table() -> str:
     info = jload(PAPER / "inputs.json")["model_info"]
     alias = jload(PAPER / "inputs.json")["aliases"]
     weights = {k.split("/")[-1]: v["weights"] for k, v in info.items()}
-    rows = ["| Model | Weights | Valid answers | F1 (strict) | Task success rate (strict) | F1, valid-only | Task success rate, valid-only |",
+    rows = ["| Model | Weights | Valid answers | F1, strict | Task success rate, strict | F1, valid-only | Task success rate, valid-only |",
             "|:--------|:---|---:|---:|---:|---:|---:|"]
     for k, m in sorted(by_model.items(), key=lambda kv: (-kv[1]["success"], -kv[1]["new_f1"], kv[0])):
         name = alias.get(k, k).split("/")[-1]
@@ -876,7 +936,7 @@ def october_models_table() -> str:
 
 
 def october_table(V: dict) -> str:
-    rows = ["| Category (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success rate | Requested part exactly right |",
+    rows = ["| Category (first-version corpus) | Answers | Valid | F1, earlier grader | F1 | Task success rate | Requested part exactly right |",
             "|:-----------|---:|---:|---:|---:|---:|---:|"]
     for key, name in (("translation", "Translation"), ("grounded", "Structure-grounded, name resolution and interactions"),
                       ("clinical", "Clinical variant")):
@@ -884,7 +944,7 @@ def october_table(V: dict) -> str:
         rows.append(f"| {name} | {V[q + '.n']:,} | {V[q + '.n_valid']:,} | {V[q + '.old_f1']:.2f} | {V[q + '.f1']:.2f} "
                     f"| {V[q + '.success']:.1%} | {V[q + '.highlight_exact']:.1%} of {V[q + '.highlight_n']} |")
     rows.append(f"| **All** | {V['oct.spec.n']:,} | {V['oct.spec.n_valid']:,} | {V['oct.spec.old_f1']:.2f} "
-                f"| {V['oct.spec.f1']:.2f} | {V['oct.spec.success']:.1%} | |")
+                f"| {V['oct.spec.f1']:.2f} | {V['oct.spec.success']:.1%} | {V['oct.spec.highlight_exact']:.1%} of {V['oct.spec.highlight_n']} |")
     return "\n".join(rows) + "\n"
 
 
@@ -1006,7 +1066,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
              + (" †" if x.get("optional") else "") for x in models]
     weights = ["–" if x["route"] == "baseline" else ("open" if x["open_weights"] else "closed") for x in models]
     out = {}
-    head = ("| Model | Weights | Valid answers | Task success rate (strict) | Target score (strict) | F1 (strict) "
+    head = ("| Model | Weights | Valid answers | Task success rate, strict | Target score, strict | F1, strict "
             "| Task success rate, valid-only | Target score, valid-only | All-3 rate | Cost (USD) |\n"
             "|:-------|:---|---:|---:|---:|---:|---:|---:|---:|---:|\n")
     # The review draft shows the first rows; the final table has one row per model (SI Table S7).
@@ -1017,7 +1077,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     body += (f"| … {n_core - shown} further rows for the other core models and up to {len(names) - n_core} "
              f"for the optional models (SI Table S7) | | {P} | | | | | | | |\n")
     out["shape_leaderboard.md"] = head + body
-    tiers = ("| Category | Tasks | Structures | Task success rate (strict) | Target score (strict) | F1 (strict) "
+    tiers = ("| Category | Tasks | Structures | Task success rate, strict | Target score, strict | F1, strict "
              "| Task success rate, valid-only | Target score, valid-only |\n"
              "|:------------------------|---:|---:|---:|---:|---:|---:|---:|\n")
     for track, label in (("mvs", "Scene track"), ("api", "Call-list track")):
@@ -1028,19 +1088,19 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
                 tiers += (f"| {TIER_NAME[tier]} | {n} | {V[f'corpus.{track}.{tier}.n_structures']} "
                           f"| {P} | {P} | {P} | {P} | {P} |\n")
             if n and tier == "resolve":
-                for which in ("answers on the reference entry (graded on drawn state)",
-                              "answers on another entry that the task accepts (compared as written, except on "
-                              f"{V['resolve.n_other_panel_entries']} panel entries)"):
+                for which in ("answers on the reference entry",
+                              "answers on another entry that the task accepts (graded by the weaker "
+                              "rule of Section 4.1)"):
                     tiers += f"| \u2003*of which:* {which} | – | – | {P} | {P} | {P} | {P} | {P} |\n"
     out["shape_tiers.md"] = tiers
     out["shape_clinical.md"] = (
-        "| Clinical tasks (scene track) | Tasks | Target score (primary) | Task success rate | Target score with grounding pack "
+        "| Clinical tasks (scene track) | Tasks | Target score (the primary score here) | Task success rate | Target score with grounding pack "
         "| Task success rate with grounding pack |\n"
         "|:------------------|--:|---:|---:|---:|---:|\n"
-        f"| **Copying the number** (primary grouping): copying is right | {V['clin.n_face_value_right']} | {P} | {P} | {P} | {P} |\n"
+        f"| **Copying the number**: copying is right | {V['clin.n_face_value_right']} | {P} | {P} | {P} | {P} |\n"
         f"| **Copying the number**: copying is wrong | {V['clin.n_face_value_wrong']} | {P} | {P} | {P} | {P} |\n"
         f"| Difference between these two rows (95% interval) | | {P} | {P} | {P} | {P} |\n"
-        f"| **Offset** (descriptive grouping): no offset | {V['clin.n_no_offset']} | {P} | {P} | {P} | {P} |\n"
+        f"| **Offset** (for description only): no offset | {V['clin.n_no_offset']} | {P} | {P} | {P} | {P} |\n"
         f"| **Offset**: offset | {V['clin.n_offset']} | {P} | {P} | {P} | {P} |\n"
         f"| Matched tasks named in UniProt numbering, structure with an offset (copying is wrong) | {V['clin.n_offset_pairs_uniprot_name']} | {P} | {P} | {P} | {P} |\n"
         f"| The same variants on the predicted structure, without an offset (copying is right) | {V['clin.n_offset_pairs_uniprot_name']} | {P} | {P} | {P} | {P} |\n"
@@ -1066,10 +1126,10 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     out["shape_robustness.md"] = (
         "| | Comparison | Tasks | Task success rate, first group | Task success rate, second group | Difference (95% interval) |\n"
         "|---:|:--------------------|---:|---:|---:|---:|\n"
-        f"| 1 | Public split against held-back split (both tracks; all tasks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| 1 | Tasks on the other structures against the set-aside split (both tracks; all tasks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
         f"| 2 | Full wording against terse wording (both tracks) | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
         f"| 3 | Full wording against indirect wording (both tracks) | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
-        f"| 4 | Main against main + JSON mode (the models that offer it: {V['plan.n_json_mode_models']} of the {V['plan.n_core_models']} core models and each optional model that is run; both tracks; one answer per task in JSON mode, set against the mean of the 3 main answers) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| 4 | Main against main + JSON mode (models that offer it; both tracks) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
         f"| 5 | Main against main + grounding pack (name-resolution and clinical categories, scene track) "
         f"| {V['corpus.mvs.resolve.n'] + V['corpus.mvs.clinical.n']} | {P} | {P} | {P} |\n"
         f"| 6 | Main against no format guide ({V['plan.n_bare_models']} models, scene track) "

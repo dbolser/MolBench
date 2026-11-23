@@ -36,7 +36,7 @@ corpus that the paper defines in its text only.
 | Polymer | The protein, DNA or RNA chains of a structure, as opposed to bound small molecules, ions and water. |
 | Structure, entry | A set of atom coordinates. An *entry* is one deposition in the Protein Data Bank (PDB), with a four-character identifier such as 2NWD. A *predicted structure* is one computed from the sequence; ours come from the AlphaFold Protein Structure Database. |
 | Coordinate set (PDB "model") | One complete set of atom positions in an entry. An entry solved by nuclear magnetic resonance usually holds several; the PDB calls each a *model* and numbers them (`pdbx_PDB_model_num`). We use the first, and we say *coordinate set* because *model* in this paper means a language model. |
-| Assembly | The form in which the molecule is thought to work, for example a pair of identical chains. An entry can deposit one copy and describe how the others are generated from it by symmetry. |
+| Assembly | The form in which the molecule is thought to work, for example two identical chains. An entry can deposit one copy and describe how the others are generated from it by symmetry. |
 | mmCIF | The file format of the PDB archive: tables of named columns, one row per atom in the table of atoms. |
 | Ligand, het group | A *ligand* is a small molecule bound to the protein. *Het group* is the older file term for any molecule in an entry that is not part of a polymer chain (a ligand, an ion, a water); each kind has an identifier of up to three characters, such as HEM for haem. |
 | Helix, strand | The two common local shapes of a protein chain. An entry records where each helix and each strand begins and ends. |
@@ -53,10 +53,11 @@ named with it.
 | SIFTS | Structure Integration with Function, Taxonomy and Sequences: the public residue-by-residue mapping between PDB entries and UniProt sequences (Section 3.1). |
 | Structure panel | The fixed set of 79 structures. Tasks are built on 78 of them; one, 1HSG, is reserved for the worked example of both system prompts (Section 3.1). |
 | Category | One of eight kinds of task. The categories are not steps on one scale of difficulty (Section 3.3). |
-| Lookup categories | Name resolution and clinical variant. In these the answer needs one fact that a person would look up in a database: an entry identifier, or a residue number. The model cannot look it up and must recall it (Section 3.3). |
+| Lookup categories | Name resolution and clinical variant. In these the answer needs one piece of information that a person would look up in a database: an entry identifier, or a residue number. The model cannot look it up and must recall it (Section 3.3). |
 | Template | A fixed kind of request within a category; a generator script fills in the structure, the residues, the colours and the wording (Section 3.3). |
 | Accepted answer | One of several drawn states that a task lists as right. An answer is graded against each, and the best result counts (Sections 3.3 and 4.2). |
-| Held-back split | The tasks on 15 structures that were set aside before generation and kept out of every earlier MolBench release. The tasks are public; the name does not mean a hidden test set (Section 3.6). |
+| Set-aside split | The tasks on 15 structures that were set aside before generation and that no earlier MolBench release used. The tasks are public; the split is not a hidden test set (Section 3.6). |
+| Qualifying record, best-reviewed record | A *qualifying record* of a variant is a ClinVar record that passes the two tests of Section 3.1. Its *best-reviewed record* is the qualifying record with the highest review status (Section 9.2). |
 
 **Table S0c. Names used in the repository and in the prompts printed in Section S7.** The
 paper and this file use the words on the right.
@@ -69,6 +70,8 @@ paper and this file use the words on the right.
 | action, canonical action | one call of a call list |
 | pdbe-molstar | PDBe Mol\* |
 | task identifiers ending in `-mvs` / `-api` | scene track / call-list track |
+| split `heldback` / `public` | set-aside split / tasks on the other structures |
+| legacy name, mature numbering | traditional name, mature-protein numbering |
 
 ## S1. The running example in full
 
@@ -253,7 +256,7 @@ From the request:
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score*: how well the requested atoms are drawn as asked, whatever else was drawn (0 to 1). Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
+score*: how far the requested style is on the requested atoms and on no others (0 to 1); unrequested background, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
 | Row | Answer | F1 | Task success | Target score |
@@ -338,14 +341,6 @@ names are the identifiers used in the task files.
 | Structure-grounded | `gr-metal-site` | 6 | 6 | 1IRO: grey cartoon; iron ion as a khaki sphere; every residue of the protein that coordinates the iron ion, as green ball-and-stick. |
 | Structure-grounded | `gr-modres` | 5 | 5 | Show 1ATP as a grey cartoon and highlight the phosphorylated residues in lime green ball-and-stick. |
 | Structure-grounded | `gr-secstruct` | 4 | 4 | Show 1A3K as a grey cartoon, then colour the helices blue and the beta strands lime green, following the helix and sheet records of the entry. |
-| Interactions | `in-ca-distance` | 5 | – | Show 1AKE as a yellow cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Ser183 to the CA atom of Lys200. Both residues are… |
-| Interactions | `in-computed` | 5 | – | 1A6M: grey cartoon; heme as red ball-and-stick with its computed non-covalent interactions shown; camera on the heme. |
-| Interactions | `in-disulfide` | 5 | – | In 1F88 (grey cartoon), measure the S-S bond of the disulfide between Cys110 and Cys187: the two cysteines in green ball-and-stick, a labelled dashed line between thei… |
-| Interactions | `in-hbond` | 5 | – | 1A3K: grey cartoon; Asn174 and Arg224 as magenta ball-and-stick; measure the hydrogen bond between OD1 of Asn174 and NH1 of Arg224 with a labelled dashed line; focus t… |
-| Interactions | `in-ligand-contact` | 5 | – | 1ATP: grey cartoon; ATP as teal ball-and-stick; Phe54 as cyan ball-and-stick; measure the contact between ATP atom O2B and N of Phe54 with a labelled dashed line; focu… |
-| Interactions | `in-metal-contact` | 5 | – | 1HRC: grey cartoon; heme as plum ball-and-stick; His18 and Met80 as salmon ball-and-stick; measure the distance from the heme iron to NE2 of His18 and SD of Met80 with… |
-| Interactions | `in-salt-bridge` | 5 | – | Load 1EMA as a grey cartoon. Show Lys3 and Glu90 as cyan ball-and-stick, draw the salt bridge between the NZ atom of Lys3 and the OE1 atom of Glu90 as a dashed line la… |
-| Interactions | `in-transparent` | 5 | – | Show 1CTQ with a semi-transparent brown protein surface (opacity 0.5) so that the GppNHp, drawn in steel blue ball-and-stick, can be seen through it. |
 | Name resolution | `res-complex` | 3 | – | Find a PDB entry of bovine trypsin in complex with bovine pancreatic trypsin inhibitor (BPTI) and show it as a plum cartoon. |
 | Name resolution | `res-dna` | 3 | – | I want to see how the cI repressor of bacteriophage lambda sits on DNA. Any PDB structure of the complex will do: protein as a brown cartoon, DNA as a teal cartoon. |
 | Name resolution | `res-gene` | 11 | – | I want to see a structure of human SOD1; a green cartoon will do. |
@@ -364,6 +359,14 @@ names are the identifiers used in the task files.
 | Clinical variant | `clin-short-target` | 9 | 9 | In PDB entry 5UAK, show the residue replaced by the pathogenic CFTR (Cystic fibrosis transmembrane conductance regulator) variant p.G551D (ClinVar) as magenta ball-and… |
 | Clinical variant | `clin-sse-helix` | 5 | 5 | PDB entry 6M7H: the CALM1 (Calmodulin-1, UniProt P0DP23) variant p.E141V is classified as pathogenic in ClinVar. Show the helix (as annotated in the entry) that contai… |
 | Clinical variant | `clin-sse-strand` | 5 | 5 | PDB entry 1HK0: the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Arg59His is classified as pathogenic in ClinVar. Show the beta strand (as annotated in the ent… |
+| Interactions | `in-ca-distance` | 5 | – | Show 1AKE as a yellow cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Ser183 to the CA atom of Lys200. Both residues are… |
+| Interactions | `in-computed` | 5 | – | 1A6M: grey cartoon; heme as red ball-and-stick with its computed non-covalent interactions shown; camera on the heme. |
+| Interactions | `in-disulfide` | 5 | – | In 1F88 (grey cartoon), measure the S-S bond of the disulfide between Cys110 and Cys187: the two cysteines in green ball-and-stick, a labelled dashed line between thei… |
+| Interactions | `in-hbond` | 5 | – | 1A3K: grey cartoon; Asn174 and Arg224 as magenta ball-and-stick; measure the hydrogen bond between OD1 of Asn174 and NH1 of Arg224 with a labelled dashed line; focus t… |
+| Interactions | `in-ligand-contact` | 5 | – | 1ATP: grey cartoon; ATP as teal ball-and-stick; Phe54 as cyan ball-and-stick; measure the contact between ATP atom O2B and N of Phe54 with a labelled dashed line; focu… |
+| Interactions | `in-metal-contact` | 5 | – | 1HRC: grey cartoon; heme as plum ball-and-stick; His18 and Met80 as salmon ball-and-stick; measure the distance from the heme iron to NE2 of His18 and SD of Met80 with… |
+| Interactions | `in-salt-bridge` | 5 | – | Load 1EMA as a grey cartoon. Show Lys3 and Glu90 as cyan ball-and-stick, draw the salt bridge between the NZ atom of Lys3 and the OE1 atom of Glu90 as a dashed line la… |
+| Interactions | `in-transparent` | 5 | – | Show 1CTQ with a semi-transparent brown protein surface (opacity 0.5) so that the GppNHp, drawn in steel blue ball-and-stick, can be seen through it. |
 | Follow-up turn | `fu-add-chain` | 2 | – | Also show chain 4 as a blue cartoon. |
 | Follow-up turn | `fu-add-label` | 2 | – | Add a label reading "BTN" to the biotin (BTN). |
 | Follow-up turn | `fu-add-ligand` | 2 | – | Now bring in the ligand HEM in plum ball-and-stick. |
@@ -472,91 +475,91 @@ SIFTS mapping added, whereas the atom table is built from the archive file.
 
 **Table S3. The panel.** *Atoms*: atoms in the first coordinate set. *Author numbering differs
 from UniProt*: at least one observed residue has an author number that is not its UniProt
-position (a dash: no protein chain mapped to UniProt). *Split*: public, or held back
-(structures used only by held-back tasks; Section 3.6 of the paper). *Tasks*: tasks of the
+position (a dash: no protein chain mapped to UniProt). *Split*: set aside (one of the 15 structures of the set-aside
+split; Section 3.6 of the paper), or other. *Tasks*: tasks of the
 corpus on this structure, both tracks, without rephrasings.
 
 | Entry | Title (as deposited) | Method | Deposited | Atoms | Author numbering differs from UniProt | Split | Tasks |
 |:---|:------------|:----|:----|---:|:---|:---|---:|
-| 1A3K | X-RAY CRYSTAL STRUCTURE OF THE HUMAN GALECTIN-3 CARBOHYDRATE RECOGNITION DOMAIN (CRD) A… | X-ray 2.10 Å | 1998-01-22 | 1253 | no | public | 8 |
-| 1A6M | OXY-MYOGLOBIN, ATOMIC RESOLUTION | X-ray 1.00 Å | 1998-02-26 | 1584 | yes | public | 9 |
-| 1AAY | ZIF268 ZINC FINGER-DNA COMPLEX | X-ray 1.60 Å | 1997-01-18 | 1330 | yes | public | 9 |
-| 1AKE | STRUCTURE OF THE COMPLEX BETWEEN ADENYLATE KINASE FROM ESCHERICHIA COLI AND THE INHIBIT… | X-ray 2.00 Å | 1991-11-08 | 3816 | no | public | 9 |
-| 1AKI | THE STRUCTURE OF THE ORTHORHOMBIC FORM OF HEN EGG-WHITE LYSOZYME AT 1.5 ANGSTROMS RESOL… | X-ray 1.50 Å | 1997-05-19 | 1079 | yes | public | 6 |
-| 1AOI | COMPLEX BETWEEN NUCLEOSOME CORE PARTICLE (H3,H4,H2A,H2B) AND 146 BP LONG DNA FRAGMENT | X-ray 2.80 Å | 1997-07-03 | 12385 | yes | public | 9 |
-| 1ATP | 2.2 angstrom refined crystal structure of the catalytic subunit of cAMP-dependent prote… | X-ray 2.20 Å | 1993-01-08 | 3070 | yes | public | 12 |
-| 1BNA | STRUCTURE OF A B-DNA DODECAMER. CONFORMATION AND DYNAMICS | X-ray 1.90 Å | 1981-01-26 | 566 | – | public | 8 |
-| 1C3W | BACTERIORHODOPSIN/LIPID COMPLEX AT 1.55 A RESOLUTION | X-ray 1.55 Å | 1999-07-28 | 2073 | yes | public | 11 |
-| 1CBS | CRYSTAL STRUCTURE OF CELLULAR RETINOIC-ACID-BINDING PROTEINS I AND II IN COMPLEX WITH A… | X-ray 1.80 Å | 1994-09-28 | 1213 | yes | public | 10 |
-| 1CRN | WATER STRUCTURE OF A HYDROPHOBIC PROTEIN AT ATOMIC RESOLUTION. PENTAGON RINGS OF WATER… | X-ray 1.50 Å | 1981-04-30 | 327 | no | public | 5 |
-| 1CTQ | STRUCTURE OF P21RAS IN COMPLEX WITH GPPNHP AT 100 K | X-ray 1.26 Å | 1999-08-20 | 1655 | no | public | 12 |
-| 1D3Z | UBIQUITIN NMR STRUCTURE | NMR | 1999-10-01 | 1231 | yes | public | 3 |
-| 1D5R | Crystal Structure of the PTEN Tumor Suppressor | X-ray 2.10 Å | 1999-10-11 | 2968 | no | public | 6 |
-| 1EHZ | The crystal structure of yeast phenylalanine tRNA at 1.93 A resolution | X-ray 1.93 Å | 2000-02-23 | 1821 | – | held back | 3 |
-| 1EMA | GREEN FLUORESCENT PROTEIN FROM AEQUOREA VICTORIA | X-ray 1.90 Å | 1996-08-01 | 1866 | no | public | 8 |
-| 1F88 | CRYSTAL STRUCTURE OF BOVINE RHODOPSIN | X-ray 2.80 Å | 2000-06-29 | 5267 | no | public | 13 |
-| 1FS3 | CRYSTAL STRUCTURE OF WILD-TYPE BOVINE PANCREATIC RIBONUCLEASE A | X-ray 1.40 Å | 2000-09-08 | 1066 | yes | held back | 3 |
-| 1HHO | STRUCTURE OF HUMAN OXYHAEMOGLOBIN AT 2.1 ANGSTROMS RESOLUTION | X-ray 2.10 Å | 1983-06-10 | 2396 | yes | public | 20 |
-| 1HK0 | Human GammaD Crystallin Structure at 1.25 A Resolution | X-ray 1.25 Å | 2003-03-05 | 1772 | yes | public | 11 |
-| 1HRC | HIGH-RESOLUTION THREE-DIMENSIONAL STRUCTURE OF HORSE HEART CYTOCHROME C | X-ray 1.90 Å | 1994-08-16 | 993 | yes | public | 9 |
+| 1A3K | X-RAY CRYSTAL STRUCTURE OF THE HUMAN GALECTIN-3 CARBOHYDRATE RECOGNITION DOMAIN (CRD) A… | X-ray 2.10 Å | 1998-01-22 | 1253 | no | other | 8 |
+| 1A6M | OXY-MYOGLOBIN, ATOMIC RESOLUTION | X-ray 1.00 Å | 1998-02-26 | 1584 | yes | other | 9 |
+| 1AAY | ZIF268 ZINC FINGER-DNA COMPLEX | X-ray 1.60 Å | 1997-01-18 | 1330 | yes | other | 9 |
+| 1AKE | STRUCTURE OF THE COMPLEX BETWEEN ADENYLATE KINASE FROM ESCHERICHIA COLI AND THE INHIBIT… | X-ray 2.00 Å | 1991-11-08 | 3816 | no | other | 9 |
+| 1AKI | THE STRUCTURE OF THE ORTHORHOMBIC FORM OF HEN EGG-WHITE LYSOZYME AT 1.5 ANGSTROMS RESOL… | X-ray 1.50 Å | 1997-05-19 | 1079 | yes | other | 6 |
+| 1AOI | COMPLEX BETWEEN NUCLEOSOME CORE PARTICLE (H3,H4,H2A,H2B) AND 146 BP LONG DNA FRAGMENT | X-ray 2.80 Å | 1997-07-03 | 12385 | yes | other | 9 |
+| 1ATP | 2.2 angstrom refined crystal structure of the catalytic subunit of cAMP-dependent prote… | X-ray 2.20 Å | 1993-01-08 | 3070 | yes | other | 12 |
+| 1BNA | STRUCTURE OF A B-DNA DODECAMER. CONFORMATION AND DYNAMICS | X-ray 1.90 Å | 1981-01-26 | 566 | – | other | 8 |
+| 1C3W | BACTERIORHODOPSIN/LIPID COMPLEX AT 1.55 A RESOLUTION | X-ray 1.55 Å | 1999-07-28 | 2073 | yes | other | 11 |
+| 1CBS | CRYSTAL STRUCTURE OF CELLULAR RETINOIC-ACID-BINDING PROTEINS I AND II IN COMPLEX WITH A… | X-ray 1.80 Å | 1994-09-28 | 1213 | yes | other | 10 |
+| 1CRN | WATER STRUCTURE OF A HYDROPHOBIC PROTEIN AT ATOMIC RESOLUTION. PENTAGON RINGS OF WATER… | X-ray 1.50 Å | 1981-04-30 | 327 | no | other | 5 |
+| 1CTQ | STRUCTURE OF P21RAS IN COMPLEX WITH GPPNHP AT 100 K | X-ray 1.26 Å | 1999-08-20 | 1655 | no | other | 12 |
+| 1D3Z | UBIQUITIN NMR STRUCTURE | NMR | 1999-10-01 | 1231 | yes | other | 3 |
+| 1D5R | Crystal Structure of the PTEN Tumor Suppressor | X-ray 2.10 Å | 1999-10-11 | 2968 | no | other | 6 |
+| 1EHZ | The crystal structure of yeast phenylalanine tRNA at 1.93 A resolution | X-ray 1.93 Å | 2000-02-23 | 1821 | – | set aside | 3 |
+| 1EMA | GREEN FLUORESCENT PROTEIN FROM AEQUOREA VICTORIA | X-ray 1.90 Å | 1996-08-01 | 1866 | no | other | 8 |
+| 1F88 | CRYSTAL STRUCTURE OF BOVINE RHODOPSIN | X-ray 2.80 Å | 2000-06-29 | 5267 | no | other | 13 |
+| 1FS3 | CRYSTAL STRUCTURE OF WILD-TYPE BOVINE PANCREATIC RIBONUCLEASE A | X-ray 1.40 Å | 2000-09-08 | 1066 | yes | set aside | 3 |
+| 1HHO | STRUCTURE OF HUMAN OXYHAEMOGLOBIN AT 2.1 ANGSTROMS RESOLUTION | X-ray 2.10 Å | 1983-06-10 | 2396 | yes | other | 20 |
+| 1HK0 | Human GammaD Crystallin Structure at 1.25 A Resolution | X-ray 1.25 Å | 2003-03-05 | 1772 | yes | other | 11 |
+| 1HRC | HIGH-RESOLUTION THREE-DIMENSIONAL STRUCTURE OF HORSE HEART CYTOCHROME C | X-ray 1.90 Å | 1994-08-16 | 993 | yes | other | 9 |
 | 1HSG | CRYSTAL STRUCTURE AT 1.9 ANGSTROMS RESOLUTION OF HUMAN IMMUNODEFICIENCY VIRUS (HIV) II… | X-ray 2.00 Å | 1995-03-31 | 1686 | yes | not used (worked example of the call-list prompt) | 0 |
-| 1HVR | RATIONAL DESIGN OF POTENT, BIOAVAILABLE, NONPEPTIDE CYCLIC UREAS AS HIV PROTEASE INHIBI… | X-ray 1.80 Å | 1994-02-14 | 1890 | yes | public | 10 |
-| 1IEP | CRYSTAL STRUCTURE OF THE C-ABL KINASE DOMAIN IN COMPLEX WITH STI-571. | X-ray 2.10 Å | 2001-04-10 | 4710 | no | public | 14 |
-| 1IGT | STRUCTURE OF IMMUNOGLOBULIN | X-ray 2.80 Å | 1996-10-25 | 12956 | yes | held back | 10 |
-| 1IRO | RUBREDOXIN (OXIDIZED, FE(III)) AT 1.1 ANGSTROMS RESOLUTION | X-ray 1.10 Å | 1995-12-13 | 858 | no | public | 5 |
-| 1K4C | Potassium Channel KcsA-Fab complex in high concentration of K+ | X-ray 2.00 Å | 2001-10-07 | 4534 | yes | public | 7 |
-| 1KF1 | Structure and Packing of Human Telomeric DNA | X-ray 2.10 Å | 2001-11-19 | 536 | – | public | 3 |
-| 1L2Y | NMR Structure of Trp-Cage Miniprotein Construct TC5b | NMR | 2002-02-25 | 304 | – | public | 2 |
-| 1LMB | REFINED 1.8 ANGSTROM CRYSTAL STRUCTURE OF THE LAMBDA REPRESSOR-OPERATOR COMPLEX | X-ray 1.80 Å | 1991-11-05 | 2334 | yes | held back | 12 |
-| 1LYZ | Real-space refinement of the structure of hen egg-white lysozyme | X-ray 2.00 Å | 1975-02-01 | 1102 | yes | public | 3 |
-| 1MBN | The stereochemistry of the protein myoglobin | X-ray 2.00 Å | 1973-04-05 | 1260 | yes | public | 10 |
-| 1PLC | ACCURACY AND PRECISION IN PROTEIN CRYSTAL STRUCTURE ANALYSIS: RESTRAINED LEAST-SQUARES… | X-ray 1.33 Å | 1992-03-11 | 1657 | yes | public | 5 |
-| 1RX2 | DIHYDROFOLATE REDUCTASE (E.C.1.5.1.3) COMPLEXED WITH WITH FOLATE AND NICOTINAMIDE ADENI… | X-ray 1.80 Å | 1996-09-19 | 1503 | no | held back | 16 |
-| 1STP | STRUCTURAL ORIGINS OF HIGH-AFFINITY BIOTIN BINDING TO STREPTAVIDIN | X-ray 2.60 Å | 1992-03-12 | 1001 | yes | public | 10 |
-| 1TRN | CRYSTAL STRUCTURE OF HUMAN TRYPSIN 1: UNEXPECTED PHOSPHORYLATION OF TYROSINE 151 | X-ray 2.20 Å | 1995-03-16 | 3705 | yes | public | 18 |
-| 1TUP | TUMOR SUPPRESSOR P53 COMPLEXED WITH DNA | X-ray 2.20 Å | 1995-07-11 | 5828 | no | public | 16 |
-| 1UBQ | STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION | X-ray 1.80 Å | 1987-01-02 | 660 | yes | public | 2 |
-| 1UDT | Crystal structure of Human Phosphodiesterase 5 complexed with Sildenafil(Viagra) | X-ray 2.30 Å | 2003-05-06 | 2655 | no | public | 12 |
-| 1Y26 | A-riboswitch-adenine complex | X-ray 2.10 Å | 2004-11-20 | 1608 | – | public | 9 |
-| 2C9V | Atomic resolution structure of Cu-Zn Human Superoxide dismutase | X-ray 1.07 Å | 2005-12-14 | 3043 | yes | held back | 18 |
-| 2CPP | HIGH-RESOLUTION CRYSTAL STRUCTURE OF CYTOCHROME P450-CAM | X-ray 1.63 Å | 1987-04-06 | 3462 | yes | public | 13 |
-| 2HHB | THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION | X-ray 1.74 Å | 1984-03-07 | 4779 | yes | public | 22 |
-| 2NWD | Structure of chemically synthesized human lysozyme at 1 Angstrom resolution | X-ray 1.04 Å | 2006-11-14 | 2691 | yes | public | 11 |
-| 2OMF | OMPF PORIN | X-ray 2.40 Å | 1995-02-28 | 2827 | yes | held back | 6 |
-| 2P4E | Crystal Structure of PCSK9 | X-ray 1.98 Å | 2007-03-12 | 4776 | no | public | 10 |
-| 2PTC | THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND… | X-ray 1.90 Å | 1982-09-27 | 2241 | yes | held back | 12 |
-| 3AVE | Crystal Structure of the Fucosylated Fc Fragment from Human Immunoglobulin G1 | X-ray 2.00 Å | 2011-03-04 | 3796 | yes | public | 10 |
-| 3EML | The 2.6 A Crystal Structure of a Human A2A Adenosine Receptor bound to ZM241385. | X-ray 2.60 Å | 2008-09-24 | 3757 | yes | public | 11 |
-| 3ERT | HUMAN ESTROGEN RECEPTOR ALPHA LIGAND-BINDING DOMAIN IN COMPLEX WITH 4-HYDROXYTAMOXIFEN | X-ray 1.90 Å | 1999-03-30 | 2070 | no | public | 11 |
-| 3F9M | Human pancreatic glucokinase in complex with glucose and activator showing a mobile flap | X-ray 1.50 Å | 2008-11-14 | 4065 | no | public | 14 |
-| 3K34 | Human carbonic anhydrase II with a sulfonamide inhibitor | X-ray 0.90 Å | 2009-10-01 | 2387 | yes | public | 9 |
-| 3KCG | Crystal structure of the antithrombin-factor IXa-pentasaccharide complex | X-ray 1.70 Å | 2009-10-21 | 6669 | yes | held back | 16 |
-| 3NGB | Crystal structure of broadly and potently neutralizing antibody VRC01 in complex with H… | X-ray 2.68 Å | 2010-06-11 | 25808 | yes | public | 5 |
-| 3PTB | THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND… | X-ray 1.70 Å | 1982-09-27 | 1701 | yes | public | 12 |
-| 4INS | THE STRUCTURE OF 2ZN PIG INSULIN CRYSTALS AT 1.5 ANGSTROMS RESOLUTION | X-ray 1.50 Å | 1989-07-10 | 1182 | yes | public | 13 |
-| 5CJ6 | Crystal Structure of a Selective Androgen Receptor Modulator Bound to the Ligand Bindin… | X-ray 2.07 Å | 2015-07-14 | 2233 | yes | public | 15 |
-| 5EDM | Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I ) | X-ray 2.20 Å | 2015-10-21 | 5005 | yes | public | 13 |
-| 5NI1 | CryoEM structure of haemoglobin at 3.2 A determined with the Volta phase plate | EM 3.20 Å | 2017-03-22 | 4579 | yes | held back | 15 |
-| 5UAK | Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (C… | EM 3.87 Å | 2016-12-19 | 9232 | no | public | 8 |
-| 6HPO | Crystallographic structure of the catalytic domain of Human Phenylalanine Hydroxylase (… | X-ray 1.67 Å | 2018-09-21 | 2880 | no | held back | 6 |
-| 6M7H | Structure of calmodulin with KN93 | X-ray 1.60 Å | 2018-08-20 | 1311 | yes | public | 17 |
-| 6TC2 | Monoclinic human insulin in complex with p-coumaric acid | X-ray 1.36 Å | 2019-11-04 | 5094 | yes | held back | 16 |
-| 6THA | Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation | X-ray 2.40 Å | 2019-11-19 | 3556 | no | held back | 7 |
-| 6VXX | Structure of the SARS-CoV-2 spike glycoprotein (closed state) | EM 2.80 Å | 2020-02-25 | 23694 | no | public | 8 |
-| 7A4M | Cryo-EM structure of mouse heavy-chain apoferritin at 1.22 A | EM 1.22 Å | 2020-08-20 | 3177 | yes | public | 9 |
-| 8C86 | Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2 | X-ray 1.10 Å | 2023-01-18 | 4150 | yes | public | 22 |
-| 8CE0 | N-terminal domain of human apolipoprotein E | X-ray 1.75 Å | 2023-02-01 | 1335 | yes | held back | 12 |
-| 8EPH | Crystal structure of human coagulation factor IXa (S195A), apo-form, DES-GLA | X-ray 1.88 Å | 2022-10-05 | 5564 | yes | public | 19 |
-| 8K7F | Crystal structure of human lysosomal alpha-galactosidase A in complex with (2R,3S,4R,5R… | X-ray 1.98 Å | 2023-07-26 | 7126 | no | held back | 13 |
-| 8PI2 | Native alpha-1-antitrypsin at 1.5 Angstrom (Cys232Ser) | X-ray 1.48 Å | 2023-06-20 | 6156 | yes | public | 10 |
-| 9F69 | Crystal structure of human triose phosphate isomerase with methyl malonic acid ligand | X-ray 1.17 Å | 2024-04-30 | 4040 | no | public | 10 |
-| 9FB2 | Gcase in complex with small molecule inhibitor 1 | X-ray 1.14 Å | 2024-05-11 | 4971 | no | public | 15 |
-| 9GIO | Crystal structure of the VHL-EloC-EloB complex with a covalent compound bound to C77 of… | X-ray 1.49 Å | 2024-08-19 | 3043 | no | public | 15 |
-| af-p04637-f1-model_v6 | AlphaFold DB model of Cellular tumor antigen p53 (TP53, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 3060 | no | public | 5 |
-| af-p07320-f1-model_v6 | AlphaFold DB model of Gamma-crystallin D (CRYGD, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1459 | no | public | 3 |
-| af-p0dp23-f1-model_v6 | AlphaFold DB model of Calmodulin-1 (CALM1, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1174 | no | public | 3 |
-| af-p61626-f1-model_v6 | AlphaFold DB model of Lysozyme C (LYZ, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1157 | no | public | 2 |
-| af-p68871-f1-model_v6 | AlphaFold DB model of Hemoglobin subunit beta (HBB, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1131 | no | public | 10 |
+| 1HVR | RATIONAL DESIGN OF POTENT, BIOAVAILABLE, NONPEPTIDE CYCLIC UREAS AS HIV PROTEASE INHIBI… | X-ray 1.80 Å | 1994-02-14 | 1890 | yes | other | 10 |
+| 1IEP | CRYSTAL STRUCTURE OF THE C-ABL KINASE DOMAIN IN COMPLEX WITH STI-571. | X-ray 2.10 Å | 2001-04-10 | 4710 | no | other | 14 |
+| 1IGT | STRUCTURE OF IMMUNOGLOBULIN | X-ray 2.80 Å | 1996-10-25 | 12956 | yes | set aside | 10 |
+| 1IRO | RUBREDOXIN (OXIDIZED, FE(III)) AT 1.1 ANGSTROMS RESOLUTION | X-ray 1.10 Å | 1995-12-13 | 858 | no | other | 5 |
+| 1K4C | Potassium Channel KcsA-Fab complex in high concentration of K+ | X-ray 2.00 Å | 2001-10-07 | 4534 | yes | other | 7 |
+| 1KF1 | Structure and Packing of Human Telomeric DNA | X-ray 2.10 Å | 2001-11-19 | 536 | – | other | 3 |
+| 1L2Y | NMR Structure of Trp-Cage Miniprotein Construct TC5b | NMR | 2002-02-25 | 304 | – | other | 2 |
+| 1LMB | REFINED 1.8 ANGSTROM CRYSTAL STRUCTURE OF THE LAMBDA REPRESSOR-OPERATOR COMPLEX | X-ray 1.80 Å | 1991-11-05 | 2334 | yes | set aside | 12 |
+| 1LYZ | Real-space refinement of the structure of hen egg-white lysozyme | X-ray 2.00 Å | 1975-02-01 | 1102 | yes | other | 3 |
+| 1MBN | The stereochemistry of the protein myoglobin | X-ray 2.00 Å | 1973-04-05 | 1260 | yes | other | 10 |
+| 1PLC | ACCURACY AND PRECISION IN PROTEIN CRYSTAL STRUCTURE ANALYSIS: RESTRAINED LEAST-SQUARES… | X-ray 1.33 Å | 1992-03-11 | 1657 | yes | other | 5 |
+| 1RX2 | DIHYDROFOLATE REDUCTASE (E.C.1.5.1.3) COMPLEXED WITH WITH FOLATE AND NICOTINAMIDE ADENI… | X-ray 1.80 Å | 1996-09-19 | 1503 | no | set aside | 16 |
+| 1STP | STRUCTURAL ORIGINS OF HIGH-AFFINITY BIOTIN BINDING TO STREPTAVIDIN | X-ray 2.60 Å | 1992-03-12 | 1001 | yes | other | 10 |
+| 1TRN | CRYSTAL STRUCTURE OF HUMAN TRYPSIN 1: UNEXPECTED PHOSPHORYLATION OF TYROSINE 151 | X-ray 2.20 Å | 1995-03-16 | 3705 | yes | other | 18 |
+| 1TUP | TUMOR SUPPRESSOR P53 COMPLEXED WITH DNA | X-ray 2.20 Å | 1995-07-11 | 5828 | no | other | 16 |
+| 1UBQ | STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION | X-ray 1.80 Å | 1987-01-02 | 660 | yes | other | 2 |
+| 1UDT | Crystal structure of Human Phosphodiesterase 5 complexed with Sildenafil(Viagra) | X-ray 2.30 Å | 2003-05-06 | 2655 | no | other | 12 |
+| 1Y26 | A-riboswitch-adenine complex | X-ray 2.10 Å | 2004-11-20 | 1608 | – | other | 9 |
+| 2C9V | Atomic resolution structure of Cu-Zn Human Superoxide dismutase | X-ray 1.07 Å | 2005-12-14 | 3043 | yes | set aside | 18 |
+| 2CPP | HIGH-RESOLUTION CRYSTAL STRUCTURE OF CYTOCHROME P450-CAM | X-ray 1.63 Å | 1987-04-06 | 3462 | yes | other | 13 |
+| 2HHB | THE CRYSTAL STRUCTURE OF HUMAN DEOXYHAEMOGLOBIN AT 1.74 ANGSTROMS RESOLUTION | X-ray 1.74 Å | 1984-03-07 | 4779 | yes | other | 22 |
+| 2NWD | Structure of chemically synthesized human lysozyme at 1 Angstrom resolution | X-ray 1.04 Å | 2006-11-14 | 2691 | yes | other | 11 |
+| 2OMF | OMPF PORIN | X-ray 2.40 Å | 1995-02-28 | 2827 | yes | set aside | 6 |
+| 2P4E | Crystal Structure of PCSK9 | X-ray 1.98 Å | 2007-03-12 | 4776 | no | other | 10 |
+| 2PTC | THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND… | X-ray 1.90 Å | 1982-09-27 | 2241 | yes | set aside | 12 |
+| 3AVE | Crystal Structure of the Fucosylated Fc Fragment from Human Immunoglobulin G1 | X-ray 2.00 Å | 2011-03-04 | 3796 | yes | other | 10 |
+| 3EML | The 2.6 A Crystal Structure of a Human A2A Adenosine Receptor bound to ZM241385. | X-ray 2.60 Å | 2008-09-24 | 3757 | yes | other | 11 |
+| 3ERT | HUMAN ESTROGEN RECEPTOR ALPHA LIGAND-BINDING DOMAIN IN COMPLEX WITH 4-HYDROXYTAMOXIFEN | X-ray 1.90 Å | 1999-03-30 | 2070 | no | other | 11 |
+| 3F9M | Human pancreatic glucokinase in complex with glucose and activator showing a mobile flap | X-ray 1.50 Å | 2008-11-14 | 4065 | no | other | 14 |
+| 3K34 | Human carbonic anhydrase II with a sulfonamide inhibitor | X-ray 0.90 Å | 2009-10-01 | 2387 | yes | other | 9 |
+| 3KCG | Crystal structure of the antithrombin-factor IXa-pentasaccharide complex | X-ray 1.70 Å | 2009-10-21 | 6669 | yes | set aside | 16 |
+| 3NGB | Crystal structure of broadly and potently neutralizing antibody VRC01 in complex with H… | X-ray 2.68 Å | 2010-06-11 | 25808 | yes | other | 5 |
+| 3PTB | THE GEOMETRY OF THE REACTIVE SITE AND OF THE PEPTIDE GROUPS IN TRYPSIN, TRYPSINOGEN AND… | X-ray 1.70 Å | 1982-09-27 | 1701 | yes | other | 12 |
+| 4INS | THE STRUCTURE OF 2ZN PIG INSULIN CRYSTALS AT 1.5 ANGSTROMS RESOLUTION | X-ray 1.50 Å | 1989-07-10 | 1182 | yes | other | 13 |
+| 5CJ6 | Crystal Structure of a Selective Androgen Receptor Modulator Bound to the Ligand Bindin… | X-ray 2.07 Å | 2015-07-14 | 2233 | yes | other | 15 |
+| 5EDM | Crystal structure of prothrombin deletion mutant residues 154-167 ( Form I ) | X-ray 2.20 Å | 2015-10-21 | 5005 | yes | other | 13 |
+| 5NI1 | CryoEM structure of haemoglobin at 3.2 A determined with the Volta phase plate | EM 3.20 Å | 2017-03-22 | 4579 | yes | set aside | 15 |
+| 5UAK | Dephosphorylated, ATP-free human cystic fibrosis transmembrane conductance regulator (C… | EM 3.87 Å | 2016-12-19 | 9232 | no | other | 8 |
+| 6HPO | Crystallographic structure of the catalytic domain of Human Phenylalanine Hydroxylase (… | X-ray 1.67 Å | 2018-09-21 | 2880 | no | set aside | 6 |
+| 6M7H | Structure of calmodulin with KN93 | X-ray 1.60 Å | 2018-08-20 | 1311 | yes | other | 17 |
+| 6TC2 | Monoclinic human insulin in complex with p-coumaric acid | X-ray 1.36 Å | 2019-11-04 | 5094 | yes | set aside | 16 |
+| 6THA | Crystal structure of human sugar transporter GLUT1 (SLC2A1) in the inward conformation | X-ray 2.40 Å | 2019-11-19 | 3556 | no | set aside | 7 |
+| 6VXX | Structure of the SARS-CoV-2 spike glycoprotein (closed state) | EM 2.80 Å | 2020-02-25 | 23694 | no | other | 8 |
+| 7A4M | Cryo-EM structure of mouse heavy-chain apoferritin at 1.22 A | EM 1.22 Å | 2020-08-20 | 3177 | yes | other | 9 |
+| 8C86 | Crystal structure of human transthyretin in complex with 3-O-methyltolcapone analogue 2 | X-ray 1.10 Å | 2023-01-18 | 4150 | yes | other | 22 |
+| 8CE0 | N-terminal domain of human apolipoprotein E | X-ray 1.75 Å | 2023-02-01 | 1335 | yes | set aside | 12 |
+| 8EPH | Crystal structure of human coagulation factor IXa (S195A), apo-form, DES-GLA | X-ray 1.88 Å | 2022-10-05 | 5564 | yes | other | 19 |
+| 8K7F | Crystal structure of human lysosomal alpha-galactosidase A in complex with (2R,3S,4R,5R… | X-ray 1.98 Å | 2023-07-26 | 7126 | no | set aside | 13 |
+| 8PI2 | Native alpha-1-antitrypsin at 1.5 Angstrom (Cys232Ser) | X-ray 1.48 Å | 2023-06-20 | 6156 | yes | other | 10 |
+| 9F69 | Crystal structure of human triose phosphate isomerase with methyl malonic acid ligand | X-ray 1.17 Å | 2024-04-30 | 4040 | no | other | 10 |
+| 9FB2 | Gcase in complex with small molecule inhibitor 1 | X-ray 1.14 Å | 2024-05-11 | 4971 | no | other | 15 |
+| 9GIO | Crystal structure of the VHL-EloC-EloB complex with a covalent compound bound to C77 of… | X-ray 1.49 Å | 2024-08-19 | 3043 | no | other | 15 |
+| af-p04637-f1-model_v6 | AlphaFold DB model of Cellular tumor antigen p53 (TP53, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 3060 | no | other | 5 |
+| af-p07320-f1-model_v6 | AlphaFold DB model of Gamma-crystallin D (CRYGD, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1459 | no | other | 3 |
+| af-p0dp23-f1-model_v6 | AlphaFold DB model of Calmodulin-1 (CALM1, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1174 | no | other | 3 |
+| af-p61626-f1-model_v6 | AlphaFold DB model of Lysozyme C (LYZ, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1157 | no | other | 2 |
+| af-p68871-f1-model_v6 | AlphaFold DB model of Hemoglobin subunit beta (HBB, Homo sapiens) | AlphaFold prediction | 2025-08-01 | 1131 | no | other | 10 |
 
 ### S3.2 The variant list, step by step
 
@@ -604,6 +607,37 @@ the UniProt canonical sequence is at that position. We also did not look for fur
 of the same amino-acid change that carry another classification: one qualifying record is
 enough, and ClinVar may hold a second record that disagrees with it.
 
+*How the names in the requests relate to the HGVS nomenclature.* Names with "p." follow the
+protein-level style of the HGVS nomenclature, the standard of the Human Genome Variation
+Society for naming variants [1, 2], but they are not complete
+HGVS descriptions. A complete description puts a reference sequence with its version number
+before the "p."; for a protein change this is a protein accession of RefSeq or Ensembl
+(beginning with NP_ or ENSP). A UniProt accession, which 46
+requests state, is not such a reference sequence. HGVS also prefers the three-letter form,
+and it puts parentheses around a protein change that is predicted from the DNA change and
+was not observed in the protein. Our requests write the protein change without parentheses
+(p.W82R or p.Trp82Arg).
+
+*How ClinVar names a record.* ClinVar states each change on a *transcript*, a reference
+sequence of one messenger RNA of the gene. For the running example the title of the record
+is NM_000239.3(LYZ):c.244T>C (p.Trp82Arg): nucleotide 244 of the coding sequence
+of transcript NM_000239.3, counted from the A of the start codon ATG, changes
+from T to C, and the protein change follows in
+parentheses. This is the format of ClinVar's titles; we take the protein change in it to be
+the consequence predicted from the DNA change. A gene can have several transcripts, and they
+can number the protein differently, so a ClinVar record lists the protein change once for
+each transcript. We accept a record if any one of these names equals our amino-acid change
+and position (step 2). We did not check which transcript that name is counted on; we take
+its position to be that of the UniProt canonical sequence (Section 9.2 of the paper).
+
+*What a request says about the classification.* ClinVar classifies DNA-level records, each
+for a stated condition. A request attaches the classification to the protein-level name and
+names no condition: it means that at least one qualifying record of this amino-acid change
+carries that classification. Where the qualifying records behind one request carry different
+values, the request says "pathogenic or likely pathogenic" (7
+requests); 21 requests say "pathogenic/likely pathogenic", which is
+ClinVar's own aggregate value on their records.
+
 *Step 3.* A request says, in ClinVar's own word for the record, that the variant of a named
 gene is classified as pathogenic, as likely pathogenic, or as pathogenic/likely pathogenic
 ("the *LYZ* variant p.W82R is classified as pathogenic in ClinVar"). The classification must
@@ -616,7 +650,7 @@ behind the classification.
 *Two variants were handled individually, outside these rules.* One variant removed in step 3c
 is used all the same, in 1 task per track: lysozyme p.Ile74Thr
 (I56T in the older literature), one of the first two variants reported to cause hereditary
-lysozyme amyloidosis [1]. It is outside the 2,400. Its
+lysozyme amyloidosis [3]. It is outside the 2,400. Its
 request says that the variant "is classified as pathogenic in
 ClinVar", which is what the record says; the record states no assertion criteria, and this
 task is therefore an exception to the rule above. One variant inside the
@@ -698,15 +732,19 @@ cut into facts as above. For each fact, counting items (one item is one style on
   the right representation with another colour or opacity;
 - *attempted*: the wanted items that the answer drew in the right representation, in any
   colour or opacity;
-- *spill*: items outside the target on which the answer repeats a style that it drew on the
-  target and that earned credit there (the requested representation, in the requested colour
-  or in another), where the reference draws no such thing;
+- *spill*: items outside the target that belong to a style of the answer (one representation
+  in one colour and opacity) which also earned credit on the target, where the reference
+  draws no such thing. The style is the answer's own: if it drew the target in red where
+  yellow was asked, its red items outside the target are spill. The requested representation
+  drawn outside the target in a separate style of another colour is not spill but
+  unrequested context;
 - *extra*: items on the target from a style of the answer that is confined to the target, in
   a representation type that the reference does not draw there.
 
 Target recall = credit / wanted. Target precision = credit / (attempted + spill + extra). The
 target score is the harmonic mean of the two, each averaged over the target's facts and over
-the facts about the scene that touch the target atoms. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats, on
+the facts about the scene that touch the target atoms (a label on the target, for example).
+A target with one fact, as in the running example, needs no averaging. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats, on
 atoms outside the target, the style that it drew on the target in the requested
 representation, whatever its colour (red spacefill on the whole chain, where yellow spacefill
 on one residue was asked for, is spill); the items count against target precision. *Extra
@@ -718,7 +756,7 @@ and task success count it. Table S1 gives the score of one example of each rule.
 between the second and the third rule is whether the style is confined to the target. It is a
 convention: a second representation on the target alone is read as part of the answer to "how
 should these atoms be drawn?", and a style that also covers other atoms is read as background.
-Rows S9 and S10 of Table S1 show the two cases side by side. Row S9 by hand: the target has
+Rows S9 and S10 of Table S1 show the two cases. Row S9 by hand: the target has
 24 atoms and one requested style, so wanted, credit and attempted are each
 24; the added ball-and-stick is confined to the target, so extra is
 24; target precision is 24/48
@@ -1470,7 +1508,7 @@ the requested part exactly right) differs slightly from that of Section 6.6 of t
 (87), because the two are found by different rules: here
 by the earlier grader, component by component of the scene tree, and there on drawn state.
 
-**Table S8. Corpus of the October 2026 pilot run (pilot run, preliminary, earlier grader).** Tasks and distinct structures (PDB entries) per category. A category is a group of tasks that need the same kind of knowledge.
+**Table S8. Corpus of the October 2026 pilot run (preliminary, earlier grader).** Tasks and distinct structures (PDB entries) per category. The categories are those of the first-version corpus.
 
 | Category | Tasks | Structures |
 | :--- | ---: | ---: |
@@ -1679,8 +1717,10 @@ judge's "same" verdicts as right would have changed no model's mean F1 by more t
 
 ## S9. Further tables of the final run
 
-⟦PENDING: final run — the tables that Section 6.5 of the paper points to, for both tracks: outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the JSON-repair counterfactual, F1 valid-only, cost per model, and the one-sided pairs of Table 9 divided by whether the side that was not right was unshowable⟧
+⟦PENDING: final run — the tables that Section 6.5 of the paper points to, for both tracks: outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the JSON-repair counterfactual, F1 valid-only, cost per model, the one-sided pairs of Table 9 divided by whether the side that was not right was unshowable, and the first two rows of Table 10 with their difference and its interval for each model (Section 6.4)⟧
 
 ## References
 
-1. Pepys MB, Hawkins PN, Booth DR, Vigushin DM, Tennent GA, Soutar AK, Totty N, Nguyen O et al. Human lysozyme gene mutations cause hereditary systemic amyloidosis. *Nature* 1993;362(6420):553–557. doi:[10.1038/362553a0](https://doi.org/10.1038/362553a0)
+1. den Dunnen JT, Dalgleish R, Maglott DR, Hart RK, Greenblatt MS, McGowan-Jordan J, Roux AF, Smith T et al. HGVS Recommendations for the Description of Sequence Variants: 2016 Update. *Human Mutation* 2016;37(6):564–569. doi:[10.1002/humu.22981](https://doi.org/10.1002/humu.22981)
+2. Hart RK, Fokkema IFAC, DiStefano M, Hastings R, Laros JFJ, Taylor R, Wagner AH, den Dunnen JT. HGVS Nomenclature 2024: improvements to community engagement, usability, and computability. *Genome Medicine* 2024;16(1):149. doi:[10.1186/s13073-024-01421-5](https://doi.org/10.1186/s13073-024-01421-5)
+3. Pepys MB, Hawkins PN, Booth DR, Vigushin DM, Tennent GA, Soutar AK, Totty N, Nguyen O et al. Human lysozyme gene mutations cause hereditary systemic amyloidosis. *Nature* 1993;362(6420):553–557. doi:[10.1038/362553a0](https://doi.org/10.1038/362553a0)

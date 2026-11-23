@@ -24,7 +24,7 @@ selection colour or in {{ex.color}} as the residue is, is accepted as well.
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score*: how well the requested atoms are drawn as asked, whatever else was drawn (0 to 1). Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
+score*: how far the requested style is on the requested atoms and on no others (0 to 1); unrequested background, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
 {{include:generated/table_example.md}}

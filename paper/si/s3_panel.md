@@ -51,8 +51,8 @@ SIFTS mapping added, whereas the atom table is built from the archive file.
 
 **Table S3. The panel.** *Atoms*: atoms in the first coordinate set. *Author numbering differs
 from UniProt*: at least one observed residue has an author number that is not its UniProt
-position (a dash: no protein chain mapped to UniProt). *Split*: public, or held back
-(structures used only by held-back tasks; Section 3.6 of the paper). *Tasks*: tasks of the
+position (a dash: no protein chain mapped to UniProt). *Split*: set aside (one of the {{corpus.heldback.n_structures}} structures of the set-aside
+split; Section 3.6 of the paper), or other. *Tasks*: tasks of the
 corpus on this structure, both tracks, without rephrasings.
 
 {{include:generated/si_panel.md}}
@@ -96,6 +96,37 @@ is counted on. We therefore rely on at least one reference protein of the record
 the UniProt canonical sequence is at that position. We also did not look for further records
 of the same amino-acid change that carry another classification: one qualifying record is
 enough, and ClinVar may hold a second record that disagrees with it.
+
+*How the names in the requests relate to the HGVS nomenclature.* Names with "p." follow the
+protein-level style of the HGVS nomenclature, the standard of the Human Genome Variation
+Society for naming variants [@denDunnen2016hgvs; @hart2024hgvs], but they are not complete
+HGVS descriptions. A complete description puts a reference sequence with its version number
+before the "p."; for a protein change this is a protein accession of RefSeq or Ensembl
+(beginning with NP_ or ENSP). A UniProt accession, which {{clin.n_accession_in_prompt}}
+requests state, is not such a reference sequence. HGVS also prefers the three-letter form,
+and it puts parentheses around a protein change that is predicted from the DNA change and
+was not observed in the protein. Our requests write the protein change without parentheses
+({{ex.name_in_prompt}} or {{ex.hgvs}}).
+
+*How ClinVar names a record.* ClinVar states each change on a *transcript*, a reference
+sequence of one messenger RNA of the gene. For the running example the title of the record
+is {{ex.clinvar_first_title}}: nucleotide {{ex.clinvar_cdna_position}} of the coding sequence
+of transcript {{ex.clinvar_transcript}}, counted from the A of the start codon ATG, changes
+from {{ex.clinvar_cdna_from}} to {{ex.clinvar_cdna_to}}, and the protein change follows in
+parentheses. This is the format of ClinVar's titles; we take the protein change in it to be
+the consequence predicted from the DNA change. A gene can have several transcripts, and they
+can number the protein differently, so a ClinVar record lists the protein change once for
+each transcript. We accept a record if any one of these names equals our amino-acid change
+and position (step 2). We did not check which transcript that name is counted on; we take
+its position to be that of the UniProt canonical sequence (Section 9.2 of the paper).
+
+*What a request says about the classification.* ClinVar classifies DNA-level records, each
+for a stated condition. A request attaches the classification to the protein-level name and
+names no condition: it means that at least one qualifying record of this amino-acid change
+carries that classification. Where the qualifying records behind one request carry different
+values, the request says "pathogenic or likely pathogenic" ({{clin.n_class_differs}}
+requests); {{clin.n_class_both_word}} requests say "pathogenic/likely pathogenic", which is
+ClinVar's own aggregate value on their records.
 
 *Step 3.* A request says, in ClinVar's own word for the record, that the variant of a named
 gene is classified as pathogenic, as likely pathogenic, or as pathogenic/likely pathogenic

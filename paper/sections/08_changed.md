@@ -1,12 +1,11 @@
 ## 7. Errors in the first version and their corrections
 
-The first version of MolBench (Section 6: the corpus and the two graders used up to the pilot
-run of October 2026) was wrong in nine ways that we know of. Table 15 lists each error, how
+The first version of MolBench (defined in Section 6) was wrong in nine ways that we know of. Table 15 lists each error, how
 we found out, and what replaced it in the present version, because each error is one that
 another benchmark of this kind could make.
 
-**Table 15. Nine errors in the first version of MolBench (the corpus and graders used up to
-the October 2026 pilot run) and what replaced each in the benchmark of Sections 3 and 4.**
+**Table 15. Nine errors in the first version of MolBench and what replaced each in the
+present version.**
 *Where*: the sections that give the numbers behind the row.
 
 | Row | What was wrong | How we found out | What replaced it | Where |

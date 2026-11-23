@@ -4,7 +4,7 @@
 <rect width="660" height="456" fill="#ffffff"/>
 <text x="10" y="19" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">No data yet. The pale example mark in each panel has the final colour and shape; its position means nothing.</text>
 <rect x="10" y="30" width="640" height="132" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="20" y="49" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">A  Task success by model, one panel per track</text>
+<text x="20" y="49" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">A  Task success by model, one plot per track</text>
 <text x="20" y="65" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One row per model, best first: 16 core models, up to 5</text>
 <text x="20" y="78" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">optional ones (†) and the keyword script. The two</text>
 <text x="20" y="91" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">tracks are not compared with each other.</text>

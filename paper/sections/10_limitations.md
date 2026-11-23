@@ -10,7 +10,7 @@ has been tested only against cases that we foresaw. The full list follows in fou
   call-list track by those of PDBe Mol\* 3.3.2. MolViewSpec is designed to be independent of the
   viewer, but Mol\* is its implementation in practice. We make no claim about PyMOL, ChimeraX
   or VMD.
-- **No lookup, one answer.** A model cannot look anything up, ask back, or see the picture.
+- **No lookup, one answer.** A model cannot look anything up, ask a clarifying question, or see the picture.
   A product that wraps a model in tools, validation and retries may do better. We measure the
   model, not such a product.
 - **No open-ended tasks.** Requests such as "show the active site clearly" have no single
@@ -25,8 +25,8 @@ has been tested only against cases that we foresaw. The full list follows in fou
   phrasings were written out one by one by the language-model coding assistant used in this
   work, and checked by rule for dropped values; no person has read them all.
 - **Public tasks and contamination.** Earlier MolBench tasks have been public since May 2026,
-  and the whole corpus, held-back split included, was in a public repository before the run. A
-  model trained later may have seen any of it. The held-back split does not solve this: it
+  and the whole corpus, set-aside split included, was in a public repository before the run. A
+  model trained later may have seen any of it. The set-aside split does not solve this: it
   compares two sets of structures, not seen tasks with unseen tasks (Section 3.6). It cannot
   show that a model has, or has not, memorised tasks, and it cannot protect future runs. The
   generators are seeded, so a fresh split on new structures can be generated.
@@ -46,8 +46,10 @@ has been tested only against cases that we foresaw. The full list follows in fou
   depend on the classification, and no task asks for a judgement about disease.
 - **Records with little review.** The clinical requests name {{clin.n_variants}} distinct
   variants (a variant that is asked about on two structures is counted once). For
-  {{clin.review.single}} of them, the running example among them, the best-reviewed record
-  that we use has the review status "{{ex.clinvar_review_status}}": one submitter, with stated
+  each variant we take its *best-reviewed record*: of its qualifying records (Section 3.1),
+  the one with the highest review status. For
+  {{clin.review.single}} variants, the running example among them, this record has the review
+  status "{{ex.clinvar_review_status}}": one submitter, with stated
   criteria, and no confirmation by a second submitter or an expert panel. For
   {{clin.review.multiple}} it has several submitters and no conflicts, and for
   {{clin.review.expert_or_guideline}} it was reviewed by an expert panel or comes from a
@@ -61,8 +63,10 @@ has been tested only against cases that we foresaw. The full list follows in fou
   name came from a transcript that numbers the protein differently, the record would be about
   another residue than the one we ask for; the reference atoms would still be those of the
   UniProt position in the request. For the same reason, a request that states no accession
-  rests on the assumption that the protein of the gene's default transcript is numbered as
-  the UniProt canonical sequence is (Section 3.3.1). And one
+  rests on the assumption that the protein of the gene's MANE Select transcript is numbered
+  as the UniProt canonical sequence is (Section 3.3.1). A request also attaches ClinVar's
+  classification to a protein-level name and names no condition, which ClinVar itself does
+  not do (Section 3.1). And one
   qualifying record is enough: we did not look for further records of the same amino-acid
   change that are classified differently.
 
@@ -78,13 +82,12 @@ has been tested only against cases that we foresaw. The full list follows in fou
   clinical category select by UniProt accession and position. The grader resolves these
   through the frozen SIFTS table; for PDB entries this path was not compared with the running
   viewer (Sections 3.4 and 3.7).
-- **Name resolution: text comparison outside the panel.** A request that names a protein
-  accepts any PDB entry of it. Only panel entries have frozen atom tables, so on any other
-  entry that the task accepts an answer's selections are compared with the reference's as
-  text. The common ways of writing "the protein" pass; a correct selection by chain
-  identifier does not. Table 8 reports answers on the reference entry and on any other entry
-  that the task accepts in separate rows; all but {{resolve.n_other_panel_entries}} of those
-  other entries are outside the panel.
+- **Name resolution: text comparison outside the panel.** Of the
+  {{resolve.n_accepted_entries:,}} entries that the name-resolution tasks accept,
+  {{resolve.n_accepted_outside_panel:,}} are outside the panel, and an answer on one of them
+  is compared with the reference as text, so a correct answer that is spelled differently
+  fails (the weaker rule of Section 4.1). Table 8 reports such answers in a row of their
+  own.
 - **The file behind the call-list viewer.** The atom tables are built from the archive file of
   each entry, and the read-back loaded that file into both viewers. Left to itself, PDBe Mol\*
   fetches PDBe's own copy of the entry, which carries the SIFTS mapping. We did not compare
@@ -109,14 +112,16 @@ has been tested only against cases that we foresaw. The full list follows in fou
 - **What the run can and cannot detect.** Means per category and track rest on
   {{corpus.tier_tasks_min}} to {{corpus.tier_tasks_max}} tasks (Table 8); the smallest
   categories are estimated loosely. Several planned
-  contrasts are descriptive only: the public against the held-back split within one category
-  (held-back tasks sit on {{corpus.heldback.n_structures}} structures); the {{clin.n_sse}}
-  helix and strand tasks; the terse and indirect phrasings within one category
-  ({{corpus.n_requests_paraphrased}} requests in all); and the matched clinical tasks. Of the
-  last there are {{clin.n_offset_pairs}} sets that ask about the same variant on a structure
-  with an offset and on one without, on {{clin.n_offset_pair_proteins}} proteins, and the structure
-  without an offset is always a predicted structure, so "no offset" and "predicted structure"
-  cannot be told apart. We report these contrasts with intervals and do not test them.
+  contrasts are descriptive only: the set-aside split against the other tasks within one
+  category (the set-aside tasks sit on {{corpus.heldback.n_structures}} structures); the
+  {{clin.n_sse}} helix and strand tasks; the terse and indirect phrasings within one category
+  ({{corpus.n_requests_paraphrased}} requests in all); and the matched clinical tasks. Table
+  10 reports {{clin.n_offset_pairs_uniprot_name}} sets of matched tasks, on
+  {{clin.n_offset_pair_proteins_uniprot_name}} proteins. ({{clin.n_offset_pairs}} sets ask
+  about the same variant on a structure with an offset and on one without; one of them uses
+  a traditional name and is left out, Section 3.3.1.) In every set the structure without an
+  offset is a predicted structure, so "no offset" and "predicted structure" cannot be told
+  apart. We report these contrasts with intervals and do not test them.
 - **The viewer can do the mapping on one track only.** On the call-list track the viewer can
   map a UniProt position itself; on the scene track the model must. The paired comparison is
   therefore reported with and without the clinical pairs (Sections 3.4 and 6.3).

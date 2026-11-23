@@ -1,0 +1,32 @@
+{
+ "scenes_sha256": "da78edeb2a2c16ab59fbe51fe86c5343de95fcf0db4a6fa81a2ecf03ee912fbe",
+ "molstar": "5.9.0",
+ "camera": {
+  "mode": "perspective",
+  "fov": 0.7853981633974483,
+  "position": [
+   13.64407194298524,
+   13.141040781681115,
+   98.9888339059493
+  ],
+  "up": [
+   0,
+   1,
+   0
+  ],
+  "target": [
+   13.64407194298524,
+   13.141040781681115,
+   27.05157709371437
+  ],
+  "radius": 27.529196351835004,
+  "radiusMax": 27.529196351835004,
+  "fog": 15,
+  "clipFar": true,
+  "minNear": 1,
+  "minFar": 0
+ },
+ "structure_files": [
+  "2nwd"
+ ]
+}

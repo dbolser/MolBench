@@ -10,8 +10,9 @@ it.
 The models are chosen by a written rule, not by results. The *core models* are the
 {{plan.n_core_models}} language models in the results that we published online in October 2026
 (the results browser of Section 12). They are kept unchanged, so that the choice of models
-depends on no result of the present benchmark. They are lower-priced models, with list prices from {{plan.core_price_output_min}}
-to {{plan.core_price_output_max:.0f}} US dollars per million output tokens. Of the
+depends on no result of the present benchmark. Most are the smaller, cheaper models of
+their providers; list prices run from {{plan.core_price_output_min}} to
+{{plan.core_price_output_max:.0f}} US dollars per million output tokens. Of the
 {{plan.n_core_models}}, {{plan.n_core_open}} have *open weights* (the weights of the model can
 be downloaded) and {{plan.n_core_closed}} have *closed weights* (the model can be used only
 through a provider's service).
@@ -24,10 +25,11 @@ models ran in the October pilot of the
 scene track (Section 6.6); the exception, {{plan.core_not_in_pilot}}, could not be reached on
 that day and had earlier call-list results only.
 
-Up to {{plan.n_optional_models}} *optional models* are larger (list prices from
-{{plan.optional_price_output_min}} to {{plan.optional_price_output_max:.0f}} US dollars per
-million output tokens): the largest current model of several providers of closed-weight
-models, and the largest model with open weights, as listed on the day the prices were recorded
+Up to {{plan.n_optional_models}} *optional models* are the largest models of their kind
+(list prices from {{plan.optional_price_output_min}} to
+{{plan.optional_price_output_max:.0f}} US dollars per million output tokens): the largest
+current model of several providers of closed-weight models, and the largest model with open
+weights, as listed on the day the prices were recorded
 in the manifest ({{plan.price_date:date}}). The manifest names them. Which of them
 are run is decided before any result exists, from the projected cost alone, and they are
 marked † in the tables. No model is added or dropped after results are seen.
@@ -40,7 +42,7 @@ request to fixed answers by rule.
 
 Table 5 lists the four prompting conditions. In each of them a model receives a system prompt
 and the request, and returns one answer. A model cannot
-look anything up, cannot ask a question back, and does not see a rendered result. It is not
+look anything up, cannot ask a clarifying question, and does not see a rendered result. It is not
 given the structure file. Both system prompts tell the model that its answer is judged by what
 the viewer ends up showing; the scene prompt adds that anything drawn that was not asked for
 counts against the answer.
@@ -78,7 +80,7 @@ words) lists the kinds of node of a scene and the fields of a selection, among t
 and residue number in author numbering and in label numbering. The guide of the call-list
 track ({{prompt.api.guide_words:,}} words) lists the calls and their fields, among them
 selection by author numbering, by label numbering and by UniProt accession and position.
-Neither guide says which numbering a given entry uses, and the scene guide does not mention
+Neither guide says how a given structure is numbered, and the scene guide does not mention
 UniProt. With the instruction and the rule for the answer, the system prompt has
 {{prompt.mvs.words:,}} words on the scene track and {{prompt.api.words:,}} on the call-list
 track. SI Section S7 prints both system prompts and both guides in full.
@@ -134,9 +136,9 @@ of the answer, and its cost.
     - *Primary comparison.* An answer is right when it is target-right, that is, when its
       target score is exactly 1. This is the same test in both formats. It uses the
       {{corpus.twins.n_with_target}} pairs that have a target score. The other
-      {{corpus.twins.n_without_target}} pairs have none (Section 4.2) and are left out: they
-      are follow-up turns whose edit hides the water ({{corpus.twins.no_target.hide_water}}),
-      sets the background colour ({{corpus.twins.no_target.background}}) or needs no change
+      {{corpus.twins.n_without_target}} pairs are follow-up turns without one (Section 4.2):
+      their edit hides the water ({{corpus.twins.no_target.hide_water}}), sets the background
+      colour ({{corpus.twins.no_target.background}}) or needs no change
       ({{corpus.twins.no_target.noop}}).
     - *Secondary comparison.* An answer is right when it is a task success. This is not the
       same test in the two formats (Section 4.2). It uses all {{corpus.n_twin_pairs}} pairs
@@ -154,28 +156,29 @@ of the answer, and its cost.
     - *Repeats.* The analysis is repeated without the {{corpus.twins.need_hide_toggle}}
       pairs whose reference call list switches off part of the default view (Section 3.4),
       and without the clinical pairs, in which the call-list viewer can do the mapping
-      itself. Those {{corpus.twins.need_hide_toggle}} pairs are first requests and the
-      {{corpus.twins.n_without_target}} pairs without a target score are follow-up turns, so
-      the two sets do not overlap.
-- **Planned comparisons**, seven in all, each as a difference with an interval.
-  Comparisons 1 to 6 are differences in task success rate and are reported together in
-  Section 6.5: (1) public against held-back split; (2) full against terse wording and
-  (3) full against indirect wording; (4) with and without JSON mode, where the single
-  JSON-mode answer to a task is set against the mean of its {{plan.samples}} answers in the
-  main condition; (5) with and without grounding pack; (6) with and without format guide.
-  Comparisons 1 to 4 use both tracks, and 5 and 6 the scene track. Comparison 7 carries the
-  question of the Introduction: clinical tasks of the scene track in which copying the number
-  in the variant name is right against those in which it is wrong (the primary clinical
-  grouping; the grouping by offset is descriptive). For this comparison alone the primary
-  score is the target score, because task success also falls when an answer adds unrequested
-  context; the difference in task success rate is given beside it. It is the difference row
-  of the clinical table in Section 6.4. Totals of the two tracks are not compared with each
-  other: the tracks differ in their mix of categories and in the length of the answer, so the
-  formats are compared on the pairs only.
+      itself. The first set holds first requests only and the pairs without a target score
+      are follow-up turns, so the two sets do not overlap.
+- **The primary clinical comparison (planned comparison 7).** It carries the question of the
+  Introduction. Clinical tasks of the scene track in which copying the number in the variant
+  name is right are compared with those in which it is wrong. The primary score is the
+  target score, because task success also falls when an answer adds unrequested context; the
+  difference in task success rate is given beside it. The result is the difference row of
+  Table 10, with an interval. The grouping by offset is reported for description only.
+- **Six further planned comparisons (Table 12).** Each is a difference in task success rate
+  with an interval.
+    1. Tasks on the other structures against the set-aside split (both tracks).
+    2. Full against terse wording (both tracks).
+    3. Full against indirect wording (both tracks).
+    4. With and without JSON mode (both tracks). The single JSON-mode answer to a task is
+       set against the mean of its {{plan.samples}} answers in the main condition.
+    5. With and without grounding pack (scene track).
+    6. With and without format guide (scene track).
+- **Not compared: the totals of the two tracks.** The tracks differ in their mix of
+  categories and in the length of the answer, so the formats are compared on the pairs only.
 - **What F1 is read against.** F1 has a floor that needs no skill: a scene with nothing but a
   protein cartoon, or a follow-up's start state returned unchanged, shares most of its drawing
-  with the reference. The task success rate is therefore the primary score and the target
-  score is reported beside it; F1 is shown with the keyword script beside it, which marks
+  with the reference. Within a track the task success rate is therefore the primary score
+  and the target score is reported beside it; F1 is shown with the keyword script beside it, which marks
   that floor.
 
 The McNemar tests are one per model; we read each as a description of that model and not as a
@@ -184,28 +187,35 @@ family of tests. We do not correct for multiple comparisons, and we report every
 ### 5.5 Human check of the grader
 
 The grader's verdict is also checked against people. After the run, volunteers will see
-*picture comparisons*: two pictures side by side, a reference and a model answer, rendered
+*picture comparisons*: two pictures next to each other, a reference and a model answer, rendered
 from the same camera and framed on the target atoms. They say whether the two show the same
 thing. The study has two parts.
 
 *Possible false fails.* The first part has {{study.n_pairs}} picture comparisons. Each is of
 a valid scene-track answer of the main condition that the grader does not count as a task
-success. They are sampled under four limits: (i) no task supplies more than
-{{study.max_per_task}} answers, and never more than {{study.max_per_task_model}} from the same
-model; (ii) half are answers that an *image judge* calls the same as the reference, and half
-are answers that it calls different; (iii) within each half, the categories contribute as
-nearly equal numbers of answers as the available answers allow; (iv) no model supplies more than {{study.max_model_share:.0%}} of the set.
-The image judge is a vision-language model that is shown the same two pictures and asked the
-same question; it is used here to find the answers most likely to look right, and it
-contributes to no score in this paper. Each comparison is rated by {{study.raters_per_pair:word}}
-raters. We will report three things, with intervals: the share of these answers that people
-judge to show the same as the reference; the agreement between raters; and the agreement
-between people and the image judge. Because the sample is balanced on the image judge's
-verdict and on category, the first of these describes the sample. It is not the grader's
-rate of false fails among all valid answers that it does not count as a success, and we make
-no estimate of that rate from this study: the study looks for cases. An answer that all its raters judge to show the same as
-the reference, although the grader did not count it as a success, is either a false fail of
-the grader or a difference that the picture does not show; each such case will be listed.
+success. Half are answers that an *image judge* calls the same as the reference, and half are
+answers that it calls different. The image judge is a vision-language model that is shown the
+same two pictures and asked the same question. It is used here to find the answers most
+likely to look right, and it contributes to no score in this paper. The sample obeys three
+further limits:
+
+- no task supplies more than {{study.max_per_task}} answers, and never more than
+  {{study.max_per_task_model}} from the same model;
+- within each half, the categories contribute as nearly equal numbers of answers as the
+  available answers allow;
+- no model supplies more than {{study.max_model_share:.0%}} of the set.
+
+Each comparison is rated by {{study.raters_per_pair:word}} raters. We will report three
+things, with intervals: the share of these answers that people judge to show the same as the
+reference; the agreement between raters; and the agreement between people and the image
+judge. An answer that all its raters judge to show the same as the reference, although the
+grader did not count it as a success, is either a false fail of the grader or a difference
+that the picture does not show; each such case will be listed.
+
+*What the study does not estimate.* Because the sample is balanced on the image judge's
+verdict and on category, the first of the three shares describes the sample. It is not the
+grader's rate of false fails among all valid answers that it does not count as a success,
+and we make no estimate of that rate: the study looks for cases.
 
 *Possible false passes.* A further {{study.n_grader_check_pairs}} picture comparisons are of
 answers that the grader counts as a task success although their pictures are not identical

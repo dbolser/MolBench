@@ -113,3 +113,26 @@ full text (first 100,000 characters of each):
   clinical-genetics reviewer stated it; check before submission.
 - The paper does not name the RefSeq protein accession of lysozyme (the reviewer proposed
   one); it says only what kind of accession a complete description needs.
+
+## Review round 6 (2026-11-23)
+
+- One reference was added: Morales et al. 2022, "A joint NCBI and EMBL-EBI transcript set for
+  clinical genomics and research" (Nature 604(7905):310–315, DOI 10.1038/s41586-022-04558-8),
+  cited in Section 3.3.1 for the MANE Select transcript. Title, journal, year, volume, issue,
+  pages, DOI and the first three authors' surnames and initials were taken on 2026-11-23 from
+  the citation that NCBI gives on its MANE page (ncbi.nlm.nih.gov/refseq/MANE/), read through
+  an automated summary. The given names in `references.bib` (Joannella, Shashikant, Jane E.)
+  were written from memory by the editing assistant; only their initials are printed. Check
+  against the Crossref record before submission.
+- What the paper says about MANE Select ("the one transcript per gene that RefSeq and Ensembl
+  jointly designate as the default for clinical reporting") rests on the same page, which
+  says that the set has one transcript at each locus, that each matches between RefSeq and
+  Ensembl/GENCODE, and that it is meant "as a universal standard for clinical reporting, as a
+  default for display". That a reader of a bare "p." name would take it to be counted on that
+  transcript's protein is the clinical-genetics reviewer's statement, not a claim read at a
+  source.
+- Not read at the source: how ClinVar forms the title of a record (the ClinVar documentation
+  page could not be opened by the automated reader). SI Section S3.2 therefore says only what
+  the title of the running example looks like and that our requests write the protein change
+  without parentheses; the earlier sentence that gave ClinVar's reason for the parentheses
+  was removed.

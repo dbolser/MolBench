@@ -3,6 +3,13 @@
 
     uv run python paper/figures.py           # writes paper/generated/fig_*.svg
     uv run python paper/figures.py --check   # exit 1 if a committed schematic is stale
+    uv run python paper/figures.py --viewer-strip   # render the three pictures of Figure 4 again
+
+The three pictures at the top of Figure 4 are rendered by headless Mol* from the graded
+answers of the running example (``generated/example_task.json``), all from one camera. That
+needs a browser and the Mol* bundle (``scripts/fetch_molstar.py``), so the pictures are
+committed (``generated/viewer_strip/``) and only embedded here; run ``--viewer-strip`` again
+when the running example changes. The build checks that they belong to the present example.
 
 Five schematics are written as plain SVG by this script (pipeline, tiers, drawn-state
 grading, paired design, and the shapes of the result figures), so they are text, diff cleanly and
@@ -17,6 +24,8 @@ green), checked for colour-vision deficiency, and every coloured mark also has a
 from __future__ import annotations
 
 import argparse
+import base64
+import hashlib
 import html
 import json
 import pathlib
@@ -130,7 +139,7 @@ def fig_pipeline(v: dict) -> str:
             f"scene track: {v['corpus.mvs.n']}",
             f"call-list track: {v['corpus.api.n']}",
             f"{v['corpus.n_twin_pairs']} pairs (one request, both tracks)",
-            f"{v['corpus.heldback.n_tasks']} tasks on held-back structures"]),
+            f"{v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} set-aside structures"]),
         ("4  Model", [
             "is given a format guide and",
             "the request only:",
@@ -194,16 +203,19 @@ def fig_pipeline(v: dict) -> str:
 # --------------------------------------------------------------------------- #
 # Figure 2: tiers
 # --------------------------------------------------------------------------- #
+# Left column: the four categories that differ in what the model must know beyond the
+# request. Right column: the four that differ in the form of the task (Section 3.3).
 TIER_CARDS = [
     ("translation", "Translation", "tr-het-code-3ert", "Everything is in the request."),
     ("grounded", "Structure-grounded", "gr-ligand-1stp-btn", "A feature is named; the model must know its atoms."),
-    ("interactions", "Interactions", "in-ca-distance-9fb2", "Named atoms and a measurement."),
     ("resolve", "Name resolution", "res-gene-p01112", "The protein is named; the entry is not."),
     ("clinical", "Clinical variant", "clin-pair-target-lyz-2nwd-w82r-mvs", None),
+    ("interactions", "Interactions", "in-ca-distance-9fb2", "Named atoms and a measurement."),
     ("followup", "Follow-up turn", "fu-referent-colour-5cj6-mvs", "A start state plus an edit."),
     ("accept_set", "Several right answers", "acc-residue-colour-4ins-mvs", "One countable thing is left open."),
     ("tool_only", "Viewer settings", "api-canvas-1udt", "Call-list track only."),
 ]
+TIER_COLUMNS = ["Differ in what the model must know", "Differ in the form of the task"]
 PROMPT_CHARS = 170      # a longer request is cut at a word and ends in an ellipsis
 
 
@@ -212,13 +224,15 @@ def fig_tiers(v: dict) -> str:
     for f in (REPO / "tasks").rglob("*.json"):
         t = json.loads(f.read_text(encoding="utf-8"))
         prompts[t.get("id")] = t
-    cw, ch, gap, y0 = 314, 104, 12, 34
+    cw, ch, gap, y0 = 314, 104, 12, 56
     s = Svg(W, y0 + 4 * (ch + gap) + 34, "The eight categories of task, each with one request from the corpus")
     s.text(10, 20, "Counts: tasks on the scene track / on the call-list track. Requests are quoted from the corpus.",
            size=10, fill=MUTED)
+    for k, head in enumerate(TIER_COLUMNS):
+        s.text(10 + k * (cw + gap), 46, head, size=11.5, weight="bold")
     for i, (tier, name, tid, needs) in enumerate(TIER_CARDS):
-        x = 10 + (i % 2) * (cw + gap)
-        y = y0 + (i // 2) * (ch + gap)
+        x = 10 + (i // 4) * (cw + gap)
+        y = y0 + (i % 4) * (ch + gap)
         lookup = tier in ("resolve", "clinical")
         if lookup:
             s.rect(x, y, cw, ch, fill=LOOKUP_FILL, stroke=BLUE, sw=1.8)
@@ -239,7 +253,7 @@ def fig_tiers(v: dict) -> str:
             prompt = prompt[:PROMPT_CHARS - 3].rsplit(" ", 1)[0] + " …"
         s.para(x + 10, yy + 3, "“" + prompt + "”", width=chars(cw - 20, 10), size=10, italic=True)
     yf = y0 + 4 * (ch + gap) + 6
-    s.para(10, yf, "Blue frame: the two lookup categories. The answer needs one fact that a person would look up "
+    s.para(10, yf, "Blue frame: the two lookup categories. The answer needs one piece of information that a person would look up "
            "(an entry, a residue number); the model must recall it.", width=chars(W - 20, 10), size=10, fill=MUTED)
     return s.done()
 
@@ -247,7 +261,44 @@ def fig_tiers(v: dict) -> str:
 # --------------------------------------------------------------------------- #
 # Figure 4: drawn-state grading of the running example
 # --------------------------------------------------------------------------- #
+STRIP = GEN / "viewer_strip"
+STRIP_PICTURES = [("reference", "right", "Reference"), ("answer_a", "face", "Answer A"),
+                  ("answer_b", "context", "Answer B")]
+
+
+def strip_scenes() -> dict:
+    """The three scenes of the strip, as graded for Table 3 (rows S1, S3 and S5)."""
+    g = json.loads((GEN / "example_task.json").read_text(encoding="utf-8"))["graded_answers"]["mvs"]
+    return {name: g[key] for name, key, _ in STRIP_PICTURES}
+
+
+def scenes_hash(scenes: dict) -> str:
+    return hashlib.sha256(json.dumps(scenes, sort_keys=True).encode()).hexdigest()
+
+
+def render_viewer_strip() -> None:
+    """Render the three scenes in headless Mol*, all from the camera that frames Answer B
+    (the only one of the three that shows the whole protein). Writes the pictures and a
+    record of what they were rendered from."""
+    sys.path.insert(0, str(REPO))
+    from molbench import render
+    scenes = strip_scenes()
+    STRIP.mkdir(exist_ok=True)
+    size = dict(width=412, height=310, network=False)
+    first = render.render_framed(scenes["answer_b"], STRIP / "answer_b.png", **size)
+    for name in ("reference", "answer_a"):
+        render.render_framed(scenes[name], STRIP / f"{name}.png", camera=first["camera"], **size)
+    version = (REPO / "molbench/static/molstar/VERSION").read_text(encoding="utf-8").split()[0]
+    (STRIP / "record.json").write_text(json.dumps(
+        {"scenes_sha256": scenes_hash(scenes), "molstar": version, "camera": first["camera"],
+         "structure_files": first["frozen_files"]}, indent=1) + "\n", encoding="utf-8")
+
+
 def fig_grading(v: dict) -> str:
+    record = json.loads((STRIP / "record.json").read_text(encoding="utf-8"))
+    if record["scenes_sha256"] != scenes_hash(strip_scenes()):
+        raise SystemExit("the pictures of Figure 4 were rendered from another running example: "
+                         "run paper/figures.py --viewer-strip")
     right, wrong = v["ex.auth_number"], v["ex.uniprot_position"]
     look = f"{v['ex.color']} {v['ex.rep_short']}"          # the look the request states
     mark = {"yellow": "#F0E442", "green": GREEN, "orange": ORANGE, "blue": BLUE}.get(v["ex.color"], GREEN)
@@ -262,11 +313,22 @@ def fig_grading(v: dict) -> str:
          right, True, "ex.mvs.context"),
     ]
     req = textwrap.wrap("Request: “" + v["ex.prompt"] + "”", width=chars(W - 20, 10))
-    y0 = 14 + len(req) * 13 + 6
+    ys0 = 14 + len(req) * 13 + 6
+    iw, ih, igap = 206, 155, 11
+    y0 = ys0 + 18 + ih + 34
     pw, ph, gap, split = W - 20, 150, 10, 316
     s = Svg(W, y0 + 3 * (ph + gap), "Drawn-state grading of the running example")
     for j, ln in enumerate(req):
         s.text(10, 18 + j * 13, ln, size=10, fill=MUTED, italic=True)
+    # the three drawings as the viewer renders them, one camera
+    for k, (name, _, label) in enumerate(STRIP_PICTURES):
+        x = 10 + k * (iw + igap)
+        s.text(x, ys0 + 10, label, size=10.5, weight="bold")
+        data = base64.b64encode((STRIP / f"{name}.png").read_bytes()).decode("ascii")
+        s.raw(f'<image x="{x}" y="{ys0 + 18}" width="{iw}" height="{ih}" href="data:image/png;base64,{data}"/>')
+        s.rect(x, ys0 + 18, iw, ih, fill="none", r=3)
+    s.text(10, ys0 + 18 + ih + 16, f"The three drawings as Mol* {record['molstar']} renders them, from one camera. "
+           "Below: how each is graded.", size=10, fill=MUTED)
     shown = [right - 1, right, right + 1, None, wrong - 1, wrong, wrong + 1]
     for i, (title, body, drawn, cartoon, key) in enumerate(panels):
         x, y = 10, y0 + i * (ph + gap)
@@ -410,8 +472,9 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
 
     tiers = [("translation", "Translation"), ("grounded", "Structure-grounded,\nname resolution,\ninteractions"),
              ("clinical", "Clinical variant")]
-    # F1 is a mean score; the other two are shares of answers and are printed as percentages.
-    series = [("f1", "F1 (mean, 0 to 1)", BLUE, "", False),
+    # F1 is a mean score and the other two are shares of answers; all three are on a scale
+    # from 0 to 1 and are printed in that one form (Table 14 gives the shares as percentages).
+    series = [("f1", "F1 (mean score)", BLUE, "", False),
               ("success", "Task success (share of answers)", ORANGE, "//", True),
               ("highlight_exact", "Requested part exactly right (share of answers\nto tasks that mark one)", GREEN, "..", True)]
     fig, ax = plt.subplots(figsize=(6.85, 3.9))     # printed at this width: font sizes are in points
@@ -423,14 +486,14 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
         for (t, _), x, y in zip(tiers, xs, ys):
             # The third series has its own denominator: answers to tasks with a marked requested part.
             n = v[f"oct.spec.{t}.highlight_n"] if key == "highlight_exact" else v[f"oct.spec.{t}.n"]
-            ax.text(x, y + 0.015, (f"{y:.0%}" if share else f"{y:.2f}") + f"\nn = {n}", ha="center", va="bottom",
+            ax.text(x, y + 0.015, f"{y:.2f}\nn = {n}", ha="center", va="bottom",
                     fontsize=7.5, color=INK, linespacing=1.15)
     ax.set_xticks(range(len(tiers)))
     ax.set_xticklabels([n for _, n in tiers], fontsize=8.5)
     ax.set_ylim(0, 1.3)
     ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
     ax.set_yticklabels(["0", "0.2", "0.4", "0.6", "0.8", "1"])
-    ax.set_ylabel("F1 (0 to 1), or share of answers (1 = 100%)\nAn unshowable answer counts as 0", fontsize=8.5)
+    ax.set_ylabel("Score (0 to 1)", fontsize=8.5)
     ax.tick_params(axis="y", labelsize=7.5, length=0)
     ax.tick_params(axis="x", length=0)
     ax.yaxis.grid(True, color="#e3e3e3", linewidth=0.8)
@@ -483,7 +546,7 @@ def fig_result_shapes(v: dict) -> str:
         return ay
 
     # A: per model, one sub-panel per track (the two tracks are not compared with each other)
-    y0 = frame(0, "A  Task success by model, one panel per track",
+    y0 = frame(0, "A  Task success by model, one plot per track",
                f"One row per model, best first: {v['plan.n_core_models']} core models, up to "
                f"{v['plan.n_optional_models']} optional ones (†) and the keyword script. The two tracks are "
                "not compared with each other.")
@@ -557,7 +620,11 @@ SCHEMATICS = {"fig_pipeline.svg": fig_pipeline, "fig_tiers.svg": fig_tiers,
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--check", action="store_true", help="write nothing; exit 1 if a schematic is stale")
+    ap.add_argument("--viewer-strip", action="store_true",
+                    help="render the three pictures of Figure 4 in headless Mol* (needs the browser and the bundle)")
     args = ap.parse_args(argv)
+    if args.viewer_strip:
+        render_viewer_strip()
     v = values()
     made = {name: fn(v) for name, fn in SCHEMATICS.items()}
     if args.check:

@@ -48,15 +48,19 @@ cut into facts as above. For each fact, counting items (one item is one style on
   the right representation with another colour or opacity;
 - *attempted*: the wanted items that the answer drew in the right representation, in any
   colour or opacity;
-- *spill*: items outside the target on which the answer repeats a style that it drew on the
-  target and that earned credit there (the requested representation, in the requested colour
-  or in another), where the reference draws no such thing;
+- *spill*: items outside the target that belong to a style of the answer (one representation
+  in one colour and opacity) which also earned credit on the target, where the reference
+  draws no such thing. The style is the answer's own: if it drew the target in red where
+  yellow was asked, its red items outside the target are spill. The requested representation
+  drawn outside the target in a separate style of another colour is not spill but
+  unrequested context;
 - *extra*: items on the target from a style of the answer that is confined to the target, in
   a representation type that the reference does not draw there.
 
 Target recall = credit / wanted. Target precision = credit / (attempted + spill + extra). The
 target score is the harmonic mean of the two, each averaged over the target's facts and over
-the facts about the scene that touch the target atoms. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats, on
+the facts about the scene that touch the target atoms (a label on the target, for example).
+A target with one fact, as in the running example, needs no averaging. The three rules for extra drawing follow from these counts. *Spill*: the answer repeats, on
 atoms outside the target, the style that it drew on the target in the requested
 representation, whatever its colour (red spacefill on the whole chain, where yellow spacefill
 on one residue was asked for, is spill); the items count against target precision. *Extra
@@ -68,7 +72,7 @@ and task success count it. Table S1 gives the score of one example of each rule.
 between the second and the third rule is whether the style is confined to the target. It is a
 convention: a second representation on the target alone is read as part of the answer to "how
 should these atoms be drawn?", and a style that also covers other atoms is read as background.
-Rows S9 and S10 of Table S1 show the two cases side by side. Row S9 by hand: the target has
+Rows S9 and S10 of Table S1 show the two cases. Row S9 by hand: the target has
 {{ex.n_target_atoms}} atoms and one requested style, so wanted, credit and attempted are each
 {{ex.n_target_atoms}}; the added {{ex.other_rep}} is confined to the target, so extra is
 {{ex.n_target_atoms}}; target precision is {{ex.n_target_atoms}}/{{ex.n_target_atoms_twice}}

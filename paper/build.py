@@ -145,7 +145,10 @@ PILOT_WORDS = [
     (r"`spec`", "main"),
     (r"`bare`", "no format guide"),
     (r"\bMVS track\b", "Scene track"),
-    (r"Corpus used for the October 2026 panel", "Corpus of the October 2026 pilot run"),
+    (r"Corpus used for the October 2026 panel \(PRELIMINARY\)",
+     "Corpus of the October 2026 pilot run (preliminary, earlier grader)"),
+    (r"A regime is a group of tasks that need the same kind of knowledge\.",
+     "The categories are those of the first-version corpus."),
     (r"the frozen MolViewSpec reference", "the format guide"),
     (r"only the output contract", "only the rule for the answer"),
     (r"as in the leaderboard table", "as in the per-model table"),
@@ -344,7 +347,7 @@ def fmt_reference(e: dict) -> str:
     tail = []
     if venue:
         tail.append(f"*{venue}*")
-    if e.get("year"):
+    if e.get("year") and e["year"] not in (venue or ""):     # "web page, 4 December 2025" has the year
         tail.append(e["year"])
     cite = " ".join(tail)
     vol = e.get("volume", "")
@@ -362,9 +365,21 @@ def fmt_reference(e: dict) -> str:
         parts.append(f"doi:[{e['doi']}](https://doi.org/{e['doi']})")
     elif e.get("eprint"):
         parts.append(f"arXiv:[{e['eprint']}](https://arxiv.org/abs/{e['eprint']})")
-    if e.get("url") and not e.get("doi"):
+    if e.get("url") and not e.get("doi") and not (e.get("eprint") and e["eprint"] in e["url"]):
         parts.append(f"<{e['url']}>")
     return " ".join(parts)
+
+
+def number_ranges(nums: list[int]) -> str:
+    """Sorted citation numbers with runs of three or more written as a range: 1–4, 7, 9, 10."""
+    out, i = [], 0
+    while i < len(nums):
+        j = i
+        while j + 1 < len(nums) and nums[j + 1] == nums[j] + 1:
+            j += 1
+        out += [f"{nums[i]}–{nums[j]}"] if j - i >= 2 else [str(n) for n in nums[i:j + 1]]
+        i = j + 1
+    return ", ".join(out)
 
 
 def resolve_citations(text: str, bib: dict, problems: list[str]) -> tuple[str, list[str]]:
@@ -379,7 +394,7 @@ def resolve_citations(text: str, bib: dict, problems: list[str]) -> tuple[str, l
             if key not in order:
                 order.append(key)
             nums.append(order.index(key) + 1)
-        return "[" + ", ".join(str(n) for n in sorted(nums)) + "]" if nums else m.group(0)
+        return "[" + number_ranges(sorted(set(nums))) + "]" if nums else m.group(0)
 
     return CITE.sub(repl, text), order
 
@@ -492,7 +507,7 @@ def pending_report(pending: list[dict], values: dict) -> str:
 
 CSS = """
 body{font:11pt/1.5 Georgia,serif;max-width:46em;margin:2em auto;padding:0 1em;color:#111}
-h1,h2,h3{font-family:Helvetica,Arial,sans-serif;line-height:1.25}
+h1,h2,h3,h4{font-family:Helvetica,Arial,sans-serif;line-height:1.25;break-after:avoid}
 table{border-collapse:collapse;font:8.5pt Helvetica,Arial,sans-serif;margin:1em 0;width:100%;break-inside:avoid}
 th,td{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left;vertical-align:top}
 th{border-bottom:2px solid #444} tr{break-inside:avoid} p:has(+ table){break-after:avoid}
@@ -586,6 +601,7 @@ def example_problems(values: dict) -> list[str]:
 # (key, value, where the words are).
 STATED_IN_WORDS = [
     ("plan.samples", 3, "'at least 2 of its 3 answers' (Sections 4.2 and 5.4, Table 9, Figures 3 and 5)"),
+    ("clin.n_offset_pairs_traditional", 1, "'one of them uses a traditional name' (Sections 3.3.1 and 9.4)"),
     ("mvs.spec.regime.Clinical.n_structures", 1, "'a single structure' (Section 6.6, Finding 2; abstract)"),
     ("study.max_per_task_model", 1, "'from the same model' (Section 5.5)"),
     ("panel.n_disease_proteins_without_task", 2, "the two proteins without a task, named in Section 3.1"),

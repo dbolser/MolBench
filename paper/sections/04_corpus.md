@@ -19,10 +19,10 @@ are in SI Section S0.
 | Term | Meaning |
 |:---------|:------------------------------|
 | UniProt, canonical sequence | UniProt is the reference database of protein sequences. Each protein has an accession, such as {{ex.accession}}, and one sequence that UniProt picks as its reference, the *canonical sequence*. |
-| ClinVar | A public archive of human genetic variants. Submitters, mostly clinical laboratories, send their classification of a variant: whether it causes disease. For each *variation record* (accession beginning with VCV; usually one change at the level of DNA) ClinVar publishes an aggregate *germline* classification, such as "Pathogenic", and a *review status*. Germline variants are present in every cell of a person, inherited or newly arisen, as opposed to somatic variants that arise in a tumour. The review status says how far the classification has been reviewed (stated criteria, several submitters in agreement, an expert panel); it is not a measure of the strength of the evidence. Different DNA changes can give the same amino-acid change, so one amino-acid change can have more than one record. We write ClinVar's terms in lower case. |
-| Transcript | A numbered reference copy of the messenger RNA of a gene (accession beginning with NM_). ClinVar states each change on a transcript, in the form {{ex.clinvar_cdna}}: nucleotide {{ex.clinvar_cdna_position}} of the coding sequence, counted from the A of the start codon ATG, changes from {{ex.clinvar_cdna_from}} to {{ex.clinvar_cdna_to}}. A gene can have several transcripts, and they can number the protein differently. |
-| Missense variant; {{ex.name_in_prompt}} | A change of one amino acid into another. {{ex.name_in_prompt}}: the tryptophan (W) at position {{ex.uniprot_position}} becomes an arginine (R). The same in three-letter form is {{ex.hgvs}}. The prefix "p." marks a description of a change in the protein, as opposed to "c." for the coding DNA; it does not say which sequence the position is counted on. In this paper that is the UniProt canonical sequence, here {{ex.accession}}, which is not a reference sequence in the sense of the HGVS nomenclature, the standard of the Human Genome Variation Society for naming variants (Section 3.3.1). |
-| Signal peptide, mature protein, traditional name | The *mature protein* is what is left after the cell has removed the leading part of a newly made protein. That part can be the first residue alone, the *initiator methionine* (haemoglobin beta); a *signal peptide* (lysozyme: {{ex.offset}} residues); or a signal peptide and a further segment, a *propeptide* (coagulation factor IX: {{clin.f9_removed}} residues). Older literature often numbers residues from the first residue of the mature protein; we call a variant name of this kind a *traditional name* (the genetics literature also says legacy name). It carries no "p.", as in {{ex.mature_name}}. |
+| ClinVar | A public archive of human genetic variants. Submitters, mostly clinical laboratories, send their classification of a variant for a condition, on a scale from benign through uncertain significance to pathogenic. For each *variation record* (accession beginning with VCV; usually one change at the level of DNA) ClinVar publishes an aggregate *germline* classification, such as "Pathogenic", and a *review status*. Germline variants are present in every cell of a person, inherited or newly arisen, as opposed to somatic variants that arise in a tumour. The review status says how far the classification has been reviewed (stated criteria, several submitters in agreement, an expert panel); it is not a measure of the strength of the evidence. Different DNA changes can give the same amino-acid change, so one amino-acid change can have more than one record. We write ClinVar's terms in lower case. |
+| Transcript | A reference sequence of one messenger RNA of a gene, with an accession and a version number ({{ex.clinvar_transcript}}). ClinVar states each change on a transcript, in the form {{ex.clinvar_cdna}}: nucleotide {{ex.clinvar_cdna_position}} of the coding sequence, counted from the A of the start codon ATG, changes from {{ex.clinvar_cdna_from}} to {{ex.clinvar_cdna_to}}. A gene can have several transcripts, and they can number the protein differently. |
+| Missense variant; {{ex.name_in_prompt}} | A change of one amino acid into another. {{ex.name_in_prompt}}: the tryptophan (W) at position {{ex.uniprot_position}} becomes an arginine (R). The same in three-letter form is {{ex.hgvs}}. The prefix "p." marks a description of a change in the protein, as opposed to "c." for the coding DNA; it does not say which sequence the position is counted on. In this paper it is the UniProt canonical sequence, here {{ex.accession}}. HGVS, the nomenclature of the Human Genome Variation Society for naming variants, does not accept a UniProt accession as a reference sequence (Section 3.3.1). |
+| Signal peptide, mature protein, traditional name | The *mature protein* is what is left after the cell has removed the leading part of a newly made protein. That part can be the first residue alone, the *initiator methionine* (haemoglobin beta); a *signal peptide* (lysozyme: {{ex.offset}} residues); or a signal peptide and a further segment, a *propeptide* (coagulation factor IX: {{clin.f9_removed}} residues). Older literature often numbers residues from the first residue of the mature protein; we call a variant name of this kind a *traditional name* (the genetics literature also says legacy name) and its numbering *mature-protein numbering*. A traditional name carries no "p.", as in {{ex.mature_name}}. |
 | Mol\*, MolViewSpec | Mol\* is an open-source molecular viewer that runs in a web browser. MolViewSpec is a format, written in JSON (JavaScript Object Notation), that describes what Mol\* should load and draw. PDBe Mol\* is the build of Mol\* maintained by the Protein Data Bank in Europe (PDBe). |
 | Polymer, ligand | The *polymer* is the protein, DNA or RNA chains of a structure. A *ligand* is a small molecule bound to them. |
 | Representation | A way of drawing atoms: *cartoon* (a ribbon that traces the whole polymer chain, the usual background of a picture), *ball-and-stick*, *spacefill* (every atom as a full-size sphere), *surface*. |
@@ -67,8 +67,8 @@ selection rule.
 
 **Disease proteins and variants.** The panel includes structures of
 {{panel.n_disease_proteins}} human proteins in which germline missense variants cause
-Mendelian disease (missense: one amino acid is replaced by another; germline: the variant is
-in every cell of a person). We chose the proteins by hand, as familiar
+Mendelian disease, that is, disease caused by changes in a single gene (missense: one amino
+acid is replaced by another; germline: the variant is in every cell of a person). We chose the proteins by hand, as familiar
 examples that have experimental structures. For each protein, one PDB entry was then chosen
 by a scripted rule that did not look at how the entry is numbered (SI Section S3). A protein
 can still have tasks on more than one structure: on its chosen entry, on its predicted
@@ -77,15 +77,31 @@ haemoglobin entries hold both the alpha and the beta chain). In all,
 {{clin.n_proteins_several_structures}} proteins have tasks on more than one structure.
 
 **The pool of variants.** UniProt lists {{variants.n_candidates:,}} missense variants of
-these proteins as pathogenic or likely pathogenic. We keep a variant only if a ClinVar record
-that UniProt cross-references confirms it: the record gives the same amino-acid change a
-pathogenic or likely pathogenic aggregate germline classification
-({{variants.n_removed_by_clinvar}} candidates have no such record and were removed), and it
-is a record of the gene named in the request, describes that change alone, and states the
-criteria of the classification (a further {{variants.n_second_pass_removed}} were removed).
+these proteins as pathogenic or likely pathogenic. We keep a variant only if at least one
+ClinVar record that UniProt cross-references passes two tests; we call such a record a
+*qualifying record*.
+
+1. The record gives the same amino-acid change a pathogenic or likely pathogenic aggregate
+   germline classification. {{variants.n_removed_by_clinvar}} candidates have no such record.
+2. The record is of the gene named in the request, describes that change alone, and states
+   the criteria of the classification. A further {{variants.n_second_pass_removed}}
+   candidates have no such record.
+
 The remaining {{variants.n_usable:,}} variants form the pool. We did not search ClinVar beyond
 UniProt's cross-references. SI Table S4 gives the filter step by step, and SI Section S3.2
 the dates on which the data were read.
+
+**What a request says about the classification.** ClinVar classifies DNA-level records, each
+for a stated condition; it does not classify protein changes as such. When a request says
+that a protein-level variant "is classified as pathogenic in ClinVar", it means that at
+least one qualifying record of this amino-acid change carries that classification. The
+request names no condition and no DNA change (Section 9.2). It repeats ClinVar's aggregate
+value in lower case: "pathogenic", "likely pathogenic" or "pathogenic/likely pathogenic",
+which is ClinVar's own value where submitters are divided between the two. Where the
+qualifying records behind one request carry different values, the request says "pathogenic
+or likely pathogenic" ({{clin.n_class_differs}} of the {{clin.n}} requests). The
+classification is always the germline one, also for variants that are better known as
+somatic changes in tumours, such as *TP53* p.Arg175His.
 
 Two exceptions were made by hand (SI Section S3.2). One well-known lysozyme variant,
 p.Ile74Thr, is outside the pool because its ClinVar record states no criteria. We use it all
@@ -96,13 +112,16 @@ for a reported protective effect and a request that calls it pathogenic would mi
 
 **From the pool to the clinical tasks.** A clinical task asks about one variant, or a few, on
 a panel structure of its protein. The generator picks the variant by seeded random choice
-among the pool variants whose residue is observed in the structure with the amino acid of the
-reference sequence. For {{clin.n_featured_proteins}} proteins a well-known variant, named by
+among the pool variants whose residue is observed in the structure (present in its
+coordinates; flexible parts of a chain are often missing from them) with the amino acid that
+the UniProt canonical sequence has at that position. For {{clin.n_featured_proteins}} proteins a well-known variant, named by
 hand before generation, is tried first (for example the sickle-cell variant of haemoglobin
 beta, p.Glu7Val; SI Section S3.2 has the list). The result is
 {{clin.n}} tasks per track on {{clin.n_proteins}} proteins and {{clin.n_structures}}
-structures ({{clin.n_pdb_structures}} PDB entries and the {{panel.n_alphafold}} predicted
-structures), with at most {{clin.max_tasks_per_structure}} tasks per track on one structure.
+structures: {{clin.n_pdb_structures}} PDB entries and the {{panel.n_alphafold}} predicted
+structures. There is one PDB entry more than there are proteins, because
+{{clin.n_proteins_one_pdb_entry}} proteins have tasks on one PDB entry each and the two
+haemoglobin chains on {{clin.n_haemoglobin_pdb_entries:word}} between them. There are at most {{clin.max_tasks_per_structure}} tasks per track on one structure.
 The other {{panel.n_disease_proteins_without_task:word}} proteins have no task, because no
 variant of the pool is observed in their panel structure (SI Section S3.2).
 
@@ -125,11 +144,11 @@ The clinical generator produced the running example in six steps.
 1. **Variant.** From the pool it picks the *{{ex.gene}}* variant {{ex.name_in_prompt}}
    ({{ex.hgvs}}; UniProt {{ex.accession}}). Through UniProt's cross-references we found
    {{ex.n_clinvar_records}} ClinVar records of this protein change, one for each of the two
-   single-nucleotide changes that turn the codon of this tryptophan into a codon of arginine
-   ({{ex.clinvar_records}}). As read on {{variants.records_retrieved:date}}, both
-   are classified as {{ex.clinvar_classification}}, with the review status
-   "{{ex.clinvar_review_status}}": one laboratory submitted the classification and stated its
-   criteria, and no second submitter or expert panel has confirmed it. The field of the
+   single-nucleotide changes that turn the codon of this tryptophan (the three nucleotides that
+   encode it) into a codon of arginine ({{ex.clinvar_records}}). As read on {{variants.records_retrieved:date}}, both
+   are classified as {{ex.clinvar_classification}}, each with the review status
+   "{{ex.clinvar_review_status}}": each record has one submitter, who stated criteria, and no
+   second submitter or expert panel has confirmed it. The field of the
    record that names the condition reads "{{ex.clinvar_conditions}}".
 2. **Structure.** The panel entry for {{ex.accession}} is {{ex.entry}}, human lysozyme.
 3. **Mapping.** The mapping table says that UniProt positions
@@ -138,10 +157,11 @@ The clinical generator produced the running example in six steps.
    {{ex.offset}}, the length of the signal peptide. Position {{ex.uniprot_position}} is
    therefore author residue {{ex.auth_number}} (label chain {{ex.label_chain}}, label residue
    {{ex.label_number}}).
-4. **Identity check.** The atom table must hold the amino acid of the reference sequence at
-   that residue. It does: {{ex.wild_type}}{{ex.auth_number}}, {{ex.n_target_atoms}} atom
+4. **Identity check.** The atom table must hold, at that residue, the amino acid that the
+   UniProt canonical sequence has at the position. It does: {{ex.wild_type}}{{ex.auth_number}}, {{ex.n_target_atoms}} atom
    records ({{ex.n_target_heavy_atoms}} non-hydrogen atoms and {{ex.n_target_hydrogens}}
-   hydrogens; this entry, at {{ex.resolution}} Å resolution, includes hydrogens). Had
+   hydrogens; this entry was measured in enough detail, at {{ex.resolution}} Å resolution, to
+   include hydrogens). Had
    the protein in the entry carried another amino acid there, the variant would not be offered
    for this entry.
 5. **Wording.** A seeded random choice picks one of the template's three wordings, the colour
@@ -150,8 +170,11 @@ The clinical generator produced the running example in six steps.
 6. **Reference, twice.** The script writes the reference scene (author chain
    {{ex.auth_chain}}, author residue {{ex.auth_number}}, {{ex.color}} {{ex.rep}}) and the
    reference call list (load the entry; draw UniProt {{ex.accession}} position
-   {{ex.uniprot_position}} as {{ex.color}} {{ex.rep}}). It then confirms that both resolve to
-   the same {{ex.n_target_atoms}} atoms, and stores them as the target of both tasks.
+   {{ex.uniprot_position}} as {{ex.color}} {{ex.rep}}). The {{ex.uniprot_position}} is correct
+   there: the call-list viewer has a selector that takes a UniProt position and converts it
+   to the residue of the file itself, which a scene cannot do (Section 3.4). The script then
+   confirms that both references resolve to the same {{ex.n_target_atoms}} atoms, and stores
+   them as the target of both tasks.
 
 One detail of the call-list viewer belongs here. It starts with the whole protein drawn as a
 cartoon (the *default view*, Box 1), and a colouring call also recolours the residue's own segment of that
@@ -179,7 +202,9 @@ in the structure, the residues, the colours and the wording. The corpus has
 are only five ways to name a protein) and in the small call-list category of requests with
 several right answers. SI Section S2 lists every template with an example.
 
-![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track (Table 1 gives the reasons). Requests are quoted from the corpus; a long one is cut short. Two words in them are file terms: a *het group* is a molecule in the entry that is not part of a polymer chain, such as a ligand, named by an identifier of up to three characters; *C-alpha* is the central carbon atom of an amino acid. Framed in blue: the two *lookup categories*, name resolution and clinical variant, in which the answer needs one fact that a person would look up in a database and that the model must recall.](generated/fig_tiers.svg)
+![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track (Table 1 gives the reasons). Requests are quoted from the corpus; a long one is cut short. Two words in them are file terms: a *het group* is a molecule in the entry that is not part of a polymer chain, such as a ligand, named by an identifier of up to three characters; *C-alpha* is the central carbon atom of an amino acid. Left column: the four categories that differ in what the model must know beyond the request. Right column: the four that differ in the form of the task. Framed in blue: the two *lookup categories*, name resolution and clinical variant, in which the answer needs one piece of information that a person would look up in a database and that the model must recall.](generated/fig_tiers.svg)
+
+*Categories that differ in what the model must know.*
 
 - **Translation.** Everything needed is in the request: the entry, the chains, the residue
   numbers, the colours. The model only has to write it in the format.
@@ -188,22 +213,21 @@ several right answers. SI Section S2 lists every template with an example.
   not see the file. It must either use a generic selector of the format where one fits (for
   example "ligand") or recall what the entry contains, such as the identifier of the ligand
   or the numbers of the residues. The references are computed from the entry's own records.
+- **Name resolution.** The request names a protein, not an entry ("a structure of human p53
+  bound to DNA"), and the model must choose an entry. Any entry on a frozen list of the PDB
+  entries of that protein is accepted (SI Section S4.4 gives the rule and the date of the
+  list). An answer on an accepted entry outside the structure panel is graded by a weaker
+  rule (Section 4.1).
+- **Clinical variant.** As in the running example: the request names a variant, and the model
+  must find its residue in the structure, where its number often differs from the one in the
+  name. Section 3.3.1 describes this category.
+
+*Categories that differ in the form of the task.*
+
 - **Interactions.** As in translation, the request states everything, so nothing more must be
   known about the structure. What differs is what must be written: single atoms are selected,
   not whole residues, and something is drawn between or around them, such as a hydrogen bond
   as a dashed line labelled with its length, with the camera centred on it.
-- **Name resolution.** The request names a protein, not an entry ("a structure of human p53
-  bound to DNA"). The task accepts any entry on a frozen list of the PDB entries of that
-  protein (SI Section S4.4 gives the rule and the date of the list). An answer on a panel
-  entry is graded on drawn state. An answer on an entry that the task accepts but that is
-  outside the panel is compared with the reference as written, because we hold no atom table
-  for it; this is a limit (Sections 4.1 and 9.3). Results are reported apart for answers on
-  the reference entry, which is always a panel entry, and for answers on any other entry that
-  the task accepts; all but {{resolve.n_other_panel_entries}} of those other entries are
-  outside the panel (Section 6.2).
-- **Clinical variant.** As in the running example: the request names a variant, and the model
-  must find its residue in the structure, where its number often differs from the one in the
-  name. Section 3.3.1 describes this category.
 - **Follow-up turn.** The model receives a start state, written as a scene or a call list in
   the format of its answer, and an edit request ("make the magenta chain plum"). It returns
   the complete new state. Only the resulting drawn state is graded, so an answer that makes
@@ -221,13 +245,15 @@ several right answers. SI Section S2 lists every template with an example.
   background colour and spin.
 
 Name resolution and clinical variant are the *lookup categories*. In both, what the request
-leaves out is one fact that a person would look up in a database: which entry holds the
+leaves out is one piece of information that a person would look up in a database: which entry holds the
 protein, or which residue number the variant has in the entry. The model cannot look it up and
 must recall it. Only these two categories have a grounding pack, in which the lookup has been
 done for the model (Section 5.2).
 
-**Table 1. The corpus.** Tasks per category and track, written as total (public + held back;
-Section 3.6). *Pairs*: requests posed on both tracks with the same target atoms. A dash means
+**Table 1. The corpus.** Tasks per category and track, written as total (tasks on the other
+structures + tasks on the {{corpus.heldback.n_structures}} *set-aside structures*, which no
+earlier release of the benchmark used; these tasks are public too and are not a hidden test
+set; Section 3.6). *Pairs*: requests posed on both tracks with the same target atoms. A dash means
 that the category has no task on that track. For interactions (on the call-list track) and
 viewer settings (on the scene track) the format cannot express what is asked. Name resolution
 could be asked on the call-list track but is not: the call-list grader has no atom table for
@@ -255,37 +281,24 @@ name {{clin.n_variants}} distinct variants; a variant that is asked about on two
 *How variants are named.* The requests use three forms of name. Three-letter names
 ({{ex.hgvs}}) and one-letter names ({{ex.name_in_prompt}}) carry the prefix "p.". In this
 corpus a name with "p." is always in UniProt numbering; the prefix itself does not say so.
-*Traditional names* ({{ex.mature_name}}) carry no prefix and are counted along the mature
-protein, as in older literature. The first two forms follow the protein-level style of the
-HGVS nomenclature, the standard of the Human Genome Variation Society for naming variants
-[@denDunnen2016hgvs; @hart2024hgvs], but they are not complete HGVS descriptions. A complete
-description puts a reference sequence with its version number before the "p."; for a protein
-change this is a protein accession of RefSeq or Ensembl (beginning with NP_ or ENSP). A
-UniProt accession, which {{clin.n_accession_in_prompt}} requests state, is not such a
-reference sequence. HGVS also prefers the three-letter form, and it puts parentheses around a
-protein change that is predicted from the DNA change and was not observed in the protein.
-
-ClinVar itself states each change on a *transcript*, a numbered reference copy of the gene's
-messenger RNA. For the running example the name is {{ex.clinvar_first_title}}: nucleotide
-{{ex.clinvar_cdna_position}} of the coding sequence of transcript {{ex.clinvar_transcript}},
-counted from the A of the start codon ATG, changes from {{ex.clinvar_cdna_from}} to
-{{ex.clinvar_cdna_to}}, which is predicted to change the protein as given in parentheses.
-ClinVar's names carry the protein change in parentheses for the reason just given. A gene can
-have several transcripts, and they can number the protein differently, so a ClinVar record
-lists the protein change once for each transcript. We accept a record if any one of these
-names equals our amino-acid change and position. We did not check which transcript that name
-is counted on; we take its position to be that of the UniProt canonical sequence (Section
-9.2).
+*Traditional names* ({{ex.mature_name}}) carry no prefix and are in mature-protein numbering,
+as in older literature. Names with "p." follow the protein-level style of the HGVS
+nomenclature [@denDunnen2016hgvs; @hart2024hgvs], but they are not complete HGVS descriptions:
+a complete description names a versioned reference sequence, and a UniProt accession, which
+{{clin.n_accession_in_prompt}} requests state, is not one that HGVS accepts. ClinVar itself
+states each change on a transcript, and we did not check which transcript its protein-level
+name is counted on. SI Section S3.2 gives the details of both points, and Section 9.2 the
+limit that follows.
 
 The request asks for the residue in one of three wordings: "the residue it replaces", "the
 residue replaced by" the variant, or "the wild-type residue at the position of" the variant.
-All three mean the amino acid of the reference sequence at that position; the third uses
-"wild-type", the usual word in structural biology, where clinical genetics would say
-"reference".
+All three mean the amino acid that the UniProt canonical sequence has at that position; the
+third uses "wild-type", the usual word in structural biology, where clinical genetics would
+say "reference".
 
 *Traditional names.* A traditional name is used in {{clin.n_mature_name}} requests (for
 example transthyretin V30M, which is p.Val50Met). Each of these requests says so, and says
-what the traditional numbering leaves out. One of them in full:
+what mature-protein numbering leaves out. One of them in full:
 
 > *"{{clin.mature_example.prompt}}"*
 
@@ -301,7 +314,8 @@ propeptide.
 *Two groupings.* Each clinical task has two yes-or-no properties that matter for the results.
 They are not the same property (Table 2a).
 
-- **Copying the number** (the primary grouping). If an answer uses the number printed in the
+- **Copying the number** (the grouping on which the question of the Introduction is
+  answered). If an answer uses the number printed in the
   variant name as the author residue number, is it right? Copying is right in
   {{clin.n_face_value_right}} tasks and wrong in {{clin.n_face_value_wrong}}. The property is
   defined on author numbering, and it describes what copying does on the scene track, where
@@ -309,7 +323,7 @@ They are not the same property (Table 2a).
   can also be passed unchanged to the viewer's UniProt selector (Section 3.4), which is right
   for every name in UniProt numbering, so results are grouped by this property on the scene
   track only (Section 6.4).
-- **Offset** (a descriptive grouping). Does the author number of the target residue differ
+- **Offset** (reported for description only). Does the author number of the target residue differ
   from its UniProt number? An offset is present in {{clin.n_offset}} tasks
   ({{clin.offset_share:.0%}}) and absent in {{clin.n_no_offset}}. Where there is one, the
   UniProt number is always the larger, by {{clin.offset_min}} to {{clin.offset_max}}
@@ -317,9 +331,10 @@ They are not the same property (Table 2a).
 
 A task with several target residues is assigned by rule. Copying counts as right only if the
 answer with every number copied is exactly right, that is, if copying is right for every named
-variant. The task has an offset if any of its target residues has one. In a task that asks for
-a helix or strand, both properties are those of the variant's residue, not of the whole helix
-or strand. As it turns out, all {{clin.n_multi}} tasks with several variants and all
+variant. The task has an offset if any of its target residues has one. Some tasks also ask
+for the helix or strand that contains the residue (helices and strands are the two common
+local shapes of a protein chain; the entry records where each begins and ends). In such a
+task both properties are those of the variant's residue, not of the whole helix or strand. As it turns out, all {{clin.n_multi}} tasks with several variants and all
 {{clin.n_sse}} helix or strand tasks have an offset, and copying is wrong in all of them.
 
 **Table 2a. The two groupings of the {{clin.n}} clinical tasks, crossed.** *Copying the number*:
@@ -332,23 +347,24 @@ one, and copying is right in it only if it is right for all of them.
 
 With a name in UniProt numbering, copying is right exactly when there is no offset. The two
 groupings differ only for the {{clin.n_mature_name}} traditional names. In
-{{clin.n_face_right_offset}} of them the entry is numbered in the same traditional way, so the
-number in the name is the author number although the UniProt number is not. The one
+{{clin.n_face_right_offset}} of them the entry is also numbered from the mature protein, so
+the number in the name is the author number although the UniProt number is not. The one
 remaining traditional name ({{clin.traditional_on_predicted.name}} of haemoglobin beta, which
 is {{clin.traditional_on_predicted.hgvs}}) is asked on a predicted structure, which
 uses UniProt numbering. There, copying the traditional number selects the wrong residue
 although the target has no offset (the single task in the top-right cell of Table 2a).
 
-*Further properties.* Table 2b lists five further properties of the clinical tasks. One needs
-a remark. Where a request states no UniProt accession and names the variant with "p.",
-neither the request nor the system prompt says which sequence the position is counted on. The
-model must take it to be the full-length protein. A reader of a bare name with "p." would
-normally take it to be the protein of the gene's default transcript; we assume, and did not
-check, that this protein is numbered as the UniProt canonical sequence is (Section 9.2).
+*Further properties.* Table 2b lists further properties of the clinical tasks. One needs a
+remark. Where a request states no UniProt accession and names the variant with "p.", neither
+the request nor the system prompt says which sequence the position is counted on. A reader of
+a bare name with "p." would normally take it to be counted on the protein of the gene's MANE
+Select transcript, the one transcript per gene that RefSeq and Ensembl jointly designate as
+the default for clinical reporting [@morales2022mane]. We assume, and did not check, that
+this protein is numbered as the UniProt canonical sequence is (Section 9.2).
 
 **Table 2b. Further properties of the {{clin.n}} clinical tasks.** *Tasks*: number of tasks
 per track with the property. Indented rows divide the row above them. *Traditional name*: a
-name counted along the mature protein, without "p."; the request then says how the name is
+name in mature-protein numbering, without "p."; the request then says how the name is
 numbered.
 
 | Property of the task | Tasks | Why it matters |
@@ -361,7 +377,7 @@ numbered.
 |  of which: "in every chain that has it" / one named chain ("in chain B only") | {{clin.n_every_chain}} / {{clin.n_one_chain}} | With "every chain", the target is the residue in all of those chains; an answer that draws it in one chain only is not target-right. |
 | The author chain identifier differs from the label chain identifier | {{clin.n_chain_differs}} | The two numberings must not be mixed. |
 | A cartoon of the structure is also asked for, in words | {{clin.n_context_cartoon}} | The reference then holds the cartoon, and on the scene track task success requires it. |
-| The helix or strand that contains the residue is also asked for (the two common local shapes of a protein chain, as recorded in the entry) | {{clin.n_sse}} | The model must also know where the entry records that helix or strand to begin and end; these tasks are reported apart. |
+| The helix or strand that contains the residue is also asked for | {{clin.n_sse}} | The model must also know where the entry records that helix or strand to begin and end; these tasks are reported apart. |
 
 *Matched tasks.* On each track, {{clin.n_in_pairs}} of the {{clin.n}} tasks form
 {{clin.n_structure_pairs}} sets of two *matched tasks*, which ask about the same variant on
@@ -417,14 +433,14 @@ the entry's author number, so on either track an answer that selects by author n
 the printed number is right. In the remaining one, on a predicted structure, the model must
 convert the number on either track. The format guide of the call-list track documents the UniProt selector, and the
 guide of the scene track documents selection by author and by label numbering; neither says
-which numbering a given entry uses (Section 5.2).
+how a given structure is numbered (Section 5.2).
 
 The grader resolves the UniProt selector through the frozen mapping table. The viewer reads
 the same SIFTS mapping from the structure file that PDBe distributes. We did not replay
 UniProt selections on PDB entries in the viewer (Section 3.7), so for these entries the
 agreement between grader and viewer rests on both using SIFTS.
 
-![**Figure 3. One request, two formats, the same target atoms.** The scene and the call list are shown in shortened form. Below: for each model, every pair falls into one of four cells by whether each side is right. The primary comparison counts a side as right when at least 2 of its {{plan.samples}} answers are *target-right*, that is, have a target score of exactly 1 (the requested atoms drawn as asked, whatever else was drawn). It uses the {{corpus.twins.n_with_target}} pairs that have a target score; it is repeated with task success in place of the target score, on all {{corpus.n_twin_pairs}} pairs (Section 5.4). McNemar's test compares the two shaded cells, in which the model was right in one format only.](generated/fig_twins.svg)
+![**Figure 3. One request, two formats, the same target atoms.** The scene and the call list are shown in shortened form. Below: for each model, every pair falls into one of four cells by whether each side is right. In the scene, "structure model" is MolViewSpec's name for the deposited coordinates and has nothing to do with a language model. The primary comparison counts a side as right when at least 2 of its {{plan.samples}} answers are *target-right*, that is, have a target score of exactly 1: the requested style is on the requested atoms and on no others, and unrequested background is ignored. It uses the {{corpus.twins.n_with_target}} pairs that have a target score; it is repeated with task success in place of the target score, on all {{corpus.n_twin_pairs}} pairs (Section 5.4). McNemar's test compares the two shaded cells, in which the model was right in one format only.](generated/fig_twins.svg)
 
 Pairs exist in five categories: translation ({{corpus.twins.translation}}), structure-grounded
 ({{corpus.twins.grounded}}), clinical ({{corpus.twins.clinical}}), follow-up
@@ -472,32 +488,35 @@ The rule covers attributes of what was requested. Additions to the picture, such
 that the request does not mention, are not covered by it; Section 4.2 says how they are
 scored.
 
-### 3.6 Public and held-back tasks; wording
+### 3.6 Set-aside structures; wording
 
 MolBench tasks have been public since May 2026, so a model released later may have seen
 earlier tasks. By *earlier* tasks and releases we mean those published before the present
 corpus (the first version of the benchmark, Section 6). Two measures address this.
 
-*Held-back split.* Before generation, {{corpus.heldback.n_structures}} structures were set
-aside: no earlier MolBench release used them, and no task of the public split uses them.
-The {{corpus.heldback.n_tasks}} tasks on them ({{corpus.heldback.share:.0%}} of the corpus) form
-the *held-back split*; the other tasks form the *public split*. The name needs one warning: the
-held-back tasks are themselves public. The corpus was developed in a public repository, so they
-were online for some days before the final run, and the split is not a hidden test set. What
-the split can show is limited. Nearly all tasks in both splits were generated for this version
-and appear in no earlier release, so it does not compare seen tasks with unseen tasks. It
-compares two sets of structures: the {{corpus.public.n_structures}} of the public split, of
-which {{corpus.public.n_structures_used_earlier}} appeared in earlier MolBench tasks and
-{{corpus.public.n_structures_not_used_earlier}} did not, and the
-{{corpus.heldback.n_structures}} held-back ones, of which none did. Three held-back structures
-share a protein with a public structure. What would be informative is a clearly lower score
-on the held-back structures: it would suggest that scores on the public structures profit
-from earlier tasks on them or from their being better known. A difference near zero would not
-show the opposite. We report the difference between the splits with an interval and do not
-test it, because the split is small (Section 9.4).
+*Set-aside structures.* Before generation, {{corpus.heldback.n_structures}} structures were
+set aside: no earlier MolBench release used them, and their tasks are reported apart. The
+{{corpus.heldback.n_tasks}} tasks on them ({{corpus.heldback.share:.0%}} of the corpus) form
+the *set-aside split*. The other {{corpus.public.n_tasks}} tasks sit on
+{{corpus.public.n_structures}} structures, of which
+{{corpus.public.n_structures_used_earlier}} appeared in earlier MolBench tasks (scene tasks
+or call-list tasks of any release of the first version) and
+{{corpus.public.n_structures_not_used_earlier}} did not.
 
-*Wording.* To measure sensitivity to wording, {{corpus.n_requests_paraphrased}} requests of
-the public split have, beside their original (*full*) wording, two further phrasings each, a
+The split compares two sets of structures. It does not compare seen tasks with unseen tasks:
+nearly all tasks in both parts were generated for this version and appear in no earlier
+release. Nor is the set-aside split a hidden test set: the corpus was developed in a public
+repository, so its tasks were online for some days before the final run. Three set-aside
+structures share a protein with one of the other structures.
+
+*How we read it.* What would be informative is a clearly lower score on the set-aside
+structures: it would suggest that scores on the other structures profit from earlier tasks on
+them or from their being better known. A difference near zero would not show the opposite.
+We report the difference with an interval and do not test it, because the split is small
+(Section 9.4).
+
+*Wording.* To measure sensitivity to wording, {{corpus.n_requests_paraphrased}} requests on
+structures outside the set-aside split have, beside their original (*full*) wording, two further phrasings each, a
 *terse* one and an *indirect* one, with the same reference. For example, the request "{{corpus.paraphrase_example.full}}" also exists in
 a terse form ("{{corpus.paraphrase_example.terse}}") and in an indirect form
 ("{{corpus.paraphrase_example.indirect}}"). Of the

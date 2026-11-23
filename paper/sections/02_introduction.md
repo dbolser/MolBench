@@ -1,7 +1,9 @@
 ## 1. Introduction
 
 Molecular viewers are how structural biologists look at their data, and they are hard to
-drive. To show one residue of one chain (one amino acid of one protein molecule in the file), a
+drive. The data are *structures*: the three-dimensional atom coordinates of molecules. Each
+structure deposited in the Protein Data Bank (PDB) is an *entry* with a four-character
+identifier, such as {{ex.entry}}. To show one residue of one chain (one amino acid of one protein molecule in the file), a
 user must know how the viewer writes a selection, the chain identifier, and which of several
 residue numbering schemes applies. Language models
 promise to remove that barrier: the user says what they want, and the model writes the
@@ -22,18 +24,19 @@ picture of the wrong amino acid, and nothing in the picture says so. The tryptop
 {{ex.auth_number}} of this file.
 
 The two numbers come from two ways of counting. The position {{ex.uniprot_position}} is
-counted along the UniProt sequence of human lysozyme (the prefix "p." marks a description of
-a change in a protein). That sequence begins with {{ex.removed_what}}, a leading segment that
-the cell cuts off after the protein is made. The Protein Data Bank (PDB) entry {{ex.entry}}
-numbers the same chain from the first residue of the mature protein, the protein that is left
+counted along the sequence of human lysozyme in UniProt, the reference database of protein
+sequences (the prefix "p." marks a description of a change in a protein). That sequence
+begins with {{ex.removed_what}}, a leading segment that the cell cuts off after the protein
+is made. Entry {{ex.entry}} numbers the same chain from the first residue of the mature protein, the protein that is left
 once that segment has been cut off; older papers accordingly call the variant
 {{ex.mature_name}}. The case is not unusual: a survey of the PDB found that 38.6% of 176,507
 entries contain proteins that are not numbered as their UniProt sequences are
 [@faezov2021pdbrenum].
 
-One remark on the first sentence of the request, which states a classification. The benchmark
-uses the variant only as an address, to ask which residue the name points to. It never asks
-whether a variant causes disease (Sections 3.2 and 9.2).
+The request also states a classification. It comes from ClinVar, a public archive of human
+genetic variants and their clinical classification. The benchmark uses the variant only as an
+address: which residue does the name point to? It never asks whether a variant causes disease
+(Section 9.2; Section 3.2 gives the ClinVar record of this variant).
 
 **What the model is given.** In MolBench the model receives only the request and a guide to
 the answer format. It does not see the structure file, it cannot look anything up, and it
@@ -50,7 +53,8 @@ not on how the answer is written.
 MolBench is a benchmark built on this thesis (Figure 1). The reference for the request above
 is not written by a person. A script reads the variant from ClinVar [@landrum2018clinvar],
 maps its UniProt position [@uniprot2025] to the residues of the entry with the SIFTS mapping
-[@dana2019sifts], and confirms that the structure holds a tryptophan there. The grader then
+[@dana2019sifts], a public table that gives, for each residue of a PDB entry, its position in
+the UniProt sequence, and confirms that the structure holds a tryptophan there. The grader then
 resolves an answer to the atoms it would draw in that structure, with their *representation*
 and colour, and compares this *drawn state* with that of the reference. A representation is a
 way of drawing atoms: the request above asks for spacefill spheres (every atom as a full-size
@@ -62,17 +66,18 @@ score.
 a residue number in one numbering and the structure uses another, does the model give the
 number that the structure uses, or does it copy the number from the request? We call the first
 *mapping* the number and the second *copying* it. Mapping is more than a habit of converting:
-some entries are numbered as the request is, and there the copied number is the right one, so
-the model must know how each entry is numbered. Section 6.4 sets out the table that will
+some structures are numbered as the request is, and there the copied number is the right
+one, so the model must know how each structure is numbered. Section 6.4 sets out the table that will
 answer this.
 
-![**Figure 1. From public data to a score.** Steps 1 to 6 are numbered, in two rows: frozen public data are turned into tasks by generator scripts; each model is given a guide to the answer format and the request, and answers each task {{plan.samples:word}} times, independently; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *F1*: how much of the drawn state is right, with partial credit. *Task success*: the drawn state is exactly right. *Target score*: how well the requested atoms are drawn as asked, whatever else was drawn (0 to 1). *Strict* and *valid-only* are two ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
+![**Figure 1. From public data to a score.** Steps 1 to 6 are numbered, in two rows: frozen public data are turned into tasks by generator scripts; each model is given a guide to the answer format and the request, and answers each task {{plan.samples:word}} times, independently; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *Set-aside structures*: {{corpus.heldback.n_structures}} structures that no earlier release of the benchmark used; their tasks are public too (Section 3.6). *F1*: how much of the drawn state is right, with partial credit. *Task success*: the drawn state is exactly right. *Target score*: how far the requested style is on the requested atoms and on no others (0 to 1); unrequested background, such as a cartoon of the protein, is ignored. *Strict* and *valid-only* are two ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
 
 This paper makes four contributions, presented in this order.
 
 1. **A corpus built by script** (Section 3). It has {{corpus.n_tasks}} tasks on
-   {{corpus.n_structures}} structures in eight categories of task, which differ in what the
-   model must know beyond the request or in the form of the task. They include {{clin.n}} clinical-variant requests on
+   {{corpus.n_structures}} structures in eight categories of task: four differ in what the
+   model must know beyond the request, and four in the form of the task (Section 3.3). They
+   include {{clin.n}} clinical-variant requests on
    {{clin.n_proteins}} proteins; in {{clin.n_face_value_wrong}} of them a model that copies
    the number from the variant name selects the wrong residue (Section 3.3.1). Every reference
    records how it was made and is tested against the structure.
