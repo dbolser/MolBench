@@ -880,6 +880,7 @@ The balance is about nil: the main text has about as many words as before this r
    the merge, `figures.py` stops and says to run it again.
 6. **To check before submission** (`related_work_checks.md`, round 6): the given names of
    the first three authors of Morales et al. 2022, and how ClinVar forms a record's title.
-7. **Layout.** Looked at this round as rendered pages: the pages with Figures 2, 4 and 6
-   and Tables 8 and 14 of the main PDF (47 pages). Not looked at: the other pages, and the
-   SI PDF (48 pages).
+7. **Layout.** Looked at this round as rendered pages of the main PDF (45 pages in its last
+   build): the pages with Figures 1, 2, 4 and 6 and Tables 8 and 14, and the page with
+   Table 1 as it was before its two group labels were shortened. Not looked at: the other
+   pages, Table 1 and Figure 5 in the last build, and the SI PDF.
