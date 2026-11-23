@@ -427,3 +427,205 @@ def test_power_more_pairs_means_a_tighter_interval():
     # No rater error and a judge that is always right: perfect agreement on both measures.
     kappa, fleiss, precision = pw.simulate(random.Random(1), 50, 2, 0.5, 1.0, 0.0, 0.0)
     assert (kappa, fleiss, precision) == (1.0, 1.0, 1.0)
+
+
+# --------------------------------------------------------------------------- #
+# Design v2: the grader against people
+# --------------------------------------------------------------------------- #
+def _pair(task, cls, tier="clinical", model="lab/m1", target=True, **kw):
+    return {"kind": "pair", "task": task, "base_task": task, "tier": tier, "model": model, "sample": 0,
+            "success": cls == "right", "target_f1": (1.0 if cls != "wrong" else 0.2) if target else None,
+            "grader_class": cls, "has_target": target, **kw}
+
+
+def _check(kind, task="t-check"):
+    return {"kind": kind, "task": task, "tier": "clinical", "has_target": True,
+            "expected": "same" if kind == "check-same" else "different"}
+
+
+def _v2_key(items, **kw):
+    return {"set": "a4-v2", "design": "v2", "items": items, **kw}
+
+
+def _v2(rows, raters=None, repeats=(), set_id="a4-v2"):
+    raters = raters or {r["rater"]: {"role": "rater"} for r in rows}
+    return {"set": set_id, "exported_at": "2026-12-01T00:00:00+00:00", "raters": raters,
+            "rows": [{"created_at": f"2026-12-01T00:{n:02d}:00+00:00", **r} for n, r in enumerate(rows)],
+            "repeats": list(repeats)}
+
+
+def _a(rater, item, label, target=None, **kw):
+    return {"rater": rater, "item": item, "label": label, "target_label": target, **kw}
+
+
+CHECK_ITEMS = {"cs1": _check("check-same"), "cs2": _check("check-same"), "cd1": _check("check-different"),
+               "cd2": _check("check-different"), "cc1": _check("check-calibrated")}
+
+
+def _passing(rater):
+    """Five checks answered right: enough to pass the rule."""
+    return [_a(rater, "cs1", S, S), _a(rater, "cs2", S, S), _a(rater, "cd1", D, D), _a(rater, "cd2", D, D),
+            _a(rater, "cc1", S, D)]   # a calibrated change seen only in the zoomed view still counts
+
+
+def test_v1_and_v2_are_never_mixed():
+    v2 = _v2_key({"p1": _pair("t1", "right")})
+    v1 = {"set": "a4-v1", "items": {"a": {"kind": "vlm", "task": "t", "model": "m", "vlm_label": S, "tier": "x"}}}
+    assert ag.design_of(v2) == "v2" and ag.design_of(v1) == "v1"
+    # a key holding items of both designs
+    with pytest.raises(ValueError, match="never analysed together"):
+        ag.design_of(_v2_key({**v2["items"], **v1["items"]}))
+    with pytest.raises(ValueError, match="never analysed together"):
+        ag.design_of({"set": "a4-v1", "items": {**v1["items"], **v2["items"]}})
+    # a v2 key with ratings of the pilot set, or with an old bare export
+    with pytest.raises(ValueError, match="never analysed together"):
+        analyse(v2, _v2([_a("R1", "p1", S, S)], set_id="a4-v1"))
+    with pytest.raises(ValueError, match="never analysed together"):
+        analyse(v2, [{"evaluator_token": "x" * 12, "item": "p1", "label": S}])
+    # a v1 key with ratings of the v2 set
+    with pytest.raises(ValueError, match="never analysed together"):
+        analyse(v1, _v2([_a("R1", "a", S)]))
+    # a v2 rating on an item the key does not hold
+    with pytest.raises(ValueError, match="not in the key"):
+        analyse(v2, _v2([_a("R1", "zzz", S, S)]))
+    with pytest.raises(ValueError, match="labels must be"):
+        analyse(v2, _v2([_a("R1", "p1", S, "maybe")]))
+
+
+def test_v2_grader_against_people_by_hand():
+    items = {**CHECK_ITEMS,
+             "a": _pair("t1", "right"), "b": _pair("t2", "right"), "c": _pair("t3", "close"),
+             "d": _pair("t4", "wrong"), "e": _pair("t5", "wrong", target=False)}
+    rows = _passing("R1") + _passing("R2")
+    # whole scene: people call a same (2), b split, c different (2), d different (2), e same/can't tell
+    # zoomed:      a same (2), b same (2), c same (2), d: one same one different; e has no zoomed view
+    rows += [_a("R1", "a", S, S), _a("R2", "a", S, S), _a("R1", "b", S, S), _a("R2", "b", D, S),
+             _a("R1", "c", D, S), _a("R2", "c", D, S), _a("R1", "d", D, S), _a("R2", "d", D, D),
+             _a("R1", "e", S), _a("R2", "e", "unsure")]
+    res = analyse(_v2_key(items), _v2(rows))
+    assert res["design"] == "v2" and res["rating_set"]["by_class"] == {"right": 2, "close": 1, "wrong": 2}
+    assert res["rating_set"]["with_target_view"] == 4
+    assert all(v["passed_checks"] for v in res["raters"].values())
+    w = res["cohorts"]["primary"]["whole"]
+    # 9 labelled whole answers; the grader (success) agrees on a,a,b(S),c,c,d,d = 7; b(D) and e(S) disagree
+    assert w["ratings"] == 9 and w["cant_tell"] == 1 and w["pairs"] == 5 and w["pairs_tied"] == 1
+    assert w["unweighted"]["per_rating"]["agreement"]["est"] == 7 / 9
+    assert w["unweighted"]["table"] == {"human same / judge same": 3, "human same / judge different": 1,
+                                        "human different / judge same": 1, "human different / judge different": 4}
+    # per pair (b is tied and left out): people same = a, e; the grader passes a only
+    pp = w["unweighted"]["per_pair"]
+    assert pp["sensitivity"]["est"] == 0.5 and pp["specificity"]["est"] == 1.0
+    assert pp["rescue_precision"]["est"] == 1.0 and pp["npv"]["est"] == 2 / 3
+    assert w["human_vs_human"]["pairs"] == 4 and w["human_vs_human"]["pairs_split"] == 1
+    # zoomed view against target score = 1 (a, b, c): 7 of 8 answers agree; d(S) does not
+    t = res["cohorts"]["primary"]["target"]
+    assert t["ratings"] == 8 and t["pairs"] == 4
+    assert t["unweighted"]["per_rating"]["agreement"]["est"] == 7 / 8
+    # what people said by the grader's verdict: "close" is different on the whole scene, same zoomed
+    assert w["by_class"]["close"]["same_share"]["est"] == 0.0 and t["by_class"]["close"]["same_share"]["est"] == 1.0
+    assert w["by_class"]["right"]["same_share"]["est"] == 0.75
+    assert list(w["by_class"]) == ["right", "close", "wrong"]
+    assert res["cohorts"]["all"]["judge"] is None   # the judge was not run
+
+
+def test_v2_check_rule_and_cohorts():
+    items = {**CHECK_ITEMS, "a": _pair("t1", "right")}
+    rows = _passing("R1") + [_a("R1", "a", S, S)]                                  # passes
+    rows += [r for r in _passing("R2") if r["item"] != "cd1"] + [_a("R2", "cd1", S, S), _a("R2", "a", D, D)]  # easy miss
+    rows += _passing("R3")[:3] + [_a("R3", "a", S, S)]                             # 3 checks: too few
+    rows += [r for r in _passing("R4") if r["item"] != "cs1"] + [_a("R4", "cs1", "unsure", "unsure"), _a("R4", "a", S, S)]
+    rows += _passing("R5") + [_a("R5", "a", D, D)]                                 # the author
+    raters = {f"R{n}": {"role": "rater"} for n in range(1, 5)} | {"R5": {"role": "author"}}
+    res = analyse(_v2_key(items), _v2(rows, raters))
+    passed = {p: v["passed_checks"] for p, v in res["raters"].items()}
+    # R4: one miss ("can't tell" on a known-same) is allowed; R2 missed an easy known-different; R3 answered 3
+    assert passed == {"R1": True, "R2": False, "R3": False, "R4": True, "R5": True}
+    assert res["raters"]["R1"]["check_kinds_in_first_8"] == 3
+    c = res["cohorts"]
+    assert c["primary"]["raters"] == ["R1", "R4"] and c["no_author"]["raters"] == ["R1", "R2", "R3", "R4"]
+    assert c["all"]["raters"] == ["R1", "R2", "R3", "R4", "R5"]
+    assert c["primary"]["whole"]["ratings"] == 2 and c["all"]["whole"]["ratings"] == 5
+    assert c["all"]["whole"]["unweighted"]["per_rating"]["agreement"]["est"] == 3 / 5
+
+
+def test_v2_weights_stand_for_the_run():
+    items = {"a": _pair("t1", "right"), "b": _pair("t2", "wrong"), "c": _pair("t3", "wrong", tier="grounded")}
+    # the run: 90 right, 10 wrong (8 clinical, 2 grounded). People confirm a and b, not c.
+    pop = {"cells": [["clinical", "right", 90], ["clinical", "wrong", 8], ["grounded", "wrong", 2]]}
+    rows = [_a("R1", "a", S, S), _a("R1", "b", D, D), _a("R1", "c", S, S)]
+    w = analyse(_v2_key(items), _v2(rows), population=pop)["cohorts"]["all"]["whole"]
+    assert w["unweighted"]["per_rating"]["agreement"]["est"] == 2 / 3
+    assert w["weighted"]["per_rating"]["agreement"]["est"] == 98 / 100
+    assert ag.weights_v2({k: items[k] for k in "ab"}, pop) == {"a": 90.0, "b": 10.0}   # c's cell is covered by scaling
+
+
+def test_v2_weights_undo_the_preference_for_passes_that_look_different():
+    """The set keeps 3 passes whose pictures differ and 1 identical one, but of the 20
+    passes drawn only 4 differed: the three stand for 20% of the run's passes, the one for 80%."""
+    items = {k: {**_pair(f"t{n}", "right"), "pictures_differ": k != "d"} for n, k in enumerate("abcd")}
+    pop = {"cells": [["clinical", "right", 100]], "right_pictures": {"drawn": 20, "differ": 4}}
+    w = ag.weights_v2(items, pop)
+    assert w["d"] == pytest.approx(80.0) and sum(w[k] for k in "abc") == pytest.approx(20.0)
+    # people reject one of the passes that differ: 1 in 3 of 20%, not 1 in 4 of everything
+    rows = [_a("R1", "a", D, D), _a("R1", "b", S, S), _a("R1", "c", S, S), _a("R1", "d", S, S)]
+    res = analyse(_v2_key(items), _v2(rows), population=pop)["cohorts"]["all"]["whole"]
+    assert res["unweighted"]["per_rating"]["agreement"]["est"] == 0.75
+    assert res["weighted"]["per_rating"]["agreement"]["est"] == pytest.approx(1 - 0.2 / 3)
+    assert {g: v["pairs"] for g, v in res["right_by_pictures"].items()} == {"differ": 3, "identical": 1}
+    # a key from before the preference (no flag, no counts) is weighted as before
+    plain = {k: _pair(f"t{n}", "right") for n, k in enumerate("ab")}
+    assert ag.weights_v2(plain, {"cells": [["clinical", "right", 100]]}) == {"a": 50.0, "b": 50.0}
+
+
+def test_v2_retest_judge_and_markdown():
+    items = {**CHECK_ITEMS, "aaaaaaaaaaaa": _pair("t1", "right", judge_label=S),
+             "bbbbbbbbbbbb": _pair("t2", "wrong", judge_label=S), "cccccccccccc": _pair("t3", "wrong")}
+    rows = _passing("R1") + _passing("R2") + [
+        _a("R1", "aaaaaaaaaaaa", S, S), _a("R2", "aaaaaaaaaaaa", S, S), _a("R1", "bbbbbbbbbbbb", D, D),
+        _a("R2", "bbbbbbbbbbbb", D, D), _a("R1", "cccccccccccc", D, D, note="colour differs | here", ref_wrong=True)]
+    repeats = [{"rater": "R1", "item": "aaaaaaaaaaaa", "label": S, "target_label": D},
+               {"rater": "R1", "item": "bbbbbbbbbbbb", "label": D, "target_label": D}]
+    res = analyse(_v2_key(items), _v2(rows, repeats=repeats))
+    assert res["raters"]["R1"]["retest"] == {"whole": {"n": 2, "same_answer": 2}, "target": {"n": 2, "same_answer": 1}}
+    assert res["retest_no_author"]["target"] == {"n": 2, "same_answer": 1}
+    j = res["cohorts"]["all"]["judge"]
+    # the judge said same on a and b; people: a same, b different -> 2 of 4 answers agree; c has no verdict
+    assert j["pairs"] == 2 and j["unweighted"]["per_rating"]["agreement"]["est"] == 0.5
+    md = ag.markdown_v2(res)
+    for heading in ("Primary: task success against people", "Primary: target score against people",
+                    "People against people", "Secondary: the image-pair judge", "by the grader's verdict"):
+        assert heading in md
+    assert "aaaaaaaaaaaa" not in md and "colour differs \\| here" in md   # no item ids; notes escaped
+    import json as _json
+    assert "aaaaaaaaaaaa" not in _json.dumps(res)
+
+
+def test_v2_two_way_bootstrap_is_no_narrower_when_raters_differ():
+    # R1 always agrees with the grader, R2 never does: resampling raters must widen the interval.
+    recs = [(f"t{n}", p, S if (p == "R1") == (n % 2 == 0) else D, S if n % 2 == 0 else D)
+            for n in range(40) for p in ("R1", "R2")]
+    two = ag.bootstrap_tasks_and_raters(recs, reps=400, seed=1)["agreement"]
+    clusters = collections.defaultdict(list)
+    for t, _, h, j in recs:
+        clusters[t].append((h, j, 1.0))
+    one = ag.bootstrap(clusters, ag.judge_measures, reps=400, seed=1)["agreement"]
+    assert one["lo"] == one["hi"] == 0.5          # every task holds one agreeing and one disagreeing answer
+    assert two["lo"] == 0.0 and two["hi"] == 1.0  # the panel of raters is the uncertainty
+
+
+def test_export_repeats_use_the_same_pseudonyms(monkeypatch):
+    rows = [{"evaluator_token": "tokA", "name": "Al", "item": "i1", "label": S, "target_label": D}]
+    out, names = ex.pseudonymise(rows, {})
+    assert out[0]["target_label"] == D
+    rep = ex.pseudonymise_repeats([{"evaluator_token": "tokA", "item": "i1", "label": S, "target_label": S,
+                                    "ms": 5, "created_at": "x"}], names)
+    assert rep == [{"rater": "R1", "item": "i1", "label": S, "target_label": S, "ms": 5, "created_at": "x"}]
+    sent = []
+    monkeypatch.setattr(ex, "select", lambda q, project=ex.PROJECT: sent.append(q) or [{"ok": False}])
+    assert ex.fetch_repeats("a4-v2") == [] and len(sent) == 1     # no table: nothing more is asked
+    with pytest.raises(ValueError):
+        ex._safe("a4'; drop table x; --")
+    monkeypatch.undo()
+    for bad in ("delete from ratings", "select 1; drop table ratings"):
+        with pytest.raises(ValueError, match="only a single SELECT"):
+            ex.select(bad)      # refused before anything is sent
