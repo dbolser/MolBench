@@ -106,15 +106,17 @@ of the answer, and its cost.
   4.2). Means over models are means over the core models and the optional models that were
   run; they leave the keyword script out.
 - **Intervals** are 95% bootstrap intervals [@efron1979] with {{run.bootstrap_replicates:,}}
-  resamples. Whole structures are resampled with replacement, not single tasks, because tasks
-  on one structure share its difficulties. Each task goes with the structure of its reference.
-  The {{plan.samples}} answers to a task are averaged before resampling and are not themselves
-  resampled, so an interval reflects the choice of structures and tasks, not the variation
-  between a model's answers to one task. Models are treated as fixed: an interval on a mean
-  over models describes these models, not models in general. In the clinical category, several structures can belong to one protein;
-  they are resampled as separate structures, which we name as a limit in Section 9.4. The
-  table of results by category (Section 6.2) gives the number of structures beside the number
-  of tasks.
+  resamples.
+    - *What is resampled.* Whole structures, with replacement, not single tasks, because
+      tasks on one structure share its difficulties. Each task goes with the structure of its
+      reference. The table of results by category (Section 6.2) gives the number of structures
+      beside the number of tasks.
+    - *What is not.* The {{plan.samples}} answers to a task are averaged before resampling and
+      are not themselves resampled, so an interval reflects the choice of structures and
+      tasks, not the variation between a model's answers to one task. Models are treated as
+      fixed: an interval on a mean over models describes these models, not models in general.
+    - *A limit.* In the clinical category, several structures can belong to one protein. They
+      are resampled as separate structures (Section 9.4).
 - **Paired comparison of formats**, in six parts.
     - *Unit.* For each model and pair, a side is right when at least 2 of its
       {{plan.samples}} answers are right (the majority summary of Section 4.2).

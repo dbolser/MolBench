@@ -50,8 +50,8 @@ has been tested only against cases that we foresaw. The full list follows in fou
   criteria, and no confirmation by a second submitter or an expert panel. For
   {{clin.review.multiple}} it has several submitters and no conflicts, and for
   {{clin.review.expert_or_guideline}} it was reviewed by an expert panel or comes from a
-  practice guideline. {{clin.review.none:word}} variant is used although its record states no
-  criteria (Section 3.1).
+  practice guideline. One variant, lysozyme p.Ile74Thr, is used although its record states
+  no criteria (Section 3.1).
 - **What we did not check in ClinVar.** We looked only at the ClinVar records that UniProt
   cross-references and did not search ClinVar beyond them. A variant is matched to a record by
   its amino-acid change and position; ClinVar states that change per transcript, and we did

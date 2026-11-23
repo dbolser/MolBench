@@ -7,7 +7,7 @@ serves only as a residue position with a classification label.
 **Not for clinical use.** A high score does not make a model fit to interpret variants. The
 clinical category measures whether a model can locate a residue in a structure. The data providers
 say the same of their data: UniProt and the AlphaFold Protein Structure Database state that
-their content is not a substitute for professional medical advice.
+their content is not a substitute for professional medical advice. ⟦PENDING: Dan — ClinVar's own statement on clinical use, to be read at the source by hand and added to this sentence; the page refuses automated reading⟧
 
 **Volunteer raters.** The rating study asks volunteers to compare two pictures of a molecule
 at a time. It collects their answers, optional free-text notes

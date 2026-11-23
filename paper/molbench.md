@@ -380,7 +380,7 @@ in the structure, the residues, the colours and the wording. The corpus has
 are only five ways to name a protein) and in the small call-list category of requests with
 several right answers. SI Section S2 lists every template with an example.
 
-![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track (Table 1 gives the reasons). Requests are quoted from the corpus; a long one is cut short. Framed in blue: the two *lookup categories*, name resolution and clinical variant, in which the answer needs one fact that a person would look up in a database and that the model must recall.](generated/fig_tiers.svg)
+![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track (Table 1 gives the reasons). Requests are quoted from the corpus; a long one is cut short. Two words in them are file terms: a *het group* is a molecule in the entry that is not part of a polymer chain, such as a ligand, named by an identifier of up to three characters; *C-alpha* is the central carbon atom of an amino acid. Framed in blue: the two *lookup categories*, name resolution and clinical variant, in which the answer needs one fact that a person would look up in a database and that the model must recall.](generated/fig_tiers.svg)
 
 - **Translation.** Everything needed is in the request: the entry, the chains, the residue
   numbers, the colours. The model only has to write it in the format.
@@ -465,7 +465,8 @@ style of the HGVS nomenclature, the standard of the Human Genome Variation Socie
 variants [32], but they are not complete HGVS descriptions. HGVS requires a
 reference sequence from RefSeq or Ensembl before the "p."; a UniProt accession, which
 46 requests state, is not one. HGVS also recommends the
-three-letter form.
+three-letter form, and brackets around a protein change that was deduced from the DNA and not
+observed in the protein.
 
 ClinVar itself states each change on a *transcript*, a numbered reference copy of the gene's
 messenger RNA (for the running example, NM_000239.3(LYZ):c.244T>C (p.Trp82Arg): DNA letter
@@ -1171,15 +1172,17 @@ of the answer, and its cost.
   4.2). Means over models are means over the core models and the optional models that were
   run; they leave the keyword script out.
 - **Intervals** are 95% bootstrap intervals [34] with 10,000
-  resamples. Whole structures are resampled with replacement, not single tasks, because tasks
-  on one structure share its difficulties. Each task goes with the structure of its reference.
-  The 3 answers to a task are averaged before resampling and are not themselves
-  resampled, so an interval reflects the choice of structures and tasks, not the variation
-  between a model's answers to one task. Models are treated as fixed: an interval on a mean
-  over models describes these models, not models in general. In the clinical category, several structures can belong to one protein;
-  they are resampled as separate structures, which we name as a limit in Section 9.4. The
-  table of results by category (Section 6.2) gives the number of structures beside the number
-  of tasks.
+  resamples.
+    - *What is resampled.* Whole structures, with replacement, not single tasks, because
+      tasks on one structure share its difficulties. Each task goes with the structure of its
+      reference. The table of results by category (Section 6.2) gives the number of structures
+      beside the number of tasks.
+    - *What is not.* The 3 answers to a task are averaged before resampling and
+      are not themselves resampled, so an interval reflects the choice of structures and
+      tasks, not the variation between a model's answers to one task. Models are treated as
+      fixed: an interval on a mean over models describes these models, not models in general.
+    - *A limit.* In the clinical category, several structures can belong to one protein. They
+      are resampled as separate structures (Section 9.4).
 - **Paired comparison of formats**, in six parts.
     - *Unit.* For each model and pair, a side is right when at least 2 of its
       3 answers are right (the majority summary of Section 4.2).
@@ -1457,7 +1460,7 @@ the system prompt that documents the answer format.
 <div class="box">
 
 **Everything in this box is preliminary.** Findings 1 to 4 come from a pilot run of
-2026-10-18: 15 models, the scene track only, 70 tasks on
+18 October 2026: 15 models, the scene track only, 70 tasks on
 14 structures, one answer per task. Finding 5 comes
 from an earlier run of our first call-list track, and Finding 6 from a small trial of the
 rating study on the October answers. The tasks of the pilot run were an earlier corpus; none of
@@ -1569,7 +1572,7 @@ these models, knowledge of the MolViewSpec format came from the prompt and not f
 track had 20 hand-written tasks and a grader that compared call lists field
 by field. Under that grader the keyword script reached a mean F1 of
 0.72, and the 16 models scored between
-0.72 and 0.95 (run of 2026-07-04). These
+0.72 and 0.95 (run of 4 July 2026). These
 numbers are the reason the track was rebuilt; they are not results of the present benchmark.
 
 **Finding 6: the trial of the rating study was too small to validate anything.** In October,
@@ -1696,8 +1699,8 @@ has been tested only against cases that we foresaw. The full list follows in fou
   criteria, and no confirmation by a second submitter or an expert panel. For
   52 it has several submitters and no conflicts, and for
   19 it was reviewed by an expert panel or comes from a
-  practice guideline. one variant is used although its record states no
-  criteria (Section 3.1).
+  practice guideline. One variant, lysozyme p.Ile74Thr, is used although its record states
+  no criteria (Section 3.1).
 - **What we did not check in ClinVar.** We looked only at the ClinVar records that UniProt
   cross-references and did not search ClinVar beyond them. A variant is matched to a record by
   its amino-acid change and position; ClinVar states that change per transcript, and we did
@@ -1801,7 +1804,7 @@ serves only as a residue position with a classification label.
 **Not for clinical use.** A high score does not make a model fit to interpret variants. The
 clinical category measures whether a model can locate a residue in a structure. The data providers
 say the same of their data: UniProt and the AlphaFold Protein Structure Database state that
-their content is not a substitute for professional medical advice.
+their content is not a substitute for professional medical advice. ⟦PENDING: Dan — ClinVar's own statement on clinical use, to be read at the source by hand and added to this sentence; the page refuses automated reading⟧
 
 **Volunteer raters.** The rating study asks volunteers to compare two pictures of a molecule
 at a time. It collects their answers, optional free-text notes

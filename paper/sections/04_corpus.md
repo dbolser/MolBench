@@ -135,7 +135,7 @@ in the structure, the residues, the colours and the wording. The corpus has
 are only five ways to name a protein) and in the small call-list category of requests with
 several right answers. SI Section S2 lists every template with an example.
 
-![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track (Table 1 gives the reasons). Requests are quoted from the corpus; a long one is cut short. Framed in blue: the two *lookup categories*, name resolution and clinical variant, in which the answer needs one fact that a person would look up in a database and that the model must recall.](generated/fig_tiers.svg)
+![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track (Table 1 gives the reasons). Requests are quoted from the corpus; a long one is cut short. Two words in them are file terms: a *het group* is a molecule in the entry that is not part of a polymer chain, such as a ligand, named by an identifier of up to three characters; *C-alpha* is the central carbon atom of an amino acid. Framed in blue: the two *lookup categories*, name resolution and clinical variant, in which the answer needs one fact that a person would look up in a database and that the model must recall.](generated/fig_tiers.svg)
 
 - **Translation.** Everything needed is in the request: the entry, the chains, the residue
   numbers, the colours. The model only has to write it in the format.
@@ -210,7 +210,8 @@ style of the HGVS nomenclature, the standard of the Human Genome Variation Socie
 variants [@denDunnen2016hgvs], but they are not complete HGVS descriptions. HGVS requires a
 reference sequence from RefSeq or Ensembl before the "p."; a UniProt accession, which
 {{clin.n_accession_in_prompt}} requests state, is not one. HGVS also recommends the
-three-letter form.
+three-letter form, and brackets around a protein change that was deduced from the DNA and not
+observed in the protein.
 
 ClinVar itself states each change on a *transcript*, a numbered reference copy of the gene's
 messenger RNA (for the running example, {{ex.clinvar_first_title}}: DNA letter

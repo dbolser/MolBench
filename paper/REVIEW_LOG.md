@@ -390,3 +390,150 @@ clarity.
    the paper and the SI (51 pages), including how the printed format guides break across
    pages. Tables that do not fit under their caption move to the next page and leave white
    space (pages 18 and 26).
+
+## Round 4 (2026-11-23; third round of the third paper branch)
+
+**Scores (clarity, of 10):** structural bioinformatician 8, machine-learning benchmark
+reviewer 8, clinical geneticist 7, copy-editor 8, cold reader 8. All five would accept on
+clarity. All five summaries state the thesis, the three scores, the two formats and the
+question correctly; none says how many models are run, and all say "convert or copy".
+
+### Must-fix items, both fixed (clinical geneticist)
+
+| Issue | What changed |
+|:---|:---|
+| Section 3.4 said that with a traditional name "the model must convert it on either track"; Table 2 says copying is right in 12 of the 13 | Section 3.4 now says what each case demands: the UniProt selector gives the wrong residue if the printed number is passed on; in 12 of the 13 the printed number is the author number, so selecting by author number is right on either track; in the one on a predicted structure the number must be converted. It also says how the call-list reference is written (the selector with the converted position; checked in the task files). |
+| "The other 36 requests ... are still positions in the UniProt canonical sequence" | False for 6 of them. The script now counts 30 names with "p." and 6 traditional names among the 36 (`clin.n_no_accession_uniprot`, `clin.n_no_accession_traditional`), and the sentence says so. |
+
+### Should-fix and polish items, fixed
+
+- **Abstract** (all five). Rewritten in plain sentences: what SIFTS, ClinVar and UniProt
+  supply; "pathogenic or likely pathogenic"; "usually by its UniProt sequence position"; the
+  two formats as a list, with "which can convert the number itself" attached to the viewer;
+  the two faults of the pilot as "The fault was ours: ..."; "a second score" in place of the
+  undefined "target score". To stay within 200 words the sentence on the number of models
+  went (it used the undefined "core models"); the PENDING tag asks the final abstract to give
+  it.
+- **Table 3 caption: "one division"** (three). The caption carries the sum through: 24/56 =
+  0.43, 24/2,691 = 0.009, recall 1, harmonic mean 0.60 and 0.02, all from generated values.
+- **Target score** (four). Section 4.2 gives target recall and target precision in words, so
+  that Table 3 can be checked without the SI; the spill rule is one plain sentence; the text
+  says why a follow-up turn that takes something away has no target score, and Box 1 no longer
+  says that every task stores a target.
+- **Call-list F1** (four). Rewritten without "a change is not a set of styles"; the text now
+  says that any change to the right atoms earns one half there, that the scene rule gives 0
+  for a wrong representation (checked with the grader: 0.0 against 0.5), and that F1 is
+  therefore never compared between the tracks. Section 9.3 repeats it as a limit.
+- **Viewer settings as facts and targets** (ML reviewer). Section 4.1, Box 2 and Box 1.
+- **The 15 pairs and the 8 pairs** (structural bioinformatician). Both descriptions were
+  loose. From the task files: the reference call list switches off part of the default view
+  in 15 pairs, all first requests; the request asks for it in 9, and in the other 6 (whole
+  protein as surface or spheres) the list without the call is accepted as well. The 8 pairs
+  without a target score are follow-up turns: hide the water (2), set the background (2), no
+  change needed (4). Sections 3.4, 5.4 and the caption of Table 9 say this; the script asserts
+  that the two sets do not overlap.
+- **Follow-up turns that need no change** (two). Explained with a request from the corpus;
+  the two scene tasks that ask for a spin are named.
+- **Clinical category** (clinical geneticist): the mature protein defined for all three cases
+  (initiator methionine 7, signal peptide 4, signal peptide and propeptide 2 of the 13
+  traditional names); HGVS reference sequences and why a UniProt accession is not one;
+  transcripts explained with the running example; review status defined as level of review,
+  with counts for the 87 variants (15 single submitter, 52 several submitters, 19 expert
+  panel or practice guideline, 1 without criteria); what "in every chain that has it" means
+  (21 requests, 14 name one chain); the sign of the offset; the three wordings; the 2 matched
+  sets of p53; the 9 proteins with a well-known variant tried first and their list in the SI;
+  ClinVar classifies DNA changes (Introduction).
+- **ClinVar was not searched** (clinical geneticist). Sections 3.1, 7 and 9.2 and SI S3.2 say
+  that only the records that UniProt cross-references were examined.
+- **One numbering for the variant filter** (two). Steps 1, 2, 3 in the paper and the SI, with
+  the three counts of step 3 in the paper. SI Table S3b is Table S4; the later SI tables moved
+  up by one (S4 to S19).
+- **25 proteins, 26 PDB entries** (structural bioinformatician). Section 3.1 says how a
+  protein comes to have tasks on more than one structure (6 proteins).
+- **Sample of call-list controls replayed in the viewer** (three). See "Corrected" below.
+- **Section 4 opened with a signpost** (cold reader). It opens with what the grader does and
+  the three scores.
+- **Whose calls** (copy-editor). Section 3.4: a JSON notation of our own, one item per call or
+  setting of PDBe Mol\* 3.3.2, under the names of the notebook widget ipymolstar 0.1.0.
+- **A scene whose file cannot be loaded** (copy-editor). Section 4.4 and SI Table S5: it is
+  unshowable and scores 0; a scene on a readable but unaccepted entry is valid and scores 0.
+- **Table 10 and the fourth pattern** (structural bioinformatician). Section 6.4 lists four
+  patterns, among them the model that always converts. The Question in Section 1 defines
+  mapping as giving the number that the structure uses.
+- **Pilot section**: Finding 1 gives the correlation with the strict task success rate as
+  well (r = 0.93) and names the columns; Finding 3 says that every pilot task had a grounding
+  pack; Finding 6 is one paragraph, with the full account in SI Section S8.1; the earlier
+  scene grader's 3% of false passes is in the text and in Table 15.
+- **SI**: Section S0 (background terms, moved from Box 1, with het group, C-alpha, helix and
+  strand added); Section S8 says in which direction its numbers differ from Section 6.6, why
+  85 and 87, and that one class of Table S10 is empty; plain column heads in Table S18;
+  Section S9 for the final-run tables.
+- **Limitations**: the clinical bullet is three bullets; the two limits of the paired
+  comparison (the viewer maps on one track; the prompts differ in length) are in Section 9.4.
+- **Figures**: Figure 2 gives 48 of 82 (copying is wrong), not 59; Figures 3 and 5 use the
+  cell names of Table 9; the example marks of Figure 5 have the final colours and shapes,
+  drawn pale; Figure 1 says "averages: strict, valid-only". Captions of Figures 2 and 5 and
+  of Tables 4, 9a, 9b, 10 and 12 follow the reviewers.
+- **Lists and long bullets**: core models by weights with the developer of each; name
+  resolution bullet; the statistics bullets on intervals and on the paired comparison in
+  labelled parts; atom tables (detail to SI S3.1); proteins without a task (to SI S3.2).
+- **Style** (copy-editor): dates as "13 November 2026" (`{{key:date}}`), small counts in prose
+  as words where a reviewer pointed at them (`{{key:word}}`), "Data and Software
+  Availability", "Errors in the first version and their corrections".
+
+### Corrected although no reviewer asked
+
+- **How many controls were replayed in the call-list viewer.** The record holds only the
+  number of call lists (234). The check takes controls in a fixed order, one from each kind in
+  turn, up to a number given on the command line. Applied to the control set that was
+  committed with the record (850 call-list controls), that order gives 234 replayed and 3
+  not runnable lists for exactly one sample size: 120 controls, of whose 240 lists 3 select
+  by UniProt number. `paper/corpus_values.py --viewer-sample` does this from the git history
+  and writes `generated/viewer_sample.json`; the build stops if the file does not fit the
+  record. The paper now says 120 of 850 (14%), and that 145 call-list controls were added
+  afterwards. Round 3 had "234 of the 995", then "a sample".
+- **The 15 pairs "that must switch off part of the default view".** In 6 of them the call is
+  not required (see above).
+- **The target score of follow-up turns.** The text said that the tasks without one "take
+  something away or reset a setting"; some of them need no change. Reworded.
+
+### Declined, or done differently, and why
+
+| Suggestion | Decision |
+|:---|:---|
+| Rename the held-back split "new-structure split" (structural bioinformatician) | The name would be wrong on the facts: the public split also contains structures that no earlier release used (Section 3.6 gives the counts). "Held-back" is also the word of the repository, the task files and the tables that the final run writes. The warning stays. |
+| "the answer draws the requested representation on the target and, in the same colour, on other atoms" for spill (cold reader) | Kept "in any colour": spill is judged on the style that the answer itself drew on the target, whether or not that is the requested colour (SI S4.3). |
+| Add ClinVar to the sentence on disclaimers (clinical geneticist) | Not done yet: ClinVar's page refuses automated reading (tried again this round), and the paper states no wording that was not read at the source. A PENDING tag for the author marks the place. |
+| Boxes 1 and 2 as numbered tables (copy-editor) | Left as boxes until the journal is fixed: it would renumber all 16 tables, and `venues.md` already lists the template check. Box 1 is shorter (background terms are in SI S0). |
+| All counts below ten as words (copy-editor) | Done where a reviewer pointed and in the sentences rewritten this round. Counts that are compared with other numbers in the same sentence ("at least 2 of its 3 answers", "in 9 of them ... in the other 6") stay as digits. |
+| "N of the 995 controls" for the viewer replay (three) | The check ran on the control set of that day, 850 call-list controls; the paper says 120 of 850 and that 145 were added later. |
+| Move the alignment threshold of the name-resolution list to Section 4.1 (structural bioinformatician) | It is in SI Section S4.4 only; the bullet points there. |
+| Sort Table 13 by the share of valid answers (ML reviewer) | Kept the order by task success rate, the primary score; the finding now names its columns and gives both correlations. |
+| Keep the number of models in the abstract (copy-editor's rewording) | No room within 200 words once SIFTS, ClinVar and UniProt are glossed and the pilot has three sentences; Sections 1 and 5.1 give it. |
+
+### Open, for the lead
+
+1. **`tests/controls/viewer_check.json` should record the sample.** The paper's "120 of 850"
+   is worked out, not recorded. A rerun of `scripts/grader_controls.py --viewer-api N` on the
+   present 995 controls, with N and the number of controls written into the record, would
+   replace the derivation (then run `paper/corpus_values.py --viewer-sample` again, or drop
+   it).
+2. **ClinVar's statement on clinical use** must be read by hand (PENDING tag in Section 11).
+3. **New value keys and specs** on this branch: `clin.*` (traditional names, copies, review
+   status, featured list), `corpus.twins.hide_*`, `corpus.twins.no_target.*`,
+   `corpus.followup.noop_*`, `controls.viewer.api.*`, `plan.core_models_open/closed`,
+   `oct.spec.r_valid_success`, `ex.clinvar_*`; build specs `word`, `date`, `month`. The merge
+   with `final-benchmark` must regenerate `corpus_values.json`; if the corpus moved, the
+   assertions in `clinical_details` and `pairs_and_followup_details` will say which sentence
+   no longer holds.
+4. **SI table numbers moved** (S4 to S19) and there is a Section S9 for the final-run tables;
+   `scripts/paper_tables.py` writes no numbers into captions, so nothing else follows.
+5. **Table 9 titles changed** ("Table 9a. Primary comparison. ..."): see
+   `generated/shape_paired.md`.
+6. The developer names in Section 5.1 come from a small map in `corpus_values.py` (route
+   prefix to company name); check "Alibaba" for the Qwen models and "Z.ai" for GLM.
+7. Still open from earlier rounds: items 1, 4, 5, 6 and 8 of round 3.
+8. **Layout.** Looked at in the PDF this round, in a build of 42 pages made before the last
+   edits (the final build has 43): page 4 (Box 1) and page 24 (nested bullets of Section
+   5.4); and page 42 of the SI (45 pages). Figures 1, 2, 3 and 5 were looked at as rendered
+   SVG files. The rest of the PDFs was not looked at.

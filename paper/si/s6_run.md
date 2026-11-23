@@ -3,7 +3,7 @@
 The final run is defined by one manifest file in the repository. Its contents, in words:
 
 - **Corpus.** Version `{{plan.corpus_version}}` ⟦PENDING: corpus freeze — final version tag and hash⟧.
-- **Answers.** {{plan.samples:word}} per task, model and condition (one in the JSON-mode condition);
+- **Answers.** Each model gives {{plan.samples:word}} answers per task and condition (one in the JSON-mode condition);
   no temperature is sent, so each provider's default applies. Limit on the length of an answer:
   {{plan.max_tokens:,}} tokens. Models that write reasoning text before the answer, which the
   user does not see, get {{plan.reasoning_max_tokens:,}} tokens for reasoning and answer

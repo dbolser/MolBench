@@ -136,7 +136,7 @@ the system prompt that documents the answer format.
 <div class="box">
 
 **Everything in this box is preliminary.** Findings 1 to 4 come from a pilot run of
-{{run.date}}: {{oct.spec.n_models}} models, the scene track only, {{mvs.n_tasks}} tasks on
+{{run.date:date}}: {{oct.spec.n_models}} models, the scene track only, {{mvs.n_tasks}} tasks on
 {{mvs.n_structures}} structures, {{mvs.spec.samples_per_task:word}} answer per task. Finding 5 comes
 from an earlier run of our first call-list track, and Finding 6 from a small trial of the
 rating study on the October answers. The tasks of the pilot run were an earlier corpus; none of
@@ -227,7 +227,7 @@ these models, knowledge of the MolViewSpec format came from the prompt and not f
 track had {{legacy_api.n_tasks}} hand-written tasks and a grader that compared call lists field
 by field. Under that grader the keyword script reached a mean F1 of
 {{legacy_api.baseline_f1:.2f}}, and the {{legacy_api.n_models}} models scored between
-{{legacy_api.f1_min:.2f}} and {{legacy_api.f1_max:.2f}} (run of {{legacy_api.run}}). These
+{{legacy_api.f1_min:.2f}} and {{legacy_api.f1_max:.2f}} (run of {{legacy_api.run:date}}). These
 numbers are the reason the track was rebuilt; they are not results of the present benchmark.
 
 **Finding 6: the trial of the rating study was too small to validate anything.** In October,

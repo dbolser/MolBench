@@ -173,7 +173,7 @@ PILOT_WORDS = [
     (r"\bSuccess\b", "Score of 1"),
     (r"whether the model weights are openly released", "open if the weights of the model can be downloaded"),
     (r"Tree score vs render-checked score", "Earlier-grader F1 against the score after a check of the picture"),
-    # Table S19 (the check of pictures in October): column heads and caption in plain words.
+    # Table S18 (the check of pictures in October): column heads and caption in plain words.
     (r"A valid scene that scores below 1 is \*escalated\*: it is rendered next to the reference\. It is "
      r"\*rescued\* \(counted as correct\) if",
      "A valid scene that scores below 1 is rendered next to the reference (*pictures compared*). It is "

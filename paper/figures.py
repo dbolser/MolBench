@@ -229,8 +229,8 @@ def fig_tiers(v: dict) -> str:
         n_m, n_a = v[f"corpus.mvs.{tier}.n"], v[f"corpus.api.{tier}.n"]
         s.text(x + cw - 10, y + 19, f"{n_m or '–'} / {n_a or '–'}", size=10.5, anchor="end", fill=MUTED)
         if tier == "clinical":
-            needs = (f"The variant's residue must be found in the structure; in {v['clin.n_face_value_wrong']} of "
-                     f"{v['clin.n']} tasks the number in its name is not its number there.")
+            needs = (f"The residue must be found in the structure; copying the number in its name is wrong in "
+                     f"{v['clin.n_face_value_wrong']} of {v['clin.n']} tasks.")
         yy = s.para(x + 10, y + 35, needs, width=chars(cw - 20, 10), size=10, fill=MUTED)
         prompt = " ".join(prompts[tid]["prompt"].split())
         if tier == "followup":
@@ -453,7 +453,7 @@ EXAMPLE_OPACITY = 0.45     # example marks: the final colours and shapes, drawn 
 def fig_result_shapes(v: dict) -> str:
     """Three empty panels that show how the final-run figures will be read. Nothing in
     this figure is a result: each panel has axes, the marks explained in a key, and one
-    greyed example row that is labelled as an example."""
+    example row in the final colours and shapes, drawn pale and labelled as an example."""
     ph, gap, top, split = 132, 10, 30, 300
     s = Svg(W, top + 3 * (ph + gap), "Shapes of the three result figures that the final run will fill; no data are shown")
     s.text(10, 19, "No data yet. The pale example mark in each panel has the final colour and shape; "
