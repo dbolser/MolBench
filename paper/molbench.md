@@ -20,9 +20,9 @@ and is checked against the structure. The corpus has 797 tasks on
 variants that must be mapped from UniProt numbering to the residues of a structure.
 258 requests are posed in two output formats, a declarative scene and an
 imperative call list, to separate not knowing the answer from not being able to write it. On
-2,105 control answers with known verdicts the grader made no error; the two graders it
-replaces failed 42% and
-54% of the correct ones. In a pilot run, clinical tasks
+2,175 control answers with known verdicts the grader made no error; the two graders it
+replaces failed 44% and
+55% of the correct ones. In a pilot run, clinical tasks
 scored lowest although most answers drew the right residue: they lost points on context that
 nobody had requested. References now hold only what the request states.
 ⟦PENDING: final run — headline results on both tracks and the paired comparison, two sentences⟧
@@ -76,7 +76,7 @@ This paper makes four contributions, presented in this order.
    59 need a change of residue number. Every reference records how it was made
    and is tested against the structure.
 2. **A grader on drawn state, with a measured error rate** (Section 4): three scores with
-   plain definitions, and a control set of 2,105 answers whose verdict is known from
+   plain definitions, and a control set of 2,175 answers whose verdict is known from
    how they were made.
 3. **A paired design** (Sections 3.4 and 5): 258 requests are posed in two
    output formats with the same target atoms, so that an error of content can be told apart
@@ -418,7 +418,7 @@ Four checks involve no model (Figure 1, bottom row).
 - **Atom tables against the viewer.** Selections were read back from the real viewers. For the
   scene track, Mol\* 5.9.0 was run without a display and asked which atoms each representation
   holds. For the call-list track, call lists were replayed in PDBe Mol\* 3.3.2 and each
-  selection compared atom for atom (234 lists, all in agreement). A
+  selection compared atom for atom (267 lists, all in agreement). A
   bare load of 73 panel entries was compared in the same way.
 - **Grader against a control set.** Section 4.5.
 - **Format rules.** One script validates every task file against the written task format and
@@ -545,7 +545,7 @@ Scores are averaged in three named ways.
 
 A grader that compares drawn states can still be wrong: it may fail a correct answer that is
 written in an unexpected way, or pass a wrong one. We measured this with a *control set* of
-2,105 pairs of a reference and an answer whose verdict is known from how the pair
+2,175 pairs of a reference and an answer whose verdict is known from how the pair
 was made (Table 3). The answer is one of three things.
 
 - **Identical**: the reference itself. It must pass.
@@ -570,8 +570,8 @@ success.
 
 | Track | Controls | Structures | Kinds of equivalent / wrong answer | False pass | False fail | Earlier grader: false pass | Earlier grader: false fail |
 |:---|---:|---:|---:|---:|---:|---:|---:|
-| Scene | 1,110 | 78 | 24 / 24 | 0 of 480 | 0 of 630 | 13 of 480 | 264 of 630 (42%) |
-| Call list | 995 | 74 | 22 / 21 | 0 of 420 | 0 of 575 | 75 of 420 (18%) | 311 of 575 (54%) |
+| Scene | 1,155 | 78 | 25 / 26 | 0 of 505 | 0 of 650 | 16 of 505 | 284 of 650 (44%) |
+| Call list | 1020 | 74 | 22 / 23 | 0 of 445 | 0 of 575 | 95 of 445 (21%) | 319 of 575 (55%) |
 
 The zeros must be read with care. We corrected the grader until it agreed with every control,
 so they show that the stated rules are implemented. They do not show how often a way of
@@ -579,13 +579,13 @@ writing an answer that we did not foresee is misjudged. Two things keep the cont
 honest. First, the verdicts do not come from the grader. For the scene track, both scenes of a
 pair were loaded in Mol\* 5.9.0 and the atoms, colours and opacities of each representation
 were read back: the viewer drew the same for the must-pass pairs and something different for
-the must-fail pairs in all 890 pairs that can be read back this way
-(140 pairs of kinds such as camera target and label text cannot).
-For the call-list track, 234 call lists were replayed in PDBe Mol\*
+the must-fail pairs in all 910 pairs that can be read back this way
+(245 pairs of kinds such as camera target and label text cannot).
+For the call-list track, 267 call lists were replayed in PDBe Mol\*
 3.3.2 and the end state matched the grader's replay in every case. Second, the earlier graders
 give the scale of the problem that the control set detects: the scene grader used in our pilot
-run failed 42% of correct answers, and the first call-list
-grader passed 18% of wrong ones. SI Section S5 lists every
+run failed 44% of correct answers, and the first call-list
+grader passed 21% of wrong ones. SI Section S5 lists every
 kind of control with its counts.
 
 ### 4.6 What is deliberately not graded
@@ -720,6 +720,7 @@ condition, at list price. Intervals (95%, structures resampled) will be given wi
 | Model | Weights | Valid outputs | F1 (strict) | Task success (strict) | Target score (strict) | F1, valid outputs only | Tasks with all 3 samples right | Cost (USD) |
 |:---|:---|---:|---:|---:|---:|---:|---:|---:|
 | Keyword script (no model) | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
+| Literal script (no model) | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | claude-haiku-4-5 | closed | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | deepseek-v3.2 | open | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | deepseek-v4-flash | open | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
@@ -1021,10 +1022,10 @@ another benchmark of this kind could make.
    classified as conflicting. *Change*: every variant is confirmed against ClinVar's own
    record, and the date is stored (Section 3.1).
 4. **The graders compared text.** The first scene grader compared scene trees path by path. It
-   failed 264 of 630 correct control
+   failed 284 of 650 correct control
    answers that were merely written differently. The first call-list grader compared call
-   sequences. It passed 75 of 420
-   wrong control answers and failed 311 of
+   sequences. It passed 95 of 445
+   wrong control answers and failed 319 of
    575 correct ones, and a keyword script scored close to the
    models (Section 6.6, Finding 5). *Change*: both tracks are graded on drawn state, and the
    control set is run as a test on every change.
@@ -1069,9 +1070,9 @@ the models.
 **Exactness is measurable for this task.** A viewer scene has a definite content: these atoms,
 drawn this way. Once references are computed from the structure and answers are resolved to
 atoms, "is it right?" has a yes-or-no answer that needs no judge model and no rubric. The
-control set shows that the answer is stable under rewriting (2,105 controls, no
-error) and that graders which compare text are not (42%
-and 54% of correct answers failed).
+control set shows that the answer is stable under rewriting (2,175 controls, no
+error) and that graders which compare text are not (44%
+and 55% of correct answers failed).
 
 **One score is not enough.** The pilot run gave three different pictures of the same answers.
 Strict scores mostly measured whether a model can close its braces. F1 on the clinical tier

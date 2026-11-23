@@ -1,6 +1,7 @@
 | Model identifier | Panel | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
 |:---|:---|:---|:---|:---|:---|:---|
 | Keyword script | core | not a model | – | – | 0 / 0 | – |
+| Literal script | core | not a model | – | – | 0 / 0 | – |
 | `claude-haiku-4-5` | core | closed | no | no | 1.0 / 5.0 | 2026-11-16 |
 | `deepseek/deepseek-v3.2` | core | open | no | yes | 0.26 / 0.38 | 2026-11-16 |
 | `deepseek/deepseek-v4-flash` | core | open | yes | yes | 0.09 / 0.18 | 2026-11-16 |

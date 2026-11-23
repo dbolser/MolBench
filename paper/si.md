@@ -599,21 +599,21 @@ is counted apart from a malformed one in the outcome tables.
 
 ## S5. The control set by kind
 
-The control set has 2,105 pairs of a reference and an answer on the structures of the
-panel: 1,110 on the scene track (150
-identical, 480 equivalent, 480 wrong) and
-995 on the call-list track (150 identical,
-425 equivalent, 420 wrong). The verdict of each
+The control set has 2,175 pairs of a reference and an answer on the structures of the
+panel: 1,155 on the scene track (150
+identical, 500 equivalent, 505 wrong) and
+1020 on the call-list track (150 identical,
+425 equivalent, 445 wrong). The verdict of each
 pair is known from how it was made.
 
-Read-back from the viewers. Scene track: 890 pairs were loaded in
+Read-back from the viewers. Scene track: 910 pairs were loaded in
 Mol\* 5.9.0 and the drawing of both scenes read back; in all of them the
-viewer agreed with the verdict. 140 pairs are of kinds that cannot
+viewer agreed with the verdict. 245 pairs are of kinds that cannot
 be read back (camera target, label text, colouring by chain, assembly, another entry). In the
 same run the grader's resolved state equalled the viewer's for all
-1498 scenes, and 3,818 single
+1545 scenes, and 3,926 single
 representations probed across the panel were drawn as the grader predicts. Call-list track:
-234 call lists were replayed in PDBe Mol\*
+267 call lists were replayed in PDBe Mol\*
 3.3.2, all with the end state that the grader computes.
 
 **Table S5. Every kind of control pair.** *Pairs*: number of pairs of this kind. *Graded as
@@ -640,6 +640,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | a ligand selected by residue name, or each copy by author chain and number | 20 | 20 | 20 |
 | must pass (equivalent) | one cartoon with a colour child for one chain, or one cartoon component per chain | 20 | 20 | 0 |
 | must pass (equivalent) | three residues in one component (a selector list) or in three components | 20 | 20 | 20 |
+| must pass (equivalent) | a stretch in a colour of its own, drawn as a component of its own that is listed before the grey drawing of the whole polymer in the same representation type: the first one listed is the one seen (pixels counted in Mol*, tests/controls/overlap_evidence.json) | 20 | 20 | 0 |
 | must pass (equivalent) | a colour that a later colour node replaces (the last one wins) | 20 | 20 | 0 |
 | must pass (equivalent) | one residue range written as two adjacent ranges in two components | 20 | 20 | 20 |
 | must pass (equivalent) | six residues listed one by one instead of an author-number range | 20 | 20 | 20 |
@@ -651,6 +652,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | another entry's file is downloaded and parsed as well, and nothing of it is drawn | 20 | 20 | 0 |
 | must pass (identical) | the answer is the reference itself | 150 | 150 | 150 |
 | must fail (wrong) | 'all' instead of 'polymer' under ball-and-stick (waters and ligands are drawn too) | 20 | 0 | 0 |
+| must fail (wrong) | the right scene on an AlphaFold model address that does not exist: the file name on RCSB's host, without its model version, with an old version, or in lower case (the viewer shows nothing) | 5 | 0 | 3 |
 | must fail (wrong) | the biological assembly is loaded where the deposited model was asked for | 20 | 0 | 0 |
 | must fail (wrong) | the author residue number written in the label-number field (structures where they differ) | 20 | 0 | 0 |
 | must fail (wrong) | two chains' colours the wrong way round | 20 | 0 | 0 |
@@ -663,6 +665,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must fail (wrong) | one requested component is not drawn | 20 | 0 | 0 |
 | must fail (wrong) | a neighbouring shade outside the tolerance (lightgray for gray, darkred for red, ...) | 20 | 0 | 0 |
 | must fail (wrong) | reference colours by chain; the answer paints every chain the same colour | 20 | 0 | 0 |
+| must fail (wrong) | a stretch is to be coloured: the answer draws the whole polymer in grey and then the stretch again, same representation type, in the colour. The second drawing lies exactly under the first and is not seen: the picture is grey all over (pixels counted in Mol*, tests/controls/overlap_evidence.json) | 20 | 0 | 0 |
 | must fail (wrong) | a residue range that stops three residues early | 20 | 0 | 0 |
 | must fail (wrong) | the neighbouring residue is highlighted | 20 | 0 | 0 |
 | must fail (wrong) | only the side chain is drawn where the whole residue was asked for | 20 | 0 | 0 |
@@ -683,7 +686,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | auth_residue_number instead of auth_seq_id | 20 | 20 | 20 |
 | must pass (equivalent) | a colour as #rrggbb or as an {r,g,b} object instead of its name | 20 | 20 | 0 |
 | must pass (equivalent) | an entity id instead of the entity's only chain | 20 | 20 | 0 |
-| must pass (equivalent) | the entry id in upper case, or the same entry loaded by URL | 20 | 20 | 7 |
+| must pass (equivalent) | the same entry loaded by URL (PDBe's updated file) instead of by its id | 20 | 20 | 0 |
 | must pass (equivalent) | focus: true inside the color call, or a separate focus action | 20 | 20 | 0 |
 | must pass (equivalent) | settings that do not interact, in another order | 20 | 20 | 20 |
 | must pass (equivalent) | struct_asym_id + residue_number (label) instead of auth_asym_id + auth_seq_id | 20 | 20 | 10 |
@@ -701,7 +704,8 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must pass (equivalent) | a grey cartoon and a coloured ligand are asked for: the answer leaves the cartoon to the viewer's default view and paints the ligand (water and other components stay on screen, which the request does not mention) | 20 | 20 | 0 |
 | must pass (equivalent) | the same request answered on the default view with the waters hidden, which nobody asked for: the task accepts the cartoon style (no water drawn) and the default view (water drawn), so the state in between is right too (the task's free_hide) | 20 | 20 | 0 |
 | must pass (equivalent) | a grey cartoon and a residue as coloured ball-and-stick are asked for: the answer colours the residue and adds the ball-and-stick in the same colour, the form the API prompt's own example teaches (the residue's stretch of cartoon takes the highlight colour) | 20 | 20 | 0 |
-| must pass (identical) | the answer is the reference itself | 150 | 150 | 150 |
+| must pass (identical) | the answer is the reference itself | 150 | 150 | 149 |
+| must fail (wrong) | the right calls on an AlphaFold model address that does not exist (the file name on RCSB's host, without its model version, with an old version, or in lower case): nothing loads | 5 | 0 | 0 |
 | must fail (wrong) | the author residue number given as residue_number, which is label numbering | 20 | 0 | 15 |
 | must fail (wrong) | the structure is loaded and nothing else is done | 20 | 0 | 0 |
 | must fail (wrong) | color given where representationColor was needed: the added sticks stay element-coloured | 20 | 0 | 20 |
@@ -718,6 +722,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 | must fail (wrong) | the default-view answer to 'grey cartoon, ligand in <colour>' without the grey: the cartoon keeps the viewer's chain colours, and grey was stated | 20 | 0 | 0 |
 | must fail (wrong) | the default-view answer to 'grey cartoon, ligand in <colour>' with the ligand in another palette colour: what the request states still has to match | 20 | 0 | 0 |
 | must fail (wrong) | the default-view answer to 'grey cartoon, residue as coloured ball-and-stick' with the polymer hidden: a free hide toggle never covers what was asked for | 20 | 0 | 0 |
+| must fail (wrong) | the right calls with the PDB id in upper case, as the request writes it: the viewer puts molecule_id into PDBe's file address as written, PDBe names its files in lower case, and nothing loads (run in pdbe-molstar 3.3.2 against PDBe on 2026-11-23: 0 structures for '3K34' and '1LMB', 2,387 atoms for '3k34') | 20 | 0 | 20 |
 | must fail (wrong) | the same residue number in another chain | 20 | 0 | 0 |
 | must fail (wrong) | another palette colour | 20 | 0 | 0 |
 | must fail (wrong) | the same calls on another structure | 20 | 0 | 0 |
@@ -750,6 +755,7 @@ price*: US dollars per million input / output tokens, read on the date given.
 | Model identifier | Panel | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |
 |:---|:---|:---|:---|:---|:---|:---|
 | Keyword script | core | not a model | – | – | 0 / 0 | – |
+| Literal script | core | not a model | – | – | 0 / 0 | – |
 | `claude-haiku-4-5` | core | closed | no | no | 1.0 / 5.0 | 2026-11-16 |
 | `deepseek/deepseek-v3.2` | core | open | no | yes | 0.26 / 0.38 | 2026-11-16 |
 | `deepseek/deepseek-v4-flash` | core | open | yes | yes | 0.09 / 0.18 | 2026-11-16 |

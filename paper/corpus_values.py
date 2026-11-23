@@ -42,6 +42,9 @@ sys.path.insert(0, str(REPO))
 from molbench import atoms, runner, tasks as T  # noqa: E402
 
 PENDING = "⟦PENDING: final run⟧"
+#: The scripted baselines of the panel (no model is called), as the paper names them
+#: (the same words as molbench.analysis.PAPER_BASELINES).
+SCRIPTED = {"baseline": "Keyword script (no model)", "baseline-literal": "Literal script (no model)"}
 
 TIERS = ["translation", "grounded", "interactions", "resolve", "clinical", "followup",
          "accept_set", "tool_only"]
@@ -492,7 +495,7 @@ def study_values(V: dict) -> None:
 def plan_values(V: dict) -> list[dict]:
     m = tomllib.loads((REPO / "run/final_run.toml").read_text(encoding="utf-8"))
     models = m["models"]
-    core = [x for x in models if not x.get("optional") and x["route"] != "baseline"]
+    core = [x for x in models if not x.get("optional") and x["route"] not in SCRIPTED]
     opt = [x for x in models if x.get("optional")]
     V["plan.samples"] = m["run"]["samples"]
     V["plan.max_tokens"] = m["run"]["max_tokens"]
@@ -511,9 +514,9 @@ def plan_values(V: dict) -> list[dict]:
 def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     """The result tables in their final shape, every result cell pending."""
     P = PENDING
-    names = [("Keyword script (no model)" if x["route"] == "baseline" else x["id"].split("/")[-1])
+    names = [(SCRIPTED[x["route"]] if x["route"] in SCRIPTED else x["id"].split("/")[-1])
              + (" †" if x.get("optional") else "") for x in models]
-    weights = ["–" if x["route"] == "baseline" else ("open" if x["open_weights"] else "closed") for x in models]
+    weights = ["–" if x["route"] in SCRIPTED else ("open" if x["open_weights"] else "closed") for x in models]
     out = {}
     head = ("| Model | Weights | Valid outputs | F1 (strict) | Task success (strict) | Target score (strict) "
             "| F1, valid outputs only | Tasks with all 3 samples right | Cost (USD) |\n"
@@ -539,7 +542,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
         "| Model | Pairs | Both right | Scene right, call list wrong | Call list right, scene wrong | Both wrong | McNemar p |\n"
         "|:---|---:|---:|---:|---:|---:|---:|\n"
         + "".join(f"| {n} | {V['corpus.n_twin_pairs']} | {P} | {P} | {P} | {P} | {P} |\n"
-                  for n, x in zip(names, models) if x["route"] != "baseline"))
+                  for n, x in zip(names, models) if x["route"] not in SCRIPTED))
     out["shape_robustness.md"] = (
         "| Comparison | Tasks | Task success, first group | Task success, second group | Difference (95% interval) |\n"
         "|:---|---:|---:|---:|---:|\n"
@@ -565,8 +568,8 @@ def si_models_table(models: list[dict]) -> str:
     rows = ["| Model identifier | Panel | Weights | Hidden reasoning by default | JSON mode | List price, USD per million tokens (input / output) | Price read on |",
             "|:---|:---|:---|:---|:---|:---|:---|"]
     for x in models:
-        if x["route"] == "baseline":
-            rows.append("| Keyword script | core | not a model | – | – | 0 / 0 | – |")
+        if x["route"] in SCRIPTED:
+            rows.append(f"| {SCRIPTED[x['route']].split(' (')[0]} | core | not a model | – | – | 0 / 0 | – |")
             continue
         p = x["price"]
         rows.append(f"| `{x['id']}` | {'optional' if x.get('optional') else 'core'} "
