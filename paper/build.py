@@ -608,19 +608,19 @@ def example_problems(values: dict) -> list[str]:
 # Numbers that the prose states in words. If one of them changes, the sentence must change:
 # (key, value, where the words are).
 STATED_IN_WORDS = [
-    ("plan.samples", 3, "'at least 2 of its 3 answers' (Sections 4.2 and 5.4, Table 9, Figures 3 and 5)"),
-    ("clin.n_offset_pairs_traditional", 1, "'one of them uses a traditional name' (Sections 3.3.1 and 9.4)"),
-    ("mvs.spec.regime.Clinical.n_structures", 1, "'a single structure' (Section 6.6, Finding 2; abstract)"),
-    ("study.max_per_task_model", 1, "'from the same model' (Section 5.5)"),
-    ("panel.n_disease_proteins_without_task", 2, "the two proteins without a task, named in Section 3.1"),
-    ("clin.n_tasks_kept_by_name", 1, "'1 task per track' for lysozyme p.Ile74Thr (Section 3.1)"),
-    ("prompt.longer_track", "call-list", "the order of the two prompt lengths (Sections 5.2 and 9.4)"),
-    ("ex.n_clinvar_records", 2, "'both DNA changes', 'both are classified' (Sections 1 and 3.2, SI Section S1)"),
-    ("clin.n_face_wrong_no_offset", 1, "'the one remaining traditional name' (Section 3.3.1)"),
-    ("clin.n_same_numbering_pairs", 2, "'in the other 2 sets' of matched tasks, both of p53 (Section 3.3.1)"),
-    ("corpus.followup.noop_spin", 2, "'in 2 scene tasks, a spin' (Section 3.3, follow-up turn)"),
+    ("plan.samples", 3, "'at least 2 of its 3 answers' (Section 5.4, Table 9, Figures 3 and 5)"),
+    ("clin.n_offset_pairs_traditional", 1, "'one of them uses a traditional name' (SI Sections S10.3 and S14.4)"),
+    ("mvs.spec.regime.Clinical.n_structures", 1, "'a single structure' (Section 6.6, Finding 2)"),
+    ("study.max_per_task_model", 1, "'from the same model' (SI Section S12.5)"),
+    ("panel.n_disease_proteins_without_task", 2, "the two proteins without a task, named in SI Section S3.2"),
+    ("clin.n_tasks_kept_by_name", 1, "'1 task per track' for lysozyme p.Ile74Thr (SI Sections S3.2 and S10.1)"),
+    ("prompt.longer_track", "call-list", "the order of the two prompt lengths (SI Section S14.4)"),
+    ("ex.n_clinvar_records", 2, "'both DNA changes', 'both are classified' (Section 3.2, SI Section S1)"),
+    ("clin.n_face_wrong_no_offset", 1, "'the one remaining task' (Section 3.3.1, SI Section S10.3)"),
+    ("clin.n_same_numbering_pairs", 2, "'in the other 2 sets' of matched tasks, both of p53 (SI Section S10.3)"),
+    ("corpus.followup.noop_spin", 2, "'in 2 scene tasks, a spin' (SI Section S10.2)"),
     ("mvs.spec.outcome.not_mvs", 0, "'no answer of the pilot run fell in the class' (SI Section S8)"),
-    ("mvs.spec.samples_per_task", 1, "'one answer per task' in the pilot run (Section 6.6, Table 13)"),
+    ("mvs.spec.samples_per_task", 1, "'one answer per task' in the pilot run (Section 6.6, SI Table S21)"),
 ]
 
 

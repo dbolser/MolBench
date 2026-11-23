@@ -90,7 +90,7 @@ are (Section 5.4).
 
 ### S11.3 The target score: which atoms, which convention, which tasks
 
-**Target score: is the requested style on the requested atoms, and only there?** The *target*
+**Target score: are the requested atoms marked out exactly?** The *target*
 of a task is the atoms that the request is about. For most tasks the generator stores it with
 the task. In a
 clinical task it is the residue of the variant. In a task that asks for a feature against a

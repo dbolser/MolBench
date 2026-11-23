@@ -903,3 +903,115 @@ brought into line with what had changed since. No reviewer has read these passag
 - **Section 6 (opening) and SI Section S6.1:** the provider pilot, with its one table.
 
 Word count after the merge: about 21,000 (paper) and 9,000 (SI).
+
+## Condensing pass (2026-11-23), after round 6: not reviewed
+
+Five reviewers held the paper at 8 of 10 over six rounds, and each round added words. This
+pass did the opposite: the main text was rewritten shorter, and what a reader does not need
+in order to follow what was built, why, and how an answer is scored was moved to the
+Supporting Information with a one-sentence pointer. No reviewer has read the result.
+
+### Word counts (text outside tables, figure captions and PENDING tags, as `build.py` counts)
+
+| Section | Before | After |
+|:---|---:|---:|
+| Draft note | 99 | 79 |
+| Abstract | 201 | 199 |
+| 1 Introduction | 1,148 | 850 |
+| 2 Related work | 808 | 319 |
+| 3 Building the benchmark | 5,246 | 1,859 |
+| 4 Grading on drawn state | 4,547 | 1,935 |
+| 5 Experimental setup | 2,805 | 1,110 |
+| 6 Results | 3,036 | 1,603 |
+| 7 Errors in the first version | 219 | 67 |
+| 8 Discussion | 185 | 148 |
+| 9 Limitations | 1,579 | 445 |
+| 10 Conclusion | 243 | 181 |
+| 11 Ethics, 12 Availability, SI list | 477 | 496 |
+| **Paper** | **20,594** | **9,291** |
+| Supporting Information | 9,006 | 24,182 |
+
+With the text of the PENDING tags, `build.py` prints about 9,700 for the paper. The PDF went
+from 45 pages to 28; the SI PDF has 80.
+
+### What moved where
+
+| From the paper | Now in |
+|:---|:---|
+| Box 1 (two glossary tables) and Box 2 | SI Tables S0d, S0e, S0f. The paper keeps one box of ten terms. |
+| 2.1 to 2.3, each related work described | SI Sections S15.1 to S15.3 |
+| 3.1: how disease proteins and entries were chosen, counts of proteins and structures | S10.1 (the filter, the two exceptions and the wording of the classification were already in S3.2) |
+| 3.3: the eight categories one by one, follow-up turns that need no change, call-only translation tasks | S10.2 |
+| 3.3.1: forms of name, HGVS and transcripts, wordings, traditional names with an example, rule for several variants, Table 2b, all matched tasks | S10.3; Table 2b is Table S20; Table 2a is Table 2 |
+| 3.4: the notation of a call list, traditional names on the two tracks, pairs by category, the 15 pairs with a switch-off call | S10.4 |
+| 3.5 in full (representation, opacity) | S10.5 |
+| 3.6 in full (structures used earlier, how the split is read, counts of rephrasings) | S10.6 |
+| 4.1: examples of viewer rules, counts of accepted entries | S11.1 |
+| 4.2: the call-list rule of F1, the all-3 rate and majority | S11.2 (the two summaries are defined in the captions of Tables 6 and 9) |
+| 4.2: counts and three rules of the target score, rule 2 by hand | S4.3 (already there); which atoms are the target, the cost of the convention, the call-list track, the tasks without a target score: S11.3 |
+| 4.3: every score of Table 3 worked by hand, row C7, the spill rows of the caption | S11.4 |
+| 4.4: the outcomes in full, cut-off answers | S11.5 and Table S5 |
+| 4.5: kinds of control, the viewer check in three bullets, what was not checked | S11.6 and S5 |
+| 4.6: tolerances | S11.7 |
+| 5.1 to 5.6 in full (models, format guides, sampling, every rule of the bootstrap, the six parts of the paired comparison, the rating study with its sampling limits) | S12.1 to S12.6 |
+| 6.6: Findings 3 to 6, Table 13 (pilot per model), Table 14 (pilot by category) | S13.1; Tables S21 and S22. The box keeps Findings 1 and 2, Figure 6 and one paragraph on the rest. |
+| 7: Table 15 with how each error was found, and the text on row 9 | S13.2, Table S23. The paper keeps a two-column Table 13. |
+| 9.1 to 9.4, 22 limitations | S14.1 to S14.4. The paper keeps ten, as a list. |
+| 11: Table 16 (licences) | S15.4, Table S24 |
+
+Section numbers of the paper did not change (3.1 to 3.7, 4.1 to 4.6, 5.1 to 5.6, 6.1 to
+6.6), because the generated tables and the SI cite them. Section 9 lost its subsections.
+The moved text is the round-6 text with its cross-references renumbered; it was not
+rewritten, so Sections S10 to S14 repeat some of what S3 to S5 say.
+
+### The standing must-fix: one wording of the target score
+
+Every earlier gloss was false for some row of Table 3 ("on no others" does not cover a second
+representation on the residue alone, row S9; "whatever else was drawn" is false for spill,
+rows S7 and S8). The wording now used everywhere:
+
+> how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they
+> carry the requested style, no other atom carries that style, and no other representation
+> is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored.
+
+Checked against Table 3: S4 and C4 (wrong colour, 0.50), S5 and S10 (context, 1.00), S7 and S8
+(spill, 0.60 and 0.02), S9 (extra on the target, 0.67), C7 (default cartoon hidden, 1.00).
+Long form: Section 4.2, Table 3 and Table 9 captions, Figure 3 caption, SI Sections S1 and
+S4.3, SI Table S0f. Short form ("how exactly the answer marks out the requested atoms; any
+other drawing is ignored"): abstract, Figures 1, 4 and 5, Tables 6 and 10. Task success and
+F1 are defined once, in Section 4.2, and repeated only in captions. `paper/README.md` records
+the wording.
+
+### Other points of the last review round that this pass settled
+
+- Which score is primary is said once, in one paragraph of Section 4.2 ("Which score is read
+  first"); Box 2 is gone.
+- The name-resolution caveat is said once (Section 4.1), with its denominator.
+- HGVS, transcripts and the default transcript are one sentence in Section 3.3.1.
+- The planned comparisons are three separate paragraphs in Section 5.4.
+- The pilot findings no longer give a Pearson correlation as evidence about a ranking; the
+  box says "nearly proportional".
+- The conclusion states the size of the corpus and the paired design.
+- A sentence of the pilot box said that a keyword script scored within the range of the
+  models; the numbers are 0.72 against 0.72 to 0.95, and the sentence now gives them.
+
+### The result figure
+
+`scripts/paper_figures.py --result-figure DIR` draws Figure 5 from the four result tables
+in `DIR` (`table_final_leaderboard_scene`, `_calls`, `_paired`, `_tiers`), so figure and tables
+cannot differ. Tested on the dry-run tables: `paper/generated_mock/fig_final_results.svg`,
+stamped as mock. Mock tables are refused in `paper/generated`. The paper includes
+`generated/fig_final_results.md` when it exists and `figures/fig5_layout.md` (the sketch)
+until then. The provider pilot is one sentence at the start of Section 6.
+
+### Open, for the lead
+
+1. **No test covers the new figure command**; tests are outside what this pass could change.
+   A test should run it on the mock tables and assert the refusal in `paper/generated`.
+2. **Sections S10 to S14 of the SI overlap with S3 to S5.** They should be merged in a pass
+   of their own; nothing in them is new.
+3. **Tables 6, 9a and 9b still show their first rows only, and Table 7 is a tag**, as before.
+4. **The glossary of 5.4 lost its home in the paper**: "all-3 rate" and "majority" are now
+   defined only in the captions of Tables 6 and 9 and in SI Table S0f.
+5. Items 1 to 7 of round 6 are unchanged. Layout: all 28 pages of the paper's PDF were looked
+   at as thumbnails; the SI PDF was not looked at.

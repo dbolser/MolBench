@@ -117,7 +117,7 @@ those of the paper.
 | F1 | How much of the drawn state is right, from 0 to 1, with partial credit. For each fact of the reference, take the fraction of it that the answer also draws; *recall* is the mean of these fractions. *Precision* is the same in the other direction, over the facts of the answer. F1 is the harmonic mean of the two. |
 | Task success | For one answer, yes or no: the drawn state is exactly right, with nothing missing and nothing extra. The *task success rate* of a model is the share of its answers that succeed. |
 | All-3 rate, majority | *All-3 rate*: the share of tasks on which all 3 answers succeed. *Majority*: at least 2 of the 3 answers are right; used only in the comparison of pairs. |
-| Target score | From 0 to 1: how far the requested style is on the target atoms and on no others. Unrequested background, such as a cartoon of the protein, is ignored. An answer is *target-right* when its target score is exactly 1. |
+| Target score | From 0 to 1: how exactly the answer marks out the target atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. |
 | Primary score | The score on which a table or a comparison is read first. *Within a track* (Tables 6 to 8, 11 and 12 of the paper): the task success rate, strict. *Between the two formats* (Table 9a of the paper) *and for copying against mapping* (Table 10 of the paper): the target score, because task success is not the same test on the two tracks and also falls when an answer adds unrequested context. The comparison of pairs on the target score is the *primary comparison* (Table 9a of the paper), and the one on task success the secondary (Table 9b). F1 is reported for partial credit and is never primary. |
 | Unrequested context | Drawing that the request did not ask for, such as a cartoon of the protein behind a requested residue. |
 | Valid, invalid | An answer is *valid* if it obeys the answer format and the viewer can show it: on the scene track, a scene that Mol\* accepts and whose structure file it can load; on the call-list track, a JSON list in which every call and every field is documented. Otherwise it is *invalid*, in one of two ways. An *unshowable* answer cannot be shown at all and scores 0. A *schema-breaking* call list contains parts that the viewer ignores; it is graded as the viewer would treat it but is not counted as valid (Section 4.4). |
@@ -312,7 +312,7 @@ From the request:
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score*: how far the requested style is on the requested atoms and on no others (0 to 1); unrequested background, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
+score* (0 to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
 | Row | Answer | F1 | Task success | Target score |
@@ -790,6 +790,8 @@ harmonic mean. Two drawn states are compared, that of the reference and that of 
 An answer that draws nothing scores 0 on every score when the reference draws something.
 
 ### S4.3 Target score
+
+The target score, from 0 to 1, is how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no other representation is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored. The counts below make this exact.
 
 The *target's drawing* is the set of the reference's styles that lie wholly inside the target
 atoms (in the running example the yellow spacefill spheres of the residue; a cartoon of the
@@ -2273,7 +2275,7 @@ are (Section 5.4).
 
 ### S11.3 The target score: which atoms, which convention, which tasks
 
-**Target score: is the requested style on the requested atoms, and only there?** The *target*
+**Target score: are the requested atoms marked out exactly?** The *target*
 of a task is the atoms that the request is about. For most tasks the generator stores it with
 the task. In a
 clinical task it is the residue of the variant. In a task that asks for a feature against a
