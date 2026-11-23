@@ -10,20 +10,30 @@ This file used to hold the plan and its history (421 lines). The history is kept
 | How answers are graded, and the grader's control set | [`GRADING.md`](GRADING.md) |
 | The task file format | [`TASK_FORMAT.md`](TASK_FORMAT.md) |
 | How a run is defined, started and re-graded | [`run/README.md`](run/README.md) |
+| What the provider pilot of November 2026 found and changed | [`PILOT.md`](PILOT.md) |
+| **Every step from here to submission, with its command** | [`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md) |
 | Every open idea and old to-do, each with a disposition | [`LEDGER.md`](LEDGER.md) |
 | The paper, its Supporting Information and what they still wait for | [`paper/README.md`](paper/README.md), [`paper/PENDING.md`](paper/PENDING.md) |
-| The human rating study: pilot readout and the design of the next one | [`paper/a4/REPORT.md`](paper/a4/REPORT.md), [`paper/a4/FINAL_CALL.md`](paper/a4/FINAL_CALL.md) |
+| The human rating study: pilot readout, the plan of the next one and its runbook | [`paper/a4/REPORT.md`](paper/a4/REPORT.md), [`paper/a4/FINAL_CALL.md`](paper/a4/FINAL_CALL.md), [`paper/a4/RATING_V2_RUNBOOK.md`](paper/a4/RATING_V2_RUNBOOK.md) |
 | Where to submit | [`paper/venues.md`](paper/venues.md) |
+
+## Where things stand (2026-11-23)
+
+Built and checked at no cost: the corpus (879 task files, 78 structures), both graders with
+their control set, the runner with its manifest and dry run, the paper draft with every
+result cell marked as pending, and the tooling of the second rating study. A provider pilot
+on 39 tasks (US $0.21) proved the path to a provider and led to eight fixes (`PILOT.md`).
+Nothing is frozen yet: the corpus has no tag and its hash is not pinned.
 
 ## What is left, in order
 
-1. Freeze the corpus: pin its version and hash in `run/final_run.toml`, set the budget cap.
-2. Rehearse: `python -m molbench.runner --manifest run/final_run.toml --dry-run` (no cost).
-3. The one paid run: the same command with `--go`.
-4. Rebuild the paper: `scripts/paper_tables.py`, `paper/corpus_values.py`, `paper/figures.py`,
-   `paper/build.py`. `paper/PENDING.md` should then list only author decisions.
-5. Second rating study on the final run's scenes (`paper/a4/FINAL_CALL.md`).
-6. Deposit corpus, archives and ratings for a DOI; preprint; submit.
+The steps and their commands are in [`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md). In short:
+
+1. Rule on the open points, then freeze the corpus (tag, pinned hash, budget cap).
+2. Top up the provider account; rehearse; the one paid run.
+3. Tables into the paper; write the result sentences; rebuild.
+4. Second rating study on the final run's scenes.
+5. Deposit corpus, archives and ratings for a DOI; preprint; submit.
 
 ## Not in this paper
 

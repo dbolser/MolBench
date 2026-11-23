@@ -62,6 +62,21 @@ This runs the keyless rule-based **baseline** over the whole corpus and writes
 `results/scorecard.json`. The baseline exists to (a) prove the harness runs with
 no setup and (b) give real models a floor to beat.
 
+## The benchmark run
+
+The benchmark itself is one run defined by one manifest file (models, conditions, samples,
+prices, budget cap). It is rehearsed with a mock model at no cost:
+
+```bash
+uv sync --extra execute --extra authoring --extra anthropic --extra openai --group paper
+python -m molbench.runner --manifest run/final_run.toml --dry-run   # rehearse everything, $0
+python -m molbench.runner --manifest run/final_run.toml             # plan and projected cost, no calls
+```
+
+[`run/README.md`](run/README.md) describes the manifest, the run sizes and what is archived.
+[`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md) lists the steps from the corpus freeze to
+submission. [`PILOT.md`](PILOT.md) reports the small provider pilot of November 2026.
+
 ## Models & API keys
 
 A "model" is selected with a **spec string** `provider:model-id` (or the bare word
@@ -114,8 +129,8 @@ branch in `build_model()`. That's the entire contract.
 
 ## CI & publishing results
 
-* **CI** (`.github/workflows/ci.yml`) runs on every push: sanity tests + the
-  keyless baseline on Python 3.10 and 3.12. It needs **no API keys** and spends
+* **CI** (`.github/workflows/ci.yml`) runs on every push: the whole test suite, the
+  keyless baseline and a dry run of the final-run manifest, on Python 3.10 and 3.12. It needs **no API keys** and spends
   nothing — it validates the harness, not the models.
 * **Leaderboard** ([dbolser.github.io/MolBench](https://dbolser.github.io/MolBench/))
   is served from `docs/` via GitHub Pages. Publishing a result is a deliberate step:
@@ -177,7 +192,8 @@ results/                scorecards (generated)
 ## Corpus & data
 
 * **Graded Component-1 tasks** live in `tasks/` (`mvs_*/` scene trees,
-  `api_*/` imperative; 781 tasks on 75 structures, see [`CORPUS.md`](CORPUS.md)).
+  `api_*/` imperative; 879 task files on 78 structures: 797 tasks and 82 further
+  wordings of 41 of them, see [`CORPUS.md`](CORPUS.md)).
   Every reference is written by a generator script in `scripts/`.
 * **`data/molviewstories/`** holds curated MolViewStories scenes (caption + tree).
   These are **Component-2 (VLM-judged) material**, not C1 tasks: experiment showed
@@ -218,7 +234,8 @@ commands inspired planned Tier-2 task types.
 
 ## Roadmap
 
-The current plan is [`FINAL_PLAN.md`](FINAL_PLAN.md); [`ROADMAP.md`](ROADMAP.md) points to
+The current plan is [`FINAL_PLAN.md`](FINAL_PLAN.md); what is left to do, in order, is
+[`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md); [`ROADMAP.md`](ROADMAP.md) points to
 everything else. The corpus is described in [`CORPUS.md`](CORPUS.md), grading in
 [`GRADING.md`](GRADING.md), and a run in [`run/README.md`](run/README.md). The paper draft is in
 [`paper/`](paper/) (`python paper/build.py`); every number in it is written by script.

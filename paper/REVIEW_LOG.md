@@ -884,3 +884,22 @@ The balance is about nil: the main text has about as many words as before this r
    build): the pages with Figures 1, 2, 4 and 6 and Tables 8 and 14, and the page with
    Table 1 as it was before its two group labels were shortened. Not looked at: the other
    pages, Table 1 and Figure 5 in the last build, and the SI PDF.
+
+## After round 6: changes made at the merge (2026-11-23), not reviewed
+
+The paper branch was written on the corpus of 2026-11-16. When it was merged, the text was
+brought into line with what had changed since. No reviewer has read these passages:
+
+- **Section 5.1, Box 2, Section 9:** a second script without a model (the literal script)
+  beside the keyword script.
+- **Section 4.2, SI Sections S4.3 to S4.6 and S4.8:** grader rules added after the provider
+  pilot (two coincident representations, the one address of an AlphaFold model, lower-case
+  PDB identifiers on the call-list track, half credit only in a style confined to the target,
+  target score as the best over accepted answers).
+- **Section 4.5 and SI Section S5:** the viewer check as re-run on the present control set.
+- **Section 5.5:** rewritten for the rating study as its tooling now builds it (four
+  pictures and two verdicts per comparison, three groups by the grader's verdict). The
+  earlier text described a design balanced on the image judge.
+- **Section 6 (opening) and SI Section S6.1:** the provider pilot, with its one table.
+
+Word count after the merge: about 21,000 (paper) and 9,000 (SI).

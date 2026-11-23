@@ -18,6 +18,8 @@ python -m molbench.runner --manifest run/final_run.toml --go        # the paid r
 python -m molbench.runner --manifest run/final_run.toml --grade-only   # re-grade the archive, $0
 python scripts/paper_tables.py --from-dry-run                       # MOCK tables -> paper/generated_mock/
 python scripts/paper_tables.py --from-run results/final-v1          # the real ones -> paper/generated_final/
+python scripts/paper_tables.py --from-run results/final-v1 --into-paper   # also the paper's seven tables and final_values.json -> paper/generated/
+python scripts/paper_tables.py --from-run results/pilot-v1          # a pilot: its tables stay in results/pilot-v1/paper/; one labelled table -> paper/generated/pilot_results.md
 python -m molbench.runner --manifest run/pilot.toml --dry-run       # rehearse the pilot, $0
 ```
 
@@ -97,11 +99,19 @@ Where things land (`<name>` is `run.name` in the manifest):
 - `paper/generated_final/` — the paper's tables, from `scripts/paper_tables.py --from-run`.
   `paper/generated_mock/` holds the same tables from the dry run: final shapes, fake
   numbers, every file flagged MOCK; the two are never written to the same directory.
-  `paper/generated/` stays the October 2026 preliminary set.
+  `paper/generated/` holds the October 2026 preliminary set, the provider pilot's one
+  labelled table (`pilot_results.md`, `pilot_values.json`) and, once the real run is complete
+  and `--into-paper` is given, the seven `table_final_*.md` files that the paper includes and
+  `final_values.json` (read by `paper/build.py` as `{{final.<key>}}`). `--into-paper`
+  refuses a dry run, a pilot and a run with cells missing.
 - A dry run writes to `runs/<name>.dryrun/` and `results/<name>.dryrun/` instead, and
   empties them first. Everything in them is mock data.
 
-Before the paid run: freeze the corpus and pin `corpus.sha256`; run the pilot; re-project
+The ordered steps from the freeze to submission, each with its command, are in
+[`RELEASE_CHECKLIST.md`](../RELEASE_CHECKLIST.md).
+
+Before the paid run: freeze the corpus and pin `corpus.sha256`; run the pilot (done on
+2026-11-16, see `PILOT.md`); re-project
 the cost and set `budget.cap_usd` (a test holds it between the projection and 1.5 times
 it); check the prices are current (last read from OpenRouter's public model list on
 2026-11-16); install the `execute` extra and the Mol* bundle (`run.validate = "required"`).
