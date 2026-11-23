@@ -36,10 +36,10 @@ answer on a panel entry is graded on drawn state. An answer on an accepted entry
 panel has no atom table to be resolved on: its selections are compared with the reference's
 as written, and all three scores of Section 4.2 come from that comparison. The common ways
 of writing "the protein" pass; a correct selection that is spelled differently, for example
-by chain identifier, fails. This is the *weaker rule* of the name-resolution category. The
+by chain identifier, fails. This is the *text rule* of the name-resolution category. The
 run records for each answer whether its entry is the reference entry, so results are
 reported in two rows: answers on the reference entry, and answers on any other accepted
-entry, nearly all of which fall under the weaker rule (Table 8).
+entry, nearly all of which fall under the text rule (Table 8).
 
 On the call-list track the grader replays the calls in order, following the behaviour of PDBe
 Mol\* 3.3.2, and compares the drawn state that they end in. Because that viewer draws the whole

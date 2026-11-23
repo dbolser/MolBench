@@ -59,8 +59,8 @@ named with it.
 | Lookup categories | Name resolution and clinical variant. In these the answer needs one piece of information that a person would look up in a database: an entry identifier, or a residue number. The model cannot look it up and must recall it (Section 3.3). |
 | Template | A fixed kind of request within a category; a generator script fills in the structure, the residues, the colours and the wording (Section 3.3). |
 | Accepted answer | One of several drawn states that a task lists as right. An answer is graded against each, and the best result counts (Sections 3.3 and 4.2). |
-| Set-aside split | The tasks on 15 structures that were set aside before generation and that no earlier MolBench release used. The tasks are public; the split is not a hidden test set (Section 3.6). |
-| Qualifying record, best-reviewed record | A *qualifying record* of a variant is a ClinVar record that passes the two tests of Section 3.1. Its *best-reviewed record* is the qualifying record with the highest review status (Section S14.2). |
+| Set-aside split | The tasks on 15 structures that were set aside before generation and that the first version of the benchmark never used, in any of its releases. The tasks are public; the split is not a hidden test set (Section 3.6). |
+| Qualifying record, best-reviewed record | A *qualifying record* of a variant is a ClinVar variation record, cross-referenced by UniProt, that meets the four conditions of Section 3.1 of the paper. Its *best-reviewed record* is the qualifying record with the highest review status (Section S14.2). |
 
 **Table S0c. Names used in the repository and in the prompts printed in Section S7.** The
 paper and this file use the words on the right.
@@ -99,7 +99,7 @@ paper and this file use the words on the right.
 | Offset | For one residue, its UniProt number minus its author number (82 − 64 = 18 in the running example). It can differ from residue to residue within a chain. A residue *has an offset* when the two numbers differ. In every clinical task with an offset the UniProt number is the larger one. |
 | Copying the number | Using the number printed in a variant name as the author residue number, without converting it. Copying is *right* in a task if the answer written in this way is exactly right, and *wrong* otherwise. The property is defined on author numbering and is used to group results of the scene track only (Section S10.3). |
 | Request, task, answer | The *request* is the plain-language instruction given to the model. A *task* is a request on one track, with its reference answer and, where it has one, its target; a request that is posed on both tracks is two tasks. An *answer* is what the model returns for one task. Each task is answered 3 times in the main condition. |
-| Target | The atoms that the request is about. Most tasks store it. For a request that only changes a viewer setting or hides something, the target is everything the reference changes; 31 follow-up tasks have none (Section 4.2). |
+| Target | The atoms that the request is about. Most tasks store it. For a first request that only changes a viewer setting or hides something, the target is everything the reference changes. 31 follow-up tasks have none, and means of the target score leave them out (Section 4.2). |
 | Scene | An answer in MolViewSpec: a description of what to load and how to draw it. A scene groups the atoms it selects into *components*; each component is a named set of atoms that is then drawn in one or more ways. Nothing is on screen unless the scene says so. |
 | Call list | An answer as an ordered list of calls to the PDBe Mol\* viewer, written in JSON (Section 3.4). |
 | Default view | What the call-list viewer draws as soon as a structure is loaded, before any further call: the whole structure, with the polymer as a cartoon. A scene has no default view; its screen starts empty. |
@@ -117,7 +117,7 @@ those of the paper.
 | F1 | How much of the drawn state is right, from 0 to 1, with partial credit. For each fact of the reference, take the fraction of it that the answer also draws; *recall* is the mean of these fractions. *Precision* is the same in the other direction, over the facts of the answer. F1 is the harmonic mean of the two. |
 | Task success | For one answer, yes or no: the drawn state is exactly right, with nothing missing and nothing extra. The *task success rate* of a model is the share of its answers that succeed. |
 | All-3 rate, majority | *All-3 rate*: the share of tasks on which all 3 answers succeed. *Majority*: at least 2 of the 3 answers are right; used only in the comparison of pairs. |
-| Target score | From 0 to 1: how exactly the answer marks out the target atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. |
+| Target score | From 0 to 1: how exactly the answer marks out the target atoms. It is 1 (*target-right*) when three things hold: the target atoms carry the requested style; no other atom carries that style; and no second representation is drawn on target atoms alone. Any other drawing, such as a cartoon of the protein, is ignored. |
 | Primary score | The score on which a table or a comparison is read first. *Within a track* (Tables 6 to 8, 11 and 12 of the paper): the task success rate, strict. *Between the two formats* (Table 9a of the paper) *and for copying against mapping* (Table 10 of the paper): the target score, because task success is not the same test on the two tracks and also falls when an answer adds unrequested context. The comparison of pairs on the target score is the *primary comparison* (Table 9a of the paper), and the one on task success the secondary (Table 9b). F1 is reported for partial credit and is never primary. |
 | Unrequested context | Drawing that the request did not ask for, such as a cartoon of the protein behind a requested residue. |
 | Valid, invalid | An answer is *valid* if it obeys the answer format and the viewer can show it: on the scene track, a scene that Mol\* accepts and whose structure file it can load; on the call-list track, a JSON list in which every call and every field is documented. Otherwise it is *invalid*, in one of two ways. An *unshowable* answer cannot be shown at all and scores 0. A *schema-breaking* call list contains parts that the viewer ignores; it is graded as the viewer would treat it but is not counted as valid (Section 4.4). |
@@ -312,7 +312,7 @@ From the request:
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score* (0 to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
+score* (0 to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when three things hold: the target atoms carry the requested style; no other atom carries that style; and no second representation is drawn on target atoms alone. Any other drawing, such as a cartoon of the protein, is ignored. Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
 | Row | Answer | F1 | Task success | Target score |
@@ -633,20 +633,22 @@ record, the record whose accession begins with VCV. ClinVar keeps germline class
 ones (of variants that arise in a tumour); we use the germline one. A variation record
 is usually about one change at the level of DNA, and different DNA changes can give the same
 amino-acid change, so one amino-acid change can have several records.
-74 of the variants that we keep have more than one qualifying
-record.
+74 of the variants that we keep have more than one record
+that passes steps 2, 3a and 3b of Table S4 (where a variant has single-nucleotide records, only these are counted).
 
 **Table S4. The variant list in three steps.** Counts are of variants (amino-acid changes)
 removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper
-gives the same counts in one paragraph, with steps 3a to 3c taken together.
+gives the first and the last count, and states the rule as four conditions on one record.
+A *matching record* (step 2) that is of the named gene (3a), is not a haplotype (3b) and
+states its assertion criteria (3c) is a *qualifying record*, the term of the paper.
 
 | Step | Rule | Removed | Left |
 |:--|:----------------------------------|---:|---:|
 | 1 | Single-residue missense variants of the 27 proteins that UniProt reports as pathogenic or likely pathogenic, with ClinVar as a source | | 3,352 |
-| 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same amino-acid change at that position and has the aggregate germline classification "Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic" (a *qualifying record*) | 657 | 2,695 |
-| 3a | Remove if no qualifying record is of the gene that the request names | 44 | |
-| 3b | Remove if every qualifying record of that gene is a haplotype (two changes on one chromosome) | 35 | |
-| 3c | Remove if every remaining qualifying record has the review status "no assertion criteria provided" | 216 | 2,400 |
+| 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same amino-acid change at that position and has the aggregate germline classification "Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic" (a *matching record*) | 657 | 2,695 |
+| 3a | Remove if no matching record is of the gene that the request names | 44 | |
+| 3b | Remove if every matching record of that gene is a haplotype (two changes on one chromosome) | 35 | |
+| 3c | Remove if every remaining matching record has the review status "no assertion criteria provided" | 216 | 2,400 |
 
 *The rule in one sentence.* A variant is kept if at least one ClinVar record that lists it is
 classified as pathogenic or likely pathogenic, is of the gene that the request names,
@@ -695,8 +697,8 @@ its position to be that of the UniProt canonical sequence (Section S14.2).
 
 *What a request says about the classification.* ClinVar classifies DNA-level records, each
 for a stated condition. A request attaches the classification to the protein-level name and
-names no condition: it means that at least one qualifying record of this amino-acid change
-carries that classification. Where the qualifying records behind one request carry different
+names no condition: it means that at least one record of this amino-acid change, of the
+named gene, carries that classification. Where the records behind one request carry different
 values, the request says "pathogenic or likely pathogenic" (7
 requests); 21 requests say "pathogenic/likely pathogenic", which is
 ClinVar's own aggregate value on their records.
@@ -791,7 +793,7 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 
 ### S4.3 Target score
 
-The target score, from 0 to 1, is how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they carry the requested style, no other atom carries that style, and no second representation is drawn on these atoms and nowhere else; any other drawing, such as a cartoon of the protein, is ignored. The counts below make this exact.
+The target score, from 0 to 1, is how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when three things hold: the target atoms carry the requested style; no other atom carries that style; and no second representation is drawn on target atoms alone. Any other drawing, such as a cartoon of the protein, is ignored. The counts below make this exact.
 
 The *target's drawing* is the set of the reference's styles that lie wholly inside the target
 atoms (in the running example the yellow spacefill spheres of the residue; a cartoon of the
@@ -2154,7 +2156,7 @@ earlier tasks. By *earlier* tasks and releases we mean those published before th
 corpus (the first version of the benchmark, Section 6). Two measures address this.
 
 *Set-aside structures.* Before generation, 15 structures were
-set aside: no earlier MolBench release used them, and their tasks are reported apart. The
+set aside: no release of the first version used them, and their tasks are reported apart. The
 165 tasks on them (21% of the corpus) form
 the *set-aside split*. The other 632 tasks sit on
 63 structures, of which
@@ -2221,10 +2223,10 @@ answer on a panel entry is graded on drawn state. An answer on an accepted entry
 panel has no atom table to be resolved on: its selections are compared with the reference's
 as written, and all three scores of Section 4.2 come from that comparison. The common ways
 of writing "the protein" pass; a correct selection that is spelled differently, for example
-by chain identifier, fails. This is the *weaker rule* of the name-resolution category. The
+by chain identifier, fails. This is the *text rule* of the name-resolution category. The
 run records for each answer whether its entry is the reference entry, so results are
 reported in two rows: answers on the reference entry, and answers on any other accepted
-entry, nearly all of which fall under the weaker rule (Table 8).
+entry, nearly all of which fall under the text rule (Table 8).
 
 On the call-list track the grader replays the calls in order, following the behaviour of PDBe
 Mol\* 3.3.2, and compares the drawn state that they end in. Because that viewer draws the whole
@@ -3000,7 +3002,7 @@ has been tested only against cases that we foresaw. The full list follows in fou
   5,778 entries that the name-resolution tasks accept,
   5,736 are outside the panel, and an answer on one of them
   is compared with the reference as text, so a correct answer that is spelled differently
-  fails (the weaker rule of Section 4.1). Table 8 reports such answers in a row of their
+  fails (the text rule of Section 4.1). Table 8 reports such answers in a row of their
   own.
 - **The file behind the call-list viewer.** The atom tables are built from the archive file of
   each entry, and the read-back loaded that file into both viewers. Left to itself, PDBe Mol\*

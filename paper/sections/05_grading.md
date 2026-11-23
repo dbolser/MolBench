@@ -29,10 +29,10 @@ entry of the named protein ({{resolve.n_accepted_entries:,}} entries over the
 {{corpus.mvs.resolve.n}} tasks), and we hold atom tables only for panel entries. For an
 answer on an accepted entry outside the panel the grader has no atoms to resolve, so it
 compares the answer's selections with the reference's as text; a correct selection that is
-spelled differently (by chain identifier, for example) fails. We call this the *weaker
-rule*, and
-report the category in two rows: answers on the reference entry, and answers on any other
-accepted entry (Table 8).
+spelled differently (by chain identifier, for example) fails. We call this the *text
+rule*. An answer on an entry that the task does not accept scores 0. Table 8 reports the
+category in two further rows: answers on the reference entry, and answers on any other
+accepted entry.
 
 ### 4.2 Three scores
 
@@ -45,21 +45,23 @@ atoms that the request is about: in a clinical task, the residue of the variant;
 request for a feature against a background ("grey cartoon and the biotin in green
 ball-and-stick"), the feature; where there is no such distinction, everything that the
 reference draws. The target score, from 0 to 1, is how exactly the answer marks out the
-target. It is 1, and the answer is *target-right*, when the target atoms carry the
-requested style, no other atom carries that style, and no second representation is drawn
-on these atoms and nowhere else. Any other drawing, such as a cartoon of the protein, is
-ignored.
+target. It is 1, and the answer is *target-right*, when three things hold: the target
+atoms carry the requested style; no other atom carries that style; and no second
+representation is drawn on target atoms alone. Any other drawing, such as a cartoon of the
+protein, is ignored.
 
 The target score is the harmonic mean of a recall and a precision, counted in *items* (one
 style on one atom). Recall is the share of the requested items that the answer has, with
 half credit for the right representation in another colour or opacity. Precision divides
-the same credit by the items that the answer spent on marking the target. Drawing beyond
-the request is of three kinds (rows of Table 3 in parentheses).
+the same credit by all items that the answer drew to mark the target: its items of the
+requested representation on the target, plus *spill* and *extra* (formula in SI Section
+S4.3). Drawing beyond the request is of three kinds (rows of Table 3 in parentheses).
 
 - *Spill*: the style that marks the target, repeated on atoms outside it
   ({{ex.row.mvs.spill}}, {{ex.row.mvs.spill_chain}}). It lowers precision.
-- *Extra*: another representation drawn on target atoms and nowhere else
-  ({{ex.row.mvs.extra}}). It lowers precision.
+- *Extra*: another representation drawn on target atoms alone ({{ex.row.mvs.extra}}:
+  {{ex.n_target_atoms}} credited items of {{ex.n_target_atoms_twice}} drawn, precision
+  {{ex.mvs.extra.target_precision:.2f}}). It lowers precision.
 - *Unrequested context*: any other style that reaches beyond the target, such as a cartoon
   of the protein ({{ex.row.mvs.context}}, {{ex.row.mvs.other_rep_around}}). It is not
   counted.
@@ -70,29 +72,29 @@ The line between extra and context is a convention, and its consequence may surp
 the residue and its two neighbours is context and leaves the score at
 {{ex.mvs.other_rep_around.target:.2f}} (row {{ex.row.mvs.other_rep_around}}; SI Section
 S11.3 gives the reason). {{corpus.n_without_target_followup}} follow-up tasks, among them
-both sides of {{corpus.twins.n_without_target}} pairs, have no target score: their edit
-takes something away, changes a setting of the whole view, or needs no change, so no atoms
+both sides of {{corpus.twins.n_without_target}} pairs, have no target score and are left out of every mean of it: their
+edit takes something away, changes a setting of the whole view, or needs no change, so no atoms
 are "drawn as asked" afterwards (SI Section S11.3).
 
 **F1: how much of the drawn state is right?** F1, from 0 to 1, gives partial credit. It is
 the harmonic mean of *recall*, the mean over the facts of the reference of the fraction
 that the answer also draws, and *precision*, the same over the facts of the answer. A style
 with the right representation and the wrong colour or opacity counts half. On the call-list track each changed
-atom is compared by its final appearance as a whole, a more generous rule (SI Section
-S11.2). Where a task lists several accepted answers, an answer is graded against each, and
+atom is compared by its final appearance as a whole. This is more generous than the scene
+rule: any change to the right atoms earns one half, even in the wrong representation, which
+earns nothing on the scene track (SI Section S11.2). Where a task lists several accepted answers, an answer is graded against each, and
 the best result counts.
 
-**Which score is read first.** On the scene track the screen starts empty, so anything
-drawn beyond the request costs precision and task success. On the call-list track only
-changes from the default view are graded, and leaving the default view in place costs
-nothing. Task success and F1 are therefore not the same tests on the two tracks, and track
-totals are not compared on them. The formats are set against each other on task success
-only in the secondary comparison of Table 9b; "both tracks" in Table 12 means that the
-tasks of the two tracks are pooled. The target score is computed with the same counts on
-both. Within a track, the primary score is the task success rate, strict (Section 4.4),
-because a viewer scene is either the one that was asked for or it is not. Between the two
-formats (Table 9a) and for copying against mapping (Table 10), the primary score is the
-target score. F1 is reported for partial credit and is never primary.
+**Which score is primary.** Within a track, the primary score is the task success rate,
+strict (Section 4.4), because a viewer scene is either the one that was asked for or it is
+not. Between the two formats (Table 9a) and for copying against mapping (Table 10), it is
+the target score. F1 is reported for partial credit and is never primary. The reason for
+the second choice is that task success and F1 are not the same tests on the two tracks. On
+the scene track the screen starts empty, so anything drawn beyond the request costs
+precision and task success. On the call-list track only changes from the default view are
+graded, and leaving the default view in place costs nothing. Track totals are therefore not
+compared on these two scores; the target score is computed with the same counts on both
+tracks.
 
 ### 4.3 The running example, graded
 
@@ -105,10 +107,9 @@ nothing else.
 **Table 3. Answers to the running example and their scores**, computed by the benchmark's
 grader. *F1*: how much of the drawn
 state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target score* (0
-to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when
-they carry the requested style, no other atom carries that style, and no second
-representation is drawn on these atoms and nowhere else; any other drawing, such as a
-cartoon of the protein, is ignored. *Spill*, *extra on the target* and *context* are the
+to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) under
+the three conditions of Section 4.2; any other drawing, such as a cartoon of the protein, is
+ignored. *Spill*, *extra on the target* and *context* are the
 three kinds of drawing beyond the request of Section 4.2.
 
 {{include:generated/table_example.md}}
@@ -145,9 +146,8 @@ it is not counted as valid (SI Table S5).
 Scores are averaged in three named ways. *Strict*, the default: every answer counts, which
 is what a user of a model without tools would experience. *Valid-only*: the mean over a
 model's valid answers, which separates "wrote a loadable answer" from "the answer is
-right". *Repaired*: strict, after each answer that is not parseable JSON has been passed
-through an offline repair library [@jsonrepair]; it is reported beside the strict score and
-never replaces it.
+right". *Repaired*: strict, after an offline library [@jsonrepair] has repaired each answer that is
+not parseable JSON; it never replaces the strict score.
 
 ### 4.5 How well the grader itself works
 
@@ -165,7 +165,7 @@ answer graded as not a success.
 defined above, each out of all answers of its kind. *Earlier grader*: our own grader that this
 work replaces on each track; both compared the text of answers. The
 {{controls.api.n_entries_without:word}} entries that hold only DNA or RNA have no call-list
-control.
+control, because each call-list control is built around a protein residue (SI Section S5).
 
 | Track | Controls | Structures | Kinds of equivalent / wrong answer | False pass | False fail | Earlier grader: false pass | Earlier grader: false fail |
 |:---|---:|---:|---:|---:|---:|---:|---:|
@@ -179,14 +179,14 @@ run as a test on every change. They do not estimate how often a way of writing a
 that we did not foresee is misjudged. Finding such cases needs people, and is the purpose of
 the rating study (Section 5.5).
 
-**Agreement with the viewers.** Many controls were also checked in the running viewers. On the scene track, the
+**Agreement with the viewers.** On the scene track, the
 reference and the answer of {{controls.viewer.mvs.checked}} controls were each loaded in
 Mol\* 5.9.0 and read back: the viewer always agreed with the verdict of the control and
 drew the atoms that the grader resolves. On the call-list track,
-{{controls.viewer.api.lists}} call lists from a sample of {{controls.viewer.api.sample}}
-controls were replayed in PDBe Mol\* 3.3.2, and each ended in the state that the grader
-computes. Not checked in a viewer are controls of kinds that cannot be read back (the text of a label, for example), the
-call-list controls outside the sample, and every selection by UniProt number (SI Sections
+{{controls.viewer.api.lists}} of the {{controls.viewer.api.sample_lists}} call lists
+(references and answers) of a sample of {{controls.viewer.api.sample}} controls were replayed
+in PDBe Mol\* 3.3.2, and each ended in the state that the grader computes. Not checked in a viewer: controls of kinds that cannot be read back (the text of a label,
+for example), call-list controls outside the sample, and every selection by UniProt number (SI Sections
 S5 and S11.6).
 
 ### 4.6 What is deliberately not graded

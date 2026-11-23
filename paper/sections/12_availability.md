@@ -13,13 +13,13 @@ for the rating study need a browser without a display and the Mol\* bundle, both
 
 ## Supporting Information
 
-The Supporting Information (one PDF file) contains: the full glossary (S0); the
-running example in full (S1); all task templates (S2); the structure panel and the variant
-list (S3); the grading rules (S4); the control set by kind (S5); the run manifest, the
-models and the connection test (S6); the system prompts (S7); tables of the pilot run and
-the trial of the rating study (S8); further tables of the final run (S9, pending); and the
-long form of Sections 3 to 5 (S10 to S12), of the pilot findings and the errors of the first
-version (S13), of the limitations (S14), and of related work and licences (S15).
+The Supporting Information (one PDF file) contains: glossary (S0); running example (S1);
+task templates (S2); structure panel and variant list (S3); grading rules (S4); control set
+(S5); run manifest, models and connection test (S6); system prompts (S7); tables of the
+pilot run and the trial of the rating study (S8); further tables of the final run (S9,
+pending); and the long form of Sections 3 to 5 (S10 to S12), of the pilot findings and the
+errors of the first version (S13), of the limitations (S14), and of related work and
+licences (S15).
 
 ## Author information
 

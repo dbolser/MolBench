@@ -70,12 +70,14 @@ record, the record whose accession begins with VCV. ClinVar keeps germline class
 ones (of variants that arise in a tumour); we use the germline one. A variation record
 is usually about one change at the level of DNA, and different DNA changes can give the same
 amino-acid change, so one amino-acid change can have several records.
-{{variants.n_several_records}} of the variants that we keep have more than one qualifying
-record.
+{{variants.n_several_records}} of the variants that we keep have more than one record
+that passes steps 2, 3a and 3b of Table S4 (where a variant has single-nucleotide records, only these are counted).
 
 **Table S4. The variant list in three steps.** Counts are of variants (amino-acid changes)
 removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper
-gives the same counts in one paragraph, with steps 3a to 3c taken together.
+gives the first and the last count, and states the rule as four conditions on one record.
+A *matching record* (step 2) that is of the named gene (3a), is not a haplotype (3b) and
+states its assertion criteria (3c) is a *qualifying record*, the term of the paper.
 
 {{include:generated/table_variants.md}}
 
@@ -126,8 +128,8 @@ its position to be that of the UniProt canonical sequence (Section S14.2).
 
 *What a request says about the classification.* ClinVar classifies DNA-level records, each
 for a stated condition. A request attaches the classification to the protein-level name and
-names no condition: it means that at least one qualifying record of this amino-acid change
-carries that classification. Where the qualifying records behind one request carry different
+names no condition: it means that at least one record of this amino-acid change, of the
+named gene, carries that classification. Where the records behind one request carry different
 values, the request says "pathogenic or likely pathogenic" ({{clin.n_class_differs}}
 requests); {{clin.n_class_both_word}} requests say "pathogenic/likely pathogenic", which is
 ClinVar's own aggregate value on their records.

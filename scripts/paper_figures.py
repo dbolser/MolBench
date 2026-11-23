@@ -369,13 +369,15 @@ def result_figure(tables: pathlib.Path, out: pathlib.Path) -> pathlib.Path:
         ax.set_title(("A  " if k == 0 else "") + head, loc="left", fontweight="bold")
 
     ax = fig.add_subplot(gs[1, :])
-    styles = [("right on both sides", "#8a8a8a", None), ("right in the scene only", OI_BLUE, "////"),
-              ("right in the call list only", OI_ORANGE, "...."), ("right on neither side", "#ececec", None)]
+    # solid fills, in the colours that Figure 3 gives the two one-sided cells; the order of
+    # the segments is fixed (both, scene only, call list only, neither), left to right
+    styles = [("right on both sides", "#8a8a8a"), ("right in the scene only", OI_BLUE),
+              ("right in the call list only", OI_ORANGE), ("right on neither side", "#ececec")]
     for y, (model, counts) in enumerate(pairs):
         left, total = 0.0, sum(counts)
-        for (label, colour, hatch), n in zip(styles, counts):
-            ax.barh(y, n / total, left=left, height=0.72, color="white" if hatch else colour, hatch=hatch,
-                    edgecolor=colour if hatch else "white", linewidth=0.6, label=label if y == 0 else None)
+        for (label, colour), n in zip(styles, counts):
+            ax.barh(y, n / total, left=left, height=0.72, color=colour,
+                    edgecolor="white", linewidth=0.6, label=label if y == 0 else None)
             left += n / total
     ax.set_yticks(range(len(pairs)), [m for m, _ in pairs])
     ax.set_ylim(-0.7, len(pairs) - 0.3)

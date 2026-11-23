@@ -83,7 +83,7 @@ has been tested only against cases that we foresaw. The full list follows in fou
   {{resolve.n_accepted_entries:,}} entries that the name-resolution tasks accept,
   {{resolve.n_accepted_outside_panel:,}} are outside the panel, and an answer on one of them
   is compared with the reference as text, so a correct answer that is spelled differently
-  fails (the weaker rule of Section 4.1). Table 8 reports such answers in a row of their
+  fails (the text rule of Section 4.1). Table 8 reports such answers in a row of their
   own.
 - **The file behind the call-list viewer.** The atom tables are built from the archive file of
   each entry, and the read-back loaded that file into both viewers. Left to itself, PDBe Mol\*

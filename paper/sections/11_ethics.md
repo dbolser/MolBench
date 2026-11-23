@@ -2,7 +2,7 @@
 
 **No patient data.** The benchmark contains no data about individuals. Clinical variants come
 from UniProt's variant annotation and are confirmed in ClinVar's public variant-level
-records (one exception, Section 3.1).
+records (one exception, whose record states no assertion criteria; Section 3.1).
 
 **Not for clinical use.** A high score does not make a model fit to interpret variants. The
 clinical category measures whether a model can locate a residue in a structure. The data providers

@@ -6,10 +6,9 @@ file before any model is called (SI Section S6). SI Section S12 gives this secti
 ### 5.1 Models
 
 The models are chosen by a written rule, not by results. The {{plan.n_core_models}} *core
-models* are those in the results that we published online in October 2026; they are kept
-unchanged, so that the choice depends on no result of the present benchmark.
-{{plan.n_core_in_pilot}} of them ran in the pilot run of Section 6.6; the other could
-not be reached that day and had call-list results only (SI Section S12.1). Most are the
+models* are the models of the first version's public results (October 2026), taken over
+unchanged, so that the choice depends on no result of the present benchmark;
+{{plan.n_core_in_pilot}} of them are in the pilot run of Section 6.6 (SI Section S12.1). Most are the
 smaller, cheaper models of their providers. {{plan.n_core_open}} have *open weights* (the
 weights can be downloaded) and {{plan.n_core_closed}} have *closed weights* (the model can
 be used only through a provider's service). Up to {{plan.n_optional_models}} *optional
@@ -22,7 +21,8 @@ Two scripts that use no model are run on both tracks as floors. The *keyword scr
 words of the request to fixed answers. The *literal script* writes what the request spells
 out and uses every number as written, as an author residue number. It looks nothing up, so
 the difference between a model and the literal script is what the model adds to the words
-of the request.
+of the request. On a clinical task it copies the number (Box 1), so its rows show what
+copying alone scores.
 
 ### 5.2 Prompting conditions
 
@@ -64,7 +64,8 @@ stands and is not retried. Every raw answer is archived with its token counts an
 
 **Scores and intervals.** A per-model score is the mean over tasks of the mean over the
 task's {{plan.samples}} answers (valid-only scores pool a model's valid answers); a mean
-over models leaves the two scripts out. Intervals
+over models covers the core models and the optional models that were run, and leaves the
+two scripts out. Intervals
 are 95% bootstrap intervals [@efron1979] with {{run.bootstrap_replicates:,}} resamples.
 Whole structures are resampled, not single tasks, because tasks on one structure share its
 difficulties. Models are treated as fixed, so an interval describes these models and not
@@ -85,11 +86,10 @@ number is right are compared with those in which it is wrong, on the target scor
 task success also falls when an answer adds unrequested context (difference row of Table
 10).
 
-**Six further planned comparisons** (Table 12), each a difference in task success rate with
-an interval: (1) the set-aside split against the other tasks; (2) terse and (3) indirect
-wording against the full wording; (4) with and without JSON mode; (5) with and without
-grounding pack; (6) with and without format guide. We do not correct for
-multiple comparisons, and we report every count.
+**Six further planned comparisons** are the rows of Table 12, each a difference in task
+success rate with an interval: the set-aside split, the two rewordings, JSON mode, the
+grounding pack and the format guide. We do not correct for multiple comparisons, and we
+report every count.
 
 ### 5.5 Human check of the grader
 
@@ -99,16 +99,16 @@ zoomed on the target atoms. The rater says "same", "different" or "can't tell" t
 the whole scenes (compared with the grader's task success) and on the zoomed pictures
 (compared with a target score of 1).
 
-The study has {{study.n_pairs}} such comparisons of valid scene-track answers, in three
-groups of {{study.n_per_verdict}} by the grader's verdict: task successes; answers that are
-target-right but not a success; and the other answers. Each is rated by
-{{study.raters_per_pair:word}} raters. We will report how often people call the grader's task
+The study has {{study.n_pairs}} such comparisons of valid scene-track answers,
+{{study.n_per_verdict}} for each verdict of the grader (task success; target-right but not a
+success; neither), each rated by {{study.raters_per_pair:word}} raters. We will report how often people call the grader's task
 successes the same and its other answers different, the same for the target score, and the
 agreement between raters as the yardstick. The call-list track and the name-resolution category are left out (SI Section
-S12.5). A smaller trial has been run on the pilot
-answers (Section 6.6).
+S12.5). 
 
 ### 5.6 Reproducibility
 
 One command performs the run from the manifest, and one rebuilds every table, figure and
-number of this paper from the archived answers.
+number of this paper from the archived answers. A *connection test* of the run script on a few tasks, before the corpus was
+frozen, exposed faults of the grader, which were corrected; it produced no result reported
+here (SI Section S6.1).

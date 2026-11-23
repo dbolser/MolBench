@@ -62,7 +62,7 @@ TIER_NAME = {"translation": "Translation", "grounded": "Structure-grounded",
              "accept_set": "Several right answers", "tool_only": "Viewer settings"}
 TIER_ASKS = {
     "translation": "Everything needed is in the request; write it in the format.",
-    "grounded": "The request names a feature (the ligand, the disulfides); the model must know which atoms these are.",
+    "grounded": "The request names a feature (the ligand, a bound small molecule; the disulfides, bonds between two cysteines); the model must know which atoms these are.",
     "interactions": "Named atoms and a measurement or contact between them.",
     "resolve": "The structure is named by protein, not by identifier.",
     "clinical": "A variant is named in UniProt numbering or in mature-protein numbering; its residue must be found in the structure, where its number often differs.",
@@ -584,7 +584,7 @@ def clinical_groupings_table(V: dict) -> str:
 
 
 def corpus_table(V: dict) -> str:
-    rows = ["| Category | What is asked | Scene track (remaining + set-aside) | Call-list track (remaining + set-aside) | Pairs |",
+    rows = ["| Category | What is asked | Scene track (other + set-aside) | Call-list track (other + set-aside) | Pairs |",
             "|:---------|:----------------|-----:|-----:|--:|"]
     first = {g[0]: title for title, g in TIER_GROUPS}
     for tier in TIERS:
@@ -702,13 +702,13 @@ def variants_table(V: dict) -> str:
             f"pathogenic or likely pathogenic, with ClinVar as a source | | {V['variants.n_candidates']:,} |",
             f"| 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same "
             f"amino-acid change at that position and has the aggregate germline classification \"Pathogenic\", "
-            f"\"Likely pathogenic\" or \"Pathogenic/Likely pathogenic\" (a *qualifying record*) "
+            f"\"Likely pathogenic\" or \"Pathogenic/Likely pathogenic\" (a *matching record*) "
             f"| {V['variants.n_removed_by_clinvar']:,} | {V['variants.n_confirmed']:,} |",
-            f"| 3a | Remove if no qualifying record is of the gene that the request names "
+            f"| 3a | Remove if no matching record is of the gene that the request names "
             f"| {V['variants.n_other_gene_only']} | |",
-            f"| 3b | Remove if every qualifying record of that gene is a haplotype (two changes on one chromosome) "
+            f"| 3b | Remove if every matching record of that gene is a haplotype (two changes on one chromosome) "
             f"| {V['variants.n_haplotype_only']} | |",
-            f"| 3c | Remove if every remaining qualifying record has the review status \"no assertion criteria provided\" "
+            f"| 3c | Remove if every remaining matching record has the review status \"no assertion criteria provided\" "
             f"| {V['variants.n_no_criteria']} | {V['variants.n_usable']:,} |"]
     return "\n".join(rows) + "\n"
 

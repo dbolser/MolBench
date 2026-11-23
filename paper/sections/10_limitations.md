@@ -16,12 +16,12 @@ the full list with numbers.
   hand; the median year of deposition is {{panel.deposited_median}}. Scores may be higher
   than on recent or very large structures.
 - **ClinVar is a snapshot, read through UniProt.** Classifications change. We looked only at
-  the records that UniProt cross-references, did not check which transcript a record's
-  protein-level name is counted on, and attach the classification to a protein-level name
+  the records that UniProt cross-references, did not check which transcript (messenger RNA of the gene) a
+  record's protein-level name is counted on, and attach the classification to a protein-level name
   without a condition, which ClinVar itself does not do. The residue that a name points to
   does not depend on the classification.
-- **The grader is tested only against cases that we foresaw.** It makes no error on the
-  control set because it was corrected until it made none. Until the rating study is done,
+- **The grader is tested only against cases that we foresaw** (Section 4.5). Until the
+  rating study is done,
   the evidence that task success matches what people see is the control set and the
   read-back from the viewers. Selections by UniProt position were not replayed in the
   viewer, and name-resolution answers outside the panel are compared as text.
@@ -34,7 +34,4 @@ the full list with numbers.
 - **Small groups are descriptive only.** The set-aside split within one category, the
   matched clinical tasks, the helix and strand tasks and the two rephrasings are reported
   with intervals and not tested. In every set of matched tasks the structure without an
-  offset is a predicted structure, so the effect of the offset cannot be told apart from
-  that of a predicted structure. Structures of one
-  protein are resampled separately, so intervals in the clinical category are somewhat too
-  narrow.
+  offset is a predicted structure, so the two effects cannot be told apart.

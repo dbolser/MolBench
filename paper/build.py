@@ -214,6 +214,10 @@ INCLUDE_WORDS = {
         (r"the faults the pilot showed", "the faults the test showed"),
     ],
 }
+# The row label of Table 8 that molbench/analysis.py and the shape table share (a test holds
+# them equal) says "weaker rule"; the paper calls the rule by what it does, the *text rule*.
+for _tiers in ("generated/shape_tiers.md", "generated/table_final_tiers.md"):
+    INCLUDE_WORDS[_tiers] = [(r"graded by the weaker rule of Section 4\.1", "graded by the text rule of Section 4.1")]
 
 
 def include_words(rel: str, text: str) -> str:
@@ -249,8 +253,8 @@ def substitute(text: str, values: dict, where: str, problems: list[str], depth: 
                 if PAPER not in f.parents or not f.exists():
                     problems.append(f"{where}: missing include {rel}")
                     return m.group(0)
-                return substitute(f.read_text(encoding="utf-8").rstrip(), values, rel, problems,
-                                  depth + 1)
+                return substitute(include_words(rel, f.read_text(encoding="utf-8").rstrip()), values, rel,
+                                  problems, depth + 1)
             if body.startswith("include:") and fallback.startswith("pilot:"):
                 rel = body[len("include:"):].strip()
                 f = (PAPER / rel).resolve()
@@ -643,8 +647,6 @@ STATED_IN_WORDS = [
     ("corpus.followup.noop_spin", 2, "'in 2 scene tasks, a spin' (SI Section S10.2)"),
     ("mvs.spec.outcome.not_mvs", 0, "'no answer of the pilot run fell in the class' (SI Section S8)"),
     ("mvs.spec.samples_per_task", 1, "'one answer per task' in the pilot run (Section 6.6, SI Table S21)"),
-    ("plan.n_core_models", 16, "'the other could not be reached' (Section 5.1): one core model not in the pilot run"),
-    ("plan.n_core_in_pilot", 15, "the same sentence of Section 5.1"),
 ]
 
 

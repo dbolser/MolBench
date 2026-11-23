@@ -289,7 +289,7 @@ earlier tasks. By *earlier* tasks and releases we mean those published before th
 corpus (the first version of the benchmark, Section 6). Two measures address this.
 
 *Set-aside structures.* Before generation, {{corpus.heldback.n_structures}} structures were
-set aside: no earlier MolBench release used them, and their tasks are reported apart. The
+set aside: no release of the first version used them, and their tasks are reported apart. The
 {{corpus.heldback.n_tasks}} tasks on them ({{corpus.heldback.share:.0%}} of the corpus) form
 the *set-aside split*. The other {{corpus.public.n_tasks}} tasks sit on
 {{corpus.public.n_structures}} structures, of which

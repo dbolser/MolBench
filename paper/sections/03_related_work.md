@@ -14,7 +14,7 @@ residue numbers.
 **Assistants.** Assistants that drive a molecular viewer exist for Mol\*
 [@navarro2026speak; @molstarprism; @molstarmcp], PyMOL [@sun2024chatmol], ChimeraX
 [@chimeraxmcp] and for speech interfaces [@jia2025voice; @cortes2026speech]. In their papers
-and documentation we found no accuracy for driving the viewer on scored tasks. One community tool states that
+and documentation we found no measurement of how accurately they drive the viewer. One community tool states that
 the residue numbers which researchers take from ClinVar and the literature "are always
 author numbers" [@molstarmcp]; that fails for many entries [@faezov2021pdbrenum], and it is
 the error our clinical category is built to detect.

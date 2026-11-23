@@ -14,15 +14,15 @@ exist today come from a first version of the benchmark and are boxed in Section 
 
 Language models now drive molecular viewers, and a wrong picture looks as polished as a
 right one. MolBench grades by rule, without a judge model, what the Mol\* viewer would draw:
-which atoms, in which representation (drawing style) and colour. The model sees only the
+which atoms, in which representation (spheres, sticks or a ribbon) and colour. The model sees only the
 request and a format guide: no structure file, no lookup. Scripts compute references
-from structure files, a residue-numbering table (SIFTS) and a variant archive (ClinVar). The 797 tasks on 78 structures form eight
-categories. One asks for the residue (amino acid) of a variant that ClinVar classifies as
-pathogenic or likely pathogenic. The variant's name usually gives a position in the UniProt
+from structure files, a residue-numbering table (SIFTS) and a variant archive (ClinVar). Of eight task categories
+(797 tasks, 78 structures), one asks for the residue
+(amino acid) of a variant that is classified in ClinVar as pathogenic or likely pathogenic. Its name usually gives a position in the UniProt
 sequence; the structure often numbers that residue differently. Do models convert the
-number, or copy it? To separate content errors from format errors,
+number, or copy it? To separate content from format errors,
 258 requests are answered in two formats: a scene description
-(MolViewSpec) and a list of viewer calls (PDBe Mol\*). Three scores are given: task success
+(MolViewSpec) and a list of viewer calls (PDBe Mol\*). Three scores are reported: task success
 (drawing exactly right), a target score (requested atoms marked out exactly; background
 ignored) and F1 (partial credit). The grader agrees with all 2,175 control answers
 used to develop it. A pilot run exposed two faults in our own references; both are corrected.
@@ -60,7 +60,7 @@ numbered as their UniProt sequences are [5].
 **What the model is given.** In MolBench the model receives only the request and a guide to
 the answer format. It does not see the structure file, it cannot look anything up, and it
 does not see the picture that its answer produces. To answer the request above it must know
-from its training how entry 2NWD is numbered. This is the situation of a model that is used without tools. The classification in the request
+from its training how entry 2NWD is numbered, as a model that is used without tools must. The classification in the request
 comes from ClinVar, a public archive of human genetic variants; the benchmark uses a variant
 only as an address for a residue and never asks whether it causes disease.
 
@@ -84,7 +84,7 @@ from the request? We call the first *mapping* the number and the second *copying
 Mapping is more than a habit of converting: some structures are numbered as the request is,
 and there the copied number is right, so the model must know how each structure is numbered.
 
-![**Figure 1. From public data to a score.** Frozen public data are turned into tasks by generator scripts; each model is given the format guide and the request, and answers each task three times; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *Set-aside structures*: 15 structures that no earlier release of the benchmark used; their tasks are public too. *Task success*: the drawn state is exactly right. *Target score* (0 to 1): how exactly the answer marks out the requested atoms; any other drawing, such as a cartoon of the protein, is ignored. *F1*: how much of the drawn state is right, with partial credit. *Strict* and *valid-only* are the two main ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
+![**Figure 1. From public data to a score.** Frozen public data are turned into tasks by generator scripts; each model is given the format guide and the request, and answers each task three times; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *Set-aside structures*: 15 structures that the first version of the benchmark (public from May 2026) never used; their tasks are public too. *Task success*: the drawn state is exactly right. *Target score* (0 to 1): how exactly the answer marks out the requested atoms; any other drawing, such as a cartoon of the protein, is ignored. *F1*: how much of the drawn state is right, with partial credit. *Strict* and *valid-only* are the two main ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
 
 This paper makes four contributions.
 
@@ -99,8 +99,7 @@ This paper makes four contributions.
    list of calls to the PDBe Mol\* viewer (the *call-list track*).
    258 requests are posed on both tracks, with the same target atoms, so
    that an error of content can be told apart from an error of format.
-4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 6
-   and 7). A pilot run exposed flaws in our own references, and the analysis of the final
+4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 5 to 7). A pilot run exposed flaws in our own references, and the analysis of the final
    run (tables, comparisons and primary scores) was fixed before any model was called.
    ⟦PENDING: final run — one sentence stating the main result⟧
 
@@ -120,7 +119,7 @@ residue numbers.
 **Assistants.** Assistants that drive a molecular viewer exist for Mol\*
 [2, 3, 16], PyMOL [4], ChimeraX
 [1] and for speech interfaces [17, 18]. In their papers
-and documentation we found no accuracy for driving the viewer on scored tasks. One community tool states that
+and documentation we found no measurement of how accurately they drive the viewer. One community tool states that
 the residue numbers which researchers take from ClinVar and the literature "are always
 author numbers" [16]; that fails for many entries [5], and it is
 the error our clinical category is built to detect.
@@ -150,7 +149,7 @@ Section S0 is the full glossary.
 | Author numbering | The chain names and residue numbers chosen by the depositors of a structure. Papers and most viewers show these. |
 | Label numbering | The chain names and residue numbers assigned by the archive: 1, 2, 3 … along the molecule that was studied. |
 | UniProt numbering | The position of a residue in UniProt's canonical sequence of the protein, counted from its first residue (the initiator methionine included). A variant name with the prefix "p." (p.W82R, or p.Trp82Arg) is in this numbering here. |
-| Traditional name | A variant name from older literature, without "p.", numbered from the first residue of the *mature protein*: the protein after the cell has cut off its leading segment (W64R for p.W82R). |
+| Traditional name | A variant name from older literature, without "p.", numbered from the first residue of the *mature protein*: the protein after the cell has cut off its leading segment, which is a signal peptide or the initiator methionine alone (W64R for p.W82R). |
 | Offset | For one residue, its UniProt number minus its author number (82 − 64 = 18 in the running example). A residue *has an offset* when the two differ. |
 | Copying the number | Using the number printed in a variant name as the author residue number. Copying is *right* in a task if the answer written in this way is exactly right, and *wrong* otherwise. |
 | Scene, call list | The two answer formats. A *scene* (MolViewSpec) states what to load and draw; nothing is on screen unless the scene says so. A *call list* is an ordered list of calls to the PDBe Mol\* viewer, which starts from a *default view*: the whole structure, with the polymer chains as a cartoon (a ribbon that traces each chain). |
@@ -172,18 +171,22 @@ has an offset. Every feature that we claim for a structure is verified in its fi
 build script (SI Section S3.1).
 
 **Variants.** The panel includes structures of 27 human proteins in which germline *missense* variants (one amino acid replaced by another;
-germline: present in every cell of a person) cause single-gene disease.
-UniProt lists 3,352 such variants of these proteins as pathogenic or
+germline: present in every cell of a person, not acquired in a tumour) cause single-gene
+disease. A variant here is one amino-acid change, of which ClinVar may hold several
+DNA-level records. UniProt lists 3,352 such variants of these proteins as pathogenic or
 likely pathogenic. We keep a variant only if it has a *qualifying record*: a ClinVar
 variation record, cross-referenced by UniProt, that meets four conditions. It lists the same
-amino-acid change at the same position; its classification is pathogenic, likely pathogenic
-or pathogenic/likely pathogenic; it is a record of the gene named in the request and of that
-one change alone; and its review status is not "no assertion criteria provided". This
-leaves a pool of 2,400 variants, from which the generator draws: the
-clinical tasks name only 87 variants, on 25 of the
-27 proteins. SI Section S3.2 gives the filter step by step, two
-exceptions made by hand, the proteins without a task, and what a request says about the
-classification.
+amino-acid change at the same position; its aggregate germline classification is
+pathogenic, likely pathogenic or pathogenic/likely pathogenic; it is a record of the gene
+named in the request and of that change alone, not of a haplotype that carries a second
+change; and its review status is not "no assertion criteria provided". This
+leaves a pool of 2,400 variants, from which the generator draws. The
+clinical tasks name 87 variants (a few tasks name several) on
+25 of the 27 proteins. One of them is an
+exception made by hand, from outside the pool: lysozyme p.Ile74Thr, whose record states no
+assertion criteria (one task per track). SI Section S3.2 gives
+the filter step by step, a pool variant that we never ask about, the proteins without a
+task, and what a request says about the classification.
 
 **Atom tables and residue mapping.** For each structure we freeze two tables: an *atom table*
 of every atom record of the file, with its chain and residue in author and in label
@@ -208,7 +211,8 @@ The clinical generator produced the running example in six steps.
 4. **Identity check.** The atom table must hold, at that residue, the amino acid that the
    UniProt sequence has at the position. It does: Trp64, with
    24 atom records (14 non-hydrogen atoms and
-   10 hydrogens; the entry is at 1.04 Å resolution).
+   10 hydrogens, which this entry includes at its high resolution of
+   1.04 Å).
    Otherwise the variant would not be offered for this entry.
 5. **Wording.** A seeded random choice picks one of the template's wordings, the colour
    (yellow) and the representation (spacefill spheres). The request never says which residue
@@ -240,19 +244,22 @@ asks. Each category has several *templates*; a seeded generator fills in the str
 residues, the colours and the wording (SI Section S2 lists the 129
 templates, and SI Section S10.2 describes each category in full).
 
-![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track. Requests are quoted from the corpus; a long one is cut short. A *het group* is a molecule in the entry that is not part of a polymer chain, such as a bound small molecule; *C-alpha* is the central carbon atom of an amino acid. In the example for several right answers, 4INS has a Lys29 in each of two chains, and the request does not say which is meant. Left column: the four categories that differ in what the model must know. Right column: the four that differ in the form of the task. Framed in blue: the two lookup categories.](generated/fig_tiers.svg)
+![**Figure 2. The eight categories of task, with one request each.** Counts are tasks on the scene track / the call-list track; a dash means that the category has no task on that track. Requests are quoted from the corpus; a long one is cut short.  A grey line under a request explains a term in it. Left column: the four categories that differ in what the model must know. Right column: the four that differ in the form of the task. Framed in blue: the two lookup categories.](generated/fig_tiers.svg)
 
-**Table 1. The corpus.** Tasks per category and track, written as total (a + b): b tasks on the
-15 *set-aside structures*, which no earlier release of the
-benchmark used (Section 3.6), and a tasks on the remaining 63. *Pairs*: requests posed on both tracks. A dash means that the category has no task on
+**Table 1. The corpus.** Tasks per category and track, written as total (a + b): a tasks on the
+63 other structures and b tasks on the
+15 *set-aside structures*, which the first version of the
+benchmark never used (Section 3.6). *Pairs*: requests posed on both tracks. The call-list
+track has more translation tasks: 116 exercise calls
+that no scene can express. A dash means that the category has no task on
 that track: the format cannot express what is asked or, for name resolution, the call-list
 grader has no atom table for an entry outside the panel.
 
-| Category | What is asked | Scene track (remaining + set-aside) | Call-list track (remaining + set-aside) | Pairs |
+| Category | What is asked | Scene track (other + set-aside) | Call-list track (other + set-aside) | Pairs |
 |:---------|:----------------|-----:|-----:|--:|
 | ***Differ in what the model must know*** | | | | |
 | Translation | Everything needed is in the request; write it in the format. | 73 (55 + 18) | 178 (138 + 40) | 62 |
-| Structure-grounded | The request names a feature (the ligand, the disulfides); the model must know which atoms these are. | 63 (52 + 11) | 63 (52 + 11) | 63 |
+| Structure-grounded | The request names a feature (the ligand, a bound small molecule; the disulfides, bonds between two cysteines); the model must know which atoms these are. | 63 (52 + 11) | 63 (52 + 11) | 63 |
 | Name resolution | The structure is named by protein, not by identifier. | 39 (32 + 7) | – | – |
 | Clinical variant | A variant is named in UniProt numbering or in mature-protein numbering; its residue must be found in the structure, where its number often differs. | 82 (63 + 19) | 82 (63 + 19) | 82 |
 | ***Differ in the form of the task*** | | | | |
@@ -271,7 +278,9 @@ leaves out. 46 requests state the UniProt accession, as the
 running example does; the other 36 do not, and neither the request nor
 the system prompt then says which sequence a "p." position is counted on. A name with "p."
 follows the style of the HGVS nomenclature for variants [32, 33]
-but is not a complete description in it (SI Section S10.3).
+but is not a complete description in it (SI Section S10.3). In 10 tasks the
+request also asks for the helix or strand (two local shapes of the chain) that contains the
+residue; these are reported apart (Table 10).
 
 Two yes-or-no properties of a clinical task matter for the results, and they are not the
 same property (Table 2).
@@ -297,11 +306,12 @@ groupings differ only for traditional names: in 12 tasks the
 structure is numbered from the mature protein as the name is, so the copied number is right
 although the residue has an offset. In the one remaining task a traditional name
 (E6V of haemoglobin beta, which is
-p.Glu7Val) is used on a predicted structure, which has UniProt
+p.Glu7Val: the mature protein lacks the initiator methionine) is
+used on a predicted structure, which has UniProt
 numbering: the residue has no offset, but copying the mature-protein number is wrong.
-In 7 sets of two *matched tasks*, the same variant,
-named in UniProt numbering, is asked on a structure with an offset and on a predicted
-structure without one (SI Section S10.3 lists them, with the rules for tasks that name
+For 7 variants there are two *matched tasks*: the same
+variant, named in UniProt numbering, is asked once on a structure with an offset and once on
+a predicted structure without one (SI Section S10.3 lists them, with the rules for tasks that name
 several variants).
 
 ### 3.4 The same request in two formats
@@ -323,7 +333,7 @@ a clinical pair, a model can thus be right without knowing any residue number of
 structure. Clinical pairs are
 therefore read apart from the others (Section 6.3).
 
-![**Figure 3. One request, two formats, the same target atoms.** The scene and the call list are shown in shortened form. Below: for each model, every pair falls into one of four cells by whether each side is right. In the scene, "structure model" is MolViewSpec's name for the deposited coordinates and has nothing to do with a language model. A side is right when at least 2 of its 3 answers are *target-right*: the requested atoms are marked out exactly (a target score of 1, Section 4.2). McNemar's test compares the two shaded cells, in which the model was right in one format only.](generated/fig_twins.svg)
+![**Figure 3. One request, two formats, the same target atoms.** The scene and the call list are shown in shortened form. Below: for each model, every pair falls into one of four cells by whether each side is right. In the scene, "structure model" is MolViewSpec's name for the deposited coordinates and has nothing to do with a language model. A side is right when at least 2 of its 3 answers are *target-right*: the requested atoms are marked out exactly (a target score of 1, Section 4.2). McNemar's test compares the two coloured cells, in which the model was right in one format only; Figure 5 uses the same two colours.](generated/fig_twins.svg)
 
 Pairs exist in five categories (Table 1). In 15 pairs the request asks for something to be shown alone
 or for the whole protein in another representation, so the reference call list also
@@ -341,14 +351,14 @@ the picture such as an unrequested cartoon, which Section 4.2 treats (SI Section
 ### 3.6 Set-aside structures; wording
 
 MolBench tasks have been public since May 2026, so a model released later may have seen
-earlier ones. Before generation, 15 structures that no earlier
-release had used were set aside, and the 165 tasks on them
+earlier ones. Before generation, 15 structures that the
+first version of the benchmark (Section 6) had never used were set aside, and the 165 tasks on them
 (21% of the corpus) are reported apart as the *set-aside split*.
 The split asks one thing: do models score higher on structures that earlier MolBench tasks
-used? A lower score on the split would suggest so. The test is
-weak: of the 63 other structures only
-23 appeared in an earlier release, and nearly all
-tasks in both parts are new. Nor is the split a hidden test set: its tasks are public too.
+used? A lower score on the split would suggest so. The test is weak: only
+23 of the 63 other
+structures appeared in the first version, nearly all tasks in both parts are new, and the
+split's tasks are public too (Section 9).
 
 To measure sensitivity to wording, 30 requests
 (41 tasks, because 11 of them are
@@ -358,12 +368,8 @@ counted in Table 1 (SI Section S10.6).
 
 ### 3.7 Checks on the corpus
 
-Four checks involve no model (Figure 1). Every reference and every accepted answer must
-select at least one atom, name the residue that the generator intended, and grade as exactly
-right against itself. Selections read back from the running viewers agree atom for atom
-with the atom tables, and the grader agrees with a control set of 2,175 answers
-whose verdict is known (Section 4.5). One script validates every task file, and the run
-does not start unless every check passes.
+Four checks involve no model: Figure 1 states them in its lower half, and Section 4.5
+reports the two that concern the grader. The run does not start unless every check passes.
 
 ## 4. Grading on drawn state
 
@@ -396,10 +402,10 @@ entry of the named protein (5,778 entries over the
 39 tasks), and we hold atom tables only for panel entries. For an
 answer on an accepted entry outside the panel the grader has no atoms to resolve, so it
 compares the answer's selections with the reference's as text; a correct selection that is
-spelled differently (by chain identifier, for example) fails. We call this the *weaker
-rule*, and
-report the category in two rows: answers on the reference entry, and answers on any other
-accepted entry (Table 8).
+spelled differently (by chain identifier, for example) fails. We call this the *text
+rule*. An answer on an entry that the task does not accept scores 0. Table 8 reports the
+category in two further rows: answers on the reference entry, and answers on any other
+accepted entry.
 
 ### 4.2 Three scores
 
@@ -412,21 +418,23 @@ atoms that the request is about: in a clinical task, the residue of the variant;
 request for a feature against a background ("grey cartoon and the biotin in green
 ball-and-stick"), the feature; where there is no such distinction, everything that the
 reference draws. The target score, from 0 to 1, is how exactly the answer marks out the
-target. It is 1, and the answer is *target-right*, when the target atoms carry the
-requested style, no other atom carries that style, and no second representation is drawn
-on these atoms and nowhere else. Any other drawing, such as a cartoon of the protein, is
-ignored.
+target. It is 1, and the answer is *target-right*, when three things hold: the target
+atoms carry the requested style; no other atom carries that style; and no second
+representation is drawn on target atoms alone. Any other drawing, such as a cartoon of the
+protein, is ignored.
 
 The target score is the harmonic mean of a recall and a precision, counted in *items* (one
 style on one atom). Recall is the share of the requested items that the answer has, with
 half credit for the right representation in another colour or opacity. Precision divides
-the same credit by the items that the answer spent on marking the target. Drawing beyond
-the request is of three kinds (rows of Table 3 in parentheses).
+the same credit by all items that the answer drew to mark the target: its items of the
+requested representation on the target, plus *spill* and *extra* (formula in SI Section
+S4.3). Drawing beyond the request is of three kinds (rows of Table 3 in parentheses).
 
 - *Spill*: the style that marks the target, repeated on atoms outside it
   (S7, S8). It lowers precision.
-- *Extra*: another representation drawn on target atoms and nowhere else
-  (S9). It lowers precision.
+- *Extra*: another representation drawn on target atoms alone (S9:
+  24 credited items of 48 drawn, precision
+  0.50). It lowers precision.
 - *Unrequested context*: any other style that reaches beyond the target, such as a cartoon
   of the protein (S5, S10). It is not
   counted.
@@ -437,29 +445,29 @@ ball-and-stick added to the target residue alone lowers the target score to
 the residue and its two neighbours is context and leaves the score at
 1.00 (row S10; SI Section
 S11.3 gives the reason). 31 follow-up tasks, among them
-both sides of 8 pairs, have no target score: their edit
-takes something away, changes a setting of the whole view, or needs no change, so no atoms
+both sides of 8 pairs, have no target score and are left out of every mean of it: their
+edit takes something away, changes a setting of the whole view, or needs no change, so no atoms
 are "drawn as asked" afterwards (SI Section S11.3).
 
 **F1: how much of the drawn state is right?** F1, from 0 to 1, gives partial credit. It is
 the harmonic mean of *recall*, the mean over the facts of the reference of the fraction
 that the answer also draws, and *precision*, the same over the facts of the answer. A style
 with the right representation and the wrong colour or opacity counts half. On the call-list track each changed
-atom is compared by its final appearance as a whole, a more generous rule (SI Section
-S11.2). Where a task lists several accepted answers, an answer is graded against each, and
+atom is compared by its final appearance as a whole. This is more generous than the scene
+rule: any change to the right atoms earns one half, even in the wrong representation, which
+earns nothing on the scene track (SI Section S11.2). Where a task lists several accepted answers, an answer is graded against each, and
 the best result counts.
 
-**Which score is read first.** On the scene track the screen starts empty, so anything
-drawn beyond the request costs precision and task success. On the call-list track only
-changes from the default view are graded, and leaving the default view in place costs
-nothing. Task success and F1 are therefore not the same tests on the two tracks, and track
-totals are not compared on them. The formats are set against each other on task success
-only in the secondary comparison of Table 9b; "both tracks" in Table 12 means that the
-tasks of the two tracks are pooled. The target score is computed with the same counts on
-both. Within a track, the primary score is the task success rate, strict (Section 4.4),
-because a viewer scene is either the one that was asked for or it is not. Between the two
-formats (Table 9a) and for copying against mapping (Table 10), the primary score is the
-target score. F1 is reported for partial credit and is never primary.
+**Which score is primary.** Within a track, the primary score is the task success rate,
+strict (Section 4.4), because a viewer scene is either the one that was asked for or it is
+not. Between the two formats (Table 9a) and for copying against mapping (Table 10), it is
+the target score. F1 is reported for partial credit and is never primary. The reason for
+the second choice is that task success and F1 are not the same tests on the two tracks. On
+the scene track the screen starts empty, so anything drawn beyond the request costs
+precision and task success. On the call-list track only changes from the default view are
+graded, and leaving the default view in place costs nothing. Track totals are therefore not
+compared on these two scores; the target score is computed with the same counts on both
+tracks.
 
 ### 4.3 The running example, graded
 
@@ -472,10 +480,9 @@ nothing else.
 **Table 3. Answers to the running example and their scores**, computed by the benchmark's
 grader. *F1*: how much of the drawn
 state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target score* (0
-to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when
-they carry the requested style, no other atom carries that style, and no second
-representation is drawn on these atoms and nowhere else; any other drawing, such as a
-cartoon of the protein, is ignored. *Spill*, *extra on the target* and *context* are the
+to 1): how exactly the answer marks out the requested atoms. It is 1 (*target-right*) under
+the three conditions of Section 4.2; any other drawing, such as a cartoon of the protein, is
+ignored. *Spill*, *extra on the target* and *context* are the
 three kinds of drawing beyond the request of Section 4.2.
 
 | Row | Answer | F1 | Task success | Target score |
@@ -532,9 +539,8 @@ it is not counted as valid (SI Table S5).
 Scores are averaged in three named ways. *Strict*, the default: every answer counts, which
 is what a user of a model without tools would experience. *Valid-only*: the mean over a
 model's valid answers, which separates "wrote a loadable answer" from "the answer is
-right". *Repaired*: strict, after each answer that is not parseable JSON has been passed
-through an offline repair library [34]; it is reported beside the strict score and
-never replaces it.
+right". *Repaired*: strict, after an offline library [34] has repaired each answer that is
+not parseable JSON; it never replaces the strict score.
 
 ### 4.5 How well the grader itself works
 
@@ -552,7 +558,7 @@ answer graded as not a success.
 defined above, each out of all answers of its kind. *Earlier grader*: our own grader that this
 work replaces on each track; both compared the text of answers. The
 four entries that hold only DNA or RNA have no call-list
-control.
+control, because each call-list control is built around a protein residue (SI Section S5).
 
 | Track | Controls | Structures | Kinds of equivalent / wrong answer | False pass | False fail | Earlier grader: false pass | Earlier grader: false fail |
 |:---|---:|---:|---:|---:|---:|---:|---:|
@@ -566,14 +572,14 @@ run as a test on every change. They do not estimate how often a way of writing a
 that we did not foresee is misjudged. Finding such cases needs people, and is the purpose of
 the rating study (Section 5.5).
 
-**Agreement with the viewers.** Many controls were also checked in the running viewers. On the scene track, the
+**Agreement with the viewers.** On the scene track, the
 reference and the answer of 910 controls were each loaded in
 Mol\* 5.9.0 and read back: the viewer always agreed with the verdict of the control and
 drew the atoms that the grader resolves. On the call-list track,
-267 call lists from a sample of 150
-controls were replayed in PDBe Mol\* 3.3.2, and each ended in the state that the grader
-computes. Not checked in a viewer are controls of kinds that cannot be read back (the text of a label, for example), the
-call-list controls outside the sample, and every selection by UniProt number (SI Sections
+267 of the 300 call lists
+(references and answers) of a sample of 150 controls were replayed
+in PDBe Mol\* 3.3.2, and each ended in the state that the grader computes. Not checked in a viewer: controls of kinds that cannot be read back (the text of a label,
+for example), call-list controls outside the sample, and every selection by UniProt number (SI Sections
 S5 and S11.6).
 
 ### 4.6 What is deliberately not graded
@@ -591,10 +597,9 @@ file before any model is called (SI Section S6). SI Section S12 gives this secti
 ### 5.1 Models
 
 The models are chosen by a written rule, not by results. The 16 *core
-models* are those in the results that we published online in October 2026; they are kept
-unchanged, so that the choice depends on no result of the present benchmark.
-15 of them ran in the pilot run of Section 6.6; the other could
-not be reached that day and had call-list results only (SI Section S12.1). Most are the
+models* are the models of the first version's public results (October 2026), taken over
+unchanged, so that the choice depends on no result of the present benchmark;
+15 of them are in the pilot run of Section 6.6 (SI Section S12.1). Most are the
 smaller, cheaper models of their providers. 13 have *open weights* (the
 weights can be downloaded) and 3 have *closed weights* (the model can
 be used only through a provider's service). Up to 5 *optional
@@ -607,7 +612,8 @@ Two scripts that use no model are run on both tracks as floors. The *keyword scr
 words of the request to fixed answers. The *literal script* writes what the request spells
 out and uses every number as written, as an author residue number. It looks nothing up, so
 the difference between a model and the literal script is what the model adds to the words
-of the request.
+of the request. On a clinical task it copies the number (Box 1), so its rows show what
+copying alone scores.
 
 ### 5.2 Prompting conditions
 
@@ -649,7 +655,8 @@ stands and is not retried. Every raw answer is archived with its token counts an
 
 **Scores and intervals.** A per-model score is the mean over tasks of the mean over the
 task's 3 answers (valid-only scores pool a model's valid answers); a mean
-over models leaves the two scripts out. Intervals
+over models covers the core models and the optional models that were run, and leaves the
+two scripts out. Intervals
 are 95% bootstrap intervals [35] with 10,000 resamples.
 Whole structures are resampled, not single tasks, because tasks on one structure share its
 difficulties. Models are treated as fixed, so an interval describes these models and not
@@ -670,11 +677,10 @@ number is right are compared with those in which it is wrong, on the target scor
 task success also falls when an answer adds unrequested context (difference row of Table
 10).
 
-**Six further planned comparisons** (Table 12), each a difference in task success rate with
-an interval: (1) the set-aside split against the other tasks; (2) terse and (3) indirect
-wording against the full wording; (4) with and without JSON mode; (5) with and without
-grounding pack; (6) with and without format guide. We do not correct for
-multiple comparisons, and we report every count.
+**Six further planned comparisons** are the rows of Table 12, each a difference in task
+success rate with an interval: the set-aside split, the two rewordings, JSON mode, the
+grounding pack and the format guide. We do not correct for multiple comparisons, and we
+report every count.
 
 ### 5.5 Human check of the grader
 
@@ -684,19 +690,19 @@ zoomed on the target atoms. The rater says "same", "different" or "can't tell" t
 the whole scenes (compared with the grader's task success) and on the zoomed pictures
 (compared with a target score of 1).
 
-The study has 300 such comparisons of valid scene-track answers, in three
-groups of 100 by the grader's verdict: task successes; answers that are
-target-right but not a success; and the other answers. Each is rated by
-two raters. We will report how often people call the grader's task
+The study has 300 such comparisons of valid scene-track answers,
+100 for each verdict of the grader (task success; target-right but not a
+success; neither), each rated by two raters. We will report how often people call the grader's task
 successes the same and its other answers different, the same for the target score, and the
 agreement between raters as the yardstick. The call-list track and the name-resolution category are left out (SI Section
-S12.5). A smaller trial has been run on the pilot
-answers (Section 6.6).
+S12.5). 
 
 ### 5.6 Reproducibility
 
 One command performs the run from the manifest, and one rebuilds every table, figure and
-number of this paper from the archived answers.
+number of this paper from the archived answers. A *connection test* of the run script on a few tasks, before the corpus was
+frozen, exposed faults of the grader, which were corrected; it produced no result reported
+here (SI Section S6.1).
 
 ## 6. Results
 
@@ -705,12 +711,9 @@ corpus and the two text-comparing graders that were public from May 2026 until t
 corpus replaced them. Its run of the scene tasks in October 2026 is the *pilot run*, whose
 results are kept apart in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that
 the final run will fill; their layout and captions are fixed, and a script fills the cells.
-Before the corpus was frozen, we also sent a few of its tasks
-to one provider to test the run script. This *connection test* (SI Section S6.1) exposed
-faults of the present grader, which were corrected. It is not a result, and it is distinct
-from the pilot run and from the errors of Table 13.
 
-![**Figure 5. Layout of the result figure that the final run will fill (no data shown).** **A**: task success rate (the share of answers whose drawn state is exactly right) per model, strict, with 95% intervals, one plot per track. The two plots must not be compared with each other (Section 4.2); formats are compared in panel B only. **B**: for each model, its 250 pairs that have a target score, by which side was right (at least 2 of its 3 answers target-right). **C**: valid answers only, per category: task success rate and target score (0 to 1: how exactly the answer marks out the requested atoms; any other drawing is ignored). A target score well above the task success rate means that the requested atoms were right and something else was not. Panel A is strict and panel C is valid-only, so the two must not be compared.](generated/fig_result_shapes.svg)
+
+![**Figure 5. Layout of the result figure that the final run will fill (no data shown).** **A**: task success rate (the share of answers whose drawn state is exactly right) per model, strict, with 95% intervals, one plot per track. The two plots must not be compared with each other (Section 4.2); formats are compared in panel B only. **B**: for each model, its 250 pairs that have a target score, by which side was right (at least 2 of its 3 answers target-right); blue and orange mark the pairs that are right in the scene only and in the call list only, as in Figure 3. **C**: valid answers only, per category: task success rate and target score (0 to 1: how exactly the answer marks out the requested atoms; any other drawing is ignored). A target score well above the task success rate means that the requested atoms were right and something else was not. Panel A is strict and panel C is valid-only, so the two must not be compared.](generated/fig_result_shapes.svg)
 
 ### 6.1 Models on both tracks
 
@@ -744,7 +747,8 @@ call list keeps, under *strict*, the scores it earns when replayed (Section 4.4)
 structures under the tasks of the row, which are the units resampled for its intervals.
 Scores as in Table 6. The two rows marked *of which* divide the answers of the
 name-resolution category by the entry that the model chose (Section 4.1); they are sets of
-answers, so they have no number of tasks.
+answers, so they have no number of tasks. An answer on an entry that the task does not
+accept, or that loads none, scores 0 and is in the category row only.
 
 | Category | Tasks | Structures | Task success rate, strict | Target score, strict | F1, strict | Task success rate, valid-only | Target score, valid-only |
 |:------------------------|---:|---:|---:|---:|---:|---:|---:|
@@ -753,7 +757,7 @@ answers, so they have no number of tasks.
 | Structure-grounded | 63 | 55 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Name resolution | 39 | 39 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 |  *of which:* answers on the reference entry | – | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
-|  *of which:* answers on another entry that the task accepts (graded by the weaker rule of Section 4.1) | – | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
+|  *of which:* answers on another entry that the task accepts (graded by the text rule of Section 4.1) | – | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Clinical variant | 82 | 31 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Interactions | 40 | 38 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Follow-up turn | 58 | 42 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
@@ -808,10 +812,10 @@ counts without the clinical pairs are the cleaner test of the formats.
 right.** On this track the model must map the number itself. *Target score* (the primary
 score of this table) and *task success rate* as in Table 6; both are strict means over the
 models. *With grounding pack*: the mapped residue is
-appended to the request. The rows are the two groupings of the same 82 tasks (Table
-2, Box 1). *Matched tasks*: the same variant asked on a
-structure with an offset and on a predicted structure without one (descriptive only). The
-helix and strand tasks also ask for the helix or strand that contains the residue.
+appended to the request. The first five rows are the two groupings of the same 82
+tasks (Table 2, Box 1); the last three are subsets. *Matched tasks*: the same variant asked
+on a structure with an offset and on a predicted structure without one (descriptive only).
+*Helix or strand requested*: Section 3.3.1.
 
 | Clinical tasks (scene track) | Tasks | Target score (the primary score here) | Task success rate | Target score with grounding pack | Task success rate with grounding pack |
 |:------------------|--:|---:|---:|---:|---:|
@@ -843,7 +847,7 @@ pattern 3 when it lies below zero; otherwise pattern 2 or 4 is read from the lev
 two rows, which we report and do not classify by rule.
 ⟦PENDING: final run — the number of models under each pattern, from the per-model rows of SI Section S9⟧
 
-### 6.5 Follow-up turns, requests with several right answers, and planned comparisons
+### 6.5 Follow-up turns, several right answers, planned comparisons
 
 **Table 11. Follow-up turns and requests with several right answers.** *Task success rate*:
 share of answers whose drawn state is exactly right (for a request with several right
@@ -861,7 +865,7 @@ right answer returns it unaltered.
 rate (strict, mean over the models) between two groups of tasks or two conditions, with a
 95% interval on the difference (structures resampled). The conditions are those of Table 5;
 the one JSON-mode answer to a task is set against the mean of its 3 main
-answers.
+answers. *Both tracks* means that the tasks of the two tracks are pooled.
 
 | | Comparison | Tasks | Task success rate, first group | Task success rate, second group | Difference (95% interval) |
 |---:|:--------------------|---:|---:|---:|---:|
@@ -876,7 +880,7 @@ answers.
 
 ⟦PENDING: rating study — the four results named in Section 5.5, with intervals: the share of the grader's task successes that people call the same, the share of the other answers that people call different, the same two shares for the target score, and the agreement between raters⟧
 
-### 6.6 Preliminary evidence from the first version of the benchmark (2026)
+### 6.6 Preliminary evidence from the first version (pilot run, October 2026)
 
 <div class="box">
 
@@ -937,7 +941,7 @@ make. SI Section S13.2 says how each was found.
 |--:|:----------------|:----------------|
 | 1 | Clinical references drew a cartoon that no request asked for, and we read the low score that followed as a difficulty of finding the residue. | A reference holds only what the request states. Every task stores its target where it has one, and the target score is reported beside task success. |
 | 2 | The clinical category could not test the mapping: all its tasks sat on one structure that uses UniProt numbering. | 82 tasks on 31 structures; copying the number is wrong in 48 of them, and results are grouped by that property. |
-| 3 | "Pathogenic" was taken from a secondary source, UniProt's variant annotation. | A variant is used only if a ClinVar record of that gene and that one change is classified as pathogenic or likely pathogenic with stated criteria (one exception made by hand, Section 3.1). |
+| 3 | "Pathogenic" was taken from a secondary source, UniProt's variant annotation. | A variant is used only if a ClinVar record of that gene and that one change is classified as pathogenic or likely pathogenic with stated criteria (one exception, lysozyme p.Ile74Thr, whose record states no criteria; Section 3.1). |
 | 4 | Both graders compared text. They rejected correct answers that were written differently (44% and 55% of them on the control set) and passed some wrong ones. | Both tracks are graded on drawn state, and the control set is run as a test on every change. |
 | 5 | Hand-written call-list references had errors, such as label numbers where author numbers were meant. | Every reference is generated and checked against the structure. |
 | 6 | Some requests had no single answer ("show me lysozyme"). | Requests with a countable ambiguity list every accepted answer; open-ended requests are left out. |
@@ -981,12 +985,12 @@ the full list with numbers.
   hand; the median year of deposition is 1999. Scores may be higher
   than on recent or very large structures.
 - **ClinVar is a snapshot, read through UniProt.** Classifications change. We looked only at
-  the records that UniProt cross-references, did not check which transcript a record's
-  protein-level name is counted on, and attach the classification to a protein-level name
+  the records that UniProt cross-references, did not check which transcript (messenger RNA of the gene) a
+  record's protein-level name is counted on, and attach the classification to a protein-level name
   without a condition, which ClinVar itself does not do. The residue that a name points to
   does not depend on the classification.
-- **The grader is tested only against cases that we foresaw.** It makes no error on the
-  control set because it was corrected until it made none. Until the rating study is done,
+- **The grader is tested only against cases that we foresaw** (Section 4.5). Until the
+  rating study is done,
   the evidence that task success matches what people see is the control set and the
   read-back from the viewers. Selections by UniProt position were not replayed in the
   viewer, and name-resolution answers outside the panel are compared as text.
@@ -999,10 +1003,7 @@ the full list with numbers.
 - **Small groups are descriptive only.** The set-aside split within one category, the
   matched clinical tasks, the helix and strand tasks and the two rephrasings are reported
   with intervals and not tested. In every set of matched tasks the structure without an
-  offset is a predicted structure, so the effect of the offset cannot be told apart from
-  that of a predicted structure. Structures of one
-  protein are resampled separately, so intervals in the clinical category are somewhat too
-  narrow.
+  offset is a predicted structure, so the two effects cannot be told apart.
 
 ## 10. Conclusion
 
@@ -1011,12 +1012,12 @@ representations and colours that the viewer would draw, without a judge model. R
 are computed by script from the structure and, for clinical variants, from the SIFTS
 mapping and ClinVar. The corpus has 797 tasks on 78
 structures, and 258 requests are posed in two answer formats, to
-tell errors of content from errors of format. The grader agrees with every
-known verdict of the 2,175 control answers against which it was developed, and a
-check by people is planned. A pilot run
-taught two things: most points were lost to answers that the viewer could not show at all,
-and in the clinical category most were lost to our own references, which drew a cartoon
-that no request asked for. In the rebuilt category, copying the number from the variant
+tell errors of content from errors of format. The grader agrees with all
+2,175 control answers against which it was developed, and a check by people is
+planned. A pilot run
+taught two things: most points were lost to answers that the viewer could not show,
+and in the clinical category most were lost to our own references, which drew an
+unrequested cartoon. In the rebuilt category, copying the number from the variant
 name gives the wrong residue in 48 of 82 tasks, and the
 final run will show whether models copy it.
 ⟦PENDING: final run — two sentences on the results: how well the models drive the viewer on each track, and what the paired comparison shows⟧
@@ -1025,7 +1026,7 @@ final run will show whether models copy it.
 
 **No patient data.** The benchmark contains no data about individuals. Clinical variants come
 from UniProt's variant annotation and are confirmed in ClinVar's public variant-level
-records (one exception, Section 3.1).
+records (one exception, whose record states no assertion criteria; Section 3.1).
 
 **Not for clinical use.** A high score does not make a model fit to interpret variants. The
 clinical category measures whether a model can locate a residue in a structure. The data providers
@@ -1061,13 +1062,13 @@ for the rating study need a browser without a display and the Mol\* bundle, both
 
 ## Supporting Information
 
-The Supporting Information (one PDF file) contains: the full glossary (S0); the
-running example in full (S1); all task templates (S2); the structure panel and the variant
-list (S3); the grading rules (S4); the control set by kind (S5); the run manifest, the
-models and the connection test (S6); the system prompts (S7); tables of the pilot run and
-the trial of the rating study (S8); further tables of the final run (S9, pending); and the
-long form of Sections 3 to 5 (S10 to S12), of the pilot findings and the errors of the first
-version (S13), of the limitations (S14), and of related work and licences (S15).
+The Supporting Information (one PDF file) contains: glossary (S0); running example (S1);
+task templates (S2); structure panel and variant list (S3); grading rules (S4); control set
+(S5); run manifest, models and connection test (S6); system prompts (S7); tables of the
+pilot run and the trial of the rating study (S8); further tables of the final run (S9,
+pending); and the long form of Sections 3 to 5 (S10 to S12), of the pilot findings and the
+errors of the first version (S13), of the limitations (S14), and of related work and
+licences (S15).
 
 ## Author information
 

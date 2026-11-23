@@ -5,10 +5,7 @@ corpus and the two text-comparing graders that were public from May 2026 until t
 corpus replaced them. Its run of the scene tasks in October 2026 is the *pilot run*, whose
 results are kept apart in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that
 the final run will fill; their layout and captions are fixed, and a script fills the cells.
-Before the corpus was frozen, we also sent a few of its tasks
-to one provider to test the run script. This *connection test* (SI Section S6.1) exposed
-faults of the present grader, which were corrected. It is not a result, and it is distinct
-from the pilot run and from the errors of Table 13.
+
 
 {{include:generated/fig_final_results.md|else:figures/fig5_layout.md}}
 
@@ -39,7 +36,8 @@ call list keeps, under *strict*, the scores it earns when replayed (Section 4.4)
 structures under the tasks of the row, which are the units resampled for its intervals.
 Scores as in Table 6. The two rows marked *of which* divide the answers of the
 name-resolution category by the entry that the model chose (Section 4.1); they are sets of
-answers, so they have no number of tasks.
+answers, so they have no number of tasks. An answer on an entry that the task does not
+accept, or that loads none, scores 0 and is in the category row only.
 
 {{include:generated/table_final_tiers.md|else:generated/shape_tiers.md}}
 
@@ -71,10 +69,10 @@ counts without the clinical pairs are the cleaner test of the formats.
 right.** On this track the model must map the number itself. *Target score* (the primary
 score of this table) and *task success rate* as in Table 6; both are strict means over the
 models. *With grounding pack*: the mapped residue is
-appended to the request. The rows are the two groupings of the same {{clin.n}} tasks (Table
-2, Box 1). *Matched tasks*: the same variant asked on a
-structure with an offset and on a predicted structure without one (descriptive only). The
-helix and strand tasks also ask for the helix or strand that contains the residue.
+appended to the request. The first five rows are the two groupings of the same {{clin.n}}
+tasks (Table 2, Box 1); the last three are subsets. *Matched tasks*: the same variant asked
+on a structure with an offset and on a predicted structure without one (descriptive only).
+*Helix or strand requested*: Section 3.3.1.
 
 {{include:generated/table_final_clinical.md|else:generated/shape_clinical.md}}
 
@@ -97,7 +95,7 @@ pattern 3 when it lies below zero; otherwise pattern 2 or 4 is read from the lev
 two rows, which we report and do not classify by rule.
 ⟦PENDING: final run — the number of models under each pattern, from the per-model rows of SI Section S9⟧
 
-### 6.5 Follow-up turns, requests with several right answers, and planned comparisons
+### 6.5 Follow-up turns, several right answers, planned comparisons
 
 **Table 11. Follow-up turns and requests with several right answers.** *Task success rate*:
 share of answers whose drawn state is exactly right (for a request with several right
@@ -111,7 +109,7 @@ right answer returns it unaltered.
 rate (strict, mean over the models) between two groups of tasks or two conditions, with a
 95% interval on the difference (structures resampled). The conditions are those of Table 5;
 the one JSON-mode answer to a task is set against the mean of its {{plan.samples}} main
-answers.
+answers. *Both tracks* means that the tasks of the two tracks are pooled.
 
 {{include:generated/table_final_robustness.md|else:generated/shape_robustness.md}}
 
@@ -119,7 +117,7 @@ answers.
 
 ⟦PENDING: rating study — the four results named in Section 5.5, with intervals: the share of the grader's task successes that people call the same, the share of the other answers that people call different, the same two shares for the target score, and the agreement between raters⟧
 
-### 6.6 Preliminary evidence from the first version of the benchmark (2026)
+### 6.6 Preliminary evidence from the first version (pilot run, October 2026)
 
 <div class="box">
 
