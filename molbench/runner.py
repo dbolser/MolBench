@@ -1613,6 +1613,8 @@ def _sample_summary(s: dict) -> dict[str, Any]:
     for k in ("error", "mvs_issues", "load_error", "grader_crash", "matched_reference"):
         if s.get(k):
             out[k] = s[k]
+    if s.get("cost_usd") is not None:
+        out["cost_usd"] = s["cost_usd"]     # per sample, so a table can cost one track
     for k in ("preserved_f1", "preserved_ok", "entry_outcome", "entry_is_reference",
               "hidden_overlay"):
         if s.get(k) is not None:
@@ -1708,6 +1710,7 @@ def model_record(spec: ModelSpec, tasks: list[dict], per_task_samples: dict[str,
     return {
         "spec": spec.route,
         "open_weights": spec.open_weights,
+        "optional": spec.optional,
         "mean_f1": overall.get("mean_f1", 0.0),
         "success": overall.get("success", 0.0),
         "success_all": overall.get("success_all", 0.0),

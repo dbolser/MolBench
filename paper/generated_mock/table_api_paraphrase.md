@@ -26,6 +26,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | 19 | 0.579 | 0.579 | 0.667 | 0.456 | 14 of 19 | 71.9% |
 | mistralai/mistral-small-2603 | 19 | 0.649 | 0.579 | 0.544 | 0.491 | 14 of 19 | 73.7% |
 | baseline-rules (keyword baseline) | 19 | 0.596 | 0.596 | 0.632 | 0.474 | 14 of 19 | 68.4% |
+| baseline-literal (literal baseline) | 19 | 0.649 | 0.544 | 0.456 | 0.561 | 17 of 19 | 73.7% |
 | **panel mean** | 19 | 0.582 | 0.576 | 0.573 | 0.446 | 70.4% | 74.9% |
 
 Task success per phrasing. Spread: for each request, the highest minus the lowest task success among its three phrasings, then the mean over requests. A request flips when it is solved (more than half the samples right) in one phrasing and not in another. Sampling noise alone gives a spread above 0: the last column is the share of single phrasings whose own samples do not all agree, the noise the spread has to be read against.

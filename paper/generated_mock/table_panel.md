@@ -26,5 +26,6 @@
 | qwen/qwen3-next-80b-a3b-instruct | `openrouter:qwen/qwen3-next-80b-a3b-instruct` | open | 0.09 / 1.1 | 2026-11-16 | spec, spec_structured, spec_grounded |
 | mistralai/mistral-small-2603 | `openrouter:mistralai/mistral-small-2603` | open | 0.15 / 0.6 | 2026-11-16 | spec, spec_structured, spec_grounded |
 | baseline-rules (keyword baseline) | `baseline` | no model | 0.0 / 0.0 | 2026-11-16 | spec, spec_grounded |
+| baseline-literal (literal baseline) | `baseline-literal` | no model | 0.0 / 0.0 | 2026-11-22 | spec, spec_grounded |
 
 From the run's scorecards (the manifest names each route and price). Reasoning effort sent: provider-default; no temperature is sent.

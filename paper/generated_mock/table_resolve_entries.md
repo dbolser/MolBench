@@ -26,6 +26,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | spec | 117 | 66.7% | 5.1% | 6.0% | 0.0% | 22.2% | 0.607 | 0.910 (78) | – |
 | mistralai/mistral-small-2603 | spec | 117 | 59.0% | 11.1% | 9.4% | 0.0% | 20.5% | 0.462 | 0.783 (69) | – |
 | baseline-rules (keyword baseline) | spec | 117 | 62.4% | 10.3% | 10.3% | 0.0% | 17.1% | 0.573 | 0.918 (73) | – |
+| baseline-literal (literal baseline) | spec | 117 | 62.4% | 3.4% | 7.7% | 0.0% | 26.5% | 0.530 | 0.849 (73) | – |
 | **all models, spec** | spec | 2457 | 65.6% | 8.2% | 7.8% | 0.0% | 18.4% | – | – | – |
 | moonshotai/kimi-k2.6 | spec_grounded | 117 | 63.2% | 11.1% | 8.5% | 0.0% | 17.1% | 0.530 | 0.838 (74) | – |
 | openai/gpt-5.4-nano | spec_grounded | 117 | 61.5% | 9.4% | 12.0% | 0.0% | 17.1% | 0.530 | 0.861 (72) | – |
@@ -49,6 +50,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | spec_grounded | 117 | 69.2% | 10.3% | 6.0% | 0.0% | 14.5% | 0.581 | 0.840 (81) | – |
 | mistralai/mistral-small-2603 | spec_grounded | 117 | 63.2% | 7.7% | 4.3% | 0.0% | 24.8% | 0.530 | 0.838 (74) | – |
 | baseline-rules (keyword baseline) | spec_grounded | 117 | 65.0% | 5.1% | 11.1% | 0.0% | 18.8% | 0.556 | 0.855 (76) | – |
+| baseline-literal (literal baseline) | spec_grounded | 117 | 70.1% | 7.7% | 4.3% | 0.0% | 17.9% | 0.598 | 0.854 (82) | – |
 | **all models, spec_grounded** | spec_grounded | 2457 | 65.6% | 7.6% | 6.8% | 0.0% | 20.0% | – | – | – |
 
 The request names a protein; many entries are right (the frozen accepted list). A wrong id is either a real entry of something else or an id that no entry has (the list of current PDB ids frozen on 2026-11-13). "No entry loaded" includes answers that could not be read. The last two columns split the answers on an accepted entry: only the reference entry of a task has a frozen atom table, and on any other accepted entry an answer is compared with the reference as written, so a correct selection by chain id fails there. Paraphrases are left out.

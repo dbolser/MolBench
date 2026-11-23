@@ -26,6 +26,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | 305 | 0.558 | 76 | 0.557 | -0.001 [-0.074, +0.071] |
 | mistralai/mistral-small-2603 | 305 | 0.513 | 76 | 0.566 | +0.053 [-0.033, +0.128] |
 | baseline-rules (keyword baseline) | 305 | 0.544 | 76 | 0.557 | +0.013 [-0.055, +0.078] |
+| baseline-literal (literal baseline) | 305 | 0.548 | 76 | 0.544 | -0.004 [-0.079, +0.080] |
 | **panel mean** | 305 | 0.545 | 76 | 0.538 | -0.007 [-0.024, +0.010] |
 | panel, translation tier | 55 | 0.557 | 18 | 0.534 | -0.023 [-0.063, +0.022] |
 | panel, grounded tier | 52 | 0.536 | 11 | 0.522 | -0.014 [-0.060, +0.044] |

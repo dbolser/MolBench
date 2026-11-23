@@ -26,5 +26,6 @@
 | qwen/qwen3-next-80b-a3b-instruct | 0.558 | 0.558 | +0.000 | 0.685 | 0.713 | +0.028 |
 | mistralai/mistral-small-2603 | 0.523 | 0.591 | +0.067 | 0.658 | 0.741 | +0.083 |
 | baseline-rules (keyword baseline) | 0.547 | 0.596 | +0.049 | 0.683 | 0.743 | +0.060 |
+| baseline-literal (literal baseline) | 0.547 | 0.576 | +0.029 | 0.688 | 0.726 | +0.038 |
 
-All original tasks of each track (not only twins), headline condition. Over the 21 models (keyword baseline left out), Pearson r between the two tracks is -0.514 for task success and -0.413 for strict F1.
+All original tasks of each track (not only twins), headline condition. Over the 21 models (scripted baselines left out), Pearson r between the two tracks is -0.514 for task success and -0.413 for strict F1.

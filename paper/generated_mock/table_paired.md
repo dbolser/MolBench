@@ -6,57 +6,59 @@
 
 | model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| moonshotai/kimi-k2.6 | 176 | 93 | 39 | 25 | 19 | 75.0% | 67.0% | 0.103 |
-| openai/gpt-5.4-nano | 176 | 90 | 37 | 27 | 22 | 72.2% | 66.5% | 0.260 |
-| google/gemma-3-27b-it | 176 | 80 | 41 | 28 | 27 | 68.8% | 61.4% | 0.148 |
-| anthropic/claude-opus-5.5 | 176 | 87 | 48 | 28 | 13 | 76.7% | 65.3% | 0.029 |
+| moonshotai/kimi-k2.6 | 176 | 94 | 38 | 25 | 19 | 75.0% | 67.6% | 0.130 |
+| openai/gpt-5.4-nano | 176 | 91 | 36 | 27 | 22 | 72.2% | 67.0% | 0.314 |
+| google/gemma-3-27b-it | 176 | 81 | 40 | 28 | 27 | 68.8% | 61.9% | 0.182 |
+| anthropic/claude-opus-5.5 | 176 | 88 | 47 | 28 | 13 | 76.7% | 65.9% | 0.037 |
 | x-ai/grok-4.7 | 176 | 94 | 36 | 22 | 24 | 73.9% | 65.9% | 0.087 |
 | z-ai/glm-5.2 | 176 | 91 | 29 | 33 | 23 | 68.2% | 70.5% | 0.704 |
 | minimax/minimax-m3 | 176 | 90 | 41 | 21 | 24 | 74.4% | 63.1% | 0.015 |
-| nvidia/nemotron-3-super-120b-a12b | 176 | 81 | 46 | 33 | 16 | 72.2% | 64.8% | 0.177 |
+| nvidia/nemotron-3-super-120b-a12b | 176 | 82 | 45 | 33 | 16 | 72.2% | 65.3% | 0.213 |
 | deepseek/deepseek-v3.2 | 176 | 85 | 41 | 25 | 25 | 71.6% | 62.5% | 0.064 |
-| google/gemini-4-argon | 176 | 89 | 34 | 29 | 24 | 69.9% | 67.0% | 0.615 |
+| google/gemini-4-argon | 176 | 90 | 33 | 29 | 24 | 69.9% | 67.6% | 0.704 |
 | deepseek/deepseek-v4-pro-0813 | 176 | 95 | 28 | 34 | 19 | 69.9% | 73.3% | 0.526 |
-| meta-llama/llama-4-maverick | 176 | 84 | 43 | 25 | 24 | 72.2% | 61.9% | 0.038 |
+| meta-llama/llama-4-maverick | 176 | 87 | 40 | 25 | 24 | 72.2% | 63.6% | 0.082 |
 | openai/gpt-oss-20b | 176 | 85 | 39 | 30 | 22 | 70.5% | 65.3% | 0.336 |
-| qwen/qwen3-30b-a3b-instruct-2507 | 176 | 88 | 42 | 20 | 26 | 73.9% | 61.4% | 0.007 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 176 | 89 | 41 | 20 | 26 | 73.9% | 61.9% | 0.010 |
 | deepseek/deepseek-v4-flash | 176 | 87 | 43 | 24 | 22 | 73.9% | 63.1% | 0.027 |
-| google/gemini-3.5-flash | 176 | 77 | 56 | 24 | 19 | 75.6% | 57.4% | < 0.001 |
-| openai/gpt-oss-120b | 176 | 89 | 40 | 22 | 25 | 73.3% | 63.1% | 0.030 |
+| google/gemini-3.5-flash | 176 | 78 | 55 | 24 | 19 | 75.6% | 58.0% | < 0.001 |
+| openai/gpt-oss-120b | 176 | 90 | 39 | 23 | 24 | 73.3% | 64.2% | 0.056 |
 | claude-haiku-4-5 | 176 | 85 | 37 | 30 | 24 | 69.3% | 65.3% | 0.464 |
 | openai/gpt-6.1-sol | 176 | 81 | 45 | 22 | 28 | 71.6% | 58.5% | 0.007 |
-| qwen/qwen3-next-80b-a3b-instruct | 176 | 72 | 49 | 27 | 28 | 68.8% | 56.2% | 0.015 |
-| mistralai/mistral-small-2603 | 176 | 89 | 38 | 27 | 22 | 72.2% | 65.9% | 0.215 |
-| baseline-rules (keyword baseline) | 176 | 87 | 36 | 32 | 21 | 69.9% | 67.6% | 0.716 |
-| **pooled over models** | 3696 | 1812 | 852 | 556 | 476 | 72.1% | 64.1% | < 0.001 |
+| qwen/qwen3-next-80b-a3b-instruct | 176 | 73 | 48 | 27 | 28 | 68.8% | 56.8% | 0.020 |
+| mistralai/mistral-small-2603 | 176 | 89 | 38 | 28 | 21 | 72.2% | 66.5% | 0.268 |
+| baseline-rules (keyword baseline) | 176 | 88 | 35 | 32 | 21 | 69.9% | 68.2% | 0.807 |
+| baseline-literal (literal baseline) | 176 | 90 | 42 | 19 | 25 | 75.0% | 61.9% | 0.004 |
+| **pooled over models** | 3696 | 1825 | 839 | 558 | 474 | 72.1% | 64.5% | < 0.001 |
 
 *Sensitivity: without the twins whose API side needs a hide toggle the request does not state (161 pairs). Solved = requested atoms drawn as asked (target score 1).*
 
 | model | pairs | both solved | MVS only | API only | neither | MVS solved | API solved | McNemar p (exact) |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| moonshotai/kimi-k2.6 | 161 | 84 | 36 | 23 | 18 | 74.5% | 66.5% | 0.117 |
-| openai/gpt-5.4-nano | 161 | 85 | 32 | 23 | 21 | 72.7% | 67.1% | 0.281 |
-| google/gemma-3-27b-it | 161 | 77 | 37 | 23 | 24 | 70.8% | 62.1% | 0.092 |
-| anthropic/claude-opus-5.5 | 161 | 82 | 47 | 20 | 12 | 80.1% | 63.4% | 0.001 |
+| moonshotai/kimi-k2.6 | 161 | 85 | 35 | 23 | 18 | 74.5% | 67.1% | 0.148 |
+| openai/gpt-5.4-nano | 161 | 86 | 31 | 23 | 21 | 72.7% | 67.7% | 0.341 |
+| google/gemma-3-27b-it | 161 | 78 | 36 | 23 | 24 | 70.8% | 62.7% | 0.117 |
+| anthropic/claude-opus-5.5 | 161 | 83 | 46 | 20 | 12 | 80.1% | 64.0% | 0.002 |
 | x-ai/grok-4.7 | 161 | 88 | 33 | 19 | 21 | 75.2% | 66.5% | 0.070 |
 | z-ai/glm-5.2 | 161 | 83 | 28 | 30 | 20 | 68.9% | 70.2% | 0.896 |
 | minimax/minimax-m3 | 161 | 85 | 39 | 18 | 19 | 77.0% | 64.0% | 0.008 |
-| nvidia/nemotron-3-super-120b-a12b | 161 | 78 | 41 | 28 | 14 | 73.9% | 65.8% | 0.148 |
+| nvidia/nemotron-3-super-120b-a12b | 161 | 79 | 40 | 28 | 14 | 73.9% | 66.5% | 0.182 |
 | deepseek/deepseek-v3.2 | 161 | 79 | 40 | 21 | 21 | 73.9% | 62.1% | 0.020 |
-| google/gemini-4-argon | 161 | 83 | 34 | 24 | 20 | 72.7% | 66.5% | 0.237 |
+| google/gemini-4-argon | 161 | 84 | 33 | 24 | 20 | 72.7% | 67.1% | 0.289 |
 | deepseek/deepseek-v4-pro-0813 | 161 | 90 | 24 | 29 | 18 | 70.8% | 73.9% | 0.583 |
-| meta-llama/llama-4-maverick | 161 | 79 | 41 | 21 | 20 | 74.5% | 62.1% | 0.015 |
+| meta-llama/llama-4-maverick | 161 | 82 | 38 | 21 | 20 | 74.5% | 64.0% | 0.036 |
 | openai/gpt-oss-20b | 161 | 81 | 37 | 27 | 16 | 73.3% | 67.1% | 0.260 |
-| qwen/qwen3-30b-a3b-instruct-2507 | 161 | 82 | 38 | 17 | 24 | 74.5% | 61.5% | 0.006 |
+| qwen/qwen3-30b-a3b-instruct-2507 | 161 | 83 | 37 | 17 | 24 | 74.5% | 62.1% | 0.009 |
 | deepseek/deepseek-v4-flash | 161 | 83 | 40 | 20 | 18 | 76.4% | 64.0% | 0.013 |
-| google/gemini-3.5-flash | 161 | 75 | 50 | 19 | 17 | 77.6% | 58.4% | < 0.001 |
-| openai/gpt-oss-120b | 161 | 85 | 36 | 17 | 23 | 75.2% | 63.4% | 0.013 |
+| google/gemini-3.5-flash | 161 | 76 | 49 | 19 | 17 | 77.6% | 59.0% | < 0.001 |
+| openai/gpt-oss-120b | 161 | 86 | 35 | 18 | 22 | 75.2% | 64.6% | 0.027 |
 | claude-haiku-4-5 | 161 | 83 | 35 | 23 | 20 | 73.3% | 65.8% | 0.148 |
 | openai/gpt-6.1-sol | 161 | 75 | 42 | 17 | 27 | 72.7% | 57.1% | 0.002 |
-| qwen/qwen3-next-80b-a3b-instruct | 161 | 69 | 47 | 22 | 23 | 72.0% | 56.5% | 0.004 |
-| mistralai/mistral-small-2603 | 161 | 82 | 38 | 21 | 20 | 74.5% | 64.0% | 0.036 |
-| baseline-rules (keyword baseline) | 161 | 79 | 35 | 28 | 19 | 70.8% | 66.5% | 0.450 |
-| **pooled over models** | 3381 | 1708 | 795 | 462 | 416 | 74.0% | 64.2% | < 0.001 |
+| qwen/qwen3-next-80b-a3b-instruct | 161 | 70 | 46 | 22 | 23 | 72.0% | 57.1% | 0.005 |
+| mistralai/mistral-small-2603 | 161 | 82 | 38 | 22 | 19 | 74.5% | 64.6% | 0.052 |
+| baseline-rules (keyword baseline) | 161 | 80 | 34 | 28 | 19 | 70.8% | 67.1% | 0.526 |
+| baseline-literal (literal baseline) | 161 | 86 | 40 | 13 | 22 | 78.3% | 61.5% | < 0.001 |
+| **pooled over models** | 3381 | 1721 | 782 | 464 | 414 | 74.0% | 64.6% | < 0.001 |
 
 *Clinical twins (reported apart: the PDBe viewer maps UniProt numbering itself, an MVS scene cannot) (82 pairs). Solved = requested atoms drawn as asked (target score 1).*
 
@@ -84,6 +86,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | 82 | 41 | 21 | 14 | 6 | 75.6% | 67.1% | 0.311 |
 | mistralai/mistral-small-2603 | 82 | 36 | 19 | 12 | 15 | 67.1% | 58.5% | 0.281 |
 | baseline-rules (keyword baseline) | 82 | 38 | 15 | 19 | 10 | 64.6% | 69.5% | 0.608 |
+| baseline-literal (literal baseline) | 82 | 28 | 21 | 23 | 10 | 59.8% | 62.2% | 0.880 |
 | **pooled over models** | 1722 | 743 | 453 | 313 | 213 | 69.5% | 61.3% | < 0.001 |
 
 *All twins outside the clinical tier (176 pairs). Solved = final state exactly right (task success).*
@@ -112,6 +115,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | 176 | 50 | 45 | 46 | 35 | 54.0% | 54.5% | 1.000 |
 | mistralai/mistral-small-2603 | 176 | 60 | 33 | 52 | 31 | 52.8% | 63.6% | 0.050 |
 | baseline-rules (keyword baseline) | 176 | 63 | 37 | 53 | 23 | 56.8% | 65.9% | 0.113 |
+| baseline-literal (literal baseline) | 176 | 62 | 39 | 41 | 34 | 57.4% | 58.5% | 0.911 |
 | **pooled over models** | 3696 | 1268 | 782 | 1035 | 611 | 55.5% | 62.3% | < 0.001 |
 
 *Sensitivity: without the twins whose API side needs a hide toggle the request does not state (161 pairs). Solved = final state exactly right (task success).*
@@ -140,6 +144,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | 161 | 47 | 43 | 41 | 30 | 55.9% | 54.7% | 0.913 |
 | mistralai/mistral-small-2603 | 161 | 53 | 33 | 46 | 29 | 53.4% | 61.5% | 0.177 |
 | baseline-rules (keyword baseline) | 161 | 55 | 36 | 49 | 21 | 56.5% | 64.6% | 0.193 |
+| baseline-literal (literal baseline) | 161 | 58 | 37 | 35 | 31 | 59.0% | 57.8% | 0.906 |
 | **pooled over models** | 3381 | 1164 | 725 | 941 | 551 | 55.9% | 62.3% | < 0.001 |
 
 *Clinical twins (reported apart: the PDBe viewer maps UniProt numbering itself, an MVS scene cannot) (82 pairs). Solved = final state exactly right (task success).*
@@ -168,6 +173,7 @@
 | qwen/qwen3-next-80b-a3b-instruct | 82 | 34 | 18 | 21 | 9 | 63.4% | 67.1% | 0.749 |
 | mistralai/mistral-small-2603 | 82 | 26 | 16 | 22 | 18 | 51.2% | 58.5% | 0.418 |
 | baseline-rules (keyword baseline) | 82 | 27 | 13 | 30 | 12 | 48.8% | 69.5% | 0.014 |
+| baseline-literal (literal baseline) | 82 | 22 | 19 | 29 | 12 | 50.0% | 62.2% | 0.193 |
 | **pooled over models** | 1722 | 594 | 352 | 462 | 314 | 54.9% | 61.3% | < 0.001 |
 
 *Pooled over models, by tier.*
@@ -180,4 +186,4 @@
 | follow-up | 756 | 253 | 171 | 202 | 130 | 56.1% | 60.2% | 36 | 0.120 |
 | accept-set | 315 | 113 | 54 | 96 | 52 | 53.0% | 66.3% | 15 | < 0.001 |
 
-A pair is one request posed on both tracks with the same target atoms. A side is solved when more than half of its samples are right, by two measures: the target score (the requested atoms drawn exactly as asked, whatever else is on screen), which is the same test on both tracks and is the primary one, and task success (the whole final state exactly right), which is not: the API track accepts the viewer's default view, with water and ligands on screen, where an MVS scene that draws them is marked wrong. McNemar's exact test uses the discordant pairs only (solved on one side and not the other). The pooled rows add the counts of all models (keyword baseline left out); the same pairs recur across models, so their p value is descriptive.
+A pair is one request posed on both tracks with the same target atoms. A side is solved when more than half of its samples are right, by two measures: the target score (the requested atoms drawn exactly as asked, whatever else is on screen), which is the same test on both tracks and is the primary one, and task success (the whole final state exactly right), which is not: the API track accepts the viewer's default view, with water and ligands on screen, where an MVS scene that draws them is marked wrong. McNemar's exact test uses the discordant pairs only (solved on one side and not the other). The pooled rows add the counts of all models (scripted baselines left out); the same pairs recur across models, so their p value is descriptive.

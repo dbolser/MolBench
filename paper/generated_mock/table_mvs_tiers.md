@@ -26,5 +26,6 @@
 | qwen/qwen3-next-80b-a3b-instruct | 0.507 [0.432, 0.577] | 0.561 [0.495, 0.626] | 0.517 [0.442, 0.600] | 0.607 [0.521, 0.701] | 0.614 [0.545, 0.678] | 0.563 [0.503, 0.627] | 0.500 [0.373, 0.617] | 0.570 [0.500, 0.636] |
 | mistralai/mistral-small-2603 | 0.479 [0.399, 0.559] | 0.513 [0.435, 0.586] | 0.575 [0.483, 0.659] | 0.462 [0.376, 0.547] | 0.516 [0.454, 0.574] | 0.569 [0.500, 0.636] | 0.603 [0.500, 0.694] | 0.539 [0.462, 0.612] |
 | baseline-rules (keyword baseline) | 0.562 [0.498, 0.624] | 0.566 [0.494, 0.639] | 0.608 [0.525, 0.692] | 0.573 [0.479, 0.667] | 0.516 [0.466, 0.569] | 0.500 [0.424, 0.580] | 0.526 [0.420, 0.625] | 0.564 [0.494, 0.635] |
+| baseline-literal (literal baseline) | 0.580 [0.514, 0.643] | 0.519 [0.457, 0.583] | 0.575 [0.500, 0.643] | 0.530 [0.444, 0.615] | 0.545 [0.488, 0.610] | 0.563 [0.500, 0.629] | 0.474 [0.347, 0.583] | 0.515 [0.446, 0.590] |
 
 Original tasks, headline condition. Intervals: bootstrap over structures. The last column leaves out the grounded tasks that need the entry's own helix and strand records (longest helix, secondary-structure colouring): no prompt condition supplies those on this tier, so they measure recall of an annotation.

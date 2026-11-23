@@ -5,7 +5,7 @@
 Nothing here may be quoted as a result. The real tables are written to another directory and never mixed with these.
 
 Built by `scripts/paper_tables.py --from-dry-run` from the scorecards in `results/final-v1.dryrun`
-(run `final-v1`, corpus `corpus-v1.0-dev ab76adffc83b`, 67 scorecards). Rebuild, do not edit.
+(run `final-v1`, corpus `corpus-v1.0-dev 45a841aecbd2`, 69 scorecards). Rebuild, do not edit.
 
 | file | what |
 |---|---|
@@ -40,4 +40,11 @@ Built by `scripts/paper_tables.py --from-dry-run` from the scorecards in `result
 | `table_grounding.md` | Grounding pack against none, on the lookup tiers |
 | `table_bare.md` | Bare prompt (output contract only) against the prompt with the reference |
 | `table_cost.md` | Calls, tokens and cost of the run |
+| `table_final_leaderboard_scene.md` | Scene track, headline condition (format reference): 381 tasks, 3 samples per task |
+| `table_final_leaderboard_calls.md` | Call-list track, headline condition (format reference): 416 tasks, 3 samples per task |
+| `table_final_tiers.md` | Scores by tier and track, mean over models (21 models, 3 samples per task) |
+| `table_final_paired.md` | Paired comparison of the two formats |
+| `table_final_clinical.md` | Clinical tier on the scene track, by what the request demands (21 models, 3 samples per task) |
+| `table_final_followup.md` | Follow-up turns and requests with several right answers (21 models, 3 samples per task) |
+| `table_final_robustness.md` | Planned comparisons (21 models, 3 samples per task) |
 | `values.json` | every number above as a flat key → value map; `"status"` says whether it is mock |

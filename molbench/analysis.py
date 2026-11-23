@@ -57,6 +57,20 @@ BASELINE = "baseline-rules"
 #: Both are listed in every table and left out of every panel mean and pooled count.
 BASELINES = {"baseline-rules": "keyword baseline", "baseline-literal": "literal baseline"}
 HEADLINE = "spec"
+GROUNDED = "spec_grounded"
+#: The paper's words (paper/sections, paper/corpus_values.py).
+PAPER_BASELINES = {"baseline-rules": "Keyword script (no model)",
+                   "baseline-literal": "Literal script (no model)"}
+PAPER_TIER = {"translation": "Translation", "grounded": "Structure-grounded",
+              "interactions": "Interactions", "resolve": "Name resolution",
+              "clinical": "Clinical variant", "followup": "Follow-up turn",
+              "accept_set": "Several right answers", "tool_only": "Viewer settings"}
+#: The seven result tables the paper includes; each replaces ``shape_<name>.md``.
+PAPER_TABLES = ("table_final_leaderboard_scene", "table_final_leaderboard_calls",
+                "table_final_tiers", "table_final_paired", "table_final_clinical",
+                "table_final_followup", "table_final_robustness")
+PILOT_BANNER = ("> **PILOT.** A provider-path pilot on a few tasks, not the benchmark run: these "
+                "numbers show that the path works, not how good a model is.")
 MOCK_BANNER = ("> **MOCK DATA.** Dry run answered by the mock model: the table has its final "
                "shape, **every number in it is fake**.")
 CLINICAL_SSE = ("clin-sse-helix", "clin-sse-strand")
@@ -381,6 +395,8 @@ class Tables:
         self.grounding()
         self.bare()
         self.cost()
+        if HEADLINE in r.conditions:
+            self.final()
         return self
 
     # -- corpus (from the task files alone) ---------------------------------------------
@@ -1335,6 +1351,257 @@ class Tables:
             "The system prompt without the format reference, MVS track.",
             [("MVS track", is_track("mvs"))])
 
+    # -- the paper's seven result tables ---------------------------------------------------
+    def paper_name(self, model: str) -> str:
+        """A model as the paper names it: the last part of its id, a dagger on an
+        optional model, the scripted baselines in words."""
+        if model in PAPER_BASELINES:
+            return PAPER_BASELINES[model]
+        rec = self.run.cards.get((HEADLINE, model)) or {}
+        return model.split("/")[-1] + (" †" if rec.get("optional") else "")
+
+    def final(self) -> None:
+        """The seven tables the paper includes (``table_final_*``), with the columns of
+        ``paper/generated/shape_*.md`` and in the paper's words: scene track and
+        call-list track, the paper's tier names, the paper's model names. Every cell is
+        computed here from the task rows; the definitions are those of the captions in
+        ``paper/sections/07_results.md`` (strict scores; a panel mean is the mean over
+        the models, scripted baselines left out, of each task's mean over its samples).
+        The other tables of this module keep the analysis vocabulary and go to the
+        Supporting Information."""
+        r = self.run
+        models = r.models(HEADLINE)
+        panel = r.models(HEADLINE, baseline=False)
+        n_s = r.samples.get(HEADLINE) or 1
+        pilot = bool(r.meta.get("pilot"))
+        about = (f"{len(panel)} model{'s' if len(panel) != 1 else ''}, "
+                 f"{n_samples(n_s)}")
+
+        def valid(s: dict) -> bool:
+            return s["outcome"] in ("valid", "unchecked")
+
+        def panel_mean(test, field="success", cond=HEADLINE, only=None) -> tuple:
+            its = self.panel_values(cond, test, field, only)
+            return its, mean(v for _, v in its)
+
+        def valid_only(test) -> float | None:
+            per = []
+            for m in panel:
+                ss = [s for s in samples_of(r.pick(HEADLINE, m, test)) if valid(s)]
+                if ss:
+                    per.append(mean(float(s["success"]) for s in ss))
+            return mean(per)
+
+        # Tables 5 and 6: one row per model, per track
+        all_right = ("Tasks with all 3 samples right" if n_s == 3 else
+                     "Tasks with the one sample right" if n_s == 1 else
+                     f"Tasks with all {n_s} samples right")
+        for track, key, label in (("mvs", "scene", "Scene track"),
+                                  ("api_calling", "calls", "Call-list track")):
+            rows = []
+            order = [m for m in models if m in BASELINES] + sorted(
+                panel, key=lambda m: -(mean(t["success"] for t in r.pick(HEADLINE, m, is_track(track))) or 0))
+            for m in order:
+                got = r.pick(HEADLINE, m, is_track(track))
+                if not got:
+                    continue
+                ss = samples_of(got)
+                ok = [s for s in ss if valid(s)]
+                f1, f1ci = self.stat(items(got, "f1"), f"final|lb|{track}|{m}|f1")
+                su, suci = self.stat(items(got, "success"), f"final|lb|{track}|{m}|su")
+                tg, tgci = self.stat(items(got, "target_f1"), f"final|lb|{track}|{m}|tg")
+                costs = [s.get("cost_usd") for s in ss]
+                cost = ("–" if m in BASELINES else "n/a" if any(c is None for c in costs)
+                        else f"{sum(costs):.2f}")
+                rows.append([self.paper_name(m), "–" if m in BASELINES else r.weights(m),
+                             pct(len(ok) / len(ss)), with_ci(f1, f1ci), with_ci(su, suci),
+                             with_ci(tg, tgci), f3(mean(s["f1"] for s in ok)),
+                             pct(mean(float(t["success_all"]) for t in got)), cost])
+            if not rows:
+                continue
+            n = len(r.pick(HEADLINE, models[0], is_track(track)))
+            self.add(f"table_final_leaderboard_{key}",
+                     f"{label}, headline condition (format reference): {n} tasks, {n_samples(n_s)}",
+                     md_table(["Model", "Weights", "Valid outputs", "F1 (strict)",
+                               "Task success (strict)", "Target score (strict)",
+                               "F1, valid outputs only", all_right, "Cost (USD)"], rows, "llrrrrrrr"),
+                     "Models in order of task success, the scripted baselines first. Square "
+                     "brackets: 95% interval, structures resampled. Cost: the calls of this "
+                     "track in this condition; a price of zero is shown as 0.00.")
+
+        # Table 7: tier by track, mean over models
+        rows = []
+        for track, label in (("mvs", "Scene track"), ("api_calling", "Call-list track")):
+            for tier in tasks_mod.TIERS:
+                test = lambda x, a=track, b=tier: x["category"] == a and x["tier"] == b  # noqa: E731
+                its, su = panel_mean(test)
+                if not its:
+                    continue
+                got = r.pick(HEADLINE, (panel or models)[0], test)
+                rows.append([f"{label}: {PAPER_TIER[tier]}", len(its), len({t["cluster"] for t in got}),
+                             f3(panel_mean(test, "f1")[1]), f3(su),
+                             f3(panel_mean(test, "target_f1")[1]), f3(valid_only(test))])
+        if rows:
+            self.add("table_final_tiers", f"Scores by tier and track, mean over models ({about})",
+                     md_table(["Tier", "Tasks", "Structures", "F1 (strict)", "Task success (strict)",
+                               "Target score (strict)", "Task success, valid outputs only"], rows),
+                     "Original tasks. A follow-up turn without target atoms has no target "
+                     "score and is left out of that mean.")
+
+        # Table 8: the pairs of each model, split four ways, by two measures
+        pairs = self.twin_pairs()
+        rows = []
+        for m in panel:
+            got = r.rows(HEADLINE, m)
+            cells = {}
+            for name, right in (("target", target_solved), ("success", solved)):
+                c: Counter = Counter()
+                for a, b, _ in pairs:
+                    if a in got and b in got:
+                        c[(right(got[a]), right(got[b]))] += 1
+                cells[name] = c
+            n = sum(cells["target"].values())
+            if not n:
+                continue
+
+            def both(k):
+                return f"{cells['target'][k]} ({cells['success'][k]})"
+            p = [pval(mcnemar_exact(c[(True, False)], c[(False, True)])) for c in cells.values()]
+            rows.append([self.paper_name(m), n, both((True, True)), both((True, False)),
+                         both((False, True)), both((False, False)), f"{p[0]} ({p[1]})"])
+        if rows:
+            need = "at least two of its three sampled answers are" if n_s == 3 else \
+                "more than half of its sampled answers are" if n_s > 1 else "its one sampled answer is"
+            self.add("table_final_paired", "Paired comparison of the two formats",
+                     md_table(["Model", "Pairs", "Both right", "Scene right, call list wrong",
+                               "Call list right, scene wrong", "Both wrong", "McNemar p"], rows),
+                     f"A side is right when {need} right. Each cell: counted by the target "
+                     "score (the requested atoms drawn exactly as asked), and in brackets by "
+                     "task success (the whole final state exactly right).")
+
+        # Table 9: the clinical tier on the scene track
+        clin = lambda x: x["category"] == "mvs" and x["tier"] == "clinical"  # noqa: E731
+        groups = [
+            ("Number in the variant name is the author residue number",
+             lambda x: x["difficulty"].get("number_in_name_as_author_number_is_right") is True),
+            ("Number in the variant name is **not** the author residue number",
+             lambda x: x["difficulty"].get("number_in_name_as_author_number_is_right") is False),
+            ("Target residue numbered as in UniProt",
+             lambda x: x["difficulty"].get("needs_offset") is False),
+            ("Target residue numbered differently from UniProt",
+             lambda x: x["difficulty"].get("needs_offset") is True),
+            ("Helix or strand requested (reported apart)",
+             lambda x: x.get("family") in CLINICAL_SSE)]
+        with_pack = [m for m in panel if (GROUNDED, m) in r.cards]
+        rows = []
+        for label, test in groups:
+            both_ = lambda x, t=test: clin(x) and t(x)  # noqa: E731
+            its, su = panel_mean(both_)
+            if not its:
+                continue
+            pack = panel_mean(both_, cond=GROUNDED, only=with_pack)[1] if with_pack else None
+            rows.append([label, len(its), f3(su), f3(panel_mean(both_, "target_f1")[1]), f3(pack)])
+        if rows:
+            self.add("table_final_clinical",
+                     f"Clinical tier on the scene track, by what the request demands ({about})",
+                     md_table(["Clinical tasks (scene track)", "Tasks", "Task success", "Target score",
+                               "Task success with grounding pack"], rows),
+                     "Strict, mean over models. The grounding pack states the residue the "
+                     "variant maps to, so the last column is an upper bound: the lookup done "
+                     "and its result handed over.")
+
+        # Table 10: follow-up turns and requests with several right answers
+        def noop(x: dict) -> bool:
+            return bool(((r.task(x) or {}).get("context") or {}).get("noop"))
+        groups = [("Follow-up turns that need a change", lambda x: x["tier"] == "followup" and not noop(x)),
+                  ("Follow-up turns that need no change", lambda x: x["tier"] == "followup" and noop(x)),
+                  ("Requests with several right answers", lambda x: x["tier"] == "accept_set")]
+        rows = []
+        for label, test in groups:
+            row = [label]
+            for track in TRACKS:
+                its, su = panel_mean(lambda x, a=track, t=test: x["category"] == a and t(x))
+                row += [len(its), f3(su)]
+            if row[1] or row[3]:
+                rows.append(row)
+        if rows:
+            self.add("table_final_followup",
+                     f"Follow-up turns and requests with several right answers ({about})",
+                     md_table(["Group", "Scene track: tasks", "Scene track: task success",
+                               "Call-list track: tasks", "Call-list track: task success"], rows),
+                     "Task success, strict, mean over models.")
+
+        # Table 11: the planned comparisons
+        rows = []
+
+        def compare(label: str, tasks_cell, a: list, b: list, dci) -> None:
+            ma, mb = mean(v for _, v in a), mean(v for _, v in b)
+            if ma is None or mb is None:
+                return
+            rows.append([label, tasks_cell, f3(ma), f3(mb), signed(mb - ma) + ci(dci, signed)])
+        pub = self.panel_values(HEADLINE, lambda x: x["split"] == "public")
+        held = self.panel_values(HEADLINE, lambda x: x["split"] == "heldback")
+        compare("Public split against held-back split", f"{len(pub)} and {len(held)}", pub, held,
+                self.boot.diff_ci(held, pub, "final|split"))
+        for style in ("terse", "indirect"):
+            # one row per request: a request asked on both tracks (a twin pair) is one
+            # request, its value the mean of its two tasks
+            by_request: dict[tuple, list] = {}
+            for track in TRACKS:
+                for orig, ids in self.paraphrase_groups(track).items():
+                    a = [r.rows(HEADLINE, m).get(orig) for m in panel]
+                    b = [r.rows(HEADLINE, m).get(ids[style]) for m in panel]
+                    got = [(x, y) for x, y in zip(a, b) if x and y]
+                    if got:
+                        twin = (r.tasks.get(orig) or {}).get("twin_of")
+                        key = tuple(sorted({orig, twin or orig}))
+                        by_request.setdefault(key, []).append(
+                            (got[0][0]["cluster"], statistics.fmean(x["success"] for x, _ in got),
+                             statistics.fmean(y["success"] for _, y in got)))
+            full, other, diff = [], [], []
+            for key in sorted(by_request):
+                c = by_request[key][0][0]
+                fa = statistics.fmean(v[1] for v in by_request[key])
+                fb = statistics.fmean(v[2] for v in by_request[key])
+                full.append((c, fa)), other.append((c, fb)), diff.append((c, fb - fa))
+            compare(f"Full wording against {style} wording", f"{len(full)} requests", full, other,
+                    self.boot.ci(diff, f"final|{style}"))
+
+        def conditions(label: str, cond: str, test=lambda x: True) -> None:
+            ms = [m for m in panel if (cond, m) in r.cards]
+            a, b, diff = [], [], []
+            ids = sorted({i for m in ms for i, t in r.rows(cond, m).items()
+                          if not t.get("paraphrase_of") and test(t)})
+            for i in ids:
+                got = [(r.rows(HEADLINE, m).get(i), r.rows(cond, m).get(i)) for m in ms]
+                got = [(x, y) for x, y in got if x and y]
+                if got:
+                    fa = statistics.fmean(x["success"] for x, _ in got)
+                    fb = statistics.fmean(y["success"] for _, y in got)
+                    c = got[0][0]["cluster"]
+                    a.append((c, fa)), b.append((c, fb)), diff.append((c, fb - fa))
+            if a:
+                compare(label.format(n=f"{len(ms)} model{'s' if len(ms) != 1 else ''}"), len(a), a, b,
+                        self.boot.ci(diff, f"final|{cond}"))
+        conditions("Format reference against format reference plus JSON mode ({n})",
+                   "spec_structured")
+        conditions("Format reference against format reference plus grounding pack "
+                   "(lookup tiers, scene track)", GROUNDED, is_track("mvs"))
+        conditions("Format reference against no format reference ({n}, scene track)",
+                   "bare", is_track("mvs"))
+        if rows:
+            self.add("table_final_robustness", f"Planned comparisons ({about})",
+                     md_table(["Comparison", "Tasks", "Task success, first group",
+                               "Task success, second group", "Difference (95% interval)"], rows),
+                     "Task success, strict, mean over the models that ran both sides. The "
+                     "difference is second minus first; its interval resamples structures (the "
+                     "two splits share none, so each side is resampled on its own; elsewhere "
+                     "the per-task difference is resampled). No interval where fewer than two "
+                     "structures are on a side.")
+        if pilot and not r.mock:        # a dry run of the pilot carries the mock banner
+            for name in [n for n in self.tables if n.startswith("table_final_")]:
+                self.tables[name] = PILOT_BANNER + "\n\n" + self.tables[name]
+
     # -- cost -----------------------------------------------------------------------------------
     def cost(self) -> None:
         r = self.run
@@ -1436,6 +1703,99 @@ def write(tables: Tables, out: pathlib.Path, flag: str = "") -> None:
         n_cards=len(run.cards),
         files="\n".join(f"| `{n}.md` | {t} |" for n, t in titles.items()),
         notes="\n".join(f"- {n}" for n in tables.notes)).rstrip() + "\n", encoding="utf-8")
+
+
+def copy_into_paper(tables: Tables, generated: pathlib.Path) -> list[str]:
+    """Write the seven tables the paper includes (``PAPER_TABLES``) into
+    ``paper/generated/``, where ``{{include:generated/table_final_x.md|else:...}}`` finds
+    them. Only for the real, complete benchmark run: a dry run, a pilot and a run with
+    cells still missing are refused, so the paper can never show their numbers as
+    results."""
+    run = tables.run
+    if run.mock:
+        raise SystemExit("a dry run's tables are mock data; they are not written into the paper")
+    if run.meta.get("pilot"):
+        raise SystemExit("a pilot is not the benchmark run; its tables are not written into "
+                         "the paper as results (its own table is paper/generated/pilot_results.md)")
+    if run.incomplete:
+        raise SystemExit(f"{len(run.incomplete)} scorecard(s) are incomplete; finish the run first")
+    missing = [n for n in PAPER_TABLES if n not in tables.tables]
+    if missing:
+        raise SystemExit("the run did not produce: " + ", ".join(missing))
+    for name in PAPER_TABLES:
+        (generated / f"{name}.md").write_text(tables.tables[name].rstrip() + "\n", encoding="utf-8")
+    return list(PAPER_TABLES)
+
+
+def pilot_summary(run: Run, model: str | None = None) -> tuple[str, dict]:
+    """The provider-path pilot as one small table and its values, for one model (the
+    panel's own; a free model run beside it is not in the final panel). Counted over
+    every task of the pilot, paraphrases included, one row per condition and track."""
+    if run.mock or not run.meta.get("pilot"):
+        raise SystemExit("pilot_summary is for a real pilot run (run.pilot = true)")
+    panel = [m for m in run.model_order if not (run.cards.get((HEADLINE, m)) or {}).get("optional")
+             and m not in BASELINES]
+    model = model or (panel[0] if panel else run.model_order[0])
+    label = {"mvs": "scene track", "api_calling": "call-list track"}
+    cond_name = {"spec": "Format reference", "spec_grounded": "Format reference + grounding pack",
+                 "spec_structured": "Format reference + JSON mode", "bare": "No format reference"}
+    rows, values, ids = [], {}, set()
+    tot = Counter()
+    for cond in run.conditions:
+        rec = run.cards.get((cond, model))
+        if not rec:
+            continue
+        for track in TRACKS:
+            got = [t for t in rec["tasks"] if t["category"] == track]
+            if not got:
+                continue
+            ids |= {t["id"] for t in got}
+            ss = samples_of(got)
+            ok = [s for s in ss if s["outcome"] in ("valid", "unchecked")]
+            cost = [s.get("cost_usd") for s in ss]
+            e = {"n_tasks": len(got), "n_samples": len(ss), "valid_rate": len(ok) / len(ss),
+                 "f1": mean(t["f1"] for t in got), "success": mean(t["success"] for t in got),
+                 "target": mean(t["target_f1"] for t in got if t.get("target_f1") is not None),
+                 "n_right": sum(bool(s["success"]) for s in ss),
+                 "n_truncated": sum(bool(s.get("truncated")) for s in ss),
+                 "n_hidden_overlay": sum(bool(s.get("hidden_overlay")) for s in ss),
+                 "cost_usd": None if any(c is None for c in cost) else round(sum(cost), 4)}
+            for k, v in e.items():
+                values[f"pilot.{cond}.{TRACK_KEY[track]}.{k}"] = round(v, 4) if isinstance(v, float) else v
+            tot.update(calls=len(ss), right=e["n_right"])
+            rows.append([f"{cond_name.get(cond, cond)}, {label[track]}", len(got), pct(e["valid_rate"]),
+                         f3(e["f1"]), f"{f3(e['success'])} ({e['n_right']} of {len(ss)})",
+                         f3(e["target"]), "n/a" if e["cost_usd"] is None else f"{e['cost_usd']:.2f}"])
+        u = rec.get("usage") or {}
+        tot.update(input_tokens=u.get("input_tokens") or 0, output_tokens=u.get("output_tokens") or 0)
+        values[f"pilot.{cond}.cost_usd"] = rec.get("cost_usd")
+    cost = [values.get(f"pilot.{c}.cost_usd") for c in run.conditions if (c, model) in run.cards]
+    values.update({
+        "pilot.status": "pilot", "pilot.model": model, "pilot.run": run.meta.get("run_name"),
+        "pilot.run_started": str(run.meta.get("started_at"))[:10],
+        "pilot.graded_at": str(run.card_meta[(HEADLINE, model)].get("graded_at"))[:10],
+        "pilot.graded_on_commit": run.card_meta[(HEADLINE, model)].get("git_commit"),
+        "pilot.corpus_sha256_graded_on": run.meta.get("corpus_sha256"),
+        "pilot.samples_per_task": run.samples.get(HEADLINE),
+        "pilot.n_tasks": len(ids), "pilot.n_calls": tot["calls"], "pilot.n_right": tot["right"],
+        "pilot.input_tokens": tot["input_tokens"], "pilot.output_tokens": tot["output_tokens"],
+        "pilot.cost_usd": None if any(c is None for c in cost) else round(sum(cost), 4)})
+    text = "\n".join([
+        PILOT_BANNER, "",
+        f"**Provider-path pilot: {model.split('/')[-1]}, {len(ids)} tasks, "
+        f"{n_samples(run.samples.get(HEADLINE))}, {tot['calls']} calls, "
+        f"US ${values['pilot.cost_usd']:.2f}**" if values["pilot.cost_usd"] is not None else "", "",
+        md_table(["Condition and track", "Tasks", "Valid outputs", "F1 (strict)",
+                  "Task success (strict)", "Target score (strict)", "Cost (USD)"], rows), "",
+        f"Run of {values['pilot.run_started']} on the direct provider route; the archived answers "
+        f"were graded on {values['pilot.graded_at']} with the grader and corpus as they stood "
+        "after the faults the pilot showed were fixed (`PILOT.md`). The tasks were picked by "
+        "rule to cover every tier, track and kind of task, including the paraphrases of one "
+        "request; they are not a sample of the corpus, and one answer per task says nothing "
+        "about the spread between answers. *Valid outputs*: answers that parse and that the "
+        "viewer accepts. *Strict*: an invalid answer counts as 0. The grounding pack states the "
+        "residue a variant maps to, so that row is an upper bound.", ""])
+    return text, dict(sorted(values.items()))
 
 
 def build(results_dir: pathlib.Path, out: pathlib.Path, replicates: int = 2000,

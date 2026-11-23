@@ -26,5 +26,6 @@
 | qwen/qwen3-next-80b-a3b-instruct | 1248 | 927 | 218 | 103 | 321 | 98 | 223 | 98 |
 | mistralai/mistral-small-2603 | 1248 | 963 | 197 | 88 | 285 | 95 | 190 | 95 |
 | baseline-rules (keyword baseline) | 1248 | 958 | 188 | 102 | 290 | 91 | 199 | 91 |
+| baseline-literal (literal baseline) | 1248 | 950 | 210 | 88 | 298 | 117 | 181 | 117 |
 
 A sample is "cut off" when the provider reports that it stopped at the token limit; that says the limit was too low, not that the model cannot write the format. "Not a valid call list" samples are still graded.

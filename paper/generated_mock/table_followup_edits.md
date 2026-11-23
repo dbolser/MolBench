@@ -5,7 +5,7 @@
 | edit | MVS tasks | MVS success | MVS target | MVS preserved | API tasks | API success | API target | API preserved |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|
 | add a component (a chain), keeping the rest | 2 | 0.556 | 0.770 | 0.663 | – | – | – | – |
-| add a component (a residue), keeping the rest | 4 | 0.556 | 0.766 | 0.713 | 4 | 0.571 | 0.774 | 0.731 |
+| add a component (a residue), keeping the rest | 4 | 0.556 | 0.766 | 0.661 | 4 | 0.571 | 0.774 | 0.731 |
 | add a component (the ligand), keeping the rest | 2 | 0.548 | 0.778 | 0.663 | – | – | – | – |
 | also: a label | 2 | 0.540 | 0.794 | 0.667 | – | – | – | – |
 | also: a scene setting | 2 | 0.548 | – | 0.696 | 2 | 0.659 | – | 0.773 |

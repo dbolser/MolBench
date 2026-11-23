@@ -48,6 +48,8 @@
 | mistralai/mistral-small-2603 | clinical tier | 82 | 74.8% | 74.8% | 0.647 | 0.645 | 0.516 | 0.516 | -0.000 [-0.089, +0.089] | -0.006 |
 | baseline-rules (keyword baseline) | resolve tier | 39 | 80.3% | 81.2% | 0.588 | 0.611 | 0.573 | 0.556 | -0.017 [-0.154, +0.111] | +0.030 |
 | baseline-rules (keyword baseline) | clinical tier | 82 | 73.6% | 76.0% | 0.639 | 0.661 | 0.516 | 0.528 | +0.012 [-0.054, +0.070] | +0.033 |
+| baseline-literal (literal baseline) | resolve tier | 39 | 71.8% | 76.9% | 0.573 | 0.628 | 0.530 | 0.598 | +0.068 [-0.034, +0.171] | +0.056 |
+| baseline-literal (literal baseline) | clinical tier | 82 | 75.6% | 77.2% | 0.661 | 0.659 | 0.545 | 0.512 | -0.033 [-0.131, +0.052] | +0.016 |
 | **panel mean** | resolve tier | 39 |  |  |  |  |  |  | -0.008 [-0.035, +0.020] |  |
 | **panel mean** | clinical tier | 82 |  |  |  |  |  |  | +0.008 [-0.005, +0.023] |  |
 

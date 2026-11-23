@@ -26,5 +26,6 @@
 | qwen/qwen3-next-80b-a3b-instruct | open | 0.685 [0.661, 0.711] | 0.558 [0.527, 0.589] | 0.184 | 0.705 | 75.2% | 0.911 | 0.709 |
 | mistralai/mistral-small-2603 | open | 0.658 [0.633, 0.685] | 0.523 [0.491, 0.556] | 0.139 | 0.691 | 74.3% | 0.886 | 0.684 |
 | baseline-rules (keyword baseline) | no model | 0.683 [0.658, 0.708] | 0.547 [0.519, 0.574] | 0.168 | 0.709 | 76.5% | 0.894 | 0.705 |
+| baseline-literal (literal baseline) | no model | 0.688 [0.664, 0.711] | 0.547 [0.516, 0.576] | 0.157 | 0.714 | 76.4% | 0.901 | 0.715 |
 
 Strict F1: mean score over all tasks, an output the viewer cannot show scores 0. Task success: share of samples whose final state is exactly right. Target score: the requested atoms alone. Valid output: share of samples that parse and that the viewer accepts. F1 after JSON repair: the same samples with broken JSON mended offline by `json-repair` (a counterfactual; the strict score is never changed). Intervals: bootstrap over structures.

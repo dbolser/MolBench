@@ -405,6 +405,87 @@ def test_mock_and_real_tables_are_never_mixed(mock_run, tmp_path):
         analysis.build(copy, tmp_path / "mixed", replicates=10)
 
 
+# --- the seven tables the paper includes (analysis.Tables.final) ------------------------
+
+#: table_final_<name> takes the place of shape_<name> (paper/sections/07_results.md)
+PAPER_SHAPES = {"table_final_leaderboard_scene": "shape_leaderboard",
+                "table_final_leaderboard_calls": "shape_leaderboard",
+                "table_final_tiers": "shape_tiers", "table_final_paired": "shape_paired",
+                "table_final_clinical": "shape_clinical",
+                "table_final_followup": "shape_followup",
+                "table_final_robustness": "shape_robustness"}
+
+
+def _header(text: str) -> list[str]:
+    row = next(line for line in text.splitlines() if line.startswith("| "))
+    return [c.strip() for c in row.strip("|").split("|")]
+
+
+def test_the_papers_seven_tables_have_the_columns_of_the_shape_tables(mock_run, tmp_path):
+    """The mapping from a run's scorecards to the tables the paper includes: seven
+    tables, each with exactly the columns of the pending-shape table it replaces, in
+    the paper's words (scene track / call-list track, the paper's tier names)."""
+    t = analysis.build(mock_run, tmp_path / "generated_mock", replicates=50, require_mock=True)
+    assert set(analysis.PAPER_TABLES) == set(PAPER_SHAPES) <= set(t.tables)
+    for name, shape in PAPER_SHAPES.items():
+        want = _header((REPO / "paper" / "generated" / f"{shape}.md").read_text())
+        got = _header(t.tables[name])
+        if shape == "shape_leaderboard":      # the pilot manifest takes one sample
+            assert got[7] == "Tasks with the one sample right"
+            assert want[7] == "Tasks with all 3 samples right"
+            got[7] = want[7]
+        assert got == want, name
+        assert t.tables[name].startswith(analysis.MOCK_BANNER)
+    tiers = t.tables["table_final_tiers"]
+    assert "Scene track: Clinical variant" in tiers and "Call-list track: Translation" in tiers
+    assert "mvs" not in tiers.lower() and "api" not in tiers.lower()
+    # every include of a result table in the paper has its table here, and no other
+    text = (REPO / "paper" / "sections" / "07_results.md").read_text()
+    asked = set(re.findall(r"include:generated/(table_final_\w+)\.md", text))
+    assert asked == set(analysis.PAPER_TABLES)
+
+
+def test_only_the_real_complete_run_is_written_into_the_paper(mock_run, tmp_path):
+    t = analysis.build(mock_run, tmp_path / "generated_mock", replicates=50, require_mock=True)
+    into = tmp_path / "generated"
+    into.mkdir()
+    with pytest.raises(SystemExit, match="mock data"):
+        analysis.copy_into_paper(t, into)
+    with pytest.raises(SystemExit, match="pilot_summary is for a real pilot"):
+        analysis.pilot_summary(t.run)
+    # a real pilot is refused as well; its own small table is labelled a pilot
+    import shutil
+    copy = tmp_path / "copy"
+    shutil.copytree(mock_run, copy, ignore=shutil.ignore_patterns("paper", "samples", "site"))
+    for f in copy.glob("*/*.json"):
+        card = json.loads(f.read_text())
+        card["meta"]["mock"] = False
+        f.write_text(json.dumps(card))
+    real = analysis.build(copy, tmp_path / "pilot_tables", replicates=50)
+    with pytest.raises(SystemExit, match="pilot is not the benchmark run"):
+        analysis.copy_into_paper(real, into)
+    assert not list(into.iterdir())
+    for name in analysis.PAPER_TABLES:
+        assert real.tables[name].startswith(analysis.PILOT_BANNER), name
+    text, values = analysis.pilot_summary(real.run)
+    assert text.startswith(analysis.PILOT_BANNER) and values["pilot.status"] == "pilot"
+    assert values["pilot.n_tasks"] == 39 and values["pilot.samples_per_task"] == 1
+    with pytest.raises(SystemExit, match="dry run is mock data"):
+        pt.main(["--from-dry-run", str(mock_run), "--into-paper", "--out", str(tmp_path / "x")])
+
+
+def test_the_committed_pilot_table_is_labelled_and_is_not_a_result_table():
+    gen = REPO / "paper" / "generated"
+    text = (gen / "pilot_results.md").read_text()
+    values = json.loads((gen / "pilot_values.json").read_text())
+    assert text.startswith(analysis.PILOT_BANNER)
+    assert values["pilot.status"] == "pilot" and values["pilot.model"] == "claude-haiku-4-5"
+    assert values["pilot.n_tasks"] == 39 and values["pilot.n_calls"] == 46
+    assert values["pilot.samples_per_task"] == 1
+    assert not list(gen.glob("table_final_*.md")), "result tables come from the real run only"
+    assert not [k for k in json.loads((gen / "values.json").read_text()) if k.startswith("pilot.")]
+
+
 def test_from_dry_run_flag_writes_the_mock_directory(mock_run, tmp_path, capsys):
     out = tmp_path / "generated_mock"
     assert pt.main(["--from-dry-run", str(mock_run), "--out", str(out),

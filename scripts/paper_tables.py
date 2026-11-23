@@ -9,6 +9,10 @@
     uv run scripts/paper_tables.py --manifest FINAL.json --data-root /path/to/data
     uv run python scripts/paper_tables.py --from-dry-run        # MOCK tables -> paper/generated_mock/
     uv run python scripts/paper_tables.py --from-run results/final-v1   # -> paper/generated_final/
+    uv run python scripts/paper_tables.py --from-run results/final-v1 --into-paper
+                                    # ... and the paper's seven table_final_*.md -> paper/generated/
+    uv run python scripts/paper_tables.py --from-run results/pilot-v1   # a pilot: its tables stay in
+                                    # results/pilot-v1/paper/; paper/generated/pilot_results.md
 
 Three sets of tables, in three directories, never mixed:
 
@@ -1515,6 +1519,9 @@ def main(argv=None) -> int:
     ap.add_argument("--from-run", type=pathlib.Path, default=None, metavar="RESULTS_DIR",
                     help="build every final table from a real manifest run's scorecards into "
                          f"{FINAL_OUT.relative_to(REPO)}")
+    ap.add_argument("--into-paper", action="store_true",
+                    help="with --from-run on the real, complete run: also write the seven "
+                         "tables the paper includes (table_final_*.md) into paper/generated/")
     ap.add_argument("--extra-tasks", type=pathlib.Path, default=None,
                     help="a task directory besides tasks/ (a dry run that added fixtures)")
     args = ap.parse_args(argv)
@@ -1528,7 +1535,20 @@ def main(argv=None) -> int:
             raise SystemExit(f"{source} does not exist" + (
                 "; run the dry run first: python -m molbench.runner --manifest "
                 "run/final_run.toml --dry-run" if mock else ""))
-        out = args.out or (MOCK_OUT if mock else FINAL_OUT)
+        pilot = False
+        if not mock:
+            first = next((f for f in sorted(source.glob("*/*.json"))
+                          if f.parent.name not in ("site", "samples", "paper")), None)
+            pilot = bool(first and json.loads(first.read_text(encoding="utf-8"))
+                         .get("meta", {}).get("pilot"))
+        # A pilot's tables never go where the final run's go: they stay with its results,
+        # and one small table, labelled as a pilot, goes to the paper.
+        out = args.out or (MOCK_OUT if mock else source / "paper" if pilot else FINAL_OUT)
+        if pilot and out.resolve() == FINAL_OUT.resolve():
+            raise SystemExit(f"{source} is a pilot; its tables are not written to {FINAL_OUT}")
+        if args.into_paper and (mock or pilot):
+            raise SystemExit("--into-paper is for the real benchmark run: a dry run is mock "
+                             "data and a pilot is not a result")
         tables = analysis.build(
             source, out, replicates=args.bootstrap or (2000 if mock else 10000),
             seed=args.seed, extra_tasks=args.extra_tasks, require_mock=mock,
@@ -1537,6 +1557,16 @@ def main(argv=None) -> int:
             print(f"note: {n}", file=sys.stderr)
         print(f"wrote {len(tables.values)} values and {len(tables.tables)} tables to {out}"
               + ("  (MOCK: fake numbers)" if mock else ""))
+        if pilot:
+            text, values = analysis.pilot_summary(tables.run)
+            (DEFAULT_OUT / "pilot_results.md").write_text(text, encoding="utf-8")
+            (DEFAULT_OUT / "pilot_values.json").write_text(
+                json.dumps(values, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+            print(f"wrote the pilot's own table and values to {DEFAULT_OUT}/pilot_results.md, "
+                  "pilot_values.json  (PILOT: not a benchmark result)")
+        if args.into_paper:
+            names = analysis.copy_into_paper(tables, DEFAULT_OUT)
+            print(f"wrote {len(names)} result tables into {DEFAULT_OUT}: " + ", ".join(names))
         return 0
     args.out = args.out or DEFAULT_OUT
     args.bootstrap = args.bootstrap or 10000

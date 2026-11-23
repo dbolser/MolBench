@@ -26,5 +26,6 @@
 | qwen/qwen3-next-80b-a3b-instruct | 0.608 | 0.632 | 0.569 | 0.605 | 0.529 | 0.614 |
 | mistralai/mistral-small-2603 | 0.510 | 0.509 | 0.578 | 0.456 | 0.618 | 0.509 |
 | baseline-rules (keyword baseline) | 0.549 | 0.509 | 0.500 | 0.553 | 0.598 | 0.632 |
+| baseline-literal (literal baseline) | 0.539 | 0.553 | 0.441 | 0.553 | 0.529 | 0.588 |
 
 Helix / strand context tasks left out.
