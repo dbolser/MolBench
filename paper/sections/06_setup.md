@@ -9,8 +9,8 @@ it.
 
 The models are chosen by a written rule, not by results. The *core models* are the
 {{plan.n_core_models}} language models in the results that we published online in October 2026
-(the results browser of Section 12), kept unchanged so that old and new numbers can be
-compared. They are lower-priced models, with list prices from {{plan.core_price_output_min}}
+(the results browser of Section 12). They are kept unchanged, so that the choice of models
+depends on no result of the present benchmark. They are lower-priced models, with list prices from {{plan.core_price_output_min}}
 to {{plan.core_price_output_max:.0f}} US dollars per million output tokens. Of the
 {{plan.n_core_models}}, {{plan.n_core_open}} have *open weights* (the weights of the model can
 be downloaded) and {{plan.n_core_closed}} have *closed weights* (the model can be used only
@@ -83,15 +83,15 @@ UniProt. With the instruction and the rule for the answer, the system prompt has
 {{prompt.mvs.words:,}} words on the scene track and {{prompt.api.words:,}} on the call-list
 track. SI Section S7 prints both system prompts and both guides in full.
 
-No prompt was tuned on benchmark tasks. The worked example in each prompt uses an entry that
-no task uses. The format guide of the scene track also contains one short illustration of a
+No prompt was tuned on benchmark tasks. Each of the two system prompts has one worked example,
+and both examples use entry {{prompt.worked_example_entry}}, which no task uses. The format guide of the scene track also contains one short illustration of a
 distance line on an entry that tasks do use; no task asks for that distance.
 
 ### 5.3 Sampling
 
 Each model answers each task {{plan.samples:word}} times in the main condition, at the provider's
 default temperature. The limit on the length of an answer is {{plan.max_tokens:,}} tokens.
-Of the core models, {{plan.n_core_reasoning}} first write reasoning text that the user does not
+Of the core models, {{plan.n_core_reasoning:word}} first write reasoning text that the user does not
 see; the provider bills it and counts it against the limit. For these models the limit is
 {{plan.reasoning_max_tokens:,}} tokens for reasoning and answer together (SI Table S7). An
 invalid answer is scored as it stands and is not retried; only transport errors are retried.
@@ -103,8 +103,9 @@ of the answer, and its cost.
 - **Per-model scores** are means over tasks of the mean over the task's {{plan.samples}}
   answers. For task success this is the task success rate; the all-{{plan.samples}} rate (the
   share of tasks on which all {{plan.samples}} answers succeed) is reported beside it (Section
-  4.2). Means over models are means over the core models and the optional models that were
-  run; they leave the keyword script out.
+  4.2). Valid-only scores are the exception: they pool a model's valid answers (Section 4.4).
+  Means over models are means over the core models and the optional models that were run;
+  they leave the keyword script out.
 - **Intervals** are 95% bootstrap intervals [@efron1979] with {{run.bootstrap_replicates:,}}
   resamples.
     - *What is resampled.* Whole structures, with replacement, not single tasks, because
@@ -115,11 +116,21 @@ of the answer, and its cost.
       are not themselves resampled, so an interval reflects the choice of structures and
       tasks, not the variation between a model's answers to one task. Models are treated as
       fixed: an interval on a mean over models describes these models, not models in general.
+    - *Valid-only scores.* Structures are resampled with all the valid answers to their
+      tasks, and the pooled mean is recomputed in each resample.
+    - *Differences.* Where the same tasks are compared under two conditions or two wordings
+      (planned comparisons 2 to 6 below), the difference is taken task by task, and
+      structures are resampled with the differences of their tasks. In comparison 1 the two
+      splits share no structure, and each split is resampled on its own. In comparison 7 the
+      two groups of clinical tasks can share a structure; each resample draws the structures
+      once, and both groups are recomputed on that draw.
     - *A limit.* In the clinical category, several structures can belong to one protein. They
       are resampled as separate structures (Section 9.4).
 - **Paired comparison of formats**, in six parts.
     - *Unit.* For each model and pair, a side is right when at least 2 of its
-      {{plan.samples}} answers are right (the majority summary of Section 4.2).
+      {{plan.samples}} answers are right (the majority summary of Section 4.2). The test
+      below needs one yes-or-no verdict per side, and the majority depends less on a single
+      unlucky answer than the first answer alone would.
     - *Primary comparison.* An answer is right when it is target-right, that is, when its
       target score is exactly 1. This is the same test in both formats. It uses the
       {{corpus.twins.n_with_target}} pairs that have a target score. The other
@@ -135,23 +146,32 @@ of the answer, and its cost.
       selected the wrong atoms. The outcome tables of the SI give the share of unshowable
       answers per model and track, against which the one-sided counts must be read.
     - *Test.* The two counts of pairs that are right on one side only are compared with
-      McNemar's exact test [@mcnemar1947]. We report the four counts for every model.
+      McNemar's exact test [@mcnemar1947]. We report the four counts for every model. The
+      test treats pairs as independent, although several pairs sit on one structure, so its p
+      values are somewhat too small. We read them as descriptions, and we give beside them
+      the difference between the two one-sided counts as a share of the pairs, with a 95%
+      interval for which structures are resampled.
     - *Repeats.* The analysis is repeated without the {{corpus.twins.need_hide_toggle}}
       pairs whose reference call list switches off part of the default view (Section 3.4),
       and without the clinical pairs, in which the call-list viewer can do the mapping
       itself. Those {{corpus.twins.need_hide_toggle}} pairs are first requests and the
       {{corpus.twins.n_without_target}} pairs without a target score are follow-up turns, so
       the two sets do not overlap.
-- **Planned comparisons**, each as a difference in task success rate with an interval:
-  (1) public against held-back split; (2) full against terse wording and (3) full against
-  indirect wording; (4) with and without JSON mode; (5) with and without grounding pack;
-  (6) with and without format guide; and (7) clinical tasks in which copying the number in the
-  variant name is right against those in which it is wrong (the primary clinical grouping; the
-  grouping by offset is descriptive). Comparisons 1 to 6 are reported together in Section 6.5.
-  Comparison 7 is the difference row of the clinical table in Section 6.4, where it is also
-  given on the target score. Totals of the
-  two tracks are not compared with each other: the tracks differ in their mix of categories
-  and in the length of the answer, so the formats are compared on the pairs only.
+- **Planned comparisons**, seven in all, each as a difference with an interval.
+  Comparisons 1 to 6 are differences in task success rate and are reported together in
+  Section 6.5: (1) public against held-back split; (2) full against terse wording and
+  (3) full against indirect wording; (4) with and without JSON mode, where the single
+  JSON-mode answer to a task is set against the mean of its {{plan.samples}} answers in the
+  main condition; (5) with and without grounding pack; (6) with and without format guide.
+  Comparisons 1 to 4 use both tracks, and 5 and 6 the scene track. Comparison 7 carries the
+  question of the Introduction: clinical tasks of the scene track in which copying the number
+  in the variant name is right against those in which it is wrong (the primary clinical
+  grouping; the grouping by offset is descriptive). For this comparison alone the primary
+  score is the target score, because task success also falls when an answer adds unrequested
+  context; the difference in task success rate is given beside it. It is the difference row
+  of the clinical table in Section 6.4. Totals of the two tracks are not compared with each
+  other: the tracks differ in their mix of categories and in the length of the answer, so the
+  formats are compared on the pairs only.
 - **What F1 is read against.** F1 has a floor that needs no skill: a scene with nothing but a
   protein cartoon, or a follow-up's start state returned unchanged, shares most of its drawing
   with the reference. The task success rate is therefore the primary score and the target
@@ -173,14 +193,17 @@ a valid scene-track answer of the main condition that the grader does not count 
 success. They are sampled under four limits: (i) no task supplies more than
 {{study.max_per_task}} answers, and never more than {{study.max_per_task_model}} from the same
 model; (ii) half are answers that an *image judge* calls the same as the reference, and half
-are answers that it calls different; (iii) within each half, the categories have numbers as
-equal as the available answers allow; (iv) no model supplies more than {{study.max_model_share:.0%}} of the set.
+are answers that it calls different; (iii) within each half, the categories contribute as
+nearly equal numbers of answers as the available answers allow; (iv) no model supplies more than {{study.max_model_share:.0%}} of the set.
 The image judge is a vision-language model that is shown the same two pictures and asked the
 same question; it is used here to find the answers most likely to look right, and it
-contributes to no score in this paper. Each comparison is rated by {{study.raters_per_pair}}
+contributes to no score in this paper. Each comparison is rated by {{study.raters_per_pair:word}}
 raters. We will report three things, with intervals: the share of these answers that people
 judge to show the same as the reference; the agreement between raters; and the agreement
-between people and the image judge. An answer that all its raters judge to show the same as
+between people and the image judge. Because the sample is balanced on the image judge's
+verdict and on category, the first of these describes the sample. It is not the grader's
+rate of false fails among all valid answers that it does not count as a success, and we make
+no estimate of that rate from this study: the study looks for cases. An answer that all its raters judge to show the same as
 the reference, although the grader did not count it as a success, is either a false fail of
 the grader or a difference that the picture does not show; each such case will be listed.
 

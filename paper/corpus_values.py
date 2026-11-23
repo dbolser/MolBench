@@ -221,6 +221,29 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     assert re.search(r"^MIN_SHARE = 0\.5$", src, flags=re.M) and "RCSB" in res_data["source"]   # "half", "RCSB PDB"
     V["corpus.n_other_tasks_with_alternatives"] = sum(
         1 for t in orig if t["accepted"] and t["tier"] != "accept_set")
+    # Name resolution: how many accepted entries there are, and how many of them, besides the
+    # reference entries, are panel entries with an atom table (graded on drawn state there).
+    res = [t for t in orig if t["tier"] == "resolve"]
+    other = {(t["id"], e.lower()) for t in res for e in t.get("accepted_ids") or []
+             if e.lower() not in {s.lower() for s in t["structures"]}}
+    V["resolve.n_accepted_entries"] = len(other) + len(res)
+    V["resolve.n_other_panel_entries"] = sum(T.has_table(e) for _, e in other)
+    V["resolve.n_tasks_with_other_panel_entry"] = len({i for i, e in other if T.has_table(e)})
+    assert all(T.has_table(s) for t in res for s in t["structures"])
+    # The entry of the worked example of both system prompts, which no task uses.
+    V["prompt.worked_example_entry"] = T.WORKED_EXAMPLE.upper()
+    sent = runner.build_system_prompts("spec")
+    assert all(re.search(T.WORKED_EXAMPLE, sent[k], flags=re.I) for k in ("mvs", "api_calling"))
+    # First requests of the scene track that name no representation for what they ask to be
+    # drawn: one template of the category "several right answers" (Section 3.5).
+    rep_open = [t for t in orig if t["track"] == "mvs" and t["family"] == "acc-representation-open"]
+    V["corpus.mvs.n_representation_open"] = len(rep_open)
+    V["corpus.mvs.representation_open_example"] = min(rep_open, key=lambda t: len(t["prompt"]))["prompt"]
+    assert all(t["tier"] == "accept_set" and t["accepted"] for t in rep_open)
+    # Opacity: a reference is opaque unless the request states an opacity (Section 3.5).
+    with_opacity = [t for t in orig if "opacity" in json.dumps(t["reference"])]
+    assert all(re.search(r"opacity|transparen", t["prompt"], flags=re.I) for t in with_opacity)
+    V["corpus.n_opacity_stated"] = len(with_opacity)
 
     # Largest template share per tier and track.
     worst = {}
@@ -354,6 +377,18 @@ def clinical_details(V: dict, clin: list[dict], by_id: dict) -> None:
     V["clin.n_no_accession_traditional"] = sum(bool(x["difficulty"]["name_in_mature_numbering"]) for x in no_acc)
     V["clin.n_no_accession_uniprot"] = len(no_acc) - V["clin.n_no_accession_traditional"]
     assert all(x["naming"] == "legacy" for x in c if x["difficulty"]["name_in_mature_numbering"])
+    # Requests with an accession, by the numbering of the name (Section 3.4).
+    acc = [x for x in c if x["difficulty"]["accession_in_prompt"]]
+    V["clin.n_accession_traditional"] = sum(bool(x["difficulty"]["name_in_mature_numbering"]) for x in acc)
+    V["clin.n_accession_uniprot"] = len(acc) - V["clin.n_accession_traditional"]
+    V["clin.n_uniprot_name"] = V["clin.n_accession_uniprot"] + V["clin.n_no_accession_uniprot"]
+    assert V["clin.n_uniprot_name"] + V["clin.n_mature_name"] == len(c)
+    # The quoted traditional-name request: is copying its number right? (The text says which.)
+    q = [x for t, x in zip(clin, c) if " ".join(t["prompt"].split()) == V["clin.mature_example.prompt"]]
+    assert len(q) == 1 and q[0]["difficulty"]["number_in_name_as_author_number_is_right"] is True
+    V["clin.mature_example.entry"] = [t for t, x in zip(clin, c) if x is q[0]][0]["structures"][0].upper()
+    V["clin.mature_example.number"] = int(re.sub(r"\D", "", q[0]["variants"][0]["name_in_prompt"]))
+    assert q[0]["variants"][0]["residues"][0]["auth_seq_id"] == V["clin.mature_example.number"]
     assert all(v["name_in_prompt"].startswith("p.") for x in c for v in x["variants"] if x["naming"] != "legacy")
     # What the traditional numbering leaves out, as each request says it.
     kinds = collections.Counter()
@@ -404,6 +439,28 @@ def clinical_details(V: dict, clin: list[dict], by_id: dict) -> None:
     assert len(same) == 2 * V["clin.n_same_numbering_pairs"]
     assert all(t["provenance"]["clinical"]["gene"] == "TP53"
                and not t["provenance"]["clinical"]["difficulty"]["needs_numbering_offset"] for t in same)
+    # Matched sets with an offset on one structure: how the variant is named in them. With a
+    # name in UniProt numbering, copying is wrong on the structure with the offset and right
+    # on the predicted one; with a traditional name it is the other way round.
+    sets = {}
+    for t in clin:
+        x = t["provenance"]["clinical"]
+        if x.get("pair") and t not in same:
+            sets.setdefault(frozenset((t["id"], x["pair"]["with"])), []).append(x)
+    assert len(sets) == V["clin.n_offset_pairs"] and all(len(v) == 2 for v in sets.values())
+    trad_sets = [v for v in sets.values() if v[0]["difficulty"]["name_in_mature_numbering"]]
+    for v in sets.values():
+        assert len({bool(x["difficulty"]["name_in_mature_numbering"]) for x in v}) == 1
+        off = [x for x in v if x["difficulty"]["needs_numbering_offset"]]
+        flat = [x for x in v if not x["difficulty"]["needs_numbering_offset"]]
+        assert len(off) == len(flat) == 1 and flat[0]["difficulty"]["alphafold_model"]
+        trad = bool(v[0]["difficulty"]["name_in_mature_numbering"])
+        assert off[0]["difficulty"]["number_in_name_as_author_number_is_right"] is trad
+        assert flat[0]["difficulty"]["number_in_name_as_author_number_is_right"] is (not trad)
+    V["clin.n_offset_pairs_traditional"] = len(trad_sets)
+    V["clin.n_offset_pairs_uniprot_name"] = len(sets) - len(trad_sets)
+    assert len(trad_sets) == 1 and trad_sets[0][0]["gene"] == "HBB"      # the text names E6V of haemoglobin beta
+    assert trad_sets[0][0]["variants"][0]["name_in_prompt"] == V["clin.traditional_on_predicted.name"]
     # Review status of the variants asked about: the best-reviewed record that the task cites.
     rank = ["no assertion criteria provided", "criteria provided, single submitter",
             "criteria provided, multiple submitters, no conflicts", "reviewed by expert panel", "practice guideline"]
@@ -971,11 +1028,13 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
                 tiers += (f"| {TIER_NAME[tier]} | {n} | {V[f'corpus.{track}.{tier}.n_structures']} "
                           f"| {P} | {P} | {P} | {P} | {P} |\n")
             if n and tier == "resolve":
-                for which in ("answers on the reference entry", "answers on another accepted entry"):
+                for which in ("answers on the reference entry (graded on drawn state)",
+                              "answers on another accepted entry (compared as written, except on "
+                              f"{V['resolve.n_other_panel_entries']} panel entries)"):
                     tiers += f"| \u2003*of which:* {which} | – | – | {P} | {P} | {P} | {P} | {P} |\n"
     out["shape_tiers.md"] = tiers
     out["shape_clinical.md"] = (
-        "| Clinical tasks (scene track) | Tasks | Target score | Task success rate | Target score with grounding pack "
+        "| Clinical tasks (scene track) | Tasks | Target score (primary) | Task success rate | Target score with grounding pack "
         "| Task success rate with grounding pack |\n"
         "|:------------------|--:|---:|---:|---:|---:|\n"
         f"| **Copying the number** (primary grouping): copying is right | {V['clin.n_face_value_right']} | {P} | {P} | {P} | {P} |\n"
@@ -983,17 +1042,18 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
         f"| Difference between these two rows (95% interval) | | {P} | {P} | {P} | {P} |\n"
         f"| **Offset** (descriptive grouping): no offset | {V['clin.n_no_offset']} | {P} | {P} | {P} | {P} |\n"
         f"| **Offset**: offset | {V['clin.n_offset']} | {P} | {P} | {P} | {P} |\n"
-        f"| Matched tasks, structure with an offset | {V['clin.n_offset_pairs']} | {P} | {P} | {P} | {P} |\n"
-        f"| Matched tasks, predicted structure without an offset | {V['clin.n_offset_pairs']} | {P} | {P} | {P} | {P} |\n"
+        f"| Matched tasks named in UniProt numbering, structure with an offset (copying is wrong) | {V['clin.n_offset_pairs_uniprot_name']} | {P} | {P} | {P} | {P} |\n"
+        f"| The same variants on the predicted structure, without an offset (copying is right) | {V['clin.n_offset_pairs_uniprot_name']} | {P} | {P} | {P} | {P} |\n"
         f"| Helix or strand requested (a subset, reported apart) | {V['clin.n_sse']} | {P} | {P} | {P} | {P} |\n")
     lm = [n for n, x in zip(names, models) if x["route"] != "baseline"]
     def paired(title: str, n_pairs: int) -> str:
         return (f"**{title}**\n\n"
                 "| Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only "
-                "| Right on neither side | McNemar p |\n"
-                "|:--------|--:|---:|---:|---:|---:|---:|\n"
-                + "".join(f"| {n} | {n_pairs} | {P} | {P} | {P} | {P} | {P} |\n" for n in lm[:2])
-                + f"| … up to {len(lm) - 2} further rows, one per model | | {P} | | | | |\n")
+                "| Right on neither side | McNemar p | Difference: scene only minus call list only, as a share "
+                "of the pairs (95% interval) |\n"
+                "|:--------|--:|---:|---:|---:|---:|---:|---:|\n"
+                + "".join(f"| {n} | {n_pairs} | {P} | {P} | {P} | {P} | {P} | {P} |\n" for n in lm[:2])
+                + f"| … up to {len(lm) - 2} further rows, one per model | | {P} | | | | | |\n")
     s3 = V["plan.samples"]
     assert s3 == 3      # "at least 2 of the 3 answers" is written out here and in the text
     out["shape_paired.md"] = (
@@ -1006,10 +1066,10 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     out["shape_robustness.md"] = (
         "| | Comparison | Tasks | Task success rate, first group | Task success rate, second group | Difference (95% interval) |\n"
         "|---:|:--------------------|---:|---:|---:|---:|\n"
-        f"| 1 | Public split against held-back split (both tracks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
-        f"| 2 | Full wording against terse wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
-        f"| 3 | Full wording against indirect wording | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
-        f"| 4 | Main against main + JSON mode (the models that offer it: {V['plan.n_json_mode_models']} of the {V['plan.n_core_models']} core models and each optional model that is run; one answer per task in JSON mode) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| 1 | Public split against held-back split (both tracks; all tasks) | {V['corpus.public.n_tasks']} and {V['corpus.heldback.n_tasks']} | {P} | {P} | {P} |\n"
+        f"| 2 | Full wording against terse wording (both tracks) | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
+        f"| 3 | Full wording against indirect wording (both tracks) | {V['corpus.n_requests_paraphrased']} requests ({V['corpus.n_tasks_paraphrased']} tasks) | {P} | {P} | {P} |\n"
+        f"| 4 | Main against main + JSON mode (the models that offer it: {V['plan.n_json_mode_models']} of the {V['plan.n_core_models']} core models and each optional model that is run; both tracks; one answer per task in JSON mode, set against the mean of the 3 main answers) | {V['corpus.n_tasks']} | {P} | {P} | {P} |\n"
         f"| 5 | Main against main + grounding pack (name-resolution and clinical categories, scene track) "
         f"| {V['corpus.mvs.resolve.n'] + V['corpus.mvs.clinical.n']} | {P} | {P} | {P} |\n"
         f"| 6 | Main against no format guide ({V['plan.n_bare_models']} models, scene track) "
@@ -1188,6 +1248,7 @@ def example_values(V: dict, by_id: dict) -> dict:
         "colour": calls(unp, colour="red"),
         "default_colour": calls(unp, cartoon="default"),
         "bare": [{"action": "load", "molecule_id": m["structures"][0]}],
+        "hide_cartoon": a["reference"] + [{"action": "set_property", "name": "hide_polymer", "value": True}],
     }
     answers = {"mvs": mvs_answers, "api": api_answers}
     for track, task in (("mvs", m), ("api", a)):
@@ -1221,6 +1282,18 @@ def example_values(V: dict, by_id: dict) -> dict:
     assert V["ex.api.colour.f1"] == 0.5 and V["ex.api.bare.f1"] == 0
     assert V["ex.mvs.other_rep_around.target"] == 1 and not V["ex.mvs.other_rep_around.success"]
     assert V["ex.mvs.surface.target"] == 1 and not V["ex.mvs.surface.success"]
+    # Section 4.2 works the "extra on the target" row by hand: credit n, attempted n, extra n.
+    assert V["ex.mvs.extra.target_precision"] == 0.5 and round(V["ex.mvs.extra.target"], 2) == 0.67
+    V["ex.n_target_atoms_twice"] = 2 * V["ex.n_target_atoms"]
+    # ... and says that context on the target atoms (the other representation on the residue
+    # and its neighbours) enters no count.
+    assert V["ex.mvs.other_rep_around.target_precision"] == 1
+    # The two call-list rows that are special to that track: the accepted alternative
+    # (the residue's segment of the default cartoon recoloured too), and an unrequested
+    # change outside the target (the default cartoon hidden).
+    assert V["ex.api.default_colour.success"] and V["ex.api.default_colour.target"] == 1
+    assert not V["ex.api.hide_cartoon.success"] and V["ex.api.hide_cartoon.target"] == 1
+    assert V["ex.api.hide_cartoon.f1"] < 1
     return {"mvs_task": m, "api_task": a, "answers": answers}
 
 
@@ -1249,6 +1322,9 @@ def example_table(V: dict) -> str:
         (f"Number copied from the variant name and used as the author number ({e['ex.face_value_residue']}{e['ex.uniprot_position']})", "ex.api.face"),
         ("Right residue, drawn red", "ex.api.colour"),
         ("Load only, no further call", "ex.api.bare"),
+        ("Right residue; its segment of the default cartoon is recoloured too (an accepted answer, Section 3.2)",
+         "ex.api.default_colour"),
+        ("Right residue, and the default cartoon hidden, which the request does not ask for", "ex.api.hide_cartoon"),
     ]
     rows = ["| Row | Answer | F1 | Task success | Target score |",
             "|:--|:------------------------------------------|--:|:--|--:|"]

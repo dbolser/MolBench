@@ -20,18 +20,19 @@ that is drawn is unrequested drawing.
 
 Recall is the mean, over the reference's facts, of how much of each the answer has. Precision
 is the mean, over the answer's facts, of how much of each the reference has. F1 is their
-harmonic mean. How much of a fact the other side has:
+harmonic mean. Two drawn states are compared, that of the reference and that of the answer;
+*the other* below means the other of these two. How much of a fact the other drawn state has:
 
-- *Fact about atoms*: the mean over its atoms of the share of the atom's styles that the other side
-  also has. A style that the other side has with the same representation type and another
-  colour or opacity counts half. An atom that the other side does not draw counts 0. Styles that
-  the other side has in addition do not lower this number; they lower the number computed in
-  the other direction.
+- *Fact about atoms*: the mean over its atoms of the share of the atom's styles that the
+  other also has. A style that the other has with the same representation type and another
+  colour or opacity counts half. An atom that the other does not draw counts 0. Styles that
+  the other has in addition do not lower this number; they lower the number computed in the
+  other direction.
 - *Label, tooltip, interaction request*: the share of the atoms carrying it that carry the
-  same on the other side.
+  same in the other.
 - *Camera target*: the overlap (intersection over union) of the two targets, as whole
   residues.
-- *Primitive, structure type, background*: 1 if the other side has the same, else 0.
+- *Primitive, structure type, background*: 1 if the other has the same, else 0.
 
 An answer that draws nothing scores 0 on every score when the reference draws something.
 
@@ -40,12 +41,13 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 The *target's drawing* is the set of the reference's styles that lie wholly inside the target
 atoms (in the running example the {{ex.color}} {{ex.rep}} of the residue; a cartoon of the
 whole chain that passes through the residue is not part of it). It is
-cut into facts as above. For each fact, counting (atom, style) items:
+cut into facts as above. For each fact, counting items (one item is one style on one atom):
 
 - *wanted*: the reference's items;
-- *credit*: 1 for each item the answer has, ½ for each that the answer draws in the right
-  representation with another colour or opacity;
-- *attempted*: the items the answer drew at all;
+- *credit*: 1 for each wanted item that the answer has, ½ for each that the answer draws in
+  the right representation with another colour or opacity;
+- *attempted*: the wanted items that the answer drew in the right representation, in any
+  colour or opacity;
 - *spill*: items outside the target on which the answer repeats a style that it drew on the
   target and that earned credit there (the requested representation, in the requested colour
   or in another), where the reference draws no such thing;
@@ -66,12 +68,18 @@ and task success count it. Table S1 gives the score of one example of each rule.
 between the second and the third rule is whether the style is confined to the target. It is a
 convention: a second representation on the target alone is read as part of the answer to "how
 should these atoms be drawn?", and a style that also covers other atoms is read as background.
-Rows S9 and S10 of Table S1 show the two cases side by side.
+Rows S9 and S10 of Table S1 show the two cases side by side. Row S9 by hand: the target has
+{{ex.n_target_atoms}} atoms and one requested style, so wanted, credit and attempted are each
+{{ex.n_target_atoms}}; the added {{ex.other_rep}} is confined to the target, so extra is
+{{ex.n_target_atoms}}; target precision is {{ex.n_target_atoms}}/{{ex.n_target_atoms_twice}}
+= {{ex.mvs.extra.target_precision:.2f}}, target recall is 1, and the target score is
+{{ex.mvs.extra.target:.2f}}. In row S10 the {{ex.other_rep}} also covers the two neighbours,
+is not confined to the target, and enters no count.
 
 Tasks without a stored target are of two kinds (Section 4.2 of the paper). A single request
 without one, such as a change of the background colour, uses everything the reference draws or
-changes as its target. A follow-up task without one, in which the edit takes something away
-or resets a setting, has no target score, and averages leave it out: there are no atoms
+changes as its target. A follow-up task without one, in which the edit takes something away,
+changes or restores a setting of the whole view, or needs no change, has no target score, and averages leave it out: there are no atoms
 "drawn as asked", and to use everything the reference draws would give full marks to the
 start state returned unchanged.
 
@@ -85,10 +93,14 @@ Protein Data Bank): it holds every current PDB entry
 in which a chain is aligned to the UniProt accession of the named protein over at least
 {{resolve.min_residues}} residues in total, or over at least half of the UniProt sequence if
 that is shorter. Where the request names several proteins, a ligand or bound DNA, the entry
-must hold all of them. An answer on another listed entry is graded against the reference's
-drawing resolved on that entry; where that entry is outside the structure panel, selections
-are compared as written (Section S4.8), and F1, task success and the target score all come
-from that comparison. A follow-up task gives a start
+must hold all of them. The references of this category select by kind (the polymer, the
+protein, the nucleic acid) or by the identifier of a compound, never by chain identifier or
+residue number, so the same selections can be evaluated on any entry. An answer on another
+listed entry that is in the structure panel ({{resolve.n_other_panel_entries}} such entries
+exist) is graded on drawn state: the reference's selections and the answer's are both
+resolved on the atom table of that entry. Where the entry is outside the structure panel,
+selections are compared as written (Section S4.8), and F1, task success and the target score
+all come from that comparison. A follow-up task gives a start
 state and an edit request; the answer is the complete new scene or call list, and only the
 drawn state it results in is graded. If the right answer is to change nothing, the reference is the start
 state.
@@ -129,9 +141,11 @@ ends in are its differences from the default view of the same structure, that is
 | assembly, preset, option, canvas | the assembly identifier, the load preset, each non-default option, each non-default canvas setting |
 
 A bare load has no facts and scores 0, unless a bare load is the reference. Two details differ
-from the scene track. A fact about atoms scores the share of its atoms that end up looking exactly
-the same on the other side; atoms that both sides changed but that look different count half.
-The target score is computed on the changes from a bare load on the target atoms. Selections in
+from the scene track. A fact about atoms scores the share of its atoms that end up looking
+exactly the same in the other drawn state; atoms that reference and answer both changed but
+that look different count half. The target score is computed on the changes from a bare load
+on the target atoms (a style added, or a default style removed), with the same counts of
+wanted, credit, attempted, spill and extra as on the scene track. Selections in
 UniProt numbering are resolved through the frozen SIFTS tables; the viewer reads the same
 mapping from the structure file that PDBe distributes.
 
@@ -180,8 +194,9 @@ tables.
   in PDBe Mol\* 3.3.2. The notebook widget that hosts this viewer for Python users (ipymolstar
   0.1.0) has no handler for four of the actions (camera focus, setting the highlight colour,
   clearing the highlight and clearing the selection); there they do nothing.
-- **Call-list track.** Options that need live services (superposition, ligand view,
-  annotations, density maps, lighting) are compared as declared settings. Camera focus,
+- **Call-list track.** Four options fetch data from live services (superposition of related
+  structures, the close-up view of one ligand, annotations from databases, experimental
+  density maps). They are compared as declared settings, and so is lighting. Camera focus,
   highlight and UniProt-numbered selections were not read back from the viewer. Which atoms
   are polymer, ligand, ion or water comes from tables filled by Mol\* 5.9.0, whereas PDBe Mol\*
   3.3.2 carries an older Mol\*; a bare load of {{controls.viewer.api.bare_loads}} entries was

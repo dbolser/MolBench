@@ -8,30 +8,35 @@ This file accompanies the paper. Every table in it is written by script from the
 the frozen data or archived model answers. Terms are used as defined in Boxes 1 and 2 of the paper:
 *scene track* (answers are MolViewSpec scenes), *call-list track* (answers are ordered calls to
 the PDBe Mol\* viewer), *drawn state*, *style*, *fact*, *F1*, *task success*, *target score*, *strict*
-and *valid-only*. *Model* always means a language model. The repository's own grading
-document calls a style a *draw* and a category a *tier*; the rules are the same. Task identifiers are those of the task files; in them the endings `-mvs` and
-`-api` mark the scene track and the call-list track.
+and *valid-only*. *Model* always means a language model. The repository and the prompts
+printed in Section S7 use a few other names for the same things (a *draw* for a style, a
+*tier* for a category); Table S0c lists them all. Task identifiers are those of the task
+files.
 
-Contents: S0, background terms of structural biology · S1, the running example in full · S2,
+Contents: S0, background terms · S1, the running example in full · S2,
 all task templates · S3, the structure panel and the variant list · S4, grading rules and
 known limits · S5, the control set by kind · S6, the run manifest, models and prices · S7,
 the system prompts · S8, further tables of the pilot run, and the trial of the rating study ·
 S9, further tables of the final run (pending).
 
-## S0. Background terms of structural biology
+## S0. Background terms
 
 For readers from outside structural biology. Box 1 of the paper defines the terms of
-sequences and variants (UniProt, ClinVar, transcript, missense variant, mature protein) and
-the terms of the corpus; Box 2 defines the terms of grading.
+sequences and variants (UniProt, ClinVar, transcript, missense variant, mature protein,
+polymer, ligand, representation) and the main terms of the corpus; Box 2 defines the terms of
+grading. Table S0a adds background terms of structural biology, and Table S0b the terms of the
+corpus that the paper defines in its text only.
 
-**Table S0. Background terms.**
+**Table S0a. Background terms of structural biology.**
 
 | Term | Meaning |
 |:---------|:------------------------------|
 | Residue, chain | A protein is a chain of amino acids. One amino acid in the chain is a *residue*; residues are numbered along the chain. A structure file names each chain with a short identifier, often one letter. |
 | C-alpha | The central carbon atom of an amino acid, to which its side chain is attached. One C-alpha per residue traces the course of the chain. |
 | Polymer | The protein, DNA or RNA chains of a structure, as opposed to bound small molecules, ions and water. |
-| Structure, entry | A set of atom coordinates. An *entry* is one deposition in the Protein Data Bank (PDB), with a four-character identifier such as 2NWD; where an entry holds several coordinate sets we use the first. A *predicted structure* is one computed from the sequence; ours come from the AlphaFold Protein Structure Database. |
+| Structure, entry | A set of atom coordinates. An *entry* is one deposition in the Protein Data Bank (PDB), with a four-character identifier such as 2NWD. A *predicted structure* is one computed from the sequence; ours come from the AlphaFold Protein Structure Database. |
+| Coordinate set (PDB "model") | One complete set of atom positions in an entry. An entry solved by nuclear magnetic resonance usually holds several; the PDB calls each a *model* and numbers them (`pdbx_PDB_model_num`). We use the first, and we say *coordinate set* because *model* in this paper means a language model. |
+| Assembly | The form in which the molecule is thought to work, for example a pair of identical chains. An entry can deposit one copy and describe how the others are generated from it by symmetry. |
 | mmCIF | The file format of the PDB archive: tables of named columns, one row per atom in the table of atoms. |
 | Ligand, het group | A *ligand* is a small molecule bound to the protein. *Het group* is the older file term for any molecule in an entry that is not part of a polymer chain (a ligand, an ion, a water); each kind has an identifier of up to three characters, such as HEM for haem. |
 | Helix, strand | The two common local shapes of a protein chain. An entry records where each helix and each strand begins and ends. |
@@ -40,14 +45,40 @@ the terms of the corpus; Box 2 defines the terms of grading.
 | Selection | The expression in an answer that picks atoms, for example "chain X, residue 64". |
 | Alternate positions | The same atom recorded at two or more positions, where the experiment saw a residue in more than one pose (the file calls these alternate conformers). |
 
+**Table S0b. Further terms of the corpus**, each defined in the section of the paper that is
+named with it.
+
+| Term | Meaning in the paper |
+|:---------|:------------------------------|
+| SIFTS | Structure Integration with Function, Taxonomy and Sequences: the public residue-by-residue mapping between PDB entries and UniProt sequences (Section 3.1). |
+| Structure panel | The fixed set of 79 structures. Tasks are built on 78 of them; one, 1HSG, is reserved for the worked example of both system prompts (Section 3.1). |
+| Category | One of eight kinds of task. The categories are not steps on one scale of difficulty (Section 3.3). |
+| Lookup categories | Name resolution and clinical variant. In these the answer needs one fact that a person would look up in a database: an entry identifier, or a residue number. The model cannot look it up and must recall it (Section 3.3). |
+| Template | A fixed kind of request within a category; a generator script fills in the structure, the residues, the colours and the wording (Section 3.3). |
+| Accepted answer | One of several drawn states that a task lists as right. An answer is graded against each, and the best result counts (Sections 3.3 and 4.2). |
+| Held-back split | The tasks on 15 structures that were set aside before generation and kept out of every earlier MolBench release. The tasks are public; the name does not mean a hidden test set (Section 3.6). |
+
+**Table S0c. Names used in the repository and in the prompts printed in Section S7.** The
+paper and this file use the words on the right.
+
+| In the repository or a prompt | In the paper |
+|:---------|:------------------------------|
+| draw | style |
+| tier | category |
+| MVS; MVS state, scene tree | MolViewSpec; scene |
+| action, canonical action | one call of a call list |
+| pdbe-molstar | PDBe Mol\* |
+| task identifiers ending in `-mvs` / `-api` | scene track / call-list track |
+
 ## S1. The running example in full
 
 The request, the two reference answers, the further accepted answers on the call-list track,
 the stored target and the grounding pack, exactly as they are in the task files
 `clin-pair-target-lyz-2nwd-w82r-mvs` (scene track) and `clin-pair-target-lyz-2nwd-w82r-api` (call-list track). The variant is
 *LYZ* p.W82R (p.Trp82Arg; UniProt P61626). UniProt names the disease
-as "Familial visceral amyloidosis, Ostertag type (AMYLD2)". ClinVar holds 2 records of this protein change, one
-for each DNA change that causes it: VCV000014376, NM_000239.3(LYZ):c.244T>C (p.Trp82Arg); VCV000014378, NM_000239.3(LYZ):c.244T>A (p.Trp82Arg). Both carry the aggregate
+as "Familial visceral amyloidosis, Ostertag type (AMYLD2)". Through UniProt's cross-references we found 2
+ClinVar records of this protein change, one for each of the two single-nucleotide changes
+that turn the codon of this tryptophan into a codon of arginine: VCV000014376, NM_000239.3(LYZ):c.244T>C (p.Trp82Arg); VCV000014378, NM_000239.3(LYZ):c.244T>A (p.Trp82Arg). Both carry the aggregate
 classification "pathogenic" and the review status
 "criteria provided, single submitter"; ClinVar's own field for the condition reads
 "not provided" on both. The entry 2NWD is human lysozyme at
@@ -222,7 +253,7 @@ From the request:
 
 **Table S1. Scores of the answers discussed in Sections 4.2 and 4.3 of the paper** (the same as Table 3 of the paper). *F1*: how much of
 the drawn state is right (0 to 1). *Task success*: the drawn state is exactly right. *Target
-score*: the requested atoms are drawn as asked, whatever else was drawn (0 to 1). Rows S1 to S10 are scenes, rows C1 to C5 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
+score*: how well the requested atoms are drawn as asked, whatever else was drawn (0 to 1). Rows S1 to S10 are scenes, rows C1 to C7 call lists. *Spill*, *extra on the target* and *context* are the three rules for extra
 drawing of Section S4.3.
 
 | Row | Answer | F1 | Task success | Target score |
@@ -244,6 +275,8 @@ drawing of Section S4.3.
 | C3 | Number copied from the variant name and used as the author number (Ser82) | 0.00 | no | 0.00 |
 | C4 | Right residue, drawn red | 0.50 | no | 0.50 |
 | C5 | Load only, no further call | 0.00 | no | 0.00 |
+| C6 | Right residue; its segment of the default cartoon is recoloured too (an accepted answer, Section 3.2) | 1.00 | yes | 1.00 |
+| C7 | Right residue, and the default cartoon hidden, which the request does not ask for | 0.33 | no | 1.00 |
 
 ## S2. Task templates
 
@@ -402,8 +435,8 @@ offset) must be found in the file by the build script, or the build fails.
 2. *Named entries*, chosen by hand to cover folds and features that the first group lacks.
    Well-known entries were preferred, solved by X-ray crystallography at 2.5 Å or better where
    one exists. The choice is by hand; the check of each claimed feature is by script.
-3. *Disease proteins.* 27 human proteins in which missense variants
-   cause inherited disease are listed by UniProt accession. The list was written by hand:
+3. *Disease proteins.* 27 human proteins in which germline missense
+   variants cause Mendelian disease are listed by UniProt accession. The list was written by hand:
    familiar examples that have experimental structures. For each, candidate entries are all PDB entries that SIFTS maps to the accession.
    The script keeps X-ray entries at 2.5 Å or better that cover at least one variant position
    (failing that, X-ray or cryo-electron microscopy entries at 3.5 Å or better), drops entries
@@ -412,7 +445,7 @@ offset) must be found in the file by the build script, or the build fails.
    resolution. Whether the author numbering differs from UniProt was not a criterion. A
    variant may also be asked on any other panel structure of the same protein.
 4. *5 predicted structures* from the AlphaFold Protein Structure Database,
-   numbered as UniProt is by construction: of p53, gamma-crystallin D, calmodulin-1, lysozyme and haemoglobin beta. The predicted
+   which use UniProt numbering by construction: of p53, gamma-crystallin D, calmodulin-1, lysozyme and haemoglobin beta. The predicted
    structure of p53 was used by earlier tasks. Each of the others is a partner to an
    experimental structure of the same protein that is numbered differently, so that the same
    variant can be asked with and without an offset.
@@ -530,15 +563,16 @@ corpus on this structure, both tracks, without rephrasings.
 We use *missense* variants only: one amino acid replaced by another. Throughout, the
 *classification* of a variant means ClinVar's aggregate germline classification on a variation
 record, the record whose accession begins with VCV. ClinVar keeps germline classifications
-(of inherited variants) apart from somatic ones; we use the germline one. A variation record
+(of variants present in every cell of a person, inherited or newly arisen) apart from somatic
+ones (of variants that arise in a tumour); we use the germline one. A variation record
 is usually about one change at the level of DNA, and different DNA changes can give the same
 amino-acid change, so one amino-acid change can have several records.
 74 of the variants that we keep have more than one qualifying
 record.
 
 **Table S4. The variant list in three steps.** Counts are of variants (amino-acid changes)
-removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper uses
-the same step numbers and gives step 3 as one step.
+removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper
+gives the same counts in one paragraph, with steps 3a to 3c taken together.
 
 | Step | Rule | Removed | Left |
 |:--|:----------------------------------|---:|---:|
@@ -563,8 +597,9 @@ classifications of pathogenicity" or "Uncertain significance". A candidate is ke
 ClinVar record, reached through UniProt's cross-references to ClinVar, lists the same
 amino-acid change at the same position among its protein changes and is classified
 "Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic". ClinVar lists the protein
-change of a record for each transcript; we did not check which transcript the matching name
-belongs to. We therefore rely on at least one reference protein of the record being numbered as
+change of a record once for each transcript of the gene. A record matches if any one of these
+names equals our amino-acid change and position; we did not check which transcript that name
+is counted on. We therefore rely on at least one reference protein of the record being numbered as
 the UniProt canonical sequence is at that position. We also did not look for further records
 of the same amino-acid change that carry another classification: one qualifying record is
 enough, and ClinVar may hold a second record that disagrees with it.
@@ -635,18 +670,19 @@ that is drawn is unrequested drawing.
 
 Recall is the mean, over the reference's facts, of how much of each the answer has. Precision
 is the mean, over the answer's facts, of how much of each the reference has. F1 is their
-harmonic mean. How much of a fact the other side has:
+harmonic mean. Two drawn states are compared, that of the reference and that of the answer;
+*the other* below means the other of these two. How much of a fact the other drawn state has:
 
-- *Fact about atoms*: the mean over its atoms of the share of the atom's styles that the other side
-  also has. A style that the other side has with the same representation type and another
-  colour or opacity counts half. An atom that the other side does not draw counts 0. Styles that
-  the other side has in addition do not lower this number; they lower the number computed in
-  the other direction.
+- *Fact about atoms*: the mean over its atoms of the share of the atom's styles that the
+  other also has. A style that the other has with the same representation type and another
+  colour or opacity counts half. An atom that the other does not draw counts 0. Styles that
+  the other has in addition do not lower this number; they lower the number computed in the
+  other direction.
 - *Label, tooltip, interaction request*: the share of the atoms carrying it that carry the
-  same on the other side.
+  same in the other.
 - *Camera target*: the overlap (intersection over union) of the two targets, as whole
   residues.
-- *Primitive, structure type, background*: 1 if the other side has the same, else 0.
+- *Primitive, structure type, background*: 1 if the other has the same, else 0.
 
 An answer that draws nothing scores 0 on every score when the reference draws something.
 
@@ -655,12 +691,13 @@ An answer that draws nothing scores 0 on every score when the reference draws so
 The *target's drawing* is the set of the reference's styles that lie wholly inside the target
 atoms (in the running example the yellow spacefill spheres of the residue; a cartoon of the
 whole chain that passes through the residue is not part of it). It is
-cut into facts as above. For each fact, counting (atom, style) items:
+cut into facts as above. For each fact, counting items (one item is one style on one atom):
 
 - *wanted*: the reference's items;
-- *credit*: 1 for each item the answer has, ½ for each that the answer draws in the right
-  representation with another colour or opacity;
-- *attempted*: the items the answer drew at all;
+- *credit*: 1 for each wanted item that the answer has, ½ for each that the answer draws in
+  the right representation with another colour or opacity;
+- *attempted*: the wanted items that the answer drew in the right representation, in any
+  colour or opacity;
 - *spill*: items outside the target on which the answer repeats a style that it drew on the
   target and that earned credit there (the requested representation, in the requested colour
   or in another), where the reference draws no such thing;
@@ -681,12 +718,18 @@ and task success count it. Table S1 gives the score of one example of each rule.
 between the second and the third rule is whether the style is confined to the target. It is a
 convention: a second representation on the target alone is read as part of the answer to "how
 should these atoms be drawn?", and a style that also covers other atoms is read as background.
-Rows S9 and S10 of Table S1 show the two cases side by side.
+Rows S9 and S10 of Table S1 show the two cases side by side. Row S9 by hand: the target has
+24 atoms and one requested style, so wanted, credit and attempted are each
+24; the added ball-and-stick is confined to the target, so extra is
+24; target precision is 24/48
+= 0.50, target recall is 1, and the target score is
+0.67. In row S10 the ball-and-stick also covers the two neighbours,
+is not confined to the target, and enters no count.
 
 Tasks without a stored target are of two kinds (Section 4.2 of the paper). A single request
 without one, such as a change of the background colour, uses everything the reference draws or
-changes as its target. A follow-up task without one, in which the edit takes something away
-or resets a setting, has no target score, and averages leave it out: there are no atoms
+changes as its target. A follow-up task without one, in which the edit takes something away,
+changes or restores a setting of the whole view, or needs no change, has no target score, and averages leave it out: there are no atoms
 "drawn as asked", and to use everything the reference draws would give full marks to the
 start state returned unchanged.
 
@@ -700,10 +743,14 @@ Protein Data Bank): it holds every current PDB entry
 in which a chain is aligned to the UniProt accession of the named protein over at least
 50 residues in total, or over at least half of the UniProt sequence if
 that is shorter. Where the request names several proteins, a ligand or bound DNA, the entry
-must hold all of them. An answer on another listed entry is graded against the reference's
-drawing resolved on that entry; where that entry is outside the structure panel, selections
-are compared as written (Section S4.8), and F1, task success and the target score all come
-from that comparison. A follow-up task gives a start
+must hold all of them. The references of this category select by kind (the polymer, the
+protein, the nucleic acid) or by the identifier of a compound, never by chain identifier or
+residue number, so the same selections can be evaluated on any entry. An answer on another
+listed entry that is in the structure panel (3 such entries
+exist) is graded on drawn state: the reference's selections and the answer's are both
+resolved on the atom table of that entry. Where the entry is outside the structure panel,
+selections are compared as written (Section S4.8), and F1, task success and the target score
+all come from that comparison. A follow-up task gives a start
 state and an edit request; the answer is the complete new scene or call list, and only the
 drawn state it results in is graded. If the right answer is to change nothing, the reference is the start
 state.
@@ -744,9 +791,11 @@ ends in are its differences from the default view of the same structure, that is
 | assembly, preset, option, canvas | the assembly identifier, the load preset, each non-default option, each non-default canvas setting |
 
 A bare load has no facts and scores 0, unless a bare load is the reference. Two details differ
-from the scene track. A fact about atoms scores the share of its atoms that end up looking exactly
-the same on the other side; atoms that both sides changed but that look different count half.
-The target score is computed on the changes from a bare load on the target atoms. Selections in
+from the scene track. A fact about atoms scores the share of its atoms that end up looking
+exactly the same in the other drawn state; atoms that reference and answer both changed but
+that look different count half. The target score is computed on the changes from a bare load
+on the target atoms (a style added, or a default style removed), with the same counts of
+wanted, credit, attempted, spill and extra as on the scene track. Selections in
 UniProt numbering are resolved through the frozen SIFTS tables; the viewer reads the same
 mapping from the structure file that PDBe distributes.
 
@@ -795,8 +844,9 @@ tables.
   in PDBe Mol\* 3.3.2. The notebook widget that hosts this viewer for Python users (ipymolstar
   0.1.0) has no handler for four of the actions (camera focus, setting the highlight colour,
   clearing the highlight and clearing the selection); there they do nothing.
-- **Call-list track.** Options that need live services (superposition, ligand view,
-  annotations, density maps, lighting) are compared as declared settings. Camera focus,
+- **Call-list track.** Four options fetch data from live services (superposition of related
+  structures, the close-up view of one ligand, annotations from databases, experimental
+  density maps). They are compared as declared settings, and so is lighting. Camera focus,
   highlight and UniProt-numbered selections were not read back from the viewer. Which atoms
   are polymer, ligand, ion or water comes from tables filled by Mol\* 5.9.0, whereas PDBe Mol\*
   3.3.2 carries an older Mol\*; a bare load of 73 entries was
@@ -1015,9 +1065,7 @@ short illustration of a distance line on entry 1A6M, which tasks use; no task as
 distance.
 
 The prompts and guides are printed as sent, so they use the words of the repository and not
-those of the paper. In them, *MVS* is MolViewSpec, an *MVS state* or *scene tree* is a scene,
-an *action* (or *canonical action*) is one call of a call list, and *pdbe-molstar* is PDBe
-Mol\*.
+those of the paper; Table S0c lists the names that differ.
 
 **Scene track: system prompt.**
 

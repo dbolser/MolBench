@@ -17,3 +17,5 @@
 | C3 | Number copied from the variant name and used as the author number (Ser82) | 0.00 | no | 0.00 |
 | C4 | Right residue, drawn red | 0.50 | no | 0.50 |
 | C5 | Load only, no further call | 0.00 | no | 0.00 |
+| C6 | Right residue; its segment of the default cartoon is recoloured too (an accepted answer, Section 3.2) | 1.00 | yes | 1.00 |
+| C7 | Right residue, and the default cartoon hidden, which the request does not ask for | 0.33 | no | 1.00 |

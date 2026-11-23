@@ -1,7 +1,8 @@
 ## 11. Ethics, human participants and licences
 
 **No patient data.** The benchmark contains no data about individuals. Clinical variants come
-from ClinVar's public variant-level records; no individual-level data are used. A variant
+from UniProt's variant annotation and are confirmed in ClinVar's public variant-level
+records; no individual-level data are used. A variant
 serves only as a residue position with a classification label.
 
 **Not for clinical use.** A high score does not make a model fit to interpret variants. The

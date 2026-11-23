@@ -120,10 +120,10 @@ def fig_pipeline(v: dict) -> str:
             f"{v['variants.n_usable']:,} variants classified as",
             "(likely) pathogenic in ClinVar"]),
         ("2  Generator scripts", [
-            f"{v['corpus.n_templates']} templates",
-            "request",
-            "reference answer",
-            "target atoms",
+            f"{v['corpus.n_templates']} templates.",
+            "Each task gets: a request,",
+            "a reference answer,",
+            "its target atoms and a",
             "record of how it was made"]),
         ("3  Task corpus", [
             f"{v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} categories",
@@ -429,8 +429,8 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
     ax.set_xticklabels([n for _, n in tiers], fontsize=8.5)
     ax.set_ylim(0, 1.3)
     ax.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
-    ax.set_yticklabels(["0", "0.2 (20%)", "0.4 (40%)", "0.6 (60%)", "0.8 (80%)", "1 (100%)"])
-    ax.set_ylabel("F1, or share of answers\n(an unshowable answer counts as 0)", fontsize=8.5)
+    ax.set_yticklabels(["0", "0.2", "0.4", "0.6", "0.8", "1"])
+    ax.set_ylabel("F1 (0 to 1), or share of answers (1 = 100%)\nAn unshowable answer counts as 0", fontsize=8.5)
     ax.tick_params(axis="y", labelsize=7.5, length=0)
     ax.tick_params(axis="x", length=0)
     ax.yaxis.grid(True, color="#e3e3e3", linewidth=0.8)
@@ -455,7 +455,7 @@ def fig_result_shapes(v: dict) -> str:
     this figure is a result: each panel has axes, the marks explained in a key, and one
     example row in the final colours and shapes, drawn pale and labelled as an example."""
     ph, gap, top, split = 132, 10, 30, 300
-    s = Svg(W, top + 3 * (ph + gap), "Shapes of the three result figures that the final run will fill; no data are shown")
+    s = Svg(W, top + 3 * (ph + gap), "Layout of the result figure, in three panels, that the final run will fill; no data are shown")
     s.text(10, 19, "No data yet. The pale example mark in each panel has the final colour and shape; "
            "its position means nothing.", size=10, fill=MUTED)
     ticks = ["0", "0.25", "0.5", "0.75", "1"]
@@ -519,11 +519,13 @@ def fig_result_shapes(v: dict) -> str:
           f'<rect width="6" height="6" fill="#ffffff"/><circle cx="3" cy="3" r="1.6" fill="{ORANGE}"/></pattern></defs>')
     for a, b, fill, pat in cuts:
         s.raw(f'<rect x="{ax + aw * a:.1f}" y="{ry}" width="{aw * (b - a):.1f}" height="14" fill="{pat or fill}" stroke="#ffffff"/>')
-    # the labels of Table 9; the two long ones sit in the right-hand column of the key
-    keys = [("#8a8a8a", "", "right on both sides"), ("", "url(#hatchA)", "right in the scene only"),
-            ("#f1f1f1", "", "right on neither side"), ("", "url(#hatchB)", "right in the call list only")]
+    # the labels of Table 9, in the order of the bar from left to right: down the first
+    # column of the key, then down the second
+    keys = [("#8a8a8a", "", "1  right on both sides"), ("", "url(#hatchA)", "2  right in the scene only"),
+            ("", "url(#hatchB)", "3  right in the call list only"), ("#f1f1f1", "", "4  right on neither side")]
     for k, (fill, pat, label) in enumerate(keys):
-        kx, kyy = 22 + (k % 2) * 130, y0 + ph - 26 + (k // 2) * 15
+        s.text(ax + aw * (cuts[k][0] + cuts[k][1]) / 2, ry - 4, str(k + 1), size=9.5, anchor="middle", fill=MUTED)
+        kx, kyy = 18 + (k // 2) * 128, y0 + ph - 26 + (k % 2) * 15
         s.raw(f'<rect x="{kx}" y="{kyy - 9}" width="14" height="10" fill="{pat or fill}" stroke="{LINE}" stroke-width="0.8"/>')
         s.text(kx + 20, kyy, label, size=9.5)
 

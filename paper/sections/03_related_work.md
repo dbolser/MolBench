@@ -14,8 +14,8 @@ biochemistry domain uses UCSF ChimeraX [@goddard2018chimerax], and a task is che
 the state of the application after the agent has finished. MolBench shares the idea of checking
 the resulting state. It differs in four ways. It tests the step from request to commands
 directly, with no desktop in between. Its references are computed by script and record their
-origin. Its categories of task are defined by what the model must know beyond the request, and
-include clinical variants. And it poses requests in two answer formats.
+origin. Its categories of task differ in what the model must know beyond the request or in
+the form of the task, and include clinical variants. And it poses requests in two answer formats.
 
 **SciVisAgentBench** [@ai2026scivisagentbench] has 108 expert-written cases of scientific
 visualization; its molecular cases use GROMACS and VMD. Outcomes are scored by a language-model
@@ -72,6 +72,5 @@ language model can do the same mapping when it writes a scene. MiSI-Bench [@li20
 vision-language models questions about rendered images of molecules and finds them well below
 human level, which is one reason our scores do not rest on a model that looks at pictures.
 
-Statements in this section about what other work contains were checked against the cited
-sources, and the notes of each check are in the repository. Where we say that a benchmark
-lacks something, we mean that we did not find it in its paper.
+Where this section says that another work lacks something, we mean that we did not find it in
+the cited source.

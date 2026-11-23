@@ -14,8 +14,8 @@ offset) must be found in the file by the build script, or the build fails.
 2. *Named entries*, chosen by hand to cover folds and features that the first group lacks.
    Well-known entries were preferred, solved by X-ray crystallography at 2.5 Å or better where
    one exists. The choice is by hand; the check of each claimed feature is by script.
-3. *Disease proteins.* {{panel.n_disease_proteins}} human proteins in which missense variants
-   cause inherited disease are listed by UniProt accession. The list was written by hand:
+3. *Disease proteins.* {{panel.n_disease_proteins}} human proteins in which germline missense
+   variants cause Mendelian disease are listed by UniProt accession. The list was written by hand:
    familiar examples that have experimental structures. For each, candidate entries are all PDB entries that SIFTS maps to the accession.
    The script keeps X-ray entries at 2.5 Å or better that cover at least one variant position
    (failing that, X-ray or cryo-electron microscopy entries at 3.5 Å or better), drops entries
@@ -24,7 +24,7 @@ offset) must be found in the file by the build script, or the build fails.
    resolution. Whether the author numbering differs from UniProt was not a criterion. A
    variant may also be asked on any other panel structure of the same protein.
 4. *{{panel.n_alphafold}} predicted structures* from the AlphaFold Protein Structure Database,
-   numbered as UniProt is by construction: of {{panel.alphafold_proteins}}. The predicted
+   which use UniProt numbering by construction: of {{panel.alphafold_proteins}}. The predicted
    structure of p53 was used by earlier tasks. Each of the others is a partner to an
    experimental structure of the same protein that is numbered differently, so that the same
    variant can be asked with and without an offset.
@@ -62,15 +62,16 @@ corpus on this structure, both tracks, without rephrasings.
 We use *missense* variants only: one amino acid replaced by another. Throughout, the
 *classification* of a variant means ClinVar's aggregate germline classification on a variation
 record, the record whose accession begins with VCV. ClinVar keeps germline classifications
-(of inherited variants) apart from somatic ones; we use the germline one. A variation record
+(of variants present in every cell of a person, inherited or newly arisen) apart from somatic
+ones (of variants that arise in a tumour); we use the germline one. A variation record
 is usually about one change at the level of DNA, and different DNA changes can give the same
 amino-acid change, so one amino-acid change can have several records.
 {{variants.n_several_records}} of the variants that we keep have more than one qualifying
 record.
 
 **Table S4. The variant list in three steps.** Counts are of variants (amino-acid changes)
-removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper uses
-the same step numbers and gives step 3 as one step.
+removed and left. The tests 3a to 3c are applied in this order. Section 3.1 of the paper
+gives the same counts in one paragraph, with steps 3a to 3c taken together.
 
 {{include:generated/table_variants.md}}
 
@@ -89,8 +90,9 @@ classifications of pathogenicity" or "Uncertain significance". A candidate is ke
 ClinVar record, reached through UniProt's cross-references to ClinVar, lists the same
 amino-acid change at the same position among its protein changes and is classified
 "Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic". ClinVar lists the protein
-change of a record for each transcript; we did not check which transcript the matching name
-belongs to. We therefore rely on at least one reference protein of the record being numbered as
+change of a record once for each transcript of the gene. A record matches if any one of these
+names equals our amino-acid change and position; we did not check which transcript that name
+is counted on. We therefore rely on at least one reference protein of the record being numbered as
 the UniProt canonical sequence is at that position. We also did not look for further records
 of the same amino-acid change that carry another classification: one qualifying record is
 enough, and ClinVar may hold a second record that disagrees with it.

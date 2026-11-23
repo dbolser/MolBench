@@ -14,9 +14,7 @@ short illustration of a distance line on entry 1A6M, which tasks use; no task as
 distance.
 
 The prompts and guides are printed as sent, so they use the words of the repository and not
-those of the paper. In them, *MVS* is MolViewSpec, an *MVS state* or *scene tree* is a scene,
-an *action* (or *canonical action*) is one call of a call list, and *pdbe-molstar* is PDBe
-Mol\*.
+those of the paper; Table S0c lists the names that differ.
 
 {{include:generated/si_prompts.md}}
 
