@@ -171,8 +171,7 @@ entry is reserved for the worked example of the system prompts, so tasks use
 has an offset. Every feature that we claim for a structure is verified in its file by the
 build script (SI Section S3.1).
 
-**Variants.** The panel includes structures of 27 human proteins,
-chosen by hand, in which germline *missense* variants (one amino acid replaced by another;
+**Variants.** The panel includes structures of 27 human proteins in which germline *missense* variants (one amino acid replaced by another;
 germline: present in every cell of a person) cause single-gene disease.
 UniProt lists 3,352 such variants of these proteins as pathogenic or
 likely pathogenic. We keep a variant only if it has a *qualifying record*: a ClinVar
@@ -265,8 +264,7 @@ grader has no atom table for an entry outside the panel.
 
 #### 3.3.1 The clinical category
 
-Each track has 82 clinical tasks, on 25 proteins and
-31 structures. A request names its variant in UniProt numbering, with
+Each track has 82 clinical tasks, on 31 structures. A request names its variant in UniProt numbering, with
 the prefix "p.", or, in 13 requests, by a traditional name, in which
 case the request says that the name is in mature-protein numbering and what that numbering
 leaves out. 46 requests state the UniProt accession, as the
@@ -523,7 +521,7 @@ of Mol\* 5.9.0 itself, run in a browser without a display, and must name a struc
 that can be loaded, which is decided from the address alone, with nothing fetched. On the
 call-list track a valid answer is a JSON list in which every call and field is one that the
 format guide documents. An invalid answer is
-one of two things, which must be kept apart. An *unshowable* answer cannot be shown at all:
+one of two things. An *unshowable* answer cannot be shown at all:
 it holds no parseable JSON of the right outer shape (a scene, or a list of calls) or, on the
 scene track, is rejected by the viewer or names a file that cannot be loaded. It scores 0 on
 all three scores. A
@@ -568,8 +566,7 @@ run as a test on every change. They do not estimate how often a way of writing a
 that we did not foresee is misjudged. Finding such cases needs people, and is the purpose of
 the rating study (Section 5.5).
 
-**Agreement with the viewers.** The verdict of a control comes from how it was made, not
-from the grader, and many were also checked in the running viewers. On the scene track, the
+**Agreement with the viewers.** Many controls were also checked in the running viewers. On the scene track, the
 reference and the answer of 910 controls were each loaded in
 Mol\* 5.9.0 and read back: the viewer always agreed with the verdict of the control and
 drew the atoms that the grader resolves. On the call-list track,
@@ -699,7 +696,7 @@ answers (Section 6.6).
 ### 5.6 Reproducibility
 
 One command performs the run from the manifest, and one rebuilds every table, figure and
-number of this paper from the archived answers (Section 12).
+number of this paper from the archived answers.
 
 ## 6. Results
 
@@ -894,8 +891,7 @@ leading models.
 answers, 75% were valid scenes. Per model the share ranged from
 9% to 99%, and strict F1 from
 0.07 to 0.84; the two are nearly proportional
-(Pearson r = 0.99 over the 15 models; SI Table
-S21). Valid-only, the models are much closer (F1 from 0.78 to
+(SI Table S21). Valid-only, the models are much closer (F1 from 0.78 to
 0.95). Most invalid answers were not parseable JSON, often with
 unbalanced braces: a scene is a deeply nested tree, and one brace too many loses the whole
 answer. This is why the final run reports strict and valid-only scores together and adds a
@@ -1014,8 +1010,8 @@ MolBench grades how a language model drives a molecular viewer on the atoms,
 representations and colours that the viewer would draw, without a judge model. References
 are computed by script from the structure and, for clinical variants, from the SIFTS
 mapping and ClinVar. The corpus has 797 tasks on 78
-structures, and 258 requests are posed in two answer formats, so that
-an error of content can be told apart from an error of format. The grader agrees with every
+structures, and 258 requests are posed in two answer formats, to
+tell errors of content from errors of format. The grader agrees with every
 known verdict of the 2,175 control answers against which it was developed, and a
 check by people is planned. A pilot run
 taught two things: most points were lost to answers that the viewer could not show at all,
@@ -1029,8 +1025,7 @@ final run will show whether models copy it.
 
 **No patient data.** The benchmark contains no data about individuals. Clinical variants come
 from UniProt's variant annotation and are confirmed in ClinVar's public variant-level
-records (one exception, Section 3.1). A variant
-serves only as a residue position with a classification label.
+records (one exception, Section 3.1).
 
 **Not for clinical use.** A high score does not make a model fit to interpret variants. The
 clinical category measures whether a model can locate a residue in a structure. The data providers

@@ -35,8 +35,7 @@ entry is reserved for the worked example of the system prompts, so tasks use
 has an offset. Every feature that we claim for a structure is verified in its file by the
 build script (SI Section S3.1).
 
-**Variants.** The panel includes structures of {{panel.n_disease_proteins}} human proteins,
-chosen by hand, in which germline *missense* variants (one amino acid replaced by another;
+**Variants.** The panel includes structures of {{panel.n_disease_proteins}} human proteins in which germline *missense* variants (one amino acid replaced by another;
 germline: present in every cell of a person) cause single-gene disease.
 UniProt lists {{variants.n_candidates:,}} such variants of these proteins as pathogenic or
 likely pathogenic. We keep a variant only if it has a *qualifying record*: a ClinVar
@@ -118,8 +117,7 @@ grader has no atom table for an entry outside the panel.
 
 #### 3.3.1 The clinical category
 
-Each track has {{clin.n}} clinical tasks, on {{clin.n_proteins}} proteins and
-{{clin.n_structures}} structures. A request names its variant in UniProt numbering, with
+Each track has {{clin.n}} clinical tasks, on {{clin.n_structures}} structures. A request names its variant in UniProt numbering, with
 the prefix "p.", or, in {{clin.n_mature_name}} requests, by a traditional name, in which
 case the request says that the name is in mature-protein numbering and what that numbering
 leaves out. {{clin.n_accession_in_prompt}} requests state the UniProt accession, as the

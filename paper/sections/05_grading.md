@@ -134,7 +134,7 @@ of Mol\* 5.9.0 itself, run in a browser without a display, and must name a struc
 that can be loaded, which is decided from the address alone, with nothing fetched. On the
 call-list track a valid answer is a JSON list in which every call and field is one that the
 format guide documents. An invalid answer is
-one of two things, which must be kept apart. An *unshowable* answer cannot be shown at all:
+one of two things. An *unshowable* answer cannot be shown at all:
 it holds no parseable JSON of the right outer shape (a scene, or a list of calls) or, on the
 scene track, is rejected by the viewer or names a file that cannot be loaded. It scores 0 on
 all three scores. A
@@ -179,8 +179,7 @@ run as a test on every change. They do not estimate how often a way of writing a
 that we did not foresee is misjudged. Finding such cases needs people, and is the purpose of
 the rating study (Section 5.5).
 
-**Agreement with the viewers.** The verdict of a control comes from how it was made, not
-from the grader, and many were also checked in the running viewers. On the scene track, the
+**Agreement with the viewers.** Many controls were also checked in the running viewers. On the scene track, the
 reference and the answer of {{controls.viewer.mvs.checked}} controls were each loaded in
 Mol\* 5.9.0 and read back: the viewer always agreed with the verdict of the control and
 drew the atoms that the grader resolves. On the call-list track,

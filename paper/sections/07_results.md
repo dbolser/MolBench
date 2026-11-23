@@ -134,8 +134,7 @@ leading models.
 answers, {{oct.spec.valid_share:.0%}} were valid scenes. Per model the share ranged from
 {{oct.spec.valid_share_min:.0%}} to {{oct.spec.valid_share_max:.0%}}, and strict F1 from
 {{oct.spec.f1_min:.2f}} to {{oct.spec.f1_max:.2f}}; the two are nearly proportional
-(Pearson r = {{oct.spec.r_valid_f1:.2f}} over the {{oct.spec.n_models}} models; SI Table
-S21). Valid-only, the models are much closer (F1 from {{oct.spec.valid.f1_min:.2f}} to
+(SI Table S21). Valid-only, the models are much closer (F1 from {{oct.spec.valid.f1_min:.2f}} to
 {{oct.spec.valid.f1_max:.2f}}). Most invalid answers were not parseable JSON, often with
 unbalanced braces: a scene is a deeply nested tree, and one brace too many loses the whole
 answer. This is why the final run reports strict and valid-only scores together and adds a

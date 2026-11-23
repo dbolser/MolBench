@@ -111,4 +111,4 @@ answers (Section 6.6).
 ### 5.6 Reproducibility
 
 One command performs the run from the manifest, and one rebuilds every table, figure and
-number of this paper from the archived answers (Section 12).
+number of this paper from the archived answers.

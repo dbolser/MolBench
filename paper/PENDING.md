@@ -29,9 +29,9 @@ Run numbers currently come from: **October 2026 panel** (PRELIMINARY). They appe
 | 11 | `sections/07_results.md` | 177 | 1 | rating study — the four results named in Section 5.5, with intervals: the share of the grader's task successes that people call the same, the share of the other answers that people call different, the same two shares for the target score, and the agreement between raters | rating study |
 | 12 | `sections/09_discussion.md` | 3 | 1 | final run — discussion of the results: which categories separate models, what the paired comparison shows, whether the set-aside split differs from the other tasks, and what Table 10 says about mapping against copying | final run |
 | 13 | `sections/10z_conclusion.md` | 16 | 1 | final run — two sentences on the results: how well the models drive the viewer on each track, and what the paired comparison shows | final run |
-| 14 | `sections/11_ethics.md` | 11 | 1 | Dan — ClinVar's own statement on clinical use, to be read at the source by hand and added to this sentence; the page refuses automated reading | Dan |
-| 15 | `sections/11_ethics.md` | 16 | 1 | Dan — confirm the consent wording shown to raters, and whether the target journal or the author's institution requires an ethics statement or a waiver for this study | Dan |
-| 16 | `sections/11_ethics.md` | 21 | 1 | Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements | Dan |
+| 14 | `sections/11_ethics.md` | 10 | 1 | Dan — ClinVar's own statement on clinical use, to be read at the source by hand and added to this sentence; the page refuses automated reading | Dan |
+| 15 | `sections/11_ethics.md` | 15 | 1 | Dan — confirm the consent wording shown to raters, and whether the target journal or the author's institution requires an ethics statement or a waiver for this study | Dan |
+| 16 | `sections/11_ethics.md` | 20 | 1 | Dan — final wording of this disclosure, which the journal asks for in the Acknowledgements | Dan |
 | 17 | `sections/12_availability.md` | 5 | 1 | deposit — DOI of the frozen corpus, including the set-aside split, and of the raw model answers and score files of the final run | deposit |
 | 18 | `sections/12_availability.md` | 6 | 1 | deposit — anonymised ratings of both rating studies, with the analysis scripts | deposit |
 | 19 | `sections/12_availability.md` | 26 | 1 | Dan — corresponding author, author contributions, and the notes the journal asks for (competing interests) | Dan |
