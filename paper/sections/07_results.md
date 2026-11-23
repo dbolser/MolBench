@@ -119,7 +119,7 @@ the system prompt that documents the answer format.
 
 ⟦PENDING: final run — outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the repaired scores, F1 valid-only and the cost per model, as tables in SI Section S8⟧
 
-⟦PENDING: rating study — how often people call an answer that the grader failed the same as the reference, agreement between people, and the check of possible false passes, with intervals (Section 5.5)⟧
+⟦PENDING: rating study — how often people call an answer that the grader did not count as a success the same as the reference, agreement between people, and the check of possible false passes, with intervals (Section 5.5)⟧
 
 ### 6.6 Preliminary evidence (October 2026 pilot run: older corpus, regraded with the present grader)
 
@@ -152,8 +152,8 @@ or too few loses the whole answer. An offline repair of the JSON turned
 were not checked by the viewer). This is why the final run reports strict and valid-only scores
 side by side and adds a JSON-mode condition.
 
-**Table 13. Pilot run, per model (preliminary).** {{mvs.n_tasks}} tasks, one answer each,
-ordered by task success rate. *Weights*: open if the weights of the model can be downloaded,
+**Table 13. Pilot run, per model (preliminary).** The run had {{mvs.n_tasks}} tasks and one
+answer per task; the rows are ordered by task success rate. *Weights*: open if the weights of the model can be downloaded,
 closed if the model can be used only through a provider's service. *Valid answers*: answers
 that parse and that the viewer accepts. *F1*: how much of the drawn state is right (0 to 1).
 *Task success rate*: share of answers whose drawn state is exactly right. *Strict*: every answer

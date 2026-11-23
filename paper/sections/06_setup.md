@@ -86,7 +86,7 @@ distance line on an entry that tasks do use; no task asks for that distance.
 
 Each model answers each task {{plan.samples}} times in the main condition, at the provider's
 default temperature. The limit on the length of an answer is {{plan.max_tokens:,}} tokens.
-{{plan.n_core_reasoning}} of the core models first write reasoning text that the user does not
+Of the core models, {{plan.n_core_reasoning}} first write reasoning text that the user does not
 see; the provider bills it and counts it against the limit. For these models the limit is
 {{plan.reasoning_max_tokens:,}} tokens for reasoning and answer together (SI Table S6). An
 invalid answer is scored as it stands and is not retried; only transport errors are retried.
@@ -107,8 +107,9 @@ of the answer, and its cost.
   resampled, so an interval reflects the choice of structures and tasks, not the variation
   between a model's answers to one task. Models are treated as fixed: an interval on a mean
   over models describes these models, not models in general. In the clinical category, several structures can belong to one protein;
-  they are resampled as separate structures, which we name as a limit in Section 9.4. Table 8
-  gives the number of structures beside the number of tasks.
+  they are resampled as separate structures, which we name as a limit in Section 9.4. The
+  table of results by category (Section 6.2) gives the number of structures beside the number
+  of tasks.
 - **Paired comparison of formats.** For each model and pair, a side counts as right when at
   least 2 of its {{plan.samples}} answers are right (the majority summary of Section 4.2).
   "Right" is taken two ways. The primary comparison uses the target score: an answer is right
@@ -132,8 +133,9 @@ of the answer, and its cost.
   indirect wording; (4) with and without JSON mode; (5) with and without grounding pack;
   (6) with and without format guide; and (7) clinical tasks in which copying the number in the
   variant name is right against those in which it is wrong (the primary clinical grouping; the
-  grouping by offset is descriptive). Comparisons 1 to 6 are the rows of Table 12. Comparison
-  7 is the difference row of Table 10, which is also given on the target score. Totals of the
+  grouping by offset is descriptive). Comparisons 1 to 6 are reported together in Section 6.5.
+  Comparison 7 is the difference row of the clinical table in Section 6.4, where it is also
+  given on the target score. Totals of the
   two tracks are not compared with each other: the tracks differ in their mix of categories
   and in the length of the answer, so the formats are compared on the pairs only.
 - **What F1 is read against.** F1 has a floor that needs no skill: a scene with nothing but a
@@ -162,10 +164,10 @@ numbers; (iv) no model supplies more than {{study.max_model_share:.0%}} of the s
 The image judge is a vision-language model that is shown the same two pictures and asked the
 same question; it is used here to find the answers most likely to look right, and it
 contributes to no score in this paper. Each comparison is rated by {{study.raters_per_pair}}
-raters. We will report, with intervals, how often people call an answer that the grader failed
-the same as the reference, the agreement between the raters, and the agreement between people
+raters. We will report, with intervals, how often people call an answer that the grader did not
+count as a success the same as the reference, the agreement between the raters, and the agreement between people
 and the image judge. An answer that all its raters call the same as the reference although the
-grader failed it is either a false fail of the grader or a difference that the picture does
+grader did not count it as a success is either a false fail of the grader or a difference that the picture does
 not show; each such case will be listed.
 
 *Possible false passes.* A further {{study.n_grader_check_pairs}} picture comparisons are of

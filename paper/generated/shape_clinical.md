@@ -1,5 +1,5 @@
 | Clinical tasks (scene track) | Tasks | Target score | Task success rate | Target score with grounding pack | Task success rate with grounding pack |
-|:---|---:|---:|---:|---:|---:|
+|:------------------|--:|---:|---:|---:|---:|
 | **Copying the number** (primary grouping): copying is right | 34 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | **Copying the number**: copying is wrong | 48 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Difference between these two rows (95% interval) | | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |

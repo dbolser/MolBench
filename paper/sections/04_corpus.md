@@ -7,7 +7,7 @@ whole.
 
 ### 3.1 Frozen public data
 
-**Structures.** All tasks use a fixed *structure panel* of {{panel.n}} structures:
+**Structures.** All tasks use a fixed *structure panel* of {{panel.n}} structures, namely
 {{panel.n_pdb}} PDB entries [@wwpdb2019] and {{panel.n_alphafold}} predicted structures from
 the AlphaFold Protein Structure Database [@varadi2024afdb]. One PDB entry is reserved as the
 worked example in a prompt, so tasks use {{corpus.n_structures}}. The panel was chosen for
@@ -54,12 +54,12 @@ structures ({{clin.n_pdb_structures}} PDB entries and the {{panel.n_alphafold}} 
 structures), with at most {{clin.max_tasks_per_structure}} tasks per track on one structure.
 The other {{panel.n_disease_proteins_without_task}} proteins have no task: for triosephosphate
 isomerase no variant passed the filter, and for carbonic anhydrase 2 the only one that passed
-lies at a residue that the panel structure does not contain. SI Section S3.2 names the
-proteins that have tasks on more than one structure and the entries that serve two proteins.
+lies at a residue that the panel structure does not contain. SI Section S3.2 says how many
+proteins have tasks on more than one structure and how many entries serve two proteins.
 
 **Atom tables and residue mapping.** For each structure we store two frozen tables. The *atom
-table* lists every atom record of the first coordinate set of the entry's mmCIF file from the
-PDB archive (for a predicted structure, the file of the AlphaFold Protein Structure Database),
+table* lists every atom record of the first coordinate set of the entry's file in the PDB
+archive, in the archive's mmCIF format (for a predicted structure, the file of the AlphaFold Protein Structure Database),
 with its chain and residue in both author and label numbering. It keeps *alternate
 conformers*, the same atom recorded at two or more positions where the experiment saw a
 residue in more than one pose ({{panel.n_with_alternate_conformers}} structures have them),
@@ -182,9 +182,10 @@ The {{corpus.n_tasks}} tasks ({{corpus.mvs.n}} on the scene track, {{corpus.api.
 call-list track) use {{corpus.n_structures}} of the {{panel.n}} panel structures. No structure
 appears in more than {{corpus.max_tasks_per_structure_tier_track}} tasks of one category and
 track. The call-list track has more translation tasks than the scene track because its format
-has many single-purpose calls and selectors: {{corpus.api.translation.n_call_only_templates}}
-templates ({{corpus.api.translation.n_call_only}} tasks) exercise calls that the scene
-templates have no counterpart for, and the other {{corpus.twins.translation}} tasks are pairs.
+has many single-purpose calls and selectors. Calls that the scene templates have no
+counterpart for are exercised by {{corpus.api.translation.n_call_only_templates}} templates
+({{corpus.api.translation.n_call_only}} tasks); the other {{corpus.twins.translation}}
+translation tasks are pairs.
 
 #### 3.3.1 The clinical category
 

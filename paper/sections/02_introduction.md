@@ -59,20 +59,20 @@ in different ways receive the same score.
 
 This paper makes four contributions, presented in this order.
 
-1. **A corpus built by script** (Section 3): {{corpus.n_tasks}} tasks on
+1. **A corpus built by script** (Section 3). It has {{corpus.n_tasks}} tasks on
    {{corpus.n_structures}} structures in eight categories of task, which differ in what the
    model must know beyond the request. They include {{clin.n}} clinical-variant requests on
    {{clin.n_proteins}} proteins; in {{clin.n_face_value_wrong}} of them a model that copies
    the number from the variant name selects the wrong residue (Section 3.3.1). Every reference
    records how it was made and is tested against the structure.
-2. **A grader on drawn state, tested against a control set** (Section 4): three scores with
-   plain definitions, and {{controls.n:,}} control answers whose verdict is known from how
-   they were made.
-3. **A paired design** (Sections 3.4 and 5): {{corpus.n_twin_pairs}} requests are posed in two
+2. **A grader on drawn state, tested against a control set** (Section 4). It gives three
+   scores with plain definitions, and it is tested on {{controls.n:,}} control answers whose
+   verdict is known from how they were made.
+3. **A paired design** (Sections 3.4 and 5). In it, {{corpus.n_twin_pairs}} requests are posed in two
    answer formats with the same target atoms, so that an error of content can be told apart
    from an error of format.
 4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 6
-   and 7): a pilot run on {{oct.spec.n_models}} models exposed a flaw in our own references
+   and 7). A pilot run on {{oct.spec.n_models}} models exposed a flaw in our own references
    and changed the design, and one final run will fill tables whose shape is already set.
    ⟦PENDING: final run — one sentence stating the main result⟧
 

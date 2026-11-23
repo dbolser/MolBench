@@ -193,6 +193,7 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     # Requests that ask for a lone metal ion as a sphere (SI Section S4.8).
     ion = [t for t in orig if t["family"] == "tr-ions"]
     assert all("sphere" in t["prompt"] for t in ion)
+    assert sum(t["track"] == "mvs" for t in ion) * 2 == len(ion)      # "half of them on each track"
     V["corpus.n_ion_sphere_tasks"] = len(ion)
     # Translation on the call-list track: templates for calls that a scene has no partner for.
     api_tr = [t for t in orig if t["track"] == "api" and t["tier"] == "translation"]
@@ -347,7 +348,7 @@ def clinical_groupings_table(V: dict) -> str:
     n = V
     return "\n".join([
         "| | Copying the number is right | Copying the number is wrong | All |",
-        "|:---|---:|---:|---:|",
+        "|:-----------------|---:|---:|---:|",
         f"| **No offset**: the target's author number is its UniProt number | {n['clin.n_face_right_no_offset']} "
         f"| {n['clin.n_face_wrong_no_offset']} | {n['clin.n_no_offset']} |",
         f"| **Offset**: the target's author number differs from its UniProt number | {n['clin.n_face_right_offset']} "
@@ -358,7 +359,7 @@ def clinical_groupings_table(V: dict) -> str:
 
 def corpus_table(V: dict) -> str:
     rows = ["| Category | What is asked | Scene track (public + held back) | Call-list track (public + held back) | Pairs |",
-            "|:---|:---|---:|---:|---:|"]
+            "|:------|:----------------|-----:|-----:|--:|"]
     for tier in TIERS:
         cells = []
         for track in ("mvs", "api"):
@@ -467,7 +468,7 @@ def panel_values(V: dict, used) -> list[dict]:
 
 def variants_table(V: dict) -> str:
     """The variant list step by step (Section 3.1)."""
-    rows = ["| Step | Rule | Removed | Left |", "|:---|:---|---:|---:|",
+    rows = ["| Step | Rule | Removed | Left |", "|:--|:----------------------------------|---:|---:|",
             f"| 1 | Single-residue missense variants of the {V['panel.n_disease_proteins']} proteins that UniProt reports as "
             f"pathogenic or likely pathogenic, with ClinVar as a source | | {V['variants.n_candidates']:,} |",
             f"| 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same "
@@ -485,7 +486,7 @@ def variants_table(V: dict) -> str:
 
 def si_panel_table(entries, used, held) -> str:
     rows = ["| Entry | Title (as deposited) | Method | Deposited | Atoms | Author numbering differs from UniProt | Split | Tasks |",
-            "|:---|:---|:---|:---|---:|:---|:---|---:|"]
+            "|:---|:------------|:----|:----|---:|:---|:---|---:|"]
     for e in entries:
         res = f" {e['resolution']:.2f} Å" if e.get("resolution") else ""
         off = "–" if not e.get("sifts") else ("yes" if e.get("offset") else "no")
@@ -568,7 +569,7 @@ def si_controls_table(s: dict) -> str:
     for track, name in (("mvs", "Scene track"), ("api", "Call-list track")):
         out += [f"**{name}.**", "",
                 "| Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |",
-                "|:---|:---|---:|---:|---:|"]
+                "|:-----|:----------------------|---:|---:|---:|"]
         for k in s["tracks"][track]["kinds"]:
             verdict = {"identical": "must pass (identical)", "equivalent": "must pass (equivalent)",
                        "wrong": "must fail (wrong)"}.get(k["group"], k["group"])
@@ -635,7 +636,7 @@ def october_models_table() -> str:
     alias = jload(PAPER / "inputs.json")["aliases"]
     weights = {k.split("/")[-1]: v["weights"] for k, v in info.items()}
     rows = ["| Model | Weights | Valid answers | F1 (strict) | Task success rate (strict) | F1, valid-only | Task success rate, valid-only |",
-            "|:---|:---|---:|---:|---:|---:|---:|"]
+            "|:--------|:---|---:|---:|---:|---:|---:|"]
     for k, m in sorted(by_model.items(), key=lambda kv: (-kv[1]["success"], -kv[1]["new_f1"], kv[0])):
         name = alias.get(k, k).split("/")[-1]
         rows.append(f"| {name} | {weights.get(name, '?')} | {m['valid']} of {m['n']} | {m['new_f1']:.2f} "
@@ -645,7 +646,7 @@ def october_models_table() -> str:
 
 def october_table(V: dict) -> str:
     rows = ["| Category (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success rate | Requested part exactly right |",
-            "|:---|---:|---:|---:|---:|---:|---:|"]
+            "|:-----------|---:|---:|---:|---:|---:|---:|"]
     for key, name in (("translation", "Translation"), ("grounded", "Structure-grounded, name resolution and interactions"),
                       ("clinical", "Clinical variant")):
         q = f"oct.spec.{key}"
@@ -768,7 +769,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     out = {}
     head = ("| Model | Weights | Valid answers | Task success rate (strict) | Target score (strict) | F1 (strict) "
             "| Task success rate, valid-only | Target score, valid-only | All-3 rate | Cost (USD) |\n"
-            "|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|\n")
+            "|:-------|:---|---:|---:|---:|---:|---:|---:|---:|---:|\n")
     # The review draft shows the first rows; the final table has one row per model (SI Table S6).
     shown = 3
     body = "".join(f"| {n} | {w} | {P} | {P} | {P} | {P} | {P} | {P} | {P} | {P} |\n"
@@ -794,7 +795,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
     out["shape_clinical.md"] = (
         "| Clinical tasks (scene track) | Tasks | Target score | Task success rate | Target score with grounding pack "
         "| Task success rate with grounding pack |\n"
-        "|:---|---:|---:|---:|---:|---:|\n"
+        "|:------------------|--:|---:|---:|---:|---:|\n"
         f"| **Copying the number** (primary grouping): copying is right | {V['clin.n_face_value_right']} | {P} | {P} | {P} | {P} |\n"
         f"| **Copying the number**: copying is wrong | {V['clin.n_face_value_wrong']} | {P} | {P} | {P} | {P} |\n"
         f"| Difference between these two rows (95% interval) | | {P} | {P} | {P} | {P} |\n"
@@ -808,7 +809,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
         return (f"**{title}**\n\n"
                 "| Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only "
                 "| Right on neither side | McNemar p |\n"
-                "|:---|---:|---:|---:|---:|---:|---:|\n"
+                "|:--------|--:|---:|---:|---:|---:|---:|\n"
                 + "".join(f"| {n} | {n_pairs} | {P} | {P} | {P} | {P} | {P} |\n" for n in lm[:2])
                 + f"| … up to {len(lm) - 2} further rows, one per model | | {P} | | | | |\n")
     s3 = V["plan.samples"]
@@ -832,7 +833,7 @@ def shape_tables(V: dict, models: list[dict]) -> dict[str, str]:
         f"| {V['corpus.mvs.n']} | {P} | {P} | {P} |\n")
     out["shape_followup.md"] = (
         "| Group | Scene track: tasks | Scene track: task success rate | Call-list track: tasks | Call-list track: task success rate |\n"
-        "|:---|---:|---:|---:|---:|\n"
+        "|:----------|---:|---:|---:|---:|\n"
         f"| Follow-up turns that need a change | {V['corpus.mvs.followup.n'] - V['corpus.followup.mvs.noop']} | {P} "
         f"| {V['corpus.api.followup.n'] - V['corpus.followup.api.noop']} | {P} |\n"
         f"| Follow-up turns that need no change | {V['corpus.followup.mvs.noop']} | {P} | {V['corpus.followup.api.noop']} | {P} |\n"
@@ -863,7 +864,7 @@ def si_templates_table(orig: list[dict]) -> str:
         f[t["track"]] += 1
         if f["ex"] is None or (t["track"] == "mvs" and f["ex"]["track"] != "mvs"):
             f["ex"] = t
-    rows = ["| Category | Template | Scene tasks | Call-list tasks | Example request |", "|:---|:---|---:|---:|:---|"]
+    rows = ["| Category | Template | Scene tasks | Call-list tasks | Example request |", "|:----|:-----|--:|--:|:----------------|"]
     for tier in TIERS:
         for (tr, fam), f in sorted(fams.items()):
             if tr != tier:

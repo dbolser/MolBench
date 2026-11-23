@@ -156,6 +156,7 @@ PILOT_WORDS = [
     (r"selects exactly the target atoms", "selects exactly the atoms of the requested part"),
     (r"\bTarget (exact|wrong)\b", lambda m: "Requested part " + m.group(1)),
     (r"\bSuccess\b", "Score of 1"),
+    (r"whether the model weights are openly released", "open if the weights of the model can be downloaded"),
     (r"Tree score vs render-checked score", "Earlier-grader F1 against the score after a check of the picture"),
     (r"\bTree F1\b", "Earlier-grader F1"), (r"\btree F1\b", "earlier-grader F1"),
     (r"\btree score\b", "earlier-grader F1"),

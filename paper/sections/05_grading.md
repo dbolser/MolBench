@@ -306,6 +306,6 @@ colours as the largest of these three differences. Requests use a palette of
 {{colour.closest_pair_distance}} apart, so no palette colour can pass for another. A named
 lighter or darker shade of a requested colour, such as "darkred" for red, lies outside the
 tolerance and counts as wrong. In the pilot run, {{colour.oct.n_comparable:,}} colour values in
-answers could be compared with a requested colour. {{colour.oct.exact:,}} of them were exactly
+answers could be compared with a requested colour. Of these, {{colour.oct.exact:,}} were exactly
 the requested colour, and each of the other {{colour.oct.inexact}} was at least
 {{colour.oct.closest_inexact}} away from it, so the tolerance decided no case.

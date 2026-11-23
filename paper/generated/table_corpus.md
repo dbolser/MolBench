@@ -1,5 +1,5 @@
 | Category | What is asked | Scene track (public + held back) | Call-list track (public + held back) | Pairs |
-|:---|:---|---:|---:|---:|
+|:------|:----------------|-----:|-----:|--:|
 | Translation | Everything needed is in the request; write it in the format. | 73 (55 + 18) | 178 (138 + 40) | 62 |
 | Structure-grounded | The request names a feature (the ligand, the disulfides); the model must know which atoms these are. | 63 (52 + 11) | 63 (52 + 11) | 63 |
 | Interactions | Named atoms and a measurement or contact between them. | 40 (32 + 8) | – | – |

@@ -1,5 +1,5 @@
 | Category (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success rate | Requested part exactly right |
-|:---|---:|---:|---:|---:|---:|---:|
+|:-----------|---:|---:|---:|---:|---:|---:|
 | Translation | 615 | 491 | 0.78 | 0.77 | 69.9% | 80.0% of 105 |
 | Structure-grounded, name resolution and interactions | 300 | 197 | 0.55 | 0.49 | 29.7% | 45.6% of 195 |
 | Clinical variant | 135 | 96 | 0.48 | 0.31 | 3.7% | 64.4% of 135 |

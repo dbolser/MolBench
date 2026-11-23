@@ -231,7 +231,7 @@ colours and the wording. The corpus has 129 templates.
 names are the identifiers used in the task files.
 
 | Category | Template | Scene tasks | Call-list tasks | Example request |
-|:---|:---|---:|---:|:---|
+|:----|:-----|--:|--:|:----------------|
 | Translation | `api-assembly` | – | 6 | Load oxyhaemoglobin (1HHO) as its biological assembly (the tetramer, assembly 1) and show it as a molecular surface. |
 | Translation | `api-atoms` | – | 5 | Open 1AAY in the ball-and-stick style; atoms CB and OD1 of Asp166 of chain A should be cyan. |
 | Translation | `api-chain-colour` | – | 10 | Load insulin (4INS) as a cartoon. Colour the two A chains (author chains A and C) blue and the two B chains (author chains B and D) yellow, and show the zinc ions (ZN)… |
@@ -411,7 +411,7 @@ position (a dash: no protein chain mapped to UniProt). *Split*: public, or held 
 corpus on this structure, both tracks, without rephrasings.
 
 | Entry | Title (as deposited) | Method | Deposited | Atoms | Author numbering differs from UniProt | Split | Tasks |
-|:---|:---|:---|:---|---:|:---|:---|---:|
+|:---|:------------|:----|:----|---:|:---|:---|---:|
 | 1A3K | X-RAY CRYSTAL STRUCTURE OF THE HUMAN GALECTIN-3 CARBOHYDRATE RECOGNITION DOMAIN (CRD) A… | X-ray 2.10 Å | 1998-01-22 | 1253 | no | public | 8 |
 | 1A6M | OXY-MYOGLOBIN, ATOMIC RESOLUTION | X-ray 1.00 Å | 1998-02-26 | 1584 | yes | public | 9 |
 | 1AAY | ZIF268 ZINC FINGER-DNA COMPLEX | X-ray 1.60 Å | 1997-01-18 | 1330 | yes | public | 9 |
@@ -507,7 +507,7 @@ record.
 removed and left. The tests 3a to 3c are applied in this order.
 
 | Step | Rule | Removed | Left |
-|:---|:---|---:|---:|
+|:--|:----------------------------------|---:|---:|
 | 1 | Single-residue missense variants of the 27 proteins that UniProt reports as pathogenic or likely pathogenic, with ClinVar as a source | | 3,352 |
 | 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same amino-acid change at that position and has the aggregate germline classification "Pathogenic", "Likely pathogenic" or "Pathogenic/Likely pathogenic" (a *qualifying record*) | 657 | 2,695 |
 | 3a | Remove if no qualifying record is of the gene that the request names | 44 | |
@@ -740,8 +740,8 @@ tables.
   theme.
 - **Distance lines.** The target score does not notice a missing distance line. Lines, labels
   and the camera target were not read back from Mol\*; they are compared as declared.
-- **Lone ions.** 8 tasks ask for a metal ion as a sphere, and the
-  reference draws it as spacefill. An answer that draws the ion as ball-and-stick uses another
+- **Lone ions.** 8 tasks, half of them on each track, ask for a
+  metal ion as a sphere, and the reference draws it as spacefill. An answer that draws the ion as ball-and-stick uses another
   representation and, by the general rule, receives a target score of 0, although a single
   atom looks much the same in both.
 - **The file that PDBe Mol\* fetches.** The atom tables are built from the archive file of
@@ -799,7 +799,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 **Scene track.**
 
 | Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
-|:---|:---|---:|---:|---:|
+|:-----|:----------------------|---:|---:|---:|
 | must pass (equivalent) | selector 'all' instead of 'polymer' under a cartoon (a cartoon draws polymer only) | 20 | 20 | 1 |
 | must pass (equivalent) | a chain's cartoon selected by author chain id, label chain id or entity id | 20 | 20 | 2 |
 | must pass (equivalent) | reference colours by the chain-id theme; the answer gives each chain its own colour | 20 | 20 | 0 |
@@ -853,7 +853,7 @@ this work replaces on that track, with a score of exactly 1 read as success.
 **Call-list track.**
 
 | Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
-|:---|:---|---:|---:|---:|
+|:-----|:----------------------|---:|---:|---:|
 | must pass (equivalent) | struct_asym_id (label chain) instead of auth_asym_id for the same chain | 20 | 20 | 17 |
 | must pass (equivalent) | auth_residue_number instead of auth_seq_id | 20 | 20 | 20 |
 | must pass (equivalent) | a colour as #rrggbb or as an {r,g,b} object instead of its name | 20 | 20 | 0 |
@@ -1373,7 +1373,7 @@ target, so there is no target score in these tables.
 | Interactions | 6 | 3 |
 | **All** | 70 | 14 |
 
-**Table S8. Scene track, main condition (pilot run, preliminary, earlier grader).** 15 models, 70 tasks on 14 structures, 1 answer per task. *Strict F1*: mean score over all tasks, where an answer the viewer cannot show scores 0. *Valid*: share of answers that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid answers only. *Score of 1*: share of answers that are valid and score exactly 1. 95% interval: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: whether the model weights are openly released.
+**Table S8. Scene track, main condition (pilot run, preliminary, earlier grader).** 15 models, 70 tasks on 14 structures, 1 answer per task. *Strict F1*: mean score over all tasks, where an answer the viewer cannot show scores 0. *Valid*: share of answers that parse as JSON and that Mol\* accepts and loads. *F1 (valid)*: mean score over the valid answers only. *Score of 1*: share of answers that are valid and score exactly 1. 95% interval: bootstrap over tasks, resampling whole structures (10000 replicates). Weights: open if the weights of the model can be downloaded.
 
 | # | Model | Weights | Strict F1 | 95% interval | Valid | 95% interval | F1 (valid) | 95% interval | Score of 1 |
 | ---: | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |

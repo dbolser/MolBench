@@ -1,5 +1,5 @@
 | Entry | Title (as deposited) | Method | Deposited | Atoms | Author numbering differs from UniProt | Split | Tasks |
-|:---|:---|:---|:---|---:|:---|:---|---:|
+|:---|:------------|:----|:----|---:|:---|:---|---:|
 | 1A3K | X-RAY CRYSTAL STRUCTURE OF THE HUMAN GALECTIN-3 CARBOHYDRATE RECOGNITION DOMAIN (CRD) A… | X-ray 2.10 Å | 1998-01-22 | 1253 | no | public | 8 |
 | 1A6M | OXY-MYOGLOBIN, ATOMIC RESOLUTION | X-ray 1.00 Å | 1998-02-26 | 1584 | yes | public | 9 |
 | 1AAY | ZIF268 ZINC FINGER-DNA COMPLEX | X-ray 1.60 Å | 1997-01-18 | 1330 | yes | public | 9 |

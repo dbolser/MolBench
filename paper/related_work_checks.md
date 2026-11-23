@@ -84,3 +84,12 @@ full text (first 100,000 characters of each):
   pages and authors were taken from its Crossref record on 2026-11-22. The statement that the
   paper reports two variants (Ile56Thr and Asp67His) was written from memory by the
   editing assistant and was not re-read at the source: check before submission.
+
+## Review round 3 (2026-11-23)
+
+- One reference was added: den Dunnen et al. 2016, "HGVS Recommendations for the Description
+  of Sequence Variants: 2016 Update" (Human Mutation 37(6):564–569, DOI 10.1002/humu.22981),
+  cited in Section 3.3.1 for the HGVS nomenclature. Title, journal, year, volume, issue, pages
+  and the ten named authors were taken from its Crossref record on 2026-11-23. The paper cites
+  it only for the existence of the nomenclature and its "p." prefix; no further claim about its
+  content is made.

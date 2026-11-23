@@ -1,7 +1,7 @@
 **Scene track.**
 
 | Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
-|:---|:---|---:|---:|---:|
+|:-----|:----------------------|---:|---:|---:|
 | must pass (equivalent) | selector 'all' instead of 'polymer' under a cartoon (a cartoon draws polymer only) | 20 | 20 | 1 |
 | must pass (equivalent) | a chain's cartoon selected by author chain id, label chain id or entity id | 20 | 20 | 2 |
 | must pass (equivalent) | reference colours by the chain-id theme; the answer gives each chain its own colour | 20 | 20 | 0 |
@@ -55,7 +55,7 @@
 **Call-list track.**
 
 | Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
-|:---|:---|---:|---:|---:|
+|:-----|:----------------------|---:|---:|---:|
 | must pass (equivalent) | struct_asym_id (label chain) instead of auth_asym_id for the same chain | 20 | 20 | 17 |
 | must pass (equivalent) | auth_residue_number instead of auth_seq_id | 20 | 20 | 20 |
 | must pass (equivalent) | a colour as #rrggbb or as an {r,g,b} object instead of its name | 20 | 20 | 0 |

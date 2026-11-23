@@ -166,8 +166,8 @@ tables.
   theme.
 - **Distance lines.** The target score does not notice a missing distance line. Lines, labels
   and the camera target were not read back from Mol\*; they are compared as declared.
-- **Lone ions.** {{corpus.n_ion_sphere_tasks}} tasks ask for a metal ion as a sphere, and the
-  reference draws it as spacefill. An answer that draws the ion as ball-and-stick uses another
+- **Lone ions.** {{corpus.n_ion_sphere_tasks}} tasks, half of them on each track, ask for a
+  metal ion as a sphere, and the reference draws it as spacefill. An answer that draws the ion as ball-and-stick uses another
   representation and, by the general rule, receives a target score of 0, although a single
   atom looks much the same in both.
 - **The file that PDBe Mol\* fetches.** The atom tables are built from the archive file of

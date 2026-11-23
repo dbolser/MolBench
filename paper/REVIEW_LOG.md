@@ -248,3 +248,142 @@ are called (families, categories, tiers, types), and whose the earlier graders w
 10. **Layout.** Four pages of the PDF were looked at (those with Figures 3, 5 and 6 and with
     Tables 6 and 13). Figures 1, 2 and 4 were not looked at in the PDF, and the rest of the
     layout was not checked.
+
+## Round 3 (2026-11-23; second round of the third paper branch)
+
+**Scores (clarity, of 10):** structural bioinformatician 8, machine-learning benchmark
+reviewer 8, clinical geneticist 7, copy-editor 8, cold reader 7.5. All five would accept on
+clarity.
+
+### Must-fix items, all fixed
+
+| Issue (raised by) | What changed |
+|:---|:---|
+| The primary paired comparison had two denominators: 258 in Table 9a, its caption and Figures 3 and 5B, 250 in Section 5.4 (four reviewers) | Table 9a, its caption, both figures and Section 5.4 now say the same: the primary comparison is on the 250 pairs that have a target score, and the 8 follow-up pairs without one appear in Table 9b only. The numbers are `corpus.twins.n_with_target` and `n_without_target`. Section 5.4 also says that none of the 8 is among the 15 pairs whose call list must hide the default view (asserted by `corpus_values.py`). |
+| "Most answers drew the right residue" over-claimed by omission; the Conclusion contradicted Finding 1 (clinical geneticist) | Abstract, Section 6.6 (Finding 2), Section 8 and Section 10 now say that the single pilot structure needed no renumbering, so the statement is about drawing and not about mapping. The Conclusion says that the reference flaw was the largest loss in the clinical category, and unshowable answers over the whole pilot. |
+
+### Should-fix and polish items, fixed
+
+- **Variant filter** (four reviewers): Section 3.1 names the candidates (3,352) and the two
+  steps with their counts (657, 295) in words; the two hand-made exceptions (lysozyme
+  p.Ile74Thr, one *APOE* variant) are in the main text; "germline" is in Box 1 and Section 3.1.
+- **The 27 proteins** were chosen by hand, and the paper says so (Section 3.1, SI S3.1). The
+  two proteins without a task are named with the reason for each (no variant left; the one
+  left is not observed in the structure), asserted by `corpus_values.py`. The paragraph on the
+  pool was cut from eleven counts to the three that matter.
+- **Multi-variant and helix tasks in the two clinical groupings** (three reviewers): the rule
+  is stated (copying is right only if right for every variant; offset if any target residue
+  has one; a helix task takes the properties of the variant's residue), with the fact that all
+  8 multi-variant and all 10 helix or strand tasks sit in "offset, copying wrong" (asserted).
+- **Variant notation** (clinical geneticist): Section 3.3.1 states the three forms of name and
+  that "p." marks UniProt numbering; HGVS is named and cited (den Dunnen et al. 2016, checked
+  at Crossref); ClinVar's own transcript-level name of the running example is quoted; the
+  paper writes p.W82R wherever the UniProt-numbered name is meant; gene symbols are italic.
+  The 36 requests without an accession are discussed. R136L is given as p.Arg154Leu.
+- **ClinVar caveats** (clinical geneticist): Section 9.2 now says that transcripts were not
+  compared and that discordant records were not looked for. The running example's records are
+  identified in Section 3.2, with the "not provided" condition field. Box 1 corrects "one
+  change at the level of DNA".
+- **Target score** (three reviewers): rule 1 says that spill is judged on the style the answer
+  drew on the target in the requested representation, whatever its colour (checked in
+  `molbench/drawn.py`); a paragraph after rule 3 gives the reason for the line between rules 2
+  and 3 and names its cost, with the two rows of Table 3. "766 of 797 tasks have a target
+  score" replaces the sum the reader had to do.
+- **F1** (three reviewers): the definition comes first; a cartoon as a style of atoms is
+  explained; the call-list rule has three cases, a reason and the example of Table 3.
+- **Table 3**: rows are numbered S1 to S10 and C1 to C5 and cited by number through generated
+  keys (`ex.row.*`); the caption derives the two spill rows (24/56 and 24/2,691) and says what
+  the default cartoon costs on each track; the Answer column is wide.
+- **Planned comparisons** (two reviewers): seven are listed and numbered; 1 to 6 are the rows
+  of Table 12 (numbered), 7 is the difference row of Table 10.
+- **Format guide** (structural bioinformatician): Section 5.2 says what each guide contains,
+  how long it is (975 and 1,211 words; system prompts 1,216 and 1,514 words) and that neither
+  says which numbering an entry uses. SI S7 prints both guides in full, with a glossary of the
+  words the prompts use. Lengths are in words because no tokenizer is used.
+- **Other facts added**: which file the atom tables come from, and that the call-list
+  viewer's own copy of a file was not compared (Sections 3.1, 3.7, 9.3, SI S4.8); how the list
+  of accepted entries for name resolution was made (Section 3.3, SI S4.4) and that all three
+  scores on an entry outside the panel come from the text comparison; why the call-list
+  controls use 74 structures (Table 4, SI S5); why the grounding pack is run on the scene
+  track only; that the three answers of a task are not resampled; which models run in JSON
+  mode; what an informative result of the held-back split would be.
+- **Terms**: Box 1 is split in two. Box 1 (Section 1) holds background and corpus terms and
+  names the seven terms that carry the results; Box 2 (start of Section 4) holds grading and
+  run terms. New entries: default view, component, accepted answer, copying the number,
+  all-3 rate and majority, invalid, task, insertion code. Alternate conformers and the jargon
+  of Section 9.3 are explained in place. "Open / closed weights" is the only pair of terms for
+  that property; "rejected" replaces "failed" for the grader; "phrasings" replaces
+  "paraphrases"; "full wording" is introduced; "about the same variant".
+- **Abstract** (four reviewers): states the thesis (by rule, no judge model) and the question
+  (convert or copy); no sentence begins with a numeral; "16 core models and up to 5 larger
+  ones"; "each task"; the call-list viewer's own conversion is named. It is at its 200-word
+  limit.
+- **Introduction**: the paragraph on the running example opens with the wrong picture and
+  then explains the two ways of counting; contribution 1 gives one count (48).
+- **Call-outs**: every table and figure is cited in the text, in order of first citation.
+  The two pilot tables are Tables 13 and 14, "what changed" is Table 15, licences Table 16.
+  "Section 7 (rows 1 and 2)" is "Table 15".
+- **Figures**: all schematics are redrawn at 660 px, the width at which they print, and
+  `figures.py` refuses in-figure text below 9.5 px (7 pt). Figure 1 has two rows of three
+  steps; Figure 2 is a 2 x 4 grid, with the lookup categories framed in blue and tagged;
+  Figure 4 has three strips with no empty band and the title "number copied from the variant
+  name"; Figure 5A has one panel per track and its caption forbids the comparison; Figure 5C
+  says why it is valid-only; Figure 6 prints shares as percentages, with an axis that says so.
+- **Tables**: column widths are set in the generators; Table 8 has a header row per track
+  and indented sub-rows; pilot tables use "task success rate", two decimals for F1 and
+  "1,050"; Table 15 has a header for its first column; tables are not broken across pages
+  where they fit on one.
+- **SI**: S4.3 says what spill is judged on and why rules 2 and 3 differ; S4.8 is rewritten
+  for coordinate sets and lone ions (8 tasks; checked with the grader on four of them); S8
+  uses "Requested part", "Score of 1" and "Earlier-grader F1", so that no word of the paper
+  has a second meaning there; Table S6 has a provider column.
+
+### Corrected although no reviewer asked
+
+- **The viewer replay of the call-list controls counted call lists, not controls.** The paper
+  said that 234 of the 995 call-list controls were confirmed in the viewer. The record
+  (`tests/controls/viewer_check.json`, `scripts/grader_controls.py`) counts 234 call lists,
+  two per control, from a sample of controls. Sections 3.7 and 4.5, Table 4 and SI S5 now say
+  that; the value `controls.viewer.api.n_not_replayed` is gone. How many controls were in the
+  sample is not on record.
+
+### Declined, or done differently, and why
+
+| Suggestion | Decision |
+|:---|:---|
+| "The read-back confirmed that selections agree atom for atom on both" the archive file and PDBe's updated file (structural bioinformatician) | Not true as far as the record goes: the replay loaded the archive file into both viewers. The paper says which file was used and names the missing comparison as a limit. |
+| Format guide lengths in tokens | Given in words: token counts differ by model and the build uses no tokenizer. |
+| "Sixteen core models" spelled out in the abstract | The number is written by script; the sentence was recast so that no numeral starts it. |
+| Keep the earlier graders' 42% and 10% in the abstract | Dropped from the abstract to stay within 200 words after the thesis, the question and the pilot caveat went in; both numbers stay in Sections 4.5, 7 and 10. The sentence "Tasks, graders and answers are open" went for the same reason (Section 12 says it). |
+| Figure 3 caption: keep the sentence on traditional names with more context | Deleted from the caption, as the reviewer's second option; Section 3.4 says it. |
+| A call-list row "default cartoon left in place" in Table 3 | That answer is the reference (row C1), which now says so; the caption states the contrast with row S5. |
+| "Mendelian disease", "with crystal structures" for the 27 proteins | "Inherited disease" and "experimental structures": not every entry is a crystal structure, and the paper makes no claim about the mode of inheritance. |
+| The reason why a protein with one variant gets no task: "a category needs a choice of variants" | Not the reason. The real ones are stated: no variant left, or the one left is not observed in the structure. |
+| Why the grounding pack is not run on the call-list track: "if the reason is cost, say that" | The plan gives no reason. The paper states the two facts that make the condition less informative there and claims no motive. |
+
+### Open, for the lead
+
+1. **Table 9a on 250 pairs.** The paper now specifies it. `molbench/analysis.py`
+   (`target_solved`) still counts the 8 pairs without a target score as right on neither
+   side; the writer of `table_final_paired.md` must leave them out of Table 9a.
+2. **Final table shapes changed again**: Table 8 (a header row per track, indented sub-rows),
+   Table 9 (titles, Pairs column), Table 12 (a first column with the comparison number),
+   Tables 13 and 14 are the pilot tables. See `generated/shape_*.md`.
+3. **Call-list controls replayed in the viewer**: the number of controls in the sample is not
+   recorded, only the number of call lists (234). A rerun of `grader_controls.py --viewer-api`
+   could record it.
+4. **PDBe's own copy of a structure file** was never compared with the archive file that the
+   atom tables are built from. The paper names this as a limit.
+5. **Lone ions** (8 tasks): ball-and-stick for a single ion scores a target score of 0. The
+   paper states it as a limit; a grader rule could accept it.
+6. **The 27 proteins "cause inherited disease"**: written from the panel's disease notes; one
+   of them (TP53) also lists somatic cancers. Check the wording.
+7. The main checkout of `final-benchmark` has uncommitted changes to `paper/corpus_values.py`
+   and generated files; this branch changes the same script (new values, table shapes), so
+   the merge will need care. Corpus numbers that moved on `final-benchmark` were not chased.
+8. Still open from earlier rounds: helix and strand tasks in the clinical strata of the
+   analysis; LYZ p.Ile74Thr request wording; Pepys et al. 1993 (two variants) to be checked at
+   the source; which optional models are run; the 80 scene controls added after the read-back.
+9. **Layout.** Looked at in the PDF this round: pages with Figures 1 to 5, Box 1, Tables 1, 3,
+   6, 8 and 9. Not looked at: the rest of the paper and the SI (51 pages), including how the
+   printed format guides break across pages.

@@ -1,5 +1,5 @@
 | Model | Weights | Valid answers | F1 (strict) | Task success rate (strict) | F1, valid-only | Task success rate, valid-only |
-|:---|:---|---:|---:|---:|---:|---:|
+|:--------|:---|---:|---:|---:|---:|---:|
 | gemini-3.5-flash | closed | 66 of 70 | 0.84 | 71.4% | 0.89 | 75.8% |
 | llama-4-maverick | open | 57 of 70 | 0.77 | 70.0% | 0.95 | 86.0% |
 | deepseek-v4-flash | open | 65 of 70 | 0.80 | 68.6% | 0.86 | 73.9% |

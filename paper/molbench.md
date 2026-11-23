@@ -93,20 +93,20 @@ in different ways receive the same score.
 
 This paper makes four contributions, presented in this order.
 
-1. **A corpus built by script** (Section 3): 797 tasks on
+1. **A corpus built by script** (Section 3). It has 797 tasks on
    78 structures in eight categories of task, which differ in what the
    model must know beyond the request. They include 82 clinical-variant requests on
    25 proteins; in 48 of them a model that copies
    the number from the variant name selects the wrong residue (Section 3.3.1). Every reference
    records how it was made and is tested against the structure.
-2. **A grader on drawn state, tested against a control set** (Section 4): three scores with
-   plain definitions, and 2,105 control answers whose verdict is known from how
-   they were made.
-3. **A paired design** (Sections 3.4 and 5): 258 requests are posed in two
+2. **A grader on drawn state, tested against a control set** (Section 4). It gives three
+   scores with plain definitions, and it is tested on 2,105 control answers whose
+   verdict is known from how they were made.
+3. **A paired design** (Sections 3.4 and 5). In it, 258 requests are posed in two
    answer formats with the same target atoms, so that an error of content can be told apart
    from an error of format.
 4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 6
-   and 7): a pilot run on 15 models exposed a flaw in our own references
+   and 7). A pilot run on 15 models exposed a flaw in our own references
    and changed the design, and one final run will fill tables whose shape is already set.
    ⟦PENDING: final run — one sentence stating the main result⟧
 
@@ -250,7 +250,7 @@ whole.
 
 ### 3.1 Frozen public data
 
-**Structures.** All tasks use a fixed *structure panel* of 79 structures:
+**Structures.** All tasks use a fixed *structure panel* of 79 structures, namely
 74 PDB entries [24] and 5 predicted structures from
 the AlphaFold Protein Structure Database [25]. One PDB entry is reserved as the
 worked example in a prompt, so tasks use 78. The panel was chosen for
@@ -297,12 +297,12 @@ structures (26 PDB entries and the 5 predicted
 structures), with at most 6 tasks per track on one structure.
 The other 2 proteins have no task: for triosephosphate
 isomerase no variant passed the filter, and for carbonic anhydrase 2 the only one that passed
-lies at a residue that the panel structure does not contain. SI Section S3.2 names the
-proteins that have tasks on more than one structure and the entries that serve two proteins.
+lies at a residue that the panel structure does not contain. SI Section S3.2 says how many
+proteins have tasks on more than one structure and how many entries serve two proteins.
 
 **Atom tables and residue mapping.** For each structure we store two frozen tables. The *atom
-table* lists every atom record of the first coordinate set of the entry's mmCIF file from the
-PDB archive (for a predicted structure, the file of the AlphaFold Protein Structure Database),
+table* lists every atom record of the first coordinate set of the entry's file in the PDB
+archive, in the archive's mmCIF format (for a predicted structure, the file of the AlphaFold Protein Structure Database),
 with its chain and residue in both author and label numbering. It keeps *alternate
 conformers*, the same atom recorded at two or more positions where the experiment saw a
 residue in more than one pose (29 structures have them),
@@ -420,7 +420,7 @@ could be asked on the call-list track but is not: the call-list grader has no at
 an entry outside the panel (Section 3.4).
 
 | Category | What is asked | Scene track (public + held back) | Call-list track (public + held back) | Pairs |
-|:---|:---|---:|---:|---:|
+|:------|:----------------|-----:|-----:|--:|
 | Translation | Everything needed is in the request; write it in the format. | 73 (55 + 18) | 178 (138 + 40) | 62 |
 | Structure-grounded | The request names a feature (the ligand, the disulfides); the model must know which atoms these are. | 63 (52 + 11) | 63 (52 + 11) | 63 |
 | Interactions | Named atoms and a measurement or contact between them. | 40 (32 + 8) | – | – |
@@ -435,9 +435,10 @@ The 797 tasks (381 on the scene track, 416 on the
 call-list track) use 78 of the 79 panel structures. No structure
 appears in more than 6 tasks of one category and
 track. The call-list track has more translation tasks than the scene track because its format
-has many single-purpose calls and selectors: 18
-templates (116 tasks) exercise calls that the scene
-templates have no counterpart for, and the other 62 tasks are pairs.
+has many single-purpose calls and selectors. Calls that the scene templates have no
+counterpart for are exercised by 18 templates
+(116 tasks); the other 62
+translation tasks are pairs.
 
 #### 3.3.1 The clinical category
 
@@ -489,7 +490,7 @@ number, or does not. A task with several target residues has an offset if any of
 one, and copying is right in it only if it is right for all of them.
 
 | | Copying the number is right | Copying the number is wrong | All |
-|:---|---:|---:|---:|
+|:-----------------|---:|---:|---:|
 | **No offset**: the target's author number is its UniProt number | 22 | 1 | 23 |
 | **Offset**: the target's author number differs from its UniProt number | 12 | 47 | 59 |
 | **All** | **34** | **48** | **82** |
@@ -964,7 +965,7 @@ colours as the largest of these three differences. Requests use a palette of
 55 apart, so no palette colour can pass for another. A named
 lighter or darker shade of a requested colour, such as "darkred" for red, lies outside the
 tolerance and counts as wrong. In the pilot run, 2,303 colour values in
-answers could be compared with a requested colour. 2,227 of them were exactly
+answers could be compared with a requested colour. Of these, 2,227 were exactly
 the requested colour, and each of the other 76 was at least
 58 away from it, so the tolerance decided no case.
 
@@ -1056,7 +1057,7 @@ distance line on an entry that tasks do use; no task asks for that distance.
 
 Each model answers each task 3 times in the main condition, at the provider's
 default temperature. The limit on the length of an answer is 8,000 tokens.
-7 of the core models first write reasoning text that the user does not
+Of the core models, 7 first write reasoning text that the user does not
 see; the provider bills it and counts it against the limit. For these models the limit is
 16,000 tokens for reasoning and answer together (SI Table S6). An
 invalid answer is scored as it stands and is not retried; only transport errors are retried.
@@ -1077,8 +1078,9 @@ of the answer, and its cost.
   resampled, so an interval reflects the choice of structures and tasks, not the variation
   between a model's answers to one task. Models are treated as fixed: an interval on a mean
   over models describes these models, not models in general. In the clinical category, several structures can belong to one protein;
-  they are resampled as separate structures, which we name as a limit in Section 9.4. Table 8
-  gives the number of structures beside the number of tasks.
+  they are resampled as separate structures, which we name as a limit in Section 9.4. The
+  table of results by category (Section 6.2) gives the number of structures beside the number
+  of tasks.
 - **Paired comparison of formats.** For each model and pair, a side counts as right when at
   least 2 of its 3 answers are right (the majority summary of Section 4.2).
   "Right" is taken two ways. The primary comparison uses the target score: an answer is right
@@ -1102,8 +1104,9 @@ of the answer, and its cost.
   indirect wording; (4) with and without JSON mode; (5) with and without grounding pack;
   (6) with and without format guide; and (7) clinical tasks in which copying the number in the
   variant name is right against those in which it is wrong (the primary clinical grouping; the
-  grouping by offset is descriptive). Comparisons 1 to 6 are the rows of Table 12. Comparison
-  7 is the difference row of Table 10, which is also given on the target score. Totals of the
+  grouping by offset is descriptive). Comparisons 1 to 6 are reported together in Section 6.5.
+  Comparison 7 is the difference row of the clinical table in Section 6.4, where it is also
+  given on the target score. Totals of the
   two tracks are not compared with each other: the tracks differ in their mix of categories
   and in the length of the answer, so the formats are compared on the pairs only.
 - **What F1 is read against.** F1 has a floor that needs no skill: a scene with nothing but a
@@ -1132,10 +1135,10 @@ numbers; (iv) no model supplies more than 12% of the set.
 The image judge is a vision-language model that is shown the same two pictures and asked the
 same question; it is used here to find the answers most likely to look right, and it
 contributes to no score in this paper. Each comparison is rated by 2
-raters. We will report, with intervals, how often people call an answer that the grader failed
-the same as the reference, the agreement between the raters, and the agreement between people
+raters. We will report, with intervals, how often people call an answer that the grader did not
+count as a success the same as the reference, the agreement between the raters, and the agreement between people
 and the image judge. An answer that all its raters call the same as the reference although the
-grader failed it is either a false fail of the grader or a difference that the picture does
+grader did not count it as a success is either a false fail of the grader or a difference that the picture does
 not show; each such case will be listed.
 
 *Possible false passes.* A further 40 picture comparisons are of
@@ -1179,7 +1182,7 @@ model in this condition, at list price. Intervals (95%, structures resampled) wi
 with each score. F1 valid-only is in the SI.
 
 | Model | Weights | Valid answers | Task success rate (strict) | Target score (strict) | F1 (strict) | Task success rate, valid-only | Target score, valid-only | All-3 rate | Cost (USD) |
-|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+|:-------|:---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Keyword script (no model) | – | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | claude-haiku-4-5 | closed | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | deepseek-v3.2 | open | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
@@ -1242,7 +1245,7 @@ optional model.
 **Table 9a. Right = target-right (primary); at least 2 of the 3 answers. The 250 pairs that have a target score.**
 
 | Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only | Right on neither side | McNemar p |
-|:---|---:|---:|---:|---:|---:|---:|
+|:--------|--:|---:|---:|---:|---:|---:|
 | claude-haiku-4-5 | 250 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | deepseek-v3.2 | 250 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | … up to 19 further rows, one per model | | ⟦PENDING: final run⟧ | | | | |
@@ -1250,7 +1253,7 @@ optional model.
 **Table 9b. Right = task success (secondary); at least 2 of the 3 answers. All 258 pairs.**
 
 | Model | Pairs | Right on both sides | Right in the scene only | Right in the call list only | Right on neither side | McNemar p |
-|:---|---:|---:|---:|---:|---:|---:|
+|:--------|--:|---:|---:|---:|---:|---:|
 | claude-haiku-4-5 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | deepseek-v3.2 | 258 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | … up to 19 further rows, one per model | | ⟦PENDING: final run⟧ | | | | |
@@ -1280,7 +1283,7 @@ the same variant asked on a structure with an offset and on a predicted structur
 own annotation; they are a subset of the 82 and are also reported apart.
 
 | Clinical tasks (scene track) | Tasks | Target score | Task success rate | Target score with grounding pack | Task success rate with grounding pack |
-|:---|---:|---:|---:|---:|---:|
+|:------------------|--:|---:|---:|---:|---:|
 | **Copying the number** (primary grouping): copying is right | 34 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | **Copying the number**: copying is wrong | 48 | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
 | Difference between these two rows (95% interval) | | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ | ⟦PENDING: final run⟧ |
@@ -1308,7 +1311,7 @@ share of answers whose drawn state is exactly right (for a request with several 
 the drawn state equals any one of the accepted answers), strict, mean over the models.
 
 | Group | Scene track: tasks | Scene track: task success rate | Call-list track: tasks | Call-list track: task success rate |
-|:---|---:|---:|---:|---:|
+|:----------|---:|---:|---:|---:|
 | Follow-up turns that need a change | 48 | ⟦PENDING: final run⟧ | 36 | ⟦PENDING: final run⟧ |
 | Follow-up turns that need no change | 10 | ⟦PENDING: final run⟧ | 8 | ⟦PENDING: final run⟧ |
 | Requests with several right answers | 26 | ⟦PENDING: final run⟧ | 15 | ⟦PENDING: final run⟧ |
@@ -1331,7 +1334,7 @@ the system prompt that documents the answer format.
 
 ⟦PENDING: final run — outcome counts per model (valid, unshowable by kind, schema-breaking, cut off), the repaired scores, F1 valid-only and the cost per model, as tables in SI Section S8⟧
 
-⟦PENDING: rating study — how often people call an answer that the grader failed the same as the reference, agreement between people, and the check of possible false passes, with intervals (Section 5.5)⟧
+⟦PENDING: rating study — how often people call an answer that the grader did not count as a success the same as the reference, agreement between people, and the check of possible false passes, with intervals (Section 5.5)⟧
 
 ### 6.6 Preliminary evidence (October 2026 pilot run: older corpus, regraded with the present grader)
 
@@ -1364,8 +1367,8 @@ or too few loses the whole answer. An offline repair of the JSON turned
 were not checked by the viewer). This is why the final run reports strict and valid-only scores
 side by side and adds a JSON-mode condition.
 
-**Table 13. Pilot run, per model (preliminary).** 70 tasks, one answer each,
-ordered by task success rate. *Weights*: open if the weights of the model can be downloaded,
+**Table 13. Pilot run, per model (preliminary).** The run had 70 tasks and one
+answer per task; the rows are ordered by task success rate. *Weights*: open if the weights of the model can be downloaded,
 closed if the model can be used only through a provider's service. *Valid answers*: answers
 that parse and that the viewer accepts. *F1*: how much of the drawn state is right (0 to 1).
 *Task success rate*: share of answers whose drawn state is exactly right. *Strict*: every answer
@@ -1373,7 +1376,7 @@ counts, and an unshowable answer scores 0. *Valid-only*: the mean over valid ans
 pilot tasks stored no target, so there is no target score.
 
 | Model | Weights | Valid answers | F1 (strict) | Task success rate (strict) | F1, valid-only | Task success rate, valid-only |
-|:---|:---|---:|---:|---:|---:|---:|
+|:--------|:---|---:|---:|---:|---:|---:|
 | gemini-3.5-flash | closed | 66 of 70 | 0.84 | 71.4% | 0.89 | 75.8% |
 | llama-4-maverick | open | 57 of 70 | 0.77 | 70.0% | 0.95 | 86.0% |
 | deepseek-v4-flash | open | 65 of 70 | 0.80 | 68.6% | 0.86 | 73.9% |
@@ -1420,7 +1423,7 @@ requested part is taken from the reference. The October corpus had too few tasks
 its categories to show them apart, so they are pooled in one row.
 
 | Category (October corpus) | Answers | Valid | F1, earlier grader | F1 | Task success rate | Requested part exactly right |
-|:---|---:|---:|---:|---:|---:|---:|
+|:-----------|---:|---:|---:|---:|---:|---:|
 | Translation | 615 | 491 | 0.78 | 0.77 | 69.9% | 80.0% of 105 |
 | Structure-grounded, name resolution and interactions | 300 | 197 | 0.55 | 0.49 | 29.7% | 45.6% of 195 |
 | Clinical variant | 135 | 96 | 0.48 | 0.31 | 3.7% | 64.4% of 135 |

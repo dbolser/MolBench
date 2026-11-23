@@ -22,7 +22,7 @@ result tables), then the three commands above.
 | `molbench.md`, `si.md`, `plain_summary.md` | Built. Do not edit; edit the sources. |
 | `PENDING.md` | Built. Every PENDING tag with what fills it, and the files the final run must write. |
 | `corpus_values.py` | Every number that does not come from a model run: corpus counts, panel and variant facts, control set, the October answers regraded, the pilot rating study, the run plan, the running example graded by the benchmark's grader. Also writes the corpus table, the empty result tables (`generated/shape_*.md`) and the SI tables. `--check` fails if a committed file is stale. |
-| `figures.py` | Schematic figures as plain SVG (pipeline, tiers, paired design, drawn-state grading, shapes of the result figures) and the chart of the pilot run. Okabe–Ito colours; every mark also has a label or a pattern. |
+| `figures.py` | Schematic figures as plain SVG (pipeline, tiers, paired design, drawn-state grading, shapes of the result figures) and the chart of the pilot run. Okabe–Ito colours; every mark also has a label or a pattern. The schematics are 660 px wide, the width at which the PDF prints them, and the script refuses in-figure text below 9.5 px (7 pt in print). |
 | `generated/` | Output of the scripts, committed so the paper builds without the git-ignored archives. `values.json` and the `table_mvs_*`/`fig_mvs_*` files are written by `scripts/paper_tables.py` and `scripts/paper_figures.py` from the October 2026 pilot run. |
 | `inputs.json` | Which archives `scripts/paper_tables.py` reads. |
 | `references.bib`, `related_work_checks.md` | References, and the record of how each was verified. |
@@ -57,13 +57,25 @@ layout) are then drawn from the same archive.
 The October pilot numbers are reported in Section 6.6 of the paper (boxed) and in SI Section S8;
 where another section cites one, it says that it is a pilot result.
 
-## Words and table numbers (review round 2)
+## Words and table numbers (review rounds 2 and 3)
 
 The paper says *category* where the repository says tier, *style* where `GRADING.md` says
 draw, *format guide* for the vendored reference in the system prompt, *main* for the `spec`
 condition, *structure panel* for the 79 structures and *core / optional models* for the
 models. The clinical results are grouped by *copying the number* (primary) and by *offset*.
-Tables: 1 corpus, 2 clinical groupings, 3 running example, 4 control set, 5 conditions,
-6 and 7 per model, 8 categories, 9a and 9b pairs, 10 clinical, 11 follow-up, 12 planned
-comparisons, 13 what changed, 14 licences. The final tables that `scripts/paper_tables.py`
-writes must use the column names of `generated/shape_*.md`.
+Tables: 1 corpus, 2 clinical groupings, 3 running example (rows S1 to S10 and C1 to C5; the
+text cites them through `{{ex.row.*}}`), 4 control set, 5 conditions, 6 and 7 per model,
+8 categories, 9a and 9b pairs, 10 clinical, 11 follow-up, 12 planned comparisons, 13 and 14
+pilot run (in the box of Section 6.6), 15 what changed, 16 licences. Terms are defined in two
+boxes: Box 1 (structures, variants, corpus) in Section 1 and Box 2 (grading and the run) at the
+start of Section 4. The final tables that `scripts/paper_tables.py` writes must use the column
+names of `generated/shape_*.md`. In particular, Table 9a is on the pairs that have a target
+score (250 of 258) and Table 9b on all pairs, and Table 8 has one header row per track.
+
+Three checks of the build keep prose and numbers together: the running example must look the
+same in its table and figures; a number that the prose states in words (`STATED_IN_WORDS` in
+`build.py`, for example "a single structure") must still have that value; and
+`corpus_values.py` asserts each fact that a sentence states without a number (which proteins
+have no task, where the multi-variant tasks sit in Table 2, what the format guides document).
+A column of a pipe table is as wide as its run of dashes in the header rule, relative to the
+others; the generators set these so that text columns are wide and number columns narrow.
