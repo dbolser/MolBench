@@ -127,13 +127,13 @@ def chars(px: float, size: float, mono: bool = False) -> int:
 def fig_pipeline(v: dict) -> str:
     boxes = [
         ("1  Frozen public data", [
-            f"{v['panel.n']} structures (PDB and AlphaFold DB):",
-            f"{v['corpus.n_structures']} carry tasks, {v['panel.n'] - v['corpus.n_structures']} is the prompt example",
-            "residue mapping (SIFTS)",
-            f"{v['variants.n_usable']:,} amino-acid changes with a ClinVar",
-            "record: pathogenic or likely pathogenic",
-            f"the tasks name {v['clin.n_variants']} variants: {v['clin.n_variants_from_pool']} of",
-            f"these and {v['clin.n_variants'] - v['clin.n_variants_from_pool']} exception"]),
+            f"\u2022 {v['panel.n']} structures (PDB, AlphaFold DB):",
+            f"   {v['corpus.n_structures']} carry tasks, {v['panel.n'] - v['corpus.n_structures']} is the prompt example",
+            "\u2022 Residue mapping: SIFTS",
+            f"\u2022 Variants: {v['variants.n_usable']:,} with a ClinVar record,",
+            "   pathogenic or likely pathogenic;",
+            f"   tasks name {v['clin.n_variants']}: {v['clin.n_variants_from_pool']} of these",
+            f"   and {v['clin.n_variants'] - v['clin.n_variants_from_pool']} exception"]),
         ("2  Generator scripts", [
             f"{v['corpus.n_templates']} templates.",
             "Each task gets: a request,",
@@ -141,11 +141,11 @@ def fig_pipeline(v: dict) -> str:
             "its target atoms and a",
             "record of how it was made"]),
         ("3  Task corpus", [
-            f"{v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} categories",
-            f"scene track: {v['corpus.mvs.n']}",
-            f"call-list track: {v['corpus.api.n']}",
-            f"{v['corpus.n_twin_pairs']} pairs (one request, both tracks)",
-            f"{v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} set-aside structures"]),
+            f"\u2022 {v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} categories",
+            f"\u2022 Scene track: {v['corpus.mvs.n']}",
+            f"\u2022 Call-list track: {v['corpus.api.n']}",
+            f"\u2022 {v['corpus.n_twin_pairs']} pairs (one request, both tracks)",
+            f"\u2022 {v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} set-aside structures"]),
         ("4  Model", [
             "is given a format guide and",
             "the request only:",
@@ -176,7 +176,9 @@ def fig_pipeline(v: dict) -> str:
         s.rect(x, y, w, h, fill=LOOKUP_FILL if i in (2, 5) else PALE)
         s.text(x + 10, y + 20, title, size=11.5, weight="bold")
         for j, ln in enumerate(lines):
-            s.text(x + 10, y + 40 + j * 15, ln, size=10)
+            # A line that continues a bulleted item is indented to the text after the bullet.
+            indent = 9 if ln.startswith(" ") else 0
+            s.text(x + 10 + indent, y + 40 + j * 15, ln.lstrip(), size=10)
         if i % 3 < 2:
             s.arrow(x + w + 1, y + h / 2, x + w + gap - 1, y + h / 2)
     # from box 3 down and back to box 4
@@ -188,7 +190,9 @@ def fig_pipeline(v: dict) -> str:
         ("Reference against structure (step 2)",
          "Each reference must select atoms, name the residue the generator intended, and grade as exactly right against itself."),
         ("Atom tables against the viewer (step 5)",
-         "Selections were read back from the running viewers (Mol* 5.9.0, PDBe Mol* 3.3.2) and agree atom for atom."),
+         f"Selections were read back from the running viewers (Mol* 5.9.0: {v['controls.viewer.mvs.checked']:,} scene "
+         "controls; PDBe Mol* 3.3.2: a sample of call lists, not those that select by UniProt position) "
+         "and agreed atom for atom."),
         ("Grader against a control set (step 5)",
          f"{v['controls.n']:,} control answers with a verdict known from how they were made. The grader "
          "was developed against them and now agrees with all; they are re-run on every change."),
@@ -328,7 +332,7 @@ def fig_grading(v: dict) -> str:
         ("Answer A: number copied from the variant name",
          f"Author residue {wrong} drawn. It is {v['ex.face_value_residue']}{wrong}, another residue.",
          wrong, False, "ex.mvs.face"),
-        ("Answer B: right residue, extra context",
+        ("Answer B: right residue, plus unrequested context",
          "The right residue, plus a grey cartoon of the whole protein that the request does not ask for.",
          right, True, "ex.mvs.context"),
     ]
@@ -494,7 +498,9 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
     matplotlib.use("Agg")
     matplotlib.rcParams["svg.hashsalt"] = "molbench"
     matplotlib.rcParams["svg.fonttype"] = "none"
-    matplotlib.rcParams["font.family"] = ["DejaVu Sans"]
+    # The typeface of Figures 1 to 5 (FONT); the SVG names the whole list, so the viewer picks it.
+    matplotlib.rcParams["font.family"] = ["sans-serif"]
+    matplotlib.rcParams["font.sans-serif"] = ["Helvetica", "Arial", "Liberation Sans", "DejaVu Sans"]
     import matplotlib.pyplot as plt
 
     tiers = [("translation", "Translation"), ("grounded", "Structure-grounded,\nname resolution,\ninteractions"),

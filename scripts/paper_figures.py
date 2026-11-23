@@ -44,7 +44,8 @@ INK, MUTED, GRID = "#0b0b0b", "#52514e", "#dddcd6"
 PNG_DIR: pathlib.Path | None = None
 
 plt.rcParams.update({
-    "font.family": "DejaVu Sans", "font.size": 8.5, "axes.titlesize": 9.5,
+    "font.family": "sans-serif", "font.sans-serif": ["Helvetica", "Arial", "Liberation Sans", "DejaVu Sans"],
+    "font.size": 8.5, "axes.titlesize": 9.5,
     "axes.labelsize": 8.5, "axes.edgecolor": MUTED, "axes.linewidth": 0.6,
     "axes.spines.top": False, "axes.spines.right": False,
     "xtick.color": MUTED, "ytick.color": MUTED, "text.color": INK, "axes.labelcolor": INK,

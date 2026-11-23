@@ -86,7 +86,7 @@
 <text x="326" y="557" font-size="10" font-weight="bold" fill="#1a1a1a" text-anchor="start">Target score</text>
 <text x="640" y="557" font-size="10" font-weight="bold" fill="#1a1a1a" text-anchor="end">0.00</text>
 <rect x="10" y="573" width="640" height="150" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="20" y="592" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">Answer B: right residue, extra context</text>
+<text x="20" y="592" font-size="11" font-weight="bold" fill="#1a1a1a" text-anchor="start">Answer B: right residue, plus unrequested context</text>
 <text x="20" y="608" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">The right residue, plus a grey cartoon of the whole</text>
 <text x="20" y="621" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">protein that the request does not ask for. Table 3, row</text>
 <text x="20" y="634" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">S5.</text>

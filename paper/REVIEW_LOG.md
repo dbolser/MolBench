@@ -1420,3 +1420,107 @@ ImageMagick. The PDF pages were not looked at in this round.
 1. The earlier open items stand.
 2. Whether the 14 structures of the pilot run are all among the 23 could be settled from the
    pilot archive; the text does not depend on it.
+
+## Panel round 4 (2026-11-23): fourth review of the condensed paper
+
+Five reviewers read the paper after panel round 3. No must-fix item was raised.
+
+| Reviewer | Clarity score | Would accept on clarity |
+|---|---:|---|
+| Structural bioinformatician | 9 | yes |
+| Benchmark reviewer | 9.4 | yes |
+| Clinical geneticist | 9 | yes |
+| Copy-editor | 9 | yes |
+| Cold reader | 9 | yes |
+
+### Length
+
+Text outside tables, figure captions and PENDING tags, as `build.py` counts: **9,490 words**
+(9,489 before this round; ceiling 9,500). The fixes needed about 75 words more than they
+saved in place; the cuts below took them back. Abstract 200 words.
+
+### Should-fix items, all fixed
+
+- **"so none disagreed" about call lists that were never replayed** (four reviewers).
+  Section 4.5 now says: the other 33 are untested: 27 select by UniProt number and six could
+  not be run by our replay of local files. The six (three the replay script could not run,
+  three that load nothing by the grader's rule for file addresses) are a new value,
+  `controls.viewer.api.lists_other_not_replayed`, asserted against the replay record; SI
+  Section S5 keeps the split.
+- **"Two errors in our own references"; row 2 of Table 13 is a design flaw** (three
+  reviewers). Abstract: "A pilot run found that our first clinical references drew an
+  unrequested cartoon and its clinical tasks could not test the mapping; both are fixed."
+  Contribution 4: "errors in our own benchmark".
+- **"Convert" in the abstract against "always converting" as a failure in Section 6.4**
+  (benchmark reviewer). The abstract now asks "Do models map the number, or copy it?", the
+  word of the body.
+- **"Which ClinVar itself does not do"** (four reviewers). Section 9: "ClinVar classifies a
+  variant for a stated condition; we attach the classification to a protein-level name and
+  drop the condition."
+- **UniProt called "the protein's reference sequence"** (clinical geneticist). Abstract:
+  "UniProt's canonical sequence".
+- **The 36 requests without an accession** (clinical geneticist). Section 9 now says that a
+  "p." position there is graded on UniProt's canonical sequence while a clinical reader would
+  count it on the MANE Select protein, and that we assume, without checking, that the two
+  agree (SI Section S10.3).
+- **Figure 4, Answer B titled "extra context"** (copy-editor): "right residue, plus
+  unrequested context".
+- **Figure 1, items running together in boxes 1 and 3** (cold reader): each item starts with
+  a bullet and its continuation lines are indented.
+
+### Polish applied
+
+Target recall and target precision named as such in Section 4.2, "not in facts as F1 is";
+the Figure 4 caption says its recall and precision are those of F1. Target-right and *extra*:
+"another representation confined to the target atoms" (the wording of GRADING.md) in place
+of "on target atoms alone". Table 12 caption: pooling compares like with like in rows 2 to
+4; in row 1 the share of scene tasks is 48% and 46% (new values `corpus.public.mvs_share`,
+`corpus.heldback.mvs_share`). Section 3.6: "none is a task of the pilot run". Box 1: copying
+is right if the residue so named is the target residue. Section 4.4: the schema-breaking
+answer defined in its own sentence, only on the call-list track, keeping its replayed score
+even under strict. Table 5: the three models are those of the pilot run (SI Section S12.2).
+Figure 6 (and the script of the final result figure) in the typeface of Figures 1 to 5. SI
+Section S7: the quoted prompts are indented by two spaces, so their own headings no longer
+appear as SI headings. Section 3.7: the first and fourth checks are gates. Section 1: the
+clause "as a model that is used without tools must" removed. Section 4.2, F1: the call-list
+rule said as "compared as one unit, not style by style". Section 3.1: the four conditions of a
+qualifying record in one sentence; the haplotype gloss and the gloss of the review status are
+in SI Section S3.2. Section 9: which prompt has 1,328 and which 1,556 words. Section 11:
+"each has a qualifying public ClinVar record ... except one". Section 12: "the rating study
+and its trial". Table 6: valid answers as Section 4.4 defines them. Table 13, row 3: the
+full rule (three classification values; review status not "no assertion criteria
+provided"). Abstract: "grades what the Mol* viewer would draw, by rule, without a judge
+model"; requests "posed", not "answered".
+
+### Declined, or done differently, and why
+
+- **"[n] tasks of the first version's other sets are reused"** (structural reviewer). No
+  frozen value counts them, and a check against tag `corpus-v0.1` found only five call-list
+  requests with the same text, while the first version had further releases. Section 3.6 says
+  only what is on record: none of the corpus is a task of the pilot run.
+- **"SI Section S9 gives row 1 per track"** (structural reviewer). That would add a table that
+  the final-run scripts do not yet write; the caption gives the two shares instead, which is
+  what a reader needs to judge the pooling.
+- **"Mol* 5.9.0: 910 controls" in Figure 1 as "all controls"**: the figure says 910 scene
+  controls and, for PDBe Mol*, a sample of call lists without those that select by UniProt
+  position, as Section 4.5 does.
+
+### Cut to hold the length
+
+The abstract's list of representations and its gloss "(amino acid)"; the opening of Section 6
+to one sentence (the first version is defined in Section 3.6); "Tables 6 and 7 give one row
+per model" (the captions say it); the first paragraph of the Conclusion to three sentences;
+"and its consequence may surprise" (4.2); two sentences of 6.4 to one; small trims in 8.
+
+### Checked
+
+`python paper/corpus_values.py --check`, `python paper/build.py --check` and `--pdf`;
+`pytest tests/test_paper_tables.py tests/test_agreement.py` (68 passed). Figures 1, 4 and 6
+were rendered with the Chromium that builds the PDF and looked at. The PDF pages were not
+looked at in this round.
+
+### Open, for the lead
+
+1. The earlier open items stand.
+2. The number of corpus tasks that repeat a task of any release of the first version is not
+   on record; if wanted, `corpus_values.py` could count it from the release tags.

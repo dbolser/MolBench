@@ -1476,6 +1476,12 @@ def si_example(ex: dict) -> str:
     ]) + "\n"
 
 
+def quoted(text: str) -> str:
+    """A quoted prompt, each line indented by two spaces, so that its own Markdown headings
+    ("## Output contract") can never be read as headings of the SI."""
+    return "\n".join(("  " + ln) if ln else ln for ln in text.split("\n"))
+
+
 def si_prompts() -> str:
     """The two system prompts as sent, with the long vendored references left as slots."""
     fence = "`" * 4
@@ -1483,7 +1489,7 @@ def si_prompts() -> str:
     for name, title in (("system_mvs.md", "Scene track"), ("system_api.md", "Call-list track")):
         text = (REPO / "prompts" / name).read_text(encoding="utf-8").rstrip()
         text = re.sub(r"\{\{(\w+)\}\}", r"<<\1>>", text)   # a slot; not a marker of paper/build.py
-        out.append(f"**{title}: system prompt.**\n\n{fence}text\n{text}\n{fence}")
+        out.append(f"**{title}: system prompt.**\n\n{fence}text\n{quoted(text)}\n{fence}")
     from molbench import schema
     long = "`" * 5
     for slot, title, text in (
@@ -1494,7 +1500,7 @@ def si_prompts() -> str:
         # "{{distance}}" in a guide is literal text of the format, not a marker of paper/build.py:
         # a zero-width space between the braces keeps the build from reading it as one.
         shown = text.rstrip().replace("{{", "{\u200b{")
-        out.append(f"**{title}** (slot `<<{slot}>>`), {len(text.split()):,} words.\n\n{long}text\n{shown}\n{long}")
+        out.append(f"**{title}** (slot `<<{slot}>>`), {len(text.split()):,} words.\n\n{long}text\n{quoted(shown)}\n{long}")
     return "\n\n".join(out) + "\n"
 
 
