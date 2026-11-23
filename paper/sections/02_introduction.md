@@ -54,7 +54,7 @@ from the request? We call the first *mapping* the number and the second *copying
 Mapping is more than a habit of converting: some structures are numbered as the request is,
 and there the copied number is right, so the model must know how each structure is numbered.
 
-![**Figure 1. From public data to a score.** Frozen public data are turned into tasks by generator scripts; each model is given the format guide and the request, and answers each task {{plan.samples:word}} times; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *Set-aside structures*: {{corpus.heldback.n_structures}} structures that the first version of the benchmark (public from May 2026) never used; their tasks are public too. *Task success*: the drawn state is exactly right. *Target score* (0 to 1): how exactly the answer marks out the requested atoms; any other drawing, such as a cartoon of the protein, is ignored. *F1*: how much of the drawn state is right, with partial credit. *Strict* and *valid-only* are the two main ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
+![**Figure 1. From public data to a score.** Frozen public data are turned into tasks by generator scripts; each model is given the format guide and the request, and answers each task {{plan.samples:word}} times; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *Set-aside structures*: {{corpus.heldback.n_structures}} structures that the first version of the benchmark (public from May 2026) never used; their tasks are public too. *Task success*: the drawn state is exactly right. *Target score* (0 to 1): how exactly the answer marks out the requested atoms; any other drawing, such as a cartoon of the protein (a ribbon that traces the chain), is ignored. *F1*: how much of the drawn state is right, with partial credit. *Strict* and *valid-only* are the two main ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
 
 This paper makes four contributions.
 
@@ -69,6 +69,6 @@ This paper makes four contributions.
    list of calls to the PDBe Mol\* viewer (the *call-list track*).
    {{corpus.n_twin_pairs}} requests are posed on both tracks, with the same target atoms, so
    that an error of content can be told apart from an error of format.
-4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 5 to 7). A pilot run exposed flaws in our own references, and the analysis of the final
+4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 5 to 7). A pilot run exposed errors in our own references (Table 13, rows 1 and 2), and the analysis of the final
    run (tables, comparisons and primary scores) was fixed before any model was called.
    ⟦PENDING: final run — one sentence stating the main result⟧

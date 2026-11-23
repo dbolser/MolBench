@@ -9,8 +9,7 @@ clinical category measures whether a model can locate a residue in a structure. 
 say the same of their data: UniProt and the AlphaFold Protein Structure Database state that
 their content is not a substitute for professional medical advice. ⟦PENDING: Dan — ClinVar's own statement on clinical use, to be read at the source by hand and added to this sentence; the page refuses automated reading⟧
 
-**Volunteer raters.** The rating study asks volunteers to compare pictures of a molecule,
-one reference and one model answer at a time. It collects their answers, optional free-text notes
+**Volunteer raters.** The rating study asks volunteers to compare pictures of a molecule. It collects their answers, optional free-text notes
 and the time taken per item. Raters are identified in the analysis by pseudonyms; no names,
 contact details or rater identifiers are published. ⟦PENDING: Dan — confirm the consent wording shown to raters, and whether the target journal or the author's institution requires an ethics statement or a waiver for this study⟧
 

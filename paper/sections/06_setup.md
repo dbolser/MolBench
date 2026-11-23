@@ -6,9 +6,10 @@ file before any model is called (SI Section S6). SI Section S12 gives this secti
 ### 5.1 Models
 
 The models are chosen by a written rule, not by results. The {{plan.n_core_models}} *core
-models* are the models of the first version's public results (October 2026), taken over
-unchanged, so that the choice depends on no result of the present benchmark;
-{{plan.n_core_in_pilot}} of them are in the pilot run of Section 6.6 (SI Section S12.1). Most are the
+models* are those shown in the first version's online results browser in October 2026
+(Section 12), taken over unchanged, so that the choice depends on no result of the present
+benchmark; {{plan.n_core_in_pilot}} of them are in the pilot run of Section 6.6, and the
+other could not be reached on the day of that run (SI Section S12.1). Most are the
 smaller, cheaper models of their providers. {{plan.n_core_open}} have *open weights* (the
 weights can be downloaded) and {{plan.n_core_closed}} have *closed weights* (the model can
 be used only through a provider's service). Up to {{plan.n_optional_models}} *optional
@@ -57,8 +58,9 @@ whether a model can use raw lookup tables.
 
 Each model answers each task {{plan.samples:word}} times in the main condition, at the
 provider's default temperature, with a limit of {{plan.max_tokens:,}} tokens per answer
-(more for models that first write hidden reasoning). An invalid answer is scored as it
-stands and is not retried. Every raw answer is archived with its token counts and its cost.
+(more for models that first write hidden reasoning). An answer that reaches the limit is
+*cut off* by the provider. A cut-off or invalid answer is scored as it stands and is not
+retried.
 
 ### 5.4 Statistics
 
@@ -87,7 +89,7 @@ task success also falls when an answer adds unrequested context (difference row 
 10).
 
 **Six further planned comparisons** are the rows of Table 12, each a difference in task
-success rate with an interval: the set-aside split, the two rewordings, JSON mode, the
+success rate with an interval: the set-aside split, the two alternative wordings, JSON mode, the
 grounding pack and the format guide. We do not correct for multiple comparisons, and we
 report every count.
 
@@ -108,7 +110,7 @@ S12.5).
 
 ### 5.6 Reproducibility
 
-One command performs the run from the manifest, and one rebuilds every table, figure and
-number of this paper from the archived answers. A *connection test* of the run script on a few tasks, before the corpus was
+One command performs the run from the manifest, and one rebuilds this paper from the
+archived answers. A *connection test* of the run script on a few tasks, before the corpus was
 frozen, exposed faults of the grader, which were corrected; it produced no result reported
 here (SI Section S6.1).

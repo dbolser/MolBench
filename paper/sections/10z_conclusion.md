@@ -2,8 +2,7 @@
 
 MolBench grades how a language model drives a molecular viewer on the atoms,
 representations and colours that the viewer would draw, without a judge model. References
-are computed by script from the structure and, for clinical variants, from the SIFTS
-mapping and ClinVar. The corpus has {{corpus.n_tasks}} tasks on {{corpus.n_structures}}
+are computed by script from the structure, the SIFTS mapping and ClinVar. The corpus has {{corpus.n_tasks}} tasks on {{corpus.n_structures}}
 structures, and {{corpus.n_twin_pairs}} requests are posed in two answer formats, to
 tell errors of content from errors of format. The grader agrees with all
 {{controls.n:,}} control answers against which it was developed, and a check by people is

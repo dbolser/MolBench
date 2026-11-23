@@ -78,7 +78,7 @@ class Svg:
         fam = ' font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve"' if mono else ""
         it = ' font-style="italic"' if italic else ""
         self.parts.append(f'<text x="{x}" y="{y}" font-size="{size}" font-weight="{weight}" fill="{fill}" '
-                          f'text-anchor="{anchor}"{fam}{it}>{html.escape(str(s))}</text>')
+                          f'text-anchor="{anchor}"{fam}{it}>{html.escape(str(s), quote=False)}</text>')
 
     def para(self, x, y, s, width, size=11, lh=None, **kw) -> int:
         """Wrapped text; returns the y after the last line."""
@@ -127,11 +127,13 @@ def chars(px: float, size: float, mono: bool = False) -> int:
 def fig_pipeline(v: dict) -> str:
     boxes = [
         ("1  Frozen public data", [
-            f"{v['panel.n']} structures (PDB and AlphaFold DB),",
-            f"{v['corpus.n_structures']} in tasks; residue mapping (SIFTS)",
-            f"{v['variants.n_usable']:,} amino-acid changes with a",
-            "(likely) pathogenic ClinVar record;",
-            f"the tasks name {v['clin.n_variants']} variants"]),
+            f"{v['panel.n']} structures (PDB and AlphaFold DB):",
+            f"{v['corpus.n_structures']} carry tasks, {v['panel.n'] - v['corpus.n_structures']} is the prompt example",
+            "residue mapping (SIFTS)",
+            f"{v['variants.n_usable']:,} amino-acid changes with a ClinVar",
+            "record: pathogenic or likely pathogenic",
+            f"the tasks name {v['clin.n_variants']} variants: {v['clin.n_variants_from_pool']} of",
+            f"these and {v['clin.n_variants'] - v['clin.n_variants_from_pool']} exception"]),
         ("2  Generator scripts", [
             f"{v['corpus.n_templates']} templates.",
             "Each task gets: a request,",
@@ -163,7 +165,7 @@ def fig_pipeline(v: dict) -> str:
             "each averaged strict (all answers)",
             "and valid-only (valid answers)"]),
     ]
-    x0, y0, w, h, gap, vgap = 10, 34, 206, 112, 11, 30
+    x0, y0, w, h, gap, vgap = 10, 34, 206, 140, 11, 30
     yb = y0 + 2 * h + vgap + 44
     ch = 82
     s = Svg(W, yb + 2 * ch + 10 + 8, "How a MolBench task is built, answered and graded")
@@ -390,9 +392,11 @@ def fig_grading(v: dict) -> str:
                      "(no atom shared with the reference)"]
         else:
             facts = [f"fact 1: {v['ex.wild_type']}{right}, grey cartoon and {look};",
-                     "   one of its two styles is in the reference",
+                     "   one of its two styles is in the reference: 0.5",
                      "fact 2: all other residues, grey cartoon;",
-                     "   none of it is in the reference"]
+                     "   none of it is in the reference: 0",
+                     f"precision: (0.5 + 0) / 2 = {v[key + '.precision']:.2f}"]
+            assert abs(v[key + ".precision"] - (0.5 + 0) / 2) < 1e-9
         for j, ln in enumerate(facts):
             s.text(xr, y + 34 + j * 13, ln, size=10)
         ysc = y + ph - 58

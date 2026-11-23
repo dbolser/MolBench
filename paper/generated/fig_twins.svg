@@ -21,11 +21,11 @@
 <text x="20" y="204" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">     color  yellow</text>
 <text x="20" y="217" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">The model must turn UniProt 82 into author residue 64</text>
 <text x="20" y="230" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">itself.</text>
-<text x="346" y="126" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">load   molecule_id = &quot;2nwd&quot;</text>
-<text x="346" y="139" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">color  uniprot_accession = &quot;P61626&quot;,</text>
+<text x="346" y="126" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">load   molecule_id = "2nwd"</text>
+<text x="346" y="139" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">color  uniprot_accession = "P61626",</text>
 <text x="346" y="152" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       uniprot_residue_number = 82,</text>
-<text x="346" y="165" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representation = &quot;spacefill&quot;,</text>
-<text x="346" y="178" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representationColor = &quot;yellow&quot;</text>
+<text x="346" y="165" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representation = "spacefill",</text>
+<text x="346" y="178" font-size="9.5" font-weight="normal" fill="#1a1a1a" text-anchor="start" font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve">       representationColor = "yellow"</text>
 <text x="346" y="217" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">The viewer does the mapping; the model only passes on the</text>
 <text x="346" y="230" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">accession and the position.</text>
 <line x1="167.0" y1="239" x2="250.0" y2="262" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
@@ -53,6 +53,6 @@
 <text x="503.0" y="395" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="middle">right on neither side</text>
 <text x="582" y="365" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">scene right</text>
 <text x="582" y="395" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">scene wrong</text>
-<text x="432" y="424" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">McNemar&#x27;s test compares the two coloured cells</text>
+<text x="432" y="424" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">McNemar's test compares the two coloured cells</text>
 <text x="432" y="437" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle">(right in one format only).</text>
 </svg>

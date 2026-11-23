@@ -5,11 +5,14 @@ corpus and the two text-comparing graders that were public from May 2026 until t
 corpus replaced them. Its run of the scene tasks in October 2026 is the *pilot run*, whose
 results are kept apart in the box of Section 6.6. Sections 6.1 to 6.5 show the tables that
 the final run will fill; their layout and captions are fixed, and a script fills the cells.
+Figure 5 shows the layout of the summary figure.
 
 
 {{include:generated/fig_final_results.md|else:figures/fig5_layout.md}}
 
 ### 6.1 Models on both tracks
+
+Tables 6 and 7 give one row per model, one table per track.
 
 **Table 6. Scene track, main condition.** One row per model; † marks an optional model.
 *Valid answers*: share of
@@ -25,7 +28,7 @@ intervals (structures resampled).
 {{include:generated/table_final_leaderboard_scene.md|else:generated/shape_leaderboard.md}}
 
 **Table 7. Call-list track, main condition.** Columns as in Table 6, except that a *valid
-answer* is a JSON list in which every call and field is documented, and a schema-breaking
+answer* is a JSON list that keeps to the documented calls, and a schema-breaking
 call list keeps, under *strict*, the scores it earns when replayed (Section 4.4).
 
 {{include:generated/table_final_leaderboard_calls.md|PENDING: final run — the table for the call-list track, in the shape of Table 6}}
@@ -69,8 +72,8 @@ counts without the clinical pairs are the cleaner test of the formats.
 right.** On this track the model must map the number itself. *Target score* (the primary
 score of this table) and *task success rate* as in Table 6; both are strict means over the
 models. *With grounding pack*: the mapped residue is
-appended to the request. The first five rows are the two groupings of the same {{clin.n}}
-tasks (Table 2, Box 1); the last three are subsets. *Matched tasks*: the same variant asked
+appended to the request. The rows labelled *Copying the number* and *Offset* are the two
+groupings of the same {{clin.n}} tasks (Table 2, Box 1); the last three rows are subsets. *Matched tasks*: the same variant asked
 on a structure with an offset and on a predicted structure without one (descriptive only).
 *Helix or strand requested*: Section 3.3.1.
 
@@ -89,23 +92,29 @@ before the run and do not predict which one a model will show.
 Only pattern 2 shows that a model knows how each structure is numbered. With the grounding
 pack, patterns 1 and 3 should both turn into pattern 2. The patterns describe one model: in
 a mean over models, a mixture of copying and converting models could pass for pattern 4, so
-the question is answered model by model (SI Section S9). A model shows pattern 1 when
-the interval of its difference (copying right minus copying wrong) lies above zero, and
-pattern 3 when it lies below zero; otherwise pattern 2 or 4 is read from the level of the
-two rows, which we report and do not classify by rule.
-⟦PENDING: final run — the number of models under each pattern, from the per-model rows of SI Section S9⟧
+the question is answered model by model (SI Section S9). For each model we report the two
+row means and the interval of their difference (copying right minus copying wrong). An
+interval above zero points towards pattern 1 (score is lost where copying is wrong), and one
+below zero towards pattern 3. An interval that includes zero leaves patterns 2 and 4, which
+differ only in the level of the two rows; we give the levels and set no threshold between
+them.
+⟦PENDING: final run — the number of models with an interval above, below and across zero, with the levels of the two rows, from the per-model rows of SI Section S9⟧
 
 ### 6.5 Follow-up turns, several right answers, planned comparisons
+
+Table 11 divides the follow-up turns by whether the edit needs a change; Table 12 holds the
+planned comparisons of Section 5.4.
 
 **Table 11. Follow-up turns and requests with several right answers.** *Task success rate*:
 share of answers whose drawn state is exactly right (for a request with several right
 answers: equal to any one of the accepted answers), strict, mean over the models. A
 follow-up turn *needs no change* when the start state already shows what is asked; the
-right answer returns it unaltered.
+right answer returns it unaltered. The two tracks stand side by side for reference; their
+task success rates must not be compared (Section 4.2).
 
 {{include:generated/table_final_followup.md|else:generated/shape_followup.md}}
 
-**Table 12. Planned comparisons 1 to 6 of Section 5.4.** Each row compares the task success
+**Table 12. The six further planned comparisons of Section 5.4.** Each row compares the task success
 rate (strict, mean over the models) between two groups of tasks or two conditions, with a
 95% interval on the difference (structures resampled). The conditions are those of Table 5;
 the one JSON-mode answer to a task is set against the mean of its {{plan.samples}} main
@@ -147,7 +156,7 @@ clinical answers, and in {{oct.spec.clinical.highlight_valid_share:.0%}} of the 
 the requested residue
 was drawn exactly as in the reference. The points were lost elsewhere: each clinical
 reference also drew a grey cartoon of the whole protein, and the requests asked only for
-the residue. There was a second flaw. All {{mvs.spec.regime.Clinical.n_tasks}} clinical
+the residue. There was a second error. All {{mvs.spec.regime.Clinical.n_tasks}} clinical
 tasks used a single structure in which author numbers equal UniProt numbers, so the
 category could not test the mapping at all. "Most answers drew the right residue" is
 therefore a statement about drawing, not about mapping.

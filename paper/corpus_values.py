@@ -378,6 +378,11 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     kv = [v for v in kept[0]["provenance"]["clinical"]["variants"] if v["variant"] == "I74T"][0]
     assert kv["clinvar_review_status"] == ["no assertion criteria provided"]
     V["clin.kept_by_name.classification"] = kv["clinvar_classification"][0].lower()
+    # Section 3.1 and Figure 1: the named variants that come from the pool; "one exception".
+    kept_variants = {(x["gene"], v["variant"]) for x in c for v in x["variants"]
+                     if x["gene"] == "LYZ" and v["variant"] == "I74T"}
+    assert len(kept_variants) == 1
+    V["clin.n_variants_from_pool"] = V["clin.n_variants"] - len(kept_variants)
     assert V["clin.n_insertion_code"] == 0      # the text says no clinical target has one
     # Section 3.3.1 says in words where the tasks with several variants and the helix and
     # strand tasks sit in Table 2: all of them have an offset, and copying is wrong in all.
@@ -785,6 +790,7 @@ def controls_values(V: dict) -> dict:
     V["controls.viewer.api.kinds_at_check"] = vs["kinds_at_check"]
     V["controls.viewer.api.sample_share"] = pct(vs["controls_in_sample"], vs["controls_at_check"])
     V["controls.viewer.api.sample_lists"] = 2 * vs["controls_in_sample"]
+    V["controls.viewer.api.lists_not_replayed"] = 2 * vs["controls_in_sample"] - a["lists_run"]
     V["controls.viewer.api.skipped_uniprot"] = vs["lists_selecting_by_uniprot"]
     V["controls.viewer.api.n_added_since"] = V["controls.api.n_controls"] - vs["controls_at_check"]
     # Each control has two call lists (reference and answer); the replay record counts lists.

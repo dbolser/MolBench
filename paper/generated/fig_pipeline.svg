@@ -1,73 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 514" width="660" height="514" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="How a MolBench task is built, answered and graded">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 570" width="660" height="570" font-family="Helvetica, Arial, sans-serif" role="img" aria-label="How a MolBench task is built, answered and graded">
 <title>How a MolBench task is built, answered and graded</title>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#555555"/></marker></defs>
-<rect width="660" height="514" fill="#ffffff"/>
+<rect width="660" height="570" fill="#ffffff"/>
 <text x="10" y="20" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Steps 1 to 6. Grading (steps 5 and 6) uses no network and no model.</text>
-<rect x="10" y="34" width="206" height="112" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<rect x="10" y="34" width="206" height="140" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="20" y="54" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">1  Frozen public data</text>
-<text x="20" y="74" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">79 structures (PDB and AlphaFold DB),</text>
-<text x="20" y="89" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">78 in tasks; residue mapping (SIFTS)</text>
-<text x="20" y="104" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">2,400 amino-acid changes with a</text>
-<text x="20" y="119" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">(likely) pathogenic ClinVar record;</text>
-<text x="20" y="134" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">the tasks name 87 variants</text>
-<line x1="217" y1="90.0" x2="226" y2="90.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
-<rect x="227" y="34" width="206" height="112" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="20" y="74" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">79 structures (PDB and AlphaFold DB):</text>
+<text x="20" y="89" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">78 carry tasks, 1 is the prompt example</text>
+<text x="20" y="104" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">residue mapping (SIFTS)</text>
+<text x="20" y="119" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">2,400 amino-acid changes with a ClinVar</text>
+<text x="20" y="134" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">record: pathogenic or likely pathogenic</text>
+<text x="20" y="149" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">the tasks name 87 variants: 86 of</text>
+<text x="20" y="164" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">these and 1 exception</text>
+<line x1="217" y1="104.0" x2="226" y2="104.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="227" y="34" width="206" height="140" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="237" y="54" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">2  Generator scripts</text>
 <text x="237" y="74" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">129 templates.</text>
 <text x="237" y="89" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">Each task gets: a request,</text>
 <text x="237" y="104" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">a reference answer,</text>
 <text x="237" y="119" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">its target atoms and a</text>
 <text x="237" y="134" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">record of how it was made</text>
-<line x1="434" y1="90.0" x2="443" y2="90.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
-<rect x="444" y="34" width="206" height="112" rx="6" fill="#d3e4f1" stroke="#8a8a8a" stroke-width="1.0"/>
+<line x1="434" y1="104.0" x2="443" y2="104.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="444" y="34" width="206" height="140" rx="6" fill="#d3e4f1" stroke="#8a8a8a" stroke-width="1.0"/>
 <text x="454" y="54" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">3  Task corpus</text>
 <text x="454" y="74" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">797 tasks, 8 categories</text>
 <text x="454" y="89" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">scene track: 381</text>
 <text x="454" y="104" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">call-list track: 416</text>
 <text x="454" y="119" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">258 pairs (one request, both tracks)</text>
 <text x="454" y="134" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">165 tasks on 15 set-aside structures</text>
-<rect x="10" y="176" width="206" height="112" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="20" y="196" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">4  Model</text>
-<text x="20" y="216" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">is given a format guide and</text>
-<text x="20" y="231" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">the request only:</text>
-<text x="20" y="246" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">no structure file, no lookup</text>
-<text x="20" y="261" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">3 answers per task,</text>
-<text x="20" y="276" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">each a scene or a call list</text>
-<line x1="217" y1="232.0" x2="226" y2="232.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
-<rect x="227" y="176" width="206" height="112" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="237" y="196" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">5  Grader</text>
-<text x="237" y="216" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">resolves reference and answer</text>
-<text x="237" y="231" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">to their drawn state:</text>
-<text x="237" y="246" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">per atom, how it is drawn</text>
-<text x="237" y="261" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">and coloured</text>
-<text x="237" y="276" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">(frozen atom tables)</text>
-<line x1="434" y1="232.0" x2="443" y2="232.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
-<rect x="444" y="176" width="206" height="112" rx="6" fill="#d3e4f1" stroke="#8a8a8a" stroke-width="1.0"/>
-<text x="454" y="196" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">6  Scores</text>
-<text x="454" y="216" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">three scores:</text>
-<text x="454" y="231" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">task success (yes or no),</text>
-<text x="454" y="246" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">target score, F1 (partial credit)</text>
-<text x="454" y="261" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">each averaged strict (all answers)</text>
-<text x="454" y="276" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">and valid-only (valid answers)</text>
-<path d="M547.0,147 V161.0 H113.0 V175" fill="none" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
-<text x="10" y="320" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Checks that do not depend on any model</text>
-<rect x="10.0" y="332" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
-<text x="20.0" y="351" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Reference against structure (step 2)</text>
-<text x="20.0" y="368" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Each reference must select atoms, name the residue the</text>
-<text x="20.0" y="381" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">generator intended, and grade as exactly right against</text>
-<text x="20.0" y="394" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">itself.</text>
-<rect x="335.5" y="332" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
-<text x="345.5" y="351" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Atom tables against the viewer (step 5)</text>
-<text x="345.5" y="368" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Selections were read back from the running viewers (Mol*</text>
-<text x="345.5" y="381" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">5.9.0, PDBe Mol* 3.3.2) and agree atom for atom.</text>
-<rect x="10.0" y="424" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
-<text x="20.0" y="443" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Grader against a control set (step 5)</text>
-<text x="20.0" y="460" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">2,175 control answers with a verdict known from how they</text>
-<text x="20.0" y="473" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">were made. The grader was developed against them and now</text>
-<text x="20.0" y="486" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">agrees with all; they are re-run on every change.</text>
-<rect x="335.5" y="424" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
-<text x="345.5" y="443" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Format rules (step 3)</text>
-<text x="345.5" y="460" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One script validates every task file against the written</text>
-<text x="345.5" y="473" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">task format; the run does not start unless every check</text>
-<text x="345.5" y="486" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">passes.</text>
+<rect x="10" y="204" width="206" height="140" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="20" y="224" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">4  Model</text>
+<text x="20" y="244" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">is given a format guide and</text>
+<text x="20" y="259" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">the request only:</text>
+<text x="20" y="274" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">no structure file, no lookup</text>
+<text x="20" y="289" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">3 answers per task,</text>
+<text x="20" y="304" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">each a scene or a call list</text>
+<line x1="217" y1="274.0" x2="226" y2="274.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="227" y="204" width="206" height="140" rx="6" fill="#f3f5f7" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="237" y="224" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">5  Grader</text>
+<text x="237" y="244" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">resolves reference and answer</text>
+<text x="237" y="259" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">to their drawn state:</text>
+<text x="237" y="274" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">per atom, how it is drawn</text>
+<text x="237" y="289" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">and coloured</text>
+<text x="237" y="304" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">(frozen atom tables)</text>
+<line x1="434" y1="274.0" x2="443" y2="274.0" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="444" y="204" width="206" height="140" rx="6" fill="#d3e4f1" stroke="#8a8a8a" stroke-width="1.0"/>
+<text x="454" y="224" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">6  Scores</text>
+<text x="454" y="244" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">three scores:</text>
+<text x="454" y="259" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">task success (yes or no),</text>
+<text x="454" y="274" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">target score, F1 (partial credit)</text>
+<text x="454" y="289" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">each averaged strict (all answers)</text>
+<text x="454" y="304" font-size="10" font-weight="normal" fill="#1a1a1a" text-anchor="start">and valid-only (valid answers)</text>
+<path d="M547.0,175 V189.0 H113.0 V203" fill="none" stroke="#555555" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="10" y="376" font-size="11.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Checks that do not depend on any model</text>
+<rect x="10.0" y="388" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
+<text x="20.0" y="407" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Reference against structure (step 2)</text>
+<text x="20.0" y="424" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Each reference must select atoms, name the residue the</text>
+<text x="20.0" y="437" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">generator intended, and grade as exactly right against</text>
+<text x="20.0" y="450" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">itself.</text>
+<rect x="335.5" y="388" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
+<text x="345.5" y="407" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Atom tables against the viewer (step 5)</text>
+<text x="345.5" y="424" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">Selections were read back from the running viewers (Mol*</text>
+<text x="345.5" y="437" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">5.9.0, PDBe Mol* 3.3.2) and agree atom for atom.</text>
+<rect x="10.0" y="480" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
+<text x="20.0" y="499" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Grader against a control set (step 5)</text>
+<text x="20.0" y="516" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">2,175 control answers with a verdict known from how they</text>
+<text x="20.0" y="529" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">were made. The grader was developed against them and now</text>
+<text x="20.0" y="542" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">agrees with all; they are re-run on every change.</text>
+<rect x="335.5" y="480" width="314.5" height="82" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1.0" stroke-dasharray="4 3"/>
+<text x="345.5" y="499" font-size="10.5" font-weight="bold" fill="#1a1a1a" text-anchor="start">Format rules (step 3)</text>
+<text x="345.5" y="516" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">One script validates every task file against the written</text>
+<text x="345.5" y="529" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">task format; the run does not start unless every check</text>
+<text x="345.5" y="542" font-size="10" font-weight="normal" fill="#555555" text-anchor="start">passes.</text>
 </svg>

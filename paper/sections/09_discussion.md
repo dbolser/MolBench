@@ -8,8 +8,7 @@ Two points concern the instrument and can be made before the final run.
 answers. Strict scores mostly measured whether a model returned a scene that the viewer
 could load. F1 in the clinical category mostly measured whether a model reproduced a
 background. Only a score restricted to the requested atoms showed that the residue was
-usually drawn right. We therefore report the task success rate and the target score
-together, strict and valid-only, and F1 for partial credit.
+usually drawn right. We therefore report task success and the target score together.
 
 **A benchmark's references need the same scrutiny as the models.** The most important
 finding so far concerns our own references (Table 13, row 1). It was found by asking where

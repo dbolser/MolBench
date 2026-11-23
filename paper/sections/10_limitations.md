@@ -18,7 +18,7 @@ the full list with numbers.
 - **ClinVar is a snapshot, read through UniProt.** Classifications change. We looked only at
   the records that UniProt cross-references, did not check which transcript (messenger RNA of the gene) a
   record's protein-level name is counted on, and attach the classification to a protein-level name
-  without a condition, which ClinVar itself does not do. The residue that a name points to
+  without naming the disease, which ClinVar itself does not do. The residue that a name points to
   does not depend on the classification.
 - **The grader is tested only against cases that we foresaw** (Section 4.5). Until the
   rating study is done,
@@ -32,7 +32,7 @@ the full list with numbers.
   UniProt position itself, and the two system prompts differ in length
   ({{prompt.mvs.words:,}} and {{prompt.api.words:,}} words).
 - **Small groups are descriptive only.** The set-aside split within one category, the
-  matched clinical tasks, the helix and strand tasks and the two rephrasings are reported
+  matched clinical tasks, the helix and strand tasks and the two alternative wordings are reported
   with intervals and not tested. In every set of matched tasks the structure without an
   offset is a predicted structure, so the effect of the offset cannot be told apart from
   that of a predicted structure.
