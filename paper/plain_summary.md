@@ -17,4 +17,4 @@ atom by atom.
 We need people to check the program. You will see two pictures side by side: the right answer
 and a model's answer, taken from the same viewpoint. You say whether they show the same thing,
 a different thing, or that you cannot tell. You need no knowledge of biology. It takes about
-ten seconds per pair, and nothing we publish will carry your name.
+ten seconds per comparison, and nothing we publish will carry your name.

@@ -1,18 +1,18 @@
 ## Abstract
 
-Scientists now ask language models to drive molecular viewers in plain words: "show the residue
-changed by this variant". A wrong picture looks as polished as a right one. MolBench grades a model on what the viewer
-would draw: which atoms, in which representation and colour. Every reference answer is
-computed by script from the deposited structure, a residue-level mapping to UniProt, and ClinVar,
-and is checked against the structure. The corpus has {{corpus.n_tasks}} tasks on
-{{corpus.n_structures}} structures in eight tiers, from fully specified requests to clinical
-variants that must be mapped from UniProt numbering to the residues of a structure.
-{{corpus.n_twin_pairs}} requests are posed in two output formats, a declarative scene and an
-imperative call list, to separate not knowing the answer from not being able to write it. On
-{{controls.n:,}} control answers with known verdicts the grader made no error; the two graders it
-replaces failed {{controls.mvs.old.false_fail_rate:.0%}} and
-{{controls.api.old.false_fail_rate:.0%}} of the correct ones. In a pilot run, clinical tasks
-scored lowest although most answers drew the right residue: they lost points on context that
-nobody had requested. References now hold only what the request states.
-⟦PENDING: final run — headline results on both tracks and the paired comparison, two sentences⟧
-Tasks, graders and model outputs are open.
+Language models now drive molecular viewers, and a wrong picture looks as polished as a
+right one. MolBench grades by rule, without a judge model, what the Mol\* viewer would draw:
+which atoms, which representation, which colour. The model sees only the request and a format
+guide: no structure file, no lookup. Scripts compute references from structure files, a
+residue-numbering table (SIFTS) and a clinical variant archive (ClinVar). The
+{{corpus.n_tasks}} tasks on {{corpus.n_structures}} structures form eight categories. One
+asks about variants that ClinVar classifies as pathogenic or likely pathogenic. The variant's
+name usually gives its UniProt sequence position; the structure often numbers that residue
+differently. Do models convert the number, or copy it? To separate content from format
+errors, {{corpus.n_twin_pairs}} requests are posed twice: as a MolViewSpec scene and as
+PDBe Mol\* viewer calls. The grader agrees with all {{controls.n:,}} control answers used to
+develop it. In a pilot, clinical tasks scored lowest although most answers drew the right
+residue. Our references drew an unrequested cartoon (a ribbon), and all clinical tasks used
+one structure numbered as its UniProt sequence, which needs no conversion. Both are
+corrected, and a target score now grades the requested atoms and ignores background.
+⟦PENDING: final run — main results on both tracks and the paired comparison, with the number of models, in two sentences, which replace the four sentences on the pilot run so that the abstract stays within its limit⟧

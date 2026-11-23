@@ -378,6 +378,522 @@
  },
  "graded_answers": {
   "mvs": {
+   "spill": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "beg_auth_seq_id": 63,
+               "end_auth_seq_id": 65
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "spill_chain": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X"
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "extra": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "other_rep_around": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "beg_auth_seq_id": 63,
+               "end_auth_seq_id": 65
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "ball_and_stick"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "surface": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": "polymer"
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "surface"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "gray"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "other_colour_around": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "beg_auth_seq_id": 63,
+               "end_auth_seq_id": 65
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "red"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "other_colour_beside": {
+    "root": {
+     "kind": "root",
+     "children": [
+      {
+       "kind": "download",
+       "params": {
+        "url": "https://files.rcsb.org/download/2nwd.cif"
+       },
+       "children": [
+        {
+         "kind": "parse",
+         "params": {
+          "format": "mmcif"
+         },
+         "children": [
+          {
+           "kind": "structure",
+           "params": {
+            "type": "model"
+           },
+           "children": [
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 64
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "yellow"
+                 }
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "kind": "component",
+             "params": {
+              "selector": {
+               "auth_asym_id": "X",
+               "auth_seq_id": 65
+              }
+             },
+             "children": [
+              {
+               "kind": "representation",
+               "params": {
+                "type": "spacefill"
+               },
+               "children": [
+                {
+                 "kind": "color",
+                 "params": {
+                  "color": "red"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   },
    "right": {
     "root": {
      "kind": "root",
@@ -853,6 +1369,29 @@
     {
      "action": "load",
      "molecule_id": "2nwd"
+    }
+   ],
+   "hide_cartoon": [
+    {
+     "action": "load",
+     "molecule_id": "2nwd"
+    },
+    {
+     "action": "color",
+     "data": [
+      {
+       "uniprot_accession": "P61626",
+       "uniprot_residue_number": 82,
+       "color": null,
+       "representation": "spacefill",
+       "representationColor": "yellow"
+      }
+     ]
+    },
+    {
+     "action": "set_property",
+     "name": "hide_polymer",
+     "value": true
     }
    ]
   }

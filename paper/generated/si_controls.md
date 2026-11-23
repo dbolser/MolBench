@@ -1,7 +1,7 @@
 **Scene track.**
 
-| Verdict known from construction | Kind of pair | Pairs | Graded as success | Graded as success by the earlier grader |
-|:---|:---|---:|---:|---:|
+| Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
+|:-----|:----------------------|---:|---:|---:|
 | must pass (equivalent) | selector 'all' instead of 'polymer' under a cartoon (a cartoon draws polymer only) | 20 | 20 | 1 |
 | must pass (equivalent) | a chain's cartoon selected by author chain id, label chain id or entity id | 20 | 20 | 2 |
 | must pass (equivalent) | reference colours by the chain-id theme; the answer gives each chain its own colour | 20 | 20 | 0 |
@@ -30,7 +30,7 @@
 | must pass (identical) | the answer is the reference itself | 150 | 150 | 150 |
 | must fail (wrong) | 'all' instead of 'polymer' under ball-and-stick (waters and ligands are drawn too) | 20 | 0 | 0 |
 | must fail (wrong) | the right scene on an AlphaFold model address that does not exist: the file name on RCSB's host, without its model version, with an old version, or in lower case (the viewer shows nothing) | 5 | 0 | 3 |
-| must fail (wrong) | the biological assembly is loaded where the deposited model was asked for | 20 | 0 | 0 |
+| must fail (wrong) | the biological assembly is loaded where the deposited coordinates was asked for | 20 | 0 | 0 |
 | must fail (wrong) | the author residue number written in the label-number field (structures where they differ) | 20 | 0 | 0 |
 | must fail (wrong) | two chains' colours the wrong way round | 20 | 0 | 0 |
 | must fail (wrong) | the structure is loaded and nothing is drawn | 20 | 0 | 0 |
@@ -57,8 +57,8 @@
 
 **Call-list track.**
 
-| Verdict known from construction | Kind of pair | Pairs | Graded as success | Graded as success by the earlier grader |
-|:---|:---|---:|---:|---:|
+| Verdict known from construction | Kind of control | Controls | Graded as success | Graded as success by the earlier grader |
+|:-----|:----------------------|---:|---:|---:|
 | must pass (equivalent) | struct_asym_id (label chain) instead of auth_asym_id for the same chain | 20 | 20 | 17 |
 | must pass (equivalent) | auth_residue_number instead of auth_seq_id | 20 | 20 | 20 |
 | must pass (equivalent) | a colour as #rrggbb or as an {r,g,b} object instead of its name | 20 | 20 | 0 |

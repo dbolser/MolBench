@@ -1,5 +1,5 @@
-| Tier | Template | Scene tasks | Call-list tasks | Example request |
-|:---|:---|---:|---:|:---|
+| Category | Template | Scene tasks | Call-list tasks | Example request |
+|:----|:-----|--:|--:|:----------------|
 | Translation | `api-assembly` | – | 6 | Load oxyhaemoglobin (1HHO) as its biological assembly (the tetramer, assembly 1) and show it as a molecular surface. |
 | Translation | `api-atoms` | – | 5 | Open 1AAY in the ball-and-stick style; atoms CB and OD1 of Asp166 of chain A should be cyan. |
 | Translation | `api-chain-colour` | – | 10 | Load insulin (4INS) as a cartoon. Colour the two A chains (author chains A and C) blue and the two B chains (author chains B and D) yellow, and show the zinc ions (ZN)… |
@@ -49,14 +49,6 @@
 | Structure-grounded | `gr-metal-site` | 6 | 6 | 1IRO: grey cartoon; iron ion as a khaki sphere; every residue of the protein that coordinates the iron ion, as green ball-and-stick. |
 | Structure-grounded | `gr-modres` | 5 | 5 | Show 1ATP as a grey cartoon and highlight the phosphorylated residues in lime green ball-and-stick. |
 | Structure-grounded | `gr-secstruct` | 4 | 4 | Show 1A3K as a grey cartoon, then colour the helices blue and the beta strands lime green, following the helix and sheet records of the entry. |
-| Interactions | `in-ca-distance` | 5 | – | Show 1AKE as a yellow cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Ser183 to the CA atom of Lys200. Both residues are… |
-| Interactions | `in-computed` | 5 | – | 1A6M: grey cartoon; heme as red ball-and-stick with its computed non-covalent interactions shown; camera on the heme. |
-| Interactions | `in-disulfide` | 5 | – | In 1F88 (grey cartoon), measure the S-S bond of the disulfide between Cys110 and Cys187: the two cysteines in green ball-and-stick, a labelled dashed line between thei… |
-| Interactions | `in-hbond` | 5 | – | 1A3K: grey cartoon; Asn174 and Arg224 as magenta ball-and-stick; measure the hydrogen bond between OD1 of Asn174 and NH1 of Arg224 with a labelled dashed line; focus t… |
-| Interactions | `in-ligand-contact` | 5 | – | 1ATP: grey cartoon; ATP as teal ball-and-stick; Phe54 as cyan ball-and-stick; measure the contact between ATP atom O2B and N of Phe54 with a labelled dashed line; focu… |
-| Interactions | `in-metal-contact` | 5 | – | 1HRC: grey cartoon; heme as plum ball-and-stick; His18 and Met80 as salmon ball-and-stick; measure the distance from the heme iron to NE2 of His18 and SD of Met80 with… |
-| Interactions | `in-salt-bridge` | 5 | – | Load 1EMA as a grey cartoon. Show Lys3 and Glu90 as cyan ball-and-stick, draw the salt bridge between the NZ atom of Lys3 and the OE1 atom of Glu90 as a dashed line la… |
-| Interactions | `in-transparent` | 5 | – | Show 1CTQ with a semi-transparent brown protein surface (opacity 0.5) so that the GppNHp, drawn in steel blue ball-and-stick, can be seen through it. |
 | Name resolution | `res-complex` | 3 | – | Find a PDB entry of bovine trypsin in complex with bovine pancreatic trypsin inhibitor (BPTI) and show it as a plum cartoon. |
 | Name resolution | `res-dna` | 3 | – | I want to see how the cI repressor of bacteriophage lambda sits on DNA. Any PDB structure of the complex will do: protein as a brown cartoon, DNA as a teal cartoon. |
 | Name resolution | `res-gene` | 11 | – | I want to see a structure of human SOD1; a green cartoon will do. |
@@ -75,6 +67,14 @@
 | Clinical variant | `clin-short-target` | 9 | 9 | In PDB entry 5UAK, show the residue replaced by the pathogenic CFTR (Cystic fibrosis transmembrane conductance regulator) variant p.G551D (ClinVar) as magenta ball-and… |
 | Clinical variant | `clin-sse-helix` | 5 | 5 | PDB entry 6M7H: the CALM1 (Calmodulin-1, UniProt P0DP23) variant p.E141V is classified as pathogenic in ClinVar. Show the helix (as annotated in the entry) that contai… |
 | Clinical variant | `clin-sse-strand` | 5 | 5 | PDB entry 1HK0: the CRYGD (Gamma-crystallin D, UniProt P07320) variant p.Arg59His is classified as pathogenic in ClinVar. Show the beta strand (as annotated in the ent… |
+| Interactions | `in-ca-distance` | 5 | – | Show 1AKE as a yellow cartoon. Add a distance measurement (dashed line with the value as label) from the CA atom of Ser183 to the CA atom of Lys200. Both residues are… |
+| Interactions | `in-computed` | 5 | – | 1A6M: grey cartoon; heme as red ball-and-stick with its computed non-covalent interactions shown; camera on the heme. |
+| Interactions | `in-disulfide` | 5 | – | In 1F88 (grey cartoon), measure the S-S bond of the disulfide between Cys110 and Cys187: the two cysteines in green ball-and-stick, a labelled dashed line between thei… |
+| Interactions | `in-hbond` | 5 | – | 1A3K: grey cartoon; Asn174 and Arg224 as magenta ball-and-stick; measure the hydrogen bond between OD1 of Asn174 and NH1 of Arg224 with a labelled dashed line; focus t… |
+| Interactions | `in-ligand-contact` | 5 | – | 1ATP: grey cartoon; ATP as teal ball-and-stick; Phe54 as cyan ball-and-stick; measure the contact between ATP atom O2B and N of Phe54 with a labelled dashed line; focu… |
+| Interactions | `in-metal-contact` | 5 | – | 1HRC: grey cartoon; heme as plum ball-and-stick; His18 and Met80 as salmon ball-and-stick; measure the distance from the heme iron to NE2 of His18 and SD of Met80 with… |
+| Interactions | `in-salt-bridge` | 5 | – | Load 1EMA as a grey cartoon. Show Lys3 and Glu90 as cyan ball-and-stick, draw the salt bridge between the NZ atom of Lys3 and the OE1 atom of Glu90 as a dashed line la… |
+| Interactions | `in-transparent` | 5 | – | Show 1CTQ with a semi-transparent brown protein surface (opacity 0.5) so that the GppNHp, drawn in steel blue ball-and-stick, can be seen through it. |
 | Follow-up turn | `fu-add-chain` | 2 | – | Also show chain 4 as a blue cartoon. |
 | Follow-up turn | `fu-add-label` | 2 | – | Add a label reading "BTN" to the biotin (BTN). |
 | Follow-up turn | `fu-add-ligand` | 2 | – | Now bring in the ligand HEM in plum ball-and-stick. |

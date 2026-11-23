@@ -75,7 +75,7 @@ It *can* be pictured: `paper/a4/api_render_probe.py` replays a reference and an 
 headless pdbe-molstar 3.3.2 and photographs both from the reference's camera (done for two
 pilot answers). But that path has no target framing, a different look (the viewer's own
 background and defaults), and has not been tried on every call kind. So API answers are not in
-a4-v2. The API grader is covered by its control set (910 controls, 0 false passes, 0 false
+a4-v2. The API grader is covered by its control set (1,020 controls, 0 false passes, 0 false
 fails), not by people; the paper should say so.
 
 **Left out:** name-resolution requests (any view is accepted, so "same picture?" is not the

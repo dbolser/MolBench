@@ -69,8 +69,8 @@ PAPER_TIER = {"translation": "Translation", "grounded": "Structure-grounded",
 PAPER_TABLES = ("table_final_leaderboard_scene", "table_final_leaderboard_calls",
                 "table_final_tiers", "table_final_paired", "table_final_clinical",
                 "table_final_followup", "table_final_robustness")
-PILOT_BANNER = ("> **PILOT.** A provider-path pilot on a few tasks, not the benchmark run: these "
-                "numbers show that the path works, not how good a model is.")
+PILOT_BANNER = ("> **PROVIDER PILOT.** A trial of the path to a provider on a few tasks, not the "
+                "benchmark run: these numbers show that the path works, not how good a model is.")
 MOCK_BANNER = ("> **MOCK DATA.** Dry run answered by the mock model: the table has its final "
                "shape, **every number in it is fake**.")
 CLINICAL_SSE = ("clin-sse-helix", "clin-sse-strand")
@@ -1737,8 +1737,9 @@ def pilot_summary(run: Run, model: str | None = None) -> tuple[str, dict]:
              and m not in BASELINES]
     model = model or (panel[0] if panel else run.model_order[0])
     label = {"mvs": "scene track", "api_calling": "call-list track"}
-    cond_name = {"spec": "Format reference", "spec_grounded": "Format reference + grounding pack",
-                 "spec_structured": "Format reference + JSON mode", "bare": "No format reference"}
+    # the names of the paper's table of conditions
+    cond_name = {"spec": "Main", "spec_grounded": "Main + grounding pack",
+                 "spec_structured": "Main + JSON mode", "bare": "No format guide"}
     rows, values, ids = [], {}, set()
     tot = Counter()
     for cond in run.conditions:
@@ -1764,8 +1765,8 @@ def pilot_summary(run: Run, model: str | None = None) -> tuple[str, dict]:
                 values[f"pilot.{cond}.{TRACK_KEY[track]}.{k}"] = round(v, 4) if isinstance(v, float) else v
             tot.update(calls=len(ss), right=e["n_right"])
             rows.append([f"{cond_name.get(cond, cond)}, {label[track]}", len(got), pct(e["valid_rate"]),
-                         f3(e["f1"]), f"{f3(e['success'])} ({e['n_right']} of {len(ss)})",
-                         f3(e["target"]), "n/a" if e["cost_usd"] is None else f"{e['cost_usd']:.2f}"])
+                         f"{f3(e['success'])} ({e['n_right']} of {len(ss)})", f3(e["target"]),
+                         f3(e["f1"]), "n/a" if e["cost_usd"] is None else f"{e['cost_usd']:.2f}"])
         u = rec.get("usage") or {}
         tot.update(input_tokens=u.get("input_tokens") or 0, output_tokens=u.get("output_tokens") or 0)
         values[f"pilot.{cond}.cost_usd"] = rec.get("cost_usd")
@@ -1782,19 +1783,20 @@ def pilot_summary(run: Run, model: str | None = None) -> tuple[str, dict]:
         "pilot.cost_usd": None if any(c is None for c in cost) else round(sum(cost), 4)})
     text = "\n".join([
         PILOT_BANNER, "",
-        f"**Provider-path pilot: {model.split('/')[-1]}, {len(ids)} tasks, "
+        f"**Provider pilot: {model.split('/')[-1]}, {len(ids)} tasks, "
         f"{n_samples(run.samples.get(HEADLINE))}, {tot['calls']} calls, "
         f"US ${values['pilot.cost_usd']:.2f}**" if values["pilot.cost_usd"] is not None else "", "",
-        md_table(["Condition and track", "Tasks", "Valid outputs", "F1 (strict)",
-                  "Task success (strict)", "Target score (strict)", "Cost (USD)"], rows), "",
-        f"Run of {values['pilot.run_started']} on the direct provider route; the archived answers "
+        md_table(["Condition and track", "Tasks", "Valid answers", "Task success rate, strict",
+                  "Target score, strict", "F1, strict", "Cost (USD)"], rows), "",
+        f"Run of {values['pilot.run_started']} on the provider's own service; the archived answers "
         f"were graded on {values['pilot.graded_at']} with the grader and corpus as they stood "
-        "after the faults the pilot showed were fixed (`PILOT.md`). The tasks were picked by "
-        "rule to cover every tier, track and kind of task, including the paraphrases of one "
-        "request; they are not a sample of the corpus, and one answer per task says nothing "
-        "about the spread between answers. *Valid outputs*: answers that parse and that the "
-        "viewer accepts. *Strict*: an invalid answer counts as 0. The grounding pack states the "
-        "residue a variant maps to, so that row is an upper bound.", ""])
+        "after the faults the pilot showed were fixed (`PILOT.md` in the repository). The tasks "
+        "were picked by rule to cover every category, track and kind of task, including the "
+        "three wordings of one request; they are not a sample of the corpus, and one answer per "
+        "task says nothing about the spread between answers. *Valid answers*: answers that parse "
+        "and that the viewer accepts. *Strict*: every answer counts, and an unshowable answer "
+        "scores 0. The grounding pack states the residue that a variant maps to, so that row is "
+        "an upper bound.", ""])
     return text, dict(sorted(values.items()))
 
 

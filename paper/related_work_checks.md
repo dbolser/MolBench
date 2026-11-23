@@ -76,3 +76,63 @@ full text (first 100,000 characters of each):
   Crossref record, because the AlphaFold DB licence asks for it.
 - No other citation was added. Statements about other benchmarks (169, 108 and 146 tasks;
   alpha 0.669; r about 0.81; 38.6% of 176,507 entries) are unchanged from the verified draft.
+
+## Review round 2 (2026-11-22)
+
+- One reference was added: Pepys et al. 1993 (Nature 362:553–557, DOI 10.1038/362553a0), for
+  the lysozyme variant p.Ile74Thr (I56T) in SI Section S3.2. Title, journal, year, volume,
+  pages and authors were taken from its Crossref record on 2026-11-22. The statement that the
+  paper reports two variants (Ile56Thr and Asp67His) was written from memory by the
+  editing assistant and was not re-read at the source: check before submission.
+
+## Review round 3 (2026-11-23)
+
+- One reference was added: den Dunnen et al. 2016, "HGVS Recommendations for the Description
+  of Sequence Variants: 2016 Update" (Human Mutation 37(6):564–569, DOI 10.1002/humu.22981),
+  cited in Section 3.3.1 for the HGVS nomenclature. Title, journal, year, volume, issue, pages
+  and the ten named authors were taken from its Crossref record on 2026-11-23. The paper cites
+  it only for the existence of the nomenclature and its "p." prefix; no further claim about its
+  content is made.
+
+## Review round 5 (2026-11-23)
+
+- One reference was added: Hart et al. 2024, "HGVS Nomenclature 2024: improvements to
+  community engagement, usability, and computability" (Genome Medicine 16:149, DOI
+  10.1186/s13073-024-01421-5), cited beside den Dunnen et al. 2016 in Section 3.3.1. Title,
+  journal, year, volume, article number and the eight authors were taken from its Crossref
+  record on 2026-11-23.
+- Three statements of Section 3.3.1 about the HGVS nomenclature were read on 2026-11-23 at
+  hgvs-nomenclature.org (pages "General recommendations" and "Reference sequences" of the
+  stable version; the pages show no version number): a variant description without a
+  versioned reference sequence is not valid, and accepted protein references are RefSeq NP_
+  and Ensembl ENSP accessions; the three-letter amino-acid code is preferred; a predicted
+  protein consequence is given in parentheses. The pages were read through an automated
+  summary, not word for word: check before submission.
+- Not read at the source this round: that "c." positions are counted from the A of the start
+  codon ATG (Box 1 and Section 3.3.1). This is the rule of den Dunnen et al. 2016 as the
+  clinical-genetics reviewer stated it; check before submission.
+- The paper does not name the RefSeq protein accession of lysozyme (the reviewer proposed
+  one); it says only what kind of accession a complete description needs.
+
+## Review round 6 (2026-11-23)
+
+- One reference was added: Morales et al. 2022, "A joint NCBI and EMBL-EBI transcript set for
+  clinical genomics and research" (Nature 604(7905):310–315, DOI 10.1038/s41586-022-04558-8),
+  cited in Section 3.3.1 for the MANE Select transcript. Title, journal, year, volume, issue,
+  pages, DOI and the first three authors' surnames and initials were taken on 2026-11-23 from
+  the citation that NCBI gives on its MANE page (ncbi.nlm.nih.gov/refseq/MANE/), read through
+  an automated summary. The given names in `references.bib` (Joannella, Shashikant, Jane E.)
+  were written from memory by the editing assistant; only their initials are printed. Check
+  against the Crossref record before submission.
+- What the paper says about MANE Select ("the one transcript per gene that RefSeq and Ensembl
+  jointly designate as the default for clinical reporting") rests on the same page, which
+  says that the set has one transcript at each locus, that each matches between RefSeq and
+  Ensembl/GENCODE, and that it is meant "as a universal standard for clinical reporting, as a
+  default for display". That a reader of a bare "p." name would take it to be counted on that
+  transcript's protein is the clinical-genetics reviewer's statement, not a claim read at a
+  source.
+- Not read at the source: how ClinVar forms the title of a record (the ClinVar documentation
+  page could not be opened by the automated reader). SI Section S3.2 therefore says only what
+  the title of the running example looks like and that our requests write the protein change
+  without parentheses; the earlier sentence that gave ClinVar's reason for the parentheses
+  was removed.

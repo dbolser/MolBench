@@ -1,88 +1,97 @@
 ## 1. Introduction
 
 Molecular viewers are how structural biologists look at their data, and they are hard to
-drive. To show one residue of one chain, a user must know the viewer's selection language, the
-chain identifier, and which of several residue numbering schemes applies. Language models
+drive. The data are *structures*: the three-dimensional atom coordinates of molecules. Each
+structure deposited in the Protein Data Bank (PDB) is an *entry* with a four-character
+identifier, such as {{ex.entry}}. To show one residue of one chain (one amino acid of one protein molecule in the file), a
+user must know how the viewer writes a selection, the chain identifier, and which of several
+residue numbering schemes applies. Language models
 promise to remove that barrier: the user says what they want, and the model writes the
-commands. Several viewers now ship such assistants, or can be operated by one through a tool
-protocol [@chimeraxmcp; @molstarprism; @navarro2026speak; @sun2024chatmol].
+commands. Several viewers now ship such assistants, or can be operated by one through a
+programming interface [@chimeraxmcp; @molstarprism; @navarro2026speak; @sun2024chatmol].
 
 Whether these assistants are right is rarely measured, and a wrong answer is hard to see. One
-request, which we follow through this paper, shows why:
+request, which we follow through this paper and always quote as it is in the task file, shows
+why:
 
-> *"PDB entry {{ex.entry}}: the {{ex.gene}} ({{ex.protein}}) variant {{ex.variant}} is
-> classified as {{ex.clinvar_classification}} in ClinVar. Show the residue it replaces as
-> {{ex.color}} {{ex.rep}}."*
+> *"{{ex.prompt}}"*
 
-The variant name {{ex.variant}} counts residues along the UniProt sequence of human lysozyme:
-tryptophan {{ex.uniprot_position}}. The Protein Data Bank (PDB) entry {{ex.entry}} numbers
-the same chain from the start of the mature protein, {{ex.offset}} residues later. In the file,
-that tryptophan is residue {{ex.auth_number}}, and residue {{ex.uniprot_position}} is a
-serine. A model that selects residue {{ex.uniprot_position}} returns a clean picture of the
-wrong amino acid, and nothing in the picture says so. The case is not unusual: a survey of the
-PDB found that 38.6% of 176,507 entries contain proteins that are not numbered as their
-UniProt sequences are [@faezov2021pdbrenum].
+The request asks for "the residue it replaces": the tryptophan (W) that the variant
+{{ex.name_in_prompt}} turns into an arginine (R). A model that takes the
+{{ex.uniprot_position}} of that name as the residue number selects residue
+{{ex.uniprot_position}} of the file. That residue is a serine. The model returns a clean
+picture of the wrong amino acid, and nothing in the picture says so. The tryptophan is residue
+{{ex.auth_number}} of this file.
 
-**Thesis.** Control of a molecular viewer by a language model can be measured exactly, and
-without a second model as judge, if two conditions hold: each reference answer is computed
-from the structure itself, and each answer is graded on what the viewer would draw, not on how
-the answer is written.
+The two numbers come from two ways of counting. The position {{ex.uniprot_position}} is
+counted along the sequence of human lysozyme in UniProt, the reference database of protein
+sequences (the prefix "p." marks a description of a change in a protein). That sequence
+begins with {{ex.removed_what}}, a leading segment that the cell cuts off after the protein
+is made. Entry {{ex.entry}} numbers the same chain from the first residue of the mature protein, the protein that is left
+once that segment has been cut off; older papers accordingly call the variant
+{{ex.mature_name}}. The case is not unusual: a survey of the PDB found that 38.6% of 176,507
+entries contain proteins that are not numbered as their UniProt sequences are
+[@faezov2021pdbrenum]. The request also states a classification. It comes from ClinVar, a public archive of human
+genetic variants and their clinical classification. The benchmark uses the variant only as an
+address: which residue does the name point to? It never asks whether a variant causes disease
+(Section 9.2; Section 3.2 gives the ClinVar record of this variant).
 
-MolBench is built on that thesis (Figure 1). The reference for the request above is not
-written by a person. A script reads the variant from ClinVar [@landrum2018clinvar], maps its
-UniProt position [@uniprot2025] to the residues of the entry with the SIFTS mapping
-[@dana2019sifts], and confirms that the structure holds a tryptophan there. The grader then
-resolves any answer to the atoms it would draw in that structure, with their representation
-and colour, and compares this *drawn state* with that of the reference. Two answers that name
-the same atoms in different ways receive the same score.
+**What the model is given.** In MolBench the model receives only the request and a guide to
+the answer format. It does not see the structure file, it cannot look anything up, and it
+does not see the picture that its answer produces. To answer the request above it must
+therefore know, from its training, that entry {{ex.entry}} is numbered from the mature
+protein. This is the hardest way to ask the question, and it is the way a model is used when
+it has no tools (a *bare* model).
 
-![**Figure 1. From public data to a score.** Top row: frozen public data are turned into tasks by generator scripts; a model answers each request once per sample; the grader resolves the reference and the answer to their drawn state and compares them. Bottom row: four checks that involve no model. A *pair* is one request posed on both tracks. F1, task success and target score are defined in Box 1.](generated/fig_pipeline.svg)
+**Thesis.** Whether a language model has driven a molecular viewer correctly can be decided
+by rule, without a second model as judge, if two conditions hold: each reference answer is
+computed from the structure itself, and each answer is graded on what the viewer would draw,
+not on how the answer is written.
+
+MolBench is a benchmark built on this thesis (Figure 1). The reference for the request above
+is not written by a person. A script reads the variant from ClinVar [@landrum2018clinvar],
+maps its UniProt position [@uniprot2025] to the residues of the entry with the SIFTS mapping
+[@dana2019sifts], a public table that gives, for each residue of a PDB entry, its position in
+the UniProt sequence, and confirms that the structure holds a tryptophan there. The grader then
+resolves an answer to the atoms it would draw in that structure, with their *representation*
+and colour, and compares this *drawn state* with that of the reference. A representation is a
+way of drawing atoms: the request above asks for spacefill spheres (every atom as a full-size
+sphere), and the usual background of a protein picture is a *cartoon*, a ribbon that traces
+the whole chain. Two answers that name the same atoms in different ways receive the same
+score.
+
+**Question.** With this benchmark we ask one question above the others. When a request gives
+a residue number in one numbering and the structure uses another, does the model give the
+number that the structure uses, or does it copy the number from the request? We call the first
+*mapping* the number and the second *copying* it. Mapping is more than a habit of converting:
+some structures are numbered as the request is, and there the copied number is the right
+one, so the model must know how each structure is numbered. Section 6.4 sets out the table that will
+answer this.
+
+![**Figure 1. From public data to a score.** Steps 1 to 6 are numbered, in two rows: frozen public data are turned into tasks by generator scripts; each model is given a guide to the answer format and the request, and answers each task {{plan.samples:word}} times, independently; the grader resolves the reference and the answer to their drawn state and compares them. Below the steps: the four checks that involve no model (Section 3.7). A *pair* is one request posed on both tracks. *Set-aside structures*: {{corpus.heldback.n_structures}} structures that no earlier release of the benchmark used; their tasks are public too (Section 3.6). *F1*: how much of the drawn state is right, with partial credit. *Task success*: the drawn state is exactly right. *Target score*: how far the requested style is on the requested atoms and on no others (0 to 1); unrequested background, such as a cartoon of the protein, is ignored. *Strict* and *valid-only* are two ways to average a score (Section 4.4).](generated/fig_pipeline.svg)
 
 This paper makes four contributions, presented in this order.
 
-1. **A corpus built by script** (Section 3): {{corpus.n_tasks}} tasks on
-   {{corpus.n_structures}} structures in eight tiers of difficulty, including
-   {{clin.n}} clinical-variant requests on {{clin.n_proteins}} proteins, of which
-   {{clin.n_offset}} need a change of residue number. Every reference records how it was made
-   and is tested against the structure.
-2. **A grader on drawn state, with a measured error rate** (Section 4): three scores with
-   plain definitions, and a control set of {{controls.n:,}} answers whose verdict is known from
-   how they were made.
-3. **A paired design** (Sections 3.4 and 5): {{corpus.n_twin_pairs}} requests are posed in two
-   output formats with the same target atoms, so that an error of content can be told apart
-   from an error of format.
-4. **Evidence** (Section 6): a pilot run on {{oct.spec.n_models}} models that exposed a flaw in
-   our own references and changed the design (Sections 6.6 and 7), and the tables that one
-   final run will fill. ⟦PENDING: final run — one sentence stating the main result⟧
+1. **A corpus built by script** (Section 3). It has {{corpus.n_tasks}} tasks on
+   {{corpus.n_structures}} structures in eight categories of task: four differ in what the
+   model must know beyond the request, and four in the form of the task (Section 3.3). They
+   include {{clin.n}} clinical-variant requests on
+   {{clin.n_proteins}} proteins; in {{clin.n_face_value_wrong}} of them a model that copies
+   the number from the variant name selects the wrong residue (Section 3.3.1). Every reference
+   records how it was made and is tested against the structure.
+2. **A grader on drawn state, tested against a control set** (Section 4). It gives three
+   scores with plain definitions, and it is tested on {{controls.n:,}} control answers whose
+   verdict is known from how they were made.
+3. **A paired design** (Sections 3.4 and 5). The benchmark has two halves, which we call
+   *tracks*. On the *scene track* an answer is a MolViewSpec scene, a description of what the
+   Mol\* viewer should load and draw. On the *call-list track* it is an ordered list of calls
+   to the PDBe Mol\* viewer. {{corpus.n_twin_pairs}} requests are posed on both tracks with the
+   same target atoms, so that an error of content can be told apart from an error of format.
+4. **A pilot that corrected the benchmark, and a fixed plan for the final run** (Sections 6
+   and 7). A pilot run on {{oct.spec.n_models}} models exposed a flaw in our own references
+   and changed the design, and one final run will fill tables whose shape is already set.
+   ⟦PENDING: final run — one sentence stating the main result⟧
 
-We write "computational intelligence (CI)" for what is often called artificial intelligence.
-Box 1 defines the terms used throughout.
-
-<div class="box">
-
-**Box 1. Terms and notation.**
-
-| Term | Meaning in this paper |
-|:---|:---|
-| Structure, entry | One deposited model from the Protein Data Bank (four-character identifier, such as {{ex.entry}}) or one predicted model from the AlphaFold Protein Structure Database. |
-| Author numbering | The chain identifiers and residue numbers chosen by the depositors. This is what papers and most viewers show. |
-| Label numbering | The chain identifiers and residue numbers assigned by the archive: residues are counted 1, 2, 3 … along each chain. |
-| UniProt numbering | The position of a residue in the UniProt reference sequence of the protein. Variant names such as {{ex.variant}} use it. |
-| SIFTS | Structure Integration with Function, Taxonomy and Sequences: the public residue-by-residue mapping between PDB entries and UniProt sequences. |
-| Request | The plain-language instruction given to the model. |
-| Scene | An answer in MolViewSpec: a description, in JSON (JavaScript Object Notation), of what to load and how to draw it. |
-| Call list | An answer as an ordered list of calls to the PDBe Mol\* viewer (PDBe: Protein Data Bank in Europe). |
-| Track | One of the two answer formats. *Scene track*: MolViewSpec scenes. *Call-list track*: viewer calls. |
-| Draw | One representation type with one colour and one opacity, for example "grey cartoon, opaque". |
-| Drawn state (final state) | For every atom of the structure, the set of its draws, plus a few facts about the whole scene (labels, distance lines, camera target). |
-| Fact | One unit of the drawn state: all atoms that are drawn in the same way form one fact; each label or distance line is one fact. |
-| F1 | How much of the drawn state is right, from 0 to 1: the harmonic mean of *recall* (the share of the reference's facts that the answer has) and *precision* (the share of the answer's facts that the reference has). |
-| Task success | Yes or no: the drawn state is exactly right, with nothing missing and nothing extra. |
-| Target score | From 0 to 1: are the atoms that the request is about drawn as asked, whatever else the answer did? |
-| Valid output | An answer that parses as JSON and that the viewer accepts. |
-| Strict / valid-only | Two ways to average a score. *Strict*: every output counts, an invalid one as 0. *Valid-only*: the mean over valid outputs. |
-| Pair | One request posed on both tracks, with the same target atoms. |
-| Held-back split | Tasks on structures that appear in no published task. |
-| CI | Computational intelligence. |
-
-</div>
+Terms are defined where they are first used and collected in two boxes: Box 1, at the start
+of Section 3, has the terms of variants, numbering and the corpus, and Box 2, at the start of
+Section 4, those of grading and of the run.

@@ -1567,6 +1567,12 @@ def main(argv=None) -> int:
         if args.into_paper:
             names = analysis.copy_into_paper(tables, DEFAULT_OUT)
             print(f"wrote {len(names)} result tables into {DEFAULT_OUT}: " + ", ".join(names))
+            # the same run's values, for the result sentences of the prose ({{final.<key>}})
+            (DEFAULT_OUT / "final_values.json").write_text(
+                json.dumps(tables.values, indent=1, ensure_ascii=False, sort_keys=True) + "\n",
+                encoding="utf-8")
+            print(f"wrote {len(tables.values)} values to {DEFAULT_OUT}/final_values.json "
+                  "(read by paper/build.py as {{final.<key>}})")
         return 0
     args.out = args.out or DEFAULT_OUT
     args.bootstrap = args.bootstrap or 10000

@@ -49,6 +49,7 @@ PAPER = pathlib.Path(__file__).resolve().parent
 SECTIONS = PAPER / "sections"
 VALUES = PAPER / "generated" / "values.json"
 CORPUS_VALUES = PAPER / "generated" / "corpus_values.json"
+FINAL_VALUES = PAPER / "generated" / "final_values.json"
 SI_SECTIONS = PAPER / "si"
 OUT_SI = PAPER / "si.md"
 PLAIN_SECTIONS = PAPER / "plain"
@@ -104,13 +105,35 @@ def load_values() -> dict:
         if both:
             raise BuildError(f"keys defined in both value files: {both[:5]}")
         values.update(more)
+    # Numbers of the final run, for the result sentences of the prose: written by
+    # ``scripts/paper_tables.py --from-run <results> --into-paper``, read as ``{{final.<key>}}``.
+    if FINAL_VALUES.exists():
+        final = json.loads(FINAL_VALUES.read_text(encoding="utf-8"))
+        if final.get("status") in ("MOCK", "pilot"):
+            raise BuildError(f"{FINAL_VALUES} is not from the real run (status {final['status']!r})")
+        values.update({f"final.{k}": v for k, v in final.items()})
     return values
 
 
 # --------------------------------------------------------------------------- #
 # Values and includes
 # --------------------------------------------------------------------------- #
+NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+          "October", "November", "December"]
+
+
 def fmt_value(value, spec: str | None) -> str:
+    if spec == "word":          # a small count in running prose: "three times"; 10 and above stay digits
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise ValueError("'word' needs a whole number")
+        return NUMBER_WORDS[value] if 0 <= value < len(NUMBER_WORDS) else f"{value:,}"
+    if spec in ("date", "month"):   # an ISO date as "13 November 2026", or as "November 2026"
+        m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", str(value))
+        if not m:
+            raise ValueError(f"'{spec}' needs a value of the form YYYY-MM-DD")
+        month = f"{MONTHS[int(m.group(2)) - 1]} {m.group(1)}"
+        return month if spec == "month" else f"{int(m.group(3))} {month}"
     if spec:
         return format(value, spec)
     if isinstance(value, bool):
@@ -118,6 +141,75 @@ def fmt_value(value, spec: str | None) -> str:
     if isinstance(value, int):
         return f"{value:,}" if abs(value) >= 10000 else str(value)
     return str(value)
+
+
+# The pilot tables of SI Section S8 are written by scripts/paper_tables.py in the words of
+# October 2026. They are shown with a table number and in the words of the paper; the map
+# below changes words only, never a number. Order matters (longer forms first).
+PILOT_WORDS = [
+    (r"`spec_grounded`", "main + grounding pack"),
+    (r"`bare_grounded`", "no format guide + grounding pack"),
+    (r"`_grounded`", "+ grounding pack"),
+    (r"`spec`", "main"),
+    (r"`bare`", "no format guide"),
+    (r"\bMVS track\b", "Scene track"),
+    (r"Corpus used for the October 2026 panel \(PRELIMINARY\)",
+     "Corpus of the October 2026 pilot run (preliminary, earlier grader)"),
+    (r"A regime is a group of tasks that need the same kind of knowledge\.",
+     "The categories are those of the first-version corpus."),
+    (r"the frozen MolViewSpec reference", "the format guide"),
+    (r"only the output contract", "only the rule for the answer"),
+    (r"as in the leaderboard table", "as in the per-model table"),
+    (r"image-pair judge model", "image judge"),
+    (r"[Tt]ask × model pairs", lambda m: ("T" if m.group(0)[0] == "T" else "t") + "ask-model combinations"),
+    (r"of those pairs", "of those combinations"),
+    (r"\bA regime is\b", "A category is"),
+    (r"\bregimes\b", "categories"), (r"\bregime\b", "category"), (r"\bRegime\b", "Category"),
+    (r"\bOutputs\b", "Answers"), (r"\bOutput\b", "Answer"),
+    (r"\boutputs\b", "answers"), (r"\boutput\b", "answer"),
+    (r"\bResolution\b", "Name resolution"),
+    (r"\bGrounded\b", "Structure-grounded"),
+    (r"\b(\d+) samples? per task", lambda m: f"{m.group(1)} answer{'' if m.group(1) == '1' else 's'} per task"),
+    (r"95% CIs\b", "95% intervals"), (r"95% CI\b", "95% interval"),
+    (r"\(PRELIMINARY\)", "(pilot run, preliminary, earlier grader)"),
+    # Words that the paper defines otherwise (Section 4.2): in the pilot tables "target" was the
+    # requested part read from the reference, "success" a score of 1 under the earlier grader,
+    # and "tree F1" or "tree score" that grader's F1.
+    (r"the target atoms are selected", "the atoms of the requested part are selected"),
+    (r"The \*target\* of a task", "The *requested part* of a task"),
+    (r"every target with", "every requested part with"),
+    (r"the target is right", "the requested part is right"),
+    (r"selects exactly the target atoms", "selects exactly the atoms of the requested part"),
+    (r"\bTarget (exact|wrong)\b", lambda m: "Requested part " + m.group(1)),
+    (r"\bSuccess\b", "Score of 1"),
+    (r"whether the model weights are openly released", "open if the weights of the model can be downloaded"),
+    (r"Tree score vs render-checked score", "Earlier-grader F1 against the score after a check of the picture"),
+    # Table S18 (the check of pictures in October): column heads and caption in plain words.
+    (r"A valid scene that scores below 1 is \*escalated\*: it is rendered next to the reference\. It is "
+     r"\*rescued\* \(counted as correct\) if",
+     "A valid scene that scores below 1 is rendered next to the reference (*pictures compared*). It is "
+     "*counted right* if"),
+    (r"\*Validated F1\* is the tree F1 with rescued scenes set to 1\. Scores are never lowered by escalation\.",
+     "*F1 after picture check* is the earlier-grader F1 with the scenes that were counted right set to 1. "
+     "The check never lowers a score."),
+    (r"\bValidated F1\b", "F1 after picture check"),
+    (r"\bEscalated\b", "Pictures compared"),
+    (r"\bRescued \(pixels\)", "Counted right: pictures identical"),
+    (r"\bRescued \(judge\)", "Counted right: image judge says same"),
+    (r"Read the thin rows with care: the sample sizes are in the table\.",
+     "Rows with few tasks must be read with care: the numbers of tasks are in the table."),
+    (r"\bTree F1\b", "Earlier-grader F1"), (r"\btree F1\b", "earlier-grader F1"),
+    (r"\btree score\b", "earlier-grader F1"),
+]
+
+
+def pilot_table(text: str, label: str) -> str:
+    """A pilot table with its number and in the paper's words (see PILOT_WORDS)."""
+    for pattern, new in PILOT_WORDS:
+        text = re.sub(pattern, new, text)
+    if not text.startswith("**"):
+        raise BuildError(f"pilot table for {label} does not start with a bold title")
+    return f"**{label}. " + text[2:]
 
 
 def substitute(text: str, values: dict, where: str, problems: list[str], depth: int = 0) -> str:
@@ -137,6 +229,13 @@ def substitute(text: str, values: dict, where: str, problems: list[str], depth: 
                     return m.group(0)
                 return substitute(f.read_text(encoding="utf-8").rstrip(), values, rel, problems,
                                   depth + 1)
+            if body.startswith("include:") and fallback.startswith("pilot:"):
+                rel = body[len("include:"):].strip()
+                f = (PAPER / rel).resolve()
+                if PAPER not in f.parents or not f.exists():
+                    problems.append(f"{where}: missing include {rel}")
+                    return m.group(0)
+                return pilot_table(f.read_text(encoding="utf-8").rstrip(), fallback[len("pilot:"):].strip())
             if not fallback.startswith("PENDING:"):
                 problems.append(f"{where}: fallback must start with 'PENDING:' in {{{{{m.group(1)}}}}}")
                 return m.group(0)
@@ -256,7 +355,7 @@ def fmt_reference(e: dict) -> str:
     tail = []
     if venue:
         tail.append(f"*{venue}*")
-    if e.get("year"):
+    if e.get("year") and e["year"] not in (venue or ""):     # "web page, 4 December 2025" has the year
         tail.append(e["year"])
     cite = " ".join(tail)
     vol = e.get("volume", "")
@@ -274,9 +373,21 @@ def fmt_reference(e: dict) -> str:
         parts.append(f"doi:[{e['doi']}](https://doi.org/{e['doi']})")
     elif e.get("eprint"):
         parts.append(f"arXiv:[{e['eprint']}](https://arxiv.org/abs/{e['eprint']})")
-    if e.get("url") and not e.get("doi"):
+    if e.get("url") and not e.get("doi") and not (e.get("eprint") and e["eprint"] in e["url"]):
         parts.append(f"<{e['url']}>")
     return " ".join(parts)
+
+
+def number_ranges(nums: list[int]) -> str:
+    """Sorted citation numbers with runs of three or more written as a range: 1–4, 7, 9, 10."""
+    out, i = [], 0
+    while i < len(nums):
+        j = i
+        while j + 1 < len(nums) and nums[j + 1] == nums[j] + 1:
+            j += 1
+        out += [f"{nums[i]}–{nums[j]}"] if j - i >= 2 else [str(n) for n in nums[i:j + 1]]
+        i = j + 1
+    return ", ".join(out)
 
 
 def resolve_citations(text: str, bib: dict, problems: list[str]) -> tuple[str, list[str]]:
@@ -291,7 +402,7 @@ def resolve_citations(text: str, bib: dict, problems: list[str]) -> tuple[str, l
             if key not in order:
                 order.append(key)
             nums.append(order.index(key) + 1)
-        return "[" + ", ".join(str(n) for n in sorted(nums)) + "]" if nums else m.group(0)
+        return "[" + number_ranges(sorted(set(nums))) + "]" if nums else m.group(0)
 
     return CITE.sub(repl, text), order
 
@@ -404,15 +515,17 @@ def pending_report(pending: list[dict], values: dict) -> str:
 
 CSS = """
 body{font:11pt/1.5 Georgia,serif;max-width:46em;margin:2em auto;padding:0 1em;color:#111}
-h1,h2,h3{font-family:Helvetica,Arial,sans-serif;line-height:1.25}
-table{border-collapse:collapse;font:8.5pt Helvetica,Arial,sans-serif;margin:1em 0;width:100%}
-th,td{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left}
-th{border-bottom:2px solid #444} img{max-width:100%}
+h1,h2,h3,h4{font-family:Helvetica,Arial,sans-serif;line-height:1.25;break-after:avoid}
+table{border-collapse:collapse;font:8.5pt Helvetica,Arial,sans-serif;margin:1em 0;width:100%;break-inside:avoid}
+th,td{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left;vertical-align:top}
+th{border-bottom:2px solid #444} tr{break-inside:avoid} p:has(+ table){break-after:avoid}
+img{max-width:100%} figure{break-inside:avoid} figure img{width:100%}
 code{font-size:90%} pre{font-size:8.5pt;background:#f6f6f6;padding:8px;overflow-x:auto;white-space:pre-wrap}
 blockquote{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.4em 1em;background:#fafafa}
 blockquote table{background:#fff} figure{margin:1.2em 0} figcaption{font-size:9.5pt;color:#222}
 div.box{border:1.5px solid #555;border-radius:4px;margin:1.2em 0;padding:.2em 1em;background:#fafafa}
-div.box table{background:#fff}
+div.box table{background:#fff;break-inside:auto}
+p:has(+ table){break-inside:avoid}
 @page{size:A4;margin:18mm}
 """
 
@@ -465,6 +578,57 @@ def render(md_path: pathlib.Path) -> list[str]:
     return made
 
 
+REPRESENTATION_WORDS = ("ball-and-stick", "ball_and_stick", "spacefill", "cartoon", "surface", "line", "putty")
+
+
+def example_problems(values: dict) -> list[str]:
+    """The running example must look the same wherever it is shown: the generated table and
+    the two figures of it must state the colour and the representation of the request, and
+    no other representation for the requested residue."""
+    problems = []
+    colour, rep = values.get("ex.color"), values.get("ex.rep_short")
+    if not colour or not rep:
+        return ["generated values lack ex.color / ex.rep_short: run paper/corpus_values.py"]
+    if f"{colour} {values['ex.rep']}" not in values.get("ex.prompt", ""):
+        problems.append("the request of the running example does not state its colour and representation")
+    for name in ("table_example.md", "fig_grading.svg", "fig_twins.svg"):
+        f = PAPER / "generated" / name
+        text = f.read_text(encoding="utf-8") if f.exists() else ""
+        if colour not in text or (rep not in text and values["ex.rep_scene"] not in text):
+            problems.append(f"generated/{name} does not show the running example as {colour} {rep}")
+        other = [w for w in REPRESENTATION_WORDS
+                 if w not in (rep, values["ex.rep_scene"], "cartoon", "line") and w in text
+                 # the table also grades answers that add another representation, and says so
+                 and not (name == "table_example.md" and w == values.get("ex.other_rep"))]
+        if other:
+            problems.append(f"generated/{name} names a representation the request does not ask for: {other}")
+    return problems
+
+
+# Numbers that the prose states in words. If one of them changes, the sentence must change:
+# (key, value, where the words are).
+STATED_IN_WORDS = [
+    ("plan.samples", 3, "'at least 2 of its 3 answers' (Sections 4.2 and 5.4, Table 9, Figures 3 and 5)"),
+    ("clin.n_offset_pairs_traditional", 1, "'one of them uses a traditional name' (Sections 3.3.1 and 9.4)"),
+    ("mvs.spec.regime.Clinical.n_structures", 1, "'a single structure' (Section 6.6, Finding 2; abstract)"),
+    ("study.max_per_task_model", 1, "'from the same model' (Section 5.5)"),
+    ("panel.n_disease_proteins_without_task", 2, "the two proteins without a task, named in Section 3.1"),
+    ("clin.n_tasks_kept_by_name", 1, "'1 task per track' for lysozyme p.Ile74Thr (Section 3.1)"),
+    ("prompt.longer_track", "call-list", "the order of the two prompt lengths (Sections 5.2 and 9.4)"),
+    ("ex.n_clinvar_records", 2, "'both DNA changes', 'both are classified' (Sections 1 and 3.2, SI Section S1)"),
+    ("clin.n_face_wrong_no_offset", 1, "'the one remaining traditional name' (Section 3.3.1)"),
+    ("clin.n_same_numbering_pairs", 2, "'in the other 2 sets' of matched tasks, both of p53 (Section 3.3.1)"),
+    ("corpus.followup.noop_spin", 2, "'in 2 scene tasks, a spin' (Section 3.3, follow-up turn)"),
+    ("mvs.spec.outcome.not_mvs", 0, "'no answer of the pilot run fell in the class' (SI Section S8)"),
+    ("mvs.spec.samples_per_task", 1, "'one answer per task' in the pilot run (Section 6.6, Table 13)"),
+]
+
+
+def stated_in_words_problems(values: dict) -> list[str]:
+    return [f"the text states {key} = {want!r} in words, but the value is {values.get(key)!r}: {where}"
+            for key, want, where in STATED_IN_WORDS if values.get(key) != want]
+
+
 def words(md: str) -> int:
     """Words outside tables, code blocks, figure captions, HTML comments and the reference list."""
     md = md.split("\n## References")[0]
@@ -489,6 +653,8 @@ def main(argv=None) -> int:
         print(f"error: {e}", file=sys.stderr)
         return 1
     problems = [p for _, _, _, probs in built for p in probs]
+    problems += example_problems(values)
+    problems += stated_in_words_problems(values)
     for _, _, pending, _ in built:
         problems += [f"{p['section']}:{p['line']}: PENDING tag with no owner: {p['what']!r}"
                      for p in pending if not filled_by(p["what"])]
