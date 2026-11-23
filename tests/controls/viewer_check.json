@@ -1,26 +1,27 @@
 {
  "mvs": {
   "molstar": "5.9.0",
-  "controls_checked": 890,
-  "verdict_agrees": 890,
-  "scenes_checked": 1498,
-  "grader_state_agrees": 1498,
+  "controls_checked": 910,
+  "verdict_agrees": 910,
+  "scenes_checked": 1545,
+  "grader_state_agrees": 1545,
   "problems": [],
-  "skipped": 140,
+  "skipped": 245,
   "rule_probes": {
-   "entries": 75,
-   "draws_compared": 3818,
-   "agree": 3818,
+   "entries": 78,
+   "draws_compared": 3926,
+   "agree": 3926,
    "differ": []
   }
  },
  "api": {
   "pdbe_molstar": "3.3.2",
-  "lists_run": 234,
-  "agree": 234,
+  "lists_run": 267,
+  "agree": 267,
   "problems": [],
   "note": "the replayed end state is compared with the real viewer's (selections atom for atom, components, representations, overpaint); focus, highlight and UniProt selections are not read back",
   "not_runnable": 3,
+  "load_fails_by_rule": 3,
   "bare_loads": {
    "entries": 73,
    "agree": 73,

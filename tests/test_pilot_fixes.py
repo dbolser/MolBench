@@ -60,6 +60,18 @@ def test_a_stretch_drawn_again_in_the_same_type_is_hidden_and_graded_as_grey():
     assert len(mvs.hidden_overlays(scene(RCSB.format("3k34"), [BASE] + STRETCHES))) == 2
 
 
+def test_the_hidden_drawing_is_still_an_object_the_viewer_holds():
+    """A read-back of Mol*'s representation objects lists the green cartoon although no
+    pixel of it is seen; the controls' viewer check compares with the drawings as
+    created (grader_controls.grader_state), the grade with what is seen."""
+    tree = scene(RCSB.format("3k34"), [BASE] + STRETCHES)
+    seen = mvs.resolve_scene(tree).structures["3k34"].draws
+    made = mvs.resolve_scene(tree, as_created=True).structures["3k34"].draws
+    colours = lambda draws: {d[1] for d in draws}  # noqa: E731
+    assert len(colours(seen)) == 1 and len(colours(made)) == 3
+    assert not mvs.resolve_scene(tree, as_created=True).structures["3k34"].hidden
+
+
 def test_the_same_components_in_the_other_order_show_the_colours():
     got = grade("tr-range-rows-3k34", scene(RCSB.format("3k34"), STRETCHES + [BASE]))
     assert got["success"] and got["target_f1"] == 1.0
@@ -398,3 +410,14 @@ def test_both_baselines_are_in_the_final_panel_and_out_of_the_panel_means():
     assert ids["baseline-rules"] == "baseline" and ids["baseline-literal"] == "baseline-literal"
     assert set(analysis.BASELINES) == {"baseline-rules", "baseline-literal"}
     assert isinstance(build_model("baseline-literal"), LiteralBaseline)
+
+
+def test_paired_rule_a_side_is_right_when_two_of_three_samples_are_right():
+    """Lead's ruling (vi), and Section 5 of the paper: with three samples a side of a
+    twin pair counts as right when at least two of them are right."""
+    from molbench import analysis
+    row = lambda *ok: {"success": sum(ok) / len(ok),  # noqa: E731
+                       "samples": [{"target_f1": 1.0 if x else 0.5} for x in ok]}
+    for ok, want in (((1, 1, 1), True), ((1, 1, 0), True), ((1, 0, 0), False), ((0, 0, 0), False)):
+        assert analysis.solved(row(*ok)) is want
+        assert analysis.target_solved(row(*ok)) is want

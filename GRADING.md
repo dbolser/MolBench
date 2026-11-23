@@ -553,6 +553,13 @@ it is hidden) and the same two components in the other order (must pass); and on
 tracks the right answer on an AlphaFold file address that does not exist (must fail;
 five controls each, one per model in the panel).
 
+A fifth followed on 2026-11-23, on the API track: the right calls with the PDB id in upper
+case (must fail: nothing loads). The must-pass kind that had expected an upper-case id
+to load now covers only the same entry loaded by URL. The viewer check of the MVS
+controls compares Mol\*'s read-back with the drawings the grader resolves *as created*
+(`resolve_scene(as_created=True)`): the read-back lists a representation that lies
+hidden under another, and which of the two is seen is what the pixel count settles.
+
 Five kinds are about unstated attributes: on the MVS track a reference with no colour
 node answered in a palette colour (must pass) and answered with the stated colour all
 over (must fail); on the API track "a grey cartoon and the ligand in a colour" answered
@@ -589,5 +596,8 @@ not come from the grader:
   components, representations, colouring), and does the same for a bare load of every
   panel entry. Focus, highlight and UniProt-numbered selections are not read back, so
   for those kinds the verdict rests on the construction of the pair alone.
+  A list the grader says loads nothing (an upper-case PDB id) is not run either: the
+  harness serves the frozen files itself and cannot show what PDBe answers; that rule
+  rests on the run against PDBe recorded above.
 
 The result of both runs is `tests/controls/viewer_check.json`.

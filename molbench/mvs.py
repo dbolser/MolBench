@@ -751,13 +751,23 @@ class DrawnStructure:
             store[key] = store[key] | atoms if key in store else atoms
             self._classes = None
 
-    def settle(self) -> None:
+    def settle(self, as_created: bool = False) -> None:
         """Coincident drawing: where two opaque representations of the same type are
         drawn on the same atom, the viewer shows one of them. Their geometry is the
         same, so the one created first wins the depth test and the later one is not
         seen at all; with different size factors the larger encloses the smaller
         (measured in headless Mol* 5.9.0, ``scripts/check_overlap.py``). A surface is
-        left out: the surface of a part is not part of the surface of the whole."""
+        left out: the surface of a part is not part of the surface of the whole.
+
+        ``as_created``: keep every drawing, hidden or not. That is the list of
+        representation objects the viewer holds, which is what a read-back of the
+        viewer's state gives (``scripts/grader_controls.py --viewer``); what is seen
+        on screen is the settled state."""
+        if as_created:
+            for rtype, colour, opacity, atoms, _ in self.pending:
+                self.add(self.draws, (rtype, colour, opacity), atoms)
+            self.pending = []
+            return
         by_type: dict[Any, list[tuple]] = {}
         for order, (rtype, colour, opacity, atoms, factor) in enumerate(self.pending):
             by_type.setdefault(rtype, []).append((-factor, order, colour, opacity, atoms))
@@ -847,8 +857,13 @@ def _symbolic(selector: Any) -> frozenset:
 
 def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
                   rename: dict[str, str] | None = None,
-                  unstated_colour_free: bool = False) -> DrawnScene | None:
+                  unstated_colour_free: bool = False,
+                  as_created: bool = False) -> DrawnScene | None:
     """Resolve a scene tree to its drawn state, or None if it is not a scene tree.
+
+    ``as_created``: every representation the scene creates, including one hidden under
+    an earlier one of the same type (``DrawnStructure.settle``); for comparing with a
+    read-back of the viewer's objects, never for grading.
 
     ``symbolic``: entries to resolve without their atom table (both sides of a
     comparison must be resolved the same way). ``rename``: entry id -> the entry to
@@ -1044,7 +1059,7 @@ def resolve_scene(tree: Any, symbolic: set[str] | frozenset = frozenset(),
 
     walk(root, None, True)
     for st in scene.structures.values():
-        st.settle()
+        st.settle(as_created)
     if unstated_colour_free:
         for st in scene.structures.values():
             stated: dict[Any, set] = {}

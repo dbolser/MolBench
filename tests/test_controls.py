@@ -123,7 +123,7 @@ def test_the_viewer_check_on_record_found_no_disagreement():
     assert m["scenes_checked"] >= 1400 and m["grader_state_agrees"] == m["scenes_checked"]
     assert m["problems"] == []
     rules = m["rule_probes"]
-    assert rules["entries"] == 75 and rules["differ"] == []
+    assert rules["entries"] >= 75 and rules["differ"] == []
     assert rules["agree"] == rules["draws_compared"] >= 3500
     api = report["api"]
     assert api["lists_run"] >= 100

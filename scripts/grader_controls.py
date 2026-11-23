@@ -1931,7 +1931,11 @@ class Molstar:
 
 
 def grader_state(tree: Any) -> dict[tuple, int]:
-    scene_ = mvs.resolve_scene(tree)
+    """The representations the grader resolves a scene to, as created: the viewer's
+    read-back lists its representation objects, also one that lies exactly under an
+    earlier one of the same type and is not seen. Which of two such drawings is seen is
+    measured in pixels (scripts/check_overlap.py), not here."""
+    scene_ = mvs.resolve_scene(tree, as_created=True)
     out: dict[tuple, int] = {}
     for st in scene_.structures.values():
         for d, m in st.draws.items():
@@ -2099,6 +2103,13 @@ def viewer_check_api(controls: list[dict], n: int) -> dict:
                 if any("uniprot_accession" in p for a in actions for p in a.get("data", []) or []
                        if isinstance(p, dict)) or any("custom_data" in a for a in actions):
                     continue                 # needs PDBe's updated file: checked by check_api_refs --uniprot
+                if str(car.ps.replay(copy.deepcopy(actions)).entry or "id:").startswith("id:"):
+                    # the grader says nothing loads (a file address the host does not
+                    # serve: upper-case PDB id, AlphaFold address). The harness serves the
+                    # frozen files itself, so it cannot show what a remote host answers;
+                    # those rules rest on requests recorded in GRADING.md.
+                    report["load_fails_by_rule"] = report.get("load_fails_by_rule", 0) + 1
+                    continue
                 try:
                     dump = viewer.run(actions)
                     if dump.get("notes"):    # a step the harness cannot run (e.g. a trait
