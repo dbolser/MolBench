@@ -39,6 +39,10 @@ GEN = PAPER / "generated"
 BLUE, ORANGE, GREEN = "#0072B2", "#E69F00", "#009E73"
 INK, MUTED, LINE, PALE, GREY = "#1a1a1a", "#555555", "#8a8a8a", "#f3f5f7", "#b8b8b8"
 FONT = "Helvetica, Arial, sans-serif"
+# A pair that is right on one side only: in the scene only (blue), in the call list only
+# (orange). Figure 3 marks its two cells with these colours and Figure 5, panel B, fills its
+# bar segments with them; the pale tints are the cell backgrounds of Figure 3.
+ONE_SIDED, ONE_SIDED_PALE = (BLUE, ORANGE), ("#d9e9f4", "#fbecc8")
 
 
 def values() -> dict:
@@ -74,7 +78,7 @@ class Svg:
         fam = ' font-family="DejaVu Sans Mono, Menlo, Consolas, monospace" xml:space="preserve"' if mono else ""
         it = ' font-style="italic"' if italic else ""
         self.parts.append(f'<text x="{x}" y="{y}" font-size="{size}" font-weight="{weight}" fill="{fill}" '
-                          f'text-anchor="{anchor}"{fam}{it}>{html.escape(str(s))}</text>')
+                          f'text-anchor="{anchor}"{fam}{it}>{html.escape(str(s), quote=False)}</text>')
 
     def para(self, x, y, s, width, size=11, lh=None, **kw) -> int:
         """Wrapped text; returns the y after the last line."""
@@ -123,11 +127,13 @@ def chars(px: float, size: float, mono: bool = False) -> int:
 def fig_pipeline(v: dict) -> str:
     boxes = [
         ("1  Frozen public data", [
-            f"{v['panel.n']} structures (PDB and AlphaFold DB),",
-            f"{v['corpus.n_structures']} of them in tasks",
-            "residue mapping (SIFTS)",
-            f"{v['variants.n_usable']:,} variants classified as",
-            "(likely) pathogenic in ClinVar"]),
+            f"\u2022 {v['panel.n']} structures (PDB, AlphaFold DB):",
+            f"   {v['corpus.n_structures']} carry tasks, {v['panel.n'] - v['corpus.n_structures']} is the prompt example",
+            "\u2022 Residue mapping: SIFTS",
+            f"\u2022 Variants: {v['variants.n_usable']:,} with a ClinVar record,",
+            "   pathogenic or likely pathogenic;",
+            f"   tasks name {v['clin.n_variants']}: {v['clin.n_variants_from_pool']} of these",
+            f"   and {v['clin.n_variants'] - v['clin.n_variants_from_pool']} exception"]),
         ("2  Generator scripts", [
             f"{v['corpus.n_templates']} templates.",
             "Each task gets: a request,",
@@ -135,11 +141,11 @@ def fig_pipeline(v: dict) -> str:
             "its target atoms and a",
             "record of how it was made"]),
         ("3  Task corpus", [
-            f"{v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} categories",
-            f"scene track: {v['corpus.mvs.n']}",
-            f"call-list track: {v['corpus.api.n']}",
-            f"{v['corpus.n_twin_pairs']} pairs (one request, both tracks)",
-            f"{v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} set-aside structures"]),
+            f"\u2022 {v['corpus.n_tasks']} tasks, {v['corpus.n_tiers']} categories",
+            f"\u2022 Scene track: {v['corpus.mvs.n']}",
+            f"\u2022 Call-list track: {v['corpus.api.n']}",
+            f"\u2022 {v['corpus.n_twin_pairs']} pairs (one request, both tracks)",
+            f"\u2022 {v['corpus.heldback.n_tasks']} tasks on {v['corpus.heldback.n_structures']} set-aside structures"]),
         ("4  Model", [
             "is given a format guide and",
             "the request only:",
@@ -153,13 +159,13 @@ def fig_pipeline(v: dict) -> str:
             "and coloured",
             "(frozen atom tables)"]),
         ("6  Scores", [
-            "F1 (partial credit)",
-            "task success (yes or no)",
-            "target score",
-            "valid or invalid answer",
-            "averages: strict, valid-only"]),
+            "three scores:",
+            "task success (yes or no),",
+            "target score, F1 (partial credit)",
+            "each averaged strict (all answers)",
+            "and valid-only (valid answers)"]),
     ]
-    x0, y0, w, h, gap, vgap = 10, 34, 206, 112, 11, 30
+    x0, y0, w, h, gap, vgap = 10, 34, 206, 140, 11, 30
     yb = y0 + 2 * h + vgap + 44
     ch = 82
     s = Svg(W, yb + 2 * ch + 10 + 8, "How a MolBench task is built, answered and graded")
@@ -170,7 +176,9 @@ def fig_pipeline(v: dict) -> str:
         s.rect(x, y, w, h, fill=LOOKUP_FILL if i in (2, 5) else PALE)
         s.text(x + 10, y + 20, title, size=11.5, weight="bold")
         for j, ln in enumerate(lines):
-            s.text(x + 10, y + 40 + j * 15, ln, size=10)
+            # A line that continues a bulleted item is indented to the text after the bullet.
+            indent = 9 if ln.startswith(" ") else 0
+            s.text(x + 10 + indent, y + 40 + j * 15, ln.lstrip(), size=10)
         if i % 3 < 2:
             s.arrow(x + w + 1, y + h / 2, x + w + gap - 1, y + h / 2)
     # from box 3 down and back to box 4
@@ -182,7 +190,9 @@ def fig_pipeline(v: dict) -> str:
         ("Reference against structure (step 2)",
          "Each reference must select atoms, name the residue the generator intended, and grade as exactly right against itself."),
         ("Atom tables against the viewer (step 5)",
-         "Selections were read back from the running viewers (Mol* 5.9.0, PDBe Mol* 3.3.2) and agree atom for atom."),
+         f"Selections were read back from the running viewers (Mol* 5.9.0: {v['controls.viewer.mvs.checked']:,} scene "
+         "controls; PDBe Mol* 3.3.2: a sample of call lists, not those that select by UniProt position) "
+         "and agreed atom for atom."),
         ("Grader against a control set (step 5)",
          f"{v['controls.n']:,} control answers with a verdict known from how they were made. The grader "
          "was developed against them and now agrees with all; they are re-run on every change."),
@@ -206,13 +216,16 @@ def fig_pipeline(v: dict) -> str:
 # Left column: the four categories that differ in what the model must know beyond the
 # request. Right column: the four that differ in the form of the task (Section 3.3).
 TIER_CARDS = [
-    ("translation", "Translation", "tr-het-code-3ert", "Everything is in the request."),
+    ("translation", "Translation", "tr-het-code-3ert", "Everything is in the request.",
+     "Het group: a molecule of the entry outside the polymer chains, such as a bound small molecule."),
     ("grounded", "Structure-grounded", "gr-ligand-1stp-btn", "A feature is named; the model must know its atoms."),
     ("resolve", "Name resolution", "res-gene-p01112", "The protein is named; the entry is not."),
     ("clinical", "Clinical variant", "clin-pair-target-lyz-2nwd-w82r-mvs", None),
-    ("interactions", "Interactions", "in-ca-distance-9fb2", "Named atoms and a measurement."),
+    ("interactions", "Interactions", "in-ca-distance-9fb2", "Named atoms and a measurement.",
+     "C-alpha: the central carbon atom of an amino acid."),
     ("followup", "Follow-up turn", "fu-referent-colour-5cj6-mvs", "A start state plus an edit."),
-    ("accept_set", "Several right answers", "acc-residue-colour-4ins-mvs", "One countable thing is left open."),
+    ("accept_set", "Several right answers", "acc-residue-colour-4ins-mvs", "One countable thing is left open.",
+     "4INS has a Lys29 in each of two chains; the request does not say which."),
     ("tool_only", "Viewer settings", "api-canvas-1udt", "Call-list track only."),
 ]
 TIER_COLUMNS = ["Differ in what the model must know", "Differ in the form of the task"]
@@ -220,21 +233,39 @@ PROMPT_CHARS = 170      # a longer request is cut at a word and ends in an ellip
 
 
 def fig_tiers(v: dict) -> str:
+    """Two columns of four cards. A row of cards is as tall as the longer of its two texts.
+    A card may end in a grey line that explains a term of its request (TIER_CARDS)."""
     prompts = {}
     for f in (REPO / "tasks").rglob("*.json"):
         t = json.loads(f.read_text(encoding="utf-8"))
         prompts[t.get("id")] = t
-    cw, ch, gap, y0 = 314, 104, 12, 56
-    s = Svg(W, y0 + 4 * (ch + gap) + 34, "The eight categories of task, each with one request from the corpus")
+    cw, gap, y0, lh = 314, 10, 56, 13
+    width = chars(cw - 20, 10)
+    cards = []
+    for tier, name, tid, needs, *gloss in TIER_CARDS:
+        if tier == "clinical":
+            needs = (f"The residue must be found in the structure; copying the number in its name is wrong in "
+                     f"{v['clin.n_face_value_wrong']} of {v['clin.n']} tasks.")
+        prompt = " ".join(prompts[tid]["prompt"].split())
+        if tier == "followup":
+            prompt = "[start: a scene with one magenta chain] " + prompt
+        if len(prompt) > PROMPT_CHARS:
+            prompt = prompt[:PROMPT_CHARS - 3].rsplit(" ", 1)[0] + " …"
+        prompt = "“" + prompt + "”"
+        gloss = gloss[0] if gloss else None
+        n_lines = sum(len(textwrap.wrap(x, width=width)) for x in (needs, prompt, gloss) if x)
+        cards.append((tier, name, needs, prompt, gloss, 35 + n_lines * lh + 3 + (3 if gloss else 0) - 2))
+    heights = [max(cards[r][5], cards[r + 4][5]) for r in range(4)]
+    tops = [y0 + sum(heights[:r]) + r * gap for r in range(4)]
+    yf = tops[3] + heights[3] + 18
+    s = Svg(W, yf + 22, "The eight categories of task, each with one request from the corpus")
     s.text(10, 20, "Counts: tasks on the scene track / on the call-list track. Requests are quoted from the corpus.",
            size=10, fill=MUTED)
     for k, head in enumerate(TIER_COLUMNS):
         s.text(10 + k * (cw + gap), 46, head, size=11.5, weight="bold")
-    for i, (tier, name, tid, needs) in enumerate(TIER_CARDS):
-        x = 10 + (i // 4) * (cw + gap)
-        y = y0 + (i % 4) * (ch + gap)
-        lookup = tier in ("resolve", "clinical")
-        if lookup:
+    for i, (tier, name, needs, prompt, gloss, _) in enumerate(cards):
+        x, y, ch = 10 + (i // 4) * (cw + gap), tops[i % 4], heights[i % 4]
+        if tier in ("resolve", "clinical"):
             s.rect(x, y, cw, ch, fill=LOOKUP_FILL, stroke=BLUE, sw=1.8)
             s.text(x + 16 + len(name) * 6.6, y + 19, "lookup category", size=9.5, weight="bold", fill=BLUE)
         else:
@@ -242,17 +273,10 @@ def fig_tiers(v: dict) -> str:
         s.text(x + 10, y + 19, name, size=11.5, weight="bold")
         n_m, n_a = v[f"corpus.mvs.{tier}.n"], v[f"corpus.api.{tier}.n"]
         s.text(x + cw - 10, y + 19, f"{n_m or '–'} / {n_a or '–'}", size=10.5, anchor="end", fill=MUTED)
-        if tier == "clinical":
-            needs = (f"The residue must be found in the structure; copying the number in its name is wrong in "
-                     f"{v['clin.n_face_value_wrong']} of {v['clin.n']} tasks.")
-        yy = s.para(x + 10, y + 35, needs, width=chars(cw - 20, 10), size=10, fill=MUTED)
-        prompt = " ".join(prompts[tid]["prompt"].split())
-        if tier == "followup":
-            prompt = "[start: a scene with one magenta chain] " + prompt
-        if len(prompt) > PROMPT_CHARS:
-            prompt = prompt[:PROMPT_CHARS - 3].rsplit(" ", 1)[0] + " …"
-        s.para(x + 10, yy + 3, "“" + prompt + "”", width=chars(cw - 20, 10), size=10, italic=True)
-    yf = y0 + 4 * (ch + gap) + 6
+        yy = s.para(x + 10, y + 35, needs, width=width, size=10, fill=MUTED)
+        yy = s.para(x + 10, yy + 3, prompt, width=width, size=10, italic=True)
+        if gloss:
+            s.para(x + 10, yy + 3, gloss, width=width, size=10, fill=MUTED)
     s.para(10, yf, "Blue frame: the two lookup categories. The answer needs one piece of information that a person would look up "
            "(an entry, a residue number); the model must recall it.", width=chars(W - 20, 10), size=10, fill=MUTED)
     return s.done()
@@ -308,7 +332,7 @@ def fig_grading(v: dict) -> str:
         ("Answer A: number copied from the variant name",
          f"Author residue {wrong} drawn. It is {v['ex.face_value_residue']}{wrong}, another residue.",
          wrong, False, "ex.mvs.face"),
-        ("Answer B: right residue, extra context",
+        ("Answer B: right residue, plus unrequested context",
          "The right residue, plus a grey cartoon of the whole protein that the request does not ask for.",
          right, True, "ex.mvs.context"),
     ]
@@ -372,15 +396,17 @@ def fig_grading(v: dict) -> str:
                      "(no atom shared with the reference)"]
         else:
             facts = [f"fact 1: {v['ex.wild_type']}{right}, grey cartoon and {look};",
-                     "   one of its two styles is in the reference",
+                     "   one of its two styles is in the reference: 0.5",
                      "fact 2: all other residues, grey cartoon;",
-                     "   none of it is in the reference"]
+                     "   none of it is in the reference: 0"]
+            assert abs(v[key + ".precision"] - (0.5 + 0) / 2) < 1e-9   # the sum shown in the precision row
         for j, ln in enumerate(facts):
             s.text(xr, y + 34 + j * 13, ln, size=10)
         ysc = y + ph - 58
         s.line(xr, ysc - 13, x + pw - 10, ysc - 13)
         rows = [("Recall (share of the reference the answer has)", f"{v[key + '.recall']:.2f}"),
-                ("Precision (share of the answer the reference has)", f"{v[key + '.precision']:.2f}"),
+                ("Precision, the mean over the two facts: (0.5 + 0) / 2" if key == "ex.mvs.context"
+                 else "Precision (share of the answer the reference has)", f"{v[key + '.precision']:.2f}"),
                 ("F1", f"{v[key + '.f1']:.2f}"),
                 ("Task success", "yes" if v[key + ".success"] else "no"),
                 ("Target score", f"{v[key + '.target']:.2f}")]
@@ -418,11 +444,13 @@ def fig_twins(v: dict) -> str:
              f"              auth_seq_id = {v['ex.auth_number']}",
              f"    representation  {v['ex.rep_scene']}",
              f"     color  {v['ex.color']}"]
-    calls = [f'load   molecule_id = "{entry}"',
-             f'color  uniprot_accession = "{v["ex.accession"]}",',
+    # No quotation marks, as in the scene panel: both are shortened forms, and one renderer
+    # (ImageMagick) drops a quotation mark at the end of a line.
+    calls = [f'load   molecule_id = {entry}',
+             f'color  uniprot_accession = {v["ex.accession"]},',
              f'       uniprot_residue_number = {v["ex.uniprot_position"]},',
-             f'       representation = "{v["ex.rep_short"]}",',
-             f'       representationColor = "{v["ex.color"]}"']
+             f'       representation = {v["ex.rep_short"]},',
+             f'       representationColor = {v["ex.color"]}']
     for x, code, note in (
             (lx, scene, f"The model must turn UniProt {v['ex.uniprot_position']} into author residue "
                         f"{v['ex.auth_number']} itself."),
@@ -446,15 +474,18 @@ def fig_twins(v: dict) -> str:
            f"task success over all {v['corpus.n_twin_pairs']} pairs.", width=chars(gx - 30, 10), size=10, fill=MUTED)
     s.text(gx + cw / 2, gy - 6, "call list right", size=10, anchor="middle", fill=MUTED)
     s.text(gx + cw * 1.5, gy - 6, "call list wrong", size=10, anchor="middle", fill=MUTED)
-    cells = [("right on both sides", PALE), ("right in the scene only", "#fdf0d5"),
-             ("right in the call list only", "#fdf0d5"), ("right on neither side", PALE)]
-    for k, (label, fill) in enumerate(cells):
+    # the two one-sided cells carry the colours of the same cells in Figure 5, panel B
+    cells = [("right on both sides", PALE, None), ("right in the scene only", ONE_SIDED_PALE[0], ONE_SIDED[0]),
+             ("right in the call list only", ONE_SIDED_PALE[1], ONE_SIDED[1]), ("right on neither side", PALE, None)]
+    for k, (label, fill, mark) in enumerate(cells):
         cx, cy = gx + (k % 2) * cw, gy + (k // 2) * chh
         s.rect(cx, cy, cw, chh, fill=fill, r=0)
-        s.text(cx + cw / 2, cy + 19, label, size=10, anchor="middle")
+        if mark:
+            s.raw(f'<rect x="{cx}" y="{cy}" width="7" height="{chh}" fill="{mark}"/>')
+        s.text(cx + cw / 2 + (3 if mark else 0), cy + 19, label, size=10, anchor="middle")
     s.text(gx + 2 * cw + 8, gy + 19, "scene right", size=10, fill=MUTED)
     s.text(gx + 2 * cw + 8, gy + chh + 19, "scene wrong", size=10, fill=MUTED)
-    s.text(gx + cw, gy + 2 * chh + 18, "McNemar's test compares the two shaded cells", size=10, anchor="middle", fill=MUTED)
+    s.text(gx + cw, gy + 2 * chh + 18, "McNemar's test compares the two coloured cells", size=10, anchor="middle", fill=MUTED)
     s.text(gx + cw, gy + 2 * chh + 31, "(right in one format only).", size=10, anchor="middle", fill=MUTED)
     return s.done()
 
@@ -467,7 +498,9 @@ def fig_october(v: dict, out: pathlib.Path) -> None:
     matplotlib.use("Agg")
     matplotlib.rcParams["svg.hashsalt"] = "molbench"
     matplotlib.rcParams["svg.fonttype"] = "none"
-    matplotlib.rcParams["font.family"] = ["DejaVu Sans"]
+    # The typeface of Figures 1 to 5 (FONT); the SVG names the whole list, so the viewer picks it.
+    matplotlib.rcParams["font.family"] = ["sans-serif"]
+    matplotlib.rcParams["font.sans-serif"] = ["Helvetica", "Arial", "Liberation Sans", "DejaVu Sans"]
     import matplotlib.pyplot as plt
 
     tiers = [("translation", "Translation"), ("grounded", "Structure-grounded,\nname resolution,\ninteractions"),
@@ -548,7 +581,7 @@ def fig_result_shapes(v: dict) -> str:
     # A: per model, one sub-panel per track (the two tracks are not compared with each other)
     y0 = frame(0, "A  Task success by model, one plot per track",
                f"One row per model, best first: {v['plan.n_core_models']} core models, up to "
-               f"{v['plan.n_optional_models']} optional ones (†) and the keyword script. The two tracks are "
+               f"{v['plan.n_optional_models']} optional ones (†) and the two scripts. The two tracks are "
                "not compared with each other.")
     ky = y0 + ph - 12
     s.circle(26, ky - 4, 4.5, BLUE)
@@ -574,22 +607,18 @@ def fig_result_shapes(v: dict) -> str:
     axis(ax, y0, aw, "Share of pairs")
     ry = y0 + 36
     s.text(ax - 6, ry + 11, "model", size=9.5, anchor="end", fill=MUTED)
-    cuts = [(0.0, 0.45, "#8a8a8a", ""), (0.45, 0.60, "#c4c4c4", "url(#hatchA)"),
-            (0.60, 0.72, "#c4c4c4", "url(#hatchB)"), (0.72, 1.0, "#f1f1f1", "")]
-    s.raw('<defs><pattern id="hatchA" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
-          f'<rect width="6" height="6" fill="#ffffff"/><line x1="0" y1="0" x2="0" y2="6" stroke="{BLUE}" stroke-width="2.4"/></pattern>'
-          '<pattern id="hatchB" width="6" height="6" patternUnits="userSpaceOnUse">'
-          f'<rect width="6" height="6" fill="#ffffff"/><circle cx="3" cy="3" r="1.6" fill="{ORANGE}"/></pattern></defs>')
-    for a, b, fill, pat in cuts:
-        s.raw(f'<rect x="{ax + aw * a:.1f}" y="{ry}" width="{aw * (b - a):.1f}" height="14" fill="{pat or fill}" stroke="#ffffff"/>')
+    # solid fills (a pattern fill is lost by some renderers); each segment is also numbered
+    cuts = [(0.0, 0.45, "#8a8a8a"), (0.45, 0.60, ONE_SIDED[0]), (0.60, 0.72, ONE_SIDED[1]), (0.72, 1.0, "#f1f1f1")]
+    for a, b, fill in cuts:
+        s.raw(f'<rect x="{ax + aw * a:.1f}" y="{ry}" width="{aw * (b - a):.1f}" height="14" fill="{fill}" stroke="#ffffff"/>')
     # the labels of Table 9, in the order of the bar from left to right: down the first
     # column of the key, then down the second
-    keys = [("#8a8a8a", "", "1  right on both sides"), ("", "url(#hatchA)", "2  right in the scene only"),
-            ("", "url(#hatchB)", "3  right in the call list only"), ("#f1f1f1", "", "4  right on neither side")]
-    for k, (fill, pat, label) in enumerate(keys):
+    keys = [(cuts[0][2], "1  right on both sides"), (cuts[1][2], "2  right in the scene only"),
+            (cuts[2][2], "3  right in the call list only"), (cuts[3][2], "4  right on neither side")]
+    for k, (fill, label) in enumerate(keys):
         s.text(ax + aw * (cuts[k][0] + cuts[k][1]) / 2, ry - 4, str(k + 1), size=9.5, anchor="middle", fill=MUTED)
         kx, kyy = 18 + (k // 2) * 128, y0 + ph - 26 + (k % 2) * 15
-        s.raw(f'<rect x="{kx}" y="{kyy - 9}" width="14" height="10" fill="{pat or fill}" stroke="{LINE}" stroke-width="0.8"/>')
+        s.raw(f'<rect x="{kx}" y="{kyy - 9}" width="14" height="10" fill="{fill}" stroke="{LINE}" stroke-width="0.8"/>')
         s.text(kx + 20, kyy, label, size=9.5)
 
     # C: categories

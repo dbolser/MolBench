@@ -903,3 +903,624 @@ brought into line with what had changed since. No reviewer has read these passag
 - **Section 6 (opening) and SI Section S6.1:** the provider pilot, with its one table.
 
 Word count after the merge: about 21,000 (paper) and 9,000 (SI).
+
+## Condensing pass (2026-11-23), after round 6: not reviewed
+
+Five reviewers held the paper at 8 of 10 over six rounds, and each round added words. This
+pass did the opposite: the main text was rewritten shorter, and what a reader does not need
+in order to follow what was built, why, and how an answer is scored was moved to the
+Supporting Information with a one-sentence pointer. No reviewer has read the result.
+
+### Word counts (text outside tables, figure captions and PENDING tags, as `build.py` counts)
+
+| Section | Before | After |
+|:---|---:|---:|
+| Draft note | 99 | 79 |
+| Abstract | 201 | 199 |
+| 1 Introduction | 1,148 | 850 |
+| 2 Related work | 808 | 319 |
+| 3 Building the benchmark | 5,246 | 1,859 |
+| 4 Grading on drawn state | 4,547 | 1,935 |
+| 5 Experimental setup | 2,805 | 1,110 |
+| 6 Results | 3,036 | 1,603 |
+| 7 Errors in the first version | 219 | 67 |
+| 8 Discussion | 185 | 148 |
+| 9 Limitations | 1,579 | 445 |
+| 10 Conclusion | 243 | 181 |
+| 11 Ethics, 12 Availability, SI list | 477 | 496 |
+| **Paper** | **20,594** | **9,291** |
+| Supporting Information | 9,006 | 24,182 |
+
+With the text of the PENDING tags, `build.py` prints about 9,700 for the paper. The PDF went
+from 45 pages to 28; the SI PDF has 80.
+
+### What moved where
+
+| From the paper | Now in |
+|:---|:---|
+| Box 1 (two glossary tables) and Box 2 | SI Tables S0d, S0e, S0f. The paper keeps one box of ten terms. |
+| 2.1 to 2.3, each related work described | SI Sections S15.1 to S15.3 |
+| 3.1: how disease proteins and entries were chosen, counts of proteins and structures | S10.1 (the filter, the two exceptions and the wording of the classification were already in S3.2) |
+| 3.3: the eight categories one by one, follow-up turns that need no change, call-only translation tasks | S10.2 |
+| 3.3.1: forms of name, HGVS and transcripts, wordings, traditional names with an example, rule for several variants, Table 2b, all matched tasks | S10.3; Table 2b is Table S20; Table 2a is Table 2 |
+| 3.4: the notation of a call list, traditional names on the two tracks, pairs by category, the 15 pairs with a switch-off call | S10.4 |
+| 3.5 in full (representation, opacity) | S10.5 |
+| 3.6 in full (structures used earlier, how the split is read, counts of rephrasings) | S10.6 |
+| 4.1: examples of viewer rules, counts of accepted entries | S11.1 |
+| 4.2: the call-list rule of F1, the all-3 rate and majority | S11.2 (the two summaries are defined in the captions of Tables 6 and 9) |
+| 4.2: counts and three rules of the target score, rule 2 by hand | S4.3 (already there); which atoms are the target, the cost of the convention, the call-list track, the tasks without a target score: S11.3 |
+| 4.3: every score of Table 3 worked by hand, row C7, the spill rows of the caption | S11.4 |
+| 4.4: the outcomes in full, cut-off answers | S11.5 and Table S5 |
+| 4.5: kinds of control, the viewer check in three bullets, what was not checked | S11.6 and S5 |
+| 4.6: tolerances | S11.7 |
+| 5.1 to 5.6 in full (models, format guides, sampling, every rule of the bootstrap, the six parts of the paired comparison, the rating study with its sampling limits) | S12.1 to S12.6 |
+| 6.6: Findings 3 to 6, Table 13 (pilot per model), Table 14 (pilot by category) | S13.1; Tables S21 and S22. The box keeps Findings 1 and 2, Figure 6 and one paragraph on the rest. |
+| 7: Table 15 with how each error was found, and the text on row 9 | S13.2, Table S23. The paper keeps a two-column Table 13. |
+| 9.1 to 9.4, 22 limitations | S14.1 to S14.4. The paper keeps ten, as a list. |
+| 11: Table 16 (licences) | S15.4, Table S24 |
+
+Section numbers of the paper did not change (3.1 to 3.7, 4.1 to 4.6, 5.1 to 5.6, 6.1 to
+6.6), because the generated tables and the SI cite them. Section 9 lost its subsections.
+The moved text is the round-6 text with its cross-references renumbered; it was not
+rewritten, so Sections S10 to S14 repeat some of what S3 to S5 say.
+
+### The standing must-fix: one wording of the target score
+
+Every earlier gloss was false for some row of Table 3 ("on no others" does not cover a second
+representation on the residue alone, row S9; "whatever else was drawn" is false for spill,
+rows S7 and S8). The wording now used everywhere:
+
+> how exactly the answer marks out the requested atoms. It is 1 (*target-right*) when they
+> carry the requested style, no other atom carries that style, and no other representation
+> is drawn on them alone; any other drawing, such as a cartoon of the protein, is ignored.
+
+Checked against Table 3: S4 and C4 (wrong colour, 0.50), S5 and S10 (context, 1.00), S7 and S8
+(spill, 0.60 and 0.02), S9 (extra on the target, 0.67), C7 (default cartoon hidden, 1.00).
+Long form: Section 4.2, Table 3 and Table 9 captions, Figure 3 caption, SI Sections S1 and
+S4.3, SI Table S0f. Short form ("how exactly the answer marks out the requested atoms; any
+other drawing is ignored"): abstract, Figures 1, 4 and 5, Tables 6 and 10. Task success and
+F1 are defined once, in Section 4.2, and repeated only in captions. `paper/README.md` records
+the wording.
+
+### Other points of the last review round that this pass settled
+
+- Which score is primary is said once, in one paragraph of Section 4.2 ("Which score is read
+  first"); Box 2 is gone.
+- The name-resolution caveat is said once (Section 4.1), with its denominator.
+- HGVS, transcripts and the default transcript are one sentence in Section 3.3.1.
+- The planned comparisons are three separate paragraphs in Section 5.4.
+- The pilot findings no longer give a Pearson correlation as evidence about a ranking; the
+  box says "nearly proportional".
+- The conclusion states the size of the corpus and the paired design.
+- A sentence of the pilot box said that a keyword script scored within the range of the
+  models; the numbers are 0.72 against 0.72 to 0.95, and the sentence now gives them.
+
+### The result figure
+
+`scripts/paper_figures.py --result-figure DIR` draws Figure 5 from the four result tables
+in `DIR` (`table_final_leaderboard_scene`, `_calls`, `_paired`, `_tiers`), so figure and tables
+cannot differ. Tested on the dry-run tables: `paper/generated_mock/fig_final_results.svg`,
+stamped as mock. Mock tables are refused in `paper/generated`. The paper includes
+`generated/fig_final_results.md` when it exists and `figures/fig5_layout.md` (the sketch)
+until then. The provider pilot is one sentence at the start of Section 6.
+
+### Open, for the lead
+
+1. **No test covers the new figure command**; tests are outside what this pass could change.
+   A test should run it on the mock tables and assert the refusal in `paper/generated`.
+2. **Sections S10 to S14 of the SI overlap with S3 to S5.** They should be merged in a pass
+   of their own; nothing in them is new.
+3. **Tables 6, 9a and 9b still show their first rows only, and Table 7 is a tag**, as before.
+4. **The glossary of 5.4 lost its home in the paper**: "all-3 rate" and "majority" are now
+   defined only in the captions of Tables 6 and 9 and in SI Table S0f.
+5. Items 1 to 7 of round 6 are unchanged. Layout: all 28 pages of the paper's PDF were looked
+   at as thumbnails; the SI PDF was not looked at.
+
+## Panel round 1 (2026-11-23): first review of the condensed paper
+
+Five reviewers read the condensed manuscript. No must-fix item; 28 should-fix and 46 polish
+items, many of them the same point from several readers.
+
+| Reviewer | Score | Would accept on clarity |
+|:---|---:|:---|
+| Structural bioinformatician | 9 | yes |
+| Reviewer of machine-learning benchmarks | 9 | yes |
+| Clinical geneticist | 9 | yes |
+| Copy-editor | 9 | yes |
+| Cold reader | 9 | yes |
+
+### Length
+
+Text outside tables, figure captions and PENDING tags, as `build.py` counts: **9,289 words**
+(9,291 before this round; ceiling 9,500). The fixes needed about 600 words; the same number
+was cut elsewhere (list below). With the text of the PENDING tags `build.py` prints about
+9,700, as before. Abstract 198 words. The PDF has 27 pages (28 before).
+
+### Should-fix items, all fixed
+
+- **"Never compare between tracks" against Tables 9b and 12** (4.2). Now: track totals are not
+  compared on task success and F1; the formats are set against each other on task success
+  only in the secondary comparison of Table 9b; "both tracks" in Table 12 means pooled.
+- **"We predict none of them"** (6.4). Now: "We state them before the run and do not predict
+  which one a model will show."
+- **Validity needs the viewer, grading needs no browser** (4.1, 4.4, 5.6, 12). Section 4.4 says
+  that validity is decided in a separate step before grading (Mol\* 5.9.0's own validation in
+  a browser without a display; loadability from the address alone, nothing fetched). 4.1
+  points to it. Section 12 says "grading a validated answer".
+- **The extra-against-context convention** (4.2; four readers). The three kinds of drawing
+  beyond the request are a list of three, each with its rows of Table 3, and the consequence
+  is said outright: ball-and-stick on the target residue alone gives 0.67 (row S9), the same
+  on the residue and its two neighbours gives 1.00 (row S10).
+- **One wording of the target score, changed once.** "No other representation is drawn on them
+  alone" could be read as "only that representation is on them". The long form is now: "…no
+  other atom carries that style, and no second representation is drawn on these atoms and
+  nowhere else". Changed in Section 4.2, the Table 3 caption, SI Sections S1 and S4.3, SI Table
+  S0f and `paper/README.md`; the captions of Figure 3 and Table 9 no longer repeat the long
+  form and point to Section 4.2. Checked against rows S4, S5, S7 to S10 and C7 of Table 3.
+- **Two things called a pilot** (three readers). "Pilot" now means the pilot run of October
+  2026 only. The trial on a few tasks of the present corpus is the *connection test* (Section
+  6, SI Section S6.1, the Supporting Information list). The table in S6.1 is written by
+  `scripts/paper_tables.py` under the repository's name for it; `INCLUDE_WORDS` in `build.py`
+  changes its words, never a number, and fails if the words are no longer found.
+- **16 core models against 15 in the pilot run** (all five). Section 5.1 says that 15 ran in the
+  pilot run and the other could not be reached that day and had call-list results only; the
+  box of 6.6 says "15 of the 16 core models". `STATED_IN_WORDS` holds both numbers.
+- **What the set-aside split asks** (3.6; two readers). It asks whether models score higher on
+  structures that earlier tasks used; a lower score on the split would suggest so; the test is
+  weak (of the 63 other structures only 23 appeared in an earlier release); it is not a hidden
+  test set.
+- **The 15 pairs that switch off part of the default view** (3.4): one sentence says what the
+  request asks for in them.
+- **Further findings of the box** (6.6; two readers): they rest on other conditions of the
+  pilot run and on a separate run of the first version's call-list tasks in July 2026.
+- **The qualifying ClinVar record** (3.1; all five). "Two tests" followed by four conditions is
+  now "four conditions", in ClinVar's terms: a variation record that lists the same
+  amino-acid change at the same position; classified pathogenic, likely pathogenic or
+  pathogenic/likely pathogenic; of the named gene and of that one change alone; review status
+  not "no assertion criteria provided". The record lists the change; it does not classify an
+  amino-acid change.
+- **2,400 variants in the pool, 87 in the tasks, 25 of 27 proteins** (3.1, Figure 1 box 1).
+- **Is the model told which sequence a "p." position is counted on?** (3.3.1): 46 requests
+  state the UniProt accession, 36 do not, and then neither request nor system prompt says.
+- **"64% of all answers"** (6.6): "of the 135 clinical answers".
+- **Figure 5, panel A**: "the two scripts" (`figures.py`).
+- **"The two cannot be told apart"** (9): the effect of the offset and that of a predicted
+  structure.
+- **Abstract**: requests "are answered in two formats: a scene description (MolViewSpec) and a
+  list of viewer calls (PDBe Mol\*)"; "representation (drawing style)", "residue (amino acid)".
+- **Figure 2 caption**: why the 4INS example has several right answers (a Lys29 in each of two
+  chains).
+
+### Polish, applied
+
+Table 11 caption defines a turn that needs no change. Trp64: 24 atom records are 14
+non-hydrogen atoms and 10 hydrogens, at 1.04 Å. Table 4: "1,020", and why the call-list
+controls sit on 74 structures. Figure 1 caption: "the two main ways to average". Name
+resolution outside the panel: selections are compared as text. The 31 follow-up tasks without
+a target score: why, and that both sides of 8 pairs are among them. The one task in which
+copying is wrong without an offset: E6V of haemoglobin beta on a predicted structure. Table 1:
+caption and column heads say "remaining + set-aside". Box 1: UniProt's canonical sequence,
+initiator methionine included. "Missense" used once. Traditional names: "in which case the
+request says …". Table 3, row S2: only the chain name differs in this entry. Table 13 row 3 and
+Section 11: the one exception made by hand. Wording: 30 requests are 41 tasks because 11 are
+pairs. 4.5: "the reference and the answer of 910 controls". "This is the situation of a model
+that is used without tools." Optional models: what "largest" means. OSWorld-Science: PyMOL in
+one of its software configurations. Volunteer raters: "one reference and one model answer at a
+time". An unshowable answer is defined for both tracks. SI Section S0 is titled "Glossary and
+background terms". SI S13.1 no longer mentions the drafting history. Contribution 4: the
+analysis of the final run was fixed before any model was called.
+
+### Declined, or done differently, and why
+
+- **"The clinical tasks name 87 of them [the pool]"** (clinical geneticist). Not exact: one of
+  the 87 is the exception made by hand and lies outside the pool (SI Section S3.2). The text
+  says that the generator draws from the pool and that the tasks name only 87 variants.
+- **"No second representation is drawn on exactly the target atoms"** (benchmark reviewer). Not
+  exact: *extra* is a style confined to the target, which may cover part of it. The wording
+  used is "on these atoms and nowhere else".
+- **The connection test "exposed faults in the task files"** (benchmark reviewer). It exposed
+  faults of the grader; no request and no reference changed (SI Section S6.1). The text says
+  "faults of the present grader".
+- **Cut the Figure 1 caption to the pipeline sentence** (copy-editor). Not done: another
+  reviewer asked for the full definitions to stay in Figure 1, Table 3 and Table 6. They stay
+  there; Figures 3 and 4 and Tables 9 and 10 now point to them.
+- **Figure 5 caption, "formats are compared in panel B only"**: kept, since it is a statement
+  about the figure and is true of it.
+- **"Passes two tests (i), (ii)"** (benchmark reviewer): three other readers asked for four
+  conditions, which is what the text now has.
+- **27 proteins against 25, in Section 3.3.1** (structural reviewer): said in 3.1 instead, where
+  the 27 are introduced; 3.3.1 no longer repeats the number of proteins.
+- **Gloss of the interactions category in the text of 3.3**: the sentence that glossed the four
+  categories of form was cut; Table 1 and Figure 2 say what each asks.
+
+### Cut to hold the length
+
+The repeated definitions in the captions of Tables 2, 4, 9 and 10; the list of data sources in
+Section 2 (the citations moved to Section 3.1); the glosses of four categories in 3.3 (Table 1
+has them); the transcript caveat in 3.3.1 (it stays in Section 9 and SI Section S10.3); the
+sentence on why some scene tasks have no partner (Table 1 caption has it); 3.7 as a paragraph;
+the Pearson correlation in the box (SI Section S13.1 has it); the second statement that track
+totals are not compared (5.4); the repeated statement of what a model cannot do (5.2); the
+detail of the viewer check (4.5); the list of licensed sources in Section 11 (SI Table S24);
+the draft note; small trims in 3.2, 4.3, 5.5, 5.6, 6, 10, 11 and the Supporting Information
+list.
+
+### Checked
+
+`python paper/corpus_values.py --check`, `python paper/build.py --check` and `--pdf`;
+`pytest tests/test_paper_tables.py tests/test_agreement.py` (68 passed). Figures 1 and 5 were
+rendered and looked at after their text changed. All 27 pages of the paper's PDF were looked
+at as thumbnails, and pages 4 and 12 (Box 1, Table 3) at reading size. The SI PDF was built
+and not looked at.
+
+### Open, for the lead
+
+1. The earlier open items stand (no test for the result-figure command; SI Sections S10 to S14
+   overlap with S3 to S5).
+2. `molbench/analysis.py` still titles the table of SI Section S6.1 "Provider pilot"; the paper
+   changes the words at build time. If the repository takes the paper's name, drop
+   `INCLUDE_WORDS`.
+3. SI Section S3.2 says that Section 3.1 of the paper "gives the same counts in one paragraph";
+   the paper gives the first and the last count only.
+
+## Panel round 2 (2026-11-23): second review of the condensed paper
+
+Five reviewers read the manuscript as it stood after panel round 1. No must-fix item; 19
+should-fix and 38 polish items, several of them the same point from more than one reader.
+
+| Reviewer | Score | Would accept on clarity |
+|:---|---:|:---|
+| Structural bioinformatician | 9 | yes |
+| Reviewer of machine-learning benchmarks | 9 | yes |
+| Clinical geneticist | 9 | yes |
+| Copy-editor | 9 | yes |
+| Cold reader | 9 | yes |
+
+### Length
+
+Text outside tables, figure captions and PENDING tags, as `build.py` counts: **9,337 words**
+(9,289 before this round; ceiling 9,500). The fixes needed about 270 words and about 220
+were cut elsewhere (list below), so the text grew by 48 words. With the text of the PENDING
+tags `build.py` prints about 9,750. Abstract 200 words. The PDF has 27 pages, as before; the
+SI has 80.
+
+### Should-fix items, all fixed
+
+- **"No second representation is drawn on these atoms and nowhere else"** (4.2, Table 3
+  caption, SI Tables S0f and S1, SI Section S4.3; all five readers). The clause parsed two
+  ways. Now, everywhere: "when three things hold: the target atoms carry the requested
+  style; no other atom carries that style; and no second representation is drawn on target
+  atoms alone. Any other drawing, such as a cartoon of the protein, is ignored." The
+  *extra* bullet uses the same words ("on target atoms alone"). The Table 3 caption points
+  to "the three conditions of Section 4.2" and does not repeat them.
+- **"Two exceptions" in 3.1 against "one exception, Section 3.1" in Table 13 and Section
+  11** (all five). Section 3.1 now names the one exception to the rule (lysozyme
+  p.Ile74Thr, from outside the pool, record without assertion criteria, one task per track)
+  and says apart that one pool variant is never asked about (SI Section S3.2). Table 13 row
+  3 and Section 11 say what the exception is, so the pointer to Section 3.1 now leads to
+  the same statement.
+- **Precision of the target score: "the items that the answer spent on marking the
+  target"** (benchmark reviewer; three others as polish). Now: "all items that the answer
+  drew to mark the target: its items of the requested representation on the target, plus
+  spill and extra (formula in SI Section S4.3)". The *extra* bullet gives row S9 in counts
+  (24 credited items of 48 drawn, precision 0.50), from generated values.
+- **"Qualifying record" meant four conditions in the paper and two in the SI** (clinical
+  geneticist, copy-editor). The paper's meaning holds everywhere. SI Table S4 (generated,
+  `corpus_values.py`) calls a record that passes step 2 a *matching record*; the text under
+  it says that a matching record which also passes 3a to 3c is a qualifying record. SI Table
+  S0b cites "the four conditions of Section 3.1". The count of variants with several records
+  now says exactly what is counted (records that pass steps 2, 3a and 3b; single-nucleotide
+  records only where a variant has one), which is what the script counts.
+- **"2,400 ClinVar variants" in Figure 1** (clinical geneticist). The box now reads "2,400
+  amino-acid changes with a (likely) pathogenic ClinVar record; the tasks name 87
+  variants". Section 3.1 says that a variant here is one amino-acid change, of which ClinVar
+  may hold several DNA-level records.
+- **"A more generous rule"** (copy-editor; two others as polish). Now with its sense: any
+  change to the right atoms earns one half, even in the wrong representation, which earns
+  nothing on the scene track.
+- **"The weaker rule"** (copy-editor). Renamed the *text rule*, after what it does. Section
+  4.1 also says that an answer on an entry the task does not accept scores 0, and the Table 8
+  caption says that such answers, and answers that load no entry, are in the category row
+  only (checked in `molbench/runner.py`: the flag that divides the two rows is set only for
+  accepted entries). The row label of Table 8 is written by `molbench/analysis.py`, which
+  this branch does not own, and a test holds it equal to the shape table; `build.py`
+  therefore changes the two words when it includes the table (`INCLUDE_WORDS`, which now
+  also applies to an `else:` include).
+- **"Which score is read first"** (copy-editor, cold reader). The paragraph is headed
+  "Which score is primary" and answers in its first two sentences; the reason follows. The
+  remark on "both tracks" moved to the Table 12 caption; Table 9b was already described in
+  the Table 9 caption.
+- **Abstract: "representation (drawing style)"** (cold reader). "Style" is a defined term in
+  Section 4.1. Now "representation (spheres, sticks or a ribbon)".
+
+### Polish, applied
+
+Abstract: "Of eight task categories …, one asks"; "classified in ClinVar as". Contribution 4
+points to Sections 5 to 7. Related work: "we found no measurement of how accurately they
+drive the viewer". One name, *first version*, for what Figure 1, Table 1 and Section 3.6
+called an earlier release (SI Table S0b and Section S10.6 too). Box 1 and Section 3.3.1:
+the leading segment is a signal peptide, sometimes with a propeptide, or the initiator
+methionine alone, which is why E6V is p.Glu7Val. Section 3.1: aggregate germline
+classification; "not of a haplotype that carries a second change"; germline "inherited or
+newly arisen, not acquired in a tumour"; 87 variants in 82 tasks because a few tasks name
+several. Step 4 of 3.2: why the resolution is mentioned. Table 1: "a" before "b", "other" in
+place of "remaining" (caption and column heads), why the call-list track has 116 more
+translation tasks, and glosses of ligand and disulfide. Section 3.3.1: the 10 helix or
+strand tasks, with a gloss, so that Table 10 can point there; "For 7 variants there are two
+matched tasks". The 31 follow-up tasks without a target score are left out of every mean of
+it (also SI Table S0e, which now says "first request" for the other kind). Table 4: why the
+four entries with only DNA or RNA have no call-list control. Section 4.5: 267 of the 300
+call lists of the sample. Section 5.1: the core models in one sentence; the literal script
+copies the number on a clinical task. Section 5.4: which models a mean over models covers.
+Table 10 caption: the first five rows are the groupings, the last three subsets. Headings of
+6.5 and 6.6. Section 9: transcript glossed. The connection test moved from the opening of
+Section 6 to one sentence in Section 5.6.
+
+Figures (`figures.py`, `scripts/paper_figures.py`): Figure 1, box 6 lists three scores and
+then the two averages, in the order of the text. Figure 2: each row of cards is as tall as
+its text, and the three glosses that were in the caption (het group, C-alpha, the two
+Lys29 of 4INS) are grey lines in their cards. Figures 3 and 5: the two one-sided cells are
+blue (right in the scene only) and orange (right in the call list only), as solid fills, in
+Figure 3, in the layout of Figure 5 and in the drawn result figure; the hatch patterns are
+gone (a pattern fill is lost by some renderers). All four schematics were rendered with the
+Chromium that builds the PDF and looked at, as were pages 6 and 17 of the PDF and the mock
+result figure.
+
+### Declined, or done differently, and why
+
+- **"Lysozyme p.I74T"** (structural reviewer): written p.Ile74Thr, the form of the SI.
+- **"Any change to a right atom earns at least half credit"** (benchmark reviewer): the rule
+  of SI Section S11.2 is one half for a change to another result and 1 for the same result;
+  the text gives it in those words.
+- **Heading "Follow-up turns, open requests and planned comparisons"** (copy-editor): "open"
+  is not used, because open-ended requests are a different thing, which the corpus leaves
+  out (Table 13, row 6). The heading is "Follow-up turns, several right answers, planned
+  comparisons".
+- **Connection test to the SI only** (cold reader): one sentence stays in Section 5.6,
+  because it discloses that the test exposed faults of the grader.
+- **"If there really were several releases, say so once"** (benchmark reviewer): said in
+  the SI (Table S0b, Section S10.6: "in any of its releases"); the paper says "never used".
+- **A change of what the count of variants with several records counts** (clinical
+  geneticist offered either): the count is unchanged and its description is made exact.
+
+### Cut to hold the length
+
+Section 3.7 to two sentences (Figure 1 states the four checks). The second statement of the
+target-right conditions in the Table 3 caption. The list form of the six planned comparisons
+in 5.4 (Table 12 has the rows). The groups of the rating study in one clause, and the
+sentence on its trial (Section 6.6 has it). Two sentences of the grader bullet and one of
+the small-groups bullet in Section 9 (Section 4.5 and SI Section S14 have them). Small trims
+in 3.6, 4.4, 4.5, 5.1, the Conclusion and the Supporting Information list.
+
+### Checked
+
+`python paper/corpus_values.py --check`, `python paper/build.py --check` and `--pdf`;
+`pytest tests/test_paper_tables.py tests/test_agreement.py` (68 passed).
+`scripts/paper_figures.py --result-figure paper/generated_mock` still draws the mock figure.
+
+### Open, for the lead
+
+1. `molbench/analysis.py` writes the Table 8 row label with "weaker rule"; the paper changes
+   the words at build time. If the repository takes the paper's term (*text rule*), change
+   the label there and in `corpus_values.py` together and drop the entry in `INCLUDE_WORDS`.
+2. The earlier open items stand (no test for the result-figure command; SI Sections S10 to
+   S14 overlap with S3 to S5; "Provider pilot" in `molbench/analysis.py`).
+3. Item 3 of panel round 1 is closed: SI Section S3.2 now says what Section 3.1 gives.
+
+## Panel round 3 (2026-11-23): third review of the condensed paper
+
+Five reviewers read the paper after panel round 2. No must-fix item was raised.
+
+| Reviewer | Clarity score | Would accept on clarity |
+|---|---:|---|
+| Structural bioinformatician | 9 | yes |
+| Benchmark reviewer | 9.5 | yes |
+| Clinical geneticist | 9.5 | yes |
+| Copy-editor | 9.5 | yes |
+| Cold reader | 9.5 | yes |
+
+### Length
+
+Text outside tables, figure captions and PENDING tags, as `build.py` counts: **9,489 words**
+(9,337 before this round; ceiling 9,500). The fixes needed about 310 words and about 160
+were cut elsewhere (list below). With the text of the PENDING tags `build.py` prints about
+9,920. Abstract 200 words.
+
+### Should-fix items, all fixed
+
+- **The rule of Section 6.4 did not match the four patterns** (structural reviewer). The
+  paragraph no longer assigns a pattern by rule. For each model the two row means and the
+  interval of their difference are reported; an interval above zero points towards pattern
+  1, one below zero towards pattern 3, and one that includes zero leaves patterns 2 and 4,
+  between which no threshold is set. The PENDING tag asks for the number of models with an
+  interval above, below and across zero, with the levels.
+- **"267 of the 300 call lists"** (four reviewers). Section 4.5 now says: a sample of 150
+  controls holds 300 call lists; 267 were replayed and every one agreed; the other 33 were
+  not replayed (27 select by UniProt number), so none disagreed. New value
+  `controls.viewer.api.lists_not_replayed`. SI Section S5 keeps the full breakdown (27, 3, 3).
+- **23 structures against 14** (structural reviewer). Section 3.6: "appeared in any task of
+  the first version (its pilot run, of scene tasks alone, used 14 structures)".
+- **The ClinVar terms of Section 3.1** (benchmark reviewer). Aggregate classification,
+  haplotype and "no assertion criteria provided" are each glossed in a clause; *missense*
+  and *germline* have a sentence of their own (clinical geneticist). Section 9: "without
+  naming the disease".
+- **87 variants, "one of them"** (clinical geneticist). "86 from the pool and one exception
+  made by hand from outside it, lysozyme p.Ile74Thr, among the first variants reported to
+  cause lysozyme amyloidosis". New value `clin.n_variants_from_pool`. Figure 1, box 1, says
+  the same, and "pathogenic or likely pathogenic" in full.
+- **Three floats never cited in the text** (copy-editor). Figure 5 is cited at the opening of
+  Section 6, Tables 6 and 7 in 6.1, Tables 11 and 12 in 6.5.
+- **Box 1, traditional name** (all five). Two sentences; the example W64R stands with the
+  definition and not with the initiator methionine.
+- **16 core models against 15 in the pilot run** (all five). Section 5.1: the core models are
+  those of the first version's online results browser in October 2026; 15 are in the pilot
+  run, "and the other could not be reached on the day of that run".
+
+### Polish, applied
+
+Abstract: "the variant's name"; "the protein's reference sequence (UniProt)"; "cartoon
+ribbon"; "errors" for faults and flaws, here, in contribution 4 (with "Table 13, rows 1 and
+2") and in Section 6.6. Figure 1 caption: cartoon glossed; box 1 says what the 78 and the
+79 are. Box 1: label numbering counts along the full sequence, residues without coordinates
+included. Section 3.2, step 4: "otherwise" stands next to the check; the notation Trp64 is
+explained. Table 1 caption: why name resolution has no call-list task (the scene grader can
+compare as text; a call list cannot be replayed without atoms). Section 3.3.1: the sentence
+on E6V in three short ones. Section 3.4: PDBe expanded; Figure 3 caption: the note on
+"structure model" moved up. Section 3.6: the first version defined at its first use in the
+body. Section 3.7 names the four checks. Section 4.1: "the separate check, made before
+grading". Section 4.2: the three kinds of drawing beyond the request come before the
+sentence on precision; "the target score is used between the formats because". Section 5.3:
+*cut off* defined. "Wording" for phrasing, rewording and rephrasing (3.6, 5.4, 9). Table 10
+caption: which rows are the groupings. Table 11 caption: the two tracks must not be compared
+on task success. Table 12 title. Figure 4, Answer B: the credit of each fact (0.5 and 0)
+and the sum in the precision row; the script asserts that the sum is the graded value.
+
+### Declined, or done differently, and why
+
+- **A valid call list: "every call and every field is documented"** (copy-editor). The
+  check (`molbench/schema.py`, GRADING.md) does not reject an undocumented field; it rejects
+  an unknown call, a missing required field, a wrongly typed value and a representation
+  name outside the viewer's list. Section 4.4 and the Table 7 caption now say that, and no
+  longer say that every field must be documented.
+- **"14 of them in its scene tasks"** (structural reviewer). No frozen file shows that the
+  14 structures of the pilot run are all among the 23, so the text gives the 14 without
+  calling them a subset, as SI Section S10.6 does.
+- **"The sixteenth was added to the public results after that run"** (two reviewers offered
+  it as a guess). The true reason, from SI Section S12.1, is given: it could not be reached
+  on that day.
+- **Closing the quotation marks in Figure 3** (structural reviewer). They were closed in the
+  file; ImageMagick drops a quotation mark at the end of a line. The call-list panel now has
+  no quotation marks, like the scene panel (the reviewer's alternative), so it reads the
+  same in every renderer.
+- **The cold reader's wording of the abstract** ("that a named disease variant replaces; the
+  variants are classified ...") did not fit the 200 words; the sentence is "the residue
+  (amino acid) replaced by a variant that ClinVar classifies as pathogenic or likely
+  pathogenic. The variant's name ...".
+- **Figure 4, a separate line for the sum**: it did not fit the panel; the sum is in the
+  label of the precision row.
+
+### Cut to hold the length
+
+The recolouring of the default cartoon in Section 3.2 to one clause (SI Section S1 has it);
+the list of what SI Section S3.2 and S10.3 hold; the second statement of the two further
+rows of Table 8 in Section 4.1; the definition of target-right in the Table 3 caption
+(Section 4.2 is on the same page); "a lower score on the split would suggest so" (3.6);
+the archive of raw answers in 5.3 (Section 12 and Table 13, row 8, have it); the closing
+sentence of the first Discussion point; small trims in 3 (opening), 3.4, 5.6, 10 and 11.
+
+### Checked
+
+`python paper/corpus_values.py --check`, `python paper/build.py --check` and `--pdf`;
+`pytest tests/test_paper_tables.py tests/test_agreement.py` (68 passed). Figures 1, 3 and 4
+were rendered with the Chromium that builds the PDF and looked at; Figure 3 also with
+ImageMagick. The PDF pages were not looked at in this round.
+
+### Open, for the lead
+
+1. The earlier open items stand.
+2. Whether the 14 structures of the pilot run are all among the 23 could be settled from the
+   pilot archive; the text does not depend on it.
+
+## Panel round 4 (2026-11-23): fourth review of the condensed paper
+
+Five reviewers read the paper after panel round 3. No must-fix item was raised.
+
+| Reviewer | Clarity score | Would accept on clarity |
+|---|---:|---|
+| Structural bioinformatician | 9 | yes |
+| Benchmark reviewer | 9.4 | yes |
+| Clinical geneticist | 9 | yes |
+| Copy-editor | 9 | yes |
+| Cold reader | 9 | yes |
+
+### Length
+
+Text outside tables, figure captions and PENDING tags, as `build.py` counts: **9,490 words**
+(9,489 before this round; ceiling 9,500). The fixes needed about 75 words more than they
+saved in place; the cuts below took them back. Abstract 200 words.
+
+### Should-fix items, all fixed
+
+- **"so none disagreed" about call lists that were never replayed** (four reviewers).
+  Section 4.5 now says: the other 33 are untested: 27 select by UniProt number and six could
+  not be run by our replay of local files. The six (three the replay script could not run,
+  three that load nothing by the grader's rule for file addresses) are a new value,
+  `controls.viewer.api.lists_other_not_replayed`, asserted against the replay record; SI
+  Section S5 keeps the split.
+- **"Two errors in our own references"; row 2 of Table 13 is a design flaw** (three
+  reviewers). Abstract: "A pilot run found that our first clinical references drew an
+  unrequested cartoon and its clinical tasks could not test the mapping; both are fixed."
+  Contribution 4: "errors in our own benchmark".
+- **"Convert" in the abstract against "always converting" as a failure in Section 6.4**
+  (benchmark reviewer). The abstract now asks "Do models map the number, or copy it?", the
+  word of the body.
+- **"Which ClinVar itself does not do"** (four reviewers). Section 9: "ClinVar classifies a
+  variant for a stated condition; we attach the classification to a protein-level name and
+  drop the condition."
+- **UniProt called "the protein's reference sequence"** (clinical geneticist). Abstract:
+  "UniProt's canonical sequence".
+- **The 36 requests without an accession** (clinical geneticist). Section 9 now says that a
+  "p." position there is graded on UniProt's canonical sequence while a clinical reader would
+  count it on the MANE Select protein, and that we assume, without checking, that the two
+  agree (SI Section S10.3).
+- **Figure 4, Answer B titled "extra context"** (copy-editor): "right residue, plus
+  unrequested context".
+- **Figure 1, items running together in boxes 1 and 3** (cold reader): each item starts with
+  a bullet and its continuation lines are indented.
+
+### Polish applied
+
+Target recall and target precision named as such in Section 4.2, "not in facts as F1 is";
+the Figure 4 caption says its recall and precision are those of F1. Target-right and *extra*:
+"another representation confined to the target atoms" (the wording of GRADING.md) in place
+of "on target atoms alone". Table 12 caption: pooling compares like with like in rows 2 to
+4; in row 1 the share of scene tasks is 48% and 46% (new values `corpus.public.mvs_share`,
+`corpus.heldback.mvs_share`). Section 3.6: "none is a task of the pilot run". Box 1: copying
+is right if the residue so named is the target residue. Section 4.4: the schema-breaking
+answer defined in its own sentence, only on the call-list track, keeping its replayed score
+even under strict. Table 5: the three models are those of the pilot run (SI Section S12.2).
+Figure 6 (and the script of the final result figure) in the typeface of Figures 1 to 5. SI
+Section S7: the quoted prompts are indented by two spaces, so their own headings no longer
+appear as SI headings. Section 3.7: the first and fourth checks are gates. Section 1: the
+clause "as a model that is used without tools must" removed. Section 4.2, F1: the call-list
+rule said as "compared as one unit, not style by style". Section 3.1: the four conditions of a
+qualifying record in one sentence; the haplotype gloss and the gloss of the review status are
+in SI Section S3.2. Section 9: which prompt has 1,328 and which 1,556 words. Section 11:
+"each has a qualifying public ClinVar record ... except one". Section 12: "the rating study
+and its trial". Table 6: valid answers as Section 4.4 defines them. Table 13, row 3: the
+full rule (three classification values; review status not "no assertion criteria
+provided"). Abstract: "grades what the Mol* viewer would draw, by rule, without a judge
+model"; requests "posed", not "answered".
+
+### Declined, or done differently, and why
+
+- **"[n] tasks of the first version's other sets are reused"** (structural reviewer). No
+  frozen value counts them, and a check against tag `corpus-v0.1` found only five call-list
+  requests with the same text, while the first version had further releases. Section 3.6 says
+  only what is on record: none of the corpus is a task of the pilot run.
+- **"SI Section S9 gives row 1 per track"** (structural reviewer). That would add a table that
+  the final-run scripts do not yet write; the caption gives the two shares instead, which is
+  what a reader needs to judge the pooling.
+- **"Mol* 5.9.0: 910 controls" in Figure 1 as "all controls"**: the figure says 910 scene
+  controls and, for PDBe Mol*, a sample of call lists without those that select by UniProt
+  position, as Section 4.5 does.
+
+### Cut to hold the length
+
+The abstract's list of representations and its gloss "(amino acid)"; the opening of Section 6
+to one sentence (the first version is defined in Section 3.6); "Tables 6 and 7 give one row
+per model" (the captions say it); the first paragraph of the Conclusion to three sentences;
+"and its consequence may surprise" (4.2); two sentences of 6.4 to one; small trims in 8.
+
+### Checked
+
+`python paper/corpus_values.py --check`, `python paper/build.py --check` and `--pdf`;
+`pytest tests/test_paper_tables.py tests/test_agreement.py` (68 passed). Figures 1, 4 and 6
+were rendered with the Chromium that builds the PDF and looked at. The PDF pages were not
+looked at in this round.
+
+### Open, for the lead
+
+1. The earlier open items stand.
+2. The number of corpus tasks that repeat a task of any release of the first version is not
+   on record; if wanted, `corpus_values.py` could count it from the release tags.

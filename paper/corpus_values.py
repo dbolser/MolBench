@@ -62,7 +62,7 @@ TIER_NAME = {"translation": "Translation", "grounded": "Structure-grounded",
              "accept_set": "Several right answers", "tool_only": "Viewer settings"}
 TIER_ASKS = {
     "translation": "Everything needed is in the request; write it in the format.",
-    "grounded": "The request names a feature (the ligand, the disulfides); the model must know which atoms these are.",
+    "grounded": "The request names a feature (the ligand, a bound small molecule; the disulfides, bonds between two cysteines); the model must know which atoms these are.",
     "interactions": "Named atoms and a measurement or contact between them.",
     "resolve": "The structure is named by protein, not by identifier.",
     "clinical": "A variant is named in UniProt numbering or in mature-protein numbering; its residue must be found in the structure, where its number often differs.",
@@ -165,6 +165,10 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     V["corpus.heldback.n_tasks"] = sum(t["split"] == "heldback" for t in orig)
     V["corpus.heldback.share"] = pct(V["corpus.heldback.n_tasks"], len(orig))
     V["corpus.public.n_tasks"] = len(orig) - V["corpus.heldback.n_tasks"]
+    # Row 1 of Table 12 pools the tracks: the share of scene tasks in each group.
+    for split, key in (("public", "public"), ("heldback", "heldback")):
+        n = sum(t["split"] == split for t in orig)
+        V[f"corpus.{key}.mvs_share"] = pct(sum(t["split"] == split and t["track"] == "mvs" for t in orig), n)
     pub_structs = {s for t in orig if t["split"] == "public" for s in t["structures"]}
     assert not pub_structs & set(held), "a held-back structure is used by a public task"
     V["corpus.n_tasks_without_structure"] = sum(not t["structures"] for t in orig)
@@ -378,6 +382,11 @@ def corpus_values(V: dict, corpus: list[dict]) -> dict:
     kv = [v for v in kept[0]["provenance"]["clinical"]["variants"] if v["variant"] == "I74T"][0]
     assert kv["clinvar_review_status"] == ["no assertion criteria provided"]
     V["clin.kept_by_name.classification"] = kv["clinvar_classification"][0].lower()
+    # Section 3.1 and Figure 1: the named variants that come from the pool; "one exception".
+    kept_variants = {(x["gene"], v["variant"]) for x in c for v in x["variants"]
+                     if x["gene"] == "LYZ" and v["variant"] == "I74T"}
+    assert len(kept_variants) == 1
+    V["clin.n_variants_from_pool"] = V["clin.n_variants"] - len(kept_variants)
     assert V["clin.n_insertion_code"] == 0      # the text says no clinical target has one
     # Section 3.3.1 says in words where the tasks with several variants and the helix and
     # strand tasks sit in Table 2: all of them have an offset, and copying is wrong in all.
@@ -584,7 +593,7 @@ def clinical_groupings_table(V: dict) -> str:
 
 
 def corpus_table(V: dict) -> str:
-    rows = ["| Category | What is asked | Scene track (other + set-aside structures) | Call-list track (other + set-aside structures) | Pairs |",
+    rows = ["| Category | What is asked | Scene track (other + set-aside) | Call-list track (other + set-aside) | Pairs |",
             "|:---------|:----------------|-----:|-----:|--:|"]
     first = {g[0]: title for title, g in TIER_GROUPS}
     for tier in TIERS:
@@ -702,13 +711,13 @@ def variants_table(V: dict) -> str:
             f"pathogenic or likely pathogenic, with ClinVar as a source | | {V['variants.n_candidates']:,} |",
             f"| 2 | Keep if a ClinVar variation record, reached through UniProt's cross-references, lists the same "
             f"amino-acid change at that position and has the aggregate germline classification \"Pathogenic\", "
-            f"\"Likely pathogenic\" or \"Pathogenic/Likely pathogenic\" (a *qualifying record*) "
+            f"\"Likely pathogenic\" or \"Pathogenic/Likely pathogenic\" (a *matching record*) "
             f"| {V['variants.n_removed_by_clinvar']:,} | {V['variants.n_confirmed']:,} |",
-            f"| 3a | Remove if no qualifying record is of the gene that the request names "
+            f"| 3a | Remove if no matching record is of the gene that the request names "
             f"| {V['variants.n_other_gene_only']} | |",
-            f"| 3b | Remove if every qualifying record of that gene is a haplotype (two changes on one chromosome) "
+            f"| 3b | Remove if every matching record of that gene is a haplotype (two changes on one chromosome) "
             f"| {V['variants.n_haplotype_only']} | |",
-            f"| 3c | Remove if every remaining qualifying record has the review status \"no assertion criteria provided\" "
+            f"| 3c | Remove if every remaining matching record has the review status \"no assertion criteria provided\" "
             f"| {V['variants.n_no_criteria']} | {V['variants.n_usable']:,} |"]
     return "\n".join(rows) + "\n"
 
@@ -785,7 +794,13 @@ def controls_values(V: dict) -> dict:
     V["controls.viewer.api.kinds_at_check"] = vs["kinds_at_check"]
     V["controls.viewer.api.sample_share"] = pct(vs["controls_in_sample"], vs["controls_at_check"])
     V["controls.viewer.api.sample_lists"] = 2 * vs["controls_in_sample"]
+    V["controls.viewer.api.lists_not_replayed"] = 2 * vs["controls_in_sample"] - a["lists_run"]
     V["controls.viewer.api.skipped_uniprot"] = vs["lists_selecting_by_uniprot"]
+    # Not replayed for another reason: the replay script could not run them, or they load
+    # nothing by the grader's rule for file addresses, which a replay of local files cannot test.
+    V["controls.viewer.api.lists_other_not_replayed"] = (V["controls.viewer.api.lists_not_replayed"]
+                                                       - V["controls.viewer.api.skipped_uniprot"])
+    assert V["controls.viewer.api.lists_other_not_replayed"] == a.get("not_runnable", 0) + by_rule
     V["controls.viewer.api.n_added_since"] = V["controls.api.n_controls"] - vs["controls_at_check"]
     # Each control has two call lists (reference and answer); the replay record counts lists.
     ents = {tr: {json.loads(line)["entry"] for line in (REPO / f"tests/controls/{tr}.jsonl").open(encoding="utf-8")}
@@ -1401,7 +1416,7 @@ def example_table(V: dict) -> str:
     e = V
     scene = [
         (f"Reference: author chain {e['ex.auth_chain']}, author residue {e['ex.auth_number']}, {e['ex.color']} {e['ex.rep']}", "ex.mvs.right"),
-        (f"The same residue named by label numbering (label chain {e['ex.label_chain']}, residue {e['ex.label_number']})", "ex.mvs.label"),
+        (f"The same residue named by label numbering (label chain {e['ex.label_chain']}, residue {e['ex.label_number']}; in this entry only the chain name differs from the author numbering)", "ex.mvs.label"),
         (f"Number copied from the variant name and used as the author number ({e['ex.face_value_residue']}{e['ex.uniprot_position']})", "ex.mvs.face"),
         ("Right residue, drawn red", "ex.mvs.colour"),
         ("Right residue, plus a grey cartoon of the protein that the request does not ask for: context", "ex.mvs.context"),
@@ -1461,6 +1476,12 @@ def si_example(ex: dict) -> str:
     ]) + "\n"
 
 
+def quoted(text: str) -> str:
+    """A quoted prompt, each line indented by two spaces, so that its own Markdown headings
+    ("## Output contract") can never be read as headings of the SI."""
+    return "\n".join(("  " + ln) if ln else ln for ln in text.split("\n"))
+
+
 def si_prompts() -> str:
     """The two system prompts as sent, with the long vendored references left as slots."""
     fence = "`" * 4
@@ -1468,7 +1489,7 @@ def si_prompts() -> str:
     for name, title in (("system_mvs.md", "Scene track"), ("system_api.md", "Call-list track")):
         text = (REPO / "prompts" / name).read_text(encoding="utf-8").rstrip()
         text = re.sub(r"\{\{(\w+)\}\}", r"<<\1>>", text)   # a slot; not a marker of paper/build.py
-        out.append(f"**{title}: system prompt.**\n\n{fence}text\n{text}\n{fence}")
+        out.append(f"**{title}: system prompt.**\n\n{fence}text\n{quoted(text)}\n{fence}")
     from molbench import schema
     long = "`" * 5
     for slot, title, text in (
@@ -1479,7 +1500,7 @@ def si_prompts() -> str:
         # "{{distance}}" in a guide is literal text of the format, not a marker of paper/build.py:
         # a zero-width space between the braces keeps the build from reading it as one.
         shown = text.rstrip().replace("{{", "{\u200b{")
-        out.append(f"**{title}** (slot `<<{slot}>>`), {len(text.split()):,} words.\n\n{long}text\n{shown}\n{long}")
+        out.append(f"**{title}** (slot `<<{slot}>>`), {len(text.split()):,} words.\n\n{long}text\n{quoted(shown)}\n{long}")
     return "\n\n".join(out) + "\n"
 
 

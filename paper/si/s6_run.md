@@ -26,13 +26,13 @@ price*: US dollars per million input / output tokens, read on the date given.
 
 {{include:generated/si_models.md}}
 
-### S6.1 Provider pilot
+### S6.1 Connection test
 
-Before the final run, the path from the manifest to a provider and back to a graded answer
-was tried once, on a few tasks of the present corpus and with one model of the core set. We
-call this the *provider pilot*. It is not the pilot run of October 2026 (Section 6.6 of the
-paper), and it is not a result of the benchmark. Every answer of the provider pilot that
-was not counted as a task success was read. This showed faults of the benchmark itself,
+Before the corpus was frozen, the way from the manifest to a provider and back to a graded
+answer was tested once, on a few tasks of the present corpus and with one model of the core
+set. We call this the *connection test*. It is not the pilot run of October 2026 (Section
+6.6 of the paper), and it is not a result of the benchmark. Every answer of the connection
+test that was not counted as a task success was read. This showed faults of the benchmark itself,
 which were corrected before the corpus was frozen: among them, wrong answers that had been
 graded as right (a file address that does not exist; a PDB identifier in upper case on the
 call-list track) and a second representation of the same type that the viewer does not show

@@ -2,7 +2,7 @@
 |:--|:------------------------------------------|--:|:--|--:|
 | | **Scene track** | | | |
 | S1 | Reference: author chain X, author residue 64, yellow spacefill spheres | 1.00 | yes | 1.00 |
-| S2 | The same residue named by label numbering (label chain A, residue 64) | 1.00 | yes | 1.00 |
+| S2 | The same residue named by label numbering (label chain A, residue 64; in this entry only the chain name differs from the author numbering) | 1.00 | yes | 1.00 |
 | S3 | Number copied from the variant name and used as the author number (Ser82) | 0.00 | no | 0.00 |
 | S4 | Right residue, drawn red | 0.50 | no | 0.50 |
 | S5 | Right residue, plus a grey cartoon of the protein that the request does not ask for: context | 0.40 | no | 1.00 |

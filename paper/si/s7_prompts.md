@@ -13,8 +13,9 @@ scene prompt sits inside its format guide. The format guide of the scene track a
 short illustration of a distance line on entry 1A6M, which tasks use; no task asks for that
 distance.
 
-The prompts and guides are printed as sent, so they use the words of the repository and not
-those of the paper; Table S0c lists the names that differ.
+The prompts and guides are printed as sent, each line indented by two spaces so that their own
+headings are not read as headings of this document. They use the words of the repository and
+not those of the paper; Table S0c lists the names that differ.
 
 {{include:generated/si_prompts.md}}
 
